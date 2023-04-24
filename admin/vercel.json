@@ -1,0 +1,4 @@
+{
+  "buildCommand": "yarn turbo build",
+  "ignoreCommand": "yarn dlx turbo-ignore"
+}
