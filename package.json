@@ -1,0 +1,21 @@
+{
+  "private": true,
+  "workspaces": [
+    "www"
+  ],
+  "scripts": {
+    "start": "turbo run start",
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+  },
+  "devDependencies": {
+    "prettier": "^2.8.8",
+    "turbo": "^1.9.3"
+  },
+  "engines": {
+    "node": "^18"
+  },
+  "packageManager": "yarn@3.5.0"
+}

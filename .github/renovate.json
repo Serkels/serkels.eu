@@ -1,0 +1,11 @@
+{
+  "extends": [
+    "config:base",
+    ":maintainLockFilesWeekly",
+    ":automergeAll",
+    ":timezone(Europe/Paris)"
+  ],
+  "dependencyDashboardAutoclose": true,
+  "postUpdateOptions": ["npmDedupe", "yarnDedupeHighest"],
+  "labels": ["dependencies"]
+}
