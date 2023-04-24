@@ -1,9 +1,5 @@
 {
   "private": true,
-  "workspaces": [
-    "admin",
-    "www"
-  ],
   "scripts": {
     "start": "turbo run start",
     "build": "turbo run build",
@@ -18,5 +14,5 @@
   "engines": {
     "node": "^18"
   },
-  "packageManager": "yarn@3.5.0"
+  "packageManager": "pnpm@8.3.1"
 }

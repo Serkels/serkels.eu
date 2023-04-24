@@ -1,6 +1,6 @@
 {
-  "buildCommand": "yarn turbo build",
-  "ignoreCommand": "yarn dlx turbo-ignore",
+  "buildCommand": "pnpm turbo build",
+  "ignoreCommand": "pnpm dlx turbo-ignore",
   "builds": [
     {
       "src": "www/package.json",
