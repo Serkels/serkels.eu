@@ -1,0 +1,14 @@
+{
+  "buildCommand": "yarn turbo build",
+  "ignoreCommand": "yarn dlx turbo-ignore",
+  "builds": [
+    {
+      "src": "www/package.json",
+      "use": "@vercel/next"
+    },
+    {
+      "src": "admin/package.json",
+      "use": "@vercel/static-build"
+    }
+  ]
+}
