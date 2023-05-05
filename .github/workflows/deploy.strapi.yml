@@ -42,8 +42,8 @@ jobs:
 
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
-        working-directory: admin
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: toctoc-admin
           heroku_email: ${{ secrets.HEROKU_EMAIL  }}
+          appdir: "admin"
