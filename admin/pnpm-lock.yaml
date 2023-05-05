@@ -16,6 +16,9 @@ importers:
       pg:
         specifier: ^8.10.0
         version: 8.10.0
+      strapi-plugin-passwordless:
+        specifier: ^4.0.9
+        version: 4.0.9(@strapi/strapi@4.10.2)
 
 packages:
 
@@ -9368,6 +9371,16 @@ packages:
 
   /std-env@3.3.3:
     resolution: {integrity: sha512-Rz6yejtVyWnVjC1RFvNmYL10kgjC49EOghxWn0RFqlCHGFpQx+Xe7yW3I4ceK1SGrWIGMjD5Kbue8W/udkbMJg==}
+    dev: false
+
+  /strapi-plugin-passwordless@4.0.9(@strapi/strapi@4.10.2):
+    resolution: {integrity: sha512-DE6uAP0p5GT5ccUwo0yyempAZm00VbDOP1vL2VVyBmK/zb0+XMFbQ31PkO2LDS8MmiAO2j/FSbE3moyq7IQCjw==}
+    engines: {node: '>=10.16.0', npm: '>=6.0.0'}
+    peerDependencies:
+      '@strapi/strapi': ^4.x
+    dependencies:
+      '@strapi/strapi': 4.10.2(@babel/runtime@7.21.0)(@codemirror/autocomplete@6.6.1)(@codemirror/language@6.6.0)(@codemirror/lint@6.2.1)(@codemirror/search@6.4.0)(@codemirror/state@6.2.0)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.11.0)(codemirror@5.65.13)(pg@8.10.0)(react-dom@17.0.2)(react-router-dom@5.3.4)(react@17.0.2)(redux@4.2.1)(styled-components@5.3.3)(typescript@5.0.4)
+      nanoid: 3.3.6
     dev: false
 
   /stream-chain@2.2.5:
