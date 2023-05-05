@@ -21,27 +21,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
-        id: pnpm-install
-        with:
-          version: 8
-          run_install: false
-
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: "latest"
-          cache: pnpm
-
-      - working-directory: admin
-        run: |
-          pnpm install
-
-      - working-directory: admin
-        run: |
-          pnpm build
-
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
