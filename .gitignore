@@ -3,3 +3,7 @@ node_modules/
 
 # Turbo
 .turbo/
+
+# Vercel
+.vercel/
+.vercel

@@ -1,7 +1,4 @@
-# next.js
-/.next/
-/out/
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+node_modules
+.vercel
+dist
+.env

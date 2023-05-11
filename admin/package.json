@@ -2,7 +2,7 @@
   "name": "admin",
   "private": true,
   "version": "0.1.0",
-  "description": "A Strapi application",
+  "description": "A Strapi application for Toc-Toc",
   "scripts": {
     "dev": "strapi develop",
     "start": "strapi start",
@@ -10,10 +10,15 @@
     "strapi": "strapi"
   },
   "dependencies": {
-    "@strapi/plugin-i18n": "^4.10.2",
-    "@strapi/plugin-users-permissions": "^4.10.2",
-    "@strapi/strapi": "^4.10.2",
+    "@strapi/plugin-documentation": "4.10.5",
+    "@strapi/plugin-i18n": "4.10.5",
+    "@strapi/plugin-sentry": "4.10.5",
+    "@strapi/plugin-seo": "^1.8.0",
+    "@strapi/plugin-users-permissions": "4.10.5",
+    "@strapi/strapi": "4.10.5",
     "pg": "^8.10.0",
+    "strapi-plugin-comments": "^2.2.10",
+    "strapi-plugin-country-select": "^1.0.2",
     "strapi-plugin-passwordless": "^4.0.9"
   },
   "author": {
@@ -22,5 +27,8 @@
   "engines": {
     "node": ">=18"
   },
-  "license": "MIT"
+  "devDependencies": {
+    "typescript": "beta",
+    "@strapi/typescript-utils": "4.10.5"
+  }
 }
