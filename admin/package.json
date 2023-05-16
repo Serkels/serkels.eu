@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "typescript": "beta",
+    "prettier": "^2.8.8",
     "@strapi/typescript-utils": "4.10.5"
   }
 }
