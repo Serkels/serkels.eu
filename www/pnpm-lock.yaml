@@ -25,8 +25,8 @@ devDependencies:
     specifier: ^0.6.0
     version: 0.6.0
   '@magne4000/vite-plugin-vercel-ssr':
-    specifier: ^0.1.5
-    version: 0.1.5
+    specifier: ^0.2.0
+    version: 0.2.0
   '@playwright/test':
     specifier: ^1.33.0
     version: 1.33.0
@@ -891,8 +891,8 @@ packages:
     resolution: {integrity: sha512-a4Bo/80Z6CoJNor5ldgs6002utmmbttP4JYd/FJ0Ob2fVdf6O6ha5SORBCqrnDnBvMc1TlrHY7dCfat5+H0a6A==}
     dev: true
 
-  /@magne4000/vite-plugin-vercel-ssr@0.1.5:
-    resolution: {integrity: sha512-4RcK5qHFY+97ldMdw8k3LQyeDaGMkERV7QFJq43cSc27wSxnwz19ACpVHPRDbm8gM7rqhbGd+YksW8wwpw2RuQ==}
+  /@magne4000/vite-plugin-vercel-ssr@0.2.0:
+    resolution: {integrity: sha512-Ff6WYhQSwYvputOwBLdnGWugUDXhqNqePHaJLJsC/fFD6/zw4P+uSF8borsFZDFtPzoDAcR0sLi17jVm5Ph9EQ==}
     dev: true
 
   /@miragejs/pretender-node-polyfill@0.1.2:
