@@ -1,8 +1,8 @@
 //
 
 import { QueryClient, useQuery } from "@tanstack/react-query";
-import createClient from "openapi-fetch";
-import type { components, paths } from "../api/v1";
+import { Opportunity } from "../api/Opportunity";
+import { client } from "../api/client";
 import { OpportunityCard } from "./OpportunityCard";
 
 //
@@ -184,30 +184,8 @@ function AnonymousExplorer() {
     </section>
   );
 }
-// console.log(import.meta.env);
-
-const { get } = createClient<paths>({
-  baseUrl: import.meta.env.VITE_STRAPI_API_URL,
-});
-
-function Opportunity(
-  raw: components["schemas"]["OpportunityListResponseDataItem"]
-) {
-  const { id, attributes } = raw as Required<
-    components["schemas"]["OpportunityListResponseDataItem"]
-  >;
-  const { title, description, expireAt } = attributes;
-  // console.log({ title, description, expireAt });
-  return {
-    id,
-    title,
-    description,
-    expireAt: new Date(expireAt!),
-  };
-}
-
 async function fetcher() {
-  const { data, error } = await get("/opportunities", {
+  const { data, error } = await client.get("/opportunities", {
     params: { query: {} },
   });
   if (error) throw error;

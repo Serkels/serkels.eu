@@ -1,10 +1,7 @@
 {
-  "extends": ["@tsconfig/vite-react/tsconfig", "@tsconfig/strictest/tsconfig"],
+  "extends": ["@1/tsconfig/vite-react.json"],
   "compilerOptions": {
     "baseUrl": ".",
-    "checkJs": false,
-    "isolatedModules": true,
-    "types": ["vite/client"],
-    "verbatimModuleSyntax": true
+    "isolatedModules": true
   }
 }

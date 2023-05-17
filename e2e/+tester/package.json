@@ -1,0 +1,13 @@
+{
+  "name": "@1/strapi-openapi",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "pnpx openapi-typescript openapi.json --output v1.d.ts"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "beta"
+  }
+}
