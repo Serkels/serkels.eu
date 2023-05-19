@@ -19,7 +19,7 @@
   "devDependencies": {
     "@cucumber/cucumber": "^9.1.1",
     "@edge-runtime/types": "^2.0.8",
-    "@hono/node-server": "^0.6.0",
+    "@hono/node-server": "^1.0.0",
     "@magne4000/vite-plugin-vercel-ssr": "^0.2.0",
     "@playwright/test": "^1.33.0",
     "@tanstack/eslint-plugin-query": "^4.29.4",
