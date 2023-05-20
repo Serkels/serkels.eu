@@ -1,0 +1,17 @@
+{
+  "name": "e2e",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "test": "codeceptjs run"
+  },
+  "devDependencies": {
+    "@1/tsconfig": "workspace:*",
+    "@codeceptjs/configure": "^0.10.0",
+    "@types/node": "^18.16.0",
+    "codeceptjs": "^3.4.1",
+    "playwright": "^1.33.0",
+    "ts-node": "^10.9.1",
+    "typescript": "beta"
+  }
+}
