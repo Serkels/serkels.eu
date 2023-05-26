@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "@1/tsconfig": "workspace:*",
+    "@1/theme": "workspace:*",
     "@ladle/react": "^2.12.3",
     "@types/react": "^18.2.0",
     "prettier": "^2.8.8",
