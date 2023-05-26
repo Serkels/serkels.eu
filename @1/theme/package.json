@@ -10,12 +10,12 @@
   },
   "dependencies": {
     "@iconify/utils": "^2.1.5",
-    "unocss": "^0.51.13"
+    "unocss": "^0.52.4"
   },
   "devDependencies": {
-    "@unocss/core": "^0.51.13",
-    "@types/node": "^20.1.0",
     "@1/tsconfig": "workspace:*",
+    "@types/node": "^20.1.0",
+    "@unocss/core": "^0.52.4",
     "typescript": "beta"
   }
 }

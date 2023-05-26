@@ -1,8 +1,8 @@
 //
 
 import { config } from "@1/theme";
-import { defineConfig, type UserConfig } from "unocss";
+import { defineConfig } from "unocss";
 
 //
 
-export default defineConfig(config as UserConfig<any>);
+export default defineConfig(config);
