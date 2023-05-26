@@ -12,6 +12,7 @@
     "codeceptjs": "^3.4.1",
     "playwright": "^1.33.0",
     "ts-node": "^10.9.1",
+    "prettier": "^2.8.8",
     "typescript": "beta"
   }
 }

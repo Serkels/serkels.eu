@@ -16,6 +16,7 @@
     "@1/tsconfig": "workspace:*",
     "@types/node": "^20.1.0",
     "@unocss/core": "^0.52.4",
+    "prettier": "^2.8.8",
     "typescript": "beta"
   }
 }

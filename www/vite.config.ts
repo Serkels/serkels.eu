@@ -2,6 +2,8 @@
 
 import VercelSsr from "@magne4000/vite-plugin-vercel-ssr";
 import React from "@vitejs/plugin-react";
+import path from "node:path";
+import url from "node:url";
 import UnoCSS from "unocss/vite";
 import { defineConfig } from "vite";
 import Ssr from "vite-plugin-ssr/plugin";
@@ -17,7 +19,7 @@ export default defineConfig(async ({ mode }) => {
       // hattip({
       //   hattipEntry: "/server/ssr.ts",
       // }),
-      TsconfigPaths(),
+      TsconfigPaths({ root: path.dirname(url.fileURLToPath(import.meta.url)) }),
       Vercel(),
       VercelSsr(),
       Ssr({ prerender: true }),

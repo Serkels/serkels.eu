@@ -91,20 +91,23 @@ function AnonymousExplorer() {
         un-p="lg"
       >
         <a href="./opportunity" un-text="#023F87">
-          <ExplorerLink icon="binoculars">Opportunités</ExplorerLink>
+          <ExplorerLink un-i-brand="binoculars">Opportunités</ExplorerLink>
         </a>
         <a href="./faq" un-text="#782b8f">
-          <ExplorerLink icon="message-group">Question réponse</ExplorerLink>
+          <ExplorerLink un-i-brand="message-group">
+            Question réponse
+          </ExplorerLink>
         </a>
-        <a href="./student-guide" un-text="#ce118b">
-          <ExplorerLink icon="book">Guide d'étudiante</ExplorerLink>
+        <a href="./guide" un-text="#ce118b">
+          <ExplorerLink un-i-brand="book">Guide d'étudiante</ExplorerLink>
         </a>
       </nav>
     </section>
   );
 }
 
-function ExplorerLink({ children, icon }: PropsWithChildren<{ icon: string }>) {
+function ExplorerLink(props: PropsWithChildren<{ "un-i-brand": string }>) {
+  const { children, "un-i-brand": icon } = props;
   return (
     <article un-flex="~ col items-center">
       <div un-i-brand={icon} un-text="2rem" un-my="18px" />
