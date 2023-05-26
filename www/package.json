@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@hattip/compose": "^0.0.33",
-    "@hattip/cookie": "^0.0.33",
+    "@hattip/cookie": "^0.0.34",
     "@hattip/core": "^0.0.33",
     "@hattip/response": "^0.0.33",
     "@hattip/router": "^0.0.33",
