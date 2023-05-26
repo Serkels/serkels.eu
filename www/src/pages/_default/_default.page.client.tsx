@@ -31,7 +31,8 @@ let root: Root;
 let dehydratedState: unknown;
 
 //
-
+export const clientRouting = true;
+export const hydrationCanBeAborted = true;
 export async function render(pageContext: Context) {
   pageContext.queryClient = queryClientPageClient;
   if (!dehydratedState && pageContext.dehydratedState) {

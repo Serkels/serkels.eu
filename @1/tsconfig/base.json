@@ -11,6 +11,7 @@
     "module": "ESNext",
     "moduleResolution": "node",
     "preserveWatchOutput": true,
-    "target": "ESNext"
+    "target": "ESNext",
+    "verbatimModuleSyntax": true
   }
 }

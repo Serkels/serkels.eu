@@ -12,11 +12,19 @@ module.exports = {
           "upload",
           "users-permissions",
         ],
-        mutateDocumentation: (generatedDocumentationDraft) => {
-          // TODO(douglasduteil): my what to manually add passwordless open api here
-          // console.log(generatedDocumentationDraft);
-        },
       },
     },
   },
+  // passwordless: {
+  //   enabled: true,
+  //   config: {
+  //     settings: {
+  //       message_text:
+  //         "Hiiii!\n" +
+  //         "Please click on the link below to login on a strapi driven site.\n" +
+  //         "<%= URL %>?loginToken=<%= CODE %>\n" +
+  //         "Thanks.",
+  //     },
+  //   },
+  // },
 };

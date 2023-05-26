@@ -1,11 +1,12 @@
 //
 
-import vercelSsr from "@magne4000/vite-plugin-vercel-ssr";
-import react from "@vitejs/plugin-react";
+import VercelSsr from "@magne4000/vite-plugin-vercel-ssr";
+import React from "@vitejs/plugin-react";
 import UnoCSS from "unocss/vite";
 import { defineConfig } from "vite";
-import ssr from "vite-plugin-ssr/plugin";
-import vercel from "vite-plugin-vercel";
+import Ssr from "vite-plugin-ssr/plugin";
+import Vercel from "vite-plugin-vercel";
+import TsconfigPaths from "vite-tsconfig-paths";
 import { configDefaults } from "vitest/config";
 
 //
@@ -13,11 +14,15 @@ import { configDefaults } from "vitest/config";
 export default defineConfig(async ({ mode }) => {
   return {
     plugins: [
-      vercel(),
-      vercelSsr(),
-      ssr({ prerender: true }),
-      react(),
+      // hattip({
+      //   hattipEntry: "/server/ssr.ts",
+      // }),
+      TsconfigPaths(),
+      Vercel(),
+      VercelSsr(),
+      Ssr({ prerender: true }),
       UnoCSS(),
+      React(),
     ],
     maxThreads: mode === "e2e" ? 1 : undefined,
     minThreads: mode === "e2e" ? 1 : undefined,

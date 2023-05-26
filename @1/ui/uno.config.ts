@@ -1,0 +1,1 @@
+../theme/uno.config.ts

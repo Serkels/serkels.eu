@@ -24,9 +24,10 @@ const queryClientPageServer = new QueryClient({
 //
 
 export const passToClient: Array<keyof Context> = [
-  "pageProps",
-  "urlPathname",
+  "csrfToken",
   "dehydratedState",
+  "pageProps",
+  "routeParams",
 ];
 
 export async function render(pageContext: Context) {
@@ -34,6 +35,10 @@ export async function render(pageContext: Context) {
   pageContext.queryClient = queryClientPageServer;
   pageContext.dehydratedState = dehydrate(queryClientPageServer);
 
+  pageContext.pageProps = {
+    ...(pageContext.pageProps ?? {}),
+    routeParams: pageContext.routeParams,
+  };
   const ReactRootComponent = createPageApp(pageContext);
 
   const body = pageContext.Page ? await renderToString(ReactRootComponent) : "";
