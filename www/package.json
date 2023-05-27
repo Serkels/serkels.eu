@@ -13,7 +13,7 @@
     "@hattip/compose": "^0.0.33",
     "@hattip/cookie": "^0.0.33",
     "@hattip/core": "^0.0.33",
-    "@hattip/response": "^0.0.33",
+    "@hattip/response": "^0.0.34",
     "@hattip/router": "^0.0.33",
     "@hattip/vite": "^0.0.33",
     "@tanstack/react-query": "^4.29.5",
