@@ -109,8 +109,8 @@ importers:
         specifier: ^0.0.33
         version: 0.0.33
       '@hattip/vite':
-        specifier: ^0.0.33
-        version: 0.0.33(vite@4.3.1)
+        specifier: ^0.0.34
+        version: 0.0.34(vite@4.3.1)
       '@tanstack/react-query':
         specifier: ^4.29.5
         version: 4.29.5(react-dom@18.2.0)(react@18.2.0)
@@ -869,19 +869,11 @@ packages:
     requiresBuild: true
     optional: true
 
-  /@hattip/adapter-node@0.0.33:
-    resolution: {integrity: sha512-tEEYo/V0Vj7kQRuruoBHUzfJnaoKjW5EHALsU9RgyPvOs1hCJUil9UEkyVebneTBdQHUcljx4a4ZgS2pnrWOAA==}
-    dependencies:
-      '@hattip/core': 0.0.33
-      '@hattip/polyfills': 0.0.33
-    dev: false
-
   /@hattip/adapter-node@0.0.34:
     resolution: {integrity: sha512-saEmf4Wh0KwXTm44sjvTcBOe8znPHBGtKhQOJVfafUgZ9OkXGTd9A8wdi6cO9b9HZFJm+JkQu/UVb4p0vccRmQ==}
     dependencies:
       '@hattip/core': 0.0.34
       '@hattip/polyfills': 0.0.34
-    dev: true
 
   /@hattip/compose@0.0.33:
     resolution: {integrity: sha512-/T0bE+/i7E285KIkMK6bMzr276uUGjWaiVyQqs7Up9IEezRdsjtjc+KV+91Rl2unfu1jdz+D8+khYqexHuSNYw==}
@@ -911,19 +903,11 @@ packages:
   /@hattip/core@0.0.34:
     resolution: {integrity: sha512-L9MRB5fVgW8vd2wKDbD1pIhsM4UloRCdsXn3x9us2Xp1jeynS83T3gHGLdUvPclgGvQZapwBgUkkn9paS+bjDg==}
 
-  /@hattip/polyfills@0.0.33:
-    resolution: {integrity: sha512-8rRQv/4F1xDionmk+T42lQ3tq6tQ4/+NoYaciKx0eg0C9KL1+of5BHGDkZA7XpymeoTZXsdY1hmWusX5w/8lTg==}
-    dependencies:
-      '@hattip/core': 0.0.33
-      node-fetch-native: 1.1.1
-    dev: false
-
   /@hattip/polyfills@0.0.34:
     resolution: {integrity: sha512-zD0BemBQ4iqwKyX0jNu7YTSZtG4zH7sOB3XIBa5FkxRHZEjEc1dtKHsQpWhNqZW9+h5c8TWS9EiTMstqbtL2SQ==}
     dependencies:
       '@hattip/core': 0.0.34
       node-fetch-native: 1.1.1
-    dev: true
 
   /@hattip/response@0.0.34:
     resolution: {integrity: sha512-CCLr6qriIKDswHTp5TW+bGlDeGzjmy3qBgSlp9CJLshXWoTNVvIMnLQUkmsnLnOMc1JSE+vrmdcMlZGKIs3Klw==}
@@ -938,13 +922,13 @@ packages:
       '@hattip/core': 0.0.33
     dev: false
 
-  /@hattip/vite@0.0.33(vite@4.3.1):
-    resolution: {integrity: sha512-ZOtZf0dKIKNMlrjqH+bBuk82BHt/+PBSvxUUBFfVP8S0HQyEIQwtxgOx3R0SgE5WQ0ZvljjdrbOOyISTx4+LHw==}
+  /@hattip/vite@0.0.34(vite@4.3.1):
+    resolution: {integrity: sha512-i2pLi+0ok3ISDWeNMyUx24SiH+wLrPVmibrKwlq3HAugvm5uZw6xa1DdiVRFBdaPbl9oJlkbtOfZ3k2ErLhwrA==}
     hasBin: true
     peerDependencies:
       vite: '>= 3'
     dependencies:
-      '@hattip/adapter-node': 0.0.33
+      '@hattip/adapter-node': 0.0.34
       '@vavite/connect': 1.8.1(vite@4.3.1)
       '@vavite/multibuild': 1.8.1(vite@4.3.1)
       '@vavite/node-loader': 1.8.1(vite@4.3.1)
