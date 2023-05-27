@@ -152,8 +152,8 @@ importers:
         specifier: ^2.0.8
         version: 2.0.8
       '@hattip/adapter-node':
-        specifier: ^0.0.33
-        version: 0.0.33
+        specifier: ^0.0.34
+        version: 0.0.34
       '@magne4000/vite-plugin-vercel-ssr':
         specifier: ^0.2.0
         version: 0.2.0
@@ -1050,6 +1050,14 @@ packages:
     dependencies:
       '@hattip/core': 0.0.33
       '@hattip/polyfills': 0.0.33
+    dev: false
+
+  /@hattip/adapter-node@0.0.34:
+    resolution: {integrity: sha512-saEmf4Wh0KwXTm44sjvTcBOe8znPHBGtKhQOJVfafUgZ9OkXGTd9A8wdi6cO9b9HZFJm+JkQu/UVb4p0vccRmQ==}
+    dependencies:
+      '@hattip/core': 0.0.34
+      '@hattip/polyfills': 0.0.34
+    dev: true
 
   /@hattip/compose@0.0.33:
     resolution: {integrity: sha512-/T0bE+/i7E285KIkMK6bMzr276uUGjWaiVyQqs7Up9IEezRdsjtjc+KV+91Rl2unfu1jdz+D8+khYqexHuSNYw==}
@@ -1074,6 +1082,11 @@ packages:
 
   /@hattip/core@0.0.33:
     resolution: {integrity: sha512-/3hhN1PYMwDDSF1zqVHEHgFHhwB2YxDPBByLZFPQG6euPTODxG9/RMpZ9YJ4cYatshSAGGwSfNXUVpflMLbJTg==}
+    dev: false
+
+  /@hattip/core@0.0.34:
+    resolution: {integrity: sha512-L9MRB5fVgW8vd2wKDbD1pIhsM4UloRCdsXn3x9us2Xp1jeynS83T3gHGLdUvPclgGvQZapwBgUkkn9paS+bjDg==}
+    dev: true
 
   /@hattip/core@0.0.34:
     resolution: {integrity: sha512-L9MRB5fVgW8vd2wKDbD1pIhsM4UloRCdsXn3x9us2Xp1jeynS83T3gHGLdUvPclgGvQZapwBgUkkn9paS+bjDg==}
@@ -1084,6 +1097,14 @@ packages:
     dependencies:
       '@hattip/core': 0.0.33
       node-fetch-native: 1.1.0
+    dev: false
+
+  /@hattip/polyfills@0.0.34:
+    resolution: {integrity: sha512-zD0BemBQ4iqwKyX0jNu7YTSZtG4zH7sOB3XIBa5FkxRHZEjEc1dtKHsQpWhNqZW9+h5c8TWS9EiTMstqbtL2SQ==}
+    dependencies:
+      '@hattip/core': 0.0.34
+      node-fetch-native: 1.1.0
+    dev: true
 
   /@hattip/response@0.0.33:
     resolution: {integrity: sha512-blwq1PJITeWwhx/Tyret8OYqTcrGEu/eTlSoC5U8b1uy6s+oNTJ/bhQUtfj8P5X+DSaKmbo1ymBKyCPpmPv6vg==}

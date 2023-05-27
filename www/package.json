@@ -31,7 +31,7 @@
     "@1/ui": "workspace:*",
     "@cucumber/cucumber": "^9.1.1",
     "@edge-runtime/types": "^2.0.8",
-    "@hattip/adapter-node": "^0.0.33",
+    "@hattip/adapter-node": "^0.0.34",
     "@magne4000/vite-plugin-vercel-ssr": "^0.2.0",
     "@tanstack/eslint-plugin-query": "^4.29.4",
     "@tanstack/react-query-devtools": "^4.29.6",
