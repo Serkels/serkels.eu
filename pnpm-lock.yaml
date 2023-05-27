@@ -106,8 +106,8 @@ importers:
         specifier: ^0.0.34
         version: 0.0.34
       '@hattip/router':
-        specifier: ^0.0.33
-        version: 0.0.33
+        specifier: ^0.0.34
+        version: 0.0.34
       '@hattip/vite':
         specifier: ^0.0.33
         version: 0.0.33(vite@4.3.1)
@@ -883,12 +883,6 @@ packages:
       '@hattip/polyfills': 0.0.34
     dev: true
 
-  /@hattip/compose@0.0.33:
-    resolution: {integrity: sha512-/T0bE+/i7E285KIkMK6bMzr276uUGjWaiVyQqs7Up9IEezRdsjtjc+KV+91Rl2unfu1jdz+D8+khYqexHuSNYw==}
-    dependencies:
-      '@hattip/core': 0.0.33
-    dev: false
-
   /@hattip/compose@0.0.34:
     resolution: {integrity: sha512-faW5gIvyDmut3/lUWslHitH2+rrtkM9IQvBOmdTjS7r9vaADVh2t/M+MgitTzsSavfQUbP+uCbTPQ+ffrUhceA==}
     dependencies:
@@ -931,11 +925,11 @@ packages:
       '@hattip/core': 0.0.34
     dev: false
 
-  /@hattip/router@0.0.33:
-    resolution: {integrity: sha512-rZVC/f4fl7T5gmDdDaZC/6+uxvNnIdC23/gv3JMneIXOfuMSxdXOAe8jteE3kXde3zXODDHT8sp+lHl4jKjGwA==}
+  /@hattip/router@0.0.34:
+    resolution: {integrity: sha512-iLpidXXhYpZ5xy+3h9CIBx8f8Rek4mqJWQNJIXCcYGrTutQwptzj1HiI30kAzx8JkGi6b2KLWOyT/aRzRQk4aw==}
     dependencies:
-      '@hattip/compose': 0.0.33
-      '@hattip/core': 0.0.33
+      '@hattip/compose': 0.0.34
+      '@hattip/core': 0.0.34
     dev: false
 
   /@hattip/vite@0.0.33(vite@4.3.1):
