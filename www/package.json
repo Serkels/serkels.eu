@@ -10,7 +10,7 @@
     "e2e": "vitest --run --mode e2e"
   },
   "dependencies": {
-    "@hattip/compose": "^0.0.33",
+    "@hattip/compose": "^0.0.34",
     "@hattip/cookie": "^0.0.34",
     "@hattip/core": "^0.0.33",
     "@hattip/response": "^0.0.34",
