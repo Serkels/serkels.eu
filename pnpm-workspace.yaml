@@ -1,3 +1,6 @@
 packages:
   - "@1/*"
+  - "@1/config/*"
   - "www"
+  #
+  - "packages/@douglasduteil/*"

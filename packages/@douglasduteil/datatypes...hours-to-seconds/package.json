@@ -1,0 +1,13 @@
+{
+  "name": "@douglasduteil/datatypes...hours-to-seconds",
+  "version": "0.0.0",
+  "description": "Constant number types in seconds for 24 hours",
+  "main": "index.ts",
+  "module": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Douglas Duteil <douglasduteil@gmail.com> (https://douglasduteil.github.io/)",
+  "license": "WTFPL"
+}

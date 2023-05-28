@@ -28,7 +28,7 @@
     "node": ">=18"
   },
   "devDependencies": {
-    "@1/tsconfig": "link:../../@1/tsconfig",
+    "@1/typescript-config": "link:../../@1/config/typescript-config",
     "@strapi/typescript-utils": "4.10.6",
     "prettier": "^2.8.8",
     "typescript": "beta"

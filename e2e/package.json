@@ -6,7 +6,7 @@
     "test": "codeceptjs run"
   },
   "devDependencies": {
-    "@1/tsconfig": "workspace:*",
+    "@1/typescript-config": "link:../../@1/config/typescript-config",
     "@codeceptjs/configure": "^0.10.0",
     "@types/node": "^18.16.0",
     "codeceptjs": "^3.4.1",

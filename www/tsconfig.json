@@ -1,10 +1,11 @@
 {
-  "extends": ["@1/tsconfig/vite-react.json"],
+  "extends": "@1/typescript-config/next.json",
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "./app",
     "paths": {
-      "@/*": ["src/*"]
-    },
-    "isolatedModules": true
-  }
+      "@/*": ["*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": [".next", "node_modules"]
 }

@@ -3,5 +3,16 @@
   "engines": {
     "node": ">=18"
   },
+  "scripts": {
+    "build": "turbo run build",
+    "clean": "turbo run clean",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint"
+  },
+  "devDependencies": {
+    "prettier": "^2.8.8",
+    "turbo": "^1.9.9",
+    "typescript": "5.1.0-beta"
+  },
   "packageManager": "pnpm@8.5.1"
 }

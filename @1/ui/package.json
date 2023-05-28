@@ -6,22 +6,19 @@
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "scripts": {
-    "dev": "ladle serve",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "formik": "^2.2.9",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": "18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwindcss": "3.3.2"
   },
   "devDependencies": {
-    "@1/tsconfig": "workspace:*",
-    "@1/theme": "workspace:*",
-    "@ladle/react": "^2.12.3",
+    "@1/tailwindcss-config": "workspace:*",
+    "@1/typescript-config": "workspace:*",
     "@types/react": "^18.2.0",
     "prettier": "^2.8.8",
-    "typescript": "beta",
-    "unocss": "^0.52.4",
-    "vite": "^4.3.1"
+    "typescript": "beta"
   }
 }

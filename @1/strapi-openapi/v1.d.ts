@@ -332,16 +332,12 @@ export interface paths {
   "/passwordless/send-link": {
     /** Send an email to user with login link */
     post: {
-      requestBody?: {
-        content: {
-          "application/json": components["schemas"]["Passwordless-SendLinkRequest"];
-        };
-      };
+      requestBody: components["requestBodies"]["Passwordless-SendLinkRequest"];
       responses: {
         /** @description Returns email and boolean to confirm email was sent */
         200: {
           content: {
-            "application/json": components["schemas"]["Passwordless-EmailSent"];
+            "application/json": components["requestBodies"]["Passwordless-EmailSent"];
           };
         };
         /** @description Bad Request */
@@ -1890,25 +1886,6 @@ export interface components {
       sent?: boolean;
       username?: string | null;
     };
-    "Passwordless-SendLinkRequest": {
-      /**
-       * @description context of authentification 
-       * @example {
-       *   "currentUrl": "localhost"
-       * }
-       */
-      context?: Record<string, never>;
-      /**
-       * @description the user email 
-       * @example foo@bar.com
-       */
-      email?: string;
-      /**
-       * @description username for new user 
-       * @example foo
-       */
-      username?: string;
-    };
     "Passwordless-User": components["schemas"]["Users-Permissions-UserRegistration"] & {
       context?: Record<string, never>;
     };
@@ -1992,6 +1969,27 @@ export interface components {
   responses: never;
   parameters: never;
   requestBodies: {
+    "Passwordless-SendLinkRequest": {
+      content: {
+        /**
+         * @example {
+         *   "email": "foo@bar.com",
+         *   "username": "foo",
+         *   "context": {
+         *     "currentUrl": "localhost"
+         *   }
+         * }
+         */
+        "application/json": {
+          /** @description context of authentification */
+          context?: Record<string, never>;
+          /** @description the user email */
+          email?: string;
+          /** @description username for new user */
+          username?: string;
+        };
+      };
+    };
     "Users-Permissions-RoleRequest": {
       content: {
         /**

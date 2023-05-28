@@ -1,3 +1,7 @@
 {
-  "extends": ["@1/tsconfig/vite-react.json"]
+  "extends": ["@1/typescript-config/react.json"],
+  "compilerOptions": {
+    "rootDir": "."
+  },
+  "include": ["shell", "login", "icons"]
 }
