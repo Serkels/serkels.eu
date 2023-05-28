@@ -1,10 +1,10 @@
 {
   "folders": [
+    { "path": "@1/config/eslint-config", "name": "@1/config/eslint-config" },
     {
       "path": "@1/config/tailwindcss-config",
       "name": "@1/config/tailwindcss-config"
     },
-    { "path": "@1/config/eslint-config", "name": "@1/config/eslint-config" },
     {
       "path": "@1/config/typescript-config",
       "name": "@1/config/typescript-config"
