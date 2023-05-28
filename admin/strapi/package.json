@@ -1,5 +1,5 @@
 {
-  "name": "admin",
+  "name": "strapi",
   "private": true,
   "version": "0.1.0",
   "description": "A Strapi application for Toc-Toc",

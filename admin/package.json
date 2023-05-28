@@ -1,5 +1,8 @@
 {
   "private": true,
+  "scripts": {
+    "start": "pnpm --filter strapi start"
+  },
   "engines": {
     "node": ">=18"
   },
