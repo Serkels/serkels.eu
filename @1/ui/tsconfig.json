@@ -1,7 +1,5 @@
 {
   "extends": ["@1/typescript-config/react.json"],
-  "compilerOptions": {
-    "rootDir": "."
-  },
+  "compilerOptions": {},
   "include": ["shell", "login", "icons"]
 }

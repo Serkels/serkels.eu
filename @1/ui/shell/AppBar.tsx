@@ -1,21 +1,18 @@
 //
 
+import type { PropsWithChildren } from "react";
+import { Logo } from "../icons";
+
 //
 
-export function AppBar() {
+export function AppBar({ children }: PropsWithChildren) {
   return (
-    <header un-px="1" un-py="3" un-flex="~ items-center">
-      <div un-flex="~ 1" un-px="1rem" un-sm-px="2rem">
-        <h1 un-flex="~ 1" un-justify="center">
-          <a href="/">Toc - Toc</a>
-        </h1>
+    <header className="flex px-[64px] bg-primary-gradient text-white justify-between items-stretch">
+      <figure className="p-5">
+        <Logo className="w-[133px] h-[22px] " />
+      </figure>
 
-        <button>Login</button>
-      </div>
+      {children}
     </header>
   );
 }
-
-//
-
-type Props = { position: string };

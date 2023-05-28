@@ -1,6 +1,16 @@
 //
 
+const {
+  encodeSvgForCss,
+} = require("@iconify/utils/lib/svg/encode-svg-for-css");
+const plugin = require("tailwindcss/plugin");
+
 const defaultTheme = require("tailwindcss/defaultTheme");
+
+const path = require("path");
+const fs = require("fs");
+const svgPath = path.resolve(__dirname, "./icons/binoculars.svg");
+const svg = fs.readFileSync(svgPath, "utf8");
 
 //
 
@@ -26,6 +36,9 @@ module.exports = {
         Chateau_Green,
       },
       backgroundImage: {
+        "i-binoculars": `url("data:image/svg+xml;utf8,${encodeSvgForCss(
+          svg
+        )}")`,
         "primary-gradient": `
           linear-gradient(
             52deg,
@@ -37,5 +50,16 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ addComponents, theme }) {
+      addComponents({
+        ".icon": {
+          backgroundColor: "currentColor",
+          color: "inherit",
+          backgroundSize: "100% 100%",
+          mask: "var(--un-icon) no-repeat",
+        },
+      });
+    }),
+  ],
 };
