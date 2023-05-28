@@ -37,9 +37,9 @@ importers:
         specifier: ^4.0.11
         version: 4.0.11(@strapi/strapi@4.10.6)
     devDependencies:
-      '@1/tsconfig':
-        specifier: link:../../@1/tsconfig
-        version: link:../../@1/tsconfig
+      '@1/typescript-config':
+        specifier: link:../../@1/config/typescript-config
+        version: link:../../@1/config/typescript-config
       '@strapi/typescript-utils':
         specifier: 4.10.6
         version: 4.10.6
