@@ -9,13 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@1/eslint-config": "workspace:*",
     "@1/tailwindcss-config": "workspace:*",
     "@1/typescript-config": "workspace:*",
-    "@1/eslint-config": "workspace:*",
     "@1/ui": "workspace:*",
     "clsx": "^1.2.1",
     "ms": "3.0.0-canary.1",
     "next": "13.4.4",
+    "nextjs-toploader": "^1.4.2",
     "postcss": "8.4.23",
     "react": "18.2.0",
     "react-dom": "18.2.0",
