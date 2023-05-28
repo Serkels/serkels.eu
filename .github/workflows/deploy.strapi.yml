@@ -27,4 +27,4 @@ jobs:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: toctoc-admin
           heroku_email: ${{ secrets.HEROKU_EMAIL  }}
-          appdir: "admin/strapi"
+          appdir: "admin"
