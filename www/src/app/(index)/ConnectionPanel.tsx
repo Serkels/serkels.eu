@@ -8,6 +8,7 @@ import { useMutation } from "@tanstack/react-query";
 import type { Session } from "next-auth";
 
 import { signOut, useSession } from "next-auth/react";
+import Link from "next/link";
 import { useCallback, type PropsWithChildren } from "react";
 
 //
@@ -24,7 +25,7 @@ export function ConnectionPanel() {
   if (status === "loading") return <Loading />;
   if (session && session.user && status === "authenticated")
     return <LoginAs user={session.user} />;
-  console.log({ session, status });
+
   if (isLoading) return <Loading />;
   if (isError) return <ErrorOccur />;
   if (isSuccess) return <CheckYourMail />;
@@ -81,17 +82,19 @@ function LoginAs({ user }: { user: NonNullable<Session["user"]> }) {
   const on_logout = useCallback(() => signOut(), [user.email]);
   return (
     <WhiteCard>
-      <figure>
-        <img
-          className="m-auto aspect-square rounded-full p-11"
-          src={user.image!}
-        />
-        <figcaption className="text-center">
-          <h3 className="text-center">
-            Vous êtes connecté en tant que : <strong>{user.name}</strong>.
-          </h3>
-        </figcaption>
-      </figure>
+      <Link href="/exchange">
+        <figure>
+          <img
+            className="m-auto aspect-square rounded-full p-11"
+            src={user.image!}
+          />
+          <figcaption className="text-center">
+            <h3 className="text-center">
+              Vous êtes connecté en tant que : <strong>{user.name}</strong>.
+            </h3>
+          </figcaption>
+        </figure>
+      </Link>
 
       <hr />
 

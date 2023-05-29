@@ -19,7 +19,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <NextTopLoader color="#000" showSpinner={false} />
+        <NextTopLoader color="#fff" showSpinner={false} />
         <Providers>{children}</Providers>
       </body>
     </html>
