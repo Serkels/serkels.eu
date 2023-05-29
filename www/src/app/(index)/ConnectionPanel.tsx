@@ -14,8 +14,10 @@ import { useCallback, type PropsWithChildren } from "react";
 
 export function ConnectionPanel() {
   const { data: session, status } = useSession();
-  const { mutate, isLoading, isSuccess, isError } =
-    useMutation(submitFormHandler);
+  const { mutate, isLoading, isSuccess, isError } = useMutation(
+    submitFormHandler,
+    { retry: 3 }
+  );
   const onFormSubmit = async ({ email }: { email: string }) =>
     await mutate({ email });
 
