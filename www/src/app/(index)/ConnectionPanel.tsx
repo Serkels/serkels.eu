@@ -59,15 +59,18 @@ export function ConnectionPanel() {
 }
 
 async function submitFormHandler({ email }: { email: string }) {
-  const res = await fetch("http://localhost:1337/api/passwordless/send-link", {
-    method: "POST",
-    body: JSON.stringify({
-      email,
-    }),
-    headers: {
-      "Content-type": "application/json; charset=UTF-8",
-    },
-  });
+  const res = await fetch(
+    process.env["STRAPI_API_URL"] + "/api/passwordless/send-link",
+    {
+      method: "POST",
+      body: JSON.stringify({
+        email,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    }
+  );
   const result = await res.json();
   return result;
 }
