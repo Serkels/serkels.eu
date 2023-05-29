@@ -15,9 +15,14 @@ function Binoculars(props: any) {
   return <></>;
 }
 export function UserBar() {
-  const { data: session } = useSession();
-  session;
-  // console.log({ session });
+  const { data: session } = useSession({
+    required: true,
+    onUnauthenticated() {
+      window.location.href = "/";
+    },
+  });
+  if (!session) return <>Loading...</>;
+  console.log({ session });
   return (
     <AppBar>
       <nav>
@@ -48,7 +53,16 @@ export function UserBar() {
           </li>
         </ul>
       </nav>
-      <nav></nav>
+      <nav className="grid min-w-[160px] grid-cols-5 items-center justify-center">
+        <button className="h-[20px] w-[20px]">{"➕"}</button>
+        <button className="h-[20px] w-[20px]">{"🔔"}</button>
+        <button className="h-[20px] w-[20px]">{"💬"}</button>
+        <button className="h-[20px] w-[20px]">{"↔️"}</button>
+        <img
+          className="h-[20px] w-[20px] rounded-full border-2 border-white object-cover"
+          src={session.user!.image!}
+        />
+      </nav>
     </AppBar>
   );
 }

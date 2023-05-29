@@ -13,12 +13,12 @@ export function LoginForm({ onSubmit }: Props) {
   return (
     <form
       onSubmit={formik.handleSubmit}
-      className="bg-white p-4 grid text-black grid-cols-1 gap-5 rounded-md border "
+      className="grid grid-cols-1 gap-5 rounded-md border bg-white p-4 text-black "
       un-bg="white"
       un-p="lg"
       un-grid="~ cols-1"
     >
-      <h1 className="uppercase text-center font-bold text-base">
+      <h1 className="text-center text-base font-bold uppercase">
         Créer un compte
       </h1>
       <input
@@ -27,19 +27,19 @@ export function LoginForm({ onSubmit }: Props) {
         // onChange={formik.handleChange}
         placeholder="Adresse email"
         type="email"
-        className="p-6 h-12 placeholder-slate-400 text-lg border border-solid border-black"
+        className="h-12 border border-solid border-black p-6 text-lg placeholder-slate-400"
         // value={formik.values.email}
       />
       <button
         type="submit"
-        className="border-none h-12 text-lg rounded-full font-bold color-white bg-Cerulean text-white"
+        className="color-white h-12 rounded-full border-none bg-Cerulean text-lg font-bold text-white"
         disabled={true}
       >
         Étudiant
       </button>
       <button
         type="submit"
-        className="border-none h-12 text-lg rounded-full font-bold color-white bg-RedViolet text-white"
+        className="color-white h-12 rounded-full border-none bg-RedViolet text-lg font-bold text-white"
         disabled={true}
       >
         Partenaire
@@ -51,12 +51,12 @@ export function LoginForm({ onSubmit }: Props) {
         onChange={formik.handleChange}
         placeholder="Adresse email"
         type="email"
-        className="p-6 h-12 placeholder-slate-400 text-lg border border-solid border-black"
+        className="h-12 border border-solid border-black p-6 text-lg placeholder-slate-400"
         value={formik.values.email}
       />
       <button
         type="submit"
-        className="border-none h-12 text-lg rounded-full font-bold color-white bg-Chateau_Green text-white"
+        className="color-white h-12 rounded-full border-none bg-Chateau_Green text-lg font-bold text-white"
         disabled={formik.isSubmitting}
       >
         Se connecter

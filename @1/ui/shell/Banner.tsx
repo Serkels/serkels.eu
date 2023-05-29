@@ -1,22 +1,39 @@
-import type { PropsWithChildren } from "react";
+//
+
+import clsx from "clsx";
+import {
+  forwardRef,
+  type ComponentPropsWithoutRef,
+  type ElementRef,
+} from "react";
 
 //
-export function Banner({ children }: PropsWithChildren) {
+
+export const Banner = forwardRef<
+  ElementRef<"div">,
+  ComponentPropsWithoutRef<"div">
+>(function Banner({ children, ...props }, forwardedRef) {
+  const { className, ...other_props } = props;
+
   return (
-    <section className="p-6 bg-primary-gradient text-white">
-      <div
-        className={`
-          container
-          m-auto
-          max-w-2xl
-          min-h-[346px]
-          grid gap-4 gap-x-9 grid-cols-1 items-center justify-around
-          sm:grid-cols-2
-          sm:min-h-[25rem]
-      `}
-      >
-        {children}
-      </div>
+    <section
+      className={clsx(
+        `
+        flex
+        min-h-[calc(100vh_-_149px_-_25px)]
+        items-center
+        p-6
+      `,
+        {
+          "bg-primary-gradient": !className?.includes("bg-"),
+          "text-white": !className?.includes("text-"),
+        },
+        className
+      )}
+      ref={forwardedRef}
+      {...other_props}
+    >
+      {children}
     </section>
   );
-}
+});

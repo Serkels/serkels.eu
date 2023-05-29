@@ -25,8 +25,6 @@ const RedViolet_Dark = "#C91489";
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  mode: "jit",
-  darkMode: "class",
   theme: {
     extend: {
       colors: {

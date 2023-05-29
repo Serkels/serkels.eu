@@ -36,6 +36,7 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+  // pages: { error: "/" },
   callbacks: {
     async session({ session, token }) {
       console.log("session");
@@ -46,7 +47,7 @@ export const authOptions: NextAuthOptions = {
       // session.user.username = token.username;
       session.user = {
         email: token.email!,
-        image: "https://source.unsplash.com/random/64x64",
+        image: "https://i.pravatar.cc/256?u=" + token.email,
         name: token.name || (token as any).username,
       };
       return Promise.resolve(session);

@@ -1,6 +1,8 @@
 //
 
-import { ConfirmButton } from "./ConfirmButton";
+import { BigBar, Footer } from "@1/ui/shell";
+import Image from "next/image";
+import { ConfirmPanel } from "./ConfirmPanel";
 //
 
 // export const metadata: Metadata = {
@@ -9,13 +11,30 @@ import { ConfirmButton } from "./ConfirmButton";
 // };
 
 export default async function Page({ params }: { params: { token: string } }) {
+  const now = await getServerDate();
   const { token } = params;
 
   return (
     <>
-      Confirm <ConfirmButton token={token} />
+      <BigBar>
+        <Image
+          src="/toc-toc.svg"
+          alt="Toc Toc Logo"
+          width={175}
+          height={53}
+          priority
+        />
+      </BigBar>
+
+      <ConfirmPanel token={token} />
+
+      <Footer now={now} />
     </>
   );
 }
 
 //
+
+async function getServerDate() {
+  return new Date().toISOString();
+}

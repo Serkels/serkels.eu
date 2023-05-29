@@ -2,7 +2,7 @@
 
 //
 
-import { BigBar, Footer } from "@1/ui/shell";
+import { Banner, BigBar, Footer } from "@1/ui/shell";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -41,17 +41,11 @@ export default async function NotFound() {
 
 function NotFoundMain({ children }: PropsWithChildren) {
   return (
-    <main
-      className={`
-        flex flex-col items-center justify-between
-        bg-primary-gradient
-        p-24`}
-    >
-      <h1
+    <Banner>
+      <main
         className={`
             mx-auto
             my-0
-            p-24
             text-center text-6xl
             font-extrabold
             text-white
@@ -60,8 +54,8 @@ function NotFoundMain({ children }: PropsWithChildren) {
         `}
       >
         {children}
-      </h1>
-    </main>
+      </main>
+    </Banner>
   );
 }
 
