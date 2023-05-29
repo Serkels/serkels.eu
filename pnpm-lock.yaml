@@ -100,6 +100,9 @@ importers:
 
   '@1/ui':
     dependencies:
+      clsx:
+        specifier: ^1.2.1
+        version: 1.2.1
       formik:
         specifier: ^2.2.9
         version: 2.2.9(react@18.2.0)
