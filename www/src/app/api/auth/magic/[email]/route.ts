@@ -8,7 +8,12 @@ export async function GET(
   { params }: { params: { email: string } }
 ) {
   const { email } = params;
-  console.log("Send Magic Email to ", email);
+  console.log(
+    "Send Magic Email to ",
+    email,
+    " throw ",
+    process.env["STRAPI_API_URL"] + "/api/passwordless/send-link"
+  );
   try {
     return await fetch(
       process.env["STRAPI_API_URL"] + "/api/passwordless/send-link",
