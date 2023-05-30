@@ -16,12 +16,13 @@ const svg = fs.readFileSync(svgPath, "utf8");
 
 const Cerulean = "#04AAE8";
 const Cerulean_Dark = "#04AAE8";
-
-const Eminence = "#782D8E";
 const Chateau_Green = "#39b154";
-
+const Congress_Blue = "#023f87";
+const Eminence = "#782D8E";
 const RedViolet = "#CE118B";
 const RedViolet_Dark = "#C91489";
+
+//
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -29,13 +30,15 @@ module.exports = {
     extend: {
       colors: {
         Cerulean,
+        Chateau_Green,
+        Congress_Blue,
         Eminence,
         RedViolet,
-        Chateau_Green,
       },
 
       gridTemplateColumns: {
-        holy: "300px minmax(600px, 1fr) 200px",
+        "holy-grail-ish": "300px minmax(600px, 1fr)",
+        "holy-grail": "auto 1fr auto",
       },
       backgroundImage: {
         "i-binoculars": `url("data:image/svg+xml;utf8,${encodeSvgForCss(

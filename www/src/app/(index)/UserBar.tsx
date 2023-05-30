@@ -6,9 +6,8 @@
 import { Binoculars, Book, Exchange, MessageGroup } from "@1/ui/icons";
 import { AppBar } from "@1/ui/shell";
 import clsx from "clsx";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { redirect, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import type { PropsWithChildren } from "react";
 
 //
@@ -16,13 +15,13 @@ import type { PropsWithChildren } from "react";
 export function UserBar() {
   const pathname = usePathname();
 
-  const { data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      window.location.href = "/";
-    },
-  });
-  if (!session) return redirect("/");
+  // const { data: session } = useSession({
+  //   required: true,
+  //   onUnauthenticated() {
+  //     redirect("/");
+  //   },
+  // });
+  // if (!session) return redirect("/");
 
   return (
     <AppBar>
@@ -39,7 +38,7 @@ export function UserBar() {
                 <Exchange className="mx-auto block w-5 self-end" />
                 <span
                   className={clsx("text-xs ", {
-                    "font-bold": pathname.includes("/opportunity"),
+                    "font-bold": pathname.includes("/exchange"),
                   })}
                 >
                   Échanges
@@ -52,7 +51,7 @@ export function UserBar() {
               className={clsx("block", {
                 "border-b-2": pathname.includes("/opportunity"),
               })}
-              href="/exchange"
+              href="/opportunity"
             >
               <NavItem>
                 <Binoculars className="mx-auto block w-5 self-end" />
@@ -101,7 +100,7 @@ export function UserBar() {
         <button className="h-[20px] w-[20px]">{"↔️"}</button>
         <img
           className="h-[20px] w-[20px] rounded-full border-2 border-white object-cover"
-          src={session.user!.image!}
+          // src={session.user!.image!}
         />
       </nav>
     </AppBar>

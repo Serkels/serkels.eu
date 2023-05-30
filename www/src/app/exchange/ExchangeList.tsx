@@ -7,12 +7,6 @@ import { useSession } from "next-auth/react";
 
 //
 
-function ExchangeDTO(...data: any) {
-  return {
-    ...data,
-  };
-}
-
 export function ExchangeList() {
   const {} = useSession();
   const { data, isLoading, isError } = useQuery({
@@ -24,9 +18,9 @@ export function ExchangeList() {
   if (!data) return <>No data O_o</>;
   return (
     <ul className="grid grid-cols-1 gap-8">
-      {data.map(ExchangeDTO).map((exchange) => (
-        <li className="mx-auto max-w-2xl">
-          <ExchangeCard key={exchange.id} />
+      {data.map((exchange) => (
+        <li key={exchange.id} className="mx-auto xl:max-w-3xl">
+          <ExchangeCard />
         </li>
       ))}
     </ul>
@@ -58,7 +52,7 @@ function ExchangeCard() {
               className="h-12 w-12 rounded-full"
               src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
             />
-            <div className="ml-2 mt-0.5">
+            <figcaption className="ml-2 mt-0.5">
               <span
                 className="block text-base font-medium leading-snug text-black
         "
@@ -68,13 +62,13 @@ function ExchangeCard() {
               <span className="block text-sm font-light leading-snug text-gray-500 ">
                 🎓 Université Paris 8
               </span>
-            </div>
+            </figcaption>
           </figure>
           <time className="mt-3 text-xs">02/09/2023</time>
         </header>
         <hr className="my-2" />
-        <div className=" flex items-center justify-between text-xs text-[#707070]">
-          <div className="inline-flex ">
+        <div className="items-center justify-between text-xs text-[#707070] sm:flex">
+          <div className="inline-flex">
             <span className="min-w-[100px] font-bold uppercase text-Eminence">
               Proposition
             </span>

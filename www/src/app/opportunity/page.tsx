@@ -3,8 +3,7 @@
 import { InputSearch } from "@1/ui/components/InputSearch";
 import { Footer } from "@1/ui/shell";
 import { UserBar } from "../(index)/UserBar";
-import { ExchangeList } from "./ExchangeList";
-import { SeeAlso } from "./SeeAlso";
+import { OpportunityList } from "./OpportunityList";
 
 //
 
@@ -13,7 +12,7 @@ export default async function Page() {
   return (
     <>
       <UserBar />
-      <ExchangePanel />
+      <Opportunities />
       <Footer now={now} />
     </>
   );
@@ -21,24 +20,22 @@ export default async function Page() {
 
 //
 
-function ExchangePanel() {
+function Opportunities() {
   return (
-    <div className="mt-10 grid justify-between gap-5 px-1 lg:grid-cols-holy-grail">
-      <aside className="hidden  lg:block lg:px-10">
-        <article>
-          <h3 className="font-bold uppercase text-[#00adee]">Échanges</h3>
+    <div className="grid justify-between gap-5 px-1 lg:grid-cols-holy-grail">
+      <aside className="hidden shadow lg:block lg:px-10">
+        <article className="mt-10 ">
+          <h3 className="font-bold uppercase text-Congress_Blue">
+            Opportunités
+          </h3>
 
           <InputSearch />
-
           <ul></ul>
         </article>
       </aside>
-      <main>
-        <ExchangeList />
+      <main className="mt-10">
+        <OpportunityList />
       </main>
-      <aside className="lg:px-10">
-        <SeeAlso />
-      </aside>
     </div>
   );
 }
