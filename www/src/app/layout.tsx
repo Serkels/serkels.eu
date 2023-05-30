@@ -1,5 +1,6 @@
 ///
 
+import clsx from "clsx";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={clsx(inter.className, "bg-[#F5F8FA]")}>
         <NextTopLoader color="#fff" showSpinner={false} />
         <Providers>{children}</Providers>
       </body>

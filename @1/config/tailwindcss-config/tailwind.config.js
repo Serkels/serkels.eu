@@ -33,6 +33,10 @@ module.exports = {
         RedViolet,
         Chateau_Green,
       },
+
+      gridTemplateColumns: {
+        holy: "300px minmax(600px, 1fr) 200px",
+      },
       backgroundImage: {
         "i-binoculars": `url("data:image/svg+xml;utf8,${encodeSvgForCss(
           svg
