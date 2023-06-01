@@ -1,4 +1,4 @@
-module.exports = {
+module.exports = ({ env }) => ({
   documentation: {
     enabled: true,
     config: {
@@ -15,6 +15,23 @@ module.exports = {
       },
     },
   },
+  email: {
+    config: {
+      provider: "nodemailer",
+      providerOptions: {
+        host: env("SMTP_HOST", "localhost"),
+        port: env("SMTP_PORT", 587),
+        auth: {
+          user: env("SMTP_USERNAME"),
+          pass: env("SMTP_PASSWORD"),
+        },
+      },
+      settings: {
+        defaultFrom: env("EMAIL_DEFAULT_FROM"),
+        defaultReplyTo: env("EMAIL_DEFAULT_REPLY_TO"),
+      },
+    },
+  },
   // passwordless: {
   //   enabled: true,
   //   config: {
@@ -27,4 +44,4 @@ module.exports = {
   //     },
   //   },
   // },
-};
+});
