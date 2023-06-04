@@ -33,8 +33,8 @@ importers:
         specifier: 1.10.1
         version: 1.10.1(eslint@8.40.0)
       eslint-plugin-jest-dom:
-        specifier: 4.0.3
-        version: 4.0.3(eslint@8.40.0)
+        specifier: 5.0.1
+        version: 5.0.1(@testing-library/dom@8.20.0)(eslint@8.40.0)
       eslint-plugin-react:
         specifier: 7.32.2
         version: 7.32.2(eslint@8.40.0)
@@ -1598,10 +1598,11 @@ packages:
       - eslint-import-resolver-webpack
       - supports-color
 
-  /eslint-plugin-jest-dom@4.0.3(eslint@8.40.0):
-    resolution: {integrity: sha512-9j+n8uj0+V0tmsoS7bYC7fLhQmIvjRqRYEcbDSi+TKPsTThLLXCyj5swMSSf/hTleeMktACnn+HFqXBr5gbcbA==}
+  /eslint-plugin-jest-dom@5.0.1(@testing-library/dom@8.20.0)(eslint@8.40.0):
+    resolution: {integrity: sha512-zD/BjNk12R5R9cxIu8oa2HfNeDSknI3ewtN8nygIUMQuieWDnTY9Np//6a1Z3G7Y3dx3l45hCUR4EphsgRmUtA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0, npm: '>=6', yarn: '>=1'}
     peerDependencies:
+      '@testing-library/dom': ^8.0.0 || ^9.0.0
       eslint: ^6.8.0 || ^7.0.0 || ^8.0.0
     dependencies:
       '@babel/runtime': 7.21.0

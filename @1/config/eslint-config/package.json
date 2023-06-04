@@ -11,7 +11,7 @@
     "eslint-config-next": "13.4.4",
     "eslint-config-prettier": "8.8.0",
     "eslint-config-turbo": "1.10.1",
-    "eslint-plugin-jest-dom": "4.0.3",
+    "eslint-plugin-jest-dom": "5.0.1",
     "eslint-plugin-react": "7.32.2",
     "eslint-plugin-simple-import-sort": "10.0.0",
     "eslint-plugin-testing-library": "5.11.0",
