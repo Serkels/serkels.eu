@@ -6,7 +6,11 @@ import { type PropsWithChildren } from "react";
 
 //
 
-export function Footer({ children, now }: PropsWithChildren<{ now?: string }>) {
+export function Footer({
+  children,
+  now,
+  year,
+}: PropsWithChildren<{ now?: string; year?: number }>) {
   return (
     <footer
       className="mt-28 flex min-h-[25px]  justify-center bg-primary-gradient p-1
@@ -14,7 +18,7 @@ export function Footer({ children, now }: PropsWithChildren<{ now?: string }>) {
     >
       <section>{children}</section>
       <section>
-        © Toc-Toc / <small>{now}</small>
+        ©{year} Toc-Toc / <small>{now}</small>
       </section>
     </footer>
   );
