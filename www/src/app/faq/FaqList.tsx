@@ -17,7 +17,7 @@ export function FaqList() {
   if (isError) return <>Epic fail...</>;
   if (!data) return <>No data O_o</>;
   return (
-    <ul className="grid grid-cols-1 gap-8">
+    <ul className="grid grid-cols-1 gap-9">
       {data.map((exchange) => (
         <li key={exchange.id} className="mx-auto xl:max-w-3xl">
           <ExchangeCard />
@@ -99,9 +99,9 @@ function ExchangeCard() {
       </div>
       <footer className="mt-4 bg-Eminence px-5 py-3 text-white">
         <div className="flex justify-between">
-          <button className="block">🔖</button>
+          <button className="block">0 réponse</button>
           <button className="block rounded-full bg-Chateau_Green px-7 text-white">
-            Demander
+            Répondre
           </button>
           <button className="block">↗️</button>
         </div>
