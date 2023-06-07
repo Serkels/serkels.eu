@@ -8,7 +8,7 @@ import type { PropsWithChildren } from "react";
 import Providers from "./(index)/Providers";
 import "./globals.css";
 
-const roboto = Roboto({ weight: ["400"] });
+const roboto = Roboto({ weight: ["400"], subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Toc-Toc",
