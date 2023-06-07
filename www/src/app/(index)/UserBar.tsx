@@ -2,10 +2,10 @@
 
 //
 
-// import BinocularsIcon from "@1/ui/icons/binoculars.svg";
 import { Binoculars, Book, Exchange, MessageGroup } from "@1/ui/icons";
 import { AppBar } from "@1/ui/shell";
 import clsx from "clsx";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { PropsWithChildren } from "react";
@@ -15,17 +15,11 @@ import type { PropsWithChildren } from "react";
 export function UserBar() {
   const pathname = usePathname();
 
-  // const { data: session } = useSession({
-  //   required: true,
-  //   onUnauthenticated() {
-  //     redirect("/");
-  //   },
-  // });
-  // if (!session) return redirect("/");
+  const { data: session } = useSession();
 
   return (
     <AppBar>
-      <nav>
+      <nav className="col-span-6">
         <ul className="grid grid-cols-4 gap-8">
           <li>
             <Link
@@ -70,7 +64,7 @@ export function UserBar() {
               className={clsx("block", {
                 "border-b-2": pathname.includes("/faq"),
               })}
-              href="/exchange"
+              href="/faq"
             >
               <NavItem>
                 <MessageGroup className="mx-auto block w-5 self-end" />
@@ -83,7 +77,7 @@ export function UserBar() {
               className={clsx("block", {
                 "border-b-2": pathname.includes("/guide"),
               })}
-              href="/exchange"
+              href="/guide"
             >
               <NavItem>
                 <Book className="mx-auto block w-5 self-end" />
@@ -93,16 +87,18 @@ export function UserBar() {
           </li>
         </ul>
       </nav>
-      <nav className="grid min-w-[160px] grid-cols-5 items-center justify-center">
-        <button className="h-[20px] w-[20px]">{"➕"}</button>
-        <button className="h-[20px] w-[20px]">{"🔔"}</button>
-        <button className="h-[20px] w-[20px]">{"💬"}</button>
-        <button className="h-[20px] w-[20px]">{"↔️"}</button>
-        <img
-          className="h-[20px] w-[20px] rounded-full border-2 border-white object-cover"
-          // src={session.user!.image!}
-        />
-      </nav>
+      {session ? (
+        <nav className="grid min-w-[160px] grid-cols-5 items-center justify-center">
+          <button className="h-[20px] w-[20px]">{"➕"}</button>
+          <button className="h-[20px] w-[20px]">{"🔔"}</button>
+          <button className="h-[20px] w-[20px]">{"💬"}</button>
+          <button className="h-[20px] w-[20px]">{"↔️"}</button>
+          <img
+            className="h-[20px] w-[20px] rounded-full border-2 border-white object-cover"
+            src={session.user!.image!}
+          />
+        </nav>
+      ) : null}
     </AppBar>
   );
 }

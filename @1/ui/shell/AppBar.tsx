@@ -1,19 +1,28 @@
 //
 
 import type { PropsWithChildren } from "react";
-import { Logo } from "../icons";
+import { HamburgerMenu, Logo } from "../icons";
 
 //
 
 export function AppBar({ children }: PropsWithChildren) {
   return (
     <header
-      className={
-        "flex items-stretch justify-between bg-primary-gradient text-white md:px-[64px]"
-      }
+      className={`
+        sticky
+        top-0 z-50
+        grid
+        grid-cols-12
+        items-stretch
+        gap-[35px]
+        bg-primary-gradient
+        text-white
+
+      `}
     >
-      <figure className="p-5">
-        <Logo className="h-[22px] w-[133px] " />
+      <figure className="col-span-3 flex items-center md:pl-[64px] ">
+        <HamburgerMenu className="mr-5" />
+        <Logo className="h-[22px] w-[133px]" />
       </figure>
 
       {children}

@@ -1,21 +1,16 @@
 //
 
-import { BigBar, Footer } from "@1/ui/shell";
+import { BigBar } from "@1/ui/shell";
 import type { _1_HOUR_ } from "@douglasduteil/datatypes...hours-to-seconds";
 import Image from "next/image";
+import { AppFooter } from "./(index)/AppFooter";
 import { HomeBanner } from "./(index)/HomeBanner";
 
 //
 
 export const revalidate: _1_HOUR_ = 3600;
 
-async function getServerDate() {
-  return new Date().toISOString();
-}
-
 export default async function Home() {
-  const now = await getServerDate();
-
   return (
     <>
       <BigBar>
@@ -30,7 +25,8 @@ export default async function Home() {
 
       <HomeBanner />
 
-      <Footer now={now} />
+      {/* @ts-expect-error Server Component */}
+      <AppFooter />
     </>
   );
 }

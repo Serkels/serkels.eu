@@ -6,7 +6,6 @@ import { Spinner } from "@1/ui/components/Spinner";
 import { LoginForm } from "@1/ui/domains/login/LoginForm";
 import { useMutation } from "@tanstack/react-query";
 import type { Session } from "next-auth";
-
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useCallback, type PropsWithChildren } from "react";
@@ -40,6 +39,7 @@ async function submitFormHandler({ email }: { email: string }) {
   }
   return result;
 }
+
 function Loading() {
   return (
     <section className="text-center">
