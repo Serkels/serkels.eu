@@ -1,7 +1,6 @@
 "use client";
 
 import { Spinner } from "@1/ui/components/Spinner";
-import { Exchange } from "@1/ui/icons";
 import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 
@@ -44,8 +43,8 @@ async function faq_query() {
 
 function ExchangeCard() {
   return (
-    <div className="overflow-hidden rounded-xl bg-white text-black shadow-[5px_5px_10px_#7E7E7E33]">
-      <div className="p-6">
+    <div className="overflow-hidden rounded-xl bg-white p-6 text-black shadow-[5px_5px_10px_#7E7E7E33]">
+      <div className="">
         <header className="mb-4 flex justify-between">
           <figure className="flex">
             <img
@@ -57,50 +56,28 @@ function ExchangeCard() {
                 className="block text-base font-medium leading-snug text-black
         "
               >
-                Alexandre Mollet
+                Yasmin Ibrahim
               </span>
               <span className="block text-sm font-light leading-snug text-gray-500 ">
-                🎓 Université Paris 8
+                🎓 Université Lyon 3
               </span>
             </figcaption>
           </figure>
           <time className="mt-3 text-xs">02/09/2023</time>
         </header>
-        <hr className="my-2" />
-        <div className="items-center justify-between text-xs text-[#707070] sm:flex">
-          <div className="inline-flex">
-            <span className="min-w-[100px] font-bold uppercase text-Eminence">
-              Proposition
-            </span>
-            <span className="font-bold">📍En ligne</span>
-          </div>
-          <div className=" flex items-center justify-between">
-            <span className="whitespace-nowrap font-bold uppercase">
-              Cours de langes
-            </span>
-            <Exchange className="mx-1 w-5 text-Chateau_Green" />
-            <span className="whitespace-nowrap font-bold">Sans échange</span>
-          </div>
-        </div>
-        <hr className="my-2" />
         <article>
-          <h3 className="my-5 text-2xl font-bold">
-            Cours de français tout les niveau
+          <h3 className="my-5 text-xl font-bold">
+            Quel temps les étudiants consacrent-ils aux études ?
           </h3>
-          <p>
-            Dans une licence LEA, vous étudiez deux langues los fige à un niveau
-            égal, le plus souvent l'anglais et une autre langue, mais aussi des
-            matières d'application. (Si vous vous inscrivez à une licence où
-            vous apprenez deux langues autres que l'anglais, vous aurez des
-            cours d'anglais en plus). Le but n'est pas seulement de
-            perfectionner communication…
-          </p>
         </article>
       </div>
-      <footer className="mt-4 bg-Eminence px-5 py-3 text-white">
+      <hr className="my-2" />
+      <footer className="mt-4 ">
         <div className="flex justify-between">
-          <button className="block">0 réponse</button>
-          <button className="block rounded-full bg-Chateau_Green px-7 text-white">
+          <button className="block text-sm font-bold text-[#656565]">
+            <span className="text-Chateau_Green">1</span> réponse
+          </button>
+          <button className="text-md block  rounded-full px-7 font-bold text-Chateau_Green">
             Répondre
           </button>
           <button className="block">↗️</button>

@@ -21,6 +21,11 @@ export const InputSearch = forwardRef<
       placeholder="Recherche"
       className={clsx(
         `
+          w-full
+          rounded-[26px]
+          border-[#E5E3E3]
+          p-4
+          text-xs
         `,
         className
       )}
