@@ -38,3 +38,14 @@ col de gauche sa ns shadom 5px 5px
 - FAQ layout style should match Opportuniy or echange ?
 
 § Header (button 121px) padding
+
+# TODO
+
+- Change text base size to 14px without changing the spacings values in the tailwind theme.
+- opportunité
+
+# FUTUR
+
+- Gestion de group (privé / public)
+- recherche de group par nom / ville / category (nom unique)
+- recherche d'utilisateur

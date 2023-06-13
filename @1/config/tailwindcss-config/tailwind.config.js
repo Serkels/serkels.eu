@@ -33,6 +33,20 @@ const GAP_SIZE = 35;
 module.exports = {
   theme: {
     extend: {
+      screens: {
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+        "2xl": "1536px",
+
+        // xs: 0,
+        // sm: 576px,
+        // md: 768px,
+        // lg: 992px,
+        // xl: 1200px,
+        // xxl: 1400px
+      },
       colors: {
         Cerulean,
         Chateau_Green,
@@ -76,12 +90,14 @@ module.exports = {
         "primary-gradient-large": `
           linear-gradient(
             41deg,
-            ${Cerulean} 0%,
-            ${Eminence} 52%,
-            ${Violet_Eggplant} 91%,
-            ${RedViolet_Dark} 100%
+            ${Cerulean} -20%,
+            ${Eminence} 40%,
+            ${Violet_Eggplant} 100%
           )
         `,
+      },
+      opacity: {
+        45: "0.45",
       },
 
       boxShadow: {
@@ -98,6 +114,12 @@ module.exports = {
           backgroundSize: "100% 100%",
           mask: "var(--tw-icon) no-repeat",
         },
+      });
+    }),
+
+    plugin(function ({ addBase }) {
+      addBase({
+        html: { fontSize: "14px" },
       });
     }),
   ],

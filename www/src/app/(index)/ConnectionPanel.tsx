@@ -50,7 +50,10 @@ function Loading() {
 
 function WhiteCard({ children }: PropsWithChildren) {
   return (
-    <article className="grid grid-cols-1 gap-5 rounded-md border bg-white p-6 text-black ">
+    <article
+      className="grid grid-cols-1 gap-5 rounded-md border bg-white p-6 text-black
+    shadow-[10px_10px_10px_#00000029]"
+    >
       {children}
     </article>
   );

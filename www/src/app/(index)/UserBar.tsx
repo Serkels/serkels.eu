@@ -8,18 +8,19 @@ import clsx from "clsx";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import type { PropsWithChildren } from "react";
+import { useState, type PropsWithChildren } from "react";
 
 //
 
 export function UserBar() {
+  const [, setShowSideBar] = useState(false);
   const pathname = usePathname();
 
   const { data: session } = useSession();
 
   return (
-    <AppBar>
-      <nav className="col-span-6">
+    <AppBar onClick={() => setShowSideBar(true)}>
+      <nav className="col-span-6 ">
         <ul className="grid grid-cols-4 gap-8">
           <li>
             <Link
@@ -31,7 +32,7 @@ export function UserBar() {
               <NavItem>
                 <Exchange className="mx-auto block w-5 self-end" />
                 <span
-                  className={clsx("text-xs ", {
+                  className={clsx("hidden text-lg lg:block", {
                     "font-bold": pathname.includes("/exchange"),
                   })}
                 >
@@ -50,7 +51,7 @@ export function UserBar() {
               <NavItem>
                 <Binoculars className="mx-auto block w-5 self-end" />
                 <span
-                  className={clsx("text-xs ", {
+                  className={clsx("hidden text-lg lg:block", {
                     "font-bold": pathname.includes("/opportunity"),
                   })}
                 >
@@ -68,7 +69,13 @@ export function UserBar() {
             >
               <NavItem>
                 <MessageGroup className="mx-auto block w-5 self-end" />
-                <span className="text-xs font-bold">Question-Réponse</span>
+                <span
+                  className={clsx("hidden text-lg lg:block", {
+                    "font-bold": pathname.includes("/faq"),
+                  })}
+                >
+                  Question-Réponse
+                </span>
               </NavItem>
             </Link>
           </li>
@@ -81,14 +88,20 @@ export function UserBar() {
             >
               <NavItem>
                 <Book className="mx-auto block w-5 self-end" />
-                <span className="text-xs font-bold">Guide D'étudiant</span>
+                <span
+                  className={clsx("hidden text-lg lg:block", {
+                    "font-bold": pathname.includes("/guide"),
+                  })}
+                >
+                  Guide D'étudiant
+                </span>
               </NavItem>
             </Link>
           </li>
         </ul>
       </nav>
       {session ? (
-        <nav className="grid min-w-[160px] grid-cols-5 items-center justify-center">
+        <nav className="grid grid-cols-5 items-center justify-center">
           <button className="h-[20px] w-[20px]">{"➕"}</button>
           <button className="h-[20px] w-[20px]">{"🔔"}</button>
           <button className="h-[20px] w-[20px]">{"💬"}</button>
@@ -107,7 +120,7 @@ export function UserBar() {
 
 function NavItem({ children }: PropsWithChildren) {
   return (
-    <div className="grid-rows grid h-[64px]  items-center justify-center">
+    <div className="grid-rows grid h-[64px]  content-center items-center justify-center">
       {children}
     </div>
   );

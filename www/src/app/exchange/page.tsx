@@ -9,8 +9,8 @@ import { SeeAlso } from "./SeeAlso";
 export default async function Page() {
   return (
     <>
-      <aside className="col-span-3 hidden lg:block lg:px-10">
-        <article className="mt-10">
+      <aside className="hidden md:col-span-2 md:block lg:col-span-3 ">
+        <article className="mt-10 pl-4">
           <h3 className="font-bold uppercase text-[#00adee]">Échanges</h3>
 
           <InputSearch />
@@ -18,10 +18,10 @@ export default async function Page() {
           <ul></ul>
         </article>
       </aside>
-      <main className="col-span-6 mt-10">
+      <main className="col-span-4 mt-10 sm:col-span-6 ">
         <ExchangeList />
       </main>
-      <aside className="col-span-3 mt-10 lg:px-10">
+      <aside className="mt-10 hidden lg:col-span-3 lg:block ">
         <SeeAlso />
       </aside>
     </>

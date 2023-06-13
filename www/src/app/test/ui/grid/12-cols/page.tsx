@@ -20,7 +20,6 @@ export default function Page() {
           px-4
           text-center
           opacity-20
-          max-lg:container
           sm:grid-cols-6
           sm:px-8
           md:grid-cols-8

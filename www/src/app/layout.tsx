@@ -18,8 +18,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
-    <html lang="en" className="text-[14px]">
-      <body className={clsx(roboto.className, "bg-[#F5F8FA]", "text-base")}>
+    // <html lang="en" className="text-[14px]">
+    <html lang="en">
+      <body
+        className={clsx(
+          roboto.className,
+          "antialiased",
+          "bg-[#F5F8FA]",
+          "text-base"
+        )}
+      >
         <NextTopLoader color="#fff" showSpinner={false} />
         <Providers>{children}</Providers>
       </body>

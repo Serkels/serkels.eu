@@ -54,7 +54,9 @@
     "typescript.preferences.importModuleSpecifier": "shortest",
     "typescript.tsdk": "root/node_modules/typescript/lib",
     "workbench.editor.labelFormat": "medium",
-    "autoHide.autoHidePanel": false
+    "autoHide.autoHidePanel": false,
+    "tailwindCSS.rootFontSize": 14,
+    "prettier.prettierPath": "root/node_modules/prettier"
   },
   "tasks": {
     "version": "2.0.0",

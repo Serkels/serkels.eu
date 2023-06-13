@@ -20,9 +20,8 @@ export const Banner = forwardRef<
       className={clsx(
         `
         flex
-        min-h-[calc(100vh_-_149px_-_25px)]
         items-center
-        p-6
+        py-14
       `,
         {
           "bg-primary-gradient": !className?.includes("bg-"),

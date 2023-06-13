@@ -16,7 +16,7 @@ export default function Providers({ children }: PropsWithChildren) {
     <QueryClientProvider client={client}>
       <SessionProvider>{children}</SessionProvider>
 
-      <ReactQueryDevtools initialIsOpen={false} />
+      <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
     </QueryClientProvider>
   );
   // return (
