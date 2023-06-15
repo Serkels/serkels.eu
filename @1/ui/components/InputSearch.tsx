@@ -42,11 +42,13 @@ export const InputSearch = forwardRef<
         </div>
 
         <input
+          ref={forwardedRef}
           type="search"
           id="default-search"
-          className="search-cancel:text-black block w-full rounded-full border border-[#B7B7B7] p-3 pl-9 text-xs outline-none"
+          className="block w-full rounded-full border border-[#B7B7B7] p-3 pl-9 text-xs outline-none search-cancel:text-black"
           placeholder="Recherche"
           required
+          {...other_props}
         />
 
         {/* <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">

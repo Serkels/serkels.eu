@@ -1,9 +1,9 @@
 //
 
-import { AppBigBar } from "@/(index)/AppBigBar";
-import { AppFooter } from "@/(index)/AppFooter";
-import { HomeBanner } from "@/(index)/HomeBanner";
-import { MobileNavBar } from "@/(index)/MobileNavBar";
+import { HomeBanner } from "@/app/(index)/HomeBanner";
+import { AppBigBar } from "@/components/AppBigBar";
+import { AppFooter } from "@/components/AppFooter.server";
+import { MobileNavBar } from "@/components/MobileNavBar";
 import { Grid } from "@1/ui/components/Grid";
 import { Binoculars, Book, MessageGroup } from "@1/ui/icons";
 import type { _1_HOUR_ } from "@douglasduteil/datatypes...hours-to-seconds";

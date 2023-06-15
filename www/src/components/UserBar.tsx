@@ -1,8 +1,7 @@
 "use client";
 
+import { AppSidebar } from "@/app/(index)/AppSidebar";
 import { Grid } from "@1/ui/components/Grid";
-//
-
 import {
   Binoculars,
   Book,
@@ -17,8 +16,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, type PropsWithChildren } from "react";
-import { AppSidebar } from "../app/(index)/AppSidebar";
-import { MobileNavBar } from "../app/(index)/MobileNavBar";
+import { MobileNavBar } from "./MobileNavBar";
 
 //
 
