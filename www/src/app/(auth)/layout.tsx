@@ -1,6 +1,6 @@
 ///
 
-import { AppFooter } from "@/(index)/AppFooter";
+import { AppFooter } from "@/components/AppFooter.server";
 import { BigBar } from "@1/ui/shell";
 import Image from "next/image";
 import type { PropsWithChildren } from "react";

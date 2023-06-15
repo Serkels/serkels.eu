@@ -1,6 +1,7 @@
 {
   "private": true,
   "scripts": {
+    "dev": "pnpm --filter strapi dev",
     "build": "pnpm --filter strapi build",
     "start": "pnpm --filter strapi start"
   },

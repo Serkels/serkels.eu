@@ -1,14 +1,14 @@
 ///
 
-import { AppFooter } from "@/(index)/AppFooter";
+import { AppFooter } from "@/components/AppFooter.server";
 import type { PropsWithChildren } from "react";
-import { UserBar } from "../(index)/UserBar";
+import { UserBar } from "@/components/UserBar";
 
 export default function Layout({ children }: PropsWithChildren) {
   return (
     <>
       <UserBar />
-      <div className="grid px-1 lg:grid-cols-12">{children}</div>;
+      {children}
       {/* @ts-expect-error Server Component */}
       <AppFooter />
     </>

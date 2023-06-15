@@ -17,8 +17,8 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, type PropsWithChildren } from "react";
-import { AppSidebar } from "./AppSidebar";
-import { MobileNavBar } from "./MobileNavBar";
+import { AppSidebar } from "../app/(index)/AppSidebar";
+import { MobileNavBar } from "../app/(index)/MobileNavBar";
 
 //
 

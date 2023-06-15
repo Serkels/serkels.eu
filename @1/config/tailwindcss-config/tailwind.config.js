@@ -114,7 +114,10 @@ module.exports = {
     },
   },
   plugins: [
-    plugin(function ({ addComponents, theme }) {
+    plugin(function ({ addBase, addComponents, addVariant, theme }) {
+      addBase({
+        html: { fontSize: "14px" },
+      });
       addComponents({
         ".icon": {
           backgroundColor: "currentColor",
@@ -123,12 +126,7 @@ module.exports = {
           mask: "var(--tw-icon) no-repeat",
         },
       });
-    }),
-
-    plugin(function ({ addBase }) {
-      addBase({
-        html: { fontSize: "14px" },
-      });
+      addVariant("search-cancel", "&::-webkit-search-cancel-button");
     }),
   ],
 };
