@@ -7,7 +7,11 @@ import clsx from "clsx";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { type ComponentPropsWithoutRef, type PropsWithChildren } from "react";
+import {
+  type ComponentPropsWithoutRef,
+  type ElementType,
+  type PropsWithChildren,
+} from "react";
 
 //
 
@@ -17,83 +21,62 @@ export function MobileNavBar({ className }: ComponentPropsWithoutRef<"nav">) {
   const isLogin = Boolean(session);
 
   return (
-    <nav className={clsx("bg-primary-gradient text-white", className)}>
-      <ul className="mx-auto grid w-fit grid-cols-4">
+    <nav className={clsx("text-white max-sm:bg-primary-gradient", className)}>
+      <ul className="grid h-full grid-cols-4 justify-between">
         <li>
           <Link
-            className={clsx("block", {
-              "border-b-2": pathname.includes("/exchange"),
+            className={clsx("block h-full border-b-2", {
+              "border-white": pathname.includes("/exchange"),
+              "border-transparent": !pathname.includes("/exchange"),
               "pointer-events-none opacity-45": !isLogin,
             })}
             aria-disabled={!isLogin}
             href="/exchange"
           >
-            <NavItem>
-              <Exchange className="mx-auto block w-5 self-end" />
-              <span
-                className={clsx("hidden text-lg lg:block", {
-                  "font-bold": pathname.includes("/exchange"),
-                })}
-              >
-                Échanges
-              </span>
+            <NavItem Icon={Exchange} isActive={pathname.includes("/exchange")}>
+              Échanges
             </NavItem>
           </Link>
         </li>
         <li>
           <Link
-            className={clsx("block", {
-              "border-b-2": pathname.includes("/opportunity"),
+            className={clsx("block h-full border-b-2", {
+              "border-white": pathname.includes("/opportunity"),
+              "border-transparent": !pathname.includes("/opportunity"),
             })}
             href="/opportunity"
           >
-            <NavItem>
-              <Binoculars className="mx-auto block w-5 self-end" />
-              <span
-                className={clsx("hidden text-lg lg:block", {
-                  "font-bold": pathname.includes("/opportunity"),
-                })}
-              >
-                Opportunités
-              </span>
+            <NavItem
+              Icon={Binoculars}
+              isActive={pathname.includes("/opportunity")}
+            >
+              Opportunités
             </NavItem>
           </Link>
         </li>
         <li>
           <Link
-            className={clsx("block", {
-              "border-b-2": pathname.includes("/faq"),
+            className={clsx("block h-full border-b-2", {
+              "border-white": pathname.includes("/faq"),
+              "border-transparent": !pathname.includes("/faq"),
             })}
             href="/faq"
           >
-            <NavItem>
-              <MessageGroup className="mx-auto block w-5 self-end" />
-              <span
-                className={clsx("hidden text-lg lg:block", {
-                  "font-bold": pathname.includes("/faq"),
-                })}
-              >
-                Question-Réponse
-              </span>
+            <NavItem Icon={MessageGroup} isActive={pathname.includes("/faq")}>
+              Question-Réponse
             </NavItem>
           </Link>
         </li>
         <li>
           <Link
-            className={clsx("block", {
-              "border-b-2": pathname.includes("/guide"),
+            className={clsx("block h-full border-b-2", {
+              "border-white": pathname.includes("/guide"),
+              "border-transparent": !pathname.includes("/guide"),
             })}
             href="/guide"
           >
-            <NavItem>
-              <Book className="mx-auto block w-5 self-end" />
-              <span
-                className={clsx("hidden text-lg lg:block", {
-                  "font-bold": pathname.includes("/guide"),
-                })}
-              >
-                Guide D'étudiant
-              </span>
+            <NavItem Icon={Book} isActive={pathname.includes("/guide")}>
+              Guide D'étudiant
             </NavItem>
           </Link>
         </li>
@@ -104,10 +87,26 @@ export function MobileNavBar({ className }: ComponentPropsWithoutRef<"nav">) {
 
 //
 
-function NavItem({ children }: PropsWithChildren) {
+function NavItem({
+  children,
+  Icon,
+  isActive,
+}: PropsWithChildren<{ Icon: ElementType; isActive: boolean }>) {
   return (
-    <div className="grid-rows grid h-[55px] w-[55px] content-center items-center justify-center">
-      {children}
+    <div
+      className="
+        flex h-full min-w-[55px] flex-col items-center justify-end py-2
+        [&>svg]:w-6
+      "
+    >
+      <Icon className="mx-auto block flex-1" />
+      <span
+        className={clsx("hidden text-sm lg:block", {
+          "font-bold": isActive,
+        })}
+      >
+        {children}
+      </span>
     </div>
   );
 }

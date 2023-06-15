@@ -72,6 +72,14 @@ module.exports = {
         "i-binoculars": `url("data:image/svg+xml;utf8,${encodeSvgForCss(
           svg
         )}")`,
+        "primary-gradient-74": `
+          linear-gradient(
+            74deg,
+            ${Cerulean} 0%,
+            ${Eminence} 52%,
+            ${RedViolet_Dark} 100%
+          )
+        `,
         "secondary-blue-gradient": `
           linear-gradient(
             38deg,
