@@ -64,6 +64,32 @@
       },
       "type": "uid",
       "targetField": "title"
+    },
+    "opportunity_category": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::opportunity-category.opportunity-category"
+    },
+    "link": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "partner": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::partner.partner"
+    },
+    "location": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
     }
   }
 }

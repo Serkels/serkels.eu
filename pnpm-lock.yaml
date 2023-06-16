@@ -152,6 +152,9 @@ importers:
       '@1/eslint-config':
         specifier: workspace:*
         version: link:../@1/config/eslint-config
+      '@1/strapi-openapi':
+        specifier: workspace:*
+        version: link:../@1/strapi-openapi
       '@1/tailwindcss-config':
         specifier: workspace:*
         version: link:../@1/config/tailwindcss-config

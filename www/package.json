@@ -13,6 +13,7 @@
     "@1/tailwindcss-config": "workspace:*",
     "@1/typescript-config": "workspace:*",
     "@1/ui": "workspace:*",
+    "@1/strapi-openapi": "workspace:*",
     "@tanstack/react-query": "^4.29.5",
     "clsx": "^1.2.1",
     "ms": "3.0.0-canary.1",

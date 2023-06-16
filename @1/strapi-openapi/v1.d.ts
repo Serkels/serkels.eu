@@ -298,6 +298,27 @@ export interface paths {
   "/opportunities/{id}/localizations": {
     post: operations["post/opportunities/{id}/localizations"];
   };
+  "/opportunity-categories": {
+    get: operations["get/opportunity-categories"];
+    post: operations["post/opportunity-categories"];
+  };
+  "/opportunity-categories/{id}": {
+    get: operations["get/opportunity-categories/{id}"];
+    put: operations["put/opportunity-categories/{id}"];
+    delete: operations["delete/opportunity-categories/{id}"];
+  };
+  "/opportunity-categories/{id}/localizations": {
+    post: operations["post/opportunity-categories/{id}/localizations"];
+  };
+  "/partners": {
+    get: operations["get/partners"];
+    post: operations["post/partners"];
+  };
+  "/partners/{id}": {
+    get: operations["get/partners/{id}"];
+    put: operations["put/partners/{id}"];
+    delete: operations["delete/partners/{id}"];
+  };
   "/passwordless/login": {
     /** Login a user with one time password */
     get: {
@@ -354,6 +375,18 @@ export interface paths {
         };
       };
     };
+  };
+  "/tags": {
+    get: operations["get/tags"];
+    post: operations["post/tags"];
+  };
+  "/tags/{id}": {
+    get: operations["get/tags/{id}"];
+    put: operations["put/tags/{id}"];
+    delete: operations["delete/tags/{id}"];
+  };
+  "/tags/{id}/localizations": {
+    post: operations["post/tags/{id}/localizations"];
   };
   "/upload": {
     /** @description Upload files */
@@ -1795,9 +1828,71 @@ export interface components {
       description: string;
       /** Format: date */
       expireAt: string;
+      link?: string;
       locale?: string;
       localizations?: {
         data?: (components["schemas"]["Opportunity"])[];
+      };
+      location?: string;
+      opportunity_category?: {
+        data?: {
+          attributes?: {
+            /** Format: date-time */
+            createdAt?: string;
+            createdBy?: {
+              data?: {
+                attributes?: Record<string, never>;
+                id?: number;
+              };
+            };
+            locale?: string;
+            localizations?: {
+              data?: (unknown)[];
+            };
+            name?: string;
+            slug?: string;
+            /** Format: date-time */
+            updatedAt?: string;
+            updatedBy?: {
+              data?: {
+                attributes?: Record<string, never>;
+                id?: number;
+              };
+            };
+          };
+          id?: number;
+        };
+      };
+      partner?: {
+        data?: {
+          attributes?: {
+            /** Format: date-time */
+            createdAt?: string;
+            createdBy?: {
+              data?: {
+                attributes?: Record<string, never>;
+                id?: number;
+              };
+            };
+            description?: string;
+            /** Format: email */
+            email?: string;
+            location?: string;
+            name?: string;
+            /** Format: date-time */
+            publishedAt?: string;
+            /** Format: date-time */
+            updatedAt?: string;
+            updatedBy?: {
+              data?: {
+                attributes?: Record<string, never>;
+                id?: number;
+              };
+            };
+            website?: string;
+          };
+          id?: number;
+        };
       };
       /** Format: date-time */
       publishedAt?: string;
@@ -1811,6 +1906,180 @@ export interface components {
           id?: number;
         };
       };
+    };
+    OpportunityCategory: {
+      /** Format: date-time */
+      createdAt?: string;
+      createdBy?: {
+        data?: {
+          attributes?: {
+            blocked?: boolean;
+            /** Format: date-time */
+            createdAt?: string;
+            createdBy?: {
+              data?: {
+                attributes?: Record<string, never>;
+                id?: number;
+              };
+            };
+            /** Format: email */
+            email?: string;
+            firstname?: string;
+            isActive?: boolean;
+            lastname?: string;
+            preferedLanguage?: string;
+            registrationToken?: string;
+            resetPasswordToken?: string;
+            roles?: {
+              data?: ({
+                  attributes?: {
+                    code?: string;
+                    /** Format: date-time */
+                    createdAt?: string;
+                    createdBy?: {
+                      data?: {
+                        attributes?: Record<string, never>;
+                        id?: number;
+                      };
+                    };
+                    description?: string;
+                    name?: string;
+                    permissions?: {
+                      data?: ({
+                          attributes?: {
+                            action?: string;
+                            conditions?: unknown;
+                            /** Format: date-time */
+                            createdAt?: string;
+                            createdBy?: {
+                              data?: {
+                                attributes?: Record<string, never>;
+                                id?: number;
+                              };
+                            };
+                            properties?: unknown;
+                            role?: {
+                              data?: {
+                                attributes?: Record<string, never>;
+                                id?: number;
+                              };
+                            };
+                            subject?: string;
+                            /** Format: date-time */
+                            updatedAt?: string;
+                            updatedBy?: {
+                              data?: {
+                                attributes?: Record<string, never>;
+                                id?: number;
+                              };
+                            };
+                          };
+                          id?: number;
+                        })[];
+                    };
+                    /** Format: date-time */
+                    updatedAt?: string;
+                    updatedBy?: {
+                      data?: {
+                        attributes?: Record<string, never>;
+                        id?: number;
+                      };
+                    };
+                    users?: {
+                      data?: ({
+                          attributes?: Record<string, never>;
+                          id?: number;
+                        })[];
+                    };
+                  };
+                  id?: number;
+                })[];
+            };
+            /** Format: date-time */
+            updatedAt?: string;
+            updatedBy?: {
+              data?: {
+                attributes?: Record<string, never>;
+                id?: number;
+              };
+            };
+            username?: string;
+          };
+          id?: number;
+        };
+      };
+      locale?: string;
+      localizations?: {
+        data?: (components["schemas"]["OpportunityCategory"])[];
+      };
+      name?: string;
+      slug?: string;
+      /** Format: date-time */
+      updatedAt?: string;
+      updatedBy?: {
+        data?: {
+          attributes?: Record<string, never>;
+          id?: number;
+        };
+      };
+    };
+    OpportunityCategoryListResponse: {
+      data?: (components["schemas"]["OpportunityCategoryListResponseDataItem"])[];
+      meta?: {
+        pagination?: {
+          page?: number;
+          pageCount?: number;
+          pageSize?: number;
+          total?: number;
+        };
+      };
+    };
+    OpportunityCategoryListResponseDataItem: {
+      attributes?: components["schemas"]["OpportunityCategory"];
+      id?: number;
+    };
+    OpportunityCategoryListResponseDataItemLocalized: {
+      attributes?: components["schemas"]["OpportunityCategory"];
+      id?: number;
+    };
+    OpportunityCategoryLocalizationListResponse: {
+      data?: (components["schemas"]["OpportunityCategoryListResponseDataItemLocalized"])[];
+      meta?: {
+        pagination?: {
+          page?: number;
+          pageCount?: number;
+          pageSize?: number;
+          total?: number;
+        };
+      };
+    };
+    OpportunityCategoryLocalizationRequest: {
+      locale: string;
+      name?: string;
+      slug?: string;
+    };
+    OpportunityCategoryLocalizationResponse: {
+      data?: components["schemas"]["OpportunityCategoryResponseDataObjectLocalized"];
+      meta?: Record<string, never>;
+    };
+    OpportunityCategoryRequest: {
+      data: {
+        locale?: string;
+        name?: string;
+        slug?: string;
+      };
+    };
+    OpportunityCategoryResponse: {
+      data?: components["schemas"]["OpportunityCategoryResponseDataObject"];
+      meta?: Record<string, never>;
+    };
+    OpportunityCategoryResponseDataObject: {
+      attributes?: components["schemas"]["OpportunityCategory"];
+      id?: number;
+    };
+    OpportunityCategoryResponseDataObjectLocalized: {
+      attributes?: components["schemas"]["OpportunityCategory"];
+      id?: number;
     };
     OpportunityListResponse: {
       data?: (components["schemas"]["OpportunityListResponseDataItem"])[];
@@ -1848,7 +2117,13 @@ export interface components {
       description: string;
       /** Format: date */
       expireAt: string;
+      link?: string;
       locale: string;
+      location?: string;
+      /** @example string or id */
+      opportunity_category?: number | string;
+      /** @example string or id */
+      partner?: number | string;
       slug?: string;
       title: string;
     };
@@ -1863,7 +2138,13 @@ export interface components {
         description: string;
         /** Format: date */
         expireAt: string;
+        link?: string;
         locale?: string;
+        location?: string;
+        /** @example string or id */
+        opportunity_category?: number | string;
+        /** @example string or id */
+        partner?: number | string;
         slug?: string;
         title: string;
       };
@@ -1880,6 +2161,157 @@ export interface components {
       attributes?: components["schemas"]["Opportunity"];
       id?: number;
     };
+    Partner: {
+      /** Format: date-time */
+      createdAt?: string;
+      createdBy?: {
+        data?: {
+          attributes?: {
+            blocked?: boolean;
+            /** Format: date-time */
+            createdAt?: string;
+            createdBy?: {
+              data?: {
+                attributes?: Record<string, never>;
+                id?: number;
+              };
+            };
+            /** Format: email */
+            email?: string;
+            firstname?: string;
+            isActive?: boolean;
+            lastname?: string;
+            preferedLanguage?: string;
+            registrationToken?: string;
+            resetPasswordToken?: string;
+            roles?: {
+              data?: ({
+                  attributes?: {
+                    code?: string;
+                    /** Format: date-time */
+                    createdAt?: string;
+                    createdBy?: {
+                      data?: {
+                        attributes?: Record<string, never>;
+                        id?: number;
+                      };
+                    };
+                    description?: string;
+                    name?: string;
+                    permissions?: {
+                      data?: ({
+                          attributes?: {
+                            action?: string;
+                            conditions?: unknown;
+                            /** Format: date-time */
+                            createdAt?: string;
+                            createdBy?: {
+                              data?: {
+                                attributes?: Record<string, never>;
+                                id?: number;
+                              };
+                            };
+                            properties?: unknown;
+                            role?: {
+                              data?: {
+                                attributes?: Record<string, never>;
+                                id?: number;
+                              };
+                            };
+                            subject?: string;
+                            /** Format: date-time */
+                            updatedAt?: string;
+                            updatedBy?: {
+                              data?: {
+                                attributes?: Record<string, never>;
+                                id?: number;
+                              };
+                            };
+                          };
+                          id?: number;
+                        })[];
+                    };
+                    /** Format: date-time */
+                    updatedAt?: string;
+                    updatedBy?: {
+                      data?: {
+                        attributes?: Record<string, never>;
+                        id?: number;
+                      };
+                    };
+                    users?: {
+                      data?: ({
+                          attributes?: Record<string, never>;
+                          id?: number;
+                        })[];
+                    };
+                  };
+                  id?: number;
+                })[];
+            };
+            /** Format: date-time */
+            updatedAt?: string;
+            updatedBy?: {
+              data?: {
+                attributes?: Record<string, never>;
+                id?: number;
+              };
+            };
+            username?: string;
+          };
+          id?: number;
+        };
+      };
+      description?: string;
+      /** Format: email */
+      email: string;
+      location?: string;
+      name?: string;
+      /** Format: date-time */
+      publishedAt?: string;
+      /** Format: date-time */
+      updatedAt?: string;
+      updatedBy?: {
+        data?: {
+          attributes?: Record<string, never>;
+          id?: number;
+        };
+      };
+      website?: string;
+    };
+    PartnerListResponse: {
+      data?: (components["schemas"]["PartnerListResponseDataItem"])[];
+      meta?: {
+        pagination?: {
+          page?: number;
+          pageCount?: number;
+          pageSize?: number;
+          total?: number;
+        };
+      };
+    };
+    PartnerListResponseDataItem: {
+      attributes?: components["schemas"]["Partner"];
+      id?: number;
+    };
+    PartnerRequest: {
+      data: {
+        description?: string;
+        /** Format: email */
+        email: string;
+        location?: string;
+        name?: string;
+        website?: string;
+      };
+    };
+    PartnerResponse: {
+      data?: components["schemas"]["PartnerResponseDataObject"];
+      meta?: Record<string, never>;
+    };
+    PartnerResponseDataObject: {
+      attributes?: components["schemas"]["Partner"];
+      id?: number;
+    };
     "Passwordless-EmailSent": {
       email?: string;
       /** @example true */
@@ -1888,6 +2320,180 @@ export interface components {
     };
     "Passwordless-User": components["schemas"]["Users-Permissions-UserRegistration"] & {
       context?: Record<string, never>;
+    };
+    Tag: {
+      /** Format: date-time */
+      createdAt?: string;
+      createdBy?: {
+        data?: {
+          attributes?: {
+            blocked?: boolean;
+            /** Format: date-time */
+            createdAt?: string;
+            createdBy?: {
+              data?: {
+                attributes?: Record<string, never>;
+                id?: number;
+              };
+            };
+            /** Format: email */
+            email?: string;
+            firstname?: string;
+            isActive?: boolean;
+            lastname?: string;
+            preferedLanguage?: string;
+            registrationToken?: string;
+            resetPasswordToken?: string;
+            roles?: {
+              data?: ({
+                  attributes?: {
+                    code?: string;
+                    /** Format: date-time */
+                    createdAt?: string;
+                    createdBy?: {
+                      data?: {
+                        attributes?: Record<string, never>;
+                        id?: number;
+                      };
+                    };
+                    description?: string;
+                    name?: string;
+                    permissions?: {
+                      data?: ({
+                          attributes?: {
+                            action?: string;
+                            conditions?: unknown;
+                            /** Format: date-time */
+                            createdAt?: string;
+                            createdBy?: {
+                              data?: {
+                                attributes?: Record<string, never>;
+                                id?: number;
+                              };
+                            };
+                            properties?: unknown;
+                            role?: {
+                              data?: {
+                                attributes?: Record<string, never>;
+                                id?: number;
+                              };
+                            };
+                            subject?: string;
+                            /** Format: date-time */
+                            updatedAt?: string;
+                            updatedBy?: {
+                              data?: {
+                                attributes?: Record<string, never>;
+                                id?: number;
+                              };
+                            };
+                          };
+                          id?: number;
+                        })[];
+                    };
+                    /** Format: date-time */
+                    updatedAt?: string;
+                    updatedBy?: {
+                      data?: {
+                        attributes?: Record<string, never>;
+                        id?: number;
+                      };
+                    };
+                    users?: {
+                      data?: ({
+                          attributes?: Record<string, never>;
+                          id?: number;
+                        })[];
+                    };
+                  };
+                  id?: number;
+                })[];
+            };
+            /** Format: date-time */
+            updatedAt?: string;
+            updatedBy?: {
+              data?: {
+                attributes?: Record<string, never>;
+                id?: number;
+              };
+            };
+            username?: string;
+          };
+          id?: number;
+        };
+      };
+      locale?: string;
+      localizations?: {
+        data?: (components["schemas"]["Tag"])[];
+      };
+      name: string;
+      slug?: string;
+      /** Format: date-time */
+      updatedAt?: string;
+      updatedBy?: {
+        data?: {
+          attributes?: Record<string, never>;
+          id?: number;
+        };
+      };
+    };
+    TagListResponse: {
+      data?: (components["schemas"]["TagListResponseDataItem"])[];
+      meta?: {
+        pagination?: {
+          page?: number;
+          pageCount?: number;
+          pageSize?: number;
+          total?: number;
+        };
+      };
+    };
+    TagListResponseDataItem: {
+      attributes?: components["schemas"]["Tag"];
+      id?: number;
+    };
+    TagListResponseDataItemLocalized: {
+      attributes?: components["schemas"]["Tag"];
+      id?: number;
+    };
+    TagLocalizationListResponse: {
+      data?: (components["schemas"]["TagListResponseDataItemLocalized"])[];
+      meta?: {
+        pagination?: {
+          page?: number;
+          pageCount?: number;
+          pageSize?: number;
+          total?: number;
+        };
+      };
+    };
+    TagLocalizationRequest: {
+      locale: string;
+      name: string;
+      slug?: string;
+    };
+    TagLocalizationResponse: {
+      data?: components["schemas"]["TagResponseDataObjectLocalized"];
+      meta?: Record<string, never>;
+    };
+    TagRequest: {
+      data: {
+        locale?: string;
+        name: string;
+        slug?: string;
+      };
+    };
+    TagResponse: {
+      data?: components["schemas"]["TagResponseDataObject"];
+      meta?: Record<string, never>;
+    };
+    TagResponseDataObject: {
+      attributes?: components["schemas"]["Tag"];
+      id?: number;
+    };
+    TagResponseDataObjectLocalized: {
+      attributes?: components["schemas"]["Tag"];
+      id?: number;
     };
     UploadFile: {
       alternativeText?: string;
@@ -2479,6 +3085,853 @@ export interface operations {
       200: {
         content: {
           "application/json": components["schemas"]["OpportunityLocalizationResponse"];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Forbidden */
+      403: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Not Found */
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+  };
+  "get/opportunity-categories": {
+    parameters: {
+      query: {
+        /** @description Sort by attributes ascending (asc) or descending (desc) */
+        sort?: string;
+        /** @description Return page/pageSize (default: true) */
+        "pagination[withCount]"?: boolean;
+        /** @description Page number (default: 0) */
+        "pagination[page]"?: number;
+        /** @description Page size (default: 25) */
+        "pagination[pageSize]"?: number;
+        /** @description Offset value (default: 0) */
+        "pagination[start]"?: number;
+        /** @description Number of entities to return (default: 25) */
+        "pagination[limit]"?: number;
+        /** @description Fields to return (ex: title,author) */
+        fields?: string;
+        /** @description Relations to return */
+        populate?: string;
+        /** @description Filters to apply */
+        filters?: Record<string, never>;
+        /** @description Locale to apply */
+        locale?: string;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["OpportunityCategoryListResponse"];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Forbidden */
+      403: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Not Found */
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+  };
+  "post/opportunity-categories": {
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["OpportunityCategoryRequest"];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["OpportunityCategoryResponse"];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Forbidden */
+      403: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Not Found */
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+  };
+  "get/opportunity-categories/{id}": {
+    parameters: {
+      path: {
+        id: number;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["OpportunityCategoryResponse"];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Forbidden */
+      403: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Not Found */
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+  };
+  "put/opportunity-categories/{id}": {
+    parameters: {
+      path: {
+        id: number;
+      };
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["OpportunityCategoryRequest"];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["OpportunityCategoryResponse"];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Forbidden */
+      403: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Not Found */
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+  };
+  "delete/opportunity-categories/{id}": {
+    parameters: {
+      path: {
+        id: number;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": number;
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Forbidden */
+      403: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Not Found */
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+  };
+  "post/opportunity-categories/{id}/localizations": {
+    parameters: {
+      path: {
+        id: number;
+      };
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["OpportunityCategoryLocalizationRequest"];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["OpportunityCategoryLocalizationResponse"];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Forbidden */
+      403: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Not Found */
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+  };
+  "get/partners": {
+    parameters: {
+      query: {
+        /** @description Sort by attributes ascending (asc) or descending (desc) */
+        sort?: string;
+        /** @description Return page/pageSize (default: true) */
+        "pagination[withCount]"?: boolean;
+        /** @description Page number (default: 0) */
+        "pagination[page]"?: number;
+        /** @description Page size (default: 25) */
+        "pagination[pageSize]"?: number;
+        /** @description Offset value (default: 0) */
+        "pagination[start]"?: number;
+        /** @description Number of entities to return (default: 25) */
+        "pagination[limit]"?: number;
+        /** @description Fields to return (ex: title,author) */
+        fields?: string;
+        /** @description Relations to return */
+        populate?: string;
+        /** @description Filters to apply */
+        filters?: Record<string, never>;
+        /** @description Locale to apply */
+        locale?: string;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["PartnerListResponse"];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Forbidden */
+      403: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Not Found */
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+  };
+  "post/partners": {
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["PartnerRequest"];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["PartnerResponse"];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Forbidden */
+      403: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Not Found */
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+  };
+  "get/partners/{id}": {
+    parameters: {
+      path: {
+        id: number;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["PartnerResponse"];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Forbidden */
+      403: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Not Found */
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+  };
+  "put/partners/{id}": {
+    parameters: {
+      path: {
+        id: number;
+      };
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["PartnerRequest"];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["PartnerResponse"];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Forbidden */
+      403: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Not Found */
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+  };
+  "delete/partners/{id}": {
+    parameters: {
+      path: {
+        id: number;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": number;
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Forbidden */
+      403: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Not Found */
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+  };
+  "get/tags": {
+    parameters: {
+      query: {
+        /** @description Sort by attributes ascending (asc) or descending (desc) */
+        sort?: string;
+        /** @description Return page/pageSize (default: true) */
+        "pagination[withCount]"?: boolean;
+        /** @description Page number (default: 0) */
+        "pagination[page]"?: number;
+        /** @description Page size (default: 25) */
+        "pagination[pageSize]"?: number;
+        /** @description Offset value (default: 0) */
+        "pagination[start]"?: number;
+        /** @description Number of entities to return (default: 25) */
+        "pagination[limit]"?: number;
+        /** @description Fields to return (ex: title,author) */
+        fields?: string;
+        /** @description Relations to return */
+        populate?: string;
+        /** @description Filters to apply */
+        filters?: Record<string, never>;
+        /** @description Locale to apply */
+        locale?: string;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["TagListResponse"];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Forbidden */
+      403: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Not Found */
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+  };
+  "post/tags": {
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["TagRequest"];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["TagResponse"];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Forbidden */
+      403: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Not Found */
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+  };
+  "get/tags/{id}": {
+    parameters: {
+      path: {
+        id: number;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["TagResponse"];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Forbidden */
+      403: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Not Found */
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+  };
+  "put/tags/{id}": {
+    parameters: {
+      path: {
+        id: number;
+      };
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["TagRequest"];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["TagResponse"];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Forbidden */
+      403: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Not Found */
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+  };
+  "delete/tags/{id}": {
+    parameters: {
+      path: {
+        id: number;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": number;
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Forbidden */
+      403: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Not Found */
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+  };
+  "post/tags/{id}/localizations": {
+    parameters: {
+      path: {
+        id: number;
+      };
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["TagLocalizationRequest"];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["TagLocalizationResponse"];
         };
       };
       /** @description Bad Request */
