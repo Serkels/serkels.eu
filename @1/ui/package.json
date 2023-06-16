@@ -9,18 +9,18 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "clsx": "^1.2.1",
-    "formik": "^2.2.9",
+    "clsx": "1.2.1",
+    "formik": "2.2.9",
     "react": "18.2.0",
-    "react-dom": "^18.2.0",
+    "react-dom": "18.2.0",
     "tailwindcss": "3.3.2"
   },
   "devDependencies": {
     "@1/tailwindcss-config": "workspace:*",
     "@1/typescript-config": "workspace:*",
-    "@types/react": "^18.2.0",
-    "prettier": "^2.8.8",
-    "prettier-plugin-tailwindcss": "^0.3.0",
+    "@types/react": "18.2.7",
+    "prettier": "2.8.8",
+    "prettier-plugin-tailwindcss": "0.3.0",
     "typescript": "5.1.3"
   }
 }
