@@ -4,9 +4,11 @@ import { Aside } from "@/layouts/holy/aside";
 import type { components } from "@1/strapi-openapi/v1";
 import { Grid } from "@1/ui/components/Grid";
 import { InputSearch } from "@1/ui/components/InputSearch";
+import { OpportunityCategories } from "./OpportunityCategories";
 import { OpportunityList } from "./OpportunityList";
 
 //
+export const revalidate = 60;
 
 export default async function Page() {
   return (
@@ -23,25 +25,7 @@ export default async function Page() {
   );
 }
 
-//
-
-async function OpportunityCategories() {
-  const categories = await opportunity_categories_query();
-  return (
-    <ul className="mt-7 text-[#656565]">
-      {categories.map(({ name, slug }) => (
-        <li className="mb-3" key={slug}>
-          <label>
-            <input type="radio" name="category" value={slug} />
-            <span className="ml-2">{name}</span>
-          </label>
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-async function opportunity_categories_query() {
+export async function opportunity_categories_query() {
   const res = await fetch(
     `${process.env["STRAPI_API_URL"]}/api/opportunity-categories`
   );
