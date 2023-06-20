@@ -2,7 +2,8 @@
 
 //
 
-export function OpportunityCard() {
+export function OpportunityCard(props: Props) {
+  const { title } = props;
   return (
     <article className="rounded border border-neutral-200 bg-white shadow-md">
       <figure>
@@ -15,10 +16,7 @@ export function OpportunityCard() {
             Date limite : 30/03/2023
           </small>
 
-          <h3 className="my-4 text-sm font-bold">
-            Bourse Saif Benoît Schaeffer pour l'édition spécial de la
-            photographique
-          </h3>
+          <h3 className="my-4 text-sm font-bold">{title}</h3>
           <p>Université Paris 11</p>
           <p>📍Paris</p>
         </figcaption>
@@ -33,3 +31,17 @@ export function OpportunityCard() {
     </article>
   );
 }
+
+type Props = Partial<{
+  id: number;
+  title: string | undefined;
+  expireAt: string;
+  description: string;
+  slug: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  locale: string;
+  link: string;
+  location: string;
+}>;
