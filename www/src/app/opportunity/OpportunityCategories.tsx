@@ -1,8 +1,7 @@
 "use client";
 
-import type { components } from "@1/strapi-openapi/v1";
 import { Spinner } from "@1/ui/components/Spinner";
-import { useQuery } from "@tanstack/react-query";
+import { useOpportunityCategories } from "./useOpportunityCategories";
 
 //
 
@@ -12,15 +11,7 @@ export function OpportunityCategories() {
     isFetching,
     error,
     data: categories,
-  } = useQuery({
-    queryKey: ["opportunity-categories"],
-    queryFn: async () => {
-      const res = await fetch("/api/v1/opportunity-categories");
-      const { data }: components["schemas"]["OpportunityCategoryListResponse"] =
-        await res.json();
-      return data!.map(({ id, attributes }) => ({ id, ...attributes }));
-    },
-  });
+  } = useOpportunityCategories();
 
   if (isLoading || isFetching)
     <div className="mt-10 text-center">
