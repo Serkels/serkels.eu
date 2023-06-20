@@ -108,8 +108,8 @@ importers:
         specifier: 1.2.1
         version: 1.2.1
       formik:
-        specifier: 2.2.9
-        version: 2.2.9(react@18.2.0)
+        specifier: 2.4.2
+        version: 2.4.2(react@18.2.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -1750,8 +1750,8 @@ packages:
     dependencies:
       is-callable: 1.2.7
 
-  /formik@2.2.9(react@18.2.0):
-    resolution: {integrity: sha512-LQLcISMmf1r5at4/gyJigGn0gOwFbeEAlji+N9InZF6LIMXnFNkO42sCI8Jt84YZggpD4cPWObAZaxpEFtSzNA==}
+  /formik@2.4.2(react@18.2.0):
+    resolution: {integrity: sha512-C6nx0hifW2uENP3M6HpPmnAE6HFWCcd8/sqBZEOHZY6lpHJ5qehsfAy43ktpFLEmkBmhiZDei726utcUB9leqg==}
     peerDependencies:
       react: '>=16.8.0'
     dependencies:
@@ -1762,7 +1762,7 @@ packages:
       react: 18.2.0
       react-fast-compare: 2.0.4
       tiny-warning: 1.0.3
-      tslib: 1.14.1
+      tslib: 2.5.0
     dev: false
 
   /fraction.js@4.2.0:
