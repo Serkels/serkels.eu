@@ -6,28 +6,33 @@ import { useQuery } from "@tanstack/react-query";
 
 //
 
-function useOpportunityCategories() {
-  return useQuery({
-    queryKey: ["opportunity_categories"],
-    queryFn: opportunity_categories_query,
+export function OpportunityCategories() {
+  const {
+    isLoading,
+    isFetching,
+    error,
+    data: categories,
+  } = useQuery({
+    queryKey: ["opportunity-categories"],
+    queryFn: () =>
+      fetch("/api/v1/opportunity-categories")
+        .then(
+          (res) =>
+            res.json() as components["schemas"]["OpportunityCategoryListResponse"]
+        )
+        .then(({ data }) =>
+          data!.map(({ id, attributes }) => ({ id, ...attributes }))
+        ),
   });
-}
 
-export async function OpportunityCategories() {
-  const { data: categories, isLoading, isError } = useOpportunityCategories();
-  if (isLoading) return <Spinner />;
-  if (isError) return <>Epic fail...</>;
+  if (isLoading || isFetching)
+    <div className="mt-10 text-center">
+      <Spinner />
+    </div>;
+
+  if (error) return <>Epic fail....</>;
   if (!categories) return <>No data O_o</>;
-  // useEffect(() => {}, [])
-  // const categories = await (async () => {
-  //   try {
-  //     return await opportunity_categories_query();
-  //   } catch (e) {
-  //     console.error(e);
-  //     return [];
-  //   }
-  // })();
-  // const categories = [] as { name: string; slug: string }[];
+
   return (
     <ul className="mt-7 text-[#656565]">
       {categories.map(({ name, slug }) => (
@@ -41,42 +46,3 @@ export async function OpportunityCategories() {
     </ul>
   );
 }
-
-// async function opportunity_categories_query() {
-//   return Promise.resolve([] as { name: string; slug: string }[]);
-// }
-async function opportunity_categories_query() {
-  const res = await fetch(
-    `${process.env["NEXT_PUBLIC_STRAPI_API_URL"]}/api/opportunity-categories`
-  );
-  const result = await res.json();
-  console.log(result);
-  if (result.error) {
-    console.error(result.error);
-    throw result.error;
-  }
-  const { data } = result as NonNullable<
-    components["schemas"]["OpportunityCategoryListResponse"]
-  >;
-  if (!data) {
-    return [];
-  }
-  return await data.map(({ id, attributes }) => ({ id, ...attributes }));
-}
-/*
-export async function _opportunity_categories_query() {
-  const res = await fetch(`/api/v1/opportunity-categories`);
-  const result = await res.json();
-  if (result.error) {
-    console.error(result.error);
-    throw result.error;
-  }
-  const { data } = result as NonNullable<
-    components["schemas"]["OpportunityCategoryListResponse"]
-  >;
-  if (!data) {
-    return [];
-  }
-  return await data.map(({ id, attributes }) => ({ id, ...attributes }));
-}
-*/
