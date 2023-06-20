@@ -46,7 +46,7 @@ async function opportunity_categories_query() {
   return [];
 }
 
-async function _opportunity_categories_query() {
+export async function _opportunity_categories_query() {
   const res = await fetch(`/api/v1/opportunity-categories`);
   const result = await res.json();
   if (result.error) {
