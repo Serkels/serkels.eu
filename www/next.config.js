@@ -1,8 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // serverRuntimeConfig: {
-  //   STRAPI_API_URL: process.env.STRAPI_API_URL,
-  // },
   eslint: {
     ignoreDuringBuilds: true,
   },
