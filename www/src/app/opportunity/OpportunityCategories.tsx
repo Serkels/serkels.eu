@@ -14,15 +14,12 @@ export function OpportunityCategories() {
     data: categories,
   } = useQuery({
     queryKey: ["opportunity-categories"],
-    queryFn: () =>
-      fetch("/api/v1/opportunity-categories")
-        .then(
-          (res) =>
-            res.json() as components["schemas"]["OpportunityCategoryListResponse"]
-        )
-        .then(({ data }) =>
-          data!.map(({ id, attributes }) => ({ id, ...attributes }))
-        ),
+    queryFn: async () => {
+      const res = await fetch("/api/v1/opportunity-categories");
+      const { data }: components["schemas"]["OpportunityCategoryListResponse"] =
+        await res.json();
+      return data!.map(({ id, attributes }) => ({ id, ...attributes }));
+    },
   });
 
   if (isLoading || isFetching)
