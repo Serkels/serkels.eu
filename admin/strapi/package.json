@@ -15,7 +15,7 @@
     "@strapi/plugin-sentry": "4.11.1",
     "@strapi/plugin-seo": "1.8.0",
     "@strapi/plugin-users-permissions": "4.11.1",
-    "@strapi/provider-email-nodemailer": "4.10.7",
+    "@strapi/provider-email-nodemailer": "4.11.1",
     "@strapi/strapi": "4.11.1",
     "pg": "8.10.0",
     "strapi-plugin-comments": "2.2.10",
