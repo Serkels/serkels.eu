@@ -26,7 +26,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2023-06-16T20:07:03.632Z"
+    "x-generation-date": "2023-06-20T13:41:56.563Z"
   },
   "servers": [
     {
@@ -4956,6 +4956,29 @@
             }
           }
         ]
+      },
+      "Passwordless-SendLinkRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "description": "the user email",
+            "required": true,
+            "example": "foo@bar.com",
+            "type": "string"
+          },
+          "username": {
+            "example": "foo",
+            "description": "username for new user",
+            "type": "string"
+          },
+          "context": {
+            "description": "context of authentification",
+            "type": "object",
+            "example": {
+              "currentUrl": "localhost"
+            }
+          }
+        }
       }
     },
     "requestBodies": {
@@ -4993,38 +5016,6 @@
                     }
                   }
                 }
-              }
-            }
-          }
-        }
-      },
-      "Passwordless-SendLinkRequest": {
-        "required": true,
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "email": {
-                  "description": "the user email",
-                  "required": true,
-                  "type": "string"
-                },
-                "username": {
-                  "description": "username for new user",
-                  "type": "string"
-                },
-                "context": {
-                  "description": "context of authentification",
-                  "type": "object"
-                }
-              }
-            },
-            "example": {
-              "email": "foo@bar.com",
-              "username": "foo",
-              "context": {
-                "currentUrl": "localhost"
               }
             }
           }
@@ -9156,7 +9147,13 @@
         ],
         "summary": "Send an email to user with login link",
         "requestBody": {
-          "$ref": "#/components/requestBodies/Passwordless-SendLinkRequest"
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Passwordless-SendLinkRequest"
+              }
+            }
+          }
         },
         "responses": {
           "200": {
@@ -9164,7 +9161,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/requestBodies/Passwordless-EmailSent"
+                  "$ref": "#/components/schemas/Passwordless-EmailSent"
                 }
               }
             }
