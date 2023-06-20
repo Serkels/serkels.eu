@@ -30,10 +30,10 @@ importers:
         version: 4.11.1
       '@strapi/strapi':
         specifier: 4.11.1
-        version: 4.11.1(pg@8.10.0)(typescript@5.1.3)
+        version: 4.11.1(pg@8.11.0)(typescript@5.1.3)
       pg:
-        specifier: 8.10.0
-        version: 8.10.0
+        specifier: 8.11.0
+        version: 8.11.0
       strapi-plugin-comments:
         specifier: 2.2.11
         version: 2.2.11(@strapi/strapi@4.11.1)(typescript@5.1.3)
@@ -2884,7 +2884,7 @@ packages:
       lodash.deburr: 4.1.0
     dev: false
 
-  /@strapi/admin@4.11.1(@strapi/strapi@4.11.1)(debug@4.3.4)(pg@8.10.0):
+  /@strapi/admin@4.11.1(@strapi/strapi@4.11.1)(debug@4.3.4)(pg@8.11.0):
     resolution: {integrity: sha512-k0Mc2WV99qM8jfqaflT2YClBIkUxbDgg0/XvlDu5mTM0afIbpabDqKYvBg6lFCSTE9sX45KMTCo94VaKtxDBLA==}
     engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
     peerDependencies:
@@ -2899,13 +2899,13 @@ packages:
       '@fingerprintjs/fingerprintjs': 3.4.1
       '@pmmmwh/react-refresh-webpack-plugin': 0.5.10(react-refresh@0.14.0)(webpack-dev-server@4.15.1)(webpack@5.86.0)
       '@strapi/babel-plugin-switch-ee-ce': 4.11.1
-      '@strapi/data-transfer': 4.11.1(pg@8.10.0)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(redux@4.2.1)(styled-components@5.3.3)(typescript@5.1.3)
+      '@strapi/data-transfer': 4.11.1(pg@8.11.0)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(redux@4.2.1)(styled-components@5.3.3)(typescript@5.1.3)
       '@strapi/design-system': 1.8.0(@strapi/icons@1.8.0)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(styled-components@5.3.3)
       '@strapi/helper-plugin': 4.11.1(@strapi/design-system@1.8.0)(@strapi/icons@1.8.0)(debug@4.3.4)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(styled-components@5.3.3)(typescript@5.1.3)
       '@strapi/icons': 1.8.0(react-dom@18.2.0)(react@18.2.0)
       '@strapi/permissions': 4.11.1
       '@strapi/provider-audit-logs-local': 4.11.1(@strapi/strapi@4.11.1)
-      '@strapi/strapi': 4.11.1(pg@8.10.0)(typescript@5.1.3)
+      '@strapi/strapi': 4.11.1(pg@8.11.0)(typescript@5.1.3)
       '@strapi/typescript-utils': 4.11.1
       '@strapi/utils': 4.11.1
       axios: 1.4.0(debug@4.3.4)
@@ -3030,12 +3030,12 @@ packages:
       resolve: 1.22.2
     dev: false
 
-  /@strapi/data-transfer@4.11.1(pg@8.10.0)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(redux@4.2.1)(styled-components@5.3.3)(typescript@5.1.3):
+  /@strapi/data-transfer@4.11.1(pg@8.11.0)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(redux@4.2.1)(styled-components@5.3.3)(typescript@5.1.3):
     resolution: {integrity: sha512-M4zD3FgHG45qnbyblbBXl8jNKY/Vvul9N+1g7hQnTS/Fe26tp6EFraeIfaQvFebAKGKdpWOPAAmVwjrI+s48AQ==}
     engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
     dependencies:
       '@strapi/logger': 4.11.1
-      '@strapi/strapi': 4.11.1(pg@8.10.0)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(redux@4.2.1)(styled-components@5.3.3)(typescript@5.1.3)
+      '@strapi/strapi': 4.11.1(pg@8.11.0)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(redux@4.2.1)(styled-components@5.3.3)(typescript@5.1.3)
       chalk: 4.1.2
       fs-extra: 10.0.0
       lodash: 4.17.21
@@ -3071,12 +3071,12 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@strapi/data-transfer@4.11.1(pg@8.10.0)(typescript@5.1.3):
+  /@strapi/data-transfer@4.11.1(pg@8.11.0)(typescript@5.1.3):
     resolution: {integrity: sha512-M4zD3FgHG45qnbyblbBXl8jNKY/Vvul9N+1g7hQnTS/Fe26tp6EFraeIfaQvFebAKGKdpWOPAAmVwjrI+s48AQ==}
     engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
     dependencies:
       '@strapi/logger': 4.11.1
-      '@strapi/strapi': 4.11.1(pg@8.10.0)(typescript@5.1.3)
+      '@strapi/strapi': 4.11.1(pg@8.11.0)(typescript@5.1.3)
       chalk: 4.1.2
       fs-extra: 10.0.0
       lodash: 4.17.21
@@ -3126,7 +3126,7 @@ packages:
       - webpack-plugin-serve
     dev: false
 
-  /@strapi/database@4.11.1(pg@8.10.0):
+  /@strapi/database@4.11.1(pg@8.11.0):
     resolution: {integrity: sha512-cJNro9gfDKtcp5yRoS7gab8o62myigT4fK93//yqlFU91JBfXeuLQy3yMEbRm2gNPUxZZPVBXWcZyUBRy5Lr1A==}
     engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
     dependencies:
@@ -3134,7 +3134,7 @@ packages:
       date-fns: 2.30.0
       debug: 4.3.4(supports-color@5.5.0)
       fs-extra: 10.0.0
-      knex: 2.4.0(pg@8.10.0)
+      knex: 2.4.0(pg@8.11.0)
       lodash: 4.17.21
       semver: 7.5.1
       umzug: 3.2.1
@@ -3469,7 +3469,7 @@ packages:
       '@strapi/design-system': 1.8.0(@strapi/icons@1.8.0)(styled-components@5.3.10)
       '@strapi/helper-plugin': 4.11.1(@strapi/design-system@1.8.0)(@strapi/icons@1.8.0)(styled-components@5.3.10)(typescript@5.1.3)
       '@strapi/icons': 1.8.0(react-dom@18.2.0)(react@18.2.0)
-      '@strapi/strapi': 4.11.1(pg@8.10.0)(typescript@5.1.3)
+      '@strapi/strapi': 4.11.1(pg@8.11.0)(typescript@5.1.3)
       '@strapi/utils': 4.11.1
       bcryptjs: 2.4.3
       cheerio: 1.0.0-rc.12
@@ -3566,7 +3566,7 @@ packages:
       '@strapi/design-system': 1.8.0(@strapi/icons@1.8.0)(styled-components@5.3.10)
       '@strapi/helper-plugin': 4.11.1(@strapi/design-system@1.8.0)(@strapi/icons@1.8.0)(styled-components@5.3.10)(typescript@5.1.3)
       '@strapi/icons': 1.8.0(react-dom@18.2.0)(react@18.2.0)
-      '@strapi/strapi': 4.11.1(pg@8.10.0)(typescript@5.1.3)
+      '@strapi/strapi': 4.11.1(pg@8.11.0)(typescript@5.1.3)
       '@strapi/utils': 4.11.1
       apollo-server-core: 3.12.0(graphql@15.8.0)
       apollo-server-koa: 3.10.0(graphql@15.8.0)
@@ -3637,7 +3637,7 @@ packages:
       '@strapi/design-system': 1.8.0(@strapi/icons@1.8.0)(styled-components@5.3.10)
       '@strapi/helper-plugin': 4.11.1(@strapi/design-system@1.8.0)(@strapi/icons@1.8.0)(styled-components@5.3.10)(typescript@5.1.3)
       '@strapi/icons': 1.8.0(react-dom@18.2.0)(react@18.2.0)
-      '@strapi/strapi': 4.11.1(pg@8.10.0)(typescript@5.1.3)
+      '@strapi/strapi': 4.11.1(pg@8.11.0)(typescript@5.1.3)
     transitivePeerDependencies:
       - '@codemirror/view'
       - '@types/react'
@@ -3653,7 +3653,7 @@ packages:
     peerDependencies:
       '@strapi/strapi': ^4.0.0
     dependencies:
-      '@strapi/strapi': 4.11.1(pg@8.10.0)(typescript@5.1.3)
+      '@strapi/strapi': 4.11.1(pg@8.11.0)(typescript@5.1.3)
       date-fns: 2.30.0
       eslint-plugin-react-hooks: 4.6.0
       lodash: 4.17.21
@@ -3811,7 +3811,7 @@ packages:
     peerDependencies:
       '@strapi/strapi': ^4.9.0
     dependencies:
-      '@strapi/strapi': 4.11.1(pg@8.10.0)(typescript@5.1.3)
+      '@strapi/strapi': 4.11.1(pg@8.11.0)(typescript@5.1.3)
     dev: false
 
   /@strapi/provider-email-nodemailer@4.11.1:
@@ -3838,7 +3838,7 @@ packages:
       fs-extra: 10.0.0
     dev: false
 
-  /@strapi/strapi@4.11.1(pg@8.10.0)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(redux@4.2.1)(styled-components@5.3.3)(typescript@5.1.3):
+  /@strapi/strapi@4.11.1(pg@8.11.0)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(redux@4.2.1)(styled-components@5.3.3)(typescript@5.1.3):
     resolution: {integrity: sha512-pOFMgJV+5s71hJ3YJD0ffiSvCnIaxAgvR1PBzuugPOEm6X7JHcRoRNpPIQses37Tcw5HVNtzFh5iyivsnTGfpg==}
     engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
     hasBin: true
@@ -3846,9 +3846,9 @@ packages:
     dependencies:
       '@koa/cors': 3.4.3
       '@koa/router': 10.1.1
-      '@strapi/admin': 4.11.1(@strapi/strapi@4.11.1)(debug@4.3.4)(pg@8.10.0)
-      '@strapi/data-transfer': 4.11.1(pg@8.10.0)(typescript@5.1.3)
-      '@strapi/database': 4.11.1(pg@8.10.0)
+      '@strapi/admin': 4.11.1(@strapi/strapi@4.11.1)(debug@4.3.4)(pg@8.11.0)
+      '@strapi/data-transfer': 4.11.1(pg@8.11.0)(typescript@5.1.3)
+      '@strapi/database': 4.11.1(pg@8.11.0)
       '@strapi/generate-new': 4.11.1
       '@strapi/generators': 4.11.1
       '@strapi/logger': 4.11.1
@@ -3922,7 +3922,7 @@ packages:
       - typescript
     dev: false
 
-  /@strapi/strapi@4.11.1(pg@8.10.0)(typescript@5.1.3):
+  /@strapi/strapi@4.11.1(pg@8.11.0)(typescript@5.1.3):
     resolution: {integrity: sha512-pOFMgJV+5s71hJ3YJD0ffiSvCnIaxAgvR1PBzuugPOEm6X7JHcRoRNpPIQses37Tcw5HVNtzFh5iyivsnTGfpg==}
     engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
     hasBin: true
@@ -3930,9 +3930,9 @@ packages:
     dependencies:
       '@koa/cors': 3.4.3
       '@koa/router': 10.1.1
-      '@strapi/admin': 4.11.1(@strapi/strapi@4.11.1)(debug@4.3.4)(pg@8.10.0)
-      '@strapi/data-transfer': 4.11.1(pg@8.10.0)(typescript@5.1.3)
-      '@strapi/database': 4.11.1(pg@8.10.0)
+      '@strapi/admin': 4.11.1(@strapi/strapi@4.11.1)(debug@4.3.4)(pg@8.11.0)
+      '@strapi/data-transfer': 4.11.1(pg@8.11.0)(typescript@5.1.3)
+      '@strapi/database': 4.11.1(pg@8.11.0)
       '@strapi/generate-new': 4.11.1
       '@strapi/generators': 4.11.1
       '@strapi/logger': 4.11.1
@@ -8320,7 +8320,7 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: false
 
-  /knex@2.4.0(pg@8.10.0):
+  /knex@2.4.0(pg@8.11.0):
     resolution: {integrity: sha512-i0GWwqYp1Hs2yvc2rlDO6nzzkLhwdyOZKRdsMTB8ZxOs2IXQyL5rBjSbS1krowCh6V65T4X9CJaKtuIfkaPGSA==}
     engines: {node: '>=12'}
     hasBin: true
@@ -8357,7 +8357,7 @@ packages:
       getopts: 2.3.0
       interpret: 2.2.0
       lodash: 4.17.21
-      pg: 8.10.0
+      pg: 8.11.0
       pg-connection-string: 2.5.0
       rechoir: 0.8.0
       resolve-from: 5.0.0
@@ -9712,8 +9712,18 @@ packages:
     resolution: {integrity: sha512-KG8UEiEVkR3wGEb4m5yZkVCzigAD+cVEJck2CzYZO37ZGJfctvVptVO192MwrtPhzONn6go8ylnOdMhKqi4nfg==}
     dev: false
 
+  /pg-cloudflare@1.1.0:
+    resolution: {integrity: sha512-tGM8/s6frwuAIyRcJ6nWcIvd3+3NmUKIs6OjviIm1HPPFEt5MzQDOTBQyhPWg/m0kCl95M6gA1JaIXtS8KovOA==}
+    requiresBuild: true
+    dev: false
+    optional: true
+
   /pg-connection-string@2.5.0:
     resolution: {integrity: sha512-r5o/V/ORTA6TmUnyWZR9nCj1klXCO2CEKNRlVuJptZe85QuhFayC7WeMic7ndayT5IRIR0S0xFxFi2ousartlQ==}
+    dev: false
+
+  /pg-connection-string@2.6.0:
+    resolution: {integrity: sha512-x14ibktcwlHKoHxx9X3uTVW9zIGR41ZB6QNhHb21OPNdCCO3NaRnpJuwKIQSR4u+Yqjx4HCvy7Hh7VSy1U4dGg==}
     dev: false
 
   /pg-int8@1.0.1:
@@ -9721,12 +9731,12 @@ packages:
     engines: {node: '>=4.0.0'}
     dev: false
 
-  /pg-pool@3.6.0(pg@8.10.0):
+  /pg-pool@3.6.0(pg@8.11.0):
     resolution: {integrity: sha512-clFRf2ksqd+F497kWFyM21tMjeikn60oGDmqMT8UBrynEwVEX/5R5xd2sdvdo1cZCFlguORNpVuqxIj+aK4cfQ==}
     peerDependencies:
       pg: '>=8.0'
     dependencies:
-      pg: 8.10.0
+      pg: 8.11.0
     dev: false
 
   /pg-protocol@1.6.0:
@@ -9744,8 +9754,8 @@ packages:
       postgres-interval: 1.2.0
     dev: false
 
-  /pg@8.10.0:
-    resolution: {integrity: sha512-ke7o7qSTMb47iwzOSaZMfeR7xToFdkE71ifIipOAAaLIM0DYzfOAXlgFFmYUIE2BcJtvnVlGCID84ZzCegE8CQ==}
+  /pg@8.11.0:
+    resolution: {integrity: sha512-meLUVPn2TWgJyLmy7el3fQQVwft4gU5NGyvV0XbD41iU9Jbg8lCH4zexhIkihDzVHJStlt6r088G6/fWeNjhXA==}
     engines: {node: '>= 8.0.0'}
     peerDependencies:
       pg-native: '>=3.0.1'
@@ -9755,11 +9765,13 @@ packages:
     dependencies:
       buffer-writer: 2.0.0
       packet-reader: 1.0.0
-      pg-connection-string: 2.5.0
-      pg-pool: 3.6.0(pg@8.10.0)
+      pg-connection-string: 2.6.0
+      pg-pool: 3.6.0(pg@8.11.0)
       pg-protocol: 1.6.0
       pg-types: 2.2.0
       pgpass: 1.0.5
+    optionalDependencies:
+      pg-cloudflare: 1.1.0
     dev: false
 
   /pgpass@1.0.5:
@@ -11204,7 +11216,7 @@ packages:
       react-router-dom: 5.3.4
     dependencies:
       '@strapi/plugin-graphql': 4.11.1(@strapi/strapi@4.11.1)(styled-components@5.3.10)(typescript@5.1.3)
-      '@strapi/strapi': 4.11.1(pg@8.10.0)(typescript@5.1.3)
+      '@strapi/strapi': 4.11.1(pg@8.11.0)(typescript@5.1.3)
       '@strapi/utils': 4.11.1
       '@types/axios': 0.14.0
       '@types/react-intl': 3.0.0(typescript@5.1.3)
@@ -11231,7 +11243,7 @@ packages:
     peerDependencies:
       '@strapi/strapi': ^4.4.0
     dependencies:
-      '@strapi/strapi': 4.11.1(pg@8.10.0)(typescript@5.1.3)
+      '@strapi/strapi': 4.11.1(pg@8.11.0)(typescript@5.1.3)
       i18n-iso-countries: 7.6.0
     dev: false
 
@@ -11241,7 +11253,7 @@ packages:
     peerDependencies:
       '@strapi/strapi': ^4.x
     dependencies:
-      '@strapi/strapi': 4.11.1(pg@8.10.0)(typescript@5.1.3)
+      '@strapi/strapi': 4.11.1(pg@8.11.0)(typescript@5.1.3)
       nanoid: 3.3.6
     dev: false
 
