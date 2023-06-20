@@ -26,8 +26,8 @@ importers:
         specifier: 4.11.1
         version: 4.11.1(typescript@5.1.3)
       '@strapi/provider-email-nodemailer':
-        specifier: 4.10.7
-        version: 4.10.7
+        specifier: 4.11.1
+        version: 4.11.1
       '@strapi/strapi':
         specifier: 4.11.1
         version: 4.11.1(pg@8.10.0)(typescript@5.1.3)
@@ -3814,8 +3814,8 @@ packages:
       '@strapi/strapi': 4.11.1(pg@8.10.0)(typescript@5.1.3)
     dev: false
 
-  /@strapi/provider-email-nodemailer@4.10.7:
-    resolution: {integrity: sha512-gyfaHmX4MSrR/6oCAuLfSUVnLjCX11vsP6yfvW3WuAVxA7Eme63f5M/MXA+VtweH1B4gUWCfWJ206LE26USYUw==}
+  /@strapi/provider-email-nodemailer@4.11.1:
+    resolution: {integrity: sha512-ttzdrFUYsuftUOVoXo/3rSVTfE+wsP88SZO9JphhtmOI2xxYOKY5mnevAdpocD4WeKsSM+/FDXIXXjELs7Nm3g==}
     engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
     dependencies:
       lodash: 4.17.21
