@@ -6,5 +6,11 @@
     ":timezone(Europe/Paris)"
   ],
   "dependencyDashboardAutoclose": true,
+  "packageRules": [
+    {
+      "extends": "monorepo:strapi",
+      "sourceUrlPrefixes": ["https://github.com/strapi/strapi", "https://github.com/strapi/strapi-plugin-seo"]
+    }
+  ],
   "labels": ["dependencies"]
 }
