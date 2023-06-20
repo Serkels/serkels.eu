@@ -6,19 +6,18 @@ import { useQuery } from "@tanstack/react-query";
 
 //
 
-export async function OpportunityCategories() {
-  const {
-    data: categories,
-    isLoading,
-    isError,
-  } = useQuery({
+function useOpportunityCategories() {
+  return useQuery({
     queryKey: ["opportunity_categories"],
     queryFn: opportunity_categories_query,
   });
+}
 
+export async function OpportunityCategories() {
+  const { data: categories, isLoading, isError } = useOpportunityCategories();
   if (isLoading) return <Spinner />;
   if (isError) return <>Epic fail...</>;
-  // if (!categories) return <>No data O_o</>;
+  if (!categories) return <>No data O_o</>;
   // useEffect(() => {}, [])
   // const categories = await (async () => {
   //   try {
@@ -28,6 +27,7 @@ export async function OpportunityCategories() {
   //     return [];
   //   }
   // })();
+  // const categories = [] as { name: string; slug: string }[];
   return (
     <ul className="mt-7 text-[#656565]">
       {categories.map(({ name, slug }) => (
@@ -42,10 +42,28 @@ export async function OpportunityCategories() {
   );
 }
 
+// async function opportunity_categories_query() {
+//   return Promise.resolve([] as { name: string; slug: string }[]);
+// }
 async function opportunity_categories_query() {
-  return [];
+  const res = await fetch(
+    `${process.env["NEXT_PUBLIC_STRAPI_API_URL"]}/api/opportunity-categories`
+  );
+  const result = await res.json();
+  console.log(result);
+  if (result.error) {
+    console.error(result.error);
+    throw result.error;
+  }
+  const { data } = result as NonNullable<
+    components["schemas"]["OpportunityCategoryListResponse"]
+  >;
+  if (!data) {
+    return [];
+  }
+  return await data.map(({ id, attributes }) => ({ id, ...attributes }));
 }
-
+/*
 export async function _opportunity_categories_query() {
   const res = await fetch(`/api/v1/opportunity-categories`);
   const result = await res.json();
@@ -61,3 +79,4 @@ export async function _opportunity_categories_query() {
   }
   return await data.map(({ id, attributes }) => ({ id, ...attributes }));
 }
+*/

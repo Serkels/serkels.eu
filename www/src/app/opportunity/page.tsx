@@ -14,7 +14,7 @@ export default async function Page() {
     <Grid>
       <Aside title="Opportunités">
         <InputSearch />
-        {false && <OpportunityCategories />}
+        <OpportunityCategories />
       </Aside>
       <main className="col-span-full mt-10 md:col-span-6 xl:col-span-9">
         <OpportunityList />
