@@ -14,7 +14,6 @@ export default async function Page() {
     <Grid>
       <Aside title="Opportunités">
         <InputSearch />
-        {/* @ts-expect-error Server Component */}
         {false && <OpportunityCategories />}
       </Aside>
       <main className="col-span-full mt-10 md:col-span-6 xl:col-span-9">

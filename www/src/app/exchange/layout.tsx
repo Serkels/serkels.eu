@@ -26,7 +26,6 @@ export default function Layout({ children }: PropsWithChildren) {
       >
         {children}
       </div>
-      {/* @ts-expect-error Server Component */}
       <AppFooter />
     </>
   );

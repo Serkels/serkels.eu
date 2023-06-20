@@ -32,7 +32,6 @@ export default async function Home() {
 
       <hr className="my-8 border-none"></hr>
 
-      {/* @ts-expect-error Server Component */}
       <AppFooter />
       <MobileNavBar className="fixed bottom-0 left-0 right-0 z-50 sm:hidden" />
     </>
