@@ -127,8 +127,8 @@ importers:
         specifier: workspace:*
         version: link:../config/typescript-config
       '@types/react':
-        specifier: 18.2.7
-        version: 18.2.7
+        specifier: 18.2.13
+        version: 18.2.13
       prettier:
         specifier: 2.8.8
         version: 2.8.8
@@ -208,11 +208,11 @@ importers:
         specifier: 20.2.4
         version: 20.2.4
       '@types/react':
-        specifier: 18.2.7
-        version: 18.2.7
+        specifier: 18.2.13
+        version: 18.2.13
       '@types/react-dom':
-        specifier: 18.2.4
-        version: 18.2.4
+        specifier: 18.2.6
+        version: 18.2.6
       autoprefixer:
         specifier: 10.4.14
         version: 10.4.14(postcss@8.4.24)
@@ -600,14 +600,14 @@ packages:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
     dev: true
 
-  /@types/react-dom@18.2.4:
-    resolution: {integrity: sha512-G2mHoTMTL4yoydITgOGwWdWMVd8sNgyEP85xVmMKAPUBwQWm9wBPQUmvbeF4V3WBY1P7mmL4BkjQ0SqUpf1snw==}
+  /@types/react-dom@18.2.6:
+    resolution: {integrity: sha512-2et4PDvg6PVCyS7fuTc4gPoksV58bW0RwSxWKcPRcHZf0PRUGq03TKcD/rUHe3azfV6/5/biUBJw+HhCQjaP0A==}
     dependencies:
-      '@types/react': 18.2.7
+      '@types/react': 18.2.13
     dev: true
 
-  /@types/react@18.2.7:
-    resolution: {integrity: sha512-ojrXpSH2XFCmHm7Jy3q44nXDyN54+EYKP2lBhJ2bqfyPj6cIUW/FZW/Csdia34NQgq7KYcAlHi5184m4X88+yw==}
+  /@types/react@18.2.13:
+    resolution: {integrity: sha512-vJ+zElvi/Zn9cVXB5slX2xL8PZodPCwPRDpittQdw43JR2AJ5k3vKdgJJyneV/cYgIbLQUwXa9JVDvUZXGba+Q==}
     dependencies:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.3
