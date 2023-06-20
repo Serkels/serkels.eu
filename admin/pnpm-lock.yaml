@@ -41,8 +41,8 @@ importers:
         specifier: 1.0.2
         version: 1.0.2(@strapi/strapi@4.11.1)
       strapi-plugin-passwordless:
-        specifier: 4.0.11
-        version: 4.0.11(@strapi/strapi@4.11.1)
+        specifier: 4.0.12
+        version: 4.0.12(@strapi/strapi@4.11.1)
     devDependencies:
       '@1/typescript-config':
         specifier: link:../../@1/config/typescript-config
@@ -11235,8 +11235,8 @@ packages:
       i18n-iso-countries: 7.6.0
     dev: false
 
-  /strapi-plugin-passwordless@4.0.11(@strapi/strapi@4.11.1):
-    resolution: {integrity: sha512-NdefpQ+2eo8r3KnDHryOCAXGn4sCYz5pjyJv7OyDVwc1DJ9dTxRPJWMQAOpmUALQkVTVShtX3XEbP6Dp7nmtPA==}
+  /strapi-plugin-passwordless@4.0.12(@strapi/strapi@4.11.1):
+    resolution: {integrity: sha512-phs49ynrGWLCu/8ddRqpMMBcjzWqwDQYwX0Frlgpgz3tC2YJ21eaoa4qHEG/GmZbYWnIIrXxnqQ3WZn0oC2uSQ==}
     engines: {node: '>=10.16.0', npm: '>=6.0.0'}
     peerDependencies:
       '@strapi/strapi': ^4.x
