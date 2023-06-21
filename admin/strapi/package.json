@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@1/typescript-config": "link:../../@1/config/typescript-config",
-    "@strapi/typescript-utils": "4.11.1",
+    "@strapi/typescript-utils": "4.11.2",
     "prettier": "2.8.8",
     "typescript": "5.1.3"
   }
