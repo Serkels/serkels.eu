@@ -8,7 +8,7 @@
     "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {
     "i18n": {
@@ -80,8 +80,9 @@
     },
     "partner": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::partner.partner"
+      "relation": "manyToOne",
+      "target": "api::partner.partner",
+      "inversedBy": "opportunities"
     },
     "location": {
       "pluginOptions": {

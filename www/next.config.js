@@ -5,6 +5,18 @@ const nextConfig = {
   },
   reactStrictMode: true,
   transpilePackages: ["@1/ui", "@1/tailwindcss-config"],
+  async rewrites() {
+    return [
+      {
+        source: "/api/v1/:path*",
+        destination: `${process.env["STRAPI_API_URL"]}/api/:path*`,
+      },
+      {
+        source: "/media/:path*",
+        destination: `${process.env["STRAPI_API_URL"]}/:path*`,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

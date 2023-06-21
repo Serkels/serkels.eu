@@ -4,13 +4,13 @@ import { Spinner } from "@1/ui/components/Spinner";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { OpportunityCard } from "./OpportunityCard";
-import { useOpportunity } from "./useOpportunity";
+import { useOpportunities } from "./useOpportunities";
 
 //
 
 export function OpportunityList() {
   const {} = useSession();
-  const { data, isLoading, isError } = useOpportunity();
+  const { data, isLoading, isError } = useOpportunities();
   console.log({ data, isLoading, isError });
 
   if (isLoading) return <Spinner />;
@@ -31,8 +31,8 @@ export function OpportunityList() {
     >
       {data.map((opportunity) => (
         <li key={opportunity.id} className="mx-auto max-w-2xl">
-          <Link href={`/opportunity/${opportunity.id}`}>
-            <OpportunityCard title={opportunity.title} />
+          <Link href={`/opportunity/${opportunity.slug}`}>
+            <OpportunityCard {...opportunity} />
           </Link>
         </li>
       ))}

@@ -27,6 +27,12 @@
     },
     "location": {
       "type": "string"
+    },
+    "opportunities": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::opportunity.opportunity",
+      "mappedBy": "partner"
     }
   }
 }
