@@ -4,7 +4,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "pnpx openapi-typescript openapi.json --output v1.d.ts --default-non-nullable --alphabetize"
+    "build": "pnpx openapi-typescript openapi.json --output v1.d.ts --empty-objects-unknown --default-non-nullable --alphabetize"
   },
   "devDependencies": {
     "prettier": "2.8.8",

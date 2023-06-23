@@ -3,15 +3,12 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { SessionProvider } from "next-auth/react";
-import { type PropsWithChildren } from "react";
+import { useState, type PropsWithChildren } from "react";
 
 //
 
-const queryClient = new QueryClient({
-  // defaultOptions: { queries: { staleTime: ms("5s") } },
-});
-
 export default function Providers({ children }: PropsWithChildren) {
+  const [queryClient] = useState(() => new QueryClient());
   return (
     <QueryClientProvider client={queryClient}>
       <SessionProvider>{children}</SessionProvider>

@@ -47,21 +47,21 @@ function Explore() {
       <ExploreLink
         href="/opportunity"
         Icon={Binoculars}
-        className="col-span-2 text-Congress_Blue md:col-start-2 xl:col-start-4"
+        className="text-Congress_Blue col-span-2 md:col-start-2 xl:col-start-4"
       >
         Opportunités
       </ExploreLink>
       <ExploreLink
         href="/faq"
         Icon={MessageGroup}
-        className="col-span-2 text-Eminence"
+        className="text-Eminence col-span-2"
       >
         Question-Réponse
       </ExploreLink>
       <ExploreLink
         href="/guide"
         Icon={Book}
-        className="col-span-2 text-RedViolet "
+        className="text-RedViolet col-span-2 "
       >
         Guide d'étudiant
       </ExploreLink>

@@ -353,12 +353,16 @@ export interface paths {
   "/passwordless/send-link": {
     /** Send an email to user with login link */
     post: {
-      requestBody: components["requestBodies"]["Passwordless-SendLinkRequest"];
+      requestBody?: {
+        content: {
+          "application/json": components["schemas"]["Passwordless-SendLinkRequest"];
+        };
+      };
       responses: {
         /** @description Returns email and boolean to confirm email was sent */
         200: {
           content: {
-            "application/json": components["requestBodies"]["Passwordless-EmailSent"];
+            "application/json": components["schemas"]["Passwordless-EmailSent"];
           };
         };
         /** @description Bad Request */
@@ -845,7 +849,7 @@ export interface components {
             createdAt?: string;
             createdBy?: {
               data?: {
-                attributes?: Record<string, never>;
+                attributes?: Record<string, unknown>;
                 id?: number;
               };
             };
@@ -860,7 +864,7 @@ export interface components {
                   createdAt?: string;
                   createdBy?: {
                     data?: {
-                      attributes?: Record<string, never>;
+                      attributes?: Record<string, unknown>;
                       id?: number;
                     };
                   };
@@ -880,7 +884,7 @@ export interface components {
                                 createdAt?: string;
                                 createdBy?: {
                                   data?: {
-                                    attributes?: Record<string, never>;
+                                    attributes?: Record<string, unknown>;
                                     id?: number;
                                   };
                                 };
@@ -900,7 +904,7 @@ export interface components {
                                         createdAt?: string;
                                         createdBy?: {
                                           data?: {
-                                            attributes?: Record<string, never>;
+                                            attributes?: Record<string, unknown>;
                                             id?: number;
                                           };
                                         };
@@ -915,14 +919,14 @@ export interface components {
                                                 createdAt?: string;
                                                 createdBy?: {
                                                   data?: {
-                                                    attributes?: Record<string, never>;
+                                                    attributes?: Record<string, unknown>;
                                                     id?: number;
                                                   };
                                                 };
                                                 properties?: unknown;
                                                 role?: {
                                                   data?: {
-                                                    attributes?: Record<string, never>;
+                                                    attributes?: Record<string, unknown>;
                                                     id?: number;
                                                   };
                                                 };
@@ -931,7 +935,7 @@ export interface components {
                                                 updatedAt?: string;
                                                 updatedBy?: {
                                                   data?: {
-                                                    attributes?: Record<string, never>;
+                                                    attributes?: Record<string, unknown>;
                                                     id?: number;
                                                   };
                                                 };
@@ -943,13 +947,13 @@ export interface components {
                                         updatedAt?: string;
                                         updatedBy?: {
                                           data?: {
-                                            attributes?: Record<string, never>;
+                                            attributes?: Record<string, unknown>;
                                             id?: number;
                                           };
                                         };
                                         users?: {
                                           data?: ({
-                                              attributes?: Record<string, never>;
+                                              attributes?: Record<string, unknown>;
                                               id?: number;
                                             })[];
                                         };
@@ -961,7 +965,7 @@ export interface components {
                                 updatedAt?: string;
                                 updatedBy?: {
                                   data?: {
-                                    attributes?: Record<string, never>;
+                                    attributes?: Record<string, unknown>;
                                     id?: number;
                                   };
                                 };
@@ -972,7 +976,7 @@ export interface components {
                           };
                           role?: {
                             data?: {
-                              attributes?: Record<string, never>;
+                              attributes?: Record<string, unknown>;
                               id?: number;
                             };
                           };
@@ -980,7 +984,7 @@ export interface components {
                           updatedAt?: string;
                           updatedBy?: {
                             data?: {
-                              attributes?: Record<string, never>;
+                              attributes?: Record<string, unknown>;
                               id?: number;
                             };
                           };
@@ -993,13 +997,13 @@ export interface components {
                   updatedAt?: string;
                   updatedBy?: {
                     data?: {
-                      attributes?: Record<string, never>;
+                      attributes?: Record<string, unknown>;
                       id?: number;
                     };
                   };
                   users?: {
                     data?: ({
-                        attributes?: Record<string, never>;
+                        attributes?: Record<string, unknown>;
                         id?: number;
                       })[];
                   };
@@ -1011,7 +1015,7 @@ export interface components {
             updatedAt?: string;
             updatedBy?: {
               data?: {
-                attributes?: Record<string, never>;
+                attributes?: Record<string, unknown>;
                 id?: number;
               };
             };
@@ -1028,7 +1032,7 @@ export interface components {
       createdAt?: string;
       createdBy?: {
         data?: {
-          attributes?: Record<string, never>;
+          attributes?: Record<string, unknown>;
           id?: number;
         };
       };
@@ -1043,7 +1047,7 @@ export interface components {
               createdAt?: string;
               createdBy?: {
                 data?: {
-                  attributes?: Record<string, never>;
+                  attributes?: Record<string, unknown>;
                   id?: number;
                 };
               };
@@ -1060,7 +1064,7 @@ export interface components {
                     authorName?: string;
                     authorUser?: {
                       data?: {
-                        attributes?: Record<string, never>;
+                        attributes?: Record<string, unknown>;
                         id?: number;
                       };
                     };
@@ -1072,7 +1076,7 @@ export interface components {
                     createdAt?: string;
                     createdBy?: {
                       data?: {
-                        attributes?: Record<string, never>;
+                        attributes?: Record<string, unknown>;
                         id?: number;
                       };
                     };
@@ -1081,13 +1085,13 @@ export interface components {
                     removed?: boolean;
                     reports?: {
                       data?: ({
-                          attributes?: Record<string, never>;
+                          attributes?: Record<string, unknown>;
                           id?: number;
                         })[];
                     };
                     threadOf?: {
                       data?: {
-                        attributes?: Record<string, never>;
+                        attributes?: Record<string, unknown>;
                         id?: number;
                       };
                     };
@@ -1095,7 +1099,7 @@ export interface components {
                     updatedAt?: string;
                     updatedBy?: {
                       data?: {
-                        attributes?: Record<string, never>;
+                        attributes?: Record<string, unknown>;
                         id?: number;
                       };
                     };
@@ -1108,7 +1112,7 @@ export interface components {
               updatedAt?: string;
               updatedBy?: {
                 data?: {
-                  attributes?: Record<string, never>;
+                  attributes?: Record<string, unknown>;
                   id?: number;
                 };
               };
@@ -1118,7 +1122,7 @@ export interface components {
       };
       threadOf?: {
         data?: {
-          attributes?: Record<string, never>;
+          attributes?: Record<string, unknown>;
           id?: number;
         };
       };
@@ -1126,7 +1130,7 @@ export interface components {
       updatedAt?: string;
       updatedBy?: {
         data?: {
-          attributes?: Record<string, never>;
+          attributes?: Record<string, unknown>;
           id?: number;
         };
       };
@@ -1137,7 +1141,7 @@ export interface components {
       createdAt?: string;
       createdBy?: {
         data?: {
-          attributes?: Record<string, never>;
+          attributes?: Record<string, unknown>;
           id?: number;
         };
       };
@@ -1162,7 +1166,7 @@ export interface components {
                   createdAt?: string;
                   createdBy?: {
                     data?: {
-                      attributes?: Record<string, never>;
+                      attributes?: Record<string, unknown>;
                       id?: number;
                     };
                   };
@@ -1177,7 +1181,7 @@ export interface components {
                         createdAt?: string;
                         createdBy?: {
                           data?: {
-                            attributes?: Record<string, never>;
+                            attributes?: Record<string, unknown>;
                             id?: number;
                           };
                         };
@@ -1197,7 +1201,7 @@ export interface components {
                                       createdAt?: string;
                                       createdBy?: {
                                         data?: {
-                                          attributes?: Record<string, never>;
+                                          attributes?: Record<string, unknown>;
                                           id?: number;
                                         };
                                       };
@@ -1217,7 +1221,7 @@ export interface components {
                                               createdAt?: string;
                                               createdBy?: {
                                                 data?: {
-                                                  attributes?: Record<string, never>;
+                                                  attributes?: Record<string, unknown>;
                                                   id?: number;
                                                 };
                                               };
@@ -1232,14 +1236,14 @@ export interface components {
                                                       createdAt?: string;
                                                       createdBy?: {
                                                         data?: {
-                                                          attributes?: Record<string, never>;
+                                                          attributes?: Record<string, unknown>;
                                                           id?: number;
                                                         };
                                                       };
                                                       properties?: unknown;
                                                       role?: {
                                                         data?: {
-                                                          attributes?: Record<string, never>;
+                                                          attributes?: Record<string, unknown>;
                                                           id?: number;
                                                         };
                                                       };
@@ -1248,7 +1252,7 @@ export interface components {
                                                       updatedAt?: string;
                                                       updatedBy?: {
                                                         data?: {
-                                                          attributes?: Record<string, never>;
+                                                          attributes?: Record<string, unknown>;
                                                           id?: number;
                                                         };
                                                       };
@@ -1260,13 +1264,13 @@ export interface components {
                                               updatedAt?: string;
                                               updatedBy?: {
                                                 data?: {
-                                                  attributes?: Record<string, never>;
+                                                  attributes?: Record<string, unknown>;
                                                   id?: number;
                                                 };
                                               };
                                               users?: {
                                                 data?: ({
-                                                    attributes?: Record<string, never>;
+                                                    attributes?: Record<string, unknown>;
                                                     id?: number;
                                                   })[];
                                               };
@@ -1278,7 +1282,7 @@ export interface components {
                                       updatedAt?: string;
                                       updatedBy?: {
                                         data?: {
-                                          attributes?: Record<string, never>;
+                                          attributes?: Record<string, unknown>;
                                           id?: number;
                                         };
                                       };
@@ -1289,7 +1293,7 @@ export interface components {
                                 };
                                 role?: {
                                   data?: {
-                                    attributes?: Record<string, never>;
+                                    attributes?: Record<string, unknown>;
                                     id?: number;
                                   };
                                 };
@@ -1297,7 +1301,7 @@ export interface components {
                                 updatedAt?: string;
                                 updatedBy?: {
                                   data?: {
-                                    attributes?: Record<string, never>;
+                                    attributes?: Record<string, unknown>;
                                     id?: number;
                                   };
                                 };
@@ -1310,13 +1314,13 @@ export interface components {
                         updatedAt?: string;
                         updatedBy?: {
                           data?: {
-                            attributes?: Record<string, never>;
+                            attributes?: Record<string, unknown>;
                             id?: number;
                           };
                         };
                         users?: {
                           data?: ({
-                              attributes?: Record<string, never>;
+                              attributes?: Record<string, unknown>;
                               id?: number;
                             })[];
                         };
@@ -1328,7 +1332,7 @@ export interface components {
                   updatedAt?: string;
                   updatedBy?: {
                     data?: {
-                      attributes?: Record<string, never>;
+                      attributes?: Record<string, unknown>;
                       id?: number;
                     };
                   };
@@ -1345,7 +1349,7 @@ export interface components {
             createdAt?: string;
             createdBy?: {
               data?: {
-                attributes?: Record<string, never>;
+                attributes?: Record<string, unknown>;
                 id?: number;
               };
             };
@@ -1360,7 +1364,7 @@ export interface components {
                     createdAt?: string;
                     createdBy?: {
                       data?: {
-                        attributes?: Record<string, never>;
+                        attributes?: Record<string, unknown>;
                         id?: number;
                       };
                     };
@@ -1368,7 +1372,7 @@ export interface components {
                     reason?: "BAD_LANGUAGE" | "DISCRIMINATION" | "OTHER";
                     related?: {
                       data?: {
-                        attributes?: Record<string, never>;
+                        attributes?: Record<string, unknown>;
                         id?: number;
                       };
                     };
@@ -1377,7 +1381,7 @@ export interface components {
                     updatedAt?: string;
                     updatedBy?: {
                       data?: {
-                        attributes?: Record<string, never>;
+                        attributes?: Record<string, unknown>;
                         id?: number;
                       };
                     };
@@ -1387,7 +1391,7 @@ export interface components {
             };
             threadOf?: {
               data?: {
-                attributes?: Record<string, never>;
+                attributes?: Record<string, unknown>;
                 id?: number;
               };
             };
@@ -1395,7 +1399,7 @@ export interface components {
             updatedAt?: string;
             updatedBy?: {
               data?: {
-                attributes?: Record<string, never>;
+                attributes?: Record<string, unknown>;
                 id?: number;
               };
             };
@@ -1408,7 +1412,7 @@ export interface components {
       updatedAt?: string;
       updatedBy?: {
         data?: {
-          attributes?: Record<string, never>;
+          attributes?: Record<string, unknown>;
           id?: number;
         };
       };
@@ -1425,7 +1429,7 @@ export interface components {
     };
     CommentsCommentReportResponse: {
       data?: components["schemas"]["CommentsCommentReportResponseDataObject"];
-      meta?: Record<string, never>;
+      meta?: Record<string, unknown>;
     };
     CommentsCommentReportResponseDataObject: {
       attributes?: components["schemas"]["CommentsCommentReport"];
@@ -1455,16 +1459,16 @@ export interface components {
     };
     CommentsCommentResponse: {
       data?: components["schemas"]["CommentsCommentResponseDataObject"];
-      meta?: Record<string, never>;
+      meta?: Record<string, unknown>;
     };
     CommentsCommentResponseDataObject: {
       attributes?: components["schemas"]["CommentsComment"];
       id?: number;
     };
     Error: {
-      data?: Record<string, never> | (Record<string, never>)[];
+      data?: Record<string, unknown> | (Record<string, unknown>)[];
       error: {
-        details?: Record<string, never>;
+        details?: Record<string, unknown>;
         message?: string;
         name?: string;
         status?: number;
@@ -1482,7 +1486,7 @@ export interface components {
             createdAt?: string;
             createdBy?: {
               data?: {
-                attributes?: Record<string, never>;
+                attributes?: Record<string, unknown>;
                 id?: number;
               };
             };
@@ -1502,7 +1506,7 @@ export interface components {
                     createdAt?: string;
                     createdBy?: {
                       data?: {
-                        attributes?: Record<string, never>;
+                        attributes?: Record<string, unknown>;
                         id?: number;
                       };
                     };
@@ -1517,14 +1521,14 @@ export interface components {
                             createdAt?: string;
                             createdBy?: {
                               data?: {
-                                attributes?: Record<string, never>;
+                                attributes?: Record<string, unknown>;
                                 id?: number;
                               };
                             };
                             properties?: unknown;
                             role?: {
                               data?: {
-                                attributes?: Record<string, never>;
+                                attributes?: Record<string, unknown>;
                                 id?: number;
                               };
                             };
@@ -1533,7 +1537,7 @@ export interface components {
                             updatedAt?: string;
                             updatedBy?: {
                               data?: {
-                                attributes?: Record<string, never>;
+                                attributes?: Record<string, unknown>;
                                 id?: number;
                               };
                             };
@@ -1545,13 +1549,13 @@ export interface components {
                     updatedAt?: string;
                     updatedBy?: {
                       data?: {
-                        attributes?: Record<string, never>;
+                        attributes?: Record<string, unknown>;
                         id?: number;
                       };
                     };
                     users?: {
                       data?: ({
-                          attributes?: Record<string, never>;
+                          attributes?: Record<string, unknown>;
                           id?: number;
                         })[];
                     };
@@ -1563,7 +1567,7 @@ export interface components {
             updatedAt?: string;
             updatedBy?: {
               data?: {
-                attributes?: Record<string, never>;
+                attributes?: Record<string, unknown>;
                 id?: number;
               };
             };
@@ -1577,14 +1581,14 @@ export interface components {
       updatedAt?: string;
       updatedBy?: {
         data?: {
-          attributes?: Record<string, never>;
+          attributes?: Record<string, unknown>;
           id?: number;
         };
       };
     };
     I18NLocaleResponse: {
       data?: components["schemas"]["I18NLocaleResponseDataObject"];
-      meta?: Record<string, never>;
+      meta?: Record<string, unknown>;
     };
     I18NLocaleResponseDataObject: {
       attributes?: components["schemas"]["I18NLocale"];
@@ -1600,7 +1604,7 @@ export interface components {
             createdAt?: string;
             createdBy?: {
               data?: {
-                attributes?: Record<string, never>;
+                attributes?: Record<string, unknown>;
                 id?: number;
               };
             };
@@ -1610,7 +1614,7 @@ export interface components {
                 attributes?: {
                   children?: {
                     data?: ({
-                        attributes?: Record<string, never>;
+                        attributes?: Record<string, unknown>;
                         id?: number;
                       })[];
                   };
@@ -1618,7 +1622,7 @@ export interface components {
                   createdAt?: string;
                   createdBy?: {
                     data?: {
-                      attributes?: Record<string, never>;
+                      attributes?: Record<string, unknown>;
                       id?: number;
                     };
                   };
@@ -1637,7 +1641,7 @@ export interface components {
                                 createdAt?: string;
                                 createdBy?: {
                                   data?: {
-                                    attributes?: Record<string, never>;
+                                    attributes?: Record<string, unknown>;
                                     id?: number;
                                   };
                                 };
@@ -1657,7 +1661,7 @@ export interface components {
                                         createdAt?: string;
                                         createdBy?: {
                                           data?: {
-                                            attributes?: Record<string, never>;
+                                            attributes?: Record<string, unknown>;
                                             id?: number;
                                           };
                                         };
@@ -1672,14 +1676,14 @@ export interface components {
                                                 createdAt?: string;
                                                 createdBy?: {
                                                   data?: {
-                                                    attributes?: Record<string, never>;
+                                                    attributes?: Record<string, unknown>;
                                                     id?: number;
                                                   };
                                                 };
                                                 properties?: unknown;
                                                 role?: {
                                                   data?: {
-                                                    attributes?: Record<string, never>;
+                                                    attributes?: Record<string, unknown>;
                                                     id?: number;
                                                   };
                                                 };
@@ -1688,7 +1692,7 @@ export interface components {
                                                 updatedAt?: string;
                                                 updatedBy?: {
                                                   data?: {
-                                                    attributes?: Record<string, never>;
+                                                    attributes?: Record<string, unknown>;
                                                     id?: number;
                                                   };
                                                 };
@@ -1700,13 +1704,13 @@ export interface components {
                                         updatedAt?: string;
                                         updatedBy?: {
                                           data?: {
-                                            attributes?: Record<string, never>;
+                                            attributes?: Record<string, unknown>;
                                             id?: number;
                                           };
                                         };
                                         users?: {
                                           data?: ({
-                                              attributes?: Record<string, never>;
+                                              attributes?: Record<string, unknown>;
                                               id?: number;
                                             })[];
                                         };
@@ -1718,7 +1722,7 @@ export interface components {
                                 updatedAt?: string;
                                 updatedBy?: {
                                   data?: {
-                                    attributes?: Record<string, never>;
+                                    attributes?: Record<string, unknown>;
                                     id?: number;
                                   };
                                 };
@@ -1730,7 +1734,7 @@ export interface components {
                           ext?: string;
                           folder?: {
                             data?: {
-                              attributes?: Record<string, never>;
+                              attributes?: Record<string, unknown>;
                               id?: number;
                             };
                           };
@@ -1745,7 +1749,7 @@ export interface components {
                           provider_metadata?: unknown;
                           related?: {
                             data?: ({
-                                attributes?: Record<string, never>;
+                                attributes?: Record<string, unknown>;
                                 id?: number;
                               })[];
                           };
@@ -1755,7 +1759,7 @@ export interface components {
                           updatedAt?: string;
                           updatedBy?: {
                             data?: {
-                              attributes?: Record<string, never>;
+                              attributes?: Record<string, unknown>;
                               id?: number;
                             };
                           };
@@ -1768,7 +1772,7 @@ export interface components {
                   name?: string;
                   parent?: {
                     data?: {
-                      attributes?: Record<string, never>;
+                      attributes?: Record<string, unknown>;
                       id?: number;
                     };
                   };
@@ -1778,7 +1782,7 @@ export interface components {
                   updatedAt?: string;
                   updatedBy?: {
                     data?: {
-                      attributes?: Record<string, never>;
+                      attributes?: Record<string, unknown>;
                       id?: number;
                     };
                   };
@@ -1797,7 +1801,7 @@ export interface components {
             provider_metadata?: unknown;
             related?: {
               data?: ({
-                  attributes?: Record<string, never>;
+                  attributes?: Record<string, unknown>;
                   id?: number;
                 })[];
             };
@@ -1807,7 +1811,7 @@ export interface components {
             updatedAt?: string;
             updatedBy?: {
               data?: {
-                attributes?: Record<string, never>;
+                attributes?: Record<string, unknown>;
                 id?: number;
               };
             };
@@ -1821,7 +1825,7 @@ export interface components {
       createdAt?: string;
       createdBy?: {
         data?: {
-          attributes?: Record<string, never>;
+          attributes?: Record<string, unknown>;
           id?: number;
         };
       };
@@ -1841,7 +1845,7 @@ export interface components {
             createdAt?: string;
             createdBy?: {
               data?: {
-                attributes?: Record<string, never>;
+                attributes?: Record<string, unknown>;
                 id?: number;
               };
             };
@@ -1855,7 +1859,7 @@ export interface components {
             updatedAt?: string;
             updatedBy?: {
               data?: {
-                attributes?: Record<string, never>;
+                attributes?: Record<string, unknown>;
                 id?: number;
               };
             };
@@ -1870,7 +1874,7 @@ export interface components {
             createdAt?: string;
             createdBy?: {
               data?: {
-                attributes?: Record<string, never>;
+                attributes?: Record<string, unknown>;
                 id?: number;
               };
             };
@@ -1879,13 +1883,110 @@ export interface components {
             email?: string;
             location?: string;
             name?: string;
+            opportunities?: {
+              data?: ({
+                  attributes?: {
+                    cover?: {
+                      data?: {
+                        attributes?: {
+                          alternativeText?: string;
+                          caption?: string;
+                          /** Format: date-time */
+                          createdAt?: string;
+                          createdBy?: {
+                            data?: {
+                              attributes?: Record<string, unknown>;
+                              id?: number;
+                            };
+                          };
+                          ext?: string;
+                          folder?: {
+                            data?: {
+                              attributes?: Record<string, unknown>;
+                              id?: number;
+                            };
+                          };
+                          folderPath?: string;
+                          formats?: unknown;
+                          hash?: string;
+                          height?: number;
+                          mime?: string;
+                          name?: string;
+                          previewUrl?: string;
+                          provider?: string;
+                          provider_metadata?: unknown;
+                          related?: {
+                            data?: ({
+                                attributes?: Record<string, unknown>;
+                                id?: number;
+                              })[];
+                          };
+                          /** Format: float */
+                          size?: number;
+                          /** Format: date-time */
+                          updatedAt?: string;
+                          updatedBy?: {
+                            data?: {
+                              attributes?: Record<string, unknown>;
+                              id?: number;
+                            };
+                          };
+                          url?: string;
+                          width?: number;
+                        };
+                        id?: number;
+                      };
+                    };
+                    /** Format: date-time */
+                    createdAt?: string;
+                    createdBy?: {
+                      data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      };
+                    };
+                    description?: string;
+                    /** Format: date */
+                    expireAt?: string;
+                    link?: string;
+                    locale?: string;
+                    localizations?: {
+                      data?: (unknown)[];
+                    };
+                    location?: string;
+                    opportunity_category?: {
+                      data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      };
+                    };
+                    partner?: {
+                      data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      };
+                    };
+                    slug?: string;
+                    title?: string;
+                    /** Format: date-time */
+                    updatedAt?: string;
+                    updatedBy?: {
+                      data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      };
+                    };
+                  };
+                  id?: number;
+                })[];
+            };
             /** Format: date-time */
             publishedAt?: string;
             /** Format: date-time */
             updatedAt?: string;
             updatedBy?: {
               data?: {
-                attributes?: Record<string, never>;
+                attributes?: Record<string, unknown>;
                 id?: number;
               };
             };
@@ -1894,15 +1995,13 @@ export interface components {
           id?: number;
         };
       };
-      /** Format: date-time */
-      publishedAt?: string;
       slug?: string;
       title: string;
       /** Format: date-time */
       updatedAt?: string;
       updatedBy?: {
         data?: {
-          attributes?: Record<string, never>;
+          attributes?: Record<string, unknown>;
           id?: number;
         };
       };
@@ -1918,7 +2017,7 @@ export interface components {
             createdAt?: string;
             createdBy?: {
               data?: {
-                attributes?: Record<string, never>;
+                attributes?: Record<string, unknown>;
                 id?: number;
               };
             };
@@ -1938,7 +2037,7 @@ export interface components {
                     createdAt?: string;
                     createdBy?: {
                       data?: {
-                        attributes?: Record<string, never>;
+                        attributes?: Record<string, unknown>;
                         id?: number;
                       };
                     };
@@ -1953,14 +2052,14 @@ export interface components {
                             createdAt?: string;
                             createdBy?: {
                               data?: {
-                                attributes?: Record<string, never>;
+                                attributes?: Record<string, unknown>;
                                 id?: number;
                               };
                             };
                             properties?: unknown;
                             role?: {
                               data?: {
-                                attributes?: Record<string, never>;
+                                attributes?: Record<string, unknown>;
                                 id?: number;
                               };
                             };
@@ -1969,7 +2068,7 @@ export interface components {
                             updatedAt?: string;
                             updatedBy?: {
                               data?: {
-                                attributes?: Record<string, never>;
+                                attributes?: Record<string, unknown>;
                                 id?: number;
                               };
                             };
@@ -1981,13 +2080,13 @@ export interface components {
                     updatedAt?: string;
                     updatedBy?: {
                       data?: {
-                        attributes?: Record<string, never>;
+                        attributes?: Record<string, unknown>;
                         id?: number;
                       };
                     };
                     users?: {
                       data?: ({
-                          attributes?: Record<string, never>;
+                          attributes?: Record<string, unknown>;
                           id?: number;
                         })[];
                     };
@@ -1999,7 +2098,7 @@ export interface components {
             updatedAt?: string;
             updatedBy?: {
               data?: {
-                attributes?: Record<string, never>;
+                attributes?: Record<string, unknown>;
                 id?: number;
               };
             };
@@ -2018,7 +2117,7 @@ export interface components {
       updatedAt?: string;
       updatedBy?: {
         data?: {
-          attributes?: Record<string, never>;
+          attributes?: Record<string, unknown>;
           id?: number;
         };
       };
@@ -2060,7 +2159,7 @@ export interface components {
     };
     OpportunityCategoryLocalizationResponse: {
       data?: components["schemas"]["OpportunityCategoryResponseDataObjectLocalized"];
-      meta?: Record<string, never>;
+      meta?: Record<string, unknown>;
     };
     OpportunityCategoryRequest: {
       data: {
@@ -2071,7 +2170,7 @@ export interface components {
     };
     OpportunityCategoryResponse: {
       data?: components["schemas"]["OpportunityCategoryResponseDataObject"];
-      meta?: Record<string, never>;
+      meta?: Record<string, unknown>;
     };
     OpportunityCategoryResponseDataObject: {
       attributes?: components["schemas"]["OpportunityCategory"];
@@ -2129,7 +2228,7 @@ export interface components {
     };
     OpportunityLocalizationResponse: {
       data?: components["schemas"]["OpportunityResponseDataObjectLocalized"];
-      meta?: Record<string, never>;
+      meta?: Record<string, unknown>;
     };
     OpportunityRequest: {
       data: {
@@ -2151,7 +2250,7 @@ export interface components {
     };
     OpportunityResponse: {
       data?: components["schemas"]["OpportunityResponseDataObject"];
-      meta?: Record<string, never>;
+      meta?: Record<string, unknown>;
     };
     OpportunityResponseDataObject: {
       attributes?: components["schemas"]["Opportunity"];
@@ -2166,99 +2265,7 @@ export interface components {
       createdAt?: string;
       createdBy?: {
         data?: {
-          attributes?: {
-            blocked?: boolean;
-            /** Format: date-time */
-            createdAt?: string;
-            createdBy?: {
-              data?: {
-                attributes?: Record<string, never>;
-                id?: number;
-              };
-            };
-            /** Format: email */
-            email?: string;
-            firstname?: string;
-            isActive?: boolean;
-            lastname?: string;
-            preferedLanguage?: string;
-            registrationToken?: string;
-            resetPasswordToken?: string;
-            roles?: {
-              data?: ({
-                  attributes?: {
-                    code?: string;
-                    /** Format: date-time */
-                    createdAt?: string;
-                    createdBy?: {
-                      data?: {
-                        attributes?: Record<string, never>;
-                        id?: number;
-                      };
-                    };
-                    description?: string;
-                    name?: string;
-                    permissions?: {
-                      data?: ({
-                          attributes?: {
-                            action?: string;
-                            conditions?: unknown;
-                            /** Format: date-time */
-                            createdAt?: string;
-                            createdBy?: {
-                              data?: {
-                                attributes?: Record<string, never>;
-                                id?: number;
-                              };
-                            };
-                            properties?: unknown;
-                            role?: {
-                              data?: {
-                                attributes?: Record<string, never>;
-                                id?: number;
-                              };
-                            };
-                            subject?: string;
-                            /** Format: date-time */
-                            updatedAt?: string;
-                            updatedBy?: {
-                              data?: {
-                                attributes?: Record<string, never>;
-                                id?: number;
-                              };
-                            };
-                          };
-                          id?: number;
-                        })[];
-                    };
-                    /** Format: date-time */
-                    updatedAt?: string;
-                    updatedBy?: {
-                      data?: {
-                        attributes?: Record<string, never>;
-                        id?: number;
-                      };
-                    };
-                    users?: {
-                      data?: ({
-                          attributes?: Record<string, never>;
-                          id?: number;
-                        })[];
-                    };
-                  };
-                  id?: number;
-                })[];
-            };
-            /** Format: date-time */
-            updatedAt?: string;
-            updatedBy?: {
-              data?: {
-                attributes?: Record<string, never>;
-                id?: number;
-              };
-            };
-            username?: string;
-          };
+          attributes?: Record<string, unknown>;
           id?: number;
         };
       };
@@ -2267,13 +2274,339 @@ export interface components {
       email: string;
       location?: string;
       name?: string;
+      opportunities?: {
+        data?: ({
+            attributes?: {
+              cover?: {
+                data?: {
+                  attributes?: {
+                    alternativeText?: string;
+                    caption?: string;
+                    /** Format: date-time */
+                    createdAt?: string;
+                    createdBy?: {
+                      data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      };
+                    };
+                    ext?: string;
+                    folder?: {
+                      data?: {
+                        attributes?: {
+                          children?: {
+                            data?: ({
+                                attributes?: Record<string, unknown>;
+                                id?: number;
+                              })[];
+                          };
+                          /** Format: date-time */
+                          createdAt?: string;
+                          createdBy?: {
+                            data?: {
+                              attributes?: Record<string, unknown>;
+                              id?: number;
+                            };
+                          };
+                          files?: {
+                            data?: ({
+                                attributes?: {
+                                  alternativeText?: string;
+                                  caption?: string;
+                                  /** Format: date-time */
+                                  createdAt?: string;
+                                  createdBy?: {
+                                    data?: {
+                                      attributes?: {
+                                        blocked?: boolean;
+                                        /** Format: date-time */
+                                        createdAt?: string;
+                                        createdBy?: {
+                                          data?: {
+                                            attributes?: Record<string, unknown>;
+                                            id?: number;
+                                          };
+                                        };
+                                        /** Format: email */
+                                        email?: string;
+                                        firstname?: string;
+                                        isActive?: boolean;
+                                        lastname?: string;
+                                        preferedLanguage?: string;
+                                        registrationToken?: string;
+                                        resetPasswordToken?: string;
+                                        roles?: {
+                                          data?: ({
+                                              attributes?: {
+                                                code?: string;
+                                                /** Format: date-time */
+                                                createdAt?: string;
+                                                createdBy?: {
+                                                  data?: {
+                                                    attributes?: Record<string, unknown>;
+                                                    id?: number;
+                                                  };
+                                                };
+                                                description?: string;
+                                                name?: string;
+                                                permissions?: {
+                                                  data?: ({
+                                                      attributes?: {
+                                                        action?: string;
+                                                        conditions?: unknown;
+                                                        /** Format: date-time */
+                                                        createdAt?: string;
+                                                        createdBy?: {
+                                                          data?: {
+                                                            attributes?: Record<string, unknown>;
+                                                            id?: number;
+                                                          };
+                                                        };
+                                                        properties?: unknown;
+                                                        role?: {
+                                                          data?: {
+                                                            attributes?: Record<string, unknown>;
+                                                            id?: number;
+                                                          };
+                                                        };
+                                                        subject?: string;
+                                                        /** Format: date-time */
+                                                        updatedAt?: string;
+                                                        updatedBy?: {
+                                                          data?: {
+                                                            attributes?: Record<string, unknown>;
+                                                            id?: number;
+                                                          };
+                                                        };
+                                                      };
+                                                      id?: number;
+                                                    })[];
+                                                };
+                                                /** Format: date-time */
+                                                updatedAt?: string;
+                                                updatedBy?: {
+                                                  data?: {
+                                                    attributes?: Record<string, unknown>;
+                                                    id?: number;
+                                                  };
+                                                };
+                                                users?: {
+                                                  data?: ({
+                                                      attributes?: Record<string, unknown>;
+                                                      id?: number;
+                                                    })[];
+                                                };
+                                              };
+                                              id?: number;
+                                            })[];
+                                        };
+                                        /** Format: date-time */
+                                        updatedAt?: string;
+                                        updatedBy?: {
+                                          data?: {
+                                            attributes?: Record<string, unknown>;
+                                            id?: number;
+                                          };
+                                        };
+                                        username?: string;
+                                      };
+                                      id?: number;
+                                    };
+                                  };
+                                  ext?: string;
+                                  folder?: {
+                                    data?: {
+                                      attributes?: Record<string, unknown>;
+                                      id?: number;
+                                    };
+                                  };
+                                  folderPath?: string;
+                                  formats?: unknown;
+                                  hash?: string;
+                                  height?: number;
+                                  mime?: string;
+                                  name?: string;
+                                  previewUrl?: string;
+                                  provider?: string;
+                                  provider_metadata?: unknown;
+                                  related?: {
+                                    data?: ({
+                                        attributes?: Record<string, unknown>;
+                                        id?: number;
+                                      })[];
+                                  };
+                                  /** Format: float */
+                                  size?: number;
+                                  /** Format: date-time */
+                                  updatedAt?: string;
+                                  updatedBy?: {
+                                    data?: {
+                                      attributes?: Record<string, unknown>;
+                                      id?: number;
+                                    };
+                                  };
+                                  url?: string;
+                                  width?: number;
+                                };
+                                id?: number;
+                              })[];
+                          };
+                          name?: string;
+                          parent?: {
+                            data?: {
+                              attributes?: Record<string, unknown>;
+                              id?: number;
+                            };
+                          };
+                          path?: string;
+                          pathId?: number;
+                          /** Format: date-time */
+                          updatedAt?: string;
+                          updatedBy?: {
+                            data?: {
+                              attributes?: Record<string, unknown>;
+                              id?: number;
+                            };
+                          };
+                        };
+                        id?: number;
+                      };
+                    };
+                    folderPath?: string;
+                    formats?: unknown;
+                    hash?: string;
+                    height?: number;
+                    mime?: string;
+                    name?: string;
+                    previewUrl?: string;
+                    provider?: string;
+                    provider_metadata?: unknown;
+                    related?: {
+                      data?: ({
+                          attributes?: Record<string, unknown>;
+                          id?: number;
+                        })[];
+                    };
+                    /** Format: float */
+                    size?: number;
+                    /** Format: date-time */
+                    updatedAt?: string;
+                    updatedBy?: {
+                      data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      };
+                    };
+                    url?: string;
+                    width?: number;
+                  };
+                  id?: number;
+                };
+              };
+              /** Format: date-time */
+              createdAt?: string;
+              createdBy?: {
+                data?: {
+                  attributes?: Record<string, unknown>;
+                  id?: number;
+                };
+              };
+              description?: string;
+              /** Format: date */
+              expireAt?: string;
+              link?: string;
+              locale?: string;
+              localizations?: {
+                data?: (unknown)[];
+              };
+              location?: string;
+              opportunity_category?: {
+                data?: {
+                  attributes?: {
+                    /** Format: date-time */
+                    createdAt?: string;
+                    createdBy?: {
+                      data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      };
+                    };
+                    locale?: string;
+                    localizations?: {
+                      data?: (unknown)[];
+                    };
+                    name?: string;
+                    slug?: string;
+                    /** Format: date-time */
+                    updatedAt?: string;
+                    updatedBy?: {
+                      data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      };
+                    };
+                  };
+                  id?: number;
+                };
+              };
+              partner?: {
+                data?: {
+                  attributes?: {
+                    /** Format: date-time */
+                    createdAt?: string;
+                    createdBy?: {
+                      data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      };
+                    };
+                    description?: string;
+                    /** Format: email */
+                    email?: string;
+                    location?: string;
+                    name?: string;
+                    opportunities?: {
+                      data?: ({
+                          attributes?: Record<string, unknown>;
+                          id?: number;
+                        })[];
+                    };
+                    /** Format: date-time */
+                    publishedAt?: string;
+                    /** Format: date-time */
+                    updatedAt?: string;
+                    updatedBy?: {
+                      data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      };
+                    };
+                    website?: string;
+                  };
+                  id?: number;
+                };
+              };
+              slug?: string;
+              title?: string;
+              /** Format: date-time */
+              updatedAt?: string;
+              updatedBy?: {
+                data?: {
+                  attributes?: Record<string, unknown>;
+                  id?: number;
+                };
+              };
+            };
+            id?: number;
+          })[];
+      };
       /** Format: date-time */
       publishedAt?: string;
       /** Format: date-time */
       updatedAt?: string;
       updatedBy?: {
         data?: {
-          attributes?: Record<string, never>;
+          attributes?: Record<string, unknown>;
           id?: number;
         };
       };
@@ -2301,12 +2634,13 @@ export interface components {
         email: string;
         location?: string;
         name?: string;
+        opportunities?: (number | string)[];
         website?: string;
       };
     };
     PartnerResponse: {
       data?: components["schemas"]["PartnerResponseDataObject"];
-      meta?: Record<string, never>;
+      meta?: Record<string, unknown>;
     };
     PartnerResponseDataObject: {
       attributes?: components["schemas"]["Partner"];
@@ -2318,8 +2652,27 @@ export interface components {
       sent?: boolean;
       username?: string | null;
     };
+    "Passwordless-SendLinkRequest": {
+      /**
+       * @description context of authentification 
+       * @example {
+       *   "currentUrl": "localhost"
+       * }
+       */
+      context?: Record<string, unknown>;
+      /**
+       * @description the user email 
+       * @example foo@bar.com
+       */
+      email?: string;
+      /**
+       * @description username for new user 
+       * @example foo
+       */
+      username?: string;
+    };
     "Passwordless-User": components["schemas"]["Users-Permissions-UserRegistration"] & {
-      context?: Record<string, never>;
+      context?: Record<string, unknown>;
     };
     Tag: {
       /** Format: date-time */
@@ -2332,7 +2685,7 @@ export interface components {
             createdAt?: string;
             createdBy?: {
               data?: {
-                attributes?: Record<string, never>;
+                attributes?: Record<string, unknown>;
                 id?: number;
               };
             };
@@ -2352,7 +2705,7 @@ export interface components {
                     createdAt?: string;
                     createdBy?: {
                       data?: {
-                        attributes?: Record<string, never>;
+                        attributes?: Record<string, unknown>;
                         id?: number;
                       };
                     };
@@ -2367,14 +2720,14 @@ export interface components {
                             createdAt?: string;
                             createdBy?: {
                               data?: {
-                                attributes?: Record<string, never>;
+                                attributes?: Record<string, unknown>;
                                 id?: number;
                               };
                             };
                             properties?: unknown;
                             role?: {
                               data?: {
-                                attributes?: Record<string, never>;
+                                attributes?: Record<string, unknown>;
                                 id?: number;
                               };
                             };
@@ -2383,7 +2736,7 @@ export interface components {
                             updatedAt?: string;
                             updatedBy?: {
                               data?: {
-                                attributes?: Record<string, never>;
+                                attributes?: Record<string, unknown>;
                                 id?: number;
                               };
                             };
@@ -2395,13 +2748,13 @@ export interface components {
                     updatedAt?: string;
                     updatedBy?: {
                       data?: {
-                        attributes?: Record<string, never>;
+                        attributes?: Record<string, unknown>;
                         id?: number;
                       };
                     };
                     users?: {
                       data?: ({
-                          attributes?: Record<string, never>;
+                          attributes?: Record<string, unknown>;
                           id?: number;
                         })[];
                     };
@@ -2413,7 +2766,7 @@ export interface components {
             updatedAt?: string;
             updatedBy?: {
               data?: {
-                attributes?: Record<string, never>;
+                attributes?: Record<string, unknown>;
                 id?: number;
               };
             };
@@ -2432,7 +2785,7 @@ export interface components {
       updatedAt?: string;
       updatedBy?: {
         data?: {
-          attributes?: Record<string, never>;
+          attributes?: Record<string, unknown>;
           id?: number;
         };
       };
@@ -2474,7 +2827,7 @@ export interface components {
     };
     TagLocalizationResponse: {
       data?: components["schemas"]["TagResponseDataObjectLocalized"];
-      meta?: Record<string, never>;
+      meta?: Record<string, unknown>;
     };
     TagRequest: {
       data: {
@@ -2485,7 +2838,7 @@ export interface components {
     };
     TagResponse: {
       data?: components["schemas"]["TagResponseDataObject"];
-      meta?: Record<string, never>;
+      meta?: Record<string, unknown>;
     };
     TagResponseDataObject: {
       attributes?: components["schemas"]["Tag"];
@@ -2510,7 +2863,7 @@ export interface components {
       name?: string;
       previewUrl?: string;
       provider?: string;
-      provider_metadata?: Record<string, never>;
+      provider_metadata?: Record<string, unknown>;
       /** Format: double */
       size?: number;
       /** Format: date-time */
@@ -2575,27 +2928,6 @@ export interface components {
   responses: never;
   parameters: never;
   requestBodies: {
-    "Passwordless-SendLinkRequest": {
-      content: {
-        /**
-         * @example {
-         *   "email": "foo@bar.com",
-         *   "username": "foo",
-         *   "context": {
-         *     "currentUrl": "localhost"
-         *   }
-         * }
-         */
-        "application/json": {
-          /** @description context of authentification */
-          context?: Record<string, never>;
-          /** @description the user email */
-          email?: string;
-          /** @description username for new user */
-          username?: string;
-        };
-      };
-    };
     "Users-Permissions-RoleRequest": {
       content: {
         /**
@@ -2840,7 +3172,7 @@ export interface operations {
         /** @description Relations to return */
         populate?: string;
         /** @description Filters to apply */
-        filters?: Record<string, never>;
+        filters?: Record<string, unknown>;
         /** @description Locale to apply */
         locale?: string;
       };
@@ -3139,7 +3471,7 @@ export interface operations {
         /** @description Relations to return */
         populate?: string;
         /** @description Filters to apply */
-        filters?: Record<string, never>;
+        filters?: Record<string, unknown>;
         /** @description Locale to apply */
         locale?: string;
       };
@@ -3438,7 +3770,7 @@ export interface operations {
         /** @description Relations to return */
         populate?: string;
         /** @description Filters to apply */
-        filters?: Record<string, never>;
+        filters?: Record<string, unknown>;
         /** @description Locale to apply */
         locale?: string;
       };
@@ -3687,7 +4019,7 @@ export interface operations {
         /** @description Relations to return */
         populate?: string;
         /** @description Filters to apply */
-        filters?: Record<string, never>;
+        filters?: Record<string, unknown>;
         /** @description Locale to apply */
         locale?: string;
       };
