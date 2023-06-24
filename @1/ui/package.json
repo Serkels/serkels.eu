@@ -18,7 +18,7 @@
   "devDependencies": {
     "@1/tailwindcss-config": "workspace:*",
     "@1/typescript-config": "workspace:*",
-    "@types/react": "18.2.13",
+    "@types/react": "18.2.14",
     "prettier": "2.8.8",
     "prettier-plugin-tailwindcss": "0.3.0",
     "typescript": "5.1.3"
