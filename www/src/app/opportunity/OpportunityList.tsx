@@ -4,18 +4,20 @@ import { Spinner } from "@1/ui/components/Spinner";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { OpportunityCard } from "./OpportunityCard";
+import { useOpportunityFilterContext } from "./OpportunityFilter.context";
 import { useOpportunities } from "./useOpportunities";
 
 //
 
 export function OpportunityList() {
   const {} = useSession();
-  const { data, isLoading, isError } = useOpportunities();
-  console.log({ data, isLoading, isError });
+  const { category } = useOpportunityFilterContext();
+  const { data, isLoading, isError } = useOpportunities({ category });
 
-  if (isLoading) return <Spinner />;
+  if (isLoading) return <Loading />;
   if (isError) return <>Epic fail...</>;
   if (!data) return <>No data O_o</>;
+  if (data.length === 0) return <EmptyList />;
   return (
     <ul
       className={`
@@ -40,18 +42,18 @@ export function OpportunityList() {
   );
 }
 
-// async function opportunity_query() {
-//   return Array.from({ length: 10 }).map((_, i) => ({
-//     id: i,
-//     slug: "slug" + i,
-//     date: new Date(i),
-//     user: { name: "foo" + i, location: "University" + i },
-//     isOnline: i % 3 === 0,
-//     location: "Location" + i,
-//     title: "Opportunity Title" + i,
-//     description: "Opportunity description" + i,
-//     category: "category" + i,
-//     seat: "seat" + i,
-//     maxRoom: "maxRoom" + i,
-//   }));
-// }
+function Loading() {
+  return (
+    <figure className="mt-28 min-h-screen text-center">
+      <Spinner />
+    </figure>
+  );
+}
+
+function EmptyList() {
+  return (
+    <figure className="mt-28 min-h-screen text-center">
+      <h3 className="text-xl">Aucune opportunité disponible pour le moment</h3>
+    </figure>
+  );
+}

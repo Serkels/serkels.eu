@@ -28,8 +28,8 @@ export function useOpportunities({
             q.filters &&
             q.filters["category"] &&
             `filters[opportunity_category][slug][$eq]=${q.filters["category"]}`;
-
-          return [populate, limit, category].filter(Boolean).join("&");
+          const sort = `sort[0]=expireAt:desc`;
+          return [populate, limit, category, sort].filter(Boolean).join("&");
         },
       });
       if (!data) return [];
