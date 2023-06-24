@@ -11,10 +11,6 @@ const nextConfig = {
         source: "/api/v1/:path*",
         destination: `${process.env["STRAPI_API_URL"]}/api/:path*`,
       },
-      {
-        source: "/media/:path*",
-        destination: `${process.env["STRAPI_API_URL"]}/:path*`,
-      },
     ];
   },
 };

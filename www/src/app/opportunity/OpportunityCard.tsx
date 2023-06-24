@@ -19,7 +19,7 @@ export function OpportunityCard(props: Props) {
     thumbnail: { url: string };
   };
   const image = formats?.thumbnail
-    ? `/media${formats.thumbnail.url}`
+    ? formats.thumbnail.url
     : `https://source.unsplash.com/random/242x163/?${category}&${id}`;
   const date = expireAt ? new Date(expireAt) : new Date(NaN);
   const partner_name =
