@@ -26,6 +26,8 @@ jobs:
 
       - run: pnpm install
       - run: pnpm build
+        env:
+          STRAPI_API_URL: https://api.fake.toc-toc.org
 
   admin:
     name: Build admin
