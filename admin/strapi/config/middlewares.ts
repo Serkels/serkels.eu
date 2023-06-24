@@ -1,6 +1,31 @@
 export default [
   "strapi::errors",
-  "strapi::security",
+  {
+    name: "strapi::security",
+    config: {
+      contentSecurityPolicy: {
+        useDefaults: true,
+        directives: {
+          "connect-src": ["'self'", "https:"],
+          "img-src": [
+            "'self'",
+            "data:",
+            "blob:",
+            "dl.airtable.com",
+            "toctoc-strapi-aws-s3-images-bucket.s3.eu-west-3.amazonaws.com",
+          ],
+          "media-src": [
+            "'self'",
+            "data:",
+            "blob:",
+            "dl.airtable.com",
+            "toctoc-strapi-aws-s3-images-bucket.s3.eu-west-3.amazonaws.com",
+          ],
+          upgradeInsecureRequests: null,
+        },
+      },
+    },
+  },
   "strapi::cors",
   "strapi::poweredBy",
   "strapi::logger",
