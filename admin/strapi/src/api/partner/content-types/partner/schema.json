@@ -33,6 +33,13 @@
       "relation": "oneToMany",
       "target": "api::opportunity.opportunity",
       "mappedBy": "partner"
+    },
+    "avatar": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

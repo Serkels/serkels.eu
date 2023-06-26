@@ -1,5 +1,5 @@
 export default ({ env }) => ({
-  url: "/backdoor",
+  url: "/admin",
   auth: {
     secret: env("ADMIN_JWT_SECRET"),
   },
