@@ -20,7 +20,10 @@ export function useOpportunities({
         params: { query: { populate: "*", ...limitQuery, ...categoryQuery } },
 
         querySerializer: (q) => {
-          const populate = `populate=${q.populate}`;
+          const populate = [
+            `populate[partner][populate]=avatar`,
+            `populate[cover]=${q.populate}`,
+          ].join("&");
           const limit =
             q["pagination[limit]"] &&
             `pagination[limit]=${q["pagination[limit]"]}`;

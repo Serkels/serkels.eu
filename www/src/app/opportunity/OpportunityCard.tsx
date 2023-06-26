@@ -26,6 +26,10 @@ export function OpportunityCard(props: Props) {
   const date = expireAt ? new Date(expireAt) : new Date(NaN);
   const partner_name =
     partner?.data?.attributes?.name ?? "Partenaire Inconnu :(";
+  const partner_avatar =
+    partner?.data?.attributes?.avatar?.data?.attributes?.url ??
+    `https://source.unsplash.com/random/16x16/?${partner_name}&${partner?.data?.id}`;
+
   return (
     <article
       className={clsx(
@@ -47,10 +51,7 @@ export function OpportunityCard(props: Props) {
             {title}
           </h3>
           <figure className="flex items-center">
-            <img
-              className="mr-2 h-4 w-4 rounded-full"
-              src={`https://source.unsplash.com/random/16x16/?${partner_name}&${partner?.data?.id}`}
-            />
+            <img className="mr-2 h-4 w-4 rounded-full" src={partner_avatar} />
             <figcaption className="line-clamp-1" title={partner_name}>
               {partner_name}
             </figcaption>

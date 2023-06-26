@@ -1870,6 +1870,57 @@ export interface components {
       partner?: {
         data?: {
           attributes?: {
+            avatar?: {
+              data?: {
+                attributes?: {
+                  alternativeText?: string;
+                  caption?: string;
+                  /** Format: date-time */
+                  createdAt?: string;
+                  createdBy?: {
+                    data?: {
+                      attributes?: Record<string, unknown>;
+                      id?: number;
+                    };
+                  };
+                  ext?: string;
+                  folder?: {
+                    data?: {
+                      attributes?: Record<string, unknown>;
+                      id?: number;
+                    };
+                  };
+                  folderPath?: string;
+                  formats?: unknown;
+                  hash?: string;
+                  height?: number;
+                  mime?: string;
+                  name?: string;
+                  previewUrl?: string;
+                  provider?: string;
+                  provider_metadata?: unknown;
+                  related?: {
+                    data?: ({
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      })[];
+                  };
+                  /** Format: float */
+                  size?: number;
+                  /** Format: date-time */
+                  updatedAt?: string;
+                  updatedBy?: {
+                    data?: {
+                      attributes?: Record<string, unknown>;
+                      id?: number;
+                    };
+                  };
+                  url?: string;
+                  width?: number;
+                };
+                id?: number;
+              };
+            };
             /** Format: date-time */
             createdAt?: string;
             createdBy?: {
@@ -2261,6 +2312,57 @@ export interface components {
       id?: number;
     };
     Partner: {
+      avatar?: {
+        data?: {
+          attributes?: {
+            alternativeText?: string;
+            caption?: string;
+            /** Format: date-time */
+            createdAt?: string;
+            createdBy?: {
+              data?: {
+                attributes?: Record<string, unknown>;
+                id?: number;
+              };
+            };
+            ext?: string;
+            folder?: {
+              data?: {
+                attributes?: Record<string, unknown>;
+                id?: number;
+              };
+            };
+            folderPath?: string;
+            formats?: unknown;
+            hash?: string;
+            height?: number;
+            mime?: string;
+            name?: string;
+            previewUrl?: string;
+            provider?: string;
+            provider_metadata?: unknown;
+            related?: {
+              data?: ({
+                  attributes?: Record<string, unknown>;
+                  id?: number;
+                })[];
+            };
+            /** Format: float */
+            size?: number;
+            /** Format: date-time */
+            updatedAt?: string;
+            updatedBy?: {
+              data?: {
+                attributes?: Record<string, unknown>;
+                id?: number;
+              };
+            };
+            url?: string;
+            width?: number;
+          };
+          id?: number;
+        };
+      };
       /** Format: date-time */
       createdAt?: string;
       createdBy?: {
@@ -2552,6 +2654,57 @@ export interface components {
               partner?: {
                 data?: {
                   attributes?: {
+                    avatar?: {
+                      data?: {
+                        attributes?: {
+                          alternativeText?: string;
+                          caption?: string;
+                          /** Format: date-time */
+                          createdAt?: string;
+                          createdBy?: {
+                            data?: {
+                              attributes?: Record<string, unknown>;
+                              id?: number;
+                            };
+                          };
+                          ext?: string;
+                          folder?: {
+                            data?: {
+                              attributes?: Record<string, unknown>;
+                              id?: number;
+                            };
+                          };
+                          folderPath?: string;
+                          formats?: unknown;
+                          hash?: string;
+                          height?: number;
+                          mime?: string;
+                          name?: string;
+                          previewUrl?: string;
+                          provider?: string;
+                          provider_metadata?: unknown;
+                          related?: {
+                            data?: ({
+                                attributes?: Record<string, unknown>;
+                                id?: number;
+                              })[];
+                          };
+                          /** Format: float */
+                          size?: number;
+                          /** Format: date-time */
+                          updatedAt?: string;
+                          updatedBy?: {
+                            data?: {
+                              attributes?: Record<string, unknown>;
+                              id?: number;
+                            };
+                          };
+                          url?: string;
+                          width?: number;
+                        };
+                        id?: number;
+                      };
+                    };
                     /** Format: date-time */
                     createdAt?: string;
                     createdBy?: {
@@ -2629,6 +2782,8 @@ export interface components {
     };
     PartnerRequest: {
       data: {
+        /** @example string or id */
+        avatar?: number | string;
         description?: string;
         /** Format: email */
         email: string;
