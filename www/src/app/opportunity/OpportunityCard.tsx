@@ -1,18 +1,20 @@
 "use client";
 
+import clsx from "clsx";
 import type { useOpportunities } from "./useOpportunities";
 
 //
 
 export function OpportunityCard(props: Props) {
   const {
-    id,
-    title,
+    className,
     cover,
-    location,
     expireAt,
+    id,
+    location,
     opportunity_category,
     partner,
+    title,
   } = props;
   const category = opportunity_category?.data?.attributes?.name ?? "Autres";
   const formats = cover?.data?.attributes?.formats as {
@@ -25,10 +27,15 @@ export function OpportunityCard(props: Props) {
   const partner_name =
     partner?.data?.attributes?.name ?? "Partenaire Inconnu :(";
   return (
-    <article className="rounded border border-neutral-200 bg-white shadow-md">
-      <figure>
-        <img className="w-full object-cover lg:h-[112px]" src={image} />
-        <figcaption className="p-3">
+    <article
+      className={clsx(
+        "rounded border border-neutral-200 bg-white shadow-md",
+        className
+      )}
+    >
+      <figure className="flex h-full flex-col">
+        <img className="h-[112px] w-full object-cover" src={image} />
+        <figcaption className="flex flex-1 flex-col p-3">
           <small className="font-bold text-Chateau_Green">
             Date limite :{" "}
             <time dateTime={date.toUTCString()}>
@@ -36,9 +43,21 @@ export function OpportunityCard(props: Props) {
             </time>
           </small>
 
-          <h3 className="my-4 text-sm font-bold">{title}</h3>
-          <p>{partner_name}</p>
-          <p>📍{location}</p>
+          <h3 className="my-4 line-clamp-3 flex-1 font-bold" title={title}>
+            {title}
+          </h3>
+          <figure className="flex items-center">
+            <img
+              className="mr-2 h-4 w-4 rounded-full"
+              src={`https://source.unsplash.com/random/16x16/?${partner_name}&${partner?.data?.id}`}
+            />
+            <figcaption className="line-clamp-1" title={partner_name}>
+              {partner_name}
+            </figcaption>
+          </figure>
+          <p className="line-clamp-1" title={location}>
+            📍{location}
+          </p>
         </figcaption>
         <hr />
         <footer className="flex justify-between p-3">
@@ -52,4 +71,6 @@ export function OpportunityCard(props: Props) {
   );
 }
 
-type Props = NonNullable<ReturnType<typeof useOpportunities>["data"]>[0];
+type Props = NonNullable<ReturnType<typeof useOpportunities>["data"]>[0] & {
+  className?: string;
+};

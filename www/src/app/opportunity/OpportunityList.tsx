@@ -32,9 +32,9 @@ export function OpportunityList() {
       `}
     >
       {data.map((opportunity) => (
-        <li key={opportunity.id} className="mx-auto max-w-2xl">
-          <Link href={`/opportunity/${opportunity.slug}`}>
-            <OpportunityCard {...opportunity} />
+        <li key={opportunity.id}>
+          <Link className="h-full" href={`/opportunity/${opportunity.slug}`}>
+            <OpportunityCard className="h-full" {...opportunity} />
           </Link>
         </li>
       ))}
