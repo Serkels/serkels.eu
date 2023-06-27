@@ -204,8 +204,8 @@ importers:
         specifier: 1.4.2
         version: 1.4.2(next@13.4.7)(react-dom@18.2.0)(react@18.2.0)
       openapi-fetch:
-        specifier: ^0.4.0
-        version: 0.4.0
+        specifier: ^0.5.0
+        version: 0.5.0
       postcss:
         specifier: 8.4.24
         version: 8.4.24
@@ -5357,8 +5357,8 @@ packages:
       is-inside-container: 1.0.0
       is-wsl: 2.2.0
 
-  /openapi-fetch@0.4.0:
-    resolution: {integrity: sha512-4lzZtH5J1ZH9EXfmpcmKi0gOgjy0hc6BAcucAdCmLHY6jZopMeGP51vD3Cd4rE1nTFMfJzmYDc8ar0+364gBVw==}
+  /openapi-fetch@0.5.0:
+    resolution: {integrity: sha512-C77daacn2TAaLKLbCWCdlFQKhqSalv+Q2r7W1gGexN4Xh6ImkRMAqpPRb06GZitmI4MgvfzTbihnkrXkvUmtoA==}
     dev: false
 
   /openid-client@5.4.2:
