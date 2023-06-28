@@ -16,9 +16,11 @@ export function OpportunityCategories() {
   const { category, setCategory } = useOpportunityFilterContext();
 
   if (isLoading || isFetching)
-    <div className="mt-10 text-center">
-      <Spinner />
-    </div>;
+    return (
+      <div className="mt-10 text-center">
+        <Spinner />
+      </div>
+    );
 
   if (error) return <>Epic fail....</>;
   if (!categories) return <>No data O_o</>;
