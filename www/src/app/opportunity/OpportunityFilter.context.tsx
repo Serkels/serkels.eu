@@ -32,6 +32,7 @@ export function OpportunityFilterContextProvider({
 
   useEffect(() => {
     if (searchCategory === category) return;
+
     const params = new URLSearchParams(searchParams.toString());
     if (!category) {
       params.delete("category");
@@ -41,6 +42,10 @@ export function OpportunityFilterContextProvider({
 
     router.push(pathname + "?" + params.toString());
   }, [router, searchParams, category]);
+
+  useEffect(() => {
+    setCategory(searchCategory ?? "");
+  }, [searchCategory]);
 
   return (
     <OpportunityFilterContext.Provider value={{ category, setCategory }}>
