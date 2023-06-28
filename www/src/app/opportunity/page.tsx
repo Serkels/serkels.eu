@@ -18,7 +18,7 @@ export default async function Page() {
           <InputSearch />
           <OpportunityCategories />
         </Aside>
-        <main className="col-span-full mt-10 md:col-span-6 xl:col-span-9">
+        <main className="col-span-full my-10 md:col-span-6 xl:col-span-9">
           <OpportunityList />
         </main>
       </OpportunityFilterContextProvider>

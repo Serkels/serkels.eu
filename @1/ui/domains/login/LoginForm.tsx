@@ -22,7 +22,7 @@ export function LoginForm({ onSubmit }: Props) {
         bg-white
         px-4
         py-5
-        text-[#656565]
+        text-Dove_Gray
         shadow-[10px_10px_10px_#00000029]
       "
     >

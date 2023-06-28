@@ -74,7 +74,7 @@ function ExchangeCard() {
       <hr className="my-2" />
       <footer className="mt-4 ">
         <div className="flex justify-between">
-          <button className="block text-sm font-bold text-[#656565]">
+          <button className="block text-sm font-bold text-Dove_Gray">
             <span className="text-Chateau_Green">1</span> réponse
           </button>
           <button className="text-md block  rounded-full px-7 font-bold text-Chateau_Green">

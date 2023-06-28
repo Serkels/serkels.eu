@@ -26,7 +26,7 @@ export function OpportunityCategories() {
   if (!categories) return <>No data O_o</>;
 
   return (
-    <ul className="mt-7 text-[#656565]">
+    <ul className="mt-7 text-Dove_Gray">
       {categories.map(({ name, slug }) => (
         <li className="mb-3" key={slug}>
           <label>

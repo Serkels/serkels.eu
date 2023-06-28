@@ -26,7 +26,7 @@ export const InputSearch = forwardRef<
         <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
           <svg
             aria-hidden="true"
-            className="h-4 w-4 text-[#656565]"
+            className="h-4 w-4 text-Dove_Gray"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"

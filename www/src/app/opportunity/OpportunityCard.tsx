@@ -1,5 +1,6 @@
 "use client";
 
+import { LocationRadius, Share } from "@1/ui/icons";
 import clsx from "clsx";
 import type { useOpportunities } from "./useOpportunities";
 
@@ -57,14 +58,19 @@ export function OpportunityCard(props: Props) {
             </figcaption>
           </figure>
           <p className="line-clamp-1" title={location}>
-            📍{location}
+            <LocationRadius className="inline-block h-[14px] w-[14px]" />{" "}
+            {location}
           </p>
         </figcaption>
         <hr />
         <footer className="flex justify-between p-3">
-          <aside>{category}</aside>
+          <aside className="text-xs font-bold uppercase leading-[inherit] text-Dove_Gray">
+            {category}
+          </aside>
           <aside>
-            <button>↗️</button>
+            <button>
+              <Share className="inline-block h-[14px] w-[14px] text-Dove_Gray" />
+            </button>
           </aside>
         </footer>
       </figure>

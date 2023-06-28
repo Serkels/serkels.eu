@@ -17,6 +17,7 @@ const svg = fs.readFileSync(svgPath, "utf8");
 const Cerulean = "#04AAE8";
 const Chateau_Green = "#39b154";
 const Congress_Blue = "#023f87";
+const Dove_Gray = "#656565";
 const Eminence = "#782D8E";
 const RedViolet = "#CE118B";
 const RedViolet_Dark = "#C91489";
@@ -51,6 +52,7 @@ module.exports = {
         Cerulean,
         Chateau_Green,
         Congress_Blue,
+        Dove_Gray,
         Eminence,
         RedViolet,
         Violet_Eggplant,

@@ -46,7 +46,7 @@ const Button = forwardRef<
   const { className, children, ...other_props } = props;
   return (
     <button
-      className="h-[99px] w-[189px] rounded-[20px] border-[#00000017] bg-white px-5 uppercase text-[#656565] shadow-primary"
+      className="h-[99px] w-[189px] rounded-[20px] border-[#00000017] bg-white px-5 uppercase text-Dove_Gray shadow-primary"
       ref={forwardedRef}
       {...other_props}
     >

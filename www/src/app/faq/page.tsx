@@ -18,7 +18,7 @@ export default async function Page() {
           <ul className="mt-8">
             <li>
               <input type="radio" id="latest" />
-              <label className="ml-2 text-[#656565]" htmlFor="latest">
+              <label className="ml-2 text-Dove_Gray" htmlFor="latest">
                 Les dernières questions
               </label>
             </li>
