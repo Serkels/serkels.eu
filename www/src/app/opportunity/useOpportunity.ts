@@ -25,7 +25,6 @@ export function useOpportunity(slug: string, options: { initialData: any }) {
     queryKey: ["opportunity", slug],
     queryFn: get_opportunity_by_slug,
     select: function select_first(data) {
-      console.log({ data });
       if (!data) throw new Error("Epic fail 0_o");
       if (!data.data) throw new Error("Epic fail 0_o");
       const first = data.data[0];
