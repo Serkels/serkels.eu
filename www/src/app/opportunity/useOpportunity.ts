@@ -15,7 +15,7 @@ export function useOpportunity(slug: string, options: { initialData: any }) {
         },
       },
       querySerializer: (q) =>
-        `populate[partner][populate]=avatar&populate=${q.populate}&filters[slug][$eq]=${slug}`,
+        `populate[partner][populate]=avatar&populate[cover]=${q.populate}&filters[slug][$eq]=${slug}`,
     });
 
     return data;
