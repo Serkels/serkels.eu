@@ -15,7 +15,7 @@ export function OpportunityCategories() {
   } = useOpportunityCategories();
   const { category, setCategory } = useOpportunityFilterContext();
 
-  if (isLoading || isFetching)
+  if (isFetching)
     return (
       <div className="mt-10 text-center">
         <Spinner />
