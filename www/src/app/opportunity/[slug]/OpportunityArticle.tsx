@@ -49,7 +49,15 @@ export function OpportunityArticle(props: { slug: string; initialData: any }) {
       </header>
 
       <div className="mb-10">
-        <ReactMarkdown className="[&_ul]:m-1 [&_ul]:list-disc [&_ul]:px-4">
+        <ReactMarkdown
+          className="
+            [&_h1]:my-2 [&_h1]:text-2xl
+            [&_h2]:my-2 [&_h2]:text-xl
+            [&_h3]:my-2 [&_h3]:text-lg
+            [&_h4]:my-2 [&_h4]:text-lg
+            [&_ul]:m-1 [&_ul]:list-disc [&_ul]:px-4
+          "
+        >
           {description}
         </ReactMarkdown>
       </div>
