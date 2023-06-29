@@ -2,6 +2,9 @@
 
 import { useOpportunity } from "@/app/opportunity/useOpportunity";
 import { Spinner } from "@1/ui/components/Spinner";
+import { Circle, Link as IconLink, LocationRadius, Share } from "@1/ui/icons";
+import clsx from "clsx";
+import type { ComponentPropsWithoutRef, ElementType } from "react";
 import ReactMarkdown from "react-markdown";
 
 //
@@ -17,24 +20,27 @@ export function OpportunityArticle(props: { slug: string; initialData: any }) {
 
   const { expireAt, title, partner, locale, description, location, link } =
     data.attributes;
+  const date = expireAt ? new Date(expireAt) : new Date(NaN);
   const partner_name =
     partner?.data?.attributes?.name ?? "Partenaire Inconnu :(";
-  const date = expireAt ? new Date(expireAt) : new Date(NaN);
+  const partner_avatar =
+    partner?.data?.attributes?.avatar?.data?.attributes?.url ??
+    `https://source.unsplash.com/random/16x16/?${partner_name}&${partner?.data?.id}`;
   return (
-    <article className="px-20 py-10">
-      <h1 className="text-3xl font-bold">{title}</h1>
+    <article className="px-4 py-10 lg:px-16">
+      <h1 className="text-4xl font-bold">{title}</h1>
 
-      <header className="flex items-center justify-between py-4">
+      <header className="flex items-center justify-between py-6">
         <figure className="flex items-center">
           <img
             className="mr-4 block rounded-full"
             width="30"
             height="30"
-            src="https://source.unsplash.com/random/30x30/?school"
+            src={partner_avatar}
           />
-          <figcaption>{partner_name}</figcaption>
+          <figcaption className="text-lg">{partner_name}</figcaption>
         </figure>
-        <small className="font-bold text-Chateau_Green">
+        <small className="text-lg font-bold text-Chateau_Green">
           Date limite :{" "}
           <time dateTime={date.toUTCString()}>
             {date.toLocaleDateString(locale)}
@@ -48,41 +54,44 @@ export function OpportunityArticle(props: { slug: string; initialData: any }) {
         </ReactMarkdown>
       </div>
 
-      <footer className="flex justify-between">
+      <footer className="grid grid-cols-3 items-center justify-items-center">
         <a
-          href={`https://www.openstreetmap.org/directions?to=${location}`}
+          href={`https://www.openstreetmap.org/search?query=${location}`}
           target="_blank"
           rel="noreferrer"
         >
           <figure className="flex items-center">
-            <img
-              className="mr-4 h-8 w-8 rounded-full"
-              width="30"
-              height="30"
-              src="https://source.unsplash.com/random/30x30/?paris"
-            />
-            <figcaption>{location}</figcaption>
+            <IconWithBgCircle className="basis-[30px]" Icon={LocationRadius} />
+            <figcaption className="ml-4 flex-1">{location}</figcaption>
           </figure>
         </a>
 
         <a href={link} target="_blank" rel="noreferrer">
           <figure className="flex items-center">
-            <img
-              className="mr-4 h-8 w-8  rounded-full"
-              src="https://source.unsplash.com/random/30x30/?lien web"
-            />
-            <figcaption>Lien web</figcaption>
+            <IconWithBgCircle className="basis-[30px]" Icon={IconLink} />
+            <figcaption className="ml-4 flex-1">Lien web</figcaption>
           </figure>
         </a>
 
         <figure className="flex items-center">
-          <img
-            className="mr-4 h-8 w-8  rounded-full"
-            src="https://source.unsplash.com/random/30x30/?partager"
-          />
-          <figcaption>Partager</figcaption>
+          <IconWithBgCircle className="h-[30px] basis-[30px]" Icon={Share} />
+          <figcaption className="ml-4 flex-1">Partager</figcaption>
         </figure>
       </footer>
     </article>
+  );
+}
+
+function IconWithBgCircle({
+  className,
+  Icon,
+}: ComponentPropsWithoutRef<"span"> & {
+  Icon: ElementType;
+}) {
+  return (
+    <span className={clsx("relative ", className)}>
+      <Circle className="h-full text-Cerulean" />
+      <Icon className="absolute inset-0 z-10 p-1.5 text-white" />
+    </span>
   );
 }

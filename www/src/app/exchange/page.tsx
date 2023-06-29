@@ -11,7 +11,7 @@ export default async function Page() {
     <>
       <aside className="hidden md:col-span-2 md:block lg:col-span-3 ">
         <article className="mt-10 pl-4">
-          <h3 className="font-bold uppercase text-[#00adee]">Échanges</h3>
+          <h3 className="font-bold uppercase text-Cerulean">Échanges</h3>
 
           <InputSearch />
 

@@ -20,12 +20,12 @@ export default async function Page({ params }: { params: { slug: string } }) {
     data.data[0]?.attributes?.opportunity_category?.data?.attributes?.slug;
 
   return (
-    <Grid>
+    <Grid className="px-0">
       <Aside title="Opportunités">
         <InputSearch />
         <OpportunityCategories />
       </Aside>
-      <main className="col-span-6 bg-white">
+      <main className="col-span-full bg-white md:col-span-6 xl:col-span-9">
         <OpportunityArticle slug={slug} initialData={data} />
       </main>
       <aside className="col-span-3 hidden lg:px-10">
