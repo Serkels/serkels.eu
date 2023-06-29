@@ -91,7 +91,7 @@ function IconWithBgCircle({
   return (
     <span className={clsx("relative ", className)}>
       <Circle className="h-full text-Cerulean" />
-      <Icon className="absolute inset-0 z-10 p-1.5 text-white" />
+      <Icon className="absolute inset-0 z-10 box-content p-1.5 text-white" />
     </span>
   );
 }
