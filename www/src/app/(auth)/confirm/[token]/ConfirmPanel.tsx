@@ -16,7 +16,7 @@ import { useCallback } from "react";
 
 export function ConfirmPanel({ token }: { token: string }) {
   return (
-    <Banner className="bg-black bg-none">
+    <Banner className="h-full bg-black bg-none">
       <main className="container mx-auto max-w-5xl flex-1">
         <ConfirmPanelFlow token={token} />
       </main>
@@ -27,12 +27,13 @@ export function ConfirmPanel({ token }: { token: string }) {
 //
 
 function ConfirmPanelFlow({ token }: { token: string }) {
-  const { mutate, isLoading, isSuccess, isError } = useMutation(async () =>
-    signIn("credentials", {
+  const { mutate, isLoading, isSuccess, isError } = useMutation(async () => {
+    await signIn("credentials", {
       token,
       callbackUrl: "/exchange",
-    })
-  );
+    });
+    return;
+  });
 
   if (isLoading) return <Verifying />;
   if (isSuccess) return <ConnectionSuccess />;

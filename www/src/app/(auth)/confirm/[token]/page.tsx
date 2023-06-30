@@ -12,9 +12,9 @@ export default async function Page({ params }: { params: { token: string } }) {
   const { token } = params;
 
   return (
-    <>
+    <div className="col-span-full">
       <ConfirmPanel token={token} />
-    </>
+    </div>
   );
 }
 
