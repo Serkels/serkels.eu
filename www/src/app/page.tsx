@@ -26,11 +26,13 @@ export default async function Home() {
 
       <HomeBanner />
 
-      <hr className="my-8 border-none"></hr>
+      <div className="overflow-hidden bg-white">
+        <hr className="my-8 border-none"></hr>
 
-      <Explore />
+        <Explore />
 
-      <hr className="my-8 border-none"></hr>
+        <hr className="my-8 border-none"></hr>
+      </div>
 
       <AppFooter />
       <MobileNavBar className="fixed bottom-0 left-0 right-0 z-50 sm:hidden" />
@@ -40,28 +42,28 @@ export default async function Home() {
 
 function Explore() {
   return (
-    <Grid className="my-10 grid-cols-6">
+    <Grid className="my-10 grid-cols-6 ">
       <h2 className="col-span-full mb-10 w-full text-center text-2xl">
         Explorer sans créer un compte !
       </h2>
       <ExploreLink
         href="/opportunity"
         Icon={Binoculars}
-        className="text-Congress_Blue col-span-2 md:col-start-2 xl:col-start-4"
+        className="col-span-2 text-Congress_Blue md:col-start-2 xl:col-start-4"
       >
         Opportunités
       </ExploreLink>
       <ExploreLink
         href="/faq"
         Icon={MessageGroup}
-        className="text-Eminence col-span-2"
+        className="col-span-2 text-Eminence"
       >
         Question-Réponse
       </ExploreLink>
       <ExploreLink
         href="/guide"
         Icon={Book}
-        className="text-RedViolet col-span-2 "
+        className="col-span-2 text-RedViolet "
       >
         Guide d'étudiant
       </ExploreLink>
