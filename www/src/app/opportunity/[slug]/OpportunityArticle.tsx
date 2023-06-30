@@ -4,14 +4,29 @@ import { useOpportunity } from "@/app/opportunity/useOpportunity";
 import { Spinner } from "@1/ui/components/Spinner";
 import { Circle, Link as IconLink, LocationRadius, Share } from "@1/ui/icons";
 import clsx from "clsx";
-import type { ComponentPropsWithoutRef, ElementType } from "react";
+import {
+  useEffect,
+  type ComponentPropsWithoutRef,
+  type ElementType,
+} from "react";
 import ReactMarkdown from "react-markdown";
+import { useOpportunityFilterContext } from "../OpportunityFilter.context";
 
 //
 
-export function OpportunityArticle(props: { slug: string; initialData: any }) {
-  const { slug, initialData } = props;
+export function OpportunityArticle(props: {
+  slug: string;
+  category: string;
+  initialData: any;
+}) {
+  const { slug, initialData, category } = props;
   const { data, isLoading, isError } = useOpportunity(slug, { initialData });
+
+  const { setCategory } = useOpportunityFilterContext();
+
+  useEffect(() => {
+    setCategory(category);
+  }, [category]);
 
   if (isLoading) return <Spinner />;
   if (isError) return <>Epic fail...</>;
@@ -26,6 +41,7 @@ export function OpportunityArticle(props: { slug: string; initialData: any }) {
   const partner_avatar =
     partner?.data?.attributes?.avatar?.data?.attributes?.url ??
     `https://source.unsplash.com/random/16x16/?${partner_name}&${partner?.data?.id}`;
+
   return (
     <article className="px-4 py-10 lg:px-16">
       <h1 className="text-4xl font-bold">{title}</h1>
@@ -69,14 +85,20 @@ export function OpportunityArticle(props: { slug: string; initialData: any }) {
           rel="noreferrer"
         >
           <figure className="flex items-center">
-            <IconWithBgCircle className="basis-[30px]" Icon={LocationRadius} />
+            <IconWithBgCircle
+              className="h-[30px] basis-[30px]"
+              Icon={LocationRadius}
+            />
             <figcaption className="ml-4 flex-1">{location}</figcaption>
           </figure>
         </a>
 
         <a href={link} target="_blank" rel="noreferrer">
           <figure className="flex items-center">
-            <IconWithBgCircle className="basis-[30px]" Icon={IconLink} />
+            <IconWithBgCircle
+              className="h-[30px] basis-[30px]"
+              Icon={IconLink}
+            />
             <figcaption className="ml-4 flex-1">Lien web</figcaption>
           </figure>
         </a>

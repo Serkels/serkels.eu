@@ -11,7 +11,7 @@ import { useOpportunitiesInfinite } from "./useOpportunities";
 
 export function OpportunityList() {
   const {} = useSession();
-  const { category } = useOpportunityFilterContext();
+  const { category, query } = useOpportunityFilterContext();
   const {
     data,
     isLoading,
@@ -19,7 +19,7 @@ export function OpportunityList() {
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-  } = useOpportunitiesInfinite({ category });
+  } = useOpportunitiesInfinite({ category, query });
 
   if (isLoading) return <Loading />;
   if (isError) return <>Epic fail...</>;

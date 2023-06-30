@@ -3,10 +3,10 @@
 import { client } from "@/app/client";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 
-export function useOpportunitiesInfinite({ category = "" }) {
+export function useOpportunitiesInfinite({ category = "", query = "" }) {
   return useInfiniteQuery({
-    queryKey: ["opportunities", category],
-    queryFn: fetchOpportunities({ category }),
+    queryKey: ["opportunities", { category, query }],
+    queryFn: fetchOpportunities({ category, query }),
     getNextPageParam: (lastPage) => {
       const pagination = lastPage.meta?.pagination ?? { pageCount: 0, page: 0 };
       if (!pagination.pageCount || !pagination.page) return;
@@ -66,21 +66,22 @@ export function useOpportunities({
 
 //
 
-function fetchOpportunities({ category = "" }) {
+function fetchOpportunities({ category = "", query = "" }) {
   return async ({ pageParam = 0 }) => {
-    const categoryQuery = category ? { filters: { category } } : {};
     const { data } = await client.get("/opportunities", {
       params: {
         query: {
           "pagination[page]": pageParam,
           "pagination[pageSize]": 6,
-          ...categoryQuery,
+          filters: { category, query },
+          populate: "*",
         },
       },
 
       querySerializer: (q) => {
         const populate = [
           `populate[partner][populate]=avatar`,
+          `populate[opportunity_category]=${q.populate}`,
           `populate[cover]=${q.populate}`,
         ].join("&");
         const limit =
@@ -89,14 +90,21 @@ function fetchOpportunities({ category = "" }) {
         const category =
           q.filters &&
           q.filters["category"] &&
-          `filters[opportunity_category][slug][$eq]=${q.filters["category"]}`;
+          `filters[$and][0][opportunity_category][slug][$eq]=${q.filters["category"]}`;
+        const search =
+          q.filters &&
+          q.filters["query"] &&
+          [
+            `filters[$or][0][title][$containsi]=${q.filters["query"]}`,
+            `filters[$or][1][description][$containsi]=${q.filters["query"]}`,
+          ].join("&");
         const sort = `sort[0]=expireAt:desc`;
         const page =
           q["pagination[page]"] && `pagination[page]=${q["pagination[page]"]}`;
         const pageSize =
           q["pagination[pageSize]"] &&
           `pagination[pageSize]=${q["pagination[pageSize]"]}`;
-        return [populate, limit, category, sort, page, pageSize]
+        return [populate, limit, sort, page, pageSize, search, category]
           .filter(Boolean)
           .join("&");
       },

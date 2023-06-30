@@ -7,13 +7,8 @@ import { useOpportunityCategories } from "./useOpportunityCategories";
 //
 
 export function OpportunityCategories() {
-  const {
-    isLoading,
-    isFetching,
-    error,
-    data: categories,
-  } = useOpportunityCategories();
-  const { category, setCategory } = useOpportunityFilterContext();
+  const { isFetching, error, data: categories } = useOpportunityCategories();
+  const { category, setCategoryAndUrl } = useOpportunityFilterContext();
 
   if (isFetching)
     return (
@@ -35,7 +30,7 @@ export function OpportunityCategories() {
               name="category"
               value={slug}
               checked={category === slug}
-              onChange={() => setCategory(slug ?? "")}
+              onChange={() => setCategoryAndUrl(slug ?? "")}
             />
             <span className="ml-2">{name}</span>
           </label>
@@ -48,7 +43,7 @@ export function OpportunityCategories() {
             name="category"
             value=""
             checked={category === ""}
-            onChange={() => setCategory("")}
+            onChange={() => setCategoryAndUrl("")}
           />
           <span className="ml-2">Tout</span>
         </label>
