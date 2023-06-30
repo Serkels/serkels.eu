@@ -7,10 +7,10 @@ import { useOpportunityCategories } from "./useOpportunityCategories";
 //
 
 export function OpportunityCategories() {
-  const { isFetching, error, data: categories } = useOpportunityCategories();
+  const { isLoading, error, data: categories } = useOpportunityCategories();
   const { category, setCategoryAndUrl } = useOpportunityFilterContext();
 
-  if (isFetching)
+  if (isLoading)
     return (
       <div className="mt-10 text-center">
         <Spinner />
