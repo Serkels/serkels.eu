@@ -174,7 +174,6 @@ function MiniUserNav() {
   );
 }
 function UserNav() {
-  const { data: session } = useSession();
   return (
     <nav className="grid grid-cols-5 items-center justify-items-center">
       <button className="p-2 [&>svg]:w-5">
