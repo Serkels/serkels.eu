@@ -3,19 +3,25 @@
 import { AppSidebar } from "@/app/(index)/AppSidebar";
 import { Grid } from "@1/ui/components/Grid";
 import {
+  Bell,
   Binoculars,
   Book,
   Exchange,
   HamburgerMenu,
   Logo,
   MessageGroup,
+  Messenger,
   Plus,
 } from "@1/ui/icons";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, type PropsWithChildren } from "react";
+import {
+  useState,
+  type ComponentPropsWithoutRef,
+  type PropsWithChildren,
+} from "react";
 import { MobileNavBar } from "./MobileNavBar";
 
 //
@@ -136,9 +142,16 @@ export function UserBar() {
             </li>
           </ul>
         </nav>
-        <div className="ml-auto max-w-[177px] sm:col-auto md:col-span-2 xl:col-span-3">
-          {session ? <UserNav /> : null}
-        </div>
+        {session ? (
+          <>
+            <div className="md:hidden">
+              <MiniUserNav />
+            </div>
+            <div className="ml-auto hidden max-w-[177px] sm:col-auto md:col-span-2 md:block xl:col-span-3">
+              <UserNav />
+            </div>
+          </>
+        ) : null}
       </Grid>
     </header>
   );
@@ -146,20 +159,48 @@ export function UserBar() {
 
 //
 
+function MiniUserNav() {
+  const { data: session } = useSession();
+  return (
+    <nav className="flex items-center justify-end">
+      <button className="p-2 [&>svg]:w-5">
+        <Plus className="h-4 w-4" />
+      </button>
+      <Link href={"/my/profile"} className="relative">
+        <img
+          className="h-6 w-6 rounded-full border-2 border-white object-cover"
+          src={session!.user!.image!}
+        />
+        <DotIndicator />
+      </Link>
+    </nav>
+  );
+}
 function UserNav() {
   const { data: session } = useSession();
   return (
     <nav className="grid grid-cols-5 items-center justify-items-center">
       <button className="p-2 [&>svg]:w-5">
-        <Plus className="" />
+        <Plus className="h-4 w-4" />
       </button>
-      <button className="h-[20px] w-[20px]">{"🔔"}</button>
-      <button className="h-[20px] w-[20px]">{"💬"}</button>
-      <button className="h-[20px] w-[20px]">{"↔️"}</button>
-      <img
-        className="h-[25px] w-[25px] rounded-full border-2 border-white object-cover"
-        src={session!.user!.image!}
-      />
+      <Button>
+        <Bell className="h-4 w-4" />
+        <DotIndicator />
+      </Button>
+      <Button>
+        <Messenger className="h-4 w-4" />
+        <DotIndicator />
+      </Button>
+      <Button>
+        <Exchange className="h-4 w-4" />
+        <DotIndicator />
+      </Button>
+      <Link href={"/my/profile"}>
+        <img
+          className="h-6 w-6 rounded-full border-2 border-white object-cover"
+          src={session!.user!.image!}
+        />
+      </Link>
     </nav>
   );
 }
@@ -169,5 +210,44 @@ function NavItem({ children }: PropsWithChildren) {
     <div className="grid-rows grid h-[64px]  content-center items-center justify-center">
       {children}
     </div>
+  );
+}
+
+function Button({ children }: PropsWithChildren) {
+  return (
+    <button
+      type="button"
+      className="
+        relative
+        inline-block
+        p-1
+        leading-normal text-white
+        before:absolute before:inset-0 before:rounded-full before:bg-white before:opacity-30
+        hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg
+      "
+    >
+      {children}
+    </button>
+  );
+}
+
+function DotIndicator(props: ComponentPropsWithoutRef<"span">) {
+  const { className, ...other_props } = props;
+  return (
+    <span
+      className={clsx(
+        `
+        absolute
+        left-0 top-0
+        h-2 w-2
+        -translate-y-1/2
+        transform
+        rounded-full
+        bg-[#FF5F5F]
+        `,
+        className
+      )}
+      {...other_props}
+    ></span>
   );
 }
