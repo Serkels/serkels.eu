@@ -16,7 +16,7 @@
     "@strapi/plugin-seo": "1.9.2",
     "@strapi/plugin-users-permissions": "4.11.3",
     "@strapi/provider-email-nodemailer": "4.11.3",
-    "@strapi/provider-upload-aws-s3": "^4.11.2",
+    "@strapi/provider-upload-aws-s3": "4.11.2",
     "@strapi/strapi": "4.11.3",
     "pg": "8.11.1",
     "strapi-plugin-comments": "2.2.11",
