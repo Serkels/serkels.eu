@@ -29,8 +29,8 @@ importers:
         specifier: 4.11.3
         version: 4.11.3
       '@strapi/provider-upload-aws-s3':
-        specifier: 4.11.2
-        version: 4.11.2
+        specifier: 4.11.3
+        version: 4.11.3
       '@strapi/strapi':
         specifier: 4.11.3
         version: 4.11.3(pg@8.11.1)(typescript@5.1.6)
@@ -4027,8 +4027,8 @@ packages:
       sendmail: 1.6.1
     dev: false
 
-  /@strapi/provider-upload-aws-s3@4.11.2:
-    resolution: {integrity: sha512-kAnPPTuRotAftyVGpAe5KRF1NOhm0gVcY/6/6FeYG4IWMhgBk3qwikOhQO1XaZ4xymK2YRtVSJW1TRifW/1VNA==}
+  /@strapi/provider-upload-aws-s3@4.11.3:
+    resolution: {integrity: sha512-GykrpdMgHoYMEoWGyT4xLeq4fQNv36crZsb00kU2j/G0gRx46L18SPiT6BMuATEdDbYrHjvsTwIknLpdcNV68w==}
     engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
     dependencies:
       aws-sdk: 2.1399.0
