@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 export default async function NotFound() {
   const now = await getServerDate();
   return (
-    <>
+    <div className="grid min-h-screen grid-rows-[max-content_1fr_max-content]">
       <BigBar>
         <Link href="/">
           <Image
@@ -33,7 +33,7 @@ export default async function NotFound() {
       </BigBar>
       <NotFoundMain>404</NotFoundMain>
       <Footer now={now} />
-    </>
+    </div>
   );
 }
 
