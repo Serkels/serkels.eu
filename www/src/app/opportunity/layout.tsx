@@ -2,7 +2,7 @@
 
 import { AppFooter } from "@/components/AppFooter.server";
 import { UserBar } from "@/components/UserBar";
-import { Aside } from "@/layouts/holy/aside";
+import { AsideWithTitle } from "@/layouts/holy/aside";
 import { Grid } from "@1/ui/components/Grid";
 import { Suspense, type PropsWithChildren } from "react";
 import { OpportunityCategories } from "./OpportunityCategories";
@@ -15,12 +15,12 @@ export default function Layout({ children }: PropsWithChildren) {
       <UserBar />
       <Grid>
         <OpportunityFilterContextProvider pathname="/opportunity">
-          <Aside title="Opportunités">
+          <AsideWithTitle title="Opportunités">
             <Suspense fallback={null}>
               <SearchForm />
             </Suspense>
             <OpportunityCategories />
-          </Aside>
+          </AsideWithTitle>
 
           {children}
         </OpportunityFilterContextProvider>

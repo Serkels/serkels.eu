@@ -22,6 +22,7 @@ import {
   type ComponentPropsWithoutRef,
   type PropsWithChildren,
 } from "react";
+import { Avatar } from "./Avatar";
 import { MobileNavBar } from "./MobileNavBar";
 
 //
@@ -33,7 +34,7 @@ export function UserBar() {
   const { data: session } = useSession();
 
   return (
-    <header className="bg-primary-gradient-74 text-white shadow-[0_3px_6px_#00000029]">
+    <header className="sticky top-0 bg-primary-gradient-74 text-white shadow-[0_3px_6px_#00000029]">
       <AppSidebar hidden={!showSideBar} onClose={() => setShowSideBar(false)} />
       <Grid className="items-center sm:grid-cols-[repeat(3,_auto)]">
         <figure
@@ -160,17 +161,13 @@ export function UserBar() {
 //
 
 function MiniUserNav() {
-  const { data: session } = useSession();
   return (
     <nav className="flex items-center justify-end">
       <button className="p-2 [&>svg]:w-5">
         <Plus className="h-4 w-4" />
       </button>
       <Link href={"/my/profile"} className="relative">
-        <img
-          className="h-6 w-6 rounded-full border-2 border-white object-cover"
-          src={session!.user!.image!}
-        />
+        <Avatar className="h-6 w-6 border-2 border-white" />
         <DotIndicator />
       </Link>
     </nav>
@@ -196,10 +193,7 @@ function UserNav() {
         <DotIndicator />
       </Button>
       <Link href={"/my/profile"}>
-        <img
-          className="h-6 w-6 rounded-full border-2 border-white object-cover"
-          src={session!.user!.image!}
-        />
+        <Avatar className="h-6 w-6 border-2 border-white" />
       </Link>
     </nav>
   );

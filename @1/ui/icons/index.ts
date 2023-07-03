@@ -12,4 +12,5 @@ export * from "./Logo";
 export * from "./MessageGroup";
 export * from "./Messenger";
 export * from "./Plus";
+export * from "./School";
 export * from "./Share";
