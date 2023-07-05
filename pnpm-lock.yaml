@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       prettier:
-        specifier: 2.8.8
-        version: 2.8.8
+        specifier: 3.0.0
+        version: 3.0.0
       turbo:
         specifier: 1.10.7
         version: 1.10.7
@@ -55,8 +55,8 @@ importers:
         specifier: 8.44.0
         version: 8.44.0
       prettier:
-        specifier: 2.8.8
-        version: 2.8.8
+        specifier: 3.0.0
+        version: 3.0.0
       typescript:
         specifier: 5.1.6
         version: 5.1.6
@@ -68,7 +68,7 @@ importers:
         version: link:../typescript-config
       '@pandacss/dev':
         specifier: 0.5.1
-        version: 0.5.1(@internationalized/date@3.2.0)(@types/react-dom@18.2.6)(@types/react@18.2.14)(astro@2.7.0)(typescript@5.1.6)
+        version: 0.5.1(@internationalized/date@3.2.0)(@types/react-dom@18.2.6)(@types/react@18.2.14)(astro@2.7.2)(typescript@5.1.6)
       autoprefixer:
         specifier: 10.4.14
         version: 10.4.14(postcss@8.4.24)
@@ -76,8 +76,8 @@ importers:
         specifier: 8.4.24
         version: 8.4.24
       prettier:
-        specifier: 2.8.8
-        version: 2.8.8
+        specifier: 3.0.0
+        version: 3.0.0
       typescript:
         specifier: 5.1.6
         version: 5.1.6
@@ -108,8 +108,8 @@ importers:
         version: 2.0.0
     devDependencies:
       prettier:
-        specifier: 2.8.8
-        version: 2.8.8
+        specifier: 3.0.0
+        version: 3.0.0
       typescript:
         specifier: 5.1.6
         version: 5.1.6
@@ -117,8 +117,8 @@ importers:
   '@1/strapi-openapi':
     devDependencies:
       prettier:
-        specifier: 2.8.8
-        version: 2.8.8
+        specifier: 3.0.0
+        version: 3.0.0
       typescript:
         specifier: 5.1.6
         version: 5.1.6
@@ -151,11 +151,11 @@ importers:
         specifier: 18.2.14
         version: 18.2.14
       prettier:
-        specifier: 2.8.8
-        version: 2.8.8
+        specifier: 3.0.0
+        version: 3.0.0
       prettier-plugin-tailwindcss:
         specifier: 0.3.0
-        version: 0.3.0(prettier@2.8.8)
+        version: 0.3.0(prettier@3.0.0)
       typescript:
         specifier: 5.1.6
         version: 5.1.6
@@ -253,11 +253,11 @@ importers:
         specifier: 13.4.7
         version: 13.4.7(eslint@8.44.0)(typescript@5.1.6)
       prettier:
-        specifier: 2.8.8
-        version: 2.8.8
+        specifier: 3.0.0
+        version: 3.0.0
       prettier-plugin-tailwindcss:
         specifier: 0.3.0
-        version: 0.3.0(prettier@2.8.8)
+        version: 0.3.0(prettier@3.0.0)
       typescript:
         specifier: 5.1.6
         version: 5.1.6
@@ -339,10 +339,6 @@ packages:
     resolution: {integrity: sha512-iIGKu/uzB8sJ5VveQf0eHrVPPFEcrvSlp4qShYMOuY2aMmK2RVXQlX9dUjtmBQ+NAokfIOb7fwCutvH+p13l+g==}
     dev: true
 
-  /@astrojs/internal-helpers@0.1.0:
-    resolution: {integrity: sha512-OSwvoFkTqVowiyP+codQeQZWoq/HOwY32x17NxDglWoCx2sdyXzplDZoVV4/3odmSEY6/A+48WMl5qkjmP1CXw==}
-    dev: true
-
   /@astrojs/internal-helpers@0.1.1:
     resolution: {integrity: sha512-+LySbvFbjv2nO2m/e78suleQOGEru4Cnx73VsZbrQgB2u7A4ddsQg3P2T0zC0e10jgcT+c6nNlKeLpa6nRhQIg==}
     dev: true
@@ -364,29 +360,6 @@ packages:
       vscode-languageserver-textdocument: 1.0.8
       vscode-languageserver-types: 3.17.3
       vscode-uri: 3.0.7
-    dev: true
-
-  /@astrojs/markdown-remark@2.2.1(astro@2.7.0):
-    resolution: {integrity: sha512-VF0HRv4GpC1XEMLnsKf6jth7JSmlt9qpqP0josQgA2eSpCIAC/Et+y94mgdBIZVBYH/yFnMoIxgKVe93xfO2GA==}
-    peerDependencies:
-      astro: ^2.5.0
-    dependencies:
-      '@astrojs/prism': 2.1.2
-      astro: 2.7.0
-      github-slugger: 1.5.0
-      import-meta-resolve: 2.2.2
-      rehype-raw: 6.1.1
-      rehype-stringify: 9.0.3
-      remark-gfm: 3.0.1
-      remark-parse: 10.0.1
-      remark-rehype: 10.1.0
-      remark-smartypants: 2.0.0
-      shiki: 0.14.2
-      unified: 10.1.2
-      unist-util-visit: 4.1.2
-      vfile: 5.3.7
-    transitivePeerDependencies:
-      - supports-color
     dev: true
 
   /@astrojs/markdown-remark@2.2.1(astro@2.7.2):
@@ -1026,10 +999,6 @@ packages:
       '@jridgewell/resolve-uri': 3.1.0
       '@jridgewell/sourcemap-codec': 1.4.14
 
-  /@ljharb/has-package-exports-patterns@0.0.2:
-    resolution: {integrity: sha512-4/RWEeXDO6bocPONheFe6gX/oQdP/bEpv0oL4HqjPP5DCenBSt0mHgahppY49N0CpsaqffdwPq+TlX9CYOq2Dw==}
-    dev: true
-
   /@next/env@13.4.7:
     resolution: {integrity: sha512-ZlbiFulnwiFsW9UV1ku1OvX/oyIPLtMk9p/nnvDSwI0s7vSoZdRtxXNsaO+ZXrLv/pMbXVGq4lL8TbY9iuGmVw==}
     dev: false
@@ -1138,13 +1107,13 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
 
-  /@pandacss/astro@0.5.1(astro@2.7.0)(typescript@5.1.6):
+  /@pandacss/astro@0.5.1(astro@2.7.2)(typescript@5.1.6):
     resolution: {integrity: sha512-caImRwUwVAma6N9ko+Qy+Cv+YZm3bMMAHGsKus4+kiqlz69Xq2CSxRUhNBhRfjCdYoxGd7xYpMMPUFnkAyM0ww==}
     peerDependencies:
       astro: '>=2.x'
     dependencies:
       '@pandacss/postcss': 0.5.1(typescript@5.1.6)
-      astro: 2.7.0
+      astro: 2.7.2
       autoprefixer: 10.4.14(postcss@8.4.24)
       postcss: 8.4.24
       postcss-load-config: 4.0.1(postcss@8.4.24)
@@ -1193,7 +1162,7 @@ packages:
       ts-pattern: 4.3.0
     dev: true
 
-  /@pandacss/dev@0.5.1(@internationalized/date@3.2.0)(@types/react-dom@18.2.6)(@types/react@18.2.14)(astro@2.7.0)(typescript@5.1.6):
+  /@pandacss/dev@0.5.1(@internationalized/date@3.2.0)(@types/react-dom@18.2.6)(@types/react@18.2.14)(astro@2.7.2)(typescript@5.1.6):
     resolution: {integrity: sha512-x1Qvd1ugeXzr47482aj23bKgsLpJ/ASiuyh+/QHcEbgB7G/RUh2DPaA30mNgusCTi0AomA0zAU4SH4auet6eDQ==}
     hasBin: true
     peerDependencies:
@@ -1202,7 +1171,7 @@ packages:
       astro:
         optional: true
     dependencies:
-      '@pandacss/astro': 0.5.1(astro@2.7.0)(typescript@5.1.6)
+      '@pandacss/astro': 0.5.1(astro@2.7.2)(typescript@5.1.6)
       '@pandacss/config': 0.5.1(typescript@5.1.6)
       '@pandacss/error': 0.5.1
       '@pandacss/logger': 0.5.1
@@ -1213,7 +1182,7 @@ packages:
       '@pandacss/studio': 0.5.1(@internationalized/date@3.2.0)(@types/react-dom@18.2.6)(@types/react@18.2.14)(typescript@5.1.6)
       '@pandacss/token-dictionary': 0.5.1
       '@pandacss/types': 0.5.1
-      astro: 2.7.0
+      astro: 2.7.2
       cac: 6.7.14
       pathe: 1.1.1
       perfect-debounce: 1.0.0
@@ -2570,83 +2539,6 @@ packages:
 
   /ast-types-flow@0.0.7:
     resolution: {integrity: sha512-eBvWn1lvIApYMhzQMsu9ciLfkBY499mFZlNqG+/9WR7PVlroQw0vG30cOQQbaKz3sCEc44TAOu2ykzqXSNnwag==}
-
-  /astro@2.7.0:
-    resolution: {integrity: sha512-gUYx2R0V7fpZtFRN9f4nE0We95qYhJyAr+VW0nVFqlMMF1of9MzrjjJ+8rIGJ/6RooFK8XAaXWTQMGTok3ZzEA==}
-    engines: {node: '>=16.12.0', npm: '>=6.14.0'}
-    hasBin: true
-    peerDependencies:
-      sharp: '>=0.31.0'
-    peerDependenciesMeta:
-      sharp:
-        optional: true
-    dependencies:
-      '@astrojs/compiler': 1.5.1
-      '@astrojs/internal-helpers': 0.1.0
-      '@astrojs/language-server': 1.0.8
-      '@astrojs/markdown-remark': 2.2.1(astro@2.7.0)
-      '@astrojs/telemetry': 2.1.1
-      '@astrojs/webapi': 2.2.0
-      '@babel/core': 7.22.5
-      '@babel/generator': 7.22.5
-      '@babel/parser': 7.22.5
-      '@babel/plugin-transform-react-jsx': 7.22.5(@babel/core@7.22.5)
-      '@babel/traverse': 7.22.5
-      '@babel/types': 7.22.5
-      '@types/babel__core': 7.20.1
-      '@types/yargs-parser': 21.0.0
-      acorn: 8.9.0
-      boxen: 6.2.1
-      chokidar: 3.5.3
-      ci-info: 3.8.0
-      common-ancestor-path: 1.0.1
-      cookie: 0.5.0
-      debug: 4.3.4
-      deepmerge-ts: 4.3.0
-      devalue: 4.3.2
-      diff: 5.1.0
-      es-module-lexer: 1.3.0
-      esbuild: 0.17.19
-      estree-walker: 3.0.0
-      execa: 6.1.0
-      fast-glob: 3.3.0
-      github-slugger: 2.0.0
-      gray-matter: 4.0.3
-      html-escaper: 3.0.3
-      js-yaml: 4.1.0
-      kleur: 4.1.5
-      magic-string: 0.27.0
-      mime: 3.0.0
-      ora: 6.3.1
-      p-limit: 4.0.0
-      path-to-regexp: 6.2.1
-      preferred-pm: 3.0.3
-      prompts: 2.4.2
-      rehype: 12.0.1
-      semver: 7.5.3
-      server-destroy: 1.0.1
-      shiki: 0.14.2
-      slash: 4.0.0
-      string-width: 5.1.2
-      strip-ansi: 7.1.0
-      supports-esm: 1.0.0
-      tsconfig-resolver: 3.0.1
-      typescript: 5.1.6
-      unist-util-visit: 4.1.2
-      vfile: 5.3.7
-      vite: 4.3.9
-      vitefu: 0.2.4(vite@4.3.9)
-      yargs-parser: 21.1.1
-      zod: 3.21.4
-    transitivePeerDependencies:
-      - '@types/node'
-      - less
-      - sass
-      - stylus
-      - sugarss
-      - supports-color
-      - terser
-    dev: true
 
   /astro@2.7.2:
     resolution: {integrity: sha512-2+vjXeVGU04aecs0mm93Qx9KdeVDw4OTeBIijs2Z+QLoe4RUYZnkqx5gR70VNfnoMdXoPp7+wB+ARcb0+ee/yg==}
@@ -4057,12 +3949,6 @@ packages:
   /has-flag@4.0.0:
     resolution: {integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==}
     engines: {node: '>=8'}
-
-  /has-package-exports@1.3.0:
-    resolution: {integrity: sha512-e9OeXPQnmPhYoJ63lXC4wWe34TxEGZDZ3OQX9XRqp2VwsfLl3bQBy7VehLnd34g3ef8CmYlBLGqEMKXuz8YazQ==}
-    dependencies:
-      '@ljharb/has-package-exports-patterns': 0.0.2
-    dev: true
 
   /has-property-descriptors@1.0.0:
     resolution: {integrity: sha512-62DVLZGoiEBDHQyqG4w9xCuZ7eJEwNmJRWw2VY84Oedb7WFcA27fiEVe8oUQx9hAUJ4ekurquucTGwsyO1XGdQ==}
@@ -5682,7 +5568,7 @@ packages:
       synckit: 0.8.5
     dev: true
 
-  /prettier-plugin-tailwindcss@0.3.0(prettier@2.8.8):
+  /prettier-plugin-tailwindcss@0.3.0(prettier@3.0.0):
     resolution: {integrity: sha512-009/Xqdy7UmkcTBpwlq7jsViDqXAYSOMLDrHAdTMlVZOrKfM2o9Ci7EMWTMZ7SkKBFTG04UM9F9iM2+4i6boDA==}
     engines: {node: '>=12.17.0'}
     peerDependencies:
@@ -5734,12 +5620,18 @@ packages:
       prettier-plugin-twig-melody:
         optional: true
     dependencies:
-      prettier: 2.8.8
+      prettier: 3.0.0
     dev: true
 
   /prettier@2.8.8:
     resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
     engines: {node: '>=10.13.0'}
+    hasBin: true
+    dev: true
+
+  /prettier@3.0.0:
+    resolution: {integrity: sha512-zBf5eHpwHOGPC47h0zrPyNn+eAEIdEzfywMoYn2XPi0P44Zp0tSq64rq0xAREh4auw2cJZHo9QUob+NqCQky4g==}
+    engines: {node: '>=14'}
     hasBin: true
     dev: true
 
@@ -6443,12 +6335,6 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       has-flag: 4.0.0
-
-  /supports-esm@1.0.0:
-    resolution: {integrity: sha512-96Am8CDqUaC0I2+C/swJ0yEvM8ZnGn4unoers/LSdE4umhX7mELzqyLzx3HnZAluq5PXIsGMKqa7NkqaeHMPcg==}
-    dependencies:
-      has-package-exports: 1.3.0
-    dev: true
 
   /supports-preserve-symlinks-flag@1.0.0:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
