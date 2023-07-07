@@ -17,7 +17,7 @@
     "@tanstack/react-query": "4.29.19",
     "clsx": "1.2.1",
     "ms": "3.0.0-canary.1",
-    "next": "13.4.7",
+    "next": "13.4.9",
     "next-auth": "4.22.1",
     "nextjs-toploader": "1.4.2",
     "openapi-fetch": "0.6.0",
@@ -37,7 +37,7 @@
     "@types/react-dom": "18.2.6",
     "autoprefixer": "10.4.14",
     "eslint": "8.44.0",
-    "eslint-config-next": "13.4.7",
+    "eslint-config-next": "13.4.9",
     "prettier": "3.0.0",
     "prettier-plugin-tailwindcss": "0.3.0",
     "typescript": "5.1.6"
