@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_profiles",
+  "info": {
+    "singularName": "user-profile",
+    "pluralName": "user-profiles",
+    "displayName": "User Profile",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "bookmarks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::opportunity.opportunity"
+    },
+    "firstname": {
+      "type": "string",
+      "required": true,
+      "unique": false
+    },
+    "lastname": {
+      "type": "string"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "univercity": {
+      "type": "string",
+      "required": false
+    },
+    "about": {
+      "type": "text"
+    },
+    "owner": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    }
+  }
+}

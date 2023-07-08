@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bookmarks",
+  "info": {
+    "singularName": "bookmark",
+    "pluralName": "bookmarks",
+    "displayName": "Bookmark",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "opportunity": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::opportunity.opportunity"
+    }
+  }
+}

@@ -8,7 +8,7 @@ import { ConnectionPanel } from "./ConnectionPanel";
 
 export function HomeBanner() {
   return (
-    <Banner>
+    <Banner className="min-h-[45vh]">
       <Grid className="items-center">
         <aside className="col-span-2 sm:col-span-4 md:col-start-2 xl:col-start-4">
           <h1 className="mb-6 text-xl font-bold uppercase">

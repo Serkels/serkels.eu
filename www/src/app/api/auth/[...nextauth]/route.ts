@@ -1,6 +1,56 @@
-import type { NextAuthOptions } from "next-auth";
+import type { components } from "@1/strapi-openapi/v1";
+import type { NextAuthOptions, User } from "next-auth";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
+
+async function passwordless_login(token: string) {
+  const response = await fetch(
+    `${process.env["STRAPI_API_URL"]}/api/passwordless/login?loginToken=${token}`,
+    {
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    }
+  );
+
+  if (!response.ok) {
+    const error: components["schemas"]["Error"] = await response.json();
+    throw new Error(error.error.message);
+  }
+
+  const data: components["schemas"]["Passwordless-User"] =
+    await response.json();
+
+  if (!data.user) return null;
+  if (!data.jwt) return null;
+
+  return {
+    id: Number(data.user.id),
+    email: String(data.user.email),
+    username: String(data.user.username),
+    jwt: data.jwt,
+  } satisfies Omit<User, "profile">;
+}
+
+async function user_profile(token: string) {
+  const response = await fetch(
+    `${process.env["STRAPI_API_URL"]}/api/user-profiles/me`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    }
+  );
+
+  if (!response.ok) {
+    const error: components["schemas"]["Error"] = await response.json();
+    throw new Error(error.error.message);
+  }
+
+  const data: components["schemas"]["UserProfile"] = await response.json();
+  return data;
+}
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -11,70 +61,40 @@ export const authOptions: NextAuthOptions = {
       },
 
       async authorize(credentials) {
-        if (credentials == null) return null;
-        try {
-          const response = await fetch(
-            process.env["STRAPI_API_URL"] +
-              "/api/passwordless/login?loginToken=" +
-              credentials.token,
-            {
-              headers: {
-                "Content-type": "application/json; charset=UTF-8",
-              },
-            }
-          );
+        if (!credentials) return null;
+        const user = await passwordless_login(credentials.token);
 
-          if (!response.ok) {
-            throw await response.json();
-          }
+        if (!user) return null;
+        const profile = await user_profile(user.jwt);
 
-          return await response.json();
-        } catch (error) {
-          console.error(error);
-          throw new Error("Failed to authorize");
-        }
+        return { ...user, profile } satisfies User;
       },
     }),
   ],
-  // pages: { error: "/" },
   callbacks: {
-    async session({ session, token }) {
-      console.log("session");
-      console.log({ session, token });
-      // session.id = token.id;
-      // session.jwt = token.jwt;
-      // session.user.username = token.username;
-      // session.user.username = token.username;
-      session.user = {
-        email: token.email!,
-        image: "https://i.pravatar.cc/256?u=" + token.email,
-        name: token.name || (token as any).username,
-      };
-      return Promise.resolve(session);
-    },
+    async jwt({ user, token }) {
+      // console.log("jwt", { session, user, account, profile, trigger, token });
 
-    async jwt({ token, user }) {
-      console.log("jwt");
-      console.log({ token, user });
       if (user) {
-        const strapiUser = user as any as {
-          jwt: string;
-          user: { id: number; username: string; email: string };
-        };
-        token["id"] = strapiUser.user.id;
-        token["jwt"] = strapiUser.jwt;
-        token.name = strapiUser.user.username;
-        token.email = strapiUser.user.email;
-        token.picture = "https://source.unsplash.com/random/64x64";
+        token.user = user;
       }
-      //     name?: string | null
-      // email?: string | null
-      // picture?: string | null
-      // sub?: string
-      return Promise.resolve(token);
+
+      return token;
+    },
+    async session({ session, token }) {
+      // console.log("session", { user, session, newSession, token });
+
+      if (token.user) {
+        session.user = token.user;
+      }
+
+      return session;
     },
   },
 };
+
+//
+
 const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };

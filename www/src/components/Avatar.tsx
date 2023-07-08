@@ -14,7 +14,7 @@ export function Avatar(props: ComponentPropsWithoutRef<"img">) {
   return (
     <img
       className={clsx("rounded-full object-cover", className)}
-      src={session!.user!.image!}
+      src={session!.user?.profile.image?.data?.attributes?.url}
       {...other_props}
     />
   );

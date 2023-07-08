@@ -1,5 +1,6 @@
 "use client";
 
+import { BookmarkButton } from "@/components/BookmarkButton";
 import { LocationRadius, Share } from "@1/ui/icons";
 import clsx from "clsx";
 import type { useOpportunities } from "./useOpportunities";
@@ -67,9 +68,17 @@ export function OpportunityCard(props: Props) {
           <aside className="text-xs font-bold uppercase leading-[inherit] text-Dove_Gray">
             {category}
           </aside>
-          <aside>
+          <aside className="space-x-3">
+            <BookmarkButton
+              opportunity={id!}
+              className={({ isActive }) =>
+                `inline-block h-4 w-4 ${
+                  isActive ? "text-Chateau_Green" : "text-Dove_Gray"
+                }`
+              }
+            />
             <button>
-              <Share className="inline-block h-[14px] w-[14px] text-Dove_Gray" />
+              <Share className="inline-block h-4 w-4 text-Dove_Gray" />
             </button>
           </aside>
         </footer>

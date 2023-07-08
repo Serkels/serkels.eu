@@ -3,6 +3,7 @@
 export * from "./Bell";
 export * from "./Binoculars";
 export * from "./Book";
+export * from "./Bookmark";
 export * from "./Circle";
 export * from "./Exchange";
 export * from "./HamburgerMenu";

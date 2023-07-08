@@ -32,6 +32,7 @@ export function UserBar() {
   const pathname = usePathname();
 
   const { data: session } = useSession();
+  console.log("from UserBar", { session });
 
   return (
     <header className="sticky top-0 bg-primary-gradient-74 text-white shadow-[0_3px_6px_#00000029]">

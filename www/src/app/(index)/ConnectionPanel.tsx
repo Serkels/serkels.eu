@@ -1,5 +1,6 @@
 "use client";
 
+import { Avatar } from "@/components/Avatar";
 //
 
 import { Spinner } from "@1/ui/components/Spinner";
@@ -87,13 +88,14 @@ function LoginAs({ user }: { user: NonNullable<Session["user"]> }) {
     <WhiteCard>
       <Link href="/exchange">
         <figure>
-          <img
-            className="m-auto aspect-square rounded-full p-11"
-            src={user.image!}
-          />
+          <Avatar className="m-auto aspect-square rounded-full p-11" />
           <figcaption className="text-center">
             <h3 className="text-center">
-              Vous êtes connecté en tant que : <strong>{user.name}</strong>.
+              Vous êtes connecté en tant que :{" "}
+              <strong>
+                {user.profile.firstname} {user.profile.lastname}
+              </strong>
+              .
             </h3>
           </figcaption>
         </figure>

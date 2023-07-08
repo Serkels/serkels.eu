@@ -9,7 +9,10 @@ export function AsideBar(props: ComponentPropsWithoutRef<"aside">) {
   const { className, children, ...other_props } = props;
   return (
     <aside
-      className={clsx("hidden md:col-span-2 md:block xl:col-span-3", className)}
+      className={clsx(
+        "hidden max-w-fit md:col-span-2 md:block xl:col-span-3",
+        className
+      )}
       {...other_props}
     >
       {children}
