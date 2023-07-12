@@ -68,7 +68,7 @@ importers:
         version: link:../typescript-config
       '@pandacss/dev':
         specifier: 0.6.0
-        version: 0.6.0(@internationalized/date@3.3.0)(@types/react-dom@18.2.6)(@types/react@18.2.14)(astro@2.8.0)(typescript@5.1.6)
+        version: 0.6.0(@internationalized/date@3.3.0)(@types/react-dom@18.2.7)(@types/react@18.2.14)(astro@2.8.0)(typescript@5.1.6)
       autoprefixer:
         specifier: 10.4.14
         version: 10.4.14(postcss@8.4.25)
@@ -241,8 +241,8 @@ importers:
         specifier: 18.2.14
         version: 18.2.14
       '@types/react-dom':
-        specifier: 18.2.6
-        version: 18.2.6
+        specifier: 18.2.7
+        version: 18.2.7
       autoprefixer:
         specifier: 10.4.14
         version: 10.4.14(postcss@8.4.25)
@@ -415,7 +415,7 @@ packages:
       prismjs: 1.29.0
     dev: true
 
-  /@astrojs/react@2.2.1(@types/react-dom@18.2.6)(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0):
+  /@astrojs/react@2.2.1(@types/react-dom@18.2.7)(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-nq5Zr8iWdwjSp5fh1NReaCplwsnL4w5PXAY5XWu1jE/frxEfF/ycGHrrhwWW0uJHX9G+kUtmQLR0GBhlR4FmAw==}
     engines: {node: '>=16.12.0'}
     peerDependencies:
@@ -427,7 +427,7 @@ packages:
       '@babel/core': 7.22.8
       '@babel/plugin-transform-react-jsx': 7.22.5(@babel/core@7.22.8)
       '@types/react': 18.2.14
-      '@types/react-dom': 18.2.6
+      '@types/react-dom': 18.2.7
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     transitivePeerDependencies:
@@ -1380,7 +1380,7 @@ packages:
       ts-pattern: 4.3.0
     dev: true
 
-  /@pandacss/dev@0.6.0(@internationalized/date@3.3.0)(@types/react-dom@18.2.6)(@types/react@18.2.14)(astro@2.8.0)(typescript@5.1.6):
+  /@pandacss/dev@0.6.0(@internationalized/date@3.3.0)(@types/react-dom@18.2.7)(@types/react@18.2.14)(astro@2.8.0)(typescript@5.1.6):
     resolution: {integrity: sha512-2BH6zvr3teUHnW2AwGvPjL2M2SXh7kbpiZI6NXrLxPziseyM0kDrPt2LHpHe2ENXpAKMrpABH78KJPlumR23QA==}
     hasBin: true
     peerDependencies:
@@ -1397,7 +1397,7 @@ packages:
       '@pandacss/postcss': 0.6.0(typescript@5.1.6)
       '@pandacss/preset-panda': 0.6.0
       '@pandacss/shared': 0.6.0
-      '@pandacss/studio': 0.6.0(@internationalized/date@3.3.0)(@types/react-dom@18.2.6)(@types/react@18.2.14)(typescript@5.1.6)
+      '@pandacss/studio': 0.6.0(@internationalized/date@3.3.0)(@types/react-dom@18.2.7)(@types/react@18.2.14)(typescript@5.1.6)
       '@pandacss/token-dictionary': 0.6.0
       '@pandacss/types': 0.6.0
       astro: 2.8.0
@@ -1549,11 +1549,11 @@ packages:
     resolution: {integrity: sha512-KBURQaia3gG4CERSHfdNi7b4y6rg7ELPGq/vjDo59MRkk5PzzLZTf0l34dHf6NCjpL3xCyylnbNAMHfobPqGfQ==}
     dev: true
 
-  /@pandacss/studio@0.6.0(@internationalized/date@3.3.0)(@types/react-dom@18.2.6)(@types/react@18.2.14)(typescript@5.1.6):
+  /@pandacss/studio@0.6.0(@internationalized/date@3.3.0)(@types/react-dom@18.2.7)(@types/react@18.2.14)(typescript@5.1.6):
     resolution: {integrity: sha512-PhNqdwVS2QR3rCdGv25RIRehW5kuDZpWys5TwMOFOYCFstXDLzadC4jrBJmgVD50czcve5XHrNEoSgcEMDczEQ==}
     dependencies:
       '@ark-ui/react': 0.7.2(@internationalized/date@3.3.0)(react-dom@18.2.0)(react@18.2.0)
-      '@astrojs/react': 2.2.1(@types/react-dom@18.2.6)(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0)
+      '@astrojs/react': 2.2.1(@types/react-dom@18.2.7)(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0)
       '@pandacss/config': 0.6.0(typescript@5.1.6)
       '@pandacss/logger': 0.6.0
       '@pandacss/node': 0.6.0(typescript@5.1.6)
@@ -1790,8 +1790,8 @@ packages:
   /@types/prop-types@15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
 
-  /@types/react-dom@18.2.6:
-    resolution: {integrity: sha512-2et4PDvg6PVCyS7fuTc4gPoksV58bW0RwSxWKcPRcHZf0PRUGq03TKcD/rUHe3azfV6/5/biUBJw+HhCQjaP0A==}
+  /@types/react-dom@18.2.7:
+    resolution: {integrity: sha512-GRaAEriuT4zp9N4p1i8BDBYmEyfo+xQ3yHjJU4eiK5NDa1RmUZG+unZABUTK4/Ox/M+GaHwb6Ow8rUITrtjszA==}
     dependencies:
       '@types/react': 18.2.14
     dev: true
