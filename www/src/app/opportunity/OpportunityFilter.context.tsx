@@ -112,7 +112,7 @@ export const useOpportunityFilterContext = () =>
 function useShouldUpdateStateFromSearchParams(
   name: string,
   prevState: string,
-  setState: Dispatch<SetStateAction<string>>
+  setState: Dispatch<SetStateAction<string>>,
 ) {
   const searchParams = useSearchParams();
   const param = searchParams.get(name);

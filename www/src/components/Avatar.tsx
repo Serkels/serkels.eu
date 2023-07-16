@@ -50,7 +50,7 @@ export function AvatarMediaVertical(props: ComponentPropsWithoutRef<"figure">) {
 }
 
 export function AvatarMediaHorizontal(
-  props: ComponentPropsWithoutRef<"figure">
+  props: ComponentPropsWithoutRef<"figure">,
 ) {
   const { className, ...other_props } = props;
   const { data: session } = useSession();

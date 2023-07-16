@@ -39,5 +39,5 @@ export default factories.createCoreController(
       const response = await super.update(ctx);
       return response;
     },
-  })
+  }),
 );

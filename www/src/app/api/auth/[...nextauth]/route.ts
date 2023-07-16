@@ -10,7 +10,7 @@ async function passwordless_login(token: string) {
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
-    }
+    },
   );
 
   if (!response.ok) {
@@ -40,7 +40,7 @@ async function user_profile(token: string) {
         Authorization: `Bearer ${token}`,
         "Content-type": "application/json; charset=UTF-8",
       },
-    }
+    },
   );
 
   if (!response.ok) {

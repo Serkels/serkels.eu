@@ -11,7 +11,7 @@ export function AsideBar(props: ComponentPropsWithoutRef<"aside">) {
     <aside
       className={clsx(
         "hidden max-w-fit md:col-span-2 md:block xl:col-span-3",
-        className
+        className,
       )}
       {...other_props}
     >
@@ -21,7 +21,7 @@ export function AsideBar(props: ComponentPropsWithoutRef<"aside">) {
 }
 
 export function AsideWithTitle(
-  props: ComponentPropsWithoutRef<"aside"> & { title: string }
+  props: ComponentPropsWithoutRef<"aside"> & { title: string },
 ) {
   const { className, children, title, ...other_props } = props;
   return (

@@ -25,7 +25,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
           roboto.className,
           "antialiased",
           "bg-[#F5F8FA]",
-          "text-base"
+          "text-base",
         )}
       >
         <NextTopLoader color="#fff" showSpinner={false} />

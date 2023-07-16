@@ -239,7 +239,7 @@ function DotIndicator(props: ComponentPropsWithoutRef<"span">) {
         rounded-full
         bg-[#FF5F5F]
         `,
-        className
+        className,
       )}
       {...other_props}
     ></span>
