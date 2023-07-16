@@ -36,7 +36,7 @@ export function OpportunityCard(props: Props) {
     <article
       className={clsx(
         "rounded border border-neutral-200 bg-white shadow-md",
-        className
+        className,
       )}
     >
       <figure className="flex h-full flex-col">

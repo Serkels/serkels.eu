@@ -36,7 +36,7 @@ async function getData(slug: string) {
     `${process.env["STRAPI_API_URL"]}/api/opportunities?populate=*&filters[slug][$eq]=${slug}`,
     {
       next: { revalidate: 86400 as _24_HOURS_ },
-    }
+    },
   );
 
   if (!res.ok) {

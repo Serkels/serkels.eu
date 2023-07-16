@@ -5,14 +5,14 @@ import { NextResponse, type NextRequest } from "next/server";
 // export const runtime = "edge";
 export async function GET(
   _req: NextRequest,
-  { params }: { params: { email: string } }
+  { params }: { params: { email: string } },
 ) {
   const { email } = params;
   console.log(
     "Send Magic Email to ",
     email,
     " throw ",
-    process.env["STRAPI_API_URL"] + "/api/passwordless/send-link"
+    process.env["STRAPI_API_URL"] + "/api/passwordless/send-link",
   );
   try {
     return await fetch(
@@ -25,12 +25,12 @@ export async function GET(
         headers: {
           "Content-type": "application/json; charset=UTF-8",
         },
-      }
+      },
     );
   } catch (error) {
     return NextResponse.json(
       { error: "Internal Server Error", detail: error },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

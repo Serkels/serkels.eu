@@ -20,7 +20,7 @@ export function SearchForm() {
       e.preventDefault();
       setQueryAndUrl(inputValue.current);
     },
-    [inputSearch.current, router, location]
+    [inputSearch.current, router, location],
   );
 
   return (

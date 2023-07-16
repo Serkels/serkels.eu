@@ -21,7 +21,7 @@ export const AppSidebar = forwardRef<
       className={clsx(
         `
         `,
-        className
+        className,
       )}
       {...other_props}
     >
@@ -41,7 +41,7 @@ export const AppSidebar = forwardRef<
           transition-transform
           dark:bg-gray-800
         `,
-          { "-translate-x-full": hidden }
+          { "-translate-x-full": hidden },
         )}
         tabIndex={-1}
         aria-labelledby="drawer-navigation-label"

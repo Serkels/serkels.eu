@@ -15,12 +15,14 @@ export function BookmarkButton(
   props: Omit<ComponentPropsWithoutRef<"button">, "className"> & {
     opportunity: number;
     className?: string | ((props: { isActive: boolean }) => string | undefined);
-  }
+  },
 ) {
   const { className: classNameProp, opportunity, ...other_props } = props;
   const { data: session } = useSession();
   const isActive = Boolean(
-    session?.user?.profile.bookmarks?.data?.some(({ id }) => id === opportunity)
+    session?.user?.profile.bookmarks?.data?.some(
+      ({ id }) => id === opportunity,
+    ),
   );
 
   if (!session) return null;
@@ -38,7 +40,7 @@ export function BookmarkButton(
       console.log({ session, opportunity });
       console.log("<BookmarkButton");
     },
-    [opportunity]
+    [opportunity],
   );
 
   return (
