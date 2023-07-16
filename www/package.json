@@ -15,7 +15,7 @@
     "@1/typescript-config": "workspace:*",
     "@1/ui": "workspace:*",
     "@tanstack/react-query": "4.29.23",
-    "clsx": "1.2.1",
+    "clsx": "2.0.0",
     "ms": "3.0.0-canary.1",
     "next": "13.4.10",
     "next-auth": "4.22.1",
