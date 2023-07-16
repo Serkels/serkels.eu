@@ -26,7 +26,7 @@ export default factories.createCoreController(
           data: {
             owner: user.id,
           },
-        }
+        },
       );
       console.log();
       console.log(__filename, "create");
@@ -61,5 +61,5 @@ export default factories.createCoreController(
 
       return super.find(ctx);
     },
-  })
+  }),
 );

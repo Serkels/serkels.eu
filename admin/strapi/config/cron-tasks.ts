@@ -29,7 +29,7 @@ async function unconfirmed_user_cleanup_task({ strapi }: { strapi: Strapi }) {
     console.debug(user);
     await strapi.entityService.delete(
       "plugin::users-permissions.user",
-      user.id
+      user.id,
     );
   }
 }

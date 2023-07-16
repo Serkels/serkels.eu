@@ -35,9 +35,7 @@
       "mappedBy": "partner"
     },
     "avatar": {
-      "allowedTypes": [
-        "images"
-      ],
+      "allowedTypes": ["images"],
       "type": "media",
       "multiple": false
     }

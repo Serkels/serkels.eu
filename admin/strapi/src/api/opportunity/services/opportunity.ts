@@ -2,6 +2,6 @@
  * opportunity service
  */
 
-import { factories } from '@strapi/strapi';
+import { factories } from "@strapi/strapi";
 
-export default factories.createCoreService('api::opportunity.opportunity');
+export default factories.createCoreService("api::opportunity.opportunity");
