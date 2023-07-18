@@ -63,7 +63,9 @@
           }
         }
       },
-      "tags": ["Opportunity-category"],
+      "tags": [
+        "Opportunity-category"
+      ],
       "parameters": [
         {
           "name": "sort",
@@ -232,7 +234,9 @@
           }
         }
       },
-      "tags": ["Opportunity-category"],
+      "tags": [
+        "Opportunity-category"
+      ],
       "parameters": [],
       "operationId": "post/opportunity-categories",
       "requestBody": {
@@ -311,7 +315,9 @@
           }
         }
       },
-      "tags": ["Opportunity-category"],
+      "tags": [
+        "Opportunity-category"
+      ],
       "parameters": [
         {
           "name": "id",
@@ -389,7 +395,9 @@
           }
         }
       },
-      "tags": ["Opportunity-category"],
+      "tags": [
+        "Opportunity-category"
+      ],
       "parameters": [
         {
           "name": "id",
@@ -478,7 +486,9 @@
           }
         }
       },
-      "tags": ["Opportunity-category"],
+      "tags": [
+        "Opportunity-category"
+      ],
       "parameters": [
         {
           "name": "id",
@@ -558,7 +568,9 @@
           }
         }
       },
-      "tags": ["Opportunity-category"],
+      "tags": [
+        "Opportunity-category"
+      ],
       "parameters": [
         {
           "name": "id",
