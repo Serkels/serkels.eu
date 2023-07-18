@@ -32,7 +32,6 @@ function ConfirmPanelFlow({ token }: { token: string }) {
       token,
       callbackUrl: "/exchange",
     });
-    return;
   });
 
   if (isLoading) return <Verifying />;

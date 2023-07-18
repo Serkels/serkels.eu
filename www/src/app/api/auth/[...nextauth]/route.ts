@@ -67,7 +67,11 @@ export const authOptions: NextAuthOptions = {
         if (!user) return null;
         const profile = await user_profile(user.jwt);
 
-        return { ...user, profile } satisfies User;
+        return {
+          ...user,
+          profile,
+          name: `${profile.firstname} ${profile.lastname}`,
+        } satisfies User;
       },
     }),
   ],

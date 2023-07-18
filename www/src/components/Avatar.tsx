@@ -27,12 +27,11 @@ export function AvatarMediaVertical(props: ComponentPropsWithoutRef<"figure">) {
   if (!session) return null;
 
   return (
-    <figure className={clsx("flex flex-col items-center", className)}>
-      <img
-        className="h-14 w-14 rounded-full object-cover"
-        src={session.user!.image!}
-        {...other_props}
-      />
+    <figure
+      className={clsx("flex flex-col items-center", className)}
+      {...other_props}
+    >
+      <Avatar className="h-14 w-14" />
       <figcaption>
         <h4
           className="mb-2 mt-3 text-xl font-bold text-Cerulean"
@@ -42,7 +41,7 @@ export function AvatarMediaVertical(props: ComponentPropsWithoutRef<"figure">) {
         </h4>
         <small className="block text-center text-xs text-Dove_Gray">
           <School className="mr-1.5 inline-block w-4" />
-          <span>Université Paris 8</span>
+          <span>{session.user?.profile.univercity}</span>
         </small>
       </figcaption>
     </figure>
@@ -58,12 +57,11 @@ export function AvatarMediaHorizontal(
   if (!session) return null;
 
   return (
-    <figure className={clsx("flex items-center space-x-7", className)}>
-      <img
-        className="h-14 w-14 rounded-full object-cover"
-        src={session.user!.image!}
-        {...other_props}
-      />
+    <figure
+      className={clsx("flex items-center space-x-7", className)}
+      {...other_props}
+    >
+      <Avatar className="h-14 w-14" />
       <figcaption>
         <h4
           className="text-xl font-bold text-Cerulean"
@@ -73,7 +71,7 @@ export function AvatarMediaHorizontal(
         </h4>
         <small className="block text-sm text-Dove_Gray">
           <School className="mr-1.5 inline-block w-6" />
-          <span>Université Paris 8</span>
+          <span>{session.user?.profile.univercity}</span>
         </small>
       </figcaption>
     </figure>

@@ -19,6 +19,9 @@ export default factories.createCoreController(
         bookmarks: {
           fields: ["slug"],
         },
+        image: {
+          fields: ["url"],
+        },
       };
 
       const { data } = await super.find(ctx);
