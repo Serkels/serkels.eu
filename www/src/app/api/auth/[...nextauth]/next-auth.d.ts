@@ -18,22 +18,6 @@ declare module "next-auth" {
     username: string;
     profile: components["schemas"]["UserProfile"];
   }
-  //   refreshTokenExpires?: number;
-  //   accessTokenExpires?: string;
-  //   refreshToken?: string;
-  //   token?: string;
-  //   error?: string;
-  //   user?: User;
-  // }
-  // interface User {
-  //   firstName?: string;
-  //   lastName?: string;
-  //   email?: string | null;
-  //   id?: string;
-  //   contactAddress?: {
-  //     id?: string;
-  //   };
-  // }
 }
 
 declare module "next-auth/jwt" {
@@ -41,12 +25,4 @@ declare module "next-auth/jwt" {
   interface JWT {
     user?: User;
   }
-  //   refreshTokenExpires?: number;
-  //   accessTokenExpires?: number;
-  //   refreshToken?: string;
-  //   token: string;
-  //   exp?: number;
-  //   iat?: number;
-  //   jti?: string;
-  // }
 }

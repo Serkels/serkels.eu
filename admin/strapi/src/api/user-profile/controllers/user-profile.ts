@@ -9,7 +9,6 @@ export default factories.createCoreController(
   ({ strapi }) => ({
     async me(ctx) {
       const user: { id: number } = ctx.state.user;
-
       ctx.query.filters = {
         ...(ctx.query.filters || {}),
         owner: user.id,
@@ -21,6 +20,9 @@ export default factories.createCoreController(
         },
         image: {
           fields: ["url"],
+        },
+        owner: {
+          fields: ["email", "username"],
         },
       };
 

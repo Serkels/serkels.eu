@@ -65,12 +65,14 @@ export const authOptions: NextAuthOptions = {
         const user = await passwordless_login(credentials.token);
 
         if (!user) return null;
-        const profile = await user_profile(user.jwt);
+        const profile = await user_profile(user.jwt).catch(
+          () => ({}) as components["schemas"]["UserProfile"],
+        );
 
         return {
           ...user,
           profile,
-          name: `${profile.firstname} ${profile.lastname}`,
+          name: [profile.firstname, profile.lastname].join(""),
         } satisfies User;
       },
     }),
