@@ -1,19 +1,15 @@
 //
+
 import { NextResponse, type NextRequest } from "next/server";
 
 //
-// export const runtime = "edge";
+
 export async function GET(
   _req: NextRequest,
   { params }: { params: { email: string } },
 ) {
   const { email } = params;
-  console.log(
-    "Send Magic Email to ",
-    email,
-    " throw ",
-    process.env["STRAPI_API_URL"] + "/api/passwordless/send-link",
-  );
+
   try {
     return await fetch(
       process.env["STRAPI_API_URL"] + "/api/passwordless/send-link",
@@ -40,14 +36,8 @@ export async function POST(
   { params }: { params: { email: string } },
 ) {
   const { email } = params;
-  const res: { context: { email: string } } = await request.json();
-  console.log(
-    "Send Magic Email to ",
-    email,
-    res,
-    " throw ",
-    process.env["STRAPI_API_URL"] + "/api/passwordless/send-link",
-  );
+  const res: { context: Record<string, unknown> } = await request.json();
+
   try {
     return await fetch(
       process.env["STRAPI_API_URL"] + "/api/passwordless/send-link",

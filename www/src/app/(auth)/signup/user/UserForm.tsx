@@ -6,7 +6,6 @@ import {
   type FormValues,
 } from "@1/ui/domains/signup/UserForm";
 import { useMutation } from "@tanstack/react-query";
-import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 
 //
@@ -14,23 +13,17 @@ import { useSearchParams } from "next/navigation";
 export function UserForm({ csrf }: { csrf: string }) {
   if (!csrf) return null;
 
-  const { data: session } = useSession();
   const email = useSearchParams().get("email") ?? undefined;
 
   const { mutate, isLoading, isSuccess, isError, error } =
     useMutation(submitFormHandler);
 
-  console.log("src/app/(auth)/signup/user/page.tsx", {
-    SignUpUserForm,
-    csrf,
-    session,
-    mutate,
-  });
   if (isLoading) return <Verifying />;
   if (isSuccess) return <ConnectionSuccess />;
-  // // if (isError) return <c />;
+  if (isError) return <ErrorOccur error={error as Error} />;
+
   return (
-    <div className="col-span-full ">
+    <div className="container col-span-full mx-auto flex flex-col justify-center ">
       <SignUpUserForm
         onSubmit={(values) => {
           console.log("onSubmit", { values });
@@ -50,12 +43,12 @@ function ConnectionSuccess() {
     <div className="col-span-full flex flex-col justify-center bg-black text-white">
       <h1
         className={`
-            mx-auto
-            my-0
-            text-center text-6xl
-            font-extrabold
-            sm:text-7xl
-            lg:text-8xl
+          mx-auto
+          my-0
+          text-center text-6xl
+          font-extrabold
+          sm:text-7xl
+          lg:text-8xl
         `}
       >
         Consulté votre boite mail pour confirmer votre identité
@@ -79,16 +72,15 @@ async function submitFormHandler(context: FormValues) {
 
 function Verifying() {
   return (
-    <div className="col-span-full ">
+    <div className="col-span-full bg-black text-white">
       <h1
         className={`
-            mx-auto
-            my-0
-            text-center text-6xl
-             font-extrabold
-            text-white
-            sm:text-7xl
-            lg:text-8xl
+          mx-auto
+          my-0
+          text-center text-6xl
+          font-extrabold
+          sm:text-7xl
+          lg:text-8xl
         `}
       >
         Vérification
@@ -96,6 +88,30 @@ function Verifying() {
       <div className="mx-auto mt-5 text-center">
         <Spinner />
       </div>
+    </div>
+  );
+}
+
+function ErrorOccur({ error }: { error: Error }) {
+  return (
+    <div className="col-span-full bg-black text-white">
+      <h1
+        className={`
+          mx-auto
+          my-0
+          text-center text-6xl
+          font-extrabold
+          sm:text-7xl
+          lg:text-8xl
+        `}
+      >
+        Authentification échouée
+      </h1>
+      <p className="mx-auto mt-5 max-w-xl text-center">
+        Veuillez fermer cette fenêtre et réessayez de vous authentifier.
+        <br />
+        <code>{error.message}</code>
+      </p>
     </div>
   );
 }

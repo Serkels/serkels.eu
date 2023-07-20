@@ -21,11 +21,6 @@ async function passwordless_login(token: string) {
   const data: components["schemas"]["Passwordless-User"] =
     await response.json();
 
-  console.log();
-  console.log("passwordless_login");
-  console.log({ data });
-  console.log();
-
   if (!data.user) return null;
   if (!data.jwt) return null;
   if (data.context && data.context["email"]) {
@@ -44,10 +39,6 @@ async function update_user_profile(
   token: string,
   context: Record<string, unknown>,
 ) {
-  console.log();
-  console.log("update_user_profile");
-  console.log({ token, context });
-  console.log();
   const response = await fetch(
     `${process.env["STRAPI_API_URL"]}/api/user-profiles/me`,
     {
@@ -70,10 +61,6 @@ async function update_user_profile(
 }
 
 async function user_profile(token: string) {
-  console.log();
-  console.log("src/app/api/auth/[...nextauth]/route.ts");
-  console.log("user_profile", { token });
-  console.log();
   const response = await fetch(
     `${process.env["STRAPI_API_URL"]}/api/user-profiles/me`,
     {
@@ -103,23 +90,11 @@ export const authOptions: NextAuthOptions = {
 
       async authorize(credentials) {
         if (!credentials) return null;
-        console.log();
-        console.log("src/app/api/auth/[...nextauth]/route.ts");
-        console.log("authorize");
-        console.log({ credentials });
-        console.log();
         const user = await passwordless_login(credentials.token);
 
-        console.log({ user });
-        console.log();
         if (!user) return null;
         const profile = await user_profile(user.jwt);
-        // .catch(
-        //   () => ({}) as components["schemas"]["UserProfile"],
-        // );
 
-        console.log({ profile });
-        console.log();
         return {
           ...user,
           profile,
@@ -130,8 +105,6 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async jwt({ user, token }) {
-      // console.log("jwt", { session, user, account, profile, trigger, token });
-
       if (user) {
         token.user = user;
       }
@@ -139,8 +112,6 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      // console.log("session", { user, session, newSession, token });
-
       if (token.user) {
         session.user = token.user;
       }

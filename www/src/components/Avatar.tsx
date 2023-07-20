@@ -41,7 +41,7 @@ export function AvatarMediaVertical(props: ComponentPropsWithoutRef<"figure">) {
         </h4>
         <small className="block text-center text-xs text-Dove_Gray">
           <School className="mr-1.5 inline-block w-4" />
-          <span>{session.user?.profile.univercity}</span>
+          <span>{session.user?.profile.university}</span>
         </small>
       </figcaption>
     </figure>
@@ -71,7 +71,7 @@ export function AvatarMediaHorizontal(
         </h4>
         <small className="block text-sm text-Dove_Gray">
           <School className="mr-1.5 inline-block w-6" />
-          <span>{session.user?.profile.univercity}</span>
+          <span>{session.user?.profile.university}</span>
         </small>
       </figcaption>
     </figure>

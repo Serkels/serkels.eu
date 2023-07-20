@@ -3908,7 +3908,7 @@ export interface components {
           id?: number;
         };
       };
-      lastname?: string;
+      lastname: string;
       owner?: {
         data?: {
           attributes?: {
@@ -4002,7 +4002,7 @@ export interface components {
           id?: number;
         };
       };
-      univercity?: string;
+      university?: string;
       /** Format: date-time */
       updatedAt?: string;
       updatedBy?: {
@@ -4034,10 +4034,10 @@ export interface components {
         firstname: string;
         /** @example string or id */
         image?: number | string;
-        lastname?: string;
+        lastname: string;
         /** @example string or id */
         owner?: number | string;
-        univercity?: string;
+        university?: string;
       };
     };
     UserProfileResponse: {

@@ -27,10 +27,9 @@ export function UserForm({ onSubmit, csrf: csrfToken, email }: Props) {
 
   return (
     <form
-      className="container mx-auto flex flex-col justify-center space-y-5"
+      className="flex flex-col justify-center space-y-5"
       onSubmit={formik.handleSubmit}
     >
-      <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
       <div className="mx-auto">
         <UserAvatarFilled className="h-14 w-14" />
       </div>
@@ -98,6 +97,7 @@ export function UserForm({ onSubmit, csrf: csrfToken, email }: Props) {
           placeholder="Ville"
           type="text"
           value={formik.values.city}
+          disabled
         />
         <label className="col-span-full flex items-center space-x-1">
           <span>Email :</span>
@@ -112,6 +112,8 @@ export function UserForm({ onSubmit, csrf: csrfToken, email }: Props) {
             disabled={Boolean(email)}
           />
         </label>
+        <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
+        <input name="role" type="hidden" defaultValue="user" />
       </div>
       <button type="submit" disabled={formik.isSubmitting}>
         Terminer

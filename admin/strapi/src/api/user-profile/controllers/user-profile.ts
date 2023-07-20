@@ -42,11 +42,6 @@ export default factories.createCoreController(
       };
       const { data } = await super.find(ctx);
       const profile = data[0];
-      console.log();
-      console.log("strapi/src/api/user-profile/controllers/user-profile.ts");
-      console.log("super.find(ctx)");
-      console.log({ profile });
-      console.log();
 
       if (profile) {
         ctx.params.id = profile.id;
@@ -54,29 +49,7 @@ export default factories.createCoreController(
       }
 
       ctx.request.body.data.owner = user.id;
-      console.log();
-      console.log("strapi/src/api/user-profile/controllers/user-profile.ts");
-      console.log("super.create(ctx)");
-      console.log({ body: ctx.request.body });
-      console.log();
       return super.create(ctx);
-      // try {
-      //   const res = await this.me(ctx);
-      //   if (!res) throw new Error("Profile Not Found");
-      //   console.log("me_update > me", { res });
-      //   const response = await super.update(ctx);
-      //   console.log("me_update > update", { response });
-      //   return response;
-      // } catch (error) {
-      //   console.error(error);
-
-      //   const user: { id: number } = ctx.state.user;
-      //   console.log("me_update > create", { user });
-      //   ctx.request.body.data.owner = ctx.state.user.id;
-      //   const response = await super.create(ctx);
-      //   console.log("me_update > create", { response });
-      //   return response;
-      // }
     },
   }),
 );

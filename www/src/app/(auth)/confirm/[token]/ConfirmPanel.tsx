@@ -9,14 +9,9 @@ import { useCallback } from "react";
 
 //
 
-// export const metadata: Metadata = {
-//   title: "Sign In _ Toc-Toc",
-//   description: "Sign In",
-// };
-
 export function ConfirmPanel({ token }: { token: string }) {
   return (
-    <Banner className="h-full bg-black bg-none">
+    <Banner className="h-full bg-black text-white">
       <main className="container mx-auto max-w-5xl flex-1">
         <ConfirmPanelFlow token={token} />
       </main>
@@ -34,11 +29,6 @@ function ConfirmPanelFlow({ token }: { token: string }) {
         callbackUrl: "/exchange",
         redirect: false,
       });
-
-      console.log();
-      console.log("src/app/(auth)/confirm/[token]/ConfirmPanel.tsx");
-      console.log({ res });
-      console.log();
 
       if (!res) throw new Error();
       if (res.error) throw new Error(res.error);
@@ -78,13 +68,12 @@ function Verifying() {
     <>
       <h1
         className={`
-            mx-auto
-            my-0
-            text-center text-6xl
-             font-extrabold
-            text-white
-            sm:text-7xl
-            lg:text-8xl
+          mx-auto
+          my-0
+          text-center text-6xl
+          font-extrabold
+          sm:text-7xl
+          lg:text-8xl
         `}
       >
         Vérification
@@ -101,17 +90,17 @@ function ErrorOccur({ error }: { error: Error }) {
     window.location.href = "/signup";
     return null;
   }
+
   return (
     <>
       <h1
         className={`
-            mx-auto
-            my-0
-            text-center text-6xl
-            font-extrabold
-            text-white
-            sm:text-7xl
-            lg:text-8xl
+          mx-auto
+          my-0
+          text-center text-6xl
+          font-extrabold
+          sm:text-7xl
+          lg:text-8xl
         `}
       >
         Authentification échouée
@@ -132,13 +121,12 @@ function ConnectionSuccess() {
     <>
       <h1
         className={`
-            mx-auto
-            my-0
-            text-center text-6xl
-            font-extrabold
-            text-white
-            sm:text-7xl
-            lg:text-8xl
+          mx-auto
+          my-0
+          text-center text-6xl
+          font-extrabold
+          sm:text-7xl
+          lg:text-8xl
         `}
       >
         Connexion par e-mail réussie 🪄
