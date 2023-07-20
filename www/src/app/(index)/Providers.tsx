@@ -20,8 +20,6 @@ export default function Providers({ children }: PropsWithChildren) {
   //   <Nest>
   //     <QueryClientProvider client={client} />
   //     <ReactQueryDevtools initialIsOpen={false} />
-
-  //     <App />
   //   </Nest>
   // );
 }

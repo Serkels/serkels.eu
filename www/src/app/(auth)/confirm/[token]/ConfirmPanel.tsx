@@ -27,16 +27,29 @@ export function ConfirmPanel({ token }: { token: string }) {
 //
 
 function ConfirmPanelFlow({ token }: { token: string }) {
-  const { mutate, isLoading, isSuccess, isError } = useMutation(async () => {
-    await signIn("credentials", {
-      token,
-      callbackUrl: "/exchange",
-    });
-  });
+  const { mutate, isLoading, isSuccess, isError, error } = useMutation(
+    async () => {
+      const res = await signIn("credentials", {
+        token,
+        callbackUrl: "/exchange",
+        redirect: false,
+      });
+
+      console.log();
+      console.log("src/app/(auth)/confirm/[token]/ConfirmPanel.tsx");
+      console.log({ res });
+      console.log();
+
+      if (!res) throw new Error();
+      if (res.error) throw new Error(res.error);
+    },
+  );
 
   if (isLoading) return <Verifying />;
   if (isSuccess) return <ConnectionSuccess />;
-  if (isError) return <ErrorOccur />;
+  if (isError) {
+    return <ErrorOccur error={error as Error} />;
+  }
   return <VerificationInstruction onSubmit={mutate} />;
 }
 
@@ -68,7 +81,7 @@ function Verifying() {
             mx-auto
             my-0
             text-center text-6xl
-            font-extrabold
+             font-extrabold
             text-white
             sm:text-7xl
             lg:text-8xl
@@ -83,7 +96,11 @@ function Verifying() {
   );
 }
 
-function ErrorOccur() {
+function ErrorOccur({ error }: { error: Error }) {
+  if (error.message === "Profile not found") {
+    window.location.href = "/signup";
+    return null;
+  }
   return (
     <>
       <h1
@@ -103,6 +120,8 @@ function ErrorOccur() {
         Il semble que vous ayez cliqué sur un lien de vérification d'adresse
         e-mail non valide. Veuillez fermer cette fenêtre et réessayez de vous
         authentifier.
+        <br />
+        <code>{error.message}</code>
       </p>
     </>
   );

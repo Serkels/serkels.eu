@@ -23,13 +23,16 @@
       "unique": false
     },
     "lastname": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "image": {
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "univercity": {
       "type": "string",
