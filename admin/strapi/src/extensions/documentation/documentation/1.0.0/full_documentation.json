@@ -5207,7 +5207,7 @@
                 ],
                 "example": "string or id"
               },
-              "univercity": {
+              "university": {
                 "type": "string"
               },
               "about": {
@@ -6458,7 +6458,7 @@
               }
             }
           },
-          "univercity": {
+          "university": {
             "type": "string"
           },
           "about": {

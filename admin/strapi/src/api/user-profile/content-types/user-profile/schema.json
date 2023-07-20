@@ -34,7 +34,7 @@
         "images"
       ]
     },
-    "univercity": {
+    "university": {
       "type": "string",
       "required": false
     },
