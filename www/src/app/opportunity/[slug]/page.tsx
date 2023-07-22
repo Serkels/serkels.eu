@@ -17,7 +17,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   return (
     <>
-      <main className="col-span-full bg-white md:col-span-6 xl:col-span-9">
+      <main className="relative -z-10 col-span-full bg-white md:col-span-6 xl:col-span-9">
         <OpportunityArticle
           slug={slug}
           initialData={data}

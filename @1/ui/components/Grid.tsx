@@ -25,7 +25,6 @@ export const Grid = forwardRef<
     {
       className: clsx(
         `
-          mx-auto
           grid
           grid-cols-4
           gap-4
@@ -39,11 +38,11 @@ export const Grid = forwardRef<
           lg:px-8
           xl:grid-cols-12
         `,
-        className
+        className,
       ),
       ref: forwardedRef,
       ...other_props,
     },
-    children
+    children,
   );
 });
