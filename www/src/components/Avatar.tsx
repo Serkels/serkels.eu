@@ -3,18 +3,22 @@
 import { School } from "@1/ui/icons";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
-import type { ComponentPropsWithoutRef } from "react";
+import { createHash } from "node:crypto";
+import { useMemo, type ComponentPropsWithoutRef } from "react";
 
 //
 
 export function Avatar(props: ComponentPropsWithoutRef<"img">) {
   const { className, ...other_props } = props;
   const { data: session } = useSession();
-
+  const email = session?.user?.email ?? "";
+  const image =
+    session?.user?.profile.image?.data?.attributes?.url ??
+    gravatarUrlFor(email);
   return (
     <img
       className={clsx("rounded-full object-cover", className)}
-      src={session!.user?.profile.image?.data?.attributes?.url}
+      src={image}
       {...other_props}
     />
   );
@@ -76,4 +80,17 @@ export function AvatarMediaHorizontal(
       </figcaption>
     </figure>
   );
+}
+
+function gravatarUrlFor(email: string) {
+  // see https://fr.gravatar.com/site/implement/images/
+
+  const hash = useMemo(
+    () => createHash("md5").update(email.trim().toLowerCase()).digest("hex"),
+    [email],
+  );
+
+  const paramsObj = { default: "identicon", size: "256px" };
+  const searchParams = new URLSearchParams(paramsObj);
+  return `https://www.gravatar.com/avatar/${hash}?${searchParams.toString()}`;
 }
