@@ -33,7 +33,7 @@
   "devDependencies": {
     "@douglasduteil/datatypes...hours-to-seconds": "workspace:*",
     "@tanstack/react-query-devtools": "4.32.0",
-    "@types/node": "20.4.3",
+    "@types/node": "20.4.4",
     "@types/react": "18.2.15",
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.14",
