@@ -51,7 +51,7 @@ function AsideNav(props: ComponentPropsWithoutRef<"aside">) {
               <Link href="/my/profile">Profil</Link>
             </li>
             <li>
-              <Link href="/my/profile">Paramètres</Link>
+              <Link href="/my/parameters">Paramètres</Link>
             </li>
           </ul>
         </nav>

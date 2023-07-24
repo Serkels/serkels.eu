@@ -32,7 +32,7 @@ export function UserBar() {
   const pathname = usePathname();
 
   const { data: session } = useSession();
-  console.log("from UserBar", { session });
+  // console.log("from UserBar", { session });
   if (session && !session.user?.name) {
     console.log("0_0");
   }

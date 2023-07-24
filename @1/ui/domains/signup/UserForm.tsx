@@ -1,25 +1,24 @@
 //
 
+import type { components } from "@1/strapi-openapi/v1";
 import { useFormik, type FormikConfig } from "formik";
+import type { ElementType } from "react";
 import { UserAvatarFilled } from "../../icons/UserAvatarFilled";
 
-export type FormValues = {
-  about?: string;
-  birthday?: string;
-  city?: string;
-  domain?: string;
+//
+
+export type FormValues = Omit<components["schemas"]["UserProfile"], ""> & {
   email?: string;
-  firstname: string;
-  lastname: string;
-  university?: string;
 };
 
-export function UserForm({ onSubmit, csrf: csrfToken, email }: Props) {
+export function UserForm({ onSubmit, csrf: csrfToken, email, profile }: Props) {
   const formik = useFormik<FormValues>({
     initialValues: {
-      firstname: "",
-      lastname: "",
+      about: profile.about ?? "",
       email: email ?? "",
+      firstname: profile.firstname,
+      lastname: profile.lastname,
+      university: profile.university ?? "",
     },
 
     onSubmit,
@@ -54,7 +53,7 @@ export function UserForm({ onSubmit, csrf: csrfToken, email }: Props) {
           type="text"
           value={formik.values.lastname}
         />
-        <input
+        {/* <input
           className="col-span-full h-8 rounded-sm border border-solid border-[#dddddd] px-3 py-2 text-xs placeholder-[#AAAAAA] md:col-span-4"
           id="birthday"
           name="birthday"
@@ -62,7 +61,7 @@ export function UserForm({ onSubmit, csrf: csrfToken, email }: Props) {
           placeholder="Date de naissance"
           type="date"
           value={formik.values.birthday}
-        />
+        /> */}
         <input
           className="col-span-full h-8 rounded-sm border border-solid border-[#dddddd] px-3 py-2 text-xs placeholder-[#AAAAAA] md:col-span-6"
           id="university"
@@ -72,7 +71,7 @@ export function UserForm({ onSubmit, csrf: csrfToken, email }: Props) {
           type="text"
           value={formik.values.university}
         />
-        <input
+        {/* <input
           className="col-span-full h-8 rounded-sm border border-solid border-[#dddddd] px-3 py-2 text-xs placeholder-[#AAAAAA] md:col-span-6"
           id="domain"
           name="domain"
@@ -80,7 +79,7 @@ export function UserForm({ onSubmit, csrf: csrfToken, email }: Props) {
           placeholder="Domaine"
           type="text"
           value={formik.values.domain}
-        />
+        /> */}
         <textarea
           className="col-span-full h-24 rounded-sm border border-solid border-[#dddddd] px-3 py-2 text-xs placeholder-[#AAAAAA] md:col-span-12"
           id="about"
@@ -89,7 +88,7 @@ export function UserForm({ onSubmit, csrf: csrfToken, email }: Props) {
           placeholder="À propos"
           value={formik.values.about}
         />
-        <input
+        {/* <input
           className="col-span-full h-8 rounded-sm border border-solid border-[#dddddd] px-3 py-2 text-xs placeholder-[#AAAAAA] md:col-span-6"
           id="city"
           name="city"
@@ -98,7 +97,7 @@ export function UserForm({ onSubmit, csrf: csrfToken, email }: Props) {
           type="text"
           value={formik.values.city}
           disabled
-        />
+        /> */}
         <label className="col-span-full flex items-center space-x-1">
           <span>Email :</span>
           <input
@@ -126,6 +125,8 @@ export function UserForm({ onSubmit, csrf: csrfToken, email }: Props) {
 
 type Props = {
   email: string | undefined;
+  profile: components["schemas"]["UserProfile"];
   csrf?: string;
+  Avatar?: ElementType;
   onSubmit: FormikConfig<FormValues>["onSubmit"];
 };

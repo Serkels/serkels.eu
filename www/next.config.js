@@ -5,6 +5,15 @@ const nextConfig = {
   },
   reactStrictMode: true,
   transpilePackages: ["@1/ui", "@1/tailwindcss-config"],
+  async redirects() {
+    return [
+      {
+        source: "/my",
+        destination: "/my/profile",
+        permanent: true,
+      },
+    ];
+  },
   async rewrites() {
     return [
       {

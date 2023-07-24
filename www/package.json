@@ -16,6 +16,7 @@
     "@1/ui": "workspace:*",
     "@tanstack/react-query": "4.32.0",
     "clsx": "2.0.0",
+    "formik": "2.4.2",
     "ms": "3.0.0-canary.1",
     "next": "13.4.9",
     "next-auth": "4.22.3",

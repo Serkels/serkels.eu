@@ -98,13 +98,21 @@ export const authOptions: NextAuthOptions = {
         return {
           ...user,
           profile,
-          name: [profile.firstname, profile.lastname].join(""),
+          name: [profile.firstname, profile.lastname].join(" "),
         } satisfies User;
       },
     }),
   ],
   callbacks: {
-    async jwt({ user, token }) {
+    async jwt({ user, token, trigger }) {
+      if (trigger === "update") {
+        token.user.profile = await user_profile(token.user.jwt);
+        token.user.name = [
+          token.user.profile.firstname,
+          token.user.profile.lastname,
+        ].join(" ");
+      }
+
       if (user) {
         token.user = user;
       }
