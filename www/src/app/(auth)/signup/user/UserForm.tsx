@@ -31,6 +31,7 @@ export function UserForm({ csrf }: { csrf: string }) {
         }}
         csrf={csrf}
         email={email}
+        profile={{ firstname: "", lastname: "" }}
       />
     </div>
   );
