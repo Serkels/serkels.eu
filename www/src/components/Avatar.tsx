@@ -2,8 +2,8 @@
 
 import { School } from "@1/ui/icons";
 import clsx from "clsx";
-import { createHash } from "crypto";
 import { useSession } from "next-auth/react";
+import { createHash } from "node:crypto";
 import { useMemo, type ComponentPropsWithoutRef } from "react";
 
 //
