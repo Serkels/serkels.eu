@@ -68,8 +68,8 @@ export class Opportunities {
       }) {
     const {
       data: body,
-      // error,
-      // response,
+      error,
+      response,
     } = await GET("/opportunities", {
       params: {
         query: {
@@ -106,21 +106,13 @@ export class Opportunities {
           },
           sort: ["expireAt:desc"],
         } as any,
-        // query: {
-        //   populate: {
-        //     partner: {
-        //       populate: "avatar",
-        //     },
-        //     cover: "*",
-        //   } as Record<keyof components["schemas"]["Opportunity"], unknown>,
-        // } as Omit<
-        //   operations["get/opportunities"]["parameters"]["query"],
-        //   "populate"
-        // > ,
       },
       next: { revalidate: 3600 satisfies _1_HOUR_ },
     });
-    // console.log({ body, error, url: response.url });
+
+    if (error) {
+      console.error(error, "from " + response.url);
+    }
     if (!body) return [];
     if (!body.data) return [];
 

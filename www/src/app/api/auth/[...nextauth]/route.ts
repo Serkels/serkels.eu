@@ -1,3 +1,4 @@
+import { fromServer } from "@/app/api/v1";
 import type { components } from "@1/strapi-openapi/v1";
 import type { NextAuthOptions, User } from "next-auth";
 import NextAuth from "next-auth/next";
@@ -61,23 +62,22 @@ async function update_user_profile(
 }
 
 async function user_profile(token: string) {
-  const response = await fetch(
-    `${process.env["STRAPI_API_URL"]}/api/user-profiles/me`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    },
-  );
+  const headers = new Headers({ Authorization: `Bearer ${token}` });
+  const {
+    response,
+    data: body,
+    error: errorBody,
+  } = await fromServer.GET("/user-profiles/me", { headers });
 
-  if (!response.ok) {
-    const error: components["schemas"]["Error"] = await response.json();
-    throw new Error(error.error.message);
+  if (errorBody) {
+    throw new Error(errorBody.error.message);
   }
 
-  const data: components["schemas"]["UserProfile"] = await response.json();
-  return data;
+  if (!body.data) {
+    throw new Error(["Profile Not Found", "from " + response.url].join("\n"));
+  }
+
+  return body.data;
 }
 
 export const authOptions: NextAuthOptions = {
@@ -98,18 +98,22 @@ export const authOptions: NextAuthOptions = {
         return {
           ...user,
           profile,
-          name: [profile.firstname, profile.lastname].join(" "),
+          name: [
+            profile?.attributes?.firstname,
+            profile?.attributes?.lastname,
+          ].join(" "),
         } satisfies User;
       },
     }),
   ],
   callbacks: {
     async jwt({ user, token, trigger }) {
-      if (trigger === "update") {
-        token.user.profile = await user_profile(token.user.jwt);
+      if (trigger === "update" && token.user) {
+        const profile = await user_profile(token.user.jwt);
+        token.user.profile = profile;
         token.user.name = [
-          token.user.profile.firstname,
-          token.user.profile.lastname,
+          profile.attributes?.firstname,
+          profile.attributes?.lastname,
         ].join(" ");
       }
 

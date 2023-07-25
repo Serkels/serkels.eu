@@ -25,10 +25,7 @@ export function UserForm({ csrf }: { csrf: string }) {
   return (
     <div className="container col-span-full mx-auto flex flex-col justify-center ">
       <SignUpUserForm
-        onSubmit={(values) => {
-          console.log("onSubmit", { values });
-          mutate(values);
-        }}
+        onSubmit={(values) => mutate(values)}
         csrf={csrf}
         email={email}
         profile={{ firstname: "", lastname: "" }}

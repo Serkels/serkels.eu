@@ -13,7 +13,7 @@ export function Avatar(props: ComponentPropsWithoutRef<"img">) {
   const { data: session } = useSession();
   const email = session?.user?.email ?? "";
   const image =
-    session?.user?.profile.image?.data?.attributes?.url ??
+    session?.user?.profile.attributes?.image?.data?.attributes?.url ??
     gravatarUrlFor(email);
   return (
     <img
@@ -45,7 +45,7 @@ export function AvatarMediaVertical(props: ComponentPropsWithoutRef<"figure">) {
         </h4>
         <small className="block text-center text-xs text-Dove_Gray">
           <School className="mr-1.5 inline-block w-4" />
-          <span>{session.user?.profile.university}</span>
+          <span>{session.user?.profile.attributes?.university}</span>
         </small>
       </figcaption>
     </figure>
@@ -75,7 +75,7 @@ export function AvatarMediaHorizontal(
         </h4>
         <small className="block text-sm text-Dove_Gray">
           <School className="mr-1.5 inline-block w-6" />
-          <span>{session.user?.profile.university}</span>
+          <span>{session.user?.profile.attributes?.university}</span>
         </small>
       </figcaption>
     </figure>

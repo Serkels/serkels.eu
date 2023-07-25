@@ -31,7 +31,7 @@ export default factories.createCoreController(
       const profile = data[0];
       if (!profile) return ctx.notFound("Profile not found");
 
-      return { id: profile.id, ...profile.attributes };
+      return { data: profile, meta: {} };
     },
 
     async me_update(ctx) {

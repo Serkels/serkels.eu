@@ -64,7 +64,13 @@ export function OpportunityCard(props: Props) {
           </p>
         </figcaption>
         <hr />
-        <footer className="flex justify-between p-3">
+        <footer
+          className="flex cursor-default justify-between p-3"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+          }}
+        >
           <aside className="text-xs font-bold uppercase leading-[inherit] text-Dove_Gray">
             {category}
           </aside>

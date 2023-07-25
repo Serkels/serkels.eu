@@ -1,17 +1,26 @@
 //
 
 import type { paths } from "@1/strapi-openapi/v1";
-import createClient from "openapi-fetch";
+import createClient, { type QuerySerializer } from "openapi-fetch";
 import { stringify } from "qs";
 
 //
 
-export const client = createClient<paths>({
-  baseUrl: process.env["STRAPI_API_URL"] + "/api",
+const querySerializer: QuerySerializer<unknown> = (q) =>
+  stringify(q, { encodeValuesOnly: true });
 
-  querySerializer(q) {
-    return stringify(q, { encodeValuesOnly: true });
-  },
+//
+
+export const fromServer = createClient<paths>({
+  baseUrl: process.env["STRAPI_API_URL"] + "/api",
+  querySerializer,
 });
 
-export const { GET } = client;
+export const fromClient = createClient<paths>({
+  baseUrl: "/api/v1",
+  querySerializer,
+});
+
+//
+
+export const { GET } = fromServer;

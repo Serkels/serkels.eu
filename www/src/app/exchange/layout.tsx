@@ -6,7 +6,7 @@ import type { PropsWithChildren } from "react";
 
 export default function Layout({ children }: PropsWithChildren) {
   return (
-    <>
+    <div className="grid min-h-screen grid-rows-[max-content_1fr_max-content]">
       <UserBar />
       <div
         className={`
@@ -27,6 +27,6 @@ export default function Layout({ children }: PropsWithChildren) {
         {children}
       </div>
       <AppFooter />
-    </>
+    </div>
   );
 }

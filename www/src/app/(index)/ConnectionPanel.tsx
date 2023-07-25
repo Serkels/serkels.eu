@@ -91,11 +91,7 @@ function LoginAs({ user }: { user: NonNullable<Session["user"]> }) {
           <Avatar className="m-auto aspect-square rounded-full p-11" />
           <figcaption className="text-center">
             <h3 className="text-center">
-              Vous êtes connecté en tant que :{" "}
-              <strong>
-                {user.profile.firstname} {user.profile.lastname}
-              </strong>
-              .
+              Vous êtes connecté en tant que : <strong>{user.name}</strong>.
             </h3>
           </figcaption>
         </figure>

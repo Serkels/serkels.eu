@@ -1,5 +1,7 @@
 "use client";
 
+import { useUserMutation } from "@/app/my/useUserMutation";
+import { Spinner } from "@1/ui/components/Spinner";
 import { Bookmark } from "@1/ui/icons";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
@@ -19,57 +21,42 @@ export function BookmarkButton(
 ) {
   const { className: classNameProp, opportunity, ...other_props } = props;
   const { data: session } = useSession();
-  const isActive = Boolean(
-    session?.user?.profile.bookmarks?.data?.some(
-      ({ id }) => id === opportunity,
-    ),
-  );
 
-  if (!session) return null;
+  const actual_bookmarks =
+    session?.user?.profile.attributes?.bookmarks?.data?.map(({ id }) =>
+      String(id),
+    ) ?? [];
+  const isActive = actual_bookmarks.some((id) => id === String(opportunity));
   const className = classNameProp
     ? typeof classNameProp === "string"
       ? classNameProp
       : classNameProp({ isActive })
     : undefined;
 
+  const { mutate, isLoading } = useUserMutation();
   const onClick: MouseEventHandler<HTMLButtonElement> = useCallback(
     (event) => {
       event.preventDefault();
       event.stopPropagation();
-      console.log(">BookmarkButton");
-      console.log({ session, opportunity });
-      console.log("<BookmarkButton");
+
+      const bookmarks = isActive
+        ? actual_bookmarks.filter((id) => id !== String(opportunity))
+        : actual_bookmarks.concat([String(opportunity)]);
+
+      mutate({ bookmarks });
+      return false;
     },
-    [opportunity],
+    [opportunity, isActive, actual_bookmarks],
   );
 
+  //
+
+  if (isLoading) return <Spinner className="h-4 w-4" />;
+  if (!session) return null;
+
   return (
-    <button onClick={onClick} {...other_props}>
+    <button onClick={onClick} className="w-6" {...other_props}>
       <Bookmark className={clsx("", className)} />
     </button>
   );
 }
-
-// function useToggle({ opportunity }: { opportunity: number }) {
-//   const { data: session } = useSession();
-
-//   console.log({ session });
-//   return useMutation({
-//     mutationKey: [""],
-//   });
-// }
-
-// const submitFormHandler=async({bookmarks}: )=>{
-//     const res= await  fetch("/api/v1/user-profiles/me"
-//     , {
-//         method: 'PUT',
-//         body: JSON.stringify({
-//           "data": {"bookmarks": [{"id": 10, "position": { "end": true }}]}
-//         }),
-//         headers: {
-//           'Content-type': 'application/json; charset=UTF-8',
-//         },
-//       })
-//     const result=res.json();
-//     return result;
-// }

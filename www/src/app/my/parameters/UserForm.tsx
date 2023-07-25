@@ -16,11 +16,14 @@ export function UserForm({ csrf }: { csrf: string }) {
   const { data: session, update } = useSession();
   const jwt = session?.user?.jwt;
   const profile = session?.user?.profile;
-  // if (!jwt) return <ErrorOccur error={new Error("Missing jwt")} />;
 
   const { mutateAsync, mutate, isLoading, isSuccess, isError, error } =
     useMutation(
-      async (values: Partial<{ firstname: string; lastname: string }>) => {
+      async (values: {
+        firstname: string | undefined;
+        lastname: string | undefined;
+        university: string | undefined;
+      }) => {
         if (!jwt) throw new Error("Invalid JWT");
         const response = await submitFormHandler(jwt, values);
         await update();
@@ -37,10 +40,13 @@ export function UserForm({ csrf }: { csrf: string }) {
       return;
     }
 
-    await mutateAsync({});
+    mutateAsync;
+    // await mutateAsync({});
     await update();
     // mutate({ image: null } as any);
-  }, [profile?.image?.data?.id]);
+  }, [profile?.attributes?.image?.data?.id]);
+
+  //
 
   if (isLoading) return <Verifying />;
 
@@ -52,9 +58,9 @@ export function UserForm({ csrf }: { csrf: string }) {
       {isSuccess ? <UpdateSuccess /> : null}
       <Formik
         initialValues={{
-          firstname: profile.firstname,
-          lastname: profile.lastname,
-          university: profile.university,
+          firstname: profile.attributes?.firstname,
+          lastname: profile.attributes?.lastname,
+          university: profile.attributes?.university,
         }}
         enableReinitialize
         onSubmit={(values) => mutate(values)}
@@ -145,7 +151,7 @@ export function UserForm({ csrf }: { csrf: string }) {
 
 async function submitFormHandler(
   token: string,
-  context: Partial<components["schemas"]["UserProfile"]>,
+  context: unknown, //Partial<components["schemas"]["UserProfile"]>,
 ) {
   const res = await fetch(`/api/v1/user-profiles/me`, {
     method: "PUT",
