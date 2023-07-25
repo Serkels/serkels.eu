@@ -1,7 +1,6 @@
 "use client";
 
-import { useOpportunity } from "@/app/opportunity/useOpportunity";
-import { Spinner } from "@1/ui/components/Spinner";
+import type { components } from "@1/strapi-openapi/v1";
 import { Circle, Link as IconLink, LocationRadius, Share } from "@1/ui/icons";
 import clsx from "clsx";
 import {
@@ -17,10 +16,9 @@ import { useOpportunityFilterContext } from "../OpportunityFilter.context";
 export function OpportunityArticle(props: {
   slug: string;
   category: string;
-  initialData: any;
+  data: components["schemas"]["OpportunityListResponseDataItem"];
 }) {
-  const { slug, initialData, category } = props;
-  const { data, isLoading, isError } = useOpportunity(slug, { initialData });
+  const { data, category } = props;
 
   const { setCategory } = useOpportunityFilterContext();
 
@@ -28,13 +26,10 @@ export function OpportunityArticle(props: {
     setCategory(category);
   }, [category]);
 
-  if (isLoading) return <Spinner />;
-  if (isError) return <>Epic fail...</>;
-  if (!data) return <>No data O_o</>;
   if (!data.attributes) return <>No data O_o</>;
 
   const { expireAt, title, partner, locale, description, location, link } =
-    data.attributes;
+    data.attributes!;
   const date = expireAt ? new Date(expireAt) : new Date(NaN);
   const partner_name =
     partner?.data?.attributes?.name ?? "Partenaire Inconnu :(";

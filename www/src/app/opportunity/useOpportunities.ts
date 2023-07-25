@@ -2,6 +2,7 @@
 
 import { client } from "@/app/client";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { Opportunities } from "./OpportunityRepository";
 
 export function useOpportunitiesInfinite({ category = "", query = "" }) {
   return useInfiniteQuery({
@@ -31,35 +32,15 @@ export function useOpportunities({
   category?: string;
   limit?: number;
 } = {}) {
-  const limitQuery = limit ? { "pagination[limit]": limit } : {};
-  const categoryQuery = category ? { filters: { category } } : {};
-
   return useQuery({
     queryKey: ["opportunities", limit, category],
     queryFn: async () => {
-      const { data } = await client.get("/opportunities", {
-        params: { query: { populate: "*", ...limitQuery, ...categoryQuery } },
-
-        querySerializer: (q) => {
-          const populate = [
-            `populate[partner][populate]=avatar`,
-            `populate[cover]=${q.populate}`,
-          ].join("&");
-          const limit =
-            q["pagination[limit]"] &&
-            `pagination[limit]=${q["pagination[limit]"]}`;
-          const category =
-            q.filters &&
-            q.filters["category"] &&
-            `filters[opportunity_category][slug][$eq]=${q.filters["category"]}`;
-          const sort = `sort[0]=expireAt:desc`;
-          return [populate, limit, category, sort].filter(Boolean).join("&");
-        },
+      return Opportunities.load({
+        category,
+        limit,
+        page: undefined,
+        pageSize: undefined,
       });
-      if (!data) return [];
-      if (!data.data) return [];
-
-      return data.data!.map(({ id, attributes }) => ({ id, ...attributes }));
     },
   });
 }
@@ -68,7 +49,7 @@ export function useOpportunities({
 
 function fetchOpportunities({ category = "", query = "" }) {
   return async ({ pageParam = 0 }) => {
-    const { data } = await client.get("/opportunities", {
+    const { data } = await client.GET("/opportunities", {
       params: {
         query: {
           "pagination[page]": pageParam,

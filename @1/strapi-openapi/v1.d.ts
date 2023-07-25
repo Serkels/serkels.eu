@@ -62,7 +62,7 @@ export interface paths {
     /** Confirm user email */
     get: {
       parameters: {
-        query: {
+        query?: {
           /** @description confirmation token received by email */
           confirmation?: string;
         };
@@ -115,7 +115,7 @@ export interface paths {
   };
   "/auth/local": {
     /**
-     * Local login 
+     * Local login
      * @description Returns a jwt token and user info
      */
     post: {
@@ -151,7 +151,7 @@ export interface paths {
   };
   "/auth/local/register": {
     /**
-     * Register a user 
+     * Register a user
      * @description Returns a jwt token and user info
      */
     post: {
@@ -270,7 +270,7 @@ export interface paths {
   };
   "/connect/{provider}": {
     /**
-     * Login with a provider 
+     * Login with a provider
      * @description Redirects to provider login before being redirect to /auth/{provider}/callback
      */
     get: {
@@ -410,7 +410,7 @@ export interface paths {
           "multipart/form-data": {
             /** @description The field of the entry which the file(s) will be precisely linked to. */
             field?: string;
-            files: (string)[];
+            files: string[];
             /** @description The folder where the file(s) will be uploaded to (only supported on strapi-provider-upload-aws-s3). */
             path?: string;
             /** @description The unique ID (uid) of the model which the file(s) will be linked to (api::restaurant.restaurant). */
@@ -424,7 +424,7 @@ export interface paths {
         /** @description response */
         200: {
           content: {
-            "application/json": (components["schemas"]["UploadFile"])[];
+            "application/json": components["schemas"]["UploadFile"][];
           };
         };
       };
@@ -457,7 +457,7 @@ export interface paths {
         /** @description response */
         200: {
           content: {
-            "application/json": (components["schemas"]["UploadFile"])[];
+            "application/json": components["schemas"]["UploadFile"][];
           };
         };
       };
@@ -469,7 +469,7 @@ export interface paths {
         /** @description Get a list of files */
         200: {
           content: {
-            "application/json": (components["schemas"]["UploadFile"])[];
+            "application/json": components["schemas"]["UploadFile"][];
           };
         };
       };
@@ -523,7 +523,7 @@ export interface paths {
         /** @description Returns an array of users */
         200: {
           content: {
-            "application/json": (components["schemas"]["Users-Permissions-User"])[];
+            "application/json": components["schemas"]["Users-Permissions-User"][];
           };
         };
         /** @description Error */
@@ -880,10 +880,10 @@ export interface components {
                     data?: {
                       attributes?: {
                         children?: {
-                          data?: ({
+                          data?: {
                               attributes?: Record<string, unknown>;
                               id?: number;
-                            })[];
+                            }[];
                         };
                         /** Format: date-time */
                         createdAt?: string;
@@ -894,7 +894,7 @@ export interface components {
                           };
                         };
                         files?: {
-                          data?: ({
+                          data?: {
                               attributes?: {
                                 alternativeText?: string;
                                 caption?: string;
@@ -921,7 +921,7 @@ export interface components {
                                       registrationToken?: string;
                                       resetPasswordToken?: string;
                                       roles?: {
-                                        data?: ({
+                                        data?: {
                                             attributes?: {
                                               code?: string;
                                               /** Format: date-time */
@@ -935,7 +935,7 @@ export interface components {
                                               description?: string;
                                               name?: string;
                                               permissions?: {
-                                                data?: ({
+                                                data?: {
                                                     attributes?: {
                                                       action?: string;
                                                       conditions?: unknown;
@@ -965,7 +965,7 @@ export interface components {
                                                       };
                                                     };
                                                     id?: number;
-                                                  })[];
+                                                  }[];
                                               };
                                               /** Format: date-time */
                                               updatedAt?: string;
@@ -976,14 +976,14 @@ export interface components {
                                                 };
                                               };
                                               users?: {
-                                                data?: ({
+                                                data?: {
                                                     attributes?: Record<string, unknown>;
                                                     id?: number;
-                                                  })[];
+                                                  }[];
                                               };
                                             };
                                             id?: number;
-                                          })[];
+                                          }[];
                                       };
                                       /** Format: date-time */
                                       updatedAt?: string;
@@ -1015,10 +1015,10 @@ export interface components {
                                 provider?: string;
                                 provider_metadata?: unknown;
                                 related?: {
-                                  data?: ({
+                                  data?: {
                                       attributes?: Record<string, unknown>;
                                       id?: number;
-                                    })[];
+                                    }[];
                                 };
                                 /** Format: float */
                                 size?: number;
@@ -1034,7 +1034,7 @@ export interface components {
                                 width?: number;
                               };
                               id?: number;
-                            })[];
+                            }[];
                         };
                         name?: string;
                         parent?: {
@@ -1067,10 +1067,10 @@ export interface components {
                   provider?: string;
                   provider_metadata?: unknown;
                   related?: {
-                    data?: ({
+                    data?: {
                         attributes?: Record<string, unknown>;
                         id?: number;
-                      })[];
+                      }[];
                   };
                   /** Format: float */
                   size?: number;
@@ -1102,7 +1102,7 @@ export interface components {
             link?: string;
             locale?: string;
             localizations?: {
-              data?: (unknown)[];
+              data?: unknown[];
             };
             location?: string;
             opportunity_category?: {
@@ -1118,7 +1118,7 @@ export interface components {
                   };
                   locale?: string;
                   localizations?: {
-                    data?: (unknown)[];
+                    data?: unknown[];
                   };
                   name?: string;
                   slug?: string;
@@ -1167,10 +1167,10 @@ export interface components {
                         provider?: string;
                         provider_metadata?: unknown;
                         related?: {
-                          data?: ({
+                          data?: {
                               attributes?: Record<string, unknown>;
                               id?: number;
-                            })[];
+                            }[];
                         };
                         /** Format: float */
                         size?: number;
@@ -1202,10 +1202,10 @@ export interface components {
                   location?: string;
                   name?: string;
                   opportunities?: {
-                    data?: ({
+                    data?: {
                         attributes?: Record<string, unknown>;
                         id?: number;
-                      })[];
+                      }[];
                   };
                   /** Format: date-time */
                   publishedAt?: string;
@@ -1246,7 +1246,7 @@ export interface components {
       };
     };
     BookmarkListResponse: {
-      data?: (components["schemas"]["BookmarkListResponseDataItem"])[];
+      data?: components["schemas"]["BookmarkListResponseDataItem"][];
       meta?: {
         pagination?: {
           page?: number;
@@ -1313,7 +1313,7 @@ export interface components {
                   description?: string;
                   name?: string;
                   permissions?: {
-                    data?: ({
+                    data?: {
                         attributes?: {
                           action?: string;
                           /** Format: date-time */
@@ -1339,7 +1339,7 @@ export interface components {
                                 registrationToken?: string;
                                 resetPasswordToken?: string;
                                 roles?: {
-                                  data?: ({
+                                  data?: {
                                       attributes?: {
                                         code?: string;
                                         /** Format: date-time */
@@ -1353,7 +1353,7 @@ export interface components {
                                         description?: string;
                                         name?: string;
                                         permissions?: {
-                                          data?: ({
+                                          data?: {
                                               attributes?: {
                                                 action?: string;
                                                 conditions?: unknown;
@@ -1383,7 +1383,7 @@ export interface components {
                                                 };
                                               };
                                               id?: number;
-                                            })[];
+                                            }[];
                                         };
                                         /** Format: date-time */
                                         updatedAt?: string;
@@ -1394,14 +1394,14 @@ export interface components {
                                           };
                                         };
                                         users?: {
-                                          data?: ({
+                                          data?: {
                                               attributes?: Record<string, unknown>;
                                               id?: number;
-                                            })[];
+                                            }[];
                                         };
                                       };
                                       id?: number;
-                                    })[];
+                                    }[];
                                 };
                                 /** Format: date-time */
                                 updatedAt?: string;
@@ -1432,7 +1432,7 @@ export interface components {
                           };
                         };
                         id?: number;
-                      })[];
+                      }[];
                   };
                   type?: string;
                   /** Format: date-time */
@@ -1444,10 +1444,10 @@ export interface components {
                     };
                   };
                   users?: {
-                    data?: ({
+                    data?: {
                         attributes?: Record<string, unknown>;
                         id?: number;
-                      })[];
+                      }[];
                   };
                 };
                 id?: number;
@@ -1526,10 +1526,10 @@ export interface components {
                     related?: string;
                     removed?: boolean;
                     reports?: {
-                      data?: ({
+                      data?: {
                           attributes?: Record<string, unknown>;
                           id?: number;
-                        })[];
+                        }[];
                     };
                     threadOf?: {
                       data?: {
@@ -1630,7 +1630,7 @@ export interface components {
                         description?: string;
                         name?: string;
                         permissions?: {
-                          data?: ({
+                          data?: {
                               attributes?: {
                                 action?: string;
                                 /** Format: date-time */
@@ -1656,7 +1656,7 @@ export interface components {
                                       registrationToken?: string;
                                       resetPasswordToken?: string;
                                       roles?: {
-                                        data?: ({
+                                        data?: {
                                             attributes?: {
                                               code?: string;
                                               /** Format: date-time */
@@ -1670,7 +1670,7 @@ export interface components {
                                               description?: string;
                                               name?: string;
                                               permissions?: {
-                                                data?: ({
+                                                data?: {
                                                     attributes?: {
                                                       action?: string;
                                                       conditions?: unknown;
@@ -1700,7 +1700,7 @@ export interface components {
                                                       };
                                                     };
                                                     id?: number;
-                                                  })[];
+                                                  }[];
                                               };
                                               /** Format: date-time */
                                               updatedAt?: string;
@@ -1711,14 +1711,14 @@ export interface components {
                                                 };
                                               };
                                               users?: {
-                                                data?: ({
+                                                data?: {
                                                     attributes?: Record<string, unknown>;
                                                     id?: number;
-                                                  })[];
+                                                  }[];
                                               };
                                             };
                                             id?: number;
-                                          })[];
+                                          }[];
                                       };
                                       /** Format: date-time */
                                       updatedAt?: string;
@@ -1749,7 +1749,7 @@ export interface components {
                                 };
                               };
                               id?: number;
-                            })[];
+                            }[];
                         };
                         type?: string;
                         /** Format: date-time */
@@ -1761,10 +1761,10 @@ export interface components {
                           };
                         };
                         users?: {
-                          data?: ({
+                          data?: {
                               attributes?: Record<string, unknown>;
                               id?: number;
-                            })[];
+                            }[];
                         };
                       };
                       id?: number;
@@ -1908,7 +1908,7 @@ export interface components {
       id?: number;
     };
     Error: {
-      data?: Record<string, unknown> | (Record<string, unknown>)[];
+      data?: Record<string, unknown> | Record<string, unknown>[];
       error: {
         details?: Record<string, unknown>;
         message?: string;
@@ -1941,7 +1941,7 @@ export interface components {
             registrationToken?: string;
             resetPasswordToken?: string;
             roles?: {
-              data?: ({
+              data?: {
                   attributes?: {
                     code?: string;
                     /** Format: date-time */
@@ -1955,7 +1955,7 @@ export interface components {
                     description?: string;
                     name?: string;
                     permissions?: {
-                      data?: ({
+                      data?: {
                           attributes?: {
                             action?: string;
                             conditions?: unknown;
@@ -1985,7 +1985,7 @@ export interface components {
                             };
                           };
                           id?: number;
-                        })[];
+                        }[];
                     };
                     /** Format: date-time */
                     updatedAt?: string;
@@ -1996,14 +1996,14 @@ export interface components {
                       };
                     };
                     users?: {
-                      data?: ({
+                      data?: {
                           attributes?: Record<string, unknown>;
                           id?: number;
-                        })[];
+                        }[];
                     };
                   };
                   id?: number;
-                })[];
+                }[];
             };
             /** Format: date-time */
             updatedAt?: string;
@@ -2055,10 +2055,10 @@ export interface components {
               data?: {
                 attributes?: {
                   children?: {
-                    data?: ({
+                    data?: {
                         attributes?: Record<string, unknown>;
                         id?: number;
-                      })[];
+                      }[];
                   };
                   /** Format: date-time */
                   createdAt?: string;
@@ -2069,7 +2069,7 @@ export interface components {
                     };
                   };
                   files?: {
-                    data?: ({
+                    data?: {
                         attributes?: {
                           alternativeText?: string;
                           caption?: string;
@@ -2096,7 +2096,7 @@ export interface components {
                                 registrationToken?: string;
                                 resetPasswordToken?: string;
                                 roles?: {
-                                  data?: ({
+                                  data?: {
                                       attributes?: {
                                         code?: string;
                                         /** Format: date-time */
@@ -2110,7 +2110,7 @@ export interface components {
                                         description?: string;
                                         name?: string;
                                         permissions?: {
-                                          data?: ({
+                                          data?: {
                                               attributes?: {
                                                 action?: string;
                                                 conditions?: unknown;
@@ -2140,7 +2140,7 @@ export interface components {
                                                 };
                                               };
                                               id?: number;
-                                            })[];
+                                            }[];
                                         };
                                         /** Format: date-time */
                                         updatedAt?: string;
@@ -2151,14 +2151,14 @@ export interface components {
                                           };
                                         };
                                         users?: {
-                                          data?: ({
+                                          data?: {
                                               attributes?: Record<string, unknown>;
                                               id?: number;
-                                            })[];
+                                            }[];
                                         };
                                       };
                                       id?: number;
-                                    })[];
+                                    }[];
                                 };
                                 /** Format: date-time */
                                 updatedAt?: string;
@@ -2190,10 +2190,10 @@ export interface components {
                           provider?: string;
                           provider_metadata?: unknown;
                           related?: {
-                            data?: ({
+                            data?: {
                                 attributes?: Record<string, unknown>;
                                 id?: number;
-                              })[];
+                              }[];
                           };
                           /** Format: float */
                           size?: number;
@@ -2209,7 +2209,7 @@ export interface components {
                           width?: number;
                         };
                         id?: number;
-                      })[];
+                      }[];
                   };
                   name?: string;
                   parent?: {
@@ -2242,10 +2242,10 @@ export interface components {
             provider?: string;
             provider_metadata?: unknown;
             related?: {
-              data?: ({
+              data?: {
                   attributes?: Record<string, unknown>;
                   id?: number;
-                })[];
+                }[];
             };
             /** Format: float */
             size?: number;
@@ -2277,7 +2277,7 @@ export interface components {
       link?: string;
       locale?: string;
       localizations?: {
-        data?: (components["schemas"]["Opportunity"])[];
+        data?: components["schemas"]["Opportunity"][];
       };
       location?: string;
       opportunity_category?: {
@@ -2293,7 +2293,7 @@ export interface components {
             };
             locale?: string;
             localizations?: {
-              data?: (unknown)[];
+              data?: unknown[];
             };
             name?: string;
             slug?: string;
@@ -2342,10 +2342,10 @@ export interface components {
                   provider?: string;
                   provider_metadata?: unknown;
                   related?: {
-                    data?: ({
+                    data?: {
                         attributes?: Record<string, unknown>;
                         id?: number;
-                      })[];
+                      }[];
                   };
                   /** Format: float */
                   size?: number;
@@ -2377,7 +2377,7 @@ export interface components {
             location?: string;
             name?: string;
             opportunities?: {
-              data?: ({
+              data?: {
                   attributes?: {
                     cover?: {
                       data?: {
@@ -2409,10 +2409,10 @@ export interface components {
                           provider?: string;
                           provider_metadata?: unknown;
                           related?: {
-                            data?: ({
+                            data?: {
                                 attributes?: Record<string, unknown>;
                                 id?: number;
-                              })[];
+                              }[];
                           };
                           /** Format: float */
                           size?: number;
@@ -2444,7 +2444,7 @@ export interface components {
                     link?: string;
                     locale?: string;
                     localizations?: {
-                      data?: (unknown)[];
+                      data?: unknown[];
                     };
                     location?: string;
                     opportunity_category?: {
@@ -2471,7 +2471,7 @@ export interface components {
                     };
                   };
                   id?: number;
-                })[];
+                }[];
             };
             /** Format: date-time */
             publishedAt?: string;
@@ -2523,7 +2523,7 @@ export interface components {
             registrationToken?: string;
             resetPasswordToken?: string;
             roles?: {
-              data?: ({
+              data?: {
                   attributes?: {
                     code?: string;
                     /** Format: date-time */
@@ -2537,7 +2537,7 @@ export interface components {
                     description?: string;
                     name?: string;
                     permissions?: {
-                      data?: ({
+                      data?: {
                           attributes?: {
                             action?: string;
                             conditions?: unknown;
@@ -2567,7 +2567,7 @@ export interface components {
                             };
                           };
                           id?: number;
-                        })[];
+                        }[];
                     };
                     /** Format: date-time */
                     updatedAt?: string;
@@ -2578,14 +2578,14 @@ export interface components {
                       };
                     };
                     users?: {
-                      data?: ({
+                      data?: {
                           attributes?: Record<string, unknown>;
                           id?: number;
-                        })[];
+                        }[];
                     };
                   };
                   id?: number;
-                })[];
+                }[];
             };
             /** Format: date-time */
             updatedAt?: string;
@@ -2602,7 +2602,7 @@ export interface components {
       };
       locale?: string;
       localizations?: {
-        data?: (components["schemas"]["OpportunityCategory"])[];
+        data?: components["schemas"]["OpportunityCategory"][];
       };
       name?: string;
       slug?: string;
@@ -2616,7 +2616,7 @@ export interface components {
       };
     };
     OpportunityCategoryListResponse: {
-      data?: (components["schemas"]["OpportunityCategoryListResponseDataItem"])[];
+      data?: components["schemas"]["OpportunityCategoryListResponseDataItem"][];
       meta?: {
         pagination?: {
           page?: number;
@@ -2635,7 +2635,7 @@ export interface components {
       id?: number;
     };
     OpportunityCategoryLocalizationListResponse: {
-      data?: (components["schemas"]["OpportunityCategoryListResponseDataItemLocalized"])[];
+      data?: components["schemas"]["OpportunityCategoryListResponseDataItemLocalized"][];
       meta?: {
         pagination?: {
           page?: number;
@@ -2674,7 +2674,7 @@ export interface components {
       id?: number;
     };
     OpportunityListResponse: {
-      data?: (components["schemas"]["OpportunityListResponseDataItem"])[];
+      data?: components["schemas"]["OpportunityListResponseDataItem"][];
       meta?: {
         pagination?: {
           page?: number;
@@ -2693,7 +2693,7 @@ export interface components {
       id?: number;
     };
     OpportunityLocalizationListResponse: {
-      data?: (components["schemas"]["OpportunityListResponseDataItemLocalized"])[];
+      data?: components["schemas"]["OpportunityListResponseDataItemLocalized"][];
       meta?: {
         pagination?: {
           page?: number;
@@ -2784,10 +2784,10 @@ export interface components {
             provider?: string;
             provider_metadata?: unknown;
             related?: {
-              data?: ({
+              data?: {
                   attributes?: Record<string, unknown>;
                   id?: number;
-                })[];
+                }[];
             };
             /** Format: float */
             size?: number;
@@ -2819,7 +2819,7 @@ export interface components {
       location?: string;
       name?: string;
       opportunities?: {
-        data?: ({
+        data?: {
             attributes?: {
               cover?: {
                 data?: {
@@ -2839,10 +2839,10 @@ export interface components {
                       data?: {
                         attributes?: {
                           children?: {
-                            data?: ({
+                            data?: {
                                 attributes?: Record<string, unknown>;
                                 id?: number;
-                              })[];
+                              }[];
                           };
                           /** Format: date-time */
                           createdAt?: string;
@@ -2853,7 +2853,7 @@ export interface components {
                             };
                           };
                           files?: {
-                            data?: ({
+                            data?: {
                                 attributes?: {
                                   alternativeText?: string;
                                   caption?: string;
@@ -2880,7 +2880,7 @@ export interface components {
                                         registrationToken?: string;
                                         resetPasswordToken?: string;
                                         roles?: {
-                                          data?: ({
+                                          data?: {
                                               attributes?: {
                                                 code?: string;
                                                 /** Format: date-time */
@@ -2894,7 +2894,7 @@ export interface components {
                                                 description?: string;
                                                 name?: string;
                                                 permissions?: {
-                                                  data?: ({
+                                                  data?: {
                                                       attributes?: {
                                                         action?: string;
                                                         conditions?: unknown;
@@ -2924,7 +2924,7 @@ export interface components {
                                                         };
                                                       };
                                                       id?: number;
-                                                    })[];
+                                                    }[];
                                                 };
                                                 /** Format: date-time */
                                                 updatedAt?: string;
@@ -2935,14 +2935,14 @@ export interface components {
                                                   };
                                                 };
                                                 users?: {
-                                                  data?: ({
+                                                  data?: {
                                                       attributes?: Record<string, unknown>;
                                                       id?: number;
-                                                    })[];
+                                                    }[];
                                                 };
                                               };
                                               id?: number;
-                                            })[];
+                                            }[];
                                         };
                                         /** Format: date-time */
                                         updatedAt?: string;
@@ -2974,10 +2974,10 @@ export interface components {
                                   provider?: string;
                                   provider_metadata?: unknown;
                                   related?: {
-                                    data?: ({
+                                    data?: {
                                         attributes?: Record<string, unknown>;
                                         id?: number;
-                                      })[];
+                                      }[];
                                   };
                                   /** Format: float */
                                   size?: number;
@@ -2993,7 +2993,7 @@ export interface components {
                                   width?: number;
                                 };
                                 id?: number;
-                              })[];
+                              }[];
                           };
                           name?: string;
                           parent?: {
@@ -3026,10 +3026,10 @@ export interface components {
                     provider?: string;
                     provider_metadata?: unknown;
                     related?: {
-                      data?: ({
+                      data?: {
                           attributes?: Record<string, unknown>;
                           id?: number;
-                        })[];
+                        }[];
                     };
                     /** Format: float */
                     size?: number;
@@ -3061,7 +3061,7 @@ export interface components {
               link?: string;
               locale?: string;
               localizations?: {
-                data?: (unknown)[];
+                data?: unknown[];
               };
               location?: string;
               opportunity_category?: {
@@ -3077,7 +3077,7 @@ export interface components {
                     };
                     locale?: string;
                     localizations?: {
-                      data?: (unknown)[];
+                      data?: unknown[];
                     };
                     name?: string;
                     slug?: string;
@@ -3126,10 +3126,10 @@ export interface components {
                           provider?: string;
                           provider_metadata?: unknown;
                           related?: {
-                            data?: ({
+                            data?: {
                                 attributes?: Record<string, unknown>;
                                 id?: number;
-                              })[];
+                              }[];
                           };
                           /** Format: float */
                           size?: number;
@@ -3161,10 +3161,10 @@ export interface components {
                     location?: string;
                     name?: string;
                     opportunities?: {
-                      data?: ({
+                      data?: {
                           attributes?: Record<string, unknown>;
                           id?: number;
-                        })[];
+                        }[];
                     };
                     /** Format: date-time */
                     publishedAt?: string;
@@ -3193,7 +3193,7 @@ export interface components {
               };
             };
             id?: number;
-          })[];
+          }[];
       };
       /** Format: date-time */
       publishedAt?: string;
@@ -3208,7 +3208,7 @@ export interface components {
       website?: string;
     };
     PartnerListResponse: {
-      data?: (components["schemas"]["PartnerListResponseDataItem"])[];
+      data?: components["schemas"]["PartnerListResponseDataItem"][];
       meta?: {
         pagination?: {
           page?: number;
@@ -3251,19 +3251,19 @@ export interface components {
     };
     "Passwordless-SendLinkRequest": {
       /**
-       * @description context of authentification 
+       * @description context of authentification
        * @example {
        *   "currentUrl": "localhost"
        * }
        */
       context?: Record<string, unknown>;
       /**
-       * @description the user email 
+       * @description the user email
        * @example foo@bar.com
        */
       email?: string;
       /**
-       * @description username for new user 
+       * @description username for new user
        * @example foo
        */
       username?: string;
@@ -3295,7 +3295,7 @@ export interface components {
             registrationToken?: string;
             resetPasswordToken?: string;
             roles?: {
-              data?: ({
+              data?: {
                   attributes?: {
                     code?: string;
                     /** Format: date-time */
@@ -3309,7 +3309,7 @@ export interface components {
                     description?: string;
                     name?: string;
                     permissions?: {
-                      data?: ({
+                      data?: {
                           attributes?: {
                             action?: string;
                             conditions?: unknown;
@@ -3339,7 +3339,7 @@ export interface components {
                             };
                           };
                           id?: number;
-                        })[];
+                        }[];
                     };
                     /** Format: date-time */
                     updatedAt?: string;
@@ -3350,14 +3350,14 @@ export interface components {
                       };
                     };
                     users?: {
-                      data?: ({
+                      data?: {
                           attributes?: Record<string, unknown>;
                           id?: number;
-                        })[];
+                        }[];
                     };
                   };
                   id?: number;
-                })[];
+                }[];
             };
             /** Format: date-time */
             updatedAt?: string;
@@ -3374,7 +3374,7 @@ export interface components {
       };
       locale?: string;
       localizations?: {
-        data?: (components["schemas"]["Tag"])[];
+        data?: components["schemas"]["Tag"][];
       };
       name: string;
       slug?: string;
@@ -3388,7 +3388,7 @@ export interface components {
       };
     };
     TagListResponse: {
-      data?: (components["schemas"]["TagListResponseDataItem"])[];
+      data?: components["schemas"]["TagListResponseDataItem"][];
       meta?: {
         pagination?: {
           page?: number;
@@ -3407,7 +3407,7 @@ export interface components {
       id?: number;
     };
     TagLocalizationListResponse: {
-      data?: (components["schemas"]["TagListResponseDataItemLocalized"])[];
+      data?: components["schemas"]["TagListResponseDataItemLocalized"][];
       meta?: {
         pagination?: {
           page?: number;
@@ -3472,7 +3472,7 @@ export interface components {
     UserProfile: {
       about?: string;
       bookmarks?: {
-        data?: ({
+        data?: {
             attributes?: {
               cover?: {
                 data?: {
@@ -3492,10 +3492,10 @@ export interface components {
                       data?: {
                         attributes?: {
                           children?: {
-                            data?: ({
+                            data?: {
                                 attributes?: Record<string, unknown>;
                                 id?: number;
-                              })[];
+                              }[];
                           };
                           /** Format: date-time */
                           createdAt?: string;
@@ -3506,7 +3506,7 @@ export interface components {
                             };
                           };
                           files?: {
-                            data?: ({
+                            data?: {
                                 attributes?: {
                                   alternativeText?: string;
                                   caption?: string;
@@ -3533,7 +3533,7 @@ export interface components {
                                         registrationToken?: string;
                                         resetPasswordToken?: string;
                                         roles?: {
-                                          data?: ({
+                                          data?: {
                                               attributes?: {
                                                 code?: string;
                                                 /** Format: date-time */
@@ -3547,7 +3547,7 @@ export interface components {
                                                 description?: string;
                                                 name?: string;
                                                 permissions?: {
-                                                  data?: ({
+                                                  data?: {
                                                       attributes?: {
                                                         action?: string;
                                                         conditions?: unknown;
@@ -3577,7 +3577,7 @@ export interface components {
                                                         };
                                                       };
                                                       id?: number;
-                                                    })[];
+                                                    }[];
                                                 };
                                                 /** Format: date-time */
                                                 updatedAt?: string;
@@ -3588,14 +3588,14 @@ export interface components {
                                                   };
                                                 };
                                                 users?: {
-                                                  data?: ({
+                                                  data?: {
                                                       attributes?: Record<string, unknown>;
                                                       id?: number;
-                                                    })[];
+                                                    }[];
                                                 };
                                               };
                                               id?: number;
-                                            })[];
+                                            }[];
                                         };
                                         /** Format: date-time */
                                         updatedAt?: string;
@@ -3627,10 +3627,10 @@ export interface components {
                                   provider?: string;
                                   provider_metadata?: unknown;
                                   related?: {
-                                    data?: ({
+                                    data?: {
                                         attributes?: Record<string, unknown>;
                                         id?: number;
-                                      })[];
+                                      }[];
                                   };
                                   /** Format: float */
                                   size?: number;
@@ -3646,7 +3646,7 @@ export interface components {
                                   width?: number;
                                 };
                                 id?: number;
-                              })[];
+                              }[];
                           };
                           name?: string;
                           parent?: {
@@ -3679,10 +3679,10 @@ export interface components {
                     provider?: string;
                     provider_metadata?: unknown;
                     related?: {
-                      data?: ({
+                      data?: {
                           attributes?: Record<string, unknown>;
                           id?: number;
-                        })[];
+                        }[];
                     };
                     /** Format: float */
                     size?: number;
@@ -3714,7 +3714,7 @@ export interface components {
               link?: string;
               locale?: string;
               localizations?: {
-                data?: (unknown)[];
+                data?: unknown[];
               };
               location?: string;
               opportunity_category?: {
@@ -3730,7 +3730,7 @@ export interface components {
                     };
                     locale?: string;
                     localizations?: {
-                      data?: (unknown)[];
+                      data?: unknown[];
                     };
                     name?: string;
                     slug?: string;
@@ -3779,10 +3779,10 @@ export interface components {
                           provider?: string;
                           provider_metadata?: unknown;
                           related?: {
-                            data?: ({
+                            data?: {
                                 attributes?: Record<string, unknown>;
                                 id?: number;
-                              })[];
+                              }[];
                           };
                           /** Format: float */
                           size?: number;
@@ -3814,10 +3814,10 @@ export interface components {
                     location?: string;
                     name?: string;
                     opportunities?: {
-                      data?: ({
+                      data?: {
                           attributes?: Record<string, unknown>;
                           id?: number;
-                        })[];
+                        }[];
                     };
                     /** Format: date-time */
                     publishedAt?: string;
@@ -3846,7 +3846,7 @@ export interface components {
               };
             };
             id?: number;
-          })[];
+          }[];
       };
       /** Format: date-time */
       createdAt?: string;
@@ -3887,10 +3887,10 @@ export interface components {
             provider?: string;
             provider_metadata?: unknown;
             related?: {
-              data?: ({
+              data?: {
                   attributes?: Record<string, unknown>;
                   id?: number;
-                })[];
+                }[];
             };
             /** Format: float */
             size?: number;
@@ -3941,7 +3941,7 @@ export interface components {
                   description?: string;
                   name?: string;
                   permissions?: {
-                    data?: ({
+                    data?: {
                         attributes?: {
                           action?: string;
                           /** Format: date-time */
@@ -3968,7 +3968,7 @@ export interface components {
                           };
                         };
                         id?: number;
-                      })[];
+                      }[];
                   };
                   type?: string;
                   /** Format: date-time */
@@ -3980,10 +3980,10 @@ export interface components {
                     };
                   };
                   users?: {
-                    data?: ({
+                    data?: {
                         attributes?: Record<string, unknown>;
                         id?: number;
-                      })[];
+                      }[];
                   };
                 };
                 id?: number;
@@ -4013,7 +4013,7 @@ export interface components {
       };
     };
     UserProfileListResponse: {
-      data?: (components["schemas"]["UserProfileListResponseDataItem"])[];
+      data?: components["schemas"]["UserProfileListResponseDataItem"][];
       meta?: {
         pagination?: {
           page?: number;
@@ -4077,7 +4077,7 @@ export interface components {
       /** @example true */
       confirmed?: boolean;
       /**
-       * Format: date-time 
+       * Format: date-time
        * @example 2022-06-02T08:32:06.258Z
        */
       createdAt?: string;
@@ -4088,7 +4088,7 @@ export interface components {
       /** @example local */
       provider?: string;
       /**
-       * Format: date-time 
+       * Format: date-time
        * @example 2022-06-02T08:32:06.267Z
        */
       updatedAt?: string;
@@ -4142,7 +4142,7 @@ export interface operations {
 
   "get/bookmarks": {
     parameters: {
-      query: {
+      query?: {
         /** @description Sort by attributes ascending (asc) or descending (desc) */
         sort?: string;
         /** @description Return page/pageSize (default: true) */
@@ -4579,7 +4579,7 @@ export interface operations {
   };
   "get/opportunities": {
     parameters: {
-      query: {
+      query?: {
         /** @description Sort by attributes ascending (asc) or descending (desc) */
         sort?: string;
         /** @description Return page/pageSize (default: true) */
@@ -4878,7 +4878,7 @@ export interface operations {
   };
   "get/opportunity-categories": {
     parameters: {
-      query: {
+      query?: {
         /** @description Sort by attributes ascending (asc) or descending (desc) */
         sort?: string;
         /** @description Return page/pageSize (default: true) */
@@ -5177,7 +5177,7 @@ export interface operations {
   };
   "get/partners": {
     parameters: {
-      query: {
+      query?: {
         /** @description Sort by attributes ascending (asc) or descending (desc) */
         sort?: string;
         /** @description Return page/pageSize (default: true) */
@@ -5426,7 +5426,7 @@ export interface operations {
   };
   "get/tags": {
     parameters: {
-      query: {
+      query?: {
         /** @description Sort by attributes ascending (asc) or descending (desc) */
         sort?: string;
         /** @description Return page/pageSize (default: true) */
@@ -5725,7 +5725,7 @@ export interface operations {
   };
   "get/user-profiles": {
     parameters: {
-      query: {
+      query?: {
         /** @description Sort by attributes ascending (asc) or descending (desc) */
         sort?: string;
         /** @description Return page/pageSize (default: true) */

@@ -1,19 +1,16 @@
 //
 
-import { client } from "@/app/client";
-import { useQuery } from "@tanstack/react-query";
+import { GET } from "@/app/api/v1";
 
-export function useOpportunityCategories() {
-  return useQuery({
-    queryKey: ["opportunity-categories"],
-    queryFn: async () => {
-      const { data } = await client.get("/opportunity-categories", {
-        params: { query: {} },
-      });
-      if (!data) return [];
-      if (!data.data) return [];
+//
 
-      return data.data!.map(({ id, attributes }) => ({ id, ...attributes }));
-    },
+export async function loadOpportunityCategories() {
+  const { data: response } = await GET("/opportunity-categories", {
+    params: {},
   });
+
+  if (!response) return [];
+  if (!response.data) return [];
+
+  return response.data!.map(({ id, attributes }) => ({ id, ...attributes }));
 }
