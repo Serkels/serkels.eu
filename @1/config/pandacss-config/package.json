@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "devDependencies": {
     "@1/typescript-config": "workspace:*",
-    "@pandacss/dev": "0.7.0",
+    "@pandacss/dev": "0.8.0",
     "autoprefixer": "10.4.14",
     "postcss": "8.4.27",
     "prettier": "3.0.0",
