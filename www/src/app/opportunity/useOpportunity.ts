@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 
 export function useOpportunity(slug: string, options: { initialData: any }) {
   async function get_opportunity_by_slug() {
-    const { data } = await client.get("/opportunities", {
+    const { data } = await client.GET("/opportunities", {
       params: {
         query: {
           populate: "*",

@@ -1,17 +1,23 @@
-"use client";
+// "use client";
 
-import { useOpportunities } from "@/app/opportunity/useOpportunities";
-import { Spinner } from "@1/ui/components/Spinner";
 import Link from "next/link";
 import { OpportunityCard } from "../OpportunityCard";
+import { Opportunities } from "../OpportunityRepository";
 
 //
 
-export function SeeAlso({ category }: { category: string }) {
-  const { data, isLoading, isError } = useOpportunities({ limit: 2, category });
+export async function SeeAlso({ category }: { category: string }) {
+  // const { data, isLoading, isError } = useOpportunities({ limit: 2, category });
 
-  if (isLoading) return <Spinner />;
-  if (isError) return <>Epic fail...</>;
+  // if (isLoading) return <Spinner />;
+  // if (isError) return <>Epic fail...</>;
+  const data = await Opportunities.load({
+    limit: 2,
+    category,
+    page: undefined,
+    pageSize: undefined,
+  });
+
   if (!data) return <>No data O_o</>;
   return (
     <article>

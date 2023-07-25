@@ -1,24 +1,16 @@
 "use client";
 
-import { Spinner } from "@1/ui/components/Spinner";
 import { useOpportunityFilterContext } from "./OpportunityFilter.context";
-import { useOpportunityCategories } from "./useOpportunityCategories";
+import { OpportunityCategories } from "./OpportunityRepository";
 
 //
 
-export function OpportunityCategories() {
-  const { isLoading, error, data: categories } = useOpportunityCategories();
+export function CategoriesList({
+  categories,
+}: {
+  categories: Awaited<ReturnType<(typeof OpportunityCategories)["load"]>>;
+}) {
   const { category, setCategoryAndUrl } = useOpportunityFilterContext();
-
-  if (isLoading)
-    return (
-      <div className="mt-10 text-center">
-        <Spinner />
-      </div>
-    );
-
-  if (error) return <>Epic fail....</>;
-  if (!categories) return <>No data O_o</>;
 
   return (
     <ul className="mt-7 text-Dove_Gray">

@@ -1,8 +1,10 @@
-"use client";
+// "use client";
+
 import type { paths } from "@1/strapi-openapi/v1";
 import createClient from "openapi-fetch";
 
 export const client = createClient<paths>({ baseUrl: "/api/v1" });
+export const { GET } = client;
 
 export function deepSerializer(q: object) {
   const search = new URLSearchParams();
