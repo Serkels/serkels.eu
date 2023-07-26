@@ -148,7 +148,7 @@ function ItemLinkWithIcon(
   },
 ) {
   const pathname = usePathname();
-  console.log(pathname);
+
   const {
     className,
     href,
