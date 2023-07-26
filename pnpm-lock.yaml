@@ -213,8 +213,8 @@ importers:
         specifier: 1.4.2
         version: 1.4.2(next@13.4.9)(react-dom@18.2.0)(react@18.2.0)
       openapi-fetch:
-        specifier: 0.7.0
-        version: 0.7.0
+        specifier: 0.7.1
+        version: 0.7.1
       postcss:
         specifier: 8.4.27
         version: 8.4.27
@@ -5868,8 +5868,8 @@ packages:
       is-inside-container: 1.0.0
       is-wsl: 2.2.0
 
-  /openapi-fetch@0.7.0:
-    resolution: {integrity: sha512-7624zyqz6FfEg8jjZzJGrVfqKC75ghw0ngidZAfL8R9Go7n/HOgFYpbnFeLgE9zWYVCv6kq/npsvN5tgJ/vSog==}
+  /openapi-fetch@0.7.1:
+    resolution: {integrity: sha512-yU2xMcPqk4mpgY03yXPsxbobDTTw0AGPzhv1i4dfELBrLonYMfLzQx2eGgdlY4b51GmnnAgWZE9FAnBbM9/NtA==}
     dev: false
 
   /openapi-typescript@6.3.9:
