@@ -47,7 +47,7 @@ export class FaqRepository {
             $and: [
               {
                 opportunity_category: {
-                  slug: { $eq: undefined },
+                  slug: { $eq: category },
                 },
               },
             ],

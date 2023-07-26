@@ -45,7 +45,10 @@ function FaqCard({
     : new Date(NaN);
 
   return (
-    <div className="overflow-hidden rounded-xl bg-white p-6 text-black shadow-[5px_5px_10px_#7E7E7E33]">
+    <div
+      className="overflow-hidden rounded-xl bg-white p-6 text-black shadow-[5px_5px_10px_#7E7E7E33]"
+      id={id ? String(id) : undefined}
+    >
       <div className="">
         <header className="mb-4 flex justify-between">
           <figure className="flex">
