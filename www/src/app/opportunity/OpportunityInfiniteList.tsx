@@ -9,7 +9,7 @@ import { useOpportunitiesInfinite } from "./useOpportunities";
 
 //
 
-export function OpportunityList() {
+export function OpportunityInfiniteList() {
   const {} = useSession();
   const { category, query } = useOpportunityFilterContext();
   const {

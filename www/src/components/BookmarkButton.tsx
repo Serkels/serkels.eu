@@ -10,6 +10,7 @@ import {
   type ComponentPropsWithoutRef,
   type MouseEventHandler,
 } from "react";
+import { get_session_bookmarks_id } from "./get_session_bookmarks_id";
 
 //
 
@@ -22,10 +23,7 @@ export function BookmarkButton(
   const { className: classNameProp, opportunity, ...other_props } = props;
   const { data: session } = useSession();
 
-  const actual_bookmarks =
-    session?.user?.profile.attributes?.bookmarks?.data?.map(({ id }) =>
-      String(id),
-    ) ?? [];
+  const actual_bookmarks = get_session_bookmarks_id(session);
   const isActive = actual_bookmarks.some((id) => id === String(opportunity));
   const className = classNameProp
     ? typeof classNameProp === "string"

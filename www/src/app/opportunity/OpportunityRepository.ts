@@ -113,9 +113,12 @@ export class Opportunities {
     if (error) {
       console.error(error, "from " + response.url);
     }
-    if (!body) return [];
-    if (!body.data) return [];
 
-    return body.data.map(({ id, attributes }) => ({ id, ...attributes }));
+    const result = body?.data?.map(({ id, attributes }) => ({
+      id,
+      ...attributes,
+    }));
+
+    return result ?? [];
   }
 }

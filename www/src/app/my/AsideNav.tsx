@@ -75,7 +75,7 @@ export function AsideNav(props: ComponentPropsWithoutRef<"aside">) {
                             "/my/bookmarks/exchanges",
                           ),
                         })}
-                      />{" "}
+                      />
                       <span>Échanges</span>
                     </Link>
                   </li>
@@ -100,7 +100,7 @@ export function AsideNav(props: ComponentPropsWithoutRef<"aside">) {
                           ),
                         })}
                       />
-                      <span>Sauvgardes</span>
+                      <span>Opportunités</span>
                     </Link>
                   </li>
                 </ul>
