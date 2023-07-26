@@ -1,47 +1,49 @@
 "use client";
 
+import type { components } from "@1/strapi-openapi/v1";
 import { Spinner } from "@1/ui/components/Spinner";
 import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 
 //
 
-export function FaqList() {
+export function FaqList({
+  initialData,
+}: {
+  initialData: components["schemas"]["QuestionListResponse"]["data"];
+}) {
   const {} = useSession();
   const { data, isLoading, isError } = useQuery({
     queryKey: ["faq"],
-    queryFn: faq_query,
+    // queryKey: ["faq"],
+    queryFn: () => Promise.resolve(initialData),
+    initialData,
   });
   if (isLoading) return <Spinner />;
   if (isError) return <>Epic fail...</>;
   if (!data) return <>No data O_o</>;
+  console.log({ data });
   return (
     <ul className="grid grid-cols-1 gap-9">
       {data.map((exchange) => (
         <li key={exchange.id}>
-          <ExchangeCard />
+          <FaqCard {...exchange} />
         </li>
       ))}
     </ul>
   );
 }
 
-async function faq_query() {
-  return Array.from({ length: 5 }).map((_, i) => ({
-    id: i,
-    date: new Date(i),
-    user: { name: "foo" + i, location: "University" + i },
-    isOnline: i % 3 === 0,
-    location: "Location" + i,
-    title: "Exchange Title" + i,
-    description: "Exchange description" + i,
-    category: "category" + i,
-    seat: "seat" + i,
-    maxRoom: "maxRoom" + i,
-  }));
-}
+function FaqCard({
+  attributes,
+  id,
+}: components["schemas"]["QuestionListResponseDataItem"]) {
+  const title = attributes?.title;
+  const username = attributes?.owner?.data?.attributes?.username;
+  const updatedAt = attributes?.updatedAt
+    ? new Date(attributes?.updatedAt)
+    : new Date(NaN);
 
-function ExchangeCard() {
   return (
     <div className="overflow-hidden rounded-xl bg-white p-6 text-black shadow-[5px_5px_10px_#7E7E7E33]">
       <div className="">
@@ -52,23 +54,24 @@ function ExchangeCard() {
               src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
             />
             <figcaption className="ml-2 mt-0.5">
-              <span
-                className="block text-base font-medium leading-snug text-black
-        "
-              >
-                Yasmin Ibrahim
+              <span className="block text-base font-medium leading-snug text-black">
+                {username}
               </span>
               <span className="block text-sm font-light leading-snug text-gray-500 ">
                 🎓 Université Lyon 3
               </span>
             </figcaption>
           </figure>
-          <time className="mt-3 text-xs">02/09/2023</time>
+          <time
+            className="mt-3 text-xs"
+            dateTime={updatedAt.toUTCString()}
+            title={updatedAt.toUTCString()}
+          >
+            {updatedAt.toLocaleDateString()}
+          </time>
         </header>
         <article>
-          <h3 className="my-5 text-xl font-bold">
-            Quel temps les étudiants consacrent-ils aux études ?
-          </h3>
+          <h3 className="my-5 text-xl font-bold">{title}</h3>
         </article>
       </div>
       <hr className="my-2" />

@@ -89,7 +89,7 @@ export function FaqForm({
                 name="opportunity_category"
                 disabled={isSubmitting}
               >
-                <option value="" disabled hidden selected>
+                <option value="" disabled hidden>
                   Choisir une categorie ...
                 </option>
                 {categories.map(({ name, id }) => (
