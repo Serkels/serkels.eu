@@ -11,7 +11,7 @@ export default function Layout({ children }: PropsWithChildren) {
     <div className="grid min-h-screen grid-rows-[max-content_1fr_max-content]">
       <UserBar />
       <Grid theme-padding={false}>
-        <AsideNav className="-z-10" />
+        <AsideNav />
         {children}
       </Grid>
       <AppFooter />

@@ -1,6 +1,8 @@
 "use client";
 
 import { Spinner } from "@1/ui/components/Spinner";
+
+import { Button } from "@1/ui/components/Button";
 // import { type FormValues } from "@1/ui/domains/signup/UserForm";
 import { Avatar } from "@/components/Avatar";
 import type { components } from "@1/strapi-openapi/v1";
@@ -133,13 +135,14 @@ export function UserForm({ csrf }: { csrf: string }) {
                 <ErrorMessage name="university" component="div" />
               </label>
             </div>
-            <button
+            <Button
               type="submit"
-              className="bg-Chateau_Green text-white"
+              variant="primary"
               disabled={isSubmitting}
+              className="max-w-fit"
             >
               Mettre à jour le profile
-            </button>
+            </Button>
           </Form>
         )}
       </Formik>
