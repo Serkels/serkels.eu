@@ -2,6 +2,7 @@
 
 import { InputSearch } from "@1/ui/components/InputSearch";
 
+import { OpportunityCategories } from "@/app/opportunity/OpportunityRepository";
 import { getServerSession } from "next-auth";
 import { FaqForm } from "./FaqForm";
 import { FaqList } from "./FaqList";
@@ -9,7 +10,7 @@ import { SeeAlso } from "./SeeAlso";
 
 //
 
-export default async function Page() {
+export default async function Page_() {
   const session = await getServerSession();
   const isConncected = Boolean(session?.user?.email);
 
@@ -20,7 +21,7 @@ export default async function Page() {
         {isConncected ? (
           <>
             <hr className="my-5 border-none" />
-            <FaqForm />
+            <FaqFormByCategories />
           </>
         ) : null}
         <hr className="my-10" />
@@ -31,4 +32,16 @@ export default async function Page() {
       </aside>
     </>
   );
+}
+
+export async function FaqFormByCategories() {
+  try {
+    const categories = await OpportunityCategories.load();
+    if (!categories) return <>No data O_o</>;
+
+    return <FaqForm categories={categories} />;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 }

@@ -19,13 +19,14 @@ export const Button = forwardRef<
       ref={forwardedRef}
       className={clsx(
         `
-          text-md
-          rounded-full border-none
-          px-5 py-2
+          rounded-full
+          border-none px-6
+          py-1 text-sm 
           font-semibold
         `,
         clsx({
-          "bg-Chateau_Green text-white": variant.trim() === "primary",
+          "[:not(disabled)]hover:opacity-80 bg-Chateau_Green text-white opacity-100":
+            variant.trim() === "primary",
           "bg-RedViolet text-white": variant.trim() === "secondary",
         }),
         className,

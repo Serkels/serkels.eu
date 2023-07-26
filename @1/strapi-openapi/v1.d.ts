@@ -389,6 +389,15 @@ export interface paths {
       };
     };
   };
+  "/questions": {
+    get: operations["get/questions"];
+    post: operations["post/questions"];
+  };
+  "/questions/{id}": {
+    get: operations["get/questions/{id}"];
+    put: operations["put/questions/{id}"];
+    delete: operations["delete/questions/{id}"];
+  };
   "/tags": {
     get: operations["get/tags"];
     post: operations["post/tags"];
@@ -3275,6 +3284,275 @@ export interface components {
     "Passwordless-User": components["schemas"]["Users-Permissions-UserRegistration"] & {
       context?: Record<string, unknown>;
     };
+    Question: {
+      /** Format: date-time */
+      createdAt?: string;
+      createdBy?: {
+        data?: {
+          attributes?: Record<string, unknown>;
+          id?: number;
+        };
+      };
+      opportunity_category?: {
+        data?: {
+          attributes?: {
+            /** Format: date-time */
+            createdAt?: string;
+            createdBy?: {
+              data?: {
+                attributes?: Record<string, unknown>;
+                id?: number;
+              };
+            };
+            locale?: string;
+            localizations?: {
+              data?: unknown[];
+            };
+            name?: string;
+            slug?: string;
+            /** Format: date-time */
+            updatedAt?: string;
+            updatedBy?: {
+              data?: {
+                attributes?: Record<string, unknown>;
+                id?: number;
+              };
+            };
+          };
+          id?: number;
+        };
+      };
+      owner?: {
+        data?: {
+          attributes?: {
+            blocked?: boolean;
+            confirmationToken?: string;
+            confirmed?: boolean;
+            /** Format: date-time */
+            createdAt?: string;
+            createdBy?: {
+              data?: {
+                attributes?: Record<string, unknown>;
+                id?: number;
+              };
+            };
+            /** Format: email */
+            email?: string;
+            provider?: string;
+            resetPasswordToken?: string;
+            role?: {
+              data?: {
+                attributes?: {
+                  /** Format: date-time */
+                  createdAt?: string;
+                  createdBy?: {
+                    data?: {
+                      attributes?: Record<string, unknown>;
+                      id?: number;
+                    };
+                  };
+                  description?: string;
+                  name?: string;
+                  permissions?: {
+                    data?: {
+                        attributes?: {
+                          action?: string;
+                          /** Format: date-time */
+                          createdAt?: string;
+                          createdBy?: {
+                            data?: {
+                              attributes?: {
+                                blocked?: boolean;
+                                /** Format: date-time */
+                                createdAt?: string;
+                                createdBy?: {
+                                  data?: {
+                                    attributes?: Record<string, unknown>;
+                                    id?: number;
+                                  };
+                                };
+                                /** Format: email */
+                                email?: string;
+                                firstname?: string;
+                                isActive?: boolean;
+                                lastname?: string;
+                                preferedLanguage?: string;
+                                registrationToken?: string;
+                                resetPasswordToken?: string;
+                                roles?: {
+                                  data?: {
+                                      attributes?: {
+                                        code?: string;
+                                        /** Format: date-time */
+                                        createdAt?: string;
+                                        createdBy?: {
+                                          data?: {
+                                            attributes?: Record<string, unknown>;
+                                            id?: number;
+                                          };
+                                        };
+                                        description?: string;
+                                        name?: string;
+                                        permissions?: {
+                                          data?: {
+                                              attributes?: {
+                                                action?: string;
+                                                conditions?: unknown;
+                                                /** Format: date-time */
+                                                createdAt?: string;
+                                                createdBy?: {
+                                                  data?: {
+                                                    attributes?: Record<string, unknown>;
+                                                    id?: number;
+                                                  };
+                                                };
+                                                properties?: unknown;
+                                                role?: {
+                                                  data?: {
+                                                    attributes?: Record<string, unknown>;
+                                                    id?: number;
+                                                  };
+                                                };
+                                                subject?: string;
+                                                /** Format: date-time */
+                                                updatedAt?: string;
+                                                updatedBy?: {
+                                                  data?: {
+                                                    attributes?: Record<string, unknown>;
+                                                    id?: number;
+                                                  };
+                                                };
+                                              };
+                                              id?: number;
+                                            }[];
+                                        };
+                                        /** Format: date-time */
+                                        updatedAt?: string;
+                                        updatedBy?: {
+                                          data?: {
+                                            attributes?: Record<string, unknown>;
+                                            id?: number;
+                                          };
+                                        };
+                                        users?: {
+                                          data?: {
+                                              attributes?: Record<string, unknown>;
+                                              id?: number;
+                                            }[];
+                                        };
+                                      };
+                                      id?: number;
+                                    }[];
+                                };
+                                /** Format: date-time */
+                                updatedAt?: string;
+                                updatedBy?: {
+                                  data?: {
+                                    attributes?: Record<string, unknown>;
+                                    id?: number;
+                                  };
+                                };
+                                username?: string;
+                              };
+                              id?: number;
+                            };
+                          };
+                          role?: {
+                            data?: {
+                              attributes?: Record<string, unknown>;
+                              id?: number;
+                            };
+                          };
+                          /** Format: date-time */
+                          updatedAt?: string;
+                          updatedBy?: {
+                            data?: {
+                              attributes?: Record<string, unknown>;
+                              id?: number;
+                            };
+                          };
+                        };
+                        id?: number;
+                      }[];
+                  };
+                  type?: string;
+                  /** Format: date-time */
+                  updatedAt?: string;
+                  updatedBy?: {
+                    data?: {
+                      attributes?: Record<string, unknown>;
+                      id?: number;
+                    };
+                  };
+                  users?: {
+                    data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      }[];
+                  };
+                };
+                id?: number;
+              };
+            };
+            /** Format: date-time */
+            updatedAt?: string;
+            updatedBy?: {
+              data?: {
+                attributes?: Record<string, unknown>;
+                id?: number;
+              };
+            };
+            username?: string;
+          };
+          id?: number;
+        };
+      };
+      resolved?: boolean;
+      slug?: string;
+      title: string;
+      /** Format: date-time */
+      updatedAt?: string;
+      updatedBy?: {
+        data?: {
+          attributes?: Record<string, unknown>;
+          id?: number;
+        };
+      };
+    };
+    QuestionListResponse: {
+      data?: components["schemas"]["QuestionListResponseDataItem"][];
+      meta?: {
+        pagination?: {
+          page?: number;
+          pageCount?: number;
+          pageSize?: number;
+          total?: number;
+        };
+      };
+    };
+    QuestionListResponseDataItem: {
+      attributes?: components["schemas"]["Question"];
+      id?: number;
+    };
+    QuestionRequest: {
+      data: {
+        /** @example string or id */
+        opportunity_category?: number | string;
+        /** @example string or id */
+        owner?: number | string;
+        resolved?: boolean;
+        slug?: string;
+        title: string;
+      };
+    };
+    QuestionResponse: {
+      data?: components["schemas"]["QuestionResponseDataObject"];
+      meta?: Record<string, unknown>;
+    };
+    QuestionResponseDataObject: {
+      attributes?: components["schemas"]["Question"];
+      id?: number;
+    };
     Tag: {
       /** Format: date-time */
       createdAt?: string;
@@ -5384,6 +5662,255 @@ export interface operations {
     };
   };
   "delete/partners/{id}": {
+    parameters: {
+      path: {
+        id: number;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": number;
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Forbidden */
+      403: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Not Found */
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+  };
+  "get/questions": {
+    parameters: {
+      query?: {
+        /** @description Sort by attributes ascending (asc) or descending (desc) */
+        sort?: string;
+        /** @description Return page/pageSize (default: true) */
+        "pagination[withCount]"?: boolean;
+        /** @description Page number (default: 0) */
+        "pagination[page]"?: number;
+        /** @description Page size (default: 25) */
+        "pagination[pageSize]"?: number;
+        /** @description Offset value (default: 0) */
+        "pagination[start]"?: number;
+        /** @description Number of entities to return (default: 25) */
+        "pagination[limit]"?: number;
+        /** @description Fields to return (ex: title,author) */
+        fields?: string;
+        /** @description Relations to return */
+        populate?: string;
+        /** @description Filters to apply */
+        filters?: Record<string, unknown>;
+        /** @description Locale to apply */
+        locale?: string;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["QuestionListResponse"];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Forbidden */
+      403: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Not Found */
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+  };
+  "post/questions": {
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["QuestionRequest"];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["QuestionResponse"];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Forbidden */
+      403: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Not Found */
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+  };
+  "get/questions/{id}": {
+    parameters: {
+      path: {
+        id: number;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["QuestionResponse"];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Forbidden */
+      403: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Not Found */
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+  };
+  "put/questions/{id}": {
+    parameters: {
+      path: {
+        id: number;
+      };
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["QuestionRequest"];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["QuestionResponse"];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Forbidden */
+      403: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Not Found */
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+  };
+  "delete/questions/{id}": {
     parameters: {
       path: {
         id: number;

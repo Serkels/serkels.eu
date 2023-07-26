@@ -19,19 +19,18 @@ export function UserForm({ csrf }: { csrf: string }) {
   const jwt = session?.user?.jwt;
   const profile = session?.user?.profile;
 
-  const { mutateAsync, mutate, isLoading, isSuccess, isError, error } =
-    useMutation(
-      async (values: {
-        firstname: string | undefined;
-        lastname: string | undefined;
-        university: string | undefined;
-      }) => {
-        if (!jwt) throw new Error("Invalid JWT");
-        const response = await submitFormHandler(jwt, values);
-        await update();
-        return response;
-      },
-    );
+  const { mutateAsync, isLoading, isSuccess, isError, error } = useMutation(
+    async (values: {
+      firstname: string | undefined;
+      lastname: string | undefined;
+      university: string | undefined;
+    }) => {
+      if (!jwt) throw new Error("Invalid JWT");
+      const response = await submitFormHandler(jwt, values);
+      await update();
+      return response;
+    },
+  );
 
   const onRevertToGravatarPicture = useCallback(async () => {
     if (
@@ -65,7 +64,7 @@ export function UserForm({ csrf }: { csrf: string }) {
           university: profile.attributes?.university,
         }}
         enableReinitialize
-        onSubmit={(values) => mutate(values)}
+        onSubmit={(values) => mutateAsync(values)}
       >
         {({ isSubmitting }) => (
           <Form className="flex flex-col justify-center space-y-5">
