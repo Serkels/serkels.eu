@@ -19,7 +19,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
     return (
       <>
-        <main className="relative -z-10 col-span-full bg-white md:col-span-6 xl:col-span-9">
+        <main className="col-span-full bg-white md:col-span-6 xl:col-span-9">
           <OpportunityArticle
             slug={slug}
             data={data}
@@ -34,7 +34,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   } catch (error) {
     console.error(error);
     return (
-      <main className="relative -z-10 col-span-full bg-white md:col-span-6 xl:col-span-9">
+      <main className="col-span-full bg-white md:col-span-6 xl:col-span-9">
         <article className="px-4 pt-40 lg:px-16">
           <h1 className="text-4xl font-bold">Page introuvable.</h1>
         </article>

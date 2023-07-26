@@ -18,7 +18,7 @@ export function FaqList() {
   return (
     <ul className="grid grid-cols-1 gap-9">
       {data.map((exchange) => (
-        <li key={exchange.id} className="mx-auto xl:max-w-3xl">
+        <li key={exchange.id}>
           <ExchangeCard />
         </li>
       ))}
