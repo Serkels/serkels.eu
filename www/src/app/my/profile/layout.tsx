@@ -10,6 +10,7 @@ export default function Layout({ children }: PropsWithChildren) {
       <AvatarMediaHorizontal />
 
       <ProfileNavBar className="my-10" />
+
       <hr className="my-8 border-none"></hr>
 
       {children}

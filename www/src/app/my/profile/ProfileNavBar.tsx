@@ -30,10 +30,18 @@ export function ProfileNavBar(props: ComponentPropsWithoutRef<"nav">) {
         <li className={clsx({ "text-Cerulean": pathname.includes("/about") })}>
           <Link href="/my/profile/about">À propos</Link>
         </li>
-        <li>
+        <li
+          className={clsx({
+            "text-Cerulean": pathname.includes("/profile/exchanges"),
+          })}
+        >
           <Link href="/my/profile/exchanges">Propositions</Link>
         </li>
-        <li className="border-none">
+        <li
+          className={clsx("border-none", {
+            "text-Cerulean": pathname.includes("/profile/history"),
+          })}
+        >
           <Link href="/my/profile/history">Échanges</Link>
         </li>
       </ul>

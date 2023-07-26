@@ -17,6 +17,11 @@ const nextConfig = {
         destination: "/my/profile/about",
         permanent: true,
       },
+      {
+        source: "/my/bookmarks",
+        destination: "/my/bookmarks/opportunities",
+        permanent: true,
+      },
     ];
   },
   async rewrites() {
