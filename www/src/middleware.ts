@@ -5,7 +5,7 @@ import { withAuth } from "next-auth/middleware";
 export default withAuth({
   callbacks: {
     async authorized({ token }) {
-      return Boolean(token?.user?.profile?.firstname);
+      return Boolean(token?.user?.profile?.id);
     },
   },
   pages: {
