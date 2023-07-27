@@ -40,7 +40,10 @@ export function OpportunityCard(props: Props) {
       )}
     >
       <figure className="flex h-full flex-col">
-        <img className="h-[112px] w-full object-cover" src={image} />
+        <img
+          className="h-[150px] w-full object-cover sm:h-[160px] xl:h-[150px]"
+          src={image}
+        />
         <figcaption className="flex flex-1 flex-col p-3">
           <small className="font-bold text-Chateau_Green">
             Date limite :{" "}
