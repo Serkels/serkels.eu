@@ -37,7 +37,7 @@ export default async function Page({
 
   return (
     <>
-      <main className="col-span-6 mb-5 mt-10">
+      <main className="col-span-full my-10 md:col-span-6 xl:col-span-6 ">
         <InputSearch defaultValue={search} />
         {isConncected ? (
           <>
@@ -50,7 +50,7 @@ export default async function Page({
           <QAList category={category} />
         </Hydrate>
       </main>
-      <aside className="col-span-3 mt-10 lg:px-10">
+      <aside className="col-span-3 mt-10 hidden lg:px-10 xl:block">
         <SeeAlso />
       </aside>
     </>
