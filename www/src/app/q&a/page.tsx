@@ -2,11 +2,14 @@
 
 import { InputSearch } from "@1/ui/components/InputSearch";
 
+import { fromServer } from "@/app/api/v1";
 import { OpportunityCategories } from "@/app/opportunity/OpportunityRepository";
+import { dehydrate, Hydrate } from "@tanstack/react-query";
 import { getServerSession } from "next-auth";
-import { FaqForm } from "./FaqForm";
-import { FaqList } from "./FaqList";
-import { FaqRepository } from "./FaqRepository";
+import { getQueryClient } from "../getQueryClient";
+import { QAForm } from "./QAForm";
+import { QAList } from "./QAList";
+import { QARepository } from "./QARepository";
 import { SeeAlso } from "./SeeAlso";
 
 //
@@ -18,14 +21,19 @@ export default async function Page({
 }) {
   const session = await getServerSession();
   const search = searchParams["q"];
-  const category = searchParams["category"];
-  const data = await FaqRepository.load({
-    category: category as string,
-    limit: 6,
-    page: undefined,
-    pageSize: undefined,
-  });
+  const category = searchParams["category"] as string | undefined;
   const isConncected = Boolean(session?.user?.email);
+
+  const queryClient = getQueryClient();
+  await queryClient.prefetchQuery(["q&a"], () =>
+    new QARepository(fromServer).load({
+      category,
+      limit: 6,
+      page: undefined,
+      pageSize: undefined,
+    }),
+  );
+  const dehydratedState = dehydrate(queryClient);
 
   return (
     <>
@@ -34,11 +42,13 @@ export default async function Page({
         {isConncected ? (
           <>
             <hr className="my-5 border-none" />
-            <FaqFormByCategories />
+            <QAFormByCategories />
           </>
         ) : null}
         <hr className="my-10" />
-        <FaqList initialData={data} />
+        <Hydrate state={dehydratedState}>
+          <QAList category={category} />
+        </Hydrate>
       </main>
       <aside className="col-span-3 mt-10 lg:px-10">
         <SeeAlso />
@@ -47,12 +57,12 @@ export default async function Page({
   );
 }
 
-export async function FaqFormByCategories() {
+export async function QAFormByCategories() {
   try {
     const categories = await OpportunityCategories.load();
     if (!categories) return <>No data O_o</>;
 
-    return <FaqForm categories={categories} />;
+    return <QAForm categories={categories} />;
   } catch (error) {
     console.error(error);
     return null;

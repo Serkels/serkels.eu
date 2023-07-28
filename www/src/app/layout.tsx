@@ -11,6 +11,7 @@ import "./globals.css";
 const roboto = Roboto({ weight: ["400", "500", "700"], subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://toc-toc.org"),
   title: "Toc-Toc",
   description: "Réseau d'échanges étudiant",
   icons: { icon: "/favicon.svg" },

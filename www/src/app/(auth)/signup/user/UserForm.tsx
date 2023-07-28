@@ -5,19 +5,27 @@ import {
   UserForm as SignUpUserForm,
   type FormValues,
 } from "@1/ui/domains/signup/UserForm";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { getCsrfToken } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 
 //
 
-export function UserForm({ csrf }: { csrf: string }) {
-  if (!csrf) return null;
+export function UserForm() {
+  const { data: csrf } = useQuery({
+    queryKey: ["csrf"],
+    queryFn: () => getCsrfToken(),
+    cacheTime: 0,
+  });
 
   const email = useSearchParams().get("email") ?? undefined;
 
   const { mutate, isLoading, isSuccess, isError, error } =
     useMutation(submitFormHandler);
 
+  //
+
+  if (!csrf) return null;
   if (isLoading) return <Verifying />;
   if (isSuccess) return <ConnectionSuccess />;
   if (isError) return <ErrorOccur error={error as Error} />;

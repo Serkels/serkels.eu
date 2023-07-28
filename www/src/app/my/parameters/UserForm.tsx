@@ -6,15 +6,21 @@ import { Button } from "@1/ui/components/Button";
 // import { type FormValues } from "@1/ui/domains/signup/UserForm";
 import { Avatar } from "@/components/Avatar";
 import type { components } from "@1/strapi-openapi/v1";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import clsx from "clsx";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { useSession } from "next-auth/react";
+import { getCsrfToken, useSession } from "next-auth/react";
 import { useCallback, type PropsWithChildren } from "react";
 
 //
 
-export function UserForm({ csrf }: { csrf: string }) {
+export function UserForm() {
+  const { data: csrf } = useQuery({
+    queryKey: ["csrf"],
+    queryFn: () => getCsrfToken(),
+    cacheTime: 0,
+  });
+
   const { data: session, update } = useSession();
   const jwt = session?.user?.jwt;
   const profile = session?.user?.profile;
@@ -48,6 +54,8 @@ export function UserForm({ csrf }: { csrf: string }) {
   }, [profile?.attributes?.image?.data?.id]);
 
   //
+
+  if (!csrf) return null;
 
   if (isLoading) return <Verifying />;
 

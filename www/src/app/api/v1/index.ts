@@ -11,6 +11,8 @@ const querySerializer: QuerySerializer<unknown> = (q) =>
 
 //
 
+export type ApiClient = ReturnType<typeof createClient<paths>>;
+
 export const fromServer = createClient<paths>({
   baseUrl: process.env["STRAPI_API_URL"] + "/api",
   querySerializer,

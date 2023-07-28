@@ -1,23 +1,23 @@
 "use client";
 
+import { fromClient } from "@/app/api/v1";
 import type { components } from "@1/strapi-openapi/v1";
 import { Spinner } from "@1/ui/components/Spinner";
 import { useQuery } from "@tanstack/react-query";
-import { useSession } from "next-auth/react";
+import { QARepository } from "./QARepository";
 
 //
 
-export function FaqList({
-  initialData,
-}: {
-  initialData: components["schemas"]["QuestionListResponse"]["data"];
-}) {
-  const {} = useSession();
+export function QAList({ category }: { category: string | undefined }) {
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["faq"],
-    // queryKey: ["faq"],
-    queryFn: () => Promise.resolve(initialData),
-    initialData,
+    queryKey: ["q&a"],
+    queryFn: () =>
+      new QARepository(fromClient).load({
+        category: category,
+        limit: 6,
+        page: undefined,
+        pageSize: undefined,
+      }),
   });
   if (isLoading) return <Spinner />;
   if (isError) return <>Epic fail...</>;
@@ -27,14 +27,14 @@ export function FaqList({
     <ul className="grid grid-cols-1 gap-9">
       {data.map((exchange) => (
         <li key={exchange.id}>
-          <FaqCard {...exchange} />
+          <QACard {...exchange} />
         </li>
       ))}
     </ul>
   );
 }
 
-function FaqCard({
+function QACard({
   attributes,
   id,
 }: components["schemas"]["QuestionListResponseDataItem"]) {

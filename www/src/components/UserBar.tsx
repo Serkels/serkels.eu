@@ -106,15 +106,15 @@ export function UserBar() {
             <li>
               <Link
                 className={clsx("block", {
-                  "border-b-2": pathname.includes("/faq"),
+                  "border-b-2": pathname.includes("/q&a"),
                 })}
-                href="/faq"
+                href="/q&a"
               >
                 <NavItem>
                   <MessageGroup className="mx-auto block w-5 self-end" />
                   <span
                     className={clsx("hidden text-lg lg:block", {
-                      "font-bold": pathname.includes("/faq"),
+                      "font-bold": pathname.includes("/q&a"),
                     })}
                   >
                     Question-Réponse

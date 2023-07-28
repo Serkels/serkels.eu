@@ -54,7 +54,7 @@ function Explore() {
         Opportunités
       </ExploreLink>
       <ExploreLink
-        href="/faq"
+        href="/q&a"
         Icon={MessageGroup}
         className="col-span-2 text-Eminence"
       >

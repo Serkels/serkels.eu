@@ -1921,7 +1921,7 @@ export interface components {
       id?: number;
     };
     Error: {
-      data?: Record<string, unknown> | Record<string, unknown>[];
+      data?: Record<string, unknown> | Record<string, unknown>[] | null;
       error: {
         details?: Record<string, unknown>;
         message?: string;

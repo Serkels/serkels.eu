@@ -57,12 +57,12 @@ export function MobileNavBar({ className }: ComponentPropsWithoutRef<"nav">) {
         <li>
           <Link
             className={clsx("block h-full border-b-2", {
-              "border-white": pathname.includes("/faq"),
-              "border-transparent": !pathname.includes("/faq"),
+              "border-white": pathname.includes("/q&a"),
+              "border-transparent": !pathname.includes("/q&a"),
             })}
-            href="/faq"
+            href="/q&a"
           >
-            <NavItem Icon={MessageGroup} isActive={pathname.includes("/faq")}>
+            <NavItem Icon={MessageGroup} isActive={pathname.includes("/q&a")}>
               Question-Réponse
             </NavItem>
           </Link>
