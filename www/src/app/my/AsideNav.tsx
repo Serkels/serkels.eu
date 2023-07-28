@@ -2,14 +2,7 @@
 
 import { Avatar, AvatarMediaVertical } from "@/components/Avatar";
 import { AsideBar } from "@/layouts/holy/aside";
-import {
-  Binoculars,
-  Bookmark,
-  Exchange,
-  MessageGroup,
-  Messenger,
-  Plus,
-} from "@1/ui/icons";
+import { Binoculars, Bookmark, Exchange, Messenger, Plus } from "@1/ui/icons";
 import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -106,13 +99,13 @@ export function AsideNav(props: ComponentPropsWithoutRef<"aside">) {
                 </ul>
               ) : null}
             </li>
-            <ItemLinkWithIcon
+            {/* <ItemLinkWithIcon
               Icon={MessageGroup}
               match="/my/Groupes"
               href="/my/profile"
             >
               Groupes
-            </ItemLinkWithIcon>
+            </ItemLinkWithIcon> */}
             <ItemLinkWithIcon
               Icon={Messenger}
               match="/my/Messenger"

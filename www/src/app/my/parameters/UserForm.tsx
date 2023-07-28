@@ -70,6 +70,7 @@ export function UserForm() {
           firstname: profile.attributes?.firstname,
           lastname: profile.attributes?.lastname,
           university: profile.attributes?.university,
+          about: profile.attributes?.about,
         }}
         enableReinitialize
         onSubmit={(values) => mutateAsync(values)}
@@ -84,8 +85,8 @@ export function UserForm() {
               </div>
               <div className="md:col-span-1">
                 <br />
-                <button
-                  className="bg-Cerulean text-white"
+                <Button
+                  variant="tertiary"
                   onClick={onRevertToGravatarPicture}
                   type="button"
                 >
@@ -101,7 +102,7 @@ export function UserForm() {
                   >
                     Gravatar
                   </a>
-                </button>
+                </Button>
               </div>
               <label className="md:col-span-1">
                 <span className="font-bold">Prénom</span>
@@ -140,6 +141,30 @@ export function UserForm() {
                 />
                 <br />
                 <ErrorMessage name="university" component="div" />
+              </label>
+              <label className="md:col-span-1">
+                <span className="font-bold">Domaine</span>
+                <br />
+                <Field
+                  className="h-8 w-full rounded-sm border border-solid border-[#dddddd] px-3 py-2 text-xs placeholder-[#AAAAAA]"
+                  type="field_of_study"
+                  name="field_of_study"
+                />
+                <br />
+                <ErrorMessage name="field_of_study" component="div" />
+              </label>
+              <label className="md:col-span-2">
+                <span className="font-bold">À propos</span>
+                <br />
+                <Field
+                  className="w-full rounded-sm border border-solid border-[#dddddd] px-3 py-2 text-xs placeholder-[#AAAAAA]"
+                  component="textarea"
+                  rows="5"
+                  name="about"
+                  type="about"
+                />
+                <br />
+                <ErrorMessage name="about" component="div" />
               </label>
             </div>
             <Button

@@ -102,7 +102,7 @@ export function QAForm({
               />
               <div className="flex justify-between">
                 <Field
-                  as="select"
+                  component="select"
                   className="min-w-[25%] border border-[#dddddd]"
                   name="opportunity_category"
                   disabled={isSubmitting}

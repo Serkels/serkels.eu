@@ -28,6 +28,7 @@ export const Button = forwardRef<
           "[:not(disabled)]hover:opacity-80 bg-Chateau_Green text-white opacity-100":
             variant.trim() === "primary",
           "bg-RedViolet text-white": variant.trim() === "secondary",
+          "bg-Cerulean text-white": variant.trim() === "tertiary",
         }),
         className,
       )}
