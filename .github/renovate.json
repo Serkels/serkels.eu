@@ -8,10 +8,10 @@
   "dependencyDashboardAutoclose": true,
   "packageRules": [
     {
-      "description": "Group packages from strapi and plugins together",
-      "extends": "monorepo:strapi",
+      "description": "strapi monorepo",
+      "sourceUrlPrefixes": ["https://github.com/strapi/strapi"],
       "groupName": "strapi monorepo",
-      "matchPackagePatterns": ["^@strapi/", "^strapi-"]
+      "matchPackagePatterns": ["strapi", "^@strapi/", "^strapi-"]
     }
   ],
   "labels": ["dependencies"]
