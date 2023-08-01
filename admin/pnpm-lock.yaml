@@ -33,10 +33,10 @@ importers:
         version: 4.11.7
       '@strapi/strapi':
         specifier: 4.11.7
-        version: 4.11.7(pg@8.11.1)(typescript@5.1.6)
+        version: 4.11.7(pg@8.11.2)(typescript@5.1.6)
       pg:
-        specifier: 8.11.1
-        version: 8.11.1
+        specifier: 8.11.2
+        version: 8.11.2
       strapi-plugin-comments:
         specifier: 2.2.12
         version: 2.2.12(@strapi/strapi@4.11.7)(typescript@5.1.6)
@@ -1810,7 +1810,7 @@ packages:
       lodash.deburr: 4.1.0
     dev: false
 
-  /@strapi/admin@4.11.7(@strapi/strapi@4.11.7)(debug@4.3.4)(pg@8.11.1):
+  /@strapi/admin@4.11.7(@strapi/strapi@4.11.7)(debug@4.3.4)(pg@8.11.2):
     resolution: {integrity: sha512-5lPyPg8zWCYyl3hnEA0uLJtU4BqJsrCsoYLB/U0zaF17ng0j74HAupjLmXyIm8mTo+/Ta5vjYrUjobt4N0psGA==}
     engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
     peerDependencies:
@@ -1818,13 +1818,13 @@ packages:
     dependencies:
       '@casl/ability': 5.4.4
       '@pmmmwh/react-refresh-webpack-plugin': 0.5.10(react-refresh@0.14.0)(webpack-dev-server@4.15.1)(webpack@5.88.2)
-      '@strapi/data-transfer': 4.11.7(pg@8.11.1)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(redux@4.2.1)(styled-components@5.3.3)(typescript@5.1.3)
+      '@strapi/data-transfer': 4.11.7(pg@8.11.2)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(redux@4.2.1)(styled-components@5.3.3)(typescript@5.1.3)
       '@strapi/design-system': 1.8.2(@strapi/icons@1.8.2)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(styled-components@5.3.3)
       '@strapi/helper-plugin': 4.11.7(@strapi/design-system@1.8.2)(@strapi/icons@1.8.2)(debug@4.3.4)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(styled-components@5.3.3)(typescript@5.1.3)
       '@strapi/icons': 1.8.2(react-dom@18.2.0)(react@18.2.0)
       '@strapi/permissions': 4.11.7
       '@strapi/provider-audit-logs-local': 4.11.7(@strapi/strapi@4.11.7)
-      '@strapi/strapi': 4.11.7(pg@8.11.1)(typescript@5.1.6)
+      '@strapi/strapi': 4.11.7(pg@8.11.2)(typescript@5.1.6)
       '@strapi/typescript-utils': 4.11.7
       '@strapi/utils': 4.11.7
       axios: 1.4.0(debug@4.3.4)
@@ -1940,12 +1940,12 @@ packages:
       - webpack-plugin-serve
     dev: false
 
-  /@strapi/data-transfer@4.11.7(pg@8.11.1)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(redux@4.2.1)(styled-components@5.3.3)(typescript@5.1.3):
+  /@strapi/data-transfer@4.11.7(pg@8.11.2)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(redux@4.2.1)(styled-components@5.3.3)(typescript@5.1.3):
     resolution: {integrity: sha512-MHrIGO4+KmyHv/5bqx4lwYn++q0OJDsmdh6rlWdZ1bMRrZoYc6GLLpTUtpyL6Xpfd5s0OvmOS7x33Otxc80sdQ==}
     engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
     dependencies:
       '@strapi/logger': 4.11.7
-      '@strapi/strapi': 4.11.7(pg@8.11.1)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(redux@4.2.1)(styled-components@5.3.3)(typescript@5.1.3)
+      '@strapi/strapi': 4.11.7(pg@8.11.2)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(redux@4.2.1)(styled-components@5.3.3)(typescript@5.1.3)
       chalk: 4.1.2
       fs-extra: 10.0.0
       lodash: 4.17.21
@@ -1981,12 +1981,12 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@strapi/data-transfer@4.11.7(pg@8.11.1)(typescript@5.1.6):
+  /@strapi/data-transfer@4.11.7(pg@8.11.2)(typescript@5.1.6):
     resolution: {integrity: sha512-MHrIGO4+KmyHv/5bqx4lwYn++q0OJDsmdh6rlWdZ1bMRrZoYc6GLLpTUtpyL6Xpfd5s0OvmOS7x33Otxc80sdQ==}
     engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
     dependencies:
       '@strapi/logger': 4.11.7
-      '@strapi/strapi': 4.11.7(pg@8.11.1)(typescript@5.1.6)
+      '@strapi/strapi': 4.11.7(pg@8.11.2)(typescript@5.1.6)
       chalk: 4.1.2
       fs-extra: 10.0.0
       lodash: 4.17.21
@@ -2037,7 +2037,7 @@ packages:
       - webpack-plugin-serve
     dev: false
 
-  /@strapi/database@4.11.7(pg@8.11.1):
+  /@strapi/database@4.11.7(pg@8.11.2):
     resolution: {integrity: sha512-FlV72mvR2LlJdhggt1Wo81M6n0x9c8hAcGKhi2mCT1cFSgkXPUN3R+rkbpPXyAhJuii4g3mx/+b7daywLkLRyA==}
     engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
     dependencies:
@@ -2045,7 +2045,7 @@ packages:
       date-fns: 2.30.0
       debug: 4.3.4(supports-color@5.5.0)
       fs-extra: 10.0.0
-      knex: 2.5.0(pg@8.11.1)
+      knex: 2.5.0(pg@8.11.2)
       lodash: 4.17.21
       semver: 7.5.1
       umzug: 3.2.1
@@ -2386,7 +2386,7 @@ packages:
       '@strapi/design-system': 1.8.2(@strapi/icons@1.8.2)(styled-components@5.3.11)
       '@strapi/helper-plugin': 4.11.7(@strapi/design-system@1.8.2)(@strapi/icons@1.8.2)(debug@4.3.4)(typescript@5.1.6)
       '@strapi/icons': 1.8.2(react-dom@18.2.0)(react@18.2.0)
-      '@strapi/strapi': 4.11.7(pg@8.11.1)(typescript@5.1.6)
+      '@strapi/strapi': 4.11.7(pg@8.11.2)(typescript@5.1.6)
       '@strapi/utils': 4.11.7
       bcryptjs: 2.4.3
       cheerio: 1.0.0-rc.12
@@ -2483,7 +2483,7 @@ packages:
       '@strapi/design-system': 1.8.2(@strapi/icons@1.8.2)(styled-components@5.3.11)
       '@strapi/helper-plugin': 4.12.0(@strapi/design-system@1.8.2)(@strapi/icons@1.8.2)(styled-components@5.3.11)(typescript@5.1.6)
       '@strapi/icons': 1.8.2(react-dom@18.2.0)(react@18.2.0)
-      '@strapi/strapi': 4.11.7(pg@8.11.1)(typescript@5.1.6)
+      '@strapi/strapi': 4.11.7(pg@8.11.2)(typescript@5.1.6)
       '@strapi/utils': 4.12.0
       apollo-server-core: 3.12.0(graphql@15.8.0)
       apollo-server-koa: 3.10.0(graphql@15.8.0)
@@ -2555,7 +2555,7 @@ packages:
       '@strapi/design-system': 1.8.2(@strapi/icons@1.8.2)(styled-components@5.3.11)
       '@strapi/helper-plugin': 4.11.7(@strapi/design-system@1.8.2)(@strapi/icons@1.8.2)(debug@4.3.4)(typescript@5.1.6)
       '@strapi/icons': 1.8.2(react-dom@18.2.0)(react@18.2.0)
-      '@strapi/strapi': 4.11.7(pg@8.11.1)(typescript@5.1.6)
+      '@strapi/strapi': 4.11.7(pg@8.11.2)(typescript@5.1.6)
     transitivePeerDependencies:
       - '@codemirror/view'
       - '@types/react'
@@ -2572,7 +2572,7 @@ packages:
     peerDependencies:
       '@strapi/strapi': ^4.0.0
     dependencies:
-      '@strapi/strapi': 4.11.7(pg@8.11.1)(typescript@5.1.6)
+      '@strapi/strapi': 4.11.7(pg@8.11.2)(typescript@5.1.6)
       date-fns: 2.30.0
       eslint-plugin-react-hooks: 4.6.0
       lodash: 4.17.21
@@ -2730,7 +2730,7 @@ packages:
     peerDependencies:
       '@strapi/strapi': ^4.9.0
     dependencies:
-      '@strapi/strapi': 4.11.7(pg@8.11.1)(typescript@5.1.6)
+      '@strapi/strapi': 4.11.7(pg@8.11.2)(typescript@5.1.6)
     dev: false
 
   /@strapi/provider-email-nodemailer@4.11.7:
@@ -2765,7 +2765,7 @@ packages:
       fs-extra: 10.0.0
     dev: false
 
-  /@strapi/strapi@4.11.7(pg@8.11.1)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(redux@4.2.1)(styled-components@5.3.3)(typescript@5.1.3):
+  /@strapi/strapi@4.11.7(pg@8.11.2)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(redux@4.2.1)(styled-components@5.3.3)(typescript@5.1.3):
     resolution: {integrity: sha512-cBNa/ujLSIxkPevrZ9TwN4Lrv80jbkm2wyQToF5Apv4IpaITWnACoAOyjHvSgkiwkx39ONOhW2bQ0jATY6s0yg==}
     engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
     hasBin: true
@@ -2773,9 +2773,9 @@ packages:
     dependencies:
       '@koa/cors': 3.4.3
       '@koa/router': 10.1.1
-      '@strapi/admin': 4.11.7(@strapi/strapi@4.11.7)(debug@4.3.4)(pg@8.11.1)
-      '@strapi/data-transfer': 4.11.7(pg@8.11.1)(typescript@5.1.6)
-      '@strapi/database': 4.11.7(pg@8.11.1)
+      '@strapi/admin': 4.11.7(@strapi/strapi@4.11.7)(debug@4.3.4)(pg@8.11.2)
+      '@strapi/data-transfer': 4.11.7(pg@8.11.2)(typescript@5.1.6)
+      '@strapi/database': 4.11.7(pg@8.11.2)
       '@strapi/generate-new': 4.11.7
       '@strapi/generators': 4.11.7
       '@strapi/logger': 4.11.7
@@ -2849,7 +2849,7 @@ packages:
       - typescript
     dev: false
 
-  /@strapi/strapi@4.11.7(pg@8.11.1)(typescript@5.1.6):
+  /@strapi/strapi@4.11.7(pg@8.11.2)(typescript@5.1.6):
     resolution: {integrity: sha512-cBNa/ujLSIxkPevrZ9TwN4Lrv80jbkm2wyQToF5Apv4IpaITWnACoAOyjHvSgkiwkx39ONOhW2bQ0jATY6s0yg==}
     engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
     hasBin: true
@@ -2857,9 +2857,9 @@ packages:
     dependencies:
       '@koa/cors': 3.4.3
       '@koa/router': 10.1.1
-      '@strapi/admin': 4.11.7(@strapi/strapi@4.11.7)(debug@4.3.4)(pg@8.11.1)
-      '@strapi/data-transfer': 4.11.7(pg@8.11.1)(typescript@5.1.6)
-      '@strapi/database': 4.11.7(pg@8.11.1)
+      '@strapi/admin': 4.11.7(@strapi/strapi@4.11.7)(debug@4.3.4)(pg@8.11.2)
+      '@strapi/data-transfer': 4.11.7(pg@8.11.2)(typescript@5.1.6)
+      '@strapi/database': 4.11.7(pg@8.11.2)
       '@strapi/generate-new': 4.11.7
       '@strapi/generators': 4.11.7
       '@strapi/logger': 4.11.7
@@ -7268,7 +7268,7 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: false
 
-  /knex@2.5.0(pg@8.11.1):
+  /knex@2.5.0(pg@8.11.2):
     resolution: {integrity: sha512-h6Ru3PJmZjCDUEqLgwQ/RJUu06Bz7MTzY6sD90udLIa9qwtC7Rnicr7TBiWSaswZmDqk4EZ8xysdg1fkvhYM6w==}
     engines: {node: '>=12'}
     hasBin: true
@@ -7305,7 +7305,7 @@ packages:
       getopts: 2.3.0
       interpret: 2.2.0
       lodash: 4.17.21
-      pg: 8.11.1
+      pg: 8.11.2
       pg-connection-string: 2.6.1
       rechoir: 0.8.0
       resolve-from: 5.0.0
@@ -8673,17 +8673,21 @@ packages:
     resolution: {integrity: sha512-w6ZzNu6oMmIzEAYVw+RLK0+nqHPt8K3ZnknKi+g48Ak2pr3dtljJW3o+D/n2zzCG07Zoe9VOX3aiKpj+BN0pjg==}
     dev: false
 
+  /pg-connection-string@2.6.2:
+    resolution: {integrity: sha512-ch6OwaeaPYcova4kKZ15sbJ2hKb/VP48ZD2gE7i1J+L4MspCtBMAx8nMgz7bksc7IojCIIWuEhHibSMFH8m8oA==}
+    dev: false
+
   /pg-int8@1.0.1:
     resolution: {integrity: sha512-WCtabS6t3c8SkpDBUlb1kjOs7l66xsGdKpIPZsg4wR+B3+u9UAum2odSsF9tnvxg80h4ZxLWMy4pRjOsFIqQpw==}
     engines: {node: '>=4.0.0'}
     dev: false
 
-  /pg-pool@3.6.1(pg@8.11.1):
+  /pg-pool@3.6.1(pg@8.11.2):
     resolution: {integrity: sha512-jizsIzhkIitxCGfPRzJn1ZdcosIt3pz9Sh3V01fm1vZnbnCMgmGl5wvGGdNN2EL9Rmb0EcFoCkixH4Pu+sP9Og==}
     peerDependencies:
       pg: '>=8.0'
     dependencies:
-      pg: 8.11.1
+      pg: 8.11.2
     dev: false
 
   /pg-protocol@1.6.0:
@@ -8701,8 +8705,8 @@ packages:
       postgres-interval: 1.2.0
     dev: false
 
-  /pg@8.11.1:
-    resolution: {integrity: sha512-utdq2obft07MxaDg0zBJI+l/M3mBRfIpEN3iSemsz0G5F2/VXx+XzqF4oxrbIZXQxt2AZzIUzyVg/YM6xOP/WQ==}
+  /pg@8.11.2:
+    resolution: {integrity: sha512-l4rmVeV8qTIrrPrIR3kZQqBgSN93331s9i6wiUiLOSk0Q7PmUxZD/m1rQI622l3NfqBby9Ar5PABfS/SulfieQ==}
     engines: {node: '>= 8.0.0'}
     peerDependencies:
       pg-native: '>=3.0.1'
@@ -8712,8 +8716,8 @@ packages:
     dependencies:
       buffer-writer: 2.0.0
       packet-reader: 1.0.0
-      pg-connection-string: 2.6.1
-      pg-pool: 3.6.1(pg@8.11.1)
+      pg-connection-string: 2.6.2
+      pg-pool: 3.6.1(pg@8.11.2)
       pg-protocol: 1.6.0
       pg-types: 2.2.0
       pgpass: 1.0.5
@@ -10196,7 +10200,7 @@ packages:
       react-router-dom: 5.3.4
     dependencies:
       '@strapi/plugin-graphql': 4.12.0(@strapi/strapi@4.11.7)(styled-components@5.3.11)(typescript@5.1.6)
-      '@strapi/strapi': 4.11.7(pg@8.11.1)(typescript@5.1.6)
+      '@strapi/strapi': 4.11.7(pg@8.11.2)(typescript@5.1.6)
       '@strapi/utils': 4.12.0
       '@types/axios': 0.14.0
       '@types/react-intl': 3.0.0(typescript@5.1.6)
@@ -10224,7 +10228,7 @@ packages:
     peerDependencies:
       '@strapi/strapi': ^4.4.0
     dependencies:
-      '@strapi/strapi': 4.11.7(pg@8.11.1)(typescript@5.1.6)
+      '@strapi/strapi': 4.11.7(pg@8.11.2)(typescript@5.1.6)
       i18n-iso-countries: 7.6.0
     dev: false
 
@@ -10234,7 +10238,7 @@ packages:
     peerDependencies:
       '@strapi/strapi': ^4.x
     dependencies:
-      '@strapi/strapi': 4.11.7(pg@8.11.1)(typescript@5.1.6)
+      '@strapi/strapi': 4.11.7(pg@8.11.2)(typescript@5.1.6)
       nanoid: 3.3.6
     dev: false
 
