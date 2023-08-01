@@ -37,10 +37,6 @@ export class QARepository {
     } = await this.client.GET("/questions", {
       params: {
         query: {
-          populate: {
-            opportunity_category: { fields: ["name", "slug"] },
-            owner: { fields: ["email"] },
-          },
           pagination: {
             limit,
             page,
@@ -94,7 +90,7 @@ export class QARepository {
         query: {
           populate: {
             opportunity_category: { fields: ["name"] },
-            owner: { fields: ["email"] },
+            owner: "*",
           },
         },
       },

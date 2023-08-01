@@ -51,5 +51,53 @@ export default factories.createCoreController(
       ctx.request.body.data.owner = user.id;
       return super.create(ctx);
     },
+
+    async findOne(ctx) {
+      ctx.query.populate = {
+        image: {
+          fields: ["url"],
+        },
+      };
+      return super.findOne(ctx);
+    },
+
+    async avatar(ctx) {
+      ctx.query.populate = {
+        image: {
+          fields: ["url"],
+        },
+      };
+      const { data } = await super.find(ctx);
+      const profile = data[0];
+      console.log({ profile });
+      return "";
+    },
+
+    async findOneByUser(ctx) {
+      console.log();
+      console.log("findOneByUser");
+      const user: { id: number } = ctx.params;
+      console.log({ user });
+
+      ctx.query.filters = {
+        ...(ctx.query.filters || {}),
+        owner: user.id,
+      };
+
+      ctx.query.populate = {
+        image: {
+          fields: ["url"],
+        },
+      };
+
+      const { data } = await super.find(ctx);
+      console.log({ data });
+
+      const profile = data[0];
+      if (!profile) return ctx.notFound("Profile not found");
+
+      console.log();
+      return { data: profile, meta: {} };
+    },
   }),
 );

@@ -6,4 +6,8 @@ import { factories } from "@strapi/strapi";
 
 export default factories.createCoreRouter(
   "api::opportunity-category.opportunity-category",
+  {
+    except: ["create", "delete", "findOne", "update"],
+    config: {},
+  },
 );

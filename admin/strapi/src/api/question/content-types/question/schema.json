@@ -33,6 +33,11 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::opportunity-category.opportunity-category"
+    },
+    "profile": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::user-profile.user-profile"
     }
   }
 }

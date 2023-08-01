@@ -38,6 +38,17 @@ export default {
         },
         info: { apiName: "user-profile", type: "content-api" },
       },
+      {
+        method: "GET",
+        path: "/user-profiles/public/:id",
+        handler: "api::user-profile.user-profile.findOneByUser",
+        config: {
+          policies: [],
+          middlewares: [],
+          description: "Get authenticated user profile from user id",
+        },
+        info: { apiName: "user-profile", type: "content-api" },
+      },
       ...coreRouter.routes,
     ];
   },
