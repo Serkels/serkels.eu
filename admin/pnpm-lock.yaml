@@ -11,41 +11,41 @@ importers:
   strapi:
     dependencies:
       '@strapi/plugin-documentation':
-        specifier: 4.11.7
-        version: 4.11.7(@strapi/strapi@4.11.7)(typescript@5.1.6)
+        specifier: 4.12.1
+        version: 4.12.1(@strapi/strapi@4.12.1)(typescript@5.1.6)
       '@strapi/plugin-i18n':
-        specifier: 4.11.7
-        version: 4.11.7(typescript@5.1.6)
+        specifier: 4.12.1
+        version: 4.12.1(typescript@5.1.6)
       '@strapi/plugin-sentry':
-        specifier: 4.11.7
-        version: 4.11.7(@strapi/strapi@4.11.7)(typescript@5.1.6)
+        specifier: 4.12.1
+        version: 4.12.1(@strapi/strapi@4.12.1)(typescript@5.1.6)
       '@strapi/plugin-seo':
         specifier: 1.9.2
-        version: 1.9.2(@strapi/strapi@4.11.7)
+        version: 1.9.2(@strapi/strapi@4.12.1)
       '@strapi/plugin-users-permissions':
-        specifier: 4.11.7
-        version: 4.11.7(typescript@5.1.6)
+        specifier: 4.12.1
+        version: 4.12.1(typescript@5.1.6)
       '@strapi/provider-email-nodemailer':
-        specifier: 4.11.7
-        version: 4.11.7
+        specifier: 4.12.1
+        version: 4.12.1
       '@strapi/provider-upload-aws-s3':
-        specifier: 4.11.7
-        version: 4.11.7
+        specifier: 4.12.1
+        version: 4.12.1
       '@strapi/strapi':
-        specifier: 4.11.7
-        version: 4.11.7(pg@8.11.2)(typescript@5.1.6)
+        specifier: 4.12.1
+        version: 4.12.1(pg@8.11.2)(typescript@5.1.6)
       pg:
         specifier: 8.11.2
         version: 8.11.2
       strapi-plugin-comments:
         specifier: 2.2.12
-        version: 2.2.12(@strapi/strapi@4.11.7)(typescript@5.1.6)
+        version: 2.2.12(@strapi/strapi@4.12.1)(typescript@5.1.6)
       strapi-plugin-country-select:
         specifier: 1.0.2
-        version: 1.0.2(@strapi/strapi@4.11.7)
+        version: 1.0.2(@strapi/strapi@4.12.1)
       strapi-plugin-passwordless:
         specifier: 4.0.12
-        version: 4.0.12(@strapi/strapi@4.11.7)
+        version: 4.0.12(@strapi/strapi@4.12.1)
     devDependencies:
       '@1/typescript-config':
         specifier: link:../../@1/config/typescript-config
@@ -1810,40 +1810,40 @@ packages:
       lodash.deburr: 4.1.0
     dev: false
 
-  /@strapi/admin@4.11.7(@strapi/strapi@4.11.7)(debug@4.3.4)(pg@8.11.2):
-    resolution: {integrity: sha512-5lPyPg8zWCYyl3hnEA0uLJtU4BqJsrCsoYLB/U0zaF17ng0j74HAupjLmXyIm8mTo+/Ta5vjYrUjobt4N0psGA==}
-    engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
+  /@strapi/admin@4.12.1(@strapi/strapi@4.12.1)(debug@4.3.4):
+    resolution: {integrity: sha512-2UDxm4xlILmcasAP+0sms7rdVj94/oRjNACqn9BXig8sql3UXM6G1Zd1pzKgWT5JrgXQlrE9OUWBSZ+XcfhWOw==}
+    engines: {node: '>=16.0.0 <=20.x.x', npm: '>=6.0.0'}
     peerDependencies:
       '@strapi/strapi': ^4.3.4
     dependencies:
       '@casl/ability': 5.4.4
       '@pmmmwh/react-refresh-webpack-plugin': 0.5.10(react-refresh@0.14.0)(webpack-dev-server@4.15.1)(webpack@5.88.2)
-      '@strapi/data-transfer': 4.11.7(pg@8.11.2)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(redux@4.2.1)(styled-components@5.3.3)(typescript@5.1.3)
+      '@strapi/data-transfer': 4.12.1(@strapi/strapi@4.12.1)
       '@strapi/design-system': 1.8.2(@strapi/icons@1.8.2)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(styled-components@5.3.3)
-      '@strapi/helper-plugin': 4.11.7(@strapi/design-system@1.8.2)(@strapi/icons@1.8.2)(debug@4.3.4)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(styled-components@5.3.3)(typescript@5.1.3)
+      '@strapi/helper-plugin': 4.12.1(@strapi/design-system@1.8.2)(@strapi/icons@1.8.2)(debug@4.3.4)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(styled-components@5.3.3)(typescript@5.1.3)
       '@strapi/icons': 1.8.2(react-dom@18.2.0)(react@18.2.0)
-      '@strapi/permissions': 4.11.7
-      '@strapi/provider-audit-logs-local': 4.11.7(@strapi/strapi@4.11.7)
-      '@strapi/strapi': 4.11.7(pg@8.11.2)(typescript@5.1.6)
-      '@strapi/typescript-utils': 4.11.7
-      '@strapi/utils': 4.11.7
+      '@strapi/permissions': 4.12.1
+      '@strapi/provider-audit-logs-local': 4.12.1(@strapi/strapi@4.12.1)
+      '@strapi/strapi': 4.12.1(pg@8.11.2)(typescript@5.1.6)
+      '@strapi/typescript-utils': 4.12.1
+      '@strapi/utils': 4.12.1
       axios: 1.4.0(debug@4.3.4)
       bcryptjs: 2.4.3
       browserslist: 4.21.10
       browserslist-to-esbuild: 1.2.0
       chalk: 4.1.2
-      chokidar: 3.5.2
+      chokidar: 3.5.3
       codemirror5: /codemirror@5.65.14
       cross-env: 7.0.3
       css-loader: 6.8.1(webpack@5.88.2)
       date-fns: 2.30.0
-      dotenv: 8.5.1
+      dotenv: 14.2.0
       esbuild-loader: 2.21.0(webpack@5.88.2)
-      execa: 1.0.0
+      execa: 5.1.1
       fast-deep-equal: 3.1.3
       find-root: 1.1.0
       fork-ts-checker-webpack-plugin: 7.3.0(typescript@5.1.3)(webpack@5.88.2)
-      formik: 2.4.2(react@18.2.0)
+      formik: 2.4.0(react@18.2.0)
       fractional-indexing: 3.2.0
       fs-extra: 10.0.0
       highlight.js: 10.7.3
@@ -1891,10 +1891,10 @@ packages:
       react-select: 5.7.0(react-dom@18.2.0)(react@18.2.0)
       react-window: 1.8.8(react-dom@18.2.0)(react@18.2.0)
       redux: 4.2.1
-      reselect: 4.1.8
+      reselect: 4.1.7
       rimraf: 3.0.2
-      sanitize-html: 2.10.0
-      semver: 7.5.1
+      sanitize-html: 2.11.0
+      semver: 7.5.4
       sift: 16.0.1
       style-loader: 3.3.1(webpack@5.88.2)
       styled-components: 5.3.3(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
@@ -1903,7 +1903,7 @@ packages:
       webpack-cli: 5.1.4(webpack-dev-server@4.15.1)(webpack@5.88.2)
       webpack-dev-server: 4.15.1(debug@4.3.4)(webpack-cli@5.1.4)(webpack@5.88.2)
       webpackbar: 5.0.2(webpack@5.88.2)
-      yup: 0.32.11
+      yup: 0.32.9
     transitivePeerDependencies:
       - '@babel/core'
       - '@codemirror/view'
@@ -1914,23 +1914,15 @@ packages:
       - '@types/react-dom'
       - '@types/webpack'
       - '@webpack-cli/generators'
-      - better-sqlite3
       - bufferutil
       - debug
-      - encoding
       - esbuild
       - mongoose
-      - mysql
-      - mysql2
-      - pg
-      - pg-native
       - react-native
       - redis
       - sequelize
       - sockjs-client
-      - sqlite3
       - supports-color
-      - tedious
       - type-fest
       - uglify-js
       - utf-8-validate
@@ -1940,114 +1932,39 @@ packages:
       - webpack-plugin-serve
     dev: false
 
-  /@strapi/data-transfer@4.11.7(pg@8.11.2)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(redux@4.2.1)(styled-components@5.3.3)(typescript@5.1.3):
-    resolution: {integrity: sha512-MHrIGO4+KmyHv/5bqx4lwYn++q0OJDsmdh6rlWdZ1bMRrZoYc6GLLpTUtpyL6Xpfd5s0OvmOS7x33Otxc80sdQ==}
-    engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
+  /@strapi/data-transfer@4.12.1(@strapi/strapi@4.12.1):
+    resolution: {integrity: sha512-3SofdQckGfw49k+2luN5wuMc355nU0Cl7J6zm1wRI1gwCOWlRr4CEzIvkqnm3qKfpzbnJksttu6yn6FqcqdZFQ==}
+    engines: {node: '>=16.0.0 <=20.x.x', npm: '>=6.0.0'}
+    peerDependencies:
+      '@strapi/strapi': 4.11.5
     dependencies:
-      '@strapi/logger': 4.11.7
-      '@strapi/strapi': 4.11.7(pg@8.11.2)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(redux@4.2.1)(styled-components@5.3.3)(typescript@5.1.3)
+      '@strapi/logger': 4.12.1
+      '@strapi/strapi': 4.12.1(pg@8.11.2)(typescript@5.1.6)
       chalk: 4.1.2
       fs-extra: 10.0.0
       lodash: 4.17.21
-      semver: 7.5.1
+      semver: 7.5.4
       stream-chain: 2.2.5
       stream-json: 1.8.0
       tar: 6.1.13
       tar-stream: 2.2.0
       ws: 8.13.0
     transitivePeerDependencies:
-      - '@codemirror/view'
-      - '@types/hoist-non-react-statics'
-      - '@types/node'
-      - '@types/react'
-      - '@types/react-dom'
-      - better-sqlite3
       - bufferutil
-      - encoding
-      - mysql
-      - mysql2
-      - pg
-      - pg-native
-      - react
-      - react-dom
-      - react-native
-      - react-router-dom
-      - redux
-      - sqlite3
-      - styled-components
-      - supports-color
-      - tedious
-      - typescript
       - utf-8-validate
     dev: false
 
-  /@strapi/data-transfer@4.11.7(pg@8.11.2)(typescript@5.1.6):
-    resolution: {integrity: sha512-MHrIGO4+KmyHv/5bqx4lwYn++q0OJDsmdh6rlWdZ1bMRrZoYc6GLLpTUtpyL6Xpfd5s0OvmOS7x33Otxc80sdQ==}
-    engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
+  /@strapi/database@4.12.1(pg@8.11.2):
+    resolution: {integrity: sha512-qKBk99T7DUuRsViq2WNNIYxA/vhHI49W99XsfBbUXc0RLRfgv9NOEHQEsiYY4SaFOzsED+eaoQS+kJnZM/FM/w==}
+    engines: {node: '>=16.0.0 <=20.x.x', npm: '>=6.0.0'}
     dependencies:
-      '@strapi/logger': 4.11.7
-      '@strapi/strapi': 4.11.7(pg@8.11.2)(typescript@5.1.6)
-      chalk: 4.1.2
-      fs-extra: 10.0.0
-      lodash: 4.17.21
-      semver: 7.5.1
-      stream-chain: 2.2.5
-      stream-json: 1.8.0
-      tar: 6.1.13
-      tar-stream: 2.2.0
-      ws: 8.13.0
-    transitivePeerDependencies:
-      - '@babel/core'
-      - '@codemirror/view'
-      - '@swc/core'
-      - '@types/hoist-non-react-statics'
-      - '@types/node'
-      - '@types/react'
-      - '@types/react-dom'
-      - '@types/webpack'
-      - '@webpack-cli/generators'
-      - better-sqlite3
-      - bufferutil
-      - encoding
-      - esbuild
-      - mongoose
-      - mysql
-      - mysql2
-      - pg
-      - pg-native
-      - react
-      - react-dom
-      - react-native
-      - react-router-dom
-      - redis
-      - redux
-      - sequelize
-      - sockjs-client
-      - sqlite3
-      - styled-components
-      - supports-color
-      - tedious
-      - type-fest
-      - typescript
-      - uglify-js
-      - utf-8-validate
-      - vue-template-compiler
-      - webpack-bundle-analyzer
-      - webpack-hot-middleware
-      - webpack-plugin-serve
-    dev: false
-
-  /@strapi/database@4.11.7(pg@8.11.2):
-    resolution: {integrity: sha512-FlV72mvR2LlJdhggt1Wo81M6n0x9c8hAcGKhi2mCT1cFSgkXPUN3R+rkbpPXyAhJuii4g3mx/+b7daywLkLRyA==}
-    engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
-    dependencies:
-      '@strapi/utils': 4.11.7
+      '@strapi/utils': 4.12.1
       date-fns: 2.30.0
       debug: 4.3.4(supports-color@5.5.0)
       fs-extra: 10.0.0
       knex: 2.5.0(pg@8.11.2)
       lodash: 4.17.21
-      semver: 7.5.1
+      semver: 7.5.4
       umzug: 3.2.1
     transitivePeerDependencies:
       - better-sqlite3
@@ -2123,9 +2040,9 @@ packages:
       - '@types/react-dom'
     dev: false
 
-  /@strapi/generate-new@4.11.7:
-    resolution: {integrity: sha512-a9Njs9f3ZuEc+L9NSw2/QI6mcKiySP5Qg7NXz+6bNE92CBjGdwwvJiaAuG/sc6tUfLAvLXslJLJEHIBwXmSAiA==}
-    engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
+  /@strapi/generate-new@4.12.1:
+    resolution: {integrity: sha512-OHDnJdUCtbEnhHv4w45kEUP3MvTremdP0UcOVsBWoDVAPpCWbHYD5HCEQAo4jYCQPwM0gcHHFE1b7S35fjMp4w==}
+    engines: {node: '>=16.0.0 <=20.x.x', npm: '>=6.0.0'}
     dependencies:
       '@sentry/node': 6.19.7
       chalk: 4.1.2
@@ -2136,20 +2053,20 @@ packages:
       node-fetch: 2.6.9
       node-machine-id: 1.1.12
       ora: 5.4.1
-      semver: 7.5.1
+      semver: 7.5.4
       tar: 6.1.13
     transitivePeerDependencies:
       - encoding
       - supports-color
     dev: false
 
-  /@strapi/generators@4.11.7:
-    resolution: {integrity: sha512-NcocLgrRdS3PzmFIuP0yHJOi5aKOQaAIZB2QPOdNlBhcdgtq//OFXwwGA7uugAYwcYVFDyn0TwoIFReP6P1IcA==}
-    engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
+  /@strapi/generators@4.12.1:
+    resolution: {integrity: sha512-qC7tmvtZHEvMQKpCkNim1mX1KJ2C/yaKfyZ37Z1IVwSLd/dMPE6I+1mK4Y+DXkx7/4SWFhr6TNfxerx6Lhj6tw==}
+    engines: {node: '>=16.0.0 <=20.x.x', npm: '>=6.0.0'}
     dependencies:
       '@sindresorhus/slugify': 1.1.0
-      '@strapi/typescript-utils': 4.11.7
-      '@strapi/utils': 4.11.7
+      '@strapi/typescript-utils': 4.12.1
+      '@strapi/utils': 4.12.1
       chalk: 4.1.2
       copyfiles: 2.4.1
       fs-extra: 10.0.0
@@ -2158,72 +2075,6 @@ packages:
       pluralize: 8.0.0
     transitivePeerDependencies:
       - supports-color
-    dev: false
-
-  /@strapi/helper-plugin@4.11.7(@strapi/design-system@1.8.2)(@strapi/icons@1.8.2)(debug@4.3.4)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(styled-components@5.3.3)(typescript@5.1.3):
-    resolution: {integrity: sha512-Q6uAgkwrvSw3UQgS5UiCSqFmzpnQl/U6fQlSvPdeOTfWHOt1YdzSEVCUP6K0zx1VCydByzGYNe/EjEGuGZDsJA==}
-    engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
-    peerDependencies:
-      '@strapi/design-system': 1.8.2
-      '@strapi/icons': 1.8.2
-      react: ^17.0.0 || ^18.0.0
-      react-dom: ^17.0.0 || ^18.0.0
-      react-router-dom: ^5.3.4
-      styled-components: ^5.3.3
-    dependencies:
-      '@strapi/design-system': 1.8.2(@strapi/icons@1.8.2)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(styled-components@5.3.3)
-      '@strapi/icons': 1.8.2(react-dom@18.2.0)(react@18.2.0)
-      axios: 1.4.0(debug@4.3.4)
-      date-fns: 2.30.0
-      formik: 2.4.0(react@18.2.0)
-      immer: 9.0.19
-      lodash: 4.17.21
-      prop-types: 15.8.1
-      qs: 6.11.1
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      react-helmet: 6.1.0(react@18.2.0)
-      react-intl: 6.4.1(react@18.2.0)(typescript@5.1.3)
-      react-query: 3.39.3(react-dom@18.2.0)(react@18.2.0)
-      react-router-dom: 5.3.4(react@18.2.0)
-      react-select: 5.7.0(react-dom@18.2.0)(react@18.2.0)
-      styled-components: 5.3.3(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
-    transitivePeerDependencies:
-      - '@types/react'
-      - debug
-      - react-native
-      - typescript
-    dev: false
-
-  /@strapi/helper-plugin@4.11.7(@strapi/design-system@1.8.2)(@strapi/icons@1.8.2)(debug@4.3.4)(typescript@5.1.6):
-    resolution: {integrity: sha512-Q6uAgkwrvSw3UQgS5UiCSqFmzpnQl/U6fQlSvPdeOTfWHOt1YdzSEVCUP6K0zx1VCydByzGYNe/EjEGuGZDsJA==}
-    engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
-    peerDependencies:
-      '@strapi/design-system': 1.8.2
-      '@strapi/icons': 1.8.2
-      react: ^17.0.0 || ^18.0.0
-      react-dom: ^17.0.0 || ^18.0.0
-      react-router-dom: ^5.3.4
-      styled-components: ^5.3.3
-    dependencies:
-      '@strapi/design-system': 1.8.2(@strapi/icons@1.8.2)(styled-components@5.3.11)
-      '@strapi/icons': 1.8.2(react-dom@18.2.0)(react@18.2.0)
-      axios: 1.4.0(debug@4.3.4)
-      date-fns: 2.30.0
-      formik: 2.4.0(react@18.2.0)
-      immer: 9.0.19
-      lodash: 4.17.21
-      prop-types: 15.8.1
-      qs: 6.11.1
-      react-helmet: 6.1.0(react@18.2.0)
-      react-intl: 6.4.1(typescript@5.1.6)
-      react-query: 3.39.3(react-dom@18.2.0)(react@18.2.0)
-      react-select: 5.7.0(react-dom@18.2.0)(react@18.2.0)
-    transitivePeerDependencies:
-      - '@types/react'
-      - debug
-      - react-native
-      - typescript
     dev: false
 
   /@strapi/helper-plugin@4.12.0(@strapi/design-system@1.8.2)(@strapi/icons@1.8.2)(styled-components@5.3.11)(typescript@5.1.6):
@@ -2241,7 +2092,7 @@ packages:
       '@strapi/icons': 1.8.2(react-dom@18.2.0)(react@18.2.0)
       axios: 1.4.0(debug@4.3.4)
       date-fns: 2.30.0
-      formik: 2.4.2(react@18.2.0)
+      formik: 2.4.2
       immer: 9.0.19
       lodash: 4.17.21
       prop-types: 15.8.1
@@ -2251,6 +2102,72 @@ packages:
       react-query: 3.39.3(react-dom@18.2.0)(react@18.2.0)
       react-select: 5.7.0(react-dom@18.2.0)(react@18.2.0)
       styled-components: 5.3.11
+    transitivePeerDependencies:
+      - '@types/react'
+      - debug
+      - react-native
+      - typescript
+    dev: false
+
+  /@strapi/helper-plugin@4.12.1(@strapi/design-system@1.8.2)(@strapi/icons@1.8.2)(debug@4.3.4)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(styled-components@5.3.3)(typescript@5.1.3):
+    resolution: {integrity: sha512-lCpAk5VH05fO4iaSirNIARXhPjRobSYhPvRDiKHy1UYCNaed8g7XuxuescODl01mcQGYfBD5lUYukLbIv9JbxQ==}
+    engines: {node: '>=16.0.0 <=20.x.x', npm: '>=6.0.0'}
+    peerDependencies:
+      '@strapi/design-system': 1.8.2
+      '@strapi/icons': 1.8.2
+      react: ^17.0.0 || ^18.0.0
+      react-dom: ^17.0.0 || ^18.0.0
+      react-router-dom: ^5.3.4
+      styled-components: ^5.3.3
+    dependencies:
+      '@strapi/design-system': 1.8.2(@strapi/icons@1.8.2)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(styled-components@5.3.3)
+      '@strapi/icons': 1.8.2(react-dom@18.2.0)(react@18.2.0)
+      axios: 1.4.0(debug@4.3.4)
+      date-fns: 2.30.0
+      formik: 2.4.0(react@18.2.0)
+      immer: 9.0.19
+      lodash: 4.17.21
+      prop-types: 15.8.1
+      qs: 6.11.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-helmet: 6.1.0(react@18.2.0)
+      react-intl: 6.4.1(react@18.2.0)(typescript@5.1.3)
+      react-query: 3.39.3(react-dom@18.2.0)(react@18.2.0)
+      react-router-dom: 5.3.4(react@18.2.0)
+      react-select: 5.7.0(react-dom@18.2.0)(react@18.2.0)
+      styled-components: 5.3.3(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/react'
+      - debug
+      - react-native
+      - typescript
+    dev: false
+
+  /@strapi/helper-plugin@4.12.1(@strapi/design-system@1.8.2)(@strapi/icons@1.8.2)(debug@4.3.4)(typescript@5.1.6):
+    resolution: {integrity: sha512-lCpAk5VH05fO4iaSirNIARXhPjRobSYhPvRDiKHy1UYCNaed8g7XuxuescODl01mcQGYfBD5lUYukLbIv9JbxQ==}
+    engines: {node: '>=16.0.0 <=20.x.x', npm: '>=6.0.0'}
+    peerDependencies:
+      '@strapi/design-system': 1.8.2
+      '@strapi/icons': 1.8.2
+      react: ^17.0.0 || ^18.0.0
+      react-dom: ^17.0.0 || ^18.0.0
+      react-router-dom: ^5.3.4
+      styled-components: ^5.3.3
+    dependencies:
+      '@strapi/design-system': 1.8.2(@strapi/icons@1.8.2)(styled-components@5.3.11)
+      '@strapi/icons': 1.8.2(react-dom@18.2.0)(react@18.2.0)
+      axios: 1.4.0(debug@4.3.4)
+      date-fns: 2.30.0
+      formik: 2.4.0(react@18.2.0)
+      immer: 9.0.19
+      lodash: 4.17.21
+      prop-types: 15.8.1
+      qs: 6.11.1
+      react-helmet: 6.1.0(react@18.2.0)
+      react-intl: 6.4.1(typescript@5.1.6)
+      react-query: 3.39.3(react-dom@18.2.0)(react@18.2.0)
+      react-select: 5.7.0(react-dom@18.2.0)(react@18.2.0)
     transitivePeerDependencies:
       - '@types/react'
       - debug
@@ -2268,77 +2185,36 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  /@strapi/logger@4.11.7:
-    resolution: {integrity: sha512-ewfzWAdueJ8bTEko5oNRolqlV1isNoldDGJrIG23wcmMW0/MADsve70brlLECp5FHR1w3BRF7PRXqHeDTP2BqA==}
-    engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
+  /@strapi/logger@4.12.1:
+    resolution: {integrity: sha512-ipFbypAojmzvADJgTAIbHnflLg0PJwD8AHFbjrCddqruUUMPHEvzV6YvY6pBAKHi6+4XZER0GcD+aLwvkqloHQ==}
+    engines: {node: '>=16.0.0 <=20.x.x', npm: '>=6.0.0'}
     dependencies:
       lodash: 4.17.21
-      winston: 3.9.0
+      winston: 3.10.0
     dev: false
 
-  /@strapi/permissions@4.11.7:
-    resolution: {integrity: sha512-lf4WRryF0VGyG9kvVecw/jxSMj4hsrOWITkujBTWKdry2LG1iK3TwX3oX455HUssIgSGiR44NNSMwHOP7Yui7Q==}
-    engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
+  /@strapi/permissions@4.12.1:
+    resolution: {integrity: sha512-bXAdDPqFQau7+c5s1ARuVXJKNcfE1OWRMDoruNmwf5Tfbm83JoN3qrzuNurspnVwm8QWb4RHo72DvU/tt8FUPQ==}
+    engines: {node: '>=16.0.0 <=20.x.x', npm: '>=6.0.0'}
     dependencies:
       '@casl/ability': 5.4.4
-      '@strapi/utils': 4.11.7
+      '@strapi/utils': 4.12.1
       lodash: 4.17.21
       sift: 16.0.1
     dev: false
 
-  /@strapi/plugin-content-manager@4.11.7:
-    resolution: {integrity: sha512-nZp205nwhDerMKaBXHxLMtty+qyskREX9vH773CxkgIWuQMQIfK4YDBxGKtNxjs/Jyur5X/DYbt+4ZZw6OUqWA==}
-    engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
+  /@strapi/plugin-content-manager@4.12.1:
+    resolution: {integrity: sha512-rtWmnepY12EaVi9YWfv2EvHCziQu5UDtijmOTQSC8sVSeze70s9zbWsQRat35TySCEnUtkk8DjjVlDgs5/0cDw==}
+    engines: {node: '>=16.0.0 <=20.x.x', npm: '>=6.0.0'}
     dependencies:
       '@sindresorhus/slugify': 1.1.0
-      '@strapi/utils': 4.11.7
+      '@strapi/utils': 4.12.1
       lodash: 4.17.21
     dev: false
 
-  /@strapi/plugin-content-type-builder@4.11.7(debug@4.3.4)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(styled-components@5.3.3)(typescript@5.1.3):
-    resolution: {integrity: sha512-eRvhnjIH36OOlrgNK7V2nopB/y+kltZkZSlIASo0YtSFSNtRVMqqe9qXt/Z6qKrJ3aTyv2vWe7ogGo3Y5j6YHQ==}
-    engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
-    peerDependencies:
-      react: ^17.0.0 || ^18.0.0
-      react-dom: ^17.0.0 || ^18.0.0
-      react-router-dom: 5.3.4
-      styled-components: 5.3.3
-    dependencies:
-      '@sindresorhus/slugify': 1.1.0
-      '@strapi/design-system': 1.8.2(@strapi/icons@1.8.2)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(styled-components@5.3.3)
-      '@strapi/generators': 4.11.7
-      '@strapi/helper-plugin': 4.11.7(@strapi/design-system@1.8.2)(@strapi/icons@1.8.2)(debug@4.3.4)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(styled-components@5.3.3)(typescript@5.1.3)
-      '@strapi/icons': 1.8.2(react-dom@18.2.0)(react@18.2.0)
-      '@strapi/utils': 4.11.7
-      fs-extra: 10.0.0
-      immer: 9.0.19
-      lodash: 4.17.21
-      pluralize: 8.0.0
-      prop-types: 15.8.1
-      qs: 6.11.1
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      react-helmet: 6.1.0(react@18.2.0)
-      react-intl: 6.4.1(react@18.2.0)(typescript@5.1.3)
-      react-redux: 8.1.1(react-dom@18.2.0)(react@18.2.0)(redux@4.2.1)
-      react-router-dom: 5.3.4(react@18.2.0)
-      redux: 4.2.1
-      reselect: 4.1.8
-      styled-components: 5.3.3(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
-      yup: 0.32.11
-    transitivePeerDependencies:
-      - '@codemirror/view'
-      - '@types/react'
-      - '@types/react-dom'
-      - debug
-      - react-native
-      - supports-color
-      - typescript
-    dev: false
-
-  /@strapi/plugin-content-type-builder@4.11.7(debug@4.3.4)(typescript@5.1.6):
-    resolution: {integrity: sha512-eRvhnjIH36OOlrgNK7V2nopB/y+kltZkZSlIASo0YtSFSNtRVMqqe9qXt/Z6qKrJ3aTyv2vWe7ogGo3Y5j6YHQ==}
-    engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
+  /@strapi/plugin-content-type-builder@4.12.1(debug@4.3.4)(typescript@5.1.6):
+    resolution: {integrity: sha512-xR3vaVPHTB0HUluov+uxzceJ+FwDf8X46E8AZ3ibTe5nfwZIEH+Y6FJ3pY8BgHohC1vxtmlOwxYJ7kO/p1y8vw==}
+    engines: {node: '>=16.0.0 <=20.x.x', npm: '>=6.0.0'}
     peerDependencies:
       react: ^17.0.0 || ^18.0.0
       react-dom: ^17.0.0 || ^18.0.0
@@ -2347,10 +2223,10 @@ packages:
     dependencies:
       '@sindresorhus/slugify': 1.1.0
       '@strapi/design-system': 1.8.2(@strapi/icons@1.8.2)(styled-components@5.3.11)
-      '@strapi/generators': 4.11.7
-      '@strapi/helper-plugin': 4.11.7(@strapi/design-system@1.8.2)(@strapi/icons@1.8.2)(debug@4.3.4)(typescript@5.1.6)
+      '@strapi/generators': 4.12.1
+      '@strapi/helper-plugin': 4.12.1(@strapi/design-system@1.8.2)(@strapi/icons@1.8.2)(debug@4.3.4)(typescript@5.1.6)
       '@strapi/icons': 1.8.2(react-dom@18.2.0)(react@18.2.0)
-      '@strapi/utils': 4.11.7
+      '@strapi/utils': 4.12.1
       fs-extra: 10.0.0
       immer: 9.0.19
       lodash: 4.17.21
@@ -2361,8 +2237,8 @@ packages:
       react-intl: 6.4.1(typescript@5.1.6)
       react-redux: 8.1.1(redux@4.2.1)
       redux: 4.2.1
-      reselect: 4.1.8
-      yup: 0.32.11
+      reselect: 4.1.7
+      yup: 0.32.9
     transitivePeerDependencies:
       - '@codemirror/view'
       - '@types/react'
@@ -2373,9 +2249,9 @@ packages:
       - typescript
     dev: false
 
-  /@strapi/plugin-documentation@4.11.7(@strapi/strapi@4.11.7)(typescript@5.1.6):
-    resolution: {integrity: sha512-hLq9X1NWmNb+eBC45wQoJkMj7yXrNcWrWxx4Y90dFFAomif/tbBvF+zVy72OIa5pc8uWr021ZN6dplvv9PsiVg==}
-    engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
+  /@strapi/plugin-documentation@4.12.1(@strapi/strapi@4.12.1)(typescript@5.1.6):
+    resolution: {integrity: sha512-A9G/sj8HsdHY1wuwM6SexvptW5dE+U9GddXNPBxa5HkufqjD/XmQ0hfGglJmKFk5+bPqye/4Y6ctWnw6JUinyw==}
+    engines: {node: '>=16.0.0 <=20.x.x', npm: '>=6.0.0'}
     peerDependencies:
       '@strapi/strapi': ^4.0.0
       react: ^17.0.0 || ^18.0.0
@@ -2384,10 +2260,10 @@ packages:
       styled-components: 5.3.3
     dependencies:
       '@strapi/design-system': 1.8.2(@strapi/icons@1.8.2)(styled-components@5.3.11)
-      '@strapi/helper-plugin': 4.11.7(@strapi/design-system@1.8.2)(@strapi/icons@1.8.2)(debug@4.3.4)(typescript@5.1.6)
+      '@strapi/helper-plugin': 4.12.1(@strapi/design-system@1.8.2)(@strapi/icons@1.8.2)(debug@4.3.4)(typescript@5.1.6)
       '@strapi/icons': 1.8.2(react-dom@18.2.0)(react@18.2.0)
-      '@strapi/strapi': 4.11.7(pg@8.11.2)(typescript@5.1.6)
-      '@strapi/utils': 4.11.7
+      '@strapi/strapi': 4.12.1(pg@8.11.2)(typescript@5.1.6)
+      '@strapi/utils': 4.12.1
       bcryptjs: 2.4.3
       cheerio: 1.0.0-rc.12
       formik: 2.4.0(react@18.2.0)
@@ -2396,16 +2272,12 @@ packages:
       koa-static: 5.0.0
       lodash: 4.17.21
       path-to-regexp: 6.2.1
-      pluralize: 8.0.0
       react-helmet: 6.1.0(react@18.2.0)
       react-intl: 6.4.1(typescript@5.1.6)
       react-query: 3.39.3(react-dom@18.2.0)(react@18.2.0)
-      react-redux: 8.1.1(redux@4.2.1)
-      redux: 4.2.1
-      reselect: 4.1.8
       swagger-ui-dist: 4.19.0
       yaml: 1.10.2
-      yup: 0.32.11
+      yup: 0.32.9
     transitivePeerDependencies:
       - '@codemirror/view'
       - '@types/react'
@@ -2416,37 +2288,9 @@ packages:
       - typescript
     dev: false
 
-  /@strapi/plugin-email@4.11.7(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(styled-components@5.3.3)(typescript@5.1.3):
-    resolution: {integrity: sha512-QRN5NjYgjrRalsc+fgNtGwDZVVl3AMDT/6ogjVjrL5YBpXRn+R/qoZTTjtJGkR8riHQKhPnOLntpcCCbdg7wJg==}
-    engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
-    peerDependencies:
-      react: ^17.0.0 || ^18.0.0
-      react-dom: ^17.0.0 || ^18.0.0
-      react-router-dom: 5.3.4
-      styled-components: 5.3.3
-    dependencies:
-      '@strapi/design-system': 1.8.2(@strapi/icons@1.8.2)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(styled-components@5.3.3)
-      '@strapi/icons': 1.8.2(react-dom@18.2.0)(react@18.2.0)
-      '@strapi/provider-email-sendmail': 4.11.7
-      '@strapi/utils': 4.11.7
-      lodash: 4.17.21
-      prop-types: 15.8.1
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      react-intl: 6.4.1(react@18.2.0)(typescript@5.1.3)
-      react-router-dom: 5.3.4(react@18.2.0)
-      styled-components: 5.3.3(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
-      yup: 0.32.11
-    transitivePeerDependencies:
-      - '@codemirror/view'
-      - '@types/react'
-      - '@types/react-dom'
-      - typescript
-    dev: false
-
-  /@strapi/plugin-email@4.11.7(typescript@5.1.6):
-    resolution: {integrity: sha512-QRN5NjYgjrRalsc+fgNtGwDZVVl3AMDT/6ogjVjrL5YBpXRn+R/qoZTTjtJGkR8riHQKhPnOLntpcCCbdg7wJg==}
-    engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
+  /@strapi/plugin-email@4.12.1(typescript@5.1.6):
+    resolution: {integrity: sha512-csYir5dNtwXfK8kx6Qwk1GeEWJXgLlr5MZGO7Y5KuGlepQFHi6+PByrhbp2IjE9gqCcgjSFH+clJXQXDKBLWWw==}
+    engines: {node: '>=16.0.0 <=20.x.x', npm: '>=6.0.0'}
     peerDependencies:
       react: ^17.0.0 || ^18.0.0
       react-dom: ^17.0.0 || ^18.0.0
@@ -2455,12 +2299,12 @@ packages:
     dependencies:
       '@strapi/design-system': 1.8.2(@strapi/icons@1.8.2)(styled-components@5.3.11)
       '@strapi/icons': 1.8.2(react-dom@18.2.0)(react@18.2.0)
-      '@strapi/provider-email-sendmail': 4.11.7
-      '@strapi/utils': 4.11.7
+      '@strapi/provider-email-sendmail': 4.12.1
+      '@strapi/utils': 4.12.1
       lodash: 4.17.21
       prop-types: 15.8.1
       react-intl: 6.4.1(typescript@5.1.6)
-      yup: 0.32.11
+      yup: 0.32.9
     transitivePeerDependencies:
       - '@codemirror/view'
       - '@types/react'
@@ -2468,7 +2312,7 @@ packages:
       - typescript
     dev: false
 
-  /@strapi/plugin-graphql@4.12.0(@strapi/strapi@4.11.7)(styled-components@5.3.11)(typescript@5.1.6):
+  /@strapi/plugin-graphql@4.12.0(@strapi/strapi@4.12.1)(styled-components@5.3.11)(typescript@5.1.6):
     resolution: {integrity: sha512-6cv//FOcu+qYOiOiFNBe8ndrroZL1oT/gK4iQVBgVtDpu3c5vPcnHB/xBf7hD78rtav7wiM9t5sob2EofSb+Yw==}
     engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
     peerDependencies:
@@ -2483,7 +2327,7 @@ packages:
       '@strapi/design-system': 1.8.2(@strapi/icons@1.8.2)(styled-components@5.3.11)
       '@strapi/helper-plugin': 4.12.0(@strapi/design-system@1.8.2)(@strapi/icons@1.8.2)(styled-components@5.3.11)(typescript@5.1.6)
       '@strapi/icons': 1.8.2(react-dom@18.2.0)(react@18.2.0)
-      '@strapi/strapi': 4.11.7(pg@8.11.2)(typescript@5.1.6)
+      '@strapi/strapi': 4.12.1(pg@8.11.2)(typescript@5.1.6)
       '@strapi/utils': 4.12.0
       apollo-server-core: 3.12.0(graphql@15.8.0)
       apollo-server-koa: 3.10.0(graphql@15.8.0)
@@ -2509,9 +2353,9 @@ packages:
       - typescript
     dev: false
 
-  /@strapi/plugin-i18n@4.11.7(typescript@5.1.6):
-    resolution: {integrity: sha512-oiyFQr0WuLzYKGOOEaBr+mR2jC9e9qckoDiyicnpFVoedN0quhZbwO/cu5O28Bk+mKfHfrrx5I4mLSCFx4/rcQ==}
-    engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
+  /@strapi/plugin-i18n@4.12.1(typescript@5.1.6):
+    resolution: {integrity: sha512-59zK54f+yovi0cxS1Jos0l6jYatHnvKKqb6h7xKs8clk/mmes/UaalDPk8/oXQIRlJ2BMPWgS0RtBW8d4h8pZw==}
+    engines: {node: '>=16.0.0 <=20.x.x', npm: '>=6.0.0'}
     peerDependencies:
       react: ^17.0.0 || ^18.0.0
       react-dom: ^17.0.0 || ^18.0.0
@@ -2519,9 +2363,9 @@ packages:
       styled-components: 5.3.3
     dependencies:
       '@strapi/design-system': 1.8.2(@strapi/icons@1.8.2)(styled-components@5.3.11)
-      '@strapi/helper-plugin': 4.11.7(@strapi/design-system@1.8.2)(@strapi/icons@1.8.2)(debug@4.3.4)(typescript@5.1.6)
+      '@strapi/helper-plugin': 4.12.1(@strapi/design-system@1.8.2)(@strapi/icons@1.8.2)(debug@4.3.4)(typescript@5.1.6)
       '@strapi/icons': 1.8.2(react-dom@18.2.0)(react@18.2.0)
-      '@strapi/utils': 4.11.7
+      '@strapi/utils': 4.12.1
       formik: 2.4.0(react@18.2.0)
       immer: 9.0.19
       lodash: 4.17.21
@@ -2531,7 +2375,7 @@ packages:
       react-query: 3.39.3(react-dom@18.2.0)(react@18.2.0)
       react-redux: 8.1.1(redux@4.2.1)
       redux: 4.2.1
-      yup: 0.32.11
+      yup: 0.32.9
     transitivePeerDependencies:
       - '@codemirror/view'
       - '@types/react'
@@ -2541,9 +2385,9 @@ packages:
       - typescript
     dev: false
 
-  /@strapi/plugin-sentry@4.11.7(@strapi/strapi@4.11.7)(typescript@5.1.6):
-    resolution: {integrity: sha512-tzm7VsvewsgGi9o0Y/vGeQv+QiM65ukbciZ7Dmw/Y9H/cFjoxAxlMNe22AuGkbwB+igRutyQeFMeRyw+jf1P3Q==}
-    engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
+  /@strapi/plugin-sentry@4.12.1(@strapi/strapi@4.12.1)(typescript@5.1.6):
+    resolution: {integrity: sha512-23rlAAPxXwPaJ7xzqrlDAGITWq64VuR4DVcPucD6jWs3sHgrgHpcZo57mGNwCiCYP83KRvUXrp/QJL/cythBMA==}
+    engines: {node: '>=16.0.0 <=20.x.x', npm: '>=6.0.0'}
     peerDependencies:
       '@strapi/strapi': ^4.0.0
       react: ^17.0.0 || ^18.0.0
@@ -2553,9 +2397,9 @@ packages:
     dependencies:
       '@sentry/node': 6.19.7
       '@strapi/design-system': 1.8.2(@strapi/icons@1.8.2)(styled-components@5.3.11)
-      '@strapi/helper-plugin': 4.11.7(@strapi/design-system@1.8.2)(@strapi/icons@1.8.2)(debug@4.3.4)(typescript@5.1.6)
+      '@strapi/helper-plugin': 4.12.1(@strapi/design-system@1.8.2)(@strapi/icons@1.8.2)(debug@4.3.4)(typescript@5.1.6)
       '@strapi/icons': 1.8.2(react-dom@18.2.0)(react@18.2.0)
-      '@strapi/strapi': 4.11.7(pg@8.11.2)(typescript@5.1.6)
+      '@strapi/strapi': 4.12.1(pg@8.11.2)(typescript@5.1.6)
     transitivePeerDependencies:
       - '@codemirror/view'
       - '@types/react'
@@ -2566,13 +2410,13 @@ packages:
       - typescript
     dev: false
 
-  /@strapi/plugin-seo@1.9.2(@strapi/strapi@4.11.7):
+  /@strapi/plugin-seo@1.9.2(@strapi/strapi@4.12.1):
     resolution: {integrity: sha512-skqckP1ut5nshgLyLJh/aXdwxCawfNzhdA0GfHK4OLffoYIVrtBhLaGyyschJH6NfVt/0AFl2uhU16ievdz9QQ==}
     engines: {node: '>=12.x.x <=18.x.x', npm: '>=6.0.0'}
     peerDependencies:
       '@strapi/strapi': ^4.0.0
     dependencies:
-      '@strapi/strapi': 4.11.7(pg@8.11.2)(typescript@5.1.6)
+      '@strapi/strapi': 4.12.1(pg@8.11.2)(typescript@5.1.6)
       date-fns: 2.30.0
       eslint-plugin-react-hooks: 4.6.0
       lodash: 4.17.21
@@ -2581,61 +2425,9 @@ packages:
       - eslint
     dev: false
 
-  /@strapi/plugin-upload@4.11.7(debug@4.3.4)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(redux@4.2.1)(styled-components@5.3.3)(typescript@5.1.3):
-    resolution: {integrity: sha512-QJOk6IOB2Nt1mcqDjRvIs1WC1rFWrbBHyj5F1wrX9atoPMN5MJ3rc99SYdqV3NXqYVwts3Mm45SrGHNpeg+5PA==}
-    engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
-    peerDependencies:
-      react: ^17.0.0 || ^18.0.0
-      react-dom: ^17.0.0 || ^18.0.0
-      react-router-dom: 5.3.4
-      styled-components: 5.3.3
-    dependencies:
-      '@strapi/design-system': 1.8.2(@strapi/icons@1.8.2)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(styled-components@5.3.3)
-      '@strapi/helper-plugin': 4.11.7(@strapi/design-system@1.8.2)(@strapi/icons@1.8.2)(debug@4.3.4)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(styled-components@5.3.3)(typescript@5.1.3)
-      '@strapi/icons': 1.8.2(react-dom@18.2.0)(react@18.2.0)
-      '@strapi/provider-upload-local': 4.11.7
-      '@strapi/utils': 4.11.7
-      axios: 1.4.0(debug@4.3.4)
-      byte-size: 7.0.1
-      cropperjs: 1.5.12
-      date-fns: 2.30.0
-      formik: 2.4.0(react@18.2.0)
-      fs-extra: 10.0.0
-      immer: 9.0.19
-      koa-range: 0.3.0
-      koa-static: 5.0.0
-      lodash: 4.17.21
-      mime-types: 2.1.35
-      prop-types: 15.8.1
-      qs: 6.11.1
-      react: 18.2.0
-      react-dnd: 15.1.2(react@18.2.0)
-      react-dom: 18.2.0(react@18.2.0)
-      react-helmet: 6.1.0(react@18.2.0)
-      react-intl: 6.4.1(react@18.2.0)(typescript@5.1.3)
-      react-query: 3.39.3(react-dom@18.2.0)(react@18.2.0)
-      react-redux: 8.1.1(react-dom@18.2.0)(react@18.2.0)(redux@4.2.1)
-      react-router-dom: 5.3.4(react@18.2.0)
-      react-select: 5.7.0(react-dom@18.2.0)(react@18.2.0)
-      sharp: 0.32.0
-      styled-components: 5.3.3(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
-      yup: 0.32.11
-    transitivePeerDependencies:
-      - '@codemirror/view'
-      - '@types/hoist-non-react-statics'
-      - '@types/node'
-      - '@types/react'
-      - '@types/react-dom'
-      - debug
-      - react-native
-      - redux
-      - supports-color
-      - typescript
-    dev: false
-
-  /@strapi/plugin-upload@4.11.7(debug@4.3.4)(typescript@5.1.6):
-    resolution: {integrity: sha512-QJOk6IOB2Nt1mcqDjRvIs1WC1rFWrbBHyj5F1wrX9atoPMN5MJ3rc99SYdqV3NXqYVwts3Mm45SrGHNpeg+5PA==}
-    engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
+  /@strapi/plugin-upload@4.12.1(debug@4.3.4)(typescript@5.1.6):
+    resolution: {integrity: sha512-6CxoMvIrkRjBRl9ReqoXuxkNzkUHUF3RzAX5zZSlO5mmXFRuUn54Vx8OVoMtlzsj++7gq5/XaiJ3W+c+gMS1kQ==}
+    engines: {node: '>=16.0.0 <=20.x.x', npm: '>=6.0.0'}
     peerDependencies:
       react: ^17.0.0 || ^18.0.0
       react-dom: ^17.0.0 || ^18.0.0
@@ -2643,10 +2435,10 @@ packages:
       styled-components: 5.3.3
     dependencies:
       '@strapi/design-system': 1.8.2(@strapi/icons@1.8.2)(styled-components@5.3.11)
-      '@strapi/helper-plugin': 4.11.7(@strapi/design-system@1.8.2)(@strapi/icons@1.8.2)(debug@4.3.4)(typescript@5.1.6)
+      '@strapi/helper-plugin': 4.12.1(@strapi/design-system@1.8.2)(@strapi/icons@1.8.2)(debug@4.3.4)(typescript@5.1.6)
       '@strapi/icons': 1.8.2(react-dom@18.2.0)(react@18.2.0)
-      '@strapi/provider-upload-local': 4.11.7
-      '@strapi/utils': 4.11.7
+      '@strapi/provider-upload-local': 4.12.1
+      '@strapi/utils': 4.12.1
       axios: 1.4.0(debug@4.3.4)
       byte-size: 7.0.1
       cropperjs: 1.5.12
@@ -2667,7 +2459,7 @@ packages:
       react-redux: 8.1.1(redux@4.2.1)
       react-select: 5.7.0(react-dom@18.2.0)(react@18.2.0)
       sharp: 0.32.0
-      yup: 0.32.11
+      yup: 0.32.9
     transitivePeerDependencies:
       - '@codemirror/view'
       - '@types/hoist-non-react-statics'
@@ -2681,9 +2473,9 @@ packages:
       - typescript
     dev: false
 
-  /@strapi/plugin-users-permissions@4.11.7(typescript@5.1.6):
-    resolution: {integrity: sha512-uRHG8adtP03nkCCRBiZn1S8Vx3KrBqDuOsa4Af3xXxIZOk5SF1PPrR56sTu71soTHX/FCMOGKKSAOSHzLUYB9w==}
-    engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
+  /@strapi/plugin-users-permissions@4.12.1(typescript@5.1.6):
+    resolution: {integrity: sha512-dSTU1/CRIFqP4JxBqoKuupxZOBlL++qfsrh8hM8noKM25gfnVxrxHklveasB8UR1QnwpnGNpRfetQf8kZASuig==}
+    engines: {node: '>=16.0.0 <=20.x.x', npm: '>=6.0.0'}
     peerDependencies:
       react: ^17.0.0 || ^18.0.0
       react-dom: ^17.0.0 || ^18.0.0
@@ -2691,16 +2483,16 @@ packages:
       styled-components: 5.3.3
     dependencies:
       '@strapi/design-system': 1.8.2(@strapi/icons@1.8.2)(styled-components@5.3.11)
-      '@strapi/helper-plugin': 4.11.7(@strapi/design-system@1.8.2)(@strapi/icons@1.8.2)(debug@4.3.4)(typescript@5.1.6)
+      '@strapi/helper-plugin': 4.12.1(@strapi/design-system@1.8.2)(@strapi/icons@1.8.2)(debug@4.3.4)(typescript@5.1.6)
       '@strapi/icons': 1.8.2(react-dom@18.2.0)(react@18.2.0)
-      '@strapi/utils': 4.11.7
+      '@strapi/utils': 4.12.1
       bcryptjs: 2.4.3
       formik: 2.4.0(react@18.2.0)
-      grant-koa: 5.4.8(koa@2.14.2)
+      grant-koa: 5.4.8(koa@2.13.4)
       immer: 9.0.19
       jsonwebtoken: 9.0.0
       jwk-to-pem: 2.0.5
-      koa: 2.14.2
+      koa: 2.13.4
       koa2-ratelimit: 1.1.3
       lodash: 4.17.21
       prop-types: 15.8.1
@@ -2709,7 +2501,7 @@ packages:
       react-query: 3.39.3(react-dom@18.2.0)(react@18.2.0)
       react-redux: 8.1.1(redux@4.2.1)
       url-join: 4.0.1
-      yup: 0.32.11
+      yup: 0.32.9
     transitivePeerDependencies:
       - '@codemirror/view'
       - '@types/react'
@@ -2724,82 +2516,82 @@ packages:
       - typescript
     dev: false
 
-  /@strapi/provider-audit-logs-local@4.11.7(@strapi/strapi@4.11.7):
-    resolution: {integrity: sha512-UJCdoUBxIrTL4/VTi9z62507jVoyhOz/8m/T0zWsSeqwnSh9timWLWRt3MZwqmA4iCZLF9/+5HreiWy5395Fbg==}
-    engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
+  /@strapi/provider-audit-logs-local@4.12.1(@strapi/strapi@4.12.1):
+    resolution: {integrity: sha512-65T0/J0+CgwqBvwPQn2/UTaQNRf9knT3n2Fs6TKIbtb78CFWXW3GgN09IFmRfOnBJObjD5q2kKdjwQ5OdLUtcQ==}
+    engines: {node: '>=16.0.0 <=20.x.x', npm: '>=6.0.0'}
     peerDependencies:
       '@strapi/strapi': ^4.9.0
     dependencies:
-      '@strapi/strapi': 4.11.7(pg@8.11.2)(typescript@5.1.6)
+      '@strapi/strapi': 4.12.1(pg@8.11.2)(typescript@5.1.6)
     dev: false
 
-  /@strapi/provider-email-nodemailer@4.11.7:
-    resolution: {integrity: sha512-3nPd7tiJGPM1y9H0WXlqs/+MJfLbA4MO4UGPr3mJ2SZu5JvF5kjwnQ9+S5sXTnLpjvHNwXozQ70knJBxmEfdyQ==}
-    engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
+  /@strapi/provider-email-nodemailer@4.12.1:
+    resolution: {integrity: sha512-i5NFT15AT8Mc/8OnRS2sni9ShvUDgk+z3h/CQYfx01Cu2pu1+AY1NLxY7XdgJ2935lGINUvHWE1qKvqbAf45nQ==}
+    engines: {node: '>=16.0.0 <=20.x.x', npm: '>=6.0.0'}
     dependencies:
       lodash: 4.17.21
       nodemailer: 6.9.1
     dev: false
 
-  /@strapi/provider-email-sendmail@4.11.7:
-    resolution: {integrity: sha512-f5HaVVK8fO1KEGp0bLmf9Pp+RlPfJM3Zjy4xgrWP7YVkY7bStFDigDhnp1SrOv+k/0nSesz5S3bvC6s6bb/dBQ==}
-    engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
+  /@strapi/provider-email-sendmail@4.12.1:
+    resolution: {integrity: sha512-b7FmBKNBAQ5ioG1v1yyCmzab4sHDFWcF3FGtSj/+UNcQDd7QtCj/XiPUrOKGcZyXNpfrOjc43qS8E63iLOa38g==}
+    engines: {node: '>=16.0.0 <=20.x.x', npm: '>=6.0.0'}
     dependencies:
-      '@strapi/utils': 4.11.7
+      '@strapi/utils': 4.12.1
       sendmail: 1.6.1
     dev: false
 
-  /@strapi/provider-upload-aws-s3@4.11.7:
-    resolution: {integrity: sha512-JaBbVoZfr8VM4pQoHQDnyNzz92Jf1D+O4OPPO+U+TBP5mS4XU+8XecynHkvmWtfAST/zfHpbgfmIvsbLfEtpQw==}
-    engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
+  /@strapi/provider-upload-aws-s3@4.12.1:
+    resolution: {integrity: sha512-Q6nPUICJQX1k70iy31STDvcjH/o1Znk9yx3w+SEXY66LI501cT3pLezsrQowd3aUk5FtldaHImGEt5EE5fBSlQ==}
+    engines: {node: '>=16.0.0 <=20.x.x', npm: '>=6.0.0'}
     dependencies:
-      aws-sdk: 2.1413.0
+      aws-sdk: 2.1425.0
       lodash: 4.17.21
     dev: false
 
-  /@strapi/provider-upload-local@4.11.7:
-    resolution: {integrity: sha512-XKFHlPLlGScn7O/eXVFtxDilXZqZwnkHCS6/gYMynikBoxW/PbsDoHou8z7vNLd1Pky1BgAeeDZRfb0W0GGmxQ==}
-    engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
+  /@strapi/provider-upload-local@4.12.1:
+    resolution: {integrity: sha512-yqXYpohUH6Dx0BZfpkg+ceP2JGbBLUSubRZoZsWED9Zzjxh5A6O3RbYj+qtqOwz8bY55VmYpYlFlAMyGhFXUZA==}
+    engines: {node: '>=16.0.0 <=20.x.x', npm: '>=6.0.0'}
     dependencies:
-      '@strapi/utils': 4.11.7
+      '@strapi/utils': 4.12.1
       fs-extra: 10.0.0
     dev: false
 
-  /@strapi/strapi@4.11.7(pg@8.11.2)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(redux@4.2.1)(styled-components@5.3.3)(typescript@5.1.3):
-    resolution: {integrity: sha512-cBNa/ujLSIxkPevrZ9TwN4Lrv80jbkm2wyQToF5Apv4IpaITWnACoAOyjHvSgkiwkx39ONOhW2bQ0jATY6s0yg==}
-    engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
+  /@strapi/strapi@4.12.1(pg@8.11.2)(typescript@5.1.6):
+    resolution: {integrity: sha512-c4PPNlQUKiaIp/mhDMyUzrU8BDqJMNvwfNl7gJC/+zKw85Rr4p297RtIshQs4j9TA6K6JYVE53ZEX/I5lAZgBg==}
+    engines: {node: '>=16.0.0 <=20.x.x', npm: '>=6.0.0'}
     hasBin: true
     requiresBuild: true
     dependencies:
       '@koa/cors': 3.4.3
       '@koa/router': 10.1.1
-      '@strapi/admin': 4.11.7(@strapi/strapi@4.11.7)(debug@4.3.4)(pg@8.11.2)
-      '@strapi/data-transfer': 4.11.7(pg@8.11.2)(typescript@5.1.6)
-      '@strapi/database': 4.11.7(pg@8.11.2)
-      '@strapi/generate-new': 4.11.7
-      '@strapi/generators': 4.11.7
-      '@strapi/logger': 4.11.7
-      '@strapi/permissions': 4.11.7
-      '@strapi/plugin-content-manager': 4.11.7
-      '@strapi/plugin-content-type-builder': 4.11.7(debug@4.3.4)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(styled-components@5.3.3)(typescript@5.1.3)
-      '@strapi/plugin-email': 4.11.7(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(styled-components@5.3.3)(typescript@5.1.3)
-      '@strapi/plugin-upload': 4.11.7(debug@4.3.4)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(redux@4.2.1)(styled-components@5.3.3)(typescript@5.1.3)
-      '@strapi/typescript-utils': 4.11.7
-      '@strapi/utils': 4.11.7
+      '@strapi/admin': 4.12.1(@strapi/strapi@4.12.1)(debug@4.3.4)
+      '@strapi/data-transfer': 4.12.1(@strapi/strapi@4.12.1)
+      '@strapi/database': 4.12.1(pg@8.11.2)
+      '@strapi/generate-new': 4.12.1
+      '@strapi/generators': 4.12.1
+      '@strapi/logger': 4.12.1
+      '@strapi/permissions': 4.12.1
+      '@strapi/plugin-content-manager': 4.12.1
+      '@strapi/plugin-content-type-builder': 4.12.1(debug@4.3.4)(typescript@5.1.6)
+      '@strapi/plugin-email': 4.12.1(typescript@5.1.6)
+      '@strapi/plugin-upload': 4.12.1(debug@4.3.4)(typescript@5.1.6)
+      '@strapi/typescript-utils': 4.12.1
+      '@strapi/utils': 4.12.1
       bcryptjs: 2.4.3
       boxen: 5.1.2
       chalk: 4.1.2
-      chokidar: 3.5.2
+      chokidar: 3.5.3
       ci-info: 3.8.0
       cli-table3: 0.6.2
       commander: 8.3.0
       configstore: 5.0.1
       debug: 4.3.4(supports-color@5.5.0)
       delegates: 1.0.0
-      dotenv: 10.0.0
+      dotenv: 14.2.0
       execa: 5.1.1
       fs-extra: 10.0.0
-      glob: 7.2.0
+      glob: 7.2.3
       http-errors: 1.8.1
       https-proxy-agent: 5.0.1
       inquirer: 8.2.5
@@ -2823,91 +2615,7 @@ packages:
       package-json: 7.0.0
       qs: 6.11.1
       resolve-cwd: 3.0.0
-      semver: 7.5.1
-      statuses: 2.0.1
-    transitivePeerDependencies:
-      - '@codemirror/view'
-      - '@types/hoist-non-react-statics'
-      - '@types/node'
-      - '@types/react'
-      - '@types/react-dom'
-      - better-sqlite3
-      - encoding
-      - mysql
-      - mysql2
-      - pg
-      - pg-native
-      - react
-      - react-dom
-      - react-native
-      - react-router-dom
-      - redux
-      - sqlite3
-      - styled-components
-      - supports-color
-      - tedious
-      - typescript
-    dev: false
-
-  /@strapi/strapi@4.11.7(pg@8.11.2)(typescript@5.1.6):
-    resolution: {integrity: sha512-cBNa/ujLSIxkPevrZ9TwN4Lrv80jbkm2wyQToF5Apv4IpaITWnACoAOyjHvSgkiwkx39ONOhW2bQ0jATY6s0yg==}
-    engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
-    hasBin: true
-    requiresBuild: true
-    dependencies:
-      '@koa/cors': 3.4.3
-      '@koa/router': 10.1.1
-      '@strapi/admin': 4.11.7(@strapi/strapi@4.11.7)(debug@4.3.4)(pg@8.11.2)
-      '@strapi/data-transfer': 4.11.7(pg@8.11.2)(typescript@5.1.6)
-      '@strapi/database': 4.11.7(pg@8.11.2)
-      '@strapi/generate-new': 4.11.7
-      '@strapi/generators': 4.11.7
-      '@strapi/logger': 4.11.7
-      '@strapi/permissions': 4.11.7
-      '@strapi/plugin-content-manager': 4.11.7
-      '@strapi/plugin-content-type-builder': 4.11.7(debug@4.3.4)(typescript@5.1.6)
-      '@strapi/plugin-email': 4.11.7(typescript@5.1.6)
-      '@strapi/plugin-upload': 4.11.7(debug@4.3.4)(typescript@5.1.6)
-      '@strapi/typescript-utils': 4.11.7
-      '@strapi/utils': 4.11.7
-      bcryptjs: 2.4.3
-      boxen: 5.1.2
-      chalk: 4.1.2
-      chokidar: 3.5.2
-      ci-info: 3.8.0
-      cli-table3: 0.6.2
-      commander: 8.3.0
-      configstore: 5.0.1
-      debug: 4.3.4(supports-color@5.5.0)
-      delegates: 1.0.0
-      dotenv: 10.0.0
-      execa: 5.1.1
-      fs-extra: 10.0.0
-      glob: 7.2.0
-      http-errors: 1.8.1
-      https-proxy-agent: 5.0.1
-      inquirer: 8.2.5
-      is-docker: 2.2.1
-      koa: 2.13.4
-      koa-body: 4.2.0
-      koa-compose: 4.1.0
-      koa-compress: 5.1.0
-      koa-favicon: 2.1.0
-      koa-helmet: 7.0.2
-      koa-ip: 2.1.3
-      koa-session: 6.4.0
-      koa-static: 5.0.0
-      lodash: 4.17.21
-      mime-types: 2.1.35
-      node-fetch: 2.6.9
-      node-machine-id: 1.1.12
-      node-schedule: 2.1.0
-      open: 8.4.0
-      ora: 5.4.1
-      package-json: 7.0.0
-      qs: 6.11.1
-      resolve-cwd: 3.0.0
-      semver: 7.5.1
+      semver: 7.5.4
       statuses: 2.0.1
     transitivePeerDependencies:
       - '@babel/core'
@@ -2950,18 +2658,6 @@ packages:
       - webpack-plugin-serve
     dev: false
 
-  /@strapi/typescript-utils@4.11.7:
-    resolution: {integrity: sha512-2m+0W/ss4a99PR5hloCkzpOvrWl6GHoMmdL/2gjzUv9gFLjmEx8x9VhBGsvYr/bRFqzMxlnc2z/gaqUmhpQrAQ==}
-    engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
-    dependencies:
-      chalk: 4.1.2
-      cli-table3: 0.6.2
-      fs-extra: 10.0.1
-      lodash: 4.17.21
-      prettier: 2.8.4
-      typescript: 5.1.3
-    dev: false
-
   /@strapi/typescript-utils@4.12.1:
     resolution: {integrity: sha512-ZttKBMnvbwP6JV6unq13Zy2PcDdukA+rBY6NetmpkRl9Fxr3mezU71GjGBSyisogG9OdSxQpGJssisdLsi/t2Q==}
     engines: {node: '>=16.0.0 <=20.x.x', npm: '>=6.0.0'}
@@ -2972,7 +2668,6 @@ packages:
       lodash: 4.17.21
       prettier: 2.8.4
       typescript: 5.1.3
-    dev: true
 
   /@strapi/ui-primitives@1.8.2(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-33GDdBXyH8BtBNyjUNiiZVoZ0R9BPtcKhCIb9VtR6RoyR/OVoAOgA3cOO9isxrwh8LZFP2BgofKW62ew3Y801w==}
@@ -3008,8 +2703,8 @@ packages:
       - '@types/react-dom'
     dev: false
 
-  /@strapi/utils@4.11.7:
-    resolution: {integrity: sha512-NAnjcKxR9rpJFKsRgqDtjImoKEUrK0Zf5y+5AAowWtteyWXYujkUxNpWYKJ8D08sFnp//MyP8fT6Rtu196ZQTQ==}
+  /@strapi/utils@4.12.0:
+    resolution: {integrity: sha512-2N3IDMtvl3Mt5Y1SduMSef7xuzYJb9rlmnqY2cbUviAMPg5zR46vYfdbtLj5o+W3NajBS6b3U5iUNMkcL5d8fQ==}
     engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
     dependencies:
       '@sindresorhus/slugify': 1.1.0
@@ -3020,9 +2715,9 @@ packages:
       yup: 0.32.9
     dev: false
 
-  /@strapi/utils@4.12.0:
-    resolution: {integrity: sha512-2N3IDMtvl3Mt5Y1SduMSef7xuzYJb9rlmnqY2cbUviAMPg5zR46vYfdbtLj5o+W3NajBS6b3U5iUNMkcL5d8fQ==}
-    engines: {node: '>=14.19.1 <=18.x.x', npm: '>=6.0.0'}
+  /@strapi/utils@4.12.1:
+    resolution: {integrity: sha512-y72JjH/6JgPK2k8Wq6z0jQS391YHAWa+7eDfV8cTWgjE6oxQsCPcfwO9aX7wQo8hWpIsizvBottrJQccYbJsoA==}
+    engines: {node: '>=16.0.0 <=20.x.x', npm: '>=6.0.0'}
     dependencies:
       '@sindresorhus/slugify': 1.1.0
       date-fns: 2.30.0
@@ -3993,8 +3688,8 @@ packages:
     engines: {node: '>= 0.4'}
     dev: false
 
-  /aws-sdk@2.1413.0:
-    resolution: {integrity: sha512-vKpjC7iRwOhgv7P0xw90mVGO//2rqVPJKyYIs7uxLzSV0JzriVD+yqktOu/Hz6/phOmAd1cMIeFgpEC9ynrppg==}
+  /aws-sdk@2.1425.0:
+    resolution: {integrity: sha512-DbY5z7E8RsrX8/0pMBKMuh/rWFic3AghtU2AWkUdzxDi0cUSK7rOSPS/OIURU9Rh0jaNXoA0ujBDdx/CC5CvRA==}
     engines: {node: '>= 10.0.0'}
     dependencies:
       buffer: 4.9.2
@@ -4261,7 +3956,7 @@ packages:
     resolution: {integrity: sha512-xq+q3SRMOxGivLhBNaUdC64hDTQwejJ+H0T/NB1XMtTVEwNTrfFF3gAxiyW0Bu/xWEGhjVKgUcMhCrUy2+uCWg==}
     dependencies:
       base64-js: 1.5.1
-      ieee754: 1.1.13
+      ieee754: 1.2.1
       isarray: 1.0.0
     dev: false
 
@@ -4469,21 +4164,6 @@ packages:
       parse5-htmlparser2-tree-adapter: 7.0.0
     dev: false
 
-  /chokidar@3.5.2:
-    resolution: {integrity: sha512-ekGhOnNVPgT77r4K/U3GDhu+FQ2S8TnK/s2KbIGXi0SZWuwkZ2QNyfWdZW+TVfn84DpEP7rLeCt2UI6bJ8GwbQ==}
-    engines: {node: '>= 8.10.0'}
-    dependencies:
-      anymatch: 3.1.3
-      braces: 3.0.2
-      glob-parent: 5.1.2
-      is-binary-path: 2.1.0
-      is-glob: 4.0.3
-      normalize-path: 3.0.0
-      readdirp: 3.6.0
-    optionalDependencies:
-      fsevents: 2.3.2
-    dev: false
-
   /chokidar@3.5.3:
     resolution: {integrity: sha512-Dr3sfKRP6oTcjf2JmUmFJfeVMvXBdegxB0iVQ5eb2V10uFJUCAS8OByZdVAyVb8xXNz3GjjTgj9kLWsZTqE6kw==}
     engines: {node: '>= 8.10.0'}
@@ -4617,7 +4297,7 @@ packages:
     resolution: {integrity: sha512-sX/LQ7LqUhgyaxzbe7IqwPeTr2yfpfUIQ/dgpKo6ZI4y4lpQA0YxAomWIY+7I7rHWcG02PG+OuPREzMW/5tszQ==}
     dependencies:
       inflation: 2.0.0
-      qs: 6.11.1
+      qs: 6.11.2
       raw-body: 2.5.2
       type-is: 1.6.18
     dev: false
@@ -4866,7 +4546,7 @@ packages:
     resolution: {integrity: sha512-fereAvAvxDrQDOXybk3Qu3dPbOoKoysFMWtkY3mv5BsL8//OSZVL5DCLYqgRfY5cWirgRzlC+WSrxp6Bo3eNZg==}
     hasBin: true
     dependencies:
-      glob: 7.2.0
+      glob: 7.2.3
       minimatch: 3.1.2
       mkdirp: 1.0.4
       noms: 0.0.0
@@ -4925,17 +4605,6 @@ packages:
       cross-spawn: 7.0.3
     dev: false
 
-  /cross-spawn@6.0.5:
-    resolution: {integrity: sha512-eTVLrBSt7fjbDygz805pMnstIs2VTBNkRm0qxZd+M7A5XDdxVRWO5MxGBXZhjY4cqLYLdtrGqRf8mBPmzwSpWQ==}
-    engines: {node: '>=4.8'}
-    dependencies:
-      nice-try: 1.0.5
-      path-key: 2.0.1
-      semver: 5.7.2
-      shebang-command: 1.2.0
-      which: 1.3.1
-    dev: false
-
   /cross-spawn@7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
     engines: {node: '>= 8'}
@@ -4968,7 +4637,7 @@ packages:
       postcss-modules-scope: 3.0.0(postcss@8.4.27)
       postcss-modules-values: 4.0.0(postcss@8.4.27)
       postcss-value-parser: 4.2.0
-      semver: 7.5.1
+      semver: 7.5.4
       webpack: 5.88.2(webpack-cli@5.1.4)
     dev: false
 
@@ -5332,14 +5001,9 @@ packages:
       is-obj: 2.0.0
     dev: false
 
-  /dotenv@10.0.0:
-    resolution: {integrity: sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==}
-    engines: {node: '>=10'}
-    dev: false
-
-  /dotenv@8.5.1:
-    resolution: {integrity: sha512-qC1FbhCH7UH7B+BcRNUDhAk04d/n+tnGGB1ctwndZkVFeehYJOn39pRWWzmdzpFqImyX1KB8tO0DCHLf8yRaYQ==}
-    engines: {node: '>=10'}
+  /dotenv@14.2.0:
+    resolution: {integrity: sha512-05POuPJyPpO6jqzTNweQFfAyMSD4qa4lvsMOWyTRTdpHKy6nnnN+IYWaXF+lHivhBH/ufDKlR4IWCAN3oPnHuw==}
+    engines: {node: '>=12'}
     dev: false
 
   /ecdsa-sig-formatter@1.0.11:
@@ -5565,19 +5229,6 @@ packages:
   /events@3.3.0:
     resolution: {integrity: sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==}
     engines: {node: '>=0.8.x'}
-    dev: false
-
-  /execa@1.0.0:
-    resolution: {integrity: sha512-adbxcyWV46qiHyvSp50TKt05tB4tK3HcmF7/nxfAdhnox83seTDbwnaqKO4sXRy7roHAIFqJP/Rw/AuEbX61LA==}
-    engines: {node: '>=6'}
-    dependencies:
-      cross-spawn: 6.0.5
-      get-stream: 4.1.0
-      is-stream: 1.1.0
-      npm-run-path: 2.0.2
-      p-finally: 1.0.0
-      signal-exit: 3.0.7
-      strip-eof: 1.0.0
     dev: false
 
   /execa@5.1.1:
@@ -5895,7 +5546,7 @@ packages:
       minimatch: 3.1.2
       node-abort-controller: 3.1.1
       schema-utils: 3.3.0
-      semver: 7.5.1
+      semver: 7.5.4
       tapable: 2.2.1
       typescript: 5.1.3
       webpack: 5.88.2(webpack-cli@5.1.4)
@@ -5930,7 +5581,7 @@ packages:
       tslib: 1.14.1
     dev: false
 
-  /formik@2.4.2(react@18.2.0):
+  /formik@2.4.2:
     resolution: {integrity: sha512-C6nx0hifW2uENP3M6HpPmnAE6HFWCcd8/sqBZEOHZY6lpHJ5qehsfAy43ktpFLEmkBmhiZDei726utcUB9leqg==}
     peerDependencies:
       react: '>=16.8.0'
@@ -5939,7 +5590,6 @@ packages:
       hoist-non-react-statics: 3.3.2
       lodash: 4.17.21
       lodash-es: 4.17.21
-      react: 18.2.0
       react-fast-compare: 2.0.4
       tiny-warning: 1.0.3
       tslib: 2.6.1
@@ -6051,13 +5701,6 @@ packages:
     engines: {node: '>=8.0.0'}
     dev: false
 
-  /get-stream@4.1.0:
-    resolution: {integrity: sha512-GMat4EJ5161kIy2HevLlr4luNjBgvmj413KaQA7jt4V8B4RDsfpHk7WQ9GVqfYyyx8OS/L66Kox+rJRNklLK7w==}
-    engines: {node: '>=6'}
-    dependencies:
-      pump: 3.0.0
-    dev: false
-
   /get-stream@5.2.0:
     resolution: {integrity: sha512-nBF+F1rAZVCu/p7rjzgA+Yb4lfYXrpl7a6VmJrU8wF9I1CKvP/QwPNZHnOlwbTkY6dvtFIzFMSyQXbLoTQPRpA==}
     engines: {node: '>=8'}
@@ -6092,17 +5735,6 @@ packages:
 
   /glob-to-regexp@0.4.1:
     resolution: {integrity: sha512-lkX1HJXwyMcprw/5YUZc2s7DrpAiHB21/V+E1rHUrVNokkvB6bqMzT0VfV6/86ZNabt1k14YOIaT7nDvOX3Iiw==}
-    dev: false
-
-  /glob@7.2.0:
-    resolution: {integrity: sha512-lmLf6gtyrPq8tTjSmrO94wBeQbFR3HbLHbuyD69wuyQkImp2hWqMGB47OX65FBkPffO641IP9jWa1z4ivqG26Q==}
-    dependencies:
-      fs.realpath: 1.0.0
-      inflight: 1.0.6
-      inherits: 2.0.4
-      minimatch: 3.1.2
-      once: 1.4.0
-      path-is-absolute: 1.0.1
     dev: false
 
   /glob@7.2.3:
@@ -6160,7 +5792,7 @@ packages:
       array-union: 2.1.0
       dir-glob: 3.0.1
       fast-glob: 3.3.1
-      glob: 7.2.0
+      glob: 7.2.3
       ignore: 5.2.4
       merge2: 1.4.1
       slash: 3.0.0
@@ -6192,14 +5824,14 @@ packages:
   /graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
 
-  /grant-koa@5.4.8(koa@2.14.2):
+  /grant-koa@5.4.8(koa@2.13.4):
     resolution: {integrity: sha512-Kw8np9AL3Z3mZuvoSUklHJpTe3xx7iLBDauRyIwwbDLRr/5Ll6APmOFHixXj+Vw+LGEnreTxO35CyhAf9oBUMA==}
     engines: {node: '>=8.0.0'}
     peerDependencies:
       koa: '>=2.0.0'
     dependencies:
       grant: 5.4.21
-      koa: 2.14.2
+      koa: 2.13.4
     dev: false
 
   /grant@5.4.21:
@@ -7030,11 +6662,6 @@ packages:
       is-unc-path: 1.0.0
     dev: false
 
-  /is-stream@1.1.0:
-    resolution: {integrity: sha512-uQPm8kcs47jx38atAcWTVxyltQYoPT68y9aWYdV6yWXSyW8mzSat0TL6CiWdZeCdF3KrAvpVtnHbTv4RN+rqdQ==}
-    engines: {node: '>=0.10.0'}
-    dev: false
-
   /is-stream@2.0.1:
     resolution: {integrity: sha512-hFoiJiTl63nn+kstHGBtewWSKnQLpyb155KHheA1l39uvtO9nWIop1p3udqPcUd/xbF1VLMO4n7OI6p7RbngDg==}
     engines: {node: '>=8'}
@@ -7460,37 +7087,6 @@ packages:
 
   /koa@2.13.4:
     resolution: {integrity: sha512-43zkIKubNbnrULWlHdN5h1g3SEKXOEzoAlRsHOTFpnlDu8JlAOZSMJBLULusuXRequboiwJcj5vtYXKB3k7+2g==}
-    engines: {node: ^4.8.4 || ^6.10.1 || ^7.10.1 || >= 8.1.4}
-    dependencies:
-      accepts: 1.3.8
-      cache-content-type: 1.0.1
-      content-disposition: 0.5.4
-      content-type: 1.0.5
-      cookies: 0.8.0
-      debug: 4.3.4(supports-color@5.5.0)
-      delegates: 1.0.0
-      depd: 2.0.0
-      destroy: 1.2.0
-      encodeurl: 1.0.2
-      escape-html: 1.0.3
-      fresh: 0.5.2
-      http-assert: 1.5.0
-      http-errors: 1.8.1
-      is-generator-function: 1.0.10
-      koa-compose: 4.1.0
-      koa-convert: 2.0.0
-      on-finished: 2.4.1
-      only: 0.0.2
-      parseurl: 1.3.3
-      statuses: 1.5.0
-      type-is: 1.6.18
-      vary: 1.1.2
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
-
-  /koa@2.14.2:
-    resolution: {integrity: sha512-VFI2bpJaodz6P7x2uyLiX6RLYpZmOJqNmoCst/Yyd7hQlszyPwG/I9CQJ63nOtKSxpt5M7NH67V6nJL2BwCl7g==}
     engines: {node: ^4.8.4 || ^6.10.1 || ^7.10.1 || >= 8.1.4}
     dependencies:
       accepts: 1.3.8
@@ -8112,10 +7708,6 @@ packages:
       tslib: 2.6.1
     dev: false
 
-  /nice-try@1.0.5:
-    resolution: {integrity: sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==}
-    dev: false
-
   /no-case@2.3.2:
     resolution: {integrity: sha512-rmTZ9kz+f3rCvK2TD1Ue/oZlns7OGoIWP4fc3llxxRXlOkHKoWPPWJOfFYpITabSow43QJbRIoHQXtt10VldyQ==}
     dependencies:
@@ -8133,7 +7725,7 @@ packages:
     resolution: {integrity: sha512-iwXuFrMAcFVi/ZoZiqq8BzAdsLw9kxDfTC0HMyjXfSL/6CSDAGD5UmR7azrAgWV1zKYq7dUUMj4owusBWKLsiQ==}
     engines: {node: '>=10'}
     dependencies:
-      semver: 7.5.1
+      semver: 7.5.4
     dev: false
 
   /node-abort-controller@3.1.1:
@@ -8237,13 +7829,6 @@ packages:
   /normalize-url@6.1.0:
     resolution: {integrity: sha512-DlL+XwOy3NxAQ8xuC0okPgK46iuVNAK01YN7RueYBqqFeGsBjV9XmCAzAdgt+667bCl5kPh9EqKKDwnaPG1I7A==}
     engines: {node: '>=10'}
-    dev: false
-
-  /npm-run-path@2.0.2:
-    resolution: {integrity: sha512-lJxZYlT4DW/bRUtFh1MQIWqmLwQfAxnqWG4HhEdjMlkrJYnJn0Jrr2u3mgxqaWsdiBc76TYkTG/mhrnYTuzfHw==}
-    engines: {node: '>=4'}
-    dependencies:
-      path-key: 2.0.1
     dev: false
 
   /npm-run-path@4.0.1:
@@ -8419,11 +8004,6 @@ packages:
     engines: {node: '>=8'}
     dev: false
 
-  /p-finally@1.0.0:
-    resolution: {integrity: sha512-LICb2p9CB7FS+0eR1oqWnHhp0FljGLZCWBE9aix0Uye9W8LTQPwMTYVGWQWIw9RdQiDg4+epXQODwIYJtSJaow==}
-    engines: {node: '>=4'}
-    dev: false
-
   /p-limit@2.3.0:
     resolution: {integrity: sha512-//88mFWSJx8lxCzwdAABTJL2MyWB12+eIY7MDL2SqLmAkeKU9qxRvWuSyTjm3FUmpBEMuFfckAIqEaVGUDxb6w==}
     engines: {node: '>=6'}
@@ -8493,7 +8073,7 @@ packages:
       got: 11.8.6
       registry-auth-token: 4.2.2
       registry-url: 5.1.0
-      semver: 7.5.1
+      semver: 7.5.4
     dev: false
 
   /packet-reader@1.0.0:
@@ -8625,11 +8205,6 @@ packages:
   /path-is-absolute@1.0.1:
     resolution: {integrity: sha512-AVbw3UJ2e9bq64vSaS9Am0fje1Pa8pbGqTTsmXfaIiMpnr5DlDhfJOuLj9Sf95ZPVDAUerDfEk88MPmPe7UCQg==}
     engines: {node: '>=0.10.0'}
-    dev: false
-
-  /path-key@2.0.1:
-    resolution: {integrity: sha512-fEHGKCSmUSDPv4uoj8AlD+joPlq3peND+HRYyxFz4KPw4z926S/b8rIuFs2FYJg3BwsxJf6A9/3eIdLaYC+9Dw==}
-    engines: {node: '>=4'}
     dev: false
 
   /path-key@3.1.1:
@@ -9601,8 +9176,8 @@ packages:
     resolution: {integrity: sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ==}
     dev: false
 
-  /reselect@4.1.8:
-    resolution: {integrity: sha512-ab9EmR80F/zQTMNeneUr4cv+jSwPJgIlvEmVwLerwrWVbpLlBuls9XHzIeTFy4cegU2NHBp3va0LKOzU5qFEYQ==}
+  /reselect@4.1.7:
+    resolution: {integrity: sha512-Zu1xbUt3/OPwsXL46hvOOoQrap2azE7ZQbokq61BQfiXvhewsKDwhMeZjTX9sX0nvw1t/U5Audyn1I9P/m9z0A==}
     dev: false
 
   /resolve-alpn@1.2.1:
@@ -9701,14 +9276,14 @@ packages:
     resolution: {integrity: sha512-uWjbaKIK3T1OSVptzX7Nl6PvQ3qAGtKEtVRjRuazjfL3Bx5eI409VZSqgND+4UNnmzLVdPj9FqFJNPqBZFve4w==}
     hasBin: true
     dependencies:
-      glob: 7.2.0
+      glob: 7.2.3
     dev: false
 
   /rimraf@3.0.2:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
     hasBin: true
     dependencies:
-      glob: 7.2.0
+      glob: 7.2.3
     dev: false
 
   /run-async@2.4.1:
@@ -9758,8 +9333,8 @@ packages:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
     dev: false
 
-  /sanitize-html@2.10.0:
-    resolution: {integrity: sha512-JqdovUd81dG4k87vZt6uA6YhDfWkUGruUu/aPmXLxXi45gZExnt9Bnw/qeQU8oGf82vPyaE0vO4aH0PbobB9JQ==}
+  /sanitize-html@2.11.0:
+    resolution: {integrity: sha512-BG68EDHRaGKqlsNjJ2xUB7gpInPA8gVx/mvjO743hZaeMCZ2DwzW7xvsqZ+KNU4QKwj86HJ3uu2liISf2qBBUA==}
     dependencies:
       deepmerge: 4.3.1
       escape-string-regexp: 4.0.0
@@ -9809,22 +9384,9 @@ packages:
       node-forge: 1.3.1
     dev: false
 
-  /semver@5.7.2:
-    resolution: {integrity: sha512-cBznnQ9KjJqU67B52RMC65CMarK2600WFnbkcaiwWq3xy/5haFJlshgnpjovMVJ+Hff49d8GEn0b87C5pDQ10g==}
-    hasBin: true
-    dev: false
-
   /semver@6.3.1:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
     hasBin: true
-    dev: false
-
-  /semver@7.5.1:
-    resolution: {integrity: sha512-Wvss5ivl8TMRZXXESstBA4uR5iXgEN/VC5/sOcuXdVLzcdkz4HWetIoRfG5gb5X+ij/G9rw9YoGn3QoQ8OCSpw==}
-    engines: {node: '>=10'}
-    hasBin: true
-    dependencies:
-      lru-cache: 6.0.0
     dev: false
 
   /semver@7.5.4:
@@ -9954,17 +9516,10 @@ packages:
       detect-libc: 2.0.2
       node-addon-api: 6.1.0
       prebuild-install: 7.1.1
-      semver: 7.5.1
+      semver: 7.5.4
       simple-get: 4.0.1
       tar-fs: 2.1.1
       tunnel-agent: 0.6.0
-    dev: false
-
-  /shebang-command@1.2.0:
-    resolution: {integrity: sha512-EV3L1+UQWGor21OmnvojK36mhg+TyIKDh3iFBKBohr5xeXIhNBcx8oWdgkTEEQ+BEFFYdLRuqMfd5L84N1V5Vg==}
-    engines: {node: '>=0.10.0'}
-    dependencies:
-      shebang-regex: 1.0.0
     dev: false
 
   /shebang-command@2.0.0:
@@ -9972,11 +9527,6 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       shebang-regex: 3.0.0
-    dev: false
-
-  /shebang-regex@1.0.0:
-    resolution: {integrity: sha512-wpoSFAxys6b2a2wHZ1XpDSgD7N9iVjg29Ph9uV/uaP9Ex/KXlkTZTeddxDPSYQpgvzKLGJke2UU0AzoGCjNIvQ==}
-    engines: {node: '>=0.10.0'}
     dev: false
 
   /shebang-regex@3.0.0:
@@ -10203,7 +9753,7 @@ packages:
     resolution: {integrity: sha512-Rz6yejtVyWnVjC1RFvNmYL10kgjC49EOghxWn0RFqlCHGFpQx+Xe7yW3I4ceK1SGrWIGMjD5Kbue8W/udkbMJg==}
     dev: false
 
-  /strapi-plugin-comments@2.2.12(@strapi/strapi@4.11.7)(typescript@5.1.6):
+  /strapi-plugin-comments@2.2.12(@strapi/strapi@4.12.1)(typescript@5.1.6):
     resolution: {integrity: sha512-zdl85u99sJBQIkM1vFMDY1vsiTz7ZufWf9apTCxViD0SJ7QPbsf/KYuS8HXuR70r7/e/SydazuCFOi0Jvo0mXg==}
     engines: {node: '>=14.19.1 <=18.x.x', npm: '>=7.x.x'}
     peerDependencies:
@@ -10212,8 +9762,8 @@ packages:
       react-dom: ^17.0.2
       react-router-dom: 5.3.4
     dependencies:
-      '@strapi/plugin-graphql': 4.12.0(@strapi/strapi@4.11.7)(styled-components@5.3.11)(typescript@5.1.6)
-      '@strapi/strapi': 4.11.7(pg@8.11.2)(typescript@5.1.6)
+      '@strapi/plugin-graphql': 4.12.0(@strapi/strapi@4.12.1)(styled-components@5.3.11)(typescript@5.1.6)
+      '@strapi/strapi': 4.12.1(pg@8.11.2)(typescript@5.1.6)
       '@strapi/utils': 4.12.0
       '@types/axios': 0.14.0
       '@types/react-intl': 3.0.0(typescript@5.1.6)
@@ -10236,22 +9786,22 @@ packages:
       - typescript
     dev: false
 
-  /strapi-plugin-country-select@1.0.2(@strapi/strapi@4.11.7):
+  /strapi-plugin-country-select@1.0.2(@strapi/strapi@4.12.1):
     resolution: {integrity: sha512-YNr3MavJJROmEnlmDi4IMcnhi83t5/hw3AlDQecV1fJPJiAi4DwPSMZwur9RlVsRwAlsxR8JBa/RHNeo9FGdhg==}
     peerDependencies:
       '@strapi/strapi': ^4.4.0
     dependencies:
-      '@strapi/strapi': 4.11.7(pg@8.11.2)(typescript@5.1.6)
+      '@strapi/strapi': 4.12.1(pg@8.11.2)(typescript@5.1.6)
       i18n-iso-countries: 7.6.0
     dev: false
 
-  /strapi-plugin-passwordless@4.0.12(@strapi/strapi@4.11.7):
+  /strapi-plugin-passwordless@4.0.12(@strapi/strapi@4.12.1):
     resolution: {integrity: sha512-phs49ynrGWLCu/8ddRqpMMBcjzWqwDQYwX0Frlgpgz3tC2YJ21eaoa4qHEG/GmZbYWnIIrXxnqQ3WZn0oC2uSQ==}
     engines: {node: '>=10.16.0', npm: '>=6.0.0'}
     peerDependencies:
       '@strapi/strapi': ^4.x
     dependencies:
-      '@strapi/strapi': 4.11.7(pg@8.11.2)(typescript@5.1.6)
+      '@strapi/strapi': 4.12.1(pg@8.11.2)(typescript@5.1.6)
       nanoid: 3.3.6
     dev: false
 
@@ -10331,11 +9881,6 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       ansi-regex: 5.0.1
-
-  /strip-eof@1.0.0:
-    resolution: {integrity: sha512-7FCwGGmx8mD5xQd3RPUvnSpUXHM3BWuzjtpD4TXsfcZ9EL4azvVVUscFYwD9nx8Kh+uCBC00XBtAykoMHwTh8Q==}
-    engines: {node: '>=0.10.0'}
-    dev: false
 
   /strip-final-newline@2.0.0:
     resolution: {integrity: sha512-BrpvfNAE3dcvq7ll3xVumzjKjZQ5tI1sEUIKr3Uoks0XUl45St3FlatVqef9prk4jRDzhW6WZg+3bk93y6pLjA==}
@@ -11221,8 +10766,8 @@ packages:
       triple-beam: 1.4.1
     dev: false
 
-  /winston@3.9.0:
-    resolution: {integrity: sha512-jW51iW/X95BCW6MMtZWr2jKQBP4hV5bIDq9QrIjfDk6Q9QuxvTKEAlpUNAzP+HYHFFCeENhph16s0zEunu4uuQ==}
+  /winston@3.10.0:
+    resolution: {integrity: sha512-nT6SIDaE9B7ZRO0u3UvdrimG0HkB7dSTAgInQnNR2SOPJ4bvq5q79+pXLftKmP52lJGW15+H5MCK0nM9D3KB/g==}
     engines: {node: '>= 12.0.0'}
     dependencies:
       '@colors/colors': 1.5.0
@@ -11385,19 +10930,6 @@ packages:
   /yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
-    dev: false
-
-  /yup@0.32.11:
-    resolution: {integrity: sha512-Z2Fe1bn+eLstG8DRR6FTavGD+MeAwyfmouhHsIUgaADz8jvFKbO/fXc2trJKZg+5EBjh4gGm3iU/t3onKlXHIg==}
-    engines: {node: '>=10'}
-    dependencies:
-      '@babel/runtime': 7.22.6
-      '@types/lodash': 4.14.196
-      lodash: 4.17.21
-      lodash-es: 4.17.21
-      nanoclone: 0.2.1
-      property-expr: 2.0.5
-      toposort: 2.0.2
     dev: false
 
   /yup@0.32.9:
