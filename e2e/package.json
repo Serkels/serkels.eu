@@ -8,7 +8,7 @@
   "devDependencies": {
     "@1/typescript-config": "link:../../@1/config/typescript-config",
     "@codeceptjs/configure": "0.10.0",
-    "@types/node": "18.17.2",
+    "@types/node": "18.17.3",
     "codeceptjs": "3.5.3",
     "playwright": "1.36.2",
     "ts-node": "10.9.1",
