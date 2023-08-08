@@ -46,6 +46,7 @@ function QACard({
     isLoading,
     isError,
   } = useQuery({
+    enabled: Boolean(owner_id),
     queryKey: ["user-profiles", owner_id],
     queryFn: () => new UserProfileRepository(fromClient).loadById(owner_id),
   });
