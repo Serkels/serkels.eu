@@ -68,7 +68,7 @@ importers:
         version: link:../typescript-config
       '@pandacss/dev':
         specifier: 0.10.0
-        version: 0.10.0(@internationalized/date@3.3.0)(@types/react-dom@18.2.7)(@types/react@18.2.18)(astro@2.10.1)(typescript@5.1.6)
+        version: 0.10.0(@internationalized/date@3.3.0)(@types/react-dom@18.2.7)(@types/react@18.2.19)(astro@2.10.1)(typescript@5.1.6)
       autoprefixer:
         specifier: 10.4.14
         version: 10.4.14(postcss@8.4.27)
@@ -154,8 +154,8 @@ importers:
         specifier: workspace:*
         version: link:../config/typescript-config
       '@types/react':
-        specifier: 18.2.18
-        version: 18.2.18
+        specifier: 18.2.19
+        version: 18.2.19
       prettier:
         specifier: 3.0.1
         version: 3.0.1
@@ -229,7 +229,7 @@ importers:
         version: 18.2.0(react@18.2.0)
       react-markdown:
         specifier: 8.0.7
-        version: 8.0.7(@types/react@18.2.18)(react@18.2.0)
+        version: 8.0.7(@types/react@18.2.19)(react@18.2.0)
       react-nest:
         specifier: 0.1.10
         version: 0.1.10(react-dom@18.2.0)(react@18.2.0)
@@ -253,8 +253,8 @@ importers:
         specifier: ^6.9.7
         version: 6.9.7
       '@types/react':
-        specifier: 18.2.18
-        version: 18.2.18
+        specifier: 18.2.19
+        version: 18.2.19
       '@types/react-dom':
         specifier: 18.2.7
         version: 18.2.7
@@ -431,7 +431,7 @@ packages:
       prismjs: 1.29.0
     dev: true
 
-  /@astrojs/react@2.2.1(@types/react-dom@18.2.7)(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0):
+  /@astrojs/react@2.2.1(@types/react-dom@18.2.7)(@types/react@18.2.19)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-nq5Zr8iWdwjSp5fh1NReaCplwsnL4w5PXAY5XWu1jE/frxEfF/ycGHrrhwWW0uJHX9G+kUtmQLR0GBhlR4FmAw==}
     engines: {node: '>=16.12.0'}
     peerDependencies:
@@ -442,7 +442,7 @@ packages:
     dependencies:
       '@babel/core': 7.22.9
       '@babel/plugin-transform-react-jsx': 7.22.5(@babel/core@7.22.9)
-      '@types/react': 18.2.18
+      '@types/react': 18.2.19
       '@types/react-dom': 18.2.7
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -1393,7 +1393,7 @@ packages:
       ts-pattern: 5.0.4
     dev: true
 
-  /@pandacss/dev@0.10.0(@internationalized/date@3.3.0)(@types/react-dom@18.2.7)(@types/react@18.2.18)(astro@2.10.1)(typescript@5.1.6):
+  /@pandacss/dev@0.10.0(@internationalized/date@3.3.0)(@types/react-dom@18.2.7)(@types/react@18.2.19)(astro@2.10.1)(typescript@5.1.6):
     resolution: {integrity: sha512-NznJ4d8qW5KM9fGri4R2nrTThNgfsbzJqvoIQNtWrLj5b3VbnkdDXYmQAHG30eUTLd5yqAbclWuFb6vZe+MBfA==}
     hasBin: true
     peerDependencies:
@@ -1410,7 +1410,7 @@ packages:
       '@pandacss/postcss': 0.10.0(typescript@5.1.6)
       '@pandacss/preset-panda': 0.10.0
       '@pandacss/shared': 0.10.0
-      '@pandacss/studio': 0.10.0(@internationalized/date@3.3.0)(@types/react-dom@18.2.7)(@types/react@18.2.18)(typescript@5.1.6)
+      '@pandacss/studio': 0.10.0(@internationalized/date@3.3.0)(@types/react-dom@18.2.7)(@types/react@18.2.19)(typescript@5.1.6)
       '@pandacss/token-dictionary': 0.10.0
       '@pandacss/types': 0.10.0
       astro: 2.10.1
@@ -1563,11 +1563,11 @@ packages:
     resolution: {integrity: sha512-tBrMw0e+CpgTz3wPfPYuveY1rQusry8xExmrgIkVx8ZbNKleZuM2mnH1vb/D0es75F5zTVUEnIgab10KB8l3Kw==}
     dev: true
 
-  /@pandacss/studio@0.10.0(@internationalized/date@3.3.0)(@types/react-dom@18.2.7)(@types/react@18.2.18)(typescript@5.1.6):
+  /@pandacss/studio@0.10.0(@internationalized/date@3.3.0)(@types/react-dom@18.2.7)(@types/react@18.2.19)(typescript@5.1.6):
     resolution: {integrity: sha512-clEht36qwDL7YK5SEWTT6FfNtfAr6Xr7JfeO8lt21Ep7ODBlzSEXZ++zrF+pUXe+bI2FPcXSm55gGo/Q84pKcQ==}
     dependencies:
       '@ark-ui/react': 0.9.0(@internationalized/date@3.3.0)(react-dom@18.2.0)(react@18.2.0)
-      '@astrojs/react': 2.2.1(@types/react-dom@18.2.7)(@types/react@18.2.18)(react-dom@18.2.0)(react@18.2.0)
+      '@astrojs/react': 2.2.1(@types/react-dom@18.2.7)(@types/react@18.2.19)(react-dom@18.2.0)(react@18.2.0)
       '@pandacss/config': 0.10.0
       '@pandacss/logger': 0.10.0
       '@pandacss/node': 0.10.0(typescript@5.1.6)
@@ -1816,11 +1816,11 @@ packages:
   /@types/react-dom@18.2.7:
     resolution: {integrity: sha512-GRaAEriuT4zp9N4p1i8BDBYmEyfo+xQ3yHjJU4eiK5NDa1RmUZG+unZABUTK4/Ox/M+GaHwb6Ow8rUITrtjszA==}
     dependencies:
-      '@types/react': 18.2.18
+      '@types/react': 18.2.19
     dev: true
 
-  /@types/react@18.2.18:
-    resolution: {integrity: sha512-da4NTSeBv/P34xoZPhtcLkmZuJ+oYaCxHmyHzwaDQo9RQPBeXV+06gEk2FpqEcsX9XrnNLvRpVh6bdavDSjtiQ==}
+  /@types/react@18.2.19:
+    resolution: {integrity: sha512-e2S8wmY1ePfM517PqCG80CcE48Xs5k0pwJzuDZsfE8IZRRBfOMCF+XqnFxu6mWtyivum1MQm4aco+WIt6Coimw==}
     dependencies:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.3
@@ -6233,7 +6233,7 @@ packages:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
     dev: false
 
-  /react-markdown@8.0.7(@types/react@18.2.18)(react@18.2.0):
+  /react-markdown@8.0.7(@types/react@18.2.19)(react@18.2.0):
     resolution: {integrity: sha512-bvWbzG4MtOU62XqBx3Xx+zB2raaFFsq4mYiAzfjXJMEz2sixgeAfraA3tvzULF02ZdOMUOKTBFFaZJDDrq+BJQ==}
     peerDependencies:
       '@types/react': '>=16'
@@ -6241,7 +6241,7 @@ packages:
     dependencies:
       '@types/hast': 2.3.5
       '@types/prop-types': 15.7.5
-      '@types/react': 18.2.18
+      '@types/react': 18.2.19
       '@types/unist': 2.0.7
       comma-separated-tokens: 2.0.3
       hast-util-whitespace: 2.0.1
