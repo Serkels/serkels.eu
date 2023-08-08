@@ -53,7 +53,15 @@ export function OpportunityInfiniteList() {
             >
               <OpportunityCard
                 className="h-full"
-                {...{ ...opportunity.attributes!, id: opportunity.id }}
+                cover={opportunity.attributes?.cover!}
+                expireAt={opportunity.attributes?.expireAt!}
+                id={String(opportunity.id)}
+                location={opportunity.attributes?.location!}
+                opportunity_category={
+                  opportunity.attributes?.opportunity_category!
+                }
+                partner={opportunity.attributes?.partner!}
+                title={opportunity.attributes?.title!}
               />
             </Link>
           </li>

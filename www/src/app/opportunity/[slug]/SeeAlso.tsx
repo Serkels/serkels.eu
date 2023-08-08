@@ -29,7 +29,15 @@ export async function SeeAlso({ category }: { category: string }) {
         {data.map((opportunity) => (
           <li key={opportunity.id} className="mx-auto mb-7 max-w-[188px]">
             <Link href={`/opportunity/${opportunity.slug}`}>
-              <OpportunityCard {...opportunity} />
+              <OpportunityCard
+                cover={opportunity.cover!}
+                expireAt={opportunity.expireAt!}
+                id={String(opportunity.id)}
+                location={opportunity.location!}
+                opportunity_category={opportunity.opportunity_category!}
+                partner={opportunity.partner!}
+                title={opportunity.title!}
+              />
             </Link>
           </li>
         ))}

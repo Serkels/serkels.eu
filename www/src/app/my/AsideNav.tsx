@@ -6,7 +6,7 @@ import { Binoculars, Bookmark, Exchange, Messenger, Plus } from "@1/ui/icons";
 import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import type { ComponentPropsWithoutRef, ElementType } from "react";
+import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
 //
 
@@ -26,14 +26,22 @@ export function AsideNav(props: ComponentPropsWithoutRef<"aside">) {
               [&>li]:block [&>li]:px-6
             "
           >
-            <ItemLinkWithIcon Icon={Plus} match="/my/Créer" href="/my/profile">
+            <ItemLinkWithIcon
+              icon={<Plus />}
+              match="/my/Créer"
+              href="/my/profile"
+            >
               Créer
             </ItemLinkWithIcon>
-            <ItemLinkWithIcon Icon={Plus} match="/my/Plus" href="/my/profile">
+            <ItemLinkWithIcon
+              icon={<Plus />}
+              match="/my/Plus"
+              href="/my/profile"
+            >
               Mes annonces
             </ItemLinkWithIcon>
             <ItemLinkWithIcon
-              Icon={Exchange}
+              icon={<Exchange />}
               match="/my/Plus"
               href="/my/profile"
             >
@@ -41,7 +49,7 @@ export function AsideNav(props: ComponentPropsWithoutRef<"aside">) {
             </ItemLinkWithIcon>
 
             <ItemLinkWithIcon
-              Icon={Bookmark}
+              icon={<Bookmark />}
               match="/my/bookmarks"
               href="/my/bookmarks"
             >
@@ -107,21 +115,21 @@ export function AsideNav(props: ComponentPropsWithoutRef<"aside">) {
               Groupes
             </ItemLinkWithIcon> */}
             <ItemLinkWithIcon
-              Icon={Messenger}
+              icon={<Messenger />}
               match="/my/Messenger"
               href="/my/profile"
             >
               Messagerie
             </ItemLinkWithIcon>
             <ItemLinkWithIcon
-              Icon={Avatar}
+              icon={<Avatar />}
               match="/my/profile"
               href="/my/profile"
             >
               Profil
             </ItemLinkWithIcon>
             <ItemLinkWithIcon
-              Icon={Avatar}
+              icon={<Avatar />}
               match="/my/parameters"
               href="/my/parameters"
             >
@@ -136,7 +144,7 @@ export function AsideNav(props: ComponentPropsWithoutRef<"aside">) {
 
 function ItemLinkWithIcon(
   props: ComponentPropsWithoutRef<"a"> & {
-    Icon: ElementType;
+    icon: ReactNode;
     match: string;
   },
 ) {
@@ -145,7 +153,7 @@ function ItemLinkWithIcon(
   const {
     className,
     href,
-    Icon,
+    icon,
     match: target,
     children,
     // ...other_props
@@ -164,12 +172,14 @@ function ItemLinkWithIcon(
           "pointer-events-auto cursor-default": pathname.includes(target),
         })}
       >
-        <Icon
+        <div
           className={clsx("aspect-square h-4 justify-self-center", {
             "opacity-40": !pathname.includes(target),
             "text-Cerulean": pathname.includes(target),
           })}
-        />
+        >
+          {icon}
+        </div>
         <span className="">{children}</span>
       </Link>
     </li>

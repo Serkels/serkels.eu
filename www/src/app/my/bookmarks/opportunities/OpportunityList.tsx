@@ -2,22 +2,23 @@
 
 import { fromClient } from "@/app/api/v1";
 import { OpportunityCard } from "@/app/opportunity/OpportunityCard";
-import { get_session_bookmarks_id } from "@/components/get_session_bookmarks_id";
+import { get_bookmark_opportunities_ids } from "@/components/get_session_bookmarks_id";
 import { Spinner } from "@1/ui/components/Spinner";
 import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { useBookmarksQuery } from "./useBookmarkedOpportunitiesIds";
 
 //
 
 export function OpportunityList() {
   const { data: session } = useSession();
-  if (!session) return null;
 
   const { data, isLoading, isError } = useBookmarkedOpportunities(
-    get_session_bookmarks_id(session),
+    session?.user?.jwt,
   );
 
+  if (!session) return null;
   if (isLoading) return <Loading />;
   if (isError) return <>Epic fail...</>;
   if (!data) return <>No data O_o</>;
@@ -43,7 +44,15 @@ export function OpportunityList() {
           >
             <OpportunityCard
               className="h-full"
-              {...{ ...opportunity.attributes!, id: opportunity.id }}
+              cover={opportunity.attributes?.cover!}
+              expireAt={opportunity.attributes?.expireAt!}
+              id={String(opportunity.id)}
+              location={opportunity.attributes?.location!}
+              opportunity_category={
+                opportunity.attributes?.opportunity_category!
+              }
+              partner={opportunity.attributes?.partner!}
+              title={opportunity.attributes?.title!}
             />
           </Link>
         </li>
@@ -68,10 +77,15 @@ function EmptyList() {
   );
 }
 
-function useBookmarkedOpportunities(ids: string[]) {
+function useBookmarkedOpportunities(jwt: string | undefined) {
+  const { data: bookmark } = useBookmarksQuery(jwt);
+  const bookmark_ids = get_bookmark_opportunities_ids(bookmark?.attributes);
   return useQuery({
-    queryKey: ["opportunities", ids.sort()],
+    enabled: Boolean(bookmark_ids),
+    queryKey: ["opportunities", (bookmark_ids ?? []).sort()],
     queryFn: async () => {
+      if (!bookmark_ids?.length) return [];
+
       const {
         response,
         data: body,
@@ -84,7 +98,7 @@ function useBookmarkedOpportunities(ids: string[]) {
               opportunity_category: { fields: ["name"] },
               partner: { fields: ["name", "avatar"], populate: ["avatar"] },
             } as any,
-            filters: { $or: ids.map((id) => ({ id })) },
+            filters: { $or: bookmark_ids.map((id) => ({ id })) },
           },
         },
       });

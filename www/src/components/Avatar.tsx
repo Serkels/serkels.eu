@@ -10,11 +10,15 @@ import { useMemo, type ComponentPropsWithoutRef } from "react";
 
 export function Avatar(props: ComponentPropsWithoutRef<"img">) {
   const { className, ...other_props } = props;
+
   const { data: session } = useSession();
   const email = session?.user?.email ?? "";
-  const image =
-    session?.user?.profile.attributes?.image?.data?.attributes?.url ??
-    gravatarUrlFor(email);
+  const url = session?.user?.profile.attributes?.image?.data?.attributes?.url;
+
+  const image = useMemo(() => {
+    return url ?? gravatarUrlFor(email);
+  }, [url, email]);
+
   return (
     <img
       className={clsx("rounded-full object-cover", className)}
@@ -85,10 +89,9 @@ export function AvatarMediaHorizontal(
 function gravatarUrlFor(email: string) {
   // see https://fr.gravatar.com/site/implement/images/
 
-  const hash = useMemo(
-    () => createHash("md5").update(email.trim().toLowerCase()).digest("hex"),
-    [email],
-  );
+  const hash = createHash("md5")
+    .update(email.trim().toLowerCase())
+    .digest("hex");
 
   const paramsObj = { default: "identicon", size: "256px" };
   const searchParams = new URLSearchParams(paramsObj);

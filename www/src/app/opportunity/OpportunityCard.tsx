@@ -1,9 +1,10 @@
 "use client";
 
 import { BookmarkButton } from "@/components/BookmarkButton";
+import type { components } from "@1/strapi-openapi/v1";
 import { LocationRadius, Share } from "@1/ui/icons";
 import clsx from "clsx";
-import type { useOpportunities } from "./useOpportunities";
+import type { ComponentPropsWithoutRef } from "react";
 
 //
 
@@ -79,7 +80,7 @@ export function OpportunityCard(props: Props) {
           </aside>
           <aside className="space-x-3">
             <BookmarkButton
-              opportunity={id!}
+              opportunity={Number(id)}
               className={({ isActive }) =>
                 `inline-block h-4 w-4 ${
                   isActive ? "text-Chateau_Green" : "text-Dove_Gray"
@@ -96,6 +97,15 @@ export function OpportunityCard(props: Props) {
   );
 }
 
-type Props = NonNullable<ReturnType<typeof useOpportunities>["data"]>[0] & {
-  className?: string;
-};
+type Opportunity = components["schemas"]["Opportunity"];
+
+type Props = ComponentPropsWithoutRef<"article"> &
+  Pick<
+    Opportunity,
+    | "cover"
+    | "expireAt"
+    | "location"
+    | "opportunity_category"
+    | "partner"
+    | "title"
+  >;

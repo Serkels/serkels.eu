@@ -1,6 +1,9 @@
 "use client";
 
-import { useUserMutation } from "@/app/my/useUserMutation";
+import {
+  useBookmarkedOpportunitiesIdsMutation,
+  useBookmarksQuery,
+} from "@/app/my/bookmarks/opportunities/useBookmarkedOpportunitiesIds";
 import { Spinner } from "@1/ui/components/Spinner";
 import { Bookmark } from "@1/ui/icons";
 import clsx from "clsx";
@@ -10,7 +13,7 @@ import {
   type ComponentPropsWithoutRef,
   type MouseEventHandler,
 } from "react";
-import { get_session_bookmarks_id } from "./get_session_bookmarks_id";
+import { get_bookmark_opportunities_ids } from "./get_session_bookmarks_id";
 
 //
 
@@ -23,25 +26,33 @@ export function BookmarkButton(
   const { className: classNameProp, opportunity, ...other_props } = props;
   const { data: session } = useSession();
 
-  const actual_bookmarks = get_session_bookmarks_id(session);
-  const isActive = actual_bookmarks.some((id) => id === String(opportunity));
+  const { data: bookmarks, isFetching } = useBookmarksQuery(session?.user?.jwt);
+  const actual_bookmarks = get_bookmark_opportunities_ids(
+    bookmarks?.attributes,
+  );
+
+  const isActive = actual_bookmarks.some((id) => id === opportunity) ?? false;
+
+  const { mutate, isLoading } = useBookmarkedOpportunitiesIdsMutation(
+    bookmarks?.id,
+  );
+
   const className = classNameProp
     ? typeof classNameProp === "string"
       ? classNameProp
       : classNameProp({ isActive })
     : undefined;
 
-  const { mutate, isLoading } = useUserMutation();
   const onClick: MouseEventHandler<HTMLButtonElement> = useCallback(
     (event) => {
       event.preventDefault();
       event.stopPropagation();
 
-      const bookmarks = isActive
-        ? actual_bookmarks.filter((id) => id !== String(opportunity))
-        : actual_bookmarks.concat([String(opportunity)]);
+      const opportunities = isActive
+        ? actual_bookmarks.filter((id) => id !== opportunity)
+        : actual_bookmarks.concat([opportunity]);
 
-      mutate({ bookmarks });
+      mutate({ opportunities });
       return false;
     },
     [opportunity, isActive, actual_bookmarks],
@@ -49,11 +60,16 @@ export function BookmarkButton(
 
   //
 
-  if (isLoading) return <Spinner className="h-4 w-4" />;
   if (!session) return null;
+  if (isLoading || isFetching) return <Spinner className="h-4 w-4" />;
 
   return (
-    <button onClick={onClick} className="w-6" {...other_props}>
+    <button
+      onClick={onClick}
+      // disabled={isIdle}
+      className="w-6"
+      {...other_props}
+    >
       <Bookmark className={clsx("", className)} />
     </button>
   );

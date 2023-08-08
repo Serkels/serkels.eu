@@ -12,11 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "bookmarks": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::opportunity.opportunity"
-    },
     "firstname": {
       "type": "string",
       "required": true,

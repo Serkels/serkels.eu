@@ -28,9 +28,7 @@ export default {
               const owner = ctx.state.user?.id;
               const bookmarks = await strapi.entityService.findMany(
                 "api::bookmark.bookmark",
-                {
-                  populate: "*",
-                },
+                {},
                 { filters: { owner } },
               );
 
@@ -45,7 +43,7 @@ export default {
               ctx.params = { id };
               return next();
             },
-            "api::bookmark.populate-opportunities",
+            "api::bookmark.populate-opportunities-ids",
           ],
           auth: { scope: ["api::bookmark.bookmark.findOne"] },
           policies: ["global::is-authenticated"],
