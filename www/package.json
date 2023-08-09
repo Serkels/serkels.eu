@@ -36,7 +36,7 @@
     "@tanstack/react-query-devtools": "4.32.6",
     "@types/node": "20.4.9",
     "@types/qs": "^6.9.7",
-    "@types/react": "18.2.19",
+    "@types/react": "18.2.20",
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.14",
     "eslint": "8.46.0",
