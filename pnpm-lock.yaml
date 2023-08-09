@@ -169,8 +169,8 @@ importers:
   packages/@douglasduteil/auth...providers_strapi-plugin-passwordless:
     dependencies:
       next-auth:
-        specifier: 4.22.4
-        version: 4.22.4(next@13.4.13)(react-dom@18.2.0)(react@18.2.0)
+        specifier: 4.22.5
+        version: 4.22.5(next@13.4.13)(react-dom@18.2.0)(react@18.2.0)
 
   packages/@douglasduteil/datatypes...hours-to-seconds: {}
 
@@ -207,8 +207,8 @@ importers:
         specifier: 13.4.13
         version: 13.4.13(react-dom@18.2.0)(react@18.2.0)
       next-auth:
-        specifier: 4.22.4
-        version: 4.22.4(next@13.4.13)(react-dom@18.2.0)(react@18.2.0)
+        specifier: 4.22.5
+        version: 4.22.5(next@13.4.13)(react-dom@18.2.0)(react@18.2.0)
       nextjs-toploader:
         specifier: 1.4.2
         version: 1.4.2(next@13.4.13)(react-dom@18.2.0)(react@18.2.0)
@@ -5614,8 +5614,8 @@ packages:
       typescript: 5.1.6
     dev: true
 
-  /next-auth@4.22.4(next@13.4.13)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-VMI6pq3z4BfvFeCZHBkYtRYa0qqGTYAi2yy3hWCB78KkN1YsSAsOLSssd4oGrQBj0z/0zg2VLzn9tSJ14AtmWw==}
+  /next-auth@4.22.5(next@13.4.13)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-zPVEpqDp4cx1y0HbonCSrz2sA4qw0grTMd/S0PezUKXvDzmVemtsJnfNK/xo5pO2sz5ilM541+EVCTp9QoRLbA==}
     peerDependencies:
       next: ^12.2.5 || ^13
       nodemailer: ^6.6.5
