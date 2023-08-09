@@ -3,6 +3,10 @@
  */
 
 import { factories } from "@strapi/strapi";
+import { Response } from "koa";
+import { lookup } from "mime-types";
+import { pipeline } from "undici";
+import { StrapiContext } from "../../../types";
 
 export default factories.createCoreController(
   "api::user-profile.user-profile",
@@ -61,16 +65,53 @@ export default factories.createCoreController(
       return super.findOne(ctx);
     },
 
-    async avatar(ctx) {
-      ctx.query.populate = {
-        image: {
-          fields: ["url"],
+    async avatar(ctx: StrapiContext) {
+      const profile = await strapi.entityService.findOne(
+        "api::user-profile.user-profile",
+        ctx.params.id,
+        {
+          populate: {
+            owner: {
+              fields: ["email"],
+            },
+            image: {
+              fields: ["url"],
+            },
+          },
         },
-      };
-      const { data } = await super.find(ctx);
-      const profile = data[0];
-      console.log({ profile });
-      return "";
+      );
+
+      if (!profile) return ctx.notFound("Profile not found");
+      const { image, owner } = profile;
+
+      const url =
+        image?.url ??
+        (await (async () => {
+          const user = await strapi.entityService.findOne(
+            "plugin::users-permissions.user",
+            owner.id,
+          );
+
+          if (!user) return ctx.notFound("User not found");
+          const { email } = user;
+
+          return strapi
+            .service("api::user-profile.user-profile")
+            .gravatarUrlFor(email);
+        })());
+
+      (ctx as any).body = ctx.req.pipe(
+        pipeline(
+          url,
+          { method: ctx.method as "GET", opaque: ctx.response },
+          ({ statusCode, headers, body, opaque }) => {
+            (opaque as Response).status = statusCode;
+            const mimeType = lookup(url) || "image/png";
+            ctx.response.set("content-type", mimeType);
+            return body;
+          },
+        ),
+      );
     },
 
     async findOneByUser(ctx) {

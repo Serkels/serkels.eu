@@ -520,9 +520,6 @@ export interface paths {
     get: operations["get/user-profiles/me"];
     put: operations["put/user-profiles/me"];
   };
-  "/user-profiles/public/{id}": {
-    get: operations["get/user-profiles/public/{id}"];
-  };
   "/users": {
     /** Get list of users */
     get: {
@@ -6242,51 +6239,6 @@ export interface operations {
     requestBody: {
       content: {
         "application/json": components["schemas"]["UserProfileRequest"];
-      };
-    };
-    responses: {
-      /** @description OK */
-      200: {
-        content: {
-          "application/json": components["schemas"]["UserProfileResponse"];
-        };
-      };
-      /** @description Bad Request */
-      400: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
-      /** @description Not Found */
-      404: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
-      /** @description Internal Server Error */
-      500: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
-    };
-  };
-  "get/user-profiles/public/{id}": {
-    parameters: {
-      path: {
-        id: number;
       };
     };
     responses: {

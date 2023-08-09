@@ -2,22 +2,20 @@
 
 import { School } from "@1/ui/icons";
 import clsx from "clsx";
-import { createHash } from "crypto";
 import { useSession } from "next-auth/react";
 import { useMemo, type ComponentPropsWithoutRef } from "react";
 
 //
 
-export function Avatar(props: ComponentPropsWithoutRef<"img">) {
-  const { className, ...other_props } = props;
+export function Avatar(
+  props: ComponentPropsWithoutRef<"img"> & { u?: string | number | undefined },
+) {
+  const { className, u, ...other_props } = props;
 
   const { data: session } = useSession();
-  const email = session?.user?.email ?? "";
-  const url = session?.user?.profile.attributes?.image?.data?.attributes?.url;
+  const id = u ?? session?.user?.profile.id;
 
-  const image = useMemo(() => {
-    return url ?? gravatarUrlFor(email);
-  }, [url, email]);
+  const image = useMemo(() => `/api/v1/avatars/u/${id}`, [id]);
 
   return (
     <img
@@ -84,16 +82,4 @@ export function AvatarMediaHorizontal(
       </figcaption>
     </figure>
   );
-}
-
-function gravatarUrlFor(email: string) {
-  // see https://fr.gravatar.com/site/implement/images/
-
-  const hash = createHash("md5")
-    .update(email.trim().toLowerCase())
-    .digest("hex");
-
-  const paramsObj = { default: "identicon", size: "256px" };
-  const searchParams = new URLSearchParams(paramsObj);
-  return `https://www.gravatar.com/avatar/${hash}?${searchParams.toString()}`;
 }

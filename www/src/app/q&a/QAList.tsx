@@ -1,6 +1,7 @@
 "use client";
 
 import { fromClient } from "@/app/api/v1";
+import { Avatar } from "@/components/Avatar";
 import type { components } from "@1/strapi-openapi/v1";
 import { Spinner } from "@1/ui/components/Spinner";
 import { useQuery } from "@tanstack/react-query";
@@ -71,10 +72,7 @@ function QACard({
       <div className="">
         <header className="mb-4 flex justify-between">
           <figure className="flex">
-            <img
-              className="h-12 w-12 rounded-full"
-              src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-            />
+            <Avatar className="h-12 w-12" u={owner_id} />
             <figcaption className="ml-2 mt-0.5">
               <span className="block text-base font-medium leading-snug text-black">
                 {username}

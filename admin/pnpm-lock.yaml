@@ -34,6 +34,9 @@ importers:
       '@strapi/strapi':
         specifier: 4.12.1
         version: 4.12.1(pg@8.11.2)(typescript@5.1.6)
+      mime-types:
+        specifier: ^2.1.35
+        version: 2.1.35
       pg:
         specifier: 8.11.2
         version: 8.11.2
@@ -46,6 +49,9 @@ importers:
       strapi-plugin-passwordless:
         specifier: 4.0.12
         version: 4.0.12(@strapi/strapi@4.12.1)
+      undici:
+        specifier: ^5.22.1
+        version: 5.22.1
     devDependencies:
       '@1/typescript-config':
         specifier: link:../../@1/config/typescript-config
@@ -3987,6 +3993,13 @@ packages:
     engines: {node: '>=4.5.0'}
     dependencies:
       dicer: 0.3.0
+    dev: false
+
+  /busboy@1.6.0:
+    resolution: {integrity: sha512-8SFQbg/0hQ9xy3UNTB0YEnsNBbWfhf7RtnzpL7TkBiTBRfrQ9Fxcnz7VJsleJpyp6rVLvXiuORqjlHi5q+PYuA==}
+    engines: {node: '>=10.16.0'}
+    dependencies:
+      streamsearch: 1.1.0
     dev: false
 
   /byte-size@7.0.1:
@@ -9822,6 +9835,11 @@ packages:
     engines: {node: '>=0.8.0'}
     dev: false
 
+  /streamsearch@1.1.0:
+    resolution: {integrity: sha512-Mcc5wHehp9aXz1ax6bZUyY5afg9u2rv5cqQI3mRrYkGC8rW2hM02jWuwjtL++LS5qinSyhj2QfLyNsuc+VsExg==}
+    engines: {node: '>=10.0.0'}
+    dev: false
+
   /string-argv@0.3.2:
     resolution: {integrity: sha512-aqD2Q0144Z+/RqG52NeHEkZauTAUWJO8c6yTftGJKO3Tja5tUgIfmIl6kExvhtxSDP7fXB6DvzkfMpCd/F3G+Q==}
     engines: {node: '>=0.6.19'}
@@ -10267,6 +10285,13 @@ packages:
   /unc-path-regex@0.1.2:
     resolution: {integrity: sha512-eXL4nmJT7oCpkZsHZUOJo8hcX3GbsiDOa0Qu9F646fi8dT3XuSVopVqAcEiVzSKKH7UoDti23wNX3qGFxcW5Qg==}
     engines: {node: '>=0.10.0'}
+    dev: false
+
+  /undici@5.22.1:
+    resolution: {integrity: sha512-Ji2IJhFXZY0x/0tVBXeQwgPlLWw13GVzpsWPQ3rV50IFMMof2I55PZZxtm4P6iNq+L5znYN9nSTAq0ZyE6lSJw==}
+    engines: {node: '>=14.0'}
+    dependencies:
+      busboy: 1.6.0
     dev: false
 
   /union-value@1.0.1:
