@@ -6,7 +6,6 @@ import type { components } from "@1/strapi-openapi/v1";
 import { Spinner } from "@1/ui/components/Spinner";
 import { useQuery } from "@tanstack/react-query";
 import { QARepository } from "./QARepository";
-import { UserProfileRepository } from "./UserProfileRepository";
 
 //
 
@@ -40,29 +39,29 @@ function QACard({
   attributes,
   id,
 }: components["schemas"]["QuestionListResponseDataItem"]) {
+  // const {
+  //   data: owner,
+  //   isLoading,
+  //   isError,
+  // } = useQuery({
+  //   enabled: Boolean(owner_id),
+  //   queryKey: ["user-profiles", owner_id],
+  //   queryFn: () => new UserProfileRepository(fromClient).loadById(owner_id),
+  // });
+
   const owner_id = attributes?.profile?.data?.id!;
-
-  const {
-    data: owner,
-    isLoading,
-    isError,
-  } = useQuery({
-    enabled: Boolean(owner_id),
-    queryKey: ["user-profiles", owner_id],
-    queryFn: () => new UserProfileRepository(fromClient).loadById(owner_id),
-  });
-
   const title = attributes?.title;
+  const university = attributes?.profile?.data?.attributes?.university;
   const username = [
-    owner?.attributes?.firstname,
-    owner?.attributes?.lastname,
+    attributes?.profile?.data?.attributes?.firstname,
+    attributes?.profile?.data?.attributes?.lastname,
   ].join(" ");
   const updatedAt = attributes?.updatedAt
     ? new Date(attributes?.updatedAt)
     : new Date(NaN);
 
-  if (isLoading) return null;
-  if (isError) return null;
+  // if (isLoading) return null;
+  // if (isError) return null;
 
   return (
     <div
@@ -78,7 +77,7 @@ function QACard({
                 {username}
               </span>
               <span className="block text-sm font-light leading-snug text-gray-500 ">
-                🎓 Université Lyon 3
+                🎓 {university}
               </span>
             </figcaption>
           </figure>

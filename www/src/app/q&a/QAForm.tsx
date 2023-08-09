@@ -106,10 +106,8 @@ export function QAForm({
                   className="min-w-[25%] border border-[#dddddd]"
                   name="opportunity_category"
                   disabled={isSubmitting}
+                  required
                 >
-                  <option value="" disabled hidden>
-                    Choisir une categorie ...
-                  </option>
                   {categories.map(({ name, id }) => (
                     <option value={id} key={id}>
                       {name}
