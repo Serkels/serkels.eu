@@ -117,8 +117,8 @@ importers:
   '@1/strapi-openapi':
     devDependencies:
       openapi-typescript:
-        specifier: 6.4.4
-        version: 6.4.4
+        specifier: 6.4.5
+        version: 6.4.5
       prettier:
         specifier: 3.0.1
         version: 3.0.1
@@ -5845,8 +5845,8 @@ packages:
     resolution: {integrity: sha512-hc6sAIc4eJPRoOKhNhGuyj4nPGZecc5byKicFxbnL4eXwXTu2h6ui479YcLUN2DkhGiJpHpKy632wG5HQgKByw==}
     dev: false
 
-  /openapi-typescript@6.4.4:
-    resolution: {integrity: sha512-M3sLGPTTYIrbruNGRlc2lg78OVhYsr/QATB7Uay0M9GV6ea3i58u168hBhjb/FFKvK8Jftjr37K4xP6uXYr8DA==}
+  /openapi-typescript@6.4.5:
+    resolution: {integrity: sha512-fH2p241Fm0M0K5+DfGS0pSkyEHOzwK+HxfQZaN52FbUBigszI2eNwPZAdBZcT1BD0PO80qBPSzpFAoAy+JTxMQ==}
     hasBin: true
     dependencies:
       ansi-colors: 4.1.3
