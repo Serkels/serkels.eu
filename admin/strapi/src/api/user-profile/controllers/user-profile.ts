@@ -3,6 +3,7 @@
  */
 
 import { factories } from "@strapi/strapi";
+import etag from "etag";
 import { Response } from "koa";
 import { lookup } from "mime-types";
 import { pipeline } from "undici";
@@ -108,6 +109,8 @@ export default factories.createCoreController(
             (opaque as Response).status = statusCode;
             const mimeType = lookup(url) || "image/png";
             ctx.response.set("content-type", mimeType);
+            ctx.response.set("cache-control", "max-age=300");
+            ctx.response.set("ETag", etag(url));
             return body;
           },
         ),

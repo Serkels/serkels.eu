@@ -54,7 +54,7 @@ export function AvatarMediaVertical(props: ComponentPropsWithoutRef<"figure">) {
   );
 }
 
-export function AvatarMediaHorizontal(
+export function AvatarMediaHorizontalPrimary(
   props: ComponentPropsWithoutRef<"figure">,
 ) {
   const { className, ...other_props } = props;
@@ -79,6 +79,30 @@ export function AvatarMediaHorizontal(
           <School className="mr-1.5 inline-block w-6" />
           <span>{session.user?.profile.attributes?.university}</span>
         </small>
+      </figcaption>
+    </figure>
+  );
+}
+
+export function AvatarMediaHorizontal(
+  props: ComponentPropsWithoutRef<"figure"> & {
+    u?: string | number | undefined;
+    username?: string | undefined;
+    university?: string | undefined;
+  },
+) {
+  const { className, u, username, university, ...other_props } = props;
+
+  return (
+    <figure className={clsx("flex", className)} {...other_props}>
+      <Avatar className="h-12 w-12" u={u} />
+      <figcaption className="ml-2 mt-0.5">
+        <span className="block text-base font-medium leading-snug text-black">
+          {username}
+        </span>
+        <span className="block text-sm font-light leading-snug text-gray-500 ">
+          🎓 {university}
+        </span>
       </figcaption>
     </figure>
   );

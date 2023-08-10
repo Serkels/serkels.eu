@@ -3,10 +3,11 @@
  */
 
 import { factories } from "@strapi/strapi";
+import { Router } from "@strapi/strapi/lib/types/core-api/router";
 import type { Next } from "koa";
 import { StrapiContext } from "../../../types";
 
-export default factories.createCoreRouter("api::question.question", {
+const coreRouter = factories.createCoreRouter("api::question.question", {
   config: {
     create: {
       middlewares: [
@@ -53,4 +54,41 @@ export default factories.createCoreRouter("api::question.question", {
       middlewares: ["api::question.populate"],
     },
   },
-});
+}) as unknown as Router;
+
+export default {
+  get prefix() {
+    return coreRouter.prefix;
+  },
+  get routes() {
+    return [
+      {
+        method: "GET",
+        path: "/question/:id/awnsers",
+        handler: "plugin::comments.client.findAllFlat",
+        config: {
+          description: "Get question awnsers",
+          middlewares: [
+            "api::question.relation",
+            "api::question.replate-author-by-profile",
+          ],
+        },
+        info: { apiName: "plugin::comments.comment", type: "content-api" },
+      },
+      {
+        method: "POST",
+        path: "/question/:id/awnsers",
+        handler: "plugin::comments.client.post",
+        config: {
+          description: "Get question awnsers",
+          middlewares: [
+            "api::question.relation",
+            "api::question.replate-author-by-profile",
+          ],
+        },
+        info: { apiName: "plugin::comments.comment", type: "content-api" },
+      },
+      ...coreRouter.routes,
+    ];
+  },
+};

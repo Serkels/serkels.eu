@@ -380,6 +380,10 @@ export interface paths {
       };
     };
   };
+  "/question/{id}/awnsers": {
+    get: operations["get/question/{id}/awnsers"];
+    post: operations["post/question/{id}/awnsers"];
+  };
   "/questions": {
     get: operations["get/questions"];
     post: operations["post/questions"];
@@ -1357,6 +1361,9 @@ export interface components {
       attributes?: components["schemas"]["Bookmark"];
       id?: number;
     };
+    CommentRequest: {
+      content: string;
+    };
     CommentsComment: {
       approvalStatus?: string;
       authorAvatar?: string;
@@ -1983,8 +1990,29 @@ export interface components {
       };
     };
     CommentsCommentResponse: {
-      data?: components["schemas"]["CommentsCommentResponseDataObject"];
-      meta?: Record<string, unknown>;
+      data?: ({
+          approvalStatus?: string;
+          author?: components["schemas"]["UserProfile"] & {
+            id?: number;
+          };
+          blocked?: boolean;
+          blockedThread?: boolean;
+          blockReason?: string;
+          content?: string;
+          /** Format: date-time */
+          createdAt?: string;
+          id?: number;
+          isAdminComment?: boolean;
+          related?: string;
+          threadOf?: {
+            data?: {
+              attributes?: Record<string, unknown>;
+              id?: number;
+            };
+          };
+          /** Format: date-time */
+          updatedAt?: string;
+        })[];
     };
     CommentsCommentResponseDataObject: {
       attributes?: components["schemas"]["CommentsComment"];
@@ -5364,6 +5392,101 @@ export interface operations {
       200: {
         content: {
           "application/json": number;
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Forbidden */
+      403: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Not Found */
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+  };
+  "get/question/{id}/awnsers": {
+    parameters: {
+      path: {
+        id: number;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["CommentsCommentResponse"];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Forbidden */
+      403: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Not Found */
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+  };
+  "post/question/{id}/awnsers": {
+    parameters: {
+      path: {
+        id: number;
+      };
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["CommentRequest"];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["CommentsCommentResponse"];
         };
       };
       /** @description Bad Request */

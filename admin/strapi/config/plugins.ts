@@ -1,4 +1,11 @@
-module.exports = ({ env }) => ({
+//
+
+import mutateQuestionDocumentation from "../src/api/question/documentation/mutateDocumentation";
+import mutateCommentsDocumentation from "../src/extensions/comments/documentation/mutateDocumentation";
+
+//
+
+export default ({ env }) => ({
   documentation: {
     enabled: true,
     config: {
@@ -12,6 +19,10 @@ module.exports = ({ env }) => ({
           "upload",
           "users-permissions",
         ],
+        mutateDocumentation: (generatedDocumentationDraft) => {
+          mutateQuestionDocumentation(generatedDocumentationDraft);
+          mutateCommentsDocumentation(generatedDocumentationDraft);
+        },
       },
     },
   },

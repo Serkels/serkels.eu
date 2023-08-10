@@ -104,4 +104,51 @@ export class QARepository {
 
     return body;
   }
+
+  async save_response(
+    jwt: string,
+    id: number,
+    data: components["schemas"]["CommentRequest"],
+  ) {
+    const headers = new Headers({ Authorization: `Bearer ${jwt}` });
+    const {
+      response,
+      data: body,
+      error: errorBody,
+    } = await this.client.POST("/question/{id}/awnsers", {
+      body: data,
+      headers,
+      params: {
+        path: { id },
+      },
+    });
+
+    if (errorBody) {
+      throw new Error(
+        [errorBody.error.message, "from " + response.url].join("\n"),
+      );
+    }
+
+    return body;
+  }
+
+  //
+
+  async loadResponsesOf(jwt: string, id: number) {
+    const headers = new Headers({ Authorization: `Bearer ${jwt}` });
+    const {
+      data: body,
+      error,
+      response,
+    } = await this.client.GET("/question/{id}/awnsers", {
+      headers,
+      params: { path: { id } },
+    });
+
+    if (error) {
+      console.error(error, "from " + response.url);
+    }
+
+    return body?.data ?? [];
+  }
 }
