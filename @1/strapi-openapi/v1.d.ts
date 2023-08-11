@@ -5493,7 +5493,7 @@ export interface operations {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["CommentsCommentResponse"];
+          "application/json": components["schemas"]["QuestionResponse"];
         };
       };
       /** @description Bad Request */

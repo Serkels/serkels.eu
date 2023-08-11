@@ -12,13 +12,15 @@
     "clsx": "2.0.0",
     "formik": "2.4.3",
     "react": "18.2.0",
+    "react-aria": "^3.27.0",
     "react-dom": "18.2.0",
+    "react-stately": "^3.25.0",
     "tailwindcss": "3.3.3"
   },
   "devDependencies": {
+    "@1/strapi-openapi": "workspace:*",
     "@1/tailwindcss-config": "workspace:*",
     "@1/typescript-config": "workspace:*",
-    "@1/strapi-openapi": "workspace:*",
     "@types/react": "18.2.20",
     "prettier": "3.0.1",
     "prettier-plugin-tailwindcss": "0.5.2",

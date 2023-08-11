@@ -15,19 +15,13 @@ export default {
       method: "GET",
       path: "/question/:id/awnsers",
       handler: "api::question.answers.find",
-      // handler: "plugin::comments.client.findAllFlat",
       config: {
         description: "Get question awnsers",
         middlewares: [
           "api::question.relation",
           "api::question.replate-author-by-profile",
         ],
-        policies: [
-          () => {
-            console.log("??");
-            return true;
-          },
-        ],
+        policies: [],
       },
       info: { apiName: "plugin::comments.comment", type: "content-api" },
     },

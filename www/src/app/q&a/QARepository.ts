@@ -134,14 +134,12 @@ export class QARepository {
 
   //
 
-  async loadResponsesOf(jwt: string, id: number) {
-    const headers = new Headers({ Authorization: `Bearer ${jwt}` });
+  async loadResponsesOf(id: number) {
     const {
       data: body,
       error,
       response,
     } = await this.client.GET("/question/{id}/awnsers", {
-      headers,
       params: { path: { id } },
     });
 

@@ -2,7 +2,6 @@
 import { Avatar } from "@/components/Avatar";
 import { Spinner } from "@1/ui/components/Spinner";
 import { useQuery } from "@tanstack/react-query";
-import { useSession } from "next-auth/react";
 import { useContext } from "react";
 import { fromClient } from "../api/v1";
 import { BlockedComment } from "./BlockedComment";
@@ -14,7 +13,6 @@ export function QACardResponseList() {
     statefulStatus: [{ isDisplayingResponses }],
     question,
   } = useContext(QACardContext);
-  const { data: session } = useSession();
 
   const repository = new QARepository(fromClient);
   const {
@@ -24,8 +22,7 @@ export function QACardResponseList() {
   } = useQuery({
     enabled: Boolean(question.id && isDisplayingResponses),
     queryKey: ["q&a", question.id, "awnsers"],
-    queryFn: () =>
-      repository.loadResponsesOf(session?.user?.jwt!, question.id!),
+    queryFn: () => repository.loadResponsesOf(question.id!),
   });
 
   //
