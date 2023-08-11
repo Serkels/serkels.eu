@@ -2,6 +2,7 @@
 import { Button } from "@1/ui/components/Button";
 import { useQuery } from "@tanstack/react-query";
 import clsx from "clsx";
+import { useSession } from "next-auth/react";
 import { useContext } from "react";
 import { fromClient } from "../api/v1";
 import { QACardContext } from "./QACardContext";
@@ -67,6 +68,7 @@ function ResponseCount() {
     statefulStatus: [, setStatus],
     question: { id },
   } = useContext(QACardContext);
+  const { data: session } = useSession();
   const { data: count, isLoading } = useQuery({
     enabled: Boolean(id),
     queryKey: ["q&a", id, "awnsers", "count"],
@@ -79,7 +81,7 @@ function ResponseCount() {
   return (
     <button
       className="block text-sm font-bold text-Dove_Gray"
-      disabled={!count}
+      disabled={!Boolean(count) || Boolean(session)}
       onClick={() =>
         setStatus((state) => ({
           ...state,
