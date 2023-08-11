@@ -40,10 +40,10 @@ importers:
         specifier: 4.12.4
         version: 4.12.4(pg@8.11.2)(typescript@5.1.6)
       etag:
-        specifier: ^1.8.1
+        specifier: 1.8.1
         version: 1.8.1
       mime-types:
-        specifier: ^2.1.35
+        specifier: 2.1.35
         version: 2.1.35
       pg:
         specifier: 8.11.2
@@ -58,7 +58,7 @@ importers:
         specifier: 4.0.12
         version: 4.0.12(patch_hash=ipwljz77ptgyxggbptirohrsfu)(@strapi/strapi@4.12.4)
       undici:
-        specifier: ^5.22.1
+        specifier: 5.22.1
         version: 5.22.1
     devDependencies:
       '@1/typescript-config':
@@ -68,10 +68,10 @@ importers:
         specifier: 4.12.4
         version: 4.12.4
       '@types/etag':
-        specifier: ^1.8.1
+        specifier: 1.8.1
         version: 1.8.1
       koa:
-        specifier: ^2.14.2
+        specifier: 2.14.2
         version: 2.14.2
       prettier:
         specifier: 3.0.1
