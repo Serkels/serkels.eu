@@ -19,9 +19,7 @@ export function QAResponseForm({
 }) {
   const {
     question,
-    setIsResponding,
-    setIsSubmitting,
-    setIsDisplayingResponses,
+    statefulStatus: [, setStatus],
   } = useContext(QACardContext);
   const { data: session, update } = useSession();
   const queryClient = useQueryClient();
@@ -38,18 +36,23 @@ export function QAResponseForm({
         data,
       );
 
-      await Promise.all([
-        queryClient.invalidateQueries({ queryKey: ["q&a", question.id] }),
-        update(),
-      ]);
-
       return body;
     },
     {
       onSuccess() {
-        setIsResponding(false);
-        setIsDisplayingResponses(true);
-        setIsSubmitting(false);
+        setStatus({
+          isResponding: false,
+          isDisplayingResponses: true,
+          isSubmitting: false,
+        });
+
+        Promise.all([
+          queryClient.invalidateQueries({ queryKey: ["q&a", question.id] }),
+          queryClient.invalidateQueries({
+            queryKey: ["q&a", question.id, "awnsers"],
+          }),
+          update(),
+        ]);
       },
     },
   );
@@ -82,7 +85,7 @@ export function QAResponseForm({
         }}
         enableReinitialize
         onSubmit={({ content }) => {
-          setIsSubmitting(true);
+          setStatus((state) => ({ ...state, isSubmitting: true }));
           return mutateAsync({
             content,
           });

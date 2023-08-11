@@ -1,17 +1,23 @@
 "use client";
 import type { components } from "@1/strapi-openapi/v1";
 import type { FormikProps } from "formik";
-import { createContext, type RefObject } from "react";
+import {
+  createContext,
+  type Dispatch,
+  type RefObject,
+  type SetStateAction,
+} from "react";
 
 //
 
-export const QACardContext = createContext<{
-  isSubmitting: boolean;
-  setIsSubmitting: (nextValue?: boolean) => void;
+export type QACardStatus = {
   isResponding: boolean;
-  setIsResponding: (nextValue?: boolean) => void;
+  isSubmitting: boolean;
   isDisplayingResponses: boolean;
-  setIsDisplayingResponses: (nextValue?: boolean) => void;
+};
+
+export const QACardContext = createContext<{
+  statefulStatus: [QACardStatus, Dispatch<SetStateAction<QACardStatus>>];
   question: components["schemas"]["QuestionListResponseDataItem"];
   QAResponseFormRef: RefObject<FormikProps<{ content: string }>>;
 }>({} as any);

@@ -1,7 +1,12 @@
 "use client";
+
 import { AvatarMediaHorizontal } from "@/components/Avatar";
+import { Circle } from "@1/ui/icons";
+import clsx from "clsx";
 import { useContext } from "react";
 import { QACardContext } from "./QACardContext";
+
+//
 
 export function QACardBody() {
   const {
@@ -9,6 +14,7 @@ export function QACardBody() {
   } = useContext(QACardContext);
 
   const owner_id = attributes?.profile?.data?.id!;
+  const is_resolved = Boolean(attributes?.resolved);
   const title = attributes?.title;
   const university = attributes?.profile?.data?.attributes?.university;
   const username = [
@@ -27,13 +33,21 @@ export function QACardBody() {
           university={university}
           username={username}
         />
-        <time
-          className="mt-3 text-xs"
-          dateTime={updatedAt.toUTCString()}
-          title={updatedAt.toUTCString()}
-        >
-          {updatedAt.toLocaleDateString("fr")}
-        </time>
+        <div className="space-x-2">
+          <Circle
+            className={clsx("inline-block h-4", {
+              "text-Chateau_Green": is_resolved,
+              "text-[#C10000]": !is_resolved,
+            })}
+          />
+          <time
+            className="mt-3 text-xs"
+            dateTime={updatedAt.toUTCString()}
+            title={updatedAt.toUTCString()}
+          >
+            {updatedAt.toLocaleDateString("fr")}
+          </time>
+        </div>
       </header>
       <article>
         <h3 className="my-5 text-xl font-bold">{title}</h3>
