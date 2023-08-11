@@ -3,35 +3,25 @@
  */
 
 import { factories } from "@strapi/strapi";
+import { StrapiRequestContext } from "strapi-typed";
 
 export default factories.createCoreController(
   "api::question.question",
   ({ strapi }) => ({
-    // async find(ctx) {
-    //   console.log();
-    //   console.log("api::question.question", "find");
-    //   console.log(ctx.query);
-    //   ctx.query.populate = {
-    //     profile: {
-    //       fields: [],
-    //       populate: {
-    //         image: {
-    //           fields: ["url"],
-    //         },
-    //       },
-    //     },
-    //     opportunity_category: { fields: ["name", "slug"] },
-    //   };
-    //   console.log(ctx.query, ctx.params);
+    async awnsers_count(
+      ctx: StrapiRequestContext<never, never, { id: string }>,
+    ) {
+      const { params } = ctx;
+      const { id } = params;
+      const where = { related: `api::question.question:${id}` };
 
-    //   const sanitizedQuery = await this.sanitizeQuery(ctx);
-    //   console.log({ sanitizedQuery });
-    //   const { results, pagination } = await strapi
-    //     .service("api::question.question")
-    //     .find(sanitizedQuery);
-    //   console.log({ results, pagination });
-    //   return this.transformResponse(results, { pagination });
-    // },
+      return await strapi.db
+        .query(strapi.plugin("comments").contentTypes["comment"]?.uid as string)
+        .count({
+          where,
+        });
+    },
+
     async delete(ctx) {
       ctx.query.populate = {
         owner: {

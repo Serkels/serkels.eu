@@ -151,4 +151,22 @@ export class QARepository {
 
     return body?.data ?? [];
   }
+
+  //
+
+  async count_awnsers(id: number) {
+    const {
+      data: body,
+      error,
+      response,
+    } = await this.client.GET("/question/{id}/awnsers/count", {
+      params: { path: { id } },
+    });
+
+    if (error) {
+      console.error(error, "from " + response.url);
+    }
+
+    return Number(body);
+  }
 }

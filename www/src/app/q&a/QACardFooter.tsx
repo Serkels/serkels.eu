@@ -1,7 +1,11 @@
 "use client";
 import { Button } from "@1/ui/components/Button";
+import { useQuery } from "@tanstack/react-query";
+import clsx from "clsx";
 import { useContext } from "react";
+import { fromClient } from "../api/v1";
 import { QACardContext } from "./QACardContext";
+import { QARepository } from "./QARepository";
 
 export function QACardFooter() {
   const {
@@ -12,14 +16,7 @@ export function QACardFooter() {
   return (
     <footer className="mt-4">
       <div className="flex justify-between">
-        <button
-          className="block text-sm font-bold text-Dove_Gray"
-          onClick={() =>
-            setStatus((state) => ({ ...state, isDisplayingResponses: true }))
-          }
-        >
-          <span className="text-Chateau_Green">1</span> réponse
-        </button>
+        <ResponseCount />
 
         {isResponding ? (
           <>
@@ -62,5 +59,43 @@ export function QACardFooter() {
         <button className="block">↗️</button>
       </div>
     </footer>
+  );
+}
+
+function ResponseCount() {
+  const {
+    statefulStatus: [, setStatus],
+    question: { id },
+  } = useContext(QACardContext);
+  const { data: count, isLoading } = useQuery({
+    enabled: Boolean(id),
+    queryKey: ["q&a", id, "awnsers", "count"],
+    queryFn: () => new QARepository(fromClient).count_awnsers(Number(id)),
+  });
+
+  if (isLoading) return "...";
+  if (count === undefined) return "O_o";
+
+  return (
+    <button
+      className="block text-sm font-bold text-Dove_Gray"
+      disabled={!count}
+      onClick={() =>
+        setStatus((state) => ({
+          ...state,
+          isDisplayingResponses: !state.isDisplayingResponses,
+        }))
+      }
+    >
+      <span
+        className={clsx({
+          "text-Chateau_Green": count,
+          "text-[#C10000]": !count,
+        })}
+      >
+        {count}
+      </span>{" "}
+      réponse{count > 0 ? "s" : ""}
+    </button>
   );
 }

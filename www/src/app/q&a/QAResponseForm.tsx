@@ -51,6 +51,9 @@ export function QAResponseForm({
           queryClient.invalidateQueries({
             queryKey: ["q&a", question.id, "awnsers"],
           }),
+          queryClient.invalidateQueries({
+            queryKey: ["q&a", question.id, "awnsers", "count"],
+          }),
           update(),
         ]);
       },

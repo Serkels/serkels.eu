@@ -3,7 +3,6 @@
 import type { components } from "@1/strapi-openapi/v1";
 import type { FormikProps } from "formik";
 import { useRef, useState } from "react";
-import { useToggle } from "react-use";
 import { QACardBody } from "./QACardBody";
 import { QACardContext, type QACardStatus } from "./QACardContext";
 import { QACardFooter } from "./QACardFooter";
@@ -13,9 +12,6 @@ import { QACardResponses } from "./QACardResponses";
 export function QACard(
   question: components["schemas"]["QuestionListResponseDataItem"],
 ) {
-  const [isResponding, setIsResponding] = useToggle(false);
-  const [isSubmitting, setIsSubmitting] = useToggle(false);
-  const [isDisplayingResponses, setIsDisplayingResponses] = useToggle(false);
   const statefulStatus = useState<QACardStatus>({
     isResponding: false,
     isSubmitting: false,
@@ -33,14 +29,8 @@ export function QACard(
       <QACardContext.Provider
         value={{
           statefulStatus,
-          isDisplayingResponses,
-          isResponding,
-          isSubmitting,
           QAResponseFormRef,
           question,
-          setIsDisplayingResponses,
-          setIsResponding,
-          setIsSubmitting,
         }}
       >
         <QACardBody />

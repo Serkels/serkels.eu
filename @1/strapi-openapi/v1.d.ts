@@ -69,7 +69,9 @@ export interface paths {
       };
       responses: {
         /** @description Redirects to the configure email confirmation redirect url */
-        301: never;
+        301: {
+          content: never;
+        };
         /** @description Error */
         default: {
           content: {
@@ -279,7 +281,9 @@ export interface paths {
       };
       responses: {
         /** @description Redirect response */
-        301: never;
+        301: {
+          content: never;
+        };
         /** @description Error */
         default: {
           content: {
@@ -383,6 +387,9 @@ export interface paths {
   "/question/{id}/awnsers": {
     get: operations["get/question/{id}/awnsers"];
     post: operations["post/question/{id}/awnsers"];
+  };
+  "/question/{id}/awnsers/count": {
+    get: operations["get/question/{id}/awnsers/count"];
   };
   "/questions": {
     get: operations["get/questions"];
@@ -5487,6 +5494,51 @@ export interface operations {
       200: {
         content: {
           "application/json": components["schemas"]["CommentsCommentResponse"];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Forbidden */
+      403: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Not Found */
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+  };
+  "get/question/{id}/awnsers/count": {
+    parameters: {
+      path: {
+        id: number;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": number;
         };
       };
       /** @description Bad Request */
