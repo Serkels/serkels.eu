@@ -47,12 +47,13 @@ export function QAResponseForm({
         });
 
         Promise.all([
-          queryClient.invalidateQueries({ queryKey: ["q&a", question.id] }),
           queryClient.invalidateQueries({
             queryKey: ["q&a", question.id, "awnsers"],
+            exact: true,
           }),
           queryClient.invalidateQueries({
             queryKey: ["q&a", question.id, "awnsers", "count"],
+            exact: true,
           }),
           update(),
         ]);

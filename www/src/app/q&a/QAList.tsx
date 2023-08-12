@@ -8,15 +8,22 @@ import { QARepository } from "./QARepository";
 
 //
 
-export function QAList({ category }: { category: string | undefined }) {
+export function QAList({
+  category,
+  search,
+}: {
+  category: string | undefined;
+  search: string | undefined;
+}) {
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["q&a"],
+    queryKey: ["q&a", { category, search }],
     queryFn: () =>
       new QARepository(fromClient).load({
-        category: category,
+        category,
         limit: 6,
         page: undefined,
         pageSize: undefined,
+        search,
       }),
   });
   if (isLoading) return <Spinner />;
