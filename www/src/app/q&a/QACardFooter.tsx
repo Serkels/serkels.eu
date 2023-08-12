@@ -1,10 +1,11 @@
 "use client";
+
 import { Button } from "@1/ui/components/Button";
 import { useQuery } from "@tanstack/react-query";
-
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
-import { useContext } from "react";
+import { useCallback, useContext } from "react";
+import { useTimeoutFn, useToggle } from "react-use";
 import { fromClient } from "../api/v1";
 import { QACardContext } from "./QACardContext";
 import { QARepository } from "./QARepository";
@@ -29,6 +30,15 @@ function ResponseButtons() {
     QAResponseFormRef,
   } = useContext(QACardContext);
 
+  const [shouldSignUp, setShouldSignUp] = useToggle(false);
+  const [, , reset] = useTimeoutFn(() => setShouldSignUp(false), 5000);
+  const setIsResponding = useCallback((isResponding: boolean) => {
+    setStatus((state) => ({
+      ...state,
+      isResponding,
+    }));
+  }, []);
+
   const { data: session } = useSession();
 
   if (isResponding)
@@ -46,12 +56,7 @@ function ResponseButtons() {
         <button
           className="text-md block rounded-full px-7 font-bold text-red-900 disabled:opacity-20"
           disabled={isSubmitting}
-          onClick={() =>
-            setStatus((state) => ({
-              ...state,
-              isResponding: false,
-            }))
-          }
+          onClick={() => setIsResponding(false)}
         >
           Annuler
         </button>
@@ -60,15 +65,39 @@ function ResponseButtons() {
 
   return (
     <div className="relative">
+      {shouldSignUp ? (
+        <div
+          className="
+            absolute
+            bottom-full
+            w-max
+            -translate-x-1/4
+            -translate-y-1/3
+            rounded-full
+            bg-[#707070]
+            px-6
+            py-2
+            text-white
+            before:pointer-events-none
+            before:absolute
+            before:bottom-0 
+            before:left-1/2
+            before:box-border before:h-3
+            before:w-3
+            before:-translate-x-1/2
+            before:translate-y-1/2
+            before:rotate-45
+            before:bg-inherit
+            before:content-['']
+          "
+        >
+          Connectez-vous pour répondre
+        </div>
+      ) : null}
       <button
-        // {...triggerProps}
         className="text-md block rounded-full px-7 font-bold text-Chateau_Green "
-        disabled={!Boolean(session)}
         onClick={() =>
-          setStatus((state) => ({
-            ...state,
-            isResponding: true,
-          }))
+          session ? setIsResponding(true) : (setShouldSignUp(true), reset())
         }
       >
         Répondre
