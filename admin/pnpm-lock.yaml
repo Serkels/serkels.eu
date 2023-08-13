@@ -58,8 +58,8 @@ importers:
         specifier: 4.0.12
         version: 4.0.12(patch_hash=ipwljz77ptgyxggbptirohrsfu)(@strapi/strapi@4.12.4)
       undici:
-        specifier: 5.22.1
-        version: 5.22.1
+        specifier: 5.23.0
+        version: 5.23.0
     devDependencies:
       '@1/typescript-config':
         specifier: link:../../@1/config/typescript-config
@@ -10104,8 +10104,8 @@ packages:
     resolution: {integrity: sha512-eXL4nmJT7oCpkZsHZUOJo8hcX3GbsiDOa0Qu9F646fi8dT3XuSVopVqAcEiVzSKKH7UoDti23wNX3qGFxcW5Qg==}
     engines: {node: '>=0.10.0'}
 
-  /undici@5.22.1:
-    resolution: {integrity: sha512-Ji2IJhFXZY0x/0tVBXeQwgPlLWw13GVzpsWPQ3rV50IFMMof2I55PZZxtm4P6iNq+L5znYN9nSTAq0ZyE6lSJw==}
+  /undici@5.23.0:
+    resolution: {integrity: sha512-1D7w+fvRsqlQ9GscLBwcAJinqcZGHUKjbOmXdlE/v8BvEGXjeWAax+341q44EuTcHXXnfyKNbKRq4Lg7OzhMmg==}
     engines: {node: '>=14.0'}
     dependencies:
       busboy: 1.6.0
