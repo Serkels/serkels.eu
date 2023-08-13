@@ -23,7 +23,7 @@
     "pg": "8.11.2",
     "strapi-plugin-comments": "2.2.12",
     "strapi-plugin-country-select": "1.0.2",
-    "strapi-plugin-passwordless": "4.0.12",
+    "strapi-plugin-passwordless": "4.0.13",
     "undici": "5.23.0"
   },
   "author": {
