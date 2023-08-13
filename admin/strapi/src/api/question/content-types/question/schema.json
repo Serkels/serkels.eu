@@ -19,7 +19,13 @@
     },
     "resolved": {
       "type": "boolean",
-      "default": false
+      "default": false,
+      "required": false
+    },
+    "resolved_answer": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::comments.comment"
     },
     "title": {
       "type": "string",
