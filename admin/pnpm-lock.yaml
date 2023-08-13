@@ -4,11 +4,6 @@ settings:
   autoInstallPeers: false
   excludeLinksFromLockfile: false
 
-patchedDependencies:
-  strapi-plugin-passwordless@4.0.12:
-    hash: ipwljz77ptgyxggbptirohrsfu
-    path: patches/strapi-plugin-passwordless@4.0.12.patch
-
 importers:
 
   .: {}
@@ -55,8 +50,8 @@ importers:
         specifier: 1.0.2
         version: 1.0.2(@strapi/strapi@4.12.4)
       strapi-plugin-passwordless:
-        specifier: 4.0.12
-        version: 4.0.12(patch_hash=ipwljz77ptgyxggbptirohrsfu)(@strapi/strapi@4.12.4)
+        specifier: 4.0.13
+        version: 4.0.13(@strapi/strapi@4.12.4)
       undici:
         specifier: 5.23.0
         version: 5.23.0
@@ -9661,8 +9656,8 @@ packages:
       i18n-iso-countries: 7.6.0
     dev: false
 
-  /strapi-plugin-passwordless@4.0.12(patch_hash=ipwljz77ptgyxggbptirohrsfu)(@strapi/strapi@4.12.4):
-    resolution: {integrity: sha512-phs49ynrGWLCu/8ddRqpMMBcjzWqwDQYwX0Frlgpgz3tC2YJ21eaoa4qHEG/GmZbYWnIIrXxnqQ3WZn0oC2uSQ==}
+  /strapi-plugin-passwordless@4.0.13(@strapi/strapi@4.12.4):
+    resolution: {integrity: sha512-lWZwRqbwcHBjBO/MSkPluECfHCiCzKEM2csAI657LV9M5jB0JGOZn3mk91JjD0yo+qfz5ZpG2RMFfJbTv0Ikiw==}
     engines: {node: '>=10.16.0', npm: '>=6.0.0'}
     peerDependencies:
       '@strapi/strapi': ^4.x
@@ -9670,7 +9665,6 @@ packages:
       '@strapi/strapi': 4.12.4(pg@8.11.2)(typescript@5.1.6)
       nanoid: 3.3.6
     dev: false
-    patched: true
 
   /strapi-typed@1.0.16(@strapi/strapi@4.12.4)(koa@2.14.2)(typescript@5.1.6):
     resolution: {integrity: sha512-k7mWLZUa9Kfezr/NDzPns70clDJIPbDGIG7BFueWiCFy8WotKVCasDIysh9HJfzInGfGWUvF+IBQX7sY4XSAmQ==}
