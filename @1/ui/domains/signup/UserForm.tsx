@@ -3,6 +3,7 @@
 import type { components } from "@1/strapi-openapi/v1";
 import { useFormik, type FormikConfig } from "formik";
 import type { ElementType } from "react";
+import { Button } from "../../components/Button";
 import { UserAvatarFilled } from "../../icons/UserAvatarFilled";
 
 //
@@ -114,9 +115,9 @@ export function UserForm({ onSubmit, csrf: csrfToken, email, profile }: Props) {
         <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
         <input name="role" type="hidden" defaultValue="user" />
       </div>
-      <button type="submit" disabled={formik.isSubmitting}>
+      <Button variant="primary" type="submit" disabled={formik.isSubmitting}>
         Terminer
-      </button>
+      </Button>
     </form>
   );
 }

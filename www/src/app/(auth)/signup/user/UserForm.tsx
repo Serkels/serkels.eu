@@ -31,7 +31,7 @@ export function UserForm() {
   if (isError) return <ErrorOccur error={error as Error} />;
 
   return (
-    <div className="container col-span-full mx-auto flex flex-col justify-center ">
+    <div className="col-span-full mx-auto flex flex-col justify-center ">
       <SignUpUserForm
         onSubmit={(values) => mutate(values)}
         csrf={csrf}
@@ -78,7 +78,7 @@ async function submitFormHandler(context: FormValues) {
 
 function Verifying() {
   return (
-    <div className="col-span-full bg-black text-white">
+    <div className="col-span-full flex flex-col justify-center bg-black text-white">
       <h1
         className={`
           mx-auto
@@ -100,7 +100,7 @@ function Verifying() {
 
 function ErrorOccur({ error }: { error: Error }) {
   return (
-    <div className="col-span-full bg-black text-white">
+    <div className="col-span-full flex flex-col justify-center bg-black text-white">
       <h1
         className={`
           mx-auto

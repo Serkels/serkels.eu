@@ -1,6 +1,7 @@
 ///
 
 import { AppFooter } from "@/components/AppFooter.server";
+import { Grid } from "@1/ui/components/Grid";
 import { BigBar } from "@1/ui/shell";
 import Image from "next/image";
 import type { PropsWithChildren } from "react";
@@ -17,7 +18,7 @@ export default function Layout({ children }: PropsWithChildren) {
           priority
         />
       </BigBar>
-      <div className="col-auto grid grid-cols-12">{children}</div>
+      <Grid theme-padding={false}>{children}</Grid>
       <AppFooter />
     </div>
   );
