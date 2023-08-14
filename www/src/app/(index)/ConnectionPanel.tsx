@@ -9,18 +9,33 @@ import { useMutation } from "@tanstack/react-query";
 import type { Session } from "next-auth";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import { useCallback, type PropsWithChildren } from "react";
+import { useRouter } from "next/navigation";
+import {
+  useCallback,
+  type ComponentProps,
+  type PropsWithChildren,
+} from "react";
+import { match } from "ts-pattern";
 
 //
 
 export function ConnectionPanel() {
   const { data: session, status } = useSession();
+  const router = useRouter();
   const { mutate, isLoading, isSuccess, isError } = useMutation(
     submitFormHandler,
     { retry: 3 },
   );
-  const onFormSubmit = async ({ email }: { email: string }) =>
-    await mutate({ email });
+  const onLoginFormSubmit: ComponentProps<
+    typeof LoginForm
+  >["onLogin"] = async ({ email }) => await mutate({ email });
+  const onSignUpFormSubmit: ComponentProps<
+    typeof LoginForm
+  >["onSignUp"] = async ({ email, as }) => {
+    match(as as "student" | "partner")
+      .with("student", () => router.push(`/signup/user?email=${email}`))
+      .with("partner", () => console.info("TODO"));
+  };
 
   if (status === "loading") return <Loading />;
   if (session && session.user && status === "authenticated")
@@ -29,7 +44,10 @@ export function ConnectionPanel() {
   if (isLoading) return <Loading />;
   if (isError) return <ErrorOccur />;
   if (isSuccess) return <CheckYourMail />;
-  return <LoginForm onSubmit={onFormSubmit} />;
+
+  return (
+    <LoginForm onLogin={onLoginFormSubmit} onSignUp={onSignUpFormSubmit} />
+  );
 }
 
 async function submitFormHandler({ email }: { email: string }) {

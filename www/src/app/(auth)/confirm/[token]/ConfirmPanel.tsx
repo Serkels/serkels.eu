@@ -5,6 +5,7 @@ import { Banner } from "@1/ui/shell";
 import { useMutation } from "@tanstack/react-query";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 
 //
@@ -22,6 +23,7 @@ export function ConfirmPanel({ token }: { token: string }) {
 //
 
 function ConfirmPanelFlow({ token }: { token: string }) {
+  const router = useRouter();
   const { mutate, isLoading, isSuccess, isError, error } = useMutation(
     async () => {
       const res = await signIn("credentials", {
@@ -32,6 +34,15 @@ function ConfirmPanelFlow({ token }: { token: string }) {
 
       if (!res) throw new Error();
       if (res.error) throw new Error(res.error);
+
+      return;
+    },
+    {
+      onSuccess() {
+        setTimeout(() => {
+          router.push("/exchange");
+        }, 5_000);
+      },
     },
   );
 
