@@ -4,7 +4,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "openapi-typescript openapi.json --output v1.d.ts --empty-objects-unknown --default-non-nullable --alphabetize"
+    "build": "rm -rf v1.d.ts && openapi-typescript openapi.json --output v1.d.ts --empty-objects-unknown --default-non-nullable --alphabetize"
   },
   "devDependencies": {
     "openapi-typescript": "6.4.5",

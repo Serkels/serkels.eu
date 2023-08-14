@@ -3390,15 +3390,7 @@ export interface components {
       context?: Record<string, unknown>;
     };
     Question: {
-      /** Format: date-time */
-      createdAt?: string;
-      createdBy?: {
-        data?: {
-          attributes?: Record<string, unknown>;
-          id?: number;
-        };
-      };
-      opportunity_category?: {
+      category?: {
         data?: {
           attributes?: {
             /** Format: date-time */
@@ -3424,6 +3416,14 @@ export interface components {
               };
             };
           };
+          id?: number;
+        };
+      };
+      /** Format: date-time */
+      createdAt?: string;
+      createdBy?: {
+        data?: {
+          attributes?: Record<string, unknown>;
           id?: number;
         };
       };
@@ -3890,7 +3890,7 @@ export interface components {
     QuestionRequest: {
       data: {
         /** @example string or id */
-        opportunity_category?: number | string;
+        category?: number | string;
         /** @example string or id */
         owner?: number | string;
         /** @example string or id */
