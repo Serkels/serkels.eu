@@ -1,10 +1,10 @@
 //
 
 import { fromServer } from "@/app/api/v1";
-import { OpportunityCategories } from "@/app/opportunity/OpportunityRepository";
+import { getQueryClient } from "@/app/getQueryClient";
+import { OpportunityCategories } from "@/app/opportunity/data/OpportunityCategories";
 import { dehydrate, Hydrate } from "@tanstack/react-query";
 import { getServerSession } from "next-auth";
-import { getQueryClient } from "../getQueryClient";
 import { QAForm } from "./QAForm";
 import { QAList } from "./QAList";
 import { QARepository } from "./QARepository";
@@ -56,6 +56,7 @@ export default async function Page({
     </>
   );
 }
+
 export async function QAFormByCategories() {
   try {
     const categories = await OpportunityCategories.load();

@@ -35,7 +35,7 @@
       "type": "uid",
       "targetField": "title"
     },
-    "opportunity_category": {
+    "category": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::opportunity-category.opportunity-category"

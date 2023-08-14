@@ -1,6 +1,6 @@
 "use client";
 import { useContext } from "react";
-import { QACardContext } from "./QACardContext";
+import { QACardContext } from "./QACard.context";
 import { QACardResponseList } from "./QACardResponseList";
 
 export function QACardResponses() {

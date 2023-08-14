@@ -26,7 +26,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2023-08-13T16:11:52.331Z"
+    "x-generation-date": "2023-08-14T08:18:32.245Z"
   },
   "servers": [
     {
@@ -3031,6 +3031,8 @@
       },
       "OpportunityCategoryLocalizationRequest": {
         "required": [
+          "name",
+          "slug",
           "locale"
         ],
         "type": "object",
@@ -3053,6 +3055,10 @@
         ],
         "properties": {
           "data": {
+            "required": [
+              "name",
+              "slug"
+            ],
             "type": "object",
             "properties": {
               "name": {
@@ -3184,6 +3190,10 @@
       },
       "OpportunityCategory": {
         "type": "object",
+        "required": [
+          "name",
+          "slug"
+        ],
         "properties": {
           "name": {
             "type": "string"
@@ -4931,7 +4941,7 @@
               "slug": {
                 "type": "string"
               },
-              "opportunity_category": {
+              "category": {
                 "oneOf": [
                   {
                     "type": "integer"
@@ -5748,7 +5758,7 @@
           "slug": {
             "type": "string"
           },
-          "opportunity_category": {
+          "category": {
             "type": "object",
             "properties": {
               "data": {

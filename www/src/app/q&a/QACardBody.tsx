@@ -4,7 +4,7 @@ import { AvatarMediaHorizontal } from "@/components/Avatar";
 import { Circle } from "@1/ui/icons";
 import clsx from "clsx";
 import { useContext } from "react";
-import { QACardContext } from "./QACardContext";
+import { QACardContext } from "./QACard.context";
 
 //
 

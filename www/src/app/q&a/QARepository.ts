@@ -1,14 +1,12 @@
 //
 
-import { type ApiClient } from "@/app/api/v1";
+import { OpenAPIRepository } from "@/app/api/v1";
 import type { components } from "@1/strapi-openapi/v1";
 import type { _1_HOUR_ } from "@douglasduteil/datatypes...hours-to-seconds";
 
 //
 
-export class QARepository {
-  constructor(private client: ApiClient) {}
-
+export class QARepository extends OpenAPIRepository {
   async load({
     category,
     limit,

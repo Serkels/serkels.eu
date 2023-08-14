@@ -2722,8 +2722,8 @@ export interface components {
       localizations?: {
         data?: components["schemas"]["OpportunityCategory"][];
       };
-      name?: string;
-      slug?: string;
+      name: string;
+      slug: string;
       /** Format: date-time */
       updatedAt?: string;
       updatedBy?: {
@@ -2765,8 +2765,8 @@ export interface components {
     };
     OpportunityCategoryLocalizationRequest: {
       locale: string;
-      name?: string;
-      slug?: string;
+      name: string;
+      slug: string;
     };
     OpportunityCategoryLocalizationResponse: {
       data?: components["schemas"]["OpportunityCategoryResponseDataObjectLocalized"];
@@ -2775,8 +2775,8 @@ export interface components {
     OpportunityCategoryRequest: {
       data: {
         locale?: string;
-        name?: string;
-        slug?: string;
+        name: string;
+        slug: string;
       };
     };
     OpportunityCategoryResponse: {
@@ -3780,6 +3780,87 @@ export interface components {
         };
       };
       resolved?: boolean;
+      resolved_answer?: {
+        data?: {
+          attributes?: {
+            approvalStatus?: string;
+            authorAvatar?: string;
+            /** Format: email */
+            authorEmail?: string;
+            authorId?: string;
+            authorName?: string;
+            authorUser?: {
+              data?: {
+                attributes?: Record<string, unknown>;
+                id?: number;
+              };
+            };
+            blocked?: boolean;
+            blockedThread?: boolean;
+            blockReason?: string;
+            content?: string;
+            /** Format: date-time */
+            createdAt?: string;
+            createdBy?: {
+              data?: {
+                attributes?: Record<string, unknown>;
+                id?: number;
+              };
+            };
+            isAdminComment?: boolean;
+            related?: string;
+            removed?: boolean;
+            reports?: {
+              data?: ({
+                  attributes?: {
+                    content?: string;
+                    /** Format: date-time */
+                    createdAt?: string;
+                    createdBy?: {
+                      data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      };
+                    };
+                    /** @enum {string} */
+                    reason?: "BAD_LANGUAGE" | "DISCRIMINATION" | "OTHER";
+                    related?: {
+                      data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      };
+                    };
+                    resolved?: boolean;
+                    /** Format: date-time */
+                    updatedAt?: string;
+                    updatedBy?: {
+                      data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      };
+                    };
+                  };
+                  id?: number;
+                })[];
+            };
+            threadOf?: {
+              data?: {
+                attributes?: Record<string, unknown>;
+                id?: number;
+              };
+            };
+            /** Format: date-time */
+            updatedAt?: string;
+            updatedBy?: {
+              data?: {
+                attributes?: Record<string, unknown>;
+                id?: number;
+              };
+            };
+          };
+          id?: number;
+        };
+      };
       slug?: string;
       title: string;
       /** Format: date-time */
@@ -3815,6 +3896,8 @@ export interface components {
         /** @example string or id */
         profile?: number | string;
         resolved?: boolean;
+        /** @example string or id */
+        resolved_answer?: number | string;
         slug?: string;
         title: string;
       };

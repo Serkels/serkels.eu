@@ -1,6 +1,6 @@
 //
 
-import { Opportunity } from "@/app/opportunity/OpportunityRepository";
+import { Opportunity } from "@/app/opportunity/data/OpportunityRepository";
 import type { components } from "@1/strapi-openapi/v1";
 import { OpportunityArticle } from "./OpportunityArticle";
 import { SeeAlso } from "./SeeAlso";

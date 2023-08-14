@@ -7,7 +7,7 @@ import { Field, Form, Formik, type FormikProps } from "formik";
 import { useSession } from "next-auth/react";
 import { useContext, type Ref } from "react";
 import { fromClient } from "../api/v1";
-import { QACardContext } from "./QACardContext";
+import { QACardContext } from "./QACard.context";
 import { QARepository } from "./QARepository";
 
 //

@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 import { useCallback, useContext } from "react";
 import { useTimeoutFn, useToggle } from "react-use";
 import { fromClient } from "../api/v1";
-import { QACardContext } from "./QACardContext";
+import { QACardContext } from "./QACard.context";
 import { QARepository } from "./QARepository";
 
 //

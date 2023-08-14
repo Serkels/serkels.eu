@@ -8,22 +8,6 @@ import type {
 
 //
 
-export class OpportunityCategories {
-  static async load() {
-    const { data: body } = await GET("/opportunity-categories", {
-      params: {},
-      next: { revalidate: 86400 satisfies _24_HOURS_ },
-    });
-
-    if (!body) return [];
-    if (!body.data) return [];
-
-    return body.data.map(({ id, attributes }) => ({ id, ...attributes }));
-  }
-}
-
-//
-
 export class Opportunity {
   static async loadFromSlug(slug: string) {
     const { data: body, response } = await GET("/opportunities", {

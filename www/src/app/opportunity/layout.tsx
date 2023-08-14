@@ -4,22 +4,20 @@ import { AppFooter } from "@/components/AppFooter.server";
 import { UserBar } from "@/components/UserBar";
 import { AsideWithTitle } from "@/layouts/holy/aside";
 import { Grid } from "@1/ui/components/Grid";
-import { Suspense, type PropsWithChildren } from "react";
-import { CategoriesList } from "./CategoryList";
+import { type PropsWithChildren } from "react";
+import { CategoriesList } from "./(page)";
 import { OpportunityFilterContextProvider } from "./OpportunityFilter.context";
-import { OpportunityCategories } from "./OpportunityRepository";
 import { SearchForm } from "./SearchForm";
+import { OpportunityCategories } from "./data/OpportunityCategories";
 
 export default function Layout({ children }: PropsWithChildren) {
   return (
     <div className="grid min-h-screen grid-rows-[max-content_1fr_max-content]">
       <UserBar />
       <Grid>
-        <OpportunityFilterContextProvider pathname="/opportunity">
+        <OpportunityFilterContextProvider>
           <AsideWithTitle title="Opportunités">
-            <Suspense fallback={null}>
-              <SearchForm />
-            </Suspense>
+            <SearchForm />
             <Categories />
           </AsideWithTitle>
 
@@ -33,10 +31,11 @@ export default function Layout({ children }: PropsWithChildren) {
 
 export async function Categories() {
   try {
-    const categories = await OpportunityCategories.load();
-    if (!categories) return <>No data O_o</>;
+    const data = await OpportunityCategories.load();
 
-    return <CategoriesList categories={categories} />;
+    if (!data) return <>No data O_o</>;
+
+    return <CategoriesList data={data} />;
   } catch (error) {
     console.error(error);
     return null;

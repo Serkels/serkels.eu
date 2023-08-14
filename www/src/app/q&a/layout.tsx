@@ -5,6 +5,8 @@ import { UserBar } from "@/components/UserBar";
 import { AsideWithTitle } from "@/layouts/holy/aside";
 import { Grid } from "@1/ui/components/Grid";
 import { type PropsWithChildren } from "react";
+import { OpportunityCategories } from "../opportunity/data/OpportunityCategories";
+import { CategoriesList, QAFilter } from "./(page)";
 
 export default function Layout({ children }: PropsWithChildren) {
   return (
@@ -12,11 +14,27 @@ export default function Layout({ children }: PropsWithChildren) {
       <UserBar />
       <Grid>
         <AsideWithTitle title="Question-Réponse">
-          {/* <FAQFilter /> */}
+          <QAFilter />
+
+          <hr className="my-10" />
+
+          <Categories />
         </AsideWithTitle>
         {children}
       </Grid>
       <AppFooter />
     </div>
   );
+}
+export async function Categories() {
+  try {
+    const data = await OpportunityCategories.load();
+
+    if (!data) return <>No data O_o</>;
+
+    return <CategoriesList data={data} />;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 }

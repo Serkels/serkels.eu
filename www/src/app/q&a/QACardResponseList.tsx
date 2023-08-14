@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 import { fromClient } from "../api/v1";
 import { BlockedComment } from "./BlockedComment";
-import { QACardContext } from "./QACardContext";
+import { QACardContext } from "./QACard.context";
 import { QARepository } from "./QARepository";
 
 export function QACardResponseList() {

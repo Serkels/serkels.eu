@@ -23,6 +23,19 @@ export const fromClient = createClient<paths>({
   querySerializer,
 });
 
+export class OpenAPIRepository {
+  constructor(
+    public client: ApiClient,
+    public jwt?: string,
+  ) {
+    if (jwt) {
+      this.headers.set("Authorization", `Bearer ${this.jwt}`);
+    }
+  }
+
+  readonly headers = new Headers();
+}
+
 //
 
 export const { GET } = fromServer;

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { OpportunityCard } from "../OpportunityCard";
-import { Opportunities } from "../OpportunityRepository";
+import { Opportunities } from "../data/OpportunityRepository";
 
 //
 

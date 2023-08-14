@@ -1,7 +1,6 @@
 "use client";
 
 import { fromClient } from "@/app/api/v1";
-import type { OpportunityCategories } from "@/app/opportunity/OpportunityRepository";
 import { Avatar } from "@/components/Avatar";
 import type { components } from "@1/strapi-openapi/v1";
 import { Button } from "@1/ui/components/Button";
@@ -10,6 +9,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Field, Form, Formik } from "formik";
 import { useSession } from "next-auth/react";
 import { useState, type ComponentPropsWithoutRef } from "react";
+import type { OpportunityCategories } from "../opportunity/data/OpportunityCategories";
+import { OpportunityCategoriesViewModel } from "../opportunity/models/OpportunityCategories";
 import { QARepository } from "./QARepository";
 
 //
@@ -108,11 +109,13 @@ export function QAForm({
                   disabled={isSubmitting}
                   required
                 >
-                  {categories.map(({ name, id }) => (
-                    <option value={id} key={id}>
-                      {name}
-                    </option>
-                  ))}
+                  {categories
+                    .map(OpportunityCategoriesViewModel.from_server)
+                    .map(({ name, id }) => (
+                      <option value={id} key={id}>
+                        {name}
+                      </option>
+                    ))}
                 </Field>
                 <Button
                   type="submit"
