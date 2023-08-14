@@ -7,7 +7,7 @@
     "build": "rm -rf v1.d.ts && openapi-typescript openapi.json --output v1.d.ts --empty-objects-unknown --default-non-nullable --alphabetize"
   },
   "devDependencies": {
-    "openapi-typescript": "6.4.5",
+    "openapi-typescript": "6.5.0",
     "prettier": "3.0.1",
     "typescript": "5.1.6"
   }
