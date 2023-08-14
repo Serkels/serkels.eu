@@ -1,10 +1,19 @@
 //
 
 import { IllegalArgs } from "@/core/errors";
+import { BasicOpenApiViewModel } from "@/core/models/BasicOpenApiViewModel";
 import { DatedEntryViewModel } from "@/core/models/DatedEntryProps";
 import type { components } from "@1/strapi-openapi/v1";
 
-export class OpportunityCategoriesViewModel {
+export interface OpportunityCategoriesProps {
+  readonly createdAt: Date;
+  readonly id: number;
+  readonly name: string;
+  readonly slug: string;
+  readonly updatedAt: Date;
+}
+
+export class OpportunityCategoriesViewModel extends BasicOpenApiViewModel<OpportunityCategoriesProps> {
   static from_server({
     id,
     attributes,
@@ -13,27 +22,11 @@ export class OpportunityCategoriesViewModel {
     if (attributes === undefined) throw new IllegalArgs("attributes undefined");
 
     const { createdAt, name, slug, updatedAt } = attributes;
-    return new OpportunityCategoriesViewModel(id, name, {
+    return new OpportunityCategoriesViewModel({
       ...DatedEntryViewModel.from_server({ createdAt, updatedAt }),
+      id,
+      name,
       slug,
     });
-  }
-
-  //
-
-  readonly createdAt: Date = new Date();
-  readonly slug: string;
-  readonly updatedAt: Date = new Date();
-
-  //
-
-  constructor(
-    public readonly id: number,
-    public readonly name: string,
-
-    data: Partial<OpportunityCategoriesViewModel>,
-  ) {
-    this.slug = name;
-    Object.assign(this, data);
   }
 }

@@ -26,6 +26,7 @@ export default function Layout({ children }: PropsWithChildren) {
     </div>
   );
 }
+
 export async function Categories() {
   try {
     const data = await OpportunityCategories.load();

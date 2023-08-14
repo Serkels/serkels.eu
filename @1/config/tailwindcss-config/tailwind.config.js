@@ -22,6 +22,7 @@ const Eminence = "#782D8E";
 const RedViolet = "#CE118B";
 const RedViolet_Dark = "#C91489";
 const Violet_Eggplant = "#AA1E8B";
+const Gamboge = "#E3A007";
 
 //
 
@@ -54,6 +55,7 @@ module.exports = {
         Congress_Blue,
         Dove_Gray,
         Eminence,
+        Gamboge,
         RedViolet,
         Violet_Eggplant,
       },
@@ -72,7 +74,7 @@ module.exports = {
       },
       backgroundImage: {
         "i-binoculars": `url("data:image/svg+xml;utf8,${encodeSvgForCss(
-          svg
+          svg,
         )}")`,
         "primary-gradient-74": `
           linear-gradient(

@@ -1,10 +1,12 @@
 "use client";
 
 import { OpportunityCategoriesViewModel } from "@/app/opportunity/models/OpportunityCategoriesViewModel";
+import { FilterRadioList } from "@/components/FilterRadioList";
 import { useSyncSearchQuery } from "@/components/useSyncSearchQuery";
 import type { components } from "@1/strapi-openapi/v1";
-import { FilterRadioList } from "../../components/FilterRadioList";
-import type { QAFilterType } from "./models/QAFilterType";
+import { InputSearch } from "@1/ui/components/InputSearch";
+import { Form, Formik, useField } from "formik";
+import type { ComponentPropsWithoutRef } from "react";
 
 //
 
@@ -38,23 +40,25 @@ export function CategoriesList({
   );
 }
 
-const data: { name: string; slug: QAFilterType }[] = [
-  { name: "Les dernières questions", slug: "" },
-  // { name: "Questions fréquentes", slug: "frequently" },
-  // { name: "Mes questions", slug: "mine" },
-  // { name: "Les dernières réponses", slug: "lastest-awnsers" },
-  // { name: "Questions répondus", slug: "awnsered" },
-];
+//
 
-export function QAFilter() {
-  const { query, setQuery } = useSyncSearchQuery("f");
-
+export function SearchForm() {
+  const { query, setQuery } = useSyncSearchQuery("q");
   return (
-    <FilterRadioList
-      data={data}
-      active={query}
-      name="filter"
-      onChange={setQuery}
-    />
+    <Formik
+      initialValues={{ query }}
+      onSubmit={(values) => setQuery(values.query)}
+    >
+      {({}) => (
+        <Form>
+          <QueryInputSearch />
+        </Form>
+      )}
+    </Formik>
   );
+}
+
+function QueryInputSearch(props: ComponentPropsWithoutRef<"input">) {
+  const [field] = useField("query");
+  return <InputSearch {...field} {...props} />;
 }

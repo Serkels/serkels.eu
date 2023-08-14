@@ -38,9 +38,9 @@ export function QAList({
             Date.parse(b.attributes?.createdAt!) -
             Date.parse(a.attributes?.createdAt!),
         )
-        .map((exchange) => (
-          <li key={exchange.id}>
-            <QACard {...exchange} />
+        .map((qa) => (
+          <li key={qa.id}>
+            <QACard {...qa} />
           </li>
         ))}
     </ul>

@@ -10,7 +10,7 @@ import { Field, Form, Formik } from "formik";
 import { useSession } from "next-auth/react";
 import { useState, type ComponentPropsWithoutRef } from "react";
 import type { OpportunityCategories } from "../opportunity/data/OpportunityCategories";
-import { OpportunityCategoriesViewModel } from "../opportunity/models/OpportunityCategories";
+import { OpportunityCategoriesViewModel } from "../opportunity/models/OpportunityCategoriesViewModel";
 import { QARepository } from "./QARepository";
 
 //
