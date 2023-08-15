@@ -37,7 +37,7 @@
     "@strapi/typescript-utils": "4.12.4",
     "@types/etag": "1.8.1",
     "koa": "2.14.2",
-    "prettier": "3.0.1",
+    "prettier": "3.0.2",
     "strapi-typed": "^1.0.16",
     "typescript": "5.1.6"
   }
