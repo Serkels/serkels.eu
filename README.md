@@ -43,6 +43,19 @@ col de gauche sa ns shadom 5px 5px
 
 - Change text base size to 14px without changing the spacings values in the tailwind theme.
 - opportunité
+- separate category per subject
+- supprimer les liens sur tous les inputs !
+- cacher les messages bloqué dans les questions
+- question répondu
+  - add metadata repo
+  - the user how ask can validate the answer
+  - button "useful answer" section display by default
+  - users can still answer answered questions
+  - button response keep displaying reponses
+  - question owner can "unpin" useful reponses
+  - line on the bottom of the card same as default footer line but align left with the text
+- studient user "university mandatory
+- add sentry browser secret on vercel !
 
 # FUTUR
 
