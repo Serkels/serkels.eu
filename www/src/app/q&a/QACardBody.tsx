@@ -14,7 +14,7 @@ export function QACardBody() {
   } = useContext(QACardContext);
 
   const owner_id = attributes?.profile?.data?.id!;
-  const is_resolved = Boolean(attributes?.resolved);
+  const is_accepted = Boolean(attributes?.is_accepted);
   const title = attributes?.title;
   const university = attributes?.profile?.data?.attributes?.university;
   const username = [
@@ -36,8 +36,8 @@ export function QACardBody() {
         <div className="space-x-2">
           <Circle
             className={clsx("inline-block h-4", {
-              "text-Chateau_Green": is_resolved,
-              "text-[#C10000]": !is_resolved,
+              "text-Chateau_Green": is_accepted,
+              "text-[#C10000]": !is_accepted,
             })}
           />
           <time
