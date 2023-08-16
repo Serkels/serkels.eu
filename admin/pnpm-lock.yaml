@@ -69,8 +69,8 @@ importers:
         version: 8.13.0
     devDependencies:
       '@1/typescript-config':
-        specifier: workspace:*
-        version: link:../typescript-config
+        specifier: link:../../@1/config/typescript-config
+        version: link:../../@1/config/typescript-config
       '@strapi/typescript-utils':
         specifier: 4.12.5
         version: 4.12.5
@@ -105,9 +105,6 @@ importers:
         specifier: 3.21.4
         version: 3.21.4
     devDependencies:
-      '@1/typescript-config':
-        specifier: workspace:*
-        version: link:../typescript-config
       prettier:
         specifier: 3.0.2
         version: 3.0.2

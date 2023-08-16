@@ -29,8 +29,8 @@ export const publicProcedure = t.procedure;
 
 //
 
-// type Post = { foo: "Poost" };
-// const ee = new EventEmitter();
+console.log("111");
+
 export const appRouter = t.router({
   notifications: t.procedure
     .input(z.number())
@@ -38,6 +38,19 @@ export const appRouter = t.router({
       console.log("on notifications", { ctx, user_id });
       return observable<Notification>(function sub(emit) {
         console.log("on notifications > observable sub", { ctx, user_id });
+
+        const timer = setInterval(() => {
+          // emits a number every second
+          emit.next({
+            id: 123,
+            createdAt: new Date(),
+            message: "Hello",
+            state: "pending",
+            subject: "GENERAL",
+            type: "GRETTING",
+            profile: { id: 0 },
+          });
+        }, 1000);
 
         emit.next({
           id: 123,
@@ -57,9 +70,10 @@ export const appRouter = t.router({
         // ee.on("add", onAdd);
         return function unsub() {
           console.log("on notifications < observable unsub", { ctx, user_id });
+          clearInterval(timer);
         };
       });
     }),
 });
-appRouter.createCaller;
+
 export type AppRouter = typeof appRouter;
