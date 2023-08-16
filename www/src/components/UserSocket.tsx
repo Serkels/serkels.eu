@@ -1,21 +1,18 @@
 //
 
 "use client";
-import type { Unsubscribable } from "@trpc/server/observable";
-import { useRef, type PropsWithChildren } from "react";
-import { useMount, useUnmount } from "react-use";
-import { trpc } from "./trpc";
+import { type PropsWithChildren } from "react";
 
 export function UserSocker({ children }: PropsWithChildren) {
-  const s = useRef<Unsubscribable>();
-  useMount(() => {
-    s.current = trpc.notifications.subscribe(undefined, {});
-  });
+  // const s = useRef<Unsubscribable>();
+  // useMount(() => {
+  //   s.current = trpc.notifications.subscribe(undefined, {});
+  // });
 
-  useUnmount(() => {
-    if (!s.current) return;
-    s.current.unsubscribe();
-  });
+  // useUnmount(() => {
+  //   if (!s.current) return;
+  //   s.current.unsubscribe();
+  // });
 
   return children;
   // const { data, isLoading } = trpc.lol.useQuery("1");

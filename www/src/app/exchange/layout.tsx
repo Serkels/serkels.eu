@@ -4,38 +4,33 @@ import { AppFooter } from "@/components/AppFooter.server";
 import { UserBar } from "@/components/UserBar";
 import { AsideWithTitle } from "@/layouts/holy/aside";
 import { Grid } from "@1/ui/components/Grid";
+import { Hydrate, dehydrate } from "@tanstack/react-query";
 import { type PropsWithChildren } from "react";
-import { OpportunityCategories } from "../opportunity/data/OpportunityCategories";
+import { getQueryClient } from "../getQueryClient";
+import { useOpportunityCategoriesprefetchQuery } from "../opportunity/data/useOpportunityCategoriesQuery";
 import { CategoriesList, SearchForm } from "./(page)";
 
-export default function Layout({ children }: PropsWithChildren) {
+export default async function Layout({ children }: PropsWithChildren) {
+  const queryClient = getQueryClient();
+  await useOpportunityCategoriesprefetchQuery();
+  const dehydratedState = dehydrate(queryClient);
+
   return (
     <div className="grid min-h-screen grid-rows-[max-content_1fr_max-content]">
       <UserBar />
       <Grid>
-        <AsideWithTitle title="Échanges">
-          <SearchForm />
-          {/* <ExhangesFilter /> */}
-          <hr className="my-10" />
+        <Hydrate state={dehydratedState}>
+          <AsideWithTitle title="Échanges">
+            <SearchForm />
+            {/* <ExhangesFilter /> */}
+            <hr className="my-10" />
 
-          <Categories />
-        </AsideWithTitle>
-        {children}
+            <CategoriesList />
+          </AsideWithTitle>
+          {children}
+        </Hydrate>
       </Grid>
       <AppFooter />
     </div>
   );
-}
-
-export async function Categories() {
-  try {
-    const data = await OpportunityCategories.load();
-
-    if (!data) return <>No data O_o</>;
-
-    return <CategoriesList data={data} />;
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
 }

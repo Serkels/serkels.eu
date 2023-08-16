@@ -2,6 +2,5 @@
   "extends": ["@1/typescript-config/base.json"],
   "compilerOptions": {
     "baseUrl": "."
-  },
-  "include": ["components", "domains", "helpers", "icons", "shell"]
+  }
 }

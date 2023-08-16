@@ -3,23 +3,25 @@
 import { OpportunityCategoriesViewModel } from "@/app/opportunity/models/OpportunityCategoriesViewModel";
 import { FilterRadioList } from "@/components/FilterRadioList";
 import { useSyncSearchQuery } from "@/components/useSyncSearchQuery";
-import type { components } from "@1/strapi-openapi/v1";
 import { InputSearch } from "@1/ui/components/InputSearch";
 import { Form, Formik, useField } from "formik";
 import type { ComponentPropsWithoutRef } from "react";
+import { useOpportunityCategoriesQuery } from "../opportunity/data/useOpportunityCategoriesQuery";
 
 //
 
-export function CategoriesList({
-  data,
-}: components["schemas"]["OpportunityCategoryListResponse"]) {
+export function CategoriesList() {
   const { query, setQuery } = useSyncSearchQuery("category");
+  const { data: raw_categories } = useOpportunityCategoriesQuery();
 
   //
 
-  if (!data) return <>0_o</>;
+  if (!raw_categories) return <>0_o</>;
 
-  const categories = data.map(OpportunityCategoriesViewModel.from_server);
+  const categories = raw_categories.map(
+    OpportunityCategoriesViewModel.from_server,
+  );
+
   categories.push(
     new OpportunityCategoriesViewModel({
       id: NaN,

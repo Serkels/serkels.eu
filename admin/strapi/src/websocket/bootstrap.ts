@@ -3,7 +3,8 @@
 import type { Strapi } from "@strapi/strapi";
 import { applyWSSHandler } from "@trpc/server/adapters/ws";
 import { Server, WebSocket } from "ws";
-import { appRouter, createContext } from "./router";
+// import { appRouter, createContext } from "./router";
+import { Context, appRouter } from "@1/strapi-trpc-router";
 
 //
 
@@ -15,7 +16,13 @@ export default function bootstrap({ strapi }: { strapi: Strapi }) {
   const handler = applyWSSHandler({
     wss,
     router: appRouter,
-    createContext,
+    createContext: () =>
+      ({
+        greeting() {
+          console.log("from greeting");
+          return Promise.resolve("Hello DinoOo");
+        },
+      }) satisfies Context,
   });
 
   wss.on("connection", onConnection.bind(null, { strapi, wss }));

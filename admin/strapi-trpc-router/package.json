@@ -1,10 +1,12 @@
 {
   "name": "@1/strapi-trpc-router",
   "version": "0.0.0",
-  "type": "module",
-  "main": "./index.ts",
-  "types": "./index.ts",
+  "main": "./lib/index.js",
   "private": true,
+  "scripts": {
+    "dev": "pnpm run build --watch --preserveWatchOutput",
+    "build": "tsc ../../@1/strapi-trpc-router/index.ts --outDir ./lib"
+  },
   "dependencies": {
     "@trpc/server": "10.37.1",
     "superjson": "1.13.1",

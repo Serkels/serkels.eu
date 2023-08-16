@@ -1,2 +1,4 @@
 packages:
   - "strapi"
+  - "strapi-trpc-router"
+  - "typescript-config"

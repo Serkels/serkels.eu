@@ -10,6 +10,7 @@
     "strapi": "strapi"
   },
   "dependencies": {
+    "@1/strapi-trpc-router": "workspace:*",
     "@strapi/plugin-documentation": "4.12.5",
     "@strapi/plugin-i18n": "4.12.5",
     "@strapi/plugin-sentry": "4.12.5",
@@ -36,7 +37,7 @@
     "node": ">=18"
   },
   "devDependencies": {
-    "@1/typescript-config": "link:../../@1/config/typescript-config",
+    "@1/typescript-config": "workspace:*",
     "@strapi/typescript-utils": "4.12.5",
     "@types/etag": "1.8.1",
     "koa": "2.14.2",
