@@ -1,5 +1,13 @@
 {
   "folders": [
+    //
+    { "path": "www", "name": "www" },
+    { "path": "admin", "name": "admin" },
+    //
+    { "path": "@1/strapi-openapi", "name": "@1/strapi-openapi" },
+    { "path": "@1/strapi-trpc-router", "name": "@1/strapi-trpc-router" },
+    { "path": "@1/ui", "name": "@1/ui" },
+    //
     { "path": "@1/config/eslint-config", "name": "@1/config/eslint-config" },
     {
       "path": "@1/config/pandacss-config",
@@ -13,12 +21,6 @@
       "path": "@1/config/typescript-config",
       "name": "@1/config/typescript-config"
     },
-    //
-    { "path": "@1/strapi-openapi", "name": "@1/strapi-openapi" },
-    { "path": "@1/ui", "name": "@1/ui" },
-    //
-    { "path": "www", "name": "www" },
-    { "path": "admin", "name": "admin" },
     //
     { "path": ".", "name": "root" }
   ],
@@ -35,7 +37,7 @@
     },
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true,
-    "editor.rulers": [{ "column": 100 }],
+    "editor.rulers": [{ "column": 80 }],
     "editor.tabSize": 2,
     "files.associations": {
       "*.css": "tailwindcss"

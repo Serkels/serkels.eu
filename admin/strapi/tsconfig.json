@@ -3,13 +3,9 @@
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": "."
+    // "verbatimModuleSyntax": true
   },
-  "include": [
-    "./",
-    "./**/*.ts",
-    "./**/*.js",
-    "src/**/*.json"
-  ],
+  "include": ["./", "./**/*.ts", "./**/*.js", "src/**/*.json"],
   "exclude": [
     "node_modules/",
     "build/",

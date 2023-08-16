@@ -1,0 +1,19 @@
+{
+  "name": "@1/strapi-trpc-router",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "private": true,
+  "scripts": {},
+  "dependencies": {
+    "@trpc/server": "10.37.1",
+    "superjson": "1.13.1",
+    "ws": "8.13.0"
+  },
+  "devDependencies": {
+    "@1/typescript-config": "workspace:*",
+    "prettier": "3.0.2",
+    "typescript": "5.1.6"
+  }
+}

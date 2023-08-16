@@ -3390,6 +3390,88 @@ export interface components {
       context?: Record<string, unknown>;
     };
     Question: {
+      accepted_answer?: {
+        data?: {
+          attributes?: {
+            approvalStatus?: string;
+            authorAvatar?: string;
+            /** Format: email */
+            authorEmail?: string;
+            authorId?: string;
+            authorName?: string;
+            authorUser?: {
+              data?: {
+                attributes?: Record<string, unknown>;
+                id?: number;
+              };
+            };
+            blocked?: boolean;
+            blockedThread?: boolean;
+            blockReason?: string;
+            content?: string;
+            /** Format: date-time */
+            createdAt?: string;
+            createdBy?: {
+              data?: {
+                attributes?: Record<string, unknown>;
+                id?: number;
+              };
+            };
+            isAdminComment?: boolean;
+            related?: string;
+            removed?: boolean;
+            reports?: {
+              data?: ({
+                  attributes?: {
+                    content?: string;
+                    /** Format: date-time */
+                    createdAt?: string;
+                    createdBy?: {
+                      data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      };
+                    };
+                    /** @enum {string} */
+                    reason?: "BAD_LANGUAGE" | "DISCRIMINATION" | "OTHER";
+                    related?: {
+                      data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      };
+                    };
+                    resolved?: boolean;
+                    /** Format: date-time */
+                    updatedAt?: string;
+                    updatedBy?: {
+                      data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      };
+                    };
+                  };
+                  id?: number;
+                })[];
+            };
+            threadOf?: {
+              data?: {
+                attributes?: Record<string, unknown>;
+                id?: number;
+              };
+            };
+            /** Format: date-time */
+            updatedAt?: string;
+            updatedBy?: {
+              data?: {
+                attributes?: Record<string, unknown>;
+                id?: number;
+              };
+            };
+          };
+          id?: number;
+        };
+      };
+      answer_count?: number;
       category?: {
         data?: {
           attributes?: {
@@ -3427,6 +3509,9 @@ export interface components {
           id?: number;
         };
       };
+      is_accepted?: boolean;
+      /** Format: date-time */
+      last_activity?: string;
       owner?: {
         data?: {
           attributes?: {
@@ -3779,88 +3864,6 @@ export interface components {
           id?: number;
         };
       };
-      resolved?: boolean;
-      resolved_answer?: {
-        data?: {
-          attributes?: {
-            approvalStatus?: string;
-            authorAvatar?: string;
-            /** Format: email */
-            authorEmail?: string;
-            authorId?: string;
-            authorName?: string;
-            authorUser?: {
-              data?: {
-                attributes?: Record<string, unknown>;
-                id?: number;
-              };
-            };
-            blocked?: boolean;
-            blockedThread?: boolean;
-            blockReason?: string;
-            content?: string;
-            /** Format: date-time */
-            createdAt?: string;
-            createdBy?: {
-              data?: {
-                attributes?: Record<string, unknown>;
-                id?: number;
-              };
-            };
-            isAdminComment?: boolean;
-            related?: string;
-            removed?: boolean;
-            reports?: {
-              data?: ({
-                  attributes?: {
-                    content?: string;
-                    /** Format: date-time */
-                    createdAt?: string;
-                    createdBy?: {
-                      data?: {
-                        attributes?: Record<string, unknown>;
-                        id?: number;
-                      };
-                    };
-                    /** @enum {string} */
-                    reason?: "BAD_LANGUAGE" | "DISCRIMINATION" | "OTHER";
-                    related?: {
-                      data?: {
-                        attributes?: Record<string, unknown>;
-                        id?: number;
-                      };
-                    };
-                    resolved?: boolean;
-                    /** Format: date-time */
-                    updatedAt?: string;
-                    updatedBy?: {
-                      data?: {
-                        attributes?: Record<string, unknown>;
-                        id?: number;
-                      };
-                    };
-                  };
-                  id?: number;
-                })[];
-            };
-            threadOf?: {
-              data?: {
-                attributes?: Record<string, unknown>;
-                id?: number;
-              };
-            };
-            /** Format: date-time */
-            updatedAt?: string;
-            updatedBy?: {
-              data?: {
-                attributes?: Record<string, unknown>;
-                id?: number;
-              };
-            };
-          };
-          id?: number;
-        };
-      };
       slug?: string;
       title: string;
       /** Format: date-time */
@@ -3890,14 +3893,17 @@ export interface components {
     QuestionRequest: {
       data: {
         /** @example string or id */
+        accepted_answer?: number | string;
+        answer_count?: number;
+        /** @example string or id */
         category?: number | string;
+        is_accepted?: boolean;
+        /** Format: date-time */
+        last_activity?: string;
         /** @example string or id */
         owner?: number | string;
         /** @example string or id */
         profile?: number | string;
-        resolved?: boolean;
-        /** @example string or id */
-        resolved_answer?: number | string;
         slug?: string;
         title: string;
       };

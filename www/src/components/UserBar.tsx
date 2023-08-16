@@ -13,25 +13,53 @@ import {
   Messenger,
   Plus,
 } from "@1/ui/icons";
+import { useQueryClient } from "@tanstack/react-query";
+import type { Unsubscribable } from "@trpc/server/observable";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
+  useEffect,
+  useRef,
   useState,
   type ComponentPropsWithoutRef,
   type PropsWithChildren,
 } from "react";
 import { Avatar } from "./Avatar";
 import { MobileNavBar } from "./MobileNavBar";
+import { trpc } from "./trpc";
 
 //
 
+function useNotification() {
+  const queryClient = useQueryClient();
+  const websocket = useRef<Unsubscribable>();
+
+  useEffect(() => {
+    websocket.current = trpc.notifications.subscribe(undefined, {
+      onData(value) {
+        console.log({ value });
+      },
+      onStarted() {
+        console.log("onStarted");
+      },
+      onComplete() {
+        console.log("onComplete");
+      },
+    });
+    return websocket.current.unsubscribe;
+  }, [queryClient]);
+}
 export function UserBar() {
   const [showSideBar, setShowSideBar] = useState(false);
   const pathname = usePathname();
 
   const { data: session } = useSession();
+  useNotification();
+  // console.log({ notification });
+  // const lolQuery = trpc.lol.query("1");
+  // console.log({ lolQuery });
 
   return (
     <header className="sticky top-0 z-10 bg-primary-gradient-74 text-white shadow-[0_3px_6px_#00000029]">
