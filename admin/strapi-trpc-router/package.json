@@ -2,10 +2,11 @@
   "name": "@1/strapi-trpc-router",
   "version": "0.0.0",
   "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
   "private": true,
   "scripts": {
-    "dev": "pnpm run build --watch --preserveWatchOutput",
-    "build": "tsc ../../@1/strapi-trpc-router/index.ts --outDir ./lib"
+    "dev": "pnpm run build --watch --preserveWatchOutput ",
+    "build": "tsc ../../@1/strapi-trpc-router/index.ts --outDir ./lib --declaration --declarationMap"
   },
   "dependencies": {
     "@trpc/server": "10.37.1",
