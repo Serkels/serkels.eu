@@ -23,7 +23,7 @@
     "next-auth": "4.23.0",
     "nextjs-toploader": "1.4.2",
     "openapi-fetch": "0.7.2",
-    "postcss": "8.4.27",
+    "postcss": "8.4.28",
     "qs": "6.11.2",
     "react": "18.2.0",
     "react-aria": "^3.27.0",
