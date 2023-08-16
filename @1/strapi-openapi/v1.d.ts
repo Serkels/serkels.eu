@@ -4485,17 +4485,17 @@ export interface components {
       id?: number;
     };
     "Users-Permissions-PermissionsTree": {
-      [key: string]: ({
+      [key: string]: {
         /** @description every controller of the api */
         controllers?: {
-          [key: string]: ({
+          [key: string]: {
             [key: string]: {
               enabled?: boolean;
               policy?: string;
-            } | undefined;
-          }) | undefined;
+            };
+          };
         };
-      }) | undefined;
+      };
     };
     "Users-Permissions-Role": {
       /** Format: date-time */

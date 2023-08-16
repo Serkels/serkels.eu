@@ -26,7 +26,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2023-08-14T12:26:58.683Z"
+    "x-generation-date": "2023-08-16T01:13:32.102Z"
   },
   "servers": [
     {
@@ -4921,10 +4921,10 @@
                 ],
                 "example": "string or id"
               },
-              "resolved": {
+              "is_accepted": {
                 "type": "boolean"
               },
-              "resolved_answer": {
+              "accepted_answer": {
                 "oneOf": [
                   {
                     "type": "integer"
@@ -4962,6 +4962,13 @@
                   }
                 ],
                 "example": "string or id"
+              },
+              "answer_count": {
+                "type": "integer"
+              },
+              "last_activity": {
+                "type": "string",
+                "format": "date-time"
               }
             }
           }
@@ -5524,10 +5531,10 @@
               }
             }
           },
-          "resolved": {
+          "is_accepted": {
             "type": "boolean"
           },
-          "resolved_answer": {
+          "accepted_answer": {
             "type": "object",
             "properties": {
               "data": {
@@ -6294,6 +6301,13 @@
                 }
               }
             }
+          },
+          "answer_count": {
+            "type": "integer"
+          },
+          "last_activity": {
+            "type": "string",
+            "format": "date-time"
           },
           "createdAt": {
             "type": "string",
