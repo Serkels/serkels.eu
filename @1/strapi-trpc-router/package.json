@@ -10,7 +10,7 @@
     "@trpc/server": "10.37.1",
     "superjson": "1.13.1",
     "ws": "8.13.0",
-    "zod": "3.21.4"
+    "zod": "3.22.1"
   },
   "devDependencies": {
     "@1/typescript-config": "workspace:*",
