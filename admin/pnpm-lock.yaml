@@ -62,8 +62,8 @@ importers:
         specifier: 10.37.1
         version: 10.37.1
       '@types/koa':
-        specifier: 2.13.6
-        version: 2.13.6
+        specifier: 2.13.8
+        version: 2.13.8
       codemirror:
         specifier: ^6.0.1
         version: 6.0.1
@@ -3790,15 +3790,15 @@ packages:
   /@types/koa-bodyparser@4.3.10:
     resolution: {integrity: sha512-6ae05pjhmrmGhUR8GYD5qr5p9LTEMEGfGXCsK8VaSL+totwigm8+H/7MHW7K4854CMeuwRAubT8qcc/EagaeIA==}
     dependencies:
-      '@types/koa': 2.13.6
+      '@types/koa': 2.13.8
 
   /@types/koa-compose@3.2.5:
     resolution: {integrity: sha512-B8nG/OoE1ORZqCkBVsup/AKcvjdgoHnfi4pZMn5UwAPCbhk/96xyv284eBYW8JlQbQ7zDmnpFr68I/40mFoIBQ==}
     dependencies:
-      '@types/koa': 2.13.6
+      '@types/koa': 2.13.8
 
-  /@types/koa@2.13.6:
-    resolution: {integrity: sha512-diYUfp/GqfWBAiwxHtYJ/FQYIXhlEhlyaU7lB/bWQrx4Il9lCET5UwpFy3StOAohfsxxvEQ11qIJgT1j2tfBvw==}
+  /@types/koa@2.13.8:
+    resolution: {integrity: sha512-Ugmxmgk/yPRW3ptBTh9VjOLwsKWJuGbymo1uGX0qdaqqL18uJiiG1ZoV0rxCOYSaDGhvEp5Ece02Amx0iwaxQQ==}
     dependencies:
       '@types/accepts': 1.3.5
       '@types/content-disposition': 0.5.5
@@ -3812,7 +3812,7 @@ packages:
   /@types/koa__cors@3.3.1:
     resolution: {integrity: sha512-aFGYhTFW7651KhmZZ05VG0QZJre7QxBxDj2LF1lf6GA/wSXEfKVAJxiQQWzRV4ZoMzQIO8vJBXKsUcRuvYK9qw==}
     dependencies:
-      '@types/koa': 2.13.6
+      '@types/koa': 2.13.8
 
   /@types/liftoff@2.5.1:
     resolution: {integrity: sha512-nB3R6Q9CZcM07JgiTK6ibxqrG1reiHE+UX7em/W1DKwVBxDlfKWOefQjk4jubY5xX+GDxVsWR2KD1SenPby8ow==}
@@ -4360,7 +4360,7 @@ packages:
     dependencies:
       '@koa/cors': 3.4.3
       '@types/accepts': 1.3.5
-      '@types/koa': 2.13.6
+      '@types/koa': 2.13.8
       '@types/koa-bodyparser': 4.3.10
       '@types/koa-compose': 3.2.5
       '@types/koa__cors': 3.3.1
