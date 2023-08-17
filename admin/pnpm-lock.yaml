@@ -8,73 +8,14 @@ importers:
 
   .: {}
 
-  '@1/config/typescript-config':
-    dependencies:
-      '@tsconfig/strictest':
-        specifier: 2.0.1
-        version: 2.0.1
-      '@tsconfig/vite-react':
-        specifier: 2.0.0
-        version: 2.0.0
-    devDependencies:
-      prettier:
-        specifier: 3.0.2
-        version: 3.0.2
-      typescript:
-        specifier: 5.1.6
-        version: 5.1.6
-
-  '@1/models':
-    devDependencies:
-      '@1/typescript-config':
-        specifier: workspace:*
-        version: link:../config/typescript-config
-      prettier:
-        specifier: 3.0.2
-        version: 3.0.2
-      typescript:
-        specifier: 5.1.6
-        version: 5.1.6
-
-  '@1/strapi-trpc-router':
-    dependencies:
-      '@1/models':
-        specifier: workspace:*
-        version: link:../models
-      '@trpc/server':
-        specifier: 10.37.1
-        version: 10.37.1
-      superjson:
-        specifier: 1.13.1
-        version: 1.13.1
-      ws:
-        specifier: 8.13.0
-        version: 8.13.0
-      zod:
-        specifier: 3.21.4
-        version: 3.21.4
-    devDependencies:
-      '@1/typescript-config':
-        specifier: workspace:*
-        version: link:../config/typescript-config
-      '@types/node':
-        specifier: 20.5.0
-        version: 20.5.0
-      prettier:
-        specifier: 3.0.2
-        version: 3.0.2
-      typescript:
-        specifier: 5.1.6
-        version: 5.1.6
-
   strapi:
     dependencies:
       '@1/models':
         specifier: workspace:*
-        version: link:../@1/models
+        version: link:../xxx/models
       '@1/strapi-trpc-router':
         specifier: workspace:*
-        version: link:../@1/strapi-trpc-router
+        version: link:../xxx/strapi-trpc-router
       '@codemirror/autocomplete':
         specifier: 6.6.1
         version: 6.6.1
@@ -165,7 +106,7 @@ importers:
     devDependencies:
       '@1/typescript-config':
         specifier: workspace:*
-        version: link:../@1/config/typescript-config
+        version: link:../xxx/config/typescript-config
       '@strapi/typescript-utils':
         specifier: 4.12.5
         version: 4.12.5
@@ -181,6 +122,65 @@ importers:
       strapi-typed:
         specifier: 1.0.16
         version: 1.0.16(@codemirror/autocomplete@6.6.1)(@codemirror/lint@6.2.1)(@codemirror/search@6.4.0)(@codemirror/theme-one-dark@6.1.2)(@strapi/strapi@4.12.5)(codemirror@6.0.1)(koa@2.14.2)(typescript@5.1.6)
+      typescript:
+        specifier: 5.1.6
+        version: 5.1.6
+
+  xxx/config/typescript-config:
+    dependencies:
+      '@tsconfig/strictest':
+        specifier: 2.0.1
+        version: 2.0.1
+      '@tsconfig/vite-react':
+        specifier: 2.0.0
+        version: 2.0.0
+    devDependencies:
+      prettier:
+        specifier: 3.0.2
+        version: 3.0.2
+      typescript:
+        specifier: 5.1.6
+        version: 5.1.6
+
+  xxx/models:
+    devDependencies:
+      '@1/typescript-config':
+        specifier: workspace:*
+        version: link:../config/typescript-config
+      prettier:
+        specifier: 3.0.2
+        version: 3.0.2
+      typescript:
+        specifier: 5.1.6
+        version: 5.1.6
+
+  xxx/strapi-trpc-router:
+    dependencies:
+      '@1/models':
+        specifier: workspace:*
+        version: link:../models
+      '@trpc/server':
+        specifier: 10.37.1
+        version: 10.37.1
+      superjson:
+        specifier: 1.13.1
+        version: 1.13.1
+      ws:
+        specifier: 8.13.0
+        version: 8.13.0
+      zod:
+        specifier: 3.21.4
+        version: 3.21.4
+    devDependencies:
+      '@1/typescript-config':
+        specifier: workspace:*
+        version: link:../config/typescript-config
+      '@types/node':
+        specifier: 20.5.0
+        version: 20.5.0
+      prettier:
+        specifier: 3.0.2
+        version: 3.0.2
       typescript:
         specifier: 5.1.6
         version: 5.1.6

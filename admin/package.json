@@ -1,9 +1,9 @@
 {
   "private": true,
   "scripts": {
-    "xXx:cp:models": "cp -rf ../@1/models/index.ts ./@1/models/index.ts",
-    "xXx:cp:strapi-trpc-router": "cp -rf ../@1/strapi-trpc-router/index.ts ./@1/strapi-trpc-router/index.ts",
-    "xXx:cp:config": "cp -rf ../@1/config/typescript-config ./@1/config/",
+    "xXx:cp:models": "cp -rf ../@1/models/index.ts ./xxx/models/index.ts",
+    "xXx:cp:strapi-trpc-router": "cp -rf ../@1/strapi-trpc-router/index.ts ./xxx/strapi-trpc-router/index.ts",
+    "xXx:cp:config": "cp -rf ../@1/config/typescript-config ./xxx/config/",
     "watch:cp:models": "pnpx chokidar-cli \"../@1/models/index.ts\" -c \"pnpm run '/xXx:cp:.*/'\" --initial",
     "watch:cp:strapi-trpc-router": "pnpx chokidar-cli \"../@1/strapi-trpc-router/index.ts\" -c \"pnpm run '/xXx:cp:.*/'\" --initial",
     "watch:cp:config": "pnpx chokidar-cli \"../@1/config/**/*.json\" -c \"pnpm run '/xXx:cp:.*/'\" --initial",

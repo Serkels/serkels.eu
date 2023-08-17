@@ -1,6 +1,6 @@
 packages:
   - "strapi"
-  - "sdf/config/eslint-config"
-  - "sdf/config/typescript-config"
-  - "sdf/models"
-  - "sdf/strapi-trpc-router"
+  - "xxx/config/eslint-config"
+  - "xxx/config/typescript-config"
+  - "xxx/models"
+  - "xxx/strapi-trpc-router"
