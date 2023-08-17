@@ -2,8 +2,7 @@
   "extends": ["@1/typescript-config/base.json"],
   "compilerOptions": {
     "baseUrl": ".",
-    "lib": ["ESNext"],
-    "types": ["node"],
+    "lib": ["ESNext"]
   },
   "files": ["index.ts"]
 }
