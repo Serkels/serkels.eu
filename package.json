@@ -4,6 +4,7 @@
     "node": ">=18"
   },
   "scripts": {
+    "start": "pnpm --filter strapi start",
     "build": "turbo run build",
     "clean": "turbo run clean",
     "dev": "turbo run dev --parallel --continue",
