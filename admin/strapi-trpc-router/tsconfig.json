@@ -1,0 +1,11 @@
+{
+  "extends": ["@1/typescript-config/base.json"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "lib",
+    "declaration": true,
+    "declarationMap": true,
+    "lib": ["ESNext"]
+  },
+  "files": ["lib/index.ts"]
+}

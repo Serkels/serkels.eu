@@ -35,12 +35,12 @@ import { trpc } from "./trpc";
 function useNotification() {
   const queryClient = useQueryClient();
   const { data: session } = useSession();
-  const user_id = session?.user?.id;
+  const jwt = session?.user?.jwt;
   const websocket = useRef<Unsubscribable>();
 
   useEffect(() => {
-    if (!user_id) return;
-    websocket.current = trpc.notifications.subscribe(user_id, {
+    if (!jwt) return;
+    websocket.current = trpc.notifications.subscribe(jwt, {
       onData(value) {
         console.log({ value });
       },
@@ -52,7 +52,7 @@ function useNotification() {
       },
     });
     return websocket.current.unsubscribe;
-  }, [queryClient, user_id]);
+  }, [queryClient, jwt]);
 }
 export function UserBar() {
   const [showSideBar, setShowSideBar] = useState(false);

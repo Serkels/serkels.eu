@@ -7,16 +7,19 @@
   "scripts": {
     "dev": "pnpm run build --watch --preserveWatchOutput ",
     "build:copy": "yes | cp -rf ../../@1/strapi-trpc-router/index.ts ./lib/index.ts",
-    "build:tsc": "tsc ./lib/index.ts --outDir ./lib --declaration --declarationMap",
-    "build": "pnpm run build:copy && pnpm run  build:tsc"
+    "build:tsc": "tsc",
+    "build": "pnpm run build:copy && pnpm run build:tsc"
   },
   "dependencies": {
+    "@1/models": "workspace:*",
     "@trpc/server": "10.37.1",
     "superjson": "1.13.1",
     "ws": "8.13.0",
     "zod": "3.21.4"
   },
   "devDependencies": {
+    "@1/typescript-config": "link:../../@1/config/typescript-config",
+    "@types/node": "20.5.0",
     "prettier": "3.0.2",
     "typescript": "5.1.6"
   }

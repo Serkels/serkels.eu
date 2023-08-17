@@ -3,6 +3,7 @@
 import type { Event } from "@strapi/database/lib/lifecycles";
 import type { Subscriber } from "@strapi/database/lib/lifecycles/subscribers";
 import type { Comment } from "strapi-plugin-comments/types/contentTypes";
+import { UserEmitterMap } from "../../../../websocket";
 
 //
 
@@ -37,17 +38,50 @@ export default {
     });
   },
   async afterCreate(event) {
+    {
+      const result: Comment = event["result"];
+      const { params } = event;
+      const { where, data } = params;
+      console.log();
+      console.log("---");
+      console.log("afterCreate");
+      console.log({ event, params });
+      console.log({ where, data });
+      console.log({ result });
+      console.trace();
+      console.log();
+    }
+
+    //
+
     const result: Comment = event["result"];
-    const { params } = event;
-    const { where, data } = params;
-    console.log();
-    console.log("---");
-    console.log("afterCreate");
-    console.log({ event, params });
-    console.log({ where, data });
-    console.log({ result });
-    console.trace();
-    console.log();
+    const related: string = result.related;
+    if (!related.startsWith(QUESTION_API_CONTENT_ID)) {
+      return;
+    }
+
+    const question_id = Number(
+      related.replace(`${QUESTION_API_CONTENT_ID}:`, ""),
+    );
+    if (Number.isNaN(question_id)) {
+      strapi.log.warn(
+        `extensions/comments/content-types/comment/lifecycles.ts : question_id of ${related} is NaN`,
+      );
+      return;
+    }
+
+    // const owner_id = await strapi.entityService.findOne("api::question.question", question_id, {propulate: ["owner"]});
+    // if (Number.isNaN(owner_id)) {
+    //   strapi.log.warn(
+    //     `extensions/comments/content-types/comment/lifecycles.ts : question_id of ${related} is NaN`,
+    //   );
+    //   return;
+    // }
+
+    UserEmitterMap.get(question_id).notifications.emit(
+      "new_answer",
+      Number(result.authorId),
+    );
   },
   async afterDelete(event) {
     const result: Comment = event["result"];

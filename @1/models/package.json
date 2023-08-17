@@ -1,20 +1,13 @@
 {
-  "name": "@1/strapi-trpc-router",
+  "name": "@1/models",
   "version": "0.0.0",
   "type": "module",
   "main": "./index.ts",
   "types": "./index.ts",
   "private": true,
-  "dependencies": {
-    "@1/models": "workspace:*",
-    "@trpc/server": "10.37.1",
-    "superjson": "1.13.1",
-    "ws": "8.13.0",
-    "zod": "3.21.4"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@1/typescript-config": "workspace:*",
-    "@types/node": "20.5.0",
     "prettier": "3.0.2",
     "typescript": "5.1.6"
   }

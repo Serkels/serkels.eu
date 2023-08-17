@@ -144,6 +144,9 @@ importers:
       '@1/typescript-config':
         specifier: workspace:*
         version: link:../config/typescript-config
+      '@types/node':
+        specifier: 20.5.0
+        version: 20.5.0
       prettier:
         specifier: 3.0.2
         version: 3.0.2

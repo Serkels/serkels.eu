@@ -1,14 +1,18 @@
 //
 
+import { getService } from "@strapi/plugin-users-permissions/server/utils";
 import type { Strapi } from "@strapi/strapi";
 import { applyWSSHandler } from "@trpc/server/adapters/ws";
 import { Server, WebSocket } from "ws";
 
-import { Context, appRouter } from "@1/strapi-trpc-router";
+import { AppContext, appRouter } from "@1/strapi-trpc-router";
+import { UserEmitterMap } from ".";
 
 //
 
 export default function bootstrap({ strapi }: { strapi: Strapi }) {
+  UserEmitterMap.get(34);
+
   const wss = (strapi.server.wss = new Server({
     server: strapi.server.httpServer,
   }));
@@ -22,10 +26,29 @@ export default function bootstrap({ strapi }: { strapi: Strapi }) {
           console.log("from greeting");
           return Promise.resolve("Hello DinoOo");
         },
-      }) satisfies Context,
+
+        async verify_jwt(jwt: string) {
+          return getService("jwt").verify(jwt) as { id: number };
+        },
+        emitters: new Map(),
+        async get_my_notifications(limit: number): Promise<Notification[]> {
+          limit;
+          return [
+            {
+              id: 123,
+              createdAt: new Date(),
+              message: "Hello",
+              state: "pending",
+              subject: "GENERAL",
+              type: "GRETTING",
+              profile: { id: 0 },
+            },
+          ];
+        },
+      }) satisfies AppContext,
   });
 
-  // wss.on("connection", onConnection.bind(null, { strapi, wss }));
+  wss.on("connection", onConnection.bind(null, { strapi, wss }));
 
   return { wss, handler };
 }
@@ -37,6 +60,7 @@ export function onConnection(
   ws: WebSocket,
 ) {
   strapi.log.debug(`+ Connection (${wss.clients.size})`);
+
   ws.once("close", () => {
     strapi.log.debug(`- Connection (${wss.clients.size})`);
   });
