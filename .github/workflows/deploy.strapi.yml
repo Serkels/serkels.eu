@@ -4,15 +4,17 @@ name: Deploy Strapi to Heroku
 
 on:
   push:
-    branches: [master]
+    branches:
+      - master
   pull_request:
-    branches: [master]
+    branches:
+      - master
 
   workflow_dispatch:
 
-concurrency:
-  group: "deploy.strapi.${{ github.ref }}"
-  cancel-in-progress: false
+# concurrency:
+#   group: "deploy.strapi.${{ github.ref }}"
+#   cancel-in-progress: false
 
 jobs:
   deploy:
