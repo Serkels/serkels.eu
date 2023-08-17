@@ -1,17 +1,16 @@
 "use client";
 
-import type { components } from "@1/strapi-openapi/v1";
 import { usePathname, useRouter } from "next/navigation";
 import { FilterRadioList } from "../../components/FilterRadioList";
 import { useOpportunityFilterContext } from "./OpportunityFilter.context";
+import { useOpportunityCategoriesQuery } from "./data/useOpportunityCategoriesQuery";
 import { OpportunityCategoriesViewModel } from "./models/OpportunityCategoriesViewModel";
 
 //
 
-export function CategoriesList({
-  data,
-}: components["schemas"]["OpportunityCategoryListResponse"]) {
+export function CategoriesList() {
   const { category, setCategory } = useOpportunityFilterContext();
+  const { data: raw_categories } = useOpportunityCategoriesQuery();
   const pathname = usePathname();
   const router = useRouter();
 
@@ -26,8 +25,13 @@ export function CategoriesList({
         };
 
   //
-  if (!data) return <>0_o</>;
-  const categories = data.map(OpportunityCategoriesViewModel.from_server);
+
+  if (!raw_categories) return <>0_o</>;
+
+  const categories = raw_categories.map(
+    OpportunityCategoriesViewModel.from_server,
+  );
+
   categories.push(
     new OpportunityCategoriesViewModel({
       id: NaN,
@@ -37,6 +41,7 @@ export function CategoriesList({
       updatedAt: new Date(),
     }),
   );
+
   return (
     <FilterRadioList
       data={categories}

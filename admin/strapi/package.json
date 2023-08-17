@@ -10,6 +10,8 @@
     "strapi": "strapi"
   },
   "dependencies": {
+    "@1/models": "workspace:*",
+    "@1/strapi-trpc-router": "workspace:*",
     "@strapi/plugin-documentation": "4.12.5",
     "@strapi/plugin-i18n": "4.12.5",
     "@strapi/plugin-sentry": "4.12.5",
@@ -18,13 +20,15 @@
     "@strapi/provider-email-nodemailer": "4.12.5",
     "@strapi/provider-upload-aws-s3": "4.12.5",
     "@strapi/strapi": "4.12.5",
-    "@trpc/server": "10.26.0",
+    "@trpc/server": "10.37.1",
     "etag": "1.8.1",
     "mime-types": "2.1.35",
     "pg": "8.11.3",
     "strapi-plugin-comments": "2.2.12",
     "strapi-plugin-country-select": "1.0.2",
     "strapi-plugin-passwordless": "4.0.13",
+    "superjson": "1.13.1",
+    "typed-emitter": "^2.1.0",
     "undici": "5.23.0",
     "ws": "8.13.0"
   },
@@ -35,7 +39,7 @@
     "node": ">=18"
   },
   "devDependencies": {
-    "@1/typescript-config": "link:../../@1/config/typescript-config",
+    "@1/typescript-config": "workspace:*",
     "@strapi/typescript-utils": "4.12.5",
     "@types/etag": "1.8.1",
     "koa": "2.14.2",

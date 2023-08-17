@@ -9,48 +9,24 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Field, Form, Formik } from "formik";
 import { useSession } from "next-auth/react";
 import { useState, type ComponentPropsWithoutRef } from "react";
-import type { OpportunityCategories } from "../opportunity/data/OpportunityCategories";
+import { useOpportunityCategoriesQuery } from "../opportunity/data/useOpportunityCategoriesQuery";
 import { OpportunityCategoriesViewModel } from "../opportunity/models/OpportunityCategoriesViewModel";
 import { QARepository } from "./QARepository";
 
 //
 
-export function QAForm({
-  categories,
-}: {
-  categories: Awaited<ReturnType<(typeof OpportunityCategories)["load"]>>;
-}) {
+export function QAForm() {
   const [isOpen, setIsOpen] = useState(false);
+  const { data: categories } = useOpportunityCategoriesQuery();
+  const { mutateAsync, isError, isLoading, error } = useNewQAMutation();
 
-  const { data: session, update } = useSession();
-  const queryClient = useQueryClient();
-  const jwt = session?.user?.jwt;
-
-  const { mutateAsync, isError, isLoading, error } = useMutation(
-    async (data: components["schemas"]["QuestionRequest"]["data"]) => {
-      if (!session?.user?.id) throw new Error("Invalid Session");
-      if (!jwt) throw new Error("Invalid JWT");
-
-      const body = await new QARepository(fromClient).save(
-        jwt,
-        session.user?.id,
-        data,
-      );
-
-      await Promise.all([
-        queryClient.invalidateQueries({ queryKey: ["q&a"] }),
-        update(),
-      ]);
-
-      return body;
-    },
-  );
+  //
 
   if (isError) {
     return <ErrorOccur error={error as Error} />;
   }
 
-  if (isLoading) {
+  if (isLoading || !categories) {
     return (
       <Card>
         <Spinner className="mx-auto my-5" />
@@ -179,5 +155,32 @@ function Card({ children }: ComponentPropsWithoutRef<"div">) {
     >
       {children}
     </div>
+  );
+}
+
+//
+
+function useNewQAMutation() {
+  const { data: session, update } = useSession();
+  const queryClient = useQueryClient();
+  const jwt = session?.user?.jwt;
+  return useMutation(
+    async (data: components["schemas"]["QuestionRequest"]["data"]) => {
+      if (!session?.user?.id) throw new Error("Invalid Session");
+      if (!jwt) throw new Error("Invalid JWT");
+
+      const body = await new QARepository(fromClient).save(
+        jwt,
+        session.user?.id,
+        data,
+      );
+
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: ["q&a"] }),
+        update(),
+      ]);
+
+      return body;
+    },
   );
 }

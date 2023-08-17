@@ -3,12 +3,14 @@
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": "."
+    // "verbatimModuleSyntax": true
   },
   "include": [
     "./",
     "./**/*.ts",
     "./**/*.js",
-    "src/**/*.json"
+    "src/**/*.json",
+    "../strapi-trpc-router/lib"
   ],
   "exclude": [
     "node_modules/",

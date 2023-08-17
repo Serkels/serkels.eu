@@ -2,9 +2,9 @@
 
 import { fromServer } from "@/app/api/v1";
 import { getQueryClient } from "@/app/getQueryClient";
-import { OpportunityCategories } from "@/app/opportunity/data/OpportunityCategories";
-import { dehydrate, Hydrate } from "@tanstack/react-query";
+import { Hydrate, dehydrate } from "@tanstack/react-query";
 import { getServerSession } from "next-auth";
+import { useOpportunityCategoriesprefetchQuery } from "../opportunity/data/useOpportunityCategoriesQuery";
 import { QAForm } from "./QAForm";
 import { QAList } from "./QAList";
 import { QARepository } from "./QARepository";
@@ -33,6 +33,7 @@ export default async function Page({
       search,
     }),
   );
+  await useOpportunityCategoriesprefetchQuery();
   const dehydratedState = dehydrate(queryClient);
 
   return (
@@ -42,7 +43,7 @@ export default async function Page({
         {isConncected ? (
           <>
             <hr className="my-5 border-none" />
-            <QAFormByCategories />
+            <QAForm />
           </>
         ) : null}
         <hr className="my-10" />
@@ -55,16 +56,4 @@ export default async function Page({
       </aside>
     </>
   );
-}
-
-export async function QAFormByCategories() {
-  try {
-    const categories = await OpportunityCategories.load();
-    if (!categories) return <>No data O_o</>;
-
-    return <QAForm categories={categories} />;
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
 }

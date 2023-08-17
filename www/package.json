@@ -11,10 +11,14 @@
   "dependencies": {
     "@1/eslint-config": "workspace:*",
     "@1/strapi-openapi": "workspace:*",
+    "@1/strapi-trpc-router": "workspace:*",
     "@1/tailwindcss-config": "workspace:*",
     "@1/typescript-config": "workspace:*",
     "@1/ui": "workspace:*",
     "@tanstack/react-query": "4.32.6",
+    "@trpc/client": "10.37.1",
+    "@trpc/next": "^10.37.1",
+    "@trpc/react-query": "10.37.1",
     "clsx": "2.0.0",
     "formik": "2.4.3",
     "modern-errors": "6.0.0",
@@ -32,12 +36,15 @@
     "react-nest": "0.1.10",
     "react-stately": "3.25.0",
     "react-use": "17.4.0",
+    "superjson": "1.13.1",
     "tailwindcss": "3.3.3",
-    "ts-pattern": "5.0.5"
+    "ts-pattern": "5.0.5",
+    "zod": "3.21.4"
   },
   "devDependencies": {
     "@douglasduteil/datatypes...hours-to-seconds": "workspace:*",
     "@tanstack/react-query-devtools": "4.32.6",
+    "@trpc/server": "10.37.1",
     "@types/node": "20.5.0",
     "@types/qs": "6.9.7",
     "@types/react": "18.2.20",

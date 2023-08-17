@@ -1,8 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "dev": "pnpm --filter strapi dev",
-    "build": "pnpm --filter strapi build",
+    "dev": "pnpm run -r --parallel dev",
+    "build": "pnpm run -r build",
     "start": "pnpm --filter strapi start"
   },
   "engines": {

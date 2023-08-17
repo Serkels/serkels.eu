@@ -1,2 +1,5 @@
 packages:
   - "strapi"
+  - "strapi-trpc-router"
+  - "../@1/config/typescript-config"
+  - "../@1/models"
