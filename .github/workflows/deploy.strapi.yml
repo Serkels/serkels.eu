@@ -6,7 +6,8 @@ on:
   push:
     branches:
       - master
-
+    pull_request:
+      - master
   workflow_dispatch:
 
 concurrency:
@@ -25,6 +26,6 @@ jobs:
         uses: akhileshns/heroku-deploy@v3.12.14
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: toctoc-admin
+          heroku_app_name: toctoc-admin-staging
           heroku_email: ${{ secrets.HEROKU_EMAIL  }}
           appdir: "admin"
