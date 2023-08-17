@@ -4,6 +4,10 @@ import type { ParameterizedContext } from "koa";
 
 //
 
+export type { EntityService } from "@strapi/strapi/lib/services/entity-service";
+
+//
+
 export interface State extends DefaultStateExtends {
   user?: {
     id: string;

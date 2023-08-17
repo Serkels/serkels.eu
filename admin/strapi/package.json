@@ -50,6 +50,7 @@
   },
   "devDependencies": {
     "@1/typescript-config": "workspace:*",
+    "@bn-digital/strapi-types": "^1.0.64",
     "@strapi/typescript-utils": "4.12.5",
     "@types/etag": "1.8.1",
     "koa": "2.14.2",

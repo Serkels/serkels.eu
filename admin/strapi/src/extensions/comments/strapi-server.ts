@@ -7,6 +7,7 @@ import lifecycles from "./content-types/comment/lifecycles";
 const COMMENT_CONTENT_TYPE = "comment";
 export default (plugin) => {
   const super_bootstrap = plugin.bootstrap;
+
   plugin.bootstrap = async (ctx: { strapi: Strapi }) => {
     super_bootstrap(ctx);
 

@@ -12,9 +12,9 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "opportunities": {
+    "opportunity": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "oneToOne",
       "target": "api::opportunity.opportunity"
     },
     "owner": {

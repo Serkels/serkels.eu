@@ -2,14 +2,20 @@
   "extends": "@strapi/typescript-utils/tsconfigs/server",
   "compilerOptions": {
     "outDir": "dist",
-    "rootDir": "."
+    "rootDir": ".",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["*"]
+    },
+    "resolveJsonModule": true,
+    "types": ["@bn-digital/strapi-types"]
   },
   "include": [
     "./",
     "./**/*.ts",
     "./**/*.js",
     "src/**/*.json",
-    "../strapi-trpc-router/lib"
+    "src/types.d.ts"
   ],
   "exclude": [
     "node_modules/",
