@@ -1,5 +1,6 @@
 # 
 
 # treat built files as linguist-generated=true
-*.js linguist-generated=true
 *.d.* linguist-generated=true
+*.js linguist-generated=true
+*.ts linguist-generated=true
