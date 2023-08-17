@@ -36,6 +36,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - run: |
+          mv "pnpm-workspace copy.yaml" "pnpm-workspace.yaml"
+          mv "pnpm-lock copy.yaml" "pnpm-lock.yaml"
+          mv ".npmrc copy" ".npmrc"
+
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         id: pnpm-install
