@@ -28,10 +28,13 @@ jobs:
           mv "pnpm-lock copy.yaml" "pnpm-lock.yaml"
           mv ".npmrc copy" ".npmrc"
 
+          rm -rf  "pnpm-workspace.yaml"
+
           git config --global user.name "runner"
           git config --global user.email "runner@githubactions.local"
           git add .
           git commit -m "deploy"
+
       - name: Deploy to Heroku (staging)
         uses: akhileshns/heroku-deploy@v3.12.14
         with:
