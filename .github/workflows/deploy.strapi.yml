@@ -30,13 +30,12 @@ jobs:
           git add .
           git commit -m "deploy"
       - name: Deploy to Heroku (staging)
-        if: ${{ github.ref != 'refs/heads/master' }}
         uses: akhileshns/heroku-deploy@v3.12.14
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: toctoc-admin-staging
           heroku_email: ${{ secrets.HEROKU_EMAIL  }}
-      - name: Deploy to Heroku (prodution)
+      - name: Deploy to Heroku (prodution)}
         if: ${{ github.ref == 'refs/heads/master' }}
         uses: akhileshns/heroku-deploy@v3.12.14
         with:
