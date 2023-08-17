@@ -1,8 +1,0 @@
-#
-
-ignore-workspace-root-check=true
-node-linker=hoisted
-shamefully-hoist=true
-dedupe-direct-deps=true
-strict-peer-dependencies=false
-auto-install-peers=false

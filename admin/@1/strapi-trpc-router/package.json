@@ -1,14 +1,12 @@
 {
   "name": "@1/strapi-trpc-router",
   "version": "0.0.0",
-  "main": "./lib/index.js",
-  "types": "./lib/index.d.ts",
+  "main": "./index.js",
   "private": true,
   "scripts": {
-    "dev": "pnpm run build --watch --preserveWatchOutput ",
-    "build:copy": "yes | cp -rf ../../@1/strapi-trpc-router/index.ts ./lib/index.ts",
+    "dev": "pnpm run build --watch --preserveWatchOutput",
     "build:tsc": "tsc",
-    "build": "pnpm run build:copy && pnpm run build:tsc"
+    "build": "pnpm run build:tsc"
   },
   "dependencies": {
     "@1/models": "workspace:*",

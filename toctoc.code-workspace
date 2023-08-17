@@ -5,6 +5,7 @@
     { "path": "admin", "name": "admin" },
     //
     { "path": "@1/strapi-openapi", "name": "@1/strapi-openapi" },
+    { "path": "@1/models", "name": "@1/models" },
     { "path": "@1/strapi-trpc-router", "name": "@1/strapi-trpc-router" },
     { "path": "@1/ui", "name": "@1/ui" },
     //

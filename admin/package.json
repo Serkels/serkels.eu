@@ -1,7 +1,15 @@
 {
   "private": true,
   "scripts": {
-    "dev": "pnpm run -r --parallel dev",
+    "xXx:cp:models": "cp -rf ../@1/models/index.ts ./@1/models/index.ts",
+    "xXx:cp:strapi-trpc-router": "cp -rf ../@1/strapi-trpc-router/index.ts ./@1/strapi-trpc-router/index.ts",
+    "xXx:cp:config": "cp -rf ../@1/config/typescript-config ./@1/config/",
+    "watch:cp:models": "pnpx chokidar-cli \"../@1/models/index.ts\" -c \"pnpm run '/xXx:cp:.*/'\" --initial",
+    "watch:cp:strapi-trpc-router": "pnpx chokidar-cli \"../@1/strapi-trpc-router/index.ts\" -c \"pnpm run '/xXx:cp:.*/'\" --initial",
+    "watch:cp:config": "pnpx chokidar-cli \"../@1/config/**/*.json\" -c \"pnpm run '/xXx:cp:.*/'\" --initial",
+    "dev:workspace": "pnpm run -r --parallel dev ",
+    "dev:xXx": "pnpm run /watch:cp:.*/",
+    "dev": "pnpm run /dev:.*/",
     "build": "pnpm run -r build",
     "start": "pnpm --filter strapi start"
   },

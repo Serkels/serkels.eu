@@ -1,0 +1,16 @@
+{
+  "name": "@1/models",
+  "version": "0.0.0",
+  "main": "./index.js",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm run build --watch --preserveWatchOutput",
+    "build:tsc": "tsc",
+    "build": "pnpm run build:tsc"
+  },
+  "devDependencies": {
+    "@1/typescript-config": "workspace:*",
+    "prettier": "3.0.2",
+    "typescript": "5.1.6"
+  }
+}

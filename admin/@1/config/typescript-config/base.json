@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Base",
+  "extends": "@tsconfig/strictest/tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "declarationMap": true,
+    "ignoreDeprecations": "5.0",
+    "isolatedModules": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "preserveWatchOutput": true,
+    "target": "ESNext",
+    "verbatimModuleSyntax": true
+  }
+}

@@ -13,11 +13,6 @@ type MessageEvents = {
   message: (body: string, from: string) => void;
 };
 
-// export const STREM_TYPE = ["MESSAGES", "GRETTING"] as const;
-// export type StremType = (typeof STREM_TYPE)[number];
-// export type UserEventType = { id: number; type: "GRETTING" };
-// export const UserEventEmitterMap = new WeakMap<UserEventType, EventEmitter>();
-
 export interface IUserEmitterMap {}
 
 export class UserEmitterMap implements IUserEmitterMap {
