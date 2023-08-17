@@ -1,0 +1,5 @@
+# 
+
+# treat built files as binary
+*.js binary
+*.d.* binary
