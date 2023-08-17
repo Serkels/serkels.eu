@@ -29,11 +29,19 @@ export class UserEmitterMap implements IUserEmitterMap {
     return streams.get(id) ?? streams.set(id, new UserEmitterMap()).get(id);
   }
 
+  static will_off(id: number, stream: "messages" | "notifications") {
+    return function off() {
+      return UserEmitterMap.off(id, stream);
+    };
+  }
+
   static off(id: number, stream: "messages" | "notifications") {
-    const { streams, nope_emitter } = UserEmitterMap;
+    const { streams } = UserEmitterMap;
     const map = streams.get(id);
-    map[stream] = nope_emitter as any;
-    if ([map.messages, map.notifications].every((e) => e === nope_emitter)) {
+    strapi.log.debug(`-UserEmitterMap> ${stream} ${id}`);
+
+    if (map.is_empty()) {
+      strapi.log.debug(`--UserEmitterMap> kill  ${id}`);
       streams.delete(id);
     }
   }
@@ -42,4 +50,14 @@ export class UserEmitterMap implements IUserEmitterMap {
 
   messages = new EventEmitter() as TypedEmitter<MessageEvents>;
   notifications = new EventEmitter() as TypedEmitter<NotificationEvents>;
+
+  //
+
+  is_empty() {
+    return Boolean(
+      this.messages.listenerCount("message") +
+        this.notifications.listenerCount("new_answer") ===
+        0,
+    );
+  }
 }

@@ -114,6 +114,18 @@ importers:
         specifier: 5.1.6
         version: 5.1.6
 
+  '@1/models':
+    devDependencies:
+      '@1/typescript-config':
+        specifier: workspace:*
+        version: link:../config/typescript-config
+      prettier:
+        specifier: 3.0.2
+        version: 3.0.2
+      typescript:
+        specifier: 5.1.6
+        version: 5.1.6
+
   '@1/strapi-openapi':
     devDependencies:
       openapi-typescript:
@@ -128,6 +140,9 @@ importers:
 
   '@1/strapi-trpc-router':
     dependencies:
+      '@1/models':
+        specifier: workspace:*
+        version: link:../models
       '@trpc/server':
         specifier: 10.37.1
         version: 10.37.1

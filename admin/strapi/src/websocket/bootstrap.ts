@@ -1,18 +1,21 @@
 //
 
+import { Notification } from "@1/models";
+import { AppContext, appRouter } from "@1/strapi-trpc-router";
 import { getService } from "@strapi/plugin-users-permissions/server/utils";
 import type { Strapi } from "@strapi/strapi";
 import { applyWSSHandler } from "@trpc/server/adapters/ws";
+import { observable } from "@trpc/server/observable";
 import { Server, WebSocket } from "ws";
-
-import { AppContext, appRouter } from "@1/strapi-trpc-router";
 import { UserEmitterMap } from ".";
 
 //
 
-export default function bootstrap({ strapi }: { strapi: Strapi }) {
-  UserEmitterMap.get(34);
+setInterval(() => {
+  UserEmitterMap.get(34).notifications.emit("new_answer", 10);
+}, 2000);
 
+export default function bootstrap({ strapi }: { strapi: Strapi }) {
   const wss = (strapi.server.wss = new Server({
     server: strapi.server.httpServer,
   }));
@@ -22,28 +25,39 @@ export default function bootstrap({ strapi }: { strapi: Strapi }) {
     router: appRouter,
     createContext: () =>
       ({
-        greeting() {
-          console.log("from greeting");
-          return Promise.resolve("Hello DinoOo");
+        subscription_to: {
+          notifications(id: number) {
+            return observable<Notification>((emit) => {
+              strapi.log.debug(`+ Notification ${id}`);
+              const on_new_answer = (data: number) => {
+                emit.next({
+                  id: 123,
+                  createdAt: new Date(),
+                  message: "Hello",
+                  state: "pending",
+                  subject: "GENERAL",
+                  type: "GRETTING",
+                  profile: { id: 0 },
+                });
+              };
+              UserEmitterMap.get(id).notifications.on(
+                "new_answer",
+                on_new_answer,
+              );
+              return () =>
+                UserEmitterMap.get(id).notifications.off(
+                  "new_answer",
+                  on_new_answer,
+                );
+            });
+          },
+          messages(id: number) {
+            return observable<Notification>(() => {});
+          },
         },
 
         async verify_jwt(jwt: string) {
           return getService("jwt").verify(jwt) as { id: number };
-        },
-        emitters: new Map(),
-        async get_my_notifications(limit: number): Promise<Notification[]> {
-          limit;
-          return [
-            {
-              id: 123,
-              createdAt: new Date(),
-              message: "Hello",
-              state: "pending",
-              subject: "GENERAL",
-              type: "GRETTING",
-              profile: { id: 0 },
-            },
-          ];
         },
       }) satisfies AppContext,
   });
@@ -60,9 +74,11 @@ export function onConnection(
   ws: WebSocket,
 ) {
   strapi.log.debug(`+ Connection (${wss.clients.size})`);
+  strapi.log.debug(`+ UserEmitterMap (${UserEmitterMap.streams.size})`);
 
   ws.once("close", () => {
     strapi.log.debug(`- Connection (${wss.clients.size})`);
+    strapi.log.debug(`- UserEmitterMap (${UserEmitterMap.streams.size})`);
   });
 }
 
