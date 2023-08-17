@@ -27,3 +27,4 @@ jobs:
           heroku_app_name: toctoc-admin
           heroku_email: ${{ secrets.HEROKU_EMAIL  }}
           appdir: "admin"
+          stack: "heroku-22"
