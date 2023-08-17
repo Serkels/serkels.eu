@@ -28,18 +28,18 @@ jobs:
           mv "pnpm-lock copy.yaml" "pnpm-lock.yaml"
           mv ".npmrc copy" ".npmrc"
 
-          rm -rf  "pnpm-workspace.yaml"
-
           git config --global user.name "runner"
           git config --global user.email "runner@githubactions.local"
           git add .
           git commit -m "deploy"
 
       - name: Deploy to Heroku (staging)
-        uses: ElayGelbart/Heroku-Auto-Deployment@v1.0.6
+        uses: akhileshns/heroku-deploy@v3.12.14
         with:
-          herokuApiKey: ${{ secrets.HEROKU_API_KEY}}
-          herokuAppName: toctoc-admin
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: toctoc-admin-staging
+          heroku_email: ${{ secrets.HEROKU_EMAIL  }}
+          usedocker: true
       - name: Deploy to Heroku (prodution)}
         if: ${{ github.ref == 'refs/heads/master' }}
         uses: akhileshns/heroku-deploy@v3.12.14
@@ -47,3 +47,4 @@ jobs:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: toctoc-admin
           heroku_email: ${{ secrets.HEROKU_EMAIL  }}
+          usedocker: true
