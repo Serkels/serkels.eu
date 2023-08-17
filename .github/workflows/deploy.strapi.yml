@@ -6,11 +6,14 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches:
+      - master
 
   workflow_dispatch:
 
 concurrency:
-  group: "deploy.strapi"
+  group: "deploy.strapi.${{ github.ref }}"
   cancel-in-progress: false
 
 jobs:
@@ -21,7 +24,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Deploy to Heroku
+      - name: Deploy to Heroku (staging)
+        uses: akhileshns/heroku-deploy@v3.12.14
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: toctoc-admin-staging
+          heroku_email: ${{ secrets.HEROKU_EMAIL  }}
+          appdir: "admin"
+      - name: Deploy to Heroku (prodution)}
+        if: ${{ github.ref == 'refs/heads/master' }}
         uses: akhileshns/heroku-deploy@v3.12.14
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
