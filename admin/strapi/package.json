@@ -18,7 +18,7 @@
     "@strapi/provider-email-nodemailer": "4.12.5",
     "@strapi/provider-upload-aws-s3": "4.12.5",
     "@strapi/strapi": "4.12.5",
-    "@trpc/server": "10.26.0",
+    "@trpc/server": "10.37.1",
     "etag": "1.8.1",
     "mime-types": "2.1.35",
     "pg": "8.11.3",
