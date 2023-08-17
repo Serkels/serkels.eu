@@ -11,15 +11,28 @@ import type { Next } from "koa";
 const coreRouter = factories.createCoreRouter("api::bookmark.bookmark", {
   only: ["find", "create", "delete"],
   config: {
-    create: {},
-    delete: {},
+    create: {
+      middlewares: [
+        "global::assign-owner",
+        "api::bookmark.populate-opportunities-ids",
+      ],
+    },
+    delete: {
+      policies: ["global::is-owned"],
+    },
     find: {
       middlewares: [
         async function filter_owner(ctx: StrapiContext, next: Next) {
           const owner = ctx.state.user?.id;
 
+          ctx.query.filters = {
+            ...(ctx.query.filters || {}),
+            owner: owner,
+          };
+
           return next();
         },
+        "api::bookmark.populate-opportunities-ids",
       ],
       policies: [],
     },

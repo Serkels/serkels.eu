@@ -1,30 +1,21 @@
 //
 
 import { errors } from "@strapi/utils";
-import { StrapiContext } from "../types";
+import { EntityService, StrapiContext } from "../types";
 
-export default async (policyContext: StrapiContext, config, { strapi }) => {
+export default async (policyContext: StrapiContext, _config, { strapi }) => {
   const apiName = policyContext.state.route.info.apiName;
   const controllerName = policyContext.state.route.handler.split(".")[0];
-  const { id } = policyContext.params;
-  const idQuery = { ...(id ? { id: { $eq: id } } : undefined) };
+  const { id: entry_id } = policyContext.params;
 
-  // const entry = await strapi.entityService.findOne('api::article.article', 1, {
-  //   populate: { someRelation: true },
-  // });
-  // const entity = await strapi.db
-  // .query(`api::${apiName}.${controllerName}`)
-  // .findMany({
-  //   where: {
-  //     ...idQuery,
-  //     owner: policyContext.state.user.id,
-  //   },
-  // });
+  const entityService: EntityService = strapi.entityService;
+  const entry = await entityService.findOne<string, { owner: { id: number } }>(
+    `${controllerName}.${apiName}`,
+    entry_id,
+    { populate: ["owner"] },
+  );
 
-  // policyContext.query.filters.owner = policyContext.state.user.id;
-
-  // const entry = config.queryEntry();
-  if (policyContext.state.user.id === policyContext.params.id) {
+  if (Number(policyContext.state.user?.id) === Number(entry?.owner.id)) {
     return true;
   }
 

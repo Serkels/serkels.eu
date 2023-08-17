@@ -7,7 +7,7 @@ export default () => {
   return async (context: StrapiContext, next: Next) => {
     context.query.populate = {
       ...(context.query.populate || {}),
-      opportunities: { fields: ["id"] },
+      opportunity: { fields: ["id"] },
     };
 
     await next();
