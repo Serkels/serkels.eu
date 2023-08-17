@@ -2,16 +2,31 @@
  * bookmark router
  */
 
-import { factories } from "@strapi/strapi";
+import type { EntityService, StrapiContext } from "@/src/types";
+import { ApiBookmarkBookmark } from "@/types/generated/contentTypes";
+import { factories, type Shared } from "@strapi/strapi";
 import { Router } from "@strapi/strapi/lib/types/core-api/router";
 import type { Next } from "koa";
-import type { StrapiContext } from "../../../types";
 
-const coreRouter = factories.createCoreRouter(
-  "api::bookmark.bookmark",
-) as unknown as Router;
+const coreRouter = factories.createCoreRouter("api::bookmark.bookmark", {
+  only: ["find", "create", "delete"],
+  config: {
+    create: {},
+    delete: {},
+    find: {
+      middlewares: [
+        async function filter_owner(ctx: StrapiContext, next: Next) {
+          const owner = ctx.state.user?.id;
 
-export default {
+          return next();
+        },
+      ],
+      policies: [],
+    },
+  },
+}) as unknown as Router;
+export default coreRouter;
+export const sdf = {
   get prefix() {
     return coreRouter.prefix;
   },
@@ -25,16 +40,21 @@ export default {
           description: "Get authenticated user bookmarks",
           middlewares: [
             async function findBookmarkId(ctx: StrapiContext, next: Next) {
+              const entityService: EntityService = strapi.entityService;
               const owner = ctx.state.user?.id;
-              const bookmarks = await strapi.entityService.findMany(
-                "api::bookmark.bookmark",
-                {},
-                { filters: { owner } },
-              );
-
-              if (bookmarks.length !== 1) {
-                return;
-              }
+              const bookmarks = await entityService.findMany<
+                keyof Shared.ContentTypes,
+                ApiBookmarkBookmark["attributes"] & { id: number }
+              >("api::bookmark.bookmark", {
+                filters: {
+                  owner,
+                },
+              });
+              // const bookmarks = await entityService.findMany(
+              //   "api::bookmark.bookmark",
+              //   {},
+              //   { filters: { owner } },
+              // );
 
               const id = String(bookmarks[0].id);
 

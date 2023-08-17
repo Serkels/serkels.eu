@@ -84,14 +84,7 @@ export class QARepository extends OpenAPIRepository {
         data: { ...data, owner: String(owner) },
       },
       headers,
-      params: {
-        query: {
-          populate: {
-            opportunity_category: { fields: ["name"] },
-            owner: "*",
-          },
-        },
-      },
+      params: {},
     });
 
     if (errorBody) {

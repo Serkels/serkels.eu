@@ -29,7 +29,7 @@ export default {
     console.log(__dirname, { action, model, params });
   },
   async beforeDelete(event: LifecycleEvent & ParamsWhere) {
-    const { action, model, params } = event;
+    const { model, params } = event;
 
     const entry: ApiUserProfileUserProfile["attributes"] & { id: number } =
       await strapi.db
@@ -74,11 +74,7 @@ async function remove_profile_bookmarks(
     ApiBookmarkBookmark["attributes"] & { id: number }
   >("api::bookmark.bookmark", {
     filters: {
-      $or: [
-        {
-          owner: owner["id"],
-        },
-      ],
+      owner: owner["id"],
     },
   });
 
