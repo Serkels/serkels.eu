@@ -6,7 +6,7 @@ import { getService } from "@strapi/plugin-users-permissions/server/utils";
 import type { Strapi } from "@strapi/strapi";
 import { applyWSSHandler } from "@trpc/server/adapters/ws";
 import { observable } from "@trpc/server/observable";
-import { Server, WebSocket } from "ws";
+import { Server, type WebSocket } from "ws";
 import { UserEmitterMap } from ".";
 
 //
@@ -70,7 +70,7 @@ export default function bootstrap({ strapi }: { strapi: Strapi }) {
 //
 
 export function onConnection(
-  { strapi, wss }: { strapi: Strapi; wss: Server<WebSocket> },
+  { strapi, wss }: { strapi: Strapi; wss: Server },
   ws: WebSocket,
 ) {
   strapi.log.debug(`+ Connection (${wss.clients.size})`);

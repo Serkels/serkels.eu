@@ -8,7 +8,10 @@ export default factories.createCoreRouter("api::question.question", {
   config: {
     create: {
       middlewares: [
-        async function findProfile(ctx: StrapiContext, next: Next) {
+        async function findProfile(
+          ctx: StrapiContext & { request: { body: unknown } },
+          next: Next,
+        ) {
           const user = ctx.state.user;
 
           const profiles = await strapi.entityService.findMany(

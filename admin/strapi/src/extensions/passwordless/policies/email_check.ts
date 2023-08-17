@@ -2,7 +2,11 @@
 
 import { StrapiContext } from "../../../types";
 
-export default async (policyContext: StrapiContext, _config, { strapi }) => {
+export default async (
+  policyContext: StrapiContext & { request: { body: unknown } },
+  _config,
+  { strapi },
+) => {
   const body = policyContext.request.body as
     | { email: string | undefined; context: object }
     | undefined;
