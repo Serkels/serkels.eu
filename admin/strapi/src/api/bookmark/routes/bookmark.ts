@@ -14,6 +14,25 @@ const coreRouter = factories.createCoreRouter("api::bookmark.bookmark", {
     create: {
       middlewares: [
         "global::assign-owner",
+        async function no_duplicate_entry(ctx: StrapiContext, next: Next) {
+          const owner = ctx.state.user?.id;
+          const data = ctx.request["body"]
+            ?.data as ApiBookmarkBookmark["attributes"];
+
+          const entityService: EntityService = strapi.entityService;
+          const entry = await entityService.count<
+            keyof Shared.ContentTypes,
+            ApiBookmarkBookmark["attributes"]
+          >("api::bookmark.bookmark", {
+            filters: { owner, opportunity: data.opportunity },
+          });
+
+          if (entry > 0) {
+            return ctx.throw(409, "Already bookmarked");
+          }
+
+          return next();
+        },
         "api::bookmark.populate-opportunities-ids",
       ],
     },
