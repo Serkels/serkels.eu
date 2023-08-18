@@ -30,7 +30,7 @@ export function BookmarkButton(
   const repository = new BookmarksRepository(fromClient, session?.user?.jwt);
 
   const jwt = session?.user?.jwt;
-  const { data: bookmarks } = useQuery({
+  const { data: bookmarks, isLoading: isDataLoading } = useQuery({
     enabled: Boolean(jwt),
     queryKey: BookmarksRepository.queryKey,
     queryFn: async () => new BookmarksRepository(fromClient, jwt).load(),
@@ -60,7 +60,7 @@ export function BookmarkButton(
     repository.delete.bind(repository),
     { onSettled },
   );
-  const isLoading = isSaveLoading || isDeleteLoading;
+  const isLoading = isDataLoading || isSaveLoading || isDeleteLoading;
 
   const className = classNameProp
     ? typeof classNameProp === "string"
