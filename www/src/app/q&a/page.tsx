@@ -5,7 +5,7 @@ import { getQueryClient } from "@/app/getQueryClient";
 import { Hydrate, dehydrate } from "@tanstack/react-query";
 import { getServerSession } from "next-auth";
 import { useOpportunityCategoriesprefetchQuery } from "../opportunity/data/useOpportunityCategoriesQuery";
-import { QAForm } from "./QAForm";
+import { QACreateForm } from "./QACreateForm";
 import { QAList } from "./QAList";
 import { QARepository } from "./QARepository";
 import { QASearchForm } from "./QASearchForm";
@@ -43,7 +43,7 @@ export default async function Page({
         {isConncected ? (
           <>
             <hr className="my-5 border-none" />
-            <QAForm />
+            <QACreateForm />
           </>
         ) : null}
         <hr className="my-10" />

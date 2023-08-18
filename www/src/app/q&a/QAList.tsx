@@ -36,6 +36,7 @@ export function QAList({
   if (isLoading) return <Spinner />;
   if (isError) return <>Epic fail...</>;
   if (!data) return <>No data O_o</>;
+  if (data.length === 0) return <EmptyList />;
 
   return (
     <ul className="grid grid-cols-1 gap-9">
@@ -51,6 +52,14 @@ export function QAList({
           </li>
         ))}
     </ul>
+  );
+}
+
+//
+
+function EmptyList() {
+  return (
+    <h5 className="py-5 text-center font-bold">Pas plus de résultats ...</h5>
   );
 }
 

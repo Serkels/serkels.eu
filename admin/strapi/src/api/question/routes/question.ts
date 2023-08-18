@@ -10,6 +10,14 @@ export default factories.createCoreRouter("api::question.question", {
     create: {
       middlewares: [clean_body, findProfile, "api::question.populate"],
     },
+    delete: {
+      middlewares: ["api::question.populate"],
+      policies: ["global::is-owned"],
+    },
+    update: {
+      middlewares: ["api::question.populate"],
+      policies: ["global::is-owned"],
+    },
     find: {
       middlewares: ["api::question.populate"],
     },

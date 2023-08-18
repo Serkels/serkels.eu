@@ -9,17 +9,21 @@ import { QACardFooter } from "./QACardFooter";
 import { QACardHeader } from "./QACardHeader";
 import { QACardResponseForm } from "./QACardResponseForm";
 import { QACardResponses } from "./QACardResponses";
+import { QAEditForm } from "./QAEditForm";
 import { QARepository } from "./QARepository";
 
 export function QACard({ id }: { id: number }) {
   const statefulStatus = useState<QACardStatus>({
+    isDeleting: false,
+    isDisplayingResponses: false,
+    isEditing: false,
     isResponding: false,
     isSubmitting: false,
-    isDisplayingResponses: false,
   });
+  const [{ isDisplayingResponses, isEditing }] = statefulStatus;
   const QAResponseFormRef = useRef<FormikProps<{ content: string }>>(null);
 
-  useRefreshAnswers(Number(id), statefulStatus[0].isDisplayingResponses);
+  useRefreshAnswers(Number(id), isDisplayingResponses);
 
   const { data: question } = useQuery({
     enabled: Number.isInteger(id),
@@ -47,11 +51,15 @@ export function QACard({ id }: { id: number }) {
         }}
       >
         <QACardHeader />
-        <article>
-          <h3 className="my-5 text-xl font-bold">
-            {question.attributes?.title}
-          </h3>
-        </article>
+        {isEditing ? (
+          <QAEditForm />
+        ) : (
+          <article>
+            <h3 className="my-5 text-xl font-bold">
+              {question.attributes?.title}
+            </h3>
+          </article>
+        )}
         <QACardResponses />
         <QACardResponseForm />
         <hr className="my-2" />

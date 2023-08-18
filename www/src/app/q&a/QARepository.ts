@@ -6,6 +6,11 @@ import type { _1_HOUR_ } from "@douglasduteil/datatypes...hours-to-seconds";
 
 //
 
+type QuestionRequestBody = components["schemas"]["QuestionRequest"]["data"];
+type CommentRequest = components["schemas"]["CommentRequest"];
+
+//
+
 export class QARepository extends OpenAPIRepository {
   static queryKey = ["q&a"];
   async load({
@@ -111,10 +116,29 @@ export class QARepository extends OpenAPIRepository {
     return body;
   }
 
-  async save_response(
-    id: number,
-    data: components["schemas"]["CommentRequest"],
-  ) {
+  async edit(id: number, data: QuestionRequestBody) {
+    const {
+      response,
+      data: body,
+      error: errorBody,
+    } = await this.client.PUT("/questions/{id}", {
+      body: {
+        data,
+      },
+      headers: this.headers,
+      params: { path: { id } },
+    });
+
+    if (errorBody) {
+      throw new Error(
+        [errorBody.error.message, "from " + response.url].join("\n"),
+      );
+    }
+
+    return body;
+  }
+
+  async save_response(id: number, data: CommentRequest) {
     const {
       response,
       data: body,

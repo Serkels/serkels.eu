@@ -39,11 +39,12 @@ export function QAResponseForm({
     },
     {
       onSuccess() {
-        setStatus({
+        setStatus((state) => ({
+          ...state,
           isResponding: false,
           isDisplayingResponses: true,
           isSubmitting: false,
-        });
+        }));
 
         Promise.all([
           queryClient.invalidateQueries({
