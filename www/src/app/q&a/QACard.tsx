@@ -5,8 +5,8 @@ import type { FormikProps } from "formik";
 import { useEffect, useRef, useState } from "react";
 import { fromClient } from "../api/v1";
 import { QACardContext, type QACardStatus } from "./QACard.context";
-import { QACardBody } from "./QACardBody";
 import { QACardFooter } from "./QACardFooter";
+import { QACardHeader } from "./QACardHeader";
 import { QACardResponseForm } from "./QACardResponseForm";
 import { QACardResponses } from "./QACardResponses";
 import { QARepository } from "./QARepository";
@@ -46,7 +46,12 @@ export function QACard({ id }: { id: number }) {
           question,
         }}
       >
-        <QACardBody />
+        <QACardHeader />
+        <article>
+          <h3 className="my-5 text-xl font-bold">
+            {question.attributes?.title}
+          </h3>
+        </article>
         <QACardResponses />
         <QACardResponseForm />
         <hr className="my-2" />
