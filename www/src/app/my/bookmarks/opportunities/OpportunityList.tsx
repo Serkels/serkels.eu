@@ -81,7 +81,7 @@ function useBookmarkedOpportunities() {
   const bookmark_ids = get_bookmark_opportunities_ids(bookmarks?.data);
   return useQuery({
     enabled: Boolean(bookmark_ids),
-    queryKey: ["opportunities", (bookmark_ids ?? []).sort()],
+    queryKey: ["my", "bookmarks", "opportunities"],
     queryFn: async () => {
       if (!bookmark_ids?.length) return [];
 
@@ -108,5 +108,6 @@ function useBookmarkedOpportunities() {
 
       return body?.data ?? [];
     },
+    staleTime: Infinity,
   });
 }

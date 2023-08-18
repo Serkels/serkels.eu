@@ -34,7 +34,7 @@ export function BookmarkButton(
     enabled: Boolean(jwt),
     queryKey: BookmarksRepository.queryKey,
     queryFn: async () => new BookmarksRepository(fromClient, jwt).load(),
-    staleTime: 2_000,
+    staleTime: Infinity,
   });
 
   const bookmark = bookmarks?.data?.find(
@@ -44,8 +44,13 @@ export function BookmarkButton(
 
   //
 
-  const onSettled = () => {
-    queryClient.invalidateQueries({ queryKey: BookmarksRepository.queryKey });
+  const onSettled = async () => {
+    await Promise.all([
+      queryClient.invalidateQueries({ queryKey: BookmarksRepository.queryKey }),
+      queryClient.invalidateQueries({
+        queryKey: ["my", "bookmarks", "opportunities"],
+      }),
+    ]);
   };
   const { mutate: save_bookmark, isLoading: isSaveLoading } = useMutation(
     repository.save.bind(repository),
@@ -70,9 +75,11 @@ export function BookmarkButton(
 
       const bookmark_id = bookmark?.id;
 
-      return bookmark_id
+      bookmark_id
         ? delete_bookmark(bookmark_id)
         : save_bookmark({ opportunity });
+
+      return false;
     },
     [bookmark?.id, opportunity, isActive],
   );
@@ -80,7 +87,7 @@ export function BookmarkButton(
   //
 
   if (!session) return null;
-  if (isLoading || isFetching) return <Spinner className="h-4 w-4" />;
+  if (isLoading) return <Spinner className="h-4 w-4" />;
 
   return (
     <button
