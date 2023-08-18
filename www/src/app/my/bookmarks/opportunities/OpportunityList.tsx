@@ -7,16 +7,14 @@ import { Spinner } from "@1/ui/components/Spinner";
 import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { useBookmarksQuery } from "./useBookmarkedOpportunitiesIds";
+import { useBookmarksQuery } from "../data/useBookmarksQuery";
 
 //
 
 export function OpportunityList() {
   const { data: session } = useSession();
 
-  const { data, isLoading, isError } = useBookmarkedOpportunities(
-    session?.user?.jwt,
-  );
+  const { data, isLoading, isError } = useBookmarkedOpportunities();
 
   if (!session) return null;
   if (isLoading) return <Loading />;
@@ -77,9 +75,10 @@ function EmptyList() {
   );
 }
 
-function useBookmarkedOpportunities(jwt: string | undefined) {
-  const { data: bookmark } = useBookmarksQuery(jwt);
-  const bookmark_ids = get_bookmark_opportunities_ids(bookmark?.attributes);
+function useBookmarkedOpportunities() {
+  const { data: bookmarks } = useBookmarksQuery();
+
+  const bookmark_ids = get_bookmark_opportunities_ids(bookmarks?.data);
   return useQuery({
     enabled: Boolean(bookmark_ids),
     queryKey: ["opportunities", (bookmark_ids ?? []).sort()],

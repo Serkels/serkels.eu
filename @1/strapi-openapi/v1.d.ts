@@ -256,9 +256,10 @@ export interface paths {
   };
   "/bookmarks": {
     get: operations["get/bookmarks"];
+    post: operations["post/bookmarks"];
   };
   "/bookmarks/{id}": {
-    put: operations["put/bookmarks/{id}"];
+    delete: operations["delete/bookmarks/{id}"];
   };
   "/comments/{relation}/comment/{commentId}": {
     put: operations["put/comments/{relation}/comment/{commentId}"];
@@ -1352,6 +1353,21 @@ export interface components {
           id?: number;
         };
       };
+    };
+    BookmarkListResponse: {
+      data?: components["schemas"]["BookmarkListResponseDataItem"][];
+      meta?: {
+        pagination?: {
+          page?: number;
+          pageCount?: number;
+          pageSize?: number;
+          total?: number;
+        };
+      };
+    };
+    BookmarkListResponseDataItem: {
+      attributes?: components["schemas"]["Bookmark"];
+      id?: number;
     };
     BookmarkRequest: {
       data: {
@@ -4584,6 +4600,75 @@ export type external = Record<string, never>;
 export interface operations {
 
   "get/bookmarks": {
+    parameters: {
+      query?: {
+        /** @description Sort by attributes ascending (asc) or descending (desc) */
+        sort?: string;
+        /** @description Return page/pageSize (default: true) */
+        "pagination[withCount]"?: boolean;
+        /** @description Page number (default: 0) */
+        "pagination[page]"?: number;
+        /** @description Page size (default: 25) */
+        "pagination[pageSize]"?: number;
+        /** @description Offset value (default: 0) */
+        "pagination[start]"?: number;
+        /** @description Number of entities to return (default: 25) */
+        "pagination[limit]"?: number;
+        /** @description Fields to return (ex: title,author) */
+        fields?: string;
+        /** @description Relations to return */
+        populate?: string;
+        /** @description Filters to apply */
+        filters?: Record<string, unknown>;
+        /** @description Locale to apply */
+        locale?: string;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["BookmarkListResponse"];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Forbidden */
+      403: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Not Found */
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+  };
+  "post/bookmarks": {
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["BookmarkRequest"];
+      };
+    };
     responses: {
       /** @description OK */
       200: {
@@ -4623,22 +4708,17 @@ export interface operations {
       };
     };
   };
-  "put/bookmarks/{id}": {
+  "delete/bookmarks/{id}": {
     parameters: {
       path: {
         id: number;
-      };
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["BookmarkRequest"];
       };
     };
     responses: {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["BookmarkResponse"];
+          "application/json": number;
         };
       };
       /** @description Bad Request */

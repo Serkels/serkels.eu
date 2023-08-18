@@ -11,10 +11,6 @@ import { UserEmitterMap } from ".";
 
 //
 
-setInterval(() => {
-  UserEmitterMap.get(34).notifications.emit("new_answer", 10);
-}, 2000);
-
 export default function bootstrap({ strapi }: { strapi: Strapi }) {
   const wss = (strapi.server.wss = new Server({
     server: strapi.server.httpServer,

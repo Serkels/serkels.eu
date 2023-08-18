@@ -19,6 +19,7 @@
     "@trpc/client": "10.37.1",
     "@trpc/next": "^10.37.1",
     "@trpc/react-query": "10.37.1",
+    "@yornaath/batshit": "^0.7.1",
     "clsx": "2.0.0",
     "formik": "2.4.3",
     "modern-errors": "6.0.0",

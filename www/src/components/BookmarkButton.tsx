@@ -1,11 +1,10 @@
 "use client";
 
-import {
-  useBookmarkedOpportunitiesIdsMutation,
-  useBookmarksQuery,
-} from "@/app/my/bookmarks/opportunities/useBookmarkedOpportunitiesIds";
+import { fromClient } from "@/app/api/v1";
+import { BookmarksRepository } from "@/app/my/bookmarks/data/BookmarksRepository";
 import { Spinner } from "@1/ui/components/Spinner";
 import { Bookmark } from "@1/ui/icons";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
 import {
@@ -13,7 +12,6 @@ import {
   type ComponentPropsWithoutRef,
   type MouseEventHandler,
 } from "react";
-import { get_bookmark_opportunities_ids } from "./get_session_bookmarks_id";
 
 //
 
@@ -25,17 +23,39 @@ export function BookmarkButton(
 ) {
   const { className: classNameProp, opportunity, ...other_props } = props;
   const { data: session } = useSession();
+  const queryClient = useQueryClient();
 
-  const { data: bookmarks, isFetching } = useBookmarksQuery(session?.user?.jwt);
-  const actual_bookmarks = get_bookmark_opportunities_ids(
-    bookmarks?.attributes,
+  //
+
+  const repository = new BookmarksRepository(fromClient, session?.user?.jwt);
+
+  const jwt = session?.user?.jwt;
+  const { data: bookmarks, isFetching } = useQuery({
+    enabled: Boolean(jwt),
+    queryKey: BookmarksRepository.queryKey,
+    queryFn: async () => new BookmarksRepository(fromClient, jwt).load(),
+    staleTime: 2_000,
+  });
+
+  const bookmark = bookmarks?.data?.find(
+    ({ attributes }) => attributes?.opportunity?.data?.id === opportunity,
   );
+  const isActive = Boolean(bookmark);
 
-  const isActive = actual_bookmarks.some((id) => id === opportunity) ?? false;
+  //
 
-  const { mutate, isLoading } = useBookmarkedOpportunitiesIdsMutation(
-    bookmarks?.id,
+  const onSettled = () => {
+    queryClient.invalidateQueries({ queryKey: BookmarksRepository.queryKey });
+  };
+  const { mutate: save_bookmark, isLoading: isSaveLoading } = useMutation(
+    repository.save.bind(repository),
+    { onSettled },
   );
+  const { mutate: delete_bookmark, isLoading: isDeleteLoading } = useMutation(
+    repository.delete.bind(repository),
+    { onSettled },
+  );
+  const isLoading = isSaveLoading || isDeleteLoading;
 
   const className = classNameProp
     ? typeof classNameProp === "string"
@@ -48,14 +68,13 @@ export function BookmarkButton(
       event.preventDefault();
       event.stopPropagation();
 
-      const opportunities = isActive
-        ? actual_bookmarks.filter((id) => id !== opportunity)
-        : actual_bookmarks.concat([opportunity]);
+      const bookmark_id = bookmark?.id;
 
-      mutate({ opportunities });
-      return false;
+      return bookmark_id
+        ? delete_bookmark(bookmark_id)
+        : save_bookmark({ opportunity });
     },
-    [opportunity, isActive, actual_bookmarks],
+    [bookmark?.id, opportunity, isActive],
   );
 
   //
