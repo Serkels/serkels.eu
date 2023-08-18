@@ -15,7 +15,8 @@
     "./**/*.ts",
     "./**/*.js",
     "src/**/*.json",
-    "src/types.d.ts"
+    "src/types.d.ts",
+    "types/generated/*.d.ts"
   ],
   "exclude": [
     "node_modules/",

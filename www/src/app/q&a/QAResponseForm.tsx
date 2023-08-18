@@ -30,8 +30,7 @@ export function QAResponseForm({
       if (!question.id) throw new Error("Invalid question.id");
       if (!jwt) throw new Error("Invalid JWT");
 
-      const body = await new QARepository(fromClient).save_response(
-        jwt,
+      const body = await new QARepository(fromClient, jwt).save_response(
         question.id,
         data,
       );
@@ -48,12 +47,7 @@ export function QAResponseForm({
 
         Promise.all([
           queryClient.invalidateQueries({
-            queryKey: ["q&a", question.id, "awnsers"],
-            exact: true,
-          }),
-          queryClient.invalidateQueries({
-            queryKey: ["q&a", question.id, "awnsers", "count"],
-            exact: true,
+            queryKey: ["q&a", question.id],
           }),
           update(),
         ]);

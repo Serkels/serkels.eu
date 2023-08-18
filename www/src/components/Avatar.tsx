@@ -17,6 +17,10 @@ export function Avatar(
 
   const image = useMemo(() => `/api/v1/avatars/u/${id}`, [id]);
 
+  if (!id) {
+    return null;
+  }
+
   return (
     <img
       className={clsx("rounded-full object-cover", className)}

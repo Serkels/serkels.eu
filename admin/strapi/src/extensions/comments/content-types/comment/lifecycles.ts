@@ -2,6 +2,8 @@
 
 import type { Event } from "@strapi/database/lib/lifecycles";
 import type { Subscriber } from "@strapi/database/lib/lifecycles/subscribers";
+import type { EntityService } from "@strapi/strapi/lib/services/entity-service";
+import type { GetValues } from "@strapi/strapi/lib/types/core/attributes";
 import type { Comment } from "strapi-plugin-comments/types/contentTypes";
 import { UserEmitterMap } from "../../../../websocket";
 
@@ -12,9 +14,12 @@ const QUESTION_API_CONTENT_ID = "api::question.question";
 //
 
 export default {
-  async afterUpdate(event) {
+  async afterDelete(event) {
     const result: Comment = event["result"];
+    console.log({ event });
     const related: string = result.related;
+
+    const entityService: EntityService = strapi.entityService;
     if (!related.startsWith(QUESTION_API_CONTENT_ID)) {
       return;
     }
@@ -25,37 +30,31 @@ export default {
       related.replace(`${QUESTION_API_CONTENT_ID}:`, ""),
     );
     if (Number.isNaN(question_id)) {
-      strapi.log.warn(
-        `extensions/comments/content-types/comment/lifecycles.ts : question_id of ${related} is NaN`,
-      );
+      strapi.log.warn(`${__filename} : question_id of ${related} is NaN`);
       return;
     }
 
-    await strapi.entityService.update("api::question.question", question_id, {
-      data: {
-        answer_count,
-      },
-    });
+    await entityService
+      .update("api::question.question", question_id, {
+        data: <GetValues<"api::question.question">>{
+          answer_count,
+          last_activity: new Date().toISOString(),
+        },
+      })
+      .then(() =>
+        strapi.log.info(`UPDATE api::question.question ${question_id}`, {
+          answer_count,
+        }),
+      );
   },
+
+  //
+
   async afterCreate(event) {
-    {
-      const result: Comment = event["result"];
-      const { params } = event;
-      const { where, data } = params;
-      console.log();
-      console.log("---");
-      console.log("afterCreate");
-      console.log({ event, params });
-      console.log({ where, data });
-      console.log({ result });
-      console.trace();
-      console.log();
-    }
-
-    //
-
     const result: Comment = event["result"];
     const related: string = result.related;
+    const entityService: EntityService = strapi.entityService;
+
     if (!related.startsWith(QUESTION_API_CONTENT_ID)) {
       return;
     }
@@ -63,43 +62,48 @@ export default {
     const question_id = Number(
       related.replace(`${QUESTION_API_CONTENT_ID}:`, ""),
     );
+
     if (Number.isNaN(question_id)) {
-      strapi.log.warn(
-        `extensions/comments/content-types/comment/lifecycles.ts : question_id of ${related} is NaN`,
-      );
+      strapi.log.warn(`${__filename} : question_id of ${related} is NaN`);
       return;
     }
 
-    // const owner_id = await strapi.entityService.findOne("api::question.question", question_id, {propulate: ["owner"]});
-    // if (Number.isNaN(owner_id)) {
-    //   strapi.log.warn(
-    //     `extensions/comments/content-types/comment/lifecycles.ts : question_id of ${related} is NaN`,
-    //   );
-    //   return;
-    // }
+    //
 
-    UserEmitterMap.get(question_id).notifications.emit(
+    const answer_count = await count_related_comments(event);
+    await entityService
+      .update<"api::question.question", GetValues<"api::question.question">>(
+        "api::question.question",
+        question_id,
+        {
+          data: <GetValues<"api::question.question">>{
+            answer_count,
+            last_activity: new Date().toISOString(),
+          },
+        },
+      )
+      .then(() =>
+        strapi.log.info(`UPDATE api::question.question ${question_id}`, {
+          answer_count,
+        }),
+      );
+
+    //
+
+    const had_listeners = UserEmitterMap.get(question_id).notifications.emit(
       "new_answer",
       Number(result.authorId),
     );
-  },
-  async afterDelete(event) {
-    const result: Comment = event["result"];
-    const { params } = event;
-    console.log();
-    console.log("---");
-    console.log("afterDelete");
-    console.log({ event });
-    console.log({ params });
-    console.log({ result });
-    console.trace();
-    console.log();
+    if (had_listeners) {
+      strapi.log.info(`EMIT notifications.new_answer ${result.authorId}`);
+    }
   },
 } as Subscriber;
 
 //
 
 async function count_related_comments(event: Event): Promise<number> {
+  const entityService: EntityService = strapi.entityService;
   const result: Comment = event["result"];
   const related: string = result.related;
 
@@ -107,7 +111,7 @@ async function count_related_comments(event: Event): Promise<number> {
     model: { uid },
   } = event;
 
-  return strapi.entityService.count(uid, {
+  return entityService.count(uid, {
     filters: {
       related: {
         $eq: related,

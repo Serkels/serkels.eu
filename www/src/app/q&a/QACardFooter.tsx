@@ -1,14 +1,11 @@
 "use client";
 
 import { Button } from "@1/ui/components/Button";
-import { useQuery } from "@tanstack/react-query";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
 import { useCallback, useContext } from "react";
 import { useTimeoutFn, useToggle } from "react-use";
-import { fromClient } from "../api/v1";
 import { QACardContext } from "./QACard.context";
-import { QARepository } from "./QARepository";
 
 //
 
@@ -109,16 +106,11 @@ function ResponseButtons() {
 function ResponseCount() {
   const {
     statefulStatus: [, setStatus],
-    question: { id },
+    question: { attributes },
   } = useContext(QACardContext);
-  const { data: count, isLoading } = useQuery({
-    enabled: Boolean(id),
-    queryKey: ["q&a", id, "awnsers", "count"],
-    queryFn: () => new QARepository(fromClient).count_awnsers(Number(id)),
-  });
 
-  if (isLoading) return "...";
-  if (count === undefined) return "O_o";
+  const count = attributes?.answer_count;
+  if (count === undefined) return "...";
 
   return (
     <button

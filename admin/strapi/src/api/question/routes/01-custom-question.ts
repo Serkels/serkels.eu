@@ -9,7 +9,7 @@ export default {
         middlewares: [],
         policies: [],
       },
-      info: { apiName: "plugin::question.question", type: "content-api" },
+      info: { apiName: "plugin::question.answers", type: "content-api" },
     },
     {
       method: "GET",
@@ -23,12 +23,12 @@ export default {
         ],
         policies: [],
       },
-      info: { apiName: "plugin::comments.comment", type: "content-api" },
+      info: { apiName: "api::question.answers", type: "content-api" },
     },
     {
       method: "POST",
       path: "/question/:id/awnsers",
-      handler: "plugin::comments.client.post",
+      handler: "api::question.answers.post",
       config: {
         description: "Get question awnsers",
         middlewares: [
@@ -37,7 +37,7 @@ export default {
         ],
         policies: [],
       },
-      info: { apiName: "plugin::comments.comment", type: "content-api" },
+      info: { apiName: "api::question.answers", type: "content-api" },
     },
   ],
 };

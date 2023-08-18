@@ -2,23 +2,28 @@
 
 import { fromClient } from "@/app/api/v1";
 import { Avatar } from "@/components/Avatar";
-import type { components } from "@1/strapi-openapi/v1";
 import { Button } from "@1/ui/components/Button";
 import { Spinner } from "@1/ui/components/Spinner";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Field, Form, Formik } from "formik";
 import { useSession } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
 import { useState, type ComponentPropsWithoutRef } from "react";
 import { useOpportunityCategoriesQuery } from "../opportunity/data/useOpportunityCategoriesQuery";
-import { OpportunityCategoriesViewModel } from "../opportunity/models/OpportunityCategoriesViewModel";
+import {
+  OTHER_CATEGORY_SLUGS,
+  OpportunityCategoriesViewModel,
+} from "../opportunity/models/OpportunityCategoriesViewModel";
 import { QARepository } from "./QARepository";
 
 //
 
 export function QAForm() {
   const [isOpen, setIsOpen] = useState(false);
-  const { data: categories } = useOpportunityCategoriesQuery();
+  const { isLoading: isLoadingyCategories, data: all_categories } =
+    useOpportunityCategoriesQuery();
   const { mutateAsync, isError, isLoading, error } = useNewQAMutation();
+  const searchParams = useSearchParams();
 
   //
 
@@ -26,13 +31,33 @@ export function QAForm() {
     return <ErrorOccur error={error as Error} />;
   }
 
-  if (isLoading || !categories) {
+  const categories = all_categories?.map(
+    OpportunityCategoriesViewModel.from_server,
+  );
+
+  const other_category = categories?.find(({ slug }) =>
+    OTHER_CATEGORY_SLUGS.includes(
+      slug as (typeof OTHER_CATEGORY_SLUGS)[number],
+    ),
+  );
+
+  if (
+    isLoading ||
+    isLoadingyCategories ||
+    !categories ||
+    !all_categories ||
+    !other_category
+  ) {
     return (
       <Card>
         <Spinner className="mx-auto my-5" />
       </Card>
     );
   }
+
+  const category = searchParams.get("category");
+  const initial_category =
+    categories?.find(({ slug }) => slug === category)?.id ?? other_category.id;
 
   return (
     <Card>
@@ -41,23 +66,10 @@ export function QAForm() {
         <Formik
           initialValues={{
             title: "",
-            opportunity_category: undefined,
+            category: initial_category,
           }}
           enableReinitialize
-          onSubmit={(values) => {
-            return mutateAsync(
-              Object.assign(
-                {
-                  title: values.title,
-                },
-                values.opportunity_category
-                  ? {
-                      opportunity_category: values.opportunity_category,
-                    }
-                  : {},
-              ),
-            );
-          }}
+          onSubmit={(values) => mutateAsync(values)}
         >
           {({ isSubmitting }) => (
             <Form className="flex-1">
@@ -79,19 +91,20 @@ export function QAForm() {
               />
               <div className="flex justify-between">
                 <Field
-                  component="select"
                   className="min-w-[25%] border border-[#dddddd]"
-                  name="opportunity_category"
+                  component="select"
                   disabled={isSubmitting}
+                  name="category"
                   required
                 >
                   {categories
-                    .map(OpportunityCategoriesViewModel.from_server)
+                    .filter(({ slug }) => slug !== other_category.slug)
                     .map(({ name, id }) => (
                       <option value={id} key={id}>
                         {name}
                       </option>
                     ))}
+                  <option value={other_category.id}>Autres</option>
                 </Field>
                 <Button
                   type="submit"
@@ -165,14 +178,13 @@ function useNewQAMutation() {
   const queryClient = useQueryClient();
   const jwt = session?.user?.jwt;
   return useMutation(
-    async (data: components["schemas"]["QuestionRequest"]["data"]) => {
+    async ({ title, category }: { title: string; category: number }) => {
       if (!session?.user?.id) throw new Error("Invalid Session");
       if (!jwt) throw new Error("Invalid JWT");
 
-      const body = await new QARepository(fromClient).save(
-        jwt,
+      const body = await new QARepository(fromClient, jwt).save(
         session.user?.id,
-        data,
+        { title, category: Number(category) },
       );
 
       await Promise.all([

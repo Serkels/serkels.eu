@@ -11,7 +11,7 @@ type BookmarkRequest = components["schemas"]["BookmarkRequest"];
 //
 
 export class BookmarksRepository extends OpenAPIRepository {
-  static queryKey = ["bookmarks"]
+  static queryKey = ["bookmarks"];
   async load() {
     const { data: body } = await this.client.GET("/bookmarks", {
       headers: this.headers,

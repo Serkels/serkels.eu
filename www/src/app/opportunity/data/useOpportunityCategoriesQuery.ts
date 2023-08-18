@@ -13,6 +13,7 @@ export function useOpportunityCategoriesQuery() {
   return useQuery({
     queryKey,
     queryFn: () => new OpportunityCategoriesRepository(fromClient).load(),
+    staleTime: Infinity,
   });
 }
 

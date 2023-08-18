@@ -23,6 +23,7 @@ export function QACardResponseList() {
     enabled: Boolean(question.id && isDisplayingResponses),
     queryKey: ["q&a", question.id, "awnsers"],
     queryFn: () => repository.loadResponsesOf(question.id!),
+    staleTime: Infinity,
   });
 
   //

@@ -7,6 +7,7 @@ import type { _1_HOUR_ } from "@douglasduteil/datatypes...hours-to-seconds";
 //
 
 export class QARepository extends OpenAPIRepository {
+  static queryKey = ["q&a"];
   async load({
     category,
     limit,
@@ -43,7 +44,7 @@ export class QARepository extends OpenAPIRepository {
           filters: {
             $and: [
               {
-                opportunity_category: {
+                category: {
                   slug: { $eq: category },
                 },
               },
@@ -69,12 +70,26 @@ export class QARepository extends OpenAPIRepository {
     return body?.data ?? [];
   }
 
+  async loadOne(id: number) {
+    const {
+      data: body,
+      error: errorBody,
+      response,
+    } = await this.client.GET("/questions/{id}", { params: { path: { id } } });
+
+    if (errorBody) {
+      throw new Error(
+        [errorBody.error.message, "from " + response.url].join("\n"),
+      );
+    }
+
+    return body?.data;
+  }
+
   async save(
-    jwt: string,
     owner: string | number,
-    data: components["schemas"]["QuestionRequest"]["data"],
+    data: { title: string; category?: number },
   ) {
-    const headers = new Headers({ Authorization: `Bearer ${jwt}` });
     const {
       response,
       data: body,
@@ -83,7 +98,7 @@ export class QARepository extends OpenAPIRepository {
       body: {
         data: { ...data, owner: String(owner) },
       },
-      headers,
+      headers: this.headers,
       params: {},
     });
 
@@ -97,18 +112,16 @@ export class QARepository extends OpenAPIRepository {
   }
 
   async save_response(
-    jwt: string,
     id: number,
     data: components["schemas"]["CommentRequest"],
   ) {
-    const headers = new Headers({ Authorization: `Bearer ${jwt}` });
     const {
       response,
       data: body,
       error: errorBody,
     } = await this.client.POST("/question/{id}/awnsers", {
       body: data,
-      headers,
+      headers: this.headers,
       params: {
         path: { id },
       },
@@ -139,23 +152,5 @@ export class QARepository extends OpenAPIRepository {
     }
 
     return body?.data ?? [];
-  }
-
-  //
-
-  async count_awnsers(id: number) {
-    const {
-      data: body,
-      error,
-      response,
-    } = await this.client.GET("/question/{id}/awnsers/count", {
-      params: { path: { id } },
-    });
-
-    if (error) {
-      console.error(error, "from " + response.url);
-    }
-
-    return Number(body);
   }
 }

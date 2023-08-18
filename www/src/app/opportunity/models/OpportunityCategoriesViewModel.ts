@@ -5,6 +5,8 @@ import { BasicOpenApiViewModel } from "@/core/models/BasicOpenApiViewModel";
 import { DatedEntryViewModel } from "@/core/models/DatedEntryProps";
 import type { components } from "@1/strapi-openapi/v1";
 
+export const OTHER_CATEGORY_SLUGS = ["other", "autres", "autre"] as const;
+
 export interface OpportunityCategoriesProps {
   readonly createdAt: Date;
   readonly id: number;

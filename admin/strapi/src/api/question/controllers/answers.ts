@@ -19,7 +19,9 @@ export default {
   },
 
   async find(ctx: ExtendableContext, next: Next) {
-    console.log(strapi.controller("plugin::comments.client"));
     return strapi.controller("plugin::comments.client").findAllFlat(ctx, next);
+  },
+  async post(ctx: ExtendableContext, next: Next) {
+    return strapi.controller("plugin::comments.client").post(ctx, next);
   },
 };

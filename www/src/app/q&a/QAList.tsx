@@ -2,7 +2,8 @@
 
 import { fromClient } from "@/app/api/v1";
 import { Spinner } from "@1/ui/components/Spinner";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { QACard } from "./QACard";
 import { QARepository } from "./QARepository";
 
@@ -17,7 +18,7 @@ export function QAList({
 }) {
   const { data, isLoading, isError } = useQuery({
     queryKey: ["q&a", { category, search }],
-    queryFn: () =>
+    queryFn: async () =>
       new QARepository(fromClient).load({
         category,
         limit: 6,
@@ -25,7 +26,13 @@ export function QAList({
         pageSize: undefined,
         search,
       }),
+    staleTime: 10_000,
   });
+
+  useCacheQAItemQueries(data);
+
+  //
+
   if (isLoading) return <Spinner />;
   if (isError) return <>Epic fail...</>;
   if (!data) return <>No data O_o</>;
@@ -40,9 +47,24 @@ export function QAList({
         )
         .map((qa) => (
           <li key={qa.id}>
-            <QACard {...qa} />
+            <QACard id={Number(qa.id)} />
           </li>
         ))}
     </ul>
   );
+}
+
+//
+
+function useCacheQAItemQueries(list: { id?: number }[] | undefined) {
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    if (!list) return;
+    Promise.all(
+      list.map((data) =>
+        queryClient.setQueryData(["q&a", Number(data.id)], data),
+      ),
+    );
+  }, [list?.length]);
 }

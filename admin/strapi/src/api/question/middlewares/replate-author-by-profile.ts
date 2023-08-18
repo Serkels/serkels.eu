@@ -4,7 +4,7 @@ import type { Next, ParameterizedContext } from "koa";
 import type { Comment } from "strapi-plugin-comments/types/contentTypes";
 import type { State } from "../../../types";
 
-export default (config: { many: (ctx: object) => any[] }) => {
+export default () => {
   return async function replate_author_by_profile(ctx: Context, next: Next) {
     await next();
 

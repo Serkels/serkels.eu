@@ -1,6 +1,7 @@
 //
 
 import { factories } from "@strapi/strapi";
+import type { GetValues } from "@strapi/strapi/lib/types/core/attributes";
 import type { Next } from "koa";
 import { StrapiContext } from "../../../types";
 
@@ -8,6 +9,35 @@ export default factories.createCoreRouter("api::question.question", {
   config: {
     create: {
       middlewares: [
+        async function clean_body(
+          ctx: StrapiContext & {
+            request: {
+              body: {
+                data: GetValues<"api::question.question">;
+              };
+            };
+          },
+          next: Next,
+        ) {
+          const { data } = ctx.request.body;
+
+          if (!data) {
+            ctx.noContent("Missing request body");
+            return next();
+          }
+
+          if (!data.category) {
+            ctx.badRequest("Missing category");
+            return next();
+          }
+
+          data.accepted_answer = null;
+          data.answer_count = 0;
+          data.last_activity = new Date().toISOString();
+          data.is_accepted = null;
+
+          return next();
+        },
         async function findProfile(
           ctx: StrapiContext & { request: { body: unknown } },
           next: Next,

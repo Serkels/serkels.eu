@@ -18,6 +18,7 @@ export function CategoriesList({
   if (!data) return <>0_o</>;
 
   const categories = data.map(OpportunityCategoriesViewModel.from_server);
+
   categories.push(
     new OpportunityCategoriesViewModel({
       id: NaN,
