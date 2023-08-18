@@ -30,7 +30,7 @@ export function BookmarkButton(
   const repository = new BookmarksRepository(fromClient, session?.user?.jwt);
 
   const jwt = session?.user?.jwt;
-  const { data: bookmarks, isFetching } = useQuery({
+  const { data: bookmarks } = useQuery({
     enabled: Boolean(jwt),
     queryKey: BookmarksRepository.queryKey,
     queryFn: async () => new BookmarksRepository(fromClient, jwt).load(),
