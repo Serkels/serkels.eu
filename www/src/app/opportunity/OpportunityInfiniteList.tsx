@@ -1,7 +1,6 @@
 "use client";
 
 import { Spinner } from "@1/ui/components/Spinner";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { OpportunityCard } from "./OpportunityCard";
 import { useOpportunityFilterContext } from "./OpportunityFilter.context";
@@ -10,7 +9,6 @@ import { useOpportunitiesInfinite } from "./useOpportunities";
 //
 
 export function OpportunityInfiniteList() {
-  const {} = useSession();
   const { category, query } = useOpportunityFilterContext();
   const {
     data,

@@ -75,7 +75,7 @@ export function QACard({ id }: { id: number }) {
       queryClient.invalidateQueries({
         queryKey: QARepository.queryKey,
       });
-    }, 3_456);
+    }, 2_222);
   }, [isDeleting && delete_mutation.isSuccess]);
 
   //

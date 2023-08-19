@@ -68,21 +68,11 @@ export function BookmarkButton(
       : classNameProp({ isActive })
     : undefined;
 
-  const onClick: MouseEventHandler<HTMLButtonElement> = useCallback(
-    (event) => {
-      event.preventDefault();
-      event.stopPropagation();
+  const onClick: MouseEventHandler<HTMLButtonElement> = useCallback(() => {
+    const bookmark_id = bookmark?.id;
 
-      const bookmark_id = bookmark?.id;
-
-      bookmark_id
-        ? delete_bookmark(bookmark_id)
-        : save_bookmark({ opportunity });
-
-      return false;
-    },
-    [bookmark?.id, opportunity, isActive],
-  );
+    bookmark_id ? delete_bookmark(bookmark_id) : save_bookmark({ opportunity });
+  }, [bookmark?.id, opportunity, isActive]);
 
   //
 

@@ -4,6 +4,7 @@ import { BookmarkButton } from "@/components/BookmarkButton";
 import type { components } from "@1/strapi-openapi/v1";
 import { LocationRadius, Share } from "@1/ui/icons";
 import clsx from "clsx";
+import * as NProgress from "nprogress";
 import type { ComponentPropsWithoutRef } from "react";
 
 //
@@ -15,6 +16,7 @@ export function OpportunityCard(props: Props) {
     expireAt,
     id,
     location,
+    locale,
     opportunity_category,
     partner,
     title,
@@ -49,7 +51,7 @@ export function OpportunityCard(props: Props) {
           <small className="font-bold text-Chateau_Green">
             Date limite :{" "}
             <time dateTime={date.toUTCString()}>
-              {date.toLocaleDateString()}
+              {date.toLocaleDateString(locale)}
             </time>
           </small>
 
@@ -68,17 +70,23 @@ export function OpportunityCard(props: Props) {
           </p>
         </figcaption>
         <hr />
-        <footer
-          className="flex cursor-default justify-between p-3"
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-          }}
-        >
+        <footer className="flex cursor-default justify-between p-3">
           <aside className="text-xs font-bold uppercase leading-[inherit] text-Dove_Gray">
             {category}
           </aside>
-          <aside className="space-x-3">
+          <aside
+            className="space-x-3"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+
+              // ! HACK(douglasduteil): stop NProgress from displaying a loader
+              // As nextjs-toploader is "secretly" looking for a parent link,
+              // this click event will still produce a NProgress.start();
+              // \see https://github.com/TheSGJ/nextjs-toploader/blob/c1678c2/src/index.tsx#L136-L141
+              setTimeout(() => NProgress.done(), 2_222);
+            }}
+          >
             <BookmarkButton
               opportunity={Number(id)}
               className={({ isActive }) =>
@@ -107,5 +115,6 @@ type Props = ComponentPropsWithoutRef<"article"> &
     | "location"
     | "opportunity_category"
     | "partner"
+    | "locale"
     | "title"
   >;
