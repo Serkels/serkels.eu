@@ -4,10 +4,11 @@ import { AvatarMediaHorizontal } from "@/components/Avatar";
 import { Button } from "@1/ui/components/Button";
 import { Circle } from "@1/ui/icons";
 import clsx from "clsx";
+import { isEqual as date_isEqual, formatDistance } from "date-fns";
+import { fr } from "date-fns/locale";
 import { useSession } from "next-auth/react";
 import { useCallback, useContext, useEffect } from "react";
 import { QACardContext } from "./QACard.context";
-
 //
 
 export function QACardHeader() {
@@ -48,19 +49,49 @@ function QACard_Time() {
   const {
     question: { attributes },
   } = useContext(QACardContext);
-  const updatedAt = attributes?.updatedAt
+  const created_at = attributes?.createdAt
+    ? new Date(attributes?.createdAt)
+    : new Date(NaN);
+
+  const updated_at = attributes?.updatedAt
     ? new Date(attributes?.updatedAt)
     : new Date(NaN);
 
+  const has_been_edited = !date_isEqual(created_at, updated_at);
+
+  const time_distance = formatDistance(created_at, new Date(), {
+    locale: fr,
+  });
+
   //
+
+  if (has_been_edited) {
+    return (
+      <div className="mt-3 text-xs">
+        <time
+          dateTime={updated_at.toUTCString()}
+          title={updated_at.toUTCString()}
+        >
+          {time_distance}
+        </time>
+        {" • "}
+        <time
+          dateTime={created_at.toUTCString()}
+          title={created_at.toUTCString()}
+        >
+          edited
+        </time>
+      </div>
+    );
+  }
 
   return (
     <time
       className="mt-3 text-xs"
-      dateTime={updatedAt.toUTCString()}
-      title={updatedAt.toUTCString()}
+      dateTime={created_at.toUTCString()}
+      title={created_at.toUTCString()}
     >
-      {updatedAt.toLocaleDateString("fr")}
+      {time_distance}
     </time>
   );
 }

@@ -21,6 +21,7 @@
     "@trpc/react-query": "10.37.1",
     "@yornaath/batshit": "^0.7.1",
     "clsx": "2.0.0",
+    "date-fns": "2.30.0",
     "formik": "2.4.3",
     "modern-errors": "6.0.0",
     "ms": "3.0.0-canary.1",
