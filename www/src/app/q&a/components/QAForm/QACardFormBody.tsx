@@ -1,11 +1,13 @@
-import { Button } from "@1/ui/components/Button";
-import { Field, Form, Formik } from "formik";
-import { useSearchParams } from "next/navigation";
-import { useOpportunityCategoriesQuery } from "../opportunity/data/useOpportunityCategoriesQuery";
+//
+
+import { useOpportunityCategoriesQuery } from "@/app/opportunity/data/useOpportunityCategoriesQuery";
 import {
   OTHER_CATEGORY_SLUGS,
   OpportunityCategoriesViewModel,
-} from "../opportunity/models/OpportunityCategoriesViewModel";
+} from "@/app/opportunity/models/OpportunityCategoriesViewModel";
+import { Button } from "@1/ui/components/Button";
+import { Field, Form, Formik } from "formik";
+import { useSearchParams } from "next/navigation";
 
 //
 

@@ -1,0 +1,24 @@
+---
+CommentListResponse:
+  type: object
+  properties:
+    data:
+      type: array
+      items:
+        "$ref": "#/components/schemas/CommentsComment"
+    meta:
+      type: object
+      properties:
+        pagination:
+          type: object
+          properties:
+            page:
+              type: integer
+            pageSize:
+              type: integer
+              minimum: 25
+            pageCount:
+              type: integer
+              maximum: 1
+            total:
+              type: integer

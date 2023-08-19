@@ -1,4 +1,4 @@
-"use client";
+//
 
 import { AvatarMediaHorizontal } from "@/components/Avatar";
 import { Spinner } from "@1/ui/components/Spinner";
@@ -6,9 +6,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Field, Form, Formik, type FormikProps } from "formik";
 import { useSession } from "next-auth/react";
 import { useContext, type Ref } from "react";
-import { fromClient } from "../api/v1";
-import { QACardContext } from "./QACard.context";
-import { QARepository } from "./QARepository";
+import { QACardContext } from "../QACard/QACard.context";
 
 //
 
@@ -26,16 +24,16 @@ export function QAResponseForm({
   const jwt = session?.user?.jwt;
 
   const { mutateAsync, isError, isLoading, error } = useMutation(
-    async (data: { content: string }) => {
+    async (_data: { content: string }) => {
       if (!question.id) throw new Error("Invalid question.id");
       if (!jwt) throw new Error("Invalid JWT");
 
-      const body = await new QARepository(fromClient, jwt).save_response(
-        question.id,
-        data,
-      );
+      // const body = await new QARepository(fromClient, jwt).save_response(
+      //   question.id,
+      //   data,
+      // );
 
-      return body;
+      // return body;
     },
     {
       onSuccess() {

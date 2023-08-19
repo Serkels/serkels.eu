@@ -1,14 +1,14 @@
 "use client";
 
 import { fromClient } from "@/app/api/v1";
+import { ErrorOccur } from "@/components/ErrorOccur";
 import { Spinner } from "@1/ui/components/Spinner";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import { useCallback, useContext } from "react";
-import { QACardContext } from "./QACard.context";
-import { QACardFormBody } from "./QACardFormBody";
-import { QAFormErrorOccur } from "./QAFormErrorOccur";
 import { QARepository } from "./QARepository";
+import { QACardContext } from "./components/QACard/QACard.context";
+import { QACardFormBody } from "./components/QAForm/QACardFormBody";
 
 //
 
@@ -31,7 +31,7 @@ export function QAEditForm() {
   );
 
   if (isError) {
-    return <QAFormErrorOccur error={error as Error} />;
+    return <ErrorOccur error={error as Error} />;
   }
 
   if (isLoading) {

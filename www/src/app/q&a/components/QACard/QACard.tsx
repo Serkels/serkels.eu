@@ -1,20 +1,20 @@
 "use client";
 
+import { fromClient } from "@/app/api/v1";
 import { Spinner } from "@1/ui/components/Spinner";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import type { FormikProps } from "formik";
 import { useSession } from "next-auth/react";
 import { useEffect, useRef, useState } from "react";
 import { match } from "ts-pattern";
-import { fromClient } from "../api/v1";
+import { ErrorOccur } from "../../../../components/ErrorOccur";
+import { QAEditForm } from "../../QAEditForm";
+import { QARepository } from "../../QARepository";
 import { QACardContext, type QACardStatus } from "./QACard.context";
 import { QACardFooter } from "./QACardFooter";
 import { QACardHeader } from "./QACardHeader";
 import { QACardResponseForm } from "./QACardResponseForm";
 import { QACardResponses } from "./QACardResponses";
-import { QAEditForm } from "./QAEditForm";
-import { QAFormErrorOccur } from "./QAFormErrorOccur";
-import { QARepository } from "./QARepository";
 
 export function QACard({ id }: { id: number }) {
   const queryClient = useQueryClient();
@@ -88,7 +88,7 @@ export function QACard({ id }: { id: number }) {
     );
   }
   if (delete_mutation.isError) {
-    return <QAFormErrorOccur error={delete_mutation.error as Error} />;
+    return <ErrorOccur error={delete_mutation.error as Error} />;
   }
 
   if (isDeleting) {
@@ -142,7 +142,7 @@ function useRefreshAnswers(question_id: number, shouldRefreshAnswers: boolean) {
     queryClient.invalidateQueries([
       ...QARepository.queryKey,
       question_id,
-      "awnsers",
+      "answers",
     ]);
   }, [shouldRefreshAnswers, question_id]);
 }

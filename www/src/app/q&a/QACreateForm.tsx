@@ -2,13 +2,13 @@
 
 import { fromClient } from "@/app/api/v1";
 import { Avatar } from "@/components/Avatar";
+import { ErrorOccur } from "@/components/ErrorOccur";
 import { Spinner } from "@1/ui/components/Spinner";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import { useState, type ComponentPropsWithoutRef } from "react";
-import { QACardFormBody } from "./QACardFormBody";
-import { QAFormErrorOccur } from "./QAFormErrorOccur";
 import { QARepository } from "./QARepository";
+import { QACardFormBody } from "./components/QAForm/QACardFormBody";
 
 //
 
@@ -20,7 +20,7 @@ export function QACreateForm() {
   if (isError) {
     return (
       <Card>
-        <QAFormErrorOccur error={error as Error} />
+        <ErrorOccur error={error as Error} />
       </Card>
     );
   }

@@ -1,6 +1,6 @@
 //
 
-import { OpenAPIRepository } from "@/app/api/v1";
+import { OpenAPIRepository, type ApiClient } from "@/app/api/v1";
 import type { components } from "@1/strapi-openapi/v1";
 import type { _1_HOUR_ } from "@douglasduteil/datatypes...hours-to-seconds";
 
@@ -91,6 +91,7 @@ export class QARepository extends OpenAPIRepository {
     return body?.data;
   }
 
+  //
   async save(
     owner: string | number,
     data: { title: string; category?: number },
@@ -164,7 +165,7 @@ export class QARepository extends OpenAPIRepository {
       response,
       data: body,
       error: errorBody,
-    } = await this.client.POST("/question/{id}/awnsers", {
+    } = await this.client.POST("/question/{id}/answers", {
       body: data,
       headers: this.headers,
       params: {
@@ -183,12 +184,12 @@ export class QARepository extends OpenAPIRepository {
 
   //
 
-  async loadResponsesOf(id: number) {
+  async load_responses_of(id: number) {
     const {
       data: body,
       error,
       response,
-    } = await this.client.GET("/question/{id}/awnsers", {
+    } = await this.client.GET("/question/{id}/answers", {
       params: { path: { id } },
     });
 
@@ -196,6 +197,52 @@ export class QARepository extends OpenAPIRepository {
       console.error(error, "from " + response.url);
     }
 
-    return body?.data ?? [];
+    return body?.data;
+  }
+}
+
+export class AnswerRepository extends OpenAPIRepository {
+  constructor(
+    client: ApiClient,
+    public question_id: number,
+    jwt?: string,
+  ) {
+    super(client, jwt);
+
+    this.queryKey = [...QARepository.queryKey, Number(question_id), "answers"];
+  }
+  queryKey = [...QARepository.queryKey, NaN, "answers"] as const;
+
+  async load() {
+    const {
+      data: body,
+      error,
+      response,
+    } = await this.client.GET("/question/{id}/answers", {
+      params: { path: { id: this.question_id } },
+    });
+
+    if (error) {
+      console.error(error, "from " + response.url);
+    }
+
+    return body?.data;
+  }
+  async loadOne(id: number) {
+    const { headers } = this;
+    const {
+      data: body,
+      error,
+      response,
+    } = await this.client.GET("/question/answers/{id}", {
+      params: { path: { id } },
+      headers,
+    });
+
+    if (error) {
+      console.error(error, "from " + response.url);
+    }
+
+    return body;
   }
 }

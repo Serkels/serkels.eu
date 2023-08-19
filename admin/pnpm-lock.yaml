@@ -103,6 +103,9 @@ importers:
       ws:
         specifier: 8.13.0
         version: 8.13.0
+      yaml:
+        specifier: 1.10.2
+        version: 1.10.2
     devDependencies:
       '@1/typescript-config':
         specifier: workspace:*

@@ -1,6 +1,6 @@
 //
 
-export function QAFormErrorOccur({ error }: { error: Error }) {
+export function ErrorOccur({ error }: { error: Error }) {
   return (
     <h1 className="flex-1 py-3 text-center text-lg font-bold text-red-500">
       Une erreur est survenu...

@@ -21,6 +21,9 @@ export default {
   async find(ctx: ExtendableContext, next: Next) {
     return strapi.controller("plugin::comments.client").findAllFlat(ctx, next);
   },
+  async findOne(ctx: ExtendableContext, next: Next) {
+    return strapi.controller("plugin::comments.admin").findOne(ctx, next);
+  },
   async post(ctx: ExtendableContext, next: Next) {
     return strapi.controller("plugin::comments.client").post(ctx, next);
   },

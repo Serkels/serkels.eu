@@ -1,19 +1,24 @@
 //
 
+import type { State } from "@/src/types";
 import type { Next, ParameterizedContext } from "koa";
 import type { Comment } from "strapi-plugin-comments/types/contentTypes";
-import type { State } from "../../../types";
 
-export default () => {
+export default (
+  config: { keys_to_replace: string[] } = { keys_to_replace: ["data"] },
+) => {
   return async function replate_author_by_profile(ctx: Context, next: Next) {
     await next();
 
     //
-
+    console.log(ctx.body);
+    console.log(ctx.body["data"]);
     ctx.body = ctx.body["data"]
       ? {
           data: await Promise.all(
-            (ctx.body as { data: Comment[] }).data.map(replace_autor),
+            (ctx.body as { data: Comment[] }).data
+              .map(replace_autor)
+              .filter(Boolean),
           ),
         }
       : await replace_autor(ctx.body as Comment);
@@ -25,6 +30,7 @@ export default () => {
       strapi.log.warn(
         `api::question.replate-author-by-profile middlewares detected no author.`,
       );
+      return;
     }
 
     const { id: owner } = author;
@@ -40,6 +46,7 @@ export default () => {
       strapi.log.warn(
         `api::question.replate-author-by-profile middlewares detected no profiles.`,
       );
+      return;
     }
 
     return {

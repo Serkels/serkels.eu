@@ -4,5 +4,5 @@ export type QAFilterType =
   | ""
   | "awnsered"
   | "frequently"
-  | "lastest-awnsers"
+  | "lastest-answers"
   | "mine";

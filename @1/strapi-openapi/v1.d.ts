@@ -385,12 +385,16 @@ export interface paths {
       };
     };
   };
-  "/question/{id}/awnsers": {
-    get: operations["get/question/{id}/awnsers"];
-    post: operations["post/question/{id}/awnsers"];
+  "/question/{id}/answers": {
+    get: operations["get/question/{id}/answers"];
+    post: operations["post/question/{id}/answers"];
   };
-  "/question/{id}/awnsers/count": {
-    get: operations["get/question/{id}/awnsers/count"];
+  "/question/{id}/answers/count": {
+    get: operations["get/question/{id}/answers/count"];
+  };
+  "/question/answers/{id}": {
+    get: operations["get/question/answers/{id}"];
+    post: operations["post/question/answers/{id}"];
   };
   "/questions": {
     get: operations["get/questions"];
@@ -1385,6 +1389,17 @@ export interface components {
       attributes?: components["schemas"]["Bookmark"];
       id?: number;
     };
+    CommentListResponse: {
+      data?: components["schemas"]["CommentsComment"][];
+      meta?: {
+        pagination?: {
+          page?: number;
+          pageCount?: number;
+          pageSize?: number;
+          total?: number;
+        };
+      };
+    };
     CommentRequest: {
       data?: components["schemas"]["CommentsComment"];
     };
@@ -1410,7 +1425,7 @@ export interface components {
       removed?: boolean;
       threadOf?: {
         data: {
-          attributes?: Record<string, unknown>;
+          attributes: Record<string, unknown>;
           id: number;
         };
       };
@@ -4265,7 +4280,38 @@ export interface components {
       user?: components["schemas"]["Users-Permissions-User"];
     };
   };
-  responses: never;
+  responses: {
+    /** @description Bad Request */
+    400: {
+      content: {
+        "application/json": components["schemas"]["Error"];
+      };
+    };
+    /** @description Unauthorized */
+    401: {
+      content: {
+        "application/json": components["schemas"]["Error"];
+      };
+    };
+    /** @description Forbidden */
+    403: {
+      content: {
+        "application/json": components["schemas"]["Error"];
+      };
+    };
+    /** @description Not Found */
+    404: {
+      content: {
+        "application/json": components["schemas"]["Error"];
+      };
+    };
+    /** @description Internal Server Error */
+    500: {
+      content: {
+        "application/json": components["schemas"]["Error"];
+      };
+    };
+  };
   parameters: never;
   requestBodies: {
     "Users-Permissions-RoleRequest": {
@@ -5308,7 +5354,7 @@ export interface operations {
       };
     };
   };
-  "get/question/{id}/awnsers": {
+  "get/question/{id}/answers": {
     parameters: {
       path: {
         id: number;
@@ -5318,44 +5364,86 @@ export interface operations {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["CommentsCommentResponse"];
+          "application/json": components["schemas"]["CommentListResponse"];
         };
       };
-      /** @description Bad Request */
-      400: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
-      /** @description Not Found */
-      404: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
-      /** @description Internal Server Error */
-      500: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
+      400: components["responses"]["400"];
+      401: components["responses"]["401"];
+      403: components["responses"]["403"];
+      404: components["responses"]["404"];
+      500: components["responses"]["500"];
     };
   };
-  "post/question/{id}/awnsers": {
+  "post/question/{id}/answers": {
     parameters: {
       path: {
+        id: number;
+      };
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["CommentRequest"];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["CommentsComment"];
+        };
+      };
+      400: components["responses"]["400"];
+      401: components["responses"]["401"];
+      403: components["responses"]["403"];
+      404: components["responses"]["404"];
+      500: components["responses"]["500"];
+    };
+  };
+  "get/question/{id}/answers/count": {
+    parameters: {
+      path: {
+        id: number;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": number;
+        };
+      };
+      400: components["responses"]["400"];
+      401: components["responses"]["401"];
+      403: components["responses"]["403"];
+      404: components["responses"]["404"];
+      500: components["responses"]["500"];
+    };
+  };
+  "get/question/answers/{id}": {
+    parameters: {
+      path: {
+        /** @description The awnser id */
+        id: number;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["CommentsComment"];
+        };
+      };
+      400: components["responses"]["400"];
+      401: components["responses"]["401"];
+      403: components["responses"]["403"];
+      404: components["responses"]["404"];
+      500: components["responses"]["500"];
+    };
+  };
+  "post/question/answers/{id}": {
+    parameters: {
+      path: {
+        /** @description The answer id */
         id: number;
       };
     };
@@ -5371,81 +5459,11 @@ export interface operations {
           "application/json": components["schemas"]["QuestionResponse"];
         };
       };
-      /** @description Bad Request */
-      400: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
-      /** @description Not Found */
-      404: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
-      /** @description Internal Server Error */
-      500: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
-    };
-  };
-  "get/question/{id}/awnsers/count": {
-    parameters: {
-      path: {
-        id: number;
-      };
-    };
-    responses: {
-      /** @description OK */
-      200: {
-        content: {
-          "application/json": number;
-        };
-      };
-      /** @description Bad Request */
-      400: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
-      /** @description Not Found */
-      404: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
-      /** @description Internal Server Error */
-      500: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
+      400: components["responses"]["400"];
+      401: components["responses"]["401"];
+      403: components["responses"]["403"];
+      404: components["responses"]["404"];
+      500: components["responses"]["500"];
     };
   };
   "get/questions": {

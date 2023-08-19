@@ -1,11 +1,11 @@
 "use client";
 
 import { fromClient } from "@/app/api/v1";
+import { useSetQueryCacheById } from "@/components/useSetQueryCacheById";
 import { Spinner } from "@1/ui/components/Spinner";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useEffect } from "react";
-import { QACard } from "./QACard";
+import { useQuery } from "@tanstack/react-query";
 import { QARepository } from "./QARepository";
+import { QACard } from "./components/QACard/QACard";
 
 //
 
@@ -29,7 +29,7 @@ export function QAList({
     staleTime: 10_000,
   });
 
-  useCacheQAItemQueries(data);
+  useSetQueryCacheById(data, ({ id }) => ["q&a", Number(id)]);
 
   //
 
@@ -61,19 +61,4 @@ function EmptyList() {
   return (
     <h5 className="py-5 text-center font-bold">Pas plus de résultats ...</h5>
   );
-}
-
-//
-
-function useCacheQAItemQueries(list: { id?: number }[] | undefined) {
-  const queryClient = useQueryClient();
-
-  useEffect(() => {
-    if (!list) return;
-    Promise.all(
-      list.map((data) =>
-        queryClient.setQueryData(["q&a", Number(data.id)], data),
-      ),
-    );
-  }, [list?.length]);
 }

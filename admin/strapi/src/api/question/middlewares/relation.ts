@@ -6,7 +6,10 @@ import type { ResponseBody, State } from "../../../types";
 export default () => {
   return async function relation(ctx: Context, next: Next) {
     const { params } = ctx;
-    ctx.params = { relation: `api::question.question:${params.id}` };
+    ctx.params = {
+      ...(ctx.params ?? {}),
+      relation: `api::question.question:${params.id}`,
+    };
     return next();
   };
 };

@@ -44,7 +44,7 @@ const data: { name: string; slug: QAFilterType }[] = [
   { name: "Les dernières questions", slug: "" },
   // { name: "Questions fréquentes", slug: "frequently" },
   // { name: "Mes questions", slug: "mine" },
-  // { name: "Les dernières réponses", slug: "lastest-awnsers" },
+  // { name: "Les dernières réponses", slug: "lastest-answers" },
   // { name: "Questions répondus", slug: "awnsered" },
 ];
 
