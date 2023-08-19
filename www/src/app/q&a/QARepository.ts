@@ -62,7 +62,7 @@ export class QARepository extends OpenAPIRepository {
               },
             ],
           },
-          sort: ["updatedAt:desc"],
+          sort: ["createdAt:desc"],
         } as any,
       },
       next: { revalidate: 3600 satisfies _1_HOUR_ },
@@ -181,24 +181,6 @@ export class QARepository extends OpenAPIRepository {
 
     return body;
   }
-
-  //
-
-  async load_responses_of(id: number) {
-    const {
-      data: body,
-      error,
-      response,
-    } = await this.client.GET("/question/{id}/answers", {
-      params: { path: { id } },
-    });
-
-    if (error) {
-      console.error(error, "from " + response.url);
-    }
-
-    return body?.data;
-  }
 }
 
 export class AnswerRepository extends OpenAPIRepository {
@@ -219,7 +201,12 @@ export class AnswerRepository extends OpenAPIRepository {
       error,
       response,
     } = await this.client.GET("/question/{id}/answers", {
-      params: { path: { id: this.question_id } },
+      params: {
+        path: { id: this.question_id },
+        query: {
+          sort: ["createdAt:desc"],
+        },
+      },
     });
 
     if (error) {
