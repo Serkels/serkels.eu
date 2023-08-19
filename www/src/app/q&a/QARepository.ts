@@ -7,7 +7,7 @@ import type { _1_HOUR_ } from "@douglasduteil/datatypes...hours-to-seconds";
 //
 
 type QuestionRequestBody = components["schemas"]["QuestionRequest"]["data"];
-type CommentRequest = components["schemas"]["CommentRequest"]["data"];
+type CommentRequest = components["schemas"]["CommentRequest"];
 
 //
 
@@ -160,10 +160,10 @@ export class QARepository extends OpenAPIRepository {
 }
 
 export class AnswerRepository extends OpenAPIRepository {
+  static queryKey = ["answer"] as const;
   constructor(client: ApiClient, jwt?: string) {
     super(client, jwt);
   }
-  queryKey = ["answer"] as const;
 
   async load(question_id: number) {
     const {
@@ -171,6 +171,7 @@ export class AnswerRepository extends OpenAPIRepository {
       error,
       response,
     } = await this.client.GET("/question/{id}/answers", {
+      headers: this.headers,
       params: {
         path: { id: question_id },
         query: {
@@ -191,7 +192,7 @@ export class AnswerRepository extends OpenAPIRepository {
       data: body,
       error,
       response,
-    } = await this.client.GET("/question/answers/{id}", {
+    } = await this.client.GET("/answer/{id}", {
       params: { path: { id } },
       headers,
     });
@@ -211,11 +212,30 @@ export class AnswerRepository extends OpenAPIRepository {
       data: body,
       error: errorBody,
     } = await this.client.POST("/question/{id}/answers", {
-      body: { data },
+      body: data,
       headers: this.headers,
       params: {
         path: { id },
       },
+    });
+
+    if (errorBody) {
+      throw new Error(
+        [errorBody.error.message, "from " + response.url].join("\n"),
+      );
+    }
+
+    return body;
+  }
+
+  async delete(id: number) {
+    const {
+      response,
+      data: body,
+      error: errorBody,
+    } = await this.client.DELETE("/answer/{id}", {
+      headers: this.headers,
+      params: { path: { id } },
     });
 
     if (errorBody) {

@@ -1,4 +1,4 @@
-"use client";
+//
 
 import type { components } from "@1/strapi-openapi/v1";
 import type { FormikProps } from "formik";
@@ -12,10 +12,8 @@ import {
 //
 
 export type QAResponseStatus = {
-  isDeleting: boolean;
   isEditing: boolean;
   isSubmitting: boolean;
-  shouldDelete: boolean;
 };
 
 export const QAResponseContext = createContext<{

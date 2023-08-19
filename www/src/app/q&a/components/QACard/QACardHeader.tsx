@@ -1,12 +1,13 @@
 "use client";
 
 import { AvatarMediaHorizontal } from "@/components/Avatar";
+import { DeleteIconButton } from "@/components/DeleteButton/DeleteButton";
 import { TimeInfo } from "@/components/TimeInfo";
 import { Button } from "@1/ui/components/Button";
 import { Circle } from "@1/ui/icons";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
-import { useCallback, useContext, useEffect } from "react";
+import { useCallback, useContext } from "react";
 import { QACardContext } from "./QACard.context";
 //
 
@@ -61,7 +62,7 @@ function QACard_ActionGroup() {
   return (
     <nav className="flex">
       <QACard_EditButton />
-      <QACard_DeleteButton />
+      <DeleteIconButton />
     </nav>
   );
 }
@@ -83,35 +84,6 @@ function QACard_EditButton() {
       variant="light"
     >
       {isEditing ? "❌" : "🖊️"}
-    </Button>
-  );
-}
-
-function QACard_DeleteButton() {
-  const {
-    statefulStatus: [{ shouldDelete }, setStatus],
-  } = useContext(QACardContext);
-
-  const on_editing = useCallback(() => {
-    setStatus((state) => ({ ...state, shouldDelete: !shouldDelete }));
-  }, [shouldDelete]);
-
-  useEffect(() => {
-    if (!shouldDelete) return;
-
-    setTimeout(() => {
-      setStatus((state) => ({ ...state, shouldDelete: false }));
-    }, 0);
-  }, [shouldDelete]);
-
-  return (
-    <Button
-      className="px-2 py-2"
-      onClick={on_editing}
-      theme-padding={false}
-      variant="light"
-    >
-      {shouldDelete ? "❌" : "🗑️"}
     </Button>
   );
 }

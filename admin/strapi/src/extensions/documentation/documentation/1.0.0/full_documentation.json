@@ -26,7 +26,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2023-08-19T09:51:43.575Z"
+    "x-generation-date": "2023-08-19T12:54:48.814Z"
   },
   "servers": [
     {
@@ -9579,19 +9579,11 @@
       "CommentRequest": {
         "type": "object",
         "required": [
-          "data"
+          "content"
         ],
         "properties": {
-          "data": {
-            "required": [
-              "content"
-            ],
-            "type": "object",
-            "properties": {
-              "content": {
-                "type": "string"
-              }
-            }
+          "content": {
+            "type": "string"
           }
         }
       },
@@ -15138,7 +15130,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "",
+            "description": "The question id one answers",
             "deprecated": false,
             "required": true,
             "schema": {
@@ -15199,6 +15191,108 @@
               "schema": {
                 "$ref": "#/components/schemas/CommentRequest"
               }
+            }
+          }
+        }
+      }
+    },
+    "/answer/{id}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentsComment"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "tags": [
+          "Question"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The answer id",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "operationId": "get/answer/{id}"
+      }
+    },
+    "put": {
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommentsComment"
+              }
+            }
+          }
+        },
+        "400": {
+          "$ref": "#/components/responses/400"
+        },
+        "401": {
+          "$ref": "#/components/responses/401"
+        },
+        "403": {
+          "$ref": "#/components/responses/403"
+        },
+        "404": {
+          "$ref": "#/components/responses/404"
+        },
+        "500": {
+          "$ref": "#/components/responses/500"
+        }
+      },
+      "tags": [
+        "Question"
+      ],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "The answer id",
+          "deprecated": false,
+          "required": true,
+          "schema": {
+            "type": "number"
+          }
+        }
+      ],
+      "operationId": "post/answer/{id}",
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/CommentRequest"
             }
           }
         }

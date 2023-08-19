@@ -1,7 +1,9 @@
 //
 
 import { Avatar } from "@/components/Avatar";
+import { DeleteIconButton } from "@/components/DeleteButton/DeleteButton";
 import { TimeInfo } from "@/components/TimeInfo";
+import { useSession } from "next-auth/react";
 import { useContext } from "react";
 import { QAResponseContext } from "./QAResponse.context";
 
@@ -23,7 +25,31 @@ export function QAResponseHeader() {
         </figcaption>
       </figure>
 
-      <TimeInfo values={{ createdAt, updatedAt }} />
+      <aside className=" flex items-start justify-between">
+        <ActionGroup />
+        <TimeInfo values={{ createdAt, updatedAt }} />
+      </aside>
     </header>
+  );
+}
+
+function ActionGroup() {
+  const { data: session } = useSession();
+  const {
+    response: { author },
+  } = useContext(QAResponseContext);
+  const jwt = session?.user?.jwt;
+
+  if (!jwt) {
+    return null;
+  }
+  if (session?.user?.profile.id !== author.id) {
+    return null;
+  }
+
+  return (
+    <nav className="flex">
+      <DeleteIconButton />
+    </nav>
   );
 }

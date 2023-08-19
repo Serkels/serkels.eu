@@ -24,7 +24,7 @@ export default {
   async findOne(ctx: ExtendableContext, next: Next) {
     return strapi.controller("plugin::comments.admin").findOne(ctx, next);
   },
-  async post(ctx: ExtendableContext, next: Next) {
-    return strapi.controller("plugin::comments.client").post(ctx, next);
+  async post(ctx: StrapiRequestContext, next: Next) {
+    return strapi.controller("plugin::comments.client").post(ctx as any, next);
   },
 };

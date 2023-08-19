@@ -4,11 +4,12 @@ import { fromClient } from "@/app/api/v1";
 import { Spinner } from "@1/ui/components/Spinner";
 import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
-import { AnswerRepository } from "../../QARepository";
+import { AnswerRepository, QARepository } from "../../QARepository";
 import { QACardContext } from "../QACard/QACard.context";
 import { QAResponse } from "./QAResponse";
 
 import { useSetQueryCacheById } from "@/components/useSetQueryCacheById";
+import { useSession } from "next-auth/react";
 
 //
 
@@ -25,9 +26,7 @@ export function QACardResponseList() {
   } = useQueryAnswers(Number(question.id));
 
   useSetQueryCacheById(comments, ({ id }) => [
-    "q&a",
-    question.id,
-    "answers",
+    ...AnswerRepository.queryKey,
     Number(id),
   ]);
 
@@ -58,10 +57,15 @@ export function QACardResponseList() {
 //
 
 function useQueryAnswers(question_id: number) {
-  const api = new AnswerRepository(fromClient);
+  const { data: session } = useSession();
+  const api = new AnswerRepository(fromClient, session?.user?.jwt);
   return useQuery({
     enabled: Number.isInteger(question_id),
-    queryKey: api.queryKey,
+    queryKey: [
+      ...QARepository.queryKey,
+      Number(question_id),
+      ...AnswerRepository.queryKey,
+    ],
     queryFn: async () => api.load(question_id),
     staleTime: Infinity,
   });

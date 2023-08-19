@@ -12,12 +12,10 @@ import {
 //
 
 export type QACardStatus = {
-  isDeleting: boolean;
   isDisplayingResponses: boolean;
   isEditing: boolean;
   isResponding: boolean;
   isSubmitting: boolean;
-  shouldDelete: boolean;
 };
 
 export const QACardContext = createContext<{

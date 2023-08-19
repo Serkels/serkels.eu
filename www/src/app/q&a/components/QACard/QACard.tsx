@@ -1,15 +1,20 @@
 //
 
 import { fromClient } from "@/app/api/v1";
+import { ShouldDeleteQuestion } from "@/components/DeleteButton/DeleteButton";
+import {
+  DeleteButtonContext,
+  useDeleteButtonState,
+} from "@/components/DeleteButton/DeleteButton.context";
 import { ErrorOccur } from "@/components/ErrorOccur";
 import { Spinner } from "@1/ui/components/Spinner";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import type { FormikProps } from "formik";
 import { useSession } from "next-auth/react";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { match } from "ts-pattern";
 import { QAEditForm } from "../../QAEditForm";
-import { QARepository } from "../../QARepository";
+import { AnswerRepository, QARepository } from "../../QARepository";
 import { QACardContext, type QACardStatus } from "./QACard.context";
 import { QACardFooter } from "./QACardFooter";
 import { QACardHeader } from "./QACardHeader";
@@ -19,17 +24,14 @@ import { QACardResponses } from "./QACardResponses";
 export function QACard({ id }: { id: number }) {
   const queryClient = useQueryClient();
   const statefulStatus = useState<QACardStatus>({
-    isDeleting: false,
     isDisplayingResponses: false,
     isEditing: false,
     isResponding: false,
     isSubmitting: false,
-    shouldDelete: false,
   });
-  const [
-    { isDisplayingResponses, isEditing, isDeleting, shouldDelete },
-    setStatus,
-  ] = statefulStatus;
+  const statefulDeleteStatus = useDeleteButtonState();
+  const [{ isDeleting }] = statefulDeleteStatus;
+  const [{ isDisplayingResponses, isEditing }, setStatus] = statefulStatus;
   const QAResponseFormRef = useRef<FormikProps<{ content: string }>>(null);
 
   useRefreshAnswers(Number(id), isDisplayingResponses);
@@ -47,7 +49,7 @@ export function QACard({ id }: { id: number }) {
   );
 
   const delete_mutation = useDeleteQAMutation(Number(id));
-  useShouldDeleteQuestion(Number(id), shouldDelete, async () => {
+  const on_delete_question = useCallback(async () => {
     await set_deleteing_message(
       (message) =>
         message +
@@ -68,7 +70,7 @@ export function QACard({ id }: { id: number }) {
       queryClient.removeQueries([...QARepository.queryKey, Number(id)]),
       delete_mutation.mutateAsync(),
     ]);
-  });
+  }, [question?.id]);
 
   useEffect(() => {
     setTimeout(async () => {
@@ -105,28 +107,31 @@ export function QACard({ id }: { id: number }) {
       className="overflow-hidden rounded-xl border border-[#00000017] bg-white p-6 text-black shadow-[5px_5px_10px_#7E7E7E33]"
       id={id ? String(id) : undefined}
     >
-      <QACardContext.Provider
-        value={{
-          statefulStatus,
-          QAResponseFormRef,
-          question,
-        }}
-      >
-        <QACardHeader />
-        {isEditing ? (
-          <QAEditForm />
-        ) : (
-          <article>
-            <h3 className="my-5 text-xl font-bold">
-              {question.attributes?.title}
-            </h3>
-          </article>
-        )}
-        <QACardResponses />
-        <QACardResponseForm />
-        <hr className="my-2" />
-        <QACardFooter />
-      </QACardContext.Provider>
+      <DeleteButtonContext.Provider value={statefulDeleteStatus}>
+        <QACardContext.Provider
+          value={{
+            statefulStatus,
+            QAResponseFormRef,
+            question,
+          }}
+        >
+          <ShouldDeleteQuestion onDelete={on_delete_question} />
+          <QACardHeader />
+          {isEditing ? (
+            <QAEditForm />
+          ) : (
+            <article>
+              <h3 className="my-5 text-xl font-bold">
+                {question.attributes?.title}
+              </h3>
+            </article>
+          )}
+          <QACardResponses />
+          <QACardResponseForm />
+          <hr className="my-2" />
+          <QACardFooter />
+        </QACardContext.Provider>
+      </DeleteButtonContext.Provider>
     </div>
   );
 }
@@ -142,28 +147,9 @@ function useRefreshAnswers(question_id: number, shouldRefreshAnswers: boolean) {
     queryClient.invalidateQueries([
       ...QARepository.queryKey,
       question_id,
-      "answers",
+      ...AnswerRepository.queryKey,
     ]);
   }, [shouldRefreshAnswers, question_id]);
-}
-
-function useShouldDeleteQuestion(
-  question_id: number,
-  shouldDeleteQuestion: boolean,
-  deleteCallback: () => Promise<void> | void,
-) {
-  useEffect(() => {
-    if (Number.isNaN(question_id)) return;
-    if (!shouldDeleteQuestion) return;
-
-    if (
-      !window.confirm("Êtes vous sur de vouloir supprimer cette question ?")
-    ) {
-      return;
-    }
-
-    deleteCallback();
-  }, [shouldDeleteQuestion, question_id]);
 }
 
 //

@@ -5,6 +5,9 @@
 
 
 export interface paths {
+  "/answer/{id}": {
+    get: operations["get/answer/{id}"];
+  };
   "/auth/{provider}/callback": {
     /** Default Callback from provider auth */
     get: {
@@ -864,6 +867,14 @@ export interface paths {
       };
     };
   };
+  "put": {
+    parameters: {
+      path: {
+        /** @description The answer id */
+        id: number;
+      };
+    };
+  };
 }
 
 export type webhooks = Record<string, never>;
@@ -1401,9 +1412,7 @@ export interface components {
       };
     };
     CommentRequest: {
-      data: {
-        content: string;
-      };
+      content: string;
     };
     CommentsComment: {
       approvalStatus?: string;
@@ -4352,6 +4361,27 @@ export type external = Record<string, never>;
 
 export interface operations {
 
+  "get/answer/{id}": {
+    parameters: {
+      path: {
+        /** @description The answer id */
+        id: number;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["CommentsComment"];
+        };
+      };
+      400: components["responses"]["400"];
+      401: components["responses"]["401"];
+      403: components["responses"]["403"];
+      404: components["responses"]["404"];
+      500: components["responses"]["500"];
+    };
+  };
   "get/bookmarks": {
     parameters: {
       query?: {
@@ -5359,6 +5389,7 @@ export interface operations {
   "get/question/{id}/answers": {
     parameters: {
       path: {
+        /** @description The question id one answers */
         id: number;
       };
     };
