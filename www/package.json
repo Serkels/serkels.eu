@@ -48,7 +48,7 @@
     "@douglasduteil/datatypes...hours-to-seconds": "workspace:*",
     "@tanstack/react-query-devtools": "4.32.6",
     "@trpc/server": "10.37.1",
-    "@types/node": "20.5.0",
+    "@types/node": "20.5.1",
     "@types/nprogress": "^0.2.0",
     "@types/qs": "6.9.7",
     "@types/react": "18.2.20",
