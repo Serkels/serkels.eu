@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 import { useCallback, useContext } from "react";
 import { QACardContext } from "./QACard.context";
 import { QACardFormBody } from "./QACardFormBody";
+import { QAFormErrorOccur } from "./QAFormErrorOccur";
 import { QARepository } from "./QARepository";
 
 //
@@ -30,7 +31,7 @@ export function QAEditForm() {
   );
 
   if (isError) {
-    return <ErrorOccur error={error as Error} />;
+    return <QAFormErrorOccur error={error as Error} />;
   }
 
   if (isLoading) {
@@ -47,20 +48,6 @@ export function QAEditForm() {
         category: attributes?.category?.data?.id,
       }}
     />
-  );
-}
-
-//
-
-function ErrorOccur({ error }: { error: Error }) {
-  return (
-    <h1 className="flex-1 py-3 text-center text-lg font-bold text-red-500">
-      Une erreur est survenu...
-      <br />
-      Veuillez fermer cette fenêtre et réessayez de vous authentifier.
-      <br />
-      <code className="text-gray-800">{error?.message}</code>
-    </h1>
   );
 }
 

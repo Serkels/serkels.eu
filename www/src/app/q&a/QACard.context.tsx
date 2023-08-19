@@ -17,6 +17,7 @@ export type QACardStatus = {
   isEditing: boolean;
   isResponding: boolean;
   isSubmitting: boolean;
+  shouldDelete: boolean;
 };
 
 export const QACardContext = createContext<{

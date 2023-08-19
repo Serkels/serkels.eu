@@ -32,7 +32,7 @@ export const Spinner = forwardRef<
         align-[-0.125em]
         motion-reduce:animate-[spin_1.5s_linear_infinite]
         `,
-        className
+        className,
       )}
       role="status"
       {...other_props}

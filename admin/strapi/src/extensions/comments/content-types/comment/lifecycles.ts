@@ -16,7 +16,6 @@ const QUESTION_API_CONTENT_ID = "api::question.question";
 export default {
   async afterDelete(event) {
     const result: Comment = event["result"];
-    console.log({ event });
     const related: string = result.related;
 
     const entityService: EntityService = strapi.entityService;

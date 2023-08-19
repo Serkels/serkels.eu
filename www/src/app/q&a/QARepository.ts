@@ -138,6 +138,27 @@ export class QARepository extends OpenAPIRepository {
     return body;
   }
 
+  async delete(id: number) {
+    const {
+      response,
+      data: body,
+      error: errorBody,
+    } = await this.client.DELETE("/questions/{id}", {
+      headers: this.headers,
+      params: { path: { id } },
+    });
+
+    if (errorBody) {
+      throw new Error(
+        [errorBody.error.message, "from " + response.url].join("\n"),
+      );
+    }
+
+    return body;
+  }
+
+  //
+
   async save_response(id: number, data: CommentRequest) {
     const {
       response,
