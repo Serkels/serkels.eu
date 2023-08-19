@@ -26,7 +26,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2023-08-19T12:54:48.814Z"
+    "x-generation-date": "2023-08-19T18:32:43.882Z"
   },
   "servers": [
     {
@@ -15241,65 +15241,54 @@
           }
         ],
         "operationId": "get/answer/{id}"
-      }
-    },
-    "put": {
-      "responses": {
-        "200": {
-          "description": "OK",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CommentsComment"
+      },
+      "delete": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
               }
             }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
           }
         },
-        "400": {
-          "$ref": "#/components/responses/400"
-        },
-        "401": {
-          "$ref": "#/components/responses/401"
-        },
-        "403": {
-          "$ref": "#/components/responses/403"
-        },
-        "404": {
-          "$ref": "#/components/responses/404"
-        },
-        "500": {
-          "$ref": "#/components/responses/500"
-        }
-      },
-      "tags": [
-        "Question"
-      ],
-      "parameters": [
-        {
-          "name": "id",
-          "in": "path",
-          "description": "The answer id",
-          "deprecated": false,
-          "required": true,
-          "schema": {
-            "type": "number"
-          }
-        }
-      ],
-      "operationId": "post/answer/{id}",
-      "requestBody": {
-        "required": true,
-        "content": {
-          "application/json": {
+        "tags": [
+          "Question"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
             "schema": {
-              "$ref": "#/components/schemas/CommentRequest"
+              "type": "number"
             }
           }
-        }
-      }
-    },
-    "/question/answers/{id}": {
-      "get": {
+        ],
+        "operationId": "delete/answer/{id}"
+      },
+      "put": {
         "responses": {
           "200": {
             "description": "OK",
@@ -15334,58 +15323,15 @@
           {
             "name": "id",
             "in": "path",
-            "description": "The awnser id",
-            "required": true,
-            "schema": {
-              "type": "number"
-            }
-          }
-        ],
-        "operationId": "get/question/answers/{id}"
-      },
-      "post": {
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/QuestionResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/400"
-          },
-          "401": {
-            "$ref": "#/components/responses/401"
-          },
-          "403": {
-            "$ref": "#/components/responses/403"
-          },
-          "404": {
-            "$ref": "#/components/responses/404"
-          },
-          "500": {
-            "$ref": "#/components/responses/500"
-          }
-        },
-        "tags": [
-          "Question"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
             "description": "The answer id",
+            "deprecated": false,
             "required": true,
             "schema": {
               "type": "number"
             }
           }
         ],
-        "operationId": "post/question/answers/{id}",
+        "operationId": "post/answer/{id}",
         "requestBody": {
           "required": true,
           "content": {

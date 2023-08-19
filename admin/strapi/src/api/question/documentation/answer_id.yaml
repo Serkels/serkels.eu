@@ -1,5 +1,5 @@
 ---
-"/question/answers/{id}":
+"/answer/{id}":
   get:
     responses:
       "200":
@@ -23,19 +23,50 @@
     parameters:
       - name: id
         in: path
-        description: The awnser id
+        description: The answer id
+        deprecated: false
         required: true
         schema:
           type: number
-    operationId: get/question/answers/{id}
-  post:
+    operationId: get/answer/{id}
+  delete:
     responses:
       "200":
         description: OK
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/QuestionResponse"
+              type: integer
+              format: int64
+      "400":
+        "$ref": "#/components/responses/400"
+      "401":
+        "$ref": "#/components/responses/401"
+      "403":
+        "$ref": "#/components/responses/403"
+      "404":
+        "$ref": "#/components/responses/404"
+      "500":
+        "$ref": "#/components/responses/500"
+    tags:
+      - Question
+    parameters:
+      - name: id
+        in: path
+        description: ""
+        deprecated: false
+        required: true
+        schema:
+          type: number
+    operationId: delete/answer/{id}
+  put:
+    responses:
+      "200":
+        description: OK
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/CommentsComment"
       "400":
         "$ref": "#/components/responses/400"
       "401":
@@ -52,10 +83,11 @@
       - name: id
         in: path
         description: The answer id
+        deprecated: false
         required: true
         schema:
           type: number
-    operationId: post/question/answers/{id}
+    operationId: post/answer/{id}
     requestBody:
       required: true
       content:

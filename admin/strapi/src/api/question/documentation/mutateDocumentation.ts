@@ -15,7 +15,7 @@ export default function mutateDocumentation(generatedDocumentationDraft) {
 
   const question_id_awnsers_id = parse(
     readFileSync(
-      resolve(__dirname.replace("/dist", ""), "./question_id_awnsers_id.yaml"),
+      resolve(__dirname.replace("/dist", ""), "./answer_id.yaml"),
       "utf8",
     ),
   );

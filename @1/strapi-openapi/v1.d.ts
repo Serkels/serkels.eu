@@ -7,6 +7,8 @@
 export interface paths {
   "/answer/{id}": {
     get: operations["get/answer/{id}"];
+    put: operations["post/answer/{id}"];
+    delete: operations["delete/answer/{id}"];
   };
   "/auth/{provider}/callback": {
     /** Default Callback from provider auth */
@@ -394,10 +396,6 @@ export interface paths {
   };
   "/question/{id}/answers/count": {
     get: operations["get/question/{id}/answers/count"];
-  };
-  "/question/answers/{id}": {
-    get: operations["get/question/answers/{id}"];
-    post: operations["post/question/answers/{id}"];
   };
   "/questions": {
     get: operations["get/questions"];
@@ -864,14 +862,6 @@ export interface paths {
             "application/json": components["schemas"]["Error"];
           };
         };
-      };
-    };
-  };
-  "put": {
-    parameters: {
-      path: {
-        /** @description The answer id */
-        id: number;
       };
     };
   };
@@ -4382,6 +4372,52 @@ export interface operations {
       500: components["responses"]["500"];
     };
   };
+  "post/answer/{id}": {
+    parameters: {
+      path: {
+        /** @description The answer id */
+        id: number;
+      };
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["CommentRequest"];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["CommentsComment"];
+        };
+      };
+      400: components["responses"]["400"];
+      401: components["responses"]["401"];
+      403: components["responses"]["403"];
+      404: components["responses"]["404"];
+      500: components["responses"]["500"];
+    };
+  };
+  "delete/answer/{id}": {
+    parameters: {
+      path: {
+        id: number;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": number;
+        };
+      };
+      400: components["responses"]["400"];
+      401: components["responses"]["401"];
+      403: components["responses"]["403"];
+      404: components["responses"]["404"];
+      500: components["responses"]["500"];
+    };
+  };
   "get/bookmarks": {
     parameters: {
       query?: {
@@ -5443,53 +5479,6 @@ export interface operations {
       200: {
         content: {
           "application/json": number;
-        };
-      };
-      400: components["responses"]["400"];
-      401: components["responses"]["401"];
-      403: components["responses"]["403"];
-      404: components["responses"]["404"];
-      500: components["responses"]["500"];
-    };
-  };
-  "get/question/answers/{id}": {
-    parameters: {
-      path: {
-        /** @description The awnser id */
-        id: number;
-      };
-    };
-    responses: {
-      /** @description OK */
-      200: {
-        content: {
-          "application/json": components["schemas"]["CommentsComment"];
-        };
-      };
-      400: components["responses"]["400"];
-      401: components["responses"]["401"];
-      403: components["responses"]["403"];
-      404: components["responses"]["404"];
-      500: components["responses"]["500"];
-    };
-  };
-  "post/question/answers/{id}": {
-    parameters: {
-      path: {
-        /** @description The answer id */
-        id: number;
-      };
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["CommentRequest"];
-      };
-    };
-    responses: {
-      /** @description OK */
-      200: {
-        content: {
-          "application/json": components["schemas"]["QuestionResponse"];
         };
       };
       400: components["responses"]["400"];

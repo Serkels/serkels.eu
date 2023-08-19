@@ -27,4 +27,9 @@ export default {
   async post(ctx: StrapiRequestContext, next: Next) {
     return strapi.controller("plugin::comments.client").post(ctx as any, next);
   },
+  async delete(ctx: StrapiRequestContext, next: Next) {
+    return strapi
+      .controller("plugin::comments.admin")
+      .deleteComment(ctx as any, next);
+  },
 };

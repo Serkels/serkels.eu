@@ -19,6 +19,26 @@ export default {
       info: { apiName: "api::question.answer", type: "content-api" },
     },
     {
+      method: "DELETE",
+      path: "/answer/:id",
+      handler: "api::question.answer.delete",
+      config: {
+        description: "Delete one answer",
+        middlewares: [],
+        policies: [
+          {
+            name: "global::is-owned",
+            config: {
+              apiName: "comment",
+              controllerName: "plugin::comments",
+              entryName: "authorUser",
+            },
+          },
+        ],
+      },
+      info: { apiName: "api::question.answer", type: "content-api" },
+    },
+    {
       method: "GET",
       path: "/question/:id/answers/count",
       handler: "api::question.answer.count",
@@ -44,7 +64,6 @@ export default {
 
             const { data } = ctx.body as { data: Comment[] };
             ctx.body = { data: await Promise.all(data.map(replace_autor)) };
-            console.log(ctx.body);
           },
         ],
         policies: [],
