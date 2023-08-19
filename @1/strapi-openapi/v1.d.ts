@@ -1401,7 +1401,9 @@ export interface components {
       };
     };
     CommentRequest: {
-      data?: components["schemas"]["CommentsComment"];
+      data: {
+        content: string;
+      };
     };
     CommentsComment: {
       approvalStatus?: string;

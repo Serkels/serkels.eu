@@ -7,7 +7,7 @@ import type { _1_HOUR_ } from "@douglasduteil/datatypes...hours-to-seconds";
 //
 
 type QuestionRequestBody = components["schemas"]["QuestionRequest"]["data"];
-type CommentRequest = components["schemas"]["CommentRequest"];
+type CommentRequest = components["schemas"]["CommentRequest"]["data"];
 
 //
 
@@ -157,56 +157,26 @@ export class QARepository extends OpenAPIRepository {
 
     return body;
   }
-
-  //
-
-  async save_response(id: number, data: CommentRequest) {
-    const {
-      response,
-      data: body,
-      error: errorBody,
-    } = await this.client.POST("/question/{id}/answers", {
-      body: data,
-      headers: this.headers,
-      params: {
-        path: { id },
-      },
-    });
-
-    if (errorBody) {
-      throw new Error(
-        [errorBody.error.message, "from " + response.url].join("\n"),
-      );
-    }
-
-    return body;
-  }
 }
 
 export class AnswerRepository extends OpenAPIRepository {
-  constructor(
-    client: ApiClient,
-    public question_id: number,
-    jwt?: string,
-  ) {
+  constructor(client: ApiClient, jwt?: string) {
     super(client, jwt);
-
-    this.queryKey = [...QARepository.queryKey, Number(question_id), "answers"];
   }
-  queryKey = [...QARepository.queryKey, NaN, "answers"] as const;
+  queryKey = ["answer"] as const;
 
-  async load() {
+  async load(question_id: number) {
     const {
       data: body,
       error,
       response,
     } = await this.client.GET("/question/{id}/answers", {
       params: {
-        path: { id: this.question_id },
+        path: { id: question_id },
         query: {
           sort: ["createdAt:desc"],
         },
-      },
+      } as any,
     });
 
     if (error) {
@@ -228,6 +198,30 @@ export class AnswerRepository extends OpenAPIRepository {
 
     if (error) {
       console.error(error, "from " + response.url);
+    }
+
+    return body;
+  }
+
+  //
+
+  async save(id: number, data: CommentRequest) {
+    const {
+      response,
+      data: body,
+      error: errorBody,
+    } = await this.client.POST("/question/{id}/answers", {
+      body: { data },
+      headers: this.headers,
+      params: {
+        path: { id },
+      },
+    });
+
+    if (errorBody) {
+      throw new Error(
+        [errorBody.error.message, "from " + response.url].join("\n"),
+      );
     }
 
     return body;

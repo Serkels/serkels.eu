@@ -58,11 +58,11 @@ export function QACardResponseList() {
 //
 
 function useQueryAnswers(question_id: number) {
-  const api = new AnswerRepository(fromClient, question_id);
+  const api = new AnswerRepository(fromClient);
   return useQuery({
     enabled: Number.isInteger(question_id),
     queryKey: api.queryKey,
-    queryFn: async () => api.load(),
+    queryFn: async () => api.load(question_id),
     staleTime: Infinity,
   });
 }

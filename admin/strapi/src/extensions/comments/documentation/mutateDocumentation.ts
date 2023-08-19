@@ -6,9 +6,14 @@ import { parse } from "yaml";
 export default async function mutateDocumentation(generatedDocumentationDraft) {
   generatedDocumentationDraft.components.schemas["CommentRequest"] = {
     type: "object",
+    required: ["data"],
     properties: {
       data: {
-        $ref: "#/components/schemas/CommentsComment",
+        required: ["content"],
+        type: "object",
+        properties: {
+          content: { type: "string" },
+        },
       },
     },
   };
