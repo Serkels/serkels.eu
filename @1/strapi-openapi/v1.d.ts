@@ -1386,310 +1386,36 @@ export interface components {
       id?: number;
     };
     CommentRequest: {
-      content: string;
+      data?: components["schemas"]["CommentsComment"];
     };
     CommentsComment: {
       approvalStatus?: string;
-      authorAvatar?: string;
-      /** Format: email */
-      authorEmail?: string;
-      authorId?: string;
-      authorName?: string;
-      authorUser?: {
-        data?: {
-          attributes?: {
-            blocked?: boolean;
-            confirmationToken?: string;
-            confirmed?: boolean;
-            /** Format: date-time */
-            createdAt?: string;
-            createdBy?: {
-              data?: {
-                attributes?: Record<string, unknown>;
-                id?: number;
-              };
-            };
-            /** Format: email */
-            email?: string;
-            provider?: string;
-            resetPasswordToken?: string;
-            role?: {
-              data?: {
-                attributes?: {
-                  /** Format: date-time */
-                  createdAt?: string;
-                  createdBy?: {
-                    data?: {
-                      attributes?: Record<string, unknown>;
-                      id?: number;
-                    };
-                  };
-                  description?: string;
-                  name?: string;
-                  permissions?: {
-                    data?: {
-                        attributes?: {
-                          action?: string;
-                          /** Format: date-time */
-                          createdAt?: string;
-                          createdBy?: {
-                            data?: {
-                              attributes?: {
-                                blocked?: boolean;
-                                /** Format: date-time */
-                                createdAt?: string;
-                                createdBy?: {
-                                  data?: {
-                                    attributes?: Record<string, unknown>;
-                                    id?: number;
-                                  };
-                                };
-                                /** Format: email */
-                                email?: string;
-                                firstname?: string;
-                                isActive?: boolean;
-                                lastname?: string;
-                                preferedLanguage?: string;
-                                registrationToken?: string;
-                                resetPasswordToken?: string;
-                                roles?: {
-                                  data?: {
-                                      attributes?: {
-                                        code?: string;
-                                        /** Format: date-time */
-                                        createdAt?: string;
-                                        createdBy?: {
-                                          data?: {
-                                            attributes?: Record<string, unknown>;
-                                            id?: number;
-                                          };
-                                        };
-                                        description?: string;
-                                        name?: string;
-                                        permissions?: {
-                                          data?: {
-                                              attributes?: {
-                                                action?: string;
-                                                conditions?: unknown;
-                                                /** Format: date-time */
-                                                createdAt?: string;
-                                                createdBy?: {
-                                                  data?: {
-                                                    attributes?: Record<string, unknown>;
-                                                    id?: number;
-                                                  };
-                                                };
-                                                properties?: unknown;
-                                                role?: {
-                                                  data?: {
-                                                    attributes?: Record<string, unknown>;
-                                                    id?: number;
-                                                  };
-                                                };
-                                                subject?: string;
-                                                /** Format: date-time */
-                                                updatedAt?: string;
-                                                updatedBy?: {
-                                                  data?: {
-                                                    attributes?: Record<string, unknown>;
-                                                    id?: number;
-                                                  };
-                                                };
-                                              };
-                                              id?: number;
-                                            }[];
-                                        };
-                                        /** Format: date-time */
-                                        updatedAt?: string;
-                                        updatedBy?: {
-                                          data?: {
-                                            attributes?: Record<string, unknown>;
-                                            id?: number;
-                                          };
-                                        };
-                                        users?: {
-                                          data?: {
-                                              attributes?: Record<string, unknown>;
-                                              id?: number;
-                                            }[];
-                                        };
-                                      };
-                                      id?: number;
-                                    }[];
-                                };
-                                /** Format: date-time */
-                                updatedAt?: string;
-                                updatedBy?: {
-                                  data?: {
-                                    attributes?: Record<string, unknown>;
-                                    id?: number;
-                                  };
-                                };
-                                username?: string;
-                              };
-                              id?: number;
-                            };
-                          };
-                          role?: {
-                            data?: {
-                              attributes?: Record<string, unknown>;
-                              id?: number;
-                            };
-                          };
-                          /** Format: date-time */
-                          updatedAt?: string;
-                          updatedBy?: {
-                            data?: {
-                              attributes?: Record<string, unknown>;
-                              id?: number;
-                            };
-                          };
-                        };
-                        id?: number;
-                      }[];
-                  };
-                  type?: string;
-                  /** Format: date-time */
-                  updatedAt?: string;
-                  updatedBy?: {
-                    data?: {
-                      attributes?: Record<string, unknown>;
-                      id?: number;
-                    };
-                  };
-                  users?: {
-                    data?: {
-                        attributes?: Record<string, unknown>;
-                        id?: number;
-                      }[];
-                  };
-                };
-                id?: number;
-              };
-            };
-            /** Format: date-time */
-            updatedAt?: string;
-            updatedBy?: {
-              data?: {
-                attributes?: Record<string, unknown>;
-                id?: number;
-              };
-            };
-            username?: string;
-          };
-          id?: number;
-        };
+      author: components["schemas"]["UserProfile"] & {
+        id?: number;
       };
-      blocked?: boolean;
-      blockedThread?: boolean;
+      /** @default false */
+      blocked: boolean;
+      /** @default false */
+      blockedThread: boolean;
       blockReason?: string;
       content: string;
       /** Format: date-time */
-      createdAt?: string;
-      createdBy?: {
-        data?: {
-          attributes?: Record<string, unknown>;
-          id?: number;
-        };
-      };
+      createdAt: string;
+      gotThread: boolean;
+      id: number;
       isAdminComment?: boolean;
-      related?: string;
-      removed?: boolean;
-      reports?: {
-        data?: ({
-            attributes?: {
-              content?: string;
-              /** Format: date-time */
-              createdAt?: string;
-              createdBy?: {
-                data?: {
-                  attributes?: Record<string, unknown>;
-                  id?: number;
-                };
-              };
-              /** @enum {string} */
-              reason?: "BAD_LANGUAGE" | "DISCRIMINATION" | "OTHER";
-              related?: {
-                data?: {
-                  attributes?: {
-                    approvalStatus?: string;
-                    authorAvatar?: string;
-                    /** Format: email */
-                    authorEmail?: string;
-                    authorId?: string;
-                    authorName?: string;
-                    authorUser?: {
-                      data?: {
-                        attributes?: Record<string, unknown>;
-                        id?: number;
-                      };
-                    };
-                    blocked?: boolean;
-                    blockedThread?: boolean;
-                    blockReason?: string;
-                    content?: string;
-                    /** Format: date-time */
-                    createdAt?: string;
-                    createdBy?: {
-                      data?: {
-                        attributes?: Record<string, unknown>;
-                        id?: number;
-                      };
-                    };
-                    isAdminComment?: boolean;
-                    related?: string;
-                    removed?: boolean;
-                    reports?: {
-                      data?: {
-                          attributes?: Record<string, unknown>;
-                          id?: number;
-                        }[];
-                    };
-                    threadOf?: {
-                      data?: {
-                        attributes?: Record<string, unknown>;
-                        id?: number;
-                      };
-                    };
-                    /** Format: date-time */
-                    updatedAt?: string;
-                    updatedBy?: {
-                      data?: {
-                        attributes?: Record<string, unknown>;
-                        id?: number;
-                      };
-                    };
-                  };
-                  id?: number;
-                };
-              };
-              resolved?: boolean;
-              /** Format: date-time */
-              updatedAt?: string;
-              updatedBy?: {
-                data?: {
-                  attributes?: Record<string, unknown>;
-                  id?: number;
-                };
-              };
-            };
-            id?: number;
-          })[];
+      related: components["schemas"]["Question"] & {
+        id: number;
       };
+      removed?: boolean;
       threadOf?: {
-        data?: {
+        data: {
           attributes?: Record<string, unknown>;
-          id?: number;
+          id: number;
         };
       };
       /** Format: date-time */
-      updatedAt?: string;
-      updatedBy?: {
-        data?: {
-          attributes?: Record<string, unknown>;
-          id?: number;
-        };
-      };
+      updatedAt: string;
     };
     CommentsCommentReport: {
       content?: string;
@@ -2014,29 +1740,8 @@ export interface components {
       };
     };
     CommentsCommentResponse: {
-      data?: ({
-          approvalStatus?: string;
-          author?: components["schemas"]["UserProfile"] & {
-            id?: number;
-          };
-          blocked?: boolean;
-          blockedThread?: boolean;
-          blockReason?: string;
-          content?: string;
-          /** Format: date-time */
-          createdAt?: string;
-          id?: number;
-          isAdminComment?: boolean;
-          related?: string;
-          threadOf?: {
-            data?: {
-              attributes?: Record<string, unknown>;
-              id?: number;
-            };
-          };
-          /** Format: date-time */
-          updatedAt?: string;
-        })[];
+      data?: components["schemas"]["CommentsCommentResponseDataObject"];
+      meta?: Record<string, unknown>;
     };
     CommentsCommentResponseDataObject: {
       attributes?: components["schemas"]["CommentsComment"];
