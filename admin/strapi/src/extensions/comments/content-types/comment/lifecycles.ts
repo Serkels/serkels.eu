@@ -1,11 +1,11 @@
 //
 
+import { UserEmitterMap } from "@/src/websocket";
 import type { Event } from "@strapi/database/lib/lifecycles";
 import type { Subscriber } from "@strapi/database/lib/lifecycles/subscribers";
 import type { EntityService } from "@strapi/strapi/lib/services/entity-service";
 import type { GetValues } from "@strapi/strapi/lib/types/core/attributes";
 import type { Comment } from "strapi-plugin-comments/types/contentTypes";
-import { UserEmitterMap } from "../../../../websocket";
 
 //
 

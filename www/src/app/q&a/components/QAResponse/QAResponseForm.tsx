@@ -1,6 +1,7 @@
 //
 
 import { AvatarMediaHorizontal } from "@/components/Avatar";
+import { ErrorOccur } from "@/components/ErrorOccur";
 import { Spinner } from "@1/ui/components/Spinner";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Field, Form, Formik, type FormikProps } from "formik";
@@ -114,15 +115,3 @@ export function QAResponseForm({
 }
 
 //
-
-function ErrorOccur({ error }: { error: Error }) {
-  return (
-    <h1 className="flex-1 py-3 text-center text-lg font-bold text-red-500">
-      Une erreur est survenu...
-      <br />
-      Veuillez fermer cette fenêtre et réessayez de vous authentifier.
-      <br />
-      <code className="text-gray-800">{error?.message}</code>
-    </h1>
-  );
-}
