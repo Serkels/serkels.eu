@@ -73,7 +73,7 @@ function QACard_EditButton() {
   } = useContext(QACardContext);
 
   const on_editing = useCallback(() => {
-    setStatus((state) => ({ ...state, isEditing: !isEditing }));
+    setStatus((state) => ({ ...state, isEditing: !state.isEditing }));
   }, [isEditing]);
 
   return (
