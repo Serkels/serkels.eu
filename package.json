@@ -14,5 +14,10 @@
     "prettier": "3.0.2",
     "turbo": "1.10.12",
     "typescript": "5.1.6"
+  },
+  "pnpm": {
+    "overrides": {
+      "supports-color": "^8.1.1"
+    }
   }
 }

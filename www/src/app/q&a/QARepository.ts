@@ -92,30 +92,6 @@ export class QARepository extends OpenAPIRepository {
   }
 
   //
-  async save(
-    owner: string | number,
-    data: { title: string; category?: number },
-  ) {
-    const {
-      response,
-      data: body,
-      error: errorBody,
-    } = await this.client.POST("/questions", {
-      body: {
-        data: { ...data, owner: String(owner) },
-      },
-      headers: this.headers,
-      params: {},
-    });
-
-    if (errorBody) {
-      throw new Error(
-        [errorBody.error.message, "from " + response.url].join("\n"),
-      );
-    }
-
-    return body;
-  }
 
   async edit(id: number, data: QuestionRequestBody) {
     const {

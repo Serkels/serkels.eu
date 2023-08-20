@@ -23,7 +23,7 @@ export class Question_Repository
   extends OpenAPIRepository
   implements RepositoryPort
 {
-  constructor(client: ApiClient, jwt: string | undefined) {
+  constructor(client: ApiClient, jwt?: string | undefined) {
     super(client, jwt);
     log("new", jwt);
   }

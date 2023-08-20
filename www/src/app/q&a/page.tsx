@@ -4,10 +4,11 @@ import { fromServer } from "@/app/api/v1";
 import { getQueryClient } from "@/app/getQueryClient";
 import { Hydrate, dehydrate } from "@tanstack/react-query";
 import { getServerSession } from "next-auth";
+import { Question_Repository } from "~/modules/question/repository";
+import { Question_Controller } from "~/modules/question/view/react/controller";
 import { useOpportunityCategoriesprefetchQuery } from "../opportunity/data/useOpportunityCategoriesQuery";
 import { QACreateForm } from "./QACreateForm";
 import { QAList } from "./QAList";
-import { QARepository } from "./QARepository";
 import { QASearchForm } from "./QASearchForm";
 import { SeeAlso } from "./SeeAlso";
 
@@ -24,15 +25,14 @@ export default async function Page({
   const isConncected = Boolean(session?.user?.email);
 
   const queryClient = getQueryClient();
-  await queryClient.prefetchQuery(["q&a", { category, search }], () =>
-    new QARepository(fromServer).load({
-      category,
-      limit: 6,
-      page: undefined,
-      pageSize: undefined,
-      search,
-    }),
+  const { lists } = new Question_Controller(
+    new Question_Repository(fromServer),
   );
+  await lists.prefetchQuery({
+    filter: { category, search },
+    sort: ["createdAt:desc"],
+    pagination: { pageSize: 4 },
+  });
   await useOpportunityCategoriesprefetchQuery();
   const dehydratedState = dehydrate(queryClient);
 

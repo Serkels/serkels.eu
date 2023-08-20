@@ -8,7 +8,7 @@ import { useMemo, type PropsWithChildren } from "react";
 import Nest from "react-nest";
 import { CoreProvider } from "~/core/react";
 import { Question_Repository } from "~/modules/question/repository";
-import { Question_ViewModel_Provider } from "~/modules/question/view";
+import { QuestionControllerProvider } from "~/modules/question/view/react";
 import { fromClient } from "../api/v1";
 
 //
@@ -61,7 +61,7 @@ export default function Providers({ children }: PropsWithChildren) {
     return (
       <CoreProvider value={context}>
         <Nest>
-          <Question_ViewModel_Provider />
+          <QuestionControllerProvider />
           {children}
         </Nest>
       </CoreProvider>

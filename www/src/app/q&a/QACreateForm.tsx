@@ -6,7 +6,7 @@ import { Card } from "@1/ui/components/Card";
 import { Spinner } from "@1/ui/components/Spinner";
 import { useState } from "react";
 import { match } from "ts-pattern";
-import { useQuestion_view_model } from "~/modules/question/view";
+import { useQuestion_controller } from "~/modules/question/view/react";
 import { QACardFormBody } from "./components/QAForm/QACardFormBody";
 
 //
@@ -14,7 +14,7 @@ import { QACardFormBody } from "./components/QAForm/QACardFormBody";
 export function QACreateForm() {
   const {
     create: { useMutation },
-  } = useQuestion_view_model();
+  } = useQuestion_controller();
   const { mutateAsync, status, error, reset } = useMutation();
 
   //

@@ -8,46 +8,42 @@ import {
 } from "@tanstack/react-query";
 import debug from "debug";
 import { useSession } from "next-auth/react";
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useMemo,
-  type PropsWithChildren,
-} from "react";
-import { AuthError, ViewModelError } from "~/core/errors";
-import { useQuestion_repository } from ".";
-import type { QuestionListSchema as Question_ListSchema } from "./dto";
-import type { Question_CreateProps } from "./entity";
-import type { Question_QueryProps, Question_Repository } from "./repository";
+import { useCallback } from "react";
+import { getQueryClient } from "~/app/getQueryClient";
+import { AuthError } from "~/core/errors";
+import type { QuestionListSchema as Question_ListSchema } from "../../dto";
+import type { Question_CreateProps } from "../../entity";
+import type {
+  Question_QueryProps,
+  Question_Repository,
+} from "../../repository";
 
 //
 
-const log = debug("~:modules:question:Question_ViewModel");
+const log = debug("~:modules:question:Question_Controller");
 
 //
 
-interface Question_ViewModel_Struct {}
-
-export class Question_ViewModel implements Question_ViewModel_Struct {
+export class Question_Controller {
   constructor(private repository: Question_Repository) {}
 
   //
-
   query_keys = {
     all: ["questions"] as const,
-    lists: () => [...this.query_keys.all, "list"] as const,
+    lists: (options?: Question_QueryProps["filter"] | undefined) =>
+      [...this.query_keys.all, "list", options] as const,
     question: (id: number | string) =>
       [...this.query_keys.all, String(id)] as const,
   };
 
   //
-
   create = { useMutation: this.useCreateMutation.bind(this) };
-  lists = { useQuery: this.useListQuery.bind(this) };
+  lists = {
+    useQuery: this.useListQuery.bind(this),
+    prefetchQuery: this.prefetchListQuery.bind(this),
+  };
 
   //
-
   useCreateMutation() {
     const { data: session } = useSession();
     const queryClient = useQueryClient();
@@ -81,7 +77,7 @@ export class Question_ViewModel implements Question_ViewModel_Struct {
 
     const loadListFn: QueryFunction<
       Question_ListSchema,
-      readonly string[],
+      ReturnType<typeof this.query_keys.lists>,
       number
     > = async ({ pageParam: page }) => {
       const id = session?.user?.id;
@@ -114,51 +110,19 @@ export class Question_ViewModel implements Question_ViewModel_Struct {
       getNextPageParam,
       getPreviousPageParam,
       queryFn: useCallback(loadListFn, [this.repository]),
-      queryKey: this.query_keys.lists(),
+      queryKey: this.query_keys.lists(filter.filter),
       staleTime: Infinity,
     });
 
     return query_result;
   }
 
-  // fetchAll = () => {
-  //   const response = this.repository.getAllTodo(this.allTodoFetched);
-  //   this.allTodoFetched(response);
-  // };
-
-  // private allTodoFetched = (asyncResponse: GetAllTodoResponse) => {
-  //   console.log('privateAllTodoFetched', asyncResponse);
-  //   const todoIds = asyncResponse.todos?.map((todo: Todo) => {
-  //     // use the `setTodoItem` callback to update each todo item
-  //     this.setTodo(todo);
-  //     return todo.id;
-  //   });
-  //   if (todoIds) {
-  //     this.setTodoIds(todoIds);
-  //   }
-  // };
+  prefetchListQuery(filter: Question_QueryProps) {
+    const queryClient = getQueryClient();
+    const queryFn = () => this.repository.findAll(filter);
+    return queryClient.prefetchInfiniteQuery(
+      this.query_keys.lists(filter.filter),
+      queryFn,
+    );
+  }
 }
-
-//
-
-const context = createContext<Question_ViewModel | null>(null);
-
-export const Question_ViewModel_Provider: React.FC<PropsWithChildren> = ({
-  children,
-}) => {
-  const questionRepository = useQuestion_repository();
-  const questionViewModel = useMemo(
-    () => new Question_ViewModel(questionRepository),
-    [questionRepository],
-  );
-
-  return (
-    <context.Provider value={questionViewModel}>{children}</context.Provider>
-  );
-};
-
-export const useQuestion_view_model = () => {
-  const viewModel = useContext(context);
-  if (!viewModel) throw new ViewModelError("No Question provided");
-  return viewModel;
-};

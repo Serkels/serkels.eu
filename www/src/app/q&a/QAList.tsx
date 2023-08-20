@@ -3,7 +3,7 @@
 import { Spinner } from "@1/ui/components/Spinner";
 import { P, match } from "ts-pattern";
 import { ErrorOccur } from "~/components/ErrorOccur";
-import { useQuestion_view_model } from "~/modules/question/view";
+import { useQuestion_controller } from "~/modules/question/view/react";
 import { QACard } from "./components/QACard/QACard";
 
 //
@@ -17,7 +17,7 @@ export function QAList({
 }) {
   const {
     lists: { useQuery },
-  } = useQuestion_view_model();
+  } = useQuestion_controller();
 
   const query_result = useQuery({
     filter: { category, search },
