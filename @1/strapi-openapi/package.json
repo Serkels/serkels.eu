@@ -8,7 +8,7 @@
     "dev": "pnpx chokidar-cli \"*.json\" -c \"pnpm run build:ts\" --initial --follow-symlinks"
   },
   "devDependencies": {
-    "openapi-typescript": "6.5.0",
+    "openapi-typescript": "6.5.1",
     "prettier": "3.0.2",
     "typescript": "5.1.6"
   }
