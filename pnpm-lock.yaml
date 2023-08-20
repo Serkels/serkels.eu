@@ -262,13 +262,13 @@ importers:
         specifier: 10.37.1
         version: 10.37.1(@trpc/server@10.37.1)
       '@trpc/next':
-        specifier: ^10.37.1
+        specifier: 10.37.1
         version: 10.37.1(@tanstack/react-query@4.33.0)(@trpc/client@10.37.1)(@trpc/react-query@10.37.1)(@trpc/server@10.37.1)(next@13.4.19)(react-dom@18.2.0)(react@18.2.0)
       '@trpc/react-query':
         specifier: 10.37.1
         version: 10.37.1(@tanstack/react-query@4.33.0)(@trpc/client@10.37.1)(@trpc/server@10.37.1)(react-dom@18.2.0)(react@18.2.0)
       '@yornaath/batshit':
-        specifier: ^0.7.1
+        specifier: 0.7.1
         version: 0.7.1
       clsx:
         specifier: 2.0.0
@@ -276,6 +276,9 @@ importers:
       date-fns:
         specifier: 2.30.0
         version: 2.30.0
+      debug:
+        specifier: 4.3.4
+        version: 4.3.4
       formik:
         specifier: 2.4.3
         version: 2.4.3(react@18.2.0)
@@ -327,6 +330,9 @@ importers:
       react-use:
         specifier: 17.4.0
         version: 17.4.0(react-dom@18.2.0)(react@18.2.0)
+      rxjs:
+        specifier: 7.8.1
+        version: 7.8.1
       superjson:
         specifier: 1.13.1
         version: 1.13.1
@@ -336,6 +342,9 @@ importers:
       ts-pattern:
         specifier: 5.0.5
         version: 5.0.5
+      uuid:
+        specifier: 9.0.0
+        version: 9.0.0
       zod:
         specifier: 3.22.2
         version: 3.22.2
@@ -349,11 +358,14 @@ importers:
       '@trpc/server':
         specifier: 10.37.1
         version: 10.37.1
+      '@types/debug':
+        specifier: 4.1.7
+        version: 4.1.7
       '@types/node':
         specifier: 20.5.1
         version: 20.5.1
       '@types/nprogress':
-        specifier: ^0.2.0
+        specifier: 0.2.0
         version: 0.2.0
       '@types/qs':
         specifier: 6.9.7
@@ -364,6 +376,9 @@ importers:
       '@types/react-dom':
         specifier: 18.2.7
         version: 18.2.7
+      '@types/uuid':
+        specifier: 9.0.1
+        version: 9.0.1
       autoprefixer:
         specifier: 10.4.15
         version: 10.4.15(postcss@8.4.28)
@@ -3231,6 +3246,10 @@ packages:
 
   /@types/unist@2.0.6:
     resolution: {integrity: sha512-PBjIUxZHOuj0R15/xuwJYjFi+KZdNFrehocChv4g5hu6aFroHue8m0lBP0POdK2nKzbw0cgV1mws8+V/JAcEkQ==}
+
+  /@types/uuid@9.0.1:
+    resolution: {integrity: sha512-rFT3ak0/2trgvp4yYZo5iKFEPsET7vKydKF+VRCxlQ9bpheehyAJH89dAkaLEq/j/RZXJIqcgsmPJKUP1Z28HA==}
+    dev: true
 
   /@types/yargs-parser@21.0.0:
     resolution: {integrity: sha512-iO9ZQHkZxHn4mSakYV0vFHAVDyEOIJQrV2uZ06HxEPcx+mt8swXoZHIbaaJ2crJYFfErySgktuTZ3BeLz+XmFA==}
@@ -8064,6 +8083,12 @@ packages:
     dependencies:
       queue-microtask: 1.2.3
 
+  /rxjs@7.8.1:
+    resolution: {integrity: sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg==}
+    dependencies:
+      tslib: 2.6.0
+    dev: false
+
   /s.color@0.0.15:
     resolution: {integrity: sha512-AUNrbEUHeKY8XsYr/DYpl+qk5+aM+DChopnWOPEzn8YKzOhv4l2zH6LzZms3tOZP3wwdOyc0RmTciyi46HLIuA==}
     dev: true
@@ -8878,6 +8903,11 @@ packages:
 
   /uuid@8.3.2:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
+    hasBin: true
+    dev: false
+
+  /uuid@9.0.0:
+    resolution: {integrity: sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==}
     hasBin: true
     dev: false
 

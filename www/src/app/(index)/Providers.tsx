@@ -1,28 +1,70 @@
 "use client";
 
-import { UserSocker } from "@/components/UserSocket";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { SessionProvider } from "next-auth/react";
-import { useState, type PropsWithChildren } from "react";
+import debug from "debug";
+import { SessionProvider, useSession } from "next-auth/react";
+import { useMemo, type PropsWithChildren } from "react";
+import Nest from "react-nest";
+import { CoreProvider } from "~/core/react";
+import { Question_Repository } from "~/modules/question/repository";
+import { Question_ViewModel_Provider } from "~/modules/question/view";
+import { fromClient } from "../api/v1";
 
 //
 
+if (process.env["NEXT_PUBLIC_DEBUG"]) {
+  debug.enable(process.env["NEXT_PUBLIC_DEBUG"] ?? "*");
+}
+
+//
+
+export const initial_context = {
+  repositories: new WeakMap(),
+} as const;
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    // from https://openapi-ts.pages.dev/openapi-fetch/examples/#further-optimization
+    queries: {
+      networkMode: "offlineFirst", // keep caches as long as possible
+      refetchOnWindowFocus: false, // don’t refetch on window focus
+    },
+  },
+});
+
 export default function Providers({ children }: PropsWithChildren) {
-  const [queryClient] = useState(() => new QueryClient());
+  // const queryClient = useMemo(() => new QueryClient(), []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <SessionProvider>
-        <UserSocker>{children}</UserSocker>
+        <ViewProvider>{children}</ViewProvider>
       </SessionProvider>
 
       <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
     </QueryClientProvider>
   );
-  // return (
-  //   <Nest>
-  //     <QueryClientProvider client={client} />
-  //     <ReactQueryDevtools initialIsOpen={false} />
-  //   </Nest>
-  // );
+
+  function ViewProvider({ children }: PropsWithChildren) {
+    const { data: session } = useSession();
+    const context = initial_context;
+
+    context.repositories.set(
+      Question_Repository,
+      useMemo(
+        () => new Question_Repository(fromClient, session?.user?.jwt),
+        [session?.user?.jwt],
+      ),
+    );
+
+    return (
+      <CoreProvider value={context}>
+        <Nest>
+          <Question_ViewModel_Provider />
+          {children}
+        </Nest>
+      </CoreProvider>
+    );
+  }
 }

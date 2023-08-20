@@ -56,6 +56,7 @@ export function QAEditForm() {
 function useEditQAMutation(id: number) {
   const { data: session } = useSession();
   const queryClient = useQueryClient();
+
   const jwt = session?.user?.jwt;
 
   return useMutation(

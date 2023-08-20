@@ -1,12 +1,12 @@
 "use client";
 import { useQueryClient, type QueryKey } from "@tanstack/react-query";
 import { useEffect } from "react";
+import type { Entity } from "~/core";
 
 //
-export function useSetQueryCacheById<Id extends { id?: number }>(
-  list: Id[] | undefined,
-  queryKey: (item: Id) => QueryKey,
-) {
+export function useSetQueryCacheById<
+  Id extends Entity<unknown> | { id?: number },
+>(list: Id[] | undefined, queryKey: (item: Id) => QueryKey) {
   const queryClient = useQueryClient();
 
   useEffect(() => {
