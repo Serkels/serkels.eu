@@ -15,7 +15,7 @@
     "@1/tailwindcss-config": "workspace:*",
     "@1/typescript-config": "workspace:*",
     "@1/ui": "workspace:*",
-    "@tanstack/react-query": "4.32.6",
+    "@tanstack/react-query": "4.33.0",
     "@trpc/client": "10.37.1",
     "@trpc/next": "^10.37.1",
     "@trpc/react-query": "10.37.1",
@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "@douglasduteil/datatypes...hours-to-seconds": "workspace:*",
-    "@tanstack/react-query-devtools": "4.32.6",
+    "@tanstack/react-query-devtools": "4.33.0",
     "@trpc/server": "10.37.1",
     "@types/node": "20.5.1",
     "@types/nprogress": "^0.2.0",
