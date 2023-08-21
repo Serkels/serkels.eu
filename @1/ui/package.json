@@ -17,7 +17,7 @@
     "react-aria": "3.27.0",
     "react-dom": "18.2.0",
     "react-stately": "3.25.0",
-    "react-aria-components": "1.0.0-alpha.4",
+    "react-aria-components": "1.0.0-alpha.6",
     "tailwindcss": "3.3.3",
     "tailwindcss-animate": "1.0.5"
   },
