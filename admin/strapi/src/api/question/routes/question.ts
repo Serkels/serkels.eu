@@ -1,9 +1,11 @@
 //
 
 import { factories } from "@strapi/strapi";
+import type { EntityService } from "@strapi/strapi/lib/services/entity-service";
 import type { GetValues } from "@strapi/strapi/lib/types/core/attributes";
+import type { Context } from "@strapi/utils/dist/types";
 import type { Next } from "koa";
-import { StrapiContext } from "../../../types";
+import type { StrapiRequestContext } from "strapi-typed";
 
 export default factories.createCoreRouter("api::question.question", {
   config: {
@@ -29,25 +31,23 @@ export default factories.createCoreRouter("api::question.question", {
 
 //
 
-async function clean_body(
-  ctx: StrapiContext & {
+function clean_body(ctx: any, next: Next) {
+  const strapi_ctx: Context & {
     request: {
       body: {
         data: GetValues<"api::question.question">;
       };
     };
-  },
-  next: Next,
-) {
-  const { data } = ctx.request.body;
+  } = ctx;
+  const { data } = strapi_ctx.request.body;
 
   if (!data) {
-    ctx.noContent("Missing request body");
+    strapi_ctx.noContent("Missing request body");
     return next();
   }
 
   if (!data.category) {
-    ctx.badRequest("Missing category");
+    strapi_ctx.badRequest("Missing category");
     return next();
   }
 
@@ -59,13 +59,19 @@ async function clean_body(
   return next();
 }
 
-async function findProfile(
-  ctx: StrapiContext & { request: { body: unknown } },
-  next: Next,
-) {
-  const user = ctx.state.user;
+async function findProfile(ctx: any, next: Next) {
+  const strapi_ctx: Context & {
+    request: {
+      body: {
+        data: GetValues<"api::question.question">;
+      };
+    };
+  } = ctx;
 
-  const profiles = await strapi.entityService.findMany(
+  const entityService: EntityService = strapi.entityService;
+  const user = (ctx as StrapiRequestContext).state.user;
+
+  const profiles = await entityService.findMany(
     "api::user-profile.user-profile",
     {
       fields: ["id"],
@@ -74,15 +80,17 @@ async function findProfile(
   );
 
   if (profiles.length !== 1) {
-    return ctx.notFound("Profile not found");
+    return strapi_ctx.notFound("Profile not found");
   }
 
   const profile = profiles[0];
-  if (!profile) return ctx.notFound("Profile not found");
-  if (!ctx.request.body) return ctx.internalServerError("No body");
-  if (!ctx.request.body["data"]) return ctx.internalServerError("No body");
+  if (!profile) return strapi_ctx.notFound("Profile not found");
+  if (!strapi_ctx.request.body)
+    return strapi_ctx.internalServerError("No body");
+  if (!strapi_ctx.request.body.data)
+    return strapi_ctx.internalServerError("No body");
 
-  Object.assign(ctx.request.body["data"], {
+  Object.assign(strapi_ctx.request.body.data, {
     owner: user.id,
     profile: profile.id,
   });

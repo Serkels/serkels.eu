@@ -2,20 +2,30 @@
  * bookmark router
  */
 
-import type { EntityService, StrapiContext } from "@/src/types";
 import { ApiBookmarkBookmark } from "@/types/generated/contentTypes";
 import { factories, type Shared } from "@strapi/strapi";
+import type { EntityService } from "@strapi/strapi/lib/services/entity-service";
+import { GetValues } from "@strapi/strapi/lib/types/core/attributes";
+import { Context } from "@strapi/utils/dist/types";
 import type { Next } from "koa";
+import { StrapiRequestContext } from "strapi-typed";
 export default factories.createCoreRouter("api::bookmark.bookmark", {
   only: ["find", "create", "delete"],
   config: {
     create: {
       middlewares: [
         "global::assign-owner",
-        async function no_duplicate_entry(ctx: StrapiContext, next: Next) {
-          const owner = ctx.state.user?.id;
-          const data = ctx.request["body"]
-            ?.data as ApiBookmarkBookmark["attributes"];
+        async function no_duplicate_entry(ctx, next: Next) {
+          const strapi_state_ctx: StrapiRequestContext = ctx;
+          const strapi_ctx: Context & {
+            request: {
+              body: {
+                data: GetValues<"api::bookmark.bookmark">;
+              };
+            };
+          } = ctx;
+          const owner = strapi_state_ctx.state.user?.id;
+          const data = strapi_ctx.request.body.data;
 
           const entityService: EntityService = strapi.entityService;
           const entry = await entityService.count<
@@ -26,7 +36,7 @@ export default factories.createCoreRouter("api::bookmark.bookmark", {
           });
 
           if (entry > 0) {
-            return ctx.throw(409, "Already bookmarked");
+            return strapi_ctx.throw(409, "Already bookmarked");
           }
 
           return next();
@@ -39,10 +49,11 @@ export default factories.createCoreRouter("api::bookmark.bookmark", {
     },
     find: {
       middlewares: [
-        async function filter_owner(ctx: StrapiContext, next: Next) {
-          const owner = ctx.state.user?.id;
+        async function filter_owner(ctx, next: Next) {
+          const strapi_ctx: StrapiRequestContext = ctx;
+          const owner = strapi_ctx.state.user?.id;
 
-          ctx.query.filters = {
+          strapi_ctx.query.filters = {
             ...(ctx.query.filters || {}),
             owner: owner,
           };

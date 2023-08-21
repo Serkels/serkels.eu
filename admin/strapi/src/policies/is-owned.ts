@@ -1,21 +1,30 @@
 //
 
+import type { EntityService } from "@strapi/strapi/lib/services/entity-service";
+import type { PolicyImplementation } from "@strapi/strapi/lib/types/core-api/router";
 import { errors } from "@strapi/utils";
-import { EntityService, StrapiContext } from "../types";
+import type { StrapiRequestContext } from "strapi-typed";
 
-export default async (
-  policyContext: StrapiContext,
-  config:
+//
+
+type AsyncPolicyImplementation<TCfg = unknown> = (
+  ...args: Parameters<PolicyImplementation<TCfg>>
+) => Promise<boolean>;
+
+export default <
+  AsyncPolicyImplementation<
     | { apiName?: string; controllerName?: string; entryName?: string }
-    | undefined,
-  { strapi },
-) => {
+    | undefined
+  >
+>(async (policyContext, config, { strapi }) => {
   const entityService: EntityService = strapi.entityService;
-
-  const apiName = config?.apiName ?? policyContext.state.route.info.apiName;
+  const strapi_ctx = policyContext as any as StrapiRequestContext & {
+    state: { route: { handler: string; info: { apiName: string } } };
+  };
+  const apiName = config?.apiName ?? strapi_ctx.state.route.info.apiName;
   const controllerName =
-    config?.controllerName ?? policyContext.state.route.handler.split(".")[0];
-  const { id: entry_id } = policyContext.params;
+    config?.controllerName ?? strapi_ctx.state.route.handler.split(".")[0];
+  const { id: entry_id } = strapi_ctx.params;
 
   const entryName = config?.entryName ?? "owner";
 
@@ -27,7 +36,7 @@ export default async (
   >(`${controllerName}.${apiName}`, entry_id, {
     populate: [entryName],
   });
-  const user_id = policyContext.state.user?.id;
+  const user_id = strapi_ctx.state.user?.id;
   const owner_id = (entry ?? {})[entryName]?.id;
 
   //
@@ -39,4 +48,4 @@ export default async (
   throw new errors.PolicyError(`You are not allowed`, {
     policy: "global::is-owned",
   });
-};
+});

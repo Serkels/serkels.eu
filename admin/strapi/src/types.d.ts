@@ -1,10 +1,10 @@
 //
 
-import type { ParameterizedContext } from "koa";
-
-//
-
-export type { EntityService } from "@strapi/strapi/lib/services/entity-service";
+import type {
+  DefaultContextExtends,
+  DefaultStateExtends,
+  ParameterizedContext,
+} from "koa";
 
 //
 

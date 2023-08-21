@@ -4,10 +4,10 @@
 
 import { factories } from "@strapi/strapi";
 import etag from "etag";
-import { Response } from "koa";
+import { ExtendableContext, Response } from "koa";
 import { lookup } from "mime-types";
+import { StrapiRequestContext } from "strapi-typed";
 import { pipeline } from "undici";
-import { StrapiContext } from "../../../types";
 
 export default factories.createCoreController(
   "api::user-profile.user-profile",
@@ -66,7 +66,7 @@ export default factories.createCoreController(
       return super.findOne(ctx);
     },
 
-    async avatar(ctx: StrapiContext) {
+    async avatar(ctx: StrapiRequestContext) {
       const profile = await strapi.entityService.findOne(
         "api::user-profile.user-profile",
         ctx.params.id,
@@ -101,16 +101,17 @@ export default factories.createCoreController(
             .gravatarUrlFor(email);
         })());
 
-      (ctx as any).body = ctx.req.pipe(
+      const koa_ctx = ctx as any as ExtendableContext;
+      (ctx as any).body = koa_ctx.req.pipe(
         pipeline(
           url,
-          { method: ctx.method as "GET", opaque: ctx.response },
+          { method: koa_ctx.method as "GET", opaque: koa_ctx.response },
           ({ statusCode, headers, body, opaque }) => {
             (opaque as Response).status = statusCode;
             const mimeType = lookup(url) || "image/png";
-            ctx.response.set("content-type", mimeType);
-            ctx.response.set("cache-control", "max-age=300");
-            ctx.response.set("ETag", etag(url));
+            koa_ctx.response.set("content-type", mimeType);
+            koa_ctx.response.set("cache-control", "max-age=300");
+            koa_ctx.response.set("ETag", etag(url));
             return body;
           },
         ),

@@ -2,7 +2,8 @@
  * question controller
  */
 
-import { ExtendableContext, Next } from "koa";
+import { Context } from "@strapi/utils/dist/types";
+import { Next } from "koa";
 import { StrapiRequestContext } from "strapi-typed";
 
 export default {
@@ -18,18 +19,16 @@ export default {
       });
   },
 
-  async find(ctx: ExtendableContext, next: Next) {
+  async find(ctx: Context, next: Next) {
     return strapi.controller("plugin::comments.client").findAllFlat(ctx, next);
   },
-  async findOne(ctx: ExtendableContext, next: Next) {
+  async findOne(ctx: Context, next: Next) {
     return strapi.controller("plugin::comments.admin").findOne(ctx, next);
   },
-  async post(ctx: StrapiRequestContext, next: Next) {
-    return strapi.controller("plugin::comments.client").post(ctx as any, next);
+  async post(ctx: Context, next: Next) {
+    return strapi.controller("plugin::comments.client").post(ctx, next);
   },
-  async delete(ctx: StrapiRequestContext, next: Next) {
-    return strapi
-      .controller("plugin::comments.admin")
-      .deleteComment(ctx as any, next);
+  async delete(ctx: Context, next: Next) {
+    return strapi.controller("plugin::comments.admin").deleteComment(ctx, next);
   },
 };

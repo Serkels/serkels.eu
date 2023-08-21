@@ -1,10 +1,10 @@
 //
 
-import type { EntityService } from "@/src/types";
 import type { ApiQuestionQuestion } from "@/types/generated/contentTypes";
 import type { Event as LifecycleEvent } from "@strapi/database/lib/lifecycles";
 import type { Subscriber } from "@strapi/database/lib/lifecycles/subscribers";
 import type { Shared } from "@strapi/strapi";
+import type { EntityService } from "@strapi/strapi/lib/services/entity-service";
 import type { Comment } from "strapi-plugin-comments/types/contentTypes";
 
 //

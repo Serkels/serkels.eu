@@ -3,10 +3,12 @@ import {
   ApiBookmarkBookmark,
   ApiUserProfileUserProfile,
 } from "@/types/generated/contentTypes";
-import { Event as LifecycleEvent } from "@strapi/database/lib/lifecycles";
-
-import type { EntityService } from "@/src/types";
+import type { Event as LifecycleEvent } from "@strapi/database/lib/lifecycles";
 import type { Shared } from "@strapi/strapi";
+import type { EntityService } from "@strapi/strapi/lib/services/entity-service";
+
+//
+
 type ParamsWhere = { params: { where: { id: number } } };
 
 export default {
