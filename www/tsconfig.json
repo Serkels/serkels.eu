@@ -19,7 +19,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "../@1/ui/components/Card.tsx"
+    "../@1/ui/components/Card.tsx",
+    "../@1/ui/components/DotIndicator.tsx"
   ],
   "exclude": [".next", "node_modules"]
 }

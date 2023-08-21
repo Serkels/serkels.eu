@@ -1,8 +1,6 @@
 "use client";
 
 import { Avatar } from "@/components/Avatar";
-//
-
 import { Spinner } from "@1/ui/components/Spinner";
 import { LoginForm } from "@1/ui/domains/login/LoginForm";
 import { useMutation } from "@tanstack/react-query";

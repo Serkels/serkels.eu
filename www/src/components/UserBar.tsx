@@ -1,9 +1,9 @@
 "use client";
 
 import { AppSidebar } from "@/app/(index)/AppSidebar";
+import { DotIndicator } from "@1/ui/components/DotIndicator";
 import { Grid } from "@1/ui/components/Grid";
 import {
-  Bell,
   Binoculars,
   Book,
   Exchange,
@@ -13,53 +13,22 @@ import {
   Messenger,
   Plus,
 } from "@1/ui/icons";
-import { useQueryClient } from "@tanstack/react-query";
-import type { Unsubscribable } from "@trpc/server/observable";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  useEffect,
-  useRef,
-  useState,
-  type ComponentPropsWithoutRef,
-  type PropsWithChildren,
-} from "react";
+import { useState, type PropsWithChildren } from "react";
 import { Avatar } from "./Avatar";
 import { MobileNavBar } from "./MobileNavBar";
-import { trpc } from "./trpc";
+import { NotificationButton } from "./NotificationButton";
 
 //
 
-function useNotification() {
-  const queryClient = useQueryClient();
-  const { data: session } = useSession();
-  const jwt = session?.user?.jwt;
-  const websocket = useRef<Unsubscribable>();
-
-  useEffect(() => {
-    if (!jwt) return;
-    websocket.current = trpc.notifications.subscribe(jwt, {
-      onData(value) {
-        console.log({ value });
-      },
-      onStarted() {
-        console.log("onStarted");
-      },
-      onComplete() {
-        console.log("onComplete");
-      },
-    });
-    return websocket.current.unsubscribe;
-  }, [queryClient, jwt]);
-}
 export function UserBar() {
   const [showSideBar, setShowSideBar] = useState(false);
   const pathname = usePathname();
 
   const { data: session } = useSession();
-  useNotification();
   // console.log({ notification });
   // const lolQuery = trpc.lol.query("1");
   // console.log({ lolQuery });
@@ -210,17 +179,12 @@ function UserNav() {
       <button className="p-2 [&>svg]:w-5">
         <Plus className="h-4 w-4" />
       </button>
-      <Button>
-        <Bell className="h-4 w-4" />
-        <DotIndicator />
-      </Button>
+      <NotificationButton />
       <Button>
         <Messenger className="h-4 w-4" />
-        <DotIndicator />
       </Button>
       <Button>
         <Exchange className="h-4 w-4" />
-        <DotIndicator />
       </Button>
       <Link href={"/my/profile"}>
         <Avatar className="h-6 w-6 border-2 border-white" />
@@ -252,26 +216,5 @@ function Button({ children }: PropsWithChildren) {
     >
       {children}
     </button>
-  );
-}
-
-function DotIndicator(props: ComponentPropsWithoutRef<"span">) {
-  const { className, ...other_props } = props;
-  return (
-    <span
-      className={clsx(
-        `
-        absolute
-        left-0 top-0
-        h-2 w-2
-        -translate-y-1/2
-        transform
-        rounded-full
-        bg-[#FF5F5F]
-        `,
-        className,
-      )}
-      {...other_props}
-    ></span>
   );
 }

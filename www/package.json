@@ -15,6 +15,7 @@
     "@1/tailwindcss-config": "workspace:*",
     "@1/typescript-config": "workspace:*",
     "@1/ui": "workspace:*",
+    "@1/models": "workspace:*",
     "@tanstack/react-query": "4.33.0",
     "@trpc/client": "10.37.1",
     "@trpc/next": "10.37.1",
