@@ -24,15 +24,19 @@ export default async function Page({
   const category = searchParams["category"] as string | undefined;
   const isConncected = Boolean(session?.user?.email);
 
+  const repository = new Question_Repository(fromServer);
+
   const queryClient = getQueryClient();
-  const { lists } = new Question_Controller(
-    new Question_Repository(fromServer),
+  await queryClient.prefetchInfiniteQuery(
+    ["question", "list", undefined] as ReturnType<
+      InstanceType<typeof Question_Controller>["query_keys"]["lists"]
+    >,
+    repository.findAll.bind(repository, {
+      filter: { category, search },
+      sort: ["createdAt:desc"],
+      pagination: { pageSize: 2 },
+    }),
   );
-  await lists.prefetchQuery({
-    filter: { category, search },
-    sort: ["createdAt:desc"],
-    pagination: { pageSize: 4 },
-  });
   await useOpportunityCategoriesprefetchQuery();
   const dehydratedState = dehydrate(queryClient);
 

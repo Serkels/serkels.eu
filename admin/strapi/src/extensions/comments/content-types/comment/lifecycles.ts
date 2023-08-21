@@ -2,6 +2,7 @@
 
 import type { Event } from "@strapi/database/lib/lifecycles";
 import type { Subscriber } from "@strapi/database/lib/lifecycles/subscribers";
+import type { Common } from "@strapi/strapi";
 import type { EntityService } from "@strapi/strapi/lib/services/entity-service";
 import type { GetValues } from "@strapi/strapi/lib/types/core/attributes";
 import type { Comment } from "strapi-plugin-comments/types/contentTypes";
@@ -9,12 +10,18 @@ import { UserEmitterMap } from "../../../../websocket";
 
 //
 
-const QUESTION_API_CONTENT_ID = "api::question.question";
+const QUESTION_API_CONTENT_ID: Common.UID.ContentType =
+  "api::question.question" as const;
 
 //
 
 export default {
   async afterDelete(event) {
+    const {
+      log: { debug },
+    } = strapi;
+    debug(`${event.model.uid} ${event.action}`);
+
     const result: Comment = event["result"];
     const related: string = result.related;
 
@@ -49,7 +56,22 @@ export default {
 
   //
 
+  async afterUpdate(event) {
+    const {
+      log: { debug },
+    } = strapi;
+    debug(`${event.model.uid} ${event.action}`);
+    return this.afterDelete(event);
+  },
+
+  //
+
   async afterCreate(event) {
+    const {
+      log: { debug },
+    } = strapi;
+    debug(`${event.model.uid} ${event.action}`);
+
     const result: Comment = event["result"];
     const related: string = result.related;
     const entityService: EntityService = strapi.entityService;
@@ -112,6 +134,9 @@ async function count_related_comments(event: Event): Promise<number> {
 
   return entityService.count(uid, {
     filters: {
+      removed: {
+        $null: true,
+      },
       related: {
         $eq: related,
       },

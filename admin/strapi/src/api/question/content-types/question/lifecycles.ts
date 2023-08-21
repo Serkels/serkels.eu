@@ -1,13 +1,14 @@
 //
 
 import type { EntityService } from "@/src/types";
-import { ApiQuestionQuestion } from "@/types/generated/contentTypes";
-import { Event as LifecycleEvent } from "@strapi/database/lib/lifecycles";
+import type { ApiQuestionQuestion } from "@/types/generated/contentTypes";
+import type { Event as LifecycleEvent } from "@strapi/database/lib/lifecycles";
 import type { Subscriber } from "@strapi/database/lib/lifecycles/subscribers";
 import type { Shared } from "@strapi/strapi";
 import type { Comment } from "strapi-plugin-comments/types/contentTypes";
 
 //
+
 type ParamsWhere = { params: { where: { id: number } } };
 
 export default {

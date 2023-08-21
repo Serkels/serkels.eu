@@ -8,8 +8,7 @@ import {
 } from "@tanstack/react-query";
 import debug from "debug";
 import { useSession } from "next-auth/react";
-import { useCallback } from "react";
-import { getQueryClient } from "~/app/getQueryClient";
+import { useCallback, useEffect } from "react";
 import { AuthError } from "~/core/errors";
 import type { QuestionListSchema as Question_ListSchema } from "../../dto";
 import type { Question_CreateProps } from "../../entity";
@@ -29,9 +28,9 @@ export class Question_Controller {
 
   //
   query_keys = {
-    all: ["questions"] as const,
+    all: ["question"] as const,
     lists: (options?: Question_QueryProps["filter"] | undefined) =>
-      [...this.query_keys.all, "list", options] as const,
+      [...this.query_keys.all, "list", ...([options] ?? [])] as const,
     question: (id: number | string) =>
       [...this.query_keys.all, String(id)] as const,
   };
@@ -40,7 +39,6 @@ export class Question_Controller {
   create = { useMutation: this.useCreateMutation.bind(this) };
   lists = {
     useQuery: this.useListQuery.bind(this),
-    prefetchQuery: this.prefetchListQuery.bind(this),
   };
 
   //
@@ -61,28 +59,28 @@ export class Question_Controller {
         owner: id,
         title,
       });
+    };
 
+    const mutation_result = useMutation(
+      useCallback(createQuestionFn, [this.repository, session?.user?.id]),
+    );
+
+    useEffect(() => {
+      if (mutation_result.status !== "success") return;
       Promise.all([
         queryClient.invalidateQueries({ queryKey: this.query_keys.lists() }),
       ]);
-    };
+    }, [mutation_result.isSuccess]);
 
-    return useMutation(
-      useCallback(createQuestionFn, [this.repository, session?.user?.id]),
-    );
+    return mutation_result;
   }
 
   useListQuery(filter: Question_QueryProps) {
-    const { data: session } = useSession();
-
     const loadListFn: QueryFunction<
       Question_ListSchema,
       ReturnType<typeof this.query_keys.lists>,
       number
     > = async ({ pageParam: page }) => {
-      const id = session?.user?.id;
-      if (!id) throw new AuthError("Invalid Session");
-
       filter.pagination = Object.assign(filter.pagination ?? {}, {
         page,
       } as Question_QueryProps["pagination"]);
@@ -106,7 +104,7 @@ export class Question_Controller {
       return page > 0 ? page - 1 : undefined;
     };
 
-    const query_result = useInfiniteQuery({
+    const query_info = useInfiniteQuery({
       getNextPageParam,
       getPreviousPageParam,
       queryFn: useCallback(loadListFn, [this.repository]),
@@ -114,15 +112,6 @@ export class Question_Controller {
       staleTime: Infinity,
     });
 
-    return query_result;
-  }
-
-  prefetchListQuery(filter: Question_QueryProps) {
-    const queryClient = getQueryClient();
-    const queryFn = () => this.repository.findAll(filter);
-    return queryClient.prefetchInfiniteQuery(
-      this.query_keys.lists(filter.filter),
-      queryFn,
-    );
+    return query_info;
   }
 }

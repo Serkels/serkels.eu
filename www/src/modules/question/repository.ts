@@ -56,6 +56,7 @@ export class Question_Repository
     pagination,
   }: Question_QueryProps): Promise<QuestionListSchema> {
     log("findAll", filter);
+    const { category, search } = filter || {};
     const {
       data: body,
       error: errorBody,
@@ -63,6 +64,25 @@ export class Question_Repository
     } = await this.client.GET("/questions", {
       params: {
         query: {
+          filters: {
+            $and: [
+              {
+                category: {
+                  slug: { $eq: category },
+                },
+              },
+            ],
+            $or: [
+              {
+                title: {
+                  $containsi: search,
+                },
+                description: {
+                  $containsi: search,
+                },
+              },
+            ],
+          },
           pagination: {
             page: pagination?.page,
             pageSize: pagination?.pageSize,

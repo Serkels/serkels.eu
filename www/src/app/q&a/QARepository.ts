@@ -12,7 +12,7 @@ type CommentRequest = components["schemas"]["CommentRequest"];
 //
 
 export class QARepository extends OpenAPIRepository {
-  static queryKey = ["q&a"];
+  static queryKey = ["question"];
   async load({
     category,
     limit,
