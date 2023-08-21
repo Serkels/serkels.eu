@@ -32,7 +32,12 @@ export function QAList({
     ))
     .with({ status: "loading" }, () => <Loading />)
     .with(
-      { status: "success", data: P.when((list) => list.pages.length === 0) },
+      {
+        status: "success",
+        data: P.when(
+          (list) => list.pages.map((page) => page.data!).flat().length === 0,
+        ),
+      },
       () => <EmptyList />,
     )
     .with(

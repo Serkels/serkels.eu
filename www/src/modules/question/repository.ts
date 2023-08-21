@@ -56,7 +56,7 @@ export class Question_Repository
     pagination,
   }: Question_QueryProps): Promise<QuestionListSchema> {
     log("findAll", filter);
-    const { category, search } = filter || {};
+    const { category, search } = filter ?? {};
     const {
       data: body,
       error: errorBody,
@@ -75,9 +75,6 @@ export class Question_Repository
             $or: [
               {
                 title: {
-                  $containsi: search,
-                },
-                description: {
                   $containsi: search,
                 },
               },

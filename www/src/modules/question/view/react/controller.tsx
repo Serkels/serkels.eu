@@ -13,7 +13,7 @@ import { AuthError } from "~/core/errors";
 import type { QuestionListSchema as Question_ListSchema } from "../../dto";
 import type { Question_CreateProps } from "../../entity";
 import type {
-  Question_QueryProps,
+  Question_QueryProps as Question_QueryParamsProps,
   Question_Repository,
 } from "../../repository";
 
@@ -29,7 +29,7 @@ export class Question_Controller {
   //
   query_keys = {
     all: ["question"] as const,
-    lists: (options?: Question_QueryProps["filter"] | undefined) =>
+    lists: (options?: Question_QueryParamsProps["filter"] | undefined) =>
       [...this.query_keys.all, "list", ...(options ? [options] : [])] as const,
     question: (id: number | string) =>
       [...this.query_keys.all, String(id)] as const,
@@ -75,16 +75,16 @@ export class Question_Controller {
     return mutation_result;
   }
 
-  useListQuery(filter: Question_QueryProps) {
+  useListQuery(params: Question_QueryParamsProps) {
     const loadListFn: QueryFunction<
       Question_ListSchema,
       ReturnType<typeof this.query_keys.lists>,
       number
     > = async ({ pageParam: page }) => {
-      filter.pagination = Object.assign(filter.pagination ?? {}, {
+      params.pagination = Object.assign(params.pagination ?? {}, {
         page,
-      } as Question_QueryProps["pagination"]);
-      return this.repository.findAll(filter);
+      } as Question_QueryParamsProps["pagination"]);
+      return this.repository.findAll(params);
     };
 
     const getNextPageParam = (lastPage: Question_ListSchema) => {
@@ -107,8 +107,12 @@ export class Question_Controller {
     const query_info = useInfiniteQuery({
       getNextPageParam,
       getPreviousPageParam,
-      queryFn: useCallback(loadListFn, [this.repository]),
-      queryKey: this.query_keys.lists(filter.filter),
+      queryFn: useCallback(loadListFn, [
+        this.repository,
+        params.filter?.category,
+        params.filter?.search,
+      ]),
+      queryKey: this.query_keys.lists(params.filter),
       staleTime: Infinity,
     });
 
