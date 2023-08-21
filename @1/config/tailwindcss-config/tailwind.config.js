@@ -118,6 +118,7 @@ module.exports = {
     },
   },
   plugins: [
+    require("tailwindcss-animate"),
     plugin(function ({ addBase, addComponents, addVariant, theme }) {
       addBase({
         html: { fontSize: "14px" },
