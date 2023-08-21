@@ -28,7 +28,7 @@ export default async function Page({
 
   const queryClient = getQueryClient();
   await queryClient.prefetchInfiniteQuery(
-    ["question", "list", undefined] as ReturnType<
+    ["question", "list"] as ReturnType<
       InstanceType<typeof Question_Controller>["query_keys"]["lists"]
     >,
     repository.findAll.bind(repository, {

@@ -10,7 +10,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import type { FormikProps } from "formik";
 import { useSession } from "next-auth/react";
 import { useCallback, useContext, useRef, useState } from "react";
-import { AnswerRepository } from "../../QARepository";
+import { AnswerRepository, QARepository } from "../../QARepository";
 import { QACardContext } from "../QACard/QACard.context";
 import { QAResponseContext, type QAResponseStatus } from "./QAResponse.context";
 import { QAResponseBody } from "./QAResponseBody";
@@ -29,18 +29,21 @@ function useQAResponseProps(id: number) {
 
   const QAResponseFormRef = useRef<FormikProps<{ content: string }>>(null);
 
-  const { data: response } = useQueryResponse([Number(question_id), id]);
-
   const statefulDeleteStatus = useDeleteButtonState();
+  const { data: response } = useQueryResponse([
+    Number(question_id),
+    statefulDeleteStatus[0].isDeleting ? NaN : id,
+  ]);
 
   const delete_mutation = useDeleteAnswerMutation(Number(id));
   const queryClient = useQueryClient();
   const on_delete_question = useCallback(async () => {
     await setStatus((state) => ({ ...state, isDeleting: true }));
 
+    await Promise.all([delete_mutation.mutateAsync()]);
     await Promise.all([
       queryClient.removeQueries([...AnswerRepository.queryKey, id]),
-      delete_mutation.mutateAsync(),
+      queryClient.invalidateQueries([...QARepository.queryKey, question_id]),
     ]);
   }, [response?.id]);
 

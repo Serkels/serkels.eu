@@ -66,19 +66,13 @@ export function QACard({ id }: { id: number }) {
     );
     await setStatus((state) => ({ ...state, isDeleting: true }));
 
+    await delete_mutation.mutateAsync();
+
     await Promise.all([
       queryClient.removeQueries([...QARepository.queryKey, Number(id)]),
-      delete_mutation.mutateAsync(),
+      queryClient.invalidateQueries([...QARepository.queryKey, "list"]),
     ]);
   }, [question?.id]);
-
-  useEffect(() => {
-    setTimeout(async () => {
-      queryClient.invalidateQueries({
-        queryKey: QARepository.queryKey,
-      });
-    }, 2_222);
-  }, [isDeleting && delete_mutation.isSuccess]);
 
   //
 

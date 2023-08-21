@@ -30,7 +30,7 @@ export class Question_Controller {
   query_keys = {
     all: ["question"] as const,
     lists: (options?: Question_QueryProps["filter"] | undefined) =>
-      [...this.query_keys.all, "list", ...([options] ?? [])] as const,
+      [...this.query_keys.all, "list", ...(options ? [options] : [])] as const,
     question: (id: number | string) =>
       [...this.query_keys.all, String(id)] as const,
   };

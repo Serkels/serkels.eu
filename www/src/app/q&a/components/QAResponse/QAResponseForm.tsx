@@ -8,7 +8,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Field, Form, Formik, type FormikProps } from "formik";
 import { useSession } from "next-auth/react";
 import { useContext, type Ref } from "react";
-import { AnswerRepository } from "../../QARepository";
+import { AnswerRepository, QARepository } from "../../QARepository";
 import { QACardContext } from "../QACard/QACard.context";
 
 //
@@ -49,7 +49,7 @@ export function QAResponseForm({
 
         Promise.all([
           queryClient.invalidateQueries({
-            queryKey: ["q&a", question.id],
+            queryKey: [...QARepository.queryKey, question.id],
           }),
           update(),
         ]);
