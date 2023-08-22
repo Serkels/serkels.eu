@@ -122,9 +122,15 @@ importers:
 
   '@1/core':
     dependencies:
+      debug:
+        specifier: 4.3.4
+        version: 4.3.4
       modern-errors:
         specifier: 6.0.0
         version: 6.0.0
+      uuid:
+        specifier: 9.0.0
+        version: 9.0.0
     devDependencies:
       '@1/typescript-config':
         specifier: workspace:*
@@ -141,6 +147,34 @@ importers:
       '@1/core':
         specifier: workspace:*
         version: link:../core
+    devDependencies:
+      '@1/typescript-config':
+        specifier: workspace:*
+        version: link:../config/typescript-config
+      prettier:
+        specifier: 3.0.2
+        version: 3.0.2
+      typescript:
+        specifier: 5.1.6
+        version: 5.1.6
+
+  '@1/modules':
+    dependencies:
+      '@1/core':
+        specifier: workspace:*
+        version: link:../core
+      '@1/strapi-openapi':
+        specifier: workspace:*
+        version: link:../strapi-openapi
+      '@tanstack/react-query':
+        specifier: 4.33.0
+        version: 4.33.0(react-dom@18.2.0)(react@18.2.0)
+      debug:
+        specifier: 4.3.4
+        version: 4.3.4
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
     devDependencies:
       '@1/typescript-config':
         specifier: workspace:*
@@ -284,6 +318,9 @@ importers:
       '@1/models':
         specifier: workspace:*
         version: link:../@1/models
+      '@1/modules':
+        specifier: workspace:*
+        version: link:../@1/modules
       '@1/strapi-openapi':
         specifier: workspace:*
         version: link:../@1/strapi-openapi

@@ -9,6 +9,7 @@ import { ExchangeViewModel } from "./models/ExchangeViewModel";
 //
 
 export function ExchangeCard({ exchange }: { exchange: ExchangeViewModel }) {
+  
   return (
     <div className="overflow-hidden rounded-xl bg-white text-black shadow-[5px_5px_10px_#7E7E7E33]">
       <div className="p-6">

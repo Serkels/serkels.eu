@@ -1,13 +1,13 @@
 {
-  "name": "@1/core",
+  "name": "@1/modules",
   "version": "0.0.0",
   "type": "module",
-  "exports": "./lib/index.ts",
-  "types": "./lib/index.ts",
   "private": true,
   "dependencies": {
-    "modern-errors": "6.0.0",
-    "uuid": "9.0.0",
+    "@1/core": "workspace:*",
+    "@tanstack/react-query": "4.33.0",
+    "react": "18.2.0",
+    "@1/strapi-openapi": "workspace:*",
     "debug": "4.3.4"
   },
   "devDependencies": {

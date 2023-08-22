@@ -1,0 +1,10 @@
+{
+  "name": "@1/strapi-openapi",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "prettier": "3.0.2",
+    "typescript": "5.1.6"
+  }
+}

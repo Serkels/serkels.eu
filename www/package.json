@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@1/modules": "workspace:*",
     "@1/core": "workspace:*",
     "@1/eslint-config": "workspace:*",
     "@1/models": "workspace:*",
