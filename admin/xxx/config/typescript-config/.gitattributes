@@ -1,0 +1,5 @@
+# 
+
+# treat built files as linguist-generated=true
+*.json linguist-generated=true -diff
+package.json text=auto

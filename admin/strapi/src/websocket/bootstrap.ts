@@ -1,14 +1,15 @@
 //
 
-import { ApiUserProfileUserProfile } from "@/types/generated/contentTypes";
-import { Notification, Profile } from "@1/models";
-import { AppContext, appRouter } from "@1/strapi-trpc-router";
+import type { Profile_DTO } from "@/types";
+import type { Mapper } from "@1/core";
+import type { Notification, Profile } from "@1/models";
+import { appRouter, type AppContext } from "@1/strapi-trpc-router";
 import { getService } from "@strapi/plugin-users-permissions/server/utils";
 import type { Strapi } from "@strapi/strapi";
-import { EntityService } from "@strapi/strapi/lib/services/entity-service";
+import type { EntityService } from "@strapi/strapi/lib/services/entity-service";
 import { applyWSSHandler } from "@trpc/server/adapters/ws";
 import { observable } from "@trpc/server/observable";
-import { Comment } from "strapi-plugin-comments/types/contentTypes";
+import type { Comment } from "strapi-plugin-comments/types/contentTypes";
 import { Server, type WebSocket } from "ws";
 import { UserEmitterMap } from ".";
 
@@ -24,17 +25,8 @@ const timer = setInterval(async () => {
   source.emit("new_answer", 89);
 }, 6_666);
 
-export type Profile_DTO = ApiUserProfileUserProfile["attributes"] & {
-  id: number;
-};
-
-abstract class Mapper<T> {
-  // public toDomain (raw: any) => T;
-  // public toPersistence (t: T) => any;
-  // public static toDTO (t: T): DTO;
-}
-class VinylMap extends Mapper<Profile> {
-  public static toDomain(profile: Profile_DTO): Profile {
+class Profile_Mapper implements Mapper<Profile_DTO, Profile> {
+  toDomain(profile: Profile_DTO) {
     return {
       about: String(profile.about),
       createdAt: new Date(String(profile.createdAt)),
@@ -45,10 +37,10 @@ class VinylMap extends Mapper<Profile> {
       updatedAt: new Date(String(profile.updatedAt)),
     };
   }
-  public static toPersistence(raw) {}
 }
 
 export default function bootstrap({ strapi }: { strapi: Strapi }) {
+  const profile_mapper = new Profile_Mapper();
   const wss = (strapi.server.wss = new Server({
     server: strapi.server.httpServer,
   }));
@@ -84,7 +76,7 @@ export default function bootstrap({ strapi }: { strapi: Strapi }) {
                 emit.next({
                   answer: { id: Number(comment.id) },
                   createdAt: new Date(comment.createdAt),
-                  profile: VinylMap.toDomain(profile),
+                  profile: profile_mapper.toDomain(profile),
                   question: { id: 0 },
                   subject: "Q&A",
                   type: "NEW_ANNSWER",

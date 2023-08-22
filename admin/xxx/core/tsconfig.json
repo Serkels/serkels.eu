@@ -1,0 +1,12 @@
+{
+  "extends": ["@1/typescript-config/base.json"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "lib": ["ES2020"],
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "target": "ES2019",
+    "verbatimModuleSyntax": false
+  },
+  "files": ["lib/index.ts"]
+}

@@ -10,6 +10,7 @@
     "strapi": "strapi"
   },
   "dependencies": {
+    "@1/core": "workspace:*",
     "@1/models": "workspace:*",
     "@1/strapi-trpc-router": "workspace:*",
     "@codemirror/autocomplete": "6.9.0",

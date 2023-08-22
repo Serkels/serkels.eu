@@ -9,13 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@1/core": "workspace:*",
     "@1/eslint-config": "workspace:*",
+    "@1/models": "workspace:*",
     "@1/strapi-openapi": "workspace:*",
     "@1/strapi-trpc-router": "workspace:*",
     "@1/tailwindcss-config": "workspace:*",
     "@1/typescript-config": "workspace:*",
     "@1/ui": "workspace:*",
-    "@1/models": "workspace:*",
     "@tanstack/react-query": "4.33.0",
     "@trpc/client": "10.37.1",
     "@trpc/next": "10.37.1",

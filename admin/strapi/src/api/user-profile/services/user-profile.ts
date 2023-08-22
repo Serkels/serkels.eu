@@ -2,7 +2,7 @@
  * user-profile service
  */
 
-import type { Profile_DTO } from "@/src/websocket/bootstrap";
+import type { Profile_DTO } from "@/types";
 import { factories } from "@strapi/strapi";
 import { createHash } from "node:crypto";
 

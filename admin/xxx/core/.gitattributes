@@ -1,0 +1,6 @@
+# 
+
+# treat built files as linguist-generated=true
+*.d.* text -diff linguist-generated=true
+*.js text -diff linguist-generated=true
+*.ts text -diff linguist-generated=true
