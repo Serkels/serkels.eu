@@ -1,3 +1,4 @@
+import { Entity } from "@1/core";
 export interface Notification {
     subject: "Q&A";
     type: "NEW_ANNSWER";
@@ -12,7 +13,7 @@ export interface Answer {
 export interface Question {
     id: number;
 }
-export interface Profile {
+export interface ProfileProps {
     id: number;
     firstname: string;
     lastname: string;
@@ -20,5 +21,7 @@ export interface Profile {
     createdAt: Date;
     updatedAt: Date;
     university: string;
+}
+export declare class Profile extends Entity<ProfileProps> {
 }
 //# sourceMappingURL=index.d.ts.map

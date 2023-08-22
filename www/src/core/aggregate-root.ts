@@ -1,6 +1,6 @@
 //
 
-import { Entity } from "./entity";
+import { Entity } from "@1/core";
 
 //
 

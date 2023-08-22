@@ -1,5 +1,9 @@
 //
 
+require("fix-esm").register();
+
+//
+
 import type { Strapi } from "@strapi/strapi";
 import websocket_bootstrap, {
   destroyWSSHandler,

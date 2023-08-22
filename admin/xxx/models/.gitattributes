@@ -1,6 +1,3 @@
 # 
 
-# treat built files as linguist-generated=true
-*.d.* linguist-generated=true -diff
-*.js linguist-generated=true -diff
 *.ts linguist-generated=true -diff

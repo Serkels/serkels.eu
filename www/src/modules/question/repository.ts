@@ -1,9 +1,9 @@
 //
 
+import { HTTPError } from "@1/core";
 import debug from "debug";
 import { OpenAPIRepository, type ApiClient } from "~/app/api/v1";
 import type { RepositoryPort } from "~/core";
-import { HTTPError } from "~/core/errors";
 import type { QuestionListSchema, Question_DTO } from "./dto";
 import type { Question_CreateProps, Question_Entity } from "./entity";
 

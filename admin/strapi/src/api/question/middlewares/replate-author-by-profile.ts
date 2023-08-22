@@ -1,8 +1,8 @@
 //
 
-import type { State } from "@/src/types";
 import type { Next, ParameterizedContext } from "koa";
 import type { Comment } from "strapi-plugin-comments/types/contentTypes";
+import type { State } from "~/src/types";
 
 export default (
   config: { keys_to_replace: string[] } = { keys_to_replace: ["data"] },

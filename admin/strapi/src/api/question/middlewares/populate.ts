@@ -1,7 +1,7 @@
 //
 
-import type { StrapiContext } from "@/src/types";
 import type { Next } from "koa";
+import type { StrapiContext } from "~/src/types";
 
 export default () => {
   return async (context: StrapiContext, next: Next) => {

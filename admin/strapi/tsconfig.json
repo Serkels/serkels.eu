@@ -5,7 +5,7 @@
     "rootDir": ".",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["*"]
+      "~/*": ["*"]
     },
     "resolveJsonModule": true,
     "types": ["@bn-digital/strapi-types"]

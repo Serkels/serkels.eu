@@ -2,9 +2,9 @@
  * user-profile service
  */
 
-import type { Profile_DTO } from "@/types";
 import { factories } from "@strapi/strapi";
 import { createHash } from "node:crypto";
+import type { Profile_DTO } from "~/types";
 
 export default factories.createCoreService(
   "api::user-profile.user-profile",

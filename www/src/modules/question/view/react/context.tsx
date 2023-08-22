@@ -1,12 +1,12 @@
 //
 
+import { ViewModelError } from "@1/core";
 import {
   createContext,
   useContext,
   useMemo,
   type PropsWithChildren,
 } from "react";
-import { ViewModelError } from "~/core/errors";
 import { useQuestion_repository } from "../..";
 import { Question_Controller } from "./controller";
 

@@ -5,6 +5,9 @@
   "main": "./lib/index.ts",
   "types": "./lib/index.ts",
   "private": true,
+  "dependencies": {
+    "modern-errors": "6.0.0"
+  },
   "devDependencies": {
     "@1/typescript-config": "workspace:*",
     "prettier": "3.0.2",

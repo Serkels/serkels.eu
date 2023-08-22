@@ -1,5 +1,6 @@
 //
 
+import { AuthError } from "@1/core";
 import {
   useInfiniteQuery,
   useMutation,
@@ -9,7 +10,6 @@ import {
 import debug from "debug";
 import { useSession } from "next-auth/react";
 import { useCallback, useEffect } from "react";
-import { AuthError } from "~/core/errors";
 import type { QuestionListSchema as Question_ListSchema } from "../../dto";
 import type { Question_CreateProps } from "../../entity";
 import type {

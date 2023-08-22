@@ -8,6 +8,9 @@
     "build:tsc": "tsc",
     "build": "pnpm run build:tsc"
   },
+  "dependencies": {
+    "@1/core": "workspace:*"
+  },
   "devDependencies": {
     "@1/typescript-config": "workspace:*",
     "prettier": "3.0.2",

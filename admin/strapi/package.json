@@ -32,6 +32,7 @@
     "codemirror": "6.0.1",
     "date-fns": "2.30.0",
     "etag": "1.8.1",
+    "fix-esm": "1.0.1",
     "mime-types": "2.1.35",
     "pg": "8.11.3",
     "pg-connection-string": "2.6.2",

@@ -121,6 +121,10 @@ importers:
         version: 5.1.6
 
   '@1/core':
+    dependencies:
+      modern-errors:
+        specifier: 6.0.0
+        version: 6.0.0
     devDependencies:
       '@1/typescript-config':
         specifier: workspace:*
@@ -133,6 +137,10 @@ importers:
         version: 5.1.6
 
   '@1/models':
+    dependencies:
+      '@1/core':
+        specifier: workspace:*
+        version: link:../core
     devDependencies:
       '@1/typescript-config':
         specifier: workspace:*

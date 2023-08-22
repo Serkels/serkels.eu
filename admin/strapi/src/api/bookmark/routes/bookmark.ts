@@ -2,13 +2,13 @@
  * bookmark router
  */
 
-import { ApiBookmarkBookmark } from "@/types/generated/contentTypes";
 import { factories, type Shared } from "@strapi/strapi";
 import type { EntityService } from "@strapi/strapi/lib/services/entity-service";
 import { GetValues } from "@strapi/strapi/lib/types/core/attributes";
 import { Context } from "@strapi/utils/dist/types";
 import type { Next } from "koa";
 import { StrapiRequestContext } from "strapi-typed";
+import { ApiBookmarkBookmark } from "~/types/generated/contentTypes";
 export default factories.createCoreRouter("api::bookmark.bookmark", {
   only: ["find", "create", "delete"],
   config: {

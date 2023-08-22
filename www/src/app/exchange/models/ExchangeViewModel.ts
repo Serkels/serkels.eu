@@ -2,9 +2,9 @@
 
 import { ProfileViewModel } from "@/app/my/models/ProfileViewModel";
 import { OpportunityCategoriesViewModel } from "@/app/opportunity/models/OpportunityCategoriesViewModel";
-import { IllegalArgs } from "@/core/errors";
 import { BasicOpenApiViewModel } from "@/core/models/BasicOpenApiViewModel";
 import { DatedEntryViewModel } from "@/core/models/DatedEntryProps";
+import { IllegalArgs } from "@1/core";
 
 export interface ExchangeProps {
   readonly createdAt: Date;

@@ -1,6 +1,6 @@
 //
 
-import { ViewModelError } from "~/core/errors";
+import { ViewModelError } from "@1/core";
 import { useCoreContext } from "~/core/react";
 import { Question_Repository } from "./repository";
 

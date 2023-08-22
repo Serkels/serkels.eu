@@ -1,8 +1,6 @@
 //
 
-import type { Profile_DTO } from "@/types";
-import type { Mapper } from "@1/core";
-import type { Notification, Profile } from "@1/models";
+import { Notification } from "@1/models";
 import { appRouter, type AppContext } from "@1/strapi-trpc-router";
 import { getService } from "@strapi/plugin-users-permissions/server/utils";
 import type { Strapi } from "@strapi/strapi";
@@ -11,6 +9,8 @@ import { applyWSSHandler } from "@trpc/server/adapters/ws";
 import { observable } from "@trpc/server/observable";
 import type { Comment } from "strapi-plugin-comments/types/contentTypes";
 import { Server, type WebSocket } from "ws";
+import { Profile_Mapper } from "~/infra/strapi/mappers/profile";
+import type { Profile_DTO } from "~/types";
 import { UserEmitterMap } from ".";
 
 //
@@ -25,22 +25,7 @@ const timer = setInterval(async () => {
   source.emit("new_answer", 89);
 }, 6_666);
 
-class Profile_Mapper implements Mapper<Profile_DTO, Profile> {
-  toDomain(profile: Profile_DTO) {
-    return {
-      about: String(profile.about),
-      createdAt: new Date(String(profile.createdAt)),
-      firstname: String(profile.firstname),
-      id: profile.id,
-      lastname: String(profile.lastname),
-      university: String(profile.university),
-      updatedAt: new Date(String(profile.updatedAt)),
-    };
-  }
-}
-
 export default function bootstrap({ strapi }: { strapi: Strapi }) {
-  const profile_mapper = new Profile_Mapper();
   const wss = (strapi.server.wss = new Server({
     server: strapi.server.httpServer,
   }));
@@ -76,7 +61,7 @@ export default function bootstrap({ strapi }: { strapi: Strapi }) {
                 emit.next({
                   answer: { id: Number(comment.id) },
                   createdAt: new Date(comment.createdAt),
-                  profile: profile_mapper.toDomain(profile),
+                  profile: Profile_Mapper.toDomain(profile),
                   question: { id: 0 },
                   subject: "Q&A",
                   type: "NEW_ANNSWER",
