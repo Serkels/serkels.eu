@@ -7,5 +7,6 @@
     "moduleResolution": "Node",
     "target": "ES2019",
     "verbatimModuleSyntax": false
-  }
+  },
+  "include": ["**/*.ts"]
 }
