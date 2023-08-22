@@ -1,6 +1,15 @@
 //
 
-require("fix-esm").register();
+import { register as fix_esm } from "fix-esm";
+import { resolve } from "path";
+import { register as tsconfig_paths } from "tsconfig-paths";
+import tsConfig from "../tsconfig.json";
+
+tsconfig_paths({
+  baseUrl: resolve(__dirname, "../"),
+  paths: tsConfig.compilerOptions.paths,
+});
+fix_esm();
 
 //
 
