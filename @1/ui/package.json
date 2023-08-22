@@ -19,7 +19,7 @@
     "react-stately": "3.25.0",
     "react-aria-components": "1.0.0-alpha.6",
     "tailwindcss": "3.3.3",
-    "tailwindcss-animate": "1.0.5"
+    "tailwindcss-animate": "1.0.6"
   },
   "devDependencies": {
     "@1/strapi-openapi": "workspace:*",
