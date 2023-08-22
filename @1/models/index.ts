@@ -9,7 +9,7 @@ export interface Notification {
   type: "NEW_ANNSWER";
   answer: Answer;
   question: Question;
-  profile: Profile;
+  profile: ProfileProps;
   createdAt: Date;
   //  state: "pending" | "readed";
 }

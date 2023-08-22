@@ -52,7 +52,6 @@ export function DropdownButton({
   "slot-OverlayButton": slotOverlayButton,
 }: PropsWithChildren<{ label: string; "slot-OverlayButton": ReactNode }>) {
   return (
-    // <div className="flex items-start justify-center rounded-lg bg-gradient-to-r from-orange-400 to-pink-600 p-8">
     <DialogTrigger>
       <OverlayButton aria-label={label}>{slotOverlayButton}</OverlayButton>
       <MyPopover
@@ -76,7 +75,6 @@ export function DropdownButton({
         <Dialog className="p-2 text-gray-700 outline-none">{children}</Dialog>
       </MyPopover>
     </DialogTrigger>
-    // </div>
   );
 }
 
@@ -116,13 +114,21 @@ function MyPopover(props: PopoverProps) {
         `,
           props.className,
           {
-            "animate-in fade-in data-[placement=bottom]:slide-in-from-top-1 data-[placement=top]:slide-in-from-bottom-1 fill-mode-forwards duration-200 ease-out":
+            "duration-200 ease-out animate-in fade-in fill-mode-forwards data-[placement=bottom]:slide-in-from-top-1 data-[placement=top]:slide-in-from-bottom-1":
               isEntering,
-            "animate-out fade-out data-[placement=bottom]:slide-out-to-top-1 data-[placement=top]:slide-out-to-bottom-1 fill-mode-forwards duration-150 ease-in":
+            "duration-150 ease-in animate-out fade-out fill-mode-forwards data-[placement=bottom]:slide-out-to-top-1 data-[placement=top]:slide-out-to-bottom-1":
               isExiting,
           },
         )
       }
     />
+  );
+}
+
+export function EmptyNotification({ children }: PropsWithChildren) {
+  return (
+    <div className="flex flex-col items-center justify-center p-5">
+      {children}
+    </div>
   );
 }
