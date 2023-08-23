@@ -1,7 +1,7 @@
 //
 
 import { Entity, Ok, Result } from "@1/core/domain";
-import { Profile } from "@1/modules/profile/domain";
+import type { Profile } from "../../profile/domain";
 
 //
 

@@ -201,9 +201,6 @@ importers:
         specifier: 18.2.0
         version: 18.2.0
     devDependencies:
-      '@1/modules':
-        specifier: link:.
-        version: 'link:'
       '@1/typescript-config':
         specifier: workspace:*
         version: link:../config/typescript-config

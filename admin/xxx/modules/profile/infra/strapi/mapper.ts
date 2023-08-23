@@ -2,8 +2,8 @@
 //
 
 import { Mapper } from "@1/core/domain";
-import { Profile } from "@1/modules/profile/domain";
 import type { Profile_Schema } from "@1/strapi-openapi";
+import { Profile } from "../../domain";
 
 //
 

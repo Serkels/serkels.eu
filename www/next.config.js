@@ -4,7 +4,12 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   reactStrictMode: true,
-  transpilePackages: ["@1/ui", "@1/tailwindcss-config"],
+  transpilePackages: [
+    "@1/core",
+    "@1/modules",
+    "@1/tailwindcss-config",
+    "@1/ui",
+  ],
   async redirects() {
     return [
       {
