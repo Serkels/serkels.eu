@@ -1,7 +1,7 @@
 //
 
 import { New_Answer_Schema_To_Domain } from "@1/modules/notification/infra/strapi";
-import { Profile_Mapper } from "@1/modules/profile/infra/strapi";
+import { Profile_SchemaToDomain } from "@1/modules/profile/infra/strapi";
 import { Profile_Schema } from "@1/strapi-openapi";
 import { appRouter, type AppContext } from "@1/strapi-trpc-router";
 import { getService } from "@strapi/plugin-users-permissions/server/utils";
@@ -61,7 +61,7 @@ export default function bootstrap({ strapi }: { strapi: Strapi }) {
                 const new_answer_record = {
                   answer: { id: Number(comment.id) },
                   createdAt: new Date(comment.createdAt),
-                  profile: Profile_Mapper.toDomain(profile),
+                  profile: new Profile_SchemaToDomain().build(profile).value(),
                   question: { id: 0 },
                   subject: "Q&A",
                   type: "NEW_ANSWER",

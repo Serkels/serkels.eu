@@ -204,7 +204,7 @@ importers:
   '@1/strapi-trpc-router':
     dependencies:
       '@1/core':
-        specifier: workspace:^
+        specifier: workspace:*
         version: link:../core
       '@1/modules':
         specifier: workspace:*
