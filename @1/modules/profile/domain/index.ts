@@ -18,4 +18,13 @@ export class Profile extends Entity<Profile_Props> {
   static override create(props: Profile_Props): Result<Profile> {
     return Ok(new Profile(props));
   }
+
+  //
+
+  get university() {
+    return this.props.university;
+  }
+  get name() {
+    return [this.props.firstname, this.props.lastname].join(" ");
+  }
 }

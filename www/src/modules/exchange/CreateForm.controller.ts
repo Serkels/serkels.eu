@@ -8,24 +8,13 @@ import debug from "debug";
 import { useSession } from "next-auth/react";
 import { useCallback, useEffect } from "react";
 import type { Exchange_Repository } from "./infrastructure";
+import { Exchange_QueryKeys } from "./queryKeys";
 
 //
 
 const log = debug("~:modules:exchange:Exchange_CreateForm_Controller");
 
 //
-
-export const Exchange_QueryKeys = {
-  all: ["exchange"] as const,
-  lists() {
-    return [...this.all, "list"];
-  },
-  // lists(options?: Question_QueryParamsProps["filter"] | undefined) {
-  //   return [...this.all, "list", ...(options ? [options] : [])] as const,
-  // }
-  // question: (id: number | string) =>
-  //   [...this.query_keys.all, String(id)] as const,
-};
 
 export class Exchange_CreateForm_Controller {
   constructor(private repository: Exchange_Repository) {}

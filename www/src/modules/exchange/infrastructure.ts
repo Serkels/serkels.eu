@@ -2,10 +2,14 @@
 
 import { HTTPError } from "@1/core/domain";
 import type { Exchange_CreateProps } from "@1/modules/exchange/domain";
-import type { Exchange_Schema } from "@1/strapi-openapi";
+import type {
+  Exchange_ItemSchema,
+  Exchange_ListSchema,
+} from "@1/strapi-openapi";
 import debug from "debug";
 import { OpenAPIRepository, type ApiClient } from "~/app/api/v1";
 import type { RepositoryPort } from "~/core";
+import type { Exchange_QueryProps } from "./Exchange_QueryProps";
 // import type { ExchangeListSchema, Exchange_DTO } from "./dto";
 // import type { Exchange_CreateProps, Exchange_Entity } from "./entity";
 
@@ -13,14 +17,6 @@ import type { RepositoryPort } from "~/core";
 
 const log = debug("~:modules:exchange:Exchange_Repository");
 //
-
-export type Exchange_QueryProps = {
-  filter?: { search?: string | undefined; category?: string | undefined };
-  pagination?: { pageSize?: number; page?: number };
-  sort?: `${keyof NonNullable<NonNullable<Exchange_Schema>>}:${
-    | "asc"
-    | "desc"}`[];
-};
 
 export class Exchange_Repository
   extends OpenAPIRepository
@@ -51,5 +47,80 @@ export class Exchange_Repository
         { cause: errorBody.error },
       );
     }
+  }
+
+  async findAll({
+    filter,
+    sort,
+    pagination,
+  }: Exchange_QueryProps): Promise<Exchange_ListSchema> {
+    log("findAll", filter);
+    const { category, search } = filter ?? {};
+    const {
+      data: body,
+      error: errorBody,
+      response,
+    } = await this.client.GET("/exchanges", {
+      headers: this.headers,
+      params: {
+        query: {
+          filters: {
+            $and: [
+              {
+                category: {
+                  slug: { $eq: category },
+                },
+              },
+            ],
+            $or: [
+              {
+                title: {
+                  $containsi: search,
+                },
+              },
+            ],
+          },
+          pagination: {
+            page: pagination?.page,
+            pageSize: pagination?.pageSize,
+          },
+          sort,
+        } as any,
+      },
+    });
+
+    if (errorBody) {
+      log("create", errorBody);
+      throw new HTTPError(
+        [errorBody.error.message, "from " + response.url].join("\n"),
+        { cause: errorBody.error },
+      );
+    }
+
+    return body;
+  }
+
+  async findById(id: number): Promise<Exchange_ItemSchema | undefined> {
+    log("findById", id);
+    const {
+      data: body,
+      error: errorBody,
+      response,
+    } = await this.client.GET("/exchanges/{id}", {
+      headers: this.headers,
+      params: {
+        path: { id },
+      },
+    });
+
+    if (errorBody) {
+      log("create", errorBody);
+      throw new HTTPError(
+        [errorBody.error.message, "from " + response.url].join("\n"),
+        { cause: errorBody.error },
+      );
+    }
+
+    return body?.data;
   }
 }

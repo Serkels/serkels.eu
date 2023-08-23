@@ -13,22 +13,22 @@ export default factories.createCoreRouter("api::exchange.exchange", {
       middlewares: [
         clean_body,
         "global::assign-owner-and-profile",
-        "api::question.populate",
+        "api::exchange.populate",
       ],
     },
     delete: {
-      middlewares: ["api::question.populate"],
+      middlewares: ["api::exchange.populate"],
       policies: ["global::is-owned"],
     },
     update: {
-      middlewares: ["api::question.populate"],
+      middlewares: ["api::exchange.populate"],
       policies: ["global::is-owned"],
     },
     find: {
-      middlewares: ["api::question.populate"],
+      middlewares: ["api::exchange.populate"],
     },
     findOne: {
-      middlewares: ["api::question.populate"],
+      middlewares: ["api::exchange.populate"],
     },
   },
 });

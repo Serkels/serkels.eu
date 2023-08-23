@@ -59,21 +59,21 @@ export function QAList({
             {hasNextPage ? (
               <button
                 className="
-              rounded-md
-              bg-gray-600
-              px-3
-              py-1.5
-              text-sm
-              font-semibold
-              leading-6
-              text-white
-              shadow-sm
-              hover:bg-gray-500
-              focus-visible:outline
-              focus-visible:outline-2
-              focus-visible:outline-offset-2
-              focus-visible:outline-gray-600
-            "
+                  rounded-md
+                  bg-gray-600
+                  px-3
+                  py-1.5
+                  text-sm
+                  font-semibold
+                  leading-6
+                  text-white
+                  shadow-sm
+                  hover:bg-gray-500
+                  focus-visible:outline
+                  focus-visible:outline-2
+                  focus-visible:outline-offset-2
+                  focus-visible:outline-gray-600
+                "
                 onClick={() => fetchNextPage()}
                 disabled={!hasNextPage || isFetchingNextPage}
               >
@@ -94,6 +94,7 @@ function EmptyList() {
     <h5 className="py-5 text-center font-bold">Pas plus de résultats ...</h5>
   );
 }
+
 function Loading() {
   return (
     <div className="mt-28 text-center">

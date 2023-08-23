@@ -1,15 +1,57 @@
 //
 
-import { AvatarMediaHorizontal } from "@/components/Avatar";
+import type { Exchange_ItemSchema } from "@1/strapi-openapi";
+import { Spinner } from "@1/ui/components/Spinner";
 import { Exchange } from "@1/ui/icons";
+import { useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
+import { useSession } from "next-auth/react";
 import { P, match } from "ts-pattern";
+import { AvatarMediaHorizontal } from "~/components/Avatar";
+import { ErrorOccur } from "~/components/ErrorOccur";
+import { Exchange_Item_Controller } from "~/modules/exchange/Item.controller";
+import { Exchange_Repository } from "~/modules/exchange/infrastructure";
+import { Exchange_QueryKeys } from "~/modules/exchange/queryKeys";
+import { fromClient } from "../api/v1";
 import { ExchangeViewModel } from "./models/ExchangeViewModel";
 
 //
 
-export function ExchangeCard({ exchange }: { exchange: ExchangeViewModel }) {
-  
+export function ExchangeCard({ id }: { id: number }) {
+  const { data: session } = useSession();
+  const repository = new Exchange_Repository(fromClient, session?.user?.jwt);
+  const {
+    item: { useQuery },
+  } = new Exchange_Item_Controller(repository);
+
+  const query_info = useQuery(id);
+
+  return match(query_info)
+    .with({ status: "error" }, ({ error }) => (
+      <ErrorOccur error={error as Error} />
+    ))
+    .with({ status: "loading" }, () => <Spinner />)
+    .with(
+      {
+        status: "success",
+      },
+      () => <Exchange_Card id={id} />,
+    )
+    .exhaustive();
+}
+
+function Exchange_Card({ id }: { id: number }) {
+  const query_client = useQueryClient();
+  const raw_exchange = query_client.getQueryData(
+    Exchange_QueryKeys.item(id),
+  ) as Exchange_ItemSchema | undefined;
+  if (!raw_exchange) {
+    return null;
+  }
+
+  //
+
+  const exchange = ExchangeViewModel.from_server(raw_exchange);
   return (
     <div className="overflow-hidden rounded-xl bg-white text-black shadow-[5px_5px_10px_#7E7E7E33]">
       <div className="p-6">
