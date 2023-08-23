@@ -71,7 +71,7 @@ importers:
         version: link:../typescript-config
       '@pandacss/dev':
         specifier: 0.11.1
-        version: 0.11.1(@internationalized/date@3.4.0)(@types/react-dom@18.2.7)(@types/react@18.2.20)(typescript@5.1.6)
+        version: 0.11.1(@internationalized/date@3.4.0)(@types/react-dom@18.2.7)(@types/react@18.2.21)(typescript@5.1.6)
       autoprefixer:
         specifier: 10.4.15
         version: 10.4.15(postcss@8.4.28)
@@ -192,8 +192,8 @@ importers:
         specifier: 3.0.0
         version: 3.0.0
       openapi-typescript:
-        specifier: 6.5.2
-        version: 6.5.2
+        specifier: 6.5.3
+        version: 6.5.3
       prettier:
         specifier: 3.0.2
         version: 3.0.2
@@ -622,7 +622,7 @@ packages:
       prismjs: 1.29.0
     dev: true
 
-  /@astrojs/react@2.2.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(react-dom@18.2.0)(react@18.2.0):
+  /@astrojs/react@2.2.1(@types/react-dom@18.2.7)(@types/react@18.2.21)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-nq5Zr8iWdwjSp5fh1NReaCplwsnL4w5PXAY5XWu1jE/frxEfF/ycGHrrhwWW0uJHX9G+kUtmQLR0GBhlR4FmAw==}
     engines: {node: '>=16.12.0'}
     peerDependencies:
@@ -633,7 +633,7 @@ packages:
     dependencies:
       '@babel/core': 7.22.5
       '@babel/plugin-transform-react-jsx': 7.22.5(@babel/core@7.22.5)
-      '@types/react': 18.2.20
+      '@types/react': 18.2.21
       '@types/react-dom': 18.2.7
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -1637,7 +1637,7 @@ packages:
       ts-pattern: 5.0.4
     dev: true
 
-  /@pandacss/dev@0.11.1(@internationalized/date@3.4.0)(@types/react-dom@18.2.7)(@types/react@18.2.20)(typescript@5.1.6):
+  /@pandacss/dev@0.11.1(@internationalized/date@3.4.0)(@types/react-dom@18.2.7)(@types/react@18.2.21)(typescript@5.1.6):
     resolution: {integrity: sha512-2MrW9ML1Q1FeCrtP6DqLN6ij1Ccf+14x0Pi2WjwCoi/k6KfuYIYEw8ZIokEd64LNlnqALwpDmrzUxHCJICurYw==}
     hasBin: true
     dependencies:
@@ -1648,7 +1648,7 @@ packages:
       '@pandacss/postcss': 0.11.1(typescript@5.1.6)
       '@pandacss/preset-panda': 0.11.1
       '@pandacss/shared': 0.11.1
-      '@pandacss/studio': 0.11.1(@internationalized/date@3.4.0)(@types/react-dom@18.2.7)(@types/react@18.2.20)(typescript@5.1.6)
+      '@pandacss/studio': 0.11.1(@internationalized/date@3.4.0)(@types/react-dom@18.2.7)(@types/react@18.2.21)(typescript@5.1.6)
       '@pandacss/token-dictionary': 0.11.1
       '@pandacss/types': 0.11.1
       cac: 6.7.14
@@ -1799,11 +1799,11 @@ packages:
     resolution: {integrity: sha512-g4mnSEXON9xv7SiSdHD2Q71F11NKDXIGhtuFegL9tVxdnuvQEXJh52qQmCA4XhPKdHNovwcsA0+GdryIJir0WA==}
     dev: true
 
-  /@pandacss/studio@0.11.1(@internationalized/date@3.4.0)(@types/react-dom@18.2.7)(@types/react@18.2.20)(typescript@5.1.6):
+  /@pandacss/studio@0.11.1(@internationalized/date@3.4.0)(@types/react-dom@18.2.7)(@types/react@18.2.21)(typescript@5.1.6):
     resolution: {integrity: sha512-fKHr2YbSTJJS9z1hhfmQ58hhkqcRGkbE95EHbl4vA+O9ABdZqqD/Zw6Aw5ttqCKv/DmlipEN1e9LBTZIUFMPMQ==}
     dependencies:
       '@ark-ui/react': 0.9.0(@internationalized/date@3.4.0)(react-dom@18.2.0)(react@18.2.0)
-      '@astrojs/react': 2.2.1(@types/react-dom@18.2.7)(@types/react@18.2.20)(react-dom@18.2.0)(react@18.2.0)
+      '@astrojs/react': 2.2.1(@types/react-dom@18.2.7)(@types/react@18.2.21)(react-dom@18.2.0)(react@18.2.0)
       '@pandacss/config': 0.11.1
       '@pandacss/logger': 0.11.1
       '@pandacss/node': 0.11.1(typescript@5.1.6)
@@ -3338,14 +3338,6 @@ packages:
     resolution: {integrity: sha512-GRaAEriuT4zp9N4p1i8BDBYmEyfo+xQ3yHjJU4eiK5NDa1RmUZG+unZABUTK4/Ox/M+GaHwb6Ow8rUITrtjszA==}
     dependencies:
       '@types/react': 18.2.21
-    dev: true
-
-  /@types/react@18.2.20:
-    resolution: {integrity: sha512-WKNtmsLWJM/3D5mG4U84cysVY31ivmyw85dE84fOCk5Hx78wezB/XEjVPWl2JTZ5FkEeaTJf+VgUAUn3PE7Isw==}
-    dependencies:
-      '@types/prop-types': 15.7.5
-      '@types/scheduler': 0.16.3
-      csstype: 3.1.2
     dev: true
 
   /@types/react@18.2.21:
@@ -7407,8 +7399,8 @@ packages:
     resolution: {integrity: sha512-WDmxej0eHSZtLgCuyPEn2NXRV7tcvUnBBNP/0c/U66mOlxs6Yn0/dHuWlkVKdHGNahSUwG57A1tyutHWRpWqFg==}
     dev: false
 
-  /openapi-typescript@6.5.2:
-    resolution: {integrity: sha512-Zz41utYZ3BAyr32QhOATSnN9zcWMsJeA4Jdq7xQjfYOdZbQfI8Fvsvx41Doe9Wvoho1aj5cP9b5Z7kHtG6mYvg==}
+  /openapi-typescript@6.5.3:
+    resolution: {integrity: sha512-iVOgf1wf/6R73Cg9wcxMAD/P3+/TJ8HQruLyv3WRDu29Pwnmp7ZUJ897Kb401jW7Ao/L4JjisropHQJW62BXtA==}
     hasBin: true
     dependencies:
       ansi-colors: 4.1.3
