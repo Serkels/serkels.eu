@@ -14,3 +14,4 @@ export type With_Id = { id: number };
 
 export type Profile_Schema = Schemas["UserProfile"] & With_Id;
 export type Notification = any & With_Id;
+export type New_Answer_Schema = any & With_Id;

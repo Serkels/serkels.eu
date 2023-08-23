@@ -1,9 +1,6 @@
 //
 
-import {
-  Notification_New_Answer,
-  type Notification,
-} from "@1/modules/notification/domain";
+import { New_Answer_Schema_To_Domain } from "@1/modules/notification/infra/strapi";
 import { Profile_Mapper } from "@1/modules/profile/infra/strapi";
 import { Profile_Schema } from "@1/strapi-openapi";
 import { appRouter, type AppContext } from "@1/strapi-trpc-router";
@@ -40,7 +37,7 @@ export default function bootstrap({ strapi }: { strapi: Strapi }) {
       ({
         subscription_to: {
           notifications(id: number) {
-            return observable<Notification>((emit) => {
+            return observable((emit) => {
               strapi.log.debug(`+ Notification ${id}`);
               const on_new_answer = async (comment_id: number) => {
                 const entityService: EntityService = strapi?.entityService;
@@ -61,16 +58,21 @@ export default function bootstrap({ strapi }: { strapi: Strapi }) {
 
                 if (!profile) return;
 
-                const new_answer = Notification_New_Answer.create({
+                const new_answer_record = {
                   answer: { id: Number(comment.id) },
                   createdAt: new Date(comment.createdAt),
                   profile: Profile_Mapper.toDomain(profile),
                   question: { id: 0 },
                   subject: "Q&A",
                   type: "NEW_ANSWER",
-                });
+                };
 
-                emit.next(new_answer.value());
+                const new_answer = new New_Answer_Schema_To_Domain().build(
+                  new_answer_record,
+                );
+                if (new_answer.isFail()) return;
+
+                emit.next(new_answer.value().toObject());
                 strapi.log.debug(`++ ${id} notifications/on_new_answer`);
               };
 
@@ -90,7 +92,7 @@ export default function bootstrap({ strapi }: { strapi: Strapi }) {
             });
           },
           messages(id: number) {
-            return observable<Notification>(() => {});
+            return observable(() => {});
           },
         },
 

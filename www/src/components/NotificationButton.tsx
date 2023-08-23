@@ -1,9 +1,6 @@
 //
 
-import {
-  Notification_New_Answer,
-  type Notification,
-} from "@1/modules/notification/domain";
+import { New_Answer, type Notification } from "@1/modules/notification/domain";
 import { DotIndicator } from "@1/ui/components/DotIndicator";
 import * as UI from "@1/ui/domains/notification";
 import { Bell } from "@1/ui/icons";
@@ -11,7 +8,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import type { Unsubscribable } from "@trpc/server/observable";
 import { useSession } from "next-auth/react";
 import { useEffect, useRef, useState } from "react";
-import { match } from "ts-pattern";
+import { P, match } from "ts-pattern";
 import { trpc } from "./trpc";
 
 //
@@ -40,25 +37,34 @@ export function NotificationButton() {
             </UI.EmptyNotification>
           ))
           .otherwise(() =>
-            notifications.map((notificationEntity) => {
-              const notification = notificationEntity.toObject();
-              const { profile } = notification;
-
-              return (
-                <UI.Notification
-                  key={notification.answer.id}
-                  avatar={`/api/v1/avatars/u/${profile.id}`}
-                  name={[profile.firstname, profile.lastname].join(" ")}
-                  time={notification.createdAt.toDateString()}
-                  text={`${[profile.firstname, profile.lastname].join(
-                    " ",
-                  )} a répondu a votre question.`}
-                />
-              );
-            }),
+            notifications.map((notification) =>
+              match(notification)
+                .with(P.instanceOf(New_Answer), (new_answer) => (
+                  <Notification_New_Answer
+                    key={new_answer.id.value()}
+                    subjet={new_answer}
+                  />
+                ))
+                .otherwise(() => null),
+            ),
           )}
       </div>
     </UI.DropdownButton>
+  );
+}
+
+function Notification_New_Answer({ subjet }: { subjet: New_Answer }) {
+  const profile = subjet.get("profile");
+  const createdAt = subjet.get("createdAt");
+  return (
+    <UI.Notification
+      avatar={`/api/v1/avatars/u/${profile.id}`}
+      name={[profile.firstname, profile.lastname].join(" ")}
+      time={createdAt.toDateString()}
+      text={`${[profile.firstname, profile.lastname].join(
+        " ",
+      )} a répondu a votre question.`}
+    />
   );
 }
 
@@ -73,9 +79,7 @@ function useNotification() {
     if (!jwt) return;
     websocket.current = trpc.notifications.subscribe(jwt, {
       onData(value) {
-        set_notifications([
-          Notification_New_Answer.create(value as any).value(),
-        ]);
+        set_notifications([New_Answer.create(value).value()]);
       },
       onStarted() {
         console.log("onStarted");

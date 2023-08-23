@@ -7,7 +7,8 @@
     "rich-domain": "1.18.3",
     "modern-errors": "6.0.0",
     "uuid": "9.0.0",
-    "debug": "4.3.4"
+    "debug": "4.3.4",
+    "superjson": "1.13.1"
   },
   "devDependencies": {
     "@1/typescript-config": "workspace:*",

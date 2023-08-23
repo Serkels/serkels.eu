@@ -1,7 +1,7 @@
 //
 
 import { Entity, Ok, Result } from "@1/core/domain";
-import type { Profile } from "../../profile/domain";
+import type { Profile_Props } from "../../profile/domain";
 
 //
 
@@ -10,7 +10,7 @@ export interface Notification_New_Answer_Props {
   type: "NEW_ANSWER";
   answer: Answer;
   question: Question;
-  profile: Profile;
+  profile: Profile_Props;
   createdAt: Date;
 }
 
@@ -24,16 +24,16 @@ export interface Question {
 
 //
 
-export class Notification_New_Answer extends Entity<Notification_New_Answer_Props> {
+export class New_Answer extends Entity<Notification_New_Answer_Props> {
   static override create(
     props: Notification_New_Answer_Props,
-  ): Result<Notification_New_Answer> {
-    return Ok(new Notification_New_Answer(props));
+  ): Result<New_Answer> {
+    return Ok(new New_Answer({ ...props }));
   }
 }
 
 //
 
-export type Notification = Notification_New_Answer;
+export type Notification = New_Answer;
 
 //

@@ -6,6 +6,7 @@
   "types": "./index.ts",
   "private": true,
   "dependencies": {
+    "@1/core": "workspace:*",
     "@1/modules": "workspace:*",
     "@trpc/server": "10.37.1",
     "superjson": "1.13.1",

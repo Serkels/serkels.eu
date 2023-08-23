@@ -2,28 +2,9 @@
 
 import { Entity, Ok, Result } from "@1/core/domain";
 
-export type Notification = Notification_New_Answer;
-
 //
 
-export interface Notification_New_Answer {
-  subject: "Q&A";
-  type: "NEW_ANSWER";
-  answer: Answer;
-  question: Question;
-  profile: Profile;
-  createdAt: Date;
-}
-
-export interface Answer {
-  id: number;
-}
-
-export interface Question {
-  id: number;
-}
-
-export interface ProfileProps {
+export interface Profile_Props {
   id: number;
   firstname: string;
   lastname: string;
@@ -33,8 +14,8 @@ export interface ProfileProps {
   university: string;
 }
 
-export class Profile extends Entity<ProfileProps> {
-  static override create(props: ProfileProps): Result<Profile> {
+export class Profile extends Entity<Profile_Props> {
+  static override create(props: Profile_Props): Result<Profile> {
     return Ok(new Profile(props));
   }
 }

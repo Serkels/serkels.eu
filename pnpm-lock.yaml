@@ -131,6 +131,9 @@ importers:
       rich-domain:
         specifier: 1.18.3
         version: 1.18.3
+      superjson:
+        specifier: 1.13.1
+        version: 1.13.1
       uuid:
         specifier: 9.0.0
         version: 9.0.0
@@ -162,6 +165,9 @@ importers:
       react:
         specifier: 18.2.0
         version: 18.2.0
+      superjson:
+        specifier: 1.13.1
+        version: 1.13.1
     devDependencies:
       '@1/typescript-config':
         specifier: workspace:*
@@ -197,6 +203,9 @@ importers:
 
   '@1/strapi-trpc-router':
     dependencies:
+      '@1/core':
+        specifier: workspace:^
+        version: link:../core
       '@1/modules':
         specifier: workspace:*
         version: link:../modules

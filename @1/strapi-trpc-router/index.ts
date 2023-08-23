@@ -1,6 +1,6 @@
 //
 
-import type { Notification } from "@1/modules/notification/domain";
+import type { Notification_New_Answer_Props } from "@1/modules/notification/domain";
 import { initTRPC } from "@trpc/server";
 import { type Observable } from "@trpc/server/observable";
 import SuperJSON from "superjson";
@@ -10,8 +10,12 @@ import { z } from "zod";
 
 export interface AppContext {
   subscription_to: {
-    notifications: (id: number) => Observable<Notification, unknown>;
-    messages: (id: number) => Observable<Notification, unknown>;
+    notifications: (
+      id: number,
+    ) => Observable<Notification_New_Answer_Props, unknown>;
+    messages: (
+      id: number,
+    ) => Observable<Notification_New_Answer_Props, unknown>;
   };
   verify_jwt: (token: string) => Promise<{ id: number }>;
 }
