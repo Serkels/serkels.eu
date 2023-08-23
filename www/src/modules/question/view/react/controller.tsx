@@ -1,6 +1,7 @@
 //
 
 import { AuthError } from "@1/core/domain";
+import type { Question_ListSchema } from "@1/strapi-openapi";
 import {
   useInfiniteQuery,
   useMutation,
@@ -10,7 +11,6 @@ import {
 import debug from "debug";
 import { useSession } from "next-auth/react";
 import { useCallback, useEffect } from "react";
-import type { QuestionListSchema as Question_ListSchema } from "../../dto";
 import type { Question_CreateProps } from "../../entity";
 import type {
   Question_QueryProps as Question_QueryParamsProps,

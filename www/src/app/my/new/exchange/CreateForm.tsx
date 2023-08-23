@@ -2,47 +2,43 @@
 
 import { Spinner } from "@1/ui/components/Spinner";
 import * as UI from "@1/ui/domains/exchange/CreateForm";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { getCsrfToken } from "next-auth/react";
+import { useSession } from "next-auth/react";
+import { match } from "ts-pattern";
+import { fromClient } from "~/app/api/v1";
 import { SelectCategoryField } from "~/components/SelectCategoryField";
+import { Exchange_CreateForm_Controller } from "~/modules/exchange/CreateForm.controller";
+import { Exchange_Repository } from "~/modules/exchange/infrastructure";
 
 //
 
 export function CreateForm() {
-  const { data: csrf } = useQuery({
-    queryKey: ["csrf"],
-    queryFn: () => getCsrfToken(),
-    cacheTime: 0,
-  });
-
-  // const email = useSearchParams().get("email") ?? undefined;
-
-  const { isLoading, isSuccess, isError, error } =
-    useMutation(submitFormHandler);
-
-  //
-
-  if (!csrf) return null;
-  if (isLoading) return <Verifying />;
-  if (isSuccess) return <ConnectionSuccess />;
-  if (isError) return <ErrorOccur error={error as Error} />;
-
-  return (
-    <div className="col-span-full mx-auto flex flex-col justify-center ">
-      <UI.CreateForm
-        onSubmit={(values) => console.log(values)}
-        slot-CategoryField={(props) => <SelectCategoryField {...props} />}
-        slot-InExchangeOf={(props) => <SelectCategoryField {...props} />}
-      />
-    </div>
-  );
+  const { data: session } = useSession();
+  const repository = new Exchange_Repository(fromClient, session?.user?.jwt);
+  const {
+    create: { useMutation },
+  } = new Exchange_CreateForm_Controller(repository);
+  const { mutate, status, error } = useMutation();
+  return match(status)
+    .with("error", () => <ErrorOccur error={error as Error} />)
+    .with("idle", () => (
+      <div className="col-span-full mx-auto flex flex-col justify-center ">
+        <UI.CreateForm
+          onSubmit={(values) => mutate(values)}
+          slot-CategoryField={(props) => <SelectCategoryField {...props} />}
+          slot-InExchangeOf={(props) => <SelectCategoryField {...props} />}
+        />
+      </div>
+    ))
+    .with("loading", () => <Verifying />)
+    .with("success", () => <ConnectionSuccess />)
+    .exhaustive();
 }
 
 //
 
 function ConnectionSuccess() {
   return (
-    <div className="col-span-full flex flex-col justify-center bg-black text-white">
+    <div className="col-span-full flex min-h-full flex-col justify-center bg-black text-white">
       <h1
         className={`
           mx-auto
@@ -59,22 +55,9 @@ function ConnectionSuccess() {
   );
 }
 
-async function submitFormHandler(_context: UI.FormValues) {
-  // const { email } = context;
-  // const res = await fetch(`/api/auth/magic/${email}`, {
-  //   method: "POST",
-  //   body: JSON.stringify({ context }),
-  // });
-  // const result = await res.json();
-  // if (result.error) {
-  //   throw result.error;
-  // }
-  // return result;
-}
-
 function Verifying() {
   return (
-    <div className="col-span-full flex flex-col justify-center bg-black text-white">
+    <div className="col-span-full flex min-h-full flex-col justify-center bg-black text-white">
       <h1
         className={`
           mx-auto
@@ -96,7 +79,7 @@ function Verifying() {
 
 function ErrorOccur({ error }: { error: Error }) {
   return (
-    <div className="col-span-full flex flex-col justify-center bg-black text-white">
+    <div className="col-span-full flex min-h-full flex-col justify-center bg-black text-white">
       <h1
         className={`
           mx-auto

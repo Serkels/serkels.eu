@@ -1,6 +1,7 @@
 //
 
 import { Entity } from "@1/core/domain";
+import type { Type, TypeProps } from "./Type.value";
 
 //
 
@@ -20,7 +21,7 @@ interface Category {
 export interface ExchangeProps {
   id: number;
   done: boolean;
-  type: "proposal" | "research";
+  type: Type;
   is_online: boolean;
   when: Date;
   title: string;
@@ -42,13 +43,17 @@ export class Exchange extends Entity<ExchangeProps> {}
 //
 
 export interface Exchange_CreateProps
-  extends Omit<
+  extends Pick<
     ExchangeProps,
-    "category" | "in_exchange_of" | "when" | "slug" | "owner" | "profile"
+    | "available_places"
+    | "description"
+    | "is_online"
+    | "location"
+    | "places"
+    | "title"
   > {
-  category: number;
-  in_exchange_of: number;
+  category: string;
+  in_exchange_of?: string | undefined;
+  type: TypeProps["value"];
   when: string;
-  owner: number;
-  profile: number;
 }

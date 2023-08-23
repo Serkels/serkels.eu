@@ -39,7 +39,7 @@ export function SelectCategoryField(props: FieldAttributes<{}>) {
 
   return (
     <Field component="select" {...props}>
-      <option hidden value={NaN}>
+      <option hidden value={""}>
         {props.placeholder}
       </option>
       {categories

@@ -1,6 +1,7 @@
 //
 
 import type { Exchange_CreateProps } from "@1/modules/exchange/domain";
+import { type TypeProps } from "@1/modules/exchange/domain/Type.value";
 import clsx from "clsx";
 import {
   Field,
@@ -14,22 +15,8 @@ import { Button } from "../../components/ButtonV";
 
 //
 
-export type FormValues = Pick<
-  Exchange_CreateProps,
-  | "type"
-  | "is_online"
-  | "category"
-  | "description"
-  | "title"
-  | "location"
-  | "places"
-  | "in_exchange_of"
->;
-export type Exchange_Types = Exchange_CreateProps["type"];
+export type FormValues = Omit<Exchange_CreateProps, "available_places">;
 
-// const initialValues: Partial<Exchange_CreateProps> = {
-//   available_places: number,
-// } as const;
 export function CreateForm({
   onSubmit,
   "slot-CategoryField": slotCategoryField,
@@ -38,14 +25,15 @@ export function CreateForm({
   return (
     <Formik
       initialValues={{
-        type: "proposal",
-        is_online: true,
-        category: NaN,
+        category: "",
         description: "",
-        title: "",
+        in_exchange_of: "",
+        location: "",
+        is_online: true,
         places: 1,
-        in_exchange_of: NaN,
-        when: undefined,
+        title: "",
+        type: "proposal",
+        when: "",
       }}
       onSubmit={onSubmit}
     >
@@ -57,7 +45,7 @@ export function CreateForm({
               <Field
                 type="radio"
                 name="type"
-                value={"proposal" as Exchange_Types}
+                value={"research" as TypeProps["value"]}
                 required
               />
             </label>
@@ -66,7 +54,7 @@ export function CreateForm({
               <Field
                 type="radio"
                 name="type"
-                value={"research" as Exchange_Types}
+                value={"proposal" as TypeProps["value"]}
                 required
               />
             </label>
@@ -136,7 +124,10 @@ export function CreateForm({
             <InputField
               className="
               "
+              maxLength={100}
+              minLength={1}
               name="places"
+              required
               type="number"
             />
           </label>
@@ -144,27 +135,19 @@ export function CreateForm({
           <Fieldset>
             <label>
               <span>Sans échange</span>{" "}
-              <Field
-                checked={Number.isNaN(values.in_exchange_of)}
-                onChange={() => setFieldValue("in_exchange_of", NaN)}
-                type="radio"
-              />
+              <Field value="" name="in_exchange_of" type="radio" />
             </label>
             <label>
               <span> Sur place</span>{" "}
-              <Field
-                checked={Number.isInteger(values.in_exchange_of)}
-                type="radio"
-              />
+              <Field checked={Boolean(values.in_exchange_of)} type="radio" />
               {slotInExchangeOf({
                 name: "in_exchange_of",
                 className: clsx(`
-                w-full
-                border
-                border-Silver_Chalice
-              `),
+                  w-full
+                  border
+                  border-Silver_Chalice
+                `),
                 placeholder: "Dans quelle categorie ?",
-                required: true,
                 onChange(event: ChangeEvent<HTMLSelectElement>) {
                   setFieldValue("in_exchange_of", Number(event.target.value));
                 },

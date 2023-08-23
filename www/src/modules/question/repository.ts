@@ -1,10 +1,10 @@
 //
 
 import { HTTPError } from "@1/core/domain";
+import type { Question_ListSchema, Question_Schema } from "@1/strapi-openapi";
 import debug from "debug";
 import { OpenAPIRepository, type ApiClient } from "~/app/api/v1";
 import type { RepositoryPort } from "~/core";
-import type { QuestionListSchema, Question_DTO } from "./dto";
 import type { Question_CreateProps, Question_Entity } from "./entity";
 
 //
@@ -16,7 +16,9 @@ const log = debug("~:modules:question:Question_Repository");
 export type Question_QueryProps = {
   filter?: { search?: string | undefined; category?: string | undefined };
   pagination?: { pageSize?: number; page?: number };
-  sort?: `${keyof NonNullable<NonNullable<Question_DTO>>}:${"asc" | "desc"}`[];
+  sort?: `${keyof NonNullable<NonNullable<Question_Schema>>}:${
+    | "asc"
+    | "desc"}`[];
 };
 
 export class Question_Repository
@@ -54,7 +56,7 @@ export class Question_Repository
     filter,
     sort,
     pagination,
-  }: Question_QueryProps): Promise<QuestionListSchema> {
+  }: Question_QueryProps): Promise<Question_ListSchema> {
     log("findAll", filter);
     const { category, search } = filter ?? {};
     const {

@@ -2,9 +2,10 @@
  * user-profile service
  */
 
+import { Profile_Schema } from "@1/strapi-openapi";
 import { factories } from "@strapi/strapi";
+import type { EntityService } from "@strapi/strapi/lib/services/entity-service";
 import { createHash } from "node:crypto";
-import type { Profile_DTO } from "~/types";
 
 export default factories.createCoreService(
   "api::user-profile.user-profile",
@@ -20,7 +21,8 @@ export default factories.createCoreService(
 //
 
 export async function findOneFromUser(id: number) {
-  const profiles = await strapi.entityService.findMany(
+  const entityService: EntityService = strapi.entityService;
+  const profiles = await entityService.findMany(
     "api::user-profile.user-profile",
     {
       fields: ["id", "firstname", "lastname", "university"],
@@ -28,14 +30,14 @@ export async function findOneFromUser(id: number) {
     },
   );
 
-  if (!profiles || !profiles[0]) {
+  const profile = profiles[0] as Profile_Schema | undefined;
+  if (profile === undefined) {
     strapi.log.warn(
       `service::user-profile.user-profile :findOneFromUser(${id}): detected no profiles`,
     );
-    return;
   }
 
-  return profiles[0] as Profile_DTO;
+  return profile;
 }
 
 function gravatarUrlFor(email: string) {

@@ -2,6 +2,7 @@
 
 import { HTTPError } from "@1/core/domain";
 import type { Exchange_CreateProps } from "@1/modules/exchange/domain";
+import type { Exchange_Schema } from "@1/strapi-openapi";
 import debug from "debug";
 import { OpenAPIRepository, type ApiClient } from "~/app/api/v1";
 import type { RepositoryPort } from "~/core";
@@ -11,13 +12,14 @@ import type { RepositoryPort } from "~/core";
 //
 
 const log = debug("~:modules:exchange:Exchange_Repository");
-type Exchange_DTO = unknown;
 //
 
 export type Exchange_QueryProps = {
   filter?: { search?: string | undefined; category?: string | undefined };
   pagination?: { pageSize?: number; page?: number };
-  sort?: `${keyof NonNullable<NonNullable<Exchange_DTO>>}:${"asc" | "desc"}`[];
+  sort?: `${keyof NonNullable<NonNullable<Exchange_Schema>>}:${
+    | "asc"
+    | "desc"}`[];
 };
 
 export class Exchange_Repository
@@ -29,14 +31,13 @@ export class Exchange_Repository
     log("new", jwt);
   }
 
-  async create(entity: Exchange_CreateProps) {
-    log("create", entity);
-
+  async create(data: Exchange_CreateProps) {
+    log("create", data);
     const { response, error: errorBody } = await this.client.POST(
       "/exchanges",
       {
         body: {
-          data: entity,
+          data,
         },
         headers: this.headers,
         params: {},
