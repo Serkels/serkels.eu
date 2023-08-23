@@ -162,10 +162,10 @@ export function UserBar() {
 
 function MiniUserNav() {
   return (
-    <nav className="flex items-center justify-end">
-      <button className="p-2 [&>svg]:w-5">
+    <nav className="flex items-center justify-end space-x-3">
+      <Link href={"/my/new/exchange"}>
         <Plus className="h-4 w-4" />
-      </button>
+      </Link>
       <Link href={"/my/profile"} className="relative">
         <Avatar className="h-6 w-6 border-2 border-white" />
         <DotIndicator />
@@ -176,9 +176,9 @@ function MiniUserNav() {
 function UserNav() {
   return (
     <nav className="grid grid-cols-5 items-center justify-items-center">
-      <button className="p-2 [&>svg]:w-5">
+      <Link href={"/my/new/exchange"}>
         <Plus className="h-4 w-4" />
-      </button>
+      </Link>
       <NotificationButton />
       <Button>
         <Messenger className="h-4 w-4" />

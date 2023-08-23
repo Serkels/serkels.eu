@@ -19,10 +19,11 @@ const Chateau_Green = "#39b154";
 const Congress_Blue = "#023f87";
 const Dove_Gray = "#656565";
 const Eminence = "#782D8E";
+const Gamboge = "#E3A007";
 const RedViolet = "#CE118B";
 const RedViolet_Dark = "#C91489";
+const Silver_Chalice = "#AAAAAA";
 const Violet_Eggplant = "#AA1E8B";
-const Gamboge = "#E3A007";
 
 //
 
@@ -57,7 +58,10 @@ module.exports = {
         Eminence,
         Gamboge,
         RedViolet,
+        Silver_Chalice,
         Violet_Eggplant,
+        //
+        primary: Chateau_Green,
       },
       width: {
         "cols-6": `${COLUMNS_SIZE * 6 + GAP_SIZE * 5}px`,

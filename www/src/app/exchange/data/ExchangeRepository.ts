@@ -1,7 +1,7 @@
 //
 
 import { OpenAPIRepository } from "@/app/api/v1";
-import { Exchange } from  "@1/modules/exchange/domain";
+// import { Exchange } from  "@1/modules/exchange/domain";
 
 //
 
@@ -22,8 +22,8 @@ export class ExchangeRepository extends OpenAPIRepository {
       page,
       search,
     });
-    
-    const data  = [
+
+    const data = [
       {
         id: 123,
         attributes: {

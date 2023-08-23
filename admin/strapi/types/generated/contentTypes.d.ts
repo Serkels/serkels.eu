@@ -869,6 +869,69 @@ export interface ApiBookmarkBookmark extends Schema.CollectionType {
   };
 }
 
+export interface ApiExchangeExchange extends Schema.CollectionType {
+  collectionName: 'exchanges';
+  info: {
+    singularName: 'exchange';
+    pluralName: 'exchanges';
+    displayName: 'Exchange';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    slug: Attribute.UID<'api::exchange.exchange', 'title'>;
+    type: Attribute.Enumeration<['proposal', 'research']> & Attribute.Required;
+    is_online: Attribute.Boolean & Attribute.Required;
+    category: Attribute.Relation<
+      'api::exchange.exchange',
+      'oneToOne',
+      'api::opportunity-category.opportunity-category'
+    >;
+    when: Attribute.Date;
+    description: Attribute.Text & Attribute.Required;
+    location: Attribute.String;
+    available_places: Attribute.Integer & Attribute.Required;
+    places: Attribute.Integer &
+      Attribute.Required &
+      Attribute.SetMinMax<{
+        max: 10;
+      }> &
+      Attribute.DefaultTo<1>;
+    in_exchange_of: Attribute.Relation<
+      'api::exchange.exchange',
+      'oneToOne',
+      'api::opportunity-category.opportunity-category'
+    >;
+    owner: Attribute.Relation<
+      'api::exchange.exchange',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    profile: Attribute.Relation<
+      'api::exchange.exchange',
+      'oneToOne',
+      'api::user-profile.user-profile'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::exchange.exchange',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::exchange.exchange',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiOpportunityOpportunity extends Schema.CollectionType {
   collectionName: 'opportunities';
   info: {
@@ -1225,6 +1288,7 @@ declare module '@strapi/strapi' {
       'plugin::comments.comment-report': PluginCommentsCommentReport;
       'plugin::passwordless.token': PluginPasswordlessToken;
       'api::bookmark.bookmark': ApiBookmarkBookmark;
+      'api::exchange.exchange': ApiExchangeExchange;
       'api::opportunity.opportunity': ApiOpportunityOpportunity;
       'api::opportunity-category.opportunity-category': ApiOpportunityCategoryOpportunityCategory;
       'api::partner.partner': ApiPartnerPartner;

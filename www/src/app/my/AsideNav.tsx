@@ -28,8 +28,8 @@ export function AsideNav(props: ComponentPropsWithoutRef<"aside">) {
           >
             <ItemLinkWithIcon
               icon={<Plus />}
-              match="/my/Créer"
-              href="/my/profile"
+              match="/my/new/exchange"
+              href="/my/new/exchange"
             >
               Créer
             </ItemLinkWithIcon>

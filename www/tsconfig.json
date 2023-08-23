@@ -4,6 +4,7 @@
     "baseUrl": "src",
     "declaration": false,
     "declarationMap": false,
+    "exactOptionalPropertyTypes": false,
     "paths": {
       "~/*": ["*"],
       "@/*": ["*"]

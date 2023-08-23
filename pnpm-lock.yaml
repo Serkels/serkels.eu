@@ -258,6 +258,9 @@ importers:
       react-stately:
         specifier: 3.25.0
         version: 3.25.0(react@18.2.0)
+      tailwind-variants:
+        specifier: 0.1.13
+        version: 0.1.13(tailwindcss@3.3.3)
       tailwindcss:
         specifier: 3.3.3
         version: 3.3.3
@@ -265,6 +268,9 @@ importers:
         specifier: 1.0.6
         version: 1.0.6(tailwindcss@3.3.3)
     devDependencies:
+      '@1/modules':
+        specifier: workspace:*
+        version: link:../modules
       '@1/strapi-openapi':
         specifier: workspace:*
         version: link:../strapi-openapi
@@ -417,6 +423,9 @@ importers:
       superjson:
         specifier: 1.13.1
         version: 1.13.1
+      tailwind-variants:
+        specifier: 0.1.13
+        version: 0.1.13(tailwindcss@3.3.3)
       tailwindcss:
         specifier: 3.3.3
         version: 3.3.3
@@ -8617,6 +8626,20 @@ packages:
   /tabbable@6.2.0:
     resolution: {integrity: sha512-Cat63mxsVJlzYvN51JmVXIgNoUokrIaT2zLclCXjRd8boZ0004U4KCs/sToJ75C6sdlByWxpYnb5Boif1VSFew==}
     dev: true
+
+  /tailwind-merge@1.14.0:
+    resolution: {integrity: sha512-3mFKyCo/MBcgyOTlrY8T7odzZFx+w+qKSMAmdFzRvqBfLlSigU6TZnlFHK0lkMwj9Bj8OYU+9yW9lmGuS0QEnQ==}
+    dev: false
+
+  /tailwind-variants@0.1.13(tailwindcss@3.3.3):
+    resolution: {integrity: sha512-G2M7M74hjq0nAo6QdEfUJgF+0t9DecFUw91GC1P9YTnwMcfB3uChT5U5e2DuNU42xoOz15lzo7r0mPdMzZkylg==}
+    engines: {node: '>=16.x', pnpm: '>=7.x'}
+    peerDependencies:
+      tailwindcss: '*'
+    dependencies:
+      tailwind-merge: 1.14.0
+      tailwindcss: 3.3.3
+    dev: false
 
   /tailwindcss-animate@1.0.6(tailwindcss@3.3.3):
     resolution: {integrity: sha512-4WigSGMvbl3gCCact62ZvOngA+PRqhAn7si3TQ3/ZuPuQZcIEtVap+ENSXbzWhpojKB8CpvnIsrwBu8/RnHtuw==}

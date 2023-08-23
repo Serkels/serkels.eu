@@ -8,6 +8,7 @@ import {
 import { Button } from "@1/ui/components/Button";
 import { Field, Form, Formik } from "formik";
 import { useSearchParams } from "next/navigation";
+import { SelectCategoryField } from "~/components/SelectCategoryField";
 
 //
 
@@ -73,6 +74,12 @@ export function QACardFormBody({
             required
           />
           <div className="flex justify-between">
+            <SelectCategoryField
+              className="min-w-[25%] border border-[#dddddd]"
+              disabled={isSubmitting}
+              name="category"
+              required
+            />
             <Field
               className="min-w-[25%] border border-[#dddddd]"
               component="select"
