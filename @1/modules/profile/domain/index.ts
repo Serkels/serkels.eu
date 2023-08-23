@@ -1,21 +1,24 @@
 //
 
 import { Entity, Ok, Result } from "@1/core/domain";
+import { z } from "zod";
 
 //
 
-export interface Profile_Props {
-  id: number;
-  firstname: string;
-  lastname: string;
-  about: string;
-  createdAt: Date;
-  updatedAt: Date;
-  university: string;
-}
+export const Profile_PropsSchema = z.object({
+  id: z.number(),
+  firstname: z.string(),
+  lastname: z.string(),
+  about: z.string(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+  university: z.string(),
+});
+
+export type Profile_Props = z.TypeOf<typeof Profile_PropsSchema>;
 
 export class Profile extends Entity<Profile_Props> {
-  static override create(props: Profile_Props): Result<Profile> {
+  static override create(props: Profile_Props): Result<Profile, Error> {
     return Ok(new Profile(props));
   }
 

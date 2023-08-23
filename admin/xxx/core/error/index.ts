@@ -1,6 +1,9 @@
 //
 
 import ModernError from "modern-errors";
+export type { ErrorInstance } from "modern-errors";
+
+//
 
 //
 

@@ -1,5 +1,6 @@
 //
 
+import { Exchange_ItemSchemaToDomain } from "@1/modules/exchange/infra/strapi";
 import type { Exchange_ItemSchema } from "@1/strapi-openapi";
 import { Spinner } from "@1/ui/components/Spinner";
 import { Exchange } from "@1/ui/icons";
@@ -13,7 +14,6 @@ import { Exchange_Item_Controller } from "~/modules/exchange/Item.controller";
 import { Exchange_Repository } from "~/modules/exchange/infrastructure";
 import { Exchange_QueryKeys } from "~/modules/exchange/queryKeys";
 import { fromClient } from "../api/v1";
-import { ExchangeViewModel } from "./models/ExchangeViewModel";
 
 //
 
@@ -51,13 +51,20 @@ function Exchange_Card({ id }: { id: number }) {
 
   //
 
-  const exchange = ExchangeViewModel.from_server(raw_exchange);
+  const r_exchange = new Exchange_ItemSchemaToDomain().build(raw_exchange);
+  if (r_exchange.isFail()) {
+    console.error(r_exchange.error());
+    return null;
+  }
+
+  const exchange = r_exchange.value();
+
   return (
     <div className="overflow-hidden rounded-xl bg-white text-black shadow-[5px_5px_10px_#7E7E7E33]">
       <div className="p-6">
         <header className="mb-4 flex justify-between">
           <AvatarMediaHorizontal
-            u={exchange.profile.id}
+            u={exchange.profile.get("id")}
             university={exchange.profile.university}
             username={exchange.profile.name}
           />
