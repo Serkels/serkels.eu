@@ -1,4 +1,4 @@
-import type { Notification } from "@1/models";
+import type { Notification } from "@1/modules/notification/domain";
 import { type Observable } from "@trpc/server/observable";
 import SuperJSON from "superjson";
 export interface AppContext {
@@ -49,7 +49,7 @@ export declare const appRouter: import("@trpc/server").CreateRouterInner<import(
         _input_out: string;
         _output_in: typeof import("@trpc/server").unsetMarker;
         _output_out: typeof import("@trpc/server").unsetMarker;
-    }, Observable<Notification, unknown>>;
+    }, Observable<import("@1/modules/notification/domain").Notification_New_Answer, unknown>>;
 }>;
 export type AppRouter = typeof appRouter;
 //# sourceMappingURL=index.d.ts.map

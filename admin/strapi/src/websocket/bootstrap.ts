@@ -1,6 +1,11 @@
 //
 
-import { Notification } from "@1/models";
+import {
+  Notification_New_Answer,
+  type Notification,
+} from "@1/modules/notification/domain";
+import { Profile_Mapper } from "@1/modules/profile/infra/strapi";
+import { Profile_Schema } from "@1/strapi-openapi";
 import { appRouter, type AppContext } from "@1/strapi-trpc-router";
 import { getService } from "@strapi/plugin-users-permissions/server/utils";
 import type { Strapi } from "@strapi/strapi";
@@ -9,8 +14,6 @@ import { applyWSSHandler } from "@trpc/server/adapters/ws";
 import { observable } from "@trpc/server/observable";
 import type { Comment } from "strapi-plugin-comments/types/contentTypes";
 import { Server, type WebSocket } from "ws";
-import { Profile_Mapper } from "~/infra/strapi/mappers/profile";
-import type { Profile_DTO } from "~/types";
 import { UserEmitterMap } from ".";
 
 //
@@ -52,20 +55,22 @@ export default function bootstrap({ strapi }: { strapi: Strapi }) {
                 const user_id = comment?.authorUser?.id;
                 if (!user_id) return;
 
-                const profile: Profile_DTO = await strapi
+                const profile: Profile_Schema = await strapi
                   .service("api::user-profile.user-profile")
                   .findOneFromUser(user_id);
 
                 if (!profile) return;
 
-                emit.next({
+                const new_answer = Notification_New_Answer.create({
                   answer: { id: Number(comment.id) },
                   createdAt: new Date(comment.createdAt),
                   profile: Profile_Mapper.toDomain(profile),
                   question: { id: 0 },
                   subject: "Q&A",
-                  type: "NEW_ANNSWER",
+                  type: "NEW_ANSWER",
                 });
+
+                emit.next(new_answer.value());
                 strapi.log.debug(`++ ${id} notifications/on_new_answer`);
               };
 

@@ -1,17 +1,18 @@
 //
+//
 
-import type { Mapper } from "@1/core";
-import { Profile } from "@1/models";
-import type { Profile_DTO } from "~/types";
+import { Mapper } from "@1/core/domain";
+import { Profile } from "@1/modules/profile/domain";
+import type { Profile_Schema } from "@1/strapi-openapi";
 
 //
 
-export const Profile_Mapper: Mapper<Profile, Profile_DTO> = {
-  toPersistence(entity: Profile): Profile_DTO {
+export const Profile_Mapper: Mapper<Profile, Profile_Schema> = {
+  toPersistence(_entity: Profile): Profile_Schema {
     throw new Error("Method not implemented.");
   },
-  toDomain(record: Profile_DTO): Profile {
-    return new Profile(String(record.id), {
+  toDomain(record: Profile_Schema): Profile {
+    return Profile.create({
       about: String(record.about),
       createdAt: new Date(String(record.createdAt)),
       firstname: String(record.firstname),
@@ -19,6 +20,6 @@ export const Profile_Mapper: Mapper<Profile, Profile_DTO> = {
       lastname: String(record.lastname),
       university: String(record.university),
       updatedAt: new Date(String(record.updatedAt)),
-    });
+    }).value();
   },
 };

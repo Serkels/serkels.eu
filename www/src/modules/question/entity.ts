@@ -1,8 +1,6 @@
 //
 
-import { v4 } from "uuid";
-import { AggregateRoot } from "~/core/aggregate-root";
-
+import { Entity, Ok } from "@1/core/domain";
 //
 
 export interface Question_Props {}
@@ -12,8 +10,8 @@ export interface Question_CreateProps {
   category: number;
 }
 
-export class Question_Entity extends AggregateRoot<Question_Props> {
-  static create(props: Question_CreateProps) {
-    return new Question_Entity(v4(), props);
+export class Question_Entity extends Entity<Question_Props> {
+  static override create(props: Question_CreateProps) {
+    return Ok(new Question_Entity(props));
   }
 }

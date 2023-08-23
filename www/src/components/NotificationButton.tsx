@@ -1,6 +1,9 @@
 //
 
-import { Profile, type Notification } from "@1/models";
+import {
+  Notification_New_Answer,
+  type Notification,
+} from "@1/modules/notification/domain";
 import { DotIndicator } from "@1/ui/components/DotIndicator";
 import * as UI from "@1/ui/domains/notification";
 import { Bell } from "@1/ui/icons";
@@ -37,12 +40,9 @@ export function NotificationButton() {
             </UI.EmptyNotification>
           ))
           .otherwise(() =>
-            notifications.map((notification) => {
-              const profile_props = notification.profile;
-              const { data: profile } = new Profile(
-                String(profile_props.id),
-                profile_props,
-              );
+            notifications.map((notificationEntity) => {
+              const notification = notificationEntity.toObject();
+              const { profile } = notification;
 
               return (
                 <UI.Notification
@@ -73,7 +73,9 @@ function useNotification() {
     if (!jwt) return;
     websocket.current = trpc.notifications.subscribe(jwt, {
       onData(value) {
-        set_notifications([value]);
+        set_notifications([
+          Notification_New_Answer.create(value as any).value(),
+        ]);
       },
       onStarted() {
         console.log("onStarted");

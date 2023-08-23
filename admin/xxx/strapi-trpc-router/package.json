@@ -9,7 +9,7 @@
     "build": "pnpm run build:tsc"
   },
   "dependencies": {
-    "@1/models": "workspace:*",
+    "@1/modules": "workspace:*",
     "@trpc/server": "10.37.1",
     "superjson": "1.13.1",
     "ws": "8.13.0",

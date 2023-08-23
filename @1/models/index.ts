@@ -1,35 +1,54 @@
 //
 
-import { Entity } from "@1/core";
+import { Entity } from "@1/core/domain";
 
 //
 
-export interface Notification {
-  subject: "Q&A";
-  type: "NEW_ANNSWER";
-  answer: Answer;
-  question: Question;
-  profile: ProfileProps;
-  createdAt: Date;
-  //  state: "pending" | "readed";
-}
-
-export interface Answer {
-  id: number;
-}
-
-export interface Question {
-  id: number;
-}
-
-export interface ProfileProps {
+interface Profile {
   id: number;
   firstname: string;
   lastname: string;
-  about: string;
-  createdAt: Date;
-  updatedAt: Date;
   university: string;
 }
 
-export class Profile extends Entity<ProfileProps> {}
+interface Category {
+  id: number;
+  name: string;
+  slug: string;
+}
+
+export interface ExchangeProps {
+  id: number;
+  done: boolean;
+  type: "proposal" | "research";
+  is_online: boolean;
+  when: Date;
+  title: string;
+  slug: string;
+  location?: string;
+
+  available_places: number;
+  places: number;
+  in_exchange_of?: Category;
+  description: string;
+  createdAt: Date;
+  updatedAt: Date;
+  profile: Profile;
+  category?: Category;
+}
+
+export class Exchange extends Entity<ExchangeProps> {}
+
+//
+
+export interface Exchange_CreateProps
+  extends Omit<
+    ExchangeProps,
+    "category" | "in_exchange_of" | "when" | "slug" | "owner" | "profile"
+  > {
+  category: number;
+  in_exchange_of: number;
+  when: string;
+  owner: number;
+  profile: number;
+}

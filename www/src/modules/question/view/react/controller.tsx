@@ -1,6 +1,6 @@
 //
 
-import { AuthError } from "@1/core";
+import { AuthError } from "@1/core/domain";
 import {
   useInfiniteQuery,
   useMutation,

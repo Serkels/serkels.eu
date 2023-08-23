@@ -1,30 +1,40 @@
 //
 
-interface Profile {
+import { Entity, Ok, Result } from "@1/core/domain";
+
+export type Notification = Notification_New_Answer;
+
+//
+
+export interface Notification_New_Answer {
+  subject: "Q&A";
+  type: "NEW_ANSWER";
+  answer: Answer;
+  question: Question;
+  profile: Profile;
+  createdAt: Date;
+}
+
+export interface Answer {
   id: number;
 }
 
-interface Category {
+export interface Question {
   id: number;
-  name: string;
-  slug: string;
 }
 
-export interface Exchange {
+export interface ProfileProps {
   id: number;
-  done: boolean;
-  type: "proposal";
-  is_online: boolean;
-  when: Date;
-  title: string;
-  slug: string;
-  location?: string;
-  available_places: number;
-  places: number;
-  in_exchange_of?: Category;
-  description: string;
+  firstname: string;
+  lastname: string;
+  about: string;
   createdAt: Date;
   updatedAt: Date;
-  profile: Profile;
-  category?: Category;
+  university: string;
+}
+
+export class Profile extends Entity<ProfileProps> {
+  static override create(props: ProfileProps): Result<Profile> {
+    return Ok(new Profile(props));
+  }
 }

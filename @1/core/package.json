@@ -2,10 +2,9 @@
   "name": "@1/core",
   "version": "0.0.0",
   "type": "module",
-  "exports": "./lib/index.ts",
-  "types": "./lib/index.ts",
   "private": true,
   "dependencies": {
+    "rich-domain": "1.18.3",
     "modern-errors": "6.0.0",
     "uuid": "9.0.0",
     "debug": "4.3.4"

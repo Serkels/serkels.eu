@@ -8,5 +8,5 @@
     "target": "ES2019",
     "verbatimModuleSyntax": false
   },
-  "files": ["lib/index.ts"]
+  "include": ["**/*.ts"]
 }

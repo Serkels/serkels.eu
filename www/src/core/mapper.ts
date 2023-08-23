@@ -1,6 +1,6 @@
 //
 
-import { Entity } from "@1/core";
+import { Entity } from "@1/core/domain";
 
 //
 

@@ -1,7 +1,7 @@
 //
 
 import { BasicOpenApiViewModel } from "@/core/models/BasicOpenApiViewModel";
-import { IllegalArgs } from "@1/core";
+import { IllegalArgs } from "@1/core/domain";
 import type { components } from "@1/strapi-openapi/v1";
 
 //

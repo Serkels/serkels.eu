@@ -1,6 +1,6 @@
 //
 
-import { ViewModelError } from "@1/core";
+import { ViewModelError } from "@1/core/domain";
 import {
   createContext,
   useContext,

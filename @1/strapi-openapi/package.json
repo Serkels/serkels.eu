@@ -4,10 +4,16 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "build:ts": "rm -rf v1.d.ts && openapi-typescript openapi.json --output v1.d.ts --empty-objects-unknown --default-non-nullable --alphabetize",
-    "dev": "pnpx chokidar-cli \"*.json\" -c \"pnpm run build:ts\" --initial --follow-symlinks"
+    "build:ts": "openapi-typescript openapi.json --output v1.d.ts --empty-objects-unknown --default-non-nullable --alphabetize",
+    "clean": "rm -rf v1.d.ts",
+    "dev": "chokidar \"*.json\" -c \"pnpm run clean && pnpm run build:ts\" --initial --follow-symlinks"
+  },
+  "dependencies": {
+    "@1/core": "workspace:*"
   },
   "devDependencies": {
+    "@1/typescript-config": "workspace:*",
+    "chokidar-cli": "3.0.0",
     "openapi-typescript": "6.5.2",
     "prettier": "3.0.2",
     "typescript": "5.1.6"

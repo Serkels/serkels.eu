@@ -1,4 +1,4 @@
 packages:
   - "strapi"
-  - "xxx/config/*"
   - "xxx/*"
+  - "xxx/config/*"

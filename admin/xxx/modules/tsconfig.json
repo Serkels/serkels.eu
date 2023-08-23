@@ -1,7 +1,6 @@
 {
   "extends": ["@1/typescript-config/base.json"],
   "compilerOptions": {
-    "baseUrl": ".",
     "lib": ["ES2020"],
     "module": "CommonJS",
     "moduleResolution": "Node",

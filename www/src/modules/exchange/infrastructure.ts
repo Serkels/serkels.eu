@@ -1,6 +1,6 @@
 //
 
-import { HTTPError } from "@1/core";
+import { HTTPError } from "@1/core/domain";
 import type { Exchange_CreateProps } from "@1/modules/exchange/domain";
 import debug from "debug";
 import { OpenAPIRepository, type ApiClient } from "~/app/api/v1";

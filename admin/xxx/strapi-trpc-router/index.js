@@ -21,21 +21,5 @@ exports.appRouter = t.router({
         .subscription(async function notifications({ ctx, input: token }) {
         const { id: user_id } = await ctx.verify_jwt(token);
         return ctx.subscription_to.notifications(user_id);
-        // let greetting_emmiter = ctx.emitters.get(user_id);
-        // const greetting_emmiter = ctx.get_emmiter(user_id, "GRETTING");
-        // // if (!greetting_emmiter) {
-        // //   const emitter = new EventEmitter();
-        // //   ctx.emitters.set(user_id, emitter);
-        // //   greetting_emmiter = emitter;
-        // // }
-        // console.log("on notifications", { user_id });
-        // return observable<Notification>(function sub(emit) {
-        //   console.log("on notifications > observable sub", { user_id });
-        //   const onAdd = (data: Notification) => emit.next(data);
-        //   greetting_emmiter.on("add", onAdd);
-        //   return function unsub() {
-        //     greetting_emmiter.off("add", onAdd);
-        //   };
-        // });
     }),
 });
