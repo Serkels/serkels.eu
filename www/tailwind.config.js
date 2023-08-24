@@ -5,9 +5,7 @@ module.exports = {
   ...config,
   content: [
     "./src/**/*.{ts,tsx}",
-    "../@1/ui/{components,domains,helpers,icons,shell}/**/*.{ts,tsx}",
+    "../@1/ui/{components,domains,helpers,icons,shell,theme}/**/*.{ts,tsx}",
   ],
-  plugins: [
-    ...config.plugins
-  ]
+  plugins: [...config.plugins],
 };

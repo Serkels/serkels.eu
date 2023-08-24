@@ -4,5 +4,5 @@
     // "baseUrl": ".",
     "exactOptionalPropertyTypes": false
   },
-  "include": ["components", "domains", "helpers", "icons", "shell"]
+  "include": ["components", "domains", "helpers", "theme", "icons", "shell"]
 }

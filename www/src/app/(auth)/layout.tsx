@@ -18,7 +18,7 @@ export default function Layout({ children }: PropsWithChildren) {
           priority
         />
       </BigBar>
-      <Grid theme-padding={false}>{children}</Grid>
+      <Grid $padding={false}>{children}</Grid>
       <AppFooter />
     </div>
   );

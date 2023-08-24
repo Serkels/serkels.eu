@@ -1,21 +1,16 @@
 //
 
-import clsx from "clsx";
 import type { ComponentPropsWithoutRef } from "react";
+import tw from "tailwind-styled-components";
 
 //
 
-export function AsideBar(props: ComponentPropsWithoutRef<"aside">) {
-  const { className, children, ...other_props } = props;
-  return (
-    <aside
-      className={clsx("hidden md:col-span-2 md:block xl:col-span-3", className)}
-      {...other_props}
-    >
-      {children}
-    </aside>
-  );
-}
+export const AsideBar = tw.aside`
+  hidden
+  md:col-span-2
+  md:block
+  xl:col-span-3
+`;
 
 export function AsideWithTitle(
   props: ComponentPropsWithoutRef<"aside"> & { title: string },

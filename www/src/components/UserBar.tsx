@@ -34,7 +34,7 @@ export function UserBar() {
   // console.log({ lolQuery });
 
   return (
-    <header className="sticky top-0 z-10 bg-primary-gradient-74 text-white shadow-[0_3px_6px_#00000029]">
+    <header className="sticky top-0 z-50 bg-primary-gradient-74 text-white shadow-[0_3px_6px_#00000029]">
       <AppSidebar hidden={!showSideBar} onClose={() => setShowSideBar(false)} />
       <Grid className="items-center sm:grid-cols-[repeat(3,_auto)]">
         <figure

@@ -3,6 +3,7 @@
 import { Button } from "@1/ui/components/ButtonV";
 import { Spinner } from "@1/ui/components/Spinner";
 import * as UI from "@1/ui/domains/exchange/AskModal";
+import { OnlineOrLocation } from "@1/ui/domains/exchange/OnlineOrLocation";
 import { Share } from "@1/ui/icons";
 import { useMutation } from "@tanstack/react-query";
 import { Formik } from "formik";
@@ -99,10 +100,10 @@ export function Ask_Form({ onSend }: { onSend: (message: string) => void }) {
         <h3 className="text-2xl font-bold">{exchange.title}</h3>
       </UI.NotImplemented>
       <UI.NotImplemented>
-        {match(exchange.is_online)
-          .with(true, () => "En ligne")
-          .with(false, () => exchange.location)
-          .exhaustive()}
+        <OnlineOrLocation
+          is_online={exchange.is_online}
+          location={exchange.location}
+        />
       </UI.NotImplemented>
       <UI.NotImplemented>
         <time

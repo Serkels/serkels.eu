@@ -4,6 +4,7 @@ import { Exchange_ItemSchemaToDomain } from "@1/modules/exchange/infra/strapi";
 import type { Exchange_ItemSchema } from "@1/strapi-openapi";
 import { Spinner } from "@1/ui/components/Spinner";
 import * as UI from "@1/ui/domains/exchange/Card";
+import { OnlineOrLocation } from "@1/ui/domains/exchange/OnlineOrLocation";
 import { Exchange } from "@1/ui/icons";
 import { useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
@@ -66,7 +67,7 @@ function Exchange_Card({ id }: { id: number }) {
     <Exchange_CardContext.Provider value={{ exchange }}>
       <UI.Card>
         <div className="p-6">
-          <header className="mb-4 flex justify-between">
+          <header className="mb-4 flex flex-1 justify-between">
             <AvatarMediaHorizontal
               u={exchange.profile.get("id")}
               university={exchange.profile.university}
@@ -94,13 +95,10 @@ function Exchange_Card({ id }: { id: number }) {
                   .with("research", () => "Recherche")
                   .exhaustive()}
               </span>
-              <span className="font-bold">
-                📍
-                {match(exchange.is_online)
-                  .with(true, () => "En ligne")
-                  .with(false, () => exchange.location)
-                  .exhaustive()}
-              </span>
+              <OnlineOrLocation
+                is_online={exchange.is_online}
+                location={exchange.location}
+              />
             </div>
             <div className=" flex items-center justify-between">
               <span className="whitespace-nowrap font-bold uppercase">
