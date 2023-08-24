@@ -45,8 +45,8 @@ importers:
         specifier: 10.0.0
         version: 10.0.0(eslint@8.47.0)
       eslint-plugin-testing-library:
-        specifier: 6.0.0
-        version: 6.0.0(eslint@8.47.0)(typescript@5.1.6)
+        specifier: 6.0.1
+        version: 6.0.1(eslint@8.47.0)(typescript@5.1.6)
       next:
         specifier: 13.4.19
         version: 13.4.19(react-dom@18.2.0)(react@18.2.0)
@@ -5471,8 +5471,8 @@ packages:
       eslint: 8.47.0
     dev: false
 
-  /eslint-plugin-testing-library@6.0.0(eslint@8.47.0)(typescript@5.1.6):
-    resolution: {integrity: sha512-SHeisSxG1f6UV2wKdMuQBiTTmGEQ858H7LMyz1LG+30TxPQEcXXQauC4E6sfEdcrJ/nIOUxNmlFZdlL6PNK4mg==}
+  /eslint-plugin-testing-library@6.0.1(eslint@8.47.0)(typescript@5.1.6):
+    resolution: {integrity: sha512-CEYtjpcF3hAaQtYsTZqciR7s5z+T0LCMTwJeW+pz6kBnGtc866wAKmhaiK2Gsjc2jWNP7Gt6zhNr2DE1ZW4e+g==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0, npm: '>=6'}
     peerDependencies:
       eslint: ^7.5.0 || ^8.0.0
