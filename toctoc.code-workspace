@@ -65,7 +65,15 @@
     "typescript.tsdk": "root/node_modules/typescript/lib",
     "workbench.editor.labelFormat": "medium",
     "autoHide.autoHidePanel": false,
-    "tailwindCSS.rootFontSize": 14
+    "tailwindCSS.rootFontSize": 14,
+
+    "tailwindCSS.experimental.classRegex": [
+      [
+        // "tv\\(([^)]*)\\)",
+        // "clsx\\(([^)]*)\\)",
+        "[\"'`]([^\"'`]*).*?[\"'`]"
+      ]
+    ]
   },
   "tasks": {
     "version": "2.0.0",

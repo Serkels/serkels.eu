@@ -1,7 +1,7 @@
 {
   "extends": ["@1/typescript-config/react.json"],
   "compilerOptions": {
-    "baseUrl": ".",
+    // "baseUrl": ".",
     "exactOptionalPropertyTypes": false
   },
   "include": ["components", "domains", "helpers", "icons", "shell"]

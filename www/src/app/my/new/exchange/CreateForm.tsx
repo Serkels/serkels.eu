@@ -30,13 +30,13 @@ export function CreateForm() {
       </div>
     ))
     .with("loading", () => <Verifying />)
-    .with("success", () => <ConnectionSuccess />)
+    .with("success", () => <CreationSuccess />)
     .exhaustive();
 }
 
 //
 
-function ConnectionSuccess() {
+function CreationSuccess() {
   return (
     <div className="col-span-full flex min-h-full flex-col justify-center bg-black text-white">
       <h1

@@ -17,7 +17,7 @@ export function Card({
         shadow-[5px_5px_10px_#7E7E7E33]
       "
     >
-      <div className="p-6">{children}</div>
+      {children}
     </div>
   );
 }

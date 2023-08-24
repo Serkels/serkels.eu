@@ -6,6 +6,7 @@ const {
 const plugin = require("tailwindcss/plugin");
 
 const defaultTheme = require("tailwindcss/defaultTheme");
+const { withTV } = require("tailwind-variants/transformer");
 
 const path = require("path");
 const fs = require("fs");
@@ -33,7 +34,7 @@ const GAP_SIZE = 35;
 //
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+module.exports = withTV({
   theme: {
     extend: {
       screens: {
@@ -138,4 +139,4 @@ module.exports = {
       addVariant("search-cancel", "&::-webkit-search-cancel-button");
     }),
   ],
-};
+});
