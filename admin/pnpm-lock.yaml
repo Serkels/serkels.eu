@@ -170,8 +170,8 @@ importers:
         specifier: 6.0.0
         version: 6.0.0
       rich-domain:
-        specifier: 1.18.3
-        version: 1.18.3
+        specifier: 1.18.4
+        version: 1.18.4
     devDependencies:
       '@1/typescript-config':
         specifier: workspace:*
@@ -10338,8 +10338,8 @@ packages:
     resolution: {integrity: sha512-U9nH88a3fc/ekCF1l0/UP1IosiuIjyTh7hBvXVMHYgVcfGvt897Xguj2UOLDeI5BG2m7/uwyaLVT6fbtCwTyzw==}
     engines: {iojs: '>=1.0.0', node: '>=0.10.0'}
 
-  /rich-domain@1.18.3:
-    resolution: {integrity: sha512-q+L6DEk8VPx9EXr0mLHkCiwRUbaH18ES26vjZJwCSFhgzkjT5Qbdez7QXFngDxOF9EF6fJQUG3jAz3t/8jE+Wg==}
+  /rich-domain@1.18.4:
+    resolution: {integrity: sha512-xfsKrG/hLYQoeym6JDW4xnOPa3iuyaNoJ5BwD+i4QL1DnoYLLsFYLfbFO1sWw5/dwjXYGRS1Acuic22/T0orqg==}
     engines: {node: '>=16.x <19'}
     dev: false
 

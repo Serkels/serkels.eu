@@ -9,7 +9,7 @@
     "build": "pnpm run build:tsc"
   },
   "dependencies": {
-    "rich-domain": "1.18.3",
+    "rich-domain": "1.18.4",
     "modern-errors": "6.0.0"
   },
   "devDependencies": {

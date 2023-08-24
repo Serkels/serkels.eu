@@ -4,7 +4,7 @@
   "type": "module",
   "private": true,
   "dependencies": {
-    "rich-domain": "1.18.3",
+    "rich-domain": "1.18.4",
     "modern-errors": "6.0.0",
     "uuid": "9.0.0",
     "debug": "4.3.4",
