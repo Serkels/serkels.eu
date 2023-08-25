@@ -27,6 +27,11 @@ const nextConfig = {
         destination: "/my/bookmarks/opportunities",
         permanent: true,
       },
+      {
+        source: "/my/exchange/:id",
+        destination: "/my/exchange/:id/discussion",
+        permanent: true,
+      },
     ];
   },
   async rewrites() {

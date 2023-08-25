@@ -10,4 +10,7 @@ export const Exchange_QueryKeys = {
   item(id: number | string) {
     return [...this.all, "item", String(id)] as const;
   },
+  discussions(id: number | string) {
+    return [...this.item(id), "discussions"] as const;
+  },
 };

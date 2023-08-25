@@ -5,9 +5,20 @@ import type { components } from "@1/strapi-openapi/v1";
 import { LocationRadius, Share } from "@1/ui/icons";
 import clsx from "clsx";
 import * as NProgress from "nprogress";
-import type { ComponentPropsWithoutRef } from "react";
+import type { ComponentPropsWithoutRef, MouseEvent } from "react";
 
 //
+
+function preventNProgressLoader(e: MouseEvent) {
+  e.preventDefault();
+  e.stopPropagation();
+
+  // ! HACK(douglasduteil): stop NProgress from displaying a loader
+  // As nextjs-toploader is "secretly" looking for a parent link,
+  // this click event will still produce a NProgress.start();
+  // \see https://github.com/TheSGJ/nextjs-toploader/blob/c1678c2/src/index.tsx#L136-L141
+  setTimeout(() => NProgress.done(), 2_222);
+}
 
 export function OpportunityCard(props: Props) {
   const {
@@ -74,19 +85,7 @@ export function OpportunityCard(props: Props) {
           <aside className="text-xs font-bold uppercase leading-[inherit] text-Dove_Gray">
             {category}
           </aside>
-          <aside
-            className="space-x-3"
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-
-              // ! HACK(douglasduteil): stop NProgress from displaying a loader
-              // As nextjs-toploader is "secretly" looking for a parent link,
-              // this click event will still produce a NProgress.start();
-              // \see https://github.com/TheSGJ/nextjs-toploader/blob/c1678c2/src/index.tsx#L136-L141
-              setTimeout(() => NProgress.done(), 2_222);
-            }}
-          >
+          <aside className="space-x-3" onClick={preventNProgressLoader}>
             <BookmarkButton
               opportunity={Number(id)}
               className={({ isActive }) =>

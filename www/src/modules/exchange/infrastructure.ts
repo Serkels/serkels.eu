@@ -3,6 +3,7 @@
 import { HTTPError } from "@1/core/domain";
 import type { Exchange_CreateProps } from "@1/modules/exchange/domain";
 import type {
+  Exchange_DiscussionListSchema,
   Exchange_ItemSchema,
   Exchange_ListSchema,
 } from "@1/strapi-openapi";
@@ -90,7 +91,7 @@ export class Exchange_Repository
     });
 
     if (errorBody) {
-      log("create", errorBody);
+      log("findAll", errorBody);
       throw new HTTPError(
         [errorBody.error.message, "from " + response.url].join("\n"),
         { cause: errorBody.error },
@@ -114,7 +115,7 @@ export class Exchange_Repository
     });
 
     if (errorBody) {
-      log("create", errorBody);
+      log("findById", errorBody);
       throw new HTTPError(
         [errorBody.error.message, "from " + response.url].join("\n"),
         { cause: errorBody.error },
@@ -122,5 +123,55 @@ export class Exchange_Repository
     }
 
     return body?.data;
+  }
+
+  async discussions(id: number): Promise<Exchange_DiscussionListSchema> {
+    log("discussions", id);
+    // const {
+    //   data: body,
+    //   error: errorBody,
+    //   response,
+    // } = await this.client.GET("/exchanges/{id}", {
+    //   headers: this.headers,
+    //   params: {
+    //     path: { id },
+    //   },
+    // });
+
+    // if (errorBody) {
+    //   log("create", errorBody);
+    //   throw new HTTPError(
+    //     [errorBody.error.message, "from " + response.url].join("\n"),
+    //     { cause: errorBody.error },
+    //   );
+    // }
+
+    await Promise.race([
+      new Promise((resolve) => setTimeout(resolve, 3_333 * Math.random())),
+      // new Promise((_, reject) => setTimeout(reject, 3_333 * Math.random())),
+    ]);
+    return Promise.resolve({
+      data: [
+        {
+          id: 42,
+          attributes: {
+            profile: {
+              data: {
+                id: 34,
+                attributes: {
+                  firstname: "Yasmin",
+                  lastname: "Belamine",
+                },
+              },
+            },
+            updatedAt: "2023/08/07",
+            createdAt: "2023/07/07",
+          },
+        },
+      ],
+      meta: {
+        pagination: {},
+      },
+    });
   }
 }

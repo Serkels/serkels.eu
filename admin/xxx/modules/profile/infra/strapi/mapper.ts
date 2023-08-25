@@ -14,14 +14,19 @@ import { Profile } from "../../domain";
 
 //
 
+const StrapiResponseDataObject = z
+  .object({
+    id: z.number().describe("The profile record id"),
+    attributes: z.any().describe("The profile record attributes"),
+  })
+  .describe("Strapi Response Data Object");
+
 export class Profile_SchemaToDomain
   implements IAdapter<Profile_Schema, Profile, ErrorInstance>
 {
   fromItemDto(record: unknown): Result<Profile, ErrorInstance> {
     try {
-      const schema = z
-        .object({ id: z.number(), attributes: z.any() })
-        .parse(record);
+      const schema = StrapiResponseDataObject.parse(record);
       const domain = this.build(schema);
       if (domain.isFail())
         throw new InputError("Invalid domain", { cause: domain.error() });

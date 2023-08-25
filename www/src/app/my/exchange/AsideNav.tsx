@@ -1,7 +1,6 @@
 "use client";
 
 import { AsideBar } from "@/layouts/holy/aside";
-import { Exchange } from "@1/modules/exchange/domain";
 import { Exchange_ItemSchemaToDomain } from "@1/modules/exchange/infra/strapi";
 import { Button } from "@1/ui/components/ButtonV";
 import { InputSearch } from "@1/ui/components/InputSearch";
@@ -15,7 +14,6 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { type ComponentPropsWithoutRef } from "react";
-import { createStateContext } from "react-use";
 import tw from "tailwind-styled-components";
 import { P, match } from "ts-pattern";
 import { fromClient } from "~/app/api/v1";
@@ -23,11 +21,9 @@ import { Avatar } from "~/components/Avatar";
 import { ErrorOccur } from "~/components/ErrorOccur";
 import { Exchange_List_Controller } from "~/modules/exchange/List.controller";
 import { Exchange_Repository } from "~/modules/exchange/infrastructure";
+import { Exchange_ValueProvider, useExchange_Value } from "./Exchange.context";
 
 //
-
-export const [useExchange_Value, Exchange_ValueProvider] =
-  createStateContext<Exchange>(null as any);
 
 export function AsideNav(props: ComponentPropsWithoutRef<"aside">) {
   const { children, ...other_props } = props;
@@ -86,7 +82,7 @@ function EchangeNav() {
               .map((exchange) => (
                 <li key={exchange.get("id")}>
                   <Exchange_ValueProvider initialValue={exchange}>
-                    <EchangeNavLink />
+                    <Echange_MessagingLink />
                   </Exchange_ValueProvider>
                 </li>
               ))}
@@ -110,11 +106,11 @@ function EchangeNav() {
     .exhaustive();
 }
 
-function EchangeNavLink() {
+function Echange_MessagingLink() {
   const [exchange] = useExchange_Value();
   const pathname = usePathname();
   const { data: session } = useSession();
-  const href = `/my/exchange/${exchange.get("id")}`;
+  const href = `/my/exchange/${exchange.get("id")}/discussion`;
   const active =
     pathname.split("/").length >= href.split("/").length &&
     href.includes(pathname);
@@ -127,6 +123,7 @@ function EchangeNavLink() {
           block
           overflow-hidden
           border-l-4
+          border-transparent
           p-4
         `,
         { "border-l-primary bg-white": active },
@@ -136,7 +133,10 @@ function EchangeNavLink() {
         <div className="float-right">
           <Circle className={clsx("h-4 w-4 text-[#FF5F5F]")} />
         </div>
-        <h4 className="mb-3 line-clamp-1 text-lg font-bold">
+        <h4
+          className="mb-3 line-clamp-1 text-lg font-bold"
+          title={exchange.title}
+        >
           {exchange.title}
         </h4>
       </header>
@@ -146,7 +146,9 @@ function EchangeNavLink() {
           location={exchange.location}
         />
         <div>
-          <DisponibilityBadge $primary>2 / 2</DisponibilityBadge>{" "}
+          <DisponibilityBadge $primary>
+            {exchange.get("available_places")} / {exchange.get("places")}
+          </DisponibilityBadge>{" "}
           <span className="text-sm font-bold ">dispo</span>
         </div>
       </section>
@@ -199,10 +201,10 @@ function EchangeNavLink() {
 
 const DisponibilityBadge = tw.span<VariantProps>`
   inline-block
-  text-white
-  text-xs
-  px-2
   rounded-full
+  px-2
+  text-xs
+  text-white
   ${(p) => clsx({ "bg-primary": p.$primary })}
 `;
 

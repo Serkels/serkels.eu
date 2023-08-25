@@ -1,16 +1,11 @@
 //
 
 import { Entity, Ok, Result } from "@1/core/domain";
+import type { Category } from "../../common";
 import type { Profile } from "../../profile/domain";
 import type { Type, TypeProps } from "./Type.value";
 
 //
-
-interface Category {
-  id: number;
-  name: string;
-  slug: string;
-}
 
 export interface Exchange_Props {
   id: number;

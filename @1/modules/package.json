@@ -7,6 +7,7 @@
     "@1/core": "workspace:*",
     "@1/strapi-openapi": "workspace:*",
     "@tanstack/react-query": "4.33.0",
+    "date-fns": "2.30.0",
     "debug": "4.3.4",
     "react": "18.2.0",
     "superjson": "1.13.1",

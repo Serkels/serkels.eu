@@ -63,6 +63,7 @@ module.exports = withTV({
         Violet_Eggplant,
         //
         primary: Chateau_Green,
+        warning: Gamboge,
       },
       width: {
         "cols-6": `${COLUMNS_SIZE * 6 + GAP_SIZE * 5}px`,
