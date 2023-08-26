@@ -67,6 +67,9 @@ export default factories.createCoreController(
     },
 
     async avatar(ctx: StrapiRequestContext) {
+      const id = Number(ctx.params.id);
+      if (Number.isNaN(id)) return ctx.notFound("Profile not found");
+
       const profile = await strapi.entityService.findOne(
         "api::user-profile.user-profile",
         ctx.params.id,

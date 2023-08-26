@@ -1,0 +1,44 @@
+---
+"/exchanges/{id}/deals":
+  get:
+    responses:
+      "200":
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    "$ref": "#/components/schemas/ExchangeDealResponseDataObject"
+      "400":
+        "$ref": "#/components/responses/400"
+      "401":
+        "$ref": "#/components/responses/401"
+      "403":
+        "$ref": "#/components/responses/403"
+      "404":
+        "$ref": "#/components/responses/404"
+      "500":
+        "$ref": "#/components/responses/500"
+    tags:
+      - Exchange-deal
+    parameters:
+      - name: id
+        in: path
+        description: The exchange id
+        deprecated: false
+        required: true
+        schema:
+          type: number
+      - name: sort
+        in: query
+        description: Sort by attributes ascending (asc) or descending (desc)
+        deprecated: false
+        required: false
+        schema:
+          type: string
+
+    operationId: get/exchanges/{id}/deals

@@ -932,6 +932,55 @@ export interface ApiExchangeExchange extends Schema.CollectionType {
   };
 }
 
+export interface ApiExchangeDealExchangeDeal extends Schema.CollectionType {
+  collectionName: 'exchange_deals';
+  info: {
+    singularName: 'exchange-deal';
+    pluralName: 'exchange-deals';
+    displayName: 'Exchange Deal';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    exchange: Attribute.Relation<
+      'api::exchange-deal.exchange-deal',
+      'oneToOne',
+      'api::exchange.exchange'
+    >;
+    owner: Attribute.Relation<
+      'api::exchange-deal.exchange-deal',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    participant: Attribute.Relation<
+      'api::exchange-deal.exchange-deal',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    profile: Attribute.Relation<
+      'api::exchange-deal.exchange-deal',
+      'oneToOne',
+      'api::user-profile.user-profile'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::exchange-deal.exchange-deal',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::exchange-deal.exchange-deal',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiOpportunityOpportunity extends Schema.CollectionType {
   collectionName: 'opportunities';
   info: {
@@ -1289,6 +1338,7 @@ declare module '@strapi/strapi' {
       'plugin::passwordless.token': PluginPasswordlessToken;
       'api::bookmark.bookmark': ApiBookmarkBookmark;
       'api::exchange.exchange': ApiExchangeExchange;
+      'api::exchange-deal.exchange-deal': ApiExchangeDealExchangeDeal;
       'api::opportunity.opportunity': ApiOpportunityOpportunity;
       'api::opportunity-category.opportunity-category': ApiOpportunityCategoryOpportunityCategory;
       'api::partner.partner': ApiPartnerPartner;

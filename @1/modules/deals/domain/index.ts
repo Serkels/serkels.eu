@@ -12,7 +12,7 @@ import { formatDistance } from "date-fns";
 import { fr } from "date-fns/locale";
 import { z } from "zod";
 
-export const Discussion_PropsSchema = z.object({
+export const Deal_PropsSchema = z.object({
   createdAt: z.date(),
   id: z.number(),
   last_message: z.string(),
@@ -21,22 +21,20 @@ export const Discussion_PropsSchema = z.object({
   // slug: z.string(),
 });
 
-export type Discussion_Props = z.TypeOf<typeof Discussion_PropsSchema>;
+export type Deal_Props = z.TypeOf<typeof Deal_PropsSchema>;
 
 //
 
-export class Discussion extends Entity<Discussion_Props> {
-  private constructor(props: Discussion_Props) {
+export class Deal extends Entity<Deal_Props> {
+  private constructor(props: Deal_Props) {
     super(props);
   }
 
-  static override create(
-    props: Discussion_Props,
-  ): Result<Discussion, ErrorInstance> {
+  static override create(props: Deal_Props): Result<Deal, ErrorInstance> {
     if (!this.isValidProps(props)) {
       let cause = undefined;
       try {
-        Discussion_PropsSchema.parse(props);
+        Deal_PropsSchema.parse(props);
       } catch (e) {
         cause = e;
       }
@@ -46,14 +44,14 @@ export class Discussion extends Entity<Discussion_Props> {
         }),
       );
     }
-    return Ok(new Discussion(props));
+    return Ok(new Deal(props));
   }
 
   static override isValidProps(props: any): boolean {
     return (
       !this.validator.isUndefined(props) &&
       !this.validator.isNull(props) &&
-      Discussion_PropsSchema.safeParse(props).success
+      Deal_PropsSchema.safeParse(props).success
     );
   }
 

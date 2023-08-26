@@ -25,7 +25,7 @@ import { Exchange_ValueProvider, useExchange_Value } from "./Exchange.context";
 
 //
 
-export function AsideNav(props: ComponentPropsWithoutRef<"aside">) {
+export function MyExchanges(props: ComponentPropsWithoutRef<"aside">) {
   const { children, ...other_props } = props;
   return (
     <AsideBar {...other_props}>
@@ -44,7 +44,7 @@ function EchangeNav() {
   const { data: session } = useSession();
   const repository = new Exchange_Repository(fromClient, session?.user?.jwt);
   const {
-    lists: { useQuery },
+    my: { useQuery },
   } = new Exchange_List_Controller(repository);
 
   const query_result = useQuery({
@@ -77,7 +77,12 @@ function EchangeNav() {
               .map((page) => page.data!)
               .flat()
               .map((raw) => new Exchange_ItemSchemaToDomain().build(raw))
-              .filter((result) => result.isOk())
+              .filter((result) => {
+                if (result.isFail()) {
+                  console.error(result.error());
+                }
+                return result.isOk();
+              })
               .map((result) => result.value())
               .map((exchange) => (
                 <li key={exchange.get("id")}>
@@ -110,7 +115,7 @@ function Echange_MessagingLink() {
   const [exchange] = useExchange_Value();
   const pathname = usePathname();
   const { data: session } = useSession();
-  const href = `/my/exchange/${exchange.get("id")}/discussion`;
+  const href = `/my/exchange/${exchange.get("id")}/deals`;
   const active =
     pathname.split("/").length >= href.split("/").length &&
     href.includes(pathname);

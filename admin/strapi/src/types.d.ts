@@ -6,7 +6,12 @@ import type {
   ParameterizedContext,
 } from "koa";
 
+import type { PolicyImplementation } from "@strapi/strapi/lib/types/core-api/router";
+
 //
+export type AsyncPolicyImplementation<TCfg = unknown> = (
+  ...args: Parameters<PolicyImplementation<TCfg>>
+) => Promise<boolean>;
 
 export interface State extends DefaultStateExtends {
   user?: {

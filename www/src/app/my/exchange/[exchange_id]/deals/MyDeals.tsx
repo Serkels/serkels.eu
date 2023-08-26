@@ -32,7 +32,7 @@ import {
 
 //
 
-export function Exchange_Messaging({ exchange_id }: { exchange_id: number }) {
+export function MyDeals({ exchange_id }: { exchange_id: number }) {
   const { data: session } = useSession();
   const repository = new Exchange_Repository(fromClient, session?.user?.jwt);
   const {
@@ -71,7 +71,7 @@ export function Exchange_Messaging({ exchange_id }: { exchange_id: number }) {
               <button>...</button>
             </Messaging_Header>
             <Diviser />
-            <Echange_DiscussionNav />
+            <Echange_DealsNav />
           </Exchange_ValueProvider>
         );
       },
@@ -84,12 +84,12 @@ export function Exchange_Messaging({ exchange_id }: { exchange_id: number }) {
     .exhaustive();
 }
 
-export function Echange_DiscussionNav() {
+export function Echange_DealsNav() {
   const [exchange] = useExchange_Value();
   const { data: session } = useSession();
   const repository = new Exchange_Repository(fromClient, session?.user?.jwt);
   const {
-    discussions: { useQuery },
+    deals: { useQuery },
   } = new Exchange_Item_Controller(repository);
 
   return match(useQuery(exchange.get("id")))
@@ -122,10 +122,10 @@ export function Echange_DiscussionNav() {
                 return result.isOk();
               })
               .map((result) => result.value())
-              .map((discussion) => (
-                <li key={discussion.get("id")}>
-                  <Discussion_ValueProvider initialValue={discussion}>
-                    <Echange_DiscussionLink />
+              .map((deal) => (
+                <li key={deal.get("id")}>
+                  <Discussion_ValueProvider initialValue={deal}>
+                    <Echange_DealLink />
                   </Discussion_ValueProvider>
                 </li>
               ))}
@@ -151,12 +151,12 @@ export function Echange_DiscussionNav() {
     .exhaustive();
 }
 
-function Echange_DiscussionLink() {
+function Echange_DealLink() {
   const [exchange] = useExchange_Value();
   const [discussion] = useDiscussion_Value();
   const pathname = usePathname();
 
-  const href = `/my/exchange/${exchange.get("id")}/discussion/${discussion.get(
+  const href = `/my/exchange/${exchange.get("id")}/deals/${discussion.get(
     "id",
   )}`;
   const active =
@@ -179,19 +179,19 @@ function Echange_DiscussionLink() {
         { " bg-white": active },
       )}
     >
-      <Echange_DiscussionLink.ui.header>
+      <Echange_DealLink.ui.header>
         <AvatarMediaHorizontal
-          u="1"
+          u={discussion.profile.get("id")}
           username={discussion.profile.name}
           university="Voir le profil"
         />
-        <Echange_DiscussionLink.ui.time
+        <Echange_DealLink.ui.time
           dateTime={discussion.updated_at.toUTCString()}
           title={discussion.updated_at.toUTCString()}
         >
           {discussion.last_update}
-        </Echange_DiscussionLink.ui.time>
-      </Echange_DiscussionLink.ui.header>
+        </Echange_DealLink.ui.time>
+      </Echange_DealLink.ui.header>
       <div className="relative my-5">
         <div className="float-right">
           <Circle className="h-5 w-5 text-Gamboge" />
@@ -204,7 +204,7 @@ function Echange_DiscussionLink() {
   );
 }
 
-Echange_DiscussionLink.ui = {
+Echange_DealLink.ui = {
   header: tw.header`
   flex
   justify-between

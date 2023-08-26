@@ -1,7 +1,7 @@
 //
 
 import type {
-  Exchange_DiscussionListSchema,
+  Exchange_DealListSchema,
   Exchange_ItemSchema,
 } from "@1/strapi-openapi";
 import {
@@ -29,8 +29,8 @@ export class Exchange_Item_Controller {
   item = {
     useQuery: this.useItemQuery.bind(this),
   };
-  discussions = {
-    useQuery: this.useDiscussionQuery.bind(this),
+  deals = {
+    useQuery: this.useDealsQuery.bind(this),
   };
 
   useItemQuery(id: number) {
@@ -53,22 +53,22 @@ export class Exchange_Item_Controller {
     return query_info;
   }
 
-  useDiscussionQuery(id: number) {
-    const loadDiscussionListFn: QueryFunction<
-      Exchange_DiscussionListSchema,
-      ReturnType<typeof Exchange_QueryKeys.discussions>,
+  useDealsQuery(id: number) {
+    const loadDealsListFn: QueryFunction<
+      Exchange_DealListSchema,
+      ReturnType<typeof Exchange_QueryKeys.deals>,
       number
     > = async () => {
-      debug("loadDiscussionListFn");
-      return this.repository.discussions(id);
+      debug("loadDealsListFn");
+      return this.repository.deals(id);
     };
 
     const query_info = useInfiniteQuery({
       enabled: Boolean(this.repository.jwt),
       getNextPageParam,
       getPreviousPageParam,
-      queryFn: useCallback(loadDiscussionListFn, [this.repository, id]),
-      queryKey: Exchange_QueryKeys.discussions(id),
+      queryFn: useCallback(loadDealsListFn, [this.repository, id]),
+      queryKey: Exchange_QueryKeys.deals(id),
       staleTime: Infinity,
     });
 

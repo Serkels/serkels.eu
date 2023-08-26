@@ -6,10 +6,10 @@ export default function Layout({
   children,
   params,
 }: PropsWithChildren<{
-  params: { exchange_id: string; discussion_id: string };
+  params: { exchange_id: string; deal_id: string };
 }>) {
   const exchange_id = Number(params.exchange_id);
-  const discussion_id = Number(params.discussion_id);
-  console.log({ exchange_id, discussion_id });
+  const deal_id = Number(params.deal_id);
+  console.log({ exchange_id, deal_id });
   return <>{children}</>;
 }

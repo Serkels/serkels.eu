@@ -3,7 +3,7 @@
 import { HTTPError } from "@1/core/domain";
 import type { Exchange_CreateProps } from "@1/modules/exchange/domain";
 import type {
-  Exchange_DiscussionListSchema,
+  Exchange_DealListSchema,
   Exchange_ItemSchema,
   Exchange_ListSchema,
 } from "@1/strapi-openapi";
@@ -101,6 +101,41 @@ export class Exchange_Repository
     return body;
   }
 
+  async findAllMine({
+    filter,
+    sort,
+    pagination,
+  }: Exchange_QueryProps): Promise<Exchange_ListSchema> {
+    log("findAllMine", filter);
+
+    const {
+      data: body,
+      error: errorBody,
+      response,
+    } = await this.client.GET("/my/exchanges", {
+      headers: this.headers,
+      params: {
+        query: {
+          pagination: {
+            page: pagination?.page,
+            pageSize: pagination?.pageSize,
+          },
+          sort,
+        } as any,
+      },
+    });
+
+    if (errorBody) {
+      log("findAllMine", errorBody);
+      throw new HTTPError(
+        [errorBody.error.message, "from " + response.url].join("\n"),
+        { cause: errorBody.error },
+      );
+    }
+
+    return body;
+  }
+
   async findById(id: number): Promise<Exchange_ItemSchema | undefined> {
     log("findById", id);
     const {
@@ -125,53 +160,27 @@ export class Exchange_Repository
     return body?.data;
   }
 
-  async discussions(id: number): Promise<Exchange_DiscussionListSchema> {
+  async deals(id: number): Promise<Exchange_DealListSchema> {
     log("discussions", id);
-    // const {
-    //   data: body,
-    //   error: errorBody,
-    //   response,
-    // } = await this.client.GET("/exchanges/{id}", {
-    //   headers: this.headers,
-    //   params: {
-    //     path: { id },
-    //   },
-    // });
-
-    // if (errorBody) {
-    //   log("create", errorBody);
-    //   throw new HTTPError(
-    //     [errorBody.error.message, "from " + response.url].join("\n"),
-    //     { cause: errorBody.error },
-    //   );
-    // }
-
-    await Promise.race([
-      new Promise((resolve) => setTimeout(resolve, 3_333 * Math.random())),
-      // new Promise((_, reject) => setTimeout(reject, 3_333 * Math.random())),
-    ]);
-    return Promise.resolve({
-      data: [
-        {
-          id: 42,
-          attributes: {
-            profile: {
-              data: {
-                id: 34,
-                attributes: {
-                  firstname: "Yasmin",
-                  lastname: "Belamine",
-                },
-              },
-            },
-            updatedAt: "2023/08/07",
-            createdAt: "2023/07/07",
-          },
-        },
-      ],
-      meta: {
-        pagination: {},
+    const {
+      data: body,
+      error: errorBody,
+      response,
+    } = await this.client.GET("/exchanges/{id}/deals", {
+      headers: this.headers,
+      params: {
+        path: { id },
       },
     });
+
+    if (errorBody) {
+      log("create", errorBody);
+      throw new HTTPError(
+        [errorBody.error.message, "from " + response.url].join("\n"),
+        { cause: errorBody.error },
+      );
+    }
+
+    return body;
   }
 }

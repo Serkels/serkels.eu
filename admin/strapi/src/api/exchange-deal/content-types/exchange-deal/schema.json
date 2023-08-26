@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "exchange_deals",
+  "info": {
+    "singularName": "exchange-deal",
+    "pluralName": "exchange-deals",
+    "displayName": "Exchange Deal",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "exchange": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::exchange.exchange"
+    },
+    "owner": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "participant": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "profile": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::user-profile.user-profile"
+    }
+  }
+}

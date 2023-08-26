@@ -4,6 +4,7 @@ import type { Exchange_ListSchema } from "@1/strapi-openapi";
 import { useInfiniteQuery, type QueryFunction } from "@tanstack/react-query";
 import debug from "debug";
 import { useCallback } from "react";
+import { getNextPageParam, getPreviousPageParam } from "~/core/use-query";
 import type { Exchange_QueryProps } from "./Exchange_QueryProps";
 import type { Exchange_Repository } from "./infrastructure";
 import { Exchange_QueryKeys } from "./queryKeys";
@@ -22,6 +23,10 @@ export class Exchange_List_Controller {
     useQuery: this.useListQuery.bind(this),
   };
 
+  my = {
+    useQuery: this.useMyListQuery.bind(this),
+  };
+
   useListQuery(params: Exchange_QueryProps) {
     const loadListFn: QueryFunction<
       Exchange_ListSchema,
@@ -34,20 +39,33 @@ export class Exchange_List_Controller {
       return this.repository.findAll(params);
     };
 
-    const getNextPageParam = (lastPage: Exchange_ListSchema) => {
-      const pagination = lastPage.meta?.pagination ?? { pageCount: 0, page: 0 };
-      const { pageCount, page } = pagination;
-      if (pageCount === undefined || page === undefined) return;
+    const query_info = useInfiniteQuery({
+      enabled: Boolean(this.repository.jwt),
+      getNextPageParam,
+      getPreviousPageParam,
+      queryFn: useCallback(loadListFn, [
+        this.repository,
+        params.filter?.category,
+        params.filter?.search,
+      ]),
+      queryKey: Exchange_QueryKeys.lists(params.filter),
+      staleTime: Infinity,
+    });
 
-      return page >= pageCount ? undefined : page + 1;
-    };
+    return query_info;
+  }
 
-    const getPreviousPageParam = (lastPage: Exchange_ListSchema) => {
-      const pagination = lastPage.meta?.pagination ?? { page: 0 };
-      const { page } = pagination;
-      if (page === undefined) return;
+  useMyListQuery(params: Exchange_QueryProps) {
+    const loadListFn: QueryFunction<
+      Exchange_ListSchema,
+      ReturnType<typeof Exchange_QueryKeys.my_list>,
+      number
+    > = async ({ pageParam: page }) => {
+      params.pagination = Object.assign(params.pagination ?? {}, {
+        page,
+      } as Exchange_QueryProps["pagination"]);
 
-      return page > 0 ? page - 1 : undefined;
+      return this.repository.findAllMine(params);
     };
 
     const query_info = useInfiniteQuery({
@@ -59,7 +77,7 @@ export class Exchange_List_Controller {
         params.filter?.category,
         params.filter?.search,
       ]),
-      queryKey: Exchange_QueryKeys.lists(params.filter),
+      queryKey: Exchange_QueryKeys.my_list(),
       staleTime: Infinity,
     });
 

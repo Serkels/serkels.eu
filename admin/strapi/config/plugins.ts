@@ -1,5 +1,7 @@
 //
 
+import mutateExchangeDealDocumentation from "../src/api/exchange-deal/documentation/mutateDocumentation";
+import mutateExchangeDocumentation from "../src/api/exchange/documentation/mutateDocumentation";
 import mutateQuestionDocumentation from "../src/api/question/documentation/mutateDocumentation";
 import mutateCommentsDocumentation from "../src/extensions/comments/documentation/mutateDocumentation";
 import mutateDocumentationDocumentation from "../src/extensions/documentation/documentation/mutateDocumentation";
@@ -21,9 +23,11 @@ export default ({ env }) => ({
           "users-permissions",
         ],
         mutateDocumentation: (generatedDocumentationDraft) => {
-          mutateDocumentationDocumentation(generatedDocumentationDraft);
-          mutateQuestionDocumentation(generatedDocumentationDraft);
           mutateCommentsDocumentation(generatedDocumentationDraft);
+          mutateDocumentationDocumentation(generatedDocumentationDraft);
+          mutateExchangeDocumentation(generatedDocumentationDraft);
+          mutateExchangeDealDocumentation(generatedDocumentationDraft);
+          mutateQuestionDocumentation(generatedDocumentationDraft);
         },
       },
     },
