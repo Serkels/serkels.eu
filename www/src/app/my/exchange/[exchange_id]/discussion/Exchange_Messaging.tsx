@@ -223,7 +223,7 @@ export function AsideNav_(props: ComponentPropsWithoutRef<"aside">) {
   const thread = [{ id: 42, active: true }, { id: 4242 }, { id: 424242 }];
   return (
     <AsideBar {...other_props}>
-      <div className="sticky top-[calc(66px_+_24px)]">
+      <div className="sticky top-[calc(theme(spacing.14)_+_24px)]">
         <h1 className="text-xl font-bold">Cours de français tout les niveau</h1>
 
         <hr className="my-6 border-2 border-[#F0F0F0]" />

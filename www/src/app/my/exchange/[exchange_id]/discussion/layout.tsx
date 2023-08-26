@@ -12,7 +12,9 @@ export default function Layout({
   return (
     <>
       <AsideBar>
-        <Exchange_Messaging exchange_id={exchange_id} />
+        <div className="sticky top-[calc(theme(spacing.14)_+_theme(spacing.6))]">
+          <Exchange_Messaging exchange_id={exchange_id} />
+        </div>
       </AsideBar>
       {children}
     </>

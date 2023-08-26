@@ -15,7 +15,7 @@ export function AsideNav(props: ComponentPropsWithoutRef<"aside">) {
   const pathname = usePathname();
   return (
     <AsideBar {...other_props}>
-      <div className="sticky top-[calc(66px_+_24px)]">
+      <div className="sticky top-[calc(theme(spacing.14)_+_theme(spacing.8))]">
         <AvatarMediaVertical className="my-8 mb-4 px-10" />
         <nav>
           <ul

@@ -38,7 +38,7 @@ export function UserBar() {
           className="
             col-span-3 flex h-14 items-center
             sm:col-auto
-            md:col-span-2 md:h-[66px]
+            md:col-span-2 md:h-[theme(spacing.14)]
             xl:col-span-3
           "
         >

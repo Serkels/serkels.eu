@@ -16,8 +16,8 @@ export default async function Page({
   // console.log({ exchange_id, discussion_id });
 
   return (
-    <main className="col-span-full mb-5 grid grid-rows-[max-content_1fr_max-content] bg-white py-7 text-black sm:mb-0 md:col-span-2 xl:col-span-3 [&>*]:px-7">
-      <header className="flex flex-row justify-between space-x-3">
+    <main className="col-span-full grid grid-rows-[max-content_1fr_max-content] bg-white  text-black sm:mb-0 md:col-span-2 xl:col-span-3 [&>*]:px-7">
+      <header className="sticky top-14 z-10 flex flex-row justify-between space-x-3 bg-white py-7 text-black">
         <AvatarMediaHorizontal
           u="1"
           username={"Yasmin Belamine"}
@@ -38,7 +38,7 @@ export default async function Page({
           12/10/2023 08:45 PM
         </time>
 
-        <div className="flex flex-row mb-4 justify-start">
+        <div className="mb-4 flex flex-row justify-start">
           <div className="relative mr-4 flex h-8 w-8 flex-shrink-0">
             <img
               className="h-3xl w-3xl rounded-3xl object-cover shadow-md"
@@ -80,7 +80,7 @@ export default async function Page({
           13/10/2023 09:36 PM
         </time>
 
-        <div className="flex flex-row mb-4 justify-start">
+        <div className="mb-4 flex flex-row justify-start">
           <div className="relative mr-4 flex h-8 w-8 flex-shrink-0">
             <img
               className="h-3xl w-3xl rounded-3xl object-cover shadow-md"
@@ -114,7 +114,7 @@ export default async function Page({
           </div>
         </div>
 
-        <div className="flex flex-row mb-4 justify-end">
+        <div className="mb-4 flex flex-row justify-end">
           <div className="messages grid grid-flow-row gap-2 text-sm text-white">
             <div className="group flex flex-row-reverse items-center">
               <p className="max-w-[85%] rounded-l-3xl rounded-t-3xl bg-blue-500 px-6 py-3 ">
@@ -145,10 +145,10 @@ export default async function Page({
         </div>
       </section>
 
-      <footer className="flex min-h-[110px] flex-col items-center justify-center space-y-4">
+      <footer className="sticky bottom-0 z-10 flex  min-h-[110px] flex-col items-center justify-center space-y-4 bg-white py-5 text-black">
         <input
           type="text"
-          className="block w-full xl:max-w-[400px] rounded-2xl border border-[#33333333] px-4 py-3 text-sm"
+          className="block w-full rounded-2xl border border-[#33333333] px-4 py-3 text-sm xl:max-w-[400px]"
           placeholder="Envoie un Message…"
         />
         <SendActionGroup />

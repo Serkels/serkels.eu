@@ -18,7 +18,7 @@ export function AsideWithTitle(
   const { className, children, title, ...other_props } = props;
   return (
     <AsideBar {...other_props}>
-      <article className="sticky top-[66px] pt-10">
+      <article className="sticky top-[theme(spacing.14)] pt-10">
         <h3 className="mb-7 text-2xl font-bold uppercase text-Congress_Blue">
           {title}
         </h3>

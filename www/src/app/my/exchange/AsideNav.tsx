@@ -29,7 +29,7 @@ export function AsideNav(props: ComponentPropsWithoutRef<"aside">) {
   const { children, ...other_props } = props;
   return (
     <AsideBar {...other_props}>
-      <div className="sticky top-0">
+      <div className="sticky top-[calc(theme(spacing.14)_+_theme(spacing.9))]">
         <div className="mx-5 my-9">
           <InputSearch className="shadow-[0px_12px_44px_#0000000D]" />
         </div>
