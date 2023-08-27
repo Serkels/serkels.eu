@@ -54,7 +54,7 @@ export function NotificationButton() {
 }
 
 function Notification_New_Answer({ subjet }: { subjet: New_Answer }) {
-  const profile = subjet.get("profile");
+  const profile = subjet.get("profile") ?? {};
   const createdAt = subjet.get("createdAt");
   return (
     <UI.Notification

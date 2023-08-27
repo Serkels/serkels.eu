@@ -10,6 +10,6 @@ export default function Layout({
 }>) {
   const exchange_id = Number(params.exchange_id);
   const deal_id = Number(params.deal_id);
-  console.log({ exchange_id, deal_id });
+
   return <>{children}</>;
 }
