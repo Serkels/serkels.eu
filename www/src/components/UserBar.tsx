@@ -26,7 +26,7 @@ import { NotificationButton } from "./NotificationButton";
 
 export function UserBar() {
   const [showSideBar, setShowSideBar] = useState(false);
-  const pathname = usePathname();
+  const pathname = usePathname() ?? "";
 
   const { data: session } = useSession();
 

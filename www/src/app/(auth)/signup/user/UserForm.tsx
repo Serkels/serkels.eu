@@ -18,7 +18,8 @@ export function UserForm() {
     cacheTime: 0,
   });
 
-  const email = useSearchParams().get("email") ?? undefined;
+  const searchParams = useSearchParams() ?? new URLSearchParams();
+  const email = searchParams.get("email") ?? undefined;
 
   const { mutate, isLoading, isSuccess, isError, error } =
     useMutation(submitFormHandler);

@@ -12,7 +12,7 @@ import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
 export function AsideNav(props: ComponentPropsWithoutRef<"aside">) {
   const { children, ...other_props } = props;
-  const pathname = usePathname();
+  const pathname = usePathname() ?? "";
   return (
     <AsideBar {...other_props}>
       <div className="sticky top-[calc(theme(spacing.14)_+_theme(spacing.8))]">
@@ -148,7 +148,7 @@ function ItemLinkWithIcon(
     match: string;
   },
 ) {
-  const pathname = usePathname();
+  const pathname = usePathname() ?? "";
 
   const {
     className,

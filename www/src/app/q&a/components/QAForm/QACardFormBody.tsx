@@ -19,7 +19,7 @@ export function QACardFormBody({
 }) {
   const { categories, other_category } = useOpportunityCategories();
 
-  const searchParams = useSearchParams();
+  const searchParams = useSearchParams() ?? new URLSearchParams();
 
   //
 

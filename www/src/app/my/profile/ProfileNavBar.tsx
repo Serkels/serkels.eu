@@ -8,7 +8,7 @@ import type { ComponentPropsWithoutRef } from "react";
 //
 
 export function ProfileNavBar(props: ComponentPropsWithoutRef<"nav">) {
-  const pathname = usePathname();
+  const pathname = usePathname() ?? "";
   const { className, ...other_props } = props;
   return (
     <nav

@@ -11,7 +11,7 @@ import { OpportunityCategoriesViewModel } from "./models/OpportunityCategoriesVi
 export function CategoriesList() {
   const { category, setCategory } = useOpportunityFilterContext();
   const { data: raw_categories } = useOpportunityCategoriesQuery();
-  const pathname = usePathname();
+  const pathname = usePathname() ?? "";
   const router = useRouter();
 
   //

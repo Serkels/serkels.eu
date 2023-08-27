@@ -16,7 +16,7 @@ import {
 //
 
 export function MobileNavBar({ className }: ComponentPropsWithoutRef<"nav">) {
-  const pathname = usePathname();
+  const pathname = usePathname() ?? "";
   const { data: session } = useSession();
   const isLogin = Boolean(session);
 

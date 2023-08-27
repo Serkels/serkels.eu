@@ -113,7 +113,7 @@ function EchangeNav() {
 
 function Echange_MessagingLink() {
   const [exchange] = useExchange_Value();
-  const pathname = usePathname();
+  const pathname = usePathname() ?? "";
   const { data: session } = useSession();
   const href = `/my/exchange/${exchange.get("id")}/deals`;
   const active =

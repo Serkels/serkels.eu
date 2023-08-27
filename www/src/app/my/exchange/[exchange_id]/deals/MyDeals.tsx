@@ -154,7 +154,7 @@ export function Echange_DealsNav() {
 function Echange_DealLink() {
   const [exchange] = useExchange_Value();
   const [discussion] = useDiscussion_Value();
-  const pathname = usePathname();
+  const pathname = usePathname() ?? "";
 
   const href = `/my/exchange/${exchange.get("id")}/deals/${discussion.get(
     "id",
@@ -219,7 +219,7 @@ export function AsideNav_(props: ComponentPropsWithoutRef<"aside">) {
   const { children, ...other_props } = props;
   // const [exchange] = useExchange_Value();
   // console.log({ exchange });
-  const pathname = usePathname();
+  const pathname = usePathname() ?? "";
   const thread = [{ id: 42, active: true }, { id: 4242 }, { id: 424242 }];
   return (
     <AsideBar {...other_props}>

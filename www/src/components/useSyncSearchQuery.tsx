@@ -7,8 +7,8 @@ import { useEffect, useState } from "react";
 
 export function useSyncSearchQuery(name: string) {
   const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
+  const pathname = usePathname() ?? "";
+  const searchParams = useSearchParams() ?? new URLSearchParams();
   const searchQuery = searchParams.get(name);
   const [query, setQuery] = useState(searchQuery ?? "");
 
