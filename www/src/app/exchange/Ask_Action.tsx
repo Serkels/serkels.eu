@@ -20,7 +20,6 @@ import { Deal_Message_Repository } from "~/modules/exchange/Deal_Message.reposit
 import { Exchange_Item_Controller } from "~/modules/exchange/Item.controller";
 import { Exchange_Repository } from "~/modules/exchange/infrastructure";
 import { fromClient } from "../api/v1";
-import Loading from "../loading";
 import { Exchange_CardContext } from "./ExchangeCard.context";
 
 //
@@ -28,7 +27,7 @@ import { Exchange_CardContext } from "./ExchangeCard.context";
 export function Ask_Action() {
   return (
     <UI.DialogTrigger>
-      <Button>Demender</Button>
+      <Button>Demander</Button>
 
       <UI.Modal>
         <UI.Dialog>
