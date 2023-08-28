@@ -42,8 +42,8 @@ export function AsideNav(props: ComponentPropsWithoutRef<"aside">) {
             </ItemLinkWithIcon>
             <ItemLinkWithIcon
               icon={<Exchange />}
-              match="/my/exchange"
-              href="/my/exchange"
+              match="/my/exchanges"
+              href="/my/exchanges"
             >
               Mes échanges
             </ItemLinkWithIcon>
