@@ -118,7 +118,7 @@ function Echange_MessagingLink() {
   const href = `/my/exchanges/${exchange.get("id")}/deals`;
   const active =
     pathname.split("/").length >= href.split("/").length &&
-    href.includes(pathname);
+    pathname.includes(href);
 
   return (
     <Link
