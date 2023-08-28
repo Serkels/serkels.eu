@@ -299,8 +299,19 @@ export interface paths {
       };
     };
   };
+  "/deals/{id}/messages": {
+    get: operations["get/deals/{id}/messages"];
+    post: operations["post/deals/{id}/messages"];
+  };
+  "/deals/{id}/messages/{id}": {
+    get: operations["get/deals/{id}/messages/{id}"];
+    delete: operations["delete/deals/{id}/messages/{id}"];
+  };
   "/exchange-deals": {
     post: operations["post/exchange-deals"];
+  };
+  "/exchange-deals/{id}": {
+    get: operations["get/exchange-deals/{id}"];
   };
   "/exchanges": {
     get: operations["get/exchanges"];
@@ -2636,6 +2647,87 @@ export interface components {
           id?: number;
         };
       };
+      last_message?: {
+        data?: {
+          attributes?: {
+            approvalStatus?: string;
+            authorAvatar?: string;
+            /** Format: email */
+            authorEmail?: string;
+            authorId?: string;
+            authorName?: string;
+            authorUser?: {
+              data?: {
+                attributes?: Record<string, unknown>;
+                id?: number;
+              };
+            };
+            blocked?: boolean;
+            blockedThread?: boolean;
+            blockReason?: string;
+            content?: string;
+            /** Format: date-time */
+            createdAt?: string;
+            createdBy?: {
+              data?: {
+                attributes?: Record<string, unknown>;
+                id?: number;
+              };
+            };
+            isAdminComment?: boolean;
+            related?: string;
+            removed?: boolean;
+            reports?: {
+              data?: ({
+                  attributes?: {
+                    content?: string;
+                    /** Format: date-time */
+                    createdAt?: string;
+                    createdBy?: {
+                      data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      };
+                    };
+                    /** @enum {string} */
+                    reason?: "BAD_LANGUAGE" | "DISCRIMINATION" | "OTHER";
+                    related?: {
+                      data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      };
+                    };
+                    resolved?: boolean;
+                    /** Format: date-time */
+                    updatedAt?: string;
+                    updatedBy?: {
+                      data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      };
+                    };
+                  };
+                  id?: number;
+                })[];
+            };
+            threadOf?: {
+              data?: {
+                attributes?: Record<string, unknown>;
+                id?: number;
+              };
+            };
+            /** Format: date-time */
+            updatedAt?: string;
+            updatedBy?: {
+              data?: {
+                attributes?: Record<string, unknown>;
+                id?: number;
+              };
+            };
+          };
+          id?: number;
+        };
+      };
       owner?: {
         data?: {
           attributes?: Record<string, unknown>;
@@ -2667,6 +2759,8 @@ export interface components {
       data: {
         /** @example string or id */
         exchange?: number | string;
+        /** @example string or id */
+        last_message?: number | string;
         /** @example string or id */
         owner?: number | string;
         /** @example string or id */
@@ -5679,10 +5773,152 @@ export interface operations {
       };
     };
   };
+  "get/deals/{id}/messages": {
+    parameters: {
+      query?: {
+        /** @description Sort by attributes ascending (asc) or descending (desc) */
+        sort?: string;
+        /** @description Pagination */
+        pagination?: {
+          page?: number;
+          pageSize?: number;
+        };
+      };
+      path: {
+        /** @description The deal id */
+        id: number;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["CommentListResponse"];
+        };
+      };
+      400: components["responses"]["400"];
+      401: components["responses"]["401"];
+      403: components["responses"]["403"];
+      404: components["responses"]["404"];
+      500: components["responses"]["500"];
+    };
+  };
+  "post/deals/{id}/messages": {
+    parameters: {
+      path: {
+        /** @description The deal id */
+        id: number;
+      };
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["CommentRequest"];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["CommentsComment"];
+        };
+      };
+      400: components["responses"]["400"];
+      401: components["responses"]["401"];
+      403: components["responses"]["403"];
+      404: components["responses"]["404"];
+      500: components["responses"]["500"];
+    };
+  };
+  "get/deals/{id}/messages/{id}": {
+    parameters: {
+      path: {
+        /** @description The message id */
+        id: number;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["CommentsComment"];
+        };
+      };
+      400: components["responses"]["400"];
+      401: components["responses"]["401"];
+      403: components["responses"]["403"];
+      404: components["responses"]["404"];
+      500: components["responses"]["500"];
+    };
+  };
+  "delete/deals/{id}/messages/{id}": {
+    parameters: {
+      path: {
+        id: number;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": number;
+        };
+      };
+      400: components["responses"]["400"];
+      401: components["responses"]["401"];
+      403: components["responses"]["403"];
+      404: components["responses"]["404"];
+      500: components["responses"]["500"];
+    };
+  };
   "post/exchange-deals": {
     requestBody: {
       content: {
         "application/json": components["schemas"]["ExchangeDealRequest"];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["ExchangeDealResponse"];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Forbidden */
+      403: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Not Found */
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+  };
+  "get/exchange-deals/{id}": {
+    parameters: {
+      path: {
+        id: number;
       };
     };
     responses: {

@@ -5,7 +5,7 @@ import { useInfiniteQuery, type QueryFunction } from "@tanstack/react-query";
 import debug from "debug";
 import { useCallback } from "react";
 import { getNextPageParam, getPreviousPageParam } from "~/core/use-query";
-import type { Exchange_QueryProps } from "./Exchange_QueryProps";
+import type { Exchanges_QueryProps } from "./Exchange_QueryProps";
 import type { Exchange_Repository } from "./infrastructure";
 import { Exchange_QueryKeys } from "./queryKeys";
 
@@ -27,7 +27,7 @@ export class Exchange_List_Controller {
     useQuery: this.useMyListQuery.bind(this),
   };
 
-  useListQuery(params: Exchange_QueryProps) {
+  useListQuery(params: Exchanges_QueryProps) {
     const loadListFn: QueryFunction<
       Exchange_ListSchema,
       ReturnType<typeof Exchange_QueryKeys.lists>,
@@ -35,7 +35,7 @@ export class Exchange_List_Controller {
     > = async ({ pageParam: page }) => {
       params.pagination = Object.assign(params.pagination ?? {}, {
         page,
-      } as Exchange_QueryProps["pagination"]);
+      } as Exchanges_QueryProps["pagination"]);
       return this.repository.findAll(params);
     };
 
@@ -55,7 +55,7 @@ export class Exchange_List_Controller {
     return query_info;
   }
 
-  useMyListQuery(params: Exchange_QueryProps) {
+  useMyListQuery(params: Exchanges_QueryProps) {
     const loadListFn: QueryFunction<
       Exchange_ListSchema,
       ReturnType<typeof Exchange_QueryKeys.my_list>,
@@ -63,7 +63,7 @@ export class Exchange_List_Controller {
     > = async ({ pageParam: page }) => {
       params.pagination = Object.assign(params.pagination ?? {}, {
         page,
-      } as Exchange_QueryProps["pagination"]);
+      } as Exchanges_QueryProps["pagination"]);
 
       return this.repository.findAllMine(params);
     };

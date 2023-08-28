@@ -46,8 +46,7 @@ function clean_body(ctx: any, next: Next) {
   const { data } = strapi_ctx.request.body;
 
   if (!data) {
-    strapi_ctx.noContent("Missing request body");
-    return next();
+    return ctx.send({ error: "UnprocessableEntity" }, 422);
   }
 
   if (!data.category) {

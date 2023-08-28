@@ -23,6 +23,7 @@ export class Exchange_DealSchemaToDomain
       createdAt,
       updatedAt,
       profile: raw_profile,
+      last_message,
       ...other_props
     } = attributes;
 
@@ -43,7 +44,7 @@ export class Exchange_DealSchemaToDomain
       updatedAt: updatedAt ? new Date(updatedAt) : new Date(NaN),
       //
       id,
-      last_message: "Bonjour ! Je veux bien apprendre le français avec toi !",
+      last_message: last_message?.data?.attributes?.content ?? "",
 
       profile: profile_to_domain.value(),
     });

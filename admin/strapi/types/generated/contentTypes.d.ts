@@ -964,6 +964,11 @@ export interface ApiExchangeDealExchangeDeal extends Schema.CollectionType {
       'oneToOne',
       'api::user-profile.user-profile'
     >;
+    last_message: Attribute.Relation<
+      'api::exchange-deal.exchange-deal',
+      'oneToOne',
+      'plugin::comments.comment'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

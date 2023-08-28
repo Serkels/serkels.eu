@@ -12,6 +12,8 @@ import { formatDistance } from "date-fns";
 import { fr } from "date-fns/locale";
 import { z } from "zod";
 
+//
+
 export const Deal_PropsSchema = z.object({
   createdAt: z.date(),
   id: z.number(),
@@ -22,6 +24,15 @@ export const Deal_PropsSchema = z.object({
 });
 
 export type Deal_Props = z.TypeOf<typeof Deal_PropsSchema>;
+
+//
+
+//
+
+export const Deal_CreatePropsSchema = z.object({
+  exchange: z.any(),
+});
+export type Deal_CreateProps = z.TypeOf<typeof Deal_CreatePropsSchema>;
 
 //
 

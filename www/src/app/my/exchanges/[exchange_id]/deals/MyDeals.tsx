@@ -25,10 +25,7 @@ import {
   Exchange_ValueProvider,
   useExchange_Value,
 } from "../../Exchange.context";
-import {
-  Discussion_ValueProvider,
-  useDiscussion_Value,
-} from "./Discussion.context";
+import { Deal_ValueProvider, useDeal_Value } from "./Deal.context";
 
 //
 
@@ -124,9 +121,9 @@ export function Echange_DealsNav() {
               .map((result) => result.value())
               .map((deal) => (
                 <li key={deal.get("id")}>
-                  <Discussion_ValueProvider initialValue={deal}>
+                  <Deal_ValueProvider initialValue={deal}>
                     <Echange_DealLink />
-                  </Discussion_ValueProvider>
+                  </Deal_ValueProvider>
                 </li>
               ))}
             {isFetchingNextPage ? (
@@ -153,10 +150,10 @@ export function Echange_DealsNav() {
 
 function Echange_DealLink() {
   const [exchange] = useExchange_Value();
-  const [discussion] = useDiscussion_Value();
+  const [discussion] = useDeal_Value();
   const pathname = usePathname() ?? "";
 
-  const href = `/my/exchange/${exchange.get("id")}/deals/${discussion.get(
+  const href = `/my/exchanges${exchange.get("id")}/deals/${discussion.get(
     "id",
   )}`;
   const active =

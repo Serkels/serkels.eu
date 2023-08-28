@@ -6,13 +6,21 @@ import { parse } from "yaml";
 
 //
 
-export default function mutateDocumentation(generatedDocumentationDraft) {
-  const by_exchange = parse(
-    readFileSync(
-      resolve(__dirname.replace("/dist", ""), "./by_exchange.yaml"),
-      "utf8",
-    ),
-  );
+export default function mutateDocumentation(generatedDocumentationDraft: {
+  paths: object;
+}) {
+  ["./messages.yaml", "./messages_id.yaml", "./by_exchange.yaml"].reduce(
+    (document, yaml_file) => {
+      const openapi_path = parse(
+        readFileSync(
+          resolve(__dirname.replace("/dist", ""), yaml_file),
+          "utf8",
+        ),
+      );
 
-  Object.assign(generatedDocumentationDraft.paths, by_exchange);
+      Object.assign(document.paths, openapi_path);
+      return document;
+    },
+    generatedDocumentationDraft,
+  );
 }

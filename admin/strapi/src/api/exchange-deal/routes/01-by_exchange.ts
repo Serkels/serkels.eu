@@ -31,7 +31,7 @@ async function filter_deal_owner_participant(context, next: Next) {
 
   context.query.filters = {
     ...(context.query.filters || {}),
-    $and: [{ exchange: id }],
+    $and: [{ exchange: Number(id) }],
     $or: [{ owner: user.id }, { participant: user.id }],
   };
 
@@ -43,10 +43,14 @@ async function filter_deal_owner_participant(context, next: Next) {
     participant: {
       fields: ["id"],
     },
+    last_message: {
+      fields: ["id", "content", "author"],
+    },
     profile: {
       fields: ["id", "firstname", "lastname", "university"],
     },
   };
+
   return next();
 }
 

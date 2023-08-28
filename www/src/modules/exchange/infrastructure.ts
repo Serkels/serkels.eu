@@ -3,14 +3,19 @@
 import { HTTPError } from "@1/core/domain";
 import type { Exchange_CreateProps } from "@1/modules/exchange/domain";
 import type {
+  Common_DiscussionListSchema,
   Exchange_DealListSchema,
+  Exchange_DealSchema,
   Exchange_ItemSchema,
   Exchange_ListSchema,
 } from "@1/strapi-openapi";
 import debug from "debug";
 import { OpenAPIRepository, type ApiClient } from "~/app/api/v1";
 import type { RepositoryPort } from "~/core";
-import type { Exchange_QueryProps } from "./Exchange_QueryProps";
+import type {
+  Exchanges_QueryProps,
+  Messages_QueryProps,
+} from "./Exchange_QueryProps";
 // import type { ExchangeListSchema, Exchange_DTO } from "./dto";
 // import type { Exchange_CreateProps, Exchange_Entity } from "./entity";
 
@@ -54,7 +59,7 @@ export class Exchange_Repository
     filter,
     sort,
     pagination,
-  }: Exchange_QueryProps): Promise<Exchange_ListSchema> {
+  }: Exchanges_QueryProps): Promise<Exchange_ListSchema> {
     log("findAll", filter);
     const { category, search } = filter ?? {};
     const {
@@ -105,7 +110,7 @@ export class Exchange_Repository
     filter,
     sort,
     pagination,
-  }: Exchange_QueryProps): Promise<Exchange_ListSchema> {
+  }: Exchanges_QueryProps): Promise<Exchange_ListSchema> {
     log("findAllMine", filter);
 
     const {
@@ -161,7 +166,7 @@ export class Exchange_Repository
   }
 
   async deals(id: number): Promise<Exchange_DealListSchema> {
-    log("discussions", id);
+    log("deals", id);
     const {
       data: body,
       error: errorBody,
@@ -170,6 +175,65 @@ export class Exchange_Repository
       headers: this.headers,
       params: {
         path: { id },
+      },
+    });
+
+    if (errorBody) {
+      log("deals", errorBody);
+      throw new HTTPError(
+        [errorBody.error.message, "from " + response.url].join("\n"),
+        { cause: errorBody.error },
+      );
+    }
+
+    return body;
+  }
+
+  async findDealById(id: number): Promise<Exchange_DealSchema | undefined> {
+    log("findDealById", id);
+    const {
+      data: body,
+      error: errorBody,
+      response,
+    } = await this.client.GET("/exchange-deals/{id}", {
+      headers: this.headers,
+      params: {
+        path: { id },
+      },
+    });
+
+    if (errorBody) {
+      log("findDealById", errorBody);
+      throw new HTTPError(
+        [errorBody.error.message, "from " + response.url].join("\n"),
+        { cause: errorBody.error },
+      );
+    }
+
+    return body?.data;
+  }
+
+  async messages(
+    id: number,
+    { pagination }: Messages_QueryProps,
+  ): Promise<Common_DiscussionListSchema> {
+    log("messages", id);
+    const {
+      data: body,
+      error: errorBody,
+      response,
+    } = await this.client.GET("/deals/{id}/messages", {
+      headers: this.headers,
+      params: {
+        path: { id },
+        query: {
+          pagination: {
+            page: pagination?.page,
+            pageSize: pagination?.pageSize,
+            withCount: true,
+          } as any,
+          sort: "createdAt:desc",
+        },
       },
     });
 

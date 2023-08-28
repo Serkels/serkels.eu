@@ -1,6 +1,6 @@
-import { EntityService } from "@strapi/strapi/lib/services/entity-service";
 import { Context, Next } from "koa";
 import { Comment } from "strapi-plugin-comments/types/contentTypes";
+import { replace_autor } from "../../../extensions/comments/services/replace_autor";
 
 export default {
   routes: [
@@ -110,39 +110,8 @@ async function clean_your_body(
   await next();
 }
 
-async function replace_autor(body: Comment) {
-  const { author } = body;
-  const entityService: EntityService = strapi.entityService;
-  if (!author) {
-    strapi.log.warn(
-      `api::question.replate-author-by-profile middlewares detected no author.`,
-    );
-    return;
-  }
-
-  const { id: owner } = author;
-  const profiles = await entityService.findMany(
-    "api::user-profile.user-profile",
-    {
-      fields: ["id", "firstname", "lastname", "university"],
-      filters: { owner },
-    },
-  );
-
-  if (!profiles || !profiles[0]) {
-    strapi.log.warn(
-      `api::question.replate-author-by-profile middlewares detected no profiles.`,
-    );
-    return;
-  }
-
-  return {
-    ...body,
-    author: profiles[0],
-  };
-}
-
 //
+
 async function replate_selected_author_by_profile(ctx: Context, next: Next) {
   await next();
 

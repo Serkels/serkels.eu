@@ -5,12 +5,7 @@ import tw from "tailwind-styled-components";
 
 //
 
-export function NavControlGroup({
-  exchange_id,
-}: {
-  exchange_id: number;
-  discussion_id: number;
-}) {
+export function NavControlGroup({ exchange_id }: { exchange_id: number }) {
   return (
     <UI.Group>
       <UI.Indicator>1/3</UI.Indicator>

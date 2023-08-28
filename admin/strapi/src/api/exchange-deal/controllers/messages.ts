@@ -1,10 +1,10 @@
 /**
- * question controller
+ * Messages controller
  */
 
-import { Context } from "@strapi/utils/dist/types";
-import { Next } from "koa";
-import { StrapiRequestContext } from "strapi-typed";
+import type { Context } from "@strapi/utils/dist/types";
+import type { Next } from "koa";
+import type { StrapiRequestContext } from "strapi-typed";
 
 export default {
   async count(ctx: StrapiRequestContext<never, never, { id: string }>) {
@@ -25,7 +25,7 @@ export default {
   async findOne(ctx: Context, next: Next) {
     return strapi.controller("plugin::comments.admin").findOne(ctx, next);
   },
-  async post(ctx: Context, next: Next) {
+  async create(ctx: Context, next: Next) {
     return strapi.controller("plugin::comments.client").post(ctx, next);
   },
   async delete(ctx: Context, next: Next) {

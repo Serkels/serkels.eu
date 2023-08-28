@@ -122,10 +122,7 @@ export default factories.createCoreController(
     },
 
     async findOneByUser(ctx) {
-      console.log();
-      console.log("findOneByUser");
       const user: { id: number } = ctx.params;
-      console.log({ user });
 
       ctx.query.filters = {
         ...(ctx.query.filters || {}),
@@ -139,12 +136,10 @@ export default factories.createCoreController(
       };
 
       const { data } = await super.find(ctx);
-      console.log({ data });
 
       const profile = data[0];
       if (!profile) return ctx.notFound("Profile not found");
 
-      console.log();
       return { data: profile, meta: {} };
     },
   }),
