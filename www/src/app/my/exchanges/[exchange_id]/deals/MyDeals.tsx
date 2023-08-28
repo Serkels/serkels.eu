@@ -2,10 +2,8 @@
 
 import { AsideBar } from "@/layouts/holy/aside";
 import { UnknownError } from "@1/core/error";
-import {
-  Exchange_DiscussionSchemaToDomain,
-  Exchange_ItemSchemaToDomain,
-} from "@1/modules/exchange/infra/strapi";
+import { Exchange_DealSchemaToDomain } from "@1/modules/deal/infra/strapi/DealSchema.mapper";
+import { Exchange_ItemSchemaToDomain } from "@1/modules/exchange/infra/strapi";
 import { Button } from "@1/ui/components/ButtonV";
 import { Spinner } from "@1/ui/components/Spinner";
 import { Circle } from "@1/ui/icons";
@@ -113,7 +111,7 @@ export function Echange_DealsNav() {
             {pages
               .map((page) => page.data!)
               .flat()
-              .map((raw) => new Exchange_DiscussionSchemaToDomain().build(raw))
+              .map((raw) => new Exchange_DealSchemaToDomain().build(raw))
               .filter((result) => {
                 if (result.isFail()) {
                   console.error(result.error());
