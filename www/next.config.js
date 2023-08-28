@@ -31,7 +31,7 @@ const nextConfig = {
       },
       {
         source: "/my/exchanges/:id",
-        destination: "/my/exchanges:id/discussion",
+        destination: "/my/exchanges/:id/deals",
         permanent: true,
       },
     ];
