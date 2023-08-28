@@ -52,6 +52,11 @@ async function notify_new_anwser_to_quetion_owner(event: Event) {
     GetValues<"plugin::comments.comment"> & { id: number }
   >;
 
+  const related: string = result.related;
+  if (!related.startsWith(QUESTION_API_CONTENT_ID)) {
+    return;
+  }
+
   const question_id = parse_question_id(event);
   const entityService: EntityService = strapi.entityService;
   const question: GetValues<"api::question.question"> =
