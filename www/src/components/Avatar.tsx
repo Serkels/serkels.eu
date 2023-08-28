@@ -23,7 +23,7 @@ export function Avatar(
 
   return (
     <img
-      className={clsx("rounded-full object-cover", className)}
+      className={clsx("max-w-full rounded-full object-cover", className)}
       src={image}
       {...other_props}
     />
