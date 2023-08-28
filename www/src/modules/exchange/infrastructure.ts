@@ -3,7 +3,6 @@
 import { HTTPError } from "@1/core/domain";
 import type { Exchange_CreateProps } from "@1/modules/exchange/domain";
 import type {
-  Common_DiscussionListSchema,
   Exchange_DealListSchema,
   Exchange_DealSchema,
   Exchange_ItemSchema,
@@ -12,10 +11,7 @@ import type {
 import debug from "debug";
 import { OpenAPIRepository, type ApiClient } from "~/app/api/v1";
 import type { RepositoryPort } from "~/core";
-import type {
-  Exchanges_QueryProps,
-  Messages_QueryProps,
-} from "./Exchange_QueryProps";
+import type { Exchanges_QueryProps } from "./Exchange_QueryProps";
 // import type { ExchangeListSchema, Exchange_DTO } from "./dto";
 // import type { Exchange_CreateProps, Exchange_Entity } from "./entity";
 
@@ -165,8 +161,11 @@ export class Exchange_Repository
     return body?.data;
   }
 
-  async deals(id: number): Promise<Exchange_DealListSchema> {
-    log("deals", id);
+  async find_deal_by_participant(
+    exchange_id: number,
+    user_id: number,
+  ): Promise<Exchange_DealListSchema> {
+    log("find_deal_by_participant", exchange_id);
     const {
       data: body,
       error: errorBody,
@@ -174,7 +173,12 @@ export class Exchange_Repository
     } = await this.client.GET("/exchanges/{id}/deals", {
       headers: this.headers,
       params: {
-        path: { id },
+        path: { id: exchange_id },
+        query: {
+          filters: {
+            participant: user_id,
+          },
+        } as any,
       },
     });
 
@@ -211,40 +215,5 @@ export class Exchange_Repository
     }
 
     return body?.data;
-  }
-
-  async messages(
-    id: number,
-    { pagination }: Messages_QueryProps,
-  ): Promise<Common_DiscussionListSchema> {
-    log("messages", id);
-    const {
-      data: body,
-      error: errorBody,
-      response,
-    } = await this.client.GET("/deals/{id}/messages", {
-      headers: this.headers,
-      params: {
-        path: { id },
-        query: {
-          pagination: {
-            page: pagination?.page,
-            pageSize: pagination?.pageSize,
-            withCount: true,
-          } as any,
-          sort: "createdAt:desc",
-        },
-      },
-    });
-
-    if (errorBody) {
-      log("create", errorBody);
-      throw new HTTPError(
-        [errorBody.error.message, "from " + response.url].join("\n"),
-        { cause: errorBody.error },
-      );
-    }
-
-    return body;
   }
 }

@@ -19,6 +19,8 @@ import { P, match } from "ts-pattern";
 import { fromClient } from "~/app/api/v1";
 import { AvatarMediaHorizontal } from "~/components/Avatar";
 import { ErrorOccur } from "~/components/ErrorOccur";
+import { Deal_Controller } from "~/modules/exchange/Deal.controller";
+import { Deal_Repository } from "~/modules/exchange/Deal.repository";
 import { Exchange_Item_Controller } from "~/modules/exchange/Item.controller";
 import { Exchange_Repository } from "~/modules/exchange/infrastructure";
 import {
@@ -34,9 +36,9 @@ export function MyDeals({ exchange_id }: { exchange_id: number }) {
   const repository = new Exchange_Repository(fromClient, session?.user?.jwt);
   const {
     item: { useQuery },
-  } = new Exchange_Item_Controller(repository);
+  } = new Exchange_Item_Controller(repository, exchange_id);
 
-  const query_info = useQuery(exchange_id);
+  const query_info = useQuery();
 
   return match(query_info)
     .with({ status: "error" }, ({ error }) => (
@@ -84,10 +86,10 @@ export function MyDeals({ exchange_id }: { exchange_id: number }) {
 export function Echange_DealsNav() {
   const [exchange] = useExchange_Value();
   const { data: session } = useSession();
-  const repository = new Exchange_Repository(fromClient, session?.user?.jwt);
+  const repository = new Deal_Repository(fromClient, session?.user?.jwt);
   const {
-    deals: { useQuery },
-  } = new Exchange_Item_Controller(repository);
+    list: { useQuery },
+  } = new Deal_Controller(repository);
 
   return match(useQuery(exchange.get("id")))
     .with({ status: "error" }, ({ error }) => (

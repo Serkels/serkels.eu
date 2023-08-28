@@ -2,6 +2,7 @@
 
 import { Exchange_ItemSchemaToDomain } from "@1/modules/exchange/infra/strapi";
 import type { Exchange_ItemSchema } from "@1/strapi-openapi";
+import { Button } from "@1/ui/components/ButtonV";
 import { Spinner } from "@1/ui/components/Spinner";
 import * as UI from "@1/ui/domains/exchange/Card";
 import { OnlineOrLocation } from "@1/ui/domains/exchange/OnlineOrLocation";
@@ -9,6 +10,7 @@ import { Exchange } from "@1/ui/icons";
 import { useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 import { P, match } from "ts-pattern";
 import { AvatarMediaHorizontal } from "~/components/Avatar";
 import { ErrorOccur } from "~/components/ErrorOccur";
@@ -26,9 +28,9 @@ export function ExchangeCard({ id }: { id: number }) {
   const repository = new Exchange_Repository(fromClient, session?.user?.jwt);
   const {
     item: { useQuery },
-  } = new Exchange_Item_Controller(repository);
+  } = new Exchange_Item_Controller(repository, id);
 
-  const query_info = useQuery(id);
+  const query_info = useQuery();
 
   return match(query_info)
     .with({ status: "error" }, ({ error }) => (
@@ -45,6 +47,7 @@ export function ExchangeCard({ id }: { id: number }) {
 }
 
 function Exchange_Card({ id }: { id: number }) {
+  const { data: session } = useSession();
   const query_client = useQueryClient();
   const raw_exchange = query_client.getQueryData(
     Exchange_QueryKeys.item(id),
@@ -132,7 +135,15 @@ function Exchange_Card({ id }: { id: number }) {
         >
           <div className="flex justify-between">
             <button className="block">🔖</button>
-            <Ask_Action />
+            {match(exchange.profile.get("id"))
+              .with(session?.user?.profile.id!, () => (
+                <Link href={`/my/exchanges/${exchange.get("id")}`}>
+                  <Button>Voir mes échanges</Button>
+                </Link>
+              ))
+              .otherwise(() => (
+                <Ask_Action />
+              ))}
             <button className="block">↗️</button>
           </div>
         </footer>

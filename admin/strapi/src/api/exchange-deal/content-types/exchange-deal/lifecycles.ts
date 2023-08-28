@@ -5,7 +5,7 @@ import type { Subscriber } from "@strapi/database/lib/lifecycles/subscribers";
 import type { Shared } from "@strapi/strapi";
 import type { EntityService } from "@strapi/strapi/lib/services/entity-service";
 import type { Comment } from "strapi-plugin-comments/types/contentTypes";
-import type { ApiQuestionQuestion } from "~/types/generated/contentTypes";
+import { ApiExchangeDealExchangeDeal } from "~/types/generated/contentTypes";
 
 //
 
@@ -16,7 +16,7 @@ export default {
     const entityService: EntityService = strapi.entityService;
     const { model, params } = event;
 
-    const entry: ApiQuestionQuestion["attributes"] & { id: number } =
+    const entry: ApiExchangeDealExchangeDeal["attributes"] & { id: number } =
       await strapi.db
         .query(model.uid)
         .findOne({ ...params, populate: ["owner"] });
@@ -27,7 +27,7 @@ export default {
     >("plugin::comments.comment", {
       filters: { related: { uid: model.uid, id: entry.id } },
     });
-
+    console.log({ comments });
     await Promise.all(
       comments.map(({ id }) =>
         entityService

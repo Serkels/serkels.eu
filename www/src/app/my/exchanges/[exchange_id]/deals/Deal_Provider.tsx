@@ -7,8 +7,8 @@ import { useSession } from "next-auth/react";
 import type { PropsWithChildren } from "react";
 import { match } from "ts-pattern";
 import { fromClient } from "~/app/api/v1";
-import { Exchange_Item_Controller } from "~/modules/exchange/Item.controller";
-import { Exchange_Repository } from "~/modules/exchange/infrastructure";
+import { Deal_Controller } from "~/modules/exchange/Deal.controller";
+import { Deal_Repository } from "~/modules/exchange/Deal.repository";
 import { Deal_ValueProvider } from "./Deal.context";
 
 //
@@ -18,10 +18,10 @@ export function Deal_Provider({
   id,
 }: PropsWithChildren<{ id: number }>) {
   const { data: session } = useSession();
-  const repository = new Exchange_Repository(fromClient, session?.user?.jwt);
+  const repository = new Deal_Repository(fromClient, session?.user?.jwt);
   const {
-    deal: { useQuery },
-  } = new Exchange_Item_Controller(repository);
+    by_id: { useQuery },
+  } = new Deal_Controller(repository);
 
   const query_info = useQuery(id);
 
@@ -48,9 +48,4 @@ export function Deal_Provider({
       );
     })
     .exhaustive();
-  // return (
-  //   <Deal_ValueProvider initialValue={deal}>{children}</Deal_ValueProvider>
-  // );
-  // return (<Deal_ValueProvider>value) = {} >
-  //   <>/Deal_ValueProvider>);
 }

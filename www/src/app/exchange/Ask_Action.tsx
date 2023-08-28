@@ -4,14 +4,23 @@ import { Button } from "@1/ui/components/ButtonV";
 import { Spinner } from "@1/ui/components/Spinner";
 import * as UI from "@1/ui/domains/exchange/AskModal";
 import { OnlineOrLocation } from "@1/ui/domains/exchange/OnlineOrLocation";
-import { Share } from "@1/ui/icons";
-import { useMutation } from "@tanstack/react-query";
+import { Exchange as ExchangeIcon, Share } from "@1/ui/icons";
 import { Formik } from "formik";
-import { useContext } from "react";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
+import { useContext, useEffect, useRef } from "react";
 import { useTimeoutFn } from "react-use";
-import { match } from "ts-pattern";
+import { P, match } from "ts-pattern";
 import { Avatar } from "~/components/Avatar";
 import { ErrorOccur } from "~/components/ErrorOccur";
+import { Deal_Controller } from "~/modules/exchange/Deal.controller";
+import { Deal_Repository } from "~/modules/exchange/Deal.repository";
+import { Deal_Message_Controller } from "~/modules/exchange/Deal_Message.controller";
+import { Deal_Message_Repository } from "~/modules/exchange/Deal_Message.repository";
+import { Exchange_Item_Controller } from "~/modules/exchange/Item.controller";
+import { Exchange_Repository } from "~/modules/exchange/infrastructure";
+import { fromClient } from "../api/v1";
+import Loading from "../loading";
 import { Exchange_CardContext } from "./ExchangeCard.context";
 
 //
@@ -32,19 +41,139 @@ export function Ask_Action() {
 
 export function Ask_Body() {
   const { exchange } = useContext(Exchange_CardContext);
-  console.log({ exchange });
-  const mutation_info = useMutation(
-    (_message: string) =>
-      new Promise((resolve) => setTimeout(resolve, 3_333 * Math.random())),
+  const exchange_id = exchange.get("id");
+
+  const { data: session } = useSession();
+
+  const exchange_repository = new Exchange_Repository(
+    fromClient,
+    session?.user?.jwt,
   );
-  return match(mutation_info)
-    .with({ status: "error" }, () => (
-      <ErrorOccur error={mutation_info.error as Error} />
-    ))
-    .with({ status: "idle" }, () => <Ask_Form onSend={mutation_info.mutate} />)
-    .with({ status: "loading" }, () => <Loading />)
-    .with({ status: "success" }, () => <MessageSent />)
-    .exhaustive();
+  const { find_deal_by_participant } = new Exchange_Item_Controller(
+    exchange_repository,
+    exchange_id,
+  );
+
+  const {
+    create: { useMutation },
+  } = new Deal_Controller(new Deal_Repository(fromClient, session?.user?.jwt));
+
+  const exchange_deals_query_info = find_deal_by_participant.useQuery();
+  const deal_id = exchange_deals_query_info.data?.data?.at(0)?.id;
+
+  const message_ctrl = new Deal_Message_Controller(
+    new Deal_Message_Repository(
+      fromClient,
+      session?.user?.jwt,
+      Number(deal_id),
+    ),
+  );
+  const create_message_info = message_ctrl.create.useMutation();
+
+  const create_deal_mutation_info = useMutation();
+
+  const message_ref = useRef<string>();
+
+  //
+  //
+  //
+
+  useEffect(() => {
+    if (
+      !deal_id ||
+      !create_deal_mutation_info.isSuccess ||
+      !message_ref.current
+    )
+      return;
+
+    console.log(
+      {
+        exchange_deals: exchange_deals_query_info,
+        create_deal_mutation_info,
+        create_message_info,
+      },
+      message_ref.current,
+    );
+
+    create_message_info.mutate(message_ref.current);
+  }, [create_deal_mutation_info.isSuccess, deal_id, message_ref.current]);
+
+  return (
+    match([
+      create_message_info,
+      exchange_deals_query_info,
+      create_deal_mutation_info,
+    ])
+      .with(
+        [{ status: "error" }, P._, P._],
+        [P._, { status: "error" }, P._],
+        [P._, P._, { status: "error" }],
+        () => {
+          const error =
+            create_message_info.error ??
+            exchange_deals_query_info.error ??
+            create_deal_mutation_info.error;
+          return <ErrorOccur error={error as Error} />;
+        },
+      )
+      .with([P._, P._, { status: "loading" }], () => <Sending />)
+      .with(
+        [{ status: "loading" }, P._, P._],
+        [P._, { status: "loading" }, P._],
+        () => <Loading />,
+      )
+      .with(
+        [
+          { status: "idle" },
+          {
+            status: "success",
+            data: { data: [P.select()] },
+          },
+          { status: "idle" },
+        ],
+        ({ id }) => <RedirectToExistingDeal deal_id={id!} />,
+      )
+      //
+      .with(
+        [P._, P._, { status: "idle", mutateAsync: P.select() }],
+        (mutateAsync) => (
+          <Ask_Form
+            onSend={async (message) => {
+              message_ref.current = message;
+              await mutateAsync({ exchange_id });
+              await exchange_deals_query_info.refetch();
+            }}
+          />
+        ),
+      )
+      .with([{ status: "success" }, P._, P._], () => <MessageSent />)
+      .with([{ status: "idle" }, { status: "success" }, P._], (i) => {
+        console.warn(i);
+        return <Loading />;
+      })
+      .exhaustive()
+  );
+}
+
+function Sending() {
+  return (
+    <div className="flex flex-1 flex-col justify-center">
+      <h1
+        className={`
+        mx-auto
+        my-0
+        text-center 
+        text-xl
+        font-extrabold
+      `}
+      >
+        Envoie en cours...
+      </h1>
+      <div className="mx-auto mt-5 text-center">
+        <Spinner />
+      </div>
+    </div>
+  );
 }
 
 function Loading() {
@@ -59,7 +188,7 @@ function Loading() {
         font-extrabold
       `}
       >
-        Envoie en cours...
+        Chargement...
       </h1>
       <div className="mx-auto mt-5 text-center">
         <Spinner />
@@ -88,6 +217,25 @@ function MessageSent() {
       </h1>
       <div className="mx-auto mt-5 text-center">📮</div>
     </div>
+  );
+}
+
+function RedirectToExistingDeal({ deal_id }: { deal_id: number }) {
+  const { exchange } = useContext(Exchange_CardContext);
+
+  return (
+    <Link
+      className="flex flex-1 flex-col items-center justify-center"
+      href={`/my/exchanges/${exchange.get("id")}/deals/${deal_id}`}
+    >
+      <ExchangeIcon
+        className={`
+          max-w-[50%]
+          flex-1
+        `}
+      />
+      <div className="mx-auto mt-5 text-center">C'est par là :D</div>
+    </Link>
   );
 }
 
