@@ -128,12 +128,12 @@ function ProfileMessages({
   const last_index = messages.length - 1;
   return (
     <Speaker $isYou={isYou}>
-      <div className="relative mr-4 flex h-8 w-8 flex-shrink-0">
+      <Speaker_Avatar $isYou={isYou}>
         <Avatar
           u={profile}
           className="h-3xl w-3xl rounded-3xl object-cover shadow-md"
         />
-      </div>
+      </Speaker_Avatar>
       <MessageGroup $isYou={isYou}>
         {messages.map(({ content, id }, index) => (
           <Message
@@ -150,10 +150,23 @@ function ProfileMessages({
   );
 }
 
-const Speaker = tw.div<{ $isYou: boolean }>`
-mb-4 flex flex-row justify-start
-${({ $isYou }) => ($isYou ? "flex-row-reverse" : "")}
+const Speaker_Avatar = tw.div<{ $isYou: boolean }>`
+  relative
+  flex
+  h-8
+  w-8
+  flex-shrink-0
+  ${({ $isYou }) => ($isYou ? "ml-4" : "mr-4")}
 `;
+
+const Speaker = tw.div<{ $isYou: boolean }>`
+  mb-4
+  flex
+  flex-row
+  justify-start
+  ${({ $isYou }) => ($isYou ? "flex-row-reverse" : "")}
+`;
+
 const MessageGroup = tw.div<{
   $isYou: boolean;
 }>`
