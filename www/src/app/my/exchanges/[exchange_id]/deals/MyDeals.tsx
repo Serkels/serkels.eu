@@ -153,7 +153,7 @@ function Echange_DealLink() {
   const [discussion] = useDeal_Value();
   const pathname = usePathname() ?? "";
 
-  const href = `/my/exchanges${exchange.get("id")}/deals/${discussion.get(
+  const href = `/my/exchanges/${exchange.get("id")}/deals/${discussion.get(
     "id",
   )}`;
   const active =
