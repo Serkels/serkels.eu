@@ -2,6 +2,7 @@
 
 import { factories } from "@strapi/strapi";
 import type { GetValues } from "@strapi/strapi/lib/types/core/attributes";
+import { ValidationError } from "@strapi/utils/dist/errors";
 import type { Context } from "@strapi/utils/dist/types";
 import type { Next } from "koa";
 
@@ -44,13 +45,15 @@ function clean_body(ctx: any, next: Next) {
   const { data } = strapi_ctx.request.body;
 
   if (!data) {
-    strapi_ctx.noContent("Missing request body");
-    return next();
+    throw new ValidationError("Empty body data", ctx.request.body);
+  }
+
+  if (!data.title) {
+    throw new ValidationError("Missing title", ctx.request.body);
   }
 
   if (!data.category) {
-    strapi_ctx.badRequest("Missing category");
-    return next();
+    throw new ValidationError("Missing category", ctx.request.body);
   }
 
   data.accepted_answer = null;
