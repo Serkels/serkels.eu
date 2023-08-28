@@ -86,8 +86,6 @@ function Discussion_Timeline({
   );
 
   console.log({ grouped_by_day_and_profile });
-  // .map((raw) => new Exchange_ItemSchemaToDomain().build(raw))
-  useId();
 
   return (
     <>
@@ -99,9 +97,9 @@ function Discussion_Timeline({
         return (
           <Fragment key={Number(day)}>
             <MessageTime date={day} />
-            {messages_by_profile.map(([id, messages]) => (
+            {messages_by_profile.map(([id, messages], index) => (
               <ProfileMessages
-                key={`${Number(day)}_${id}`}
+                key={`${Number(day)}_${id}_${index}`}
                 profile={id}
                 messages={messages}
               />
