@@ -26,7 +26,7 @@ export default {
       Comment
     >("plugin::comments.comment", {
       filters: { related: { uid: model.uid, id: entry.id } },
-    });
+    }); 
     console.log({ comments });
     await Promise.all(
       comments.map(({ id }) =>

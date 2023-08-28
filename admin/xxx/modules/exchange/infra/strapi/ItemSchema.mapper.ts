@@ -56,6 +56,10 @@ export class Exchange_ItemSchemaToDomain
         }),
       );
 
+    const in_exchange_of_to_domain = new Category_SchemaToDomain().fromItemDto(
+      in_exchange_of?.data,
+    );
+
     return Exchange.create({
       ...other_props,
       //
@@ -65,6 +69,9 @@ export class Exchange_ItemSchemaToDomain
       id,
       slug: String(slug),
       category: category_to_domain.value(),
+      in_exchange_of: in_exchange_of_to_domain.isFail()
+        ? undefined
+        : in_exchange_of_to_domain.value(),
       profile: profile_to_domain.value(),
       type: Type.create(type).value(),
       when: when ? new Date(when) : new Date(NaN),

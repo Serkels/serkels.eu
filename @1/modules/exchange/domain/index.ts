@@ -1,7 +1,7 @@
 //
 
 import { Entity, Ok, Result } from "@1/core/domain";
-import type { Category } from "../../common";
+import { Category_SchemaToDomain, type Category } from "../../common";
 import type { Profile } from "../../profile/domain";
 import type { Type, TypeProps } from "./Type.value";
 
@@ -19,7 +19,7 @@ export interface Exchange_Props {
 
   available_places: number;
   places: number;
-  in_exchange_of?: Category;
+  in_exchange_of: Category | undefined;
   description: string;
   createdAt: Date;
   updatedAt: Date;
@@ -28,6 +28,10 @@ export interface Exchange_Props {
 }
 
 export class Exchange extends Entity<Exchange_Props> {
+  private constructor(props: Exchange_Props) {
+    super(props);
+  }
+
   static override create(props: Exchange_Props): Result<Exchange, Error> {
     return Ok(new Exchange(props));
   }
@@ -58,6 +62,8 @@ export class Exchange extends Entity<Exchange_Props> {
     return this.props.category;
   }
   get in_exchange_of() {
+    if (!this.props.in_exchange_of) return;
+    new Category_SchemaToDomain().fromItemDto(this.props.in_exchange_of);
     return this.props.in_exchange_of;
   }
 }
