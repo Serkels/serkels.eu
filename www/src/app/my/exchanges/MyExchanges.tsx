@@ -115,7 +115,7 @@ function Echange_MessagingLink() {
   const [exchange] = useExchange_Value();
   const pathname = usePathname() ?? "";
   const { data: session } = useSession();
-  const href = `/my/exchanges${exchange.get("id")}/deals`;
+  const href = `/my/exchanges/${exchange.get("id")}/deals`;
   const active =
     pathname.split("/").length >= href.split("/").length &&
     href.includes(pathname);
