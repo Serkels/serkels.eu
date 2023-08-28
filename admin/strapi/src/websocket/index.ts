@@ -5,7 +5,7 @@ import TypedEmitter from "typed-emitter";
 
 type NotificationEvents = {
   error: (error: Error) => void;
-  new_answer: (profile_id: number) => void;
+  new_answer: (comment_id: number) => void;
 };
 
 type MessageEvents = {

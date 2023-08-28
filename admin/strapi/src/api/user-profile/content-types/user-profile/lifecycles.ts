@@ -1,39 +1,41 @@
 //
 import type { Event as LifecycleEvent } from "@strapi/database/lib/lifecycles";
-import type { Shared } from "@strapi/strapi";
+import type { Common, Shared } from "@strapi/strapi";
 import type { EntityService } from "@strapi/strapi/lib/services/entity-service";
-import {
-  ApiBookmarkBookmark,
-  ApiUserProfileUserProfile,
-} from "~/types/generated/contentTypes";
+import { GetValues } from "~/types";
 
 //
 
-type ParamsWhere = { params: { where: { id: number } } };
+const PROFILE_API_CONTENT_ID =
+  "api::user-profile.user-profile" as const satisfies Common.UID.ContentType;
+const BOOKMARK_API_CONTENT_ID =
+  "api::bookmark.bookmark" as const satisfies Common.UID.ContentType;
+
+//
 
 export default {
-  async beforeCreate(event: LifecycleEvent & ParamsWhere) {
-    const { action, model, params } = event;
-    console.log(__dirname, { action, model, params });
+  async beforeCreate(event: LifecycleEvent) {
+    // const { action, model, params } = event;
+    // console.log(__dirname, { action, model, params });
     // event.params.data.publishedAt = null
     // event.params.data.status = null
   },
   async afterCreate(event: LifecycleEvent) {
-    const { action, model, params } = event;
-    console.log(__dirname, { action, model, params });
+    // const { action, model, params } = event;
+    // console.log(__dirname, { action, model, params });
   },
   async beforeUpdate(event: LifecycleEvent) {
-    const { action, model, params } = event;
-    console.log(__dirname, { action, model, params });
+    // const { action, model, params } = event;
+    // console.log(__dirname, { action, model, params });
   },
   async afterUpdate(event: LifecycleEvent) {
-    const { action, model, params } = event;
-    console.log(__dirname, { action, model, params });
+    // const { action, model, params } = event;
+    // console.log(__dirname, { action, model, params });
   },
-  async beforeDelete(event: LifecycleEvent & ParamsWhere) {
+  async beforeDelete(event: LifecycleEvent) {
     const { model, params } = event;
 
-    const entry: ApiUserProfileUserProfile["attributes"] & { id: number } =
+    const entry: GetValues<typeof PROFILE_API_CONTENT_ID> & { id: number } =
       await strapi.db
         .query(model.uid)
         .findOne({ ...params, populate: ["owner", "image"] });
@@ -54,7 +56,7 @@ export default {
 //
 
 async function remove_profile_image(
-  image: ApiUserProfileUserProfile["attributes"]["image"] | null,
+  image: GetValues<typeof PROFILE_API_CONTENT_ID>["image"] | null,
 ) {
   if (!image) {
     return;
@@ -64,17 +66,15 @@ async function remove_profile_image(
 }
 
 async function remove_profile_bookmarks(
-  profile: ApiUserProfileUserProfile["attributes"],
+  profile: GetValues<typeof PROFILE_API_CONTENT_ID>,
 ) {
   const entityService: EntityService = strapi.entityService;
-  const { owner } = profile as ApiUserProfileUserProfile["attributes"] & {
-    id: number;
-  };
+  const { owner } = profile;
 
   const bookmarks = await entityService.findMany<
     keyof Shared.ContentTypes,
-    ApiBookmarkBookmark["attributes"] & { id: number }
-  >("api::bookmark.bookmark", {
+    GetValues<typeof BOOKMARK_API_CONTENT_ID> & { id: number }
+  >(BOOKMARK_API_CONTENT_ID, {
     filters: {
       owner: owner["id"],
     },
@@ -84,23 +84,23 @@ async function remove_profile_bookmarks(
     // Remove all owned bookmarks
     bookmarks.map(({ id }) =>
       entityService
-        .delete<keyof Shared.ContentTypes, ApiBookmarkBookmark["attributes"]>(
-          "api::bookmark.bookmark",
-          id,
-          {},
-        )
-        .then(() => strapi.log.info(`DELETE api::bookmark.bookmark ${id}`)),
+        .delete<
+          keyof Shared.ContentTypes,
+          GetValues<typeof BOOKMARK_API_CONTENT_ID>
+        >(BOOKMARK_API_CONTENT_ID, id, {})
+        .then(() => strapi.log.info(`DELETE ${BOOKMARK_API_CONTENT_ID} ${id}`)),
     ),
   );
 }
 
 async function remove_profile_owner(
-  owner: ApiUserProfileUserProfile["attributes"]["owner"] | null,
+  owner: GetValues<typeof PROFILE_API_CONTENT_ID>["owner"] | null,
 ) {
   if (!owner) {
     return;
   }
-  const { id } = owner as ApiUserProfileUserProfile["attributes"]["owner"] & {
+
+  const { id } = owner as GetValues<typeof PROFILE_API_CONTENT_ID>["owner"] & {
     id: number;
   };
 

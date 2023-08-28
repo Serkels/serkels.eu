@@ -11,7 +11,7 @@ import type {
   PolicyImplementation,
   Shared,
   StrapiContext,
-} from "~/src/types";
+} from "~/types";
 import { findOneFromUser } from "../../user-profile/services/user-profile";
 
 export default factories.createCoreRouter("api::exchange-deal.exchange-deal", {

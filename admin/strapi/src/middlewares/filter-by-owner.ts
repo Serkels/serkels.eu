@@ -2,7 +2,7 @@
 
 import type { Strapi } from "@strapi/strapi";
 import type { Next } from "koa";
-import type { StrapiContext } from "../types";
+import type { StrapiContext } from "~/types";
 
 export default (config, { strapi }: { strapi: Strapi }) => {
   return async (context: StrapiContext, next: Next) => {

@@ -1,7 +1,7 @@
 //
 
 import type { Next, ParameterizedContext } from "koa";
-import type { ResponseBody, State } from "../../../types";
+import type { ResponseBody, State } from "../../../../types";
 
 export default () => {
   return async function relation(ctx: Context, next: Next) {

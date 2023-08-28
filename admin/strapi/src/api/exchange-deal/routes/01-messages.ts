@@ -1,9 +1,8 @@
-import { EntityService } from "@strapi/strapi/lib/services/entity-service";
+//
+
 import { errors } from "@strapi/utils";
-import { Context, Next } from "koa";
-import { Comment } from "strapi-plugin-comments/types/contentTypes";
-import { StrapiContext } from "~/src/types";
-import { replace_autor } from "../../../extensions/comments/services/replace_autor";
+import { replace_autor } from "~/src/extensions/comments/services/replace_autor";
+import type { Comment, EntityService, KoaContext, Next } from "~/types";
 
 //
 
@@ -19,20 +18,7 @@ export default {
       handler: "api::exchange-deal.messages.find",
       config: {
         description: "Get exchange deals",
-        middlewares: [
-          "api::exchange-deal.relation",
-          async function replate_author_by_profile(ctx: Context, next: Next) {
-            await next();
-
-            //
-
-            const { data } = ctx.body as { data: Comment[] };
-            ctx.body = {
-              ...(ctx.body as object),
-              data: await Promise.all(data.map(replace_autor)),
-            };
-          },
-        ],
+        middlewares: ["api::exchange-deal.relation", replate_author_by_profile],
         policies: [],
       },
       info: { apiName: "api::exchange-deal.messages", type: "content-api" },
@@ -57,13 +43,16 @@ export default {
 
 //
 
-async function update_deal_last_message(context: StrapiContext, next: Next) {
+async function update_deal_last_message(
+  context: KoaContext<any, Comment>,
+  next: Next,
+) {
   await next();
 
   //
 
   const deal_id = context.params.id;
-  const message = context.body as unknown as Comment;
+  const message = context.body;
 
   const entityService: EntityService = strapi.entityService;
   await entityService
@@ -80,11 +69,7 @@ async function update_deal_last_message(context: StrapiContext, next: Next) {
 }
 
 async function clean_your_body(
-  ctx: Context & {
-    request: {
-      body: Comment;
-    };
-  },
+  ctx: KoaContext<Partial<Pick<Comment, "content">>>,
   next: Next,
 ) {
   const data = ctx.request.body;
@@ -96,9 +81,24 @@ async function clean_your_body(
     throw new ValidationError("Empty message content", ctx.request.body);
   }
 
-  ctx.request.body = { content: data.content } as Comment;
+  ctx.request.body = { content: data.content };
 
   await next();
+}
+
+async function replate_author_by_profile(
+  ctx: KoaContext<any, { data: Comment[] }>,
+  next: Next,
+) {
+  await next();
+
+  //
+
+  const { data } = ctx.body;
+  ctx.body = {
+    ...ctx.body,
+    data: await Promise.all(data.map(replace_autor)),
+  };
 }
 
 //

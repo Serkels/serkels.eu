@@ -1219,6 +1219,7 @@ export interface ApiQuestionQuestion extends Schema.CollectionType {
       Attribute.SetMinMax<{
         min: 0;
       }>;
+    edited_at: Attribute.DateTime;
     last_activity: Attribute.DateTime;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;

@@ -15,7 +15,6 @@
     "./**/*.ts",
     "./**/*.js",
     "src/**/*.json",
-    "src/types.d.ts",
     "types/generated/*.d.ts"
   ],
   "exclude": [

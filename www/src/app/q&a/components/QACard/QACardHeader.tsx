@@ -39,7 +39,12 @@ export function QACardHeader() {
             "text-[#C10000]": !is_accepted,
           })}
         />
-        <TimeInfo values={attributes ?? {}} />
+        <TimeInfo
+          values={{
+            createdAt: attributes?.createdAt,
+            updatedAt: attributes?.edited_at,
+          }}
+        />
       </div>
     </header>
   );

@@ -1,8 +1,7 @@
 //
 
 import { New_Answer_Schema_To_Domain } from "@1/modules/notification/infra/strapi";
-import { Profile_SchemaToDomain } from "@1/modules/profile/infra/strapi";
-import { Profile_Schema } from "@1/strapi-openapi";
+import { Profile_RecordToDomain } from "@1/modules/profile/infra/strapi";
 import { appRouter, type AppContext } from "@1/strapi-trpc-router";
 import { getService } from "@strapi/plugin-users-permissions/server/utils";
 import type { Strapi } from "@strapi/strapi";
@@ -11,19 +10,10 @@ import { applyWSSHandler } from "@trpc/server/adapters/ws";
 import { observable } from "@trpc/server/observable";
 import type { Comment } from "strapi-plugin-comments/types/contentTypes";
 import { Server, type WebSocket } from "ws";
+import type { GetValues } from "~/types";
 import { UserEmitterMap } from ".";
 
 //
-
-const timer = setInterval(async () => {
-  const source = UserEmitterMap.get(34)?.notifications;
-
-  if (!source) {
-    return;
-  }
-
-  source.emit("new_answer", 89);
-}, 6_666);
 
 export default function bootstrap({ strapi }: { strapi: Strapi }) {
   const wss = (strapi.server.wss = new Server({
@@ -40,7 +30,12 @@ export default function bootstrap({ strapi }: { strapi: Strapi }) {
             return observable((emit) => {
               strapi.log.debug(`+ Notification ${id}`);
               const on_new_answer = async (comment_id: number) => {
+                strapi.log.debug(
+                  `*** on_new_answer (user ${id}) (comment_id ${comment_id})`,
+                );
                 const entityService: EntityService = strapi?.entityService;
+
+                if (Number.isNaN(comment_id)) return;
 
                 const comment: (Comment & { createdAt: string }) | undefined =
                   await entityService.findOne(
@@ -52,16 +47,24 @@ export default function bootstrap({ strapi }: { strapi: Strapi }) {
                 const user_id = comment?.authorUser?.id;
                 if (!user_id) return;
 
-                const profile: Profile_Schema = await strapi
+                const profile_record: GetValues<"api::user-profile.user-profile"> & {
+                  id: number;
+                } = await strapi
                   .service("api::user-profile.user-profile")
                   .findOneFromUser(user_id);
+                const profile_option = new Profile_RecordToDomain().build(
+                  profile_record,
+                );
 
-                if (!profile) return;
+                if (profile_option.isFail()) {
+                  strapi.log.error(profile_option.error());
+                  return;
+                }
 
                 const new_answer_record = {
                   answer: { id: Number(comment.id) },
                   createdAt: new Date(comment.createdAt),
-                  profile: new Profile_SchemaToDomain().build(profile).value(),
+                  profile: profile_option.value(),
                   question: { id: 0 },
                   subject: "Q&A",
                   type: "NEW_ANSWER",

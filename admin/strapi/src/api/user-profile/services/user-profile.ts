@@ -2,10 +2,10 @@
  * user-profile service
  */
 
-import { Profile_Schema } from "@1/strapi-openapi";
 import { factories } from "@strapi/strapi";
 import type { EntityService } from "@strapi/strapi/lib/services/entity-service";
 import { createHash } from "node:crypto";
+import type { GetValues } from "~/types";
 
 export default factories.createCoreService(
   "api::user-profile.user-profile",
@@ -22,19 +22,22 @@ export default factories.createCoreService(
 
 export async function findOneFromUser(id: number) {
   const entityService: EntityService = strapi.entityService;
-  const profiles = await entityService.findMany(
+  const profiles = await entityService.findMany<
     "api::user-profile.user-profile",
-    {
-      fields: ["id", "firstname", "lastname", "university"],
-      filters: { owner: id },
-    },
-  );
+    GetValues<"api::user-profile.user-profile">
+  >("api::user-profile.user-profile", {
+    fields: ["firstname", "lastname", "university"],
+    filters: { owner: id },
+  });
 
-  const profile = profiles[0] as Profile_Schema | undefined;
-  if (profile === undefined) {
+  // ! HACK(douglasduteil): the findMany populated the id
+  const profile = { id: NaN, ...profiles[0] };
+  if (Number.isNaN(profile.id)) {
     strapi.log.warn(
-      `service::user-profile.user-profile :findOneFromUser(${id}): detected no profiles`,
+      `service::user-profile.user-profile > ` +
+        `findOneFromUser(${id}): detected no profiles`,
     );
+    return undefined;
   }
 
   return profile;

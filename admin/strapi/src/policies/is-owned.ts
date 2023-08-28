@@ -1,15 +1,11 @@
 //
 
 import type { EntityService } from "@strapi/strapi/lib/services/entity-service";
-import type { PolicyImplementation } from "@strapi/strapi/lib/types/core-api/router";
 import { errors } from "@strapi/utils";
 import type { StrapiRequestContext } from "strapi-typed";
+import type { AsyncPolicyImplementation } from "~/types";
 
 //
-
-type AsyncPolicyImplementation<TCfg = unknown> = (
-  ...args: Parameters<PolicyImplementation<TCfg>>
-) => Promise<boolean>;
 
 export default <
   AsyncPolicyImplementation<

@@ -4298,6 +4298,8 @@ export interface components {
           id?: number;
         };
       };
+      /** Format: date-time */
+      edited_at?: string;
       is_accepted?: boolean;
       /** Format: date-time */
       last_activity?: string;
@@ -4686,6 +4688,8 @@ export interface components {
         answer_count?: number;
         /** @example string or id */
         category?: number | string;
+        /** Format: date-time */
+        edited_at?: string;
         is_accepted?: boolean;
         /** Format: date-time */
         last_activity?: string;

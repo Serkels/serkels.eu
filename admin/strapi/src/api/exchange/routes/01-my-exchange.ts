@@ -1,7 +1,7 @@
 import { EntityService } from "@strapi/strapi/lib/services/entity-service";
 import { Shared } from "@strapi/strapi/lib/types";
 import { Next } from "koa";
-import { StrapiContext } from "~/src/types";
+import { StrapiContext } from "~/types";
 import { ApiExchangeDealExchangeDeal } from "~/types/generated/contentTypes";
 
 export default {

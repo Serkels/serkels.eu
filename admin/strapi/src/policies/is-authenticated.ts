@@ -1,6 +1,6 @@
 //
 
-import { StrapiContext } from "../types";
+import type { StrapiContext } from "~/types";
 
 export default (policyContext: StrapiContext) => {
   return Boolean(policyContext.state.user);

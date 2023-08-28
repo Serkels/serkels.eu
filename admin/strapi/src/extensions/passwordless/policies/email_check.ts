@@ -1,6 +1,6 @@
 //
 
-import { StrapiContext } from "../../../types";
+import type { StrapiContext } from "~/types";
 
 export default async (
   policyContext: StrapiContext & { request: { body: unknown } },

@@ -49,6 +49,9 @@
       "type": "integer",
       "min": 0
     },
+    "edited_at": {
+      "type": "datetime"
+    },
     "last_activity": {
       "type": "datetime"
     }

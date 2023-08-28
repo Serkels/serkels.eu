@@ -1,9 +1,8 @@
 //
 
 import type { Next } from "koa";
+import type { StrapiContext } from "~/types";
 import { findOneFromUser } from "../api/user-profile/services/user-profile";
-import type { StrapiContext } from "../types";
-
 //
 
 export default () => {
