@@ -57,7 +57,10 @@ export function Dialog({ children }: PropsWithChildren) {
           items-stretch 
           justify-between
           sm:min-w-[50vw]
+          sm:max-w-[75vw]
           md:min-w-[25vw]
+          md:max-w-[50vw]
+          lg:max-w-[25vw]
         `,
       })}
     >
