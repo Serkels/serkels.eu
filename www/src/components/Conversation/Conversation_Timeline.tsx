@@ -52,8 +52,6 @@ export function Conversation_Timeline({
     [] as [Date, [number, Common_MessageSchema[]][]][],
   );
 
-  console.log({ grouped_by_day_and_profile });
-
   return (
     <>
       {match({ isFetchingNextPage, hasNextPage })

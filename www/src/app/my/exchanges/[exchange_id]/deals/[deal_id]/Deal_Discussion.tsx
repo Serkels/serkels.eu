@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 import { useId } from "react";
 import { match } from "ts-pattern";
 import { fromClient } from "~/app/api/v1";
-import { Conversation_Timeline } from "~/app/my/inbox/[thread_id]/Deal_Discussion";
+import { Conversation_Timeline } from "~/components/Conversation/Conversation_Timeline";
 import { Deal_Message_Controller } from "~/modules/exchange/Deal_Message.controller";
 import { Deal_Message_Repository } from "~/modules/exchange/Deal_Message.repository";
 import { useDeal_Value } from "../Deal.context";

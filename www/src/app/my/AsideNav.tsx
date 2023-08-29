@@ -116,8 +116,8 @@ export function AsideNav(props: ComponentPropsWithoutRef<"aside">) {
             </ItemLinkWithIcon> */}
             <ItemLinkWithIcon
               icon={<Messenger />}
-              match="/my/Messenger"
-              href="/my/profile"
+              match="/my/inbox"
+              href="/my/inbox"
             >
               Messagerie
             </ItemLinkWithIcon>

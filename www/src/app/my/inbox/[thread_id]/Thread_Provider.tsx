@@ -9,7 +9,6 @@ import tw from "tailwind-styled-components";
 import { P, match } from "ts-pattern";
 import { ErrorOccur } from "~/components/ErrorOccur";
 import {
-  Message_Schema,
   Thread,
   Thread_Schema,
   Thread_Schema_ToDomain,
@@ -17,30 +16,6 @@ import {
 import { Thread_ValueProvider, useThread_Value } from "./Thread.context";
 
 //
-const mockk = {
-  pages: [
-    {
-      data: Array.from({ length: 5 }).map(
-        (_, index) =>
-          ({
-            id: index,
-            content: "Hello " + index,
-            profile: {
-              about: "",
-              createdAt: new Date(),
-              updatedAt: new Date(),
-              firstname: "firstname" + index,
-              lastname: "lastname" + index,
-              id: index,
-              university: "university" + index,
-            },
-            created_at: `${2023 - index}-08-29T03:05:12.227Z`,
-            updated_at: `${2023 - index}-08-29T03:05:12.227Z`,
-          }) as Message_Schema,
-      ),
-    },
-  ],
-};
 
 const mock = {
   id: 1,
