@@ -2,13 +2,15 @@
 
 import {
   Aggregate,
-  Entity,
   InputError,
   Ok,
   Result,
   type IAdapter,
   type IResult,
 } from "@1/core/domain";
+import { Message } from "@1/modules/inbox/domain";
+import { Message_Schema } from "@1/modules/inbox/infra/strapi";
+import { Message_Schema_ToDomain } from "@1/modules/inbox/infra/strapi/Message_Schema_ToDomain";
 import { Profile } from "@1/modules/profile/domain";
 import {
   Profile_Schema,
@@ -27,40 +29,6 @@ import { z } from "zod";
 import { Avatar_Show_Profile } from "~/components/Avatar_Show_Profile";
 import { ErrorOccur } from "~/components/ErrorOccur";
 
-//
-
-export const Message_Schema = z.object({
-  id: z.number(),
-  content: z.string(),
-});
-export type Message_Schema = z.TypeOf<typeof Message_Schema>;
-export interface Message_Props {
-  id: number;
-  content: string;
-}
-
-export class Message extends Entity<Message_Props> {
-  private constructor(props: Message_Props) {
-    super(props);
-  }
-  static override create(props: Message_Props): Result<Message, Error> {
-    return Ok(new Message(props));
-  }
-
-  //
-
-  get the_excerpt() {
-    return this.props.content.trim().slice(0, 123);
-  }
-}
-
-class Message_Schema_ToDomain implements IAdapter<Message_Schema, Message> {
-  build(target: Message_Schema): IResult<Message, Error> {
-    const id = target.id;
-    const content = target.content;
-    return Message.create({ id, content });
-  }
-}
 //
 //
 //

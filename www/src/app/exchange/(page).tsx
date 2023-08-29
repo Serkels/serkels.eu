@@ -1,11 +1,11 @@
 "use client";
 
-import { OpportunityCategoriesViewModel } from "@/app/opportunity/models/OpportunityCategoriesViewModel";
-import { FilterRadioList } from "@/components/FilterRadioList";
-import { useSyncSearchQuery } from "@/components/useSyncSearchQuery";
 import { InputSearch } from "@1/ui/components/InputSearch";
 import { Form, Formik, useField } from "formik";
 import type { ComponentPropsWithoutRef } from "react";
+import { OpportunityCategoriesViewModel } from "~/app/opportunity/models/OpportunityCategoriesViewModel";
+import { FilterRadioList } from "~/components/FilterRadioList";
+import { useSyncSearchQuery } from "~/components/useSyncSearchQuery";
 import { useOpportunityCategoriesQuery } from "../opportunity/data/useOpportunityCategoriesQuery";
 
 //

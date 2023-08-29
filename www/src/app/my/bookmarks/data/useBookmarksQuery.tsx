@@ -1,8 +1,8 @@
 "use client";
 
-import { fromClient } from "@/app/api/v1";
 import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
+import { fromClient } from "~/app/api/v1";
 import { BookmarksRepository } from "./BookmarksRepository";
 
 //

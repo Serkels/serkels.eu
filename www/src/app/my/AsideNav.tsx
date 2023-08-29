@@ -1,12 +1,12 @@
 "use client";
 
-import { Avatar, AvatarMediaVertical } from "@/components/Avatar";
-import { AsideBar } from "@/layouts/holy/aside";
 import { Binoculars, Bookmark, Exchange, Messenger, Plus } from "@1/ui/icons";
 import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
+import { Avatar, AvatarMediaVertical } from "~/components/Avatar";
+import { AsideBar } from "~/layouts/holy/aside";
 
 //
 

@@ -1,11 +1,11 @@
 ///
 
-import { AppFooter } from "@/components/AppFooter.server";
-import { UserBar } from "@/components/UserBar";
-import { AsideWithTitle } from "@/layouts/holy/aside";
 import { Grid } from "@1/ui/components/Grid";
 import { Hydrate, dehydrate } from "@tanstack/react-query";
 import { type PropsWithChildren } from "react";
+import { AppFooter } from "~/components/AppFooter.server";
+import { UserBar } from "~/components/UserBar";
+import { AsideWithTitle } from "~/layouts/holy/aside";
 import { getQueryClient } from "../getQueryClient";
 import { useOpportunityCategoriesprefetchQuery } from "../opportunity/data/useOpportunityCategoriesQuery";
 import { CategoriesList, SearchForm } from "./(page)";

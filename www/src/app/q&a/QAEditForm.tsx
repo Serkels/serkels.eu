@@ -1,11 +1,11 @@
 "use client";
 
-import { fromClient } from "@/app/api/v1";
-import { ErrorOccur } from "@/components/ErrorOccur";
 import { Spinner } from "@1/ui/components/Spinner";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import { useCallback, useContext } from "react";
+import { fromClient } from "~/app/api/v1";
+import { ErrorOccur } from "~/components/ErrorOccur";
 import { QARepository } from "./QARepository";
 import { QACardContext } from "./components/QACard/QACard.context";
 import { QACardFormBody } from "./components/QAForm/QACardFormBody";

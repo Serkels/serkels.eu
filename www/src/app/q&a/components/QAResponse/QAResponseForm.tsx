@@ -1,13 +1,13 @@
 //
 
-import { fromClient } from "@/app/api/v1";
-import { AvatarMediaHorizontal } from "@/components/Avatar";
-import { ErrorOccur } from "@/components/ErrorOccur";
 import { Spinner } from "@1/ui/components/Spinner";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Field, Form, Formik, type FormikProps } from "formik";
 import { useSession } from "next-auth/react";
 import { useContext, type Ref } from "react";
+import { fromClient } from "~/app/api/v1";
+import { AvatarMediaHorizontal } from "~/components/Avatar";
+import { ErrorOccur } from "~/components/ErrorOccur";
 import { AnswerRepository, QARepository } from "../../QARepository";
 import { QACardContext } from "../QACard/QACard.context";
 

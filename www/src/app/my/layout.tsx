@@ -1,9 +1,9 @@
 ///
 
-import { AppFooter } from "@/components/AppFooter.server";
-import { UserBar } from "@/components/UserBar";
 import { Grid } from "@1/ui/components/Grid";
 import type { PropsWithChildren } from "react";
+import { AppFooter } from "~/components/AppFooter.server";
+import { UserBar } from "~/components/UserBar";
 import { AsideNav } from "./AsideNav";
 
 export default function Layout({ children }: PropsWithChildren) {

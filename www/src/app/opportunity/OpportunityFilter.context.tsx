@@ -1,6 +1,5 @@
 "use client";
 
-import { useSyncSearchQuery } from "@/components/useSyncSearchQuery";
 import {
   createContext,
   useContext,
@@ -8,6 +7,7 @@ import {
   type PropsWithChildren,
   type SetStateAction,
 } from "react";
+import { useSyncSearchQuery } from "~/components/useSyncSearchQuery";
 
 //
 

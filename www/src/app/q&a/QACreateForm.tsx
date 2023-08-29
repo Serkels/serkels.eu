@@ -1,11 +1,11 @@
 "use client";
 
-import { Avatar } from "@/components/Avatar";
-import { ErrorOccur } from "@/components/ErrorOccur";
 import { Card } from "@1/ui/components/Card";
 import { Spinner } from "@1/ui/components/Spinner";
 import { useState } from "react";
 import { match } from "ts-pattern";
+import { Avatar } from "~/components/Avatar";
+import { ErrorOccur } from "~/components/ErrorOccur";
 import { useQuestion_controller } from "~/modules/question/view/react";
 import { QACardFormBody } from "./components/QAForm/QACardFormBody";
 

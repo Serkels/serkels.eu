@@ -1,11 +1,11 @@
 "use client";
 
-import { BookmarkButton } from "@/components/BookmarkButton";
 import type { components } from "@1/strapi-openapi/v1";
 import { LocationRadius, Share } from "@1/ui/icons";
 import clsx from "clsx";
 import * as NProgress from "nprogress";
 import type { ComponentPropsWithoutRef, MouseEvent } from "react";
+import { BookmarkButton } from "~/components/BookmarkButton";
 
 //
 

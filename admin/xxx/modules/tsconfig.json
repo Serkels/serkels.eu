@@ -1,14 +1,17 @@
 {
   "extends": ["@1/typescript-config/base.json"],
   "compilerOptions": {
+    "rootDir": ".",
     "lib": ["ES2020"],
     "module": "CommonJS",
     "moduleResolution": "Node",
     "target": "ES2019",
     "verbatimModuleSyntax": false,
+    "composite": true,
     "paths": {
       "@1/modules/*": ["./*"]
     }
   },
-  "include": ["**/*.ts"]
+  "include": ["**/*.ts"],
+  "references": [{ "path": "../core" }]
 }

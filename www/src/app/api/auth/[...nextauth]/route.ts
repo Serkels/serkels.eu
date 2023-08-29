@@ -1,8 +1,8 @@
-import { fromServer } from "@/app/api/v1";
 import type { components } from "@1/strapi-openapi/v1";
 import type { NextAuthOptions, User } from "next-auth";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { fromServer } from "~/app/api/v1";
 
 async function passwordless_login(token: string) {
   const response = await fetch(

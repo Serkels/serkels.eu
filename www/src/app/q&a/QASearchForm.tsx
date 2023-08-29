@@ -1,9 +1,9 @@
 "use client";
 
-import { useSyncSearchQuery } from "@/components/useSyncSearchQuery";
 import { InputSearch } from "@1/ui/components/InputSearch";
 import { Form, Formik, useField } from "formik";
 import type { ComponentPropsWithoutRef } from "react";
+import { useSyncSearchQuery } from "~/components/useSyncSearchQuery";
 
 //
 

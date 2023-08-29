@@ -1,7 +1,7 @@
 //
 
-import type { ApiClient } from "@/app/api/v1";
 import type { _1_HOUR_ } from "@douglasduteil/datatypes...hours-to-seconds";
+import type { ApiClient } from "~/app/api/v1";
 
 export class UserProfileRepository {
   constructor(private client: ApiClient) {}

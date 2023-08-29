@@ -1,10 +1,10 @@
 //
 
-import { GET } from "@/app/api/v1";
 import type {
   _1_HOUR_,
   _24_HOURS_,
 } from "@douglasduteil/datatypes...hours-to-seconds";
+import { GET } from "~/app/api/v1";
 
 //
 

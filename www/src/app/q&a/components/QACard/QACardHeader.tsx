@@ -1,13 +1,13 @@
 "use client";
 
-import { AvatarMediaHorizontal } from "@/components/Avatar";
-import { DeleteIconButton } from "@/components/DeleteButton/DeleteButton";
-import { TimeInfo } from "@/components/TimeInfo";
 import { Button } from "@1/ui/components/Button";
 import { Circle } from "@1/ui/icons";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
 import { useCallback, useContext } from "react";
+import { AvatarMediaHorizontal } from "~/components/Avatar";
+import { DeleteIconButton } from "~/components/DeleteButton/DeleteButton";
+import { TimeInfo } from "~/components/TimeInfo";
 import { QACardContext } from "./QACard.context";
 //
 

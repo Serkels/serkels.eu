@@ -11,7 +11,7 @@
     "debug": "4.3.4",
     "react": "18.2.0",
     "superjson": "1.13.1",
-    "zod": "3.22.1"
+    "zod": "3.22.2"
   },
   "devDependencies": {
     "@1/typescript-config": "workspace:*",

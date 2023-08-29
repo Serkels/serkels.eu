@@ -4,13 +4,13 @@ import { Spinner } from "@1/ui/components/Spinner";
 
 import { Button } from "@1/ui/components/Button";
 // import { type FormValues } from "@1/ui/domains/signup/UserForm";
-import { Avatar } from "@/components/Avatar";
 import type { components } from "@1/strapi-openapi/v1";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import clsx from "clsx";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { getCsrfToken, useSession } from "next-auth/react";
 import { useCallback, type PropsWithChildren } from "react";
+import { Avatar } from "~/components/Avatar";
 
 //
 

@@ -1,7 +1,7 @@
 //
 
-import { client } from "@/app/client";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { client } from "~/app/client";
 import { Opportunities } from "./data/OpportunityRepository";
 
 export function useOpportunitiesInfinite({ category = "", query = "" }) {

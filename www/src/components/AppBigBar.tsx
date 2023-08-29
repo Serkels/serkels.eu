@@ -1,10 +1,10 @@
 "use client";
 
-import { AppSidebar } from "@/app/(index)/AppSidebar";
 import { HamburgerMenu } from "@1/ui/icons";
 import { BigBar } from "@1/ui/shell";
 import Image from "next/image";
 import { useState } from "react";
+import { AppSidebar } from "~/app/(index)/AppSidebar";
 
 //
 

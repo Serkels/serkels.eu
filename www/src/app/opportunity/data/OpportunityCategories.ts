@@ -1,7 +1,7 @@
 //
 
-import { OpenAPIRepository } from "@/app/api/v1";
 import type { _24_HOURS_ } from "@douglasduteil/datatypes...hours-to-seconds";
+import { OpenAPIRepository } from "~/app/api/v1";
 
 //
 

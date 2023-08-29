@@ -1,10 +1,10 @@
 ///
 
-import { AppFooter } from "@/components/AppFooter.server";
 import { Grid } from "@1/ui/components/Grid";
 import { BigBar } from "@1/ui/shell";
 import Image from "next/image";
 import type { PropsWithChildren } from "react";
+import { AppFooter } from "~/components/AppFooter.server";
 
 export default function Layout({ children }: PropsWithChildren) {
   return (

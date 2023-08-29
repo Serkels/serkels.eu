@@ -1,10 +1,10 @@
 //
 
-import { Avatar } from "@/components/Avatar";
-import { DeleteIconButton } from "@/components/DeleteButton/DeleteButton";
-import { TimeInfo } from "@/components/TimeInfo";
 import { useSession } from "next-auth/react";
 import { useContext } from "react";
+import { Avatar } from "~/components/Avatar";
+import { DeleteIconButton } from "~/components/DeleteButton/DeleteButton";
+import { TimeInfo } from "~/components/TimeInfo";
 import { QAResponseContext } from "./QAResponse.context";
 
 export function QAResponseHeader() {

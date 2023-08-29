@@ -1,7 +1,7 @@
 "use client";
 
-import { OpportunityCategoriesViewModel } from "@/app/opportunity/models/OpportunityCategoriesViewModel";
-import { useSyncSearchQuery } from "@/components/useSyncSearchQuery";
+import { OpportunityCategoriesViewModel } from "~/app/opportunity/models/OpportunityCategoriesViewModel";
+import { useSyncSearchQuery } from "~/components/useSyncSearchQuery";
 import { FilterRadioList } from "../../components/FilterRadioList";
 import { useOpportunityCategoriesQuery } from "../opportunity/data/useOpportunityCategoriesQuery";
 import type { QAFilterType } from "./models/QAFilterType";

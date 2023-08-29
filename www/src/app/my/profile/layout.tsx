@@ -1,7 +1,7 @@
 ///
 
-import { AvatarMediaHorizontalPrimary } from "@/components/Avatar";
 import type { PropsWithChildren } from "react";
+import { AvatarMediaHorizontalPrimary } from "~/components/Avatar";
 import { ProfileNavBar } from "./ProfileNavBar";
 
 export default function Layout({ children }: PropsWithChildren) {

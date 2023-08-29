@@ -1,8 +1,8 @@
 ///
 
-import { AppFooter } from "@/components/AppFooter.server";
-import { UserBar } from "@/components/UserBar";
 import type { PropsWithChildren } from "react";
+import { AppFooter } from "~/components/AppFooter.server";
+import { UserBar } from "~/components/UserBar";
 
 export default function Layout({ children }: PropsWithChildren) {
   return (

@@ -1,9 +1,9 @@
 //
 
-import { BasicOpenApiViewModel } from "@/core/models/BasicOpenApiViewModel";
-import { DatedEntryViewModel } from "@/core/models/DatedEntryProps";
 import { IllegalArgs } from "@1/core/domain";
 import type { components } from "@1/strapi-openapi/v1";
+import { BasicOpenApiViewModel } from "~/core/models/BasicOpenApiViewModel";
+import { DatedEntryViewModel } from "~/core/models/DatedEntryProps";
 
 export const OTHER_CATEGORY_SLUGS = ["other", "autres", "autre"] as const;
 

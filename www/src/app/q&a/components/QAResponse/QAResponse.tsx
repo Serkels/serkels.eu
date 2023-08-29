@@ -1,15 +1,15 @@
 //
 
-import { fromClient } from "@/app/api/v1";
-import { ShouldDeleteQuestion } from "@/components/DeleteButton/DeleteButton";
-import {
-  DeleteButtonContext,
-  useDeleteButtonState,
-} from "@/components/DeleteButton/DeleteButton.context";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import type { FormikProps } from "formik";
 import { useSession } from "next-auth/react";
 import { useCallback, useContext, useRef, useState } from "react";
+import { fromClient } from "~/app/api/v1";
+import { ShouldDeleteQuestion } from "~/components/DeleteButton/DeleteButton";
+import {
+  DeleteButtonContext,
+  useDeleteButtonState,
+} from "~/components/DeleteButton/DeleteButton.context";
 import { AnswerRepository, QARepository } from "../../QARepository";
 import { QACardContext } from "../QACard/QACard.context";
 import { QAResponseContext, type QAResponseStatus } from "./QAResponse.context";

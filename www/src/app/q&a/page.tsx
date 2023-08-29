@@ -1,9 +1,9 @@
 //
 
-import { fromServer } from "@/app/api/v1";
-import { getQueryClient } from "@/app/getQueryClient";
 import { Hydrate, dehydrate } from "@tanstack/react-query";
 import { getServerSession } from "next-auth";
+import { fromServer } from "~/app/api/v1";
+import { getQueryClient } from "~/app/getQueryClient";
 import { Question_Repository } from "~/modules/question/repository";
 import { Question_Controller } from "~/modules/question/view/react/controller";
 import { useOpportunityCategoriesprefetchQuery } from "../opportunity/data/useOpportunityCategoriesQuery";

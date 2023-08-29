@@ -1,11 +1,11 @@
 "use client";
 
+import type { Message_Schema } from "@1/modules/inbox/infra/strapi";
 import type { Comment_ListSchema } from "@1/strapi-openapi";
 import type { UseInfiniteQueryResult } from "@tanstack/react-query";
 import { Avatar_Show_Profile } from "~/components/Avatar_Show_Profile";
 import { Conversation_Form } from "~/components/Conversation/Conversation_Form";
 import { Conversation_Timeline } from "~/components/Conversation/Conversation_Timeline";
-import type { Message_Schema } from "../Inbox_UserThread_List";
 import { useThread_Value } from "./Thread.context";
 
 //

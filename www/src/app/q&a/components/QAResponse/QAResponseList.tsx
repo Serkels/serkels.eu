@@ -1,15 +1,15 @@
 "use client";
 
-import { fromClient } from "@/app/api/v1";
 import { Spinner } from "@1/ui/components/Spinner";
 import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
+import { fromClient } from "~/app/api/v1";
 import { AnswerRepository, QARepository } from "../../QARepository";
 import { QACardContext } from "../QACard/QACard.context";
 import { QAResponse } from "./QAResponse";
 
-import { useSetQueryCacheById } from "@/components/useSetQueryCacheById";
 import { useSession } from "next-auth/react";
+import { useSetQueryCacheById } from "~/components/useSetQueryCacheById";
 
 //
 

@@ -1,6 +1,6 @@
 # 
 
 node_modules/
-
+tsconfig.tsbuildinfo
 *.d.*
 *.js

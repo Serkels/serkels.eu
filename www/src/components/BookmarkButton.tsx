@@ -1,7 +1,5 @@
 "use client";
 
-import { fromClient } from "@/app/api/v1";
-import { BookmarksRepository } from "@/app/my/bookmarks/data/BookmarksRepository";
 import { Spinner } from "@1/ui/components/Spinner";
 import { Bookmark } from "@1/ui/icons";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -12,6 +10,8 @@ import {
   type ComponentPropsWithoutRef,
   type MouseEventHandler,
 } from "react";
+import { fromClient } from "~/app/api/v1";
+import { BookmarksRepository } from "~/app/my/bookmarks/data/BookmarksRepository";
 
 //
 

@@ -1,12 +1,12 @@
 "use client";
 
-import { fromClient } from "@/app/api/v1";
-import { OpportunityCard } from "@/app/opportunity/OpportunityCard";
-import { get_bookmark_opportunities_ids } from "@/components/get_session_bookmarks_id";
 import { Spinner } from "@1/ui/components/Spinner";
 import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { fromClient } from "~/app/api/v1";
+import { OpportunityCard } from "~/app/opportunity/OpportunityCard";
+import { get_bookmark_opportunities_ids } from "~/components/get_session_bookmarks_id";
 import { useBookmarksQuery } from "../data/useBookmarksQuery";
 
 //

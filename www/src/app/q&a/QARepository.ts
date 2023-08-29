@@ -1,8 +1,8 @@
 //
 
-import { OpenAPIRepository, type ApiClient } from "@/app/api/v1";
 import type { components } from "@1/strapi-openapi/v1";
 import type { _1_HOUR_ } from "@douglasduteil/datatypes...hours-to-seconds";
+import { OpenAPIRepository, type ApiClient } from "~/app/api/v1";
 
 //
 

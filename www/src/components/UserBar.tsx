@@ -1,6 +1,5 @@
 "use client";
 
-import { AppSidebar } from "@/app/(index)/AppSidebar";
 import { DotIndicator } from "@1/ui/components/DotIndicator";
 import { Grid } from "@1/ui/components/Grid";
 import {
@@ -18,6 +17,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, type PropsWithChildren } from "react";
+import { AppSidebar } from "~/app/(index)/AppSidebar";
 import { Avatar } from "./Avatar";
 import { MobileNavBar } from "./MobileNavBar";
 import { NotificationButton } from "./NotificationButton";

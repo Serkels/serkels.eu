@@ -1,13 +1,13 @@
 {
   "extends": "@1/typescript-config/next.json",
   "compilerOptions": {
+    "rootDir": ".",
     "baseUrl": "src",
     "declaration": false,
     "declarationMap": false,
     "exactOptionalPropertyTypes": false,
     "paths": {
-      "~/*": ["*"],
-      "@/*": ["*"]
+      "~/*": ["./*"]
     },
     "plugins": [
       {
@@ -16,5 +16,6 @@
     ]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": [".next", "node_modules"]
+  "exclude": [".next", "node_modules"],
+  "references": [{ "path": "../@1/core" }, { "path": "../@1/modules" }]
 }

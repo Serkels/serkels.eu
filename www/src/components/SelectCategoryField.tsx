@@ -1,11 +1,11 @@
 //
 
-import { useOpportunityCategoriesQuery } from "@/app/opportunity/data/useOpportunityCategoriesQuery";
+import { Field, type FieldAttributes } from "formik";
+import { useOpportunityCategoriesQuery } from "~/app/opportunity/data/useOpportunityCategoriesQuery";
 import {
   OTHER_CATEGORY_SLUGS,
   OpportunityCategoriesViewModel,
-} from "@/app/opportunity/models/OpportunityCategoriesViewModel";
-import { Field, type FieldAttributes } from "formik";
+} from "~/app/opportunity/models/OpportunityCategoriesViewModel";
 
 //
 

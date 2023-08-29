@@ -1,5 +1,9 @@
 {
   "extends": ["@1/typescript-config/base.json"],
-  "compilerOptions": {},
-  "include": ["**/*.ts"]
+  "compilerOptions": {
+    "rootDir": ".",
+    "composite": true
+  },
+  "include": ["**/*.ts"],
+  "references": [{ "path": "../core" }]
 }

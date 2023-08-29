@@ -26,5 +26,6 @@
     "src/admin/",
     "**/*.test.*",
     "src/plugins/**"
-  ]
+  ],
+  "references": [{ "path": "../xxx/modules" }]
 }

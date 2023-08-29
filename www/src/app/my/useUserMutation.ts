@@ -1,9 +1,9 @@
 //
 
-import { fromClient } from "@/app/api/v1";
 import type { components } from "@1/strapi-openapi/v1";
 import { useMutation } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
+import { fromClient } from "~/app/api/v1";
 
 //
 

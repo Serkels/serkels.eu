@@ -1,6 +1,5 @@
 "use client";
 
-import { AsideBar } from "@/layouts/holy/aside";
 import { Exchange_ItemSchemaToDomain } from "@1/modules/exchange/infra/strapi";
 import { Button } from "@1/ui/components/ButtonV";
 import { InputSearch } from "@1/ui/components/InputSearch";
@@ -19,6 +18,7 @@ import { P, match } from "ts-pattern";
 import { fromClient } from "~/app/api/v1";
 import { Avatar } from "~/components/Avatar";
 import { ErrorOccur } from "~/components/ErrorOccur";
+import { AsideBar } from "~/layouts/holy/aside";
 import { Exchange_List_Controller } from "~/modules/exchange/List.controller";
 import { Exchange_Repository } from "~/modules/exchange/infrastructure";
 import { Exchange_ValueProvider, useExchange_Value } from "./Exchange.context";
