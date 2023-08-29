@@ -4,7 +4,7 @@ import { Deal_Provider } from "../Deal_Provider";
 import { Deal_Discussion } from "./Deal_Discussion";
 import { Deal_Discussion_Form } from "./Deal_Discussion_Form";
 import { NavControlGroup } from "./NavControlGroup";
-import { Participant_Avatar } from "./Participant_Avatar";
+import { Thread_Avatar } from "./page.client";
 import { SendActionGroup } from "./SendActionGroup";
 
 //
@@ -21,7 +21,7 @@ export default async function Page({
     <main className="col-span-full grid grid-rows-[max-content_1fr_max-content] bg-white  text-black sm:mb-0 md:col-span-2 xl:col-span-3 [&>*]:px-7">
       <Deal_Provider id={deal_id}>
         <header className="sticky top-14 z-10 flex flex-row justify-between space-x-3 bg-white py-7 text-black">
-          <Participant_Avatar />
+          <Thread_Avatar />
           <NavControlGroup exchange_id={exchange_id} />
         </header>
 
