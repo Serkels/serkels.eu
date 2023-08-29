@@ -1,6 +1,6 @@
 //
 
-import type { Common_DiscussionListSchema } from "@1/strapi-openapi";
+import type { Comment_ListSchema } from "@1/strapi-openapi";
 import { startTransaction } from "@sentry/nextjs";
 import {
   useInfiniteQuery,
@@ -64,7 +64,7 @@ export class Deal_Message_Controller {
   useListQuery(query_params: Messages_QueryProps) {
     const queryKey = Deal_QueryKeys.messages(this.repository.deal_id);
     const load_list_query_fn: QueryFunction<
-      Common_DiscussionListSchema,
+      Comment_ListSchema,
       typeof queryKey,
       number
     > = async (params) => {

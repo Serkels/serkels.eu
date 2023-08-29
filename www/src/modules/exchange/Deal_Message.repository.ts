@@ -1,7 +1,7 @@
 //
 
 import { HTTPError } from "@1/core/domain";
-import type { Common_DiscussionListSchema } from "@1/strapi-openapi";
+import type { Comment_ListSchema } from "@1/strapi-openapi";
 import debug from "debug";
 import { OpenAPIRepository, type ApiClient } from "~/app/api/v1";
 import type { RepositoryPort } from "~/core";
@@ -47,7 +47,7 @@ export class Deal_Message_Repository
 
   async find_all({
     pagination,
-  }: Messages_QueryProps): Promise<Common_DiscussionListSchema> {
+  }: Messages_QueryProps): Promise<Comment_ListSchema> {
     log("find_messages (deal_id=%d)", this.deal_id);
     const {
       data: body,

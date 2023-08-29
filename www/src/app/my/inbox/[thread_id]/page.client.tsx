@@ -1,6 +1,6 @@
 "use client";
 
-import type { Common_DiscussionListSchema } from "@1/strapi-openapi";
+import type { Comment_ListSchema } from "@1/strapi-openapi";
 import type { UseInfiniteQueryResult } from "@tanstack/react-query";
 import { Avatar_Show_Profile } from "~/components/Avatar_Show_Profile";
 import { Conversation_Form } from "~/components/Conversation/Conversation_Form";
@@ -45,7 +45,7 @@ export function Thread_Avatar() {
 
 export function Thread_Conversation() {
   const query_info = { data: mockk } as UseInfiniteQueryResult<
-    Common_DiscussionListSchema,
+    Comment_ListSchema,
     unknown
   >;
   return <Conversation_Timeline query_info={query_info} />;

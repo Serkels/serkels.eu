@@ -1,9 +1,6 @@
 //
 
-import type {
-  Common_DiscussionListSchema,
-  Common_MessageSchema,
-} from "@1/strapi-openapi";
+import type { Comment_ListSchema, Comment_Schema } from "@1/strapi-openapi";
 import { Button } from "@1/ui/components/ButtonV";
 import { Spinner } from "@1/ui/components/Spinner";
 import type { UseInfiniteQueryResult } from "@tanstack/react-query";
@@ -21,7 +18,7 @@ import { Avatar } from "~/components/Avatar";
 export function Conversation_Timeline({
   query_info,
 }: {
-  query_info: UseInfiniteQueryResult<Common_DiscussionListSchema, unknown>;
+  query_info: UseInfiniteQueryResult<Comment_ListSchema, unknown>;
 }) {
   const { data, isFetchingNextPage, hasNextPage, fetchNextPage } = query_info;
   if (!data) return null;
@@ -49,7 +46,7 @@ export function Conversation_Timeline({
 
       return group;
     },
-    [] as [Date, [number, Common_MessageSchema[]][]][],
+    [] as [Date, [number, Comment_Schema[]][]][],
   );
 
   return (
@@ -85,7 +82,7 @@ function ProfileMessages({
   messages,
 }: {
   profile: number;
-  messages: Common_MessageSchema[];
+  messages: Comment_Schema[];
 }) {
   console.log(useRendersCount());
   const { data: session } = useSession();

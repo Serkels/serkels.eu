@@ -25,8 +25,8 @@ export type Common_PaginationMeta_Schema = {
   };
 };
 
-export type Common_DiscussionListSchema = Schemas["CommentListResponse"];
-export type Common_MessageSchema = Schemas["CommentsComment"];
+export type Comment_ListSchema = Schemas["CommentListResponse"];
+export type Comment_Schema = Schemas["CommentsComment"];
 export type Category_ItemSchema =
   Schemas["OpportunityCategoryResponseDataObject"];
 
