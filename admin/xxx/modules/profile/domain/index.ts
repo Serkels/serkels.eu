@@ -3,8 +3,6 @@
 import { Entity, Ok, Result, type ErrorInstance } from "@1/core/domain";
 import { z } from "zod";
 
-//
-
 export const Profile_PropsSchema = z.object({
   id: z.number(),
   firstname: z.string(),
@@ -29,5 +27,9 @@ export class Profile extends Entity<Profile_Props> {
   }
   get name() {
     return [this.props.firstname, this.props.lastname].join(" ");
+  }
+
+  get url() {
+    return `/@/${this.props.id}`;
   }
 }

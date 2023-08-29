@@ -1,6 +1,5 @@
 "use client";
 
-import { AsideBar } from "@/layouts/holy/aside";
 import { UnknownError } from "@1/core/error";
 import { Exchange_DealSchemaToDomain } from "@1/modules/deal/infra/strapi/DealSchema.mapper";
 import { Exchange_ItemSchemaToDomain } from "@1/modules/exchange/infra/strapi";
@@ -11,7 +10,6 @@ import clsx from "clsx";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { type ComponentPropsWithoutRef } from "react";
 import tw from "tailwind-styled-components";
 import { P, match } from "ts-pattern";
 import { fromClient } from "~/app/api/v1";
@@ -211,45 +209,6 @@ Echange_DealLink.ui = {
   font-bold
 `,
 };
-
-export function AsideNav_(props: ComponentPropsWithoutRef<"aside">) {
-  const { children, ...other_props } = props;
-  // const [exchange] = useExchange_Value();
-  // console.log({ exchange });
-  const pathname = usePathname() ?? "";
-  const thread = [{ id: 42, active: true }, { id: 4242 }, { id: 424242 }];
-  return (
-    <AsideBar {...other_props}>
-      <div className="sticky top-[calc(theme(spacing.14)_+_24px)]">
-        <h1 className="text-xl font-bold">Cours de français tout les niveau</h1>
-
-        <hr className="my-6 border-2 border-[#F0F0F0]" />
-
-        <ul className="space-y-5">
-          {thread.map((thread) => (
-            <li key={thread.id}>
-              <Link
-                href={`${pathname}/${thread.id}`}
-                className={clsx(
-                  `
-                  block
-                  rounded-xl
-                  border
-                  border-[#ECEDF4]
-                  p-4
-                  text-black
-                  shadow-[10px_10px_10px_#00000014]
-                  `,
-                  { "bg-white": thread.active },
-                )}
-              ></Link>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </AsideBar>
-  );
-}
 
 function EmptyList() {
   return (
