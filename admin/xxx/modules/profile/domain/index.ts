@@ -8,8 +8,8 @@ export const Profile_PropsSchema = z.object({
   firstname: z.string(),
   lastname: z.string(),
   about: z.string(),
-  createdAt: z.date(),
-  updatedAt: z.date(),
+  createdAt: z.coerce.date(),
+  updatedAt: z.coerce.date(),
   university: z.string(),
 });
 

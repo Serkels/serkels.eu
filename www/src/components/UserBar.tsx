@@ -177,9 +177,9 @@ function UserNav() {
         <Plus className="h-4 w-4" />
       </Link>
       <NotificationButton />
-      <Button>
+      <Link href={"/my/inbox"}>
         <Messenger className="h-4 w-4" />
-      </Button>
+      </Link>
       <Button>
         <Exchange className="h-4 w-4" />
       </Button>

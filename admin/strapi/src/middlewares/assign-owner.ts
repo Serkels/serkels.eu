@@ -1,7 +1,7 @@
 //
 
 import type { Next } from "koa";
-import type { StrapiContext } from "../../types";
+import type { StrapiContext } from "~/types";
 
 //
 
