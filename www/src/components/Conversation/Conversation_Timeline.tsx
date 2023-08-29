@@ -8,7 +8,6 @@ import { format, isSameDay } from "date-fns";
 import { fr } from "date-fns/locale";
 import { useSession } from "next-auth/react";
 import { Fragment } from "react";
-import { useRendersCount } from "react-use";
 import tw from "tailwind-styled-components";
 import { match } from "ts-pattern";
 import { Avatar } from "~/components/Avatar";
@@ -84,7 +83,6 @@ function ProfileMessages({
   profile: number;
   messages: Comment_Schema[];
 }) {
-  console.log(useRendersCount());
   const { data: session } = useSession();
   const isYou = session?.user?.profile.id === profile;
   const last_index = messages.length - 1;

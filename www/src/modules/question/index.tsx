@@ -1,14 +1,17 @@
 //
 
-import { ViewModelError } from "@1/core/domain";
-import { useCoreContext } from "~/core/react";
+import { useSession } from "next-auth/react";
+import { useMemo } from "react";
+import { fromClient } from "~/app/api/v1";
 import { Question_Repository } from "./repository";
 
 //
 
 export function useQuestion_repository() {
-  const { repositories } = useCoreContext();
-  const repository = repositories.get(Question_Repository);
-  if (!repository) throw new ViewModelError("No Question_Repository provided");
-  return repository as Question_Repository;
+  const { data: session } = useSession();
+
+  return useMemo(
+    () => new Question_Repository(fromClient, session?.user?.jwt),
+    [session?.user?.jwt],
+  );
 }

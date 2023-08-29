@@ -45,26 +45,26 @@ export default function Providers({ children }: PropsWithChildren) {
       <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
     </QueryClientProvider>
   );
+}
 
-  function ViewProvider({ children }: PropsWithChildren) {
-    const { data: session } = useSession();
-    const context = initial_context;
+function ViewProvider({ children }: PropsWithChildren) {
+  const { data: session } = useSession();
+  const context = initial_context;
 
-    context.repositories.set(
-      Question_Repository,
-      useMemo(
-        () => new Question_Repository(fromClient, session?.user?.jwt),
-        [session?.user?.jwt],
-      ),
-    );
+  context.repositories.set(
+    Question_Repository,
+    useMemo(
+      () => new Question_Repository(fromClient, session?.user?.jwt),
+      [session?.user?.jwt],
+    ),
+  );
 
-    return (
-      <CoreProvider value={context}>
-        <Nest>
-          <QuestionControllerProvider />
-          {children}
-        </Nest>
-      </CoreProvider>
-    );
-  }
+  return (
+    <CoreProvider value={context}>
+      <Nest>
+        <QuestionControllerProvider />
+        {children}
+      </Nest>
+    </CoreProvider>
+  );
 }

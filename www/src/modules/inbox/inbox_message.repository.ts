@@ -10,17 +10,18 @@ import type { RepositoryPort } from "~/core";
 
 //
 
-const log = debug("~:modules:exchange:Deal_Message_Repository");
+const log = debug("~:modules:exchange:Inbox_Message_Repository");
+
 //
 
-export class Deal_Message_Repository
+export class Inbox_Message_Repository
   extends OpenAPIRepository
   implements RepositoryPort
 {
   constructor(
     client: ApiClient,
     jwt: string | undefined,
-    public deal_id: number,
+    public thread_id: number,
   ) {
     super(client, jwt);
     log("new", jwt);
@@ -28,28 +29,33 @@ export class Deal_Message_Repository
 
   async create(body: { content: string }) {
     log("create", body);
-    const { response, error: errorBody } = await this.client.POST(
-      "/deals/{id}/messages",
-      {
-        body,
-        headers: this.headers,
-        params: { path: { id: this.deal_id } },
-      },
-    );
+    // const { response, error: errorBody } = await this.client.POST(
+    //   "/deals/{id}/messages",
+    //   {
+    //     body,
+    //     headers: this.headers,
+    //     params: { path: { id: this.deal_id } },
+    //   },
+    // );
 
-    if (errorBody) {
-      log("create", errorBody);
-      throw new HTTPError(
-        [errorBody.error.message, "from " + response.url].join("\n"),
-        { cause: errorBody.error },
-      );
-    }
+    // if (errorBody) {
+    //   log("create", errorBody);
+    //   throw new HTTPError(
+    //     [errorBody.error.message, "from " + response.url].join("\n"),
+    //     { cause: errorBody.error },
+    //   );
+    // }
+    return Promise.resolve();
   }
 
   async find_all({
     pagination,
   }: Strapi_Query_Params<Message_Schema>): Promise<Comment_ListSchema> {
-    log("find_messages (deal_id=%d)", this.deal_id);
+    const trace = log.extend(
+      `find_all(thread_id=${this.thread_id}, pageSize=${pagination?.pageSize}, page=${pagination?.page})`,
+    );
+
+    trace("");
     const {
       data: body,
       error: errorBody,
@@ -57,7 +63,7 @@ export class Deal_Message_Repository
     } = await this.client.GET("/deals/{id}/messages", {
       headers: this.headers,
       params: {
-        path: { id: this.deal_id },
+        path: { id: this.thread_id },
         query: {
           pagination: {
             page: pagination?.page,
@@ -70,14 +76,14 @@ export class Deal_Message_Repository
     });
 
     if (errorBody) {
-      log("find_messages (deal_id=%d)", this.deal_id, errorBody);
+      trace(errorBody);
       throw new HTTPError(
         [errorBody.error.message, "from " + response.url].join("\n"),
         { cause: errorBody.error },
       );
     }
 
-    log("find_messages (deal_id=%d) 200", this.deal_id);
+    trace("200");
     return body;
   }
 }

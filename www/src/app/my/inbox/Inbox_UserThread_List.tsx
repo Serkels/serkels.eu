@@ -1,173 +1,64 @@
 "use client";
 
+import { InputError, Result } from "@1/core/domain";
+import { Inbox, Thread } from "@1/modules/inbox/domain";
 import {
-  Aggregate,
-  InputError,
-  Ok,
-  Result,
-  type IAdapter,
-  type IResult,
-} from "@1/core/domain";
-import { Message } from "@1/modules/inbox/domain";
-import { Message_Schema } from "@1/modules/inbox/infra/strapi";
-import { Message_Schema_ToDomain } from "@1/modules/inbox/infra/strapi/Message_Schema_ToDomain";
-import { Profile } from "@1/modules/profile/domain";
-import {
-  Profile_Schema,
-  Profile_Schema_ToDomain,
-} from "@1/modules/profile/infra/strapi";
+  InboxList_Schema,
+  Inbox_Schema_ToDomain,
+} from "@1/modules/inbox/infra/strapi";
 import { Button } from "@1/ui/components/ButtonV";
 import { Spinner } from "@1/ui/components/Spinner";
-import { formatDistance } from "date-fns";
-import { fr } from "date-fns/locale";
+import type { InfiniteData } from "@tanstack/react-query";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import tw from "tailwind-styled-components";
 import { P, match } from "ts-pattern";
-import { z } from "zod";
 import { Avatar_Show_Profile } from "~/components/Avatar_Show_Profile";
 import { ErrorOccur } from "~/components/ErrorOccur";
 
 //
-//
-//
-
-export const Thread_Schema = z.object({
-  id: z.number(),
-  profile: Profile_Schema,
-  last_message: Message_Schema,
-  updated_at: z.string(),
-});
-
-export type Thread_Schema = z.TypeOf<typeof Thread_Schema>;
-
-//
-
-export const Inbox_Schema = z.object({
-  id: z.number(),
-  thread: Thread_Schema,
-});
-
-export type Inbox_Schema = z.TypeOf<typeof Inbox_Schema>;
-
-interface Inbox_Props {
-  id: number;
-  thread: Thread;
-}
-class Inbox extends Aggregate<Inbox_Props> {
-  private constructor(props: Inbox_Props) {
-    super(props);
-  }
-  static override create(props: Inbox_Props): Result<Inbox, Error> {
-    return Ok(new Inbox(props));
-  }
-}
-class Inbox_Schema_ToDomain implements IAdapter<Inbox_Schema, Inbox> {
-  thread_to_domain = new Thread_Schema_ToDomain();
-  build(target: Inbox_Schema): IResult<Inbox, Error> {
-    const id = target.id;
-
-    const results = [this.thread_to_domain.build(target.thread)] as const;
-    if (Result.combine([...results]).isFail())
-      throw new InputError("Inbox SubDomain", {
-        cause: Result.combine([...results]).error(),
-      });
-
-    const [thread] = results;
-    return Inbox.create({ id, thread: thread.value() });
-  }
-}
-
-//
-//
-//
-
-interface Thread_Props {
-  id: number;
-  profile: Profile;
-  last_message: Message;
-  updated_at: Date;
-}
-
-export class Thread extends Aggregate<Thread_Props> {
-  private constructor(props: Thread_Props) {
-    super(props);
-  }
-  static override create(props: Thread_Props): Result<Thread, Error> {
-    return Ok(new Thread(props));
-  }
-
-  //
-  get profile() {
-    return this.props.profile;
-  }
-  get last_message() {
-    return this.props.last_message;
-  }
-
-  get last_update() {
-    return formatDistance(this.props.updated_at, new Date(), {
-      locale: fr,
-    });
-  }
-}
-
-export class Thread_Schema_ToDomain implements IAdapter<Thread_Schema, Thread> {
-  #message_to_domain = new Message_Schema_ToDomain();
-  #profile_to_domain = new Profile_Schema_ToDomain();
-  build(target: Thread_Schema): IResult<Thread, Error> {
-    const id = target.id;
-    const last_message = this.#message_to_domain.build(target.last_message);
-    const profile = this.#profile_to_domain.build(target.profile);
-    const updated_at = new Date(target.updated_at);
-
-    const results = Result.combine([profile, last_message]);
-    if (results.isFail())
-      throw new InputError("Thread_Schema_ToDomain", {
-        cause: results.error(),
-      });
-
-    return Thread.create({
-      id,
-      last_message: last_message.value(),
-      profile: profile.value(),
-      updated_at,
-    });
-  }
-}
-//
 const mock = {
   pages: [
     {
-      data: Array.from({ length: 5 }).map(
-        (_, index) =>
-          ({
+      data: Array.from({ length: 5 }).map((_, index) => ({
+        id: index,
+        updatedAt: new Date(`${2023 - index}-08-29T03:05:12.227Z`),
+        thread: {
+          id: index,
+          profile: {
+            about: "",
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            firstname: "firstname" + index,
+            lastname: "lastname" + index,
             id: index,
-            thread: {
+            university: "university" + index,
+          },
+          last_message: {
+            id: index,
+            content: "Hello " + index,
+            author: {
+              about: "",
+              createdAt: new Date(),
+              updatedAt: new Date(),
+              firstname: "firstname" + index,
+              lastname: "lastname" + index,
               id: index,
-              profile: {
-                about: "",
-                createdAt: new Date(),
-                updatedAt: new Date(),
-                firstname: "firstname" + index,
-                lastname: "lastname" + index,
-                id: index,
-                university: "university" + index,
-              },
-              last_message: {
-                id: index,
-                content: "Hello " + index,
-              },
-              updated_at: `${2023 - index}-08-29T03:05:12.227Z`,
+              university: "university" + index,
             },
-          }) as Inbox_Schema,
-      ),
+            createdAt: new Date(),
+            updatedAt: new Date(),
+          },
+          updatedAt: new Date(`${2023 - index}-08-29T03:05:12.227Z`),
+        },
+      })),
       //  )} }) ,
       // ),
     },
   ],
-};
+  pageParams: [],
+} satisfies InfiniteData<InboxList_Schema>;
 
 function useInbox() {
   const inbox_dto_to_domain = new Inbox_Schema_ToDomain();
@@ -261,15 +152,14 @@ function UserThread_Item({ thread }: { thread: Thread }) {
     href.includes(pathname);
 
   return (
-    <Link href={href}>
-      <Thread_Card $active={active}>
-        <Thread_Header>
-          <Avatar_Show_Profile profile={thread.profile} />
-          <Thread_Time dateTime={thread.last_update} title={thread.last_update}>
-            {thread.last_update}
-          </Thread_Time>
-        </Thread_Header>
-
+    <Thread_Card $active={active}>
+      <Thread_Header>
+        <Avatar_Show_Profile profile={thread.profile} />
+        <Thread_Time dateTime={thread.last_update} title={thread.last_update}>
+          {thread.last_update}
+        </Thread_Time>
+      </Thread_Header>
+      <Link href={href}>
         {/* <div className="float-right">
           <Circle className="h-5 w-5 text-Gamboge" />
         </div> */}
@@ -279,8 +169,8 @@ function UserThread_Item({ thread }: { thread: Thread }) {
         >
           {thread.last_message.the_excerpt}
         </Thread_Excerpt>
-      </Thread_Card>
-    </Link>
+      </Link>
+    </Thread_Card>
   );
 }
 

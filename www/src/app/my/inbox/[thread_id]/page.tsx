@@ -1,11 +1,12 @@
 //
 
 import tw from "tailwind-styled-components";
-import { Thread_Provider } from "./Thread_Provider";
+import { Thread } from "./Thread_Provider";
 import {
   Thread_Avatar,
   Thread_Conversation,
   Thread_Conversation_Form,
+  Thread_Provider,
 } from "./page.client";
 
 export default async function Page({
@@ -18,16 +19,18 @@ export default async function Page({
   return (
     <Main>
       <Sticky_Container>
-        <Thread_Provider id={thread_id}>
-          <Header>
-            <Thread_Avatar />
-          </Header>
-          <Scrollable_Part>
-            <Thread_Conversation />
-          </Scrollable_Part>
-          <Footer>
-            <Thread_Conversation_Form />
-          </Footer>
+        <Thread_Provider>
+          <Thread id={thread_id}>
+            <Header>
+              <Thread_Avatar />
+            </Header>
+            <Scrollable_Part>
+              <Thread_Conversation />
+            </Scrollable_Part>
+            <Footer>
+              <Thread_Conversation_Form />
+            </Footer>
+          </Thread>
         </Thread_Provider>
       </Sticky_Container>
     </Main>

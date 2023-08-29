@@ -3,28 +3,28 @@
 import type { Strapi_Query_Params } from "@1/modules/common";
 import type { Message_Schema } from "@1/modules/inbox/infra/strapi";
 import type { Comment_ListSchema } from "@1/strapi-openapi";
-import { startTransaction } from "@sentry/nextjs";
 import {
   useInfiniteQuery,
   useMutation,
-  useQueryClient,
   type QueryFunction,
 } from "@tanstack/react-query";
 import debug from "debug";
 import { useSession } from "next-auth/react";
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
+import { tracer } from "~/core/tracer";
 import { getNextPageParam, getPreviousPageParam } from "~/core/use-query";
-import type { Deal_Message_Repository } from "./Deal_Message.repository";
-import { Deal_QueryKeys } from "./queryKeys";
+import type { Inbox_Message_Repository } from "./inbox_message.repository";
+import { Inbox_QueryKeys } from "./query_keys";
 
 //
 
-const log = debug("~:modules:exchange:Deal_Message_Controller");
+const log = debug("~:modules:exchange:Inbox_Message_Controller");
 
-//
+export class Inbox_Message_Controller {
+  constructor(private repository: Inbox_Message_Repository) {
+    log("new");
+  }
 
-export class Deal_Message_Controller {
-  constructor(private repository: Deal_Message_Repository) {}
   create = { useMutation: this.useCreateMutation.bind(this) };
   list = { useQuery: this.useListQuery.bind(this) };
 
@@ -34,17 +34,20 @@ export class Deal_Message_Controller {
     const { data: session } = useSession();
 
     const create_message = async (message: string) => {
-      log("create_message");
-      const trace = startTransaction({
-        name: `Create Message for the deal ${this.repository.deal_id}`,
+      log("create_message", { message });
+
+      const trace = tracer({
+        name: `Create Message for the inbox ${this.repository.thread_id}`,
       });
+
+      trace.startChild({
+        op: "create record",
+      });
+
       try {
-        trace.startChild({
-          op: "create record",
-        });
         await this.repository.create({ content: message });
       } finally {
-        trace.finish();
+        trace[Symbol.dispose]();
       }
     };
 
@@ -52,18 +55,18 @@ export class Deal_Message_Controller {
       useCallback(create_message, [this.repository, session?.user?.id]),
     );
 
-    const query_client = useQueryClient();
-    useEffect(() => {
-      console.log({ mutation_result });
-      query_client.invalidateQueries(
-        Deal_QueryKeys.messages(this.repository.deal_id),
-      );
-    }, [mutation_result.isSuccess]);
+    // const query_client = useQueryClient();
+    // useEffect(() => {
+    //   console.log({ mutation_result });
+    //   query_client.invalidateQueries(
+    //     Deal_QueryKeys.messages(this.repository.inbox_id),
+    //   );
+    // }, [mutation_result.isSuccess]);
     return mutation_result;
   }
 
   useListQuery(query_params: Strapi_Query_Params<Message_Schema>) {
-    const queryKey = Deal_QueryKeys.messages(this.repository.deal_id);
+    const queryKey = Inbox_QueryKeys.messages(this.repository.thread_id);
     const load_list_query_fn: QueryFunction<
       Comment_ListSchema,
       typeof queryKey,

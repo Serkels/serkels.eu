@@ -2,7 +2,7 @@
 
 //
 
-import { Exchange_DealSchemaToDomain } from "@1/modules/deal/infra/strapi/DealSchema.mapper";
+import { Exchange_DealSchemaToDomain } from "@1/modules/deal/infra/strapi";
 import { useSession } from "next-auth/react";
 import type { PropsWithChildren } from "react";
 import { match } from "ts-pattern";

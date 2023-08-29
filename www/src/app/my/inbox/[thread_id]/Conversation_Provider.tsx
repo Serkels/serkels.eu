@@ -3,16 +3,16 @@
 //
 
 import { InputError } from "@1/core/error";
+import { Thread } from "@1/modules/inbox/domain/Thread";
+import {
+  Thread_Schema,
+  Thread_Schema_ToDomain,
+} from "@1/modules/inbox/infra/strapi";
 import { Spinner } from "@1/ui/components/Spinner";
 import { useEffect, useState, type PropsWithChildren } from "react";
 import tw from "tailwind-styled-components";
 import { P, match } from "ts-pattern";
 import { ErrorOccur } from "~/components/ErrorOccur";
-import {
-  Thread,
-  Thread_Schema,
-  Thread_Schema_ToDomain,
-} from "../Inbox_UserThread_List";
 import { Thread_ValueProvider, useThread_Value } from "./Thread.context";
 
 //
@@ -31,9 +31,20 @@ const mock = {
   last_message: {
     id: 1,
     content: "Hello " + 1,
+    createdAt: new Date(),
+    author: {
+      about: "",
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      firstname: "firstname" + 1,
+      lastname: "lastname" + 1,
+      id: 1,
+      university: "university" + 1,
+    },
+    updatedAt: new Date(),
   },
-  updated_at: `${2123 - 1}-08-29T03:05:12.227Z`,
-} as Thread_Schema;
+  updatedAt: new Date(`${2123 - 1}-08-29T03:05:12.227Z`),
+} satisfies Thread_Schema;
 
 function useThread(id: number) {
   const thread_schema_to_domain = new Thread_Schema_ToDomain();

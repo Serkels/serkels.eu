@@ -1,5 +1,9 @@
 //
 
+export * from "./strapi_query_params";
+
+//
+
 import { Fail, Ok, Result, ValueObject, type IAdapter } from "@1/core/domain";
 import { IllegalArgs, InputError, type ErrorInstance } from "@1/core/error";
 import type { Category_ItemSchema } from "@1/strapi-openapi";

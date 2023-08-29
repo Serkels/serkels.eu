@@ -1,7 +1,7 @@
 "use client";
 
 import { UnknownError } from "@1/core/error";
-import { Exchange_DealSchemaToDomain } from "@1/modules/deal/infra/strapi/DealSchema.mapper";
+import { Exchange_DealSchemaToDomain } from "@1/modules/deal/infra/strapi";
 import { Exchange_ItemSchemaToDomain } from "@1/modules/exchange/infra/strapi";
 import { Button } from "@1/ui/components/ButtonV";
 import { Spinner } from "@1/ui/components/Spinner";

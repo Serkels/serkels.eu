@@ -81,12 +81,12 @@ function useNotification() {
       onData(value) {
         set_notifications([New_Answer.create(value).value()]);
       },
-      onStarted() {
-        console.log("onStarted");
-      },
-      onComplete() {
-        console.log("onComplete");
-      },
+      // onStarted() {
+      //   console.log("onStarted");
+      // },
+      // onComplete() {
+      //   console.log("onComplete");
+      // },
     });
     return websocket.current.unsubscribe;
   }, [queryClient, jwt]);

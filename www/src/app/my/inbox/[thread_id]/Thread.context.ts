@@ -1,7 +1,8 @@
 //
 
+import type { Thread } from "@1/modules/inbox/domain/Thread";
 import { createStateContext } from "react-use";
-import type { Thread } from "../Inbox_UserThread_List";
 
-export const [useThread_Value, Thread_ValueProvider] =
-  createStateContext<Thread>(null as any);
+export const [useThread_Value, Thread_ValueProvider] = createStateContext<
+  Thread | undefined
+>(undefined);
