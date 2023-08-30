@@ -1,12 +1,14 @@
 //
 
 import Image from "next/image";
+import { _set_fixed_page_layout } from "../layout.client";
 
 //
 
 export default async function Page() {
   return (
     <main className="col-span-full px-4 md:col-span-4 xl:col-span-6">
+      <_set_fixed_page_layout />
       <Empty />
     </main>
   );
@@ -14,7 +16,7 @@ export default async function Page() {
 
 function Empty() {
   return (
-    <figure className="sticky top-8 flex h-screen items-center justify-center">
+    <figure className="flex h-full items-center justify-center">
       <Image
         className=""
         src="/toc-toc.svg"

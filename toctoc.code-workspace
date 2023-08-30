@@ -66,13 +66,14 @@
     "workbench.editor.labelFormat": "medium",
     "autoHide.autoHidePanel": false,
     "tailwindCSS.rootFontSize": 14,
-
-    "tailwindCSS.experimental.classRegex": [
-      // ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"], // clsx(`...`)
-      // ["tv\\(([^)]*)\\)", "(?:'|\"|`)([^\"'`]*)(?:'|\"|`)"], // tv(`...`)
-      // "tw`([^`]*)", // tw`...`
-      // "tw\\.[^`]+`([^`]*)`", // tw.xxx<xxx>`...`
-      // "tw\\(.*?\\).*?`([^`]*)" // tw(Component)<xxx>`...`
-    ]
+    "editor.quickSuggestions": { "strings": "on" },
+    // "tailwindCSS.experimental.classRegex": [
+    // ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"], // clsx(`...`)
+    // ["tv\\(([^)]*)\\)", "(?:'|\"|`)([^\"'`]*)(?:'|\"|`)"], // tv(`...`)
+    // "tw`([^`]*)", // tw`...`
+    // "tw\\.[^`]+`([^`]*)`", // tw.xxx<xxx>`...`
+    // "tw\\(.*?\\).*?`([^`]*)" // tw(Component)<xxx>`...`
+    // ],
+    "autoHide.autoHideSideBar": false
   }
 }

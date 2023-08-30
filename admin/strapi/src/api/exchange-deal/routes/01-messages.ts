@@ -1,7 +1,7 @@
 //
 
 import { errors } from "@strapi/utils";
-import { replace_autor } from "~/src/extensions/comments/services/replace_autor";
+import { replate_each_body_data_author_by_profile } from "~/src/extensions/comments/services/replace_autor";
 import type { Comment, EntityService, KoaContext, Next } from "~/types";
 
 //
@@ -18,7 +18,10 @@ export default {
       handler: "api::exchange-deal.messages.find",
       config: {
         description: "Get exchange deals",
-        middlewares: ["api::exchange-deal.relation", replate_author_by_profile],
+        middlewares: [
+          "api::exchange-deal.relation",
+          replate_each_body_data_author_by_profile(),
+        ],
         policies: [],
       },
       info: { apiName: "api::exchange-deal.messages", type: "content-api" },
@@ -84,21 +87,6 @@ async function clean_your_body(
   ctx.request.body = { content: data.content };
 
   await next();
-}
-
-async function replate_author_by_profile(
-  ctx: KoaContext<any, { data: Comment[] }>,
-  next: Next,
-) {
-  await next();
-
-  //
-
-  const { data } = ctx.body;
-  ctx.body = {
-    ...ctx.body,
-    data: await Promise.all(data.map(replace_autor)),
-  };
 }
 
 //

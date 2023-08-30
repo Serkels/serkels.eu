@@ -13,7 +13,7 @@ export default function Layout({ children }: PropsWithChildren) {
         <Header>
           <Title>Messages</Title>
         </Header>
-        <form className="my-10" action="#">
+        <form className="mb-10 px-8" action="#">
           <InputSearch />
         </form>
 
@@ -27,13 +27,15 @@ export default function Layout({ children }: PropsWithChildren) {
 //
 
 const Header = tw.header`
-  my-10
+  mb-10
   flex
   flex-row
   justify-between
+  px-8
 `;
 
 const Title = tw.h6`
+  px-8
   text-2xl
   font-bold
 `;

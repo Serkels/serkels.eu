@@ -2,6 +2,7 @@
 
 import mutateExchangeDealDocumentation from "../src/api/exchange-deal/documentation/mutateDocumentation";
 import mutateExchangeDocumentation from "../src/api/exchange/documentation/mutateDocumentation";
+import mutate_inbox_documentation from "../src/api/inbox/documentation/mutateDocumentation";
 import mutateQuestionDocumentation from "../src/api/question/documentation/mutateDocumentation";
 import mutate_thread_documentation from "../src/api/thread/documentation/mutateDocumentation";
 import mutateCommentsDocumentation from "../src/extensions/comments/documentation/mutateDocumentation";
@@ -30,6 +31,7 @@ export default ({ env }) => ({
           mutateExchangeDealDocumentation(generatedDocumentationDraft);
           mutateQuestionDocumentation(generatedDocumentationDraft);
           mutate_thread_documentation(generatedDocumentationDraft);
+          mutate_inbox_documentation(generatedDocumentationDraft);
         },
       },
     },

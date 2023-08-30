@@ -5,17 +5,28 @@ import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
+import { tv } from "tailwind-variants";
 import { Avatar, AvatarMediaVertical } from "~/components/Avatar";
 import { AsideBar } from "~/layouts/holy/aside";
+import { useLayout } from "./layout.client";
 
 //
 
+const aside_style = tv({
+  // base: "grid min-h-screen grid-rows-[max-content_minmax(_0,_1fr_)_max-content]",
+  variants: {
+    fixed_frame: {
+      false: "sticky top-[calc(theme(spacing.14)_+_theme(spacing.8))]", //max-h-[calc(100vh_-_theme(spacing.16)-_theme(spacing.8))]",
+    },
+  },
+});
 export function AsideNav(props: ComponentPropsWithoutRef<"aside">) {
+  const [layout_variants] = useLayout();
   const { children, ...other_props } = props;
   const pathname = usePathname() ?? "";
   return (
     <AsideBar {...other_props}>
-      <div className="sticky top-[calc(theme(spacing.14)_+_theme(spacing.8))]">
+      <div className={aside_style(layout_variants)}>
         <AvatarMediaVertical className="my-8 mb-4 px-10" />
         <nav>
           <ul

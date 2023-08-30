@@ -1,6 +1,7 @@
 //
 
 import tw from "tailwind-styled-components";
+import { _set_fixed_page_layout } from "../../layout.client";
 import { Thread } from "./Thread_Provider";
 import {
   Thread_Avatar,
@@ -18,6 +19,7 @@ export default async function Page({
 
   return (
     <Main>
+      <_set_fixed_page_layout />
       <Sticky_Container>
         <Thread_Provider>
           <Thread id={thread_id}>
@@ -48,7 +50,7 @@ const Sticky_Container = tw.main`
   top-14
   m-auto
   grid
-  h-[calc(100vh_-_theme(spacing.16))]
+  h-[calc(100vh_-_theme(spacing.24))]
   grid-rows-[max-content_1fr_max-content]
   md:max-w-[80%]
 `;

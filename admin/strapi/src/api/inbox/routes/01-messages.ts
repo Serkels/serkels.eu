@@ -3,6 +3,7 @@
 import { errors } from "@strapi/utils";
 import { NotFoundError } from "@strapi/utils/dist/errors";
 import { z } from "zod";
+import { replate_each_body_data_author_by_profile } from "~/src/extensions/comments/services/replace_autor";
 import type {
   Comment,
   EntityService,
@@ -43,6 +44,7 @@ export default {
           //
           //
           //
+          replate_each_body_data_author_by_profile(),
         ],
         policies: [
           {

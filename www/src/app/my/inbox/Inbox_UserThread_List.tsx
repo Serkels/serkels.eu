@@ -13,6 +13,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import tw from "tailwind-styled-components";
+import { tv } from "tailwind-variants";
 import { P, match } from "ts-pattern";
 import { Avatar_Show_Profile } from "~/components/Avatar_Show_Profile";
 import { ErrorOccur } from "~/components/ErrorOccur";
@@ -106,7 +107,7 @@ export function Inbox_UserThread_List() {
     .with(
       { status: "success" },
       ({ isFetchingNextPage, hasNextPage, fetchNextPage }) => (
-        <nav>
+        <nav className="overflow-y-auto ">
           <UserInbox_List inboxes={inboxes} />
           {isFetchingNextPage ? <Loading /> : null}
           {hasNextPage ? (
@@ -123,6 +124,21 @@ export function Inbox_UserThread_List() {
     .exhaustive();
 }
 
+// const userinbox_navt = tv({
+//   base: "space-y-5 overflow-y-auto pb-8"})
+const userinbox_list = tv({
+  base: "space-y-5 overflow-y-auto px-8 pb-8",
+
+  // variants: {
+  //   scroll: {
+  //     true: "overflow-y-auto",
+  //   },
+  //   sticky: {
+  //     // true: "sticky top-[calc(theme(spacing.14)_+_theme(spacing.9))]",
+  //   },
+  // },
+});
+
 function UserInbox_List({ inboxes }: { inboxes: Inbox[] | undefined }) {
   return match(inboxes)
     .with(undefined, () => null)
@@ -131,7 +147,7 @@ function UserInbox_List({ inboxes }: { inboxes: Inbox[] | undefined }) {
       () => <EmptyList />,
     )
     .otherwise((list) => (
-      <ul className="space-y-5 pb-8">
+      <ul className={userinbox_list()}>
         {list.map((inbox) => (
           <li key={inbox.id.value()}>
             <UserThread_Item thread={inbox.get("thread")} />

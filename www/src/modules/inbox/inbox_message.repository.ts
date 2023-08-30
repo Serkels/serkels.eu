@@ -30,7 +30,7 @@ export class Inbox_Message_Repository
   async create(body: { content: string }) {
     log("create", body);
     const { response, error: errorBody } = await this.client.POST(
-      "/thread/{id}/messages",
+      "/inbox/{id}/messages",
       {
         body,
         headers: this.headers,
@@ -60,7 +60,7 @@ export class Inbox_Message_Repository
       data: body,
       error: errorBody,
       response,
-    } = await this.client.GET("/deals/{id}/messages", {
+    } = await this.client.GET("/inbox/{id}/messages", {
       headers: this.headers,
       params: {
         path: { id: this.thread_id },
