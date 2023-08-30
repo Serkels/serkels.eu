@@ -40,7 +40,7 @@ export function Thread_Conversation_Form() {
 
   const {
     create: { useMutation },
-  } = useInboxMessage_controller(thread?.get("id"));
+  } = useInboxMessage_controller(3 ?? thread?.get("id")); // ! CHANGE THIS
   const { mutateAsync } = useMutation();
 
   const send_message = useCallback(

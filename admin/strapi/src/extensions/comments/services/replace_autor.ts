@@ -6,7 +6,7 @@ export async function replace_autor(body: Comment) {
   const entityService: EntityService = strapi.entityService;
   if (!author) {
     strapi.log.warn(
-      `extensions/comments/services::replate-author-by-profil  detected no author.`,
+      `extensions/comments/services::replate-author-by-profil detected no author.`,
     );
     return;
   }

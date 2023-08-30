@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "threads",
+  "info": {
+    "singularName": "thread",
+    "pluralName": "threads",
+    "displayName": "Thread",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "last_message": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::comments.comment",
+      "configurable": false
+    },
+    "participants": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::user-profile.user-profile"
+    },
+    "owner": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "inboxes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::inbox.inbox",
+      "mappedBy": "thread"
+    }
+  }
+}

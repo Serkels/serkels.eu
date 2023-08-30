@@ -986,6 +986,50 @@ export interface ApiExchangeDealExchangeDeal extends Schema.CollectionType {
   };
 }
 
+export interface ApiInboxInbox extends Schema.CollectionType {
+  collectionName: 'inboxes';
+  info: {
+    singularName: 'inbox';
+    pluralName: 'inboxes';
+    displayName: 'Inbox';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    owner: Attribute.Relation<
+      'api::inbox.inbox',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    thread: Attribute.Relation<
+      'api::inbox.inbox',
+      'manyToOne',
+      'api::thread.thread'
+    >;
+    participant: Attribute.Relation<
+      'api::inbox.inbox',
+      'oneToOne',
+      'api::user-profile.user-profile'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::inbox.inbox',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::inbox.inbox',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiOpportunityOpportunity extends Schema.CollectionType {
   collectionName: 'opportunities';
   info: {
@@ -1284,6 +1328,55 @@ export interface ApiTagTag extends Schema.CollectionType {
   };
 }
 
+export interface ApiThreadThread extends Schema.CollectionType {
+  collectionName: 'threads';
+  info: {
+    singularName: 'thread';
+    pluralName: 'threads';
+    displayName: 'Thread';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    last_message: Attribute.Relation<
+      'api::thread.thread',
+      'oneToOne',
+      'plugin::comments.comment'
+    >;
+    participants: Attribute.Relation<
+      'api::thread.thread',
+      'oneToMany',
+      'api::user-profile.user-profile'
+    >;
+    owner: Attribute.Relation<
+      'api::thread.thread',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    inboxes: Attribute.Relation<
+      'api::thread.thread',
+      'oneToMany',
+      'api::inbox.inbox'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::thread.thread',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::thread.thread',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiUserProfileUserProfile extends Schema.CollectionType {
   collectionName: 'user_profiles';
   info: {
@@ -1345,11 +1438,13 @@ declare module '@strapi/strapi' {
       'api::bookmark.bookmark': ApiBookmarkBookmark;
       'api::exchange.exchange': ApiExchangeExchange;
       'api::exchange-deal.exchange-deal': ApiExchangeDealExchangeDeal;
+      'api::inbox.inbox': ApiInboxInbox;
       'api::opportunity.opportunity': ApiOpportunityOpportunity;
       'api::opportunity-category.opportunity-category': ApiOpportunityCategoryOpportunityCategory;
       'api::partner.partner': ApiPartnerPartner;
       'api::question.question': ApiQuestionQuestion;
       'api::tag.tag': ApiTagTag;
+      'api::thread.thread': ApiThreadThread;
       'api::user-profile.user-profile': ApiUserProfileUserProfile;
     }
   }

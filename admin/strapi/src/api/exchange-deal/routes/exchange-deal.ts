@@ -18,7 +18,7 @@ export default factories.createCoreRouter("api::exchange-deal.exchange-deal", {
   only: ["create", "findOne"],
   config: {
     create: {
-      middlewares: [enforce_body],
+      middlewares: [enforce_body as any],
       policies: [exchange_id_must_exist as unknown as PolicyImplementation],
     },
     findOne: { middlewares: ["api::exchange-deal.populate"] },
@@ -42,13 +42,13 @@ async function exchange_id_must_exist(
 
   if (!strapi_ctx.request.body) {
     strapi.log.warn(`api::exchange-deal requires a request body`);
-    return false;
+    return strapi_ctx.badRequest();
   }
   const { exchange } = strapi_ctx.request.body.data ?? {};
   const exchange_id = Number(exchange);
   if (!exchange || Number.isNaN(exchange_id)) {
     strapi.log.warn(`api::exchange-deal requires an exchange id in the body`);
-    return false;
+    return strapi_ctx.badRequest();
   }
 
   const exchange_count = await entityService.count<
@@ -82,7 +82,8 @@ async function enforce_body(ctx: Context, next: Next) {
 
   if (!strapi_ctx.request.body) {
     strapi.log.warn(`api::exchange-deal requires a request body`);
-    return false;
+    strapi_ctx.badRequest();
+    return next();
   }
 
   const { data } = strapi_ctx.request.body ?? { data: { exchange: NaN } };
@@ -90,7 +91,8 @@ async function enforce_body(ctx: Context, next: Next) {
 
   if (Number.isNaN(exchange_id)) {
     strapi.log.warn(`api::exchange-deal requires an exchange id in the body`);
-    return false;
+    strapi_ctx.badRequest();
+    return next();
   }
 
   const exchange = await entityService.findOne<
@@ -103,7 +105,8 @@ async function enforce_body(ctx: Context, next: Next) {
   const profile = await findOneFromUser(strapi_ctx.state.user.id);
   if (!profile) {
     strapi.log.warn(`api::exchange-deal requires an user with a profile`);
-    return false;
+    strapi_ctx.badRequest();
+    return next();
   }
 
   strapi_ctx.request.body = {

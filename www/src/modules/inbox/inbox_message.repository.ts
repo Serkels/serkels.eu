@@ -29,22 +29,22 @@ export class Inbox_Message_Repository
 
   async create(body: { content: string }) {
     log("create", body);
-    // const { response, error: errorBody } = await this.client.POST(
-    //   "/deals/{id}/messages",
-    //   {
-    //     body,
-    //     headers: this.headers,
-    //     params: { path: { id: this.deal_id } },
-    //   },
-    // );
+    const { response, error: errorBody } = await this.client.POST(
+      "/thread/{id}/messages",
+      {
+        body,
+        headers: this.headers,
+        params: { path: { id: this.thread_id } },
+      },
+    );
 
-    // if (errorBody) {
-    //   log("create", errorBody);
-    //   throw new HTTPError(
-    //     [errorBody.error.message, "from " + response.url].join("\n"),
-    //     { cause: errorBody.error },
-    //   );
-    // }
+    if (errorBody) {
+      log("create", errorBody);
+      throw new HTTPError(
+        [errorBody.error.message, "from " + response.url].join("\n"),
+        { cause: errorBody.error },
+      );
+    }
     return Promise.resolve();
   }
 

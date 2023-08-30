@@ -24,10 +24,8 @@ export interface State extends DefaultStateExtends {
   };
 }
 
-export interface Context extends DefaultContextExtends {
-  params?: {
-    id: string;
-  };
+export interface Context<RequestParams = any> extends DefaultContextExtends {
+  params: RequestParams;
   query: {
     filters?: Record<string, unknown> | Object;
     populate?: Record<string, unknown> | string | Object;
@@ -45,10 +43,15 @@ interface KoaRequest<RequestBody = any> extends Request {
   body?: RequestBody;
 }
 
-export interface KoaContext<RequestBody = any, ResponseBody = any>
-  extends Context {
+export interface KoaContext<
+  RequestBody = any,
+  ResponseBody = any,
+  RequestParams = any,
+> extends ParameterizedContext<State, Context<RequestParams>, ResponseBody> {
   request: KoaRequest<RequestBody>;
   body: ResponseBody;
+
+  send: (...args: any[]) => void;
 }
 
 export interface KoaResponseContext<ResponseBody>

@@ -20,6 +20,18 @@ export default factories.createCoreService(
 
 //
 
+export async function findRelatedUser(id: number) {
+  const entityService: EntityService = strapi.entityService;
+  const profile = await entityService.findOne<
+    "api::user-profile.user-profile",
+    GetValues<"api::user-profile.user-profile"> & { id: number }
+  >("api::user-profile.user-profile", id, { populate: ["owner"] });
+
+  return profile.owner as any as GetValues<"api::user-profile.user-profile">["owner"] & {
+    id: number;
+  };
+}
+
 export async function findOneFromUser(id: number) {
   const entityService: EntityService = strapi.entityService;
   const profiles = await entityService.findMany<
