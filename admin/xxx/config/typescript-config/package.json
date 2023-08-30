@@ -8,7 +8,7 @@
     "react-library.json"
   ],
   "dependencies": {
-    "@tsconfig/strictest": "2.0.1",
+    "@tsconfig/strictest": "2.0.2",
     "@tsconfig/vite-react": "2.0.0"
   },
   "devDependencies": {
