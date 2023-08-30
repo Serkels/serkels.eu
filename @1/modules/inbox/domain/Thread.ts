@@ -10,7 +10,7 @@ import type { Message } from "./Message";
 //
 //
 
-interface Thread_Props {
+export interface Thread_Props {
   id: number;
   profile: Profile;
   last_message: Message;

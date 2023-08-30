@@ -82,7 +82,9 @@ export class Inbox_Message_Controller {
     };
 
     const query_info = useInfiniteQuery({
-      enabled: Boolean(this.repository.jwt),
+      enabled:
+        Boolean(this.repository.jwt) &&
+        !Number.isNaN(this.repository.thread_id),
       getNextPageParam,
       getPreviousPageParam,
       queryFn: useCallback(load_list_query_fn, [this.repository]),

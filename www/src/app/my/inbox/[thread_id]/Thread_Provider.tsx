@@ -17,31 +17,39 @@ import { useThread_Value } from "./Thread.context";
 //
 
 const mock = {
-  id: 1,
-  profile: {
-    about: "",
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    firstname: "firstname" + 1,
-    lastname: "lastname" + 1,
-    id: 1,
-    university: "university" + 1,
-  },
+  participants: [] as any,
+  // id: 1,
+  // profile: {
+  //   about: "",
+  //   createdAt: new Date(),
+  //   updatedAt: new Date(),
+  //   firstname: "firstname" + 1,
+  //   lastname: "lastname" + 1,
+  //   id: 1,
+  //   university: "university" + 1,
+  // },
   last_message: {
-    id: 1,
-    content: "Hello " + 1,
-
-    author: {
-      about: "",
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      firstname: "firstname" + 1,
-      lastname: "lastname" + 1,
+    data: {
+      attributes: {
+        content: "Hello " + 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
       id: 1,
-      university: "university" + 1,
     },
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    // id: 1,
+
+    // author: {
+    //   about: "",
+    //   createdAt: new Date(),
+    //   updatedAt: new Date(),
+    //   firstname: "firstname" + 1,
+    //   lastname: "lastname" + 1,
+    //   id: 1,
+    //   university: "university" + 1,
+    // },
+    // createdAt: new Date(),
+    // updatedAt: new Date(),
   },
   updatedAt: new Date(`${2123 - 1}-08-29T03:05:12.227Z`),
 } satisfies Thread_Schema;
@@ -66,7 +74,7 @@ function useThread(id: number) {
     const { data } = list_query_info;
     if (!data) return;
 
-    const result = thread_schema_to_domain.build(data);
+    const result = thread_schema_to_domain.build(data as any);
     if (result.isFail())
       throw new InputError("Thread Provider", { cause: result.error() });
 

@@ -22,7 +22,6 @@ export function Thread_Avatar() {
 
 export function Thread_Conversation() {
   const [thread] = useThread_Value();
-  if (!thread) return null;
 
   const {
     list: { useQuery },
@@ -31,12 +30,12 @@ export function Thread_Conversation() {
 
   //
 
+  if (!thread) return null;
   return <Conversation_Timeline query_info={query_info} />;
 }
 
 export function Thread_Conversation_Form() {
   const [thread] = useThread_Value();
-  if (!thread) return null;
 
   const {
     create: { useMutation },
@@ -52,5 +51,6 @@ export function Thread_Conversation_Form() {
 
   //
 
+  if (!thread) return null;
   return <Conversation_Form send_message={send_message} />;
 }

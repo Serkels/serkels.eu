@@ -3,8 +3,8 @@
 import { InputSearch } from "@1/ui/components/InputSearch";
 import type { PropsWithChildren } from "react";
 import tw from "tailwind-styled-components";
-import { Inbox_UserThread_List } from "./Inbox_UserThread_List";
 import { My_Inbox_Nav } from "./My_Inbox_Nav";
+import { Inbox_UserThread_List } from "./layout.client";
 
 export default function Layout({ children }: PropsWithChildren) {
   return (
