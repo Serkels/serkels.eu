@@ -1,27 +1,14 @@
 import type { IAdapter, IResult } from "@1/core/domain";
 import { Profile } from "../../domain";
-import type { Profile_Schema } from "./Profile_Schema";
+import type { Profile_DataSchema } from "./Profile_Schema";
 
 export class Profile_Schema_ToDomain
-  implements IAdapter<Profile_Schema, Profile>
+  implements IAdapter<Profile_DataSchema, Profile>
 {
-  build(target: Profile_Schema): IResult<Profile, Error> {
-    const id = target.id;
-    const firstname = target.firstname;
-    const lastname = target.lastname;
-    const about = target.about;
-    const createdAt = new Date();
-    const updatedAt = new Date();
-    const university = target.university;
-
+  build({ id, attributes }: Profile_DataSchema): IResult<Profile, Error> {
     return Profile.create({
-      id,
-      firstname,
-      lastname,
-      about,
-      createdAt,
-      updatedAt,
-      university,
+      ...attributes,
+      id: Number(id),
     });
   }
 }
