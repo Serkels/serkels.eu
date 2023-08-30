@@ -4,6 +4,8 @@ import { Button } from "@1/ui/components/ButtonV";
 import tw from "tailwind-styled-components";
 import { ErrorOccur } from "~/components/ErrorOccur";
 
+//
+
 export default function Error({
   error,
   reset,
