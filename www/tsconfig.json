@@ -15,13 +15,7 @@
       }
     ]
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "../@1/modules/inbox/domain/Thread.ts"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": [".next", "node_modules"],
   "references": [{ "path": "../@1/core" }, { "path": "../@1/modules" }]
 }
