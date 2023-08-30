@@ -27,7 +27,9 @@ export class Inbox_Schema_ToDomain implements IAdapter<Inbox_Schema, Inbox> {
     const all_results = Result.combine([thread]);
     if (all_results.isFail()) {
       return Result.fail(
-        new InputError("Inbox SubDomain", { cause: all_results.error() }),
+        new InputError("Inbox_Schema_ToDomain.build", {
+          cause: all_results.error(),
+        }),
       );
     }
 
@@ -42,7 +44,9 @@ export class Inbox_Schema_ToDomain implements IAdapter<Inbox_Schema, Inbox> {
     const all_results = Result.combine(results);
     if (all_results.isFail()) {
       return Result.fail(
-        new InputError("Inbox SubDomain", { cause: all_results.error() }),
+        new InputError("Inbox_Schema_ToDomain.build_list", {
+          cause: all_results.error(),
+        }),
       );
     }
 

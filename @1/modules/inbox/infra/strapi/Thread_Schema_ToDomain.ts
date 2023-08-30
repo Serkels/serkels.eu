@@ -35,7 +35,9 @@ export class Thread_Schema_ToDomain
     const all_results = Result.combine([profile, last_message]);
     if (all_results.isFail()) {
       return Result.fail(
-        new InputError("Inbox SubDomain", { cause: all_results.error() }),
+        new InputError("Thread_Schema_ToDomain.build", {
+          cause: all_results.error(),
+        }),
       );
     }
 
