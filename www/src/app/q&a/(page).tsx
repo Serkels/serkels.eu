@@ -1,9 +1,11 @@
 "use client";
 
+import { useSession } from "next-auth/react";
 import { OpportunityCategoriesViewModel } from "~/app/opportunity/models/OpportunityCategoriesViewModel";
 import { useSyncSearchQuery } from "~/components/useSyncSearchQuery";
 import { FilterRadioList } from "../../components/FilterRadioList";
 import { useOpportunityCategoriesQuery } from "../opportunity/data/useOpportunityCategoriesQuery";
+import { QACreateForm } from "./QACreateForm";
 import type { QAFilterType } from "./models/QAFilterType";
 
 //
@@ -58,5 +60,20 @@ export function QAFilter() {
       name="filter"
       onChange={setQuery}
     />
+  );
+}
+
+export function Question_Form() {
+  const { status } = useSession();
+
+  if (status !== "authenticated") {
+    return null;
+  }
+
+  return (
+    <>
+      <hr className="my-5 border-none" />
+      <QACreateForm />
+    </>
   );
 }

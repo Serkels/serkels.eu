@@ -10,7 +10,10 @@ import { getQueryClient } from "../getQueryClient";
 import { useOpportunityCategoriesprefetchQuery } from "../opportunity/data/useOpportunityCategoriesQuery";
 import { CategoriesList, QAFilter } from "./(page)";
 
-export default async function Layout({ children }: PropsWithChildren) {
+export default async function Layout({
+  children,
+  see_also,
+}: PropsWithChildren<{ see_also: React.ReactNode }>) {
   const queryClient = getQueryClient();
   await useOpportunityCategoriesprefetchQuery();
   const dehydratedState = dehydrate(queryClient);
@@ -29,6 +32,9 @@ export default async function Layout({ children }: PropsWithChildren) {
           </AsideWithTitle>
           {children}
         </Hydrate>
+        <aside className="col-span-3 mt-10 hidden lg:px-10 xl:block">
+          {see_also}
+        </aside>
       </Grid>
       <AppFooter />
     </div>
