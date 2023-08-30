@@ -10,7 +10,7 @@ export function set_default_populate(
 ) {
   context.query.populate = {
     ...(context.query.populate || {}),
-    thread: true,
+    thread: { populate: ["last_message", "participants"] },
     participant: true,
   };
 

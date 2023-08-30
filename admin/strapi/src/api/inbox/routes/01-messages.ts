@@ -1,6 +1,8 @@
 //
 
 import { errors } from "@strapi/utils";
+import { NotFoundError } from "@strapi/utils/dist/errors";
+import { z } from "zod";
 import type {
   Comment,
   EntityService,
@@ -18,6 +20,71 @@ import { set_default_populate } from "../middlewares/set_default_populate";
 
 export default {
   routes: [
+    // {
+    //   method: "GET",
+    //   path: "/inbox/threads",
+    //   handler: "api::inbox.messages.find",
+    //   config: {
+    //     description: "Get an inbox messages",
+    //     middlewares: [set_default_relation_param()],
+    //     policies: [],
+    //   },
+    //   info: { apiName: "api::inbox.messages.find", type: "content-api" },
+    // },
+
+    {
+      method: "GET",
+      path: "/inbox/:id/messages",
+      handler: "api::inbox.messages.find",
+      config: {
+        description: "Get an inbox messages",
+        middlewares: [
+          set_default_relation_param(),
+          //
+          //
+          //
+        ],
+        policies: [
+          {
+            name: "global::params-z-shema",
+            config: {
+              schema: z.object({
+                id: z.coerce.number().safe().finite().nonnegative().int(),
+              }),
+            },
+          },
+        ],
+      },
+      info: { apiName: "api::inbox.messages.find", type: "content-api" },
+    },
+
+    {
+      method: "POST",
+      path: "/inbox/:id/messages",
+      handler: "api::inbox.messages.create",
+      config: {
+        description: "Get an inbox messages",
+        middlewares: [
+          set_default_relation_param(),
+          //
+          //
+          //
+        ],
+        policies: [
+          {
+            name: "global::params-z-shema",
+            config: {
+              schema: z.object({
+                id: z.coerce.number().safe().finite().nonnegative().int(),
+              }),
+            },
+          },
+          "global::is-owned",
+        ],
+      },
+      info: { apiName: "api::inbox.messages.create", type: "content-api" },
+    },
+
     {
       method: "POST",
       path: "/inbox/to/:profile_id",
@@ -31,20 +98,60 @@ export default {
           //
           //
           create_related_inbox,
-          // create_related_inbox,
-          // create_related_threads,
-          // "api:inbox.relation",
         ],
-        policies: [no_duplicate],
+        policies: [
+          {
+            name: "global::params-z-shema",
+            config: {
+              schema: z.object({
+                profile_id: z.coerce
+                  .number()
+                  .safe()
+                  .finite()
+                  .nonnegative()
+                  .int(),
+              }),
+            },
+          },
+          no_duplicate,
+        ],
       },
-      info: { apiName: "api::inbox.messages", type: "content-api" },
+      info: { apiName: "api::inbox.inbox.create", type: "content-api" },
     },
   ],
 };
 
 //
 
-async function findOne(filters: { owner: number; participant: number }) {
+async function find_one_by_id(id: number, filters: { owner: number }) {
+  const entityService: EntityService = strapi.entityService;
+  const entity = await entityService.findOne<
+    "api::inbox.inbox",
+    GetValues<"api::inbox.inbox">
+  >("api::inbox.inbox", id, {
+    populate: {
+      thread: { populate: ["last_message", "participants"] },
+      participant: true,
+    },
+    filters,
+  });
+
+  const inbox = { id: NaN, ...(entity ?? {}) };
+  if (Number.isNaN(inbox.id)) {
+    strapi.log.warn(
+      `service::user-profile.user-profile > ` +
+        `findOneFromUser([id=${id}]): detected no inbox`,
+    );
+    return undefined;
+  }
+
+  return inbox;
+}
+
+async function find_one_by_pair(filters: {
+  owner: number;
+  participant: number;
+}) {
   const entityService: EntityService = strapi.entityService;
   const inboxes = await entityService.findMany<
     "api::inbox.inbox",
@@ -57,7 +164,7 @@ async function findOne(filters: { owner: number; participant: number }) {
   if (Number.isNaN(inbox.id)) {
     strapi.log.warn(
       `service::user-profile.user-profile > ` +
-        `findOneFromUser([owner=${filters.owner},participant=${filters.participant}]): detected no profiles`,
+        `findOneFromUser([owner=${filters.owner},participant=${filters.participant}]): detected no inbox`,
     );
     return undefined;
   }
@@ -79,11 +186,11 @@ async function no_duplicate(context, _cfg, { strapi }) {
   }
 
   const inbox = await Promise.race([
-    findOne({
+    find_one_by_pair({
       participant: Number(profile_id),
       owner: Number(user_id),
     }),
-    findOne({
+    find_one_by_pair({
       participant: Number(user_id),
       owner: Number(user_id),
     }),
@@ -211,3 +318,32 @@ async function create_related_inbox(
 }
 
 //
+
+function set_default_relation_param() {
+  return async function relation(ctx: KoaContext, next: Next) {
+    const { params } = ctx;
+    const user_id = ctx.state.user.id;
+
+    const inbox = await find_one_by_id(params.id, { owner: Number(user_id) });
+
+    if (!inbox) {
+      throw new NotFoundError('Missing inbox"');
+    }
+
+    const { id: thread_id } = { id: NaN, ...(inbox.thread ?? {}) };
+    if (Number.isNaN(thread_id)) {
+      strapi.log.warn(
+        `api::inbox.01-messages > ` +
+          `set_default_relation_param([ctx.params.id=${params.id}]): detected no thread`,
+      );
+      throw new NotFoundError("Missing inbox thread");
+    }
+
+    strapi.log.debug(`redirect to api::thread.thread:${thread_id}`);
+    ctx.params = {
+      ...(ctx.params ?? {}),
+      relation: `api::thread.thread:${thread_id}`,
+    };
+    return next();
+  };
+}

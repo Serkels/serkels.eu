@@ -28,9 +28,9 @@ export default function bootstrap({ strapi }: { strapi: Strapi }) {
         subscription_to: {
           notifications(id: number) {
             return observable((emit) => {
-              strapi.log.debug(`+ Notification ${id}`);
+              strapi.log.silly(`+ Notification ${id}`);
               const on_new_answer = async (comment_id: number) => {
-                strapi.log.debug(
+                strapi.log.silly(
                   `*** on_new_answer (user ${id}) (comment_id ${comment_id})`,
                 );
                 const entityService: EntityService = strapi?.entityService;
@@ -76,17 +76,17 @@ export default function bootstrap({ strapi }: { strapi: Strapi }) {
                 if (new_answer.isFail()) return;
 
                 emit.next(new_answer.value().toObject());
-                strapi.log.debug(`++ ${id} notifications/on_new_answer`);
+                strapi.log.silly(`++ ${id} notifications/on_new_answer`);
               };
 
               UserEmitterMap.get(id).notifications.on(
                 "new_answer",
                 on_new_answer,
               );
-              strapi.log.debug(`+ ${id} notifications`);
+              strapi.log.silly(`+ ${id} notifications`);
 
               return () => {
-                strapi.log.debug(`- ${id} notifications`);
+                strapi.log.silly(`- ${id} notifications`);
                 UserEmitterMap.get(id).notifications.off(
                   "new_answer",
                   on_new_answer,
@@ -116,12 +116,12 @@ export function onConnection(
   { strapi, wss }: { strapi: Strapi; wss: Server },
   ws: WebSocket,
 ) {
-  strapi.log.debug(`+ Connection (${wss.clients.size})`);
-  strapi.log.debug(`+ UserEmitterMap (${UserEmitterMap.streams.size})`);
+  strapi.log.silly(`+ Connection (${wss.clients.size})`);
+  strapi.log.silly(`+ UserEmitterMap (${UserEmitterMap.streams.size})`);
 
   ws.once("close", () => {
-    strapi.log.debug(`- Connection (${wss.clients.size})`);
-    strapi.log.debug(`- UserEmitterMap (${UserEmitterMap.streams.size})`);
+    strapi.log.silly(`- Connection (${wss.clients.size})`);
+    strapi.log.silly(`- UserEmitterMap (${UserEmitterMap.streams.size})`);
   });
 }
 
