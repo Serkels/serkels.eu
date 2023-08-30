@@ -1,7 +1,7 @@
 //
 
 import { z } from "zod";
-import { z_strapi_entity_data } from "../../../common";
+import { z_strapi_entity, z_strapi_entity_data } from "../../../common";
 import { Profile_Schema } from "../../../profile/infra/strapi";
 
 //
@@ -15,6 +15,10 @@ export const Message_Schema = z.object({
 });
 
 export type Message_Schema = z.TypeOf<typeof Message_Schema>;
+
+export const Message_DataSchema = z_strapi_entity(Message_Schema);
+
+export type Message_DataSchema = z.TypeOf<typeof Message_DataSchema>;
 
 //
 

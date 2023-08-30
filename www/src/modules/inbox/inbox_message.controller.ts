@@ -6,11 +6,12 @@ import type { Comment_ListSchema } from "@1/strapi-openapi";
 import {
   useInfiniteQuery,
   useMutation,
+  useQueryClient,
   type QueryFunction,
 } from "@tanstack/react-query";
 import debug from "debug";
 import { useSession } from "next-auth/react";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { tracer } from "~/core/tracer";
 import { getNextPageParam, getPreviousPageParam } from "~/core/use-query";
 import type { Inbox_Message_Repository } from "./inbox_message.repository";
@@ -55,13 +56,13 @@ export class Inbox_Message_Controller {
       useCallback(create_message, [this.repository, session?.user?.id]),
     );
 
-    // const query_client = useQueryClient();
-    // useEffect(() => {
-    //   console.log({ mutation_result });
-    //   query_client.invalidateQueries(
-    //     Deal_QueryKeys.messages(this.repository.inbox_id),
-    //   );
-    // }, [mutation_result.isSuccess]);
+    const query_client = useQueryClient();
+    useEffect(() => {
+      console.log({ mutation_result });
+      query_client.invalidateQueries(
+        Inbox_QueryKeys.messages(this.repository.thread_id),
+      );
+    }, [mutation_result.isSuccess]);
     return mutation_result;
   }
 

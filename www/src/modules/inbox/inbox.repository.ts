@@ -3,7 +3,7 @@
 import { HTTPError } from "@1/core/domain";
 import type { Strapi_Query_Params } from "@1/modules/common";
 import type { Message_Schema } from "@1/modules/inbox/infra/strapi";
-import type { Inbox_ListSchema } from "@1/strapi-openapi";
+import type { Inbox_ItemSchema, Inbox_ListSchema } from "@1/strapi-openapi";
 import debug from "debug";
 import { OpenAPIRepository, type ApiClient } from "~/app/api/v1";
 import type { RepositoryPort } from "~/core";
@@ -80,5 +80,31 @@ export class Inbox_Repository
 
     trace("200");
     return body;
+  }
+
+  //
+
+  async find_by_id(id: number): Promise<Inbox_ItemSchema | undefined> {
+    log("find_by_id", id);
+    const {
+      data: body,
+      error: errorBody,
+      response,
+    } = await this.client.GET("/inboxes/{id}", {
+      headers: this.headers,
+      params: {
+        path: { id },
+      },
+    });
+
+    if (errorBody) {
+      log("find_by_id", errorBody);
+      throw new HTTPError(
+        [errorBody.error.message, "from " + response.url].join("\n"),
+        { cause: errorBody.error },
+      );
+    }
+
+    return body?.data;
   }
 }

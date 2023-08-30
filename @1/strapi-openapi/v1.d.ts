@@ -339,6 +339,9 @@ export interface paths {
   "/inboxes": {
     get: operations["get/inboxes"];
   };
+  "/inboxes/{id}": {
+    get: operations["get/inboxes/{id}"];
+  };
   "/my/exchanges": {
     get: operations["get/my/exchange"];
   };
@@ -7547,6 +7550,51 @@ export interface operations {
       200: {
         content: {
           "application/json": components["schemas"]["InboxListResponse"];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Forbidden */
+      403: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Not Found */
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+  };
+  "get/inboxes/{id}": {
+    parameters: {
+      path: {
+        id: number;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["InboxResponse"];
         };
       };
       /** @description Bad Request */

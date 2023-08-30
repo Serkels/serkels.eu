@@ -2,6 +2,7 @@
 
 import { z } from "zod";
 import {
+  z_strapi_entity,
   z_strapi_entity_data,
   z_strapi_flatten_page_data,
 } from "../../../common";
@@ -16,6 +17,11 @@ export const Inbox_Schema = z.object({
 });
 
 export type Inbox_Schema = z.TypeOf<typeof Inbox_Schema>;
+
+//
+
+export const Inbox_DataSchema = z_strapi_entity(Inbox_Schema);
+export type Inbox_DataSchema = z.TypeOf<typeof Inbox_DataSchema>;
 
 //
 

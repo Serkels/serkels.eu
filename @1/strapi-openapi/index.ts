@@ -77,6 +77,7 @@ export type Question_Schema = Schemas["Question"];
 //
 
 export type Inbox_ListSchema = Schemas["InboxListResponse"];
+export type Inbox_ItemSchema = Schemas["InboxResponseDataObject"];
 export type Inbox_Schema = Schemas["Inbox"];
 
 //

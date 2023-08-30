@@ -6,8 +6,7 @@ import {
   type IAdapter,
   type IResult,
 } from "@1/core/domain";
-import { Profile } from "../../../profile/domain";
-import { Inbox, Thread } from "../../domain";
+import { Inbox } from "../../domain";
 import type { InboxList_Schema, Inbox_Schema } from "./Inbox_Schema";
 import { Thread_Schema_ToDomain } from "./Thread_Schema_ToDomain";
 
@@ -20,14 +19,10 @@ function reuslt_all_ok<A = any, B = any, M = any>(
 }
 
 export class Inbox_Schema_ToDomain implements IAdapter<Inbox_Schema, Inbox> {
-  thread_to_domain = new Thread_Schema_ToDomain();
+  constructor(private thread_schema_todomain: Thread_Schema_ToDomain) {}
+
   build(target: Inbox_Schema): IResult<Inbox, Error> {
-    const thread = Thread.create({
-      id: 0,
-      updated_at: new Date(),
-      profile: Profile.create({} as any).value(),
-      last_message: {},
-    } as any);
+    const thread = this.thread_schema_todomain.build(target.thread.data);
 
     const all_results = Result.combine([thread]);
     if (all_results.isFail()) {

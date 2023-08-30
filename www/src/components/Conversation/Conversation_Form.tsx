@@ -18,7 +18,7 @@ export function Conversation_Form({
       }}
       enableReinitialize
       onSubmit={async (value, formik) => {
-        send_message(value.message);
+        await send_message(value.message);
         formik.resetForm();
       }}
     >

@@ -1,6 +1,6 @@
 "use client";
 
-import { Inbox, Thread } from "@1/modules/inbox/domain";
+import { Inbox } from "@1/modules/inbox/domain";
 import { Spinner } from "@1/ui/components/Spinner";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -26,7 +26,7 @@ export function UserInbox_List({ inboxes }: { inboxes: Inbox[] | undefined }) {
       <ul className={userinbox_list()}>
         {list.map((inbox) => (
           <li key={inbox.id.value()}>
-            <UserThread_Item thread={inbox.get("thread")} />
+            <UserThread_Item inbox={inbox} />
           </li>
         ))}
       </ul>
@@ -35,10 +35,11 @@ export function UserInbox_List({ inboxes }: { inboxes: Inbox[] | undefined }) {
 
 //
 
-function UserThread_Item({ thread }: { thread: Thread }) {
+function UserThread_Item({ inbox }: { inbox: Inbox }) {
   const pathname = usePathname() ?? "";
+  const thread = inbox.get("thread");
 
-  const href = `/my/inbox/${thread.get("id")}`;
+  const href = `/my/inbox/${inbox.get("id")}`;
   const active =
     pathname.split("/").length >= href.split("/").length &&
     href.includes(pathname);
@@ -57,9 +58,9 @@ function UserThread_Item({ thread }: { thread: Thread }) {
         </div> */}
         <Thread_Excerpt
           $active={active}
-          title={thread.last_message.the_excerpt}
+          title={thread.last_message?.the_excerpt}
         >
-          {thread.last_message.the_excerpt}
+          {thread.last_message?.the_excerpt}
         </Thread_Excerpt>
       </Link>
     </Thread_Card>

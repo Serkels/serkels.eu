@@ -5,6 +5,9 @@ export const Inbox_QueryKeys = {
   lists() {
     return [...this.all, "list"] as const;
   },
+  item(id: number | string) {
+    return [...this.all, "item", String(id)] as const;
+  },
   thread(id: number | string) {
     return [...this.all, "thread", String(id)] as const;
   },
