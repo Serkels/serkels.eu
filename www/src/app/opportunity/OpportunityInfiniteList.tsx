@@ -1,7 +1,10 @@
 "use client";
 
+import type { Strapi_OpenApi_Schemas } from "@1/strapi-openapi";
 import { Spinner } from "@1/ui/components/Spinner";
 import Link from "next/link";
+import tw from "tailwind-styled-components";
+import { P, match } from "ts-pattern";
 import { OpportunityCard } from "./OpportunityCard";
 import { useOpportunityFilterContext } from "./OpportunityFilter.context";
 import { useOpportunitiesInfinite } from "./useOpportunities";
@@ -10,67 +13,45 @@ import { useOpportunitiesInfinite } from "./useOpportunities";
 
 export function OpportunityInfiniteList() {
   const { category, query } = useOpportunityFilterContext();
-  const {
-    data,
-    isLoading,
-    isError,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-  } = useOpportunitiesInfinite({ category, query });
+  const info = useOpportunitiesInfinite({ category, query });
 
-  if (isLoading) return <Loading />;
-  if (isError) return <>Epic fail...</>;
-  if (!data) return <>No data O_o</>;
-  const { pages } = data;
-  if (pages[0]?.data?.length === 0) return <EmptyList />;
-  return (
-    <ul
-      className={`
-        grid
-        grid-flow-row
-        grid-cols-1
-        gap-8
-        px-4
-        sm:grid-cols-2
-        sm:px-0
-        md:grid-cols-2
-        lg:grid-cols-3
-        xl:grid-cols-4
-      `}
-    >
-      {pages
-        .map((page) => page.data!)
-        .filter(Boolean)
-        .flat()
-        .map((opportunity) => (
+  return match(info)
+    .with({ status: "error", error: P.select() }, (error) => {
+      throw error;
+    })
+    .with({ status: "loading" }, () => <Loading />)
+    .with({ status: "success" }, ({}) => <Opportunity_MainGrid info={info} />)
+    .exhaustive();
+}
+
+export function Opportunity_MainGrid({
+  info,
+}: {
+  info: ReturnType<typeof useOpportunitiesInfinite>;
+}) {
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = info;
+  const opportunities = (data ?? {}).pages?.map((page) => page.data!).flat();
+
+  return match(opportunities)
+    .with(undefined, () => null)
+    .when(
+      (list) => list.length === 0,
+      () => <EmptyList />,
+    )
+    .otherwise((list) => (
+      <Opportunity_Grid>
+        {list.map((opportunity) => (
           <li key={opportunity.id}>
-            <Link
-              className="h-full"
-              href={`/opportunity/${opportunity.attributes?.slug}`}
-            >
-              <OpportunityCard
-                className="h-full"
-                cover={opportunity.attributes?.cover!}
-                expireAt={opportunity.attributes?.expireAt!}
-                id={String(opportunity.id)}
-                location={opportunity.attributes?.location!}
-                opportunity_category={
-                  opportunity.attributes?.opportunity_category!
-                }
-                partner={opportunity.attributes?.partner!}
-                title={opportunity.attributes?.title!}
-              />
-            </Link>
+            <Opportunity_Item opportunity={opportunity} />
           </li>
         ))}
-      <li className="col-span-full mx-auto">
-        {isFetchingNextPage ? <Loading /> : null}
-      </li>
-      <li className="col-span-full mx-auto">
-        {hasNextPage ? (
-          <button
-            className="
+        <li className="col-span-full mx-auto">
+          {isFetchingNextPage ? <Loading /> : null}
+        </li>
+        <li className="col-span-full mx-auto">
+          {hasNextPage ? (
+            <button
+              className="
               rounded-md
               bg-gray-600
               px-3
@@ -86,16 +67,53 @@ export function OpportunityInfiniteList() {
               focus-visible:outline-offset-2
               focus-visible:outline-gray-600
             "
-            onClick={() => fetchNextPage()}
-            disabled={!hasNextPage || isFetchingNextPage}
-          >
-            Charger plus
-          </button>
-        ) : null}
-      </li>
-    </ul>
+              onClick={() => fetchNextPage()}
+              disabled={!hasNextPage || isFetchingNextPage}
+            >
+              Charger plus
+            </button>
+          ) : null}
+        </li>
+      </Opportunity_Grid>
+    ));
+}
+
+function Opportunity_Item({
+  opportunity,
+}: {
+  opportunity: Strapi_OpenApi_Schemas.Opportunity.ResponseDataObject;
+}) {
+  return (
+    <Link
+      className="h-full"
+      href={`/opportunity/${opportunity.attributes?.slug}`}
+    >
+      <OpportunityCard
+        className="h-full"
+        cover={opportunity.attributes?.cover!}
+        expireAt={opportunity.attributes?.expireAt!}
+        id={String(opportunity.id)}
+        location={opportunity.attributes?.location!}
+        opportunity_category={opportunity.attributes?.opportunity_category!}
+        partner={opportunity.attributes?.partner!}
+        title={opportunity.attributes?.title!}
+      />
+    </Link>
   );
 }
+
+const Opportunity_Grid = tw.ul`
+  grid
+  grid-flow-row
+  grid-cols-1
+  gap-8
+  px-4
+  sm:grid-cols-2
+  sm:px-0
+  md:grid-cols-2
+  lg:grid-cols-3
+  xl:grid-cols-4
+`;
 
 function Loading() {
   return (

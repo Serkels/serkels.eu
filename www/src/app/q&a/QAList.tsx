@@ -2,7 +2,6 @@
 
 import { Spinner } from "@1/ui/components/Spinner";
 import { P, match } from "ts-pattern";
-import { ErrorOccur } from "~/components/ErrorOccur";
 import { useQuestion_controller } from "~/modules/question/view/react";
 import { QACard } from "./components/QACard/QACard";
 
@@ -27,9 +26,9 @@ export function QAList({
 
   //
   return match(query_result)
-    .with({ status: "error" }, ({ error }) => (
-      <ErrorOccur error={error as Error} />
-    ))
+    .with({ status: "error" }, ({ error }) => {
+      throw error;
+    })
     .with({ status: "loading" }, () => <Loading />)
     .with(
       {

@@ -17,7 +17,6 @@ import tw from "tailwind-styled-components";
 import { P, match } from "ts-pattern";
 import { fromClient } from "~/app/api/v1";
 import { Avatar } from "~/components/Avatar";
-import { ErrorOccur } from "~/components/ErrorOccur";
 import { AsideBar } from "~/layouts/holy/aside";
 import { Exchange_List_Controller } from "~/modules/exchange/List.controller";
 import { Exchange_Repository } from "~/modules/exchange/infrastructure";
@@ -55,9 +54,9 @@ function EchangeNav() {
   //
 
   return match(query_result)
-    .with({ status: "error" }, ({ error }) => (
-      <ErrorOccur error={error as Error} />
-    ))
+    .with({ status: "error" }, ({ error }) => {
+      throw error;
+    })
     .with({ status: "loading" }, () => <Loading />)
     .with(
       {

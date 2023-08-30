@@ -74,6 +74,6 @@
     // "tw\\.[^`]+`([^`]*)`", // tw.xxx<xxx>`...`
     // "tw\\(.*?\\).*?`([^`]*)" // tw(Component)<xxx>`...`
     // ],
-    "autoHide.autoHideSideBar": false
+    "autoHide.autoHideSideBar": true
   }
 }

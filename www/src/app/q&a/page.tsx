@@ -20,7 +20,7 @@ export default async function Page({
   const search = searchParams["q"] as string | undefined;
   const category = searchParams["category"] as string | undefined;
   return (
-    <main className="col-span-full my-10 md:col-span-6 xl:col-span-6 ">
+    <main>
       <QASearchForm />
       <Question_Form />
       <hr className="my-10" />

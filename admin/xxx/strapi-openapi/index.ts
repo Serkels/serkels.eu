@@ -5,6 +5,13 @@ import type { components } from "./v1";
 //
 
 type Schemas = components["schemas"];
+export module Strapi_OpenApi_Schemas {
+  export module Opportunity {
+    export type ListResponse = Schemas["OpportunityListResponse"];
+    export type ResponseDataObject = Schemas["OpportunityResponseDataObject"];
+    export type Schema = Schemas["Opportunity"];
+  }
+}
 
 //
 
@@ -79,5 +86,13 @@ export type Question_Schema = Schemas["Question"];
 export type Inbox_ListSchema = Schemas["InboxListResponse"];
 export type Inbox_ItemSchema = Schemas["InboxResponseDataObject"];
 export type Inbox_Schema = Schemas["Inbox"];
+
+//
+
+export type Opportunity_Strapi_ListResponse =
+  Schemas["OpportunityListResponse"];
+export type Opportunity_Strapi_ResponseDataObject =
+  Schemas["OpportunityResponseDataObject"];
+export type Opportunity_Strapi_Schema = Schemas["Opportunity"];
 
 //

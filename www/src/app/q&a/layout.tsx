@@ -30,7 +30,9 @@ export default async function Layout({
 
             <CategoriesList />
           </AsideWithTitle>
-          {children}
+          <div className="col-span-full my-10 md:col-span-6 xl:col-span-6 ">
+            {children}
+          </div>
         </Hydrate>
         <aside className="col-span-3 mt-10 hidden lg:px-10 xl:block">
           {see_also}
