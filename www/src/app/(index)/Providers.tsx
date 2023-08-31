@@ -1,11 +1,13 @@
 "use client";
 
+import { setUser } from "@sentry/nextjs";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import debug from "debug";
 import { SessionProvider, useSession } from "next-auth/react";
-import { useMemo, type PropsWithChildren } from "react";
+import { useEffect, useMemo, type PropsWithChildren } from "react";
 import Nest from "react-nest";
+import { P, match } from "ts-pattern";
 import { CoreProvider } from "~/core/react";
 import { Question_Repository } from "~/modules/question/repository";
 import { QuestionControllerProvider } from "~/modules/question/view/react";
@@ -39,12 +41,34 @@ export default function Providers({ children }: PropsWithChildren) {
   return (
     <QueryClientProvider client={queryClient}>
       <SessionProvider>
+        <UserTracking />
         <ViewProvider>{children}</ViewProvider>
       </SessionProvider>
 
       <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
     </QueryClientProvider>
   );
+}
+
+function UserTracking() {
+  const session = useSession();
+
+  useEffect(() => {
+    match(session)
+      .with({ status: "authenticated", data: P.select() }, ({ user }) => {
+        setUser({
+          email: user?.email ?? undefined,
+          id: user?.id ?? undefined,
+        });
+      })
+      .with({ status: "loading" }, () => {})
+      .with({ status: "unauthenticated" }, () => {
+        setUser(null);
+      })
+      .exhaustive();
+  }, [session]);
+
+  return null;
 }
 
 function ViewProvider({ children }: PropsWithChildren) {
