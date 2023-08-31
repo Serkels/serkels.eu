@@ -43,8 +43,12 @@ export class UserEmitterMap implements IUserEmitterMap {
 
   //
 
-  messages = new EventEmitter() as TypedEmitter<MessageEvents>;
-  notifications = new EventEmitter() as TypedEmitter<NotificationEvents>;
+  messages = new EventEmitter({
+    captureRejections: true,
+  }) as TypedEmitter<MessageEvents>;
+  notifications = new EventEmitter({
+    captureRejections: true,
+  }) as TypedEmitter<NotificationEvents>;
 
   //
 

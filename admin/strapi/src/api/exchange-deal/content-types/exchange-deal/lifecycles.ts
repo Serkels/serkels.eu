@@ -4,7 +4,6 @@ import type { Event as LifecycleEvent } from "@strapi/database/lib/lifecycles";
 import type { Subscriber } from "@strapi/database/lib/lifecycles/subscribers";
 import type { Shared } from "@strapi/strapi";
 import type { EntityService } from "@strapi/strapi/lib/services/entity-service";
-import type { Comment } from "strapi-plugin-comments/types/contentTypes";
 import { ApiExchangeDealExchangeDeal } from "~/types/generated/contentTypes";
 
 //
@@ -21,11 +20,9 @@ export default {
         .query(model.uid)
         .findOne({ ...params, populate: ["owner"] });
 
-    const comments = await entityService.findMany<
-      keyof Shared.ContentTypes,
-      Comment
-    >("plugin::comments.comment", {
-      filters: { related: { uid: model.uid, id: entry.id } },
+    const comments = await entityService.findMany("plugin::comments.comment", {
+      populate: ["authorUser"],
+      filters: { related: { uid: model.uid, id: entry.id } as any },
     });
 
     await Promise.all(

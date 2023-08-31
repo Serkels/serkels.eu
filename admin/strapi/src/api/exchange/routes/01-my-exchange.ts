@@ -1,8 +1,6 @@
 import { EntityService } from "@strapi/strapi/lib/services/entity-service";
-import { Shared } from "@strapi/strapi/lib/types";
 import { Next } from "koa";
 import { StrapiContext } from "~/types";
-import { ApiExchangeDealExchangeDeal } from "~/types/generated/contentTypes";
 
 export default {
   routes: [
@@ -29,15 +27,18 @@ async function filter_deal_owner_participant(
   const user = context.state.user;
 
   const entityService: EntityService = strapi.entityService;
-  const deals = await entityService.findMany<
-    keyof Shared.ContentTypes,
-    ApiExchangeDealExchangeDeal["attributes"]
-  >("api::exchange-deal.exchange-deal", {
-    filters: { $or: [{ owner: user.id }, { participant: user.id }] },
-    populate: [
-      "exchange",
-    ] as (keyof ApiExchangeDealExchangeDeal["attributes"])[],
-  });
+  const deals = await entityService.findMany(
+    "api::exchange-deal.exchange-deal",
+    {
+      filters: {
+        $or: [
+          { owner: { id: user.id } as any },
+          { participant: { id: user.id } as any },
+        ],
+      },
+      populate: ["exchange"],
+    },
+  );
 
   const exchange_ids = deals.map(({ exchange }) => exchange["id"] as number);
 

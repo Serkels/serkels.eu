@@ -15,11 +15,9 @@ import { usePathname } from "next/navigation";
 import { type ComponentPropsWithoutRef } from "react";
 import tw from "tailwind-styled-components";
 import { P, match } from "ts-pattern";
-import { fromClient } from "~/app/api/v1";
 import { Avatar } from "~/components/Avatar";
 import { AsideBar } from "~/layouts/holy/aside";
-import { Exchange_List_Controller } from "~/modules/exchange/List.controller";
-import { Exchange_Repository } from "~/modules/exchange/infrastructure";
+import { useExchange_list_controller } from "~/modules/exchange";
 import { Exchange_ValueProvider, useExchange_Value } from "./Exchange.context";
 
 //
@@ -40,11 +38,9 @@ export function MyExchanges(props: ComponentPropsWithoutRef<"aside">) {
 }
 
 function EchangeNav() {
-  const { data: session } = useSession();
-  const repository = new Exchange_Repository(fromClient, session?.user?.jwt);
   const {
     my: { useQuery },
-  } = new Exchange_List_Controller(repository);
+  } = useExchange_list_controller();
 
   const query_result = useQuery({
     sort: ["updatedAt:desc"],

@@ -2,18 +2,16 @@
 
 import type { Event } from "@strapi/database/lib/lifecycles";
 import type { Subscriber } from "@strapi/database/lib/lifecycles/subscribers";
-import type { Common } from "@strapi/strapi";
 import type { EntityService } from "@strapi/strapi/lib/services/entity-service";
 import type { GetValues } from "@strapi/strapi/lib/types/core/attributes";
 import { ValidationError } from "@strapi/utils/dist/errors";
 import type { Comment } from "strapi-plugin-comments/types/contentTypes";
+import { UserEmitterMap } from "~/src/websocket";
 import type { AfterCreateLifecycleEvent } from "~/types";
-import { UserEmitterMap } from "../../../../websocket";
 
 //
 
-const QUESTION_API_CONTENT_ID: Common.UID.ContentType =
-  "api::question.question" as const;
+const QUESTION_API_CONTENT_ID = "api::question.question" as const;
 
 //
 
@@ -59,16 +57,16 @@ async function notify_new_anwser_to_quetion_owner(event: Event) {
 
   const question_id = parse_question_id(event);
   const entityService: EntityService = strapi.entityService;
-  const question: GetValues<"api::question.question"> =
-    await entityService.findOne(QUESTION_API_CONTENT_ID, question_id, {
-      populate: ["owner"],
-    });
-
-  // ! HACK(douglasduteil): the question ower id should be populated
-  const question_owner = { id: NaN, ...question.owner };
+  const question = await entityService.findOne(
+    QUESTION_API_CONTENT_ID,
+    question_id,
+    {
+      populate: "*",
+    },
+  );
 
   const had_listeners = UserEmitterMap.get(
-    question_owner.id,
+    Number(question.owner.id),
   ).notifications.emit("new_answer", Number(result.id));
   if (had_listeners) {
     strapi.log.info(
@@ -92,7 +90,7 @@ async function update_answer_count_of_related_quetion(event: Event) {
 
   await entityService
     .update(QUESTION_API_CONTENT_ID, question_id, {
-      data: <GetValues<typeof QUESTION_API_CONTENT_ID>>{
+      data: {
         answer_count,
         last_activity: new Date().toISOString(),
       },

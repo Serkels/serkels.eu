@@ -13,12 +13,11 @@ import { useTimeoutFn } from "react-use";
 import { P, match } from "ts-pattern";
 import { Avatar } from "~/components/Avatar";
 import { ErrorOccur } from "~/components/ErrorOccur";
+import { useExchange_item_controller } from "~/modules/exchange";
 import { Deal_Controller } from "~/modules/exchange/Deal.controller";
 import { Deal_Repository } from "~/modules/exchange/Deal.repository";
 import { Deal_Message_Controller } from "~/modules/exchange/Deal_Message.controller";
 import { Deal_Message_Repository } from "~/modules/exchange/Deal_Message.repository";
-import { Exchange_Item_Controller } from "~/modules/exchange/Item.controller";
-import { Exchange_Repository } from "~/modules/exchange/infrastructure";
 import { fromClient } from "../api/v1";
 import { Exchange_CardContext } from "./ExchangeCard.context";
 
@@ -44,14 +43,7 @@ export function Ask_Body() {
 
   const { data: session } = useSession();
 
-  const exchange_repository = new Exchange_Repository(
-    fromClient,
-    session?.user?.jwt,
-  );
-  const { find_deal_by_participant } = new Exchange_Item_Controller(
-    exchange_repository,
-    exchange_id,
-  );
+  const { find_deal_by_participant } = useExchange_item_controller(exchange_id);
 
   const {
     create: { useMutation },

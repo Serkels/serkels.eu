@@ -4,12 +4,9 @@
 
 import { factories } from "@strapi/strapi";
 import type {
-  ApiContentTypes,
   Context,
-  EntityService,
   Next,
   PolicyImplementation,
-  Shared,
   StrapiContext,
 } from "~/types";
 import { findOneFromUser } from "../../user-profile/services/user-profile";
@@ -30,7 +27,6 @@ export default factories.createCoreRouter("api::exchange-deal.exchange-deal", {
 async function exchange_id_must_exist(
   ...[policyContext, _cfg, { strapi }]: Parameters<PolicyImplementation>
 ) {
-  const entityService: EntityService = strapi.entityService;
   const strapi_ctx: StrapiContext & {
     request: {
       body?: {
@@ -51,21 +47,20 @@ async function exchange_id_must_exist(
     return strapi_ctx.badRequest();
   }
 
-  const exchange_count = await entityService.count<
-    keyof Shared.ContentTypes,
-    number
-  >("api::exchange.exchange", {
-    filters: {
-      id: exchange_id,
-      owner: { $not: strapi_ctx.state.user.id },
+  const exchange_count = await strapi.entityService.count(
+    "api::exchange.exchange",
+    {
+      filters: {
+        ...{ id: exchange_id },
+        owner: { $not: strapi_ctx.state.user.id },
+      },
     },
-  });
+  );
 
   return Boolean(exchange_count === 1);
 }
 
 async function enforce_body(ctx: Context, next: Next) {
-  const entityService: EntityService = strapi.entityService;
   const strapi_ctx: StrapiContext & {
     request: {
       body?: {
@@ -95,12 +90,13 @@ async function enforce_body(ctx: Context, next: Next) {
     return next();
   }
 
-  const exchange = await entityService.findOne<
-    keyof Shared.ContentTypes,
-    ApiContentTypes.ApiExchangeExchange["attributes"]
-  >("api::exchange.exchange", exchange_id, {
-    populate: ["owner"],
-  });
+  const exchange = await strapi.entityService.findOne(
+    "api::exchange.exchange",
+    exchange_id,
+    {
+      populate: ["owner"],
+    },
+  );
 
   const profile = await findOneFromUser(strapi_ctx.state.user.id);
   if (!profile) {

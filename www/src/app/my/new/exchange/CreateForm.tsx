@@ -2,21 +2,17 @@
 
 import { Spinner } from "@1/ui/components/Spinner";
 import * as UI from "@1/ui/domains/exchange/CreateForm";
-import { useSession } from "next-auth/react";
 import { match } from "ts-pattern";
-import { fromClient } from "~/app/api/v1";
 import { SelectCategoryField } from "~/components/SelectCategoryField";
-import { Exchange_CreateForm_Controller } from "~/modules/exchange/CreateForm.controller";
-import { Exchange_Repository } from "~/modules/exchange/infrastructure";
+import { useExchange_create_controller } from "~/modules/exchange";
 
 //
 
 export function CreateForm() {
-  const { data: session } = useSession();
-  const repository = new Exchange_Repository(fromClient, session?.user?.jwt);
   const {
     create: { useMutation },
-  } = new Exchange_CreateForm_Controller(repository);
+  } = useExchange_create_controller();
+
   const { mutate, status, error } = useMutation();
   return match(status)
     .with("error", () => <ErrorOccur error={error as Error} />)

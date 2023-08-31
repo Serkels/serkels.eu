@@ -1,16 +1,11 @@
 //
 
+import { Params } from "@strapi/strapi/lib/services/entity-service";
 import { errors } from "@strapi/utils";
 import { NotFoundError } from "@strapi/utils/dist/errors";
 import { z } from "zod";
 import { replate_each_body_data_author_by_profile } from "~/src/extensions/comments/services/replace_autor";
-import type {
-  Comment,
-  EntityService,
-  GetValues,
-  KoaContext,
-  Next,
-} from "~/types";
+import type { Comment, KoaContext, Next } from "~/types";
 import {
   findOneFromUser,
   findRelatedUser,
@@ -125,20 +120,18 @@ export default {
 
 //
 
-async function find_one_by_id(id: number, filters: { owner: number }) {
-  const entityService: EntityService = strapi.entityService;
-  const entity = await entityService.findOne<
-    "api::inbox.inbox",
-    GetValues<"api::inbox.inbox">
-  >("api::inbox.inbox", id, {
+async function find_one_by_id(
+  id: number,
+  params: Params.Pick<"api::inbox.inbox", "filters">,
+) {
+  const inbox = await strapi.entityService.findOne("api::inbox.inbox", id, {
     populate: {
       thread: { populate: ["last_message", "participants"] },
       participant: true,
     },
-    filters,
+    ...params,
   });
 
-  const inbox = { id: NaN, ...(entity ?? {}) };
   if (Number.isNaN(inbox.id)) {
     strapi.log.warn(
       `service::user-profile.user-profile > ` +
@@ -151,22 +144,23 @@ async function find_one_by_id(id: number, filters: { owner: number }) {
 }
 
 async function find_one_by_pair(filters: {
-  owner: number;
-  participant: number;
+  owner_id: number;
+  participant_id: number;
 }) {
-  const entityService: EntityService = strapi.entityService;
-  const inboxes = await entityService.findMany<
-    "api::inbox.inbox",
-    GetValues<"api::inbox.inbox">
-  >("api::inbox.inbox", {
-    filters: filters,
+  const inboxes = await strapi.entityService.findMany("api::inbox.inbox", {
+    filters: {
+      $or: [
+        { owner: { id: filters.owner_id } as any },
+        { participant: { id: filters.participant_id } as any },
+      ],
+    },
   });
 
-  const inbox = { id: NaN, ...(inboxes[0] ?? {}) };
+  const [inbox] = inboxes;
   if (Number.isNaN(inbox.id)) {
     strapi.log.warn(
       `service::user-profile.user-profile > ` +
-        `findOneFromUser([owner=${filters.owner},participant=${filters.participant}]): detected no inbox`,
+        `findOneFromUser([owner=${filters.owner_id},participant=${filters.participant_id}]): detected no inbox`,
     );
     return undefined;
   }
@@ -189,12 +183,12 @@ async function no_duplicate(context, _cfg, { strapi }) {
 
   const inbox = await Promise.race([
     find_one_by_pair({
-      participant: Number(profile_id),
-      owner: Number(user_id),
+      participant_id: Number(profile_id),
+      owner_id: Number(user_id),
     }),
     find_one_by_pair({
-      participant: Number(user_id),
-      owner: Number(user_id),
+      participant_id: Number(user_id),
+      owner_id: Number(user_id),
     }),
   ]);
 
@@ -212,16 +206,19 @@ async function no_duplicate(context, _cfg, { strapi }) {
 
 async function create_inbox(
   context: KoaContext<
-    { data: GetValues<"api::inbox.inbox"> },
+    Params.Pick<"api::inbox.inbox", "data">,
     Comment,
     { profile_id: string }
   >,
   next: Next,
 ) {
-  const profile_id = context.params.profile_id;
-  const user_id = context.state.user.id;
+  const profile_id = Number(context.params.profile_id);
+  const user_id = Number(context.state.user.id);
+
+  //
+
   context.request.body = {
-    data: { participant: profile_id as any, owner: user_id as any },
+    data: { participant: profile_id, owner: user_id },
   };
 
   //
@@ -233,7 +230,7 @@ async function create_inbox(
 
 async function create_related_inbox(
   context: KoaContext<
-    { data: GetValues<"api::inbox.inbox"> },
+    Params.Pick<"api::inbox.inbox", "data">,
     { data: { id: number } },
     { profile_id: string }
   >,
@@ -249,9 +246,8 @@ async function create_related_inbox(
   //
   //
 
-  const profile_id = context.params.profile_id;
-  const user_id = context.state.user.id;
-  const entityService: EntityService = strapi.entityService;
+  const profile_id = z.number().parse(context.params.profile_id);
+  const user_id = z.number().parse(context.state.user.id);
 
   const [related_profile, participant_user] = await Promise.all([
     findOneFromUser(Number(user_id)),
@@ -267,10 +263,7 @@ async function create_related_inbox(
     owner: participant_user.id,
   };
 
-  const related_inbox = await entityService.create<
-    "api::inbox.inbox",
-    GetValues<"api::inbox.inbox">
-  >("api::inbox.inbox", {
+  const related_inbox = await strapi.entityService.create("api::inbox.inbox", {
     data: related_inbox_data,
   });
 
@@ -293,13 +286,11 @@ async function create_related_inbox(
 
   //
 
-  const related_thread = {
-    inboxes: [inbox.id, related_inbox.id],
-    participants: [profile_id, related_profile.id],
-  };
-
-  const thread = await entityService.create("api::thread.thread", {
-    data: related_thread,
+  const thread = await strapi.entityService.create("api::thread.thread", {
+    data: {
+      inboxes: [inbox.id, related_inbox.id],
+      participants: [profile_id, related_profile.id],
+    },
   });
   if (!thread) {
     throw new errors.ApplicationError(
@@ -324,16 +315,19 @@ async function create_related_inbox(
 function set_default_relation_param() {
   return async function relation(ctx: KoaContext, next: Next) {
     const { params } = ctx;
-    const user_id = ctx.state.user.id;
+    const user_id = z.number().parse(ctx.state.user.id);
 
-    const inbox = await find_one_by_id(params.id, { owner: Number(user_id) });
+    const inbox = await find_one_by_id(params.id, {
+      filters: { owner: { id: user_id } as any },
+    });
 
     if (!inbox) {
       throw new NotFoundError('Missing inbox"');
     }
 
-    const { id: thread_id } = { id: NaN, ...(inbox.thread ?? {}) };
-    if (Number.isNaN(thread_id)) {
+    const thread = z.object({ id: z.coerce.number() }).parse(inbox.thread);
+    if (Number.isNaN(thread.id)) {
+      // TODO (douglasduteil) Might want to remove this or parseSafe the assertion above
       strapi.log.warn(
         `api::inbox.01-messages > ` +
           `set_default_relation_param([ctx.params.id=${params.id}]): detected no thread`,
@@ -341,10 +335,10 @@ function set_default_relation_param() {
       throw new NotFoundError("Missing inbox thread");
     }
 
-    strapi.log.debug(`redirect to api::thread.thread:${thread_id}`);
+    strapi.log.debug(`redirect to api::thread.thread:${thread.id}`);
     ctx.params = {
       ...(ctx.params ?? {}),
-      relation: `api::thread.thread:${thread_id}`,
+      relation: `api::thread.thread:${thread.id}`,
     };
     return next();
   };

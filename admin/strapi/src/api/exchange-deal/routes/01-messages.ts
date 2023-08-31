@@ -2,7 +2,7 @@
 
 import { errors } from "@strapi/utils";
 import { replate_each_body_data_author_by_profile } from "~/src/extensions/comments/services/replace_autor";
-import type { Comment, EntityService, KoaContext, Next } from "~/types";
+import type { Comment, KoaContext, Next } from "~/types";
 
 //
 
@@ -57,11 +57,10 @@ async function update_deal_last_message(
   const deal_id = context.params.id;
   const message = context.body;
 
-  const entityService: EntityService = strapi.entityService;
-  await entityService
+  await strapi.entityService
     .update("api::exchange-deal.exchange-deal", deal_id, {
       data: {
-        last_message: message.id,
+        last_message: Number(message.id),
       },
     })
     .then(() =>

@@ -3,7 +3,6 @@
 import { Exchange_ItemSchemaToDomain } from "@1/modules/exchange/infra/strapi";
 import type { Exchange_ItemSchema } from "@1/strapi-openapi";
 import { Button } from "@1/ui/components/ButtonV";
-import { Spinner } from "@1/ui/components/Spinner";
 import * as UI from "@1/ui/domains/exchange/Card";
 import { OnlineOrLocation } from "@1/ui/domains/exchange/OnlineOrLocation";
 import { Exchange } from "@1/ui/icons";
@@ -13,31 +12,26 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { P, match } from "ts-pattern";
 import { AvatarMediaHorizontal } from "~/components/Avatar";
-import { ErrorOccur } from "~/components/ErrorOccur";
-import { Exchange_Item_Controller } from "~/modules/exchange/Item.controller";
-import { Exchange_Repository } from "~/modules/exchange/infrastructure";
+import { useExchange_item_controller } from "~/modules/exchange";
 import { Exchange_QueryKeys } from "~/modules/exchange/queryKeys";
-import { fromClient } from "../api/v1";
 import { Ask_Action } from "./Ask_Action";
 import { Exchange_CardContext } from "./ExchangeCard.context";
 
 //
 
 export function ExchangeCard({ id }: { id: number }) {
-  const { data: session } = useSession();
-  const repository = new Exchange_Repository(fromClient, session?.user?.jwt);
   const {
     item: { useQuery },
-  } = new Exchange_Item_Controller(repository, id);
+  } = useExchange_item_controller(id);
 
   const query_info = useQuery();
 
   return match(query_info)
-    .with({ status: "error" }, ({ error }) => (
-      <ErrorOccur error={error as Error} />
-    ))
-    .with({ status: "loading" }, () => <Spinner />)
+    .with({ status: "error" }, ({ error }) => {
+      throw error;
+    })
     .with(
+      { status: "loading" },
       {
         status: "success",
       },

@@ -32,12 +32,12 @@ export default (
       return;
     }
 
-    const { id: owner } = author;
+    const { id: owner_id } = author;
     const profiles = await strapi.entityService.findMany(
       "api::user-profile.user-profile",
       {
         fields: ["id", "firstname", "lastname", "university"],
-        filters: { owner },
+        filters: { owner: { id: owner_id } as any },
       },
     );
 

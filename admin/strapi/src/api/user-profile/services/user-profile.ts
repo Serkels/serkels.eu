@@ -3,13 +3,13 @@
  */
 
 import { factories } from "@strapi/strapi";
-import type { EntityService } from "@strapi/strapi/lib/services/entity-service";
 import { createHash } from "node:crypto";
+import { z } from "zod";
 import type { GetValues } from "~/types";
 
 export default factories.createCoreService(
   "api::user-profile.user-profile",
-  ({ strapi }) => ({
+  () => ({
     gravatarUrlFor,
     async findOneFromUser(user_id: number) {
       const profile = await findOneFromUser(user_id);
@@ -21,11 +21,11 @@ export default factories.createCoreService(
 //
 
 export async function findRelatedUser(id: number) {
-  const entityService: EntityService = strapi.entityService;
-  const profile = await entityService.findOne<
+  const profile = await strapi.entityService.findOne(
     "api::user-profile.user-profile",
-    GetValues<"api::user-profile.user-profile"> & { id: number }
-  >("api::user-profile.user-profile", id, { populate: ["owner"] });
+    id,
+    { populate: ["owner"] },
+  );
 
   return profile.owner as any as GetValues<"api::user-profile.user-profile">["owner"] & {
     id: number;
@@ -33,18 +33,19 @@ export async function findRelatedUser(id: number) {
 }
 
 export async function findOneFromUser(id: number) {
-  const entityService: EntityService = strapi.entityService;
-  const profiles = await entityService.findMany<
+  const profiles = await strapi.entityService.findMany(
     "api::user-profile.user-profile",
-    GetValues<"api::user-profile.user-profile">
-  >("api::user-profile.user-profile", {
-    fields: ["firstname", "lastname", "university"],
-    filters: { owner: id },
-  });
+    {
+      filters: { owner: { id } as any },
+    },
+  );
 
-  // ! HACK(douglasduteil): the findMany populated the id
-  const profile = { id: NaN, ...profiles[0] };
-  if (Number.isNaN(profile.id)) {
+  const assertion = z
+    .array(z.object({ id: z.number() }))
+    .length(1, "Only one profile should be found")
+    .safeParse(profiles);
+
+  if (!assertion.success) {
     strapi.log.warn(
       `service::user-profile.user-profile > ` +
         `findOneFromUser(${id}): detected no profiles`,
@@ -52,7 +53,7 @@ export async function findOneFromUser(id: number) {
     return undefined;
   }
 
-  return profile;
+  return profiles[0];
 }
 
 function gravatarUrlFor(email: string) {
