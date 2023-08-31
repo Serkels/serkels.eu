@@ -410,8 +410,8 @@ importers:
         specifier: 0.2.0
         version: 0.2.0
       openapi-fetch:
-        specifier: 0.7.4
-        version: 0.7.4
+        specifier: 0.7.5
+        version: 0.7.5
       postcss:
         specifier: 8.4.29
         version: 8.4.29
@@ -7690,14 +7690,14 @@ packages:
       is-docker: 2.2.1
       is-wsl: 2.2.0
 
-  /openapi-fetch@0.7.4:
-    resolution: {integrity: sha512-ACoSikOuFO3sMROtqritJAsGd694gRNXFnWpYAqi+tQzowLOkcQ6SbeAvS+T6qNS92y/OLiiYcNrb/Rh/MrEVw==}
+  /openapi-fetch@0.7.5:
+    resolution: {integrity: sha512-N3NGEllyyZ+SzVIWKSes+jJg1quT7dLYMFA2W0nmoMJT8+yomQNcfqBBfnVNdij+zfC7tTqlnm61SpKt4QYgIQ==}
     dependencies:
-      openapi-typescript-helpers: 0.0.1
+      openapi-typescript-helpers: 0.0.2
     dev: false
 
-  /openapi-typescript-helpers@0.0.1:
-    resolution: {integrity: sha512-WDmxej0eHSZtLgCuyPEn2NXRV7tcvUnBBNP/0c/U66mOlxs6Yn0/dHuWlkVKdHGNahSUwG57A1tyutHWRpWqFg==}
+  /openapi-typescript-helpers@0.0.2:
+    resolution: {integrity: sha512-r5Z4tlGa2l6jYO1ENT9Giqo/ZWzWPmsYUR41O01kjYr7vg4iBFaMh0W0g8Ef72SpeU2F+TY6CAdKxTv7aq+WXA==}
     dev: false
 
   /openapi-typescript@6.5.4:
