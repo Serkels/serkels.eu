@@ -2,7 +2,7 @@
   "folders": [
     //
     { "path": "www", "name": "www" },
-    { "path": "admin", "name": "admin" },
+    { "path": "admin/strapi", "name": "strapi" },
     //
     { "path": "@1/modules", "name": "@1/modules" },
     { "path": "@1/core", "name": "@1/core" },
@@ -25,6 +25,7 @@
       "name": "@1/config/typescript-config"
     },
     //
+    { "path": "admin", "name": "admin" },
     { "path": ".", "name": "root" }
   ],
   "extensions": {
@@ -56,7 +57,7 @@
       "e2e-results/": true,
       "node_modules/": true,
       "out/": true,
-      "admin/xxx/": true,
+      "admin/xxx/**/*": true,
       "storybook-static/": true,
       ".eslintcache": true
     },

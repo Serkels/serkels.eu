@@ -15,10 +15,9 @@ import { P, match } from "ts-pattern";
 import { fromClient } from "~/app/api/v1";
 import { AvatarMediaHorizontal } from "~/components/Avatar";
 import { ErrorOccur } from "~/components/ErrorOccur";
+import { useExchange_item_controller } from "~/modules/exchange";
 import { Deal_Controller } from "~/modules/exchange/Deal.controller";
 import { Deal_Repository } from "~/modules/exchange/Deal.repository";
-import { Exchange_Item_Controller } from "~/modules/exchange/Item.controller";
-import { Exchange_Repository } from "~/modules/exchange/infrastructure";
 import {
   Exchange_ValueProvider,
   useExchange_Value,
@@ -28,11 +27,9 @@ import { Deal_ValueProvider, useDeal_Value } from "./Deal.context";
 //
 
 export function MyDeals({ exchange_id }: { exchange_id: number }) {
-  const { data: session } = useSession();
-  const repository = new Exchange_Repository(fromClient, session?.user?.jwt);
   const {
     item: { useQuery },
-  } = new Exchange_Item_Controller(repository, exchange_id);
+  } = useExchange_item_controller(exchange_id);
 
   const query_info = useQuery();
 

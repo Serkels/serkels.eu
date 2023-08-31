@@ -2,11 +2,8 @@
 
 import { Button } from "@1/ui/components/ButtonV";
 import { Spinner } from "@1/ui/components/Spinner";
-import { useSession } from "next-auth/react";
 import { P, match } from "ts-pattern";
-import { fromClient } from "~/app/api/v1";
-import { Exchange_List_Controller } from "~/modules/exchange/List.controller";
-import { Exchange_Repository } from "~/modules/exchange/infrastructure";
+import { useExchange_list_controller } from "~/modules/exchange";
 import { ExchangeCard } from "./ExchangeCard";
 
 //
@@ -18,11 +15,9 @@ export function ExchangeList({
   category: string | undefined;
   search: string | undefined;
 }) {
-  const { data: session } = useSession();
-  const repository = new Exchange_Repository(fromClient, session?.user?.jwt);
   const {
     lists: { useQuery },
-  } = new Exchange_List_Controller(repository);
+  } = useExchange_list_controller();
 
   const query_result = useQuery({
     filter: {
