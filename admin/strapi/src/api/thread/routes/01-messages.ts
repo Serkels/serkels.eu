@@ -1,8 +1,15 @@
 //
 
 import { errors } from "@strapi/utils";
+import { z } from "zod";
 import { replace_autor } from "~/src/extensions/comments/services/replace_autor";
-import type { Comment, EntityService, KoaContext, Next } from "~/types";
+import type {
+  Comment,
+  EntityService,
+  GetValues,
+  KoaContext,
+  Next,
+} from "~/types";
 
 //
 
@@ -44,14 +51,14 @@ export default {
 //
 
 async function update_thread_last_message(
-  context: KoaContext<any, Comment>,
+  context: KoaContext<any, GetValues<"api::inbox.inbox">>,
   next: Next,
 ) {
   await next();
 
   //
 
-  const thread_id = context.params.id;
+  const thread_id = z.number().parse(context.params.id);
   const message = context.body;
 
   const entityService: EntityService = strapi.entityService;

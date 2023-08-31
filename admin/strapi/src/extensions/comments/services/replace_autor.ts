@@ -17,7 +17,7 @@ export async function replace_autor(body: Comment) {
     "api::user-profile.user-profile",
     {
       fields: ["id", "firstname", "lastname", "university"],
-      filters: { owner },
+      filters: { owner: { id: owner } as any },
     },
   );
 

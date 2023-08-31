@@ -2,6 +2,8 @@
 
 import type { Strapi } from "@strapi/strapi";
 import { addMonths, compareAsc } from "date-fns";
+import { z } from "zod";
+import { GetValues } from "~/types";
 
 //
 
@@ -16,13 +18,18 @@ export default {
 
 //
 
-async function unconfirmed_user_cleanup_task({ strapi }: { strapi: Strapi }) {
-  const users: { id: string; updatedAt: string }[] =
-    await strapi.entityService.findMany("plugin::users-permissions.user", {
-      filters: { confirmed: false },
-    });
+const isUser = (user: GetValues<"plugin::users-permissions.user">) =>
+  z.object({ id: z.number(), updatedAt: z.coerce.date() }).parse(user);
 
-  const inactive_user = users.filter(isInactiveSince6Months);
+async function unconfirmed_user_cleanup_task({ strapi }: { strapi: Strapi }) {
+  const users = await strapi.entityService.findMany(
+    "plugin::users-permissions.user",
+    {
+      filters: { confirmed: false },
+    },
+  );
+
+  const inactive_user = users.map(isUser).filter(isInactiveSince6Months);
 
   for (const user of inactive_user) {
     console.info("Removing user ", user.id);

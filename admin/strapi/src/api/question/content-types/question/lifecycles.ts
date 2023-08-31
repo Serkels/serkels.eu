@@ -3,7 +3,6 @@
 import type { Subscriber } from "@strapi/database/lib/lifecycles/subscribers";
 import type { Shared } from "@strapi/strapi";
 import type { EntityService } from "@strapi/strapi/lib/services/entity-service";
-import type { Comment } from "strapi-plugin-comments/types/contentTypes";
 import type {
   BeforeCreateLifecycleEvent,
   BeforeDeleteLifecycleEvent,
@@ -38,10 +37,7 @@ export default {
     strapi.log.debug(`${event.action} ${event.model.uid}:${entry.id}`);
 
     // const comments = await strapi.plugin("comments").service("common").findRelatedEntitiesFor;
-    const comments = await entityService.findMany<
-      keyof Shared.ContentTypes,
-      Comment
-    >("plugin::comments.comment", {
+    const comments = await entityService.findMany("plugin::comments.comment", {
       filters: { related: `${model.uid}:${entry.id}` },
     });
     strapi.log.debug(

@@ -1,6 +1,6 @@
 //
 import type { Event as LifecycleEvent } from "@strapi/database/lib/lifecycles";
-import type { Common, Shared } from "@strapi/strapi";
+import type { Common } from "@strapi/strapi";
 import type { EntityService } from "@strapi/strapi/lib/services/entity-service";
 import { GetValues } from "~/types";
 
@@ -71,12 +71,9 @@ async function remove_profile_bookmarks(
   const entityService: EntityService = strapi.entityService;
   const { owner } = profile;
 
-  const bookmarks = await entityService.findMany<
-    keyof Shared.ContentTypes,
-    GetValues<typeof BOOKMARK_API_CONTENT_ID> & { id: number }
-  >(BOOKMARK_API_CONTENT_ID, {
+  const bookmarks = await entityService.findMany(BOOKMARK_API_CONTENT_ID, {
     filters: {
-      owner: owner["id"],
+      owner: { id: owner } as any,
     },
   });
 
@@ -84,10 +81,7 @@ async function remove_profile_bookmarks(
     // Remove all owned bookmarks
     bookmarks.map(({ id }) =>
       entityService
-        .delete<
-          keyof Shared.ContentTypes,
-          GetValues<typeof BOOKMARK_API_CONTENT_ID>
-        >(BOOKMARK_API_CONTENT_ID, id, {})
+        .delete(BOOKMARK_API_CONTENT_ID, id, {})
         .then(() => strapi.log.info(`DELETE ${BOOKMARK_API_CONTENT_ID} ${id}`)),
     ),
   );

@@ -35,6 +35,7 @@
     "date-fns": "2.30.0",
     "etag": "1.8.1",
     "fix-esm": "1.0.1",
+    "fp-ts": "^2.16.1",
     "mime-types": "2.1.35",
     "pg": "8.11.3",
     "pg-connection-string": "2.6.2",
@@ -47,7 +48,8 @@
     "undici": "5.23.0",
     "ws": "8.13.0",
     "yaml": "2.3.2",
-    "zod": "3.22.2"
+    "zod": "3.22.2",
+    "zod-validation-error": "^1.5.0"
   },
   "author": {
     "name": "A Strapi developer"
