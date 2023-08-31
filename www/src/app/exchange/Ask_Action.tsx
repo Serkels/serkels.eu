@@ -24,9 +24,15 @@ import { Exchange_CardContext } from "./ExchangeCard.context";
 //
 
 export function Ask_Action() {
+  const { exchange } = useContext(Exchange_CardContext);
+
   return (
     <UI.DialogTrigger>
-      <Button>Demander</Button>
+      {exchange.in_exchange_of ? (
+        <Button intent="warning">Échanger</Button>
+      ) : (
+        <Button>Demander</Button>
+      )}
 
       <UI.Modal>
         <UI.Dialog>
