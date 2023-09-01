@@ -6,13 +6,14 @@ import { CreateForm } from "./CreateForm";
 //
 
 export async function generateMetadata(
-  undefined: any,
+  _: any,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
   return {
-    title: `${(await parent).title?.absolute} / New Exchange`,
+    title: `New Exchange :: ${(await parent).title?.absolute}`,
   };
 }
+
 //
 
 export default async function Page() {

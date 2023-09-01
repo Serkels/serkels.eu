@@ -1,6 +1,18 @@
 //
 
+import type { Metadata, ResolvingMetadata } from "next";
 import { OpportunityList } from "./page.client";
+
+//
+
+export async function generateMetadata(
+  _: any,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  return {
+    title: `Opportunities :: ${(await parent).title?.absolute}`,
+  };
+}
 
 //
 

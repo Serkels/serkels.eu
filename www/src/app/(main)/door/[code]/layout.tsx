@@ -13,7 +13,7 @@ export async function generateMetadata(
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
   return {
-    title: `${(await parent).title?.absolute} / @${params.code}`,
+    title: `@${params.code} :: ${(await parent).title?.absolute}`,
   };
 }
 

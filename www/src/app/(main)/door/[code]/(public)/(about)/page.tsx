@@ -10,7 +10,7 @@ export async function generateMetadata(
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
   return {
-    title: `${(await parent).title?.absolute} / `,
+    title: `${(await parent).title?.absolute}`,
   };
 }
 //

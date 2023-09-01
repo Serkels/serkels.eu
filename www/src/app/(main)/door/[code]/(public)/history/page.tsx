@@ -12,7 +12,7 @@ export async function generateMetadata(
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
   return {
-    title: `${(await parent).title?.absolute} / History`,
+    title: `History :: ${(await parent).title?.absolute}`,
   };
 }
 

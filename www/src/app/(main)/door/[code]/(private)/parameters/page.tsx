@@ -1,6 +1,18 @@
 //
 
+import type { Metadata, ResolvingMetadata } from "next";
 import { UserForm } from "./UserForm";
+
+//
+
+export async function generateMetadata(
+  _: any,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  return {
+    title: `Parameters :: ${(await parent).title?.absolute}`,
+  };
+}
 
 //
 

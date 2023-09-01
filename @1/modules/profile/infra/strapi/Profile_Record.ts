@@ -28,7 +28,7 @@ export function data_to_domain({
 }: Profile_DataRecord): Profile {
   const domain = Profile.create({
     ...attributes,
-    id: Number(id),
+    id,
   });
 
   if (domain.isFail()) {
