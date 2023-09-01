@@ -2,6 +2,7 @@
 
 import { Button } from "@1/ui/components/ButtonV";
 import tw from "tailwind-styled-components";
+import { match } from "ts-pattern";
 import { ErrorOccur } from "~/components/ErrorOccur";
 
 //
@@ -13,12 +14,12 @@ export default function Error({
   error: Error;
   reset: () => void;
 }) {
-  return (
+  return match(error).otherwise(() => (
     <Container>
       <ErrorOccur error={error} />
       <Button onPress={() => reset()}>Toquer de nouveau</Button>
     </Container>
-  );
+  ));
 }
 
 const Container = tw.div`
