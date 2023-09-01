@@ -24,11 +24,7 @@ export function Avatar(
   }
 
   return (
-    <img
-      className={clsx("max-w-full rounded-full object-cover", className)}
-      src={image}
-      {...other_props}
-    />
+    <img className={avatar_img({ className })} src={image} {...other_props} />
   );
 }
 
@@ -123,7 +119,7 @@ export function AvatarMediaHorizontal(
 
   return (
     <figure className={clsx("flex", className)} {...other_props}>
-      <Avatar className="h-12 w-12" u={u} />
+      <Link_Avatar className="h-12 w-12" u={u} />
       <figcaption className="ml-2 mt-0.5">
         <span className="block text-base font-medium leading-snug text-black">
           {username}

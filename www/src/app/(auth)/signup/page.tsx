@@ -1,14 +1,20 @@
 //
 
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import Link from "next/link";
 
 //
 
-export const metadata: Metadata = {
-  title: "Sign Up _ Toc-Toc",
-  description: "Sign Up",
-};
+export async function generateMetadata(
+  _: never,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  return {
+    title: `Sign Up :: ${(await parent).title?.absolute}`,
+  };
+}
+
+//
 
 export default async function Page() {
   return (

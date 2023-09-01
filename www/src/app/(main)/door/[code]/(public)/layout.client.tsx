@@ -39,14 +39,14 @@ export function Profile_Header() {
   const profile = useProfile();
 
   return (
-    <figure>
-      <Avatar className="h-14 w-14" u={profile.get("id")} />
-      <figcaption>
+    <figure className="my-5 flex flex-row space-x-5">
+      <Avatar className="h-16 w-16" u={profile.get("id")} />
+      <figcaption className="flex flex-col items-start justify-center space-y-2">
         <h4 className="text-xl font-bold text-Cerulean" title={profile.name}>
           {profile.name}
         </h4>
-        <small className="block text-sm text-Dove_Gray">
-          <School className="mr-1.5 inline-block w-6" />
+        <small className="flex flex-row items-center justify-start space-x-1 text-sm text-Dove_Gray">
+          <School className="inline-block w-6" />
           <span>{profile.university}</span>
         </small>
       </figcaption>

@@ -1,12 +1,20 @@
 //
 
+import type { Metadata, ResolvingMetadata } from "next";
 import { ConfirmPanel } from "./ConfirmPanel";
+
 //
 
-// export const metadata: Metadata = {
-//   title: "Sign In _ Toc-Toc",
-//   description: "Sign In",
-// };
+export async function generateMetadata(
+  _: never,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  return {
+    title: `Sign In :: ${(await parent).title?.absolute}`,
+  };
+}
+
+//
 
 export default async function Page({ params }: { params: { token: string } }) {
   const { token } = params;

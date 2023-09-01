@@ -1,14 +1,20 @@
 //
 
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import { UserForm } from "./UserForm";
 
 //
 
-export const metadata: Metadata = {
-  title: "Sign Up _ Toc-Toc",
-  description: "Sign Up New User",
-};
+export async function generateMetadata(
+  _: never,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  return {
+    title: `Studient :: ${(await parent).title?.absolute}`,
+  };
+}
+
+//
 
 export default async function Page() {
   return <UserForm />;

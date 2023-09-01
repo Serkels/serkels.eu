@@ -11,7 +11,7 @@ import Link from "next/link";
 import { useContext, useEffect, useRef } from "react";
 import { useTimeoutFn } from "react-use";
 import { P, match } from "ts-pattern";
-import { Avatar } from "~/components/Avatar";
+import { Link_Avatar } from "~/components/Avatar";
 import { ErrorOccur } from "~/components/ErrorOccur";
 import { useExchange_item_controller } from "~/modules/exchange";
 import { Deal_Controller } from "~/modules/exchange/Deal.controller";
@@ -160,7 +160,7 @@ function Sending() {
         className={`
         mx-auto
         my-0
-        text-center 
+        text-center
         text-xl
         font-extrabold
       `}
@@ -181,7 +181,7 @@ function Loading() {
         className={`
         mx-auto
         my-0
-        text-center 
+        text-center
         text-xl
         font-extrabold
       `}
@@ -206,7 +206,7 @@ function MessageSent() {
         className={`
           mx-auto
           my-0
-          text-center 
+          text-center
           text-xl
           font-extrabold
         `}
@@ -243,16 +243,17 @@ export function Ask_Form({ onSend }: { onSend: (message: string) => void }) {
 
   return (
     <>
-      <UI.NotImplemented>
-        <h3 className="text-2xl font-bold">{exchange.title}</h3>
-      </UI.NotImplemented>
-      <UI.NotImplemented>
+      <h3
+        className="my-5 line-clamp-2 text-2xl font-bold"
+        title={exchange.title}
+      >
+        {exchange.title}
+      </h3>
+      <div className="my-2  flex flex-row justify-between">
         <OnlineOrLocation
           is_online={exchange.is_online}
           location={exchange.location}
         />
-      </UI.NotImplemented>
-      <UI.NotImplemented>
         <time
           className="mt-3 text-xs"
           dateTime={exchange.updatedAt.toUTCString()}
@@ -260,17 +261,18 @@ export function Ask_Form({ onSend }: { onSend: (message: string) => void }) {
         >
           {exchange.updatedAt.toLocaleDateString("fr")}
         </time>
-      </UI.NotImplemented>
-      <UI.NotImplemented>
+      </div>
+
+      <div className="flex flex-row">
         <UI.ProposedByFigure
           avatar={
-            <Avatar className="h-12 w-12" u={exchange.profile.get("id")} />
+            <Link_Avatar className="h-12 w-12" u={exchange.profile.get("id")} />
           }
           label={"Proposé par :"}
         >
           {exchange.profile.name}
         </UI.ProposedByFigure>
-      </UI.NotImplemented>
+      </div>
 
       <Formik
         initialValues={{ message: "" }}
@@ -280,6 +282,7 @@ export function Ask_Form({ onSend }: { onSend: (message: string) => void }) {
           <UI.Form>
             <UI.Textarea
               name="message"
+              rows={9}
               disabled={isSubmitting}
               placeholder="Bonjour ! Je veux bien apprendre le français avec toi !"
             />

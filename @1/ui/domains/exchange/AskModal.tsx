@@ -11,8 +11,7 @@ const dialog_class = tv({
     rounded-2xl
     border
     bg-white
-    px-5
-    py-7
+    p-7
     text-black
     shadow-[10px_13px_24px_#00000033]
   `,
@@ -54,7 +53,7 @@ export function Dialog({ children }: PropsWithChildren) {
           min-h-[50vh]
           min-w-[75vw]
           flex-col
-          items-stretch 
+          items-stretch
           justify-between
           sm:min-w-[50vw]
           sm:max-w-[75vw]
@@ -74,7 +73,6 @@ export function Form({ children, ...props }: Formik.FormikFormProps) {
     <Formik.Form
       className={`
         space-y-7
-        
       `}
       {...props}
     >
@@ -99,7 +97,7 @@ export function ProposedByFigure({
   label,
 }: PropsWithChildren<{ avatar: ReactNode; label: string }>) {
   return (
-    <figure>
+    <figure className="my-5 flex flex-row space-x-5">
       {avatar}
       <figcaption className="ml-2 mt-0.5">
         <span className="block text-sm font-light leading-snug text-gray-500 ">
