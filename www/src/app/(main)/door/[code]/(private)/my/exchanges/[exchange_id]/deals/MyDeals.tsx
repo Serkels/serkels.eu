@@ -3,6 +3,7 @@
 import { UnknownError } from "@1/core/error";
 import { Exchange_DealSchemaToDomain } from "@1/modules/deal/infra/strapi";
 import { Exchange_ItemSchemaToDomain } from "@1/modules/exchange/infra/strapi";
+import { Message, Thread } from "@1/modules/inbox/domain";
 import { Button } from "@1/ui/components/ButtonV";
 import { Spinner } from "@1/ui/components/Spinner";
 import { Circle } from "@1/ui/icons";
@@ -16,6 +17,7 @@ import { useDoor_Value } from "~/app/(main)/door/door.context";
 import { fromClient } from "~/app/api/v1";
 import { AvatarMediaHorizontal } from "~/components/Avatar";
 import { ErrorOccur } from "~/components/ErrorOccur";
+import { Thread_Item } from "~/components/Thread_Item";
 import { useExchange_item_controller } from "~/modules/exchange";
 import { Deal_Controller } from "~/modules/exchange/Deal.controller";
 import { Deal_Repository } from "~/modules/exchange/Deal.repository";

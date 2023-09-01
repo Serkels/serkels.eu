@@ -15,6 +15,7 @@ export * from "./LocationRadius";
 export * from "./Logo";
 export * from "./MessageGroup";
 export * from "./Messenger";
+export * from "./Person";
 export * from "./Plus";
 export * from "./PlusBox";
 export * from "./School";

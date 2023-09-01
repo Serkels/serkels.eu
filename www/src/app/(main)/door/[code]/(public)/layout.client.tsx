@@ -22,15 +22,7 @@ export function useProfile() {
         path: ["Profile_DataRecord"],
       });
     } catch (error) {
-      return Profile.create({
-        about: "",
-        createdAt: new Date(0),
-        firstname: "",
-        id: NaN,
-        lastname: "",
-        university: "",
-        updatedAt: new Date(0),
-      }).value();
+      return Profile.zero();
     }
   }, [door_id]);
 }

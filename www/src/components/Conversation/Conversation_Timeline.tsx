@@ -10,7 +10,7 @@ import { useSession } from "next-auth/react";
 import { Fragment } from "react";
 import tw from "tailwind-styled-components";
 import { match } from "ts-pattern";
-import { Avatar } from "~/components/Avatar";
+import { Link_Avatar } from "~/components/Avatar";
 
 //
 
@@ -89,7 +89,7 @@ function ProfileMessages({
   return (
     <Speaker $isYou={isYou}>
       <Speaker_Avatar $isYou={isYou}>
-        <Avatar
+        <Link_Avatar
           u={profile}
           className="h-3xl w-3xl rounded-3xl object-cover shadow-md"
         />
@@ -148,7 +148,7 @@ const Message = tw.p<{ $isFirst: boolean; $isLast: boolean; $isYou: boolean }>`
       ? "ml-auto rounded-l-3xl bg-[#39B15417]"
       : "rounded-r-3xl bg-[#F4F7F9]"}
   px-6
-  py-3 
+  py-3
 `;
 
 function MessageTime({ date }: { date: Date }) {

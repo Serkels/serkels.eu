@@ -38,15 +38,17 @@ export class User_Repository {
     by_id: (id: number) => ["profile", "by_id", String(id)] as const,
   };
   constructor(public repository: StrapiRepository) {}
-  static lsit<Query extends object>(client: ApiClient, query: Query) {
-    return client.GET("/user-profiles", {
+  static async lsit<Query extends object>(client: ApiClient, query: Query) {
+    const res = await client.GET("/user-profiles", {
       params: { query },
     });
+    return res.data;
   }
 
-  static by_id(id: number, client: ApiClient) {
-    return client.GET("/user-profiles/{id}", {
+  static async by_id(id: number, client: ApiClient) {
+    const res = await client.GET("/user-profiles/{id}", {
       params: { path: { id } },
     });
+    return res.data;
   }
 }

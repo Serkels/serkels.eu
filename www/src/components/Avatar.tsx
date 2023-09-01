@@ -4,8 +4,9 @@ import { School } from "@1/ui/icons";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { useMemo, type ComponentPropsWithoutRef } from "react";
-import { tv, type VariantProps } from "tailwind-variants";
+import { useMemo, type ComponentPropsWithoutRef, type ReactNode } from "react";
+import { tv, type ClassProp, type VariantProps } from "tailwind-variants";
+import { P, match } from "ts-pattern";
 
 //
 
@@ -156,10 +157,21 @@ export function AvatarMedia(
       u?: string | number | undefined;
       username?: string | undefined;
       university?: string | undefined;
+      sub_name?: (
+        tvStyle: (props: ClassProp) => string,
+      ) => ReactNode | undefined;
     },
 ) {
-  const { className, u, username, university, $size, $linked, ...other_props } =
-    props;
+  const {
+    className,
+    u,
+    username,
+    university,
+    $size,
+    $linked,
+    sub_name,
+    ...other_props
+  } = props;
   const { figure, avatar, figcaption, title, subtitle } = avatar_media({
     $size,
     $linked,
@@ -173,7 +185,15 @@ export function AvatarMedia(
       )}
       <figcaption className={figcaption()}>
         <span className={title()}>{username}</span>
-        <span className={subtitle()}>🎓 {university}</span>
+
+        {match({ sub_name, university })
+          .with({ sub_name: P.nullish, university }, () => (
+            <span className={subtitle()}>🎓 {university}</span>
+          ))
+          .with({ sub_name: P.not(P.nullish).select() }, (sub_name_fn) => (
+            <span className={subtitle()}>{sub_name_fn(subtitle)}</span>
+          ))
+          .otherwise(() => null)}
       </figcaption>
     </figure>
   );

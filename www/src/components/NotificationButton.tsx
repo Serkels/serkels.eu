@@ -58,6 +58,8 @@ function Notification_New_Answer({ subjet }: { subjet: New_Answer }) {
   const createdAt = subjet.get("createdAt");
   return (
     <UI.Notification
+      href={`/@${profile.id}`}
+      u={`/api/v1/avatars/u/${profile.id}`}
       avatar={`/api/v1/avatars/u/${profile.id}`}
       name={[profile.firstname, profile.lastname].join(" ")}
       time={createdAt.toDateString()}

@@ -22,6 +22,18 @@ export class Profile extends Entity<Profile_Props> {
     return Ok(new Profile(props));
   }
 
+  static zero() {
+    return Profile.create({
+      about: "",
+      createdAt: new Date(0),
+      firstname: "",
+      id: NaN,
+      lastname: "",
+      university: "",
+      updatedAt: new Date(0),
+    }).value();
+  }
+
   //
 
   get university() {
