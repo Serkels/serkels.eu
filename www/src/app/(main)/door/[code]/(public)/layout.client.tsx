@@ -16,10 +16,9 @@ import { useDoor_Value } from "../../door.context";
 export function useProfile() {
   const [{ door_id, owner }] = useDoor_Value();
   return useMemo(() => {
-    return Profile_DataRecord.transform(data_to_domain).parse(
-      { owner },
-      { path: ["Profile_DataRecord"] },
-    );
+    return Profile_DataRecord.transform(data_to_domain).parse(owner, {
+      path: ["Profile_DataRecord"],
+    });
   }, [door_id]);
 }
 
