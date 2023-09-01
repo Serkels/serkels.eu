@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import tw from "tailwind-styled-components";
 import { tv } from "tailwind-variants";
 import { match } from "ts-pattern";
+import { useDoor_Value } from "~/app/(main)/door/door.context";
 import { Avatar_Show_Profile } from "~/components/Avatar_Show_Profile";
 
 //
@@ -37,9 +38,11 @@ export function UserInbox_List({ inboxes }: { inboxes: Inbox[] | undefined }) {
 
 function UserThread_Item({ inbox }: { inbox: Inbox }) {
   const pathname = usePathname() ?? "";
+
+  const [{ door_id }] = useDoor_Value();
   const thread = inbox.get("thread");
 
-  const href = `/my/inbox/${inbox.get("id")}`;
+  const href = `/@${door_id}/inbox/${inbox.get("id")}`;
   const active =
     pathname.split("/").length >= href.split("/").length &&
     href.includes(pathname);

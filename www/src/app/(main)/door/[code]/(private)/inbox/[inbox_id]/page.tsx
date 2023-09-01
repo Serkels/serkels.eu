@@ -1,7 +1,6 @@
 //
 
 import tw from "tailwind-styled-components";
-import { _set_fixed_page_layout } from "../../layout.client";
 import {
   Inbox,
   Inbox_Provider,
@@ -20,7 +19,6 @@ export default async function Page({
 
   return (
     <Main>
-      <_set_fixed_page_layout />
       <Sticky_Container>
         <Inbox_Provider>
           <Thread_Provider>
