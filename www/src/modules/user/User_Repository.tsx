@@ -1,7 +1,7 @@
 //
 
 import { type ApiClient } from "~/app/api/v1";
-import { StrapiRepository } from "./user.repository";
+import type { StrapiRepository } from "~/core/StrapiRepository";
 
 /**
  * @example
