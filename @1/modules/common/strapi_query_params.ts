@@ -17,10 +17,17 @@ export const z_strapi_flatten_page_data = <Z extends ZodTypeAny>(
   attributes: Z,
 ) => z.array(z.object({ attributes, id: z.number() }));
 
+export type Strapi_flatten_page_data<Z extends ZodTypeAny> = ReturnType<
+  typeof z_strapi_flatten_page_data<Z>
+>;
+
 export const z_strapi_entity = <Z extends ZodTypeAny>(attributes: Z) =>
-  z.object({ attributes, id: z.number() });
+  z.object({ attributes, id: z.coerce.number() });
 export const z_strapi_entity_data = <Z extends ZodTypeAny>(attributes: Z) =>
   z.object({ data: z_strapi_entity(attributes) });
+export type Strapi_entity_data<Z extends ZodTypeAny> = ReturnType<
+  typeof z_strapi_entity_data<Z>
+>;
 export const z_strapi_collection = <Z extends ReturnType<typeof z.object>>(
   attributes: Z,
 ) =>

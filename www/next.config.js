@@ -15,23 +15,13 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: "/my",
-        destination: "/my/profile/about",
+        source: "/@:code/bookmarks",
+        destination: "/@:code/bookmarks/opportunities",
         permanent: true,
       },
       {
-        source: "/my/profile",
-        destination: "/my/profile/about",
-        permanent: true,
-      },
-      {
-        source: "/my/bookmarks",
-        destination: "/my/bookmarks/opportunities",
-        permanent: true,
-      },
-      {
-        source: "/my/exchanges/:id",
-        destination: "/my/exchanges/:id/deals",
+        source: "/@:code/my/exchanges/:id",
+        destination: "/@:code/my/exchanges/:id/deals",
         permanent: true,
       },
     ];
@@ -39,8 +29,8 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: "/@:username",
-        destination: `/profile/:username`,
+        source: "/@:code/:path*",
+        destination: `/door/:code/:path*`,
       },
       {
         source: "/api/v1/:path*",
@@ -55,6 +45,14 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;
+
+//
+
+// Injected
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+});
+module.exports = withBundleAnalyzer(module.exports);
 
 //
 

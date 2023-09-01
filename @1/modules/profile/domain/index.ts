@@ -32,7 +32,6 @@ export class Profile extends Entity<Profile_Props> {
   }
 
   get url() {
-    return "#";
-    // return `/@/${this.props.id}`;
+    return `/@${this.props.id}`;
   }
 }

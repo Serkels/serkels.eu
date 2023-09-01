@@ -68,13 +68,13 @@
     "autoHide.autoHidePanel": false,
     "tailwindCSS.rootFontSize": 14,
     "editor.quickSuggestions": { "strings": "on" },
-    // "tailwindCSS.experimental.classRegex": [
-    // ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"], // clsx(`...`)
-    // ["tv\\(([^)]*)\\)", "(?:'|\"|`)([^\"'`]*)(?:'|\"|`)"], // tv(`...`)
-    // "tw`([^`]*)", // tw`...`
-    // "tw\\.[^`]+`([^`]*)`", // tw.xxx<xxx>`...`
-    // "tw\\(.*?\\).*?`([^`]*)" // tw(Component)<xxx>`...`
-    // ],
+    "tailwindCSS.experimental.classRegex": [
+      // ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"], // clsx(`...`)
+      ["tv\\(([^)]*)\\)", "(?:'|\"|`)([^\"'`]*)(?:'|\"|`)"] // tv(`...`)
+      // "tw`([^`]*)", // tw`...`
+      // "tw\\.[^`]+`([^`]*)`", // tw.xxx<xxx>`...`
+      // "tw\\(.*?\\).*?`([^`]*)" // tw(Component)<xxx>`...`
+    ],
     "autoHide.autoHideSideBar": true
   }
 }

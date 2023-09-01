@@ -16,10 +16,10 @@ export const metadata: Metadata = {
   icons: { icon: "/favicon.svg" },
 };
 
-export default async function NotFound() {
+export default async function Page() {
   const now = await getServerDate();
   return (
-    <div className="grid min-h-screen grid-rows-[max-content_1fr_max-content]">
+    <div className="grid min-h-screen grid-rows-[max-content_1fr_max-content] ">
       <BigBar>
         <Link href="/">
           <Image
@@ -39,13 +39,22 @@ export default async function NotFound() {
 
 //
 
+export function NotFound() {
+  return (
+    <div className="col-span-full h-full">
+      <NotFoundMain>404</NotFoundMain>
+    </div>
+  );
+}
+
 function NotFoundMain({ children }: PropsWithChildren) {
   return (
-    <Banner>
+    <Banner className="h-full">
       <main
         className={`
             mx-auto
             my-0
+            
             text-center text-6xl
             font-extrabold
             text-white
