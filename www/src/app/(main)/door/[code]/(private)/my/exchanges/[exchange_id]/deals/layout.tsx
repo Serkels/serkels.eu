@@ -1,7 +1,7 @@
 ///
 
 import type { PropsWithChildren } from "react";
-import { AsideBar } from "~/layouts/holy/aside";
+import { AsideBar } from "~/components/layouts/holy/aside";
 import { MyDeals } from "./MyDeals";
 
 export default function Layout({

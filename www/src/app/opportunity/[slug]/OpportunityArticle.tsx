@@ -3,13 +3,18 @@
 import type { components } from "@1/strapi-openapi/v1";
 import { Circle, Link as IconLink, LocationRadius, Share } from "@1/ui/icons";
 import clsx from "clsx";
+import dynamic from "next/dynamic";
 import {
   useEffect,
   type ComponentPropsWithoutRef,
   type ElementType,
 } from "react";
-import ReactMarkdown from "react-markdown";
 import { useOpportunityFilterContext } from "../OpportunityFilter.context";
+
+//
+
+// import ReactMarkdown from "react-markdown";
+const ReactMarkdown = dynamic<any>(() => import("react-markdown"));
 
 //
 

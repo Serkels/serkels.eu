@@ -1,7 +1,7 @@
 "use client";
 
 import type { PropsWithChildren } from "react";
-import { AsideBar } from "~/layouts/holy/aside";
+import { AsideBar } from "~/components/layouts/holy/aside";
 
 //
 

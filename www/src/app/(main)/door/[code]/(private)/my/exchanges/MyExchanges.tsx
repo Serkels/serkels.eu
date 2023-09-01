@@ -16,7 +16,7 @@ import { type ComponentPropsWithoutRef } from "react";
 import tw from "tailwind-styled-components";
 import { P, match } from "ts-pattern";
 import { Avatar } from "~/components/Avatar";
-import { AsideBar } from "~/layouts/holy/aside";
+import { AsideBar } from "~/components/layouts/holy/aside";
 import { useExchange_list_controller } from "~/modules/exchange";
 import { Exchange_ValueProvider, useExchange_Value } from "./Exchange.context";
 

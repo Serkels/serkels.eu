@@ -5,7 +5,7 @@ import { Hydrate, dehydrate } from "@tanstack/react-query";
 import { type PropsWithChildren } from "react";
 import { AppFooter } from "~/components/AppFooter.server";
 import { UserBar } from "~/components/UserBar";
-import { AsideWithTitle } from "~/layouts/holy/aside";
+import { AsideWithTitle } from "~/components/layouts/holy/aside";
 import { getQueryClient } from "../getQueryClient";
 import { useOpportunityCategoriesprefetchQuery } from "../opportunity/data/useOpportunityCategoriesQuery";
 import { CategoriesList, QAFilter } from "./(page)";
