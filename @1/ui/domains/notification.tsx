@@ -25,7 +25,7 @@ function OverlayButton(props: any) {
         cursor-default
         items-center
         justify-center
-        rounded-md 
+        rounded-md
         px-3.5
         py-2
         font-medium
@@ -56,7 +56,7 @@ export function DropdownButton({
       <OverlayButton aria-label={label}>{slotOverlayButton}</OverlayButton>
       <MyPopover
         className="
-          group 
+          group
           hidden
           w-[280px]
           data-[placement=bottom]:mt-2
@@ -78,10 +78,10 @@ export function DropdownButton({
   );
 }
 
-export function Notification({ avatar, name, time, text }: any) {
+export function Notification({ avatar, name, time, text, href }: any) {
   return (
     <a
-      href="#"
+      href={href}
       className="grid grid-cols-[theme(width.5)_1fr_theme(width.4)] gap-x-2 rounded-lg p-2 hover:bg-gray-100"
     >
       <img src={avatar} className="row-span-3 h-5 w-5 rounded-full" />
@@ -105,7 +105,7 @@ function MyPopover(props: PopoverProps) {
         clsx(
           `
           rounded-lg
-          bg-white 
+          bg-white
           px-4
           ring-1
           ring-black/10
