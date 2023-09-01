@@ -1,12 +1,23 @@
 //
 
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "~/app/api/auth/[...nextauth]/route";
-import { DoorId } from "./door.context";
+import type { PropsWithChildren } from "react";
+import { fromServer } from "~/app/api/v1";
+import { Door_ValueProvider, type Props } from "./door.context";
 
-export async function this_door_is_yours(code: number | string) {
-  const session = await getServerSession(authOptions);
-  const user_id = DoorId.parse(session?.user?.profile.id);
-  const door_id = DoorId.parse(code);
-  return door_id === user_id;
+//
+
+export async function Door_Provider({
+  children,
+  initialValue,
+}: PropsWithChildren<{ initialValue: Omit<Props, "owner"> }>) {
+  const res = await fromServer.GET("/user-profiles/{id}", {
+    params: { path: { id: initialValue.door_id } },
+  });
+  const profile = res.data;
+  console.log({ profile });
+  return (
+    <Door_ValueProvider initialValue={{ ...initialValue, owner: profile }}>
+      {children}
+    </Door_ValueProvider>
+  );
 }

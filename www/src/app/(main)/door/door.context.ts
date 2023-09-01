@@ -1,3 +1,5 @@
+"use client";
+
 //
 
 import { createStateContext } from "react-use";
@@ -11,8 +13,10 @@ export interface Props {
   owner: any;
 }
 
-export const [useDoor_Value, Door_ValueProvider] = createStateContext<Props>({
+const [useDoor_Value, Door_ValueProvider] = createStateContext<Props>({
   is_yours: false, // All doors are closes by default. sorry.
   door_id: NaN, // NaN is the default door.
   owner: undefined,
 });
+
+export { Door_ValueProvider, useDoor_Value };
