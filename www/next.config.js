@@ -20,8 +20,8 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: "/@:code/exchanges/:id",
-        destination: "/@:code/exchanges/:id/deals",
+        source: "/@:code/my/exchanges/:id",
+        destination: "/@:code/my/exchanges/:id/deals",
         permanent: true,
       },
     ];

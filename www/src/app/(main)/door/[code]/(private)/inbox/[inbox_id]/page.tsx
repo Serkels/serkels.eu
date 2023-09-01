@@ -1,5 +1,6 @@
 //
 
+import type { Metadata, ResolvingMetadata } from "next";
 import tw from "tailwind-styled-components";
 import {
   Inbox,
@@ -9,6 +10,19 @@ import {
   Thread_Conversation_Form,
   Thread_Provider,
 } from "./page.client";
+
+//
+
+export async function generateMetadata(
+  { params }: { params: { inbox_id: string } },
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  return {
+    title: `Box@${params.inbox_id} :: ${(await parent).title?.absolute}`,
+  };
+}
+
+//
 
 export default async function Page({
   params,

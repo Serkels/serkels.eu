@@ -1,6 +1,18 @@
 //
 
+import type { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
+
+//
+
+export async function generateMetadata(
+  _: unknown,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  return {
+    title: `My Exchange List :: ${(await parent).title?.absolute}`,
+  };
+}
 
 //
 

@@ -1,8 +1,23 @@
 ///
 
+import type { Metadata, ResolvingMetadata } from "next";
 import type { PropsWithChildren } from "react";
 import { AsideBar } from "~/components/layouts/holy/aside";
 import { MyDeals } from "./MyDeals";
+
+//
+
+export async function generateMetadata(
+  { params }: { params: { exchange_id: string } },
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  return {
+    title: `Exchange@${params.exchange_id} :: ${(await parent).title
+      ?.absolute}`,
+  };
+}
+
+//
 
 export default function Layout({
   children,

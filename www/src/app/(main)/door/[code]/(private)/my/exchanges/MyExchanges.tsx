@@ -15,6 +15,7 @@ import { usePathname } from "next/navigation";
 import { type ComponentPropsWithoutRef } from "react";
 import tw from "tailwind-styled-components";
 import { P, match } from "ts-pattern";
+import { useDoor_Value } from "~/app/(main)/door/door.context";
 import { Avatar } from "~/components/Avatar";
 import { AsideBar } from "~/components/layouts/holy/aside";
 import { useExchange_list_controller } from "~/modules/exchange";
@@ -108,9 +109,12 @@ function EchangeNav() {
 
 function Echange_MessagingLink() {
   const [exchange] = useExchange_Value();
-  const pathname = usePathname() ?? "";
+  const pathname = usePathname();
   const { data: session } = useSession();
-  const href = `/my/exchanges/${exchange.get("id")}/deals`;
+
+  const [{ door_id }] = useDoor_Value();
+  const href = `/@${door_id}/my/exchanges/${exchange.get("id")}`;
+
   const active =
     pathname.split("/").length >= href.split("/").length &&
     pathname.includes(href);

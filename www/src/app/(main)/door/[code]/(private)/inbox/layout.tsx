@@ -1,10 +1,23 @@
 ///
 
 import { InputSearch } from "@1/ui/components/InputSearch";
+import type { Metadata, ResolvingMetadata } from "next";
 import type { PropsWithChildren } from "react";
 import tw from "tailwind-styled-components";
 import { My_Inbox_Nav } from "./My_Inbox_Nav";
 import { Inbox_UserThread_List } from "./layout.client";
+
+//
+export async function generateMetadata(
+  _: unknown,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  return {
+    title: `Inbox :: ${(await parent).title?.absolute}`,
+  };
+}
+
+//
 
 export default function Layout({ children }: PropsWithChildren) {
   return (

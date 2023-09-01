@@ -1,11 +1,23 @@
 //
 
+import type { Metadata, ResolvingMetadata } from "next";
 import { Deal_Provider } from "../Deal_Provider";
 import { Deal_Discussion } from "./Deal_Discussion";
 import { Deal_Discussion_Form } from "./Deal_Discussion_Form";
 import { NavControlGroup } from "./NavControlGroup";
-import { Thread_Avatar } from "./page.client";
 import { SendActionGroup } from "./SendActionGroup";
+import { Thread_Avatar } from "./page.client";
+
+//
+
+export async function generateMetadata(
+  { params }: { params: { deal_id: string } },
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  return {
+    title: `With@${params.deal_id} :: ${(await parent).title?.absolute}`,
+  };
+}
 
 //
 

@@ -5,7 +5,6 @@ import tw from "tailwind-styled-components";
 
 //
 
-console.log("AsideBar.name");
 export const AsideBar = tw.aside`
   hidden
   md:col-span-2

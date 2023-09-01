@@ -12,6 +12,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import tw from "tailwind-styled-components";
 import { P, match } from "ts-pattern";
+import { useDoor_Value } from "~/app/(main)/door/door.context";
 import { fromClient } from "~/app/api/v1";
 import { AvatarMediaHorizontal } from "~/components/Avatar";
 import { ErrorOccur } from "~/components/ErrorOccur";
@@ -148,9 +149,11 @@ function Echange_DealLink() {
   const [discussion] = useDeal_Value();
   const pathname = usePathname() ?? "";
 
-  const href = `/my/exchanges/${exchange.get("id")}/deals/${discussion.get(
+  const [{ door_id }] = useDoor_Value();
+  const href = `/@${door_id}/my/exchanges/${exchange.get(
     "id",
-  )}`;
+  )}/deals/${discussion.get("id")}`;
+
   const active =
     pathname.split("/").length >= href.split("/").length &&
     href.includes(pathname);

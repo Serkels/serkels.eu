@@ -68,9 +68,9 @@ export function Li_Link(
 
 const li = tv({
   slots: {
-    base: "bg-white font-bold",
-    link: "grid grid-cols-[50px_1fr] items-baseline py-4",
-    icon: "aspect-square h-4 justify-self-center",
+    base: "",
+    link: "grid grid-cols-[50px_1fr] items-center p-4",
+    icon: "h-5 w-5 justify-self-center",
   },
   variants: {
     $active: {
