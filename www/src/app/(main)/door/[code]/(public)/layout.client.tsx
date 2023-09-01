@@ -2,6 +2,7 @@
 
 //
 
+import { Profile } from "@1/modules/profile/domain";
 import {
   Profile_DataRecord,
   data_to_domain,
@@ -16,9 +17,21 @@ import { useDoor_Value } from "../../door.context";
 export function useProfile() {
   const [{ door_id, owner }] = useDoor_Value();
   return useMemo(() => {
-    return Profile_DataRecord.transform(data_to_domain).parse(owner, {
-      path: ["Profile_DataRecord"],
-    });
+    try {
+      return Profile_DataRecord.transform(data_to_domain).parse(owner, {
+        path: ["Profile_DataRecord"],
+      });
+    } catch (error) {
+      return Profile.create({
+        about: "",
+        createdAt: new Date(0),
+        firstname: "",
+        id: NaN,
+        lastname: "",
+        university: "",
+        updatedAt: new Date(0),
+      }).value();
+    }
   }, [door_id]);
 }
 

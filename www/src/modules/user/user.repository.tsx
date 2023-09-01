@@ -1,10 +1,6 @@
 //
 
 import { AuthError } from "@1/core/error";
-import {
-  Profile_DataRecord,
-  data_to_domain,
-} from "@1/modules/profile/infra/strapi";
 import type { _1_HOUR_ } from "@douglasduteil/datatypes...hours-to-seconds";
 import {
   useQuery,
@@ -22,6 +18,7 @@ import {
 } from "react";
 import type { ZodTypeAny, z } from "zod";
 import { OpenAPIRepository, fromClient, type ApiClient } from "~/app/api/v1";
+import { User_useQuery } from "./User_useQuery";
 
 //
 
@@ -50,10 +47,6 @@ export class StrapiRepository extends OpenAPIRepository {
 
     return body?.data;
   }
-}
-
-export class User_Repository {
-  constructor(public repository: StrapiRepository) {}
 }
 
 export class Strapi_useQuery {
@@ -147,41 +140,4 @@ export function useUserData() {
   const repository = useStrapiRepository();
 
   return useMemo(() => new User_useQuery(repository), [repository]);
-}
-
-/**
- * @example
- * ```
- * const {by_id} = new User_useQuery(new StrapiRepository(fromClient, ""));
- * cosnt {info, data: user} = by_id.useQuery(0);
- *
- *
- * ```
- *
- * @example
- * ```
- * const {by_id} = useUserData();
- * cosnt {info, data: user} = by_id.useQuery(0);
- *
- * ```
- */
-export class User_useQuery extends Strapi_useQuery {
-  static keys = {
-    all: ["profile"] as const,
-    by_id: (id: number) => ["profile", "by_id", String(id)] as const,
-  };
-
-  by_id = {
-    useQuery: (id: number) =>
-      this.query({
-        fetch: (client) =>
-          client.GET("/user-profiles/{id}", {
-            params: { path: { id } },
-          }),
-        mapper: Profile_DataRecord.transform(data_to_domain),
-        query_key: User_useQuery.keys.by_id(id),
-        domain_deps: [id],
-        require_jwt: true,
-      }),
-  };
 }
