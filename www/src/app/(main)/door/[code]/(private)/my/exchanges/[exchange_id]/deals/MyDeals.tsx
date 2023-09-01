@@ -7,15 +7,11 @@ import { Message, Thread } from "@1/modules/inbox/domain";
 import { Button } from "@1/ui/components/ButtonV";
 import { Spinner } from "@1/ui/components/Spinner";
 import { Circle } from "@1/ui/icons";
-import clsx from "clsx";
 import { useSession } from "next-auth/react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import tw from "tailwind-styled-components";
 import { P, match } from "ts-pattern";
 import { useDoor_Value } from "~/app/(main)/door/door.context";
 import { fromClient } from "~/app/api/v1";
-import { AvatarMediaHorizontal } from "~/components/Avatar";
 import { ErrorOccur } from "~/components/ErrorOccur";
 import { Thread_Item } from "~/components/Thread_Item";
 import { useExchange_item_controller } from "~/modules/exchange";
@@ -149,55 +145,28 @@ export function Echange_DealsNav() {
 function Echange_DealLink() {
   const [exchange] = useExchange_Value();
   const [discussion] = useDeal_Value();
-  const pathname = usePathname() ?? "";
 
   const [{ door_id }] = useDoor_Value();
   const href = `/@${door_id}/my/exchanges/${exchange.get(
     "id",
   )}/deals/${discussion.get("id")}`;
 
-  const active =
-    pathname.split("/").length >= href.split("/").length &&
-    href.includes(pathname);
+  const thread = Thread.create({
+    id: discussion.get("id"),
+    last_message: Message.create({
+      content: discussion.last_message,
+      id: Number(discussion.id.value()),
+    }).value(),
+    profile: discussion.get("profile"),
+    updated_at: discussion.updated_at,
+  }).value();
 
   return (
-    <Link
+    <Thread_Item
       href={href}
-      className={clsx(
-        `
-          block
-          rounded-xl
-          border
-          border-[#ECEDF4]
-          p-4
-          text-black
-          shadow-[10px_10px_10px_#00000014]
-        `,
-        { " bg-white": active },
-      )}
-    >
-      <Echange_DealLink.ui.header>
-        <AvatarMediaHorizontal
-          u={discussion.profile.get("id")}
-          username={discussion.profile.name}
-          university="Voir le profil"
-        />
-        <Echange_DealLink.ui.time
-          dateTime={discussion.updated_at.toUTCString()}
-          title={discussion.updated_at.toUTCString()}
-        >
-          {discussion.last_update}
-        </Echange_DealLink.ui.time>
-      </Echange_DealLink.ui.header>
-      <div className="relative my-5">
-        <div className="float-right">
-          <Circle className="h-5 w-5 text-Gamboge" />
-        </div>
-        <p className="mb-1 line-clamp-1" title={discussion.last_message}>
-          {discussion.last_message}
-        </p>
-      </div>
-    </Link>
+      thread={thread}
+      indicator={<Circle className="h-5 w-5 text-Gamboge" />}
+    />
   );
 }
 

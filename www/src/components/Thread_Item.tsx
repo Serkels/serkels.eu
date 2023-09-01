@@ -29,7 +29,10 @@ export function Thread_Item({
     <Thread_Card $active={active}>
       <Thread_Header>
         <Avatar_Show_Profile profile={thread.profile} />
-        <Thread_Time dateTime={thread.last_update} title={thread.last_update}>
+        <Thread_Time
+          dateTime={thread.get("updated_at").toUTCString()}
+          title={thread.get("updated_at").toUTCString()}
+        >
           {thread.last_update}
         </Thread_Time>
       </Thread_Header>
