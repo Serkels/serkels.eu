@@ -1,8 +1,8 @@
-///
+//
 
+import { notFound } from "next/navigation";
 import type { PropsWithChildren } from "react";
 import { Door_Provider } from "~/app/(main)/door/door.provider";
-import NotFound from "./error";
 import { this_door_is_yours } from "./this_door_is_yours";
 
 //
@@ -24,6 +24,6 @@ export default async function Layout({
       </Door_Provider>
     );
   } catch {
-    return <NotFound />;
+    return notFound();
   }
 }

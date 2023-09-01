@@ -39,7 +39,7 @@ export default async function Page() {
 
 //
 
-export async function NotFound() {
+export function NotFound() {
   return (
     <div className="col-span-full h-full">
       <NotFoundMain>404</NotFoundMain>
