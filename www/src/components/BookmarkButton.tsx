@@ -11,7 +11,8 @@ import {
   type MouseEventHandler,
 } from "react";
 import { fromClient } from "~/app/api/v1";
-import { BookmarksRepository } from "~/app/my/bookmarks/data/BookmarksRepository";
+import { useBookmard_repository } from "~/modules/bookmarks";
+import { BookmarksRepository } from "~/modules/bookmarks/BookmarksRepository";
 
 //
 
@@ -27,7 +28,7 @@ export function BookmarkButton(
 
   //
 
-  const repository = new BookmarksRepository(fromClient, session?.user?.jwt);
+  const repository = useBookmard_repository();
 
   const jwt = session?.user?.jwt;
   const { data: bookmarks, isLoading: isDataLoading } = useQuery({

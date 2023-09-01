@@ -1,6 +1,19 @@
 //
 
+import type { Metadata, ResolvingMetadata } from "next";
 import { CreateForm } from "./CreateForm";
+
+//
+
+export async function generateMetadata(
+  undefined: any,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  return {
+    title: `${(await parent).title?.absolute} / New Exchange`,
+  };
+}
+//
 
 export default async function Page() {
   return (

@@ -1,6 +1,6 @@
 //
 
-import { OpportunityList } from "./OpportunityList";
+import { OpportunityList } from "./page.client";
 
 //
 

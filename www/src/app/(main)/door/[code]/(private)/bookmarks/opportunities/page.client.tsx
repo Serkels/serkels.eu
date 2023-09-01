@@ -7,7 +7,7 @@ import Link from "next/link";
 import { fromClient } from "~/app/api/v1";
 import { OpportunityCard } from "~/app/opportunity/OpportunityCard";
 import { get_bookmark_opportunities_ids } from "~/components/get_session_bookmarks_id";
-import { useBookmarksQuery } from "../data/useBookmarksQuery";
+import { useBookmarksQuery } from "~/modules/bookmarks/useBookmarksQuery";
 
 //
 

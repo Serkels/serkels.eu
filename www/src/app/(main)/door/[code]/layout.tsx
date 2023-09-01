@@ -1,11 +1,21 @@
 //
 
+import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import type { PropsWithChildren } from "react";
 import { Door_Provider } from "~/app/(main)/door/door.provider";
 import { this_door_is_yours } from "./this_door_is_yours";
 
 //
+
+export async function generateMetadata(
+  { params }: { params: { code: string } },
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  return {
+    title: `${(await parent).title?.absolute} / @${params.code}`,
+  };
+}
 
 export default async function Layout({
   children,
