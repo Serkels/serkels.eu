@@ -2,7 +2,7 @@
 
 import { useSession } from "next-auth/react";
 import { useContext } from "react";
-import { Avatar } from "~/components/Avatar";
+import { AvatarMedia } from "~/components/Avatar";
 import { DeleteIconButton } from "~/components/DeleteButton/DeleteButton";
 import { TimeInfo } from "~/components/TimeInfo";
 import { QAResponseContext } from "./QAResponse.context";
@@ -13,17 +13,13 @@ export function QAResponseHeader() {
   } = useContext(QAResponseContext);
   return (
     <header className=" flex justify-between">
-      <figure className="flex">
-        <Avatar className="h-9 w-9" u={author?.id} />
-        <figcaption className="ml-2">
-          <span className="block text-base font-medium leading-snug text-black">
-            {[author?.firstname, author?.lastname].join(" ")}
-          </span>
-          <span className="block text-sm font-light leading-snug text-gray-500 ">
-            🎓 {author?.university}
-          </span>
-        </figcaption>
-      </figure>
+      <AvatarMedia
+        $size="sm"
+        u={author.id}
+        university={author.university}
+        // TODO (douglasduteil): use profile domain name here
+        username={[author.firstname, author.lastname].join(" ")}
+      />
 
       <aside className=" flex items-start justify-between">
         <ActionGroup />

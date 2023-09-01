@@ -5,7 +5,7 @@ import { Circle } from "@1/ui/icons";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
 import { useCallback, useContext } from "react";
-import { AvatarMediaHorizontal } from "~/components/Avatar";
+import { AvatarMedia } from "~/components/Avatar";
 import { DeleteIconButton } from "~/components/DeleteButton/DeleteButton";
 import { TimeInfo } from "~/components/TimeInfo";
 import { QACardContext } from "./QACard.context";
@@ -26,11 +26,7 @@ export function QACardHeader() {
 
   return (
     <header className="mb-4 flex justify-between">
-      <AvatarMediaHorizontal
-        u={owner_id}
-        university={university}
-        username={username}
-      />
+      <AvatarMedia u={owner_id} university={university} username={username} />
       <div className="flex items-start space-x-2">
         <QACard_ActionGroup />
         <Circle
