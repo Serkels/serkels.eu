@@ -8,12 +8,12 @@ import { OnlineOrLocation } from "@1/ui/domains/exchange/OnlineOrLocation";
 import { Exchange } from "@1/ui/icons";
 import { useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { P, match } from "ts-pattern";
 import { AvatarMediaHorizontal } from "~/components/Avatar";
 import { useExchange_item_controller } from "~/modules/exchange";
 import { Exchange_QueryKeys } from "~/modules/exchange/queryKeys";
+import { useMyProfileId } from "~/modules/user/useProfileId";
 import { Ask_Action } from "./Ask_Action";
 import { Exchange_CardContext } from "./ExchangeCard.context";
 
@@ -41,7 +41,7 @@ export function ExchangeCard({ id }: { id: number }) {
 }
 
 function Exchange_Card({ id }: { id: number }) {
-  const { data: session } = useSession();
+  const my_profile_id = useMyProfileId();
   const query_client = useQueryClient();
   const raw_exchange = query_client.getQueryData(
     Exchange_QueryKeys.item(id),
@@ -130,8 +130,10 @@ function Exchange_Card({ id }: { id: number }) {
           <div className="flex justify-between">
             <button className="block">🔖</button>
             {match(exchange.profile.get("id"))
-              .with(session?.user?.profile.id!, () => (
-                <Link href={`/my/exchanges/${exchange.get("id")}`}>
+              .with(my_profile_id!, () => (
+                <Link
+                  href={`/@${my_profile_id}/my/exchanges/${exchange.get("id")}`}
+                >
                   <Button>Voir mes échanges</Button>
                 </Link>
               ))

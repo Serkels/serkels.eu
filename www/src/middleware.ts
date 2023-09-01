@@ -13,4 +13,4 @@ export default withAuth({
   },
 });
 
-export const config = { matcher: ["/exchange", "/my/:path*"] };
+export const config = { matcher: ["/exchange", "/@:code/:path*"] };

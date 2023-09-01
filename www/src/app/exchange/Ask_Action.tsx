@@ -18,6 +18,7 @@ import { Deal_Controller } from "~/modules/exchange/Deal.controller";
 import { Deal_Repository } from "~/modules/exchange/Deal.repository";
 import { Deal_Message_Controller } from "~/modules/exchange/Deal_Message.controller";
 import { Deal_Message_Repository } from "~/modules/exchange/Deal_Message.repository";
+import { useMyProfileId } from "~/modules/user/useProfileId";
 import { fromClient } from "../api/v1";
 import { Exchange_CardContext } from "./ExchangeCard.context";
 
@@ -218,12 +219,13 @@ function MessageSent() {
 }
 
 function RedirectToExistingDeal({ deal_id }: { deal_id: number }) {
+  const id = useMyProfileId();
   const { exchange } = useContext(Exchange_CardContext);
 
   return (
     <Link
       className="flex flex-1 flex-col items-center justify-center"
-      href={`/my/exchanges/${exchange.get("id")}/deals/${deal_id}`}
+      href={`/@${id}/my/exchanges/${exchange.get("id")}/deals/${deal_id}`}
     >
       <ExchangeIcon
         className={`

@@ -18,6 +18,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, type PropsWithChildren } from "react";
 import { AppSidebar } from "~/app/(index)/AppSidebar";
+import { useMyProfileId } from "~/modules/user/useProfileId";
 import { Avatar } from "./Avatar";
 import { MobileNavBar } from "./MobileNavBar";
 import { NotificationButton } from "./NotificationButton";
@@ -158,12 +159,13 @@ export function UserBar() {
 //
 
 function MiniUserNav() {
+  const my_profile_id = useMyProfileId();
   return (
     <nav className="flex items-center justify-end space-x-3">
-      <Link href={"/my/new/exchange"}>
+      <Link href={`/@${my_profile_id}/new/exchange`}>
         <Plus className="h-4 w-4" />
       </Link>
-      <Link href={"/my/profile"} className="relative">
+      <Link href={`/@${my_profile_id}/`} className="relative">
         <Avatar className="h-6 w-6 border-2 border-white" />
         <DotIndicator />
       </Link>
@@ -171,19 +173,20 @@ function MiniUserNav() {
   );
 }
 function UserNav() {
+  const my_profile_id = useMyProfileId();
   return (
     <nav className="grid grid-cols-5 items-center justify-items-center">
-      <Link href={"/my/new/exchange"}>
+      <Link href={`/@${my_profile_id}/new/exchange`}>
         <Plus className="h-4 w-4" />
       </Link>
       <NotificationButton />
-      <Link href={"/my/inbox"}>
+      <Link href={`/@${my_profile_id}/inbox`}>
         <Messenger className="h-4 w-4" />
       </Link>
       <Button>
         <Exchange className="h-4 w-4" />
       </Button>
-      <Link href={"/my/profile"}>
+      <Link href={`/@${my_profile_id}/`}>
         <Avatar className="h-6 w-6 border-2 border-white" />
       </Link>
     </nav>

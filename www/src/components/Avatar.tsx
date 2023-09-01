@@ -3,7 +3,9 @@
 import { School } from "@1/ui/icons";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 import { useMemo, type ComponentPropsWithoutRef } from "react";
+import { tv } from "tailwind-variants";
 
 //
 
@@ -29,6 +31,28 @@ export function Avatar(
     />
   );
 }
+
+export function Link_Avatar(
+  props: ComponentPropsWithoutRef<"img"> & { u?: string | number | undefined },
+) {
+  const { className, u, ...other_props } = props;
+
+  const { data: session } = useSession();
+  const id = u ?? session?.user?.profile.id;
+
+  const image = useMemo(() => `/api/v1/avatars/u/${id}`, [id]);
+
+  if (!id) {
+    return null;
+  }
+
+  return (
+    <Link href={`/@${id}`}>
+      <img className={avatar_img({ className })} src={image} {...other_props} />
+    </Link>
+  );
+}
+const avatar_img = tv({ base: "max-w-full rounded-full object-cover" });
 
 export function AvatarMediaVertical(props: ComponentPropsWithoutRef<"figure">) {
   const { className, ...other_props } = props;
