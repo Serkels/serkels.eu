@@ -1,7 +1,6 @@
 //
 
 import { AuthError } from "@1/core/error";
-import { type Strapi_flatten_page_data } from "@1/modules/common";
 import {
   Profile_DataRecord,
   data_to_domain,
@@ -13,7 +12,14 @@ import {
   type QueryKey,
 } from "@tanstack/react-query";
 import debug from "debug";
-import { useCallback, useEffect, useState, type DependencyList } from "react";
+import { useSession } from "next-auth/react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  type DependencyList,
+} from "react";
 import type { ZodTypeAny, z } from "zod";
 import { OpenAPIRepository, fromClient, type ApiClient } from "~/app/api/v1";
 
@@ -55,13 +61,16 @@ export class Strapi_useQuery {
   protected infinite_query = this.#infinite_query.bind(this);
   protected query = this.#query.bind(this);
 
-  #infinite_query<Z extends ZodTypeAny>(endpoint: {
-    queryKey: [];
-    mapper: Strapi_flatten_page_data<Z>;
+  #infinite_query<OpenApiOut, DomainOut>(endpoint: {
+    fetch: (client: ApiClient) => OpenApiOut;
+    require_jwt: true;
+    query_key: QueryKey;
+    mapper: z.ZodEffects<ZodTypeAny, DomainOut>;
+    domain_deps?: DependencyList;
   }) {
     const { mapper } = endpoint;
     const info = { data: { pages: [{ data: {} }] } };
-    const [infinite_list, set_infinite_list] = useState<z.TypeOf<Z>>();
+    const [infinite_list, set_infinite_list] = useState<DomainOut>();
 
     useEffect(() => {
       const { data } = info;
@@ -125,24 +134,54 @@ export class Strapi_useQuery {
   }
 }
 
+export function useStrapiRepository() {
+  const { data: session } = useSession();
+
+  return useMemo(
+    () => new StrapiRepository(fromClient, session?.user?.jwt),
+    [session?.user?.jwt],
+  );
+}
+
+export function useUserData() {
+  const repository = useStrapiRepository();
+
+  return useMemo(() => new User_useQuery(repository), [repository]);
+}
+
+/**
+ * @example
+ * ```
+ * const {by_id} = new User_useQuery(new StrapiRepository(fromClient, ""));
+ * cosnt {info, data: user} = by_id.useQuery(0);
+ *
+ *
+ * ```
+ *
+ * @example
+ * ```
+ * const {by_id} = useUserData();
+ * cosnt {info, data: user} = by_id.useQuery(0);
+ *
+ * ```
+ */
 export class User_useQuery extends Strapi_useQuery {
-  list = {
+  static keys = {
+    all: ["profile"] as const,
+    by_id: (id: number) => ["profile", "by_id", String(id)] as const,
+  };
+
+  by_id = {
     useQuery: (id: number) =>
       this.query({
         fetch: (client) =>
-          client.GET("/inboxes", {
-            params: { query: {} },
+          client.GET("/user-profiles/{id}", {
+            params: { path: { id } },
           }),
         mapper: Profile_DataRecord.transform(data_to_domain),
-        query_key: [],
+        query_key: User_useQuery.keys.by_id(id),
         domain_deps: [id],
         require_jwt: true,
       }),
   };
 }
-
-const sdf = new User_useQuery(new StrapiRepository(fromClient, ""));
-sdf;
-const zer = sdf.list.useQuery(0);
-const info = zer.info;
-const data = zer.data;
