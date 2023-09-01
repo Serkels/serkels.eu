@@ -13,8 +13,9 @@ export async function Door_Provider({
   const res = await fromClient.GET("/user-profiles/{id}", {
     params: { path: { id: 1 } },
   });
+
   const profile = res.data;
-  console.log({ profile });
+
   return (
     <Door_ValueProvider initialValue={{ ...initialValue, owner: profile }}>
       {children}
