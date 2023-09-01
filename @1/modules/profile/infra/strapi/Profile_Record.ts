@@ -2,6 +2,7 @@
 
 import { InputError } from "@1/core/error";
 import { z } from "zod";
+import { z_strapi_entity_data } from "../../../common";
 import { Strapi_Timestamps } from "../../../common/record";
 import { Profile } from "../../domain";
 
@@ -17,14 +18,17 @@ export const Profile_Record = z
   .merge(Strapi_Timestamps)
   .describe("Profile Record");
 
-export type Profile_Record = z.TypeOf<typeof Profile_Record>;
+export const Profile_DataRecord = z_strapi_entity_data(Profile_Record);
+export type Profile_DataRecord = z.TypeOf<typeof Profile_DataRecord>;
 
 //
 
-export function to_domain(record: Profile_Record): Profile {
+export function data_to_domain({
+  data: { id, attributes },
+}: Profile_DataRecord): Profile {
   const domain = Profile.create({
-    ...record,
-    id: Number(),
+    ...attributes,
+    id: Number(id),
   });
 
   if (domain.isFail()) {
@@ -33,8 +37,3 @@ export function to_domain(record: Profile_Record): Profile {
 
   return domain.value();
 }
-
-export const profile_to_domain = z.preprocess(
-  (record) => to_domain(record as Profile_Record),
-  Profile_Record,
-);

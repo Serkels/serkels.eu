@@ -1,14 +1,15 @@
 "use client";
 
 import { useSession } from "next-auth/react";
+import { useDoor_Value } from "../../../door.context";
 
 //
 
 export function About() {
   const { data: session } = useSession();
-  // if (1) throw new Error("lolZ");
-  if (!session) return null;
-  const about = session.user?.profile.attributes?.about;
+  const [{ owner }] = useDoor_Value();
+
+  const about = session?.user?.profile.attributes?.about;
 
   //
 
@@ -19,5 +20,9 @@ export function About() {
       </p>
     );
   }
-  return <p>{session.user?.profile.attributes?.about}</p>;
+  return (
+    <p>
+      <pre>{JSON.stringify(owner, null, 2)}</pre>
+    </p>
+  );
 }
