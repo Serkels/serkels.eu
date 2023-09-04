@@ -40,6 +40,14 @@ const nextConfig = {
         source: "/wss",
         destination: `${process.env["STRAPI_API_URL"]}`,
       },
+      {
+        source: "/stalker.js",
+        destination: `https://www.googletagmanager.com/gtag/js`,
+      },
+      {
+        source: "/api/stalker/:path*",
+        destination: `${process.env["STALKER_URL"]}/:path*`,
+      },
     ];
   },
 };

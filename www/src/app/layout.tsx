@@ -6,6 +6,7 @@ import { Roboto } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
 import type { PropsWithChildren } from "react";
 import Providers from "./(index)/Providers";
+
 import "./globals.css";
 
 const roboto = Roboto({ weight: ["400", "500", "700"], subsets: ["latin"] });
