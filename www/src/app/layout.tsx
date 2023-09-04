@@ -3,7 +3,9 @@
 import { Analytics } from "@vercel/analytics/react";
 import clsx from "clsx";
 import type { Metadata } from "next";
+import { getSession } from "next-auth/react";
 import { Roboto } from "next/font/google";
+import Script from "next/script";
 import NextTopLoader from "nextjs-toploader";
 import type { PropsWithChildren } from "react";
 import Providers from "./(index)/Providers";
@@ -18,7 +20,8 @@ export const metadata: Metadata = {
   icons: { icon: "/favicon.svg" },
 };
 
-export default function RootLayout({ children }: PropsWithChildren) {
+export default async function RootLayout({ children }: PropsWithChildren) {
+  const session = await getSession();
   return (
     <html lang="en">
       <body
@@ -32,6 +35,27 @@ export default function RootLayout({ children }: PropsWithChildren) {
         <NextTopLoader color="#fff" showSpinner={false} />
         <Providers>{children}</Providers>
         <Analytics />
+
+        <Script
+          src={`/stalker.js?id=${process.env["NEXT_PUBLIC_GA_MEASUREMENT_ID"]}`}
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.dataLayer = [];
+            gtag('js', new Date());
+
+            gtag('config', '${process.env["NEXT_PUBLIC_GA_MEASUREMENT_ID"]}', {
+                page_path: window.location.pathname,
+                transport_url: window.location.origin + '/api/stalker',
+                first_party_collection: true,
+                user_id: '${session?.user?.email}'
+            });
+          `,
+          }}
+        />
       </body>
     </html>
   );
