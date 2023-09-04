@@ -51,7 +51,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
                 page_path: window.location.pathname,
                 transport_url: window.location.origin + '/api/stalker',
                 first_party_collection: true,
-                user_id: '${session?.user?.email}'
+                user_id: '${session?.user?.id}'
             });
           `,
           }}
