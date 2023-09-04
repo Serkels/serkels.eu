@@ -1,12 +1,12 @@
 //
 
+import { Analytics } from "@vercel/analytics/react";
 import clsx from "clsx";
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
 import type { PropsWithChildren } from "react";
 import Providers from "./(index)/Providers";
-
 import "./globals.css";
 
 const roboto = Roboto({ weight: ["400", "500", "700"], subsets: ["latin"] });
@@ -31,6 +31,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
       >
         <NextTopLoader color="#fff" showSpinner={false} />
         <Providers>{children}</Providers>
+        <Analytics />
       </body>
     </html>
   );

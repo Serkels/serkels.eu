@@ -50,7 +50,7 @@ export default function Providers({ children }: PropsWithChildren) {
 
         <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
       </QueryClientProvider>
-      <GoogleAnalytics gtagUrl="/stalker.js" />
+      <GoogleAnalytics gtagUrl="/stalker.js" trackPageViews />
       <Script
         id="google-analytics"
         strategy="afterInteractive"
