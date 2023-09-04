@@ -2,8 +2,9 @@ import {
   Profile_DataRecord,
   data_to_domain,
 } from "@1/modules/profile/infra/strapi";
+import type { ApiClient } from "~/app/api/v1";
+import { Strapi_useQuery } from "./Strapi_useQuery";
 import { User_Repository } from "./User_Repository";
-import { Strapi_useQuery } from "./user.repository";
 
 /**
  * @example
@@ -31,5 +32,33 @@ export class User_useQuery extends Strapi_useQuery {
         domain_deps: [id],
         require_jwt: true,
       }),
+  };
+
+  update = {
+    useMutation: () =>
+      this.mutate({
+        fetch: User_Repository.update.bind(null, this.repository.headers),
+        mapper: Profile_DataRecord.transform(data_to_domain),
+        query_key: User_Repository.keys.all,
+        domain_deps: [],
+        require_jwt: true,
+      }),
+  };
+
+  update_avatar = {
+    useMutation: () => {
+      return this.mutate({
+        fetch: (client: ApiClient, formData: FormData) =>
+          User_Repository.update_image(
+            this.repository.headers,
+            client,
+            formData,
+          ),
+        mapper: Profile_DataRecord.transform(data_to_domain),
+        query_key: User_Repository.keys.all,
+        domain_deps: [],
+        require_jwt: true,
+      });
+    },
   };
 }

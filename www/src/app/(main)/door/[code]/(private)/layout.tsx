@@ -1,4 +1,4 @@
-///
+//
 
 import { AuthError } from "@1/core/error";
 import type { ReactNode } from "react";
@@ -14,6 +14,7 @@ export default async function Layout(props: {
 }) {
   try {
     const { code } = props.params;
+
     if (!(await this_door_is_yours(code))) {
       throw new AuthError("Wrong door");
     }

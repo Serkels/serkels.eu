@@ -31,7 +31,7 @@ const button = tv({
   variants: {
     intent: {
       primary: "bg-primary text-white data-[hovered]:bg-primary/70",
-      secondary: "bg-secondary data-[hovered]:bg-secondary/70",
+      secondary: "bg-secondary data-[hovered]:bg-secondary/70 text-white",
       warning: "bg-warning text-white data-[hovered]:bg-warning/70",
     },
     state: {

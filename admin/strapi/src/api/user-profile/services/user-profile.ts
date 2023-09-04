@@ -5,7 +5,6 @@
 import { factories } from "@strapi/strapi";
 import { createHash } from "node:crypto";
 import { z } from "zod";
-import type { GetValues } from "~/types";
 
 export default factories.createCoreService(
   "api::user-profile.user-profile",
@@ -27,9 +26,7 @@ export async function findRelatedUser(id: number) {
     { populate: ["owner"] },
   );
 
-  return profile.owner as any as GetValues<"api::user-profile.user-profile">["owner"] & {
-    id: number;
-  };
+  return { id: NaN, ...profile.owner };
 }
 
 export async function findOneFromUser(id: number) {

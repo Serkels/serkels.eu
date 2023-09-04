@@ -3,7 +3,7 @@ module.exports = {
     {
       method: "GET",
       path: "/avatars/u/:id",
-      handler: "api::user-profile.user-profile.avatar",
+      handler: "api::user-profile.avatar.find_by_profile_id",
     },
   ],
 };

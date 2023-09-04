@@ -14,19 +14,30 @@ export const Profile_Record = z
     lastname: z.string(),
     university: z.string().default(""),
     about: z.string().default(""),
+    image: z_strapi_entity_data(z.any()).optional(),
   })
   .merge(Strapi_Timestamps)
   .describe("Profile Record");
+export type Profile_Record = z.TypeOf<typeof Profile_Record>;
 
 export const Profile_DataRecord = z_strapi_entity_data(Profile_Record);
 export type Profile_DataRecord = z.TypeOf<typeof Profile_DataRecord>;
 
 //
 
-export function data_to_domain({
-  data: { id, attributes },
-}: Profile_DataRecord): Profile {
+export const Profile_UpdateRecord = z
+  .object({
+    image: z.number().nullable().optional(),
+  })
+  .optional();
+export type Profile_UpdateRecord = z.TypeOf<typeof Profile_UpdateRecord>;
+
+//
+
+export function data_to_domain({ data }: Profile_DataRecord): Profile {
+  const { id, attributes } = data ?? { id: NaN, attributes: {} };
   const domain = Profile.create({
+    ...Profile.zero.toObject(),
     ...attributes,
     id,
   });

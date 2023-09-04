@@ -8,20 +8,20 @@
       "~/*": ["*"]
     },
     "resolveJsonModule": true,
+    "sourceMap": true,
     "types": ["@bn-digital/strapi-types"]
   },
   "include": [
     "./",
     "./**/*.ts",
-    "./**/*.js",
-    "src/**/*.json",
-    "types/generated/*.d.ts"
+    "src/**/*.json"
   ],
   "exclude": [
     "node_modules/",
     "build/",
     "dist/",
     ".cache/",
+    ".turbo/",
     ".tmp/",
     "src/admin/",
     "**/*.test.*",

@@ -49,7 +49,7 @@ export function Link_Avatar(
     </Link>
   );
 }
-const avatar_img = tv({ base: "max-w-full rounded-full object-cover" });
+export const avatar_img = tv({ base: "max-w-full rounded-full object-cover" });
 
 export function AvatarMediaVertical(props: ComponentPropsWithoutRef<"figure">) {
   const { className, ...other_props } = props;

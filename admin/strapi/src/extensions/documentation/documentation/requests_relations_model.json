@@ -1,0 +1,26 @@
+{
+  "SetRelation": {
+    "type": "object",
+    "description": "Set entities to a specific set. Using set will overwrite all existing connections to other entities.",
+    "properties": {
+      "set": {
+        "oneOf": [
+          {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["id"],
+              "properties": { "id": { "type": "integer" } }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

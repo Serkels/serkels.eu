@@ -1,16 +1,11 @@
 "use client";
 
-import { Spinner } from "@1/ui/components/Spinner";
-
-import { Button } from "@1/ui/components/Button";
 // import { type FormValues } from "@1/ui/domains/signup/UserForm";
 import type { components } from "@1/strapi-openapi/v1";
+import { Button } from "@1/ui/components/ButtonV";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import clsx from "clsx";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { getCsrfToken, useSession } from "next-auth/react";
-import { useCallback, type PropsWithChildren } from "react";
-import { Avatar } from "~/components/Avatar";
 
 //
 
@@ -21,11 +16,7 @@ export function UserForm() {
     cacheTime: 0,
   });
 
-  const { data: session, update } = useSession();
-  const jwt = session?.user?.jwt;
-  const profile = session?.user?.profile;
-
-  const { mutateAsync, isLoading, isSuccess, isError, error } = useMutation(
+  const { mutateAsync, status, error } = useMutation(
     async (values: {
       firstname: string | undefined;
       lastname: string | undefined;
@@ -38,33 +29,14 @@ export function UserForm() {
     },
   );
 
-  const onRevertToGravatarPicture = useCallback(async () => {
-    if (
-      !window.confirm(
-        "Voulez-vous vraiment réinitialiser votre avatar actuel ?",
-      )
-    ) {
-      return;
-    }
-
-    mutateAsync;
-    // await mutateAsync({});
-    await update();
-    // mutate({ image: null } as any);
-  }, [profile?.attributes?.image?.data?.id]);
-
   //
-
-  if (!csrf) return null;
-
-  if (isLoading) return <Verifying />;
-
-  if (!profile) return <ErrorOccur error={new Error("Missing profile")} />;
+  const { data: session, update } = useSession();
+  const jwt = session?.user?.jwt;
+  const profile = session?.user?.profile;
+  if (!profile) return null; //throw new AuthError("Missing profile");
 
   return (
     <div className="col-span-full mx-auto flex flex-col justify-center ">
-      {isError ? <ErrorOccur error={error as Error} /> : null}
-      {isSuccess ? <UpdateSuccess /> : null}
       <Formik
         initialValues={{
           firstname: profile.attributes?.firstname,
@@ -79,31 +51,6 @@ export function UserForm() {
           <Form className="flex flex-col justify-center space-y-5">
             <Field type="hidden" defaultValue={csrf} name="csrfToken"></Field>
             <div className="grid gap-5 md:grid-cols-2">
-              <div className="md:col-span-1">
-                <span className="font-bold">Image de profile</span>
-                <Avatar className="mx-auto h-72 w-72" />
-              </div>
-              <div className="md:col-span-1">
-                <br />
-                <Button
-                  variant="tertiary"
-                  onClick={onRevertToGravatarPicture}
-                  type="button"
-                >
-                  Revenir à l'image{" "}
-                  <a
-                    className="underline"
-                    target="_blank"
-                    rel="noreferrer"
-                    href="https://gravatar.com/"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                    }}
-                  >
-                    Gravatar
-                  </a>
-                </Button>
-              </div>
               <label className="md:col-span-1">
                 <span className="font-bold">Prénom</span>
                 <br />
@@ -169,8 +116,7 @@ export function UserForm() {
             </div>
             <Button
               type="submit"
-              variant="primary"
-              disabled={isSubmitting}
+              isDisabled={isSubmitting}
               className="max-w-fit"
             >
               Mettre à jour le profile
@@ -208,61 +154,4 @@ async function submitFormHandler(
   } catch (error) {
     return Promise.reject(res.statusText);
   }
-}
-
-function AlertPanel({
-  error: isError,
-  success: isSuccess,
-  children,
-}: PropsWithChildren<{
-  success?: boolean;
-  error?: boolean;
-}>) {
-  return (
-    <div
-      className={clsx("border-2 p-5", {
-        "border-red-700": isError,
-        "border-Chateau_Green": isSuccess,
-      })}
-    >
-      {children}
-    </div>
-  );
-}
-
-function UpdateSuccess() {
-  return <AlertPanel success>Profile mis à jour</AlertPanel>;
-}
-
-function Verifying() {
-  return (
-    <div className="col-span-full">
-      <h1
-        className={`
-          mx-auto
-          my-0
-          text-center text-6xl
-          font-extrabold
-          sm:text-7xl
-          lg:text-8xl
-        `}
-      >
-        Vérification
-      </h1>
-      <div className="mx-auto mt-5 text-center">
-        <Spinner />
-      </div>
-    </div>
-  );
-}
-
-function ErrorOccur({ error }: { error: Error }) {
-  return (
-    <AlertPanel error>
-      <h4 className="font-bold">Une error c'est produite</h4>
-      Veuillez fermer cette fenêtre et réessayez de vous authentifier.
-      <br />
-      <code>{error?.message}</code>
-    </AlertPanel>
-  );
 }

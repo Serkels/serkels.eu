@@ -15,12 +15,14 @@ const svg = fs.readFileSync(svgPath, "utf8");
 
 //
 
+const Bittersweet = "#FF5F5F";
 const Cerulean = "#04AAE8";
 const Chateau_Green = "#39b154";
 const Congress_Blue = "#023f87";
 const Dove_Gray = "#656565";
 const Eminence = "#782D8E";
 const Gamboge = "#E3A007";
+const Guardsman_Red = "#C10000";
 const RedViolet = "#CE118B";
 const RedViolet_Dark = "#C91489";
 const Silver_Chalice = "#AAAAAA";
@@ -52,6 +54,7 @@ module.exports = withTV({
         // xxl: 1400px
       },
       colors: {
+        Bittersweet,
         Cerulean,
         Chateau_Green,
         Congress_Blue,
@@ -63,6 +66,12 @@ module.exports = withTV({
         Violet_Eggplant,
         //
         primary: Chateau_Green,
+        secondary: Cerulean,
+        RedViolet: Congress_Blue,
+        quaternary: Eminence,
+        //
+        error: Guardsman_Red,
+        success: Chateau_Green,
         warning: Gamboge,
       },
       width: {

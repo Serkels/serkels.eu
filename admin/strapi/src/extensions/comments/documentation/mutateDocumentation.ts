@@ -3,6 +3,9 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { parse } from "yaml";
+
+//
+
 export default async function mutateDocumentation(generatedDocumentationDraft) {
   generatedDocumentationDraft.components.schemas["CommentRequest"] = {
     type: "object",

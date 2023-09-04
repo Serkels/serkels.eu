@@ -4,6 +4,11 @@
  */
 
 
+/** OneOf type helpers */
+type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
+type XOR<T, U> = (T | U) extends object ? (Without<T, U> & U) | (Without<U, T> & T) : T | U;
+type OneOf<T extends any[]> = T extends [infer Only] ? Only : T extends [infer A, infer B, ...infer Rest] ? OneOf<[XOR<A, B>, ...Rest]> : never;
+
 export interface paths {
   "/answer/{id}": {
     get: operations["get/answer/{id}"];
@@ -588,10 +593,6 @@ export interface paths {
     get: operations["get/user-profiles/{id}"];
     put: operations["put/user-profiles/{id}"];
     delete: operations["delete/user-profiles/{id}"];
-  };
-  "/user-profiles/me": {
-    get: operations["get/user-profiles/me"];
-    put: operations["put/user-profiles/me"];
   };
   "/users": {
     /** Get list of users */
@@ -5286,6 +5287,12 @@ export interface components {
       attributes?: components["schemas"]["Question"];
       id?: number;
     };
+    /** @description Set entities to a specific set. Using set will overwrite all existing connections to other entities. */
+    SetRelation: {
+      set?: OneOf<[number[], {
+          id: number;
+        }[]]>;
+    };
     Tag: {
       /** Format: date-time */
       createdAt?: string;
@@ -6408,14 +6415,17 @@ export interface components {
     };
     UserProfileRequest: {
       data: {
-        about?: string;
-        firstname: string;
-        /** @example string or id */
-        image?: number | string;
-        lastname: string;
-        /** @example string or id */
-        owner?: number | string;
-        university?: string;
+        data?: {
+          about?: string;
+          firstname: string;
+          /** @example string or id */
+          image?: number | string;
+          lastname: string;
+          /** @example string or id */
+          owner?: number | string;
+          university?: string;
+        };
+        image?: components["schemas"]["SetRelation"];
       };
     };
     UserProfileResponse: {
@@ -9446,91 +9456,6 @@ export interface operations {
       200: {
         content: {
           "application/json": number;
-        };
-      };
-      /** @description Bad Request */
-      400: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
-      /** @description Not Found */
-      404: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
-      /** @description Internal Server Error */
-      500: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
-    };
-  };
-  "get/user-profiles/me": {
-    responses: {
-      /** @description OK */
-      200: {
-        content: {
-          "application/json": components["schemas"]["UserProfileResponse"];
-        };
-      };
-      /** @description Bad Request */
-      400: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
-      /** @description Not Found */
-      404: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
-      /** @description Internal Server Error */
-      500: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
-    };
-  };
-  "put/user-profiles/me": {
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["UserProfileRequest"];
-      };
-    };
-    responses: {
-      /** @description OK */
-      200: {
-        content: {
-          "application/json": components["schemas"]["UserProfileResponse"];
         };
       };
       /** @description Bad Request */

@@ -2,6 +2,7 @@
 
 import type { Metadata, ResolvingMetadata } from "next";
 import { UserForm } from "./UserForm";
+import { Avartar_Form } from "./page.client";
 
 //
 
@@ -19,6 +20,7 @@ export async function generateMetadata(
 export default async function Page() {
   return (
     <main className="col-span-full my-10 md:col-span-6 xl:col-span-8">
+      <Avartar_Form />
       <UserForm />
     </main>
   );

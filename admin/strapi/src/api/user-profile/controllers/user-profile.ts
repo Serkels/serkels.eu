@@ -13,6 +13,7 @@ export default factories.createCoreController(
   "api::user-profile.user-profile",
   ({ strapi }) => ({
     async me(ctx) {
+      if (1) throw new Error("Deprecated");
       const user: { id: number } = ctx.state.user;
       ctx.query.filters = {
         ...(ctx.query.filters || {}),
@@ -40,6 +41,7 @@ export default factories.createCoreController(
     },
 
     async me_update(ctx) {
+      if (1) throw new Error("Deprecated");
       const user: { id: number } = ctx.state.user;
 
       ctx.query.filters = {

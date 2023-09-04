@@ -24,7 +24,7 @@ export type Strapi_flatten_page_data<Z extends ZodTypeAny> = ReturnType<
 export const z_strapi_entity = <Z extends ZodTypeAny>(attributes: Z) =>
   z.object({ attributes, id: z.coerce.number() });
 export const z_strapi_entity_data = <Z extends ZodTypeAny>(attributes: Z) =>
-  z.object({ data: z_strapi_entity(attributes) });
+  z.object({ data: z_strapi_entity(attributes).nullish() });
 export type Strapi_entity_data<Z extends ZodTypeAny> = ReturnType<
   typeof z_strapi_entity_data<Z>
 >;
