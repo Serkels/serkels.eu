@@ -81,10 +81,12 @@ function UserTracking() {
           email: user?.email ?? undefined,
           id: user?.id ?? undefined,
         });
+        (window as any).gtag("set", "userId", user?.email);
       })
       .with({ status: "loading" }, () => {})
       .with({ status: "unauthenticated" }, () => {
         setUser(null);
+        (window as any).gtag("set", "userId", null);
       })
       .exhaustive();
   }, [session]);
