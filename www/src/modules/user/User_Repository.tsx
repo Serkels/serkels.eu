@@ -66,17 +66,16 @@ export class User_Repository {
     data: Profile_UpdateRecord,
   ) {
     const res = await client.PUT("/user-profiles/me", {
-      params: {},
-      body: { data: { image: null } },
+      body: { data },
       headers,
     });
     return res.data;
   }
 
-  static async update_image(headers: any, client: ApiClient, body: FormData) {
+  static async update_image(headers: any, _client: ApiClient, body: FormData) {
     const res = await fetch("/api/v1/upload", {
       method: "POST",
-      body: body,
+      body,
       headers,
     });
     try {

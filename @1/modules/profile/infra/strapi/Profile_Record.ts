@@ -25,11 +25,13 @@ export type Profile_DataRecord = z.TypeOf<typeof Profile_DataRecord>;
 
 //
 
-export const Profile_UpdateRecord = z
-  .object({
-    image: z.number().nullable().optional(),
-  })
-  .optional();
+export const Profile_UpdateRecord = z.object({
+  firstname: z.string().optional(),
+  lastname: z.string().optional(),
+  university: z.string().optional(),
+  about: z.string().optional(),
+  image: z.object({ set: z.array(z.object({ id: z.number() })) }).optional(),
+});
 export type Profile_UpdateRecord = z.TypeOf<typeof Profile_UpdateRecord>;
 
 //

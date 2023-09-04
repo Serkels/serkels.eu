@@ -15,22 +15,21 @@ export async function Door_Provider({
   initialValue,
 }: PropsWithChildren<{ initialValue: Omit<Props, "owner"> }>) {
   const id = initialValue.door_id;
-  const res = await fromServer.GET("/user-profiles/{id}", {
-    params: { path: { id } },
-  });
+  const profile_record = await User_Repository.by_id(id, fromServer);
 
-  const queryClient = getQueryClient();
-  await queryClient.prefetchQuery(User_Repository.keys.by_id(id), () =>
-    User_Repository.by_id(id, fromServer),
-  );
-  const dehydratedState = dehydrate(queryClient);
-
-  if (!res.data) {
+  if (!profile_record) {
     return notFound();
   }
 
+  const queryClient = getQueryClient();
+  await queryClient.prefetchQuery({
+    queryKey: User_Repository.keys.by_id(id),
+    queryFn: () => profile_record,
+  });
+  const dehydratedState = dehydrate(queryClient);
+
   return (
-    <Door_ValueProvider initialValue={{ ...initialValue, owner: res.data }}>
+    <Door_ValueProvider initialValue={{ ...initialValue }}>
       <Hydrate state={dehydratedState}>{children}</Hydrate>
     </Door_ValueProvider>
   );

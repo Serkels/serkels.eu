@@ -1,11 +1,12 @@
 "use client";
 
 // import { type FormValues } from "@1/ui/domains/signup/UserForm";
-import type { components } from "@1/strapi-openapi/v1";
 import { Button } from "@1/ui/components/ButtonV";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { getCsrfToken, useSession } from "next-auth/react";
+import { getCsrfToken } from "next-auth/react";
+import { useUserData } from "~/modules/user";
+import { useProfile } from "../../(public)/layout.client";
 
 //
 
@@ -15,37 +16,25 @@ export function UserForm() {
     queryFn: () => getCsrfToken(),
     cacheTime: 0,
   });
-
-  const { mutateAsync, status, error } = useMutation(
-    async (values: {
-      firstname: string | undefined;
-      lastname: string | undefined;
-      university: string | undefined;
-    }) => {
-      if (!jwt) throw new Error("Invalid JWT");
-      const response = await submitFormHandler(jwt, values);
-      await update();
-      return response;
-    },
-  );
+  const {
+    update: { useMutation },
+  } = useUserData();
+  const { info } = useMutation();
+  const profile = useProfile();
 
   //
-  const { data: session, update } = useSession();
-  const jwt = session?.user?.jwt;
-  const profile = session?.user?.profile;
-  if (!profile) return null; //throw new AuthError("Missing profile");
 
   return (
     <div className="col-span-full mx-auto flex flex-col justify-center ">
       <Formik
         initialValues={{
-          firstname: profile.attributes?.firstname,
-          lastname: profile.attributes?.lastname,
-          university: profile.attributes?.university,
-          about: profile.attributes?.about,
+          firstname: profile.get("firstname"),
+          lastname: profile.get("lastname"),
+          university: profile.university,
+          about: profile.get("about"),
         }}
         enableReinitialize
-        onSubmit={(values) => mutateAsync(values)}
+        onSubmit={(values) => info.mutateAsync(values)}
       >
         {({ isSubmitting }) => (
           <Form className="flex flex-col justify-center space-y-5">
@@ -126,32 +115,4 @@ export function UserForm() {
       </Formik>
     </div>
   );
-}
-
-//
-
-async function submitFormHandler(
-  token: string,
-  context: unknown, //Partial<components["schemas"]["UserProfile"]>,
-) {
-  const res = await fetch(`/api/v1/user-profiles/me`, {
-    method: "PUT",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-type": "application/json; charset=UTF-8",
-    },
-    body: JSON.stringify({ data: context }),
-  });
-  try {
-    const result:
-      | components["schemas"]["Error"]
-      | { error: null; data: components["schemas"]["UserProfile"] } =
-      await res.json();
-    if (result.error) {
-      throw new Error(result.error.message);
-    }
-    return result.data;
-  } catch (error) {
-    return Promise.reject(res.statusText);
-  }
 }

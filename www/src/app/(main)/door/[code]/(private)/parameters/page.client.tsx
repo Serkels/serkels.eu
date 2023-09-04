@@ -1,6 +1,5 @@
 "use client";
 
-import type { components } from "@1/strapi-openapi/v1";
 import { DropZone, FileTrigger } from "@1/ui/components";
 import { Button } from "@1/ui/components/ButtonV";
 import { Spinner } from "@1/ui/components/Spinner";
@@ -8,29 +7,30 @@ import { useQueryClient } from "@tanstack/react-query";
 import { Field, Form, Formik } from "formik";
 import { useSession } from "next-auth/react";
 import { useCallback, useRef, useState, type PropsWithChildren } from "react";
-import { useBoolean } from "react-use";
+import { useBoolean, useTimeoutFn } from "react-use";
 import { tv, type VariantProps } from "tailwind-variants";
-import { match } from "ts-pattern";
+import { P, match } from "ts-pattern";
 import { avatar_img } from "~/components/Avatar";
 import { ErrorOccur } from "~/components/ErrorOccur";
+import { useUserData } from "~/modules/user";
 import { User_Repository } from "~/modules/user/User_Repository";
-import { useUserData } from "~/modules/user/user.repository";
 import { useProfile } from "../../(public)/layout.client";
 
 //
 
-const ACCEPTED_FILE_TYPES = ["image/png"];
+const ACCEPTED_FILE_TYPES = ["image/png", "image/jpeg"];
 
 //
 
 export function Avartar_Form() {
   const { update } = useSession();
   const { update_avatar, update: update_my_profile } = useUserData();
-  const { info } = update_avatar.useMutation();
-  const { info: update_my_profile_info } = update_my_profile.useMutation();
+  const { info: upload_info } = update_avatar.useMutation();
+  const { info: profile_info } = update_my_profile.useMutation();
   const profile = useProfile();
   const [has_changed, set_has_changed] = useBoolean(false);
-  const onRevertToGravatarPicture = useCallback(async () => {
+
+  const revert_to_gravatar_picture = useCallback(async () => {
     if (
       !window.confirm(
         "Voulez-vous vraiment réinitialiser votre avatar actuel ?",
@@ -39,39 +39,39 @@ export function Avartar_Form() {
       return;
     }
 
-    await update_my_profile_info.mutateAsync({ image: null });
-    console.log("Reinit");
-    // await mutateAsync({});
+    await profile_info.mutateAsync({ image: { set: [] } });
     await update();
-    // mutate({ image: null } as any);
   }, [profile.get("image")?.data?.id]);
 
   let [avatar, set_avatar] = useState<string>(
     `/api/v1/avatars/u/${profile.get("id")}`,
   );
-  const onChange = (e: FileList | null) => {
-    if (!e) return;
 
-    const files = Array.from(e);
-    const [file] = files;
-
-    if (!file) return;
-
-    const local_url = URL.createObjectURL(file);
-    console.log({ local_url });
-    set_has_changed(true);
-    // setFieldValue("file", event.currentTarget.files[0]);
-    set_avatar(files[0] ? local_url : `/api/v1/avatars/u/${profile.get("id")}`);
-  };
   const formRef = useRef<HTMLFormElement>(null);
   const query_client = useQueryClient();
+
   //
 
-  if (!profile) return null; //throw new AuthError("Missing profile");
+  const preview_avatar = (file: File) => {
+    const local_url = URL.createObjectURL(file);
+    set_has_changed(true);
+    set_avatar(local_url);
+  };
 
-  return match(info)
+  const merged_mutations = {
+    status: match([upload_info.status, profile_info.status])
+      .with(["error", P._], [P._, "error"], () => "error")
+      .with(["loading", P._], [P._, "loading"], () => "loading")
+      .with(["success", P._], [P._, "success"], () => "success")
+      .otherwise(() => "idle"),
+    error: upload_info.error || profile_info.error,
+  };
+
+  return match(merged_mutations)
     .with({ status: "loading" }, () => <Verifying />)
-    .with({ status: "error" }, () => <ErrorOccur error={info.error as Error} />)
+    .with({ status: "error" }, () => (
+      <ErrorOccur error={upload_info.error as Error} />
+    ))
     .with({ status: "success" }, () => <UpdateSuccess />)
     .otherwise(() => (
       <Formik
@@ -79,18 +79,20 @@ export function Avartar_Form() {
         onSubmit={async () => {
           if (!formRef.current) return;
 
-          const fd = new FormData(formRef.current);
-          const file = fd.get("files");
+          const form_data = new FormData(formRef.current);
+          const file = form_data.get("files");
           if (!file) return;
           if (!(file instanceof File)) return;
-          fd.set(
+
+          form_data.set(
             "files",
             new File([file], "avatar_" + profile.get("id"), {
               type: file.type,
             }),
           );
 
-          await info.mutateAsync(fd);
+          await upload_info.mutateAsync(form_data);
+
           query_client.invalidateQueries(
             User_Repository.keys.by_id(profile.get("id")),
           );
@@ -117,7 +119,7 @@ export function Avartar_Form() {
                     const files = Array.from(event ?? []);
                     const [file] = files;
                     if (!file) return;
-                    onChange(event);
+                    preview_avatar(file);
                     setFieldValue("files", [file]);
                   }}
                 >
@@ -137,7 +139,7 @@ export function Avartar_Form() {
                 <summary>
                   <Button
                     intent="secondary"
-                    onPress={onRevertToGravatarPicture}
+                    onPress={revert_to_gravatar_picture}
                     type="button"
                   >
                     Revenir à l'image Gravatar
@@ -188,6 +190,9 @@ function Verifying() {
 }
 
 function UpdateSuccess() {
+  useTimeoutFn(() => {
+    location.reload();
+  }, 1_111);
   return <AlertPanel $status="success">Profile mis à jour</AlertPanel>;
 }
 
@@ -207,30 +212,4 @@ type AlertVariants = VariantProps<typeof alert>;
 
 function AlertPanel({ $status, children }: PropsWithChildren<AlertVariants>) {
   return <div className={alert({ $status })}>{children}</div>;
-}
-
-async function submitFormHandler(
-  token: string,
-  context: unknown, //Partial<components["schemas"]["UserProfile"]>,
-) {
-  const res = await fetch(`/api/v1/user-profiles/me`, {
-    method: "PUT",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-type": "application/json; charset=UTF-8",
-    },
-    body: JSON.stringify({ data: context }),
-  });
-  try {
-    const result:
-      | components["schemas"]["Error"]
-      | { error: null; data: components["schemas"]["UserProfile"] } =
-      await res.json();
-    if (result.error) {
-      throw new Error(result.error.message);
-    }
-    return result.data;
-  } catch (error) {
-    return Promise.reject(res.statusText);
-  }
 }

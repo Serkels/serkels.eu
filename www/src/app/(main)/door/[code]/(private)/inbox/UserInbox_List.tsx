@@ -39,6 +39,10 @@ function UserThread_Item({ inbox }: { inbox: Inbox }) {
 
   const href = `/@${door_id}/inbox/${inbox.get("id")}`;
 
+  //
+
+  if (!thread) return null;
+
   return <Thread_Item href={href} thread={thread} />;
 }
 

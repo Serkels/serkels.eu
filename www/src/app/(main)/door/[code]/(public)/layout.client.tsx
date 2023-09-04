@@ -2,24 +2,33 @@
 
 //
 
+import { Profile } from "@1/modules/profile/domain";
 import {
   Profile_DataRecord,
   data_to_domain,
 } from "@1/modules/profile/infra/strapi";
 import { School } from "@1/ui/icons";
+import { useQueryClient } from "@tanstack/react-query";
 import { useMemo } from "react";
 import { Avatar } from "~/components/Avatar";
+import { User_Repository } from "~/modules/user/User_Repository";
 import { useDoor_Value } from "../../door.context";
 
 //
 
 export function useProfile() {
-  const [{ door_id, owner }] = useDoor_Value();
+  const [{ door_id }] = useDoor_Value();
+  const query_client = useQueryClient();
+
+  const profile = query_client.getQueryData<Profile>(
+    User_Repository.keys.by_id(door_id),
+  );
+
   return useMemo(() => {
-    return Profile_DataRecord.transform(data_to_domain).parse(owner, {
+    return Profile_DataRecord.transform(data_to_domain).parse(profile, {
       path: ["Profile_DataRecord"],
     });
-  }, [door_id]);
+  }, [profile?.id]);
 }
 
 export function Profile_Header() {

@@ -7,7 +7,7 @@ import type { Thread } from "./Thread";
 
 interface Inbox_Props {
   id: number;
-  thread: Thread;
+  thread: Thread | undefined;
 }
 
 export class Inbox extends Aggregate<Inbox_Props> {

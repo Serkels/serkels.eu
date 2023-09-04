@@ -18,7 +18,10 @@ export function Avatar(
   const { data: session } = useSession();
   const id = u ?? session?.user?.profile.id;
 
-  const image = useMemo(() => `/api/v1/avatars/u/${id}`, [id]);
+  const image = useMemo(
+    () => `/api/v1/avatars/u/${id}`,
+    [id, session?.user?.profile.attributes?.image?.data?.id],
+  );
 
   if (!id) {
     return null;

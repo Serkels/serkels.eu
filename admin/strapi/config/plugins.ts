@@ -66,7 +66,8 @@ export default ({ env }) => ({
   upload: {
     config: {
       provider: "aws-s3",
-      sizeLimit: 1 * 1_024 * 1_024, // 1mb in bytes
+      sizeLimit: 0.5 * 1_024 * 1_024, // 0.5mb in bytes
+
       providerOptions: {
         s3Options: {
           accessKeyId: env("AWS_ACCESS_KEY_ID"),

@@ -594,6 +594,10 @@ export interface paths {
     put: operations["put/user-profiles/{id}"];
     delete: operations["delete/user-profiles/{id}"];
   };
+  "/user-profiles/me": {
+    get: operations["get/user-profiles/me"];
+    put: operations["put/user-profiles/me"];
+  };
   "/users": {
     /** Get list of users */
     get: {
@@ -9488,6 +9492,41 @@ export interface operations {
           "application/json": components["schemas"]["Error"];
         };
       };
+    };
+  };
+  "get/user-profiles/me": {
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["UserProfileResponse"];
+        };
+      };
+      400: components["responses"]["400"];
+      401: components["responses"]["401"];
+      403: components["responses"]["403"];
+      404: components["responses"]["404"];
+      500: components["responses"]["500"];
+    };
+  };
+  "put/user-profiles/me": {
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["UserProfileRequest"];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["UserProfileResponse"];
+        };
+      };
+      400: components["responses"]["400"];
+      401: components["responses"]["401"];
+      403: components["responses"]["403"];
+      404: components["responses"]["404"];
+      500: components["responses"]["500"];
     };
   };
 }
