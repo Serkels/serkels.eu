@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import debug from "debug";
 import { SessionProvider, useSession } from "next-auth/react";
-import { usePageViews } from "nextjs-google-analytics";
+import { event, usePageViews } from "nextjs-google-analytics";
 import { useEffect, useMemo, type PropsWithChildren } from "react";
 import Nest from "react-nest";
 import { P, match } from "ts-pattern";
@@ -66,10 +66,12 @@ function UserTracking() {
           email: user?.email ?? undefined,
           id: user?.id ?? undefined,
         });
+        event("authenticated", { userId: String(user?.id) });
       })
       .with({ status: "loading" }, () => {})
       .with({ status: "unauthenticated" }, () => {
         setUser(null);
+        event("unauthenticated", { userId: undefined });
       })
       .exhaustive();
   }, [session]);
