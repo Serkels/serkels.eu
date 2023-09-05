@@ -67,7 +67,7 @@ function UserTracking() {
           id: user?.id ?? undefined,
         });
         event("authenticated", { userId: String(user?.id) });
-        gtag("set", "userId", String(user?.id));
+        gtag("set", "userId", String(user?.profile.id));
       })
       .with({ status: "loading" }, () => {})
       .with({ status: "unauthenticated" }, () => {
