@@ -1,6 +1,5 @@
 ///
 
-import { InputSearch } from "@1/ui/components/InputSearch";
 import type { Metadata, ResolvingMetadata } from "next";
 import type { PropsWithChildren } from "react";
 import tw from "tailwind-styled-components";
@@ -26,10 +25,6 @@ export default function Layout({ children }: PropsWithChildren) {
         <Header>
           <Title>Messages</Title>
         </Header>
-        <form className="mb-10 px-8" action="#">
-          <InputSearch />
-        </form>
-
         <Inbox_UserThread_List />
       </My_Inbox_Nav>
       {children}
