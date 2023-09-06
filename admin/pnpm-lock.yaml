@@ -92,6 +92,9 @@ importers:
       mime-types:
         specifier: 2.1.35
         version: 2.1.35
+      modern-errors-serialize:
+        specifier: 5.0.0
+        version: 5.0.0
       ms:
         specifier: 3.0.0-canary.1
         version: 3.0.0-canary.1
@@ -7241,6 +7244,17 @@ packages:
     dependencies:
       is-arrayish: 0.2.1
 
+  /error-serializer@6.0.1:
+    resolution: {integrity: sha512-SDEXcpWyys6yd6zLcC+s5bGnfe+xWxBJoC7p+o72c5F+hDdgdWc8LB8EOvcdqs7U+rzInYldFpiqSwmC3VZUeg==}
+    engines: {node: '>=16.17.0'}
+    dependencies:
+      is-error-instance: 2.0.0
+      is-plain-obj: 4.1.0
+      normalize-exception: 3.0.0
+      safe-json-value: 2.0.1
+      set-error-class: 2.0.0
+    dev: false
+
   /error-stack-parser@2.1.4:
     resolution: {integrity: sha512-Sk5V6wVazPhq5MhpO+AUxJn5x7XSXGl1R93Vn7i+zS15KDVxQijejNCrz8340/2bgLBjR9GtEG8ZVKONDjcqGQ==}
     dependencies:
@@ -9733,6 +9747,16 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
+  /modern-errors-serialize@5.0.0:
+    resolution: {integrity: sha512-vKtplFTL+nooOabeOsX2ur9tSgXCzvKOY15WAx1bwq9Cz6yETipqKilZX+bGXFrTRptUOotuACRWhQ+46wWguQ==}
+    engines: {node: '>=16.17.0'}
+    peerDependencies:
+      modern-errors: ^6.0.0
+    dependencies:
+      error-serializer: 6.0.1
+      is-plain-obj: 4.1.0
+    dev: false
+
   /modern-errors@6.0.0:
     resolution: {integrity: sha512-IgtbY9ITQfbtZUdoIiqOwReV+Z2iL82OtwWTNV9cusKT/SvNivIAXKyGjEGcoCpLc+32UZp0DuqXViIDAG44Zg==}
     engines: {node: '>=16.17.0'}
@@ -11475,6 +11499,14 @@ packages:
 
   /safe-buffer@5.2.1:
     resolution: {integrity: sha512-rp3So07KcdmmKbGvgaNxQSJr7bGVSVk5S9Eq1F+ppbRo70+YeaDxkw5Dd8NPN+GD6bjnYm2VuPuCXmpuYvmCXQ==}
+
+  /safe-json-value@2.0.1:
+    resolution: {integrity: sha512-vvoBxKVyksxwqzNDoD2vLVkcvbjYBFXS/CghUrFDsrP0wgTaw+/gIyOADNYa1vyPmICLUWH7RNh0FtwmFsEQCQ==}
+    engines: {node: '>=16.17.0'}
+    dependencies:
+      is-plain-obj: 4.1.0
+      normalize-exception: 3.0.0
+    dev: false
 
   /safe-regex@1.1.0:
     resolution: {integrity: sha512-aJXcif4xnaNUzvUuC5gcb46oTS7zvg4jpMTnuqtrEPlR3vFr4pxtdTwaF1Qs3Enjn9HK+ZlwQui+a7z0SywIzg==}

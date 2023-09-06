@@ -8,6 +8,7 @@ import { GetValues } from "@strapi/strapi/lib/types/core/attributes";
 import { Context } from "@strapi/utils/dist/types";
 import type { Next } from "koa";
 import { StrapiRequestContext } from "strapi-typed";
+import { z } from "zod";
 export default factories.createCoreRouter("api::bookmark.bookmark", {
   only: ["find", "create", "delete"],
   config: {
@@ -25,12 +26,18 @@ export default factories.createCoreRouter("api::bookmark.bookmark", {
           } = ctx;
           const owner = strapi_state_ctx.state.user?.id;
           const data = strapi_ctx.request.body.data;
-
+          const opportunity = z.coerce.number().safeParse(data.opportunity);
+          if (!opportunity.success) {
+            return strapi_ctx.throw(400, "Invalid opportunity id");
+          }
           const entityService: EntityService = strapi.entityService;
           const entry = await entityService.count("api::bookmark.bookmark", {
-            filters: { owner, opportunity: data.opportunity },
+            filters: { owner, opportunity: { id: opportunity.data } },
           });
 
+          if (1) {
+            return strapi_ctx.throw(409, "Already bookmarked");
+          }
           if (entry > 0) {
             return strapi_ctx.throw(409, "Already bookmarked");
           }
