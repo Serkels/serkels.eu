@@ -325,10 +325,10 @@ importers:
         version: 13.4.19(react-dom@18.2.0)(react@18.2.0)
       next-auth:
         specifier: 4.23.1
-        version: 4.23.1(next@13.4.19)(nodemailer@6.9.4)(react-dom@18.2.0)(react@18.2.0)
+        version: 4.23.1(next@13.4.19)(nodemailer@6.9.5)(react-dom@18.2.0)(react@18.2.0)
       nodemailer:
-        specifier: 6.9.4
-        version: 6.9.4
+        specifier: 6.9.5
+        version: 6.9.5
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -408,7 +408,7 @@ importers:
         version: 13.4.19(react-dom@18.2.0)(react@18.2.0)
       next-auth:
         specifier: 4.23.1
-        version: 4.23.1(next@13.4.19)(nodemailer@6.9.4)(react-dom@18.2.0)(react@18.2.0)
+        version: 4.23.1(next@13.4.19)(nodemailer@6.9.5)(react-dom@18.2.0)(react@18.2.0)
       nextjs-google-analytics:
         specifier: ^2.3.3
         version: 2.3.3(next@13.4.19)(react@18.2.0)
@@ -7484,7 +7484,7 @@ packages:
       typescript: 5.2.2
     dev: true
 
-  /next-auth@4.23.1(next@13.4.19)(nodemailer@6.9.4)(react-dom@18.2.0)(react@18.2.0):
+  /next-auth@4.23.1(next@13.4.19)(nodemailer@6.9.5)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-mL083z8KgRtlrIV6CDca2H1kduWJuK/3pTS0Fe2og15KOm4v2kkLGdSDfc2g+019aEBrJUT0pPW2Xx42ImN1WA==}
     peerDependencies:
       next: ^12.2.5 || ^13
@@ -7500,7 +7500,7 @@ packages:
       cookie: 0.5.0
       jose: 4.14.5
       next: 13.4.19(react-dom@18.2.0)(react@18.2.0)
-      nodemailer: 6.9.4
+      nodemailer: 6.9.5
       oauth: 0.9.15
       openid-client: 5.4.3
       preact: 10.17.1
@@ -7605,8 +7605,8 @@ packages:
     resolution: {integrity: sha512-uYr7J37ae/ORWdZeQ1xxMJe3NtdmqMC/JZK+geofDrkLUApKRHPd18/TxtBOJ4A0/+uUIliorNrfYV6s1b02eQ==}
     dev: true
 
-  /nodemailer@6.9.4:
-    resolution: {integrity: sha512-CXjQvrQZV4+6X5wP6ZIgdehJamI63MFoYFGGPtHudWym9qaEHDNdPzaj5bfMCvxG1vhAileSWW90q7nL0N36mA==}
+  /nodemailer@6.9.5:
+    resolution: {integrity: sha512-/dmdWo62XjumuLc5+AYQZeiRj+PRR8y8qKtFCOyuOl1k/hckZd8durUUHs/ucKx6/8kN+wFxqKJlQ/LK/qR5FA==}
     engines: {node: '>=6.0.0'}
     dev: false
 
