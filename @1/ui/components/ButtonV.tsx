@@ -27,12 +27,16 @@ const button = tv({
     disabled:opacity-50
     data-[pressed]:scale-[.97]
     data-[focus-visible]:ring-2
-    `),
+  `),
   variants: {
     intent: {
       primary: "bg-primary text-white data-[hovered]:bg-primary/70",
-      secondary: "bg-secondary data-[hovered]:bg-secondary/70 text-white",
+      secondary: "bg-secondary text-white data-[hovered]:bg-secondary/70",
+      tertiary: "bg-tertiary data-[hovered]:bg-tertiary/70 text-white",
+      quaternary: "bg-quaternary text-white data-[hovered]:bg-quaternary/70",
+      //
       warning: "bg-warning text-white data-[hovered]:bg-warning/70",
+      danger: "bg-danger text-white data-[hovered]:bg-danger/70",
     },
     state: {
       filled: "",

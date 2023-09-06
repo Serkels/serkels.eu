@@ -3,8 +3,11 @@ import {
   Profile_UpdateRecord,
   data_to_domain,
 } from "@1/modules/profile/infra/strapi";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { Strapi_useQuery } from "./Strapi_useQuery";
 import { User_Repository } from "./User_Repository";
+
+import { getNextPageParam, getPreviousPageParam } from "~/core/use-query";
 
 /**
  * @example
@@ -32,6 +35,18 @@ export class User_useQuery extends Strapi_useQuery {
         query_key: User_Repository.keys.by_id(id),
         domain_deps: [id],
         require_jwt: true,
+      }),
+  };
+  contacts = {
+    useInfiniteQuery: ({ pageSize }: { pageSize: number }) =>
+      useInfiniteQuery({
+        queryFn: (options) =>
+          this.user_repository.contacts_list({
+            pagination: { pageSize, page: options.pageParam ?? 1 },
+          }),
+        getPreviousPageParam,
+        getNextPageParam,
+        queryKey: [""] as const,
       }),
   };
 

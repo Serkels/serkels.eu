@@ -39,6 +39,7 @@ export default ({ env }) => ({
     },
   },
   email: {
+    enabled: true,
     config: {
       provider: "nodemailer",
       providerOptions: {
@@ -64,6 +65,7 @@ export default ({ env }) => ({
   },
 
   upload: {
+    enabled: true,
     config: {
       provider: "aws-s3",
       sizeLimit: 0.5 * 1_024 * 1_024, // 0.5mb in bytes
@@ -84,6 +86,13 @@ export default ({ env }) => ({
         delete: {},
       },
     },
+  },
+
+  comments: {
+    enabled: true,
+  },
+  "users-permissions": {
+    config: {},
   },
   // passwordless: {
   //   enabled: true,

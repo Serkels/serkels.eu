@@ -4,6 +4,7 @@ import type { Metadata, ResolvingMetadata } from "next";
 import type { PropsWithChildren } from "react";
 import tw from "tailwind-styled-components";
 import { My_Inbox_Nav } from "./My_Inbox_Nav";
+import { My_Inbox_Write_To_Button } from "./My_Inbox_Write_To_Button";
 import { Inbox_UserThread_List } from "./layout.client";
 
 //
@@ -24,6 +25,7 @@ export default function Layout({ children }: PropsWithChildren) {
       <My_Inbox_Nav>
         <Header>
           <Title>Messages</Title>
+          <My_Inbox_Write_To_Button />
         </Header>
         <Inbox_UserThread_List />
       </My_Inbox_Nav>

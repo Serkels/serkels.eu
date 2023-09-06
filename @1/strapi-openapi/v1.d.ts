@@ -598,6 +598,9 @@ export interface paths {
     get: operations["get/user-profiles/me"];
     put: operations["put/user-profiles/me"];
   };
+  "/user-profiles/me/contacts": {
+    get: operations["get/user-profiles/me/contacts"];
+  };
   "/users": {
     /** Get list of users */
     get: {
@@ -6646,7 +6649,14 @@ export interface components {
       };
     };
   };
-  parameters: never;
+  parameters: {
+    FieldsQuery?: string;
+    FiltersQuery?: string;
+    LocaleQuery?: string;
+    PaginationQuery?: string;
+    PopulateQuery?: string;
+    SortQuery?: string;
+  };
   requestBodies: {
     "Users-Permissions-RoleRequest": {
       content: {
@@ -9634,6 +9644,31 @@ export interface operations {
     requestBody: {
       content: {
         "application/json": components["schemas"]["UserProfileRequest"];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["UserProfileResponse"];
+        };
+      };
+      400: components["responses"]["400"];
+      401: components["responses"]["401"];
+      403: components["responses"]["403"];
+      404: components["responses"]["404"];
+      500: components["responses"]["500"];
+    };
+  };
+  "get/user-profiles/me/contacts": {
+    parameters: {
+      query?: {
+        /** @description Sort by attributes ascending (asc) or descending (desc) */
+        sort?: components["parameters"]["SortQuery"];
+        /** @description Pagination */
+        pagination?: components["parameters"]["PaginationQuery"];
+        /** @description Relations to return */
+        populate?: components["parameters"]["PopulateQuery"];
       };
     };
     responses: {

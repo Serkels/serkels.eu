@@ -26,7 +26,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2023-09-06T16:48:28.703Z"
+    "x-generation-date": "2023-09-06T15:35:16.812Z"
   },
   "servers": [
     {
@@ -16122,6 +16122,43 @@
           }
         }
       }
+    },
+    "parameters": {
+      "SortQuery": {
+        "type": "string"
+      },
+      "PaginationQuery": {
+        "type": "object",
+        "properties": {
+          "pageSize": {
+            "type": "integer"
+          },
+          "page": {
+            "type": "integer"
+          },
+          "withCount": {
+            "type": "boolean"
+          },
+          "start": {
+            "type": "integer"
+          },
+          "limit": {
+            "type": "integer"
+          }
+        }
+      },
+      "FieldsQuery": {
+        "type": "string"
+      },
+      "PopulateQuery": {
+        "type": "string"
+      },
+      "FiltersQuery": {
+        "type": "string"
+      },
+      "LocaleQuery": {
+        "type": "string"
+      }
     }
   },
   "paths": {
@@ -23793,6 +23830,70 @@
             }
           }
         }
+      }
+    },
+    "/user-profiles/me/contacts": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserProfileResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "tags": [
+          "User-profile"
+        ],
+        "parameters": [
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sort by attributes ascending (asc) or descending (desc)",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/parameters/SortQuery"
+            }
+          },
+          {
+            "name": "pagination",
+            "in": "query",
+            "description": "Pagination",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/parameters/PaginationQuery"
+            }
+          },
+          {
+            "name": "populate",
+            "in": "query",
+            "description": "Relations to return",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/parameters/PopulateQuery"
+            }
+          }
+        ],
+        "operationId": "get/user-profiles/me/contacts"
       }
     }
   },

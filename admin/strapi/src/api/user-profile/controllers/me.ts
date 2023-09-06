@@ -24,6 +24,7 @@ export default {
       owner: {
         fields: ["email", "username"],
       },
+      ...(ctx.query.populate || {}),
     };
 
     const constroller = strapi.controller<Common.UID.ContentType>(

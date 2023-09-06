@@ -67,15 +67,18 @@ module.exports = withTV({
         //
         primary: Chateau_Green,
         secondary: Cerulean,
-        RedViolet: Congress_Blue,
+        tertiary: Congress_Blue,
         quaternary: Eminence,
         //
         error: Guardsman_Red,
         success: Chateau_Green,
         warning: Gamboge,
+        danger: Bittersweet,
       },
       width: {
-        "cols-6": `${COLUMNS_SIZE * 6 + GAP_SIZE * 5}px`,
+        "cols-6": `/home/x/zzz/github/toctocorg/toctoc/@1/config/typescript-config${
+          COLUMNS_SIZE * 6 + GAP_SIZE * 5
+        }px`,
         "cols-3": `${COLUMNS_SIZE * 3 + GAP_SIZE * 2}px`,
       },
       maxWidth: {

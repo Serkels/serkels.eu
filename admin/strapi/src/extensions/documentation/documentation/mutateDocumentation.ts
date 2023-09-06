@@ -1,5 +1,6 @@
 //
 
+import query_parameters from "./query_parameters.json";
 import requests_relations_model from "./requests_relations_model.json";
 import responses_error_model from "./responses_error_model.json";
 
@@ -20,5 +21,14 @@ export default function mutateDocumentation(generatedDocumentationDraft) {
   Object.assign(
     generatedDocumentationDraft.components.schemas,
     requests_relations_model,
+  );
+
+  //
+
+  generatedDocumentationDraft.components.parameters =
+    generatedDocumentationDraft.components.parameters ?? {};
+  Object.assign(
+    generatedDocumentationDraft.components.parameters,
+    query_parameters,
   );
 }

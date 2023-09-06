@@ -1,0 +1,37 @@
+{
+  "SortQuery": {
+    "type": "string"
+  },
+  "PaginationQuery": {
+    "type": "object",
+    "properties": {
+      "pageSize": {
+        "type": "integer"
+      },
+      "page": {
+        "type": "integer"
+      },
+      "withCount": {
+        "type": "boolean"
+      },
+      "start": {
+        "type": "integer"
+      },
+      "limit": {
+        "type": "integer"
+      }
+    }
+  },
+  "FieldsQuery": {
+    "type": "string"
+  },
+  "PopulateQuery": {
+    "type": "string"
+  },
+  "FiltersQuery": {
+    "type": "string"
+  },
+  "LocaleQuery": {
+    "type": "string"
+  }
+}

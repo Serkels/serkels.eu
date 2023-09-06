@@ -1,7 +1,25 @@
 //
 
+import { KoaContext, Next } from "~/types";
+
 module.exports = {
   routes: [
+    {
+      method: "GET",
+      path: "/user-profiles/me/contacts",
+      handler: "api::user-profile.user-profile.find",
+      config: {
+        policies: [],
+        middlewares: [
+          find_in_owner_contact(),
+          //
+          //
+          //
+        ],
+        description: "Get contacts user profiles",
+      },
+      info: { apiName: "user-profile", type: "content-api" },
+    },
     {
       method: "GET",
       path: "/user-profiles/me",
@@ -26,3 +44,20 @@ module.exports = {
     },
   ],
 };
+
+//
+
+function find_in_owner_contact() {
+  return async function find(context: KoaContext, next: Next) {
+    context.query.filters = {
+      id: [],
+    };
+    context.query.populate = {};
+
+    //
+    //
+    //
+
+    return next();
+  };
+}

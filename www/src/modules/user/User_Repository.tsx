@@ -1,7 +1,9 @@
 //
 
 import { HTTPError } from "@1/core/error";
+import type { Strapi_Query_Params } from "@1/modules/common";
 import type { Profile_UpdateRecord } from "@1/modules/profile/infra/strapi";
+import type { Profile_Schema } from "@1/strapi-openapi";
 import { type ApiClient } from "~/app/api/v1";
 import type { StrapiRepository } from "~/core/StrapiRepository";
 
@@ -81,5 +83,36 @@ export class User_Repository {
     } catch (e) {
       throw new HTTPError("update_image", { cause: await res.text() });
     }
+  }
+
+  async contacts_list(query: Strapi_Query_Params<Profile_Schema>) {
+    const pagination = {
+      page: query.pagination?.page,
+      pageSize: query.pagination?.pageSize,
+    };
+    const res = await this.repository.client.GET("/user-profiles/me", {
+      headers: this.repository.headers,
+      params: {
+        query: {
+          populate: {
+            contacts: {
+              pagination,
+            },
+          },
+        },
+      },
+    });
+
+    //
+
+    if (res.error) {
+      const body = res.error;
+      throw new HTTPError(
+        `${res.response.url} ${res.response.status} : ${body.error.name}`,
+        { cause: body.error },
+      );
+    }
+
+    return res.data;
   }
 }

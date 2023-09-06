@@ -2,6 +2,7 @@
 
 import { AuthError } from "@1/core/error";
 import {
+  useInfiniteQuery,
   useMutation,
   useQuery,
   type MutationFunction,
@@ -27,26 +28,26 @@ export class Strapi_useQuery {
   #log = debug("~:modules:exchange:Strapi_useQuery");
 
   #infinite_query<OpenApiOut, DomainOut>(endpoint: {
-    fetch: (client: ApiClient) => OpenApiOut;
-    require_jwt: true;
+    fetch: () => OpenApiOut;
+
     query_key: QueryKey;
     mapper: z.ZodEffects<ZodTypeAny, DomainOut>;
     domain_deps?: DependencyList;
   }) {
-    const { mapper } = endpoint;
-    const info = { data: { pages: [{ data: {} }] } };
-    const [infinite_list, set_infinite_list] = useState<DomainOut>();
+    const { fetch, query_key: queryKey, domain_deps } = endpoint;
 
-    useEffect(() => {
-      const { data } = info;
-      if (!data) return;
-      if (!mapper) throw new AuthError("mapper not reconized");
+    const load_infinite_list_query_fn = () => {
+      debug("load_infinite_list_query_fn");
+      return fetch();
+    };
 
-      const result = mapper.parse(data.pages.map((page) => page.data).flat());
-
-      set_infinite_list(result);
-    }, [mapper, info.data, set_infinite_list]);
-    return { info, infinite_list };
+    return useInfiniteQuery({
+      queryFn: useCallback(load_infinite_list_query_fn, [
+        this.repository,
+        ...(domain_deps ?? []),
+      ]),
+      queryKey,
+    });
   }
 
   #query<OpenApiOut, DomainOut>(endpoint: {
