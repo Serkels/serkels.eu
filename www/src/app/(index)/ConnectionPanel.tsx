@@ -19,7 +19,8 @@ import { Avatar } from "~/components/Avatar";
 //
 
 export function ConnectionPanel() {
-  const { data: session, status } = useSession();
+  const { data: session, status, update } = useSession();
+  useTimeoutFn(update, 666);
   const router = useRouter();
   const { mutate, isLoading, isSuccess, isError } = useMutation(
     submitFormHandler,
@@ -100,9 +101,6 @@ function CheckYourMail() {
 }
 
 function LoginAs({ user }: { user: NonNullable<Session["user"]> }) {
-  const { update } = useSession();
-  useTimeoutFn(update, 666);
-
   const on_logout = useCallback(() => signOut(), [user.email]);
   return (
     <WhiteCard>

@@ -57,7 +57,7 @@ export function Dialog({ children }: PropsWithChildren) {
           justify-between
           sm:min-w-[50vw]
           sm:max-w-[75vw]
-          md:min-w-[25vw]
+          md:min-w-[45vw]
           md:max-w-[50vw]
           lg:max-w-[25vw]
         `,

@@ -37,6 +37,7 @@ export class User_useQuery extends Strapi_useQuery {
         require_jwt: true,
       }),
   };
+
   contacts = {
     useInfiniteQuery: ({ pageSize }: { pageSize: number }) =>
       useInfiniteQuery({
@@ -46,7 +47,8 @@ export class User_useQuery extends Strapi_useQuery {
           }),
         getPreviousPageParam,
         getNextPageParam,
-        queryKey: [""] as const,
+        queryKey: User_Repository.keys.contacts(),
+        staleTime: Infinity,
       }),
   };
 

@@ -6653,7 +6653,8 @@ export interface components {
     FieldsQuery?: string;
     FiltersQuery?: string;
     LocaleQuery?: string;
-    PaginationQuery?: string;
+    PaginationByOffsetQuery?: string;
+    PaginationByPageQuery?: string;
     PopulateQuery?: string;
     SortQuery?: string;
   };
@@ -9666,7 +9667,10 @@ export interface operations {
         /** @description Sort by attributes ascending (asc) or descending (desc) */
         sort?: components["parameters"]["SortQuery"];
         /** @description Pagination */
-        pagination?: components["parameters"]["PaginationQuery"];
+        pagination?: {
+          page?: number;
+          pageSize?: number;
+        };
         /** @description Relations to return */
         populate?: components["parameters"]["PopulateQuery"];
       };
@@ -9675,7 +9679,7 @@ export interface operations {
       /** @description OK */
       200: {
         content: {
-          "application/json": components["schemas"]["UserProfileResponse"];
+          "application/json": components["schemas"]["UserProfileListResponse"];
         };
       };
       400: components["responses"]["400"];

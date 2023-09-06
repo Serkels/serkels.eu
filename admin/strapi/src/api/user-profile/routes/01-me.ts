@@ -1,6 +1,8 @@
 //
 
+import { Params } from "@strapi/strapi/lib/services/entity-service";
 import { KoaContext, Next } from "~/types";
+import { findOneFromUser } from "../services/user-profile";
 
 module.exports = {
   routes: [
@@ -9,7 +11,7 @@ module.exports = {
       path: "/user-profiles/me/contacts",
       handler: "api::user-profile.user-profile.find",
       config: {
-        policies: [],
+        policies: ["global::is-authenticated"],
         middlewares: [
           find_in_owner_contact(),
           //
@@ -25,7 +27,7 @@ module.exports = {
       path: "/user-profiles/me",
       handler: "api::user-profile.me.find",
       config: {
-        policies: [],
+        policies: ["global::is-authenticated"],
         middlewares: [],
         description: "Get authenticated user profile",
       },
@@ -36,7 +38,7 @@ module.exports = {
       path: "/user-profiles/me",
       handler: "api::user-profile.me.update",
       config: {
-        policies: [],
+        policies: ["global::is-authenticated"],
         middlewares: [],
         description: "Update authenticated user profile",
       },
@@ -49,9 +51,21 @@ module.exports = {
 
 function find_in_owner_contact() {
   return async function find(context: KoaContext, next: Next) {
-    context.query.filters = {
-      id: [],
+    const user = context.state.user;
+    const { id } = await findOneFromUser(Number(user.id));
+    const { contacts } = await strapi.entityService.findOne(
+      "api::user-profile.user-profile",
+      id,
+      { populate: { contacts: { fields: ["id"] } } },
+    );
+
+    const contact_ids = contacts.map(({ id }) => Number(id));
+    const query: Params.Pick<"api::user-profile.user-profile", "filters"> = {
+      filters: {
+        id: { $in: contact_ids },
+      },
     };
+    context.query.filters = query.filters;
     context.query.populate = {};
 
     //

@@ -145,8 +145,7 @@ export function Ask_Body() {
         ),
       )
       .with([{ status: "success" }, P._, P._], () => <MessageSent />)
-      .with([{ status: "idle" }, { status: "success" }, P._], (i) => {
-        console.warn(i);
+      .with([{ status: "idle" }, { status: "success" }, P._], () => {
         return <Loading />;
       })
       .exhaustive()

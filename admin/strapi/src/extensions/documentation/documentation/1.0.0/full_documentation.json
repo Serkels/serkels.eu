@@ -26,7 +26,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2023-09-06T18:11:59.803Z"
+    "x-generation-date": "2023-09-06T21:06:52.613Z"
   },
   "servers": [
     {
@@ -16127,23 +16127,30 @@
       "SortQuery": {
         "type": "string"
       },
-      "PaginationQuery": {
+      "PaginationByPageQuery": {
+        "page": {
+          "type": "integer"
+        },
+        "pageSize": {
+          "type": "integer"
+        },
+        "withCount": {
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "PaginationByOffsetQuery": {
         "type": "object",
         "properties": {
-          "pageSize": {
-            "type": "integer"
-          },
-          "page": {
-            "type": "integer"
-          },
-          "withCount": {
-            "type": "boolean"
-          },
           "start": {
             "type": "integer"
           },
           "limit": {
             "type": "integer"
+          },
+          "withCount": {
+            "type": "boolean",
+            "default": true
           }
         }
       },
@@ -23840,7 +23847,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserProfileResponse"
+                  "$ref": "#/components/schemas/UserProfileListResponse"
                 }
               }
             }
@@ -23880,7 +23887,15 @@
             "description": "Pagination",
             "required": false,
             "schema": {
-              "$ref": "#/components/parameters/PaginationQuery"
+              "type": "object",
+              "properties": {
+                "page": {
+                  "type": "integer"
+                },
+                "pageSize": {
+                  "type": "integer"
+                }
+              }
             }
           },
           {

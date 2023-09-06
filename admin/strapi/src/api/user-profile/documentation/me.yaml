@@ -59,7 +59,7 @@
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/UserProfileResponse"
+              "$ref": "#/components/schemas/UserProfileListResponse"
       "400":
         "$ref": "#/components/responses/400"
       "401":
@@ -85,7 +85,12 @@
         description: Pagination
         required: false
         schema:
-          $ref: "#/components/parameters/PaginationQuery"
+          type: object
+          properties:
+            page:
+              type: integer
+            pageSize:
+              type: integer
       - name: populate
         in: query
         description: Relations to return

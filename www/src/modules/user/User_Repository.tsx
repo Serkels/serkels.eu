@@ -39,7 +39,8 @@ import type { StrapiRepository } from "~/core/StrapiRepository";
 export class User_Repository {
   static keys = {
     all: ["profile"] as const,
-    by_id: (id: number) => ["profile", "by_id", String(id)] as const,
+    by_id: (id: number) => [...this.keys.all, "by_id", String(id)] as const,
+    contacts: () => [...this.keys.all, "contacts"] as const,
   };
 
   //
@@ -90,15 +91,12 @@ export class User_Repository {
       page: query.pagination?.page,
       pageSize: query.pagination?.pageSize,
     };
-    const res = await this.repository.client.GET("/user-profiles/me", {
+
+    const res = await this.repository.client.GET("/user-profiles/me/contacts", {
       headers: this.repository.headers,
       params: {
         query: {
-          populate: {
-            contacts: {
-              pagination,
-            },
-          },
+          pagination,
         },
       },
     });
