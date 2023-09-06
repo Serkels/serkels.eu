@@ -2,7 +2,7 @@
 
 import type { Notification_New_Answer_Props } from "@1/modules/notification/domain";
 import { New_Answer_Schema_To_Domain } from "@1/modules/notification/infra/strapi";
-import { profile_to_domain } from "@1/modules/profile/infra/strapi";
+import { Profile_Record } from "@1/modules/profile/infra/strapi";
 import { observable } from "@trpc/server/observable";
 import { ZodError, z } from "zod";
 import { fromZodError } from "zod-validation-error";
@@ -38,7 +38,7 @@ export class Question_Notification_Observer {
 
       const profile_record = await findOneFromUser(user_id);
 
-      const profile = profile_to_domain.parse(profile_record, {
+      const profile = Profile_Record.parse(profile_record, {
         path: ["profile_record"],
       });
 

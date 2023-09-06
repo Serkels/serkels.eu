@@ -37,10 +37,25 @@ export type Profile_UpdateRecord = z.TypeOf<typeof Profile_UpdateRecord>;
 
 //
 
-export function data_to_domain({ data }: Profile_DataRecord): Profile {
+export function profile_to_domain({ data }: Profile_DataRecord): Profile {
   const { id, attributes } = data ?? { id: NaN, attributes: {} };
   const domain = Profile.create({
     ...Profile.zero.toObject(),
+    ...attributes,
+    id,
+  });
+
+  if (domain.isFail()) {
+    throw new InputError("Profile_Record.to_domain", { cause: domain.error() });
+  }
+
+  return domain.value();
+}
+
+export function data_to_domain({
+  data: { id, attributes },
+}: Profile_DataRecord): Profile {
+  const domain = Profile.create({
     ...attributes,
     id,
   });

@@ -37,7 +37,6 @@
     "fix-esm": "1.0.1",
     "fp-ts": "2.16.1",
     "mime-types": "2.1.35",
-    "modern-errors-serialize": "^5.0.0",
     "ms": "3.0.0-canary.1",
     "modern-errors-serialize": "5.0.0",
     "node-schedule": "2.1.1",
