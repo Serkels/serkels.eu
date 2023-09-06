@@ -98,73 +98,17 @@ export class Strapi_useQuery {
     return { info, data };
   }
 
-  #mutate<OpenApiOut, DomainOut, Variables>(endpoint: {
-    fetch: (client: ApiClient, variables: Variables) => OpenApiOut;
-    require_jwt: true;
-    query_key: QueryKey;
-    mapper: z.ZodEffects<ZodTypeAny, DomainOut>;
-    domain_deps?: DependencyList;
+  #mutate<Variables, OpenApiOut>(endpoint: {
+    fetch: (variables: Variables) => OpenApiOut;
   }) {
-    // const { data: session } = useSession();
-
-    // const mutation_fn = async (message: string) => {
-    //   this.#log("mutation_fn", { message });
-
-    //   const trace = tracer({
-    //     name: `Create Message for the inbox ${this.repository.thread_id}`,
-    //   });
-
-    //   trace.startChild({
-    //     op: "create record",
-    //   });
-
-    //   try {
-    //     await this.repository.create({ content: message });
-    //   } finally {
-    //     trace[Symbol.dispose]();
-    //   }
-    // };
-
-    // const mutation_result = useMutation(
-    //   useCallback(create_message, [this.repository, session?.user?.id]),
-    // );
-
-    // const query_client = useQueryClient();
-    // useEffect(() => {
-    //   console.log({ mutation_result });
-    //   query_client.invalidateQueries(
-    //     Inbox_QueryKeys.messages(this.repository.thread_id),
-    //   );
-    // }, [mutation_result.isSuccess]);
-    // return mutation_result;
-
     const { fetch } = endpoint;
 
     const mutationFn: MutationFunction<OpenApiOut, Variables> = async (
       variables,
     ) => {
-      debug("load_list_query_fn");
-      return fetch(this.repository.client, variables);
+      debug("mutationFn");
+      return fetch(variables);
     };
-
-    // const info = useMutation({
-    //   mutationFn: useCallback(load_query_fn, [
-    //     this.repository,
-    //     ...(domain_deps ?? []),
-    //   ]),
-    // });
-
-    // const [data, set_data] = useState<DomainOut>();
-
-    // useEffect(() => {
-    //   const { data: query_data } = info;
-    //   if (!query_data) return;
-    //   if (!mapper) throw new AuthError("mapper not reconized");
-
-    //   const result = mapper.parse(query_data);
-
-    //   set_data(result);
-    // }, [mapper, info.data, set_data]);
 
     const info = useMutation({
       mutationFn,

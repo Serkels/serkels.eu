@@ -17,13 +17,14 @@ export function AddContact() {
   const { info } = useMutation();
   const session_context = useSession();
   const profile = useProfile();
+
   const contacts = (
     session_context.data?.user?.profile.attributes?.contacts?.data ?? []
   ).map(({ id }) => ({ id: Number(id) }));
   const is_a_contact = contacts.some(
     (contact) => contact.id === profile.get("id"),
   );
-  console.log({ info, profile, contacts, is_a_contact });
+
   const toggle_add_contact = useCallback(async () => {
     const contacts_ids = is_a_contact
       ? contacts.filter((contact) => contact.id !== profile.get("id"))
@@ -38,6 +39,8 @@ export function AddContact() {
       info.reset();
     }, 666);
   }, [profile.get("id"), is_a_contact]);
+
+  //
 
   return match([info, session_context])
     .with([{ status: "loading" }, P._], [P._, { status: "loading" }], () => (

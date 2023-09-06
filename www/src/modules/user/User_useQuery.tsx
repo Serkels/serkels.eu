@@ -3,7 +3,6 @@ import {
   Profile_UpdateRecord,
   data_to_domain,
 } from "@1/modules/profile/infra/strapi";
-import type { ApiClient } from "~/app/api/v1";
 import { Strapi_useQuery } from "./Strapi_useQuery";
 import { User_Repository } from "./User_Repository";
 
@@ -24,6 +23,7 @@ import { User_Repository } from "./User_Repository";
  * ```
  */
 export class User_useQuery extends Strapi_useQuery {
+  user_repository = new User_Repository(this.repository);
   by_id = {
     useQuery: (id: number) =>
       this.query({
@@ -38,29 +38,16 @@ export class User_useQuery extends Strapi_useQuery {
   update = {
     useMutation: () =>
       this.mutate({
-        fetch: (client, data: Profile_UpdateRecord) => {
-          User_Repository.update(this.repository.headers, client, data);
-        },
-        mapper: Profile_DataRecord.transform(data_to_domain),
-        query_key: User_Repository.keys.all,
-        domain_deps: [],
-        require_jwt: true,
+        fetch: (data: Profile_UpdateRecord) =>
+          this.user_repository.update(data),
       }),
   };
 
   update_avatar = {
     useMutation: () => {
       return this.mutate({
-        fetch: (client: ApiClient, formData: FormData) =>
-          User_Repository.update_image(
-            this.repository.headers,
-            client,
-            formData,
-          ),
-        mapper: Profile_DataRecord.transform(data_to_domain),
-        query_key: User_Repository.keys.all,
-        domain_deps: [],
-        require_jwt: true,
+        fetch: (formData: FormData) =>
+          this.user_repository.update_image(formData),
       });
     },
   };
