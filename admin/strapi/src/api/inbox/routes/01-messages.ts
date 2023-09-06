@@ -11,6 +11,7 @@ import {
   findRelatedUser,
 } from "../../user-profile/services/user-profile";
 import { set_default_populate } from "../middlewares/set_default_populate";
+import { find_one_by_pair } from "../services/inbox";
 
 //
 
@@ -87,7 +88,7 @@ export default {
       path: "/inbox/to/:profile_id",
       handler: "api::inbox.inbox.create",
       config: {
-        description: "Get question answers",
+        description: "Create new inbox",
         middlewares: [
           set_default_populate,
           create_inbox,
@@ -143,31 +144,6 @@ async function find_one_by_id(
   return inbox;
 }
 
-async function find_one_by_pair(filters: {
-  owner_id: number;
-  participant_id: number;
-}) {
-  const inboxes = await strapi.entityService.findMany("api::inbox.inbox", {
-    filters: {
-      $or: [
-        { owner: { id: filters.owner_id } as any },
-        { participant: { id: filters.participant_id } as any },
-      ],
-    },
-  });
-
-  const [inbox] = inboxes;
-  if (Number.isNaN(inbox.id)) {
-    strapi.log.warn(
-      `service::user-profile.user-profile > ` +
-        `findOneFromUser([owner=${filters.owner_id},participant=${filters.participant_id}]): detected no inbox`,
-    );
-    return undefined;
-  }
-
-  return inbox;
-}
-
 async function no_duplicate(context, _cfg, { strapi }) {
   const profile_id = Number(context.params.profile_id);
   const user_id = context.state.user.id;
@@ -181,14 +157,19 @@ async function no_duplicate(context, _cfg, { strapi }) {
     );
   }
 
+  const [related_profile, participant_user] = await Promise.all([
+    findOneFromUser(Number(user_id)),
+    findRelatedUser(Number(profile_id)),
+  ]);
+
   const inbox = await Promise.race([
     find_one_by_pair({
-      participant_id: Number(profile_id),
       owner_id: Number(user_id),
+      participant_id: Number(profile_id),
     }),
     find_one_by_pair({
-      participant_id: Number(user_id),
-      owner_id: Number(user_id),
+      owner_id: Number(participant_user.id),
+      participant_id: Number(related_profile.id),
     }),
   ]);
 
