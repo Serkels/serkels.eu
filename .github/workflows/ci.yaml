@@ -28,6 +28,7 @@ jobs:
       - run: pnpm build
         env:
           STRAPI_API_URL: https://api.fake.toc-toc.org
+          STALKER_URL: https://stalker.fake.toc-toc.org
 
   admin:
     name: Build admin
@@ -51,5 +52,6 @@ jobs:
 
       - working-directory: admin
         run: pnpm install
+
       - working-directory: admin
         run: pnpm build
