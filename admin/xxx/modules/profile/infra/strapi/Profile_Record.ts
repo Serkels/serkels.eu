@@ -52,10 +52,10 @@ export function profile_to_domain({ data }: Profile_DataRecord): Profile {
   return domain.value();
 }
 
-export function data_to_domain({
-  data: { id, attributes },
-}: Profile_DataRecord): Profile {
+export function data_to_domain({ data }: Profile_DataRecord): Profile {
+  const { id, attributes } = data ?? { id: NaN, attributes: {} };
   const domain = Profile.create({
+    ...Profile.zero.toObject(),
     ...attributes,
     id,
   });
