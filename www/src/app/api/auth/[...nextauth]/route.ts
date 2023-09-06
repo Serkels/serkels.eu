@@ -110,6 +110,7 @@ export const authOptions: NextAuthOptions = {
     async jwt({ user, token, trigger }) {
       if (trigger === "update" && token.user) {
         const profile = await user_profile(token.user.jwt);
+
         token.user.profile = profile;
         token.user.name = [
           profile.attributes?.firstname,

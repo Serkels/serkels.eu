@@ -1,5 +1,6 @@
 import {
   Profile_DataRecord,
+  Profile_UpdateRecord,
   data_to_domain,
 } from "@1/modules/profile/infra/strapi";
 import type { ApiClient } from "~/app/api/v1";
@@ -37,7 +38,9 @@ export class User_useQuery extends Strapi_useQuery {
   update = {
     useMutation: () =>
       this.mutate({
-        fetch: User_Repository.update.bind(null, this.repository.headers),
+        fetch: (client, data: Profile_UpdateRecord) => {
+          User_Repository.update(this.repository.headers, client, data);
+        },
         mapper: Profile_DataRecord.transform(data_to_domain),
         query_key: User_Repository.keys.all,
         domain_deps: [],

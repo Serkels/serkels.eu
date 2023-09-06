@@ -18,6 +18,9 @@ export default {
       image: {
         fields: ["url"],
       },
+      contacts: {
+        fields: ["id"],
+      },
       owner: {
         fields: ["email", "username"],
       },
@@ -37,6 +40,12 @@ export default {
       ...(ctx.query.populate || {}),
       image: {
         fields: ["url"],
+      },
+      contacts: {
+        fields: ["id"],
+      },
+      owner: {
+        fields: ["email", "username"],
       },
     };
 

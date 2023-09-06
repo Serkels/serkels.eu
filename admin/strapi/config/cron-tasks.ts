@@ -12,6 +12,11 @@ const once_a_month = {
   tz: "Europe/Paris",
 };
 
+const every_monday_at_1am = {
+  rule: "0 0 1 * * 1", // once each month
+  tz: "Europe/Paris",
+};
+
 export default {
   unconfirmed_user_cleanup: {
     task: unconfirmed_user_cleanup_task,
@@ -20,6 +25,10 @@ export default {
   outdated_token_cleanup: {
     task: outdated_token_cleanup_task,
     options: once_a_month,
+  },
+  inactive_token_cleanup: {
+    task: inactive_token_cleanup_task,
+    options: every_monday_at_1am,
   },
   outdated_media_cleanup: {
     task: outdated_media_cleanup,
@@ -153,4 +162,41 @@ async function outdated_media_cleanup({ strapi }: { strapi: Strapi }) {
     strapi.log.error(error);
   }
   strapi.log.info("</ outdated_media_cleanup >");
+}
+
+async function inactive_token_cleanup_task({ strapi }: { strapi: Strapi }) {
+  strapi.log.info("< inactive_token_cleanup_task >");
+
+  const token_active_since_last_week = ({
+    updatedAt,
+  }: {
+    updatedAt?: DateTimeValue;
+  }) =>
+    // if a user is inactive after 1 week
+    // if today is after the last update + 1 week
+    compareAsc(new Date(), addWeeks(new Date(updatedAt), 1)) > 0;
+
+  try {
+    const tokens = await strapi.entityService.findMany(
+      "plugin::passwordless.token",
+      {
+        filters: { is_active: { $eq: false } },
+      },
+    );
+
+    for (const token of tokens) {
+      if (token_active_since_last_week(token)) continue;
+
+      await strapi.entityService.delete("plugin::passwordless.token", token.id);
+
+      strapi.log.info(
+        `inactive_token_cleanup_task > ` +
+          `DELETE plugin::passwordless.token:${token.id} ` +
+          `{email: ${token.email}}`,
+      );
+    }
+  } catch (error) {
+    strapi.log.error(error);
+  }
+  strapi.log.info("</ inactive_token_cleanup_task >");
 }

@@ -1399,6 +1399,11 @@ export interface ApiUserProfileUserProfile extends Schema.CollectionType {
       'oneToOne',
       'plugin::users-permissions.user'
     >;
+    contacts: Attribute.Relation<
+      'api::user-profile.user-profile',
+      'oneToMany',
+      'api::user-profile.user-profile'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

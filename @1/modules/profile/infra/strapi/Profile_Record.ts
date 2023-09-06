@@ -31,6 +31,7 @@ export const Profile_UpdateRecord = z.object({
   university: z.string().optional(),
   about: z.string().optional(),
   image: z.object({ set: z.array(z.object({ id: z.number() })) }).optional(),
+  contacts: z.object({ set: z.array(z.object({ id: z.number() })) }).optional(),
 });
 export type Profile_UpdateRecord = z.TypeOf<typeof Profile_UpdateRecord>;
 

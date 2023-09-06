@@ -2071,6 +2071,12 @@ export interface components {
         data?: {
           attributes?: {
             about?: string;
+            contacts?: {
+              data?: {
+                  attributes?: Record<string, unknown>;
+                  id?: number;
+                }[];
+            };
             /** Format: date-time */
             createdAt?: string;
             createdBy?: {
@@ -2498,6 +2504,12 @@ export interface components {
               data?: {
                 attributes?: {
                   about?: string;
+                  contacts?: {
+                    data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      }[];
+                  };
                   /** Format: date-time */
                   createdAt?: string;
                   createdBy?: {
@@ -3318,6 +3330,12 @@ export interface components {
               data?: {
                   attributes?: {
                     about?: string;
+                    contacts?: {
+                      data?: {
+                          attributes?: Record<string, unknown>;
+                          id?: number;
+                        }[];
+                    };
                     /** Format: date-time */
                     createdAt?: string;
                     createdBy?: {
@@ -5074,6 +5092,12 @@ export interface components {
         data?: {
           attributes?: {
             about?: string;
+            contacts?: {
+              data?: {
+                  attributes?: Record<string, unknown>;
+                  id?: number;
+                }[];
+            };
             /** Format: date-time */
             createdAt?: string;
             createdBy?: {
@@ -5832,6 +5856,12 @@ export interface components {
         data?: {
             attributes?: {
               about?: string;
+              contacts?: {
+                data?: {
+                    attributes?: Record<string, unknown>;
+                    id?: number;
+                  }[];
+              };
               /** Format: date-time */
               createdAt?: string;
               createdBy?: {
@@ -6063,6 +6093,96 @@ export interface components {
     };
     UserProfile: {
       about?: string;
+      contacts?: {
+        data?: {
+            attributes?: {
+              about?: string;
+              contacts?: {
+                data?: {
+                    attributes?: Record<string, unknown>;
+                    id?: number;
+                  }[];
+              };
+              /** Format: date-time */
+              createdAt?: string;
+              createdBy?: {
+                data?: {
+                  attributes?: Record<string, unknown>;
+                  id?: number;
+                };
+              };
+              firstname?: string;
+              image?: {
+                data?: {
+                  attributes?: {
+                    alternativeText?: string;
+                    caption?: string;
+                    /** Format: date-time */
+                    createdAt?: string;
+                    createdBy?: {
+                      data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      };
+                    };
+                    ext?: string;
+                    folder?: {
+                      data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      };
+                    };
+                    folderPath?: string;
+                    formats?: unknown;
+                    hash?: string;
+                    height?: number;
+                    mime?: string;
+                    name?: string;
+                    previewUrl?: string;
+                    provider?: string;
+                    provider_metadata?: unknown;
+                    related?: {
+                      data?: {
+                          attributes?: Record<string, unknown>;
+                          id?: number;
+                        }[];
+                    };
+                    /** Format: float */
+                    size?: number;
+                    /** Format: date-time */
+                    updatedAt?: string;
+                    updatedBy?: {
+                      data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      };
+                    };
+                    url?: string;
+                    width?: number;
+                  };
+                  id?: number;
+                };
+              };
+              lastname?: string;
+              owner?: {
+                data?: {
+                  attributes?: Record<string, unknown>;
+                  id?: number;
+                };
+              };
+              university?: string;
+              /** Format: date-time */
+              updatedAt?: string;
+              updatedBy?: {
+                data?: {
+                  attributes?: Record<string, unknown>;
+                  id?: number;
+                };
+              };
+            };
+            id?: number;
+          }[];
+      };
       /** Format: date-time */
       createdAt?: string;
       createdBy?: {
@@ -6421,6 +6541,7 @@ export interface components {
       data: {
         data?: {
           about?: string;
+          contacts?: (number | string)[];
           firstname: string;
           /** @example string or id */
           image?: number | string;

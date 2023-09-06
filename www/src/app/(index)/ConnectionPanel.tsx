@@ -12,6 +12,7 @@ import {
   type ComponentProps,
   type PropsWithChildren,
 } from "react";
+import { useTimeoutFn } from "react-use";
 import { match } from "ts-pattern";
 import { Avatar } from "~/components/Avatar";
 
@@ -99,6 +100,9 @@ function CheckYourMail() {
 }
 
 function LoginAs({ user }: { user: NonNullable<Session["user"]> }) {
+  const { update } = useSession();
+  useTimeoutFn(update, 666);
+
   const on_logout = useCallback(() => signOut(), [user.email]);
   return (
     <WhiteCard>

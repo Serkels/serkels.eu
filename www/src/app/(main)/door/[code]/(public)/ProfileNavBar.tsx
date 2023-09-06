@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ComponentPropsWithoutRef } from "react";
 import { useDoor_Value } from "../../door.context";
+import { AddContact } from "./AddContact";
 
 //
 
@@ -15,17 +16,17 @@ export function ProfileNavBar(props: ComponentPropsWithoutRef<"nav">) {
   return (
     <nav
       className={clsx(
-        "flex justify-between rounded-xl border border-gray-200 bg-white",
+        "flex justify-between rounded-xl border border-gray-200 bg-white px-3",
         className,
       )}
       {...other_props}
     >
       <ul
         className="
-          flex items-center py-3 
+          flex items-center py-3
           font-bold [&>li]:block
-          [&>li]:h-full [&>li]:border-r 
-          [&>li]:border-gray-200  [&>li]:px-4 
+          [&>li]:h-full [&>li]:border-r
+          [&>li]:border-gray-200  [&>li]:px-4
           [&>li]:py-1  [&>li]:text-sm
         "
       >
@@ -48,18 +49,32 @@ export function ProfileNavBar(props: ComponentPropsWithoutRef<"nav">) {
         </li>
       </ul>
 
-      <aside
-        className="
-          flex items-center py-3 
-          font-bold [&>button]:h-full
-          [&>button]:border-r [&>button]:border-gray-200 
-          [&>button]:px-4  [&>button]:py-1 
-          [&>button]:text-sm  [&>li]:block
-        "
-      >
-        <button>Ajouter</button>
-        <button>S'abonner</button>
-      </aside>
+      <ActionNav />
     </nav>
+  );
+}
+
+function ActionNav() {
+  const [{ is_yours }] = useDoor_Value();
+
+  if (is_yours) return null;
+
+  return (
+    <aside
+      className="
+        flex items-center py-3
+        font-bold
+        [&>button]:h-full
+        [&>button]:border-r
+      [&>button]:border-gray-200
+        [&>button]:px-4
+        [&>button]:py-1
+        [&>button]:text-sm
+        [&>li]:block
+      "
+    >
+      <AddContact />
+      {/* <button>S'abonner</button> */}
+    </aside>
   );
 }
