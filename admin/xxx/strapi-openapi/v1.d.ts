@@ -4,6 +4,11 @@
  */
 
 
+/** OneOf type helpers */
+type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
+type XOR<T, U> = (T | U) extends object ? (Without<T, U> & U) | (Without<U, T> & T) : T | U;
+type OneOf<T extends any[]> = T extends [infer Only] ? Only : T extends [infer A, infer B, ...infer Rest] ? OneOf<[XOR<A, B>, ...Rest]> : never;
+
 export interface paths {
   "/answer/{id}": {
     get: operations["get/answer/{id}"];
@@ -592,6 +597,9 @@ export interface paths {
   "/user-profiles/me": {
     get: operations["get/user-profiles/me"];
     put: operations["put/user-profiles/me"];
+  };
+  "/user-profiles/me/contacts": {
+    get: operations["get/user-profiles/me/contacts"];
   };
   "/users": {
     /** Get list of users */
@@ -2066,6 +2074,12 @@ export interface components {
         data?: {
           attributes?: {
             about?: string;
+            contacts?: {
+              data?: {
+                  attributes?: Record<string, unknown>;
+                  id?: number;
+                }[];
+            };
             /** Format: date-time */
             createdAt?: string;
             createdBy?: {
@@ -2493,6 +2507,12 @@ export interface components {
               data?: {
                 attributes?: {
                   about?: string;
+                  contacts?: {
+                    data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      }[];
+                  };
                   /** Format: date-time */
                   createdAt?: string;
                   createdBy?: {
@@ -3313,6 +3333,12 @@ export interface components {
               data?: {
                   attributes?: {
                     about?: string;
+                    contacts?: {
+                      data?: {
+                          attributes?: Record<string, unknown>;
+                          id?: number;
+                        }[];
+                    };
                     /** Format: date-time */
                     createdAt?: string;
                     createdBy?: {
@@ -5069,6 +5095,12 @@ export interface components {
         data?: {
           attributes?: {
             about?: string;
+            contacts?: {
+              data?: {
+                  attributes?: Record<string, unknown>;
+                  id?: number;
+                }[];
+            };
             /** Format: date-time */
             createdAt?: string;
             createdBy?: {
@@ -5285,6 +5317,12 @@ export interface components {
     QuestionResponseDataObject: {
       attributes?: components["schemas"]["Question"];
       id?: number;
+    };
+    /** @description Set entities to a specific set. Using set will overwrite all existing connections to other entities. */
+    SetRelation: {
+      set?: OneOf<[number[], {
+          id: number;
+        }[]]>;
     };
     Tag: {
       /** Format: date-time */
@@ -5821,6 +5859,12 @@ export interface components {
         data?: {
             attributes?: {
               about?: string;
+              contacts?: {
+                data?: {
+                    attributes?: Record<string, unknown>;
+                    id?: number;
+                  }[];
+              };
               /** Format: date-time */
               createdAt?: string;
               createdBy?: {
@@ -6052,6 +6096,96 @@ export interface components {
     };
     UserProfile: {
       about?: string;
+      contacts?: {
+        data?: {
+            attributes?: {
+              about?: string;
+              contacts?: {
+                data?: {
+                    attributes?: Record<string, unknown>;
+                    id?: number;
+                  }[];
+              };
+              /** Format: date-time */
+              createdAt?: string;
+              createdBy?: {
+                data?: {
+                  attributes?: Record<string, unknown>;
+                  id?: number;
+                };
+              };
+              firstname?: string;
+              image?: {
+                data?: {
+                  attributes?: {
+                    alternativeText?: string;
+                    caption?: string;
+                    /** Format: date-time */
+                    createdAt?: string;
+                    createdBy?: {
+                      data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      };
+                    };
+                    ext?: string;
+                    folder?: {
+                      data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      };
+                    };
+                    folderPath?: string;
+                    formats?: unknown;
+                    hash?: string;
+                    height?: number;
+                    mime?: string;
+                    name?: string;
+                    previewUrl?: string;
+                    provider?: string;
+                    provider_metadata?: unknown;
+                    related?: {
+                      data?: {
+                          attributes?: Record<string, unknown>;
+                          id?: number;
+                        }[];
+                    };
+                    /** Format: float */
+                    size?: number;
+                    /** Format: date-time */
+                    updatedAt?: string;
+                    updatedBy?: {
+                      data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      };
+                    };
+                    url?: string;
+                    width?: number;
+                  };
+                  id?: number;
+                };
+              };
+              lastname?: string;
+              owner?: {
+                data?: {
+                  attributes?: Record<string, unknown>;
+                  id?: number;
+                };
+              };
+              university?: string;
+              /** Format: date-time */
+              updatedAt?: string;
+              updatedBy?: {
+                data?: {
+                  attributes?: Record<string, unknown>;
+                  id?: number;
+                };
+              };
+            };
+            id?: number;
+          }[];
+      };
       /** Format: date-time */
       createdAt?: string;
       createdBy?: {
@@ -6408,14 +6542,18 @@ export interface components {
     };
     UserProfileRequest: {
       data: {
-        about?: string;
-        firstname: string;
-        /** @example string or id */
-        image?: number | string;
-        lastname: string;
-        /** @example string or id */
-        owner?: number | string;
-        university?: string;
+        data?: {
+          about?: string;
+          contacts?: (number | string)[];
+          firstname: string;
+          /** @example string or id */
+          image?: number | string;
+          lastname: string;
+          /** @example string or id */
+          owner?: number | string;
+          university?: string;
+        };
+        image?: components["schemas"]["SetRelation"];
       };
     };
     UserProfileResponse: {
@@ -6511,7 +6649,14 @@ export interface components {
       };
     };
   };
-  parameters: never;
+  parameters: {
+    FieldsQuery?: string;
+    FiltersQuery?: string;
+    LocaleQuery?: string;
+    PaginationQuery?: string;
+    PopulateQuery?: string;
+    SortQuery?: string;
+  };
   requestBodies: {
     "Users-Permissions-RoleRequest": {
       content: {
@@ -9488,36 +9633,11 @@ export interface operations {
           "application/json": components["schemas"]["UserProfileResponse"];
         };
       };
-      /** @description Bad Request */
-      400: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
-      /** @description Unauthorized */
-      401: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
-      /** @description Not Found */
-      404: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
-      /** @description Internal Server Error */
-      500: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
+      400: components["responses"]["400"];
+      401: components["responses"]["401"];
+      403: components["responses"]["403"];
+      404: components["responses"]["404"];
+      500: components["responses"]["500"];
     };
   };
   "put/user-profiles/me": {
@@ -9533,36 +9653,36 @@ export interface operations {
           "application/json": components["schemas"]["UserProfileResponse"];
         };
       };
-      /** @description Bad Request */
-      400: {
+      400: components["responses"]["400"];
+      401: components["responses"]["401"];
+      403: components["responses"]["403"];
+      404: components["responses"]["404"];
+      500: components["responses"]["500"];
+    };
+  };
+  "get/user-profiles/me/contacts": {
+    parameters: {
+      query?: {
+        /** @description Sort by attributes ascending (asc) or descending (desc) */
+        sort?: components["parameters"]["SortQuery"];
+        /** @description Pagination */
+        pagination?: components["parameters"]["PaginationQuery"];
+        /** @description Relations to return */
+        populate?: components["parameters"]["PopulateQuery"];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
         content: {
-          "application/json": components["schemas"]["Error"];
+          "application/json": components["schemas"]["UserProfileResponse"];
         };
       };
-      /** @description Unauthorized */
-      401: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
-      /** @description Forbidden */
-      403: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
-      /** @description Not Found */
-      404: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
-      /** @description Internal Server Error */
-      500: {
-        content: {
-          "application/json": components["schemas"]["Error"];
-        };
-      };
+      400: components["responses"]["400"];
+      401: components["responses"]["401"];
+      403: components["responses"]["403"];
+      404: components["responses"]["404"];
+      500: components["responses"]["500"];
     };
   };
 }

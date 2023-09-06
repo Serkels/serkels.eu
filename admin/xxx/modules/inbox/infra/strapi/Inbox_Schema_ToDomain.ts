@@ -22,7 +22,9 @@ export class Inbox_Schema_ToDomain implements IAdapter<Inbox_Schema, Inbox> {
   constructor(private thread_schema_todomain: Thread_Schema_ToDomain) {}
 
   build(target: Inbox_Schema): IResult<Inbox, Error> {
-    const thread = this.thread_schema_todomain.build(target.thread.data);
+    const thread = target.thread.data
+      ? this.thread_schema_todomain.build(target.thread.data)
+      : Result.Ok(undefined);
 
     const all_results = Result.combine([thread]);
     if (all_results.isFail()) {

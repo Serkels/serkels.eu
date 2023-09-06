@@ -14,6 +14,7 @@ export const Profile_Schema = z.object({
   updatedAt: z.coerce.date(),
   university: z.string(),
 });
+
 export type Profile_Schema = z.TypeOf<typeof Profile_Schema>;
 export const Profile_DataSchema = z_strapi_entity(Profile_Schema);
 export type Profile_DataSchema = z.TypeOf<typeof Profile_DataSchema>;

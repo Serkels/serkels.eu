@@ -53,6 +53,9 @@ export class Profile_SchemaToDomain
       id,
       about: String(about),
       university: String(university),
+      image: attributes.image?.data?.id
+        ? { data: { id: attributes.image.data.id } }
+        : {},
     });
   }
 }

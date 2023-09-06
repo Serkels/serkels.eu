@@ -21,7 +21,7 @@ export class Thread_Schema_ToDomain
   #profile_to_domain = new Profile_Schema_ToDomain();
 
   build(target: Thread_DataSchema): IResult<Thread, Error> {
-    const last_message = target.attributes.last_message
+    const last_message = target.attributes.last_message?.data
       ? this.#message_to_domain.build(target.attributes.last_message.data)
       : Result.Ok(undefined);
     const profile_data = target.attributes.participants.data.find(
