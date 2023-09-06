@@ -225,8 +225,8 @@ importers:
         specifier: 1.13.1
         version: 1.13.1
       zod:
-        specifier: 3.22.1
-        version: 3.22.1
+        specifier: 3.22.2
+        version: 3.22.2
     devDependencies:
       '@1/typescript-config':
         specifier: workspace:*
@@ -13189,10 +13189,6 @@ packages:
       zod: ^3.18.0
     dependencies:
       zod: 3.22.2
-    dev: false
-
-  /zod@3.22.1:
-    resolution: {integrity: sha512-+qUhAMl414+Elh+fRNtpU+byrwjDFOS1N7NioLY+tSlcADTx4TkCUua/hxJvxwDXcV4397/nZ420jy4n4+3WUg==}
     dev: false
 
   /zod@3.22.2:
