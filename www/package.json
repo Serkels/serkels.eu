@@ -27,7 +27,7 @@
     "clsx": "2.0.0",
     "date-fns": "2.30.0",
     "debug": "4.3.4",
-    "formik": "2.4.3",
+    "formik": "2.4.4",
     "modern-errors": "6.0.0",
     "ms": "3.0.0-canary.1",
     "next": "13.4.19",
