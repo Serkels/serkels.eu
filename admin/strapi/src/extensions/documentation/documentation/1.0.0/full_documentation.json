@@ -26,7 +26,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2023-09-06T21:06:52.613Z"
+    "x-generation-date": "2023-09-07T01:03:21.519Z"
   },
   "servers": [
     {
@@ -23666,6 +23666,53 @@
             }
           }
         }
+      }
+    },
+    "/inbox/to/{profile_id}": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InboxResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "tags": [
+          "Inbox"
+        ],
+        "parameters": [
+          {
+            "name": "profile_id",
+            "in": "path",
+            "description": "The profile id",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "operationId": "post/inbox/to/{profile_id}"
       }
     },
     "/inbox/{id}/messages/{id}": {

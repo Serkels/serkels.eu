@@ -13,6 +13,7 @@ import {
 import type { Inbox_ItemSchema, Inbox_ListSchema } from "@1/strapi-openapi";
 import {
   useInfiniteQuery,
+  useMutation,
   useQuery,
   type QueryFunction,
 } from "@tanstack/react-query";
@@ -20,7 +21,7 @@ import debug from "debug";
 import { useSession } from "next-auth/react";
 import { useCallback, useEffect, useState } from "react";
 import { getNextPageParam, getPreviousPageParam } from "~/core/use-query";
-import type { Inbox_Repository } from "./inbox.repository";
+import { Inbox_Repository } from "./inbox.repository";
 import { Inbox_QueryKeys } from "./query_keys";
 
 //
@@ -35,6 +36,22 @@ export class Inbox_Controller {
   }
 
   //
+
+  by_participent = {
+    useQuery: (id: number) => {
+      return useQuery({
+        queryFn: () => this.repository.find_by_participant(id),
+        queryKey: Inbox_QueryKeys.by_participent(id),
+        staleTime: Infinity,
+        retry: false,
+      });
+    },
+    useMutation: (id: number) => {
+      return useMutation({
+        mutationFn: () => this.repository.create(id),
+      });
+    },
+  };
 
   by_id = { useQuery: this.useInboxQuery.bind(this) };
   list = { useQuery: this.useListQuery.bind(this) };

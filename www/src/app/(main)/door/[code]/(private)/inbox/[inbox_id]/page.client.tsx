@@ -1,6 +1,7 @@
 "use client";
 
 import { Spinner } from "@1/ui/components/Spinner";
+import { useQueryClient } from "@tanstack/react-query";
 import { useCallback, useEffect, type PropsWithChildren } from "react";
 import { P, match } from "ts-pattern";
 import { Avatar_Show_Profile } from "~/components/Avatar_Show_Profile";
@@ -11,6 +12,7 @@ import {
   useInboxMessage_controller,
   useInbox_controller,
 } from "~/modules/inbox";
+import { Inbox_QueryKeys } from "~/modules/inbox/query_keys";
 import { Inbox_ValueProvider, useInbox_Value } from "./Inbox.context";
 import { Thread_ValueProvider, useThread_Value } from "./Thread.context";
 
@@ -68,17 +70,20 @@ export function Thread_Conversation() {
 
 export function Thread_Conversation_Form() {
   const [inbox] = useInbox_Value();
-
+  const query_client = useQueryClient();
+  const inbox_id = Number(inbox?.get("id"));
   const {
     create: { useMutation },
-  } = useInboxMessage_controller(inbox?.get("id"));
+  } = useInboxMessage_controller(inbox_id);
   const { mutateAsync } = useMutation();
 
   const send_message = useCallback(
     async (message: string) => {
       await mutateAsync(message);
+
+      query_client.invalidateQueries(Inbox_QueryKeys.item(inbox_id));
     },
-    [mutateAsync],
+    [mutateAsync, inbox_id],
   );
 
   //

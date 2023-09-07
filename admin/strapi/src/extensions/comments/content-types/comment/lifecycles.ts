@@ -43,8 +43,6 @@ export default {
 //
 
 async function notify_new_anwser_to_quetion_owner(event: Event) {
-  strapi.log.debug(`(notify_new_anwser_to_quetion_owner)`);
-
   const { result } = event as AfterCreateLifecycleEvent<
     { data: GetValues<"plugin::comments.comment"> },
     GetValues<"plugin::comments.comment"> & { id: number }
@@ -54,6 +52,7 @@ async function notify_new_anwser_to_quetion_owner(event: Event) {
   if (!related.startsWith(QUESTION_API_CONTENT_ID)) {
     return;
   }
+  strapi.log.debug(`(notify_new_anwser_to_quetion_owner)`);
 
   const question_id = parse_question_id(event);
   const entityService: EntityService = strapi.entityService;
@@ -75,34 +74,33 @@ async function notify_new_anwser_to_quetion_owner(event: Event) {
     );
   }
 }
-async function update_answer_count_of_related_quetion(event: Event) {
-  strapi.log.debug(`(update_answer_count_of_related_quetion)`);
 
+async function update_answer_count_of_related_quetion(event: Event) {
   const result: Comment = event["result"];
   const related: string = result.related;
   if (!related.startsWith(QUESTION_API_CONTENT_ID)) {
     return;
   }
-  const entityService: EntityService = strapi.entityService;
+  strapi.log.debug(`(update_answer_count_of_related_quetion)`);
 
   const question_id = parse_question_id(event);
   const answer_count = await count_related_comments(related);
 
-  await entityService
-    .update(QUESTION_API_CONTENT_ID, question_id, {
-      data: {
-        answer_count,
-        last_activity: new Date().toISOString(),
-      },
-    })
-    .then(() =>
-      strapi.log.info(
-        `${event.action} ${event.model.uid} > ` +
-          `UPDATE ${QUESTION_API_CONTENT_ID} ${question_id} ` +
-          `{answer_count: ${answer_count}}`,
-      ),
-    );
+  await strapi.entityService.update(QUESTION_API_CONTENT_ID, question_id, {
+    data: {
+      answer_count,
+      last_activity: new Date().toISOString(),
+    },
+  });
+
+  strapi.log.info(
+    `${event.action} ${event.model.uid} > ` +
+      `UPDATE ${QUESTION_API_CONTENT_ID} ${question_id} ` +
+      `{answer_count: ${answer_count}}`,
+  );
 }
+
+//
 
 function parse_question_id(event: Event) {
   const result: Comment = event["result"];

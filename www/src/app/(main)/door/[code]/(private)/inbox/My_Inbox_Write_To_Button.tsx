@@ -1,5 +1,6 @@
 "use client";
 
+import { UnknownError } from "@1/core/error";
 import type { Profile } from "@1/modules/profile/domain";
 import {
   Profile_DataRecord,
@@ -8,9 +9,13 @@ import {
 import { Button } from "@1/ui/components/ButtonV";
 import { Spinner } from "@1/ui/components/Spinner";
 import * as UI from "@1/ui/domains/exchange/AskModal";
+import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
-import { match } from "ts-pattern";
+import { useCallback, type PropsWithChildren } from "react";
+import { P, match } from "ts-pattern";
 import { AvatarMedia } from "~/components/Avatar";
+import { useInbox_controller } from "~/modules/inbox";
+import { Inbox_QueryKeys } from "~/modules/inbox/query_keys";
 import { useUserData } from "~/modules/user";
 import { useDoor_Value } from "../../../door.context";
 
@@ -66,7 +71,7 @@ function Contact_List() {
       }) => {
         return (
           <>
-            <nav className="flex-1 overflow-y-auto">
+            <nav className="flex-1 overflow-y-auto py-5">
               {infinite_list.pages
                 .map((page) => page.data)
                 .flat()
@@ -78,7 +83,9 @@ function Contact_List() {
                     ).parse({ data });
 
                     return (
-                      <Contact_Item key={profile.get("id")} profile={profile} />
+                      <Contact_Action key={profile.get("id")} profile={profile}>
+                        <Contact_Item profile={profile} />
+                      </Contact_Action>
                     );
                   } catch (error) {
                     return null;
@@ -102,20 +109,67 @@ function Contact_List() {
     .exhaustive();
 }
 
-function Contact_Item({ profile }: { profile: Profile }) {
+function Contact_Action({
+  profile,
+  children,
+}: PropsWithChildren<{ profile: Profile }>) {
   const [{ door_id }] = useDoor_Value();
   const state = UI.useDialogContext();
+  const query_client = useQueryClient();
+  const {
+    by_participent: { useQuery, useMutation },
+  } = useInbox_controller();
+  const find_query = useQuery(profile.get("id"));
+  const create = useMutation(profile.get("id"));
+  const create_inbox = useCallback(async () => {
+    await create.mutate();
+
+    query_client.invalidateQueries(Inbox_QueryKeys.lists());
+    query_client.invalidateQueries(
+      Inbox_QueryKeys.by_participent(profile.get("id")),
+    );
+  }, [query_client]);
+
+  if (!create.isIdle) {
+    return match(create)
+      .with({ status: "error", error: P.select() }, (error) => {
+        throw new UnknownError("Inbox creation fail", { cause: error });
+      })
+      .with({ status: "loading" }, () => <Spinner />)
+      .with({ status: "success", data: P.select() }, (data) => (
+        <Link href={`/@${door_id}/inbox/${data?.id}`} onClick={state.onClose}>
+          {children}
+        </Link>
+      ))
+      .otherwise(() => <Spinner />);
+  }
+  return match(find_query)
+    .with({ status: "error" }, () => (
+      <button className="w-full" onClick={create_inbox}>
+        {children}
+      </button>
+    ))
+    .with({ status: "loading" }, () => (
+      <div className="opacity-25">{children}</div>
+    ))
+    .with({ status: "success", data: P.select() }, (data) => (
+      <Link href={`/@${door_id}/inbox/${data?.id}`} onClick={state.onClose}>
+        {children}
+        <div className="float-right">{">"}</div>
+      </Link>
+    ))
+    .exhaustive();
+}
+
+function Contact_Item({ profile }: { profile: Profile }) {
   return (
-    <Link
-      href={`/@${door_id}/inbox/${profile.get("id")}`}
-      onClick={state.onClose}
-    >
-      <AvatarMedia
-        u={profile.get("id")}
-        username={profile.name}
-        $linked={false}
-      />
-    </Link>
+    <AvatarMedia
+      u={profile.get("id")}
+      username={profile.name}
+      $linked={false}
+      university={profile.university}
+      className="w-full"
+    />
   );
 }
 

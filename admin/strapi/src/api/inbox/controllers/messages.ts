@@ -5,6 +5,7 @@
 import type { Common } from "@strapi/strapi";
 import type { Context } from "@strapi/utils/dist/types";
 import type { Next } from "koa";
+import { Comment, ID_Schema, type KoaContext } from "~/types";
 
 export default {
   async find(ctx: Context, next: Next) {
@@ -17,10 +18,33 @@ export default {
       .controller("plugin::comments.admin" as Common.UID.Controller)
       .findOne(ctx, next);
   },
-  async create(ctx: Context, next: Next) {
-    return strapi
+  async create(context: KoaContext, next: Next) {
+    const response = (await strapi
       .controller("plugin::comments.client" as Common.UID.Controller)
-      .post(ctx, next);
+      .post(context, next)) as Comment;
+
+    //
+    //
+    //
+
+    const id = ID_Schema.parse(
+      String(response.related).replace(`api::thread.thread:`, ""),
+      { path: ["response.related"] },
+    );
+
+    await strapi.entityService.update("api::thread.thread", id, {
+      data: {
+        last_message: Number(response.id),
+      },
+    });
+
+    strapi.log.info(
+      `controller api::inbox.messages.create > ` +
+        `UPDATE "api::thread.thread" ${id} ` +
+        `{last_message: ${response.id}}`,
+    );
+
+    return response;
   },
   async delete(ctx: Context, next: Next) {
     return strapi

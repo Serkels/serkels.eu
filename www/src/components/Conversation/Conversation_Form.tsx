@@ -26,6 +26,7 @@ export function Conversation_Form({
         <Form className="w-full">
           <Input
             name="message"
+            autoComplete="off"
             disabled={isSubmitting}
             placeholder="Envoie un Message…"
           />

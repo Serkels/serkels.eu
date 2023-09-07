@@ -8,6 +8,7 @@ import type {
   ParameterizedContext,
   Request,
 } from "koa";
+import { z } from "zod";
 
 //
 
@@ -98,6 +99,9 @@ export type { Next } from "koa";
 //
 
 export type * as ApiContentTypes from "~/types/generated/contentTypes";
+
+//
+export const ID_Schema = z.coerce.number().safe().finite().nonnegative().int();
 
 //
 

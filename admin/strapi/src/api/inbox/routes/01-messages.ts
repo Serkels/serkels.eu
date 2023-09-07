@@ -6,6 +6,7 @@ import { NotFoundError } from "@strapi/utils/dist/errors";
 import { z } from "zod";
 import { replate_each_body_data_author_by_profile } from "~/src/extensions/comments/services/replace_autor";
 import type { Comment, KoaContext, Next } from "~/types";
+import { ID_Schema } from "~/types";
 import {
   findOneFromUser,
   findRelatedUser,
@@ -102,12 +103,7 @@ export default {
             name: "global::params-z-shema",
             config: {
               schema: z.object({
-                profile_id: z.coerce
-                  .number()
-                  .safe()
-                  .finite()
-                  .nonnegative()
-                  .int(),
+                profile_id: ID_Schema,
               }),
             },
           },
@@ -145,8 +141,12 @@ async function find_one_by_id(
 }
 
 async function no_duplicate(context, _cfg, { strapi }) {
-  const profile_id = Number(context.params.profile_id);
-  const user_id = context.state.user.id;
+  const profile_id = ID_Schema.parse(context.params.profile_id, {
+    path: ["context.params.profile_id"],
+  });
+  const user_id = ID_Schema.parse(context.state.user.id, {
+    path: ["context.state.user.id"],
+  });
 
   if (Number.isNaN(profile_id)) {
     throw new errors.PolicyError(
@@ -193,8 +193,12 @@ async function create_inbox(
   >,
   next: Next,
 ) {
-  const profile_id = Number(context.params.profile_id);
-  const user_id = Number(context.state.user.id);
+  const profile_id = ID_Schema.parse(context.params.profile_id, {
+    path: ["context.params.profile_id"],
+  });
+  const user_id = ID_Schema.parse(context.state.user.id, {
+    path: ["context.state.user.id"],
+  });
 
   //
 
@@ -227,8 +231,12 @@ async function create_related_inbox(
   //
   //
 
-  const profile_id = z.number().parse(context.params.profile_id);
-  const user_id = z.number().parse(context.state.user.id);
+  const profile_id = ID_Schema.parse(context.params.profile_id, {
+    path: ["context.params.profile_id"],
+  });
+  const user_id = ID_Schema.parse(context.state.user.id, {
+    path: ["context.state.user.id"],
+  });
 
   const [related_profile, participant_user] = await Promise.all([
     findOneFromUser(Number(user_id)),
@@ -294,9 +302,11 @@ async function create_related_inbox(
 //
 
 function set_default_relation_param() {
-  return async function relation(ctx: KoaContext, next: Next) {
-    const { params } = ctx;
-    const user_id = z.number().parse(ctx.state.user.id);
+  return async function relation(context: KoaContext, next: Next) {
+    const { params } = context;
+    const user_id = ID_Schema.parse(context.state.user.id, {
+      path: ["context.state.user.id"],
+    });
 
     const inbox = await find_one_by_id(params.id, {
       filters: { owner: { id: user_id } as any },
@@ -317,8 +327,8 @@ function set_default_relation_param() {
     }
 
     strapi.log.debug(`redirect to api::thread.thread:${thread.id}`);
-    ctx.params = {
-      ...(ctx.params ?? {}),
+    context.params = {
+      ...(context.params ?? {}),
       relation: `api::thread.thread:${thread.id}`,
     };
     return next();

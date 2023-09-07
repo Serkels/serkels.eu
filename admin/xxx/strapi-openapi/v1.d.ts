@@ -341,6 +341,9 @@ export interface paths {
     get: operations["get/inbox/{id}/messages/{id}"];
     delete: operations["delete/inbox/{id}/messages/{id}"];
   };
+  "/inbox/to/{profile_id}": {
+    post: operations["post/inbox/to/{profile_id}"];
+  };
   "/inboxes": {
     get: operations["get/inboxes"];
   };
@@ -7657,6 +7660,27 @@ export interface operations {
       200: {
         content: {
           "application/json": number;
+        };
+      };
+      400: components["responses"]["400"];
+      401: components["responses"]["401"];
+      403: components["responses"]["403"];
+      404: components["responses"]["404"];
+      500: components["responses"]["500"];
+    };
+  };
+  "post/inbox/to/{profile_id}": {
+    parameters: {
+      path: {
+        /** @description The profile id */
+        profile_id: number;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["InboxResponse"];
         };
       };
       400: components["responses"]["400"];

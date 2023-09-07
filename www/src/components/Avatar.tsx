@@ -141,7 +141,7 @@ const avatar_media = tv({
     figure: "flex",
     avatar: "h-12 w-12",
     figcaption: "ml-2 mt-0.5",
-    title: "block text-base font-medium leading-snug text-black",
+    title: "block text-left text-base font-medium leading-snug text-black",
     subtitle: "block text-sm font-light leading-snug text-gray-500",
   },
   variants: {

@@ -11,7 +11,7 @@ export async function find_one_by_pair(filters: {
 }) {
   const inboxes = await strapi.entityService.findMany("api::inbox.inbox", {
     filters: {
-      $or: [
+      $and: [
         { owner: { id: filters.owner_id } as any },
         { participant: { id: filters.participant_id } as any },
       ],
@@ -19,7 +19,7 @@ export async function find_one_by_pair(filters: {
   });
 
   const [inbox] = inboxes;
-  if (Number.isNaN(inbox.id)) {
+  if (Number.isNaN(inbox?.id)) {
     strapi.log.warn(
       `service::user-profile.user-profile > ` +
         `findOneFromUser([owner=${filters.owner_id},participant=${filters.participant_id}]): detected no inbox`,
