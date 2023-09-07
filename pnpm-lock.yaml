@@ -257,8 +257,8 @@ importers:
         specifier: 2.0.0
         version: 2.0.0
       formik:
-        specifier: 2.4.3
-        version: 2.4.3(react@18.2.0)
+        specifier: 2.4.4
+        version: 2.4.4(react@18.2.0)
       framer-motion:
         specifier: 10.16.4
         version: 10.16.4(react-dom@18.2.0)(react@18.2.0)
@@ -395,8 +395,8 @@ importers:
         specifier: 4.3.4
         version: 4.3.4
       formik:
-        specifier: 2.4.3
-        version: 2.4.3(react@18.2.0)
+        specifier: 2.4.4
+        version: 2.4.4(react@18.2.0)
       modern-errors:
         specifier: 6.0.0
         version: 6.0.0
@@ -6008,8 +6008,8 @@ packages:
     dependencies:
       is-callable: 1.2.7
 
-  /formik@2.4.3(react@18.2.0):
-    resolution: {integrity: sha512-2Dy79Szw3zlXmZiokUdKsn+n1ow4G8hRrC/n92cOWHNTWXCRpQXlyvz6HcjW7aSQZrldytvDOavYjhfmDnUq8Q==}
+  /formik@2.4.4(react@18.2.0):
+    resolution: {integrity: sha512-MV99upag7fCC3JfsI60WcxhymwNZnJUcMcnGuoz6mDf78SUfBbKjmfcA9LzHx4lEmjzmOflhP7oqz+ZQv5eStg==}
     peerDependencies:
       react: '>=16.8.0'
     dependencies:
