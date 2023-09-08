@@ -86,7 +86,7 @@ export function Login({ onSubmit }: LoginProps) {
           />
 
           <Button intent="primary" type="submit" isDisabled={isSubmitting}>
-            Étudiant
+            Se connecter
           </Button>
         </Form>
       )}
