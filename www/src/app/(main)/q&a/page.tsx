@@ -1,6 +1,7 @@
 //
 
 import { Hydrate, dehydrate } from "@tanstack/react-query";
+import { Suspense } from "react";
 import { fromServer } from "~/app/api/v1";
 import { getQueryClient } from "~/core/getQueryClient";
 import { Question_Repository } from "~/modules/question/repository";
@@ -25,7 +26,9 @@ export default async function Page({
   return (
     <main>
       <QASearchForm />
-      <Question_Form />
+      <Suspense>
+        <Question_Form />
+      </Suspense>
       <hr className="my-10" />
       <HydreatedQAList category={category} search={search} />
     </main>

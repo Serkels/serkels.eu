@@ -1,6 +1,7 @@
 //
 
 import type { Metadata, ResolvingMetadata } from "next";
+import { Suspense } from "react";
 import { Partener_SignUpForm } from "./page.client";
 
 //
@@ -17,7 +18,11 @@ export async function generateMetadata(
 //
 
 export default async function Page() {
-  return <Partener_SignUpForm />;
+  return (
+    <Suspense>
+      <Partener_SignUpForm />
+    </Suspense>
+  );
 }
 
 //

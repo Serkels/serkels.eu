@@ -1,6 +1,7 @@
 //
 
 import type { Metadata, ResolvingMetadata } from "next";
+import { Suspense } from "react";
 import { UserForm } from "./UserForm";
 
 //
@@ -17,7 +18,11 @@ export async function generateMetadata(
 //
 
 export default async function Page() {
-  return <UserForm />;
+  return (
+    <Suspense>
+      <UserForm />
+    </Suspense>
+  );
 }
 
 //

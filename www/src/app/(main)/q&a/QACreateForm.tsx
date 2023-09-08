@@ -2,7 +2,7 @@
 
 import { Card } from "@1/ui/components/Card";
 import { Spinner } from "@1/ui/components/Spinner";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { match } from "ts-pattern";
 import { Avatar } from "~/components/Avatar";
 import { ErrorOccur } from "~/components/ErrorOccur";
@@ -32,7 +32,9 @@ export function QACreateForm() {
       <Card>
         <Avatar className="h-10" />
         {isOpen ? (
-          <QACardFormBody onSubmit={(values) => mutateAsync(values)} />
+          <Suspense>
+            <QACardFormBody onSubmit={(values) => mutateAsync(values)} />
+          </Suspense>
         ) : (
           <button
             className="
