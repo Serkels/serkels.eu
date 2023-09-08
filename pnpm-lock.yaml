@@ -483,8 +483,8 @@ importers:
         specifier: 13.4.19
         version: 13.4.19
       '@sentry/cli':
-        specifier: 2.20.6
-        version: 2.20.6
+        specifier: 2.20.7
+        version: 2.20.7
       '@tanstack/react-query-devtools':
         specifier: 4.35.0
         version: 4.35.0(@tanstack/react-query@4.35.0)(react-dom@18.2.0)(react@18.2.0)
@@ -4456,8 +4456,8 @@ packages:
       - supports-color
     dev: false
 
-  /@sentry/cli@2.20.6:
-    resolution: {integrity: sha512-j4OFbDCIo/dB/uXDmXnRqCbku0KquekSFSG0Wb6RKwkGqpKwFMRauKXZJrgL4as3qIfDX8HrjNRv257QYMwdQA==}
+  /@sentry/cli@2.20.7:
+    resolution: {integrity: sha512-YaHKEUdsFt59nD8yLvuEGCOZ3/ArirL8GZ/66RkZ8wcD2wbpzOFbzo08Kz4te/Eo3OD5/RdW+1dPaOBgGbrXlA==}
     engines: {node: '>= 10'}
     hasBin: true
     requiresBuild: true
