@@ -1206,6 +1206,11 @@ export interface ApiPartnerPartner extends Schema.CollectionType {
       'api::opportunity.opportunity'
     >;
     avatar: Attribute.Media;
+    owner: Attribute.Relation<
+      'api::partner.partner',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

@@ -10,6 +10,7 @@ import {
   Plus,
   PlusBox,
 } from "@1/ui/icons";
+import type { PropsWithChildren } from "react";
 import { Avatar } from "~/components/Avatar";
 import { AsideBar } from "~/components/layouts/holy/aside";
 import { Header, Li_Link, SubNav_Bookmarks } from "./aside_navbar.client";
@@ -18,14 +19,52 @@ import { Header, Li_Link, SubNav_Bookmarks } from "./aside_navbar.client";
 
 export function Studient_NavBar() {
   return (
-    <AsideBar className="z-40 py-5 shadow-[20px_0px_40px_#00000014]">
+    <Aside_NavBar>
       <Header className="py-5" />
-      <Nav />
+      <Studient_Nav />
+    </Aside_NavBar>
+  );
+}
+
+export function Partner_NavBar() {
+  return (
+    <Aside_NavBar>
+      <Header className="py-5" />
+      <Partner_Nav />
+    </Aside_NavBar>
+  );
+}
+
+//
+
+function Aside_NavBar({ children }: PropsWithChildren) {
+  return (
+    <AsideBar className="z-40 py-5 shadow-[20px_0px_40px_#00000014]">
+      {children}
     </AsideBar>
   );
 }
 
-function Nav() {
+function Partner_Nav() {
+  return (
+    <nav>
+      <ul>
+        <Li_Link
+          icon={<Avatar className="h-6" />}
+          href="./"
+          is_active_includes={["./history", "./exchanges"]}
+        >
+          Profil
+        </Li_Link>
+        <Li_Link icon={<Gear />} href="./parameters">
+          Paramètres
+        </Li_Link>
+      </ul>
+    </nav>
+  );
+}
+
+function Studient_Nav() {
   return (
     <nav>
       <ul>

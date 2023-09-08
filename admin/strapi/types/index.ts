@@ -102,6 +102,7 @@ export type * as ApiContentTypes from "~/types/generated/contentTypes";
 
 //
 export const ID_Schema = z.coerce.number().safe().finite().nonnegative().int();
+export const Partner_Role_Schema = z.literal("partner");
 
 //
 

@@ -11,21 +11,20 @@ export default async (
     | { email: string | undefined; context: object }
     | undefined;
   if (!body) {
-    strapi.log.warn(
-      `extensions/passwordless/policies/email_check.ts requires a request body`,
-    );
+    strapi.log.warn(`plugin::passwordless.email_check requires a request body`);
     return false;
   }
 
   const { email, context } = body;
   if (!email) {
     strapi.log.warn(
-      `extensions/passwordless/policies/email_check.ts requires an email in the body`,
+      `plugin::passwordless.email_check requires an email in the body`,
     );
     return false;
   }
 
   if (context) {
+    // Allow access if a email and a context are sent (signup use case)
     return true;
   }
 
@@ -36,5 +35,7 @@ export default async (
     },
   );
 
+  // Allow access if we find any confirmed user with this email (login use case)
+  // Forbid access if no confirmed user with this email is found
   return Boolean(users.length);
 };

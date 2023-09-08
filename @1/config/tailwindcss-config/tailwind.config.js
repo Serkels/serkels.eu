@@ -69,6 +69,7 @@ module.exports = withTV({
         secondary: Cerulean,
         tertiary: Congress_Blue,
         quaternary: Eminence,
+        quinary: RedViolet,
         //
         error: Guardsman_Red,
         success: Chateau_Green,

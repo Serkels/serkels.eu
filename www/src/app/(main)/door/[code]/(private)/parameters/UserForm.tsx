@@ -95,7 +95,7 @@ export function UserForm() {
                 <Field
                   className="w-full rounded-sm border border-solid border-[#dddddd] px-3 py-2 text-xs placeholder-[#AAAAAA]"
                   component="textarea"
-                  rows="5"
+                  rows={5}
                   name="about"
                   type="about"
                 />

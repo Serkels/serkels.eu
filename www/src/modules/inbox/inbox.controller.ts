@@ -130,14 +130,17 @@ export class Inbox_Controller {
       if (!data) return;
       if (!mapper) throw new AuthError("User profile not reconized");
 
+      const flatten_data = data.pages.map((page) => page.data).flat();
+      if (flatten_data.length === 0) {
+        set_inboxes([]);
+        return;
+      }
       const result = InboxList_Schema.transform((list) =>
         mapper.build_list(list),
       ).parse(data.pages.map((page) => page.data).flat());
 
       if (result.isFail())
         throw new InputError("useInbox", { cause: result.error() });
-
-      console.log(result.value());
 
       set_inboxes(result.value());
     }, [mapper, info.data, set_inboxes]);

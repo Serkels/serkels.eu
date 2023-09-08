@@ -34,7 +34,7 @@ export function ConnectionPanel() {
   >["onSignUp"] = async ({ email, as }) => {
     match(as as "student" | "partner")
       .with("student", () => router.push(`/signup/user?email=${email}`))
-      .with("partner", () => console.info("TODO"));
+      .with("partner", () => router.push(`/signup/partener?email=${email}`));
   };
 
   if (status === "loading") return <Loading />;
@@ -102,9 +102,15 @@ function CheckYourMail() {
 
 function LoginAs({ user }: { user: NonNullable<Session["user"]> }) {
   const on_logout = useCallback(() => signOut(), [user.email]);
+
+  const href = match(user.role)
+    .with("studient", () => `/exchange`)
+    .with("partner", () => `/opportunity`)
+    .exhaustive();
+
   return (
     <WhiteCard>
-      <Link href="/exchange">
+      <Link href={href}>
         <figure>
           <Avatar className="m-auto aspect-square rounded-full p-11" />
           <figcaption className="text-center">

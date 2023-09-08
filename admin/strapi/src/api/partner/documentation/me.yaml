@@ -1,0 +1,52 @@
+---
+"/partners/me":
+  get:
+    responses:
+      "200":
+        description: OK
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/PartnerResponse"
+      "400":
+        "$ref": "#/components/responses/400"
+      "401":
+        "$ref": "#/components/responses/401"
+      "403":
+        "$ref": "#/components/responses/403"
+      "404":
+        "$ref": "#/components/responses/404"
+      "500":
+        "$ref": "#/components/responses/500"
+    tags:
+      - User-profile
+
+    operationId: get/partners/me
+
+  put:
+    responses:
+      "200":
+        description: OK
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/PartnerResponse"
+      "400":
+        "$ref": "#/components/responses/400"
+      "401":
+        "$ref": "#/components/responses/401"
+      "403":
+        "$ref": "#/components/responses/403"
+      "404":
+        "$ref": "#/components/responses/404"
+      "500":
+        "$ref": "#/components/responses/500"
+    tags:
+      - User-profile
+    operationId: put/partners/me
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/PartnerRequest"

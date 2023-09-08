@@ -1,7 +1,7 @@
 //
 
 import { Field, Form, Formik, type FormikConfig } from "formik";
-import { Button } from "../../components/Button";
+import { Button } from "../../components/ButtonV";
 
 export function LoginForm({
   onLogin,
@@ -50,20 +50,19 @@ export function SignUp({ onSubmit }: SignUpProps) {
           />
 
           <Button
-            variant="tertiary"
+            intent="secondary"
             type="submit"
-            disabled={isSubmitting}
-            onClick={() => setFieldValue("as", "student")}
+            isDisabled={isSubmitting}
+            onPress={() => setFieldValue("as", "student")}
           >
             Étudiant
           </Button>
 
           <Button
-            variant="secondary"
+            intent="quinary"
             type="submit"
-            disabled={true}
-            className="opacity-10"
-            onClick={() => setFieldValue("as", "partner")}
+            isDisabled={isSubmitting}
+            onPress={() => setFieldValue("as", "partner")}
           >
             Partenaire
           </Button>
@@ -86,7 +85,7 @@ export function Login({ onSubmit }: LoginProps) {
             type="email"
           />
 
-          <Button variant="primary" type="submit" disabled={isSubmitting}>
+          <Button intent="primary" type="submit" isDisabled={isSubmitting}>
             Étudiant
           </Button>
         </Form>

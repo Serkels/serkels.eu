@@ -3,6 +3,7 @@
 import mutateExchangeDealDocumentation from "../src/api/exchange-deal/documentation/mutateDocumentation";
 import mutateExchangeDocumentation from "../src/api/exchange/documentation/mutateDocumentation";
 import mutate_inbox_documentation from "../src/api/inbox/documentation/mutateDocumentation";
+import mutate_partner_documentation from "../src/api/partner/documentation/mutateDocumentation";
 import mutateQuestionDocumentation from "../src/api/question/documentation/mutateDocumentation";
 import mutate_thread_documentation from "../src/api/thread/documentation/mutateDocumentation";
 import mutate_user_profiles_documentation from "../src/api/user-profile/documentation/mutateDocumentation";
@@ -34,6 +35,7 @@ export default ({ env }) => ({
           mutate_thread_documentation(generatedDocumentationDraft);
           mutate_inbox_documentation(generatedDocumentationDraft);
           mutate_user_profiles_documentation(generatedDocumentationDraft);
+          mutate_partner_documentation(generatedDocumentationDraft);
         },
       },
     },

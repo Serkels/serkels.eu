@@ -73,6 +73,8 @@ export type Notification_Schema = any & With_Id;
 //
 
 export type Profile_Schema = Schemas["UserProfileResponseDataObject"];
+export type Partner_Schema = Schemas["PartnerResponseDataObject"];
+export type Partner_RequestSchema = Schemas["PartnerRequest"];
 
 //
 //

@@ -16,7 +16,9 @@ declare module "next-auth" {
     jwt: string;
     id: number;
     username: string;
+    role: "partner" | "studient";
     profile: components["schemas"]["UserProfileListResponseDataItem"];
+    partner?: components["schemas"]["PartnerListResponseDataItem"];
   }
 }
 

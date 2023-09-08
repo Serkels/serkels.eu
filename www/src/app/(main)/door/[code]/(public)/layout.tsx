@@ -3,7 +3,8 @@
 import type { ReactNode } from "react";
 import { tv } from "tailwind-variants";
 import { match } from "ts-pattern";
-import { Studient_NavBar } from "../(private)/aside_navbar";
+import { get_session_user_role } from "~/app/api/auth/[...nextauth]/route";
+import { Partner_NavBar, Studient_NavBar } from "../(private)/aside_navbar";
 import NotFound from "../error";
 import { this_door_is_yours } from "../this_door_is_yours";
 import { ProfileNavBar } from "./ProfileNavBar";
@@ -19,13 +20,14 @@ export default async function Layout(props: {
   try {
     const { code } = props.params;
 
-    const [is_yours, is_studient] = await Promise.all([
+    const [is_yours, role] = await Promise.all([
       this_door_is_yours(code),
-      true,
+      get_session_user_role(),
     ]);
 
-    const aside = match({ is_yours, is_studient })
-      .with({ is_studient: true, is_yours: true }, () => <Studient_NavBar />)
+    const aside = match({ is_yours, role })
+      .with({ role: "studient", is_yours: true }, () => <Studient_NavBar />)
+      .with({ role: "partner", is_yours: true }, () => <Partner_NavBar />)
       .otherwise(() => null);
 
     return (

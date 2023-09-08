@@ -48,7 +48,7 @@ export class Inbox_Repository
   }
 
   async find_by_participant(profile_id: number) {
-    log("create", profile_id);
+    log("find_by_participant", profile_id);
     const {
       data: body,
       response,

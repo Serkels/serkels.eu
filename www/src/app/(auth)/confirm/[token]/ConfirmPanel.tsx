@@ -3,10 +3,11 @@
 import { Spinner } from "@1/ui/components/Spinner";
 import { Banner } from "@1/ui/shell";
 import { useMutation } from "@tanstack/react-query";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
+import { P, match } from "ts-pattern";
 
 //
 
@@ -24,11 +25,12 @@ export function ConfirmPanel({ token }: { token: string }) {
 
 function ConfirmPanelFlow({ token }: { token: string }) {
   const router = useRouter();
-  const { mutate, isLoading, isSuccess, isError, error } = useMutation(
+  const { data: session } = useSession();
+
+  const siign_in_query = useMutation(
     async () => {
       const res = await signIn("credentials", {
         token,
-        callbackUrl: "/exchange",
         redirect: false,
       });
 
@@ -40,18 +42,21 @@ function ConfirmPanelFlow({ token }: { token: string }) {
     {
       onSuccess() {
         setTimeout(() => {
-          router.push("/exchange");
-        }, 5_000);
+          router.push(`/@${session?.user?.id}`);
+        }, 3_333);
       },
     },
   );
 
-  if (isLoading) return <Verifying />;
-  if (isSuccess) return <ConnectionSuccess />;
-  if (isError) {
-    return <ErrorOccur error={error as Error} />;
-  }
-  return <VerificationInstruction onSubmit={mutate} />;
+  return match(siign_in_query)
+    .with({ status: "error", error: P.select() }, (error) => (
+      <ErrorOccur error={error as Error} />
+    ))
+    .with({ status: "loading" }, () => <Verifying />)
+    .with({ status: "success" }, () => <ConnectionSuccess />)
+    .otherwise(() => {
+      return <VerificationInstruction onSubmit={siign_in_query.mutate} />;
+    });
 }
 
 function VerificationInstruction({ onSubmit }: { onSubmit: () => void }) {

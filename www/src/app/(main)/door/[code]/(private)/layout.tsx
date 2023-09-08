@@ -2,9 +2,11 @@
 
 import { AuthError } from "@1/core/error";
 import type { ReactNode } from "react";
+import { match } from "ts-pattern";
+import { get_session_user_role } from "~/app/api/auth/[...nextauth]/route";
 import { NotFound } from "~/app/not-found";
 import { this_door_is_yours } from "../this_door_is_yours";
-import { Studient_NavBar } from "./aside_navbar";
+import { Partner_NavBar, Studient_NavBar } from "./aside_navbar";
 
 //
 
@@ -15,13 +17,21 @@ export default async function Layout(props: {
   try {
     const { code } = props.params;
 
-    if (!(await this_door_is_yours(code))) {
+    const [is_yours, role] = await Promise.all([
+      this_door_is_yours(code),
+      get_session_user_role(),
+    ]);
+
+    if (!is_yours || !role) {
       throw new AuthError("Wrong door");
     }
 
     return (
       <>
-        <Studient_NavBar />
+        {match(role)
+          .with("partner", () => <Partner_NavBar />)
+          .with("studient", () => <Studient_NavBar />)
+          .exhaustive()}
         {props.children}
       </>
     );

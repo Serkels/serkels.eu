@@ -32,8 +32,9 @@ const button = tv({
     intent: {
       primary: "bg-primary text-white data-[hovered]:bg-primary/70",
       secondary: "bg-secondary text-white data-[hovered]:bg-secondary/70",
-      tertiary: "bg-tertiary data-[hovered]:bg-tertiary/70 text-white",
+      tertiary: "bg-tertiary text-white data-[hovered]:bg-tertiary/70",
       quaternary: "bg-quaternary text-white data-[hovered]:bg-quaternary/70",
+      quinary: "bg-quinary data-[hovered]:bg-quinary/70 text-white",
       //
       warning: "bg-warning text-white data-[hovered]:bg-warning/70",
       danger: "bg-danger text-white data-[hovered]:bg-danger/70",

@@ -1,8 +1,9 @@
 import type { components } from "@1/strapi-openapi/v1";
 import type { NextAuthOptions, User } from "next-auth";
-import NextAuth from "next-auth/next";
+import NextAuth, { getServerSession } from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { fromServer } from "~/app/api/v1";
+import { Partner_Repository } from "~/modules/partner/Partner_Repository";
 
 async function passwordless_login(token: string) {
   const response = await fetch(
@@ -24,8 +25,29 @@ async function passwordless_login(token: string) {
 
   if (!data.user) return null;
   if (!data.jwt) return null;
-  if (data.context && data.context["email"]) {
-    await update_user_profile(data.jwt, data.context);
+  const context = data.context ?? {};
+  if (context && context["email"]) {
+    const is_partner = context["role"] === "partner";
+    const partner_context = {
+      firstname: "🎓",
+      lastname: String(context["name"]),
+      about: String(context["description"]),
+      university: String(context["name"]),
+    };
+    await update_user_profile(data.jwt, is_partner ? partner_context : context);
+
+    const partner_repository = new Partner_Repository(fromServer, data.jwt);
+
+    if (is_partner) {
+      await partner_repository.create_me({
+        email: String(context["email"]),
+        location: String(context["location"]),
+        description: String(context["description"]),
+        website: String(context["website"]),
+        name: String(context["name"]),
+        owner: Number(data.user.id),
+      });
+    }
   }
 
   return {
@@ -33,7 +55,7 @@ async function passwordless_login(token: string) {
     email: String(data.user.email),
     username: String(data.user.username),
     jwt: data.jwt,
-  } satisfies Omit<User, "profile">;
+  } satisfies Omit<User, "profile" | "role">;
 }
 
 async function update_user_profile(
@@ -91,12 +113,18 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         if (!credentials) return null;
         const user = await passwordless_login(credentials.token);
-
         if (!user) return null;
         const profile = await user_profile(user.jwt);
 
+        const partner_repository = new Partner_Repository(fromServer, user.jwt);
+        const partner = await partner_repository
+          .find_me()
+          .catch(() => undefined);
+
         return {
           ...user,
+          role: partner ? "partner" : "studient",
+          partner,
           profile,
           name: [
             profile?.attributes?.firstname,
@@ -138,4 +166,8 @@ export const authOptions: NextAuthOptions = {
 
 const handler = NextAuth(authOptions);
 
-export { handler as GET, handler as POST };
+export { handler as GET, handler as POST }; //
+export async function get_session_user_role() {
+  const session = await getServerSession(authOptions);
+  return session?.user?.role;
+}
