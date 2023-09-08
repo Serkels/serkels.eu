@@ -12,8 +12,11 @@ import {
 
 export const ContainerContext = createContext<DependencyContainer>(container);
 
+export const useContainer = () => {
+  return useContext(ContainerContext);
+};
 export const useInject = <T extends unknown>(token: InjectionToken<T>) => {
-  const container = useContext(ContainerContext);
+  const container = useContainer();
   return container.resolve(token) as T;
 };
 

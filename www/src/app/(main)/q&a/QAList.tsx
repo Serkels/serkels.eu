@@ -2,7 +2,8 @@
 
 import { Spinner } from "@1/ui/components/Spinner";
 import { P, match } from "ts-pattern";
-import { useQuestion_controller } from "~/modules/question/view/react";
+import { useInject } from "~/core/react";
+import { Question_Controller } from "~/modules/question/view/react/controller";
 import { QACard } from "./components/QACard/QACard";
 
 //
@@ -16,7 +17,7 @@ export function QAList({
 }) {
   const {
     lists: { useQuery },
-  } = useQuestion_controller();
+  } = useInject(Question_Controller);
 
   const query_result = useQuery({
     filter: { category, search },

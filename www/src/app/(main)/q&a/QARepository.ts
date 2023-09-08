@@ -2,6 +2,7 @@
 
 import type { components } from "@1/strapi-openapi/v1";
 import type { _1_HOUR_ } from "@douglasduteil/datatypes...hours-to-seconds";
+import debug from "debug";
 import { OpenAPIRepository, type ApiClient } from "~/app/api/v1";
 
 //
@@ -136,9 +137,11 @@ export class QARepository extends OpenAPIRepository {
 }
 
 export class AnswerRepository extends OpenAPIRepository {
+  #log = debug(`~:modules:question:${AnswerRepository}`);
   static queryKey = ["answer"] as const;
   constructor(client: ApiClient, jwt?: string) {
     super(client, jwt);
+    this.#log("new", jwt ? "🗝️" : "🔒");
   }
 
   async load(question_id: number) {
@@ -162,6 +165,7 @@ export class AnswerRepository extends OpenAPIRepository {
 
     return body?.data;
   }
+
   async loadOne(id: number) {
     const { headers } = this;
     const {

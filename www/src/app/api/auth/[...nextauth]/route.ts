@@ -1,9 +1,16 @@
 import type { components } from "@1/strapi-openapi/v1";
+import debug from "debug";
 import type { NextAuthOptions, User } from "next-auth";
 import NextAuth, { getServerSession } from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { fromServer } from "~/app/api/v1";
 import { Partner_Repository } from "~/modules/partner/Partner_Repository";
+
+//
+
+const log = debug("~/app/api/auth/[...nextauth]/route.ts");
+
+//
 
 async function passwordless_login(token: string) {
   const response = await fetch(
@@ -22,12 +29,15 @@ async function passwordless_login(token: string) {
 
   const data: components["schemas"]["Passwordless-User"] =
     await response.json();
-
   if (!data.user) return null;
   if (!data.jwt) return null;
+
   const context = data.context ?? {};
+  log(`passwordless_login context=${JSON.stringify(context)}`);
   if (context && context["email"]) {
     const is_partner = context["role"] === "partner";
+    log(`passwordless_login is_partner=${is_partner}`);
+
     const partner_context = {
       firstname: "🎓",
       lastname: String(context["name"]),

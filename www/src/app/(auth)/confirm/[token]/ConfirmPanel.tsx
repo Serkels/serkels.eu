@@ -6,7 +6,7 @@ import { useMutation } from "@tanstack/react-query";
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { P, match } from "ts-pattern";
 
 //
@@ -27,7 +27,7 @@ function ConfirmPanelFlow({ token }: { token: string }) {
   const router = useRouter();
   const { data: session } = useSession();
 
-  const siign_in_query = useMutation(
+  const sign_in_query = useMutation(
     async () => {
       const res = await signIn("credentials", {
         token,
@@ -40,22 +40,27 @@ function ConfirmPanelFlow({ token }: { token: string }) {
       return;
     },
     {
-      onSuccess() {
-        setTimeout(() => {
-          router.push(`/@${session?.user?.id}`);
-        }, 3_333);
-      },
+      onSuccess() {},
     },
   );
 
-  return match(siign_in_query)
+  const id = session?.user?.profile.id;
+  useEffect(() => {
+    if (!id) return;
+
+    setTimeout(() => {
+      router.push(`/@${id}`);
+    }, 3_333);
+  }, [id]);
+
+  return match(sign_in_query)
     .with({ status: "error", error: P.select() }, (error) => (
       <ErrorOccur error={error as Error} />
     ))
     .with({ status: "loading" }, () => <Verifying />)
     .with({ status: "success" }, () => <ConnectionSuccess />)
     .otherwise(() => {
-      return <VerificationInstruction onSubmit={siign_in_query.mutate} />;
+      return <VerificationInstruction onSubmit={sign_in_query.mutate} />;
     });
 }
 
@@ -67,7 +72,7 @@ function VerificationInstruction({ onSubmit }: { onSubmit: () => void }) {
     <>
       <p className="mx-auto max-w-xl text-center text-xl">
         Pour terminer le processus de vérification, veuillez cliquer sur le
-        bouton ci-dessous :
+        bouton ci-dessous :
       </p>
       <button
         className="mx-auto my-6 block rounded-sm bg-white p-3 font-bold text-black"

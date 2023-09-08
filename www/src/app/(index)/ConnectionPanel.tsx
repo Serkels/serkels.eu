@@ -20,7 +20,7 @@ import { Avatar } from "~/components/Avatar";
 
 export function ConnectionPanel() {
   const { data: session, status, update } = useSession();
-  useTimeoutFn(update, 666);
+  useTimeoutFn(update, 123);
   const router = useRouter();
   const { mutate, isLoading, isSuccess, isError } = useMutation(
     submitFormHandler,

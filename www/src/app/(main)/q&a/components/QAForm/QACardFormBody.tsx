@@ -87,7 +87,6 @@ export function SelectCategoryField(props: FieldAttributes<{}>) {
   const categories = get_category.execute();
   const other_category = get_other_category.execute();
 
-  console.log({ other_category, categories });
   return (
     <Field component="select" {...props}>
       <option hidden value={""}>

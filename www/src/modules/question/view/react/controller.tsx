@@ -11,20 +11,25 @@ import {
 import debug from "debug";
 import { useSession } from "next-auth/react";
 import { useCallback, useEffect } from "react";
+import "reflect-metadata";
+import { inject, singleton } from "tsyringe";
 import type { Question_CreateProps } from "../../entity";
-import type {
-  Question_QueryProps as Question_QueryParamsProps,
+import {
   Question_Repository,
+  type Question_QueryProps as Question_QueryParamsProps,
 } from "../../repository";
 
 //
 
-const log = debug("~:modules:question:Question_Controller");
-
-//
-
+@singleton()
 export class Question_Controller {
-  constructor(private repository: Question_Repository) {}
+  #log = debug(`~:modules:question:${Question_Controller}`);
+  constructor(
+    @inject(Question_Repository)
+    private readonly repository: Question_Repository,
+  ) {
+    this.#log("new");
+  }
 
   //
   query_keys = {
@@ -50,7 +55,7 @@ export class Question_Controller {
       title,
       category,
     }: Omit<Question_CreateProps, "owner">) => {
-      log("createQuestionFn");
+      this.#log("createQuestionFn");
       const id = session?.user?.id;
       if (!id) throw new AuthError("Invalid Session");
 
@@ -90,7 +95,7 @@ export class Question_Controller {
     const getNextPageParam = (lastPage: Question_ListSchema) => {
       const pagination = lastPage.meta?.pagination ?? { pageCount: 0, page: 0 };
       const { pageCount, page } = pagination;
-      log("getNextPageParam", { pageCount, page });
+      this.#log("getNextPageParam", { pageCount, page });
       if (pageCount === undefined || page === undefined) return;
 
       return page >= pageCount ? undefined : page + 1;

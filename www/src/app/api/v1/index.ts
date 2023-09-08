@@ -25,8 +25,8 @@ export const fromClient = createClient<paths>({
 
 export class OpenAPIRepository {
   constructor(
-    public client: ApiClient,
-    public jwt?: string,
+    public readonly client: ApiClient,
+    public readonly jwt?: string,
   ) {
     if (jwt) {
       this.headers.set("Authorization", `Bearer ${this.jwt}`);

@@ -6,7 +6,8 @@ import { useState } from "react";
 import { match } from "ts-pattern";
 import { Avatar } from "~/components/Avatar";
 import { ErrorOccur } from "~/components/ErrorOccur";
-import { useQuestion_controller } from "~/modules/question/view/react";
+import { useInject } from "~/core/react";
+import { Question_Controller } from "~/modules/question/view/react/controller";
 import { QACardFormBody } from "./components/QAForm/QACardFormBody";
 
 //
@@ -14,7 +15,7 @@ import { QACardFormBody } from "./components/QAForm/QACardFormBody";
 export function QACreateForm() {
   const {
     create: { useMutation },
-  } = useQuestion_controller();
+  } = useInject(Question_Controller);
   const { mutateAsync, status, error, reset } = useMutation();
 
   //
@@ -35,8 +36,8 @@ export function QACreateForm() {
         ) : (
           <button
             className="
-              w-full 
-              rounded-sm border border-solid border-[#dddddd] 
+              w-full
+              rounded-sm border border-solid border-[#dddddd]
               px-4 py-2
               text-left
               hover:bg-gray-200

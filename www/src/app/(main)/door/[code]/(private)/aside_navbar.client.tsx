@@ -2,7 +2,6 @@
 
 import { School } from "@1/ui/icons";
 import clsx from "clsx";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -13,6 +12,8 @@ import {
 } from "react";
 import { tv } from "tailwind-variants";
 import { Avatar } from "~/components/Avatar";
+import { useInject } from "~/core/react";
+import { Get_Session_Profile } from "~/modules/user/application/get_session_profile.use-case";
 import { useProfile } from "../(public)/layout.client";
 
 //
@@ -88,9 +89,9 @@ const li = tv({
 
 export function Header(props: ComponentPropsWithoutRef<"figure">) {
   const { className, ...other_props } = props;
-  const { data: session } = useSession();
+  const profile = useInject(Get_Session_Profile).execute();
 
-  if (!session) return null;
+  if (!profile) return null;
 
   return (
     <figure
@@ -101,13 +102,13 @@ export function Header(props: ComponentPropsWithoutRef<"figure">) {
       <figcaption>
         <h4
           className="mb-2 mt-3 text-xl font-bold text-Cerulean"
-          title={session.user!.name!}
+          title={profile.name}
         >
-          {session.user?.name}
+          {profile.name}
         </h4>
         <small className="block text-center text-xs text-Dove_Gray">
           <School className="mr-1.5 inline-block w-4" />
-          <span>{session.user?.profile.attributes?.university}</span>
+          <span>{profile.university}</span>
         </small>
       </figcaption>
     </figure>

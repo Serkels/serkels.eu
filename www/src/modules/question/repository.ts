@@ -3,13 +3,11 @@
 import { HTTPError } from "@1/core/domain";
 import type { Question_ListSchema, Question_Schema } from "@1/strapi-openapi";
 import debug from "debug";
+import "reflect-metadata";
+import { inject, singleton } from "tsyringe";
 import { OpenAPIRepository, type ApiClient } from "~/app/api/v1";
 import type { RepositoryPort } from "~/core";
 import type { Question_CreateProps, Question_Entity } from "./entity";
-
-//
-
-const log = debug("~:modules:question:Question_Repository");
 
 //
 
@@ -21,16 +19,22 @@ export type Question_QueryProps = {
     | "desc"}`[];
 };
 
+@singleton()
 export class Question_Repository
   extends OpenAPIRepository
   implements RepositoryPort
 {
-  constructor(client: ApiClient, jwt?: string | undefined) {
+  #log = debug(`~:modules:question:${Question_Repository.name}`);
+
+  constructor(
+    @inject("api") client: ApiClient,
+    @inject("jwt") jwt?: string | undefined,
+  ) {
     super(client, jwt);
-    log("new", jwt);
+    this.#log("new", jwt ? "🗝️" : "🔒");
   }
   async create(entity: Question_CreateProps) {
-    log("create", entity);
+    this.#log("create", entity);
 
     const { response, error: errorBody } = await this.client.POST(
       "/questions",
@@ -44,7 +48,7 @@ export class Question_Repository
     );
 
     if (errorBody) {
-      log("create", errorBody);
+      this.#log("create", errorBody);
       throw new HTTPError(
         [errorBody.error.message, "from " + response.url].join("\n"),
         { cause: errorBody.error },
@@ -57,7 +61,7 @@ export class Question_Repository
     sort,
     pagination,
   }: Question_QueryProps): Promise<Question_ListSchema> {
-    log("findAll", filter);
+    this.#log("findAll", filter);
     const { category, search } = filter ?? {};
     const {
       data: body,
@@ -92,7 +96,7 @@ export class Question_Repository
     });
 
     if (errorBody) {
-      log("create", errorBody);
+      this.#log("create", errorBody);
       throw new HTTPError(
         [errorBody.error.message, "from " + response.url].join("\n"),
         { cause: errorBody.error },

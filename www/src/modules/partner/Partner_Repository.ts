@@ -2,12 +2,16 @@
 
 import { HTTPError } from "@1/core/error";
 import type { Partner_RequestSchema } from "@1/strapi-openapi";
+import debug from "debug";
 import { OpenAPIRepository } from "~/app/api/v1";
 
 //
 
 export class Partner_Repository extends OpenAPIRepository {
+  #log = debug(`~:modules:partner:${Partner_Repository.name}`);
   async find_me() {
+    this.#log("find_me");
+
     const {
       data: body,
       error: errorBody,
@@ -27,6 +31,8 @@ export class Partner_Repository extends OpenAPIRepository {
   }
 
   async create_me(data: Partner_RequestSchema["data"]) {
+    this.#log("create_me");
+
     const {
       data: body,
       error: errorBody,

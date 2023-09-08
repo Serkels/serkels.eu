@@ -13,8 +13,6 @@ import { P, match } from "ts-pattern";
 import { container } from "tsyringe";
 import { query_client } from "~/core/getQueryClient";
 import { ContainerContext } from "~/core/react";
-import { Question_Repository } from "~/modules/question/repository";
-import { QuestionControllerProvider } from "~/modules/question/view/react";
 import { fromClient } from "../api/v1";
 
 //
@@ -75,23 +73,16 @@ function UserTracking() {
 }
 
 function ViewProvider({ children }: PropsWithChildren) {
-  const { data: session } = useSession();
-  const context = initial_context;
-
-  context.repositories.set(
-    Question_Repository,
-    useMemo(
-      () => new Question_Repository(fromClient, session?.user?.jwt),
-      [session?.user?.jwt],
-    ),
-  );
-  const root_container = useMemo(() => container, []);
+  const session = useSession();
+  const root_container = useMemo(() => {
+    console.info(session.data?.user?.jwt ? "🗝️" : "🚪");
+    container.registerInstance("jwt", session.data?.user?.jwt ?? "");
+    container.registerInstance("api", fromClient);
+    return container;
+  }, [session.data?.user?.jwt]);
   return (
     <ContainerContext.Provider value={root_container}>
-      <Nest>
-        <QuestionControllerProvider />
-        {children}
-      </Nest>
+      <Nest>{children}</Nest>
     </ContainerContext.Provider>
   );
 }
