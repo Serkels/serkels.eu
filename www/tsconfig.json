@@ -5,7 +5,9 @@
     "baseUrl": "src",
     "declaration": false,
     "declarationMap": false,
+    "emitDecoratorMetadata": true,
     "exactOptionalPropertyTypes": false,
+    "experimentalDecorators": true,
     "paths": {
       "~/*": ["./*"]
     },

@@ -1,30 +1,48 @@
 //
 
 import { createContext, useContext } from "react";
-import type { RepositoryPort } from "./repository";
+import "reflect-metadata";
+import {
+  container,
+  type DependencyContainer,
+  type InjectionToken,
+} from "tsyringe";
 
 //
 
-export interface CoreContext {
-  repositories: WeakMap<Class, RepositoryPort>;
-}
+export const ContainerContext = createContext<DependencyContainer>(container);
 
-export const context = createContext<CoreContext>({
-  repositories: new WeakMap(),
-});
-
-export const CoreProvider = context.Provider;
-
-export function useCoreContext() {
-  const core_context = useContext(context);
-  if (!core_context) {
-    throw new Error("useCoreContext must be used within a CoreProvider");
-  }
-  return core_context;
-}
-
-//
-
-type Class = {
-  new (...args: any[]): any;
+export const useInject = <T extends unknown>(token: InjectionToken<T>) => {
+  const container = useContext(ContainerContext);
+  return container.resolve(token) as T;
 };
+
+// export interface CoreContext {
+//   container
+//   repositories: WeakMap<Class, RepositoryPort>;
+
+//   inject: () => {
+
+//   }
+// }
+
+// export const context = createContext<CoreContext>({
+//   repositories: new WeakMap(),
+//   container: container
+// });
+
+// export const CoreProvider = context.Provider;
+
+// export function useCoreContext() {
+//   const core_context = useContext(context);
+//   if (!core_context) {
+//     throw new Error("useCoreContext must be used within a CoreProvider");
+//   }
+//   return core_context;
+// }
+
+// //
+
+// type Class = {
+//   new (...args: any[]): any;
+// };

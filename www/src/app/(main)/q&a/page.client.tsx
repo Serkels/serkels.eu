@@ -1,14 +1,11 @@
 "use client";
 
 import { Category } from "@1/modules/category/domain";
-import {
-  Category_DataRecord,
-  category_to_domain,
-} from "@1/modules/category/infra/strapi";
 import { useSession } from "next-auth/react";
 import { FilterRadioList } from "~/components/FilterRadioList";
 import { useSyncSearchQuery } from "~/components/useSyncSearchQuery";
-import { useCategories_Query } from "~/modules/categories";
+import { useInject } from "~/core/react";
+import { Get_Category_UseCase } from "~/modules/question/application/get_categories.use-case";
 import { QACreateForm } from "./QACreateForm";
 import type { QAFilterType } from "./models/QAFilterType";
 
@@ -16,21 +13,8 @@ import type { QAFilterType } from "./models/QAFilterType";
 
 export function CategoriesList() {
   const { query, setQuery } = useSyncSearchQuery("category");
-  const { question } = useCategories_Query();
-  const { data: categories_data } = question.useQuery();
-
-  //
-
-  if (!categories_data) return <>0_o</>;
-
-  const categories = categories_data.map((data, index) =>
-    category_to_domain(
-      Category_DataRecord.parse(
-        { data },
-        { path: [`categories_data.${index}`] },
-      ),
-    ),
-  );
+  const get_category = useInject(Get_Category_UseCase);
+  const categories = get_category.execute();
   categories.push(Category.all);
 
   return (

@@ -1,6 +1,6 @@
 //
 
-import { Entity, Ok, Result, type ErrorInstance } from "@1/core/domain";
+import { Ok, Result, ValueObject, type ErrorInstance } from "@1/core/domain";
 import { z } from "zod";
 
 //
@@ -18,7 +18,7 @@ export const Category_PropsSchema = z
 
 export type Category_Props = z.TypeOf<typeof Category_PropsSchema>;
 
-export class Category extends Entity<Category_Props> {
+export class Category extends ValueObject<Category_Props> {
   static override create(
     props: Category_Props,
   ): Result<Category, ErrorInstance> {
@@ -45,6 +45,10 @@ export class Category extends Entity<Category_Props> {
 
   //
 
+  get id() {
+    return this.props.id;
+  }
+
   get name() {
     return this.props.name;
   }
@@ -53,3 +57,7 @@ export class Category extends Entity<Category_Props> {
     return this.props.slug;
   }
 }
+
+//
+
+export const OTHER_CATEGORY_SLUGS = ["other", "autres", "autre"] as const;

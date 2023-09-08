@@ -8,9 +8,11 @@ import { SessionProvider, useSession } from "next-auth/react";
 import { event, usePageViews } from "nextjs-google-analytics";
 import { useEffect, useMemo, type PropsWithChildren } from "react";
 import Nest from "react-nest";
+import "reflect-metadata";
 import { P, match } from "ts-pattern";
+import { container } from "tsyringe";
 import { query_client } from "~/core/getQueryClient";
-import { CoreProvider } from "~/core/react";
+import { ContainerContext } from "~/core/react";
 import { Question_Repository } from "~/modules/question/repository";
 import { QuestionControllerProvider } from "~/modules/question/view/react";
 import { fromClient } from "../api/v1";
@@ -83,13 +85,13 @@ function ViewProvider({ children }: PropsWithChildren) {
       [session?.user?.jwt],
     ),
   );
-
+  const root_container = useMemo(() => container, []);
   return (
-    <CoreProvider value={context}>
+    <ContainerContext.Provider value={root_container}>
       <Nest>
         <QuestionControllerProvider />
         {children}
       </Nest>
-    </CoreProvider>
+    </ContainerContext.Provider>
   );
 }

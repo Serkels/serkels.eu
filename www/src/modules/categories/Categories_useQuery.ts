@@ -10,6 +10,16 @@ export class Categories_useQuery extends Strapi_useQuery {
   category_repository = new Categories_Repository(this.repository);
 
   //
+
+  exchange = {
+    useQuery: () => {
+      return useQuery({
+        queryKey: Categories_Repository.keys.exchange(),
+        queryFn: () => this.category_repository.exchange(),
+      });
+    },
+  };
+
   question = {
     useQuery: () => {
       return useQuery({
