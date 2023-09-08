@@ -1,14 +1,11 @@
 //
 
-import mutateExchangeDealDocumentation from "../src/api/exchange-deal/documentation/mutateDocumentation";
-import mutateExchangeDocumentation from "../src/api/exchange/documentation/mutateDocumentation";
-import mutate_inbox_documentation from "../src/api/inbox/documentation/mutateDocumentation";
-import mutate_partner_documentation from "../src/api/partner/documentation/mutateDocumentation";
-import mutateQuestionDocumentation from "../src/api/question/documentation/mutateDocumentation";
-import mutate_thread_documentation from "../src/api/thread/documentation/mutateDocumentation";
+import globby from "globby";
+import { readFileSync } from "node:fs";
+import { parse } from "yaml";
 import mutate_user_profiles_documentation from "../src/api/user-profile/documentation/mutateDocumentation";
-import mutateCommentsDocumentation from "../src/extensions/comments/documentation/mutateDocumentation";
-import mutateDocumentationDocumentation from "../src/extensions/documentation/documentation/mutateDocumentation";
+import mutate_comments_documentation from "../src/extensions/comments/documentation/mutateDocumentation";
+import mutate_documentation_documentation from "../src/extensions/documentation/documentation/mutateDocumentation";
 
 //
 
@@ -26,16 +23,28 @@ export default ({ env }) => ({
           "upload",
           "users-permissions",
         ],
-        mutateDocumentation: (generatedDocumentationDraft) => {
-          mutateCommentsDocumentation(generatedDocumentationDraft);
-          mutateDocumentationDocumentation(generatedDocumentationDraft);
-          mutateExchangeDocumentation(generatedDocumentationDraft);
-          mutateExchangeDealDocumentation(generatedDocumentationDraft);
-          mutateQuestionDocumentation(generatedDocumentationDraft);
-          mutate_thread_documentation(generatedDocumentationDraft);
-          mutate_inbox_documentation(generatedDocumentationDraft);
+        mutateDocumentation: (generatedDocumentationDraft: {
+          components: { schemas: object };
+          paths: object;
+        }) => {
+          try {
+            globby
+              .sync(["./src/api/*/documentation/mutate/paths/*.yaml"])
+              .reduce((document, yaml_file) => {
+                try {
+                  const path_schema = parse(readFileSync(yaml_file, "utf8"));
+                  Object.assign(document.paths, path_schema);
+                } catch (error) {
+                  throw new Error(yaml_file + "\n" + error.message);
+                }
+                return document;
+              }, generatedDocumentationDraft);
+          } catch (e) {
+            console.error(e);
+          }
+          mutate_comments_documentation(generatedDocumentationDraft);
+          mutate_documentation_documentation(generatedDocumentationDraft);
           mutate_user_profiles_documentation(generatedDocumentationDraft);
-          mutate_partner_documentation(generatedDocumentationDraft);
         },
       },
     },
