@@ -38,12 +38,8 @@ export function ConnectionPanel() {
   };
 
   if (status === "loading") return <Loading />;
-  try {
-    if (session && session.user && status === "authenticated")
-      return <LoginAs user={session.user} />;
-  } catch (error) {
-    signOut();
-  }
+  if (session && session.user && status === "authenticated")
+    return <LoginAs user={session.user} />;
 
   if (isLoading) return <Loading />;
   if (isError) return <ErrorOccur />;

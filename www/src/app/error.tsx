@@ -4,6 +4,9 @@ import { Button } from "@1/ui/components/ButtonV";
 import tw from "tailwind-styled-components";
 import { ErrorOccur } from "~/components/ErrorOccur";
 
+import { signOut } from "next-auth/react";
+import { useEffectOnce } from "react-use";
+
 //
 
 export default function Error({
@@ -13,7 +16,10 @@ export default function Error({
   error: Error;
   reset: () => void;
 }) {
-  console.log(error);
+  useEffectOnce(() => {
+    signOut();
+  });
+
   return (
     <Container>
       <ErrorOccur error={error} />
