@@ -2,19 +2,17 @@
 
 import { Button } from "@1/ui/components/ButtonV";
 import { Spinner } from "@1/ui/components/Spinner";
+import { useSearchParams } from "next/navigation";
 import { P, match } from "ts-pattern";
 import { useExchange_list_controller } from "~/modules/exchange";
 import { ExchangeCard } from "./ExchangeCard";
 
 //
 
-export function ExchangeList({
-  category,
-  search,
-}: {
-  category: string | undefined;
-  search: string | undefined;
-}) {
+export function ExchangeList() {
+  const search_params = useSearchParams();
+  const category = search_params.get("category") ?? undefined;
+  const search = search_params.get("q") ?? undefined;
   const {
     lists: { useQuery },
   } = useExchange_list_controller();
