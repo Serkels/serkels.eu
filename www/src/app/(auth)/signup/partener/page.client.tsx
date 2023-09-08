@@ -57,10 +57,8 @@ function SignUpForm({ onSubmit }: { onSubmit: (...args: any[]) => void }) {
         location: "",
       }}
       enableReinitialize
-      onSubmit={async (values, formik) => {
-        console.log({ values });
+      onSubmit={async (values) => {
         await onSubmit(values);
-        formik.resetForm();
       }}
     >
       {({ isSubmitting }) => (
@@ -68,20 +66,32 @@ function SignUpForm({ onSubmit }: { onSubmit: (...args: any[]) => void }) {
           <div className="mx-auto">
             <UserAvatarFilled className="h-14 w-14" />
           </div>
-          <InputField name="name" placeholder="Nom de l'établissement" />
+          <InputField
+            name="name"
+            placeholder="Nom de l'établissement"
+            required
+          />
           <InputField
             component="textarea"
             name="description"
-            rows={5}
             placeholder="À propos"
+            required
+            rows={5}
           />
-          <InputField name="location" placeholder="Ville" />
-          <InputField name="category" placeholder="Catégorie" disabled={true} />
-          <InputField name="website" placeholder="Site web" />
-          <InputField name="email" disabled={true} />
+          <InputField name="location" placeholder="Ville" required />
+          <InputField
+            disabled={true}
+            name="category"
+            placeholder="Catégorie"
+            required
+          />
+          <InputField name="website" placeholder="Site web" required />
+          <InputField disabled={true} name="email" required />
           <InputField name="role" type="hidden" />
 
-          <Button type="submit" isDisabled={isSubmitting} className="">
+          <hr />
+
+          <Button type="submit" isDisabled={isSubmitting}>
             Terminer
           </Button>
         </Form>
