@@ -419,8 +419,8 @@ importers:
         specifier: 0.2.0
         version: 0.2.0
       openapi-fetch:
-        specifier: 0.7.5
-        version: 0.7.5
+        specifier: 0.7.6
+        version: 0.7.6
       postcss:
         specifier: 8.4.29
         version: 8.4.29
@@ -8984,8 +8984,8 @@ packages:
       is-wsl: 2.2.0
     dev: true
 
-  /openapi-fetch@0.7.5:
-    resolution: {integrity: sha512-N3NGEllyyZ+SzVIWKSes+jJg1quT7dLYMFA2W0nmoMJT8+yomQNcfqBBfnVNdij+zfC7tTqlnm61SpKt4QYgIQ==}
+  /openapi-fetch@0.7.6:
+    resolution: {integrity: sha512-TmHTmzMqNmVUlRasfaSVsOYnFHHu0L31VGxbk75rk9P7RfOj70kc+Tiuu548koOpB5zs8yiUwW5wsYjeQifHcA==}
     dependencies:
       openapi-typescript-helpers: 0.0.2
     dev: false
