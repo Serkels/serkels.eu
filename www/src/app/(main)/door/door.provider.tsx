@@ -4,7 +4,7 @@ import { Hydrate, dehydrate } from "@tanstack/react-query";
 import { notFound } from "next/navigation";
 import type { PropsWithChildren } from "react";
 import { fromServer } from "~/app/api/v1";
-import { getQueryClient } from "~/app/getQueryClient";
+import { getQueryClient } from "~/core/getQueryClient";
 import { User_Repository } from "~/modules/user/User_Repository";
 import { Door_ValueProvider, type Props } from "./door.context";
 

@@ -1,10 +1,14 @@
 "use client";
 
+import { Category } from "@1/modules/category/domain";
+import {
+  Category_DataRecord,
+  category_to_domain,
+} from "@1/modules/category/infra/strapi";
 import { useSession } from "next-auth/react";
-import { OpportunityCategoriesViewModel } from "~/app/opportunity/models/OpportunityCategoriesViewModel";
+import { FilterRadioList } from "~/components/FilterRadioList";
 import { useSyncSearchQuery } from "~/components/useSyncSearchQuery";
-import { FilterRadioList } from "../../components/FilterRadioList";
-import { useOpportunityCategoriesQuery } from "../opportunity/data/useOpportunityCategoriesQuery";
+import { useCategories_Query } from "~/modules/categories";
 import { QACreateForm } from "./QACreateForm";
 import type { QAFilterType } from "./models/QAFilterType";
 
@@ -12,25 +16,22 @@ import type { QAFilterType } from "./models/QAFilterType";
 
 export function CategoriesList() {
   const { query, setQuery } = useSyncSearchQuery("category");
-  const { data: raw_categories } = useOpportunityCategoriesQuery();
+  const { question } = useCategories_Query();
+  const { data: categories_data } = question.useQuery();
 
   //
 
-  if (!raw_categories) return <>0_o</>;
+  if (!categories_data) return <>0_o</>;
 
-  const categories = raw_categories.map(
-    OpportunityCategoriesViewModel.from_server,
+  const categories = categories_data.map((data, index) =>
+    category_to_domain(
+      Category_DataRecord.parse(
+        { data },
+        { path: [`categories_data.${index}`] },
+      ),
+    ),
   );
-
-  categories.push(
-    new OpportunityCategoriesViewModel({
-      id: NaN,
-      name: "Tout",
-      slug: "",
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    }),
-  );
+  categories.push(Category.all);
 
   return (
     <FilterRadioList

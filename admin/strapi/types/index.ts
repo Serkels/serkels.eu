@@ -90,7 +90,10 @@ export type AsyncPolicyImplementation<TCfg = unknown> = (
 
 //
 
-export type { EntityService } from "@strapi/strapi/lib/services/entity-service";
+export type {
+  EntityService,
+  Params,
+} from "@strapi/strapi/lib/services/entity-service";
 export type { Shared } from "@strapi/strapi/lib/types";
 export type { PolicyImplementation } from "@strapi/strapi/lib/types/core-api/router";
 export type { GetValues } from "@strapi/strapi/lib/types/core/attributes";
@@ -101,6 +104,7 @@ export type { Next } from "koa";
 export type * as ApiContentTypes from "~/types/generated/contentTypes";
 
 //
+
 export const ID_Schema = z.coerce.number().safe().finite().nonnegative().int();
 export const Partner_Role_Schema = z.literal("partner");
 

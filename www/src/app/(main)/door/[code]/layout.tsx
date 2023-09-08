@@ -6,7 +6,7 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import type { PropsWithChildren } from "react";
 import { fromServer } from "~/app/api/v1";
-import { getQueryClient } from "~/app/getQueryClient";
+import { getQueryClient } from "~/core/getQueryClient";
 import { User_Repository } from "~/modules/user/User_Repository";
 import { Door_ValueProvider } from "../door.context";
 import { this_door_is_yours } from "./this_door_is_yours";

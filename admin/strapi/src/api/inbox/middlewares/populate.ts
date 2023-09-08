@@ -20,7 +20,5 @@ export default () => {
     };
 
     await next();
-
-    console.log(context.body);
   };
 };

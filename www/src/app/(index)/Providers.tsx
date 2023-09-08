@@ -1,7 +1,7 @@
 "use client";
 
 import { setUser } from "@sentry/nextjs";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import debug from "debug";
 import { SessionProvider, useSession } from "next-auth/react";
@@ -9,6 +9,7 @@ import { event, usePageViews } from "nextjs-google-analytics";
 import { useEffect, useMemo, type PropsWithChildren } from "react";
 import Nest from "react-nest";
 import { P, match } from "ts-pattern";
+import { query_client } from "~/core/getQueryClient";
 import { CoreProvider } from "~/core/react";
 import { Question_Repository } from "~/modules/question/repository";
 import { QuestionControllerProvider } from "~/modules/question/view/react";
@@ -26,16 +27,6 @@ export const initial_context = {
   repositories: new WeakMap(),
 } as const;
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    // from https://openapi-ts.pages.dev/openapi-fetch/examples/#further-optimization
-    queries: {
-      networkMode: "offlineFirst", // keep caches as long as possible
-      refetchOnWindowFocus: false, // don’t refetch on window focus
-    },
-  },
-});
-
 export default function Providers({ children }: PropsWithChildren) {
   usePageViews({
     gaMeasurementId: process.env["NEXT_PUBLIC_GA_MEASUREMENT_ID"],
@@ -44,7 +35,7 @@ export default function Providers({ children }: PropsWithChildren) {
 
   return (
     <>
-      <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={query_client}>
         <SessionProvider>
           <UserTracking />
           <ViewProvider>{children}</ViewProvider>

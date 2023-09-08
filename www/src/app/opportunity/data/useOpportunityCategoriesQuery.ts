@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { fromClient, fromServer } from "~/app/api/v1";
-import { getQueryClient } from "~/app/getQueryClient";
+import { getQueryClient } from "~/core/getQueryClient";
 import { OpportunityCategoriesRepository } from "./OpportunityCategories";
 
 //

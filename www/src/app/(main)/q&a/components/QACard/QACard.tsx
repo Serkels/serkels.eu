@@ -36,19 +36,17 @@ export function QACard({ id }: { id: number }) {
 
   useRefreshAnswers(Number(id), isDisplayingResponses);
 
-  const { data: question } = useQuery({
-    enabled: Number.isInteger(id) && !isDeleting,
-    queryKey: [...QARepository.queryKey, Number(id)],
-    queryFn: async () => new QARepository(fromClient).loadOne(Number(id)),
-    staleTime: Infinity,
-  });
-
   //
   const [deleteing_message, set_deleteing_message] = useState(
     "Suppression de la question",
   );
 
   const delete_mutation = useDeleteQAMutation(Number(id));
+  const { data: question } = useQuery({
+    enabled: Number.isInteger(id) && delete_mutation.isIdle,
+    queryKey: [...QARepository.queryKey, Number(id)],
+    queryFn: async () => new QARepository(fromClient).loadOne(Number(id)),
+  });
   const on_delete_question = useCallback(async () => {
     await set_deleteing_message(
       (message) =>
@@ -72,7 +70,7 @@ export function QACard({ id }: { id: number }) {
       queryClient.removeQueries([...QARepository.queryKey, Number(id)]),
       queryClient.invalidateQueries([...QARepository.queryKey, "list"]),
     ]);
-  }, [question?.id]);
+  }, [question?.id, question?.attributes?.answer_count]);
 
   //
 

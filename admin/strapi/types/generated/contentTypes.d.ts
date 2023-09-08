@@ -869,6 +869,136 @@ export interface ApiBookmarkBookmark extends Schema.CollectionType {
   };
 }
 
+export interface ApiCategoryCategory extends Schema.CollectionType {
+  collectionName: 'categories';
+  info: {
+    singularName: 'category';
+    pluralName: 'categories';
+    displayName: 'Category';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    name: Attribute.String;
+    slug: Attribute.UID<'api::category.category', 'name'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCategoryExchangeCategoryExchange extends Schema.SingleType {
+  collectionName: 'category_exchanges';
+  info: {
+    singularName: 'category-exchange';
+    pluralName: 'category-exchanges';
+    displayName: 'Category / Exchange';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    categories: Attribute.Relation<
+      'api::category-exchange.category-exchange',
+      'oneToMany',
+      'api::category.category'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::category-exchange.category-exchange',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::category-exchange.category-exchange',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCategoryOpportunityCategoryOpportunity
+  extends Schema.SingleType {
+  collectionName: 'category_opportunities';
+  info: {
+    singularName: 'category-opportunity';
+    pluralName: 'category-opportunities';
+    displayName: 'Category / Opportunity';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    categories: Attribute.Relation<
+      'api::category-opportunity.category-opportunity',
+      'oneToMany',
+      'api::category.category'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::category-opportunity.category-opportunity',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::category-opportunity.category-opportunity',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCategoryQuestionCategoryQuestion extends Schema.SingleType {
+  collectionName: 'category_questions';
+  info: {
+    singularName: 'category-question';
+    pluralName: 'category-questions';
+    displayName: 'Category / Question';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    categories: Attribute.Relation<
+      'api::category-question.category-question',
+      'oneToMany',
+      'api::category.category'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::category-question.category-question',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::category-question.category-question',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiExchangeExchange extends Schema.CollectionType {
   collectionName: 'exchanges';
   info: {
@@ -1257,7 +1387,7 @@ export interface ApiQuestionQuestion extends Schema.CollectionType {
     category: Attribute.Relation<
       'api::question.question',
       'oneToOne',
-      'api::opportunity-category.opportunity-category'
+      'api::category.category'
     >;
     profile: Attribute.Relation<
       'api::question.question',
@@ -1446,6 +1576,10 @@ declare module '@strapi/strapi' {
       'plugin::i18n.locale': PluginI18NLocale;
       'plugin::passwordless.token': PluginPasswordlessToken;
       'api::bookmark.bookmark': ApiBookmarkBookmark;
+      'api::category.category': ApiCategoryCategory;
+      'api::category-exchange.category-exchange': ApiCategoryExchangeCategoryExchange;
+      'api::category-opportunity.category-opportunity': ApiCategoryOpportunityCategoryOpportunity;
+      'api::category-question.category-question': ApiCategoryQuestionCategoryQuestion;
       'api::exchange.exchange': ApiExchangeExchange;
       'api::exchange-deal.exchange-deal': ApiExchangeDealExchangeDeal;
       'api::inbox.inbox': ApiInboxInbox;

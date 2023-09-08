@@ -6,7 +6,7 @@ import { type PropsWithChildren } from "react";
 import { AppFooter } from "~/components/AppFooter.server";
 import { UserBar } from "~/components/UserBar";
 import { AsideWithTitle } from "~/components/layouts/holy/aside";
-import { getQueryClient } from "../getQueryClient";
+import { getQueryClient } from "../../core/getQueryClient";
 import { useOpportunityCategoriesprefetchQuery } from "../opportunity/data/useOpportunityCategoriesQuery";
 import { CategoriesList, SearchForm } from "./(page)";
 

@@ -1,14 +1,10 @@
 //
 
 import { Hydrate, dehydrate } from "@tanstack/react-query";
-import { fromServer } from "~/app/api/v1";
-import { getQueryClient } from "~/app/getQueryClient";
-import { Question_Repository } from "~/modules/question/repository";
-import { Question_Controller } from "~/modules/question/view/react/controller";
-import { useOpportunityCategoriesprefetchQuery } from "../opportunity/data/useOpportunityCategoriesQuery";
-import { Question_Form } from "./(page)";
+import { getQueryClient } from "~/core/getQueryClient";
 import { QAList } from "./QAList";
 import { QASearchForm } from "./QASearchForm";
+import { Question_Form } from "./page.client";
 
 //
 
@@ -37,20 +33,17 @@ async function HydreatedQAList({
   category,
   search,
 }: Record<"category" | "search", string | undefined>) {
-  const repository = new Question_Repository(fromServer);
-
   const queryClient = getQueryClient();
-  await queryClient.prefetchInfiniteQuery(
-    ["question", "list"] as ReturnType<
-      InstanceType<typeof Question_Controller>["query_keys"]["lists"]
-    >,
-    repository.findAll.bind(repository, {
-      filter: { category, search },
-      sort: ["createdAt:desc"],
-      pagination: { pageSize: 2 },
-    }),
-  );
-  await useOpportunityCategoriesprefetchQuery();
+  //   ["question", "list"] as ReturnType<
+  //     InstanceType<typeof Question_Controller>["query_keys"]["lists"]
+  //   >,
+  //   repository.findAll.bind(repository, {
+  //     filter: { category, search },
+  //     sort: ["createdAt:desc"],
+  //     pagination: { pageSize: 2 },
+  //   }),
+  // );
+  // await useOpportunityCategoriesprefetchQuery();
   const dehydratedState = dehydrate(queryClient);
 
   return (

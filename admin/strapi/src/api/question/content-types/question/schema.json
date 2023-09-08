@@ -38,7 +38,7 @@
     "category": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::opportunity-category.opportunity-category"
+      "target": "api::category.category"
     },
     "profile": {
       "type": "relation",

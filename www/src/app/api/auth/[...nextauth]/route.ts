@@ -166,8 +166,15 @@ export const authOptions: NextAuthOptions = {
 
 const handler = NextAuth(authOptions);
 
-export { handler as GET, handler as POST }; //
+export { handler as GET, handler as POST };
+
+//
+
+export async function get_api_session() {
+  return await getServerSession(authOptions);
+}
+
 export async function get_session_user_role() {
-  const session = await getServerSession(authOptions);
+  const session = await get_api_session();
   return session?.user?.role;
 }
