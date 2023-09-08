@@ -58,7 +58,7 @@
   "devDependencies": {
     "@douglasduteil/datatypes...hours-to-seconds": "workspace:*",
     "@next/bundle-analyzer": "13.4.19",
-    "@sentry/cli": "2.20.6",
+    "@sentry/cli": "2.20.7",
     "@tanstack/react-query-devtools": "4.35.0",
     "@trpc/server": "10.38.1",
     "@types/debug": "4.1.8",
