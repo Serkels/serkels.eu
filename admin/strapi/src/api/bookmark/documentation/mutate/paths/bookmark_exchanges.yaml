@@ -1,0 +1,100 @@
+---
+"/bookmark/exchanges":
+  get:
+    responses:
+      "200":
+        description: OK
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ExchangeListResponse"
+      "400":
+        "$ref": "#/components/responses/400"
+      "401":
+        "$ref": "#/components/responses/401"
+      "403":
+        "$ref": "#/components/responses/403"
+      "404":
+        "$ref": "#/components/responses/404"
+      "500":
+        "$ref": "#/components/responses/500"
+    tags:
+      - Bookmark
+    operationId: get/bookmark/exchanges
+
+"/bookmark/exchanges/{id}":
+  get:
+    responses:
+      "200":
+        description: Found
+      "400":
+        "$ref": "#/components/responses/400"
+      "401":
+        "$ref": "#/components/responses/401"
+      "403":
+        "$ref": "#/components/responses/403"
+      "404":
+        "$ref": "#/components/responses/404"
+      "500":
+        "$ref": "#/components/responses/500"
+    tags:
+      - Bookmark
+    parameters:
+      - name: id
+        in: path
+        description: "The exchanges id"
+        deprecated: false
+        required: true
+        schema:
+          type: number
+    operationId: get/bookmark/exchanges/{id}
+  post:
+    responses:
+      "200":
+        description: Add to bookmarks
+      "400":
+        "$ref": "#/components/responses/400"
+      "401":
+        "$ref": "#/components/responses/401"
+      "403":
+        "$ref": "#/components/responses/403"
+      "404":
+        "$ref": "#/components/responses/404"
+      "500":
+        "$ref": "#/components/responses/500"
+    tags:
+      - Bookmark
+    parameters:
+      - name: id
+        in: path
+        description: "The exchanges id"
+        deprecated: false
+        required: true
+        schema:
+          type: number
+    operationId: post/bookmark/exchanges/{id}
+  delete:
+    responses:
+      "200":
+        description: Remove from bookmarks
+      "400":
+        "$ref": "#/components/responses/400"
+      "401":
+        "$ref": "#/components/responses/401"
+      "403":
+        "$ref": "#/components/responses/403"
+      "404":
+        "$ref": "#/components/responses/404"
+      "500":
+        "$ref": "#/components/responses/500"
+    tags:
+      - Bookmark
+    parameters:
+      - name: id
+        in: path
+        description: "The exchanges id"
+        deprecated: false
+        required: true
+        schema:
+          type: number
+    operationId: delete/bookmark/exchanges/{id}

@@ -264,11 +264,29 @@ export interface paths {
       };
     };
   };
+  "/bookmark/exchanges": {
+    get: operations["get/bookmark/exchanges"];
+  };
+  "/bookmark/exchanges/{id}": {
+    get: operations["get/bookmark/exchanges/{id}"];
+    post: operations["post/bookmark/exchanges/{id}"];
+    delete: operations["delete/bookmark/exchanges/{id}"];
+  };
+  "/bookmark/opportunities": {
+    get: operations["get/bookmark/opportunities"];
+  };
+  "/bookmark/opportunities/{id}": {
+    get: operations["get/bookmark/opportunities/{id}"];
+    post: operations["post/bookmark/opportunities/{id}"];
+    delete: operations["delete/bookmark/opportunities/{id}"];
+  };
   "/bookmarks": {
     get: operations["get/bookmarks"];
     post: operations["post/bookmarks"];
   };
   "/bookmarks/{id}": {
+    get: operations["get/bookmarks/{id}"];
+    put: operations["put/bookmarks/{id}"];
     delete: operations["delete/bookmarks/{id}"];
   };
   "/categories": {
@@ -984,169 +1002,173 @@ export interface components {
           id?: number;
         };
       };
-      opportunity?: {
-        data?: {
-          attributes?: {
-            cover?: {
-              data?: {
-                attributes?: {
-                  alternativeText?: string;
-                  caption?: string;
-                  /** Format: date-time */
-                  createdAt?: string;
-                  createdBy?: {
-                    data?: {
-                      attributes?: Record<string, unknown>;
-                      id?: number;
+      exchanges?: {
+        data?: ({
+            attributes?: {
+              available_places?: number;
+              category?: {
+                data?: {
+                  attributes?: {
+                    /** Format: date-time */
+                    createdAt?: string;
+                    createdBy?: {
+                      data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      };
+                    };
+                    locale?: string;
+                    localizations?: {
+                      data?: unknown[];
+                    };
+                    name?: string;
+                    slug?: string;
+                    /** Format: date-time */
+                    updatedAt?: string;
+                    updatedBy?: {
+                      data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      };
                     };
                   };
-                  ext?: string;
-                  folder?: {
-                    data?: {
-                      attributes?: {
-                        children?: {
-                          data?: {
+                  id?: number;
+                };
+              };
+              /** Format: date-time */
+              createdAt?: string;
+              createdBy?: {
+                data?: {
+                  attributes?: Record<string, unknown>;
+                  id?: number;
+                };
+              };
+              description?: string;
+              in_exchange_of?: {
+                data?: {
+                  attributes?: Record<string, unknown>;
+                  id?: number;
+                };
+              };
+              is_online?: boolean;
+              location?: string;
+              owner?: {
+                data?: {
+                  attributes?: Record<string, unknown>;
+                  id?: number;
+                };
+              };
+              places?: number;
+              profile?: {
+                data?: {
+                  attributes?: {
+                    about?: string;
+                    contacts?: {
+                      data?: {
+                          attributes?: Record<string, unknown>;
+                          id?: number;
+                        }[];
+                    };
+                    /** Format: date-time */
+                    createdAt?: string;
+                    createdBy?: {
+                      data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      };
+                    };
+                    firstname?: string;
+                    image?: {
+                      data?: {
+                        attributes?: {
+                          alternativeText?: string;
+                          caption?: string;
+                          /** Format: date-time */
+                          createdAt?: string;
+                          createdBy?: {
+                            data?: {
                               attributes?: Record<string, unknown>;
                               id?: number;
-                            }[];
-                        };
-                        /** Format: date-time */
-                        createdAt?: string;
-                        createdBy?: {
-                          data?: {
-                            attributes?: Record<string, unknown>;
-                            id?: number;
+                            };
                           };
-                        };
-                        files?: {
-                          data?: {
+                          ext?: string;
+                          folder?: {
+                            data?: {
                               attributes?: {
-                                alternativeText?: string;
-                                caption?: string;
-                                /** Format: date-time */
-                                createdAt?: string;
-                                createdBy?: {
-                                  data?: {
-                                    attributes?: {
-                                      blocked?: boolean;
-                                      /** Format: date-time */
-                                      createdAt?: string;
-                                      createdBy?: {
-                                        data?: {
-                                          attributes?: Record<string, unknown>;
-                                          id?: number;
-                                        };
-                                      };
-                                      /** Format: email */
-                                      email?: string;
-                                      firstname?: string;
-                                      isActive?: boolean;
-                                      lastname?: string;
-                                      preferedLanguage?: string;
-                                      registrationToken?: string;
-                                      resetPasswordToken?: string;
-                                      roles?: {
-                                        data?: {
-                                            attributes?: {
-                                              code?: string;
-                                              /** Format: date-time */
-                                              createdAt?: string;
-                                              createdBy?: {
-                                                data?: {
-                                                  attributes?: Record<string, unknown>;
-                                                  id?: number;
-                                                };
-                                              };
-                                              description?: string;
-                                              name?: string;
-                                              permissions?: {
-                                                data?: {
-                                                    attributes?: {
-                                                      action?: string;
-                                                      conditions?: unknown;
-                                                      /** Format: date-time */
-                                                      createdAt?: string;
-                                                      createdBy?: {
-                                                        data?: {
-                                                          attributes?: Record<string, unknown>;
-                                                          id?: number;
-                                                        };
-                                                      };
-                                                      properties?: unknown;
-                                                      role?: {
-                                                        data?: {
-                                                          attributes?: Record<string, unknown>;
-                                                          id?: number;
-                                                        };
-                                                      };
-                                                      subject?: string;
-                                                      /** Format: date-time */
-                                                      updatedAt?: string;
-                                                      updatedBy?: {
-                                                        data?: {
-                                                          attributes?: Record<string, unknown>;
-                                                          id?: number;
-                                                        };
-                                                      };
-                                                    };
-                                                    id?: number;
-                                                  }[];
-                                              };
-                                              /** Format: date-time */
-                                              updatedAt?: string;
-                                              updatedBy?: {
-                                                data?: {
-                                                  attributes?: Record<string, unknown>;
-                                                  id?: number;
-                                                };
-                                              };
-                                              users?: {
-                                                data?: {
-                                                    attributes?: Record<string, unknown>;
-                                                    id?: number;
-                                                  }[];
-                                              };
-                                            };
-                                            id?: number;
-                                          }[];
-                                      };
-                                      /** Format: date-time */
-                                      updatedAt?: string;
-                                      updatedBy?: {
-                                        data?: {
-                                          attributes?: Record<string, unknown>;
-                                          id?: number;
-                                        };
-                                      };
-                                      username?: string;
-                                    };
-                                    id?: number;
-                                  };
-                                };
-                                ext?: string;
-                                folder?: {
-                                  data?: {
-                                    attributes?: Record<string, unknown>;
-                                    id?: number;
-                                  };
-                                };
-                                folderPath?: string;
-                                formats?: unknown;
-                                hash?: string;
-                                height?: number;
-                                mime?: string;
-                                name?: string;
-                                previewUrl?: string;
-                                provider?: string;
-                                provider_metadata?: unknown;
-                                related?: {
+                                children?: {
                                   data?: {
                                       attributes?: Record<string, unknown>;
                                       id?: number;
                                     }[];
                                 };
-                                /** Format: float */
-                                size?: number;
+                                /** Format: date-time */
+                                createdAt?: string;
+                                createdBy?: {
+                                  data?: {
+                                    attributes?: Record<string, unknown>;
+                                    id?: number;
+                                  };
+                                };
+                                files?: {
+                                  data?: {
+                                      attributes?: {
+                                        alternativeText?: string;
+                                        caption?: string;
+                                        /** Format: date-time */
+                                        createdAt?: string;
+                                        createdBy?: {
+                                          data?: {
+                                            attributes?: Record<string, unknown>;
+                                            id?: number;
+                                          };
+                                        };
+                                        ext?: string;
+                                        folder?: {
+                                          data?: {
+                                            attributes?: Record<string, unknown>;
+                                            id?: number;
+                                          };
+                                        };
+                                        folderPath?: string;
+                                        formats?: unknown;
+                                        hash?: string;
+                                        height?: number;
+                                        mime?: string;
+                                        name?: string;
+                                        previewUrl?: string;
+                                        provider?: string;
+                                        provider_metadata?: unknown;
+                                        related?: {
+                                          data?: {
+                                              attributes?: Record<string, unknown>;
+                                              id?: number;
+                                            }[];
+                                        };
+                                        /** Format: float */
+                                        size?: number;
+                                        /** Format: date-time */
+                                        updatedAt?: string;
+                                        updatedBy?: {
+                                          data?: {
+                                            attributes?: Record<string, unknown>;
+                                            id?: number;
+                                          };
+                                        };
+                                        url?: string;
+                                        width?: number;
+                                      };
+                                      id?: number;
+                                    }[];
+                                };
+                                name?: string;
+                                parent?: {
+                                  data?: {
+                                    attributes?: Record<string, unknown>;
+                                    id?: number;
+                                  };
+                                };
+                                path?: string;
+                                pathId?: number;
                                 /** Format: date-time */
                                 updatedAt?: string;
                                 updatedBy?: {
@@ -1155,64 +1177,270 @@ export interface components {
                                     id?: number;
                                   };
                                 };
-                                url?: string;
-                                width?: number;
                               };
                               id?: number;
-                            }[];
-                        };
-                        name?: string;
-                        parent?: {
-                          data?: {
-                            attributes?: Record<string, unknown>;
-                            id?: number;
+                            };
                           };
-                        };
-                        path?: string;
-                        pathId?: number;
-                        /** Format: date-time */
-                        updatedAt?: string;
-                        updatedBy?: {
-                          data?: {
-                            attributes?: Record<string, unknown>;
-                            id?: number;
+                          folderPath?: string;
+                          formats?: unknown;
+                          hash?: string;
+                          height?: number;
+                          mime?: string;
+                          name?: string;
+                          previewUrl?: string;
+                          provider?: string;
+                          provider_metadata?: unknown;
+                          related?: {
+                            data?: {
+                                attributes?: Record<string, unknown>;
+                                id?: number;
+                              }[];
                           };
+                          /** Format: float */
+                          size?: number;
+                          /** Format: date-time */
+                          updatedAt?: string;
+                          updatedBy?: {
+                            data?: {
+                              attributes?: Record<string, unknown>;
+                              id?: number;
+                            };
+                          };
+                          url?: string;
+                          width?: number;
                         };
+                        id?: number;
                       };
-                      id?: number;
                     };
-                  };
-                  folderPath?: string;
-                  formats?: unknown;
-                  hash?: string;
-                  height?: number;
-                  mime?: string;
-                  name?: string;
-                  previewUrl?: string;
-                  provider?: string;
-                  provider_metadata?: unknown;
-                  related?: {
-                    data?: {
+                    lastname?: string;
+                    owner?: {
+                      data?: {
                         attributes?: Record<string, unknown>;
                         id?: number;
-                      }[];
-                  };
-                  /** Format: float */
-                  size?: number;
-                  /** Format: date-time */
-                  updatedAt?: string;
-                  updatedBy?: {
-                    data?: {
-                      attributes?: Record<string, unknown>;
-                      id?: number;
+                      };
+                    };
+                    university?: string;
+                    /** Format: date-time */
+                    updatedAt?: string;
+                    updatedBy?: {
+                      data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      };
                     };
                   };
-                  url?: string;
-                  width?: number;
+                  id?: number;
                 };
-                id?: number;
+              };
+              slug?: string;
+              title?: string;
+              /** @enum {string} */
+              type?: "proposal" | "research";
+              /** Format: date-time */
+              updatedAt?: string;
+              updatedBy?: {
+                data?: {
+                  attributes?: Record<string, unknown>;
+                  id?: number;
+                };
+              };
+              /** Format: date */
+              when?: string;
+            };
+            id?: number;
+          })[];
+      };
+      opportunities?: {
+        data?: {
+            attributes?: {
+              cover?: {
+                data?: {
+                  attributes?: {
+                    alternativeText?: string;
+                    caption?: string;
+                    /** Format: date-time */
+                    createdAt?: string;
+                    createdBy?: {
+                      data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      };
+                    };
+                    ext?: string;
+                    folder?: {
+                      data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      };
+                    };
+                    folderPath?: string;
+                    formats?: unknown;
+                    hash?: string;
+                    height?: number;
+                    mime?: string;
+                    name?: string;
+                    previewUrl?: string;
+                    provider?: string;
+                    provider_metadata?: unknown;
+                    related?: {
+                      data?: {
+                          attributes?: Record<string, unknown>;
+                          id?: number;
+                        }[];
+                    };
+                    /** Format: float */
+                    size?: number;
+                    /** Format: date-time */
+                    updatedAt?: string;
+                    updatedBy?: {
+                      data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      };
+                    };
+                    url?: string;
+                    width?: number;
+                  };
+                  id?: number;
+                };
+              };
+              /** Format: date-time */
+              createdAt?: string;
+              createdBy?: {
+                data?: {
+                  attributes?: Record<string, unknown>;
+                  id?: number;
+                };
+              };
+              description?: string;
+              /** Format: date */
+              expireAt?: string;
+              link?: string;
+              locale?: string;
+              localizations?: {
+                data?: unknown[];
+              };
+              location?: string;
+              opportunity_category?: {
+                data?: {
+                  attributes?: Record<string, unknown>;
+                  id?: number;
+                };
+              };
+              partner?: {
+                data?: {
+                  attributes?: {
+                    avatar?: {
+                      data?: {
+                        attributes?: {
+                          alternativeText?: string;
+                          caption?: string;
+                          /** Format: date-time */
+                          createdAt?: string;
+                          createdBy?: {
+                            data?: {
+                              attributes?: Record<string, unknown>;
+                              id?: number;
+                            };
+                          };
+                          ext?: string;
+                          folder?: {
+                            data?: {
+                              attributes?: Record<string, unknown>;
+                              id?: number;
+                            };
+                          };
+                          folderPath?: string;
+                          formats?: unknown;
+                          hash?: string;
+                          height?: number;
+                          mime?: string;
+                          name?: string;
+                          previewUrl?: string;
+                          provider?: string;
+                          provider_metadata?: unknown;
+                          related?: {
+                            data?: {
+                                attributes?: Record<string, unknown>;
+                                id?: number;
+                              }[];
+                          };
+                          /** Format: float */
+                          size?: number;
+                          /** Format: date-time */
+                          updatedAt?: string;
+                          updatedBy?: {
+                            data?: {
+                              attributes?: Record<string, unknown>;
+                              id?: number;
+                            };
+                          };
+                          url?: string;
+                          width?: number;
+                        };
+                        id?: number;
+                      };
+                    };
+                    /** Format: date-time */
+                    createdAt?: string;
+                    createdBy?: {
+                      data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      };
+                    };
+                    description?: string;
+                    /** Format: email */
+                    email?: string;
+                    location?: string;
+                    name?: string;
+                    opportunities?: {
+                      data?: {
+                          attributes?: Record<string, unknown>;
+                          id?: number;
+                        }[];
+                    };
+                    owner?: {
+                      data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      };
+                    };
+                    /** Format: date-time */
+                    publishedAt?: string;
+                    /** Format: date-time */
+                    updatedAt?: string;
+                    updatedBy?: {
+                      data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      };
+                    };
+                    website?: string;
+                  };
+                  id?: number;
+                };
+              };
+              slug?: string;
+              title?: string;
+              /** Format: date-time */
+              updatedAt?: string;
+              updatedBy?: {
+                data?: {
+                  attributes?: Record<string, unknown>;
+                  id?: number;
+                };
               };
             };
+            id?: number;
+          }[];
+      };
+      owner?: {
+        data?: {
+          attributes?: {
+            blocked?: boolean;
+            confirmationToken?: string;
+            confirmed?: boolean;
             /** Format: date-time */
             createdAt?: string;
             createdBy?: {
@@ -1221,98 +1449,13 @@ export interface components {
                 id?: number;
               };
             };
-            description?: string;
-            /** Format: date */
-            expireAt?: string;
-            link?: string;
-            locale?: string;
-            localizations?: {
-              data?: unknown[];
-            };
-            location?: string;
-            opportunity_category?: {
+            /** Format: email */
+            email?: string;
+            provider?: string;
+            resetPasswordToken?: string;
+            role?: {
               data?: {
                 attributes?: {
-                  /** Format: date-time */
-                  createdAt?: string;
-                  createdBy?: {
-                    data?: {
-                      attributes?: Record<string, unknown>;
-                      id?: number;
-                    };
-                  };
-                  locale?: string;
-                  localizations?: {
-                    data?: unknown[];
-                  };
-                  name?: string;
-                  slug?: string;
-                  /** Format: date-time */
-                  updatedAt?: string;
-                  updatedBy?: {
-                    data?: {
-                      attributes?: Record<string, unknown>;
-                      id?: number;
-                    };
-                  };
-                };
-                id?: number;
-              };
-            };
-            partner?: {
-              data?: {
-                attributes?: {
-                  avatar?: {
-                    data?: {
-                      attributes?: {
-                        alternativeText?: string;
-                        caption?: string;
-                        /** Format: date-time */
-                        createdAt?: string;
-                        createdBy?: {
-                          data?: {
-                            attributes?: Record<string, unknown>;
-                            id?: number;
-                          };
-                        };
-                        ext?: string;
-                        folder?: {
-                          data?: {
-                            attributes?: Record<string, unknown>;
-                            id?: number;
-                          };
-                        };
-                        folderPath?: string;
-                        formats?: unknown;
-                        hash?: string;
-                        height?: number;
-                        mime?: string;
-                        name?: string;
-                        previewUrl?: string;
-                        provider?: string;
-                        provider_metadata?: unknown;
-                        related?: {
-                          data?: {
-                              attributes?: Record<string, unknown>;
-                              id?: number;
-                            }[];
-                        };
-                        /** Format: float */
-                        size?: number;
-                        /** Format: date-time */
-                        updatedAt?: string;
-                        updatedBy?: {
-                          data?: {
-                            attributes?: Record<string, unknown>;
-                            id?: number;
-                          };
-                        };
-                        url?: string;
-                        width?: number;
-                      };
-                      id?: number;
-                    };
-                  };
                   /** Format: date-time */
                   createdAt?: string;
                   createdBy?: {
@@ -1322,111 +1465,130 @@ export interface components {
                     };
                   };
                   description?: string;
-                  /** Format: email */
-                  email?: string;
-                  location?: string;
                   name?: string;
-                  opportunities?: {
+                  permissions?: {
                     data?: {
-                        attributes?: Record<string, unknown>;
+                        attributes?: {
+                          action?: string;
+                          /** Format: date-time */
+                          createdAt?: string;
+                          createdBy?: {
+                            data?: {
+                              attributes?: {
+                                blocked?: boolean;
+                                /** Format: date-time */
+                                createdAt?: string;
+                                createdBy?: {
+                                  data?: {
+                                    attributes?: Record<string, unknown>;
+                                    id?: number;
+                                  };
+                                };
+                                /** Format: email */
+                                email?: string;
+                                firstname?: string;
+                                isActive?: boolean;
+                                lastname?: string;
+                                preferedLanguage?: string;
+                                registrationToken?: string;
+                                resetPasswordToken?: string;
+                                roles?: {
+                                  data?: {
+                                      attributes?: {
+                                        code?: string;
+                                        /** Format: date-time */
+                                        createdAt?: string;
+                                        createdBy?: {
+                                          data?: {
+                                            attributes?: Record<string, unknown>;
+                                            id?: number;
+                                          };
+                                        };
+                                        description?: string;
+                                        name?: string;
+                                        permissions?: {
+                                          data?: {
+                                              attributes?: {
+                                                action?: string;
+                                                conditions?: unknown;
+                                                /** Format: date-time */
+                                                createdAt?: string;
+                                                createdBy?: {
+                                                  data?: {
+                                                    attributes?: Record<string, unknown>;
+                                                    id?: number;
+                                                  };
+                                                };
+                                                properties?: unknown;
+                                                role?: {
+                                                  data?: {
+                                                    attributes?: Record<string, unknown>;
+                                                    id?: number;
+                                                  };
+                                                };
+                                                subject?: string;
+                                                /** Format: date-time */
+                                                updatedAt?: string;
+                                                updatedBy?: {
+                                                  data?: {
+                                                    attributes?: Record<string, unknown>;
+                                                    id?: number;
+                                                  };
+                                                };
+                                              };
+                                              id?: number;
+                                            }[];
+                                        };
+                                        /** Format: date-time */
+                                        updatedAt?: string;
+                                        updatedBy?: {
+                                          data?: {
+                                            attributes?: Record<string, unknown>;
+                                            id?: number;
+                                          };
+                                        };
+                                        users?: {
+                                          data?: {
+                                              attributes?: Record<string, unknown>;
+                                              id?: number;
+                                            }[];
+                                        };
+                                      };
+                                      id?: number;
+                                    }[];
+                                };
+                                /** Format: date-time */
+                                updatedAt?: string;
+                                updatedBy?: {
+                                  data?: {
+                                    attributes?: Record<string, unknown>;
+                                    id?: number;
+                                  };
+                                };
+                                username?: string;
+                              };
+                              id?: number;
+                            };
+                          };
+                          role?: {
+                            data?: {
+                              attributes?: Record<string, unknown>;
+                              id?: number;
+                            };
+                          };
+                          /** Format: date-time */
+                          updatedAt?: string;
+                          updatedBy?: {
+                            data?: {
+                              attributes?: Record<string, unknown>;
+                              id?: number;
+                            };
+                          };
+                        };
                         id?: number;
                       }[];
                   };
-                  owner?: {
-                    data?: {
-                      attributes?: {
-                        blocked?: boolean;
-                        confirmationToken?: string;
-                        confirmed?: boolean;
-                        /** Format: date-time */
-                        createdAt?: string;
-                        createdBy?: {
-                          data?: {
-                            attributes?: Record<string, unknown>;
-                            id?: number;
-                          };
-                        };
-                        /** Format: email */
-                        email?: string;
-                        provider?: string;
-                        resetPasswordToken?: string;
-                        role?: {
-                          data?: {
-                            attributes?: {
-                              /** Format: date-time */
-                              createdAt?: string;
-                              createdBy?: {
-                                data?: {
-                                  attributes?: Record<string, unknown>;
-                                  id?: number;
-                                };
-                              };
-                              description?: string;
-                              name?: string;
-                              permissions?: {
-                                data?: {
-                                    attributes?: {
-                                      action?: string;
-                                      /** Format: date-time */
-                                      createdAt?: string;
-                                      createdBy?: {
-                                        data?: {
-                                          attributes?: Record<string, unknown>;
-                                          id?: number;
-                                        };
-                                      };
-                                      role?: {
-                                        data?: {
-                                          attributes?: Record<string, unknown>;
-                                          id?: number;
-                                        };
-                                      };
-                                      /** Format: date-time */
-                                      updatedAt?: string;
-                                      updatedBy?: {
-                                        data?: {
-                                          attributes?: Record<string, unknown>;
-                                          id?: number;
-                                        };
-                                      };
-                                    };
-                                    id?: number;
-                                  }[];
-                              };
-                              type?: string;
-                              /** Format: date-time */
-                              updatedAt?: string;
-                              updatedBy?: {
-                                data?: {
-                                  attributes?: Record<string, unknown>;
-                                  id?: number;
-                                };
-                              };
-                              users?: {
-                                data?: {
-                                    attributes?: Record<string, unknown>;
-                                    id?: number;
-                                  }[];
-                              };
-                            };
-                            id?: number;
-                          };
-                        };
-                        /** Format: date-time */
-                        updatedAt?: string;
-                        updatedBy?: {
-                          data?: {
-                            attributes?: Record<string, unknown>;
-                            id?: number;
-                          };
-                        };
-                        username?: string;
-                      };
-                      id?: number;
-                    };
-                  };
-                  /** Format: date-time */
-                  publishedAt?: string;
+                  type?: string;
                   /** Format: date-time */
                   updatedAt?: string;
                   updatedBy?: {
@@ -1435,13 +1597,16 @@ export interface components {
                       id?: number;
                     };
                   };
-                  website?: string;
+                  users?: {
+                    data?: {
+                        attributes?: Record<string, unknown>;
+                        id?: number;
+                      }[];
+                  };
                 };
                 id?: number;
               };
             };
-            slug?: string;
-            title?: string;
             /** Format: date-time */
             updatedAt?: string;
             updatedBy?: {
@@ -1450,13 +1615,8 @@ export interface components {
                 id?: number;
               };
             };
+            username?: string;
           };
-          id?: number;
-        };
-      };
-      owner?: {
-        data?: {
-          attributes?: Record<string, unknown>;
           id?: number;
         };
       };
@@ -1486,8 +1646,8 @@ export interface components {
     };
     BookmarkRequest: {
       data: {
-        /** @example string or id */
-        opportunity?: number | string;
+        exchanges?: (number | string)[];
+        opportunities?: (number | string)[];
         /** @example string or id */
         owner?: number | string;
       };
@@ -7630,6 +7790,150 @@ export interface operations {
       500: components["responses"]["500"];
     };
   };
+  "get/bookmark/exchanges": {
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["ExchangeListResponse"];
+        };
+      };
+      400: components["responses"]["400"];
+      401: components["responses"]["401"];
+      403: components["responses"]["403"];
+      404: components["responses"]["404"];
+      500: components["responses"]["500"];
+    };
+  };
+  "get/bookmark/exchanges/{id}": {
+    parameters: {
+      path: {
+        /** @description The exchanges id */
+        id: number;
+      };
+    };
+    responses: {
+      /** @description Found */
+      200: {
+        content: never;
+      };
+      400: components["responses"]["400"];
+      401: components["responses"]["401"];
+      403: components["responses"]["403"];
+      404: components["responses"]["404"];
+      500: components["responses"]["500"];
+    };
+  };
+  "post/bookmark/exchanges/{id}": {
+    parameters: {
+      path: {
+        /** @description The exchanges id */
+        id: number;
+      };
+    };
+    responses: {
+      /** @description Add to bookmarks */
+      200: {
+        content: never;
+      };
+      400: components["responses"]["400"];
+      401: components["responses"]["401"];
+      403: components["responses"]["403"];
+      404: components["responses"]["404"];
+      500: components["responses"]["500"];
+    };
+  };
+  "delete/bookmark/exchanges/{id}": {
+    parameters: {
+      path: {
+        /** @description The exchanges id */
+        id: number;
+      };
+    };
+    responses: {
+      /** @description Remove from bookmarks */
+      200: {
+        content: never;
+      };
+      400: components["responses"]["400"];
+      401: components["responses"]["401"];
+      403: components["responses"]["403"];
+      404: components["responses"]["404"];
+      500: components["responses"]["500"];
+    };
+  };
+  "get/bookmark/opportunities": {
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["OpportunityListResponse"];
+        };
+      };
+      400: components["responses"]["400"];
+      401: components["responses"]["401"];
+      403: components["responses"]["403"];
+      404: components["responses"]["404"];
+      500: components["responses"]["500"];
+    };
+  };
+  "get/bookmark/opportunities/{id}": {
+    parameters: {
+      path: {
+        /** @description The opportunity id */
+        id: number;
+      };
+    };
+    responses: {
+      /** @description Found */
+      200: {
+        content: never;
+      };
+      400: components["responses"]["400"];
+      401: components["responses"]["401"];
+      403: components["responses"]["403"];
+      404: components["responses"]["404"];
+      500: components["responses"]["500"];
+    };
+  };
+  "post/bookmark/opportunities/{id}": {
+    parameters: {
+      path: {
+        /** @description The opportunity id */
+        id: number;
+      };
+    };
+    responses: {
+      /** @description Add to bookmarks */
+      200: {
+        content: never;
+      };
+      400: components["responses"]["400"];
+      401: components["responses"]["401"];
+      403: components["responses"]["403"];
+      404: components["responses"]["404"];
+      500: components["responses"]["500"];
+    };
+  };
+  "delete/bookmark/opportunities/{id}": {
+    parameters: {
+      path: {
+        /** @description The opportunity id */
+        id: number;
+      };
+    };
+    responses: {
+      /** @description Remove from bookmarks */
+      200: {
+        content: never;
+      };
+      400: components["responses"]["400"];
+      401: components["responses"]["401"];
+      403: components["responses"]["403"];
+      404: components["responses"]["404"];
+      500: components["responses"]["500"];
+    };
+  };
   "get/bookmarks": {
     parameters: {
       query?: {
@@ -7695,6 +7999,101 @@ export interface operations {
     };
   };
   "post/bookmarks": {
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["BookmarkRequest"];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["BookmarkResponse"];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Forbidden */
+      403: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Not Found */
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+  };
+  "get/bookmarks/{id}": {
+    parameters: {
+      path: {
+        id: number;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["BookmarkResponse"];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Forbidden */
+      403: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Not Found */
+      404: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        content: {
+          "application/json": components["schemas"]["Error"];
+        };
+      };
+    };
+  };
+  "put/bookmarks/{id}": {
+    parameters: {
+      path: {
+        id: number;
+      };
+    };
     requestBody: {
       content: {
         "application/json": components["schemas"]["BookmarkRequest"];

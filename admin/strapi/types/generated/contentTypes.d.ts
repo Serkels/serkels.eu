@@ -842,15 +842,20 @@ export interface ApiBookmarkBookmark extends Schema.CollectionType {
     draftAndPublish: false;
   };
   attributes: {
-    opportunity: Attribute.Relation<
-      'api::bookmark.bookmark',
-      'oneToOne',
-      'api::opportunity.opportunity'
-    >;
     owner: Attribute.Relation<
       'api::bookmark.bookmark',
       'oneToOne',
       'plugin::users-permissions.user'
+    >;
+    exchanges: Attribute.Relation<
+      'api::bookmark.bookmark',
+      'oneToMany',
+      'api::exchange.exchange'
+    >;
+    opportunities: Attribute.Relation<
+      'api::bookmark.bookmark',
+      'oneToMany',
+      'api::opportunity.opportunity'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
