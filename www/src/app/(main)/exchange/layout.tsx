@@ -21,6 +21,7 @@ export default async function Layout({
     queryKey: Categories_Repository.keys.exchange(),
     queryFn: () => repository.exchange(),
   });
+
   const dehydratedState = dehydrate(queryClient);
 
   return (
