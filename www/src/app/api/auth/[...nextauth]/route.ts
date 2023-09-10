@@ -72,25 +72,24 @@ async function update_user_profile(
   token: string,
   context: Record<string, unknown>,
 ) {
-  const response = await fetch(
-    `${process.env["STRAPI_API_URL"]}/api/user-profiles/me`,
-    {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-type": "application/json; charset=UTF-8",
-      },
-      body: JSON.stringify({ data: context }),
-    },
-  );
+  const headers = new Headers({ Authorization: `Bearer ${token}` });
+  const {
+    response,
+    data: body,
+    error: errorBody,
+  } = await fromServer.PUT("/user-profiles/me", {
+    headers,
+    body: { data: context },
+  });
 
-  if (!response.ok) {
-    const error: components["schemas"]["Error"] = await response.json();
-    throw new Error(error.error.message);
+  if (errorBody) {
+    throw new Error(errorBody.error.message);
   }
 
-  const data: components["schemas"]["UserProfile"] = await response.json();
-  return data;
+  if (!body.data) {
+    throw new Error(["Profile Not Found", "from " + response.url].join("\n"));
+  }
+  return body.data;
 }
 
 async function user_profile(token: string) {

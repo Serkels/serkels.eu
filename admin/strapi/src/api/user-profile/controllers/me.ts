@@ -3,20 +3,20 @@
  */
 
 import { Common } from "@strapi/strapi";
-import { sanitize } from "@strapi/utils";
 import { type Next } from "koa";
 import { findOneFromUser } from "../services/user-profile";
 
 export default {
   async find(ctx, next: Next) {
-    const contentType = strapi.contentType("api::user-profile.user-profile");
+    const constroller = strapi.controller<Common.UID.ContentType>(
+      "api::user-profile.user-profile",
+    );
 
     const user: { id: number } = ctx.state.user;
     const profile = await findOneFromUser(user.id);
 
-    return sanitize.contentAPI.output({ data: profile }, contentType, {
-      auth: ctx.state.auth,
-    });
+    ctx.params.id = profile.id;
+    return constroller.findOne(ctx, next);
   },
 
   async update(ctx, next: Next) {
@@ -41,10 +41,13 @@ export default {
 
     if (profile) {
       ctx.params.id = profile.id;
-      return constroller.update(ctx, next);
+      await constroller.update(ctx, next);
+    } else {
+      ctx.request.body.data.owner = user.id;
+      await constroller.create(ctx, next);
     }
 
-    ctx.request.body.data.owner = user.id;
-    return constroller.create(ctx, next);
+    ctx.params.id = profile.id;
+    return constroller.findOne(ctx, next);
   },
 };
