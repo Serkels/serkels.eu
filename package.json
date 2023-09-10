@@ -20,5 +20,15 @@
       "supports-color": "^8.1.1",
       "zod": "3.22.2"
     }
-  }
+  },
+  "workspaces": [
+    "@1/config/*",
+    "@1/core",
+    "@1/modules",
+    "@1/strapi-openapi",
+    "@1/strapi-trpc-router",
+    "@1/ui",
+    "packages/@douglasduteil/datatypes...hours-to-seconds",
+    "www"
+  ]
 }
