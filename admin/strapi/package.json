@@ -36,7 +36,7 @@
     "etag": "1.8.1",
     "fix-esm": "1.0.1",
     "fp-ts": "2.16.1",
-    "globby": "10.0.2",
+    "globby": "13.2.2",
     "mime-types": "2.1.35",
     "modern-errors-serialize": "5.0.0",
     "ms": "3.0.0-canary.1",
