@@ -29,6 +29,7 @@
     "@1/strapi-trpc-router",
     "@1/ui",
     "packages/@douglasduteil/datatypes...hours-to-seconds",
+    "admin/strapi",
     "www"
   ]
 }
