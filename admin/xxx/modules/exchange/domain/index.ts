@@ -1,7 +1,7 @@
 //
 
 import { Entity, Ok, Result } from "@1/core/domain";
-import { Category_SchemaToDomain, type Category } from "../../common";
+import type { Category } from "../../category/domain";
 import type { Profile } from "../../profile/domain";
 import type { Type, TypeProps } from "./Type.value";
 
@@ -62,8 +62,6 @@ export class Exchange extends Entity<Exchange_Props> {
     return this.props.category;
   }
   get in_exchange_of() {
-    if (!this.props.in_exchange_of) return;
-    new Category_SchemaToDomain().fromItemDto(this.props.in_exchange_of);
     return this.props.in_exchange_of;
   }
 }

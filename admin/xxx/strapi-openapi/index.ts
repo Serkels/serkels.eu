@@ -34,8 +34,7 @@ export type Common_PaginationMeta_Schema = {
 
 export type Comment_ListSchema = Schemas["CommentListResponse"];
 export type Comment_Schema = Schemas["CommentsComment"];
-export type Category_ItemSchema =
-  Schemas["OpportunityCategoryResponseDataObject"];
+export type Category_ItemSchema = Schemas["CategoryResponseDataObject"];
 
 //
 //

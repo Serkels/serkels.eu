@@ -6,7 +6,20 @@
       "label": "NextJs Dev Server",
       "script": "dev",
       "problemMatcher": ["$tsc-watch"],
-      "group": "build"
+      "group": "build",
+      "runOptions": {
+        "instanceLimit": 1
+      }
+    },
+    {
+      "type": "npm",
+      "label": "NextJs Build",
+      "script": "build",
+      "problemMatcher": ["$tsc-watch"],
+      "group": "build",
+      "runOptions": {
+        "instanceLimit": 1
+      }
     }
   ]
 }

@@ -3,8 +3,8 @@
 import type { Category_Type } from "@1/modules/category/domain";
 import { Field, type FieldAttributes } from "formik";
 import { useInject } from "~/core/react";
-import { Get_Category_UseCase } from "~/modules/question/application/get_categories.use-case";
-import { Get_Other_Category_UseCase } from "~/modules/question/application/get_other_categories.use-case";
+import { Get_Category_UseCase } from "~/modules/categories/application/get_categories.use-case";
+import { Get_Other_Category_UseCase } from "~/modules/categories/application/get_other_categories.use-case";
 
 //
 
@@ -15,7 +15,7 @@ export function SelectCategoryField(
   const get_category = useInject(Get_Category_UseCase);
   const get_other_category = useInject(Get_Other_Category_UseCase);
   const categories = get_category.execute(type);
-  const other_category = get_other_category.execute();
+  const other_category = get_other_category.execute(type);
 
   return (
     <Field component="select" {...other_props}>

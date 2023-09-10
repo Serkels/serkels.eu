@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import { FilterRadioList } from "~/components/FilterRadioList";
 import { useSyncSearchQuery } from "~/components/useSyncSearchQuery";
 import { useInject } from "~/core/react";
-import { Get_Category_UseCase } from "~/modules/question/application/get_categories.use-case";
+import { Get_Category_UseCase } from "~/modules/categories/application/get_categories.use-case";
 import { QACreateForm } from "./QACreateForm";
 import type { QAFilterType } from "./models/QAFilterType";
 

@@ -5,8 +5,8 @@ import { Field, Form, Formik } from "formik";
 import { useSearchParams } from "next/navigation";
 import { SelectCategoryField } from "~/components/SelectCategoryField";
 import { useInject } from "~/core/react";
-import { Get_Category_UseCase } from "~/modules/question/application/get_categories.use-case";
-import { Get_Other_Category_UseCase } from "~/modules/question/application/get_other_categories.use-case";
+import { Get_Category_UseCase } from "~/modules/categories/application/get_categories.use-case";
+import { Get_Other_Category_UseCase } from "~/modules/categories/application/get_other_categories.use-case";
 
 //
 
@@ -24,7 +24,7 @@ export function QACardFormBody({
   //
 
   const categories = get_category.execute("question");
-  const other_category = get_other_category.execute();
+  const other_category = get_other_category.execute("question");
   const category = search_params.get("category");
   const initial_category =
     initialValues.category ??
