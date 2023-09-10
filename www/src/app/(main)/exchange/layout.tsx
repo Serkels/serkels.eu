@@ -3,15 +3,16 @@
 import { Grid } from "@1/ui/components/Grid";
 import { Hydrate, dehydrate } from "@tanstack/react-query";
 import { type PropsWithChildren } from "react";
-import { AppFooter } from "~/components/AppFooter.server";
-import { UserBar } from "~/components/UserBar";
 import { AsideWithTitle } from "~/components/layouts/holy/aside";
 import { get_StrapiRepository } from "~/core";
+import { getQueryClient } from "~/core/getQueryClient";
 import { Categories_Repository } from "~/modules/categories/Categories_Repository";
-import { getQueryClient } from "../../core/getQueryClient";
-import { CategoriesList, SearchForm } from "./(page)";
+import { CategoriesList, SearchForm } from "./page.client";
 
-export default async function Layout({ children }: PropsWithChildren) {
+export default async function Layout({
+  children,
+  see_also,
+}: PropsWithChildren<{ see_also: React.ReactNode }>) {
   const strapi_repository = await get_StrapiRepository();
   const repository = new Categories_Repository(strapi_repository);
 
@@ -23,21 +24,22 @@ export default async function Layout({ children }: PropsWithChildren) {
   const dehydratedState = dehydrate(queryClient);
 
   return (
-    <div className="grid min-h-screen grid-rows-[max-content_1fr_max-content]">
-      <UserBar />
-      <Grid>
-        <Hydrate state={dehydratedState}>
-          <AsideWithTitle title="Échanges">
-            <SearchForm />
-            {/* <ExhangesFilter /> */}
-            <hr className="my-10" />
+    <Hydrate state={dehydratedState}>
+      <Grid className="col-span-full">
+        <AsideWithTitle title="Échanges">
+          <SearchForm />
+          {/* <ExhangesFilter /> */}
+          <hr className="my-10" />
 
-            <CategoriesList />
-          </AsideWithTitle>
+          <CategoriesList />
+        </AsideWithTitle>
+        <div className="col-span-full my-10 md:col-span-6 xl:col-span-6 ">
           {children}
-        </Hydrate>
+        </div>
+        <aside className="mt-10 hidden xl:col-span-3 xl:block xl:px-10">
+          {see_also}
+        </aside>
       </Grid>
-      <AppFooter />
-    </div>
+    </Hydrate>
   );
 }
