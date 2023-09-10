@@ -3,10 +3,10 @@
 import { HTTPError } from "@1/core/domain";
 import type { Question_ListSchema, Question_Schema } from "@1/strapi-openapi";
 import debug from "debug";
-import "reflect-metadata";
-import { inject, singleton } from "tsyringe";
-import { OpenAPIRepository, type ApiClient } from "~/app/api/v1";
+import { type ApiClient } from "~/app/api/v1";
+import { OpenAPI_Repository } from "~/app/api/v1/OpenAPI.repository";
 import type { RepositoryPort } from "~/core";
+import { Lifecycle, inject, scoped } from "~/core/di";
 import type { Question_CreateProps, Question_Entity } from "./entity";
 
 //
@@ -19,9 +19,11 @@ export type Question_QueryProps = {
     | "desc"}`[];
 };
 
-@singleton()
+//
+
+@scoped(Lifecycle.ContainerScoped)
 export class Question_Repository
-  extends OpenAPIRepository
+  extends OpenAPI_Repository
   implements RepositoryPort
 {
   #log = debug(`~:modules:question:${Question_Repository.name}`);
@@ -33,6 +35,7 @@ export class Question_Repository
     super(client, jwt);
     this.#log("new", jwt ? "🗝️" : "🔒");
   }
+
   async create(entity: Question_CreateProps) {
     this.#log("create", entity);
 

@@ -3,12 +3,12 @@
 import { Category, OTHER_CATEGORY_SLUGS } from "@1/modules/category/domain";
 import debug from "debug";
 import { useMemo } from "react";
-import { inject, singleton } from "tsyringe";
+import { Lifecycle, inject, scoped } from "~/core/di";
 import { Get_Category_UseCase } from "./get_categories.use-case";
 
 //
 
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class Get_Other_Category_UseCase {
   #log = debug(`~:modules:question:app:${Get_Other_Category_UseCase.name}`);
 

@@ -61,7 +61,7 @@ export class Opportunities {
             partner: {
               populate: "avatar",
             },
-            opportunity_category: "*",
+            category: "*",
             cover: "*",
           },
           pagination: {
@@ -72,7 +72,7 @@ export class Opportunities {
           filters: {
             $and: [
               {
-                opportunity_category: {
+                category: {
                   slug: { $eq: category },
                 },
               },

@@ -11,6 +11,7 @@ export type Strapi_Query_Params<
 > = {
   pagination?: { pageSize?: number; page?: number };
   sort?: `${SchemaAttributes}:${"asc" | "desc"}`[];
+  filters?: Partial<Record<SchemaAttributes, unknown>>;
 };
 
 export const z_strapi_flatten_page_data = <Z extends ZodTypeAny>(

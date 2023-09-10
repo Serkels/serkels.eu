@@ -10,7 +10,7 @@ export function useSyncSearchQuery(name: string) {
   const pathname = usePathname() ?? "";
   const searchParams = useSearchParams() ?? new URLSearchParams();
   const searchQuery = searchParams.get(name);
-  const [query, setQuery] = useState(searchQuery ?? "");
+  const [query, setQuery] = useState(searchQuery ?? undefined);
 
   useEffect(() => {
     if (searchQuery === query) return;
@@ -32,7 +32,7 @@ export function useSyncSearchQuery(name: string) {
 
 function updateURLSearchParams(
   searchParams: string,
-  [queryKey, queryValue]: [string, string],
+  [queryKey, queryValue]: [string, string | undefined],
 ) {
   const params = new URLSearchParams(searchParams.toString());
 

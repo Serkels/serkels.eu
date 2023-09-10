@@ -18,9 +18,10 @@ export function CategoriesList() {
 
   const onChange =
     pathname === "/opportunity"
-      ? setCategory
+      ? async (category: string) =>
+          setCategory(category === "" ? undefined : category)
       : async (category: string) => {
-          await setCategory(category);
+          await setCategory(category === "" ? undefined : category);
           await router.push(`/opportunity`);
         };
 
@@ -45,7 +46,7 @@ export function CategoriesList() {
   return (
     <FilterRadioList
       data={categories}
-      active={category}
+      active={category ?? ""}
       name="category"
       onChange={onChange}
     />

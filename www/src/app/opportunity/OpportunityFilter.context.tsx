@@ -12,18 +12,21 @@ import { useSyncSearchQuery } from "~/components/useSyncSearchQuery";
 //
 
 export const OpportunityFilterContext = createContext<{
-  category: string;
-  setCategory: Dispatch<SetStateAction<string>>;
-  setCategoryAndUrl: Dispatch<SetStateAction<string>>;
-  query: string;
-  setQuery: Dispatch<SetStateAction<string>>;
-  setQueryAndUrl: Dispatch<SetStateAction<string>>;
-  statefulQuery: [string, Dispatch<SetStateAction<string>>];
+  category: string | undefined;
+  setCategory: Dispatch<SetStateAction<string | undefined>>;
+  setCategoryAndUrl: Dispatch<SetStateAction<string | undefined>>;
+  query: string | undefined;
+  setQuery: Dispatch<SetStateAction<string | undefined>>;
+  setQueryAndUrl: Dispatch<SetStateAction<string | undefined>>;
+  statefulQuery: [
+    string | undefined,
+    Dispatch<SetStateAction<string | undefined>>,
+  ];
 }>({
-  category: "",
+  category: undefined,
   setCategory: () => null,
   setCategoryAndUrl: () => null,
-  query: "",
+  query: undefined,
   setQuery: () => null,
   setQueryAndUrl: () => null,
 } as any);

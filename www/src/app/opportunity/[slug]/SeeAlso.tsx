@@ -34,7 +34,7 @@ export async function SeeAlso({ category }: { category: string }) {
                 expireAt={opportunity.expireAt!}
                 id={String(opportunity.id)}
                 location={opportunity.location!}
-                opportunity_category={opportunity.opportunity_category!}
+                category={opportunity.category!}
                 partner={opportunity.partner!}
                 title={opportunity.title!}
               />

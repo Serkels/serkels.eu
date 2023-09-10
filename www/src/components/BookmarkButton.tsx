@@ -2,7 +2,7 @@
 
 import { Spinner } from "@1/ui/components/Spinner";
 import { Bookmark } from "@1/ui/icons";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
 import {
@@ -10,9 +10,9 @@ import {
   type ComponentPropsWithoutRef,
   type MouseEventHandler,
 } from "react";
-import { fromClient } from "~/app/api/v1";
-import { useBookmard_repository } from "~/modules/bookmarks";
-import { BookmarksRepository } from "~/modules/bookmarks/BookmarksRepository";
+import { useInject } from "~/core/react";
+import { Is_In_Bookmarks_UseCase } from "~/modules/bookmarks/application/is_in_bookmarks.use-case";
+import { Bookmarks_Repository } from "~/modules/bookmarks/bookmarks.repository";
 
 //
 
@@ -28,39 +28,34 @@ export function BookmarkButton(
 
   //
 
-  const repository = useBookmard_repository();
+  const repository = useInject(Bookmarks_Repository);
+  const { data: is_in_bookmarks, isLoading: isDataLoading } = useInject(
+    Is_In_Bookmarks_UseCase,
+  ).execute("opportunity", opportunity);
 
-  const jwt = session?.user?.jwt;
-  const { data: bookmarks, isLoading: isDataLoading } = useQuery({
-    enabled: Boolean(jwt),
-    queryKey: BookmarksRepository.queryKey,
-    queryFn: async () => new BookmarksRepository(fromClient, jwt).load(),
-    staleTime: Infinity,
-  });
-
-  const bookmark = bookmarks?.data?.find(
-    ({ attributes }) => attributes?.opportunity?.data?.id === opportunity,
-  );
-  const isActive = Boolean(bookmark);
+  const isActive = Boolean(is_in_bookmarks?.ok ?? false);
 
   //
 
   const onSettled = async () => {
+    console.log({ isActive, is_in_bookmarks });
     await Promise.all([
-      queryClient.invalidateQueries({ queryKey: BookmarksRepository.queryKey }),
-      queryClient.invalidateQueries({
-        queryKey: ["my", "bookmarks", "opportunities"],
+      queryClient.refetchQueries({
+        queryKey: Bookmarks_Repository.keys.check("opportunity", opportunity),
+      }),
+      queryClient.refetchQueries({
+        queryKey: Bookmarks_Repository.keys.opportunity(),
       }),
     ]);
   };
-  const { mutate: save_bookmark, isLoading: isSaveLoading } = useMutation(
-    repository.save.bind(repository),
-    { onSettled },
-  );
-  const { mutate: delete_bookmark, isLoading: isDeleteLoading } = useMutation(
-    repository.delete.bind(repository),
-    { onSettled },
-  );
+  const { mutate: save_bookmark, isLoading: isSaveLoading } = useMutation({
+    mutationFn: () => repository.save("opportunity", opportunity),
+    onSettled,
+  });
+  const { mutate: delete_bookmark, isLoading: isDeleteLoading } = useMutation({
+    mutationFn: () => repository.delete("opportunity", opportunity),
+    onSettled,
+  });
   const isLoading = isDataLoading || isSaveLoading || isDeleteLoading;
 
   const className = classNameProp
@@ -70,10 +65,8 @@ export function BookmarkButton(
     : undefined;
 
   const onClick: MouseEventHandler<HTMLButtonElement> = useCallback(() => {
-    const bookmark_id = bookmark?.id;
-
-    bookmark_id ? delete_bookmark(bookmark_id) : save_bookmark({ opportunity });
-  }, [bookmark?.id, opportunity, isActive]);
+    isActive ? delete_bookmark() : save_bookmark();
+  }, [isActive]);
 
   //
 

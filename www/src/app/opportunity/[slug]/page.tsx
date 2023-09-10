@@ -1,7 +1,7 @@
 //
 
-import type { components } from "@1/strapi-openapi/v1";
-import { Opportunity } from "~/app/opportunity/data/OpportunityRepository";
+import { injector } from "~/core/di";
+import { Opportunity_Repository } from "~/modules/opportunity/opportunity.repository";
 import { OpportunityArticle } from "./OpportunityArticle";
 import { SeeAlso } from "./SeeAlso";
 
@@ -9,13 +9,11 @@ import { SeeAlso } from "./SeeAlso";
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const { slug } = params;
+  const repository = injector().resolve(Opportunity_Repository);
 
   try {
-    const data: components["schemas"]["OpportunityListResponseDataItem"] =
-      await Opportunity.loadFromSlug(slug);
-
-    const category =
-      data.attributes?.opportunity_category?.data?.attributes?.slug;
+    const data = await repository.find_by_slug(slug);
+    const category = data.attributes?.category?.data?.attributes?.slug;
 
     return (
       <>

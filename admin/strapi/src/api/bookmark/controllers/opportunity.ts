@@ -2,7 +2,6 @@
 
 import { transformResponse } from "@strapi/strapi/lib/core-api/controller/transform";
 import { sanitize, validate } from "@strapi/utils";
-import type { StrapiContentTypeFullSchema } from "strapi-typed";
 import { z } from "zod";
 import { GetValues, ID_Schema, Params, type KoaContext } from "~/types";
 import { OPPORTUNITY_API_CONTENT_ID } from "../../opportunity/content-types/opportunity";
@@ -13,11 +12,9 @@ import { find_owner_bookmarks } from "../services/bookmark";
 
 export default {
   async find(ctx: KoaContext) {
-    const contentType = strapi.contentType(
-      BOOKMARK_API_CONTENT_ID,
-    ) as StrapiContentTypeFullSchema<typeof BOOKMARK_API_CONTENT_ID>;
+    const contentType = strapi.contentType(OPPORTUNITY_API_CONTENT_ID); //as StrapiContentTypeFullSchema<typeof BOOKMARK_API_CONTENT_ID>;
 
-    await validate.contentAPI.query(ctx.query, contentType as any, {
+    await validate.contentAPI.query(ctx.query, contentType, {
       auth: ctx.state.auth,
     });
 
@@ -34,7 +31,7 @@ export default {
 
       const sanitizedQueryParams = await sanitize.contentAPI.query(
         ctx.query,
-        contentType as any,
+        contentType,
         { auth: ctx.state.auth },
       );
 
@@ -45,15 +42,11 @@ export default {
           filters: {
             id: { $in: opportunities.map(({ id }) => id) },
           },
-          fields: ["id"],
-        } satisfies Params.Pick<
-          typeof OPPORTUNITY_API_CONTENT_ID,
-          "filters" | "fields"
-        >);
+        } satisfies Params.Pick<typeof OPPORTUNITY_API_CONTENT_ID, "filters">);
 
       const sanitizedResults = await sanitize.contentAPI.output(
         results,
-        contentType as any,
+        contentType,
         {
           auth: ctx.state.auth,
         },

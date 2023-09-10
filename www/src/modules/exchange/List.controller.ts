@@ -4,9 +4,10 @@ import type { Exchange_ListSchema } from "@1/strapi-openapi";
 import { useInfiniteQuery, type QueryFunction } from "@tanstack/react-query";
 import debug from "debug";
 import { useCallback } from "react";
+import { Lifecycle, inject, scoped } from "tsyringe";
 import { getNextPageParam, getPreviousPageParam } from "~/core/use-query";
 import type { Exchanges_QueryProps } from "./Exchange_QueryProps";
-import type { Exchange_Repository } from "./infrastructure";
+import { Exchange_Repository } from "./infrastructure";
 import { Exchange_QueryKeys } from "./queryKeys";
 
 //
@@ -15,10 +16,14 @@ const log = debug("~:modules:exchange:Exchange_List_Controller");
 
 //
 
+@scoped(Lifecycle.ContainerScoped)
 export class Exchange_List_Controller {
-  constructor(private repository: Exchange_Repository) {
+  constructor(
+    @inject(Exchange_Repository) private repository: Exchange_Repository,
+  ) {
     log("new");
   }
+
   lists = {
     useQuery: this.useListQuery.bind(this),
   };
@@ -40,7 +45,7 @@ export class Exchange_List_Controller {
     };
 
     const query_info = useInfiniteQuery({
-      enabled: Boolean(this.repository.jwt),
+      enabled: this.repository.is_authorized,
       getNextPageParam,
       getPreviousPageParam,
       queryFn: useCallback(loadListFn, [
@@ -69,7 +74,7 @@ export class Exchange_List_Controller {
     };
 
     const query_info = useInfiniteQuery({
-      enabled: Boolean(this.repository.jwt),
+      enabled: this.repository.is_authorized,
       getNextPageParam,
       getPreviousPageParam,
       queryFn: useCallback(loadListFn, [

@@ -9,39 +9,41 @@ import type {
   Exchange_ListSchema,
 } from "@1/strapi-openapi";
 import debug from "debug";
-import { OpenAPIRepository, type ApiClient } from "~/app/api/v1";
+import { Lifecycle, inject, scoped } from "tsyringe";
+import { OpenAPI_Repository } from "~/app/api/v1/OpenAPI.repository";
 import type { RepositoryPort } from "~/core";
 import type { Exchanges_QueryProps } from "./Exchange_QueryProps";
 
 //
 
-const log = debug("~:modules:exchange:Exchange_Repository");
-//
+@scoped(Lifecycle.ContainerScoped)
+export class Exchange_Repository implements RepositoryPort {
+  #log = debug(`~:modules:exchange:${Exchange_Repository.name}`);
+  constructor(
+    @inject(OpenAPI_Repository) private readonly openapi: OpenAPI_Repository,
+  ) {
+    this.#log("new");
+  }
 
-export class Exchange_Repository
-  extends OpenAPIRepository
-  implements RepositoryPort
-{
-  constructor(client: ApiClient, jwt?: string | undefined) {
-    super(client, jwt);
-    log("new", jwt);
+  get is_authorized() {
+    return Boolean(this.openapi.jwt);
   }
 
   async create(data: Exchange_CreateProps) {
-    log("create", data);
-    const { response, error: errorBody } = await this.client.POST(
+    this.#log("create", data);
+    const { response, error: errorBody } = await this.openapi.client.POST(
       "/exchanges",
       {
         body: {
           data,
         },
-        headers: this.headers,
+        headers: this.openapi.headers,
         params: {},
       },
     );
 
     if (errorBody) {
-      log("create", errorBody);
+      this.#log("create", errorBody);
       throw new HTTPError(
         [errorBody.error.message, "from " + response.url].join("\n"),
         { cause: errorBody.error },
@@ -54,14 +56,14 @@ export class Exchange_Repository
     sort,
     pagination,
   }: Exchanges_QueryProps): Promise<Exchange_ListSchema> {
-    log("findAll", filter);
+    this.#log("findAll", filter);
     const { category, search } = filter ?? {};
     const {
       data: body,
       error: errorBody,
       response,
-    } = await this.client.GET("/exchanges", {
-      headers: this.headers,
+    } = await this.openapi.client.GET("/exchanges", {
+      headers: this.openapi.headers,
       params: {
         query: {
           filters: {
@@ -90,7 +92,7 @@ export class Exchange_Repository
     });
 
     if (errorBody) {
-      log("findAll", errorBody);
+      this.#log("findAll", errorBody);
       throw new HTTPError(
         [errorBody.error.message, "from " + response.url].join("\n"),
         { cause: errorBody.error },
@@ -105,14 +107,14 @@ export class Exchange_Repository
     sort,
     pagination,
   }: Exchanges_QueryProps): Promise<Exchange_ListSchema> {
-    log("findAllMine", filter);
+    this.#log("findAllMine", filter);
 
     const {
       data: body,
       error: errorBody,
       response,
-    } = await this.client.GET("/my/exchanges", {
-      headers: this.headers,
+    } = await this.openapi.client.GET("/my/exchanges", {
+      headers: this.openapi.headers,
       params: {
         query: {
           pagination: {
@@ -125,7 +127,7 @@ export class Exchange_Repository
     });
 
     if (errorBody) {
-      log("findAllMine", errorBody);
+      this.#log("findAllMine", errorBody);
       throw new HTTPError(
         [errorBody.error.message, "from " + response.url].join("\n"),
         { cause: errorBody.error },
@@ -136,20 +138,20 @@ export class Exchange_Repository
   }
 
   async findById(id: number): Promise<Exchange_ItemSchema | undefined> {
-    log("findById", id);
+    this.#log("findById", id);
     const {
       data: body,
       error: errorBody,
       response,
-    } = await this.client.GET("/exchanges/{id}", {
-      headers: this.headers,
+    } = await this.openapi.client.GET("/exchanges/{id}", {
+      headers: this.openapi.headers,
       params: {
         path: { id },
       },
     });
 
     if (errorBody) {
-      log("findById", errorBody);
+      this.#log("findById", errorBody);
       throw new HTTPError(
         [errorBody.error.message, "from " + response.url].join("\n"),
         { cause: errorBody.error },
@@ -163,13 +165,13 @@ export class Exchange_Repository
     exchange_id: number,
     user_id: number,
   ): Promise<Exchange_DealListSchema> {
-    log("find_deal_by_participant", exchange_id);
+    this.#log("find_deal_by_participant", exchange_id);
     const {
       data: body,
       error: errorBody,
       response,
-    } = await this.client.GET("/exchanges/{id}/deals", {
-      headers: this.headers,
+    } = await this.openapi.client.GET("/exchanges/{id}/deals", {
+      headers: this.openapi.headers,
       params: {
         path: { id: exchange_id },
         query: {
@@ -181,7 +183,7 @@ export class Exchange_Repository
     });
 
     if (errorBody) {
-      log("deals", errorBody);
+      this.#log("deals", errorBody);
       throw new HTTPError(
         [errorBody.error.message, "from " + response.url].join("\n"),
         { cause: errorBody.error },
@@ -192,20 +194,20 @@ export class Exchange_Repository
   }
 
   async findDealById(id: number): Promise<Exchange_DealSchema | undefined> {
-    log("findDealById", id);
+    this.#log("findDealById", id);
     const {
       data: body,
       error: errorBody,
       response,
-    } = await this.client.GET("/exchange-deals/{id}", {
-      headers: this.headers,
+    } = await this.openapi.client.GET("/exchange-deals/{id}", {
+      headers: this.openapi.headers,
       params: {
         path: { id },
       },
     });
 
     if (errorBody) {
-      log("findDealById", errorBody);
+      this.#log("findDealById", errorBody);
       throw new HTTPError(
         [errorBody.error.message, "from " + response.url].join("\n"),
         { cause: errorBody.error },

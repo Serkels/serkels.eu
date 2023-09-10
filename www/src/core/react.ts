@@ -1,12 +1,11 @@
 //
 
 import { createContext, useContext } from "react";
-import "reflect-metadata";
 import {
   container,
   type DependencyContainer,
   type InjectionToken,
-} from "tsyringe";
+} from "~/core/di";
 
 //
 

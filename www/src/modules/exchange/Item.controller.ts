@@ -43,7 +43,7 @@ export class Exchange_Item_Controller {
     };
 
     const query_info = useQuery({
-      enabled: Boolean(this.repository.jwt),
+      enabled: this.repository.is_authorized,
       queryFn: useCallback(loadItemFn, [this.repository, this.exchange_id]),
       queryKey: Exchange_QueryKeys.item(this.exchange_id),
       staleTime: Infinity,
@@ -69,7 +69,7 @@ export class Exchange_Item_Controller {
     };
 
     const query_info = useQuery({
-      enabled: Boolean(this.repository.jwt),
+      enabled: this.repository.is_authorized,
       queryFn: useCallback(find_deal_by_participant, [
         this.repository,
         this.exchange_id,

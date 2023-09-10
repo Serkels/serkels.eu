@@ -1215,10 +1215,10 @@ export interface ApiOpportunityOpportunity extends Schema.CollectionType {
           localized: true;
         };
       }>;
-    opportunity_category: Attribute.Relation<
+    category: Attribute.Relation<
       'api::opportunity.opportunity',
       'oneToOne',
-      'api::opportunity-category.opportunity-category'
+      'api::category.category'
     >;
     link: Attribute.String &
       Attribute.SetPluginOptions<{
@@ -1237,6 +1237,11 @@ export interface ApiOpportunityOpportunity extends Schema.CollectionType {
           localized: true;
         };
       }>;
+    profile: Attribute.Relation<
+      'api::opportunity.opportunity',
+      'oneToOne',
+      'api::user-profile.user-profile'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -1345,6 +1350,11 @@ export interface ApiPartnerPartner extends Schema.CollectionType {
       'api::partner.partner',
       'oneToOne',
       'plugin::users-permissions.user'
+    >;
+    profile: Attribute.Relation<
+      'api::partner.partner',
+      'oneToOne',
+      'api::user-profile.user-profile'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;

@@ -84,15 +84,6 @@ export function Ask_Body() {
     )
       return;
 
-    console.log(
-      {
-        exchange_deals: exchange_deals_query_info,
-        create_deal_mutation_info,
-        create_message_info,
-      },
-      message_ref.current,
-    );
-
     create_message_info.mutate(message_ref.current);
   }, [create_deal_mutation_info.isSuccess, deal_id, message_ref.current]);
 

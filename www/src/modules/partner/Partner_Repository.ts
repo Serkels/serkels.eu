@@ -3,11 +3,11 @@
 import { HTTPError } from "@1/core/error";
 import type { Partner_RequestSchema } from "@1/strapi-openapi";
 import debug from "debug";
-import { OpenAPIRepository } from "~/app/api/v1";
+import { OpenAPI_Repository } from "~/app/api/v1/OpenAPI.repository";
 
 //
 
-export class Partner_Repository extends OpenAPIRepository {
+export class Partner_Repository extends OpenAPI_Repository {
   #log = debug(`~:modules:partner:${Partner_Repository.name}`);
   async find_me() {
     this.#log("find_me");

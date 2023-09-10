@@ -11,8 +11,7 @@ import {
 import debug from "debug";
 import { useSession } from "next-auth/react";
 import { useCallback, useEffect } from "react";
-import "reflect-metadata";
-import { inject, singleton } from "tsyringe";
+import { Lifecycle, inject, scoped } from "~/core/di";
 import type { Question_CreateProps } from "../../entity";
 import {
   Question_Repository,
@@ -21,7 +20,7 @@ import {
 
 //
 
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class Question_Controller {
   #log = debug(`~:modules:question:${Question_Controller}`);
   constructor(
@@ -32,6 +31,7 @@ export class Question_Controller {
   }
 
   //
+
   query_keys = {
     all: ["question"] as const,
     lists: (options?: Question_QueryParamsProps["filter"] | undefined) =>
@@ -41,12 +41,14 @@ export class Question_Controller {
   };
 
   //
+
   create = { useMutation: this.useCreateMutation.bind(this) };
   lists = {
     useQuery: this.useListQuery.bind(this),
   };
 
   //
+
   useCreateMutation() {
     const { data: session } = useSession();
     const queryClient = useQueryClient();

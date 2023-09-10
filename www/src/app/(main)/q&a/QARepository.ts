@@ -3,7 +3,8 @@
 import type { components } from "@1/strapi-openapi/v1";
 import type { _1_HOUR_ } from "@douglasduteil/datatypes...hours-to-seconds";
 import debug from "debug";
-import { OpenAPIRepository, type ApiClient } from "~/app/api/v1";
+import { type ApiClient } from "~/app/api/v1";
+import { OpenAPI_Repository } from "~/app/api/v1/OpenAPI.repository";
 
 //
 
@@ -12,7 +13,7 @@ type CommentRequest = components["schemas"]["CommentRequest"];
 
 //
 
-export class QARepository extends OpenAPIRepository {
+export class QARepository extends OpenAPI_Repository {
   static queryKey = ["question"];
   async load({
     category,
@@ -136,7 +137,7 @@ export class QARepository extends OpenAPIRepository {
   }
 }
 
-export class AnswerRepository extends OpenAPIRepository {
+export class AnswerRepository extends OpenAPI_Repository {
   #log = debug(`~:modules:question:${AnswerRepository}`);
   static queryKey = ["answer"] as const;
   constructor(client: ApiClient, jwt?: string) {

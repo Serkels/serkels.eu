@@ -8,11 +8,11 @@ import {
 import debug from "debug";
 import { useSession } from "next-auth/react";
 import { useMemo } from "react";
-import { singleton } from "tsyringe";
+import { Lifecycle, scoped } from "~/core/di";
 
 //
 
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class Get_Session_Profile {
   #log = debug(`~:modules:question:app:${Get_Session_Profile.name}`);
 

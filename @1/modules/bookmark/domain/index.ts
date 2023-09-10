@@ -27,6 +27,8 @@ export const Bookmark_Category = z.union([
   z.literal("opportunity"),
 ]);
 
+export type Bookmark_Category = z.TypeOf<typeof Bookmark_Category>;
+
 //
 
 export const Bookmark_PropsSchema = z

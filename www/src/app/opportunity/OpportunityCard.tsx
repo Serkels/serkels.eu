@@ -28,10 +28,13 @@ export function OpportunityCard(props: Props) {
     id,
     location,
     locale,
-    opportunity_category,
+    category: opportunity_category,
     partner,
     title,
   } = props;
+
+  //
+
   const category = opportunity_category?.data?.attributes?.name ?? "Autres";
   const formats = cover?.data?.attributes?.formats as {
     thumbnail: { url: string };
@@ -112,7 +115,7 @@ type Props = ComponentPropsWithoutRef<"article"> &
     | "cover"
     | "expireAt"
     | "location"
-    | "opportunity_category"
+    | "category"
     | "partner"
     | "locale"
     | "title"

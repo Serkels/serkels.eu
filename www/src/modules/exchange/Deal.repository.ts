@@ -7,7 +7,8 @@ import type {
   Exchange_DealSchema,
 } from "@1/strapi-openapi";
 import debug from "debug";
-import { OpenAPIRepository, type ApiClient } from "~/app/api/v1";
+import { type ApiClient } from "~/app/api/v1";
+import { OpenAPI_Repository } from "~/app/api/v1/OpenAPI.repository";
 import type { RepositoryPort } from "~/core";
 
 //
@@ -16,7 +17,7 @@ const log = debug("~:modules:exchange:Deal_Repository");
 //
 
 export class Deal_Repository
-  extends OpenAPIRepository
+  extends OpenAPI_Repository
   implements RepositoryPort
 {
   constructor(client: ApiClient, jwt?: string | undefined) {

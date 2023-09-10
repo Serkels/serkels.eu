@@ -8,12 +8,12 @@ import { SessionProvider, useSession } from "next-auth/react";
 import { event, usePageViews } from "nextjs-google-analytics";
 import { useEffect, useMemo, type PropsWithChildren } from "react";
 import Nest from "react-nest";
-import "reflect-metadata";
 import { P, match } from "ts-pattern";
-import { container } from "tsyringe";
+import { container } from "~/core/di";
 import { query_client } from "~/core/getQueryClient";
 import { ContainerContext } from "~/core/react";
 import { fromClient } from "../api/v1";
+import { API_TOKEN, JWT_TOKEN } from "../api/v1/OpenAPI.repository";
 
 //
 
@@ -74,12 +74,15 @@ function UserTracking() {
 
 function ViewProvider({ children }: PropsWithChildren) {
   const session = useSession();
+
+  const jwt = session.data?.user?.jwt;
   const root_container = useMemo(() => {
-    console.info(session.data?.user?.jwt ? "🗝️" : "🚪");
-    container.registerInstance("jwt", session.data?.user?.jwt ?? "");
-    container.registerInstance("api", fromClient);
-    return container;
-  }, [session.data?.user?.jwt]);
+    console.info(jwt ? "🗝️" : "🚪");
+    const root = container.createChildContainer();
+    root.registerInstance(JWT_TOKEN, jwt ?? "");
+    root.registerInstance(API_TOKEN, fromClient);
+    return root;
+  }, [jwt]);
   return (
     <ContainerContext.Provider value={root_container}>
       <Nest>{children}</Nest>

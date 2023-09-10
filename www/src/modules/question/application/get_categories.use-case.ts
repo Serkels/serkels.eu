@@ -6,12 +6,12 @@ import {
   category_to_domain,
 } from "@1/modules/category/infra/strapi";
 import debug from "debug";
-import { singleton } from "tsyringe";
+import { Lifecycle, scoped } from "~/core/di";
 import { useCategories_Query } from "~/modules/categories";
 
 //
 
-@singleton()
+@scoped(Lifecycle.ContainerScoped)
 export class Get_Category_UseCase {
   #log = debug(`~:modules:question:app:${Get_Category_UseCase.name}`);
 

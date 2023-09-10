@@ -3,17 +3,18 @@
 import type { Strapi_OpenApi_Schemas } from "@1/strapi-openapi";
 import { Spinner } from "@1/ui/components/Spinner";
 import Link from "next/link";
-import tw from "tailwind-styled-components";
 import { P, match } from "ts-pattern";
 import { OpportunityCard } from "./OpportunityCard";
 import { useOpportunityFilterContext } from "./OpportunityFilter.context";
+import { Opportunity_Grid } from "./Opportunity_Item";
 import { useOpportunitiesInfinite } from "./useOpportunities";
 
 //
 
 export function OpportunityInfiniteList() {
   const { category, query } = useOpportunityFilterContext();
-  const info = useOpportunitiesInfinite({ category, query });
+
+  const info = useOpportunitiesInfinite({ category, query, pageSize: 8 });
 
   return match(info)
     .with({ status: "error", error: P.select() }, (error) => {
@@ -93,27 +94,14 @@ function Opportunity_Item({
         cover={opportunity.attributes?.cover!}
         expireAt={opportunity.attributes?.expireAt!}
         id={String(opportunity.id)}
-        location={opportunity.attributes?.location!}
-        opportunity_category={opportunity.attributes?.opportunity_category!}
-        partner={opportunity.attributes?.partner!}
+        location={opportunity.attributes?.location}
+        category={opportunity.attributes?.category}
+        partner={opportunity.attributes?.partner}
         title={opportunity.attributes?.title!}
       />
     </Link>
   );
 }
-
-const Opportunity_Grid = tw.ul`
-  grid
-  grid-flow-row
-  grid-cols-1
-  gap-8
-  px-4
-  sm:grid-cols-2
-  sm:px-0
-  md:grid-cols-2
-  lg:grid-cols-3
-  xl:grid-cols-4
-`;
 
 function Loading() {
   return (

@@ -35,12 +35,15 @@ export function OpportunityArticle(props: {
 
   const { expireAt, title, partner, locale, description, location, link } =
     data.attributes!;
+
   const date = expireAt ? new Date(expireAt) : new Date(NaN);
   const partner_name =
     partner?.data?.attributes?.name ?? "Partenaire Inconnu :(";
+
   const partner_avatar =
     partner?.data?.attributes?.avatar?.data?.attributes?.url ??
     `https://source.unsplash.com/random/16x16/?${partner_name}&${partner?.data?.id}`;
+
   return (
     <article className="px-4 py-10 lg:px-16">
       <h1 className="text-4xl font-bold">{title}</h1>

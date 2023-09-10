@@ -6,7 +6,8 @@ import type { Message_Schema } from "@1/modules/inbox/infra/strapi";
 import type { Inbox_ItemSchema, Inbox_ListSchema } from "@1/strapi-openapi";
 import debug from "debug";
 import { match } from "ts-pattern";
-import { OpenAPIRepository, type ApiClient } from "~/app/api/v1";
+import { type ApiClient } from "~/app/api/v1";
+import { OpenAPI_Repository } from "~/app/api/v1/OpenAPI.repository";
 import type { RepositoryPort } from "~/core";
 
 //
@@ -16,7 +17,7 @@ const log = debug("~:modules:exchange:Inbox_Repository");
 //
 
 export class Inbox_Repository
-  extends OpenAPIRepository
+  extends OpenAPI_Repository
   implements RepositoryPort
 {
   constructor(client: ApiClient, jwt: string | undefined) {
