@@ -1,12 +1,25 @@
 //
 
 import { HTTPError } from "@1/core/error";
-import type { StrapiRepository } from "~/core/StrapiRepository";
+import debug from "debug";
+import { Lifecycle, inject, scoped } from "tsyringe";
+import { OpenAPI_Repository } from "~/app/api/v1/OpenAPI.repository";
 
 //
 
+@scoped(Lifecycle.ContainerScoped)
 export class Categories_Repository {
-  constructor(public repository: StrapiRepository) {}
+  #log = debug(`~:modules:categories:${Categories_Repository.name}`);
+
+  constructor(
+    @inject(OpenAPI_Repository)
+    private readonly repository: OpenAPI_Repository,
+  ) {
+    this.#log("new");
+  }
+
+  //
+
   static keys = {
     all: ["categories"] as const,
     exchange() {
@@ -23,6 +36,7 @@ export class Categories_Repository {
   //
 
   async exchange() {
+    this.#log("exchange");
     const {
       data: body,
       error: errorBody,
@@ -47,6 +61,7 @@ export class Categories_Repository {
   }
 
   async opportunity() {
+    this.#log("opportunity");
     const {
       data: body,
       error: errorBody,
@@ -71,6 +86,7 @@ export class Categories_Repository {
   }
 
   async question() {
+    this.#log("question");
     const {
       data: body,
       error: errorBody,
