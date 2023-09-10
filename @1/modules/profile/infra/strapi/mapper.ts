@@ -26,7 +26,9 @@ export class Profile_SchemaToDomain
 {
   fromItemDto(record: unknown): Result<Profile, ErrorInstance> {
     try {
-      const schema = StrapiResponseDataObject.parse(record);
+      const schema = StrapiResponseDataObject.parse(record, {
+        path: ["record"],
+      });
       const domain = this.build(schema);
       if (domain.isFail())
         throw new InputError("Invalid domain", { cause: domain.error() });

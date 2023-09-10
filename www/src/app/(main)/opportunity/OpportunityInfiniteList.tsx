@@ -105,7 +105,7 @@ function Opportunity_Item({
 
 function Loading() {
   return (
-    <figure className="mt-28 min-h-screen text-center">
+    <figure className="mt-28 text-center">
       <Spinner />
     </figure>
   );
@@ -113,7 +113,7 @@ function Loading() {
 
 function EmptyList() {
   return (
-    <figure className="mt-28 min-h-screen text-center">
+    <figure className="mt-28  text-center">
       <h3 className="text-xl">Aucune opportunité disponible pour le moment</h3>
     </figure>
   );

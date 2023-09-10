@@ -6,7 +6,8 @@ import {
   type IAdapter,
 } from "@1/core/domain";
 import type { Exchange_ItemSchema } from "@1/strapi-openapi";
-import { Category_SchemaToDomain } from "../../../common";
+import { Category } from "../../../category/domain";
+import { category_to_domain } from "../../../category/infra/strapi";
 import { Profile_SchemaToDomain } from "../../../profile/infra/strapi";
 import { Exchange } from "../../domain";
 import { Type } from "../../domain/Type.value";
@@ -46,32 +47,24 @@ export class Exchange_ItemSchemaToDomain
         }),
       );
 
-    const category_to_domain = new Category_SchemaToDomain().fromItemDto(
-      raw_category?.data,
-    );
-    if (category_to_domain.isFail())
-      return Fail(
-        new IllegalArgs("Exchange_ItemSchemaToDomain/category_to_domain", {
-          cause: category_to_domain.error(),
-        }),
-      );
+    const category = raw_category?.data
+      ? category_to_domain(raw_category.data)
+      : Category.all;
 
-    const in_exchange_of_to_domain = new Category_SchemaToDomain().fromItemDto(
-      in_exchange_of?.data,
-    );
+    const in_exchange_of_to_domain = in_exchange_of?.data
+      ? category_to_domain(in_exchange_of.data)
+      : undefined;
 
     return Exchange.create({
       ...other_props,
-      //
+      //c
       createdAt: createdAt ? new Date(createdAt) : new Date(NaN),
       updatedAt: updatedAt ? new Date(updatedAt) : new Date(NaN),
       //
       id,
       slug: String(slug),
-      category: category_to_domain.value(),
-      in_exchange_of: in_exchange_of_to_domain.isFail()
-        ? undefined
-        : in_exchange_of_to_domain.value(),
+      category,
+      in_exchange_of: in_exchange_of_to_domain,
       profile: profile_to_domain.value(),
       type: Type.create(type).value(),
       when: when ? new Date(when) : new Date(NaN),

@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import { FilterRadioList } from "~/components/FilterRadioList";
 import { useSyncSearchQuery } from "~/components/useSyncSearchQuery";
 import { useInject } from "~/core/react";
-import { Get_Category_UseCase } from "~/modules/question/application/get_categories.use-case";
+import { Get_Category_UseCase } from "~/modules/categories/application/get_categories.use-case";
 import { QACreateForm } from "./QACreateForm";
 import type { QAFilterType } from "./models/QAFilterType";
 
@@ -13,8 +13,7 @@ import type { QAFilterType } from "./models/QAFilterType";
 
 export function CategoriesList() {
   const { query, setQuery } = useSyncSearchQuery("category");
-  const get_category = useInject(Get_Category_UseCase);
-  const categories = get_category.execute();
+  const categories = useInject(Get_Category_UseCase).execute("question");
   categories.push(Category.all);
 
   return (

@@ -1023,7 +1023,7 @@ export interface ApiExchangeExchange extends Schema.CollectionType {
     category: Attribute.Relation<
       'api::exchange.exchange',
       'oneToOne',
-      'api::opportunity-category.opportunity-category'
+      'api::category.category'
     >;
     when: Attribute.Date;
     description: Attribute.Text & Attribute.Required;
@@ -1038,7 +1038,7 @@ export interface ApiExchangeExchange extends Schema.CollectionType {
     in_exchange_of: Attribute.Relation<
       'api::exchange.exchange',
       'oneToOne',
-      'api::opportunity-category.opportunity-category'
+      'api::category.category'
     >;
     owner: Attribute.Relation<
       'api::exchange.exchange',

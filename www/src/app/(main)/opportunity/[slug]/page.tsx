@@ -3,7 +3,6 @@
 import { injector } from "~/core/di";
 import { Opportunity_Repository } from "~/modules/opportunity/opportunity.repository";
 import { OpportunityArticle } from "./OpportunityArticle";
-import { SeeAlso } from "./SeeAlso";
 
 //
 
@@ -16,18 +15,11 @@ export default async function Page({ params }: { params: { slug: string } }) {
     const category = data.attributes?.category?.data?.attributes?.slug;
 
     return (
-      <>
-        <main className="col-span-full bg-white md:col-span-6 xl:col-span-9">
-          <OpportunityArticle
-            slug={slug}
-            data={data}
-            category={category ?? "autres"}
-          />
-        </main>
-        <aside className="col-span-3 hidden lg:px-10">
-          <SeeAlso category={category ?? "autres"} />
-        </aside>
-      </>
+      <OpportunityArticle
+        slug={slug}
+        data={data}
+        category={category ?? "autres"}
+      />
     );
   } catch (error) {
     console.error(error);

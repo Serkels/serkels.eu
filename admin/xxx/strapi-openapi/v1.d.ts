@@ -1017,10 +1017,6 @@ export interface components {
                         id?: number;
                       };
                     };
-                    locale?: string;
-                    localizations?: {
-                      data?: unknown[];
-                    };
                     name?: string;
                     slug?: string;
                     /** Format: date-time */
@@ -1255,26 +1251,7 @@ export interface components {
             attributes?: {
               category?: {
                 data?: {
-                  attributes?: {
-                    /** Format: date-time */
-                    createdAt?: string;
-                    createdBy?: {
-                      data?: {
-                        attributes?: Record<string, unknown>;
-                        id?: number;
-                      };
-                    };
-                    name?: string;
-                    slug?: string;
-                    /** Format: date-time */
-                    updatedAt?: string;
-                    updatedBy?: {
-                      data?: {
-                        attributes?: Record<string, unknown>;
-                        id?: number;
-                      };
-                    };
-                  };
+                  attributes?: Record<string, unknown>;
                   id?: number;
                 };
               };
@@ -2808,10 +2785,6 @@ export interface components {
                 id?: number;
               };
             };
-            locale?: string;
-            localizations?: {
-              data?: unknown[];
-            };
             name?: string;
             slug?: string;
             /** Format: date-time */
@@ -3240,10 +3213,6 @@ export interface components {
                       };
                       id?: number;
                     };
-                  };
-                  locale?: string;
-                  localizations?: {
-                    data?: unknown[];
                   };
                   name?: string;
                   slug?: string;

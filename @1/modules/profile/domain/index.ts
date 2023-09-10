@@ -11,8 +11,8 @@ export const Profile_PropsSchema = z.object({
   firstname: z.string(),
   lastname: z.string(),
   about: z.string(),
-  createdAt: z.date(),
-  updatedAt: z.date(),
+  createdAt: z.date().optional(),
+  updatedAt: z.date().optional(),
   university: z.string(),
   image: z_strapi_entity_data(z.any()).optional(),
 });

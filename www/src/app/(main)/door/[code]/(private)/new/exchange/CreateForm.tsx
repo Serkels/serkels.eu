@@ -20,8 +20,12 @@ export function CreateForm() {
       <div className="col-span-full mx-auto flex flex-col justify-center ">
         <UI.CreateForm
           onSubmit={(values) => mutate(values)}
-          slot-CategoryField={(props) => <SelectCategoryField {...props} />}
-          slot-InExchangeOf={(props) => <SelectCategoryField {...props} />}
+          slot-CategoryField={(props) => (
+            <SelectCategoryField type="exchange" {...props} />
+          )}
+          slot-InExchangeOf={(props) => (
+            <SelectCategoryField type="exchange" {...props} />
+          )}
         />
       </div>
     ))

@@ -1,13 +1,25 @@
 //
 
+import { category_to_domain } from "@1/modules/category/infra/strapi";
 import { useQuery } from "@tanstack/react-query";
-import { Strapi_useQuery } from "../user/Strapi_useQuery";
+import debug from "debug";
+import { Lifecycle, inject, scoped } from "tsyringe";
 import { Categories_Repository } from "./Categories_Repository";
 
 //
 
-export class Categories_useQuery extends Strapi_useQuery {
-  category_repository = new Categories_Repository(this.repository);
+@scoped(Lifecycle.ContainerScoped)
+export class Categories_useQuery {
+  #log = debug(`~:modules:categories:${Categories_useQuery.name}`);
+
+  constructor(
+    @inject(Categories_Repository)
+    private readonly category_repository: Categories_Repository,
+  ) {
+    this.#log("new");
+  }
+
+  //
 
   //
 
@@ -16,6 +28,9 @@ export class Categories_useQuery extends Strapi_useQuery {
       return useQuery({
         queryKey: Categories_Repository.keys.exchange(),
         queryFn: () => this.category_repository.exchange(),
+        select: (datas) => {
+          return datas.map((data) => category_to_domain(data));
+        },
       });
     },
   };
@@ -25,6 +40,9 @@ export class Categories_useQuery extends Strapi_useQuery {
       return useQuery({
         queryKey: Categories_Repository.keys.question(),
         queryFn: () => this.category_repository.question(),
+        select: (datas) => {
+          return datas.map((data) => category_to_domain(data));
+        },
       });
     },
   };
@@ -34,7 +52,15 @@ export class Categories_useQuery extends Strapi_useQuery {
       return useQuery({
         queryKey: Categories_Repository.keys.opportunity(),
         queryFn: () => this.category_repository.opportunity(),
+        select: (datas) => {
+          return datas.map((data) => category_to_domain(data));
+        },
       });
     },
   };
+
+  // to_domain(records: Category_ItemSchema ) {
+  //   return records.map((data) => category_to_domain(data));
+
+  // }
 }

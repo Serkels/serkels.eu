@@ -4,7 +4,11 @@ import { HTTPError } from "@1/core/domain";
 import type { Question_ListSchema, Question_Schema } from "@1/strapi-openapi";
 import debug from "debug";
 import { type ApiClient } from "~/app/api/v1";
-import { OpenAPI_Repository } from "~/app/api/v1/OpenAPI.repository";
+import {
+  API_TOKEN,
+  JWT_TOKEN,
+  OpenAPI_Repository,
+} from "~/app/api/v1/OpenAPI.repository";
 import type { RepositoryPort } from "~/core";
 import { Lifecycle, inject, scoped } from "~/core/di";
 import type { Question_CreateProps, Question_Entity } from "./entity";
@@ -29,8 +33,8 @@ export class Question_Repository
   #log = debug(`~:modules:question:${Question_Repository.name}`);
 
   constructor(
-    @inject("api") client: ApiClient,
-    @inject("jwt") jwt?: string | undefined,
+    @inject(API_TOKEN) client: ApiClient,
+    @inject(JWT_TOKEN) jwt?: string | undefined,
   ) {
     super(client, jwt);
     this.#log("new", jwt ? "🗝️" : "🔒");

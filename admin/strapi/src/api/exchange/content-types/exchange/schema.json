@@ -35,7 +35,7 @@
     "category": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::opportunity-category.opportunity-category"
+      "target": "api::category.category"
     },
     "when": {
       "type": "date"
@@ -61,7 +61,7 @@
     "in_exchange_of": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::opportunity-category.opportunity-category"
+      "target": "api::category.category"
     },
     "owner": {
       "type": "relation",
