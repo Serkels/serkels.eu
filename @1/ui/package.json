@@ -9,7 +9,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@react-types/button": "3.7.4",
+    "@react-types/button": "3.8.0",
     "clsx": "2.0.0",
     "formik": "2.4.4",
     "framer-motion": "10.16.4",
