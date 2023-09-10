@@ -20,7 +20,7 @@ export function CategoriesList() {
   return (
     <FilterRadioList
       data={categories}
-      active={query}
+      active={query ?? ""}
       name="category"
       onChange={setQuery}
     />
@@ -41,7 +41,7 @@ export function QAFilter() {
   return (
     <FilterRadioList
       data={data}
-      active={query}
+      active={query ?? ""}
       name="filter"
       onChange={setQuery}
     />

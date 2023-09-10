@@ -35,7 +35,7 @@ export function CategoriesList() {
   return (
     <FilterRadioList
       data={categories}
-      active={query}
+      active={query ?? ""}
       name="category"
       onChange={setQuery}
     />
