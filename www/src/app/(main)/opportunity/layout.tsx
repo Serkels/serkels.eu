@@ -3,13 +3,13 @@
 import { Grid } from "@1/ui/components/Grid";
 import { Hydrate, dehydrate } from "@tanstack/react-query";
 import { type PropsWithChildren } from "react";
-import { AppFooter } from "~/components/AppFooter.server";
-import { UserBar } from "~/components/UserBar";
 import { AsideWithTitle } from "~/components/layouts/holy/aside";
 import { get_StrapiRepository } from "~/core";
+import { getQueryClient } from "~/core/getQueryClient";
 import { Categories_Repository } from "~/modules/categories/Categories_Repository";
-import { getQueryClient } from "../../core/getQueryClient";
-import { CategoriesList, SearchForm } from "./(page)";
+import { OpportunityFilterContextProvider } from "./OpportunityFilter.context";
+import { SearchForm } from "./SearchForm";
+import { CategoriesList } from "./page.client";
 
 export default async function Layout({ children }: PropsWithChildren) {
   const strapi_repository = await get_StrapiRepository();
@@ -17,27 +17,25 @@ export default async function Layout({ children }: PropsWithChildren) {
 
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery({
-    queryKey: Categories_Repository.keys.exchange(),
-    queryFn: () => repository.exchange(),
+    queryKey: Categories_Repository.keys.opportunity(),
+    queryFn: () => repository.opportunity(),
   });
   const dehydratedState = dehydrate(queryClient);
 
-  return (
-    <div className="grid min-h-screen grid-rows-[max-content_1fr_max-content]">
-      <UserBar />
-      <Grid>
-        <Hydrate state={dehydratedState}>
-          <AsideWithTitle title="Échanges">
-            <SearchForm />
-            {/* <ExhangesFilter /> */}
-            <hr className="my-10" />
+  //
 
+  return (
+    <Hydrate state={dehydratedState}>
+      <Grid className="col-span-full">
+        <OpportunityFilterContextProvider>
+          <AsideWithTitle title="Opportunités">
+            <SearchForm />
             <CategoriesList />
           </AsideWithTitle>
+
           {children}
-        </Hydrate>
+        </OpportunityFilterContextProvider>
       </Grid>
-      <AppFooter />
-    </div>
+    </Hydrate>
   );
 }

@@ -1,16 +1,17 @@
 "use client";
 
+import { Category } from "@1/modules/category/domain";
 import { usePathname, useRouter } from "next/navigation";
-import { FilterRadioList } from "../../components/FilterRadioList";
+import { FilterRadioList } from "~/components/FilterRadioList";
+import { useInject } from "~/core/react";
+import { Get_Category_UseCase } from "~/modules/question/application/get_categories.use-case";
 import { useOpportunityFilterContext } from "./OpportunityFilter.context";
-import { useOpportunityCategoriesQuery } from "./data/useOpportunityCategoriesQuery";
-import { OpportunityCategoriesViewModel } from "./models/OpportunityCategoriesViewModel";
 
 //
 
 export function CategoriesList() {
   const { category, setCategory } = useOpportunityFilterContext();
-  const { data: raw_categories } = useOpportunityCategoriesQuery();
+  const categories = useInject(Get_Category_UseCase).execute("opportunity");
   const pathname = usePathname() ?? "";
   const router = useRouter();
 
@@ -27,21 +28,7 @@ export function CategoriesList() {
 
   //
 
-  if (!raw_categories) return <>0_o</>;
-
-  const categories = raw_categories.map(
-    OpportunityCategoriesViewModel.from_server,
-  );
-
-  categories.push(
-    new OpportunityCategoriesViewModel({
-      id: NaN,
-      name: "Tout",
-      slug: "",
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    }),
-  );
+  categories.push(Category.all);
 
   return (
     <FilterRadioList

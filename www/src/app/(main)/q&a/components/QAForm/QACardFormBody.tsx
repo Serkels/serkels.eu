@@ -1,8 +1,9 @@
 //
 
 import { Button } from "@1/ui/components/Button";
-import { Field, Form, Formik, type FieldAttributes } from "formik";
+import { Field, Form, Formik } from "formik";
 import { useSearchParams } from "next/navigation";
+import { SelectCategoryField } from "~/components/SelectCategoryField";
 import { useInject } from "~/core/react";
 import { Get_Category_UseCase } from "~/modules/question/application/get_categories.use-case";
 import { Get_Other_Category_UseCase } from "~/modules/question/application/get_other_categories.use-case";
@@ -22,7 +23,7 @@ export function QACardFormBody({
 
   //
 
-  const categories = get_category.execute();
+  const categories = get_category.execute("question");
   const other_category = get_other_category.execute();
   const category = search_params.get("category");
   const initial_category =
@@ -59,6 +60,7 @@ export function QACardFormBody({
           />
           <div className="flex justify-between">
             <SelectCategoryField
+              type="question"
               className="min-w-[25%] border border-[#dddddd]"
               disabled={isSubmitting}
               placeholder=""
@@ -78,28 +80,5 @@ export function QACardFormBody({
         </Form>
       )}
     </Formik>
-  );
-}
-
-export function SelectCategoryField(props: FieldAttributes<{}>) {
-  const get_category = useInject(Get_Category_UseCase);
-  const get_other_category = useInject(Get_Other_Category_UseCase);
-  const categories = get_category.execute();
-  const other_category = get_other_category.execute();
-
-  return (
-    <Field component="select" {...props}>
-      <option hidden value={""}>
-        {props.placeholder}
-      </option>
-      {categories
-        .filter(({ slug }) => slug !== other_category.slug)
-        .map(({ name, id }) => (
-          <option value={String(id)} key={id}>
-            {name}
-          </option>
-        ))}
-      <option value={other_category.id}>{other_category.name}</option>
-    </Field>
   );
 }

@@ -7,7 +7,7 @@ import { P, match } from "ts-pattern";
 import {
   Opportunity_Grid,
   Opportunity_Item,
-} from "~/app/opportunity/Opportunity_Item";
+} from "~/app/(main)/opportunity/Opportunity_Item";
 import { useInject } from "~/core/react";
 import { Get_Opportunity_Bookmarks_UseCase } from "~/modules/bookmarks/application/get_opportunity_bookmarks.use-case";
 

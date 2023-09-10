@@ -1,10 +1,9 @@
 //
 
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInject } from "~/core/react";
 import { getNextPageParam, getPreviousPageParam } from "~/core/use-query";
 import { Opportunity_Repository } from "~/modules/opportunity/opportunity.repository";
-import { Opportunities } from "./data/OpportunityRepository";
 
 export function useOpportunitiesInfinite({
   category,
@@ -29,25 +28,5 @@ export function useOpportunitiesInfinite({
       }),
     getNextPageParam,
     getPreviousPageParam,
-  });
-}
-
-export function useOpportunities({
-  category,
-  limit,
-}: {
-  category?: string;
-  limit?: number;
-} = {}) {
-  return useQuery({
-    queryKey: ["opportunities", limit, category],
-    queryFn: async () => {
-      return Opportunities.load({
-        category,
-        limit,
-        page: undefined,
-        pageSize: undefined,
-      });
-    },
   });
 }

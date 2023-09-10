@@ -5,19 +5,6 @@ import { z } from "zod";
 
 //
 
-export const Category_PropsSchema = z
-  .object({
-    id: z.number(),
-    createdAt: z.date(),
-    updatedAt: z.date(),
-    //
-    name: z.string(),
-    slug: z.string(),
-  })
-  .describe("Category Props");
-
-export type Category_Props = z.TypeOf<typeof Category_PropsSchema>;
-
 export class Category extends ValueObject<Category_Props> {
   static override create(
     props: Category_Props,
@@ -57,6 +44,31 @@ export class Category extends ValueObject<Category_Props> {
     return this.props.slug;
   }
 }
+
+//
+
+export const Category_PropsSchema = z
+  .object({
+    id: z.number(),
+    createdAt: z.date(),
+    updatedAt: z.date(),
+    //
+    name: z.string(),
+    slug: z.string(),
+  })
+  .describe("Category Props");
+
+export type Category_Props = z.TypeOf<typeof Category_PropsSchema>;
+
+//
+
+export const Category_Type = z.union([
+  z.literal("exchange"),
+  z.literal("opportunity"),
+  z.literal("question"),
+]);
+
+export type Category_Type = z.TypeOf<typeof Category_Type>;
 
 //
 

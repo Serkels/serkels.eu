@@ -22,7 +22,7 @@ export class Get_Other_Category_UseCase {
   //
 
   execute(): Category {
-    const categories = this.get_other_category.execute();
+    const categories = this.get_other_category.execute("question");
 
     return useMemo(
       () =>

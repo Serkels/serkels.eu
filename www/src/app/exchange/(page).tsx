@@ -1,36 +1,23 @@
 "use client";
 
+import { Category } from "@1/modules/category/domain";
 import { InputSearch } from "@1/ui/components/InputSearch";
 import { Form, Formik, useField } from "formik";
 import type { ComponentPropsWithoutRef } from "react";
-import { OpportunityCategoriesViewModel } from "~/app/opportunity/models/OpportunityCategoriesViewModel";
 import { FilterRadioList } from "~/components/FilterRadioList";
 import { useSyncSearchQuery } from "~/components/useSyncSearchQuery";
-import { useOpportunityCategoriesQuery } from "../opportunity/data/useOpportunityCategoriesQuery";
+import { useInject } from "~/core/react";
+import { Get_Category_UseCase } from "~/modules/question/application/get_categories.use-case";
 
 //
 
 export function CategoriesList() {
   const { query, setQuery } = useSyncSearchQuery("category");
-  const { data: raw_categories } = useOpportunityCategoriesQuery();
+
+  const categories = useInject(Get_Category_UseCase).execute("exchange");
+  categories.push(Category.all);
 
   //
-
-  if (!raw_categories) return <>0_o</>;
-
-  const categories = raw_categories.map(
-    OpportunityCategoriesViewModel.from_server,
-  );
-
-  categories.push(
-    new OpportunityCategoriesViewModel({
-      id: NaN,
-      name: "Tout",
-      slug: "",
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    }),
-  );
 
   return (
     <FilterRadioList
