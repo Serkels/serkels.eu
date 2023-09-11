@@ -86,12 +86,7 @@ function ProfileMessages({
   const { data: session } = useSession();
   const isYou = session?.user?.profile.id === profile;
   const last_index = messages.length - 1;
-  messages.push({
-    content: "/accepter",
-    id: Number.MAX_SAFE_INTEGER,
-    author: {} as any,
-    blocked: false,
-  } as any);
+
   return (
     <Speaker $isYou={isYou}>
       <Speaker_Avatar $isYou={isYou}>

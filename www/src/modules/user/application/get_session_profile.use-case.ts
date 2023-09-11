@@ -27,15 +27,17 @@ export class Get_Session_Profile {
     const profile = session?.user?.profile;
     return useMemo(() => {
       if (!profile) return undefined;
-
       try {
         return profile_to_domain(
           Profile_DataRecord.parse({
-            data: { attributes: profile, id: profile.id },
+            data: profile,
           }),
         );
       } catch (error) {
         console.error(error);
+        console.info({
+          data: profile,
+        });
         return undefined;
       }
     }, [profile]);
