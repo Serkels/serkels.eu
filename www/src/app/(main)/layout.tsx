@@ -9,7 +9,12 @@ export default function Layout({ children }: PropsWithChildren) {
   return (
     <div className="grid min-h-screen grid-rows-[max-content_1fr_max-content]">
       <UserBar />
-      <Grid $padding={false}>{children}</Grid>
+      <Grid
+        $padding={false}
+        className="max-h-[calc(100vh_-_theme(spacing.16)-_theme(spacing.8))]"
+      >
+        {children}
+      </Grid>
       <AppFooter />
     </div>
   );

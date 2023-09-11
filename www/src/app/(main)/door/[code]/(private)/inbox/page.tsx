@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export default async function Page() {
   return (
-    <main className="col-span-full px-4 md:col-span-4 xl:col-span-6">
+    <main className="hidden px-4 md:col-span-4 md:block xl:col-span-6">
       <Empty />
     </main>
   );

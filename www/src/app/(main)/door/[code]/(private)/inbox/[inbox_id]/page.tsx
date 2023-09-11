@@ -54,20 +54,21 @@ export default async function Page({
   );
 }
 
-const Scrollable_Part = tw.main`
+const Scrollable_Part = tw.div`
+  -mr-6
   overflow-y-auto
   py-4
   pr-5
 `;
 
-const Sticky_Container = tw.main`
+const Sticky_Container = tw.div`
   sticky
   top-14
   m-auto
   grid
   h-[calc(100vh_-_theme(spacing.24))]
   grid-rows-[max-content_1fr_max-content]
-  md:max-w-[80%]
+  xl:max-w-[80%]
 `;
 
 const Main = tw.main`

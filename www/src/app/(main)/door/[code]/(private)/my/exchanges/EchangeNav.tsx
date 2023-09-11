@@ -1,5 +1,6 @@
 "use client";
 
+import type { Exchange } from "@1/modules/exchange/domain";
 import { Button } from "@1/ui/components/ButtonV";
 import { InputSearch } from "@1/ui/components/InputSearch";
 import { Spinner } from "@1/ui/components/Spinner";
@@ -11,33 +12,19 @@ import clsx from "clsx";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, type ComponentPropsWithoutRef } from "react";
+import { useCallback, useEffect, useState, type ChangeEvent } from "react";
+import { useDebounce } from "react-use";
 import tw from "tailwind-styled-components";
+import { tv } from "tailwind-variants";
 import { P, match } from "ts-pattern";
 import { useDoor_Value } from "~/app/(main)/door/door.context";
 import { Avatar } from "~/components/Avatar";
-import { AsideBar } from "~/components/layouts/holy/aside";
 import { useExchange_list_controller } from "~/modules/exchange";
 import { Exchange_ValueProvider, useExchange_Value } from "./Exchange.context";
 
 //
 
-export function MyExchanges(props: ComponentPropsWithoutRef<"aside">) {
-  const { children, ...other_props } = props;
-  return (
-    <AsideBar {...other_props}>
-      <div className="sticky top-[calc(theme(spacing.14)_+_theme(spacing.9))]">
-        <div className="mx-5 my-9">
-          <InputSearch className="shadow-[0px_12px_44px_#0000000D]" />
-        </div>
-
-        <EchangeNav />
-      </div>
-    </AsideBar>
-  );
-}
-
-function EchangeNav() {
+export function EchangeNav() {
   const {
     my: { useQuery },
   } = useExchange_list_controller();
@@ -46,6 +33,22 @@ function EchangeNav() {
     sort: ["updatedAt:desc"],
     pagination: { pageSize: 4 },
   });
+
+  const [search_value, set_search_value] = useState("");
+  const [filter_name, set_filter_name] = useState("");
+
+  useDebounce(
+    () => {
+      set_filter_name(search_value);
+    },
+    444,
+    [search_value],
+  );
+
+  const filter_list = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.currentTarget;
+    set_search_value(value);
+  }, []);
 
   const router = useRouter();
   const [{ door_id }] = useDoor_Value();
@@ -61,34 +64,43 @@ function EchangeNav() {
 
   //
 
-  return match(query_result)
-    .with({ status: "error" }, ({ error }) => {
-      throw error;
-    })
-    .with({ status: "loading" }, () => <Loading />)
-    .with(
-      {
-        status: "success",
-        data: P.when((list) => list.pages.length === 0),
-      },
-      () => <EmptyList />,
-    )
-    .with(
-      { status: "success" },
-      ({ data: { pages }, isFetchingNextPage, hasNextPage, fetchNextPage }) => (
-        <nav>
-          <ul className="space-y-5">
-            {pages.map((exchange) => (
-              <li key={exchange.get("id")}>
-                <Exchange_ValueProvider initialValue={exchange}>
-                  <Echange_MessagingLink />
-                </Exchange_ValueProvider>
-              </li>
-            ))}
-            <li className="col-span-full mx-auto">
+  return (
+    <>
+      <form className="mb-10 px-8" action="#">
+        <InputSearch
+          value={search_value}
+          onChange={filter_list}
+          disabled={true}
+        />
+      </form>
+      {match(query_result)
+        .with({ status: "error" }, ({ error }) => {
+          throw error;
+        })
+        .with({ status: "loading" }, () => <Loading />)
+        .with(
+          {
+            status: "success",
+            data: P.when((list) => list.pages.length === 0),
+          },
+          () => <EmptyList />,
+        )
+        .with(
+          { status: "success" },
+          ({
+            data: { pages },
+            isFetchingNextPage,
+            hasNextPage,
+            fetchNextPage,
+          }) => (
+            <nav className="flex-1 overflow-y-auto">
+              <Exchange_List
+                exchanges={pages.filter(
+                  (exchange) => exchange.get("title")?.includes(filter_name),
+                )}
+              />
+
               {isFetchingNextPage ? <Loading /> : null}
-            </li>
-            <li className="col-span-full mx-auto">
               {hasNextPage ? (
                 <Button
                   onPress={() => fetchNextPage()}
@@ -97,13 +109,47 @@ function EchangeNav() {
                   Charger plus
                 </Button>
               ) : null}
-            </li>
-          </ul>
-        </nav>
-      ),
-    )
-    .exhaustive();
+            </nav>
+          ),
+        )
+        .exhaustive()}
+    </>
+  );
 }
+
+function Exchange_List({ exchanges }: { exchanges: Exchange[] | undefined }) {
+  const one = exchanges?.at(0);
+
+  if (exchanges && one) {
+    const fakes = Array.from({ length: 33 }).map(() =>
+      one.clone({ id: one.get("id") + 1 }),
+    );
+
+    exchanges.push(...fakes);
+  }
+
+  return match(exchanges)
+    .with(undefined, () => null)
+    .when(
+      (list) => list.length === 0,
+      () => <EmptyList />,
+    )
+    .otherwise((list) => (
+      <ul className={ul_list()}>
+        {list.map((exchange) => (
+          <li key={exchange.id.value()}>
+            <Exchange_ValueProvider initialValue={exchange}>
+              <Echange_MessagingLink />
+            </Exchange_ValueProvider>
+          </li>
+        ))}
+      </ul>
+    ));
+}
+
+const ul_list = tv({
+  base: "overflow-y-auto pb-8",
+});
 
 function Echange_MessagingLink() {
   const [exchange] = useExchange_Value();

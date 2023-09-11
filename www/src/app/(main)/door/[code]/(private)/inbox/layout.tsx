@@ -29,6 +29,7 @@ export default function Layout({ children }: PropsWithChildren) {
         </Header>
         <Inbox_UserThread_List />
       </My_Inbox_Nav>
+
       {children}
     </>
   );

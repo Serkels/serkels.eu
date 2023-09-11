@@ -9,16 +9,11 @@ export default factories.createCoreRouter("api::inbox.inbox", {
   only: ["find", "findOne"],
   config: {
     find: {
-      middlewares: [
-        set_default_populate, // "api::inbox.set_default_populate",
-        "global::filter-by-owner",
-      ],
+      middlewares: [set_default_populate],
     },
     findOne: {
-      middlewares: [
-        set_default_populate, // "api::inbox.set_default_populate",
-        "global::filter-by-owner",
-      ],
+      middlewares: [set_default_populate],
+      policies: ["global::is-owned"],
     },
   },
 });

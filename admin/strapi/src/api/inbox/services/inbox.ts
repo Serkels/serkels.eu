@@ -3,6 +3,9 @@
  */
 
 import { factories } from "@strapi/strapi";
+import { z } from "zod";
+import { GetValues, KoaContext } from "~/types";
+import { INBOX_API_CONTENT_ID } from "../content-types/inbox";
 
 export default factories.createCoreService("api::inbox.inbox");
 export async function find_one_by_pair(filters: {
@@ -28,4 +31,28 @@ export async function find_one_by_pair(filters: {
   }
 
   return inbox;
+}
+
+export async function find_owner_inboxes(owner: number, ctx: KoaContext) {
+  const inboxes = await strapi.entityService.findMany(INBOX_API_CONTENT_ID, {
+    filters: { owner: { id: owner } },
+    populate: {
+      thread: { populate: ["last_message", "participants"] },
+      participant: true,
+    },
+  });
+
+  //
+
+  return z
+    .array(
+      z
+        .object({
+          id: z.number(),
+        })
+        .passthrough(),
+    )
+    .parse(inboxes, { path: ["inboxes"] }) as GetValues<
+    typeof INBOX_API_CONTENT_ID
+  >[];
 }

@@ -3,33 +3,56 @@
  */
 
 import { factories } from "@strapi/strapi";
+import { transformResponse } from "@strapi/strapi/lib/core-api/controller/transform";
+import { sanitize, validate } from "@strapi/utils";
 import type { Next } from "koa";
-import { GetValues, KoaContext } from "~/types";
+import { ID_Schema, KoaContext, Params } from "~/types";
+import { INBOX_API_CONTENT_ID } from "../content-types/inbox";
+import { find_owner_inboxes } from "../services/inbox";
 
 //;
 
 export default factories.createCoreController("api::inbox.inbox", {
   async find(ctx: KoaContext, next: Next) {
-    type Entity = GetValues<"api::inbox.inbox">;
-    const { apiName } = ctx.state.route.info;
-    const uuid = `api::${apiName}.${apiName}` as const;
-    const sanitizedQuery = await this.sanitizeQuery(ctx);
-    const { results, pagination } = await strapi
-      .service(uuid)
-      .find(sanitizedQuery);
-    const sanitizedResults = await this.sanitizeOutput(results, ctx);
+    const contentType = strapi.contentType(INBOX_API_CONTENT_ID);
 
-    // ! HACK(douglasduteil): retrive the comment relation by hand
-    // As I don't know how to allow the content type to access it
-    const sanitizedResultsWithLastMessage = sanitizedResults.map(
-      (result: Entity, index) =>
-        ({
-          ...result,
-          thread: results[index]["thread"],
-        }) as Entity,
-    );
-    return this.transformResponse(sanitizedResultsWithLastMessage, {
-      pagination,
+    await validate.contentAPI.query(ctx.query, contentType as any, {
+      auth: ctx.state.auth,
     });
+
+    const owner = ID_Schema.parse(ctx.state.user.id, {
+      path: ["context.state.user.id"],
+    });
+
+    //
+
+    try {
+      const inboxes = await find_owner_inboxes(owner, ctx);
+
+      const sanitizedQueryParams = await sanitize.contentAPI.query(
+        ctx.query,
+        contentType,
+        { auth: ctx.state.auth },
+      );
+      const { results, pagination } = await strapi
+        .service(INBOX_API_CONTENT_ID)
+        .find({
+          ...sanitizedQueryParams,
+          filters: {
+            id: { $in: inboxes.map(({ id }) => id) },
+          },
+        } satisfies Params.Pick<typeof INBOX_API_CONTENT_ID, "filters">);
+
+      return transformResponse(results, { pagination }, { contentType });
+    } catch (error) {
+      const pagination = {
+        page: 1,
+        pageCount: 25,
+        pageSize: 0,
+        total: 0,
+      };
+      const data = [];
+      return transformResponse(data, { pagination }, { contentType });
+    }
   },
 });

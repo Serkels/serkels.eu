@@ -10,10 +10,13 @@ import {
   Plus,
   PlusBox,
 } from "@1/ui/icons";
-import type { PropsWithChildren } from "react";
 import { Avatar } from "~/components/Avatar";
-import { AsideBar } from "~/components/layouts/holy/aside";
-import { Header, Li_Link, SubNav_Bookmarks } from "./aside_navbar.client";
+import {
+  Aside_NavBar,
+  Header,
+  Li_Link,
+  SubNav_Bookmarks,
+} from "./aside_navbar.client";
 
 //
 
@@ -32,16 +35,6 @@ export function Partner_NavBar() {
       <Header className="py-5" />
       <Partner_Nav />
     </Aside_NavBar>
-  );
-}
-
-//
-
-function Aside_NavBar({ children }: PropsWithChildren) {
-  return (
-    <AsideBar className="z-40 py-5 shadow-[20px_0px_40px_#00000014]">
-      {children}
-    </AsideBar>
   );
 }
 

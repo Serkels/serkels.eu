@@ -98,38 +98,64 @@ function ProfileMessages({
         />
       </Speaker_Avatar>
       <MessageGroup $isYou={isYou}>
-        {messages.map(({ content, id }, index) =>
-          match(content)
-            .with(`/exchange server handshake accept ${deal.get("id")}`, () => (
-              <Message_OKay
-                key={id}
-                $isFirst={index === 0}
-                $isLast={index === last_index}
-                $isYou={isYou}
-              />
-            ))
-            .with(`/exchange client handshake accept ${deal.get("id")}`, () => (
-              <Message_MeToo
-                key={id}
-                $isFirst={index === 0}
-                $isLast={index === last_index}
-                $isYou={isYou}
-              />
-            ))
-            .otherwise(() => (
+        {messages.map((message, index) =>
+          match(message)
+            .with({ blocked: true }, () => (
               <Message
-                key={id}
+                key={message.id}
                 $isFirst={index === 0}
                 $isLast={index === last_index}
                 $isYou={isYou}
               >
-                {content}
+                <i className="italic text-black/50">
+                  🚫 Ce message a été supprimé.
+                </i>
               </Message>
+            ))
+            .otherwise(() => (
+              <ProfileMessage message={message} index={index} />
             )),
         )}
       </MessageGroup>
     </Speaker>
   );
+
+  function ProfileMessage({
+    message,
+    index,
+  }: { message: Comment_Schema } & { index: number }) {
+    const { data: session } = useSession();
+    const { content, id } = message;
+    const isYou = session?.user?.profile.id === profile;
+
+    return match(content)
+      .with(`/exchange server handshake accept ${deal.get("id")}`, () => (
+        <Message_OKay
+          key={id}
+          $isFirst={index === 0}
+          $isLast={index === last_index}
+          $isYou={isYou}
+        />
+      ))
+      .with(`/exchange client handshake accept ${deal.get("id")}`, () => (
+        <Message_MeToo
+          key={id}
+          $isFirst={index === 0}
+          $isLast={index === last_index}
+          $isYou={isYou}
+        />
+      ))
+      .otherwise(() => (
+        <Message
+          key={id}
+          $isFirst={index === 0}
+          $isLast={index === last_index}
+          $isYou={isYou}
+        >
+          {content}
+        </Message>
+      ));
+  }
 }
 
 const Speaker_Avatar = tw.div<{ $isYou: boolean }>`

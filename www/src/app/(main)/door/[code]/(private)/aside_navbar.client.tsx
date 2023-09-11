@@ -12,9 +12,11 @@ import {
 } from "react";
 import { tv } from "tailwind-variants";
 import { Avatar } from "~/components/Avatar";
+import { AsideBar } from "~/components/layouts/holy/aside";
 import { useInject } from "~/core/react";
 import { Get_Session_Profile } from "~/modules/user/application/get_session_profile.use-case";
 import { useProfile } from "../(public)/layout.client";
+import { useDoor_Value } from "../../door.context";
 
 //
 
@@ -128,3 +130,24 @@ export function SubNav_Bookmarks({
 
   return <ul className=" text-base [&>li]:px-9 [&>li]:py-0">{children}</ul>;
 }
+
+//
+
+export function Aside_NavBar({ children }: PropsWithChildren) {
+  const pathname = usePathname();
+  const [{ door_id }] = useDoor_Value();
+  const is_active = pathname === `/@${door_id}`;
+
+  return (
+    <AsideBar className={navbar({ $alone: is_active })}>{children}</AsideBar>
+  );
+}
+const navbar = tv({
+  base: "z-40 py-5 shadow-[20px_0px_40px_#00000014]",
+  variants: {
+    $alone: {
+      // true: "block max-h-[calc(100vh_-_theme(spacing.16)-_theme(spacing.8))] ",
+      false: "",
+    },
+  },
+});

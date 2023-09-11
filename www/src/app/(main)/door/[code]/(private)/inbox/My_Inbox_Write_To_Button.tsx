@@ -8,8 +8,9 @@ import {
 } from "@1/modules/profile/infra/strapi";
 import { Button } from "@1/ui/components/ButtonV";
 import { Spinner } from "@1/ui/components/Spinner";
-import * as UI from "@1/ui/domains/exchange/AskModal";
+import { useDialogContext } from "@1/ui/domains/exchange/AskModal";
 import { useQueryClient } from "@tanstack/react-query";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useCallback, type PropsWithChildren } from "react";
 import { P, match } from "ts-pattern";
@@ -20,6 +21,19 @@ import { useUserData } from "~/modules/user";
 import { useDoor_Value } from "../../../door.context";
 
 //
+
+const UI = {
+  Modal: dynamic(() =>
+    import("@1/ui/domains/exchange/AskModal").then((m) => m.Modal),
+  ),
+  DialogTrigger: dynamic(() =>
+    import("@1/ui/domains/exchange/AskModal").then((m) => m.DialogTrigger),
+  ),
+  Dialog: dynamic(() =>
+    import("@1/ui/domains/exchange/AskModal").then((m) => m.Dialog),
+  ),
+  useDialogContext: useDialogContext,
+};
 
 export function My_Inbox_Write_To_Button() {
   return (

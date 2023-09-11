@@ -6,8 +6,14 @@ import { match } from "ts-pattern";
 import { fromClient } from "~/app/api/v1";
 import { Deal_Message_Controller } from "~/modules/exchange/Deal_Message.controller";
 import { Deal_Message_Repository } from "~/modules/exchange/Deal_Message.repository";
-import { Exchange_Conversation_Timeline } from "../../../Exchange_Conversation_Timeline";
 import { useDeal_Value } from "../Deal.context";
+import dynamic from "next/dynamic";
+
+const Exchange_Conversation_Timeline = dynamic(() =>
+  import("../../../Exchange_Conversation_Timeline").then(
+    (m) => m.Exchange_Conversation_Timeline,
+  ),
+);
 
 //
 

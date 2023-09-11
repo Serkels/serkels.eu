@@ -10,7 +10,7 @@ import { Thread_Item } from "~/components/Thread_Item";
 //
 
 const userinbox_list = tv({
-  base: "space-y-5 overflow-y-auto px-8 pb-8",
+  base: "space-y-5 px-8 pb-8",
 });
 
 export function UserInbox_List({ inboxes }: { inboxes: Inbox[] | undefined }) {
