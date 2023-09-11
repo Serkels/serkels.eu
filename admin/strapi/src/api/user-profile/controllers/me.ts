@@ -34,7 +34,7 @@ export default {
       },
     };
 
-    const profile = await findOneFromUser(user.id);
+    let profile = await findOneFromUser(user.id);
     const constroller = strapi.controller<Common.UID.ContentType>(
       "api::user-profile.user-profile",
     );
@@ -47,7 +47,8 @@ export default {
       await constroller.create(ctx, next);
     }
 
-    ctx.params.id = profile.id;
+    profile = await findOneFromUser(user.id);
+    ctx.params.id = profile?.id;
     return constroller.findOne(ctx, next);
   },
 };
