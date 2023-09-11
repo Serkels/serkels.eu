@@ -13,18 +13,25 @@ import {
 import debug from "debug";
 import { useSession } from "next-auth/react";
 import { useCallback, useEffect } from "react";
+import { Lifecycle, inject, scoped } from "tsyringe";
 import { getNextPageParam, getPreviousPageParam } from "~/core/use-query";
-import type { Deal_Message_Repository } from "./Deal_Message.repository";
+import { Deal_Message_Repository } from "./Deal_Message.repository";
 import { Deal_QueryKeys } from "./queryKeys";
 
 //
 
-const log = debug("~:modules:exchange:Deal_Message_Controller");
-
 //
 
+@scoped(Lifecycle.ContainerScoped)
 export class Deal_Message_Controller {
-  constructor(private repository: Deal_Message_Repository) {}
+  #log = debug(`~:modules:exchange:${Deal_Message_Controller.name}`);
+  constructor(
+    @inject(Deal_Message_Repository)
+    private readonly repository: Deal_Message_Repository,
+  ) {
+    this.#log("new");
+  }
+
   create = { useMutation: this.useCreateMutation.bind(this) };
   list = { useQuery: this.useListQuery.bind(this) };
 
@@ -34,7 +41,7 @@ export class Deal_Message_Controller {
     const { data: session } = useSession();
 
     const create_message = async (message: string) => {
-      log("create_message");
+      this.#log("create_message");
       const trace = startTransaction({
         name: `Create Message for the deal ${this.repository.deal_id}`,
       });
@@ -69,8 +76,8 @@ export class Deal_Message_Controller {
       typeof queryKey,
       number
     > = async (params) => {
-      debug("load_list_query_fn");
-      debug(`page: ${params.pageParam ?? 1}`);
+      this.#log("load_list_query_fn");
+      this.#log(`page: ${params.pageParam ?? 1}`);
 
       return this.repository.find_all({
         ...query_params,
@@ -79,7 +86,7 @@ export class Deal_Message_Controller {
     };
 
     const query_info = useInfiniteQuery({
-      enabled: Boolean(this.repository.jwt),
+      enabled: this.repository.is_authorized,
       getNextPageParam,
       getPreviousPageParam,
       queryFn: useCallback(load_list_query_fn, [this.repository]),

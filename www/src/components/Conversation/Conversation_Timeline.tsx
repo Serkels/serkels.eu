@@ -7,7 +7,7 @@ import type { UseInfiniteQueryResult } from "@tanstack/react-query";
 import { format, isSameDay } from "date-fns";
 import { fr } from "date-fns/locale";
 import { useSession } from "next-auth/react";
-import { Fragment } from "react";
+import { Fragment, type ComponentProps } from "react";
 import tw from "tailwind-styled-components";
 import { match } from "ts-pattern";
 import { Link_Avatar } from "~/components/Avatar";
@@ -58,13 +58,15 @@ export function Conversation_Timeline({
         return (
           <Fragment key={Number(day)}>
             <MessageTime date={day} />
-            {messages_by_profile.map(([id, messages], index) => (
-              <ProfileMessages
-                key={`${Number(day)}_${id}_${index}`}
-                profile={id}
-                messages={messages}
-              />
-            ))}
+            {messages_by_profile.map(([id, messages]) => {
+              return (
+                <ProfileMessages
+                  key={`${Number(day)}_${id}_${messages.length}`}
+                  profile={id}
+                  messages={messages}
+                />
+              );
+            })}
           </Fragment>
         );
       })}
@@ -95,16 +97,27 @@ function ProfileMessages({
         />
       </Speaker_Avatar>
       <MessageGroup $isYou={isYou}>
-        {messages.map(({ content, id }, index) => (
-          <Message
-            key={id}
-            $isFirst={index === 0}
-            $isLast={index === last_index}
-            $isYou={isYou}
-          >
-            {content}
-          </Message>
-        ))}
+        {messages.map((message, index) =>
+          match(message)
+            .with({ blocked: true }, ({ id }) => (
+              <Message_Blocked
+                key={id}
+                $isFirst={index === 0}
+                $isLast={index === last_index}
+                $isYou={isYou}
+              />
+            ))
+            .otherwise(({ content, id }) => (
+              <Message
+                key={id}
+                $isFirst={index === 0}
+                $isLast={index === last_index}
+                $isYou={isYou}
+              >
+                {content}
+              </Message>
+            )),
+        )}
       </MessageGroup>
     </Speaker>
   );
@@ -137,7 +150,11 @@ const MessageGroup = tw.div<{
   text-sm
 `;
 
-const Message = tw.p<{ $isFirst: boolean; $isLast: boolean; $isYou: boolean }>`
+export const Message = tw.p<{
+  $isFirst: boolean;
+  $isLast: boolean;
+  $isYou: boolean;
+}>`
   max-w-[85%]
 
   ${(p) => (p.$isFirst ? "rounded-t-3xl" : "")}
@@ -161,5 +178,13 @@ function MessageTime({ date }: { date: Date }) {
     >
       {format(date, "Pp", { locale: fr })}
     </time>
+  );
+}
+
+export function Message_Blocked(props: ComponentProps<typeof Message>) {
+  return (
+    <Message {...props}>
+      <i className="italic text-black/50">🚫 Ce message a été supprimé.</i>
+    </Message>
   );
 }

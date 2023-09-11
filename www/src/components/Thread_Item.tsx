@@ -37,7 +37,7 @@ export function Thread_Item({
         </Thread_Time>
       </Thread_Header>
       <Link href={href}>
-        <div className="float-right">
+        <div className="float-right ">
           {match(indicator)
             .with(P.instanceOf(Function), (indicator_fn) => indicator_fn())
             .otherwise(() => (

@@ -2,9 +2,8 @@
 
 import { Form } from "@1/ui/domains/exchange/AskModal";
 import { Field, Formik, type FieldAttributes } from "formik";
-import { useSession } from "next-auth/react";
 import tw from "tailwind-styled-components";
-import { fromClient } from "~/app/api/v1";
+import { useContainer, useInject } from "~/core/react";
 import { Deal_Message_Controller } from "~/modules/exchange/Deal_Message.controller";
 import { Deal_Message_Repository } from "~/modules/exchange/Deal_Message.repository";
 import { useDeal_Value } from "../Deal.context";
@@ -13,16 +12,14 @@ import { useDeal_Value } from "../Deal.context";
 
 export function Deal_Discussion_Form() {
   const [deal] = useDeal_Value();
-  const { data: session } = useSession();
-  const repository = new Deal_Message_Repository(
-    fromClient,
-    session?.user?.jwt,
+
+  useContainer().registerInstance(
+    Deal_Message_Repository.DEAL_ID_TOKEN,
     deal.get("id"),
   );
-
   const {
     create: { useMutation },
-  } = new Deal_Message_Controller(repository);
+  } = useInject(Deal_Message_Controller);
 
   const { mutate: send_message } = useMutation();
 

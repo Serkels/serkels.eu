@@ -2,7 +2,7 @@
 
 import type { Metadata, ResolvingMetadata } from "next";
 import tw from "tailwind-styled-components";
-import { Deal_Provider } from "../Deal_Provider";
+import { Deal_Provider, Exchange_Provider } from "../Deal_Provider";
 import { Deal_Discussion } from "./Deal_Discussion";
 import { Deal_Discussion_Form } from "./Deal_Discussion_Form";
 import { NavControlGroup } from "./NavControlGroup";
@@ -33,21 +33,24 @@ export default async function Page({
   return (
     <Main>
       <Sticky_Container>
-        <Deal_Provider id={deal_id}>
-          <Header>
-            <Thread_Avatar />
-            <NavControlGroup exchange_id={exchange_id} />
-          </Header>
+        <Exchange_Provider id={exchange_id}>
+          <Deal_Provider id={deal_id}>
+            <Header>
+              <Thread_Avatar />
+              <NavControlGroup exchange_id={exchange_id} />
+            </Header>
 
-          <Scrollable_Part>
-            <Deal_Discussion />
-          </Scrollable_Part>
+            <Scrollable_Part>
+              <Deal_Discussion />
+            </Scrollable_Part>
 
-          <Footer>
-            <Deal_Discussion_Form />
-            <SendActionGroup />
-          </Footer>
-        </Deal_Provider>
+            <Footer>
+              <Deal_Discussion_Form />
+
+              <SendActionGroup />
+            </Footer>
+          </Deal_Provider>
+        </Exchange_Provider>
       </Sticky_Container>
     </Main>
   );

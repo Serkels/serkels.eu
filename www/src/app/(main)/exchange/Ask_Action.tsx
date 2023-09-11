@@ -14,6 +14,7 @@ import { P, match } from "ts-pattern";
 import { fromClient } from "~/app/api/v1";
 import { Link_Avatar } from "~/components/Avatar";
 import { ErrorOccur } from "~/components/ErrorOccur";
+import { useContainer, useInject } from "~/core/react";
 import { useExchange_item_controller } from "~/modules/exchange";
 import { Deal_Controller } from "~/modules/exchange/Deal.controller";
 import { Deal_Repository } from "~/modules/exchange/Deal.repository";
@@ -59,13 +60,12 @@ export function Ask_Body() {
   const exchange_deals_query_info = find_deal_by_participant.useQuery();
   const deal_id = exchange_deals_query_info.data?.data?.at(0)?.id;
 
-  const message_ctrl = new Deal_Message_Controller(
-    new Deal_Message_Repository(
-      fromClient,
-      session?.user?.jwt,
-      Number(deal_id),
-    ),
+  useContainer().registerInstance(
+    Deal_Message_Repository.DEAL_ID_TOKEN,
+    deal_id,
   );
+  const message_ctrl = useInject(Deal_Message_Controller);
+
   const create_message_info = message_ctrl.create.useMutation();
 
   const create_deal_mutation_info = useMutation();

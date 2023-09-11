@@ -1,13 +1,12 @@
 "use client";
 
-import { useSession } from "next-auth/react";
+import dynamic from "next/dynamic";
 import { useCallback, useId } from "react";
 import { match } from "ts-pattern";
-import { fromClient } from "~/app/api/v1";
+import { useContainer, useInject } from "~/core/react";
 import { Deal_Message_Controller } from "~/modules/exchange/Deal_Message.controller";
 import { Deal_Message_Repository } from "~/modules/exchange/Deal_Message.repository";
 import { useDeal_Value } from "../Deal.context";
-import dynamic from "next/dynamic";
 
 const Exchange_Conversation_Timeline = dynamic(() =>
   import("../../../Exchange_Conversation_Timeline").then(
@@ -21,17 +20,13 @@ export function Deal_Discussion() {
   const [deal] = useDeal_Value();
   const uid = useId();
 
-  const { data: session } = useSession();
-  const repository = new Deal_Message_Repository(
-    fromClient,
-    session?.user?.jwt,
+  useContainer().registerInstance(
+    Deal_Message_Repository.DEAL_ID_TOKEN,
     deal.get("id"),
   );
-  // const repository = new Exchange_Repository(fromClient, session?.user?.jwt);
   const {
     list: { useQuery },
-    // } = new Exchange_Item_Controller(repository);
-  } = new Deal_Message_Controller(repository);
+  } = useInject(Deal_Message_Controller);
 
   const query_info = useQuery({
     sort: ["createdAt:desc"],

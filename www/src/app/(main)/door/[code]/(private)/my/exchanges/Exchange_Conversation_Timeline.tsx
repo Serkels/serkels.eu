@@ -10,7 +10,12 @@ import { useSession } from "next-auth/react";
 import { Fragment, type ComponentProps } from "react";
 import tw from "tailwind-styled-components";
 import { match } from "ts-pattern";
+import { v4 } from "uuid";
 import { Link_Avatar } from "~/components/Avatar";
+import {
+  Message,
+  Message_Blocked,
+} from "~/components/Conversation/Conversation_Timeline";
 import { useDeal_Value } from "./[exchange_id]/deals/Deal.context";
 
 //
@@ -59,13 +64,15 @@ export function Exchange_Conversation_Timeline({
         return (
           <Fragment key={Number(day)}>
             <MessageTime date={day} />
-            {messages_by_profile.map(([id, messages], index) => (
-              <ProfileMessages
-                key={`${Number(day)}_${id}_${index}`}
-                profile={id}
-                messages={messages}
-              />
-            ))}
+            {messages_by_profile.map(([id, messages]) => {
+              return (
+                <ProfileMessages
+                  key={`${Number(day)}_${v4({})}`}
+                  profile={id}
+                  messages={messages}
+                />
+              );
+            })}
           </Fragment>
         );
       })}
@@ -101,19 +108,19 @@ function ProfileMessages({
         {messages.map((message, index) =>
           match(message)
             .with({ blocked: true }, () => (
-              <Message
+              <Message_Blocked
                 key={message.id}
                 $isFirst={index === 0}
                 $isLast={index === last_index}
                 $isYou={isYou}
-              >
-                <i className="italic text-black/50">
-                  🚫 Ce message a été supprimé.
-                </i>
-              </Message>
+              />
             ))
-            .otherwise(() => (
-              <ProfileMessage message={message} index={index} />
+            .otherwise(({ id }) => (
+              <ProfileMessage
+                message={message}
+                index={index}
+                key={`${id}_${message.id}`}
+              />
             )),
         )}
       </MessageGroup>
@@ -125,21 +132,33 @@ function ProfileMessages({
     index,
   }: { message: Comment_Schema } & { index: number }) {
     const { data: session } = useSession();
-    const { content, id } = message;
+    const { content } = message;
     const isYou = session?.user?.profile.id === profile;
 
     return match(content)
-      .with(`/exchange server handshake accept ${deal.get("id")}`, () => (
+      .with(`/exchange server handshake accepeted ${deal.get("id")}`, () => (
         <Message_OKay
-          key={id}
           $isFirst={index === 0}
           $isLast={index === last_index}
           $isYou={isYou}
         />
       ))
-      .with(`/exchange client handshake accept ${deal.get("id")}`, () => (
+      .with(`/exchange client handshake accepeted ${deal.get("id")}`, () => (
         <Message_MeToo
-          key={id}
+          $isFirst={index === 0}
+          $isLast={index === last_index}
+          $isYou={isYou}
+        />
+      ))
+      .with(`/exchange server handshake denied ${deal.get("id")}`, () => (
+        <Message_Denied
+          $isFirst={index === 0}
+          $isLast={index === last_index}
+          $isYou={isYou}
+        />
+      ))
+      .with(`/exchange client handshake denied ${deal.get("id")}`, () => (
+        <Message_NotInterested
           $isFirst={index === 0}
           $isLast={index === last_index}
           $isYou={isYou}
@@ -147,7 +166,6 @@ function ProfileMessages({
       ))
       .otherwise(() => (
         <Message
-          key={id}
           $isFirst={index === 0}
           $isLast={index === last_index}
           $isYou={isYou}
@@ -185,20 +203,6 @@ const MessageGroup = tw.div<{
   text-sm
 `;
 
-const Message = tw.p<{ $isFirst: boolean; $isLast: boolean; $isYou: boolean }>`
-  max-w-[85%]
-
-  ${(p) => (p.$isFirst ? "rounded-t-3xl" : "")}
-
-  ${(p) => (p.$isLast ? "rounded-b-3xl" : "")}
-  ${(p) =>
-    p.$isYou
-      ? "ml-auto rounded-l-3xl bg-[#39B15417]"
-      : "rounded-r-3xl bg-[#F4F7F9]"}
-  px-6
-  py-3
-`;
-
 function MessageTime({ date }: { date: Date }) {
   const utc = date.toUTCString();
   return (
@@ -218,5 +222,13 @@ function Message_OKay(props: ComponentProps<typeof Message>) {
   return <Message {...props}>C'est OK pour moi, et pour toi ? ✅</Message>;
 }
 function Message_MeToo(props: ComponentProps<typeof Message>) {
-  return <Message {...props}>✅ C'est OK pour moi aussi</Message>;
+  return <Message {...props}>✅ C'est OK pour moi aussi.</Message>;
+}
+
+function Message_Denied(props: ComponentProps<typeof Message>) {
+  return <Message {...props}>✖️ Je ne suis plus disponible.</Message>;
+}
+
+function Message_NotInterested(props: ComponentProps<typeof Message>) {
+  return <Message {...props}>✖️ Je ne suis plus interessé.</Message>;
 }

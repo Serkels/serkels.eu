@@ -195,7 +195,7 @@ function Echange_MessagingLink() {
       )}
     >
       <header className="relative">
-        <div className="float-right">
+        <div className="float-right hidden">
           <Circle className={clsx("h-4 w-4 text-[#FF5F5F]")} />
         </div>
         <h4
