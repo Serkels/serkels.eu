@@ -23,7 +23,7 @@
     "@trpc/next": "10.38.1",
     "@trpc/react-query": "10.38.1",
     "@vercel/analytics": "1.0.2",
-    "@yornaath/batshit": "0.7.1",
+    "@yornaath/batshit": "0.8.0",
     "clsx": "2.0.0",
     "date-fns": "2.30.0",
     "debug": "4.3.4",
