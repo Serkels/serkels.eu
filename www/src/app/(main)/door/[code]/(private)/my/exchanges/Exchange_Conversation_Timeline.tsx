@@ -11,6 +11,7 @@ import { Fragment, type ComponentProps } from "react";
 import tw from "tailwind-styled-components";
 import { match } from "ts-pattern";
 import { Link_Avatar } from "~/components/Avatar";
+import { useDeal_Value } from "./[exchange_id]/deals/Deal.context";
 
 //
 
@@ -84,6 +85,7 @@ function ProfileMessages({
   messages: Comment_Schema[];
 }) {
   const { data: session } = useSession();
+  const [deal] = useDeal_Value();
   const isYou = session?.user?.profile.id === profile;
   const last_index = messages.length - 1;
 
@@ -98,30 +100,22 @@ function ProfileMessages({
       <MessageGroup $isYou={isYou}>
         {messages.map(({ content, id }, index) =>
           match(content)
-            .with(
-              "/accepter",
-              () => isYou,
-              () => (
-                <Message_OKay
-                  key={id}
-                  $isFirst={index === 0}
-                  $isLast={index === last_index}
-                  $isYou={isYou}
-                />
-              ),
-            )
-            .with(
-              "/accepter",
-              () => !isYou,
-              () => (
-                <Message_MeToo
-                  key={id}
-                  $isFirst={index === 0}
-                  $isLast={index === last_index}
-                  $isYou={isYou}
-                />
-              ),
-            )
+            .with(`/exchange server handshake accept ${deal.get("id")}`, () => (
+              <Message_OKay
+                key={id}
+                $isFirst={index === 0}
+                $isLast={index === last_index}
+                $isYou={isYou}
+              />
+            ))
+            .with(`/exchange client handshake accept ${deal.get("id")}`, () => (
+              <Message_MeToo
+                key={id}
+                $isFirst={index === 0}
+                $isLast={index === last_index}
+                $isYou={isYou}
+              />
+            ))
             .otherwise(() => (
               <Message
                 key={id}

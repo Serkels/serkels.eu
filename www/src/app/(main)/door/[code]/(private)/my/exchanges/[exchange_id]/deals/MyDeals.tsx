@@ -94,14 +94,16 @@ export function Echange_DealsNav() {
     if (count !== 1) {
       return;
     }
+
     const deal = query_info.data?.pages?.at(0)!;
     const target = `/@${door_id}/my/exchanges/${exchange.get(
       "id",
     )}/deals/${deal.get("id")}`;
+
     if (pathname.startsWith(target)) {
       return;
     }
-    debugger;
+
     router.push(target);
   }, [count]);
 
