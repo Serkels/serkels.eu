@@ -45,9 +45,9 @@ export default {
     } else {
       ctx.request.body.data.owner = user.id;
       await constroller.create(ctx, next);
+      profile = await findOneFromUser(user.id);
     }
 
-    profile = await findOneFromUser(user.id);
     ctx.params.id = profile?.id;
     return constroller.findOne(ctx, next);
   },
