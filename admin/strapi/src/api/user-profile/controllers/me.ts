@@ -3,6 +3,8 @@
  */
 
 import { Common } from "@strapi/strapi";
+
+import { parseBody } from "@strapi/strapi/lib/core-api/controller/transform";
 import { type Next } from "koa";
 import { findOneFromUser } from "../services/user-profile";
 
@@ -38,13 +40,15 @@ export default {
     const constroller = strapi.controller<Common.UID.ContentType>(
       "api::user-profile.user-profile",
     );
+    const service = strapi.service("api::user-profile.user-profile");
 
     if (profile) {
       ctx.params.id = profile.id;
       await constroller.update(ctx, next);
     } else {
       ctx.request.body.data.owner = user.id;
-      await constroller.create(ctx, next);
+      const { data } = parseBody(ctx);
+      await service.create({ data });
       profile = await findOneFromUser(user.id);
     }
 
