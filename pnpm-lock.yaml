@@ -383,8 +383,8 @@ importers:
         specifier: 1.0.2
         version: 1.0.2
       '@yornaath/batshit':
-        specifier: 0.7.1
-        version: 0.7.1
+        specifier: 0.8.0
+        version: 0.8.0
       clsx:
         specifier: 2.0.0
         version: 2.0.0
@@ -5116,14 +5116,14 @@ packages:
     resolution: {integrity: sha512-N8tkAACJx2ww8vFMneJmaAgmjAG1tnVBZJRLRcx061tmsLRZHSEZSLuGWnwPtunsSLvSqXQ2wfp7Mgqg1I+2dQ==}
     dev: false
 
-  /@yornaath/batshit-devtools@1.4.1:
-    resolution: {integrity: sha512-2vnWeNsw+ryHahTn8RnJ1PWWDDYKN9IL8sFL/SaJ1dCgRbZuczbc5PE1D36ydeyCrE7XJyFKnXkXv+4hsEW4IA==}
+  /@yornaath/batshit-devtools@1.5.0:
+    resolution: {integrity: sha512-wYHItjnm5kUgHgY/mByWm0s4gQR55shMsJuwYwnnMxSb13vARjWK+A0hMpaNqnrCqQQEYEUDRO6/l4XBUAJZbQ==}
     dev: false
 
-  /@yornaath/batshit@0.7.1:
-    resolution: {integrity: sha512-9VAhilDKM5wCpsFMJD+vfGmjFN694PTyl4ot6o2StaQMzNLlu3EWBHxKuurMBjLNFT94Qpef4icOCgaohZdUJQ==}
+  /@yornaath/batshit@0.8.0:
+    resolution: {integrity: sha512-6kncPCFq03tO6Fol4yXLpwVwmJQCv6hKU6BJZsNzp9nsl8yuZCCUUCNp2xH80TDXDJ8uVgf+kvCDaPx4k/rNHw==}
     dependencies:
-      '@yornaath/batshit-devtools': 1.4.1
+      '@yornaath/batshit-devtools': 1.5.0
     dev: false
 
   /@zag-js/accordion@0.12.0:
