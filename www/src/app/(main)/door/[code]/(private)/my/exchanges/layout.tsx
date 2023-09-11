@@ -1,17 +1,16 @@
 //
 
 import type { PropsWithChildren } from "react";
-import { AsideBar } from "~/components/layouts/holy/aside";
-import { EchangeNav } from "./EchangeNav";
+import { EchangeNav, My_Echange_Nav } from "./EchangeNav";
 
 //
 
 export default function Layout({ children }: PropsWithChildren<any>) {
   return (
     <>
-      <AsideBar className="-ml-[20px] flex-col overflow-hidden pt-8 md:flex">
+      <My_Echange_Nav>
         <EchangeNav />
-      </AsideBar>
+      </My_Echange_Nav>
       {children}
     </>
   );
