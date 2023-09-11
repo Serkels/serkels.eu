@@ -11,7 +11,7 @@ export default function Layout({ children }: PropsWithChildren) {
       <UserBar />
       <Grid
         $padding={false}
-        className="max-h-[calc(100vh_-_theme(spacing.16)-_theme(spacing.8))]"
+        // className="max-h-[calc(100vh_-_theme(spacing.16)-_theme(spacing.8))]"
       >
         {children}
       </Grid>
