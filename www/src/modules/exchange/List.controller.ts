@@ -1,5 +1,6 @@
 //
 
+import { Exchange_ItemSchemaToDomain } from "@1/modules/exchange/infra/strapi";
 import type { Exchange_ListSchema } from "@1/strapi-openapi";
 import { useInfiniteQuery, type QueryFunction } from "@tanstack/react-query";
 import debug from "debug";
@@ -84,6 +85,20 @@ export class Exchange_List_Controller {
       ]),
       queryKey: Exchange_QueryKeys.my_list(),
       staleTime: Infinity,
+      select: (data) => {
+        const pages = data.pages
+          .map((page) => page.data!)
+          .flat()
+          .map((raw) => new Exchange_ItemSchemaToDomain().build(raw))
+          .filter((result) => {
+            if (result.isFail()) {
+              console.error(result.error());
+            }
+            return result.isOk();
+          })
+          .map((result) => result.value());
+        return { ...data, pages };
+      },
     });
 
     return query_info;

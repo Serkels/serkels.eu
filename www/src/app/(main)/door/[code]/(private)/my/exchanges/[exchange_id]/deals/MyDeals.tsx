@@ -1,13 +1,14 @@
 "use client";
 
 import { UnknownError } from "@1/core/error";
-import { Exchange_DealSchemaToDomain } from "@1/modules/deal/infra/strapi";
 import { Exchange_ItemSchemaToDomain } from "@1/modules/exchange/infra/strapi";
 import { Message, Thread } from "@1/modules/inbox/domain";
 import { Button } from "@1/ui/components/ButtonV";
 import { Spinner } from "@1/ui/components/Spinner";
 import { Circle } from "@1/ui/icons";
 import { useSession } from "next-auth/react";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect } from "react";
 import tw from "tailwind-styled-components";
 import { P, match } from "ts-pattern";
 import { useDoor_Value } from "~/app/(main)/door/door.context";
@@ -83,7 +84,28 @@ export function Echange_DealsNav() {
     list: { useQuery },
   } = new Deal_Controller(repository);
 
-  return match(useQuery(exchange.get("id")))
+  const query_info = useQuery(exchange.get("id"));
+  const router = useRouter();
+  const pathname = usePathname();
+  const [{ door_id }] = useDoor_Value();
+
+  const count = query_info.data?.pages.length;
+  useEffect(() => {
+    if (count !== 1) {
+      return;
+    }
+    const deal = query_info.data?.pages?.at(0)!;
+    const target = `/@${door_id}/my/exchanges/${exchange.get(
+      "id",
+    )}/deals/${deal.get("id")}`;
+    if (pathname.startsWith(target)) {
+      return;
+    }
+    debugger;
+    router.push(target);
+  }, [count]);
+
+  return match(query_info)
     .with({ status: "error" }, ({ error }) => (
       <ErrorOccur error={error as Error} />
     ))
@@ -91,9 +113,7 @@ export function Echange_DealsNav() {
     .with(
       {
         status: "success",
-        data: P.when(
-          (list) => list.pages.map((page) => page.data!).flat().length === 0,
-        ),
+        data: P.when((list) => list.pages.length === 0),
       },
       () => <EmptyList />,
     )
@@ -102,24 +122,13 @@ export function Echange_DealsNav() {
       ({ data: { pages }, isFetchingNextPage, hasNextPage, fetchNextPage }) => (
         <nav>
           <ul className="space-y-5">
-            {pages
-              .map((page) => page.data!)
-              .flat()
-              .map((raw) => new Exchange_DealSchemaToDomain().build(raw))
-              .filter((result) => {
-                if (result.isFail()) {
-                  console.error(result.error());
-                }
-                return result.isOk();
-              })
-              .map((result) => result.value())
-              .map((deal) => (
-                <li key={deal.get("id")}>
-                  <Deal_ValueProvider initialValue={deal}>
-                    <Echange_DealLink />
-                  </Deal_ValueProvider>
-                </li>
-              ))}
+            {pages.map((deal) => (
+              <li key={deal.get("id")}>
+                <Deal_ValueProvider initialValue={deal}>
+                  <Echange_DealLink />
+                </Deal_ValueProvider>
+              </li>
+            ))}
             {isFetchingNextPage ? (
               <li className="col-span-full mx-auto">
                 <Loading />

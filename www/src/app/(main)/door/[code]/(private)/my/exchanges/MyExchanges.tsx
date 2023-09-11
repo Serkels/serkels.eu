@@ -1,6 +1,5 @@
 "use client";
 
-import { Exchange_ItemSchemaToDomain } from "@1/modules/exchange/infra/strapi";
 import { Button } from "@1/ui/components/ButtonV";
 import { InputSearch } from "@1/ui/components/InputSearch";
 import { Spinner } from "@1/ui/components/Spinner";
@@ -11,8 +10,8 @@ import type { VariantProps } from "@1/ui/theme";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { type ComponentPropsWithoutRef } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, type ComponentPropsWithoutRef } from "react";
 import tw from "tailwind-styled-components";
 import { P, match } from "ts-pattern";
 import { useDoor_Value } from "~/app/(main)/door/door.context";
@@ -48,6 +47,18 @@ function EchangeNav() {
     pagination: { pageSize: 4 },
   });
 
+  const router = useRouter();
+  const [{ door_id }] = useDoor_Value();
+
+  const count = query_result.data?.pages.length;
+  useEffect(() => {
+    if (count !== 1) {
+      return;
+    }
+    const exchnage = query_result.data?.pages?.at(0)!;
+    router.push(`/@${door_id}/my/exchanges/${exchnage.id}`);
+  }, [count]);
+
   //
 
   return match(query_result)
@@ -58,9 +69,7 @@ function EchangeNav() {
     .with(
       {
         status: "success",
-        data: P.when(
-          (list) => list.pages.map((page) => page.data!).flat().length === 0,
-        ),
+        data: P.when((list) => list.pages.length === 0),
       },
       () => <EmptyList />,
     )
@@ -69,24 +78,13 @@ function EchangeNav() {
       ({ data: { pages }, isFetchingNextPage, hasNextPage, fetchNextPage }) => (
         <nav>
           <ul className="space-y-5">
-            {pages
-              .map((page) => page.data!)
-              .flat()
-              .map((raw) => new Exchange_ItemSchemaToDomain().build(raw))
-              .filter((result) => {
-                if (result.isFail()) {
-                  console.error(result.error());
-                }
-                return result.isOk();
-              })
-              .map((result) => result.value())
-              .map((exchange) => (
-                <li key={exchange.get("id")}>
-                  <Exchange_ValueProvider initialValue={exchange}>
-                    <Echange_MessagingLink />
-                  </Exchange_ValueProvider>
-                </li>
-              ))}
+            {pages.map((exchange) => (
+              <li key={exchange.get("id")}>
+                <Exchange_ValueProvider initialValue={exchange}>
+                  <Echange_MessagingLink />
+                </Exchange_ValueProvider>
+              </li>
+            ))}
             <li className="col-span-full mx-auto">
               {isFetchingNextPage ? <Loading /> : null}
             </li>

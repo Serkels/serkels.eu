@@ -84,7 +84,7 @@ export class Deal_Message_Controller {
       getPreviousPageParam,
       queryFn: useCallback(load_list_query_fn, [this.repository]),
       queryKey,
-      staleTime: Infinity,
+      staleTime: 1_111,
     });
 
     return query_info;

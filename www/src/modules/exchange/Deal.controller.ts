@@ -1,5 +1,6 @@
 //
 
+import { Exchange_DealSchemaToDomain } from "@1/modules/deal/infra/strapi";
 import type {
   Exchange_DealListSchema,
   Exchange_DealSchema,
@@ -112,6 +113,20 @@ export class Deal_Controller {
       queryFn: useCallback(loadDealsListFn, [this.repository, exchange_id]),
       queryKey: Deal_QueryKeys.lists(exchange_id),
       staleTime: Infinity,
+      select: (data) => {
+        const pages = data.pages
+          .map((page) => page.data!)
+          .flat()
+          .map((raw) => new Exchange_DealSchemaToDomain().build(raw))
+          .filter((result) => {
+            if (result.isFail()) {
+              console.error(result.error());
+            }
+            return result.isOk();
+          })
+          .map((result) => result.value());
+        return { ...data, pages };
+      },
     });
 
     return query_info;
