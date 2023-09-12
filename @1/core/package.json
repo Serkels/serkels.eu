@@ -9,7 +9,7 @@
     "modern-errors-serialize": "5.0.0",
     "rich-domain": "1.18.4",
     "superjson": "1.13.1",
-    "uuid": "9.0.0"
+    "uuid": "9.0.1"
   },
   "devDependencies": {
     "@1/typescript-config": "workspace:*",
