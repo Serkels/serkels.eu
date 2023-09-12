@@ -69,8 +69,8 @@ importers:
         specifier: 4.13.4
         version: 4.13.4
       '@trpc/server':
-        specifier: 10.38.1
-        version: 10.38.1
+        specifier: 10.38.2
+        version: 10.38.2
       '@types/koa':
         specifier: 2.13.8
         version: 2.13.8
@@ -259,8 +259,8 @@ importers:
         specifier: workspace:*
         version: link:../modules
       '@trpc/server':
-        specifier: 10.38.1
-        version: 10.38.1
+        specifier: 10.38.2
+        version: 10.38.2
       superjson:
         specifier: 1.13.1
         version: 1.13.1
@@ -4997,8 +4997,8 @@ packages:
       use-sync-external-store: 1.2.0(react@18.2.0)
     dev: false
 
-  /@trpc/server@10.38.1:
-    resolution: {integrity: sha512-59mM0Jk3cnWBExSv4Z4cw/776MPwa+rcVNywnV5gyHyK/p5qHtis1b1JPYdTEQZ0zhR+6zeto14rTR51hg+Nuw==}
+  /@trpc/server@10.38.2:
+    resolution: {integrity: sha512-Jz+ebylbqz0XDkCgpVMNs8XutjmvvMFPCP+7km1EyGkF7EbWEdDGV9GC7EqzU1aC5ATt75Qta6TnR0p0kYtNFA==}
     dev: false
 
   /@tsconfig/strictest@2.0.2:
