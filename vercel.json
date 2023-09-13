@@ -4,5 +4,5 @@
     "silent": true
   },
   "installCommand": "pnpm --filter www... install",
-  "buildCommand": "pnpm turbo run build --filter=strapi"
+  "buildCommand": "pnpm turbo run build --filter=www"
 }

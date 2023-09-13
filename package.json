@@ -1,9 +1,9 @@
 {
   "private": true,
   "engines": {
-    "node": "20.6.1",
-    "npm": "9.8.1",
-    "pnpm": "8.7.5"
+    "node": ">=18",
+    "npm": ">=9",
+    "pnpm": ">=8"
   },
   "scripts": {
     "build": "turbo run build",
