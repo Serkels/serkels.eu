@@ -14,7 +14,7 @@
   "devDependencies": {
     "@1/typescript-config": "workspace:*",
     "chokidar-cli": "3.0.0",
-    "openapi-typescript": "6.6.0",
+    "openapi-typescript": "6.6.1",
     "prettier": "3.0.3",
     "typescript": "5.2.2"
   }
