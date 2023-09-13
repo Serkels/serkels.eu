@@ -11,11 +11,7 @@
     "sourceMap": true,
     "types": ["@bn-digital/strapi-types"]
   },
-  "include": [
-    "./",
-    "./**/*.ts",
-    "src/**/*.json"
-  ],
+  "include": ["./", "./**/*.ts", "src/**/*.json"],
   "exclude": [
     "node_modules/",
     "build/",
@@ -27,5 +23,5 @@
     "**/*.test.*",
     "src/plugins/**"
   ],
-  "references": [{ "path": "../xxx/modules" }]
+  "references": [{ "path": "../../01/modules" }, { "path": "../../01/core" }]
 }

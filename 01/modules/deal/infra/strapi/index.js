@@ -1,2 +1,0 @@
-//
-export * from "./DealSchema.mapper";

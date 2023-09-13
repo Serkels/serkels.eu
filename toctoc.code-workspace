@@ -4,24 +4,24 @@
     { "path": "www", "name": "www" },
     { "path": "admin/strapi", "name": "strapi" },
     //
-    { "path": "@1/modules", "name": "@1/modules" },
-    { "path": "@1/core", "name": "@1/core" },
+    { "path": "01/modules", "name": "@1/modules" },
+    { "path": "01/core", "name": "@1/core" },
     //
-    { "path": "@1/strapi-openapi", "name": "@1/strapi-openapi" },
-    { "path": "@1/strapi-trpc-router", "name": "@1/strapi-trpc-router" },
-    { "path": "@1/ui", "name": "@1/ui" },
+    { "path": "01/strapi-openapi", "name": "@1/strapi-openapi" },
+    { "path": "01/strapi-trpc-router", "name": "@1/strapi-trpc-router" },
+    { "path": "01/ui", "name": "@1/ui" },
     //
-    { "path": "@1/config/eslint-config", "name": "@1/config/eslint-config" },
+    { "path": "01/config/eslint-config", "name": "@1/config/eslint-config" },
     {
-      "path": "@1/config/pandacss-config",
+      "path": "01/config/pandacss-config",
       "name": "@1/config/pandacss-config"
     },
     {
-      "path": "@1/config/tailwindcss-config",
+      "path": "01/config/tailwindcss-config",
       "name": "@1/config/tailwindcss-config"
     },
     {
-      "path": "@1/config/typescript-config",
+      "path": "01/config/typescript-config",
       "name": "@1/config/typescript-config"
     },
     //
