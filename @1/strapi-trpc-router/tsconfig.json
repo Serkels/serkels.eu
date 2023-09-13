@@ -1,9 +1,0 @@
-{
-  "extends": ["@1/typescript-config/base.json"],
-  "compilerOptions": {
-    "baseUrl": ".",
-    "lib": ["ESNext"]
-  },
-  "files": ["index.ts"],
-  "references": [{ "path": "../core" }, { "path": "../modules" }]
-}
