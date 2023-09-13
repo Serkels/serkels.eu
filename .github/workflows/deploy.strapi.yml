@@ -29,7 +29,7 @@ jobs:
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: toctoc-admin-staging
-          heroku_email: ${{ secrets.HEROKU_EMAIL  }}
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
 
       - name: Deploy to Heroku (prodution)}
         if: ${{ github.ref == 'refs/heads/master' }}
@@ -37,4 +37,4 @@ jobs:
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: toctoc-admin
-          heroku_email: ${{ secrets.HEROKU_EMAIL  }}
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
