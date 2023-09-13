@@ -3,6 +3,5 @@
   "github": {
     "silent": true
   },
-  "installCommand": "pnpm --filter www... install",
-  "buildCommand": "pnpm turbo run build --filter=www"
+  "installCommand": "pnpm --filter www... install"
 }
