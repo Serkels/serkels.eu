@@ -1,7 +1,7 @@
 {
   "private": true,
   "engines": {
-    "node": ">=18",
+    "node": "20.6.1",
     "npm": "9.8.1",
     "pnpm": "8.7.4"
   },
