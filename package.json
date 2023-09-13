@@ -9,8 +9,9 @@
     "build": "turbo run build",
     "clean": "turbo run clean",
     "dev": "turbo run dev --parallel --continue",
-    "heroku-prebuild": "pnpm build --filter=strapi",
-    "heroku-postbuild": "pnpm prune --filter=strapi",
+    "heroku-prebuild": "pnpm --filter=strapi... install",
+    "heroku-build": "pnpm --filter=strapi... build",
+    "heroku-postbuild": "pnpm --filter=strapi... prune",
     "lint": "turbo run lint",
     "start": "pnpm -r start"
   },
