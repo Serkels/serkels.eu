@@ -3,14 +3,15 @@
   "engines": {
     "node": "20.6.1",
     "npm": "9.8.1",
-    "pnpm": "8.7.4"
+    "pnpm": "8.7.5"
   },
   "scripts": {
-    "start": "pnpm -r start",
     "build": "turbo run build",
     "clean": "turbo run clean",
     "dev": "turbo run dev --parallel --continue",
-    "lint": "turbo run lint"
+    "heroku-postbuild": "echo heroku-postbuild hook message",
+    "lint": "turbo run lint",
+    "start": "pnpm -r start"
   },
   "devDependencies": {
     "prettier": "3.0.3",
