@@ -9,6 +9,7 @@
     "build": "turbo run build",
     "clean": "turbo run clean",
     "dev": "turbo run dev --parallel --continue",
+    "heroku-prebuild": "pnpmx turbo prune --scope=strapi && cd out",
     "heroku-postbuild": "turbo run build --filter=strapi",
     "lint": "turbo run lint",
     "start": "pnpm -r start"
