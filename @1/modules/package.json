@@ -6,7 +6,7 @@
   "dependencies": {
     "@1/core": "workspace:*",
     "@1/strapi-openapi": "workspace:*",
-    "@tanstack/react-query": "4.35.0",
+    "@tanstack/react-query": "4.35.3",
     "date-fns": "2.30.0",
     "debug": "4.3.4",
     "react": "18.2.0",
