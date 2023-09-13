@@ -4,6 +4,7 @@
   "type": "module",
   "private": true,
   "scripts": {
+    "dev": "pnpm run build --watch --preserveWatchOutput",
     "build": "tsc"
   },
   "dependencies": {
