@@ -10,7 +10,7 @@
     "@codeceptjs/configure": "0.10.0",
     "@types/node": "20.6.0",
     "codeceptjs": "3.5.4",
-    "playwright": "1.37.1",
+    "playwright": "1.38.0",
     "ts-node": "10.9.1",
     "prettier": "3.0.3",
     "typescript": "5.2.2"
