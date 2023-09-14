@@ -3,6 +3,10 @@
   "version": "0.0.0",
   "type": "module",
   "private": true,
+  "scripts": {
+    "dev": "pnpm run build --watch --preserveWatchOutput",
+    "build": "tsc"
+  },
   "dependencies": {
     "@1/core": "workspace:*",
     "@1/strapi-openapi": "workspace:*",

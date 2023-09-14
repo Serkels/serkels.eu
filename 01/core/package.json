@@ -3,6 +3,10 @@
   "version": "0.0.0",
   "type": "module",
   "private": true,
+  "scripts": {
+    "dev": "pnpm run build --watch --preserveWatchOutput",
+    "build": "tsc"
+  },
   "dependencies": {
     "debug": "4.3.4",
     "modern-errors": "6.0.0",

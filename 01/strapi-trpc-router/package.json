@@ -2,8 +2,11 @@
   "name": "@1/strapi-trpc-router",
   "version": "0.0.0",
   "type": "module",
-  "main": "./index.ts",
+  "main": "./index.js",
   "types": "./index.ts",
+  "scripts": {
+    "build": "tsc"
+  },
   "private": true,
   "dependencies": {
     "@1/core": "workspace:*",

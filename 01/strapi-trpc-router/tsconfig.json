@@ -1,7 +1,7 @@
 {
   "extends": ["@1/typescript-config/base.json"],
   "compilerOptions": {
-    "baseUrl": ".",
+    "rootDir": ".",
     "lib": ["ESNext"]
   },
   "files": ["index.ts"],

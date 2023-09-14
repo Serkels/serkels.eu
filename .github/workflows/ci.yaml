@@ -24,8 +24,8 @@ jobs:
           node-version: "latest"
           cache: pnpm
 
-      - run: pnpm install
-      - run: pnpm build
+      - run: pnpm --filter www... install
+      - run: pnpm --filter www... build
         env:
           STRAPI_API_URL: https://api.fake.toc-toc.org
           STALKER_URL: https://stalker.fake.toc-toc.org
@@ -50,8 +50,6 @@ jobs:
           node-version: "latest"
           cache: pnpm
 
-      - working-directory: admin
-        run: pnpm install
+      - run: pnpm --filter strapi...  install
 
-      - working-directory: admin
-        run: pnpm build
+      - run: pnpm --filter strapi...  build

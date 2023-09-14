@@ -1,14 +1,18 @@
 {
   "private": true,
   "engines": {
-    "node": ">=18"
+    "node": ">=18",
+    "npm": ">=9",
+    "pnpm": ">=8"
   },
   "scripts": {
-    "start": "cd admin/strapi && npm start",
     "build": "turbo run build",
     "clean": "turbo run clean",
     "dev": "turbo run dev --parallel --continue",
-    "lint": "turbo run lint"
+    "heroku-prebuild": "pnpx turbo prune --scope=strapi && rm -rf 01 www admin && pnpx cpx \"out/**/*\" .",
+    "heroku-postbuild": "turbo run build --filter=strapi",
+    "lint": "turbo run lint",
+    "start": "pnpm -r start"
   },
   "devDependencies": {
     "prettier": "3.0.3",

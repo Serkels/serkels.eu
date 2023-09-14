@@ -2,5 +2,9 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "github": {
     "silent": true
-  }
+  },
+  "buildCommand": "pnpm turbo run build --filter www",
+  "devCommand": "pnpm turbo run dev --filter www",
+  "installCommand": "pnpm --filter www... install",
+  "outputDirectory": "www/.next"
 }

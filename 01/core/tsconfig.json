@@ -4,5 +4,6 @@
     "composite": true,
     "lib": ["ESNext"]
   },
-  "include": ["**/*.ts"]
+  "include": ["**/*.ts"],
+  "references": []
 }

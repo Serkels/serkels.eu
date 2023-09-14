@@ -1,15 +1,15 @@
 //
 
-import { New_Answer, type Notification } from "@1/modules/notification/domain";
+import { New_Answer } from "@1/modules/notification/domain";
+// import { New_Answer, type Notification } from "@1/modules/notification/domain";
 import { DotIndicator } from "@1/ui/components/DotIndicator";
 import * as UI from "@1/ui/domains/notification";
 import { Bell } from "@1/ui/icons";
-import { useQueryClient } from "@tanstack/react-query";
-import type { Unsubscribable } from "@trpc/server/observable";
-import { useSession } from "next-auth/react";
-import { useEffect, useRef, useState } from "react";
+// import { useQueryClient } from "@tanstack/react-query";
+// import type { Unsubscribable } from "@trpc/server/observable";
+// import { useSession } from "next-auth/react";
+// import { useRef, useState } from "react";
 import { P, match } from "ts-pattern";
-import { trpc } from "./trpc";
 
 //
 
@@ -71,27 +71,28 @@ function Notification_New_Answer({ subjet }: { subjet: New_Answer }) {
 }
 
 function useNotification() {
-  const queryClient = useQueryClient();
-  const { data: session } = useSession();
-  const jwt = session?.user?.jwt;
-  const websocket = useRef<Unsubscribable>();
-  const [notifications, set_notifications] = useState<Notification[]>([]);
+  // const queryClient = useQueryClient();
+  // const { data: session } = useSession();
+  // const jwt = session?.user?.jwt;
+  // const websocket = useRef<Unsubscribable>();
+  // const [notifications, set_notifications] = useState<Notification[]>([]);
 
-  useEffect(() => {
-    if (!jwt) return;
-    websocket.current = trpc.notifications.subscribe(jwt, {
-      onData(value) {
-        set_notifications([New_Answer.create(value).value()]);
-      },
-      // onStarted() {
-      //   console.log("onStarted");
-      // },
-      // onComplete() {
-      //   console.log("onComplete");
-      // },
-    });
-    return websocket.current.unsubscribe;
-  }, [queryClient, jwt]);
+  // useEffect(() => {
+  //   if (!jwt) return;
+  //   websocket.current = trpc.notifications.subscribe(jwt, {
+  //     onData(value) {
+  //       set_notifications([New_Answer.create(value).value()]);
+  //     },
+  //     // onStarted() {
+  //     //   console.log("onStarted");
+  //     // },
+  //     // onComplete() {
+  //     //   console.log("onComplete");
+  //     // },
+  //   });
+  //   return websocket.current.unsubscribe;
+  // }, [queryClient, jwt]);
 
-  return notifications;
+  // return notifications;
+  return [] as any[];
 }
