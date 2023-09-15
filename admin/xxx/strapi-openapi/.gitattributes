@@ -1,3 +1,0 @@
-# 
-
-*.d.ts text -diff linguist-generated=true
