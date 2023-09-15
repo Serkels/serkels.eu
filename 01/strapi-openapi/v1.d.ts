@@ -7877,7 +7877,7 @@ export interface components {
       };
     };
   };
-  parameters: {
+  parameters?: {
     FieldsQuery?: string;
     FiltersQuery?: string;
     LocaleQuery?: string;

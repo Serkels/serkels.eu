@@ -10,14 +10,16 @@ import {
   useInfiniteQuery,
   useMutation,
   useQuery,
+  useQueryClient,
   type QueryFunction,
 } from "@tanstack/react-query";
 import debug from "debug";
 import { useSession } from "next-auth/react";
 import { useCallback } from "react";
+import { Lifecycle, inject, scoped } from "tsyringe";
 import { getNextPageParam, getPreviousPageParam } from "~/core/use-query";
 import { Deal_Repository } from "./Deal.repository";
-import { Deal_QueryKeys } from "./queryKeys";
+import { Deal_QueryKeys, Exchange_QueryKeys } from "./queryKeys";
 
 //
 
@@ -25,8 +27,9 @@ const log = debug("~:modules:exchange:Deal_Controller");
 
 //
 
+@scoped(Lifecycle.ContainerScoped)
 export class Deal_Controller {
-  constructor(private repository: Deal_Repository) {}
+  constructor(@inject(Deal_Repository) private repository: Deal_Repository) {}
   create = { useMutation: this.useCreateMutation.bind(this) };
   by_id = { useQuery: this.useDealQuery.bind(this) };
   list = { useQuery: this.useListQuery.bind(this) };
@@ -35,7 +38,7 @@ export class Deal_Controller {
 
   useCreateMutation() {
     const { data: session } = useSession();
-    // const query_client = useQueryClient();
+    const query_client = useQueryClient();
 
     const create_deal = async (props: { exchange_id: number }) => {
       log("createDealFn");
@@ -54,9 +57,20 @@ export class Deal_Controller {
       }
     };
 
-    const mutation_result = useMutation(
-      useCallback(create_deal, [this.repository, session?.user?.id]),
-    );
+    const mutation_result = useMutation({
+      mutationFn: useCallback(create_deal, [
+        this.repository,
+        session?.user?.id,
+      ]),
+      onSuccess: () => {
+        // Invalidate and refetch
+        return Promise.all([
+          query_client.invalidateQueries({
+            queryKey: Exchange_QueryKeys.lists(),
+          }),
+        ]);
+      },
+    });
 
     // useEffect(() => {
     //   if (mutation_result.status !== "success") return;
@@ -86,7 +100,7 @@ export class Deal_Controller {
     };
 
     const query_info = useQuery({
-      enabled: Boolean(this.repository.jwt),
+      enabled: this.repository.is_authorized,
       queryFn: useCallback(load_query_fn, [this.repository, id]),
       queryKey,
       staleTime: Infinity,
@@ -107,7 +121,7 @@ export class Deal_Controller {
     };
 
     const query_info = useInfiniteQuery({
-      enabled: Boolean(this.repository.jwt),
+      enabled: this.repository.is_authorized,
       getNextPageParam,
       getPreviousPageParam,
       queryFn: useCallback(loadDealsListFn, [this.repository, exchange_id]),

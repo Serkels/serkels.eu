@@ -6,18 +6,15 @@ import * as UI from "@1/ui/domains/exchange/AskModal";
 import { OnlineOrLocation } from "@1/ui/domains/exchange/OnlineOrLocation";
 import { Exchange as ExchangeIcon, Share } from "@1/ui/icons";
 import { Formik } from "formik";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useContext, useEffect, useRef } from "react";
 import { useTimeoutFn } from "react-use";
 import { P, match } from "ts-pattern";
-import { fromClient } from "~/app/api/v1";
 import { Link_Avatar } from "~/components/Avatar";
 import { ErrorOccur } from "~/components/ErrorOccur";
 import { useContainer, useInject } from "~/core/react";
 import { useExchange_item_controller } from "~/modules/exchange";
 import { Deal_Controller } from "~/modules/exchange/Deal.controller";
-import { Deal_Repository } from "~/modules/exchange/Deal.repository";
 import { Deal_Message_Controller } from "~/modules/exchange/Deal_Message.controller";
 import { Deal_Message_Repository } from "~/modules/exchange/Deal_Message.repository";
 import { useMyProfileId } from "~/modules/user/useProfileId";
@@ -49,20 +46,18 @@ export function Ask_Body() {
   const { exchange } = useContext(Exchange_CardContext);
   const exchange_id = exchange.get("id");
 
-  const { data: session } = useSession();
-
   const { find_deal_by_participant } = useExchange_item_controller(exchange_id);
 
   const {
     create: { useMutation },
-  } = new Deal_Controller(new Deal_Repository(fromClient, session?.user?.jwt));
+  } = useInject(Deal_Controller);
 
   const exchange_deals_query_info = find_deal_by_participant.useQuery();
   const deal_id = exchange_deals_query_info.data?.data?.at(0)?.id;
 
   useContainer().registerInstance(
     Deal_Message_Repository.DEAL_ID_TOKEN,
-    deal_id,
+    deal_id ?? NaN,
   );
   const message_ctrl = useInject(Deal_Message_Controller);
 

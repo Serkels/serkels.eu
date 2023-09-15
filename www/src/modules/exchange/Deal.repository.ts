@@ -7,33 +7,39 @@ import type {
   Exchange_DealSchema,
 } from "@1/strapi-openapi";
 import debug from "debug";
-import { type ApiClient } from "~/app/api/v1";
+import { Lifecycle, inject, scoped } from "tsyringe";
 import { OpenAPI_Repository } from "~/app/api/v1/OpenAPI.repository";
-import type { RepositoryPort } from "~/core";
+import { Bookmarks_Repository } from "../bookmarks/bookmarks.repository";
 
 //
 
 const log = debug("~:modules:exchange:Deal_Repository");
 //
 
-export class Deal_Repository
-  extends OpenAPI_Repository
-  implements RepositoryPort
-{
-  constructor(client: ApiClient, jwt?: string | undefined) {
-    super(client, jwt);
-    log("new", jwt);
+
+@scoped(Lifecycle.ContainerScoped)
+export class Deal_Repository {
+  #log = debug(`~:modules:deal:${Bookmarks_Repository.name}`);
+  constructor(
+    @inject(OpenAPI_Repository) private readonly openapi: OpenAPI_Repository,
+  ) {
+    this.#log("new");
+  }
+
+
+  get is_authorized() {
+    return Boolean(this.openapi.jwt);
   }
 
   async create(data: Deal_CreateProps) {
     log("create", data);
-    const { response, error: errorBody } = await this.client.POST(
+    const { response, error: errorBody } = await this.openapi.client.POST(
       "/exchange-deals",
       {
         body: {
           data,
         },
-        headers: this.headers,
+        headers: this.openapi.headers,
         params: {},
       },
     );
@@ -53,8 +59,8 @@ export class Deal_Repository
       data: body,
       error: errorBody,
       response,
-    } = await this.client.GET("/exchanges/{id}/deals", {
-      headers: this.headers,
+    } = await this.openapi.client.GET("/exchanges/{id}/deals", {
+      headers: this.openapi.headers,
       params: {
         path: { id: exchange_id },
       },
@@ -77,8 +83,8 @@ export class Deal_Repository
       data: body,
       error: errorBody,
       response,
-    } = await this.client.GET("/exchange-deals/{id}", {
-      headers: this.headers,
+    } = await this.openapi.client.GET("/exchange-deals/{id}", {
+      headers: this.openapi.headers,
       params: {
         path: { id },
       },

@@ -6,18 +6,16 @@ import { Message, Thread } from "@1/modules/inbox/domain";
 import { Button } from "@1/ui/components/ButtonV";
 import { Spinner } from "@1/ui/components/Spinner";
 import { Circle } from "@1/ui/icons";
-import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import tw from "tailwind-styled-components";
 import { P, match } from "ts-pattern";
 import { useDoor_Value } from "~/app/(main)/door/door.context";
-import { fromClient } from "~/app/api/v1";
 import { ErrorOccur } from "~/components/ErrorOccur";
 import { Thread_Item } from "~/components/Thread_Item";
+import { useInject } from "~/core/react";
 import { useExchange_item_controller } from "~/modules/exchange";
 import { Deal_Controller } from "~/modules/exchange/Deal.controller";
-import { Deal_Repository } from "~/modules/exchange/Deal.repository";
 import {
   Exchange_ValueProvider,
   useExchange_Value,
@@ -78,11 +76,9 @@ export function MyDeals({ exchange_id }: { exchange_id: number }) {
 
 export function Echange_DealsNav() {
   const [exchange] = useExchange_Value();
-  const { data: session } = useSession();
-  const repository = new Deal_Repository(fromClient, session?.user?.jwt);
   const {
     list: { useQuery },
-  } = new Deal_Controller(repository);
+  } = useInject(Deal_Controller);
 
   const query_info = useQuery(exchange.get("id"));
   const router = useRouter();
