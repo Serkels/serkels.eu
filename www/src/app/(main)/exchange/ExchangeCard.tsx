@@ -1,18 +1,16 @@
 //
 
-import { Exchange_ItemSchemaToDomain } from "@1/modules/exchange/infra/strapi";
-import type { Exchange_ItemSchema } from "@1/strapi-openapi";
 import { Button } from "@1/ui/components/ButtonV";
 import * as UI from "@1/ui/domains/exchange/Card";
 import { OnlineOrLocation } from "@1/ui/domains/exchange/OnlineOrLocation";
 import { Exchange } from "@1/ui/icons";
-import { useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
 import Link from "next/link";
 import { P, match } from "ts-pattern";
 import { AvatarMediaHorizontal } from "~/components/Avatar";
+import { useInject } from "~/core/react";
 import { useExchange_item_controller } from "~/modules/exchange";
-import { Exchange_QueryKeys } from "~/modules/exchange/queryKeys";
+import { Get_Exchange_ById_UseCase } from "~/modules/exchange/application/get_exchangeuse-case";
 import { useMyProfileId } from "~/modules/user/useProfileId";
 import { Ask_Action } from "./Ask_Action";
 import { Exchange_CardContext } from "./ExchangeCard.context";
@@ -30,35 +28,21 @@ export function ExchangeCard({ id }: { id: number }) {
     .with({ status: "error" }, ({ error }) => {
       throw error;
     })
-    .with(
-      { status: "loading" },
-      {
-        status: "success",
-      },
-      () => <Exchange_Card id={id} />,
-    )
+    .with({ status: "loading" }, { status: "success" }, () => (
+      <Exchange_Card id={id} />
+    ))
     .exhaustive();
 }
 
 function Exchange_Card({ id }: { id: number }) {
   const my_profile_id = useMyProfileId();
-  const query_client = useQueryClient();
-  const raw_exchange = query_client.getQueryData(
-    Exchange_QueryKeys.item(id),
-  ) as Exchange_ItemSchema | undefined;
-  if (!raw_exchange) {
+  const { data: exchange } = useInject(Get_Exchange_ById_UseCase).execute(id);
+
+  if (!exchange) {
     return null;
   }
 
   //
-
-  const r_exchange = new Exchange_ItemSchemaToDomain().build(raw_exchange);
-  if (r_exchange.isFail()) {
-    console.error(r_exchange.error());
-    return null;
-  }
-
-  const exchange = r_exchange.value();
 
   return (
     <Exchange_CardContext.Provider value={{ exchange }}>
