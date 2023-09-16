@@ -9,7 +9,7 @@
   ],
   "dependencies": {
     "@tsconfig/strictest": "2.0.2",
-    "@tsconfig/vite-react": "2.0.0"
+    "@tsconfig/vite-react": "2.0.1"
   },
   "devDependencies": {
     "prettier": "3.0.3",
