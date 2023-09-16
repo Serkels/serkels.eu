@@ -22,6 +22,7 @@
   "pnpm": {
     "overrides": {
       "supports-color": "^8.1.1",
+      "formik": "2.4.4",
       "zod": "3.22.2"
     }
   }

@@ -2,39 +2,50 @@
 
 import { Spinner } from "@1/ui/components/Spinner";
 import * as UI from "@1/ui/domains/exchange/CreateForm";
-import { match } from "ts-pattern";
+import type { ComponentProps } from "react";
+import { P, match } from "ts-pattern";
 import { SelectCategoryField } from "~/components/SelectCategoryField";
 import { useExchange_create_controller } from "~/modules/exchange";
 
 //
 
-export function CreateForm() {
+export function New_Exchange() {
   const {
     create: { useMutation },
   } = useExchange_create_controller();
 
-  const { mutate, status, error } = useMutation();
-  return match(status)
-    .with("error", () => <ErrorOccur error={error as Error} />)
-    .with("idle", () => (
-      <div className="col-span-full mx-auto flex flex-col justify-center ">
-        <UI.CreateForm
-          onSubmit={(values) => mutate(values)}
-          slot-CategoryField={(props) => (
-            <SelectCategoryField type="exchange" {...props} />
-          )}
-          slot-InExchangeOf={(props) => (
-            <SelectCategoryField type="exchange" {...props} />
-          )}
-        />
-      </div>
+  const mutation_info = useMutation();
+
+  return match(mutation_info)
+    .with({ status: "success" }, () => <CreationSuccess />)
+    .with({ status: "loading" }, () => <Verifying />)
+    .with({ status: "error", error: P.select() }, (error) => (
+      <ErrorOccur error={error as Error} />
     ))
-    .with("loading", () => <Verifying />)
-    .with("success", () => <CreationSuccess />)
-    .exhaustive();
+    .otherwise(({ mutate }) => (
+      <New_Exchange_Form onSubmit={(values) => mutate(values)} />
+    ));
 }
 
-//
+function New_Exchange_Form({
+  onSubmit,
+}: {
+  onSubmit: ComponentProps<typeof UI.CreateForm>["onSubmit"];
+}) {
+  return (
+    <div className="col-span-full flex min-h-full flex-col justify-center ">
+      <UI.CreateForm
+        onSubmit={onSubmit}
+        slot-CategoryField={(props) => (
+          <SelectCategoryField type="exchange" {...props} />
+        )}
+        slot-InExchangeOf={(props) => (
+          <SelectCategoryField type="exchange" {...props} />
+        )}
+      />
+    </div>
+  );
+}
 
 function CreationSuccess() {
   return (

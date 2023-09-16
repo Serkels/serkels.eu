@@ -1,7 +1,7 @@
 //
 
 import type { Metadata, ResolvingMetadata } from "next";
-import { CreateForm } from "./CreateForm";
+import { New_Exchange } from "./page.client";
 
 //
 
@@ -19,7 +19,7 @@ export async function generateMetadata(
 export default async function Page() {
   return (
     <main className="col-span-full my-10 px-4 md:col-span-6 xl:col-span-8">
-      <CreateForm />
+      <New_Exchange />
     </main>
   );
 }
