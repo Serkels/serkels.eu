@@ -42,7 +42,7 @@ export class Exchange_List_Controller {
       params.pagination = Object.assign(params.pagination ?? {}, {
         page,
       } as Exchanges_QueryProps["pagination"]);
-      return this.repository.findAll(params);
+      return this.repository.find_all(params);
     };
 
     const query_info = useInfiniteQuery({
@@ -71,7 +71,7 @@ export class Exchange_List_Controller {
         page,
       } as Exchanges_QueryProps["pagination"]);
 
-      return this.repository.findAllMine(params);
+      return this.repository.find_all_mine(params);
     };
 
     const query_info = useInfiniteQuery({

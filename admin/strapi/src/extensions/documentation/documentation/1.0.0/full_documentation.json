@@ -26,7 +26,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2023-09-16T18:07:29.534Z"
+    "x-generation-date": "2023-09-16T19:03:20.455Z"
   },
   "servers": [
     {
@@ -28126,7 +28126,7 @@
         "operationId": "get/categories;question"
       }
     },
-    "/my/exchanges": {
+    "/exchanges;owned": {
       "get": {
         "responses": {
           "200": {
@@ -28170,7 +28170,54 @@
             }
           }
         ],
-        "operationId": "get/my/exchange"
+        "operationId": "get/exchanges;owned"
+      }
+    },
+    "/exchanges;participe": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExchangeListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "tags": [
+          "Exchange"
+        ],
+        "parameters": [
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sort by attributes ascending (asc) or descending (desc)",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "get/exchanges;participe"
       }
     },
     "/exchanges/{id}/deals": {

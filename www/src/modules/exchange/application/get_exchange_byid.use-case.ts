@@ -24,7 +24,7 @@ export class Get_Exchange_ById_UseCase {
 
   execute(id: number) {
     return useQuery({
-      queryFn: () => this.repository.findById(id),
+      queryFn: () => this.repository.by_id(id),
       queryKey: Exchange_QueryKeys.item(id),
       select: (data) => {
         return new Exchange_ItemSchemaToDomain().build(data!).value();

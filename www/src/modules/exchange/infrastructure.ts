@@ -51,7 +51,7 @@ export class Exchange_Repository implements RepositoryPort {
     }
   }
 
-  async findAll({
+  async find_all({
     filter,
     sort,
     pagination,
@@ -102,18 +102,18 @@ export class Exchange_Repository implements RepositoryPort {
     return body;
   }
 
-  async findAllMine({
+  async find_all_mine({
     filter,
     sort,
     pagination,
   }: Exchanges_QueryProps): Promise<Exchange_ListSchema> {
-    this.#log("findAllMine", filter);
+    this.#log("find_all_mine", filter);
 
     const {
       data: body,
       error: errorBody,
       response,
-    } = await this.openapi.client.GET("/my/exchanges", {
+    } = await this.openapi.client.GET("/exchanges;participe", {
       headers: this.openapi.headers,
       params: {
         query: {
@@ -127,7 +127,7 @@ export class Exchange_Repository implements RepositoryPort {
     });
 
     if (errorBody) {
-      this.#log("findAllMine", errorBody);
+      this.#log("find_all_mine", errorBody);
       throw new HTTPError(
         [errorBody.error.message, "from " + response.url].join("\n"),
         { cause: errorBody.error },
@@ -137,7 +137,42 @@ export class Exchange_Repository implements RepositoryPort {
     return body;
   }
 
-  async findById(id: number): Promise<Exchange_ItemSchema | undefined> {
+  async find_all_owned({
+    filter,
+    sort,
+    pagination,
+  }: Exchanges_QueryProps): Promise<Exchange_ListSchema> {
+    this.#log("find_all_owned", filter);
+
+    const {
+      data: body,
+      error: errorBody,
+      response,
+    } = await this.openapi.client.GET("/exchanges;owned", {
+      headers: this.openapi.headers,
+      params: {
+        query: {
+          pagination: {
+            page: pagination?.page,
+            pageSize: pagination?.pageSize,
+          },
+          sort,
+        } as any,
+      },
+    });
+
+    if (errorBody) {
+      this.#log("find_all_owned", errorBody);
+      throw new HTTPError(
+        [errorBody.error.message, "from " + response.url].join("\n"),
+        { cause: errorBody.error },
+      );
+    }
+
+    return body;
+  }
+
+  async by_id(id: number): Promise<Exchange_ItemSchema | undefined> {
     this.#log("findById", id);
     const {
       data: body,

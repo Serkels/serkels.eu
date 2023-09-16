@@ -4,9 +4,9 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "build:ts": "openapi-typescript openapi.json --output v1.d.ts --empty-objects-unknown --default-non-nullable --alphabetize",
+    "build": "openapi-typescript openapi.json --output v1.d.ts --empty-objects-unknown --default-non-nullable --alphabetize",
     "clean": "rm -rf v1.d.ts",
-    "dev": "chokidar \"*.json\" -c \"pnpm run clean && pnpm run build:ts\" --initial --follow-symlinks"
+    "dev": "chokidar \"*.json\" -c \"pnpm run clean && pnpm run build\" --initial --follow-symlinks"
   },
   "dependencies": {
     "@1/core": "workspace:*"

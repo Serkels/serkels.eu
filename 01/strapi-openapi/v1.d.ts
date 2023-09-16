@@ -373,6 +373,12 @@ export interface paths {
     get: operations["get/exchanges"];
     post: operations["post/exchanges"];
   };
+  "/exchanges;owned": {
+    get: operations["get/exchanges;owned"];
+  };
+  "/exchanges;participe": {
+    get: operations["get/exchanges;participe"];
+  };
   "/exchanges/{id}": {
     get: operations["get/exchanges/{id}"];
     put: operations["put/exchanges/{id}"];
@@ -400,9 +406,6 @@ export interface paths {
   };
   "/inboxes/{id}": {
     get: operations["get/inboxes/{id}"];
-  };
-  "/my/exchanges": {
-    get: operations["get/my/exchange"];
   };
   "/opportunities": {
     get: operations["get/opportunities"];
@@ -9570,6 +9573,48 @@ export interface operations {
       };
     };
   };
+  "get/exchanges;owned": {
+    parameters: {
+      query?: {
+        /** @description Sort by attributes ascending (asc) or descending (desc) */
+        sort?: string;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["ExchangeListResponse"];
+        };
+      };
+      400: components["responses"]["400"];
+      401: components["responses"]["401"];
+      403: components["responses"]["403"];
+      404: components["responses"]["404"];
+      500: components["responses"]["500"];
+    };
+  };
+  "get/exchanges;participe": {
+    parameters: {
+      query?: {
+        /** @description Sort by attributes ascending (asc) or descending (desc) */
+        sort?: string;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["ExchangeListResponse"];
+        };
+      };
+      400: components["responses"]["400"];
+      401: components["responses"]["401"];
+      403: components["responses"]["403"];
+      404: components["responses"]["404"];
+      500: components["responses"]["500"];
+    };
+  };
   "get/exchanges/{id}": {
     parameters: {
       path: {
@@ -10002,27 +10047,6 @@ export interface operations {
           "application/json": components["schemas"]["Error"];
         };
       };
-    };
-  };
-  "get/my/exchange": {
-    parameters: {
-      query?: {
-        /** @description Sort by attributes ascending (asc) or descending (desc) */
-        sort?: string;
-      };
-    };
-    responses: {
-      /** @description OK */
-      200: {
-        content: {
-          "application/json": components["schemas"]["ExchangeListResponse"];
-        };
-      };
-      400: components["responses"]["400"];
-      401: components["responses"]["401"];
-      403: components["responses"]["403"];
-      404: components["responses"]["404"];
-      500: components["responses"]["500"];
     };
   };
   "get/opportunities": {

@@ -39,7 +39,7 @@ export class Exchange_Item_Controller {
       number
     > = async () => {
       debug("loadItemFn");
-      return this.repository.findById(this.exchange_id);
+      return this.repository.by_id(this.exchange_id);
     };
 
     const query_info = useQuery({

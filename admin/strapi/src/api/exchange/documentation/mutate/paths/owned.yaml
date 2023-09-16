@@ -1,5 +1,5 @@
 ---
-"/my/exchanges":
+"/exchanges;owned":
   get:
     responses:
       "200":
@@ -28,4 +28,4 @@
         required: false
         schema:
           type: string
-    operationId: get/my/exchange
+    operationId: get/exchanges;owned

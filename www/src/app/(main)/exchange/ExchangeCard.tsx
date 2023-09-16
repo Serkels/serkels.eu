@@ -10,7 +10,7 @@ import { P, match } from "ts-pattern";
 import { AvatarMediaHorizontal } from "~/components/Avatar";
 import { useInject } from "~/core/react";
 import { useExchange_item_controller } from "~/modules/exchange";
-import { Get_Exchange_ById_UseCase } from "~/modules/exchange/application/get_exchangeuse-case";
+import { Get_Exchange_ById_UseCase } from "~/modules/exchange/application/get_exchange_byid.use-case";
 import { useMyProfileId } from "~/modules/user/useProfileId";
 import { Ask_Action } from "./Ask_Action";
 import { Exchange_CardContext } from "./ExchangeCard.context";

@@ -31,7 +31,7 @@ export default async function Page({
     await queryClient.prefetchInfiniteQuery({
       queryKey: Exchange_QueryKeys.lists(filter),
       queryFn: () =>
-        repository.findAll({
+        repository.find_all({
           filter,
           sort: ["createdAt:desc"],
           pagination: { pageSize: 4 },
@@ -40,7 +40,7 @@ export default async function Page({
   }
   {
     const { pages } = queryClient.getQueryData<
-      InfiniteData<Awaited<ReturnType<typeof repository.findAll>>>
+      InfiniteData<Awaited<ReturnType<typeof repository.find_all>>>
     >(Exchange_QueryKeys.lists(filter)) ?? { pages: [] };
 
     for (const { data: exchanges } of pages) {
