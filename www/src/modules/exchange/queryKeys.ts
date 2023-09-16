@@ -1,14 +1,17 @@
 //
 
-import type { Exchanges_QueryProps } from "./Exchange_QueryProps";
+import type { Exchanges_QueryProps } from "./infrastructure";
 
 export const Exchange_QueryKeys = {
   all: ["exchange"] as const,
-  lists(options?: Exchanges_QueryProps["filter"] | undefined) {
+  lists(options?: Exchanges_QueryProps["filters"] | undefined) {
     return [...this.all, "list", ...(options ? [options] : [])] as const;
   },
-  my_list() {
-    return [...this.all, "my list"] as const;
+  mine() {
+    return [...this.lists(), "mine"] as const;
+  },
+  owned() {
+    return [...this.lists(), "owned"] as const;
   },
   item(id: number | string) {
     return [...this.all, "item", String(id)] as const;

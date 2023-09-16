@@ -26,7 +26,8 @@ import { P, match } from "ts-pattern";
 import { useDoor_Value } from "~/app/(main)/door/door.context";
 import { Avatar } from "~/components/Avatar";
 import { AsideBar } from "~/components/layouts/holy/aside";
-import { useExchange_list_controller } from "~/modules/exchange";
+import { useInject } from "~/core/react";
+import { Get_User_Exchanges_UseCase } from "~/modules/exchange/application/get_user_exchanges.use-case";
 import { Exchange_ValueProvider, useExchange_Value } from "./Exchange.context";
 
 //
@@ -52,11 +53,7 @@ const navbar = tv({
 });
 
 export function EchangeNav() {
-  const {
-    my: { useQuery },
-  } = useExchange_list_controller();
-
-  const query_result = useQuery({
+  const info = useInject(Get_User_Exchanges_UseCase).execute({
     sort: ["updatedAt:desc"],
     pagination: { pageSize: 4 },
   });
@@ -80,13 +77,13 @@ export function EchangeNav() {
   const router = useRouter();
   const [{ door_id }] = useDoor_Value();
 
-  const count = query_result.data?.pages.length;
+  const count = info.data?.pages.flat().length;
   useEffect(() => {
     if (count !== 1) {
       return;
     }
-    const exchnage = query_result.data?.pages?.at(0)!;
-    router.push(`/@${door_id}/my/exchanges/${exchnage.id}`);
+    const exchange = info.data?.pages?.at(0)!;
+    router.push(`/@${door_id}/my/exchanges/${exchange.id}`);
   }, [count]);
 
   //
@@ -100,7 +97,7 @@ export function EchangeNav() {
           disabled={true}
         />
       </form>
-      {match(query_result)
+      {match(info)
         .with({ status: "error" }, ({ error }) => {
           throw error;
         })

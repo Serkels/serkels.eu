@@ -26,7 +26,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2023-09-16T19:03:20.455Z"
+    "x-generation-date": "2023-09-16T21:16:03.779Z"
   },
   "servers": [
     {
@@ -28158,18 +28158,6 @@
         "tags": [
           "Exchange"
         ],
-        "parameters": [
-          {
-            "name": "sort",
-            "in": "query",
-            "description": "Sort by attributes ascending (asc) or descending (desc)",
-            "deprecated": false,
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "operationId": "get/exchanges;owned"
       }
     },
@@ -28204,18 +28192,6 @@
         },
         "tags": [
           "Exchange"
-        ],
-        "parameters": [
-          {
-            "name": "sort",
-            "in": "query",
-            "description": "Sort by attributes ascending (asc) or descending (desc)",
-            "deprecated": false,
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
         ],
         "operationId": "get/exchanges;participe"
       }

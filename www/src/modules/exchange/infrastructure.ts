@@ -1,24 +1,32 @@
 //
 
 import { HTTPError } from "@1/core/domain";
+import type { Strapi_Query_Params } from "@1/modules/common";
 import type { Exchange_CreateProps } from "@1/modules/exchange/domain";
 import type {
   Exchange_DealListSchema,
   Exchange_DealSchema,
   Exchange_ItemSchema,
   Exchange_ListSchema,
+  Exchange_Schema,
 } from "@1/strapi-openapi";
 import debug from "debug";
 import { Lifecycle, inject, scoped } from "tsyringe";
 import { OpenAPI_Repository } from "~/app/api/v1/OpenAPI.repository";
 import type { RepositoryPort } from "~/core";
-import type { Exchanges_QueryProps } from "./Exchange_QueryProps";
+
+//
+
+export type Exchanges_QueryProps = Strapi_Query_Params<
+  Pick<Exchange_Schema, "category" | "createdAt" | "title" | "updatedAt">
+>;
 
 //
 
 @scoped(Lifecycle.ContainerScoped)
 export class Exchange_Repository implements RepositoryPort {
   #log = debug(`~:modules:exchange:${Exchange_Repository.name}`);
+
   constructor(
     @inject(OpenAPI_Repository) private readonly openapi: OpenAPI_Repository,
   ) {
@@ -51,13 +59,33 @@ export class Exchange_Repository implements RepositoryPort {
     }
   }
 
-  async find_all({
-    filter,
-    sort,
-    pagination,
-  }: Exchanges_QueryProps): Promise<Exchange_ListSchema> {
-    this.#log("findAll", filter);
-    const { category, search } = filter ?? {};
+  async find_all(query: Exchanges_QueryProps): Promise<Exchange_ListSchema> {
+    this.#log("find_all", query);
+
+    const pagination = {
+      page: query.pagination?.page,
+      pageSize: query.pagination?.pageSize,
+    };
+
+    const filters = {
+      $and: [
+        {
+          category: {
+            slug: { $eq: query.filters?.category },
+          },
+        },
+      ],
+      $or: [
+        {
+          title: {
+            $containsi: query.filters?.title,
+          },
+        },
+      ],
+    };
+
+    const sort = query.sort;
+
     const {
       data: body,
       error: errorBody,
@@ -66,26 +94,8 @@ export class Exchange_Repository implements RepositoryPort {
       headers: this.openapi.headers,
       params: {
         query: {
-          filters: {
-            $and: [
-              {
-                category: {
-                  slug: { $eq: category },
-                },
-              },
-            ],
-            $or: [
-              {
-                title: {
-                  $containsi: search,
-                },
-              },
-            ],
-          },
-          pagination: {
-            page: pagination?.page,
-            pageSize: pagination?.pageSize,
-          },
+          filters,
+          pagination,
           sort,
         } as any,
       },
@@ -102,12 +112,17 @@ export class Exchange_Repository implements RepositoryPort {
     return body;
   }
 
-  async find_all_mine({
-    filter,
-    sort,
-    pagination,
-  }: Exchanges_QueryProps): Promise<Exchange_ListSchema> {
-    this.#log("find_all_mine", filter);
+  async find_all_mine(
+    query: Exchanges_QueryProps,
+  ): Promise<Exchange_ListSchema> {
+    this.#log("find_all_mine", query);
+
+    const pagination = {
+      page: query.pagination?.page,
+      pageSize: query.pagination?.pageSize,
+    };
+
+    const sort = query.sort;
 
     const {
       data: body,
@@ -117,12 +132,9 @@ export class Exchange_Repository implements RepositoryPort {
       headers: this.openapi.headers,
       params: {
         query: {
-          pagination: {
-            page: pagination?.page,
-            pageSize: pagination?.pageSize,
-          },
+          pagination,
           sort,
-        } as any,
+        },
       },
     });
 
@@ -137,13 +149,17 @@ export class Exchange_Repository implements RepositoryPort {
     return body;
   }
 
-  async find_all_owned({
-    filter,
-    sort,
-    pagination,
-  }: Exchanges_QueryProps): Promise<Exchange_ListSchema> {
-    this.#log("find_all_owned", filter);
+  async find_all_owned(
+    query: Exchanges_QueryProps,
+  ): Promise<Exchange_ListSchema> {
+    this.#log("find_all_owned", query);
 
+    const pagination = {
+      page: query.pagination?.page,
+      pageSize: query.pagination?.pageSize,
+    };
+
+    const sort = query.sort;
     const {
       data: body,
       error: errorBody,
@@ -152,12 +168,9 @@ export class Exchange_Repository implements RepositoryPort {
       headers: this.openapi.headers,
       params: {
         query: {
-          pagination: {
-            page: pagination?.page,
-            pageSize: pagination?.pageSize,
-          },
+          pagination,
           sort,
-        } as any,
+        },
       },
     });
 

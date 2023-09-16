@@ -20,12 +20,4 @@
         "$ref": "#/components/responses/500"
     tags:
       - Exchange
-    parameters:
-      - name: sort
-        in: query
-        description: Sort by attributes ascending (asc) or descending (desc)
-        deprecated: false
-        required: false
-        schema:
-          type: string
     operationId: get/exchanges;owned

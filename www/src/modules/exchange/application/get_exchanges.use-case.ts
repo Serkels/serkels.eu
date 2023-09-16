@@ -14,8 +14,8 @@ import { Exchange_QueryKeys } from "../queryKeys";
 //
 
 @scoped(Lifecycle.ContainerScoped)
-export class Get_Owned_Exchanges_UseCase {
-  #log = debug(`~:modules:exchange:${Get_Owned_Exchanges_UseCase.name}`);
+export class Get_Exchanges_UseCase {
+  #log = debug(`~:modules:exchange:${Get_Exchanges_UseCase.name}`);
   #mapper = new Exchange_ItemSchemaToDomain();
 
   constructor(
@@ -27,16 +27,16 @@ export class Get_Owned_Exchanges_UseCase {
 
   //
 
-  execute(query: Exchanges_QueryProps) {
+  execute(params: Exchanges_QueryProps) {
     return useInfiniteQuery({
       enabled: this.repository.is_authorized,
-      queryFn: (options) => {
-        return this.repository.find_all_owned({
-          ...query,
-          pagination: { ...query.pagination, page: options.pageParam ?? 1 },
+      queryFn: ({ pageParam: page }) => {
+        return this.repository.find_all({
+          ...params,
+          pagination: { ...params.pagination, page },
         });
       },
-      queryKey: Exchange_QueryKeys.owned(),
+      queryKey: Exchange_QueryKeys.lists(params.filters),
       getNextPageParam,
       getPreviousPageParam,
       select: (data) => {

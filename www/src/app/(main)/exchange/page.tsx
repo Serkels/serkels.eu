@@ -6,7 +6,7 @@ import { get_StrapiRepository } from "~/core";
 import { getQueryClient } from "~/core/getQueryClient";
 import { Exchange_Repository } from "~/modules/exchange/infrastructure";
 import { Exchange_QueryKeys } from "~/modules/exchange/queryKeys";
-import { ExchangeList } from "./ExchangeList";
+import { Exchange_List } from "./page.client";
 
 //
 
@@ -25,23 +25,25 @@ export default async function Page({
   const category = searchParams["category"] ?? undefined;
   const search = searchParams["q"] ?? undefined;
 
-  const filter = { category, search };
+  const filters = { category, title: search };
   const queryClient = getQueryClient();
+
   {
     await queryClient.prefetchInfiniteQuery({
-      queryKey: Exchange_QueryKeys.lists(filter),
+      queryKey: Exchange_QueryKeys.lists(filters),
       queryFn: () =>
         repository.find_all({
-          filter,
+          filters,
           sort: ["createdAt:desc"],
           pagination: { pageSize: 4 },
         }),
     });
   }
+
   {
     const { pages } = queryClient.getQueryData<
       InfiniteData<Awaited<ReturnType<typeof repository.find_all>>>
-    >(Exchange_QueryKeys.lists(filter)) ?? { pages: [] };
+    >(Exchange_QueryKeys.lists(filters)) ?? { pages: [] };
 
     for (const { data: exchanges } of pages) {
       for (const data of exchanges ?? []) {
@@ -58,7 +60,7 @@ export default async function Page({
     <Hydrate state={dehydratedState}>
       <main className="col-span-full my-10 md:col-span-6 xl:col-span-6 ">
         <Suspense>
-          <ExchangeList />
+          <Exchange_List />
         </Suspense>
       </main>
     </Hydrate>

@@ -9574,12 +9574,6 @@ export interface operations {
     };
   };
   "get/exchanges;owned": {
-    parameters: {
-      query?: {
-        /** @description Sort by attributes ascending (asc) or descending (desc) */
-        sort?: string;
-      };
-    };
     responses: {
       /** @description OK */
       200: {
@@ -9595,12 +9589,6 @@ export interface operations {
     };
   };
   "get/exchanges;participe": {
-    parameters: {
-      query?: {
-        /** @description Sort by attributes ascending (asc) or descending (desc) */
-        sort?: string;
-      };
-    };
     responses: {
       /** @description OK */
       200: {

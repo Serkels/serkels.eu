@@ -3,11 +3,14 @@
 import { Category } from "@1/modules/category/domain";
 import { InputSearch } from "@1/ui/components/InputSearch";
 import { Form, Formik, useField } from "formik";
+import { useSearchParams } from "next/navigation";
 import type { ComponentPropsWithoutRef } from "react";
 import { FilterRadioList } from "~/components/FilterRadioList";
 import { useSyncSearchQuery } from "~/components/useSyncSearchQuery";
 import { useInject } from "~/core/react";
 import { Get_Category_UseCase } from "~/modules/categories/application/get_categories.use-case";
+import { Get_Exchanges_UseCase } from "~/modules/exchange/application/get_exchanges.use-case";
+import { Exchange_InfiniteList } from "~/modules/exchange/Exchange_InfiniteList";
 
 //
 
@@ -27,6 +30,27 @@ export function CategoriesList() {
       onChange={setQuery}
     />
   );
+}
+
+//
+
+export function Exchange_List() {
+  const search_params = useSearchParams();
+  const category = search_params.get("category") ?? undefined;
+  const search = search_params.get("q") ?? undefined;
+
+  const info = useInject(Get_Exchanges_UseCase).execute({
+    filters: {
+      category,
+      title: search,
+    },
+    sort: ["createdAt:desc"],
+    pagination: { pageSize: 4 },
+  });
+
+  //
+
+  return <Exchange_InfiniteList info={info} />;
 }
 
 //
