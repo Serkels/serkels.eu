@@ -10,6 +10,6 @@
     "tailwindcss-animate": "1.0.7"
   },
   "dependencies": {
-    "@iconify/utils": "2.1.9"
+    "@iconify/utils": "2.1.10"
   }
 }
