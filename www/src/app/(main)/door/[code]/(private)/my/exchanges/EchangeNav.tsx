@@ -43,11 +43,11 @@ export function My_Echange_Nav({ children }: PropsWithChildren) {
 }
 
 const navbar = tv({
-  base: "col-span-full h-full max-h-[calc(100vh_-_theme(spacing.16)-_theme(spacing.8))] flex-col flex-col overflow-hidden overflow-hidden pt-8 pt-8 md:flex md:flex ",
+  base: "col-span-full h-full max-h-[calc(100vh_-_theme(spacing.16)-_theme(spacing.8))] flex-col overflow-hidden pt-8 pt-8",
   variants: {
     $alone: {
       true: "block md:-ml-[20px]",
-      false: "-mx-8",
+      false: "-mx-8 md:hidden lg:flex",
     },
   },
 });

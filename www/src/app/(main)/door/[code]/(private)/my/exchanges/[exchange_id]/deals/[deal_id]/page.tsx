@@ -5,7 +5,6 @@ import tw from "tailwind-styled-components";
 import { Deal_Provider, Exchange_Provider } from "../Deal_Provider";
 import { Deal_Discussion } from "./Deal_Discussion";
 import { Deal_Discussion_Form } from "./Deal_Discussion_Form";
-import { NavControlGroup } from "./NavControlGroup";
 import { SendActionGroup } from "./SendActionGroup";
 import { Thread_Avatar } from "./page.client";
 
@@ -37,7 +36,6 @@ export default async function Page({
           <Deal_Provider id={deal_id}>
             <Header>
               <Thread_Avatar />
-              <NavControlGroup exchange_id={exchange_id} />
             </Header>
 
             <Scrollable_Part>
@@ -81,7 +79,8 @@ const Main = tw.main`
   bg-white
   text-black
   sm:mb-0
-  md:col-span-2
+  md:col-span-4
+  lg:col-span-2
   xl:col-span-3
   [&>*]:px-7
 `;
