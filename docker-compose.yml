@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  postgres:
+    image: postgres:15
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: toctoc
+      POSTGRES_USER: toctoc
+      POSTGRES_PASSWORD: toctoc
+
+volumes:
+  db_data:
