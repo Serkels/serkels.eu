@@ -90,7 +90,8 @@ export function OpportunityCard(props: Props) {
           </aside>
           <aside className="space-x-3" onClick={preventNProgressLoader}>
             <BookmarkButton
-              opportunity={Number(id)}
+              id={Number(id)}
+              type="opportunity"
               className={({ isActive }) =>
                 `inline-block h-4 w-4 ${
                   isActive ? "text-Chateau_Green" : "text-Dove_Gray"

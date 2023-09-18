@@ -26,7 +26,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2023-09-16T21:16:03.779Z"
+    "x-generation-date": "2023-09-18T12:27:00.453Z"
   },
   "servers": [
     {
@@ -27783,7 +27783,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "The exchanges id",
+            "description": "The exchange id",
             "deprecated": false,
             "required": true,
             "schema": {
@@ -27821,7 +27821,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "The exchanges id",
+            "description": "The exchange id",
             "deprecated": false,
             "required": true,
             "schema": {
@@ -27859,7 +27859,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "The exchanges id",
+            "description": "The exchange id",
             "deprecated": false,
             "required": true,
             "schema": {

@@ -8,7 +8,9 @@ export default {
       handler: "api::bookmark.exchange.find",
       config: {
         description: "Get your exchange bookmarks",
+        middlewares: ["api::exchange.populate"],
       },
+      info: { apiName: "api::exchange.exchange", type: "content-api" },
     },
     {
       method: "GET",

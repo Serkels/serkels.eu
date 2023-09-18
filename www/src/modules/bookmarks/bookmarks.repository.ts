@@ -38,6 +38,39 @@ export class Bookmarks_Repository {
     return Boolean(this.openapi.jwt);
   }
 
+  async find_exchange_bookmarks(query: Strapi_Query_Params<any>) {
+    const pagination = {
+      page: query.pagination?.page,
+      pageSize: query.pagination?.pageSize,
+    };
+
+    const {
+      data: body,
+      error: errorBody,
+      response,
+    } = await this.openapi.client.GET("/bookmark/exchanges", {
+      headers: this.openapi.headers,
+      params: {
+        query: {
+          pagination,
+        },
+      },
+    });
+
+    if (errorBody) {
+      throw new HTTPError(
+        [errorBody.error.message, "from " + response.url].join("\n"),
+        { cause: errorBody.error },
+      );
+    }
+
+    if (!body.data || !body.meta) {
+      throw new HTTPError("Empty response");
+    }
+
+    return body;
+  }
+
   async find_opportunity_bookmarks(query: Strapi_Query_Params<any>) {
     const pagination = {
       page: query.pagination?.page,

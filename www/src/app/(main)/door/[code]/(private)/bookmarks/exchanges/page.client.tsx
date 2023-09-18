@@ -1,25 +1,15 @@
 "use client";
 
-import { Spinner } from "@1/ui/components/Spinner";
+import { useInject } from "~/core/react";
+import { Get_Exchange_Bookmarks_UseCase } from "~/modules/bookmarks/application/get_exchange_bookmarks.use-case";
+import { Exchange_InfiniteList } from "~/modules/exchange/Exchange_InfiniteList";
 
 //
 
-export function Bookmark_ExcahngeList() {
-  return 1 ? <Loading /> : <EmptyList />;
-}
+export function Bookmark_ExchangeList() {
+  const info = useInject(Get_Exchange_Bookmarks_UseCase).execute({
+    pageSize: 12,
+  });
 
-function Loading() {
-  return (
-    <figure className="mt-28 min-h-screen text-center">
-      <Spinner />
-    </figure>
-  );
-}
-
-function EmptyList() {
-  return (
-    <figure className="mt-28 min-h-screen text-center">
-      <h3 className="text-xl">Aucune opportunité disponible pour le moment</h3>
-    </figure>
-  );
+  return <Exchange_InfiniteList info={info} />;
 }

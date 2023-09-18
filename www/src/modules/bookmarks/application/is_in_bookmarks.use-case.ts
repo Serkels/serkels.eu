@@ -1,11 +1,10 @@
 //
 
+import type { Bookmark_Category } from "@1/modules/bookmark/domain";
 import { useQuery } from "@tanstack/react-query";
 import debug from "debug";
 import { Lifecycle, inject, scoped } from "~/core/di";
 import { Bookmarks_Repository } from "../bookmarks.repository";
-
-import type { Bookmark_Category } from "@1/modules/bookmark/domain";
 
 //
 

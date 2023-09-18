@@ -8013,7 +8013,7 @@ export interface operations {
   "get/bookmark/exchanges/{id}": {
     parameters: {
       path: {
-        /** @description The exchanges id */
+        /** @description The exchange id */
         id: number;
       };
     };
@@ -8032,7 +8032,7 @@ export interface operations {
   "post/bookmark/exchanges/{id}": {
     parameters: {
       path: {
-        /** @description The exchanges id */
+        /** @description The exchange id */
         id: number;
       };
     };
@@ -8051,7 +8051,7 @@ export interface operations {
   "delete/bookmark/exchanges/{id}": {
     parameters: {
       path: {
-        /** @description The exchanges id */
+        /** @description The exchange id */
         id: number;
       };
     };

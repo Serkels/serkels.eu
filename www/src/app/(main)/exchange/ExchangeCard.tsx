@@ -8,6 +8,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import { P, match } from "ts-pattern";
 import { AvatarMediaHorizontal } from "~/components/Avatar";
+import { BookmarkButton } from "~/components/BookmarkButton";
 import { useInject } from "~/core/react";
 import { useExchange_item_controller } from "~/modules/exchange";
 import { Get_Exchange_ById_UseCase } from "~/modules/exchange/application/get_exchange_byid.use-case";
@@ -112,7 +113,17 @@ function Exchange_Card({ id }: { id: number }) {
           })}
         >
           <div className="flex justify-between">
-            <button className="block">🔖</button>
+            <div className="flex items-center">
+              <BookmarkButton
+                id={id}
+                type="exchange"
+                className={({ isActive }) =>
+                  `inline-block h-4 w-4 ${
+                    isActive ? "text-Chateau_Green" : "text-white"
+                  }`
+                }
+              />
+            </div>
             {match(exchange.profile.get("id"))
               .with(my_profile_id!, () => (
                 <Link

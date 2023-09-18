@@ -42,7 +42,7 @@
     parameters:
       - name: id
         in: path
-        description: "The exchanges id"
+        description: "The exchange id"
         deprecated: false
         required: true
         schema:
@@ -67,7 +67,7 @@
     parameters:
       - name: id
         in: path
-        description: "The exchanges id"
+        description: "The exchange id"
         deprecated: false
         required: true
         schema:
@@ -92,7 +92,7 @@
     parameters:
       - name: id
         in: path
-        description: "The exchanges id"
+        description: "The exchange id"
         deprecated: false
         required: true
         schema:
