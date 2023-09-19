@@ -240,8 +240,8 @@ importers:
         specifier: 1.13.1
         version: 1.13.1
       ws:
-        specifier: 8.14.1
-        version: 8.14.1
+        specifier: 8.14.2
+        version: 8.14.2
       zod:
         specifier: 3.22.2
         version: 3.22.2
@@ -449,8 +449,8 @@ importers:
         specifier: 5.24.0
         version: 5.24.0
       ws:
-        specifier: 8.14.1
-        version: 8.14.1
+        specifier: 8.14.2
+        version: 8.14.2
       yaml:
         specifier: 2.3.2
         version: 2.3.2
@@ -20330,7 +20330,7 @@ packages:
       webpack: 5.88.2(webpack-cli@5.1.4)
       webpack-cli: 5.1.4(webpack-dev-server@4.15.1)(webpack@5.88.2)
       webpack-dev-middleware: 5.3.3(webpack@5.88.2)
-      ws: 8.14.1
+      ws: 8.14.2
     transitivePeerDependencies:
       - bufferutil
       - debug
@@ -20621,8 +20621,8 @@ packages:
       utf-8-validate:
         optional: true
 
-  /ws@8.14.1:
-    resolution: {integrity: sha512-4OOseMUq8AzRBI/7SLMUwO+FEDnguetSk7KMb1sHwvF2w2Wv5Hoj0nlifx8vtGsftE/jWHojPy8sMMzYLJ2G/A==}
+  /ws@8.14.2:
+    resolution: {integrity: sha512-wEBG1ftX4jcglPxgFCMJmZ2PLtSbJ2Peg6TmpJFTbe9GZYOQCDPdMYu/Tm0/bGZkw8paZnJY45J4K2PZrLYq8g==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
       bufferutil: ^4.0.1
