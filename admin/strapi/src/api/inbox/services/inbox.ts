@@ -44,7 +44,7 @@ export async function find_owner_inboxes(owner: number, ctx: KoaContext) {
 
   //
 
-  return z
+  return (await z
     .array(
       z
         .object({
@@ -52,7 +52,7 @@ export async function find_owner_inboxes(owner: number, ctx: KoaContext) {
         })
         .passthrough(),
     )
-    .parse(inboxes, { path: ["inboxes"] }) as GetValues<
+    .parseAsync(inboxes, { path: ["inboxes"] })) as GetValues<
     typeof INBOX_API_CONTENT_ID
   >[];
 }

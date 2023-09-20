@@ -29,7 +29,7 @@ export const Profile_Mapper = Profile_DataRecord.transform(function to_domain({
   data,
 }: Profile_DataRecord): Profile {
   if (!data)
-    throw new InputError("Profile_Mapper", {
+    throw new InputError("Profile_Mapper: data undefined", {
       errors: [new IllegalArgs("data undefined")],
     });
 

@@ -17,4 +17,8 @@ export class Inbox extends Aggregate<Inbox_Props> {
   static override create(props: Inbox_Props): Result<Inbox, Error> {
     return Ok(new Inbox(props));
   }
+
+  get thread() {
+    return this.props.thread;
+  }
 }

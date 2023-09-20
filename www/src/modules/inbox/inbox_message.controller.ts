@@ -58,7 +58,6 @@ export class Inbox_Message_Controller {
 
     const query_client = useQueryClient();
     useEffect(() => {
-      console.log({ mutation_result });
       query_client.invalidateQueries(
         Inbox_QueryKeys.messages(this.repository.thread_id),
       );

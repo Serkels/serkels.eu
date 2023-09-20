@@ -34,7 +34,6 @@ export function BookmarkButton(props: {
   //
 
   const onSettled = async () => {
-    console.log({ isActive, is_in_bookmarks });
     await Promise.all([
       queryClient.refetchQueries({
         queryKey: Bookmarks_Repository.keys.check(type, opportunity),

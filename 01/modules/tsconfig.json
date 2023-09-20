@@ -2,6 +2,8 @@
   "extends": ["@1/typescript-config/base.json"],
   "compilerOptions": {
     "rootDir": ".",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "composite": true
   },
   "include": ["**/*.ts"],

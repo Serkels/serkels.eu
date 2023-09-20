@@ -34,7 +34,7 @@ const button = tv({
       secondary: "bg-secondary text-white data-[hovered]:bg-secondary/70",
       tertiary: "bg-tertiary text-white data-[hovered]:bg-tertiary/70",
       quaternary: "bg-quaternary text-white data-[hovered]:bg-quaternary/70",
-      quinary: "bg-quinary data-[hovered]:bg-quinary/70 text-white",
+      quinary: "bg-quinary text-white data-[hovered]:bg-quinary/70",
       //
       warning: "bg-warning text-white data-[hovered]:bg-warning/70",
       danger: "bg-danger text-white data-[hovered]:bg-danger/70",
@@ -90,6 +90,12 @@ const button = tv({
     //   class:
     //     "border-2 border-secondary bg-transparent  data-[hovered]:bg-secondary data-[hovered]:text-secondary-fg",
     // },
+    {
+      intent: "danger",
+      state: "outline",
+      class:
+        "data-[hovered]:text-danger-fg border-2 border-danger  bg-transparent data-[hovered]:bg-danger",
+    },
   ],
   defaultVariants: {
     intent: "primary",

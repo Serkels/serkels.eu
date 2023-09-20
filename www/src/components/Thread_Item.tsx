@@ -61,7 +61,7 @@ export function Thread_Item({
   );
 }
 
-// TODO(douglasduteil): use fv slots here...
+// TODO(douglasduteil): use tv slots here...
 const Thread_Header = tw.header`
   flex
   justify-between

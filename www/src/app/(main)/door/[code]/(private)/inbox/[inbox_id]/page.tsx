@@ -4,11 +4,9 @@ import type { Metadata, ResolvingMetadata } from "next";
 import tw from "tailwind-styled-components";
 import {
   Inbox,
-  Inbox_Provider,
   Thread_Avatar,
   Thread_Conversation,
   Thread_Conversation_Form,
-  Thread_Provider,
 } from "./page.client";
 
 //
@@ -34,21 +32,17 @@ export default async function Page({
   return (
     <Main>
       <Sticky_Container>
-        <Inbox_Provider>
-          <Thread_Provider>
-            <Inbox id={inbox_id}>
-              <Header>
-                <Thread_Avatar />
-              </Header>
-              <Scrollable_Part>
-                <Thread_Conversation />
-              </Scrollable_Part>
-              <Footer>
-                <Thread_Conversation_Form />
-              </Footer>
-            </Inbox>
-          </Thread_Provider>
-        </Inbox_Provider>
+        <Inbox id={inbox_id}>
+          <Header>
+            <Thread_Avatar />
+          </Header>
+          <Scrollable_Part>
+            <Thread_Conversation />
+          </Scrollable_Part>
+          <Footer>
+            <Thread_Conversation_Form />
+          </Footer>
+        </Inbox>
       </Sticky_Container>
     </Main>
   );

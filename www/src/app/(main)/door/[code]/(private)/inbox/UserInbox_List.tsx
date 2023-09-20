@@ -1,11 +1,13 @@
 "use client";
 
-import { Inbox } from "@1/modules/inbox/domain";
-import { Spinner } from "@1/ui/components/Spinner";
+import { UnknownError } from "@1/core/error";
+import ContentLoader from "react-content-loader";
 import { tv } from "tailwind-variants";
-import { match } from "ts-pattern";
-import { useDoor_Value } from "~/app/(main)/door/door.context";
+import { P, match } from "ts-pattern";
 import { Thread_Item } from "~/components/Thread_Item";
+import { useInject } from "~/core/react";
+import { Get_Inbox_ById_UseCase } from "~/modules/inbox/application/get_inbox_byid.use-case copy";
+import { useDoor_Value } from "../../../door.context";
 
 //
 
@@ -13,18 +15,14 @@ const userinbox_list = tv({
   base: "space-y-5 px-8 pb-8",
 });
 
-export function UserInbox_List({ inboxes }: { inboxes: Inbox[] | undefined }) {
-  return match(inboxes)
-    .with(undefined, () => null)
-    .when(
-      (list) => list.length === 0,
-      () => <EmptyList />,
-    )
+export function UserInbox_List({ inbox_ids }: { inbox_ids: number[] }) {
+  return match(inbox_ids)
+    .with([], () => <EmptyList />)
     .otherwise((list) => (
       <ul className={userinbox_list()}>
-        {list.map((inbox) => (
-          <li key={inbox.id.value()}>
-            <UserThread_Item inbox={inbox} />
+        {list.map((inbox_id) => (
+          <li key={inbox_id}>
+            <UserThread_Item inbox_id={inbox_id} />
           </li>
         ))}
       </ul>
@@ -33,26 +31,49 @@ export function UserInbox_List({ inboxes }: { inboxes: Inbox[] | undefined }) {
 
 //
 
-function UserThread_Item({ inbox }: { inbox: Inbox }) {
+export function UserThread_Item({ inbox_id }: { inbox_id: number }) {
   const [{ door_id }] = useDoor_Value();
-  const thread = inbox.get("thread");
-
-  const href = `/@${door_id}/inbox/${inbox.get("id")}`;
+  const href = `/@${door_id}/inbox/${inbox_id}`;
 
   //
 
-  if (!thread) return null;
+  const info = useInject(Get_Inbox_ById_UseCase).execute(inbox_id);
 
-  return <Thread_Item href={href} thread={thread} />;
+  return match(info)
+    .with({ status: "error", error: P.select() }, (error) => {
+      console.error(
+        new UnknownError(`Get_Inbox_ById_UseCase ${inbox_id}`, {
+          cause: error,
+        }),
+      );
+      return null;
+    })
+    .with({ status: "loading" }, () => (
+      <UserThread_Item.Loading uniqueKey={`inbox_id_${inbox_id}`} />
+    ))
+    .with({ status: "success", data: P.select() }, (inbox) => {
+      return inbox.thread ? (
+        <Thread_Item href={href} thread={inbox.thread} />
+      ) : null;
+    })
+    .exhaustive();
 }
 
 //
 
-UserInbox_List.Loading = function Loading() {
+UserThread_Item.Loading = function Loading({
+  uniqueKey,
+}: {
+  uniqueKey: string;
+}) {
   return (
-    <figure className="mt-28 text-center">
-      <Spinner />
-    </figure>
+    <ContentLoader
+      uniqueKey={uniqueKey}
+      viewBox="0 0 300 50"
+      className="w-full"
+    >
+      <rect x="0" y="0" rx="5" ry="5" width="300" height="50" />
+    </ContentLoader>
   );
 };
 

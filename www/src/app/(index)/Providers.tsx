@@ -1,5 +1,6 @@
 "use client";
 
+import { USER_PROFILE_ID_TOKEN } from "@1/core/domain";
 import { setUser } from "@sentry/nextjs";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -76,11 +77,13 @@ function ViewProvider({ children }: PropsWithChildren) {
   const session = useSession();
 
   const jwt = session.data?.user?.jwt;
+  const user_profile_id = session.data?.user?.profile.id;
   const root_container = useMemo(() => {
     console.info(jwt ? "🗝️" : "🚪");
     const root = container.createChildContainer();
     root.registerInstance(JWT_TOKEN, jwt ?? "");
     root.registerInstance(API_TOKEN, fromClient);
+    root.registerInstance(USER_PROFILE_ID_TOKEN, user_profile_id ?? NaN);
     return root;
   }, [jwt]);
   return (

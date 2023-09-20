@@ -47,14 +47,14 @@ export function NotFound() {
   );
 }
 
-function NotFoundMain({ children }: PropsWithChildren) {
+export function NotFoundMain({ children }: PropsWithChildren) {
   return (
     <Banner className="h-full">
       <main
         className={`
             mx-auto
             my-0
-            
+
             text-center text-6xl
             font-extrabold
             text-white

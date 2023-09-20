@@ -18,9 +18,6 @@ export interface Thread_Props {
 }
 
 export class Thread extends Aggregate<Thread_Props> {
-  private constructor(props: Thread_Props) {
-    super(props);
-  }
   static override create(props: Thread_Props): Result<Thread, Error> {
     return Ok(new Thread(props));
   }

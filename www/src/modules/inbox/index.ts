@@ -3,6 +3,7 @@
 import { useSession } from "next-auth/react";
 import { useMemo } from "react";
 import { fromClient } from "~/app/api/v1";
+import { useInject } from "~/core/react";
 import { Inbox_Controller } from "./inbox.controller";
 import { Inbox_Repository } from "./inbox.repository";
 import { Inbox_Message_Controller } from "./inbox_message.controller";
@@ -20,15 +21,6 @@ export function useInboxMessage_repository(id: number | undefined) {
   );
 }
 
-export function useInbox_repository() {
-  const { data: session } = useSession();
-
-  return useMemo(
-    () => new Inbox_Repository(fromClient, session?.user?.jwt),
-    [session?.user?.jwt],
-  );
-}
-
 export function useInboxMessage_controller(id: number | undefined) {
   const repository = useInboxMessage_repository(id);
 
@@ -36,7 +28,6 @@ export function useInboxMessage_controller(id: number | undefined) {
 }
 
 export function useInbox_controller() {
-  const repository = useInbox_repository();
-
+  const repository = useInject(Inbox_Repository);
   return useMemo(() => new Inbox_Controller(repository), [repository]);
 }

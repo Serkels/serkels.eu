@@ -61,7 +61,6 @@ export class Deal_Message_Controller {
 
     const query_client = useQueryClient();
     useEffect(() => {
-      console.log({ mutation_result });
       Promise.all([
         query_client.invalidateQueries(
           Deal_QueryKeys.messages(this.repository.deal_id),

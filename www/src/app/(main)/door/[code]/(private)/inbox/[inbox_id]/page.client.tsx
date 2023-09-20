@@ -7,11 +7,9 @@ import { P, match } from "ts-pattern";
 import { Avatar_Show_Profile } from "~/components/Avatar_Show_Profile";
 import { Conversation_Form } from "~/components/Conversation/Conversation_Form";
 import { Conversation_Timeline } from "~/components/Conversation/Conversation_Timeline";
-import { ErrorOccur } from "~/components/ErrorOccur";
-import {
-  useInboxMessage_controller,
-  useInbox_controller,
-} from "~/modules/inbox";
+import { useInject } from "~/core/react";
+import { useInboxMessage_controller } from "~/modules/inbox";
+import { Get_Inbox_ById_UseCase } from "~/modules/inbox/application/get_inbox_byid.use-case copy";
 import { Inbox_QueryKeys } from "~/modules/inbox/query_keys";
 import { Inbox_ValueProvider, useInbox_Value } from "./Inbox.context";
 import { Thread_ValueProvider, useThread_Value } from "./Thread.context";
@@ -22,26 +20,21 @@ export const Thread_Provider = Thread_ValueProvider;
 export const Inbox_Provider = Inbox_ValueProvider;
 
 export function Inbox({ children, id }: PropsWithChildren<{ id: number }>) {
-  const {
-    by_id: { useQuery },
-  } = useInbox_controller();
-  const { inbox, info } = useQuery(id);
+  const info = useInject(Get_Inbox_ById_UseCase).execute(id);
+  const { data: inbox } = info;
   const [, set_thread] = useThread_Value();
   const [, set_inbox] = useInbox_Value();
 
   useEffect(() => {
     set_inbox(inbox);
     set_thread(inbox?.get("thread"));
-  }, [inbox]);
-
+  }, [inbox?.get("id")]);
   return match(info)
-    .with({ status: "error", error: P.select() }, (error) => (
-      <div className="mt-24">
-        <ErrorOccur error={error as Error} />
-      </div>
-    ))
+    .with({ status: "error", error: P.select() }, (error) => {
+      throw error;
+    })
     .with({ status: "loading" }, () => <Loading />)
-    .with({ status: "success" }, ({}) => children)
+    .with({ status: "success" }, () => children)
     .exhaustive();
 }
 

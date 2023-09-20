@@ -6,33 +6,31 @@ import type { Message_Schema } from "@1/modules/inbox/infra/strapi";
 import type { Inbox_ItemSchema, Inbox_ListSchema } from "@1/strapi-openapi";
 import debug from "debug";
 import { match } from "ts-pattern";
-import { type ApiClient } from "~/app/api/v1";
+import { Lifecycle, inject, scoped } from "tsyringe";
 import { OpenAPI_Repository } from "~/app/api/v1/OpenAPI.repository";
-import type { RepositoryPort } from "~/core";
 
 //
 
-const log = debug("~:modules:exchange:Inbox_Repository");
-
-//
-
-export class Inbox_Repository
-  extends OpenAPI_Repository
-  implements RepositoryPort
-{
-  constructor(client: ApiClient, jwt: string | undefined) {
-    super(client, jwt);
-    log("new", jwt);
+@scoped(Lifecycle.ContainerScoped)
+export class Inbox_Repository {
+  #log = debug(`~:modules:inbox:${Inbox_Repository.name}`);
+  constructor(
+    @inject(OpenAPI_Repository) private readonly openapi: OpenAPI_Repository,
+  ) {
+    this.#log("new");
+  }
+  get is_authorized() {
+    return Boolean(this.openapi.jwt);
   }
 
   async create(profile_id: number) {
-    log("create", profile_id);
+    this.#log("create", profile_id);
     const {
       data: body,
       response,
       error: errorBody,
-    } = await this.client.POST("/inbox/to/{profile_id}", {
-      headers: this.headers,
+    } = await this.openapi.client.POST("/inbox/to/{profile_id}", {
+      headers: this.openapi.headers,
       params: { path: { profile_id } },
     });
 
@@ -49,13 +47,13 @@ export class Inbox_Repository
   }
 
   async find_by_participant(profile_id: number) {
-    log("find_by_participant", profile_id);
+    this.#log("find_by_participant", profile_id);
     const {
       data: body,
       response,
       error: errorBody,
-    } = await this.client.GET("/inboxes", {
-      headers: this.headers,
+    } = await this.openapi.client.GET("/inboxes", {
+      headers: this.openapi.headers,
       params: {
         query: {
           filters: {
@@ -83,10 +81,18 @@ export class Inbox_Repository
       .otherwise(() => body.data![0]);
   }
 
-  async find_all({
-    pagination,
-  }: Strapi_Query_Params<Message_Schema>): Promise<Inbox_ListSchema> {
-    const trace = log.extend(
+  async find_all(
+    query: Strapi_Query_Params<Message_Schema>,
+  ): Promise<Inbox_ListSchema> {
+    const pagination = {
+      page: query.pagination?.page,
+      pageSize: query.pagination?.pageSize,
+    };
+    const sort = query.sort;
+
+    //
+
+    const trace = this.#log.extend(
       `find_all(pageSize=${pagination?.pageSize}, page=${pagination?.page})`,
     );
 
@@ -95,20 +101,17 @@ export class Inbox_Repository
       data: body,
       error: errorBody,
       response,
-    } = await this.client.GET("/inboxes", {
-      headers: this.headers,
+    } = await this.openapi.client.GET("/inboxes", {
+      headers: this.openapi.headers,
       params: {
         query: {
-          pagination: {
-            page: pagination?.page,
-            pageSize: pagination?.pageSize,
-            withCount: true,
-          },
-          sort: "updatedAt:desc",
+          pagination,
+          sort,
         } as any,
       },
     });
 
+    trace(response.status);
     if (errorBody) {
       trace(errorBody);
       throw new HTTPError(
@@ -117,27 +120,29 @@ export class Inbox_Repository
       );
     }
 
-    trace("200");
     return body;
   }
 
   //
 
   async find_by_id(id: number): Promise<Inbox_ItemSchema | undefined> {
-    log("find_by_id", id);
+    const trace = this.#log.extend(`find_by_id(id=${id})`);
+
+    trace("");
     const {
       data: body,
       error: errorBody,
       response,
-    } = await this.client.GET("/inboxes/{id}", {
-      headers: this.headers,
+    } = await this.openapi.client.GET("/inboxes/{id}", {
+      headers: this.openapi.headers,
       params: {
         path: { id },
       },
     });
 
+    trace(response.status);
     if (errorBody) {
-      log("find_by_id", errorBody);
+      trace(errorBody);
       throw new HTTPError(
         [errorBody.error.message, "from " + response.url].join("\n"),
         { cause: errorBody.error },

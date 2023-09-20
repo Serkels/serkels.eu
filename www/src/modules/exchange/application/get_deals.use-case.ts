@@ -30,6 +30,7 @@ export class Get_Deals_UseCase {
       //     pagination: { ...params.pagination, page },
       //   });
       // },
+      // TODO(douglasduteil): use actual pagination
       queryFn: () => this.repository.find_all(id),
       queryKey: Deal_QueryKeys.lists(id),
       getNextPageParam,
