@@ -9,10 +9,11 @@
     "build": "turbo run build",
     "clean": "turbo run clean",
     "dev": "turbo run dev --parallel --continue",
-    "heroku-prebuild": "pnpx turbo prune --scope=strapi && rm -rf 01 www admin && pnpx cpx \"out/**/*\" .",
     "heroku-postbuild": "turbo run build --filter=strapi",
+    "heroku-prebuild": "pnpx turbo prune --scope=strapi && rm -rf 01 www admin && pnpx cpx \"out/**/*\" .",
     "lint": "turbo run lint",
-    "start": "pnpm -r start"
+    "start": "pnpm -r start",
+    "test": "turbo run test"
   },
   "devDependencies": {
     "prettier": "3.0.3",
