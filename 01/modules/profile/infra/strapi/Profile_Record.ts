@@ -1,6 +1,6 @@
 //
 
-import { InputError } from "@1/core/error";
+import { IllegalArgs, InputError } from "@1/core/error";
 import { z } from "zod";
 import { z_strapi_entity_data } from "../../../common";
 import { Strapi_Timestamps } from "../../../common/record";
@@ -22,6 +22,28 @@ export type Profile_Record = z.TypeOf<typeof Profile_Record>;
 
 export const Profile_DataRecord = z_strapi_entity_data(Profile_Record);
 export type Profile_DataRecord = z.TypeOf<typeof Profile_DataRecord>;
+
+//
+
+export const Profile_Mapper = Profile_DataRecord.transform(function to_domain({
+  data,
+}: Profile_DataRecord): Profile {
+  if (!data)
+    throw new InputError("Profile_Mapper", {
+      errors: [new IllegalArgs("data undefined")],
+    });
+
+  const domain = Profile.create({
+    ...data.attributes,
+    id: data.id,
+  });
+
+  if (domain.isFail()) {
+    throw new InputError("Profile_Mapper", { cause: domain.error() });
+  }
+
+  return domain.value();
+});
 
 //
 

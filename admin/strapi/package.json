@@ -50,7 +50,7 @@
     "tsconfig-paths": "4.2.0",
     "typed-emitter": "2.1.0",
     "undici": "5.24.0",
-    "ws": "8.14.2",
+    "websockets": "npm:ws@8.14.1",
     "yaml": "2.3.2",
     "zod": "3.22.2",
     "zod-validation-error": "1.5.0"
@@ -67,9 +67,11 @@
     "@strapi/typescript-utils": "4.13.6",
     "@types/etag": "1.8.1",
     "@types/node-schedule": "^2.1.0",
+    "bun-types": "1.0.2",
     "koa": "2.14.2",
     "prettier": "3.0.3",
     "strapi-typed": "1.0.16",
+    "supertest": "6.3.3",
     "typescript": "5.2.2"
   }
 }

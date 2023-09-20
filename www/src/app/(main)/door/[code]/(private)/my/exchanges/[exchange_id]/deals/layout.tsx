@@ -2,8 +2,8 @@
 
 import type { Metadata, ResolvingMetadata } from "next";
 import type { PropsWithChildren } from "react";
-import { AsideBar } from "~/components/layouts/holy/aside";
 import { MyDeals } from "./MyDeals";
+import { Deals_Aside_Nav } from "./layout.client";
 
 //
 
@@ -24,13 +24,12 @@ export default function Layout({
   params,
 }: PropsWithChildren<{ params: { exchange_id: string } }>) {
   const exchange_id = Number(params.exchange_id);
+
   return (
     <>
-      <AsideBar>
-        <div className="sticky top-[calc(theme(spacing.14)_+_theme(spacing.6))]">
-          <MyDeals exchange_id={exchange_id} />
-        </div>
-      </AsideBar>
+      <Deals_Aside_Nav exchange_id={exchange_id}>
+        <MyDeals exchange_id={exchange_id} />
+      </Deals_Aside_Nav>
       {children}
     </>
   );

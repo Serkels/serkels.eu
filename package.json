@@ -20,14 +20,18 @@
     "typescript": "5.2.2"
   },
   "optionalDependencies": {
-    "supports-color": "8.1.1",
     "formik": "2.4.5",
+    "mime": "2.6.0",
+    "supports-color": "8.1.1",
+    "ws": "8.14.1",
     "zod": "3.22.2"
   },
   "pnpm": {
     "overrides": {
-      "supports-color": "$supports-color",
       "formik": "$formik",
+      "mime": "$mime",
+      "supports-color": "$supports-color",
+      "ws": "$ws",
       "zod": "$zod"
     }
   }

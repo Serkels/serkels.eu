@@ -18,7 +18,7 @@ export async function generateMetadata(
 
 export default async function Page() {
   return (
-    <main className="hidden overflow-hidden px-4 md:col-span-4 md:block xl:col-span-6">
+    <main className="hidden overflow-hidden px-4 lg:col-span-3 lg:block xl:col-span-6 xl:block">
       <Empty />
     </main>
   );

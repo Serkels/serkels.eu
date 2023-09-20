@@ -2,13 +2,12 @@
 
 //
 
-import { Exchange_DealSchemaToDomain } from "@1/modules/deal/infra/strapi";
 import { Exchange_ItemSchemaToDomain } from "@1/modules/exchange/infra/strapi";
 import type { PropsWithChildren } from "react";
-import { match } from "ts-pattern";
+import { P, match } from "ts-pattern";
 import { useInject } from "~/core/react";
 import { useExchange_item_controller } from "~/modules/exchange";
-import { Deal_Controller } from "~/modules/exchange/Deal.controller";
+import { Get_Deal_ById_UseCase } from "~/modules/exchange/application/get_deal_byid.use-case";
 import { Exchange_ValueProvider } from "../../Exchange.context";
 import { Deal_ValueProvider } from "./Deal.context";
 
@@ -18,34 +17,19 @@ export function Deal_Provider({
   children,
   id,
 }: PropsWithChildren<{ id: number }>) {
-  const {
-    by_id: { useQuery },
-  } = useInject(Deal_Controller);
+  const query_info = useInject(Get_Deal_ById_UseCase).execute(id);
 
-  const query_info = useQuery(id);
-
-  return match(query_info.status)
-    .with("error", () => {
-      console.error(query_info.error);
+  return match(query_info)
+    .with({ status: "error", error: P.select() }, (error) => {
+      console.error(error);
       return null;
     })
-    .with("loading", () => {
+    .with({ status: "loading" }, () => {
       return null;
     })
-    .with("success", () => {
-      const { data } = query_info;
-      if (!data) return null;
-      const deal = new Exchange_DealSchemaToDomain().build(data);
-      if (deal.isFail()) {
-        console.error(deal.error());
-        return null;
-      }
-      return (
-        <Deal_ValueProvider initialValue={deal.value()}>
-          {children}
-        </Deal_ValueProvider>
-      );
-    })
+    .with({ status: "success", data: P.select() }, (data) => (
+      <Deal_ValueProvider initialValue={data}>{children}</Deal_ValueProvider>
+    ))
     .exhaustive();
 }
 

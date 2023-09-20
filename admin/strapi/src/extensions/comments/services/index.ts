@@ -18,9 +18,10 @@ export const Common_Service = {
     ) => Promise<RelatedEntity[]>;
   },
   get findOne() {
+    const common = strapi.plugin("comments").service("common");
     // \from https://github.com/VirtusLab-Open-Source/strapi-plugin-comments/blob/70a716598a1833af0393b56c75d9190f0917c50d/types/services.d.ts#L89 //
-    return strapi.plugin("comments").service("common").findOne as (
-      criteria: WhereClause,
+    return common.findOne.bind(common) as (
+      criteria: WhereClause<keyof Comment>,
     ) => Promise<Comment>;
   },
 };

@@ -25,34 +25,25 @@ export class Exchange_ItemSchemaToDomain
     if (attributes === undefined)
       return Fail(new IllegalArgs("attributes undefined"));
 
-    const {
-      createdAt,
-      category: raw_category,
-      updatedAt,
-      profile: raw_profile,
-      type,
-      in_exchange_of,
-      when,
-      slug,
-      ...other_props
-    } = attributes;
+    const { createdAt, updatedAt, type, when, slug, ...other_props } =
+      attributes;
 
-    const profile_to_domain = new Profile_SchemaToDomain().fromItemDto(
-      raw_profile?.data,
+    const profile = new Profile_SchemaToDomain().fromItemDto(
+      attributes.profile?.data,
     );
-    if (profile_to_domain.isFail())
+    if (profile.isFail())
       return Fail(
         new IllegalArgs("Exchange_ItemSchemaToDomain/profile_to_domain", {
-          cause: profile_to_domain.error(),
+          cause: profile.error(),
         }),
       );
 
-    const category = raw_category?.data
-      ? category_to_domain(raw_category.data)
+    const category = attributes.category?.data
+      ? category_to_domain(attributes.category.data)
       : Category.all;
 
-    const in_exchange_of_to_domain = in_exchange_of?.data
-      ? category_to_domain(in_exchange_of.data)
+    const in_exchange_of = attributes.in_exchange_of?.data
+      ? category_to_domain(attributes.in_exchange_of.data)
       : undefined;
 
     return Exchange.create({
@@ -64,8 +55,8 @@ export class Exchange_ItemSchemaToDomain
       id,
       slug: String(slug),
       category,
-      in_exchange_of: in_exchange_of_to_domain,
-      profile: profile_to_domain.value(),
+      in_exchange_of,
+      profile: profile.value(),
       type: Type.create(type).value(),
       when: when ? new Date(when) : new Date(NaN),
     });

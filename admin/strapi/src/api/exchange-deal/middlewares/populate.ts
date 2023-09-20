@@ -1,26 +1,34 @@
 //
 
 import type { Next } from "koa";
-import type { StrapiContext } from "~/types";
+import type { Params, StrapiContext } from "~/types";
+import { EXCHANGE_DEAL_API_CONTENT_ID } from "../content-types/exchange-deal";
 
 export default () => {
   return async (context: StrapiContext, next: Next) => {
+    const query = {
+      populate: {
+        owner: true,
+        participant: true,
+        exchange: {
+          populate: {
+            profile: true,
+            category: true,
+          },
+        },
+        profile: true,
+      },
+    } satisfies Params.Pick<typeof EXCHANGE_DEAL_API_CONTENT_ID, "populate">;
+
     context.query.populate = {
       ...(context.query.populate || {}),
-      owner: {
-        fields: ["id"],
-      },
-      participant: {
-        fields: ["id"],
-      },
-      last_message: true,
-      profile: {
-        fields: ["id", "firstname", "lastname", "university"],
-      },
+      ...query.populate,
     };
 
-    await next();
+    //
+    //
+    //
 
-    console.log(context.body);
+    await next();
   };
 };

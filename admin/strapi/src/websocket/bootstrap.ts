@@ -3,7 +3,7 @@
 import { appRouter } from "@1/strapi-trpc-router";
 import type { Strapi } from "@strapi/strapi";
 import { applyWSSHandler } from "@trpc/server/adapters/ws";
-import { Server, type WebSocket } from "ws";
+import { Server, type WebSocket } from "websockets";
 import { UserEmitterMap } from ".";
 import AppContext from "./AppContext";
 

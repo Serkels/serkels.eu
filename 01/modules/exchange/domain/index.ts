@@ -10,21 +10,21 @@ import type { Type, TypeProps } from "./Type.value";
 export interface Exchange_Props {
   id: number;
   // done: boolean;
-  type: Type;
-  is_online: boolean;
-  when: Date;
-  title: string;
-  slug: string;
-  location?: string;
 
   available_places: number;
-  places: number;
-  in_exchange_of: Category | undefined;
-  description: string;
-  createdAt: Date;
-  updatedAt: Date;
-  profile: Profile;
   category: Category;
+  createdAt: Date;
+  description: string;
+  in_exchange_of: Category | undefined;
+  is_online: boolean;
+  location?: string;
+  places: number;
+  profile: Profile;
+  slug: string;
+  title: string;
+  type: Type;
+  updatedAt: Date;
+  when: Date;
 }
 
 export class Exchange extends Entity<Exchange_Props> {

@@ -11,17 +11,20 @@ import {
 import { formatDistance } from "date-fns";
 import { fr } from "date-fns/locale";
 import { z } from "zod";
+import { Strapi_Timestamps } from "../../common/record";
+import { Message } from "../../inbox/domain";
+import { Profile } from "../../profile/domain";
 
 //
 
-export const Deal_PropsSchema = z.object({
-  createdAt: z.date(),
-  id: z.number(),
-  last_message: z.string(),
-  profile: z.any(),
-  updatedAt: z.date(),
-  // slug: z.string(),
-});
+export const Deal_PropsSchema = z
+  .object({
+    exchange: z.any(),
+    id: z.number(),
+    last_message: z.instanceof(Message),
+    profile: z.instanceof(Profile),
+  })
+  .merge(Strapi_Timestamps);
 
 export type Deal_Props = z.TypeOf<typeof Deal_PropsSchema>;
 
@@ -70,10 +73,10 @@ export class Deal extends Entity<Deal_Props> {
 
   get profile() {
     return this.props.profile;
-    // console.log("this.props.profile", this.props.profile);
-    // const profile_maybe = Profile.create(this.props.profile);
-    // if (profile_maybe.isFail()) console.error(profile_maybe.error());
-    // return profile_maybe.value();
+  }
+
+  get exchange() {
+    return this.props.exchange;
   }
 
   get last_update() {
@@ -86,8 +89,6 @@ export class Deal extends Entity<Deal_Props> {
     return this.props.updatedAt;
   }
   get last_message() {
-    const message = this.props.last_message;
-    const prefix = "";
-    return `${prefix}${message}`;
+    return this.props.last_message;
   }
 }

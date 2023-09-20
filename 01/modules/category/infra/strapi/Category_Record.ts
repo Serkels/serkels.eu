@@ -1,6 +1,6 @@
 //
 
-import { InputError } from "@1/core/error";
+import { IllegalArgs, InputError } from "@1/core/error";
 import type { Category_ItemSchema } from "@1/strapi-openapi";
 import { z } from "zod";
 import { z_strapi_entity_data } from "../../../common";
@@ -21,6 +21,28 @@ export type Category_Record = z.TypeOf<typeof Category_Record>;
 export const Category_DataRecord = z_strapi_entity_data(Category_Record);
 export type Category_DataRecord = z.TypeOf<typeof Category_DataRecord>;
 export type Category_DataInputProps = z.input<typeof Category_DataRecord>;
+
+//
+
+export const Category_Mapper = Category_DataRecord.transform(
+  function to_domain({ data }: Category_DataRecord): Category {
+    if (!data)
+      throw new InputError("Category_Mapper", {
+        errors: [new IllegalArgs("data undefined")],
+      });
+
+    const domain = Category.create({
+      ...data.attributes,
+      id: data.id,
+    });
+
+    if (domain.isFail()) {
+      throw new InputError("Category_Mapper", { cause: domain.error() });
+    }
+
+    return domain.value();
+  },
+);
 
 //
 

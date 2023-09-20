@@ -2,12 +2,13 @@
 
 import { UnknownError } from "@1/core/error";
 import { Exchange_ItemSchemaToDomain } from "@1/modules/exchange/infra/strapi";
-import { Message, Thread } from "@1/modules/inbox/domain";
+import { Thread } from "@1/modules/inbox/domain";
 import { Button } from "@1/ui/components/ButtonV";
 import { Spinner } from "@1/ui/components/Spinner";
 import { Circle } from "@1/ui/icons";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
+import ContentLoader from "react-content-loader";
 import tw from "tailwind-styled-components";
 import { P, match } from "ts-pattern";
 import { useDoor_Value } from "~/app/(main)/door/door.context";
@@ -15,7 +16,9 @@ import { ErrorOccur } from "~/components/ErrorOccur";
 import { Thread_Item } from "~/components/Thread_Item";
 import { useInject } from "~/core/react";
 import { useExchange_item_controller } from "~/modules/exchange";
-import { Deal_Controller } from "~/modules/exchange/Deal.controller";
+import { Get_Deal_ById_UseCase } from "~/modules/exchange/application/get_deal_byid.use-case";
+import { Get_Deals_UseCase } from "~/modules/exchange/application/get_deals.use-case";
+import { useMyProfileId } from "~/modules/user/useProfileId";
 import {
   Exchange_ValueProvider,
   useExchange_Value,
@@ -74,27 +77,53 @@ export function MyDeals({ exchange_id }: { exchange_id: number }) {
     .exhaustive();
 }
 
+export function Echange_Deal({ id }: { id: number }) {
+  const info = useInject(Get_Deal_ById_UseCase).execute(id);
+
+  const [, set_deal] = useDeal_Value();
+
+  useEffect(() => {
+    if (info.data) set_deal(info.data);
+  }, [Number(info.data?.get("updatedAt"))]);
+
+  return match(info)
+    .with({ status: "error", error: P.select() }, (error) => {
+      console.error(new UnknownError(`Get_Deal_ById ${id}`, { cause: error }));
+      return null;
+    })
+    .with({ status: "loading" }, () => <Echange_DealLink_Loader />)
+    .with({ status: "success", data: P.select() }, () => {
+      return <Echange_DealLink />;
+    })
+    .exhaustive();
+}
+
+function Echange_DealLink_Loader() {
+  return (
+    <ContentLoader viewBox="0 0 300 50" className="w-full">
+      <rect x="0" y="0" rx="5" ry="5" width="300" height="50" />
+    </ContentLoader>
+  );
+}
+
 export function Echange_DealsNav() {
   const [exchange] = useExchange_Value();
-  const {
-    list: { useQuery },
-  } = useInject(Deal_Controller);
+  const query_info = useInject(Get_Deals_UseCase).execute(exchange.get("id"));
 
-  const query_info = useQuery(exchange.get("id"));
   const router = useRouter();
   const pathname = usePathname();
   const [{ door_id }] = useDoor_Value();
 
   const count = query_info.data?.pages.length;
   useEffect(() => {
-    if (count !== 1) {
+    if (1 || count !== 1) {
       return;
     }
 
-    const deal = query_info.data?.pages?.at(0)!;
+    const deal_id = query_info.data?.pages?.at(0)!;
     const target = `/@${door_id}/my/exchanges/${exchange.get(
       "id",
-    )}/deals/${deal.get("id")}`;
+    )}/deals/${deal_id}`;
 
     if (pathname.startsWith(target)) {
       return;
@@ -120,10 +149,10 @@ export function Echange_DealsNav() {
       ({ data: { pages }, isFetchingNextPage, hasNextPage, fetchNextPage }) => (
         <nav>
           <ul className="space-y-5">
-            {pages.map((deal) => (
-              <li key={deal.get("id")}>
-                <Deal_ValueProvider initialValue={deal}>
-                  <Echange_DealLink />
+            {pages.map((deal_id) => (
+              <li key={deal_id}>
+                <Deal_ValueProvider>
+                  <Echange_Deal id={deal_id} />
                 </Deal_ValueProvider>
               </li>
             ))}
@@ -151,21 +180,26 @@ export function Echange_DealsNav() {
 
 function Echange_DealLink() {
   const [exchange] = useExchange_Value();
-  const [discussion] = useDeal_Value();
+  const [deal] = useDeal_Value();
+  const profile_id = useMyProfileId();
 
   const [{ door_id }] = useDoor_Value();
+
+  if (!deal) return null;
   const href = `/@${door_id}/my/exchanges/${exchange.get(
     "id",
-  )}/deals/${discussion.get("id")}`;
+  )}/deals/${deal.get("id")}`;
+
+  const deal_profile = deal.get("profile");
+  const exchange_profile = exchange.get("profile");
+  const is_yours = exchange_profile.get("id") === profile_id;
+  const profile = is_yours ? deal_profile : exchange_profile;
 
   const thread = Thread.create({
-    id: discussion.get("id"),
-    last_message: Message.create({
-      content: discussion.last_message,
-      id: Number(discussion.id.value()),
-    }).value(),
-    profile: discussion.get("profile"),
-    updated_at: discussion.updated_at,
+    id: deal.get("id"),
+    last_message: deal.last_message,
+    profile,
+    updated_at: deal.updated_at,
   }).value();
 
   return (

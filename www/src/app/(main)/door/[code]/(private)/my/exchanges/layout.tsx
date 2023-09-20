@@ -1,16 +1,17 @@
 //
 
 import type { PropsWithChildren } from "react";
-import { EchangeNav, My_Echange_Nav } from "./EchangeNav";
+import { EchangeNav } from "./EchangeNav";
+import { Exchange_Aside_Nav } from "./layout.client";
 
 //
 
 export default function Layout({ children }: PropsWithChildren<any>) {
   return (
     <>
-      <My_Echange_Nav>
+      <Exchange_Aside_Nav>
         <EchangeNav />
-      </My_Echange_Nav>
+      </Exchange_Aside_Nav>
       {children}
     </>
   );

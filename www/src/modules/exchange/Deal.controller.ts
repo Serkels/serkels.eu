@@ -1,15 +1,11 @@
 //
 
 import { Exchange_DealSchemaToDomain } from "@1/modules/deal/infra/strapi";
-import type {
-  Exchange_DealListSchema,
-  Exchange_DealSchema,
-} from "@1/strapi-openapi";
+import type { Exchange_DealListSchema } from "@1/strapi-openapi";
 import { startTransaction } from "@sentry/nextjs";
 import {
   useInfiniteQuery,
   useMutation,
-  useQuery,
   useQueryClient,
   type QueryFunction,
 } from "@tanstack/react-query";
@@ -31,7 +27,7 @@ const log = debug("~:modules:exchange:Deal_Controller");
 export class Deal_Controller {
   constructor(@inject(Deal_Repository) private repository: Deal_Repository) {}
   create = { useMutation: this.useCreateMutation.bind(this) };
-  by_id = { useQuery: this.useDealQuery.bind(this) };
+
   list = { useQuery: this.useListQuery.bind(this) };
 
   //
@@ -85,28 +81,6 @@ export class Deal_Controller {
     // }, [mutation_result.isSuccess]);
 
     return mutation_result;
-  }
-
-  useDealQuery(id: number) {
-    const queryKey = Deal_QueryKeys.item(id);
-
-    const load_query_fn: QueryFunction<
-      Exchange_DealSchema | undefined,
-      typeof queryKey,
-      number
-    > = async () => {
-      debug("load_list_query_fn");
-      return this.repository.find_by_id(id);
-    };
-
-    const query_info = useQuery({
-      enabled: this.repository.is_authorized,
-      queryFn: useCallback(load_query_fn, [this.repository, id]),
-      queryKey,
-      staleTime: Infinity,
-    });
-
-    return query_info;
   }
 
   useListQuery(exchange_id: number) {

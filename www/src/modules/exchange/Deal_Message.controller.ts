@@ -62,9 +62,14 @@ export class Deal_Message_Controller {
     const query_client = useQueryClient();
     useEffect(() => {
       console.log({ mutation_result });
-      query_client.invalidateQueries(
-        Deal_QueryKeys.messages(this.repository.deal_id),
-      );
+      Promise.all([
+        query_client.invalidateQueries(
+          Deal_QueryKeys.messages(this.repository.deal_id),
+        ),
+        query_client.invalidateQueries(
+          Deal_QueryKeys.item(this.repository.deal_id),
+        ),
+      ]);
     }, [mutation_result.isSuccess]);
     return mutation_result;
   }

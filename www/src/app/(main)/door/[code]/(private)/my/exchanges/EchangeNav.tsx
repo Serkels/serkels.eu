@@ -12,45 +12,18 @@ import clsx from "clsx";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import {
-  useCallback,
-  useEffect,
-  useState,
-  type ChangeEvent,
-  type PropsWithChildren,
-} from "react";
+import { useCallback, useEffect, useState, type ChangeEvent } from "react";
 import { useDebounce } from "react-use";
 import tw from "tailwind-styled-components";
 import { tv } from "tailwind-variants";
 import { P, match } from "ts-pattern";
 import { useDoor_Value } from "~/app/(main)/door/door.context";
 import { Avatar } from "~/components/Avatar";
-import { AsideBar } from "~/components/layouts/holy/aside";
 import { useInject } from "~/core/react";
 import { Get_User_Exchanges_UseCase } from "~/modules/exchange/application/get_user_exchanges.use-case";
 import { Exchange_ValueProvider, useExchange_Value } from "./Exchange.context";
 
 //
-
-export function My_Echange_Nav({ children }: PropsWithChildren) {
-  const pathname = usePathname();
-
-  const [{ door_id }] = useDoor_Value();
-  const is_active = pathname === `/@${door_id}/my/exchanges`;
-  return (
-    <AsideBar className={navbar({ $alone: is_active })}>{children}</AsideBar>
-  );
-}
-
-const navbar = tv({
-  base: "col-span-full h-full max-h-[calc(100vh_-_theme(spacing.16)-_theme(spacing.8))] flex-col overflow-hidden pt-8 pt-8",
-  variants: {
-    $alone: {
-      true: "block md:-ml-[20px]",
-      false: "-mx-8 md:hidden lg:flex",
-    },
-  },
-});
 
 export function EchangeNav() {
   const info = useInject(Get_User_Exchanges_UseCase).execute({

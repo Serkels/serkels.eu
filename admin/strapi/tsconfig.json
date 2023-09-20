@@ -9,7 +9,7 @@
     },
     "resolveJsonModule": true,
     "sourceMap": true,
-    "types": ["@bn-digital/strapi-types"]
+    "types": ["@bn-digital/strapi-types", "bun-types"]
   },
   "include": ["./", "./**/*.ts", "src/**/*.json"],
   "exclude": [

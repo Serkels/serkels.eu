@@ -8,6 +8,7 @@ import tw from "tailwind-styled-components";
 import type { ClassProp } from "tailwind-variants";
 import { P, match } from "ts-pattern";
 import { Avatar_Show_Profile } from "~/components/Avatar_Show_Profile";
+import { useMyProfileId } from "~/modules/user/useProfileId";
 
 export function Thread_Item({
   href,
@@ -19,11 +20,15 @@ export function Thread_Item({
   indicator?: ((tvStyle?: ClassProp) => ReactNode) | ReactNode;
 }) {
   const pathname = usePathname() ?? "";
+  const profile_id = useMyProfileId();
 
   // TODO(douglasduteil): Unify the logic with "useIsActive"
   const active =
     pathname.split("/").length >= href.split("/").length &&
     href.includes(pathname);
+
+  const author = thread.last_message?.get("author");
+  const prefix = author?.get("id") === profile_id ? "Vous : " : "";
 
   return (
     <Thread_Card $active={active}>
@@ -48,6 +53,7 @@ export function Thread_Item({
           $active={active}
           title={thread.last_message?.the_excerpt}
         >
+          {prefix}
           {thread.last_message?.the_excerpt}
         </Thread_Excerpt>
       </Link>
