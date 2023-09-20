@@ -24,6 +24,7 @@
     "mime": "2.6.0",
     "supports-color": "8.1.1",
     "ws": "8.14.1",
+    "websockets": "npm:ws@8.14.1",
     "zod": "3.22.2"
   },
   "pnpm": {
@@ -32,6 +33,7 @@
       "mime": "$mime",
       "supports-color": "$supports-color",
       "ws": "$ws",
+      "websockets": "$websockets",
       "zod": "$zod"
     }
   }

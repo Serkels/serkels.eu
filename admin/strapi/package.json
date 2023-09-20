@@ -50,7 +50,7 @@
     "tsconfig-paths": "4.2.0",
     "typed-emitter": "2.1.0",
     "undici": "5.24.0",
-    "websockets": "npm:ws@8.14.2",
+    "websockets": "npm:ws@8.14.1",
     "yaml": "2.3.2",
     "zod": "3.22.2",
     "zod-validation-error": "1.5.0"
