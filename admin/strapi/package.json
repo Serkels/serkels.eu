@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "strapi develop",
     "start": "strapi start",
+    "test": "bun test",
     "build": "strapi build",
     "build:types": "strapi ts:generate-types",
     "strapi": "strapi"
