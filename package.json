@@ -23,7 +23,7 @@
     "formik": "2.4.5",
     "mime": "3.0.0",
     "supports-color": "8.1.1",
-    "ws": "8.14.1",
+    "ws": "8.14.2",
     "websockets": "npm:ws@8.14.2",
     "zod": "3.22.2"
   },

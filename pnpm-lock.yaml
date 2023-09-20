@@ -8,7 +8,7 @@ overrides:
   formik: 2.4.5
   mime: 3.0.0
   supports-color: 8.1.1
-  ws: 8.14.1
+  ws: 8.14.2
   websockets: npm:ws@8.14.2
   zod: 3.22.2
 
@@ -29,8 +29,8 @@ importers:
         specifier: npm:ws@8.14.2
         version: /ws@8.14.2
       ws:
-        specifier: 8.14.1
-        version: 8.14.1
+        specifier: 8.14.2
+        version: 8.14.2
       zod:
         specifier: 3.22.2
         version: 3.22.2
@@ -252,8 +252,8 @@ importers:
         specifier: 1.13.1
         version: 1.13.1
       ws:
-        specifier: 8.14.1
-        version: 8.14.1
+        specifier: 8.14.2
+        version: 8.14.2
       zod:
         specifier: 3.22.2
         version: 3.22.2
@@ -6827,7 +6827,7 @@ packages:
       stream-json: 1.8.0
       tar: 6.1.13
       tar-stream: 2.2.0
-      ws: 8.14.1
+      ws: 8.14.2
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -20312,7 +20312,7 @@ packages:
       lodash: 4.17.21
       opener: 1.5.2
       sirv: 1.0.19
-      ws: 8.14.1
+      ws: 8.14.2
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -20408,7 +20408,7 @@ packages:
       webpack: 5.88.2(webpack-cli@5.1.4)
       webpack-cli: 5.1.4(webpack-dev-server@4.15.1)(webpack@5.88.2)
       webpack-dev-middleware: 5.3.3(webpack@5.88.2)
-      ws: 8.14.1
+      ws: 8.14.2
     transitivePeerDependencies:
       - bufferutil
       - debug
@@ -20674,18 +20674,6 @@ packages:
       signal-exit: 3.0.7
       typedarray-to-buffer: 3.1.5
 
-  /ws@8.14.1:
-    resolution: {integrity: sha512-4OOseMUq8AzRBI/7SLMUwO+FEDnguetSk7KMb1sHwvF2w2Wv5Hoj0nlifx8vtGsftE/jWHojPy8sMMzYLJ2G/A==}
-    engines: {node: '>=10.0.0'}
-    peerDependencies:
-      bufferutil: ^4.0.1
-      utf-8-validate: '>=5.0.2'
-    peerDependenciesMeta:
-      bufferutil:
-        optional: true
-      utf-8-validate:
-        optional: true
-
   /ws@8.14.2:
     resolution: {integrity: sha512-wEBG1ftX4jcglPxgFCMJmZ2PLtSbJ2Peg6TmpJFTbe9GZYOQCDPdMYu/Tm0/bGZkw8paZnJY45J4K2PZrLYq8g==}
     engines: {node: '>=10.0.0'}
@@ -20697,7 +20685,6 @@ packages:
         optional: true
       utf-8-validate:
         optional: true
-    dev: false
 
   /xdg-basedir@4.0.0:
     resolution: {integrity: sha512-PSNhEJDejZYV7h50BohL09Er9VaIefr2LMAf3OEmpCkjOi34eYyQYAXUTjEQtZJTKcF0E2UKTh+osDLsgNim9Q==}
