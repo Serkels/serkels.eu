@@ -56,4 +56,4 @@ jobs:
 
       - uses: oven-sh/setup-bun@v1
       - working-directory: admin/strapi
-        run: bun run test
+        run: bun test
