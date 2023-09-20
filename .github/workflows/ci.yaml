@@ -53,3 +53,7 @@ jobs:
       - run: pnpm --filter strapi...  install
 
       - run: pnpm --filter strapi...  build
+
+      - uses: oven-sh/setup-bun@v1
+      - working-directory: admin/strapi
+        run: bun run test
