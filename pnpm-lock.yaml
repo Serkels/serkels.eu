@@ -6,7 +6,7 @@ settings:
 
 overrides:
   formik: 2.4.5
-  mime: 2.6.0
+  mime: 3.0.0
   supports-color: 8.1.1
   ws: 8.14.1
   websockets: npm:ws@8.14.2
@@ -20,8 +20,8 @@ importers:
         specifier: 2.4.5
         version: 2.4.5(react@18.2.0)
       mime:
-        specifier: 2.6.0
-        version: 2.6.0
+        specifier: 3.0.0
+        version: 3.0.0
       supports-color:
         specifier: 8.1.1
         version: 8.1.1
@@ -3278,7 +3278,7 @@ packages:
   /@formatjs/fast-memoize@2.2.0:
     resolution: {integrity: sha512-hnk/nY8FyrL5YxwP9e4r9dqeM6cAbo8PeU9UjyXojZMNvVad2Z06FAVHyR3Ecw6fza+0GH7vdJgiKIVXTMbSBA==}
     dependencies:
-      tslib: 2.6.1
+      tslib: 2.6.2
 
   /@formatjs/icu-messageformat-parser@2.3.1:
     resolution: {integrity: sha512-knF2AkAKN4Upv4oIiKY4Wd/dLH68TNMPgV/tJMu/T6FP9aQwbv8fpj7U3lkyniPaNVxvia56Gxax8MKOjtxLSQ==}
@@ -3304,7 +3304,7 @@ packages:
     resolution: {integrity: sha512-VtB9Slo4ZL6QgtDFJ8Injvscf0xiDd4bIV93SOJTBjUF4xe2nAWOoSjLEtqIG+hlIs1sNrVKAaFo3nuTI4r5ZA==}
     dependencies:
       '@formatjs/ecma402-abstract': 1.17.2
-      tslib: 2.6.1
+      tslib: 2.6.2
 
   /@formatjs/intl-displaynames@6.3.1:
     resolution: {integrity: sha512-TlxguMDUbnFrJ4NA8fSyqXC62M7czvlRJ5mrJgtB91JVA+QPjjNdcRm1qPIC/DcU/pGUDcEzThn/x5A+jp15gg==}
@@ -9995,7 +9995,7 @@ packages:
       js-yaml: 4.1.0
       kleur: 4.1.5
       magic-string: 0.27.0
-      mime: 2.6.0
+      mime: 3.0.0
       network-information-types: 0.1.1(typescript@5.2.2)
       ora: 6.3.1
       p-limit: 4.0.0
@@ -15449,9 +15449,9 @@ packages:
     dependencies:
       mime-db: 1.52.0
 
-  /mime@2.6.0:
-    resolution: {integrity: sha512-USPkMeET31rOMiarsBNIHZKLGgvKc/LrjofAnBlOttf5ajRvqiRA8QsenbcooctK6d6Ts6aqZXBA+XbkKthiQg==}
-    engines: {node: '>=4.0.0'}
+  /mime@3.0.0:
+    resolution: {integrity: sha512-jSCU7/VB1loIWBZe14aEYHU/+1UMEHoaO7qxCOVJOw9GgH72VAWppxNcjU+x9a2k3GSIBXNKxXQFqRvvZ7vr3A==}
+    engines: {node: '>=10.0.0'}
     hasBin: true
 
   /mimic-fn@1.2.0:
@@ -18405,7 +18405,7 @@ packages:
       etag: 1.8.1
       fresh: 0.5.2
       http-errors: 2.0.0
-      mime: 2.6.0
+      mime: 3.0.0
       ms: 2.1.3
       on-finished: 2.4.1
       range-parser: 1.2.1
@@ -19218,7 +19218,7 @@ packages:
       form-data: 4.0.0
       formidable: 2.1.2
       methods: 1.1.2
-      mime: 2.6.0
+      mime: 3.0.0
       qs: 6.11.2
       semver: 7.5.4
     transitivePeerDependencies:
