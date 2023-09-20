@@ -1,5 +1,5 @@
 //
-
+debugger;
 export default ({ env }) => ({
   connection: {
     client: "sqlite",
