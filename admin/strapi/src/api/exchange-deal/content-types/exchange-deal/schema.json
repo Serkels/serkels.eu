@@ -12,6 +12,12 @@
   },
   "pluginOptions": {},
   "attributes": {
+    "last_message": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::comments.comment",
+      "configurable": false
+    },
     "exchange": {
       "type": "relation",
       "relation": "oneToOne",
@@ -32,11 +38,26 @@
       "relation": "oneToOne",
       "target": "api::user-profile.user-profile"
     },
-    "last_message": {
+    "organizer": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "plugin::comments.comment",
-      "configurable": false
+      "target": "api::user-profile.user-profile"
+    },
+    "participant_profile": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::user-profile.user-profile"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "idle",
+        "denied",
+        "approved by the organizer",
+        "approved"
+      ],
+      "required": true,
+      "default": "idle"
     }
   }
 }

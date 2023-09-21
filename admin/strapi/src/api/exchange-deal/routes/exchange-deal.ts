@@ -3,118 +3,21 @@
  */
 
 import { factories } from "@strapi/strapi";
-import type {
-  Context,
-  Next,
-  PolicyImplementation,
-  StrapiContext,
-} from "~/types";
-import { findOneFromUser } from "../../user-profile/services/user-profile";
+import { create_deal_body } from "../middlewares/create_deal_body";
+import { filter_by_user_id } from "../middlewares/filter_by_user_id";
 
 export default factories.createCoreRouter("api::exchange-deal.exchange-deal", {
-  only: ["create", "findOne"],
   config: {
     create: {
-      middlewares: [enforce_body as any],
-      policies: [exchange_id_must_exist as unknown as PolicyImplementation],
+      middlewares: [create_deal_body],
+      policies: [],
     },
-    findOne: { middlewares: ["api::exchange-deal.populate"] },
+    find: { middlewares: [filter_by_user_id] },
+    findOne: {
+      policies: ["global::blocked"],
+    },
+    update: {
+      policies: ["global::blocked"],
+    },
   },
 });
-
-//
-
-async function exchange_id_must_exist(
-  ...[policyContext, _cfg, { strapi }]: Parameters<PolicyImplementation>
-) {
-  const strapi_ctx: StrapiContext & {
-    request: {
-      body?: {
-        data?: { exchange: unknown; owner: unknown };
-      };
-    };
-    state: { user: { id: number } };
-  } = policyContext as any;
-
-  if (!strapi_ctx.request.body) {
-    strapi.log.warn(`api::exchange-deal requires a request body`);
-    return strapi_ctx.badRequest();
-  }
-  const { exchange } = strapi_ctx.request.body.data ?? {};
-  const exchange_id = Number(exchange);
-  if (!exchange || Number.isNaN(exchange_id)) {
-    strapi.log.warn(`api::exchange-deal requires an exchange id in the body`);
-    return strapi_ctx.badRequest();
-  }
-
-  const exchange_count = await strapi.entityService.count(
-    "api::exchange.exchange",
-    {
-      filters: {
-        ...{ id: exchange_id },
-        owner: { $not: strapi_ctx.state.user.id },
-      },
-    },
-  );
-
-  return Boolean(exchange_count === 1);
-}
-
-async function enforce_body(ctx: Context, next: Next) {
-  const strapi_ctx: StrapiContext & {
-    request: {
-      body?: {
-        data?: {
-          exchange: unknown;
-          owner: unknown;
-          participant: unknown;
-          profile: unknown;
-        };
-      };
-    };
-    state: { user: { id: number } };
-  } = ctx as any;
-
-  if (!strapi_ctx.request.body) {
-    strapi.log.warn(`api::exchange-deal requires a request body`);
-    strapi_ctx.badRequest();
-    return next();
-  }
-
-  const { data } = strapi_ctx.request.body ?? { data: { exchange: NaN } };
-  const exchange_id = Number(data.exchange);
-
-  if (Number.isNaN(exchange_id)) {
-    strapi.log.warn(`api::exchange-deal requires an exchange id in the body`);
-    strapi_ctx.badRequest();
-    return next();
-  }
-
-  const exchange = await strapi.entityService.findOne(
-    "api::exchange.exchange",
-    exchange_id,
-    {
-      populate: ["owner"],
-    },
-  );
-
-  const profile = await findOneFromUser(strapi_ctx.state.user.id);
-  if (!profile) {
-    strapi.log.warn(`api::exchange-deal requires an user with a profile`);
-    strapi_ctx.badRequest();
-    return next();
-  }
-
-  strapi_ctx.request.body = {
-    data: {
-      exchange: exchange_id,
-      owner: exchange.owner["id"],
-      participant: strapi_ctx.state.user.id,
-      profile: profile.id,
-    },
-  };
-
-  //
-
-  await next();
-}

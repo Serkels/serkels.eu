@@ -1,9 +1,9 @@
 //
 
-import { ValidationError } from "@strapi/utils/dist/errors";
-import type { StrapiRequestContext } from "strapi-typed";
-import { ZodType, z } from "zod";
-import type { PolicyImplementation } from "~/types";
+import { errors } from "@strapi/utils";
+import { z, type ZodType } from "zod";
+import { fromZodError } from "zod-validation-error";
+import type { KoaContext, PolicyImplementation } from "~/types";
 
 //
 
@@ -13,15 +13,19 @@ export function params_z_shema(
   >
 ) {
   const schema = config?.schema ?? z.object({});
-  const ctx = policyContext as any as StrapiRequestContext;
+  const ctx = policyContext as any as KoaContext;
+
   try {
-    schema.parse(ctx.params);
-  } catch (e) {
-    const error = new ValidationError("global::params_z_shema");
-    error.details = e;
-    throw error;
+    schema.parse(ctx.params, { path: ["ctx.params"] });
+    return true;
+  } catch (error) {
+    const zod_error = fromZodError(error);
+
+    throw new errors.PolicyError(zod_error.message, {
+      policy: "params_z_shema",
+      cause: error,
+    });
   }
-  return true;
 }
 
 export default params_z_shema satisfies PolicyImplementation;

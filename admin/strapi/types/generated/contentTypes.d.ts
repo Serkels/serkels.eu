@@ -1079,6 +1079,11 @@ export interface ApiExchangeDealExchangeDeal extends Schema.CollectionType {
     draftAndPublish: false;
   };
   attributes: {
+    last_message: Attribute.Relation<
+      'api::exchange-deal.exchange-deal',
+      'oneToOne',
+      'plugin::comments.comment'
+    >;
     exchange: Attribute.Relation<
       'api::exchange-deal.exchange-deal',
       'oneToOne',
@@ -1099,11 +1104,21 @@ export interface ApiExchangeDealExchangeDeal extends Schema.CollectionType {
       'oneToOne',
       'api::user-profile.user-profile'
     >;
-    last_message: Attribute.Relation<
+    organizer: Attribute.Relation<
       'api::exchange-deal.exchange-deal',
       'oneToOne',
-      'plugin::comments.comment'
+      'api::user-profile.user-profile'
     >;
+    participant_profile: Attribute.Relation<
+      'api::exchange-deal.exchange-deal',
+      'oneToOne',
+      'api::user-profile.user-profile'
+    >;
+    status: Attribute.Enumeration<
+      ['idle', 'denied', 'approved by the organizer', 'approved']
+    > &
+      Attribute.Required &
+      Attribute.DefaultTo<'idle'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

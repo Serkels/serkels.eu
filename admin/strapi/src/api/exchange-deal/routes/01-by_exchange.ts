@@ -1,16 +1,105 @@
-import { Context, Next } from "koa";
+//
+
+import type { Next } from "koa";
+import { ZodError, z } from "zod";
+import { fromZodError } from "zod-validation-error";
+import { set_params_to_nope } from "~/src/middlewares/set_params_to_nope";
+import { ID_Schema, type KoaContext } from "~/types";
+import { deal_state_action_schema } from "../content-types/exchange-deal";
+import { status_patching } from "../middlewares/status_patching";
+import { assert_deal_access } from "../policies/assert_deal_access";
+import { query_filters } from "../services/query_one_filters";
+
+//
 
 export default {
   routes: [
     {
+      method: "PATCH",
+      path: "/exchanges/:exchange_id/deals/:deal_id/status/:action",
+      handler: "api::exchange-deal.exchange-deal.update",
+      config: {
+        description: "Get exchange deals",
+        middlewares: [
+          status_patching(),
+          set_id_to_deal_id(),
+          "global::populate-all",
+          //
+          // next()
+          //
+        ],
+        policies: [
+          {
+            name: "global::params-z-shema",
+            config: {
+              schema: z.object({
+                exchange_id: ID_Schema,
+                deal_id: ID_Schema,
+                action: deal_state_action_schema,
+              }),
+            },
+          },
+          assert_deal_access,
+        ],
+      },
+      info: { apiName: "api::question.answer", type: "content-api" },
+    },
+
+    //
+    {
       method: "GET",
-      path: "/exchanges/:id/deals",
+      path: "/exchanges/:exchange_id/deals/:deal_id",
+      handler: "api::exchange-deal.exchange-deal.findOne",
+      config: {
+        description: "Get exchange deals",
+        middlewares: [
+          set_id_to_deal_id(),
+          "global::populate-all",
+          //
+          // next()
+          //
+        ],
+        policies: [
+          {
+            name: "global::params-z-shema",
+            config: {
+              schema: z.object({
+                exchange_id: ID_Schema,
+                deal_id: ID_Schema,
+              }),
+            },
+          },
+          assert_deal_access,
+        ],
+      },
+      info: { apiName: "api::question.answer", type: "content-api" },
+    },
+
+    //
+
+    {
+      method: "GET",
+      path: "/exchanges/:exchange_id/deals",
       handler: "api::exchange-deal.exchange-deal.find",
       config: {
         description: "Get exchange deals",
-        middlewares: [filter_deal_owner_participant],
+        middlewares: [
+          filter_by_exchange_and_user_id,
+          set_params_to_nope(),
+          "global::populate-all",
+          //
+          // next()
+          //
+        ],
         policies: [
-          // only_owned_or_participant_deal
+          {
+            name: "global::params-z-shema",
+            config: {
+              schema: z.object({
+                exchange_id: ID_Schema,
+              }),
+            },
+          },
         ],
       },
       info: { apiName: "api::question.answer", type: "content-api" },
@@ -18,86 +107,48 @@ export default {
   ],
 };
 
-//
+function set_id_to_deal_id() {
+  return async function set_id_to_deal_id(ctx: KoaContext, next: Next) {
+    try {
+      const deal_id = ID_Schema.parse(ctx.params.deal_id, {
+        path: ["ctx.params.deal_id"],
+      });
+      ctx.params = { id: deal_id };
+    } catch (error) {
+      if (error instanceof ZodError) {
+        return ctx.badRequest(fromZodError(error));
+      }
 
-async function filter_deal_owner_participant(context, next: Next) {
-  const ctx: Context = context;
-  const {
-    params: { id },
-  } = ctx;
-  const user = context.state.user;
+      return ctx.badRequest(error);
+    }
 
-  ctx.params = {};
+    //
+    //
+    //
 
-  context.query.filters = {
-    ...(context.query.filters || {}),
-    $and: [{ exchange: Number(id) }],
-    $or: [{ owner: user.id }, { participant: user.id }],
+    return next();
   };
+}
 
-  context.query.populate = {
-    ...(context.query.populate || {}),
-    owner: {
-      fields: ["id"],
-    },
-    participant: {
-      fields: ["id"],
-    },
-    last_message: {
-      fields: ["id", "content", "author"],
-    },
-    profile: {
-      fields: ["id", "firstname", "lastname", "university"],
-    },
-  };
+async function filter_by_exchange_and_user_id(ctx: KoaContext, next: Next) {
+  try {
+    const { filters } = await query_filters(ctx);
+
+    ctx.query.filters = {
+      ...(ctx.query.filters || {}),
+      ...filters,
+    };
+  } catch (error) {
+    if (error instanceof ZodError) {
+      return ctx.badRequest(fromZodError(error));
+    }
+
+    return ctx.badRequest(error);
+  }
+
+  //
+  //
+  //
 
   return next();
 }
-
-// async function filter_deal_owner_participant(
-//   context: StrapiContext,
-//   next: Next,
-// ) {
-//   const user = context.state.user;
-
-//   const entityService: EntityService = strapi.entityService;
-//   const deals = await entityService.findMany<
-//     keyof Shared.ContentTypes,
-//     ApiExchangeDealExchangeDeal["attributes"]
-//   >("api::exchange-deal.exchange-deal", {
-//     filters: { $or: [{ owner: user.id }, { participant: user.id }] },
-//     populate: [
-//       "exchange",
-//     ] as (keyof ApiExchangeDealExchangeDeal["attributes"])[],
-//   });
-
-//   const exchange_ids = deals.map(({ exchange }) => exchange["id"] as number);
-
-//   context.query.filters = {
-//     ...(context.query.filters || {}),
-//     $or: [{ id: exchange_ids }],
-//   };
-//   if (exchange_ids.length === 0) {
-//     context.query.filters = {
-//       owner: 0,
-//     };
-//   }
-//   return next();
-// }
-
-// async function only_owned_or_participant_deal(...[policyContext, config, { strapi }]: Parameters<PolicyImplementation>) {
-//   const strapi_ctx: StrapiContext = policyContext as any;
-//   const user = strapi_ctx.state.user;
-//   const entityService: EntityService = strapi.entityService;
-
-//   const deals = await entityService.findMany<
-//     keyof Shared.ContentTypes,
-//     ApiExchangeDealExchangeDeal["attributes"]
-//   >("api::exchange-deal.exchange-deal", {
-//     filters: { $or: [{ owner: user.id }, { participant: user.id }] },
-//     populate: [
-//       "exchange",
-//     ] as (keyof ApiExchangeDealExchangeDeal["attributes"])[],
-
-//   return false;
-// }

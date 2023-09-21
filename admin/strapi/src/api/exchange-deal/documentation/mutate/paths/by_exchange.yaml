@@ -7,12 +7,7 @@
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                data:
-                  type: array
-                  items:
-                    "$ref": "#/components/schemas/ExchangeDealResponseDataObject"
+              type: "#/components/schemas/ExchangeDealListResponse"
       "400":
         "$ref": "#/components/responses/400"
       "401":
@@ -42,3 +37,93 @@
           type: string
 
     operationId: get/exchanges/{id}/deals
+
+"/exchanges/{exchange_id}/deals/{deal_id}":
+  get:
+    responses:
+      "200":
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    "$ref": "#/components/schemas/ExchangeDealResponse"
+      "400":
+        "$ref": "#/components/responses/400"
+      "401":
+        "$ref": "#/components/responses/401"
+      "403":
+        "$ref": "#/components/responses/403"
+      "404":
+        "$ref": "#/components/responses/404"
+      "500":
+        "$ref": "#/components/responses/500"
+    tags:
+      - Exchange-deal
+    parameters:
+      - name: exchange_id
+        in: path
+        description: The exchange id
+        deprecated: false
+        required: true
+        schema:
+          type: number
+      - name: deal_id
+        in: path
+        description: The deal id
+        deprecated: false
+        required: true
+        schema:
+          type: number
+
+    operationId: get/exchanges/{exchange_id}/deals/{deal_id}
+
+"/exchanges/{exchange_id}/deals/{deal_id}/status/{action}":
+  patch:
+    responses:
+      "200":
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: "#/components/schemas/ExchangeDealResponse"
+      "400":
+        "$ref": "#/components/responses/400"
+      "401":
+        "$ref": "#/components/responses/401"
+      "403":
+        "$ref": "#/components/responses/403"
+      "404":
+        "$ref": "#/components/responses/404"
+      "500":
+        "$ref": "#/components/responses/500"
+    tags:
+      - Exchange-deal
+    parameters:
+      - name: exchange_id
+        in: path
+        description: The exchange id
+        deprecated: false
+        required: true
+        schema:
+          type: number
+      - name: deal_id
+        in: path
+        description: The deal id
+        deprecated: false
+        required: true
+        schema:
+          type: number
+      - name: action
+        in: path
+        description: The action
+        deprecated: false
+        required: true
+        schema:
+          type: string
+          enum: [approve, denie]
+    operationId: patch/exchanges/{exchange_id}/deals/{deal_id}/status/{action}
