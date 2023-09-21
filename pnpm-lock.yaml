@@ -687,8 +687,8 @@ importers:
         specifier: 4.1.8
         version: 4.1.8
       '@types/gtag.js':
-        specifier: 0.0.13
-        version: 0.0.13
+        specifier: 0.0.14
+        version: 0.0.14
       '@types/node':
         specifier: 20.6.3
         version: 20.6.3
@@ -6504,7 +6504,7 @@ packages:
     dependencies:
       '@sentry/types': 7.69.0
       '@sentry/utils': 7.69.0
-      tslib: 2.6.1
+      tslib: 2.6.2
     dev: false
 
   /@sentry/hub@6.19.7:
@@ -6522,7 +6522,7 @@ packages:
       '@sentry/types': 7.69.0
       '@sentry/utils': 7.69.0
       localforage: 1.10.0
-      tslib: 2.6.1
+      tslib: 2.6.2
     dev: false
 
   /@sentry/minimal@6.19.7:
@@ -6589,7 +6589,7 @@ packages:
       cookie: 0.4.2
       https-proxy-agent: 5.0.1(supports-color@8.1.1)
       lru_map: 0.3.3
-      tslib: 2.6.1
+      tslib: 2.6.2
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -6605,7 +6605,7 @@ packages:
       '@sentry/utils': 7.69.0
       hoist-non-react-statics: 3.3.2
       react: 18.2.0
-      tslib: 2.6.1
+      tslib: 2.6.2
     dev: false
 
   /@sentry/replay@7.69.0:
@@ -6638,7 +6638,7 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       '@sentry/types': 7.69.0
-      tslib: 2.6.1
+      tslib: 2.6.2
     dev: false
 
   /@sentry/webpack-plugin@1.20.0(supports-color@8.1.1):
@@ -8103,8 +8103,8 @@ packages:
       '@types/minimatch': 5.1.2
       '@types/node': 20.6.3
 
-  /@types/gtag.js@0.0.13:
-    resolution: {integrity: sha512-yOXFkfnt1DQr1v9B4ERulJOGnbdVqnPHV8NG4nkQhnu4qbrJecQ06DlaKmSjI3nzIwBj5U9/X61LY4sTc2KbaQ==}
+  /@types/gtag.js@0.0.14:
+    resolution: {integrity: sha512-NcR9rf3B93ie5T086NIpXGTtoIJeOeQ14+IBIBwfNBztb175e/0gONc60ywUU4+f9dwctgz9L3I4h5Gs/hl31g==}
     dev: true
 
   /@types/hast@2.3.6:

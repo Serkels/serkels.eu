@@ -65,7 +65,7 @@
     "@tanstack/react-query-devtools": "4.35.3",
     "@trpc/server": "10.38.3",
     "@types/debug": "4.1.8",
-    "@types/gtag.js": "0.0.13",
+    "@types/gtag.js": "0.0.14",
     "@types/node": "20.6.3",
     "@types/nprogress": "0.2.0",
     "@types/qs": "6.9.8",
