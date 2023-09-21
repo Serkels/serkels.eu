@@ -3,7 +3,7 @@
   "name": "@1/tailwindcss-config",
   "version": "0.0.0",
   "devDependencies": {
-    "autoprefixer": "10.4.15",
+    "autoprefixer": "10.4.16",
     "postcss": "8.4.30",
     "tailwind-variants": "0.1.14",
     "tailwindcss": "3.3.3",

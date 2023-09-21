@@ -5,7 +5,7 @@
   "devDependencies": {
     "@1/typescript-config": "workspace:*",
     "@pandacss/dev": "0.15.1",
-    "autoprefixer": "10.4.15",
+    "autoprefixer": "10.4.16",
     "postcss": "8.4.30",
     "prettier": "3.0.3",
     "typescript": "5.2.2"
