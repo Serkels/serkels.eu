@@ -38,6 +38,7 @@ const button = tv({
       //
       warning: "bg-warning text-white data-[hovered]:bg-warning/70",
       danger: "bg-danger text-white data-[hovered]:bg-danger/70",
+      light: "bg-transparent text-black data-[hovered]:bg-gray-100/70",
     },
     state: {
       filled: "",

@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@1/ui/components/Button";
+import { Button } from "@1/ui/components/ButtonV";
 import { Circle } from "@1/ui/icons";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
@@ -78,12 +78,7 @@ function QACard_EditButton() {
   }, [isEditing]);
 
   return (
-    <Button
-      className="px-2 py-2"
-      onClick={on_editing}
-      theme-padding={false}
-      variant="light"
-    >
+    <Button className="px-2 py-2" onPress={on_editing} intent="light">
       {isEditing ? "❌" : "🖊️"}
     </Button>
   );

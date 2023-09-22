@@ -1,38 +1,53 @@
 "use client";
 
-import type { Exchange_CreateProps } from "@1/modules/exchange/domain";
+import type {
+  Exchange,
+  Exchange_CreateProps,
+} from "@1/modules/exchange/domain";
+import { Spinner } from "@1/ui/components/Spinner";
 import * as UI from "@1/ui/domains/exchange/CreateForm";
+import type { QueryObserverSuccessResult } from "@tanstack/react-query";
+import { format } from "date-fns";
 import { Formik } from "formik";
-import { match } from "ts-pattern";
+import { P, match } from "ts-pattern";
 import { ErrorOccur } from "~/components/ErrorOccur";
 import { SelectCategoryField } from "~/components/SelectCategoryField";
 import { useInject } from "~/core/react";
-import { Create_Exchange_UseCase } from "~/modules/exchange/application/create_exchange";
-
+import { Edit_Exchange_UseCase } from "~/modules/exchange/application/edit_exchange";
+import { Get_Exchange_ById_UseCase } from "~/modules/exchange/application/get_exchange_byid.use-case";
 //
 
-export function New_Exchange() {
-  const mutation_info = useInject(Create_Exchange_UseCase).execute();
-  return match(mutation_info)
-    .with({ status: "success" }, () => <CreationSuccess />)
-    .otherwise(() => <New_Exchange_Form />);
+export function Edit_Exchange({ exchange_id }: { exchange_id: number }) {
+  const query_info = useInject(Get_Exchange_ById_UseCase).execute(exchange_id);
+
+  return match(query_info)
+    .with({ status: "error", error: P.select() }, (error) => {
+      throw error;
+    })
+    .with({ status: "loading" }, () => <Spinner />)
+    .with({ status: "success" }, (result) => <Edit_Exchange_Form {...result} />)
+    .exhaustive();
 }
 
-function New_Exchange_Form() {
-  const mutation_info = useInject(Create_Exchange_UseCase).execute();
+function Edit_Exchange_Form({
+  data: exchange,
+}: QueryObserverSuccessResult<Exchange, unknown>) {
+  const mutation_info = useInject(Edit_Exchange_UseCase).execute(
+    exchange.get("id"),
+  );
 
   const { error, mutateAsync } = mutation_info;
 
   const initialValues = {
-    category: "",
-    description: "",
-    in_exchange_of: "",
-    location: "",
-    is_online: true,
+    category: exchange.category.id,
+    description: exchange.description,
+    in_exchange_of: exchange.in_exchange_of?.id ?? "",
+    location: exchange.location,
+    is_online: exchange.is_online,
     places: 1,
-    title: "",
-    type: "proposal",
-    when: "",
+    title: exchange.title,
+    type: exchange.type,
+    when: format(exchange.when, "yyyy-MM-dd"),
   } as Exchange_CreateProps;
 
   return (

@@ -22,7 +22,7 @@ export class Get_Deals_UseCase {
 
   //
 
-  execute(id: number) {
+  execute(id: number, ) {
     return useInfiniteQuery({
       // queryFn: ({ pageParam: page }) => {
       //   return this.repository.find_all({

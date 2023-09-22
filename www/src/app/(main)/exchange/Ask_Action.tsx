@@ -7,16 +7,16 @@ import { OnlineOrLocation } from "@1/ui/domains/exchange/OnlineOrLocation";
 import { Exchange as ExchangeIcon, Share } from "@1/ui/icons";
 import { Formik } from "formik";
 import Link from "next/link";
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useMemo, useRef } from "react";
 import { useTimeoutFn } from "react-use";
 import { P, match } from "ts-pattern";
 import { Link_Avatar } from "~/components/Avatar";
 import { ErrorOccur } from "~/components/ErrorOccur";
 import { useContainer, useInject } from "~/core/react";
-import { useExchange_item_controller } from "~/modules/exchange";
 import { Deal_Controller } from "~/modules/exchange/Deal.controller";
 import { Deal_Message_Controller } from "~/modules/exchange/Deal_Message.controller";
 import { Deal_Message_Repository } from "~/modules/exchange/Deal_Message.repository";
+import { Get_Deals_UseCase } from "~/modules/exchange/application/get_deals.use-case";
 import { useMyProfileId } from "~/modules/user/useProfileId";
 import { Exchange_CardContext } from "./ExchangeCard.context";
 
@@ -45,21 +45,23 @@ export function Ask_Action() {
 export function Ask_Body() {
   const { exchange } = useContext(Exchange_CardContext);
   const exchange_id = exchange.get("id");
-
-  const { find_deal_by_participant } = useExchange_item_controller(exchange_id);
+  const exchange_deals_query_info =
+    useInject(Get_Deals_UseCase).execute(exchange_id);
 
   const {
     create: { useMutation },
   } = useInject(Deal_Controller);
 
-  const exchange_deals_query_info = find_deal_by_participant.useQuery();
-  const deal_id = exchange_deals_query_info.data?.data?.at(0)?.id;
-
-  useContainer().registerInstance(
-    Deal_Message_Repository.DEAL_ID_TOKEN,
-    deal_id ?? NaN,
-  );
-  const message_ctrl = useInject(Deal_Message_Controller);
+  const deal_id = exchange_deals_query_info.data?.pages.at(0);
+  const injector = useContainer();
+  const container = useMemo(() => {
+    return injector
+      .createChildContainer()
+      .register<number>(Deal_Message_Repository.DEAL_ID_TOKEN, {
+        useFactory: () => deal_id ?? NaN,
+      });
+  }, [deal_id]);
+  const message_ctrl = container.resolve(Deal_Message_Controller);
 
   const create_message_info = message_ctrl.create.useMutation();
 
@@ -82,60 +84,70 @@ export function Ask_Body() {
     create_message_info.mutate(message_ref.current);
   }, [create_deal_mutation_info.isSuccess, deal_id, message_ref.current]);
 
-  return (
-    match([
-      create_message_info,
-      exchange_deals_query_info,
-      create_deal_mutation_info,
+  console.log([
+    create_message_info,
+    exchange_deals_query_info,
+    create_deal_mutation_info,
+  ]);
+  console.log([
+    create_message_info.status,
+    exchange_deals_query_info.status,
+    create_deal_mutation_info.status,
+  ]);
+  const merged_mutations = {
+    status: match([
+      create_message_info.status,
+      exchange_deals_query_info.status,
+      create_deal_mutation_info.status,
     ])
       .with(
-        [{ status: "error" }, P._, P._],
-        [P._, { status: "error" }, P._],
-        [P._, P._, { status: "error" }],
-        () => {
-          const error =
-            create_message_info.error ??
-            exchange_deals_query_info.error ??
-            create_deal_mutation_info.error;
-          return <ErrorOccur error={error as Error} />;
-        },
-      )
-      .with([P._, P._, { status: "loading" }], () => <Sending />)
-      .with(
-        [{ status: "loading" }, P._, P._],
-        [P._, { status: "loading" }, P._],
-        () => <Loading />,
+        ["error", P._, P._],
+        [P._, "error", P._],
+        [P._, P._, "error"],
+        () => "error" as const,
       )
       .with(
-        [
-          { status: "idle" },
-          {
-            status: "success",
-            data: { data: [P.select()] },
-          },
-          { status: "idle" },
-        ],
-        ({ id }) => <RedirectToExistingDeal deal_id={id!} />,
+        ["loading", P._, P._],
+        [P._, "loading", P._],
+        () => "loading" as const,
       )
-      //
-      .with(
-        [P._, P._, { status: "idle", mutateAsync: P.select() }],
-        (mutateAsync) => (
-          <Ask_Form
-            onSend={async (message) => {
-              message_ref.current = message;
-              await mutateAsync({ exchange_id });
-              await exchange_deals_query_info.refetch();
-            }}
-          />
-        ),
-      )
-      .with([{ status: "success" }, P._, P._], () => <MessageSent />)
-      .with([{ status: "idle" }, { status: "success" }, P._], () => {
-        return <Loading />;
-      })
-      .exhaustive()
-  );
+      .with([P._, P._, "loading"], () => "sending" as const)
+      .with(["success", P._, P._], () => "sent" as const)
+      .with(["idle", "success", P.not("idle")], () => "loading" as const)
+      .with(["idle", "success", "success"], () => "loading" as const)
+      .with(["idle", "success", "idle"], () => "redirect" as const)
+      .with([P._, P._, "success"], () => "success" as const)
+      .otherwise(() => "idle" as const),
+    error:
+      create_message_info.error ||
+      exchange_deals_query_info.error ||
+      create_deal_mutation_info.error,
+    deal_id,
+  };
+  console.log({ merged_mutations });
+
+  return match(merged_mutations)
+    .with({ status: "error", error: P.select() }, (error) => (
+      <ErrorOccur error={error as Error} />
+    ))
+    .with({ status: "loading" }, () => <Loading />)
+    .with({ status: "sending" }, () => <Sending />)
+    .with({ status: "sent" }, () => <MessageSent />)
+    .with({ status: "success" }, () => null)
+    .with({ status: "redirect", deal_id: P.select(P.not(P.nullish)) }, (id) => (
+      <RedirectToExistingDeal deal_id={id!} />
+    ))
+
+    .with({ status: "redirect" }, { status: "idle" }, () => (
+      <Ask_Form
+        onSend={async (message) => {
+          message_ref.current = message;
+          await create_deal_mutation_info.mutateAsync({ exchange_id });
+          await exchange_deals_query_info.refetch();
+        }}
+      />
+    ))
+    .exhaustive();
 }
 
 function Sending() {

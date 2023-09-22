@@ -9,6 +9,7 @@ import { Get_Owned_Exchanges_UseCase } from "~/modules/exchange/application/get_
 export function Owned_ExchangeList() {
   const info = useInject(Get_Owned_Exchanges_UseCase).execute({
     pagination: { pageSize: 12 },
+    sort: ["createdAt:desc"],
   });
 
   return <Exchange_InfiniteList info={info} />;

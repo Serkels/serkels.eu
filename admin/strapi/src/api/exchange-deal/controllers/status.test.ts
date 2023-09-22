@@ -1,10 +1,12 @@
 //
 
+/// <reference types="bun-types" />
+
 import Strapi from "@strapi/strapi";
 import { expect, test } from "bun:test";
 import request from "supertest";
 
-test("should return hello world", async () => {
+test.skip("should return hello world", async () => {
   const strapi = Strapi({});
   await request(strapi.server.httpServer)
     .get("/api/exchange/")

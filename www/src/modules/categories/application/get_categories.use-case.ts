@@ -4,6 +4,8 @@ import { Category_Type } from "@1/modules/category/domain";
 import debug from "debug";
 import { match } from "ts-pattern";
 import { Lifecycle, inject, scoped } from "~/core/di";
+import { getQueryClient } from "~/core/getQueryClient";
+import { Categories_Repository } from "../Categories_Repository";
 import { Categories_useQuery } from "../Categories_useQuery";
 
 //
@@ -15,6 +17,8 @@ export class Get_Category_UseCase {
   constructor(
     @inject(Categories_useQuery)
     private readonly categories_query: Categories_useQuery,
+    @inject(Categories_Repository)
+    private readonly repository: Categories_Repository,
   ) {
     this.#log("new");
   }
@@ -33,5 +37,32 @@ export class Get_Category_UseCase {
     if (!categories) return [];
 
     return categories;
+  }
+
+  async prefetch(type: Category_Type) {
+    const queryClient = getQueryClient();
+
+    await match(type)
+      .with("exchange", () =>
+        queryClient.prefetchQuery({
+          queryKey: Categories_Repository.keys.exchange(),
+          queryFn: () => this.repository.exchange(),
+        }),
+      )
+      .with("opportunity", () =>
+        queryClient.prefetchQuery({
+          queryKey: Categories_Repository.keys.opportunity(),
+          queryFn: () => this.repository.opportunity(),
+        }),
+      )
+      .with("question", () =>
+        queryClient.prefetchQuery({
+          queryKey: Categories_Repository.keys.question(),
+          queryFn: () => this.repository.question(),
+        }),
+      )
+      .exhaustive();
+
+    return queryClient;
   }
 }

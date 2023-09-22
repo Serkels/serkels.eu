@@ -8,6 +8,7 @@ import type {
   Exchange_DealSchema,
   Exchange_ItemSchema,
   Exchange_ListSchema,
+  Exchange_RequestSchema,
   Exchange_Schema,
 } from "@1/strapi-openapi";
 import debug from "debug";
@@ -43,7 +44,7 @@ export class Exchange_Repository implements RepositoryPort {
       "/exchanges",
       {
         body: {
-          data,
+          data: data as Exchange_RequestSchema["data"],
         },
         headers: this.openapi.headers,
         params: {},
@@ -59,6 +60,27 @@ export class Exchange_Repository implements RepositoryPort {
     }
   }
 
+  async update(id: number, data: Exchange_CreateProps) {
+    this.#log("create", data);
+    const { response, error: errorBody } = await this.openapi.client.PUT(
+      "/exchanges/{id}",
+      {
+        body: {
+          data: data as Exchange_RequestSchema["data"],
+        },
+        headers: this.openapi.headers,
+        params: { path: { id } },
+      },
+    );
+
+    if (errorBody) {
+      this.#log("create", errorBody);
+      throw new HTTPError(
+        [errorBody.error.message, "from " + response.url].join("\n"),
+        { cause: errorBody.error },
+      );
+    }
+  }
   async find_all(query: Exchanges_QueryProps): Promise<Exchange_ListSchema> {
     this.#log("find_all", query);
 

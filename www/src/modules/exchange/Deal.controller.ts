@@ -47,6 +47,7 @@ export class Deal_Controller {
         });
         await this.repository.create({
           exchange: props.exchange_id,
+          status: "idle",
         });
       } finally {
         trace.finish();

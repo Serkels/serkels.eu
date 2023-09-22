@@ -1,9 +1,10 @@
 //
 
 import { Exchange_ItemSchemaToDomain } from "@1/modules/exchange/infra/strapi";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, type InfiniteData } from "@tanstack/react-query";
 import debug from "debug";
 import { Lifecycle, inject, scoped } from "~/core/di";
+import { getQueryClient } from "~/core/getQueryClient";
 import { getNextPageParam, getPreviousPageParam } from "~/core/use-query";
 import {
   Exchange_Repository,
@@ -51,5 +52,38 @@ export class Get_Exchanges_UseCase {
         };
       },
     });
+  }
+
+  async prefetch(filters: Exchanges_QueryProps["filters"]) {
+    this.#log("prefetch", { filters });
+
+    const queryClient = getQueryClient();
+
+    await queryClient.prefetchInfiniteQuery({
+      queryKey: Exchange_QueryKeys.lists(filters),
+      queryFn: () =>
+        this.repository.find_all({
+          filters,
+          sort: ["createdAt:desc"],
+          pagination: { pageSize: 4 },
+        }),
+    });
+
+    {
+      const { pages } = queryClient.getQueryData<
+        InfiniteData<Awaited<ReturnType<typeof this.repository.find_all>>>
+      >(Exchange_QueryKeys.lists(filters)) ?? { pages: [] };
+
+      for (const { data: exchanges } of pages) {
+        for (const data of exchanges ?? []) {
+          queryClient.setQueryData(
+            Exchange_QueryKeys.item(Number(data?.id)),
+            data,
+          );
+        }
+      }
+    }
+
+    return queryClient;
   }
 }

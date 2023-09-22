@@ -1,8 +1,8 @@
 //
 
 import { AuthError } from "@1/core/error";
+import type { Exchange_CreateProps } from "@1/modules/exchange/domain";
 import { Type } from "@1/modules/exchange/domain/Type.value";
-import type { FormValues } from "@1/ui/domains/exchange/CreateForm";
 import * as Sentry from "@sentry/nextjs";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import debug from "debug";
@@ -25,7 +25,7 @@ export class Exchange_CreateForm_Controller {
     const { data: session } = useSession();
     const queryClient = useQueryClient();
 
-    const createExchangeFn = async (props: FormValues) => {
+    const createExchangeFn = async (props: Exchange_CreateProps) => {
       log("createExchangeFn");
       const trace = Sentry.startTransaction({
         name: "Create Exchange",
@@ -40,7 +40,6 @@ export class Exchange_CreateForm_Controller {
         .create({
           ...other_props,
           ...(in_exchange_of ? { in_exchange_of } : {}),
-          available_places: Number(props.places),
           type: Type.create(props.type).value().get("value"),
         })
         .finally(() => trace.finish());
@@ -54,6 +53,7 @@ export class Exchange_CreateForm_Controller {
       if (mutation_result.status !== "success") return;
       Promise.all([
         queryClient.invalidateQueries({ queryKey: Exchange_QueryKeys.lists() }),
+        queryClient.invalidateQueries({ queryKey: Exchange_QueryKeys.owned() }),
       ]);
     }, [mutation_result.isSuccess]);
 

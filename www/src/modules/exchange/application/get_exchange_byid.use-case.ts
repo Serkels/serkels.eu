@@ -24,6 +24,7 @@ export class Get_Exchange_ById_UseCase {
 
   execute(id: number) {
     return useQuery({
+      enabled: this.repository.is_authorized,
       queryFn: () => this.repository.by_id(id),
       queryKey: Exchange_QueryKeys.item(id),
       select: (data) => {

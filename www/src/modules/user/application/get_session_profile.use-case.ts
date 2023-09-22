@@ -14,7 +14,7 @@ import { Lifecycle, scoped } from "~/core/di";
 
 @scoped(Lifecycle.ContainerScoped)
 export class Get_Session_Profile {
-  #log = debug(`~:modules:question:app:${Get_Session_Profile.name}`);
+  #log = debug(`~:modules:user:app:${Get_Session_Profile.name}`);
 
   constructor() {
     this.#log("new");

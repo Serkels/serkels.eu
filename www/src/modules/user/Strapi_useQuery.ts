@@ -13,12 +13,12 @@ import debug from "debug";
 import { useCallback, useEffect, useState, type DependencyList } from "react";
 import type { ZodTypeAny, z } from "zod";
 import { type ApiClient } from "~/app/api/v1";
-import { StrapiRepository } from "~/core/StrapiRepository";
+import type { OpenAPI_Repository } from "~/app/api/v1/OpenAPI.repository";
 
 //
 
 export class Strapi_useQuery {
-  constructor(public repository: StrapiRepository) {
+  constructor(public repository: OpenAPI_Repository) {
     this.#log("new");
   }
   protected infinite_query = this.#infinite_query.bind(this);

@@ -16,6 +16,12 @@ import { Message } from "../../inbox/domain";
 import { Profile } from "../../profile/domain";
 
 //
+export const Deal_Status = z.union([
+  z.literal("approved"),
+  z.literal("approved by the organizer"),
+  z.literal("denied"),
+  z.literal("idle"),
+]);
 
 export const Deal_PropsSchema = z
   .object({
@@ -23,6 +29,7 @@ export const Deal_PropsSchema = z
     id: z.number(),
     last_message: z.instanceof(Message),
     profile: z.instanceof(Profile),
+    status: Deal_Status,
   })
   .merge(Strapi_Timestamps);
 
@@ -34,6 +41,7 @@ export type Deal_Props = z.TypeOf<typeof Deal_PropsSchema>;
 
 export const Deal_CreatePropsSchema = z.object({
   exchange: z.any(),
+  status: Deal_Status,
 });
 export type Deal_CreateProps = z.TypeOf<typeof Deal_CreatePropsSchema>;
 
@@ -73,6 +81,9 @@ export class Deal extends Entity<Deal_Props> {
 
   get profile() {
     return this.props.profile;
+  }
+  get status() {
+    return this.props.status;
   }
 
   get exchange() {

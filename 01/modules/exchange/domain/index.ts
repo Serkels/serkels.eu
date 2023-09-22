@@ -1,9 +1,10 @@
 //
 
 import { Entity, Ok, Result } from "@1/core/domain";
+import { z } from "zod";
 import type { Category } from "../../category/domain";
 import type { Profile } from "../../profile/domain";
-import type { Type, TypeProps } from "./Type.value";
+import { Type, type TypeProps } from "./Type.value";
 
 //
 
@@ -64,11 +65,35 @@ export class Exchange extends Entity<Exchange_Props> {
   get in_exchange_of() {
     return this.props.in_exchange_of;
   }
+  get when() {
+    return this.props.when;
+  }
 }
 
 //
 
-export interface Exchange_CreateProps
+export interface Exchange_CreateProps {
+  type: TypeProps["value"];
+  is_online: boolean;
+  in_exchange_of?: string | undefined;
+}
+
+export const Exchange_Create_Schema = z.object(
+  {
+    places: z.coerce.number({ description: "places" }).min(1).max(100),
+    is_online: z.coerce.boolean({ description: "is_online" }),
+    title: z.string().trim().nonempty(),
+    description: z.string().trim().nonempty(),
+    location: z.string().trim().optional(),
+    when: z.coerce.date(),
+    type: Type.schema,
+    category: z.coerce.number(),
+    in_exchange_of: z.coerce.number().optional(),
+  },
+  { description: "exchange" },
+);
+
+export interface Exchange_CreateProps_
   extends Pick<
     Exchange_Props,
     | "available_places"

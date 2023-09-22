@@ -4,23 +4,17 @@ import { Grid } from "@1/ui/components/Grid";
 import { Hydrate, dehydrate } from "@tanstack/react-query";
 import { type PropsWithChildren } from "react";
 import { AsideWithTitle } from "~/components/layouts/holy/aside";
-import { get_StrapiRepository } from "~/core";
-import { getQueryClient } from "~/core/getQueryClient";
-import { Categories_Repository } from "~/modules/categories/Categories_Repository";
+import { injector } from "~/core/di";
+import { Get_Category_UseCase } from "~/modules/categories/application/get_categories.use-case";
 import { CategoriesList, QAFilter } from "./page.client";
 
 export default async function Layout({
   children,
   see_also,
 }: PropsWithChildren<{ see_also: React.ReactNode }>) {
-  const strapi_repository = await get_StrapiRepository();
-  const repository = new Categories_Repository(strapi_repository);
-
-  const queryClient = getQueryClient();
-  await queryClient.prefetchQuery({
-    queryKey: Categories_Repository.keys.question(),
-    queryFn: () => repository.question(),
-  });
+  const queryClient = await injector()
+    .resolve(Get_Category_UseCase)
+    .prefetch("question");
   const dehydratedState = dehydrate(queryClient);
 
   return (
