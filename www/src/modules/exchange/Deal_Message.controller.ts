@@ -39,7 +39,11 @@ export class Deal_Message_Controller {
 
   useCreateMutation() {
     const { data: session } = useSession();
-
+    const query_client = useQueryClient();
+    const key = [
+      ...Deal_QueryKeys.messages(this.repository.deal_id),
+      "create",
+    ] as const;
     const create_message = async (message: string) => {
       this.#log("create_message");
       const trace = startTransaction({
@@ -49,17 +53,22 @@ export class Deal_Message_Controller {
         trace.startChild({
           op: "create record",
         });
+
+        await query_client.cancelQueries({ queryKey: key });
         await this.repository.create({ content: message });
       } finally {
         trace.finish();
       }
     };
 
-    const mutation_result = useMutation(
-      useCallback(create_message, [this.repository, session?.user?.id]),
-    );
+    const mutation_result = useMutation({
+      mutationKey: key,
+      mutationFn: useCallback(create_message, [
+        this.repository,
+        session?.user?.id,
+      ]),
+    });
 
-    const query_client = useQueryClient();
     useEffect(() => {
       Promise.all([
         query_client.invalidateQueries(

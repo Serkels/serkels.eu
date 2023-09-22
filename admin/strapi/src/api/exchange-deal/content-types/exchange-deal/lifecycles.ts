@@ -2,9 +2,6 @@
 
 import type { Event as LifecycleEvent } from "@strapi/database/lib/lifecycles";
 import type { Subscriber } from "@strapi/database/lib/lifecycles/subscribers";
-import type { Shared } from "@strapi/strapi";
-import type { EntityService } from "@strapi/strapi/lib/services/entity-service";
-import { ApiExchangeDealExchangeDeal } from "~/types/generated/contentTypes";
 
 //
 
@@ -12,29 +9,29 @@ type ParamsWhere = { params: { where: { id: number } } };
 
 export default {
   async beforeDelete(event: LifecycleEvent & ParamsWhere) {
-    const entityService: EntityService = strapi.entityService;
-    const { model, params } = event;
+    const { params } = event;
 
-    const entry: ApiExchangeDealExchangeDeal["attributes"] & { id: number } =
-      await strapi.db
-        .query(model.uid)
-        .findOne({ ...params, populate: ["owner"] });
-
-    const comments = await entityService.findMany("plugin::comments.comment", {
-      populate: ["authorUser"],
-      filters: { related: { uid: model.uid, id: entry.id } as any },
-    });
-
-    await Promise.all(
-      comments.map(({ id }) =>
-        entityService
-          .delete<keyof Shared.ContentTypes, unknown>(
-            "plugin::comments.comment",
-            id,
-            {},
-          )
-          .then(() => strapi.log.info(`DELETE plugin::comments.comment ${id}`)),
-      ),
+    const relation = `api::exchange-deal.exchange-deal:${params.where.id}`;
+    const comments = await strapi.entityService.findMany(
+      "plugin::comments.comment",
+      {
+        populate: [],
+        filters: { related: relation },
+      },
     );
+
+    for (const comment of comments) {
+      await strapi.entityService.delete(
+        "plugin::comments.comment",
+        comment.id,
+        {},
+      );
+
+      strapi.log.info(
+        `unconfirmed_user_cleanup_task > ` +
+          `DELETE plugin::comments.comment:${comment.id} ` +
+          `{related: ${comment.related}}`,
+      );
+    }
   },
 } as Subscriber;

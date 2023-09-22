@@ -35,7 +35,7 @@ export class Deal_Controller {
   useCreateMutation() {
     const { data: session } = useSession();
     const query_client = useQueryClient();
-
+    const key = [...Deal_QueryKeys.all, "create"];
     const create_deal = async (props: { exchange_id: number }) => {
       log("createDealFn");
       const trace = startTransaction({
@@ -45,7 +45,8 @@ export class Deal_Controller {
         trace.startChild({
           op: "create record",
         });
-        await this.repository.create({
+        await query_client.cancelQueries({ queryKey: key });
+        return this.repository.create({
           exchange: props.exchange_id,
           status: "idle",
         });
@@ -55,6 +56,7 @@ export class Deal_Controller {
     };
 
     const mutation_result = useMutation({
+      mutationKey: key,
       mutationFn: useCallback(create_deal, [
         this.repository,
         session?.user?.id,

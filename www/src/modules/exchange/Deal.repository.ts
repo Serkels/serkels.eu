@@ -16,7 +16,6 @@ import { Bookmarks_Repository } from "../bookmarks/bookmarks.repository";
 const log = debug("~:modules:exchange:Deal_Repository");
 //
 
-
 @scoped(Lifecycle.ContainerScoped)
 export class Deal_Repository {
   #log = debug(`~:modules:deal:${Bookmarks_Repository.name}`);
