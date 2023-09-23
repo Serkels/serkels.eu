@@ -2,12 +2,13 @@
  * exchange router
  */
 
+import { ID_Schema } from "@1/core/domain";
 import { Exchange_Create_Schema } from "@1/modules/exchange/domain";
 import { factories } from "@strapi/strapi";
 import type { Next } from "koa";
 import { ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
-import { ID_Schema, KoaContext, Params } from "~/types";
+import { KoaContext, Params } from "~/types";
 import { findOneFromUser } from "../../user-profile/services/user-profile";
 import { EXCHANGE_API_CONTENT_ID } from "../content-types/exchange";
 

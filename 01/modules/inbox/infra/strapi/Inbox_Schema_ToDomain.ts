@@ -1,105 +1,73 @@
 //
 
 import {
+  Fail,
   IllegalArgs,
-  InputError,
+  Ok,
   Result,
+  type ErrorInstance,
   type IAdapter,
-  type IResult,
 } from "@1/core/domain";
+import type { Inbox_Schema } from "@1/strapi-openapi";
 import debug from "debug";
-import { Lifecycle, inject, scoped } from "tsyringe";
-import { z } from "zod";
-import { z_strapi_entity } from "../../../common";
-import { Strapi_Timestamps } from "../../../common/record";
+import { Lifecycle, scoped } from "tsyringe";
 import { Inbox } from "../../domain";
-import type { InboxList_Schema, Inbox_Schema } from "./Inbox_Schema";
-import { Thread_Schema_ToDomain } from "./Thread_Schema_ToDomain";
+import { Inbox_Record } from "./Inbox_Schema";
 
 //
 
-function reuslt_all_ok<A = any, B = any, M = any>(
-  results: Array<IResult<A, any, any>>,
-): IResult<A[], B, M> {
-  return Result.Ok(results.filter((r) => r.isOk()).map((r) => r.value()));
-}
+// function reuslt_all_ok<A = any, B = any, M = any>(
+//   results: Array<IResult<A, any, any>>,
+// ): IResult<A[], B, M> {
+//   return Result.Ok(results.filter((r) => r.isOk()).map((r) => r.value()));
+// }
 
 @scoped(Lifecycle.ContainerScoped)
 export class Inbox_Schema_ToDomain implements IAdapter<Inbox_Schema, Inbox> {
   #log = debug(`~:modules:inbox:${Inbox_Schema_ToDomain.name}`);
-  constructor(
-    @inject(Thread_Schema_ToDomain)
-    private readonly thread_schema_todomain: Thread_Schema_ToDomain,
-  ) {
+  constructor() {
     this.#log("new");
   }
 
-  schema = z_strapi_entity(
-    z
-      .object(
-        {
-          thread: z.lazy(() =>
-            z.any().transform((data) => {
-              // TODO(douglasduteil): remove dirty data.data
-              return this.thread_schema_todomain.mapper.parse(data.data);
-            }),
-          ),
-        },
-        { description: "Inbox Record" },
-      )
-      .merge(Strapi_Timestamps),
-  );
+  build(data: Inbox_Schema): Result<Inbox, ErrorInstance> {
+    try {
+      return Ok(
+        Inbox_Record.parse(
+          { data },
+          {
+            path: [
+              ...JSON.stringify({ data }, null, 2)
+                .replaceAll('"', '"')
+                .split("\n"),
 
-  to_domain = this.schema.transform(function to_domain(data): Inbox {
-    if (!data)
-      throw new InputError("Inbox_Mapper", {
-        errors: [new IllegalArgs("data undefined")],
-      });
-
-    const domain = Inbox.create({
-      ...data.attributes,
-      id: data.id,
-      thread: data.attributes.thread,
-    });
-
-    if (domain.isFail()) {
-      throw new InputError("Inbox_Mapper", { cause: domain.error() });
-    }
-
-    return domain.value();
-  });
-
-  build(target: Inbox_Schema): IResult<Inbox, Error> {
-    const thread = target.thread.data
-      ? this.thread_schema_todomain.build(target.thread.data)
-      : Result.Ok(undefined);
-
-    const all_results = Result.combine([thread]);
-    if (all_results.isFail()) {
-      return Result.fail(
-        new InputError("Inbox_Schema_ToDomain.build", {
-          cause: all_results.error(),
+              "=",
+              "data",
+            ],
+          },
+        ),
+      );
+    } catch (error) {
+      return Fail(
+        new IllegalArgs("Exchange_ItemSchemaToDomain.build", {
+          cause: error,
         }),
       );
     }
-
-    return Inbox.create({ id: Number(target.id), thread: thread.value() });
   }
+  // build(target: Inbox_Schema): IResult<Inbox, Error> {
+  //   const thread = target.thread.data
+  //     ? this.thread_schema_todomain.build(target.thread.data)
+  //     : Result.Ok(undefined);
 
-  build_list(list: InboxList_Schema): IResult<Inbox[], Error> {
-    const results = list.map((inbox) =>
-      this.build({ id: inbox.id, ...inbox.attributes }),
-    );
+  //   const all_results = Result.combine([thread]);
+  //   if (all_results.isFail()) {
+  //     return Result.fail(
+  //       new InputError("Inbox_Schema_ToDomain.build", {
+  //         cause: all_results.error(),
+  //       }),
+  //     );
+  //   }
 
-    const all_results = Result.combine(results);
-    if (all_results.isFail()) {
-      return Result.fail(
-        new InputError("Inbox_Schema_ToDomain.build_list", {
-          cause: all_results.error(),
-        }),
-      );
-    }
-
-    return reuslt_all_ok(results);
-  }
+  //   return Inbox.create({ id: Number(target.id), thread: thread.value() });
+  // }
 }

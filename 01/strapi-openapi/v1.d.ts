@@ -9325,7 +9325,7 @@ export interface operations {
     parameters: {
       query?: {
         /** @description Sort by attributes ascending (asc) or descending (desc) */
-        sort?: string;
+        sort?: string[];
         /** @description Pagination */
         pagination?: {
           page?: number;
@@ -9819,9 +9819,7 @@ export interface operations {
       /** @description OK */
       200: {
         content: {
-          "application/json": {
-            data?: components["schemas"]["ExchangeDealResponse"][];
-          };
+          "application/json": components["schemas"]["ExchangeDealResponse"];
         };
       };
       400: components["responses"]["400"];
@@ -10000,7 +9998,7 @@ export interface operations {
     parameters: {
       query?: {
         /** @description Sort by attributes ascending (asc) or descending (desc) */
-        sort?: string;
+        sort?: string[];
       };
       path: {
         /** @description The exchange id */
@@ -10065,7 +10063,7 @@ export interface operations {
     parameters: {
       query?: {
         /** @description Sort by attributes ascending (asc) or descending (desc) */
-        sort?: string;
+        sort?: string[];
         /** @description Pagination */
         pagination?: {
           page?: number;
@@ -11603,7 +11601,7 @@ export interface operations {
     parameters: {
       query?: {
         /** @description Sort by attributes ascending (asc) or descending (desc) */
-        sort?: string;
+        sort?: string[];
         /** @description Pagination */
         pagination?: {
           page?: number;

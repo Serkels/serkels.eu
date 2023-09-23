@@ -1,9 +1,10 @@
 //
 
+import { ID_Schema } from "@1/core/domain";
 import { transformResponse } from "@strapi/strapi/lib/core-api/controller/transform";
 import { sanitize, validate } from "@strapi/utils";
 import { z } from "zod";
-import { GetValues, ID_Schema, Params, type KoaContext } from "~/types";
+import { GetValues, Params, type KoaContext } from "~/types";
 import { EXCHANGE_API_CONTENT_ID } from "../../exchange/content-types/exchange";
 import { BOOKMARK_API_CONTENT_ID } from "../content-types/bookmark";
 import { find_owner_bookmarks } from "../services/bookmark";

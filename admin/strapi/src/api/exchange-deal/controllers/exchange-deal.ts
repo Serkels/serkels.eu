@@ -2,13 +2,12 @@
  * exchange-deal controller
  */
 
+import { ID_Schema } from "@1/core/domain";
 import { factories } from "@strapi/strapi";
 import { transformResponse } from "@strapi/strapi/lib/core-api/controller/transform";
 import { sanitize, validate } from "@strapi/utils";
 import type { Next } from "koa";
-import { Common_Service } from "~/src/extensions/comments/services";
-import { replace_autor } from "~/src/extensions/comments/services/replace_autor";
-import { GetValues, ID_Schema, Params, type KoaContext } from "~/types";
+import { GetValues, Params, type KoaContext } from "~/types";
 import { EXCHANGE_DEAL_API_CONTENT_ID } from "../content-types/exchange-deal";
 
 export default factories.createCoreController(
@@ -48,9 +47,11 @@ export default factories.createCoreController(
         "filters" | "populate"
       >;
 
-      const result = await strapi
-        .service(EXCHANGE_DEAL_API_CONTENT_ID)
-        .findOne(deal_id, { ...sanitizedQueryParams, ...query });
+      const result = await strapi.entityService.findOne(
+        EXCHANGE_DEAL_API_CONTENT_ID,
+        deal_id,
+        { ...sanitizedQueryParams, ...query },
+      );
 
       const sanitizedResults = (await sanitize.contentAPI.output(
         result,
@@ -60,17 +61,18 @@ export default factories.createCoreController(
         },
       )) as GetValues<typeof EXCHANGE_DEAL_API_CONTENT_ID>;
 
-      const last_message = await replace_autor(
-        await Common_Service.findOne({
-          id: result.last_message.id,
-        }),
-      );
+      return transformResponse(sanitizedResults, {}, { contentType });
+      // const last_message = await replace_autor(
+      //   await Common_Service.findOne({
+      //     id: result.last_message?.id,
+      //   }),
+      // );
 
-      return transformResponse(
-        { ...sanitizedResults, last_message },
-        {},
-        { contentType },
-      );
+      // return transformResponse(
+      //   { ...sanitizedResults, last_message },
+      //   {},
+      //   { contentType },
+      // );
     },
 
     //

@@ -1,27 +1,39 @@
 //
 
-import { Entity, Ok, Result, type ErrorInstance } from "@1/core/domain";
+import { Entity, Fail, Ok, Result, type ErrorInstance } from "@1/core/domain";
 import { z } from "zod";
 import { z_strapi_entity_data } from "../../common";
+import { Strapi_ID, Strapi_Timestamps } from "../../common/record";
 
 //
 
-export const Profile_PropsSchema = z.object({
-  id: z.number(),
-  firstname: z.string(),
-  lastname: z.string(),
-  about: z.string(),
-  createdAt: z.date().optional(),
-  updatedAt: z.date().optional(),
-  university: z.string(),
-  image: z_strapi_entity_data(z.any()).optional(),
-});
+export const Profile_PropsSchema = z
+  .object({
+    firstname: z.string(),
+    lastname: z.string(),
+    about: z.string().default(""),
+    university: z.string(),
+    image: z_strapi_entity_data(z.any()).optional(),
+  })
+  .merge(Strapi_ID)
+  .merge(Strapi_Timestamps)
+  .describe("Profile_PropsSchema");
 
 export type Profile_Props = z.TypeOf<typeof Profile_PropsSchema>;
 
 export class Profile extends Entity<Profile_Props> {
-  static override create(props: Profile_Props): Result<Profile, ErrorInstance> {
-    return Ok(new Profile(props));
+  static override create(
+    props: z.input<typeof Profile_PropsSchema>,
+  ): Result<Profile, ErrorInstance> {
+    try {
+      return Ok(
+        new Profile(
+          Profile_PropsSchema.parse(props, { path: ["Profile.create(props)"] }),
+        ),
+      );
+    } catch (error) {
+      return Fail(error as ErrorInstance);
+    }
   }
 
   static zero = Profile.create({

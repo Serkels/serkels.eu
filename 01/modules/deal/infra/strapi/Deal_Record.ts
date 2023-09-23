@@ -1,47 +1,64 @@
 //
 
-import { IllegalArgs, InputError } from "@1/core/error";
 import { z } from "zod";
-import { z_strapi_entity_data } from "../../../common";
-import { Strapi_Timestamps } from "../../../common/record";
-import { Exchange_Mapper } from "../../../exchange/infra/strapi";
-import { Message_Mapper } from "../../../inbox/infra/strapi";
-import { Profile_Mapper } from "../../../profile/infra/strapi";
-import { Deal } from "../../domain";
+import { StrapiEntity } from "../../../common";
+import { Exchange_RecordSchema } from "../../../exchange/infra/strapi";
+import { Profile_RecordSchema } from "../../../profile/infra/strapi";
+import { Deal, Deal_PropsSchema } from "../../domain";
 
 //
 
-export const Deal_Record = z
-  .object({
-    exchange: Exchange_Mapper,
-    last_message: Message_Mapper,
-    profile: Profile_Mapper,
+export const Deal_RecordSchema = StrapiEntity.transform((result) => {
+  console.log("deal/infra/strapi/Deal_Record.ts", { result });
+  return result;
+})
+  .pipe(
+    Deal_PropsSchema.merge(
+      z.object({
+        exchange: Exchange_RecordSchema,
+        organizer: Profile_RecordSchema,
+        participant_profile: Profile_RecordSchema,
+      }),
+    ),
+  )
+  .transform((result) => {
+    console.log("deal/infra/strapi/Deal_Record.ts", { result });
+    return result;
   })
-  .merge(Strapi_Timestamps)
-  .describe("Exchange Record");
-export type Deal_Record = z.TypeOf<typeof Deal_Record>;
+  .pipe(Deal_PropsSchema)
+  .transform(Deal.create)
+  .transform((result) => {
+    return result.isOk() ? result.value() : Deal.zero;
+  })
+  // .object({
+  //   // exchange: Exchange_Mapper,
+  //   // last_message: Message_Mapper,
+  //   // profile: Profile_Mapper,
+  //   organizer: Profile_Mapper,
+  // })
+  // .merge(Strapi_Timestamps)
+  .describe("Deal_RecordSchema");
 
 //
 
-export const Deal_DataRecord = z_strapi_entity_data(Deal_Record);
-export type Deal_DataRecord = z.TypeOf<typeof Deal_DataRecord>;
-
 //
 
-export const Deal_Mapper = Deal_DataRecord.transform(({ data }) => {
-  if (!data)
-    throw new InputError("Deal_Mapper", {
-      errors: [new IllegalArgs("data undefined")],
-    });
+// .transform(({ data }) => {
+//   if (!data)
+//     throw new InputError("Deal_Mapper", {
+//       errors: [new IllegalArgs("data undefined")],
+//     });
 
-  const domain = Deal.create({
-    ...data.attributes,
-    id: data.id,
-  } as any);
+//   const domain = Deal.create({
+//     ...data.attributes,
+//     last_message: undefined,
+//     status: "idle",
+//     id: data.id,
+//   });
 
-  if (domain.isFail()) {
-    throw new InputError("Deal_Mapper", { cause: domain.error() });
-  }
+//   if (domain.isFail()) {
+//     throw new InputError("Deal_Mapper", { cause: domain.error() });
+//   }
 
-  return domain.value();
-});
+//   return domain.value();
+// });

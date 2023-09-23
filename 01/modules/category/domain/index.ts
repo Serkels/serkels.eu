@@ -1,42 +1,44 @@
 //
 
 import {
-  IllegalArgs,
+  Fail,
+  Ok,
   Result,
   ValueObject,
   type ErrorInstance,
 } from "@1/core/domain";
 import { z } from "zod";
+import { Strapi_ID, Strapi_Timestamps } from "../../common/record";
 
 //
 
 export const Category_PropsSchema = z
   .object({
-    id: z.number(),
-    createdAt: z.date().default(new Date()),
-    updatedAt: z.date().default(new Date()),
-    //
-    name: z.string().default(""),
-    slug: z.string().default(""),
+    name: z.string(),
+    slug: z.string(),
   })
+  .merge(Strapi_ID)
+  .merge(Strapi_Timestamps)
   .describe("Category Props");
 
-export type Category_Props = z.TypeOf<typeof Category_PropsSchema>;
-export type Category_InputProps = z.input<typeof Category_PropsSchema>;
+//
+type Props = z.TypeOf<typeof Category_PropsSchema>;
+type Props_Input = z.input<typeof Category_PropsSchema>;
 
 //
 
-export class Category extends ValueObject<Category_Props> {
-  static override create(
-    props: Category_InputProps,
-  ): Result<Category, ErrorInstance> {
+export class Category extends ValueObject<Props> {
+  static override create(props: Props_Input): Result<Category, ErrorInstance> {
     try {
-      return Result.Ok(
-        new Category(Category_PropsSchema.parse(props, { path: ["props"] })),
+      return Ok(
+        new Category(
+          Category_PropsSchema.parse(props, {
+            path: ["Deal.create(props)"],
+          }),
+        ),
       );
     } catch (error) {
-      console.error(error);
-      return Result.fail(new IllegalArgs("Category", { cause: error }));
+      return Fail(error as ErrorInstance);
     }
   }
 
@@ -44,10 +46,15 @@ export class Category extends ValueObject<Category_Props> {
 
   static all = Category.create({
     id: Number.MAX_SAFE_INTEGER,
-    createdAt: new Date(0),
-    updatedAt: new Date(0),
     //
     name: "Tout",
+    slug: "",
+  }).value();
+
+  static unknown = Category.create({
+    id: Number.MAX_SAFE_INTEGER - 1,
+    //
+    name: "Inconnu",
     slug: "",
   }).value();
 
@@ -78,13 +85,13 @@ export class Category extends ValueObject<Category_Props> {
 
 //
 
-export const Category_Type = z.union([
+export const CategoryType_Schema = z.union([
   z.literal("exchange"),
   z.literal("opportunity"),
   z.literal("question"),
 ]);
 
-export type Category_Type = z.TypeOf<typeof Category_Type>;
+export type Category_Type = z.TypeOf<typeof CategoryType_Schema>;
 
 //
 

@@ -1,6 +1,9 @@
 {
   "SortQuery": {
-    "type": "string"
+    "type": "array",
+    "items": {
+      "type": "string"
+    }
   },
   "PaginationByPageQuery": {
     "page": {

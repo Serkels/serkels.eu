@@ -1,5 +1,6 @@
 //
 
+import type { Deal_QueryProps } from "./Deal.repository";
 import type { Exchanges_QueryProps } from "./infrastructure";
 
 export const Exchange_QueryKeys = {
@@ -31,8 +32,16 @@ export const Deal_QueryKeys = {
   // all(exchange_id: number | string) {
   //   return [...Exchange_QueryKeys.item(exchange_id), "deal"] as const;
   // },
-  lists(exchange_id: number | string) {
-    return [...this.all, "list", { exchange_id }] as const;
+  lists(
+    exchange_id: number | string,
+    options?: Deal_QueryProps["filters"] | undefined,
+  ) {
+    return [
+      ...this.all,
+      "list",
+      { exchange_id },
+      ...(options ? [options] : []),
+    ] as const;
   },
   item(id: number | string) {
     return [...this.all, "item", String(id)] as const;

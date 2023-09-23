@@ -2,16 +2,22 @@
 
 import { usePathname } from "next/navigation";
 import type { PropsWithChildren } from "react";
+import { createStateContext } from "react-use";
 import { tv } from "tailwind-variants";
 import { useDoor_Value } from "~/app/(main)/door/door.context";
 import { AsideBar } from "~/components/layouts/holy/aside";
+import { useExchange_Route_Context } from "../layout.client";
 
 //
 
-export function Deals_Aside_Nav({
-  children,
-  exchange_id,
-}: PropsWithChildren<{ exchange_id: number }>) {
+const [useDeal_Route_Context, Deal_Route_Provider] = createStateContext({
+  deal_id: NaN,
+});
+
+export { Deal_Route_Provider, useDeal_Route_Context };
+
+export function Deals_Aside_Nav({ children }: PropsWithChildren) {
+  const [{ exchange_id }] = useExchange_Route_Context();
   const pathname = usePathname();
 
   const [{ door_id }] = useDoor_Value();

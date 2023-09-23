@@ -2,10 +2,11 @@
  * Messages controller
  */
 
+import { ID_Schema } from "@1/core/domain";
 import type { Common } from "@strapi/strapi";
 import type { Context } from "@strapi/utils/dist/types";
 import type { Next } from "koa";
-import { Comment, ID_Schema, type KoaContext } from "~/types";
+import { Comment, type KoaContext } from "~/types";
 
 export default {
   async find(ctx: Context, next: Next) {

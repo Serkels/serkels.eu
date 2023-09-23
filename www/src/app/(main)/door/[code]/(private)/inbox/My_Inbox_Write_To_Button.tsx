@@ -2,10 +2,7 @@
 
 import { UnknownError } from "@1/core/error";
 import type { Profile } from "@1/modules/profile/domain";
-import {
-  Profile_DataRecord,
-  profile_to_domain,
-} from "@1/modules/profile/infra/strapi";
+import { Profile_RecordSchema } from "@1/modules/profile/infra/strapi";
 import { Button } from "@1/ui/components/ButtonV";
 import { Spinner } from "@1/ui/components/Spinner";
 import { useDialogContext } from "@1/ui/domains/exchange/AskModal";
@@ -92,9 +89,7 @@ function Contact_List() {
                 .filter((data) => !Number.isNaN(Number(data?.id)))
                 .map((data) => {
                   try {
-                    const profile = Profile_DataRecord.transform(
-                      profile_to_domain,
-                    ).parse({ data });
+                    const profile = Profile_RecordSchema.parse({ data });
 
                     return (
                       <Contact_Action key={profile.get("id")} profile={profile}>

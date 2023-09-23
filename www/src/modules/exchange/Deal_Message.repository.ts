@@ -66,7 +66,7 @@ export class Deal_Message_Repository implements RepositoryPort {
             pageSize: pagination?.pageSize,
             withCount: true,
           } as any,
-          sort: "createdAt:desc",
+          sort: ["createdAt:desc"],
         },
       },
     });

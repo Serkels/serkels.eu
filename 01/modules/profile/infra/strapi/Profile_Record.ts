@@ -1,51 +1,31 @@
 //
 
-import { IllegalArgs, InputError } from "@1/core/error";
 import { z } from "zod";
-import { z_strapi_entity_data } from "../../../common";
-import { Strapi_Timestamps } from "../../../common/record";
-import { Profile } from "../../domain";
+import { StrapiEntity } from "../../../common";
+import { Profile, Profile_PropsSchema } from "../../domain";
 
-//
+// z_strapi_entity_data_strict(z.any())
+//   .merge(schema)
+// .transform((data) => {
+//   data.
+//   return { id, ...data. attributes };
+// });
+// .refine(schema.parse)
+// .transform((sdf) => {
+//   return { ...data.attributes, ...data } as T;
+// })
 
-export const Profile_Record = z
-  .object({
-    firstname: z.string(),
-    lastname: z.string(),
-    university: z.string().default(""),
-    about: z.string().default(""),
-    image: z_strapi_entity_data(z.any()).optional(),
+// export const Profile_RecordSchema = StrapiEntity.merge(Profile_PropsSchema)//.merge(Profile_PropsSchema);
+export const Profile_RecordSchema = StrapiEntity.pipe(Profile_PropsSchema)
+  .transform(Profile.create)
+  .transform((result) => {
+    return result.isOk() ? result.value() : Profile.zero;
   })
-  .merge(Strapi_Timestamps)
-  .describe("Profile Record");
-export type Profile_Record = z.TypeOf<typeof Profile_Record>;
-
-export const Profile_DataRecord = z_strapi_entity_data(Profile_Record);
-export type Profile_DataRecord = z.TypeOf<typeof Profile_DataRecord>;
+  .describe("Profile_RecordSchema");
 
 //
 
-export const Profile_Mapper = Profile_DataRecord.transform(function to_domain({
-  data,
-}: Profile_DataRecord): Profile {
-  if (!data)
-    throw new InputError("Profile_Mapper: data undefined", {
-      errors: [new IllegalArgs("data undefined")],
-    });
-
-  const domain = Profile.create({
-    ...data.attributes,
-    id: data.id,
-  });
-
-  if (domain.isFail()) {
-    throw new InputError("Profile_Mapper", { cause: domain.error() });
-  }
-
-  return domain.value();
-});
-
-//
+export const Profile_Mapper = Profile_RecordSchema;
 
 export const Profile_UpdateRecord = z.object({
   firstname: z.string().optional(),
@@ -56,35 +36,3 @@ export const Profile_UpdateRecord = z.object({
   contacts: z.object({ set: z.array(z.object({ id: z.number() })) }).optional(),
 });
 export type Profile_UpdateRecord = z.TypeOf<typeof Profile_UpdateRecord>;
-
-//
-
-export function profile_to_domain({ data }: Profile_DataRecord): Profile {
-  const { id, attributes } = data ?? { id: NaN, attributes: {} };
-  const domain = Profile.create({
-    ...Profile.zero.toObject(),
-    ...attributes,
-    id,
-  });
-
-  if (domain.isFail()) {
-    throw new InputError("Profile_Record.to_domain", { cause: domain.error() });
-  }
-
-  return domain.value();
-}
-
-export function data_to_domain({ data }: Profile_DataRecord): Profile {
-  const { id, attributes } = data ?? { id: NaN, attributes: {} };
-  const domain = Profile.create({
-    ...Profile.zero.toObject(),
-    ...attributes,
-    id,
-  });
-
-  if (domain.isFail()) {
-    throw new InputError("Profile_Record.to_domain", { cause: domain.error() });
-  }
-
-  return domain.value();
-}

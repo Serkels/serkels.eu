@@ -7,8 +7,8 @@ const nextConfig = {
   },
   reactStrictMode: true,
   transpilePackages: [
-    "@1/core",
-    "@1/modules",
+    // "@1/core",
+    // "@1/modules",
     "@1/tailwindcss-config",
     "@1/ui",
   ],

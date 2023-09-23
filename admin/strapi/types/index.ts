@@ -103,14 +103,6 @@ export type { Next } from "koa";
 
 export type * as ApiContentTypes from "~/types/generated/contentTypes";
 
-//
-
-export const ID_Schema = z.coerce
-  .number({ description: "ID" })
-  .safe()
-  .finite()
-  .nonnegative()
-  .int();
 export const Partner_Role_Schema = z.literal("partner");
 
 //

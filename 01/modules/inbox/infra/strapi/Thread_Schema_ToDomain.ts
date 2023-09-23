@@ -1,26 +1,24 @@
 //
 
 import {
+  Fail,
   IllegalArgs,
   InputError,
+  Ok,
   Result,
   USER_PROFILE_ID_TOKEN,
+  type ErrorInstance,
   type IAdapter,
-  type IResult,
 } from "@1/core/domain";
 import debug from "debug";
 import { Lifecycle, inject, scoped } from "tsyringe";
 import { z } from "zod";
 import { z_strapi_entity } from "../../../common";
 import { Strapi_Timestamps } from "../../../common/record";
-import {
-  Profile_Mapper,
-  Profile_Schema_ToDomain,
-} from "../../../profile/infra/strapi";
+import { Profile_Mapper } from "../../../profile/infra/strapi";
 import { Thread } from "../../domain";
 import { Message_Mapper } from "./Message_Schema";
-import { Message_Schema_ToDomain } from "./Message_Schema_ToDomain";
-import type { Thread_DataSchema } from "./Thread_Schema";
+import { Thread_DataSchema, Thread_RecordSchema } from "./Thread_Schema";
 
 //
 
@@ -34,8 +32,6 @@ export class Thread_Schema_ToDomain
   ) {
     this.#log("new");
   }
-  #message_to_domain = new Message_Schema_ToDomain();
-  #profile_to_domain = new Profile_Schema_ToDomain();
 
   schema = z_strapi_entity(
     z
@@ -82,32 +78,57 @@ export class Thread_Schema_ToDomain
     return domain.value();
   });
 
-  build(target: Thread_DataSchema): IResult<Thread, Error> {
-    const last_message = target.attributes.last_message?.data
-      ? this.#message_to_domain.build(target.attributes.last_message.data)
-      : Result.Ok(undefined);
-    const profile_data = target.attributes.participants.data.find(
-      ({ id }) => id !== this.user_profile_id,
-    );
-    if (!profile_data) {
-      return Result.fail(new InputError("Are you alone in this thread ?", {}));
-    }
-    const profile = this.#profile_to_domain.build(profile_data);
+  build(data: Thread_DataSchema): Result<Thread, ErrorInstance> {
+    try {
+      return Ok(
+        Thread_RecordSchema.parse(
+          { data },
+          {
+            path: [
+              ...JSON.stringify({ data }, null, 2)
+                .replaceAll('"', '"')
+                .split("\n"),
 
-    const all_results = Result.combine([profile, last_message]);
-    if (all_results.isFail()) {
-      return Result.fail(
-        new InputError("Thread_Schema_ToDomain.build", {
-          cause: all_results.error(),
+              "=",
+              "data",
+            ],
+          },
+        ),
+      );
+    } catch (error) {
+      return Fail(
+        new IllegalArgs("Exchange_ItemSchemaToDomain.build", {
+          cause: error,
         }),
       );
     }
-
-    return Thread.create({
-      id: target.id,
-      updated_at: target.attributes.updatedAt,
-      profile: profile.value(),
-      last_message: last_message.value(),
-    });
   }
+  // build(target: Thread_DataSchema): IResult<Thread, Error> {
+  //   const last_message = target.attributes.last_message?.data
+  //     ? this.#message_to_domain.build(target.attributes.last_message.data)
+  //     : Result.Ok(undefined);
+  //   const profile_data = target.attributes.participants.data.find(
+  //     ({ id }) => id !== this.user_profile_id,
+  //   );
+  //   if (!profile_data) {
+  //     return Result.fail(new InputError("Are you alone in this thread ?", {}));
+  //   }
+  //   const profile = this.#profile_to_domain.build(profile_data);
+
+  //   const all_results = Result.combine([profile, last_message]);
+  //   if (all_results.isFail()) {
+  //     return Result.fail(
+  //       new InputError("Thread_Schema_ToDomain.build", {
+  //         cause: all_results.error(),
+  //       }),
+  //     );
+  //   }
+
+  //   return Thread.create({
+  //     id: target.id,
+  //     updated_at: target.attributes.updatedAt,
+  //     profile: profile.value(),
+  //     last_message: last_message.value(),
+  //   });
+  // }
 }

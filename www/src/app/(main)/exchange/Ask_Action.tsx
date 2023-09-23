@@ -90,7 +90,10 @@ function LookForExistingDeal() {
   const [, setContext] = useOutlet_Context();
   const { exchange } = useContext(Exchange_CardContext);
 
-  const info = useInject(Get_Deals_UseCase).execute(exchange.get("id"));
+  const info = useInject(Get_Deals_UseCase).execute(exchange.get("id"), {
+    pagination: { pageSize: 5 },
+    sort: ["updatedAt:desc"],
+  });
 
   const {
     create: { useMutation },
@@ -133,8 +136,10 @@ function CreatingDeal() {
   } = useInject(Deal_Controller);
 
   const create_deal_mutation_info = useMutation();
-  const exchange_deals_query_info =
-    useInject(Get_Deals_UseCase).execute(exchange_id);
+  const exchange_deals_query_info = useInject(Get_Deals_UseCase).execute(
+    exchange_id,
+    { pagination: { pageSize: 1 }, sort: ["updatedAt:desc"] },
+  );
 
   useTimeoutFn(async () => {
     await create_deal_mutation_info.mutateAsync({

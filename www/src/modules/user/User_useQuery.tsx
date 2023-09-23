@@ -1,8 +1,4 @@
-import {
-  Profile_DataRecord,
-  Profile_UpdateRecord,
-  data_to_domain,
-} from "@1/modules/profile/infra/strapi";
+import { Profile_RecordSchema } from "@1/modules/profile/infra/strapi";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { Strapi_useQuery } from "./Strapi_useQuery";
 import { User_Repository } from "./User_Repository";
@@ -31,7 +27,7 @@ export class User_useQuery extends Strapi_useQuery {
     useQuery: (id: number) =>
       this.query({
         fetch: User_Repository.by_id.bind(null, id),
-        mapper: Profile_DataRecord.transform(data_to_domain),
+        mapper: Profile_RecordSchema,
         query_key: User_Repository.keys.by_id(id),
         domain_deps: [id],
         require_jwt: true,
@@ -55,8 +51,7 @@ export class User_useQuery extends Strapi_useQuery {
   update = {
     useMutation: () =>
       this.mutate({
-        fetch: (data: Profile_UpdateRecord) =>
-          this.user_repository.update(data),
+        fetch: (data: Profile_Record) => this.user_repository.update(data),
       }),
   };
 

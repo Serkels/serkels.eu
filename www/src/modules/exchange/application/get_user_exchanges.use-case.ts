@@ -1,6 +1,6 @@
 //
 
-import { Exchange_ItemSchemaToDomain } from "@1/modules/exchange/infra/strapi";
+import { Exchange_RecordSchema } from "@1/modules/exchange/infra/strapi";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import debug from "debug";
 import { Lifecycle, inject, scoped } from "~/core/di";
@@ -16,7 +16,6 @@ import { Exchange_QueryKeys } from "../queryKeys";
 @scoped(Lifecycle.ContainerScoped)
 export class Get_User_Exchanges_UseCase {
   #log = debug(`~:modules:exchange:${Get_User_Exchanges_UseCase.name}`);
-  #mapper = new Exchange_ItemSchemaToDomain();
 
   constructor(
     @inject(Exchange_Repository)
@@ -43,10 +42,27 @@ export class Get_User_Exchanges_UseCase {
         return {
           ...data,
           pages: data.pages
-            .map((page) => page.data!)
+            .map(({ data }) => data)
             .flat()
-            .map((data) => {
-              return this.#mapper.build(data).value();
+            .map((data, index) => {
+              return Exchange_RecordSchema.parse(
+                { data },
+                {
+                  path: [
+                    // ...JSON.stringify({ data }, null, 2)
+                    //   .replaceAll('"', '"')
+                    //   .split("\n"),
+                    // "=",
+                    `useInfiniteQuery(${Exchange_QueryKeys.mine()})}`,
+                    "Get_User_Exchanges_UseCase",
+                    "execute",
+                    "select",
+                    "//",
+                    `data.pages[${index}]`,
+                    "{data}",
+                  ],
+                },
+              );
             }),
         };
       },

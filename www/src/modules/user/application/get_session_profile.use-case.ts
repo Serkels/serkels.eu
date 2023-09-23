@@ -1,10 +1,6 @@
 //
 
-import { Profile } from "@1/modules/profile/domain";
-import {
-  Profile_DataRecord,
-  profile_to_domain,
-} from "@1/modules/profile/infra/strapi";
+import { Profile_RecordSchema } from "@1/modules/profile/infra/strapi";
 import debug from "debug";
 import { useSession } from "next-auth/react";
 import { useMemo } from "react";
@@ -22,16 +18,36 @@ export class Get_Session_Profile {
 
   //
 
-  execute(): Profile | undefined {
+  execute() {
     const { data: session } = useSession();
     const profile = session?.user?.profile;
     return useMemo(() => {
       if (!profile) return undefined;
+      debugger;
       try {
-        return profile_to_domain(
-          Profile_DataRecord.parse({
+        return Profile_RecordSchema.parse(
+          {
             data: profile,
-          }),
+          },
+          {
+            path: [
+              ...JSON.stringify(
+                {
+                  data: profile,
+                },
+                null,
+                2,
+              )
+                .replaceAll('"', '"')
+                .split("\n"),
+
+              "=",
+              "Get_Session_Profile",
+              "execute",
+              "useMemo",
+              "{data: profile}",
+            ],
+          },
         );
       } catch (error) {
         console.error(error);

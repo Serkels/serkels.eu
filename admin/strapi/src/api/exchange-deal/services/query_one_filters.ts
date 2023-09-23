@@ -1,6 +1,7 @@
 //
 
-import { ID_Schema, KoaContext } from "~/types";
+import { ID_Schema } from "@1/core/domain";
+import { KoaContext } from "~/types";
 import { findOneFromUser } from "../../user-profile/services/user-profile";
 
 //

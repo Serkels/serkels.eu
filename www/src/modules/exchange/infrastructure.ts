@@ -5,7 +5,7 @@ import type { Strapi_Query_Params } from "@1/modules/common";
 import type { Exchange_CreateProps } from "@1/modules/exchange/domain";
 import type {
   Exchange_DealListSchema,
-  Exchange_DealSchema,
+  Exchange_Deal_ItemSchema,
   Exchange_ItemSchema,
   Exchange_ListSchema,
   Exchange_RequestSchema,
@@ -27,6 +27,7 @@ export type Exchanges_QueryProps = Strapi_Query_Params<
 @scoped(Lifecycle.ContainerScoped)
 export class Exchange_Repository implements RepositoryPort {
   #log = debug(`~:modules:exchange:${Exchange_Repository.name}`);
+  static EXCHANGE_ID_TOKEN = "EXCHANGE_ID_TOKEN" as const;
 
   constructor(
     @inject(OpenAPI_Repository) private readonly openapi: OpenAPI_Repository,
@@ -263,7 +264,9 @@ export class Exchange_Repository implements RepositoryPort {
     return body;
   }
 
-  async findDealById(id: number): Promise<Exchange_DealSchema | undefined> {
+  async findDealById(
+    id: number,
+  ): Promise<Exchange_Deal_ItemSchema | undefined> {
     this.#log("findDealById", id);
     const {
       data: body,

@@ -26,7 +26,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2023-09-22T11:55:59.952Z"
+    "x-generation-date": "2023-09-23T11:50:50.155Z"
   },
   "servers": [
     {
@@ -19554,7 +19554,10 @@
     },
     "parameters": {
       "SortQuery": {
-        "type": "string"
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
       },
       "PaginationByPageQuery": {
         "page": {
@@ -28714,7 +28717,10 @@
             "deprecated": false,
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           }
         ],
@@ -28729,15 +28735,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/ExchangeDealResponse"
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/ExchangeDealResponse"
                 }
               }
             }
@@ -28907,7 +28905,10 @@
             "deprecated": false,
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           },
           {
@@ -29130,7 +29131,10 @@
             "deprecated": false,
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           },
           {
@@ -29776,7 +29780,10 @@
             "deprecated": false,
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           },
           {

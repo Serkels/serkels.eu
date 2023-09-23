@@ -4,7 +4,10 @@ import { IllegalArgs, InputError } from "@1/core/error";
 import { z } from "zod";
 import { z_strapi_entity, z_strapi_entity_data } from "../../../common";
 import { Strapi_Timestamps } from "../../../common/record";
-import { Profile_Mapper, Profile_Schema } from "../../../profile/infra/strapi";
+import {
+  Profile_Mapper,
+  Profile_RecordSchema,
+} from "../../../profile/infra/strapi";
 import { Message } from "../../domain";
 
 //
@@ -13,7 +16,7 @@ export const Message_Schema = z
   .object({
     id: z.number().optional(),
     content: z.string(),
-    author: z_strapi_entity_data(Profile_Schema).optional(),
+    author: z_strapi_entity_data(Profile_RecordSchema).optional(),
   })
   .merge(Strapi_Timestamps)
   .describe("Message Record");

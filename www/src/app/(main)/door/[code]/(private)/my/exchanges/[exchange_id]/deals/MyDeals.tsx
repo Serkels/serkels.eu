@@ -2,7 +2,7 @@
 
 import { UnknownError } from "@1/core/error";
 import { Exchange_ItemSchemaToDomain } from "@1/modules/exchange/infra/strapi";
-import { Thread } from "@1/modules/inbox/domain";
+import { Message, Thread } from "@1/modules/inbox/domain";
 import { Button } from "@1/ui/components/ButtonV";
 import { Spinner } from "@1/ui/components/Spinner";
 import { Circle } from "@1/ui/icons";
@@ -23,11 +23,14 @@ import {
   Exchange_ValueProvider,
   useExchange_Value,
 } from "../../Exchange.context";
+import { useExchange_Route_Context } from "../layout.client";
 import { Deal_ValueProvider, useDeal_Value } from "./Deal.context";
 
 //
 
-export function MyDeals({ exchange_id }: { exchange_id: number }) {
+export function MyDeals() {
+  const [{ exchange_id }] = useExchange_Route_Context();
+
   const {
     item: { useQuery },
   } = useExchange_item_controller(exchange_id);
@@ -108,7 +111,9 @@ function Echange_DealLink_Loader() {
 
 export function Echange_DealsNav() {
   const [exchange] = useExchange_Value();
-  const query_info = useInject(Get_Deals_UseCase).execute(exchange.get("id"));
+  const query_info = useInject(Get_Deals_UseCase).execute(exchange.get("id"), {
+    pagination: { pageSize: 6 },
+  });
 
   const router = useRouter();
   const pathname = usePathname();
@@ -190,14 +195,13 @@ function Echange_DealLink() {
     "id",
   )}/deals/${deal.get("id")}`;
 
-  const deal_profile = deal.get("profile");
   const exchange_profile = exchange.get("profile");
-  const is_yours = exchange_profile.get("id") === profile_id;
-  const profile = is_yours ? deal_profile : exchange_profile;
+  const is_yours = deal.get("organizer").get("id") === profile_id;
+  const profile = is_yours ? deal.get("participant_profile") : exchange_profile;
 
   const thread = Thread.create({
     id: deal.get("id"),
-    last_message: deal.last_message,
+    last_message: Message.zero, //deal.last_message,
     profile,
     updated_at: deal.updated_at,
   }).value();

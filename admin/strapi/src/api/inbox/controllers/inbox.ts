@@ -2,13 +2,14 @@
  * inbox controller
  */
 
+import { ID_Schema } from "@1/core/domain";
 import { factories } from "@strapi/strapi";
 import { transformResponse } from "@strapi/strapi/lib/core-api/controller/transform";
 import { sanitize, validate } from "@strapi/utils";
 import type { Next } from "koa";
 import { Common_Service } from "~/src/extensions/comments/services";
 import { replace_autor } from "~/src/extensions/comments/services/replace_autor";
-import { GetValues, ID_Schema, KoaContext, Params } from "~/types";
+import { GetValues, KoaContext, Params } from "~/types";
 import { INBOX_API_CONTENT_ID } from "../content-types/inbox";
 import { find_owner_inboxes } from "../services/inbox";
 

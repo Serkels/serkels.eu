@@ -1,6 +1,5 @@
 //
 
-import type { Category_Type } from "@1/modules/category/domain";
 import { Field, type FieldAttributes } from "formik";
 import { useInject } from "~/core/react";
 import { Get_Category_UseCase } from "~/modules/categories/application/get_categories.use-case";

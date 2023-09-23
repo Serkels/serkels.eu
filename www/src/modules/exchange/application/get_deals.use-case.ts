@@ -1,10 +1,11 @@
 //
 
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, type InfiniteData } from "@tanstack/react-query";
 import debug from "debug";
 import { Lifecycle, inject, scoped } from "~/core/di";
+import { getQueryClient } from "~/core/getQueryClient";
 import { getNextPageParam, getPreviousPageParam } from "~/core/use-query";
-import { Deal_Repository } from "../Deal.repository";
+import { Deal_Repository, type Deal_QueryProps } from "../Deal.repository";
 import { Deal_QueryKeys } from "../queryKeys";
 
 //
@@ -22,16 +23,14 @@ export class Get_Deals_UseCase {
 
   //
 
-  execute(id: number, ) {
+  execute(id: number, params: Deal_QueryProps) {
     return useInfiniteQuery({
-      // queryFn: ({ pageParam: page }) => {
-      //   return this.repository.find_all({
-      //     ...params,
-      //     pagination: { ...params.pagination, page },
-      //   });
-      // },
-      // TODO(douglasduteil): use actual pagination
-      queryFn: () => this.repository.find_all(id),
+      queryFn: ({ pageParam: page }) => {
+        return this.repository.find_all(id, {
+          ...params,
+          pagination: { ...params.pagination, page },
+        });
+      },
       queryKey: Deal_QueryKeys.lists(id),
       getNextPageParam,
       getPreviousPageParam,
@@ -45,5 +44,34 @@ export class Get_Deals_UseCase {
         };
       },
     });
+  }
+
+  async prefetch(id: number, params: Deal_QueryProps) {
+    this.#log("prefetch", { id, params });
+
+    const queryClient = getQueryClient();
+
+    await queryClient.prefetchInfiniteQuery({
+      queryKey: Deal_QueryKeys.lists(id),
+      queryFn: ({ pageParam: page }) =>
+        this.repository.find_all(id, {
+          ...params,
+          pagination: { ...params.pagination, page },
+        }),
+    });
+
+    {
+      const { pages } = queryClient.getQueryData<
+        InfiniteData<Awaited<ReturnType<typeof this.repository.find_all>>>
+      >(Deal_QueryKeys.lists(id)) ?? { pages: [] };
+
+      for (const { data: deals } of pages) {
+        for (const data of deals ?? []) {
+          queryClient.setQueryData(Deal_QueryKeys.item(Number(data?.id)), data);
+        }
+      }
+    }
+
+    return queryClient;
   }
 }

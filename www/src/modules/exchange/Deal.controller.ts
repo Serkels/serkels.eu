@@ -1,6 +1,6 @@
 //
 
-import { Exchange_DealSchemaToDomain } from "@1/modules/deal/infra/strapi";
+import { Deal_RecordSchema } from "@1/modules/deal/infra/strapi";
 import type { Exchange_DealListSchema } from "@1/strapi-openapi";
 import { startTransaction } from "@sentry/nextjs";
 import {
@@ -94,7 +94,7 @@ export class Deal_Controller {
       number
     > = async () => {
       debug("loadDealsListFn");
-      return this.repository.find_all(exchange_id);
+      return this.repository.find_all(exchange_id, {});
     };
 
     const query_info = useInfiniteQuery({
@@ -108,14 +108,22 @@ export class Deal_Controller {
         const pages = data.pages
           .map((page) => page.data!)
           .flat()
-          .map((raw) => new Exchange_DealSchemaToDomain().build(raw))
-          .filter((result) => {
-            if (result.isFail()) {
-              console.error(result.error());
-            }
-            return result.isOk();
-          })
-          .map((result) => result.value());
+          .map((raw) =>
+            Deal_RecordSchema.parse(
+              { data: raw },
+              {
+                path: [
+                  ...JSON.stringify({ data }, null, 2)
+                    .replaceAll('"', '"')
+                    .split("\n"),
+
+                  "=",
+                  "{data: raw}",
+                ],
+              },
+            ),
+          );
+
         return { ...data, pages };
       },
     });

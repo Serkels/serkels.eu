@@ -1,30 +1,28 @@
 //
 
 import { z } from "zod";
-import {
-  z_strapi_entity,
-  z_strapi_entity_data,
-  z_strapi_flatten_page_data,
-} from "../../../common";
-import { Thread_Schema } from "./Thread_Schema";
+import { z_strapi_flatten_page_data } from "../../../common";
+import { Inbox, Inbox_PropsSchema } from "../../domain";
+import { Thread_RecordSchema } from "./Thread_Schema";
 
 //
 
-export const Inbox_Schema = z.object({
-  id: z.number().optional(),
-  thread: z_strapi_entity_data(Thread_Schema),
-  updatedAt: z.coerce.date(),
-});
+export const Inbox_Record = z
+  .object({
+    id: z.number().optional(),
+    thread: Thread_RecordSchema,
+    updatedAt: z.coerce.date(),
+  })
 
-export type Inbox_Schema = z.TypeOf<typeof Inbox_Schema>;
+  .transform(Inbox_PropsSchema.parse)
+  .transform(Inbox.create)
+  .transform((result) => {
+    return result.isOk() ? result.value() : Inbox.zero;
+  })
+  .describe("Inbox_Schema");
 
 //
 
-export const Inbox_DataSchema = z_strapi_entity(Inbox_Schema);
-export type Inbox_DataSchema = z.TypeOf<typeof Inbox_DataSchema>;
-
-//
-
-export const InboxList_Schema = z_strapi_flatten_page_data(Inbox_Schema);
+export const InboxList_Schema = z_strapi_flatten_page_data(Inbox_Record);
 
 export type InboxList_Schema = z.TypeOf<typeof InboxList_Schema>;

@@ -1,10 +1,10 @@
 //
 
+import { ID_Schema } from "@1/core/domain";
 import { ValidationError } from "@strapi/utils/dist/errors";
 import { ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
 import type { KoaContext, Next, Params } from "~/types";
-import { ID_Schema } from "~/types";
 import { findOneFromUser } from "../../user-profile/services/user-profile";
 import { EXCHANGE_DEAL_API_CONTENT_ID } from "../content-types/exchange-deal";
 

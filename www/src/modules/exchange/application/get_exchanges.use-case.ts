@@ -1,6 +1,9 @@
 //
 
-import { Exchange_ItemSchemaToDomain } from "@1/modules/exchange/infra/strapi";
+import {
+  Exchange_ItemSchemaToDomain,
+  Exchange_RecordSchema,
+} from "@1/modules/exchange/infra/strapi";
 import { useInfiniteQuery, type InfiniteData } from "@tanstack/react-query";
 import debug from "debug";
 import { Lifecycle, inject, scoped } from "~/core/di";
@@ -46,8 +49,23 @@ export class Get_Exchanges_UseCase {
           pages: data.pages
             .map((page) => page.data!)
             .flat()
-            .map((data) => {
-              return this.#mapper.build(data).value();
+            .map((data, index) => {
+              console.log(
+                "Get_Exchanges_UseCase.execute.useInfiniteQuery.select",
+                `pages[${index}]`,
+                "{data}",
+                { data },
+              );
+              return Exchange_RecordSchema.parse(
+                { data },
+                {
+                  path: [
+                    "Get_Exchanges_UseCase.execute.useInfiniteQuery.select",
+                    `pages[${index}]`,
+                    "{data}",
+                  ],
+                },
+              );
             }),
         };
       },

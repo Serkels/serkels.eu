@@ -1,6 +1,6 @@
 //
 
-import { Deal_Mapper } from "@1/modules/deal/infra/strapi";
+import { Deal_RecordSchema } from "@1/modules/deal/infra/strapi";
 import { useQuery } from "@tanstack/react-query";
 import debug from "debug";
 import { Lifecycle, inject, scoped } from "~/core/di";
@@ -27,7 +27,24 @@ export class Get_Deal_ById_UseCase {
       queryFn: () => this.repository.find_by_id(id),
       queryKey: Deal_QueryKeys.item(id),
       select: (data) => {
-        return Deal_Mapper.parse({ data }, { path: ["data"] });
+        return Deal_RecordSchema.parse(
+          { data },
+          {
+            path: [
+              // ...JSON.stringify({ data }, null, 2)
+              //   .replaceAll('"', '"')
+              //   .split("\n"),
+
+              // "=",
+              "Get_Deal_ById_UseCase",
+              "execute",
+              "select",
+              "Deal_RecordSchema.parse",
+              "//",
+              "{data}",
+            ],
+          },
+        );
       },
     });
   }

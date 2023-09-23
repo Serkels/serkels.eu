@@ -49,11 +49,13 @@ export type Exchange_ItemSchema = Schemas["ExchangeResponseDataObject"];
 //
 
 export type Exchange_DealListSchema = {
-  data?: Exchange_DealSchema[];
+  data?: Exchange_Deal_ItemSchema[];
 } & Common_PaginationMeta_Schema;
 
-export type Exchange_DealSchema = Schemas["ExchangeDealResponseDataObject"];
-export type Exchange_DealRequestSchema = Schemas["ExchangeDealRequest"];
+export type Exchange_Deal_Schema = Schemas["ExchangeDeal"];
+export type Exchange_Deal_ItemSchema =
+  Schemas["ExchangeDealResponseDataObject"];
+export type Exchange_Deal_RequestSchema = Schemas["ExchangeDealRequest"];
 
 //
 //

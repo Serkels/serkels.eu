@@ -1,8 +1,9 @@
+import { ID_Schema } from "@1/core/domain";
 import { EntityService } from "@strapi/strapi/lib/services/entity-service";
 import { Next } from "koa";
 import { ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
-import { ID_Schema, KoaContext } from "~/types";
+import { KoaContext } from "~/types";
 import { EXCHANGE_DEAL_API_CONTENT_ID } from "../../exchange-deal/content-types/exchange-deal";
 import { findOneFromUser } from "../../user-profile/services/user-profile";
 import { EXCHANGE_API_CONTENT_ID } from "../content-types/exchange";

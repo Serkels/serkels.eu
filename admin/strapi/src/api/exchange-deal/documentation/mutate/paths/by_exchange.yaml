@@ -34,7 +34,9 @@
         deprecated: false
         required: false
         schema:
-          type: string
+          type: array
+          items:
+            type: string
 
     operationId: get/exchanges/{id}/deals
 
@@ -46,12 +48,7 @@
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                data:
-                  type: array
-                  items:
-                    "$ref": "#/components/schemas/ExchangeDealResponse"
+              "$ref": "#/components/schemas/ExchangeDealResponse"
       "400":
         "$ref": "#/components/responses/400"
       "401":

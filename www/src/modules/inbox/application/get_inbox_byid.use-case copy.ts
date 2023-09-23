@@ -1,6 +1,9 @@
 //
 
-import { Inbox_Schema_ToDomain } from "@1/modules/inbox/infra/strapi";
+import {
+  Inbox_Record,
+  Inbox_Schema_ToDomain,
+} from "@1/modules/inbox/infra/strapi";
 import { useQuery } from "@tanstack/react-query";
 import debug from "debug";
 import { Lifecycle, inject, scoped } from "~/core/di";
@@ -31,7 +34,7 @@ export class Get_Inbox_ById_UseCase {
       },
       queryKey: Inbox_QueryKeys.item(id),
       select: (data) => {
-        return this.mapper.to_domain.parse(data, {
+        return Inbox_Record.parse(data, {
           path: ["Get_Inbox_ById_UseCase", "data"],
         });
       },

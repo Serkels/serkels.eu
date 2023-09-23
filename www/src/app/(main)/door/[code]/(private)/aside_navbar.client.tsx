@@ -42,6 +42,7 @@ export function Li_Link(
   },
 ) {
   const profile = useProfile();
+
   const is_activee = useIsActive({ root: `/@${profile.get("id")}/` });
 
   const {

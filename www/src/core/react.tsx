@@ -1,6 +1,12 @@
 //
 
-import { createContext, useContext } from "react";
+import debug from "debug";
+import {
+  createContext,
+  useContext,
+  useMemo,
+  type PropsWithChildren,
+} from "react";
 import {
   container,
   type DependencyContainer,
@@ -9,11 +15,46 @@ import {
 
 //
 
+//
+
+//
+
+const log = debug("~/core/react");
+
+//
+
+//
+
+//
+
 export const ContainerContext = createContext<DependencyContainer>(container);
 
 export const useContainer = () => {
   return useContext(ContainerContext);
 };
+
+export function Container_Provider<T>({
+  children,
+  initialFn,
+}: PropsWithChildren<{
+  initialFn: { registerInstance: [InjectionToken<T>, T] }[];
+}>) {
+  const parent = useContainer();
+  const container = useMemo(() => {
+    const child = parent.createChildContainer();
+    log("🌲");
+    for (const args of initialFn) {
+      child.registerInstance(...args.registerInstance);
+    }
+    return child;
+  }, [parent, initialFn]);
+
+  return (
+    <ContainerContext.Provider value={container}>
+      {children}
+    </ContainerContext.Provider>
+  );
+}
 
 export const useInject = <T extends unknown>(token: InjectionToken<T>) => {
   const container = useContainer();

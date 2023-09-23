@@ -4,6 +4,7 @@ import { Exchange_ItemSchemaToDomain } from "@1/modules/exchange/infra/strapi";
 import { useQuery } from "@tanstack/react-query";
 import debug from "debug";
 import { Lifecycle, inject, scoped } from "~/core/di";
+import { getQueryClient } from "~/core/getQueryClient";
 import { Exchange_Repository } from "../infrastructure";
 import { Exchange_QueryKeys } from "../queryKeys";
 
@@ -31,5 +32,18 @@ export class Get_Exchange_ById_UseCase {
         return new Exchange_ItemSchemaToDomain().build(data!).value();
       },
     });
+  }
+
+  async prefetch(id: number) {
+    this.#log("prefetch", id);
+
+    const queryClient = getQueryClient();
+
+    await queryClient.prefetchQuery({
+      queryKey: Exchange_QueryKeys.item(id),
+      queryFn: () => this.repository.by_id(id),
+    });
+
+    return queryClient;
   }
 }

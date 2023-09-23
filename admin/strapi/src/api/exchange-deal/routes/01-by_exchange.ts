@@ -1,10 +1,11 @@
 //
 
+import { ID_Schema } from "@1/core/domain";
 import type { Next } from "koa";
 import { ZodError, z } from "zod";
 import { fromZodError } from "zod-validation-error";
 import { set_params_to_nope } from "~/src/middlewares/set_params_to_nope";
-import { ID_Schema, type KoaContext } from "~/types";
+import { type KoaContext } from "~/types";
 import { deal_state_action_schema } from "../content-types/exchange-deal";
 import { status_patching } from "../middlewares/status_patching";
 import { assert_deal_access } from "../policies/assert_deal_access";
