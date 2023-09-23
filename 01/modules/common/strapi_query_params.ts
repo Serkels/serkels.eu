@@ -49,9 +49,9 @@ export const z_strapi_collection = <Z extends ReturnType<typeof z.object>>(
     }),
   });
 
-export const StrapiDataEntity = z_strapi_entity_data(
-  z.object({}, { description: "Strapi unknown attributes" }).passthrough(),
-);
+// export const StrapiDataEntity = z_strapi_entity_data(
+//   z.object({}, { description: "Strapi unknown attributes" }).passthrough(),
+// );
 
 // export const StrapiFlattenDataEntity = z.object({
 //   attributes: z.any(),
@@ -103,11 +103,30 @@ export const StrapiDataEntity = z_strapi_entity_data(
 //         return { id, ...attributes };
 //       },
 //     );
+export const StrapiDataEntity = z.object(
+  {
+    data: z
+      .object(
+        {
+          attributes: z.any(),
+          id: ID_Schema,
+        },
+        { description: "Strapi Entity" },
+      )
+      .nullable(),
+  },
+  { description: "Strapi Entity Data Maybe" },
+);
 export const StrapiEntity = StrapiDataEntity.transform(
   function flatten_attributes({ data }) {
-    return { id: Number(data?.id), ...(data?.attributes ?? {}) };
+    return data ? { id: Number(data.id), ...data.attributes } : undefined;
   },
 );
+// export const StrapiEntity = StrapiDataEntity.transform(
+//   function flatten_attributes({ data }) {
+//     return data ? { id: Number(data.id), ...data.attributes } : undefined;
+//   },
+// );
 // export const StrapiEntity = <T extends ZodTypeAny>(schema: T) =>
 //   StrapiDataEntity.transform(({ data: { attributes, id } }) => {
 //     console.log("StrapiEntity", { id });
