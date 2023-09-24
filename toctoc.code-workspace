@@ -75,5 +75,62 @@
       // "tw\\.[^`]+`([^`]*)`", // tw.xxx<xxx>`...`
       // "tw\\(.*?\\).*?`([^`]*)" // tw(Component)<xxx>`...`
     ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "1. Dev",
+        "dependsOn": ["Kernel Dev", "NextJs Dev Server", "Strapi Dev Server"],
+        "group": "build"
+      },
+      {
+        "label": "NextJs Dev Server",
+        "command": "bun",
+        "args": ["run", "dev"],
+        "type": "shell",
+        "options": {
+          "cwd": "${workspaceFolder:www}"
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "group": "build",
+        "runOptions": {
+          "instanceLimit": 1
+        }
+      },
+      {
+        "label": "Strapi Dev Server",
+        "command": "bun",
+        "args": ["run", "dev"],
+        "type": "shell",
+        "options": {
+          "cwd": "${workspaceFolder:strapi}"
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "group": "build",
+        "runOptions": {
+          "instanceLimit": 1
+        }
+      },
+      {
+        "label": "Kernel Dev",
+        "type": "shell",
+        "options": {
+          "cwd": "${workspaceFolder:root}"
+        },
+        "command": "bun",
+        "args": ["run", "dev", "--filter=!strapi", "--filter=!www"],
+        "runOptions": {
+          "instanceLimit": 1
+        },
+        "problemMatcher": ["$tsc"],
+        "presentation": {
+          "reveal": "never",
+          "group": "kernel"
+        },
+        "dependsOn": [],
+        "group": "build"
+      }
+    ]
   }
 }
