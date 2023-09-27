@@ -5,7 +5,7 @@ import { InputSearch } from "@1/ui/components/InputSearch";
 import { Form, Formik, useField } from "formik";
 import { useSearchParams } from "next/navigation";
 import type { ComponentPropsWithoutRef } from "react";
-import { FilterRadioList } from "~/components/FilterRadioList";
+import { CategoryFilterRadioList } from "~/components/FilterRadioList";
 import { useSyncSearchQuery } from "~/components/useSyncSearchQuery";
 import { useInject } from "~/core/react";
 import { Get_Category_UseCase } from "~/modules/categories/application/get_categories.use-case";
@@ -23,7 +23,7 @@ export function CategoriesList() {
   //
 
   return (
-    <FilterRadioList
+    <CategoryFilterRadioList
       data={categories}
       active={query ?? ""}
       name="category"

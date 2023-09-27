@@ -9,7 +9,6 @@ import { Exchange as ExchangeIcon, Share } from "@1/ui/icons";
 import type { UseMutationResult } from "@tanstack/react-query";
 import { Formik } from "formik";
 import Link from "next/link";
-import { useContext } from "react";
 import Nest from "react-nest";
 import { createStateContext, useTimeoutFn } from "react-use";
 import { P, match } from "ts-pattern";
@@ -18,9 +17,10 @@ import { useContainer, useInject } from "~/core/react";
 import { Deal_Controller } from "~/modules/exchange/Deal.controller";
 import { Deal_Message_Controller } from "~/modules/exchange/Deal_Message.controller";
 import { Deal_Message_Repository } from "~/modules/exchange/Deal_Message.repository";
+import { useExchange_Value } from "~/modules/exchange/Exchange.context";
 import { Get_Deals_UseCase } from "~/modules/exchange/application/get_deals.use-case";
 import { useMyProfileId } from "~/modules/user/useProfileId";
-import { Exchange_CardContext } from "./ExchangeCard.context";
+// import { Exchange_CardContext } from "./ExchangeCard.context";
 
 //
 
@@ -51,11 +51,11 @@ const [useOutlet_Context, Outlet_Provider] = createStateContext<
 //
 
 export function Ask_Action() {
-  const { exchange } = useContext(Exchange_CardContext);
+  const [exchange] = useExchange_Value();
 
   return (
     <UI.DialogTrigger>
-      {exchange.in_exchange_of ? (
+      {exchange.get("in_exchange_of") ? (
         <Button intent="warning">Échanger</Button>
       ) : (
         <Button>Demander</Button>
@@ -88,12 +88,15 @@ function Ask_Body() {
 
 function LookForExistingDeal() {
   const [, setContext] = useOutlet_Context();
-  const { exchange } = useContext(Exchange_CardContext);
+  const [exchange] = useExchange_Value();
 
-  const info = useInject(Get_Deals_UseCase).execute(exchange.get("id"), {
-    pagination: { pageSize: 5 },
-    sort: ["updatedAt:desc"],
-  });
+  const info = useInject(Get_Deals_UseCase).execute(
+    Number(exchange.id.value()),
+    {
+      pagination: { pageSize: 5 },
+      sort: ["updatedAt:desc"],
+    },
+  );
 
   const {
     create: { useMutation },
@@ -121,6 +124,7 @@ function LookForExistingDeal() {
 
 function CreatingDeal() {
   const [context, setContext] = useOutlet_Context();
+  const [exchange] = useExchange_Value();
 
   if (context.state !== "creating deal") {
     throw new UnknownError("State missmatch", { props: { context } });
@@ -128,8 +132,7 @@ function CreatingDeal() {
 
   //
 
-  const { exchange } = useContext(Exchange_CardContext);
-  const exchange_id = exchange.get("id");
+  const exchange_id = Number(exchange.id.value());
 
   const {
     create: { useMutation },
@@ -258,12 +261,12 @@ function MessageSent() {
 
 function RedirectToExistingDeal({ deal_id }: { deal_id: number }) {
   const id = useMyProfileId();
-  const { exchange } = useContext(Exchange_CardContext);
+  const [exchange] = useExchange_Value();
 
   return (
     <Link
       className="flex flex-1 flex-col items-center justify-center"
-      href={`/@${id}/my/exchanges/${exchange.get("id")}/deals/${deal_id}`}
+      href={`/@${id}/my/exchanges/${exchange.id.value()}/deals/${deal_id}`}
     >
       <ExchangeIcon
         className={`
@@ -278,38 +281,41 @@ function RedirectToExistingDeal({ deal_id }: { deal_id: number }) {
 
 function Ask_Form() {
   const [, setContext] = useOutlet_Context();
-  const { exchange } = useContext(Exchange_CardContext);
+  const [exchange] = useExchange_Value();
 
   return (
     <>
       <h3
         className="my-5 line-clamp-2 text-2xl font-bold"
-        title={exchange.title}
+        title={exchange.get("title")}
       >
-        {exchange.title}
+        {exchange.get("title")}
       </h3>
       <div className="my-2  flex flex-row justify-between">
         <OnlineOrLocation
-          is_online={exchange.is_online}
-          location={exchange.location}
+          is_online={exchange.get("is_online")}
+          location={exchange.get("location")}
         />
         <time
           className="mt-3 text-xs"
-          dateTime={exchange.updatedAt.toUTCString()}
-          title={exchange.updatedAt.toUTCString()}
+          dateTime={exchange.get("updatedAt").toUTCString()}
+          title={exchange.get("updatedAt").toUTCString()}
         >
-          {exchange.updatedAt.toLocaleDateString("fr")}
+          {exchange.get("updatedAt").toLocaleDateString("fr")}
         </time>
       </div>
 
       <div className="flex flex-row">
         <UI.ProposedByFigure
           avatar={
-            <Link_Avatar className="h-12 w-12" u={exchange.profile.get("id")} />
+            <Link_Avatar
+              className="h-12 w-12"
+              u={exchange.get("profile").get("id")}
+            />
           }
           label={"Proposé par :"}
         >
-          {exchange.profile.name}
+          {exchange.get("profile").name}
         </UI.ProposedByFigure>
       </div>
 
