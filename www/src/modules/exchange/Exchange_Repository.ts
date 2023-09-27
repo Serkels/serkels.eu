@@ -1,6 +1,6 @@
 //
 
-import { HTTPError } from "@1/core/domain";
+import { HTTPError, type UID } from "@1/core/domain";
 import type { Strapi_Query_Params } from "@1/modules/common";
 import type { Exchange_CreateProps } from "@1/modules/exchange/domain";
 import type {
@@ -12,7 +12,7 @@ import type {
   Exchange_Schema,
 } from "@1/strapi-openapi";
 import debug from "debug";
-import { Lifecycle, inject, scoped } from "tsyringe";
+import { Lifecycle, inject, scoped, type InjectionToken } from "tsyringe";
 import { OpenAPI_Repository } from "~/app/api/v1/OpenAPI.repository";
 import type { RepositoryPort } from "~/core";
 
@@ -27,7 +27,7 @@ export type Exchanges_QueryProps = Strapi_Query_Params<
 @scoped(Lifecycle.ContainerScoped)
 export class Exchange_Repository implements RepositoryPort {
   #log = debug(`~:modules:exchange:${Exchange_Repository.name}`);
-  static EXCHANGE_ID_TOKEN = "EXCHANGE_ID_TOKEN" as const;
+  static EXCHANGE_ID_TOKEN = "EXCHANGE_ID_TOKEN" as InjectionToken<number>;
 
   constructor(
     @inject(OpenAPI_Repository) private readonly openapi: OpenAPI_Repository,
@@ -208,8 +208,8 @@ export class Exchange_Repository implements RepositoryPort {
     return body;
   }
 
-  async by_id(id: number): Promise<Exchange_ItemSchema | undefined> {
-    this.#log("findById", id);
+  async by_id(id: UID): Promise<Exchange_ItemSchema | undefined> {
+    this.#log("findById", id.value());
     const {
       data: body,
       error: errorBody,
@@ -217,7 +217,7 @@ export class Exchange_Repository implements RepositoryPort {
     } = await this.openapi.client.GET("/exchanges/{id}", {
       headers: this.openapi.headers,
       params: {
-        path: { id },
+        path: { id: Number(id.value()) },
       },
     });
 
@@ -233,7 +233,7 @@ export class Exchange_Repository implements RepositoryPort {
   }
 
   async find_deal_by_participant(
-    exchange_id: number,
+    exchange_id: UID,
     user_id: number,
   ): Promise<Exchange_DealListSchema> {
     this.#log("find_deal_by_participant", exchange_id);
@@ -244,7 +244,7 @@ export class Exchange_Repository implements RepositoryPort {
     } = await this.openapi.client.GET("/exchanges/{id}/deals", {
       headers: this.openapi.headers,
       params: {
-        path: { id: exchange_id },
+        path: { id: Number(exchange_id) },
         query: {
           filters: {
             participant: user_id,

@@ -7,7 +7,7 @@ import { notFound } from "next/navigation";
 import type { PropsWithChildren } from "react";
 import { fromServer } from "~/app/api/v1";
 import { getQueryClient } from "~/core/getQueryClient";
-import { User_Repository } from "~/modules/user/User_Repository";
+import { User_Repository_Legacy } from "~/modules/user/User_Repository";
 import { Door_ValueProvider } from "../door.context";
 import { this_door_is_yours } from "./this_door_is_yours";
 
@@ -31,7 +31,10 @@ export default async function Layout({
     const profile_id = Number(code);
     const is_your_door = await this_door_is_yours(code);
 
-    const profile_record = await User_Repository.by_id(profile_id, fromServer);
+    const profile_record = await User_Repository_Legacy.by_id(
+      profile_id,
+      fromServer,
+    );
 
     if (!profile_record) {
       throw new AuthError(`Profile < ${code} > not found`);
@@ -39,7 +42,7 @@ export default async function Layout({
 
     const queryClient = getQueryClient();
     await queryClient.prefetchQuery({
-      queryKey: User_Repository.keys.by_id(profile_id),
+      queryKey: User_Repository_Legacy.keys.by_id(profile_id),
       queryFn: () => profile_record,
     });
     const dehydratedState = dehydrate(queryClient);

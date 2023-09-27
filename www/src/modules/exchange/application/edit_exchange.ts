@@ -4,7 +4,7 @@ import type { Exchange_CreateProps } from "@1/modules/exchange/domain";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import debug from "debug";
 import { Lifecycle, inject, scoped } from "~/core/di";
-import { Exchange_Repository } from "../infrastructure";
+import { Exchange_Repository } from "../Exchange_Repository";
 import { Exchange_QueryKeys } from "../queryKeys";
 
 //
@@ -26,7 +26,14 @@ export class Edit_Exchange_UseCase {
     const queryClient = useQueryClient();
     return useMutation({
       mutationFn: (data: Exchange_CreateProps) =>
-        this.repository.update(id, data),
+        this.repository.update(id, {
+          ...data,
+          in_exchange_of:
+            data.in_exchange_of === "" ||
+            Number.isNaN(Number(data.in_exchange_of))
+              ? undefined
+              : data.in_exchange_of,
+        }),
       onSuccess: async () => {
         await Promise.all([
           queryClient.invalidateQueries({

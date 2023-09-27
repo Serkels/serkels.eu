@@ -1,7 +1,7 @@
 //
 
 import { Entity, Ok, Result } from "@1/core/domain";
-import type { Profile_Props } from "../../profile/domain";
+import type { Profile } from "../../profile/domain";
 
 //
 
@@ -10,7 +10,7 @@ export interface Notification_New_Answer_Props {
   type: "NEW_ANSWER";
   answer: Answer;
   question: Question;
-  profile: Profile_Props;
+  profile: Profile;
   createdAt: Date;
 }
 

@@ -15,7 +15,7 @@ import { Avatar } from "~/components/Avatar";
 import { AsideBar } from "~/components/layouts/holy/aside";
 import { useInject } from "~/core/react";
 import { Get_Session_Profile } from "~/modules/user/application/get_session_profile.use-case";
-import { useProfile } from "../(public)/layout.client";
+import { useDoorProfile } from "../(public)/layout.client";
 import { useDoor_Value } from "../../door.context";
 
 //
@@ -41,9 +41,8 @@ export function Li_Link(
     is_active_includes?: string[];
   },
 ) {
-  const profile = useProfile();
-
-  const is_activee = useIsActive({ root: `/@${profile.get("id")}/` });
+  const profile = useDoorProfile();
+  const is_activee = useIsActive({ root: `/@${profile.id.value()}/` });
 
   const {
     href,
@@ -53,7 +52,7 @@ export function Li_Link(
     // ...other_props
   } = props;
 
-  const target_href = String(href).replace("./", `/@${profile.get("id")}/`);
+  const target_href = String(href).replace("./", `/@${profile.id.value()}/`);
   const is_active = (is_active_includes ?? [String(href)]).some((path) =>
     is_activee(String(path)),
   );
@@ -122,8 +121,8 @@ export function SubNav_Bookmarks({
   href,
   children,
 }: PropsWithChildren<{ href: string }>) {
-  const profile = useProfile();
-  const is_activee = useIsActive({ root: `/@${profile.get("id")}/` });
+  const profile = useDoorProfile();
+  const is_activee = useIsActive({ root: `/@${profile.id.value()}/` });
 
   if (!is_activee(href)) {
     return null;

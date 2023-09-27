@@ -15,7 +15,7 @@ export function Exchange_InfiniteList({
   info: UseInfiniteQueryResult<Exchange, unknown>;
 }) {
   return match(info)
-    .with({ status: "error" }, ({ error }) => {
+    .with({ status: "error", error: P.select() }, (error) => {
       throw error;
     })
     .with({ status: "loading" }, () => <Loading />)
@@ -31,8 +31,8 @@ export function Exchange_InfiniteList({
       ({ data: { pages }, isFetchingNextPage, hasNextPage, fetchNextPage }) => (
         <ul className="grid grid-cols-1 gap-9">
           {pages.flat().map((exchange) => (
-            <li key={exchange.get("id")}>
-              <ExchangeCard id={exchange.get("id")} />
+            <li key={exchange.id.value()}>
+              <ExchangeCard id={exchange.id} />
             </li>
           ))}
           <li className="col-span-full mx-auto">

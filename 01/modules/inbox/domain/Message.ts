@@ -1,26 +1,38 @@
 //
 
-import { Entity, Ok, Result } from "@1/core/domain";
-import { Profile } from "../../profile/domain";
+import { Entity, Result } from "@1/core/domain";
+import { z, type ZodError } from "zod";
+import { Entity_Schema } from "../../common/record";
 
-export interface Message_Props {
-  id: number;
-  content: string;
-  author: Profile;
-}
+//
 
-export class Message extends Entity<Message_Props> {
-  static override create(props: Message_Props): Result<Message, Error> {
-    return Ok(new Message(props));
+export const Message_PropsSchema = Entity_Schema.augment({
+  content: z.string().default(""),
+  author: z.any(),
+});
+
+//
+
+type Props = z.TypeOf<typeof Message_PropsSchema>;
+type Props_Input = z.input<typeof Message_PropsSchema>;
+
+//
+export class Message extends Entity<Props> {
+  static override create(props: Props_Input): Result<Message, ZodError> {
+    const result = Message_PropsSchema.safeParse(props, {
+      path: ["<Message.create>", "props"],
+    });
+    if (result.success) {
+      return Result.Ok(new Message(result.data));
+    } else {
+      return Result.fail(result.error);
+    }
   }
 
-  static zero = Message.create({
-    id: NaN,
-    author: Profile.zero,
-    content: "",
-  }).value();
+  static zero = z.instanceof(Message).parse(Message.create({}).value());
 
   //
+
   get the_excerpt() {
     return this.props.content.trim().slice(0, 123);
   }

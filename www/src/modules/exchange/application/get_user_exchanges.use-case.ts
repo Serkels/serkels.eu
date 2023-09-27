@@ -1,14 +1,16 @@
 //
 
-import { Exchange_RecordSchema } from "@1/modules/exchange/infra/strapi";
+import { Exchange } from "@1/modules/exchange/domain";
+import { Exchange_Record } from "@1/modules/exchange/infra/strapi";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import debug from "debug";
+import { z } from "zod";
 import { Lifecycle, inject, scoped } from "~/core/di";
 import { getNextPageParam, getPreviousPageParam } from "~/core/use-query";
 import {
   Exchange_Repository,
   type Exchanges_QueryProps,
-} from "../infrastructure";
+} from "../Exchange_Repository";
 import { Exchange_QueryKeys } from "../queryKeys";
 
 //
@@ -45,19 +47,11 @@ export class Get_User_Exchanges_UseCase {
             .map(({ data }) => data)
             .flat()
             .map((data, index) => {
-              return Exchange_RecordSchema.parse(
+              return Exchange_Record.pipe(z.instanceof(Exchange)).parse(
                 { data },
                 {
                   path: [
-                    // ...JSON.stringify({ data }, null, 2)
-                    //   .replaceAll('"', '"')
-                    //   .split("\n"),
-                    // "=",
-                    `useInfiniteQuery(${Exchange_QueryKeys.mine()})}`,
-                    "Get_User_Exchanges_UseCase",
-                    "execute",
-                    "select",
-                    "//",
+                    `<${Get_User_Exchanges_UseCase.name}.execute.useInfiniteQuery.select>`,
                     `data.pages[${index}]`,
                     "{data}",
                   ],

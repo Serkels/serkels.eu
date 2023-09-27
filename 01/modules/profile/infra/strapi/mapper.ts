@@ -9,7 +9,7 @@ import {
   type IAdapter,
 } from "@1/core/domain";
 import type { Profile_Schema } from "@1/strapi-openapi";
-import { z } from "zod";
+import { ZodError, z } from "zod";
 import { Profile } from "../../domain";
 
 //
@@ -22,9 +22,9 @@ const StrapiResponseDataObject = z
   .describe("Strapi Response Data Object");
 
 export class Profile_SchemaToDomain
-  implements IAdapter<Profile_Schema, Profile, ErrorInstance>
+  implements IAdapter<Profile_Schema, Profile, ErrorInstance | ZodError>
 {
-  fromItemDto(record: unknown): Result<Profile, ErrorInstance> {
+  fromItemDto(record: unknown): Result<Profile, ErrorInstance | ZodError> {
     try {
       const schema = StrapiResponseDataObject.parse(record, {
         path: ["record"],
@@ -38,7 +38,10 @@ export class Profile_SchemaToDomain
     }
   }
 
-  build({ id, attributes }: Profile_Schema): Result<Profile, ErrorInstance> {
+  build({
+    id,
+    attributes,
+  }: Profile_Schema): Result<Profile, ErrorInstance | ZodError> {
     if (id === undefined) return Fail(new IllegalArgs("id undefined", {}));
     if (attributes === undefined)
       return Fail(new IllegalArgs("attributes undefined"));

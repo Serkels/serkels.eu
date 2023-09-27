@@ -6,7 +6,8 @@ import { createStateContext } from "react-use";
 import { tv } from "tailwind-variants";
 import { useDoor_Value } from "~/app/(main)/door/door.context";
 import { AsideBar } from "~/components/layouts/holy/aside";
-import { useExchange_Route_Context } from "../layout.client";
+import { useInject } from "~/core/react";
+import { ROUTE_EXCHANGE_ID_TOKEN } from "../layout.client";
 
 //
 
@@ -17,7 +18,7 @@ const [useDeal_Route_Context, Deal_Route_Provider] = createStateContext({
 export { Deal_Route_Provider, useDeal_Route_Context };
 
 export function Deals_Aside_Nav({ children }: PropsWithChildren) {
-  const [{ exchange_id }] = useExchange_Route_Context();
+  const exchange_id = useInject(ROUTE_EXCHANGE_ID_TOKEN);
   const pathname = usePathname();
 
   const [{ door_id }] = useDoor_Value();

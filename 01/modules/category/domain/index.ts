@@ -1,25 +1,20 @@
 //
 
-import {
-  Fail,
-  Ok,
-  Result,
-  ValueObject,
-  type ErrorInstance,
-} from "@1/core/domain";
-import { z } from "zod";
-import { Strapi_ID, Strapi_Timestamps } from "../../common/record";
+import { Result, ValueObject } from "@1/core/domain";
+import { ZodError, z } from "zod";
+import { Entity_Schema } from "../../common/record";
 
 //
 
-export const Category_PropsSchema = z
-  .object({
-    name: z.string(),
-    slug: z.string(),
-  })
-  .merge(Strapi_ID)
-  .merge(Strapi_Timestamps)
-  .describe("Category Props");
+export const Category_PropsSchema = Entity_Schema.merge(
+  z.object(
+    {
+      name: z.string(),
+      slug: z.string(),
+    },
+    { description: "Category" },
+  ),
+).describe("Category Props");
 
 //
 type Props = z.TypeOf<typeof Category_PropsSchema>;
@@ -28,35 +23,32 @@ type Props_Input = z.input<typeof Category_PropsSchema>;
 //
 
 export class Category extends ValueObject<Props> {
-  static override create(props: Props_Input): Result<Category, ErrorInstance> {
-    try {
-      return Ok(
-        new Category(
-          Category_PropsSchema.parse(props, {
-            path: ["Deal.create(props)"],
-          }),
-        ),
-      );
-    } catch (error) {
-      return Fail(error as ErrorInstance);
+  static override create(props: Props_Input): Result<Category, ZodError> {
+    const result = Category_PropsSchema.safeParse(props, {
+      path: ["<Category.create>", "props"],
+    });
+    if (result.success) {
+      return Result.Ok(new Category(result.data));
+    } else {
+      return Result.fail(result.error);
     }
   }
 
   //
 
-  static all = Category.create({
-    id: Number.MAX_SAFE_INTEGER,
-    //
-    name: "Tout",
-    slug: "",
-  }).value();
+  static all = z.instanceof(Category).parse(
+    Category.create({
+      name: "Tout",
+      slug: "",
+    }).value(),
+  );
 
-  static unknown = Category.create({
-    id: Number.MAX_SAFE_INTEGER - 1,
-    //
-    name: "Inconnu",
-    slug: "",
-  }).value();
+  static unknown = z.instanceof(Category).parse(
+    Category.create({
+      name: "Inconnu",
+      slug: "unknown",
+    }).value(),
+  );
 
   //
 
@@ -71,7 +63,7 @@ export class Category extends ValueObject<Props> {
   //
 
   get id() {
-    return this.props.id;
+    return Number(this.props.id);
   }
 
   get name() {

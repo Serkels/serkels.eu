@@ -7,8 +7,8 @@ import { useSession } from "next-auth/react";
 import { useCallback } from "react";
 import { P, match } from "ts-pattern";
 import { useUserData } from "~/modules/user";
-import { User_Repository } from "~/modules/user/User_Repository";
-import { useProfile } from "./layout.client";
+import { User_Repository_Legacy } from "~/modules/user/User_Repository";
+import { useDoorProfile } from "./layout.client";
 
 //
 
@@ -18,7 +18,7 @@ export function AddContact() {
   } = useUserData();
   const { info } = useMutation();
   const session_context = useSession();
-  const profile = useProfile();
+  const profile = useDoorProfile();
 
   const query_client = useQueryClient();
 
@@ -38,7 +38,7 @@ export function AddContact() {
       contacts: { set: contacts_ids },
     });
 
-    query_client.invalidateQueries(User_Repository.keys.contacts());
+    query_client.invalidateQueries(User_Repository_Legacy.keys.contacts());
 
     session_context.status = "loading";
     setTimeout(async () => {

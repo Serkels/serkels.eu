@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import type { PropsWithChildren } from "react";
 import { fromServer } from "~/app/api/v1";
 import { getQueryClient } from "~/core/getQueryClient";
-import { User_Repository } from "~/modules/user/User_Repository";
+import { User_Repository_Legacy } from "~/modules/user/User_Repository";
 import { Door_ValueProvider, type Props } from "./door.context";
 
 //
@@ -25,8 +25,8 @@ export async function Door_Provider({
     const queryClient = getQueryClient();
 
     await queryClient.prefetchQuery({
-      queryKey: User_Repository.keys.by_id(id),
-      queryFn: () => User_Repository.by_id(id, fromServer),
+      queryKey: User_Repository_Legacy.keys.by_id(id),
+      queryFn: () => User_Repository_Legacy.by_id(id, fromServer),
     });
 
     const dehydratedState = dehydrate(queryClient);

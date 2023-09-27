@@ -1,14 +1,12 @@
 "use client";
 
-//
-
-import { Exchange_ItemSchemaToDomain } from "@1/modules/exchange/infra/strapi";
+import { Id } from "@1/core/domain";
 import type { PropsWithChildren } from "react";
 import { P, match } from "ts-pattern";
 import { useInject } from "~/core/react";
-import { useExchange_item_controller } from "~/modules/exchange";
+import { Exchange_ValueProvider } from "~/modules/exchange/Exchange.context";
 import { Get_Deal_ById_UseCase } from "~/modules/exchange/application/get_deal_byid.use-case";
-import { Exchange_ValueProvider } from "../../Exchange.context";
+import { Get_Exchange_ById_UseCase } from "~/modules/exchange/application/get_exchange_byid.use-case";
 import { Deal_ValueProvider } from "./Deal.context";
 
 //
@@ -37,30 +35,19 @@ export function Exchange_Provider({
   children,
   id,
 }: PropsWithChildren<{ id: number }>) {
-  const {
-    item: { useQuery },
-  } = useExchange_item_controller(id);
+  const query_info = useInject(Get_Exchange_ById_UseCase).execute(Id(id));
 
-  const query_info = useQuery();
-
-  return match(query_info.status)
-    .with("error", () => {
+  return match(query_info)
+    .with({ status: "error" }, () => {
       console.error(query_info.error);
       return null;
     })
-    .with("loading", () => {
+    .with({ status: "loading" }, () => {
       return null;
     })
-    .with("success", () => {
-      const { data } = query_info;
-      if (!data) return null;
-      const exchange = new Exchange_ItemSchemaToDomain().build(data);
-      if (exchange.isFail()) {
-        console.error(exchange.error());
-        return null;
-      }
+    .with({ status: "success", data: P.select() }, (exchange) => {
       return (
-        <Exchange_ValueProvider initialValue={exchange.value()}>
+        <Exchange_ValueProvider initialValue={exchange}>
           {children}
         </Exchange_ValueProvider>
       );

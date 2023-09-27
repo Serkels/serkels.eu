@@ -1,5 +1,6 @@
 //
 
+import type { Category_Type } from "@1/modules/category/domain";
 import debug from "debug";
 import { match } from "ts-pattern";
 import { Lifecycle, inject, scoped } from "~/core/di";

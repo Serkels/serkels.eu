@@ -35,11 +35,13 @@ import type { StrapiRepository } from "~/core/StrapiRepository";
  * const dehydratedState = dehydrate(queryClient);
  *
  * ```
+ *
+ * @deprecated
  */
-export class User_Repository {
+export class User_Repository_Legacy {
   static keys = {
     all: ["profile"] as const,
-    by_id: (id: number) => [...this.keys.all, "by_id", String(id)] as const,
+    by_id: (id: number) => [...this.keys.all, "profile", String(id)] as const,
     contacts: () => [...this.keys.all, "contacts"] as const,
   };
 

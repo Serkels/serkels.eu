@@ -2,7 +2,10 @@
 
 import { Category } from "@1/modules/category/domain";
 import { useSession } from "next-auth/react";
-import { FilterRadioList } from "~/components/FilterRadioList";
+import {
+  CategoryFilterRadioList,
+  FilterRadioList,
+} from "~/components/FilterRadioList";
 import { useSyncSearchQuery } from "~/components/useSyncSearchQuery";
 import { useInject } from "~/core/react";
 import { Get_Category_UseCase } from "~/modules/categories/application/get_categories.use-case";
@@ -17,7 +20,7 @@ export function CategoriesList() {
   categories.push(Category.all);
 
   return (
-    <FilterRadioList
+    <CategoryFilterRadioList
       data={categories}
       active={query ?? ""}
       name="category"

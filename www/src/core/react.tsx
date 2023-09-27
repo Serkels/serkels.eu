@@ -19,7 +19,7 @@ import {
 
 //
 
-const log = debug("~/core/react");
+const log = debug("~:core:react");
 
 //
 
@@ -41,8 +41,9 @@ export function Container_Provider<T>({
 }>) {
   const parent = useContainer();
   const container = useMemo(() => {
-    const child = parent.createChildContainer();
     log("🌲");
+
+    const child = parent.createChildContainer();
     for (const args of initialFn) {
       child.registerInstance(...args.registerInstance);
     }

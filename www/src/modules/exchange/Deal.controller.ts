@@ -1,6 +1,6 @@
 //
 
-import { Deal_RecordSchema } from "@1/modules/deal/infra/strapi";
+import { Deal_Record } from "@1/modules/deal/infra/strapi";
 import type { Exchange_DealListSchema } from "@1/strapi-openapi";
 import { startTransaction } from "@sentry/nextjs";
 import {
@@ -109,7 +109,7 @@ export class Deal_Controller {
           .map((page) => page.data!)
           .flat()
           .map((raw) =>
-            Deal_RecordSchema.parse(
+            Deal_Record.parse(
               { data: raw },
               {
                 path: [

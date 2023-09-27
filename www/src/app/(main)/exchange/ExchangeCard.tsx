@@ -82,9 +82,9 @@ function Card() {
       <div className={body()}>
         <header className={header()}>
           <AvatarMediaHorizontal
-            u={exchange.get("profile").id.value()}
-            university={exchange.get("profile").university}
-            username={exchange.get("profile").name}
+            u={exchange.profile.id.value()}
+            university={exchange.profile.university}
+            username={exchange.profile.name}
           />
           <div className="flex items-start space-x-2">
             <Exchange_EditButton />
@@ -146,7 +146,9 @@ function Card() {
 }
 
 function Footer() {
-  const my_profile_id = ID.create(useInject<number>(USER_PROFILE_ID_TOKEN));
+  const my_profile_id = ID.create(
+    useInject<number>(USER_PROFILE_ID_TOKEN),
+  ).value();
   const [exchange] = useExchange_Value();
 
   return (
@@ -168,8 +170,8 @@ function Footer() {
             }
           />
         </div>
-        {match(exchange.get("profile").id.value())
-          .with(my_profile_id.value(), () => (
+        {match(exchange.profile.id.value())
+          .with(my_profile_id, () => (
             <Link
               href={`/@${my_profile_id}/my/exchanges/${exchange.id.value()}`}
             >
@@ -184,11 +186,12 @@ function Footer() {
     </footer>
   );
 }
+
 function Exchange_EditButton() {
   const profile_id = ID.create(useInject<number>(USER_PROFILE_ID_TOKEN));
   const [exchange] = useExchange_Value();
 
-  if (!exchange.get("profile").id.equal(profile_id)) {
+  if (!exchange.profile.id.equal(profile_id)) {
     return null;
   }
 

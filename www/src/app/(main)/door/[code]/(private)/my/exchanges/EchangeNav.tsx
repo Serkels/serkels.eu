@@ -8,6 +8,10 @@ import { OnlineOrLocation } from "@1/ui/domains/exchange/OnlineOrLocation";
 import { Circle } from "@1/ui/icons";
 import { Exchange as ExchangeIcon } from "@1/ui/icons/Exchange";
 import type { VariantProps } from "@1/ui/theme";
+import type {
+  InfiniteQueryObserverSuccessResult,
+  UseInfiniteQueryResult,
+} from "@tanstack/react-query";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -20,8 +24,11 @@ import { P, match } from "ts-pattern";
 import { useDoor_Value } from "~/app/(main)/door/door.context";
 import { Avatar } from "~/components/Avatar";
 import { useInject } from "~/core/react";
+import {
+  Exchange_ValueProvider,
+  useExchange_Value,
+} from "~/modules/exchange/Exchange.context";
 import { Get_User_Exchanges_UseCase } from "~/modules/exchange/application/get_user_exchanges.use-case";
-import { Exchange_ValueProvider, useExchange_Value } from "./Exchange.context";
 
 //
 
@@ -70,60 +77,43 @@ export function EchangeNav() {
           disabled={true}
         />
       </form>
-      {match(info)
-        .with({ status: "error" }, ({ error }) => {
-          throw error;
-        })
-        .with({ status: "loading" }, () => <Loading />)
-        .with(
-          {
-            status: "success",
-            data: P.when((list) => list.pages.length === 0),
-          },
-          () => <EmptyList />,
-        )
-        .with(
-          { status: "success" },
-          ({
-            data: { pages },
-            isFetchingNextPage,
-            hasNextPage,
-            fetchNextPage,
-          }) => (
-            <nav className="flex-1 overflow-y-auto">
-              <Exchange_List
-                exchanges={pages.filter(
-                  (exchange) => exchange.get("title")?.includes(filter_name),
-                )}
-              />
-
-              {isFetchingNextPage ? <Loading /> : null}
-              {hasNextPage ? (
-                <Button
-                  onPress={() => fetchNextPage()}
-                  isDisabled={!hasNextPage || isFetchingNextPage}
-                >
-                  Charger plus
-                </Button>
-              ) : null}
-            </nav>
-          ),
-        )
-        .exhaustive()}
+      <InfiniteList info={info} />
     </>
   );
 }
 
-function Exchange_List({ exchanges }: { exchanges: Exchange[] | undefined }) {
-  return match(exchanges)
-    .with(undefined, () => null)
-    .when(
-      (list) => list.length === 0,
+function InfiniteList({ info }: { info: UseInfiniteQueryResult<Exchange> }) {
+  return match(info)
+    .with({ status: "error", error: P.select() }, (error) => {
+      throw error;
+    })
+    .with({ status: "loading" }, () => <Loading />)
+    .with(
+      {
+        status: "success",
+        data: P.when((list) => list.pages.flat().length === 0),
+      },
       () => <EmptyList />,
     )
-    .otherwise((list) => (
+    .with(
+      {
+        status: "success",
+      },
+      (result) => <InfiniteListData {...result} />,
+    )
+    .exhaustive();
+}
+
+function InfiniteListData({
+  data,
+  isFetchingNextPage,
+  hasNextPage,
+  fetchNextPage,
+}: InfiniteQueryObserverSuccessResult<Exchange, unknown>) {
+  return (
+    <nav className="flex-1 overflow-y-auto">
       <ul className={ul_list()}>
-        {list.map((exchange) => (
+        {data.pages.flat().map((exchange) => (
           <li key={exchange.id.value()}>
             <Exchange_ValueProvider initialValue={exchange}>
               <Echange_MessagingLink />
@@ -131,7 +121,17 @@ function Exchange_List({ exchanges }: { exchanges: Exchange[] | undefined }) {
           </li>
         ))}
       </ul>
-    ));
+      {isFetchingNextPage ? <Loading /> : null}
+      {hasNextPage ? (
+        <Button
+          onPress={() => fetchNextPage()}
+          isDisabled={!hasNextPage || isFetchingNextPage}
+        >
+          Charger plus
+        </Button>
+      ) : null}
+    </nav>
+  );
 }
 
 const ul_list = tv({

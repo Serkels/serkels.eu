@@ -2,52 +2,36 @@
 
 //
 
-import { Profile } from "@1/modules/profile/domain";
-import { Profile_RecordSchema } from "@1/modules/profile/infra/strapi";
+import { NotFoundError } from "@1/core/error";
 import { School } from "@1/ui/icons";
-import { useQueryClient } from "@tanstack/react-query";
-import { notFound } from "next/navigation";
 import { useMemo } from "react";
 import { Avatar } from "~/components/Avatar";
-import { User_Repository } from "~/modules/user/User_Repository";
+import { useInject } from "~/core/react";
+import { Get_Profile_UseCase } from "~/modules/user/application/get_profile.use-case";
 import { useDoor_Value } from "../../door.context";
 
 //
 
-export function useProfile() {
+export function useDoorProfile() {
   const [{ door_id }] = useDoor_Value();
-  const query_client = useQueryClient();
-  const profile = query_client.getQueryData<Profile>(
-    User_Repository.keys.by_id(door_id),
-  );
+
+  const { data: profile } = useInject(Get_Profile_UseCase).execute(door_id);
 
   if (!profile) {
-    return notFound();
+    throw new NotFoundError(`Profile @${door_id} not found`);
   }
 
   return useMemo(() => {
-    return Profile_RecordSchema.parse(profile, {
-      path: [
-        ...JSON.stringify({ data: profile }, null, 2)
-          .replaceAll('"', '"')
-          .split("\n"),
-        "=",
-        `useProfile(}`,
-        `useMemo${[profile?.id]}`,
-        "Profile_RecordSchema.parse",
-        "//",
-        "{ data: profile }",
-      ],
-    });
-  }, [profile?.id]);
+    return profile;
+  }, [profile.id]);
 }
 
 export function Profile_Header() {
-  const profile = useProfile();
+  const profile = useDoorProfile();
 
   return (
     <figure className="my-5 flex flex-row space-x-5">
-      <Avatar className="h-16 w-16" u={profile.get("id")} />
+      <Avatar className="h-16 w-16" u={profile.id.value()} />
       <figcaption className="flex flex-col items-start justify-center space-y-2">
         <h4 className="text-xl font-bold text-Cerulean" title={profile.name}>
           {profile.name}

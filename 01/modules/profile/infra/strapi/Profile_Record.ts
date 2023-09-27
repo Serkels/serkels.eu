@@ -4,28 +4,23 @@ import { z } from "zod";
 import { StrapiEntity } from "../../../common";
 import { Profile, Profile_PropsSchema } from "../../domain";
 
-// z_strapi_entity_data_strict(z.any())
-//   .merge(schema)
-// .transform((data) => {
-//   data.
-//   return { id, ...data. attributes };
-// });
-// .refine(schema.parse)
-// .transform((sdf) => {
-//   return { ...data.attributes, ...data } as T;
-// })
+export const Profile_Record = StrapiEntity(Profile_PropsSchema)
+  .transform(({ data }, ctx) => {
+    if (!data) {
+      return;
+    }
 
-// export const Profile_RecordSchema = StrapiEntity.merge(Profile_PropsSchema)//.merge(Profile_PropsSchema);
-export const Profile_RecordSchema = StrapiEntity.pipe(Profile_PropsSchema)
-  .transform(Profile.create)
-  .transform((result) => {
-    return result.isOk() ? result.value() : Profile.zero;
+    const entity = Profile.create({ id: data.id, ...data.attributes });
+    if (entity.isFail()) {
+      entity.error().issues.map(ctx.addIssue);
+    }
+    return entity.value();
   })
-  .describe("Profile_RecordSchema");
+  .describe("Profile_Record");
 
 //
 
-export const Profile_Mapper = Profile_RecordSchema;
+export const Profile_Mapper = Profile_Record;
 
 export const Profile_UpdateRecord = z.object({
   firstname: z.string().optional(),

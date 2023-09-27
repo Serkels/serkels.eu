@@ -1,14 +1,7 @@
-import {
-  Fail,
-  IllegalArgs,
-  Ok,
-  Result,
-  type ErrorInstance,
-  type IAdapter,
-} from "@1/core/domain";
+import { Ok, Result, type ErrorInstance, type IAdapter } from "@1/core/domain";
 import type { Exchange_ItemSchema } from "@1/strapi-openapi";
 import { Exchange } from "../../domain";
-import { Exchange_RecordSchema } from "./Exchange_Record";
+import { Exchange_Record } from "./Exchange_Record";
 
 //
 
@@ -16,30 +9,34 @@ export class Exchange_ItemSchemaToDomain
   implements IAdapter<Exchange_ItemSchema, Exchange, ErrorInstance>
 {
   build(data: Exchange_ItemSchema): Result<Exchange, ErrorInstance> {
-    try {
-      return Ok(
-        Exchange_RecordSchema.parse(
-          { data },
-          {
-            path: [
-              ...JSON.stringify({ data }, null, 2)
-                .replaceAll('"', '"')
-                .split("\n"),
-
-              "=",
-              "data",
-            ],
-          },
-        ),
-      );
-    } catch (error) {
-      return Fail(
-        new IllegalArgs("Exchange_ItemSchemaToDomain.build", {
-          cause: error,
-        }),
-      );
-    }
+    const dto = Exchange_Record.parse({ data });
+    return dto ? Ok(dto) : Ok(Exchange.zero);
   }
+  // build(data: Exchange_ItemSchema): Result<Exchange, ErrorInstance> {
+  //   try {
+  //     return Ok(
+  //       Exchange_Record.parse(
+  //         { data },
+  //         {
+  //           path: [
+  //             ...JSON.stringify({ data }, null, 2)
+  //               .replaceAll('"', '"')
+  //               .split("\n"),
+
+  //             "=",
+  //             "data",
+  //           ],
+  //         },
+  //       ),
+  //     );
+  //   } catch (error) {
+  //     return Fail(
+  //       new IllegalArgs("Exchange_ItemSchemaToDomain.build", {
+  //         cause: error,
+  //       }),
+  //     );
+  //   }
+  // }
   // build({
   //   id,
   //   attributes,

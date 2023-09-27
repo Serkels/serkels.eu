@@ -8,7 +8,7 @@ import { getNextPageParam, getPreviousPageParam } from "~/core/use-query";
 import {
   Exchange_Repository,
   type Exchanges_QueryProps,
-} from "../infrastructure";
+} from "../Exchange_Repository";
 import { Exchange_QueryKeys } from "../queryKeys";
 
 //

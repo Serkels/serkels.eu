@@ -1,7 +1,7 @@
 "use client";
 
+import { Id } from "@1/core/domain";
 import { UnknownError } from "@1/core/error";
-import { Exchange_ItemSchemaToDomain } from "@1/modules/exchange/infra/strapi";
 import { Message, Thread } from "@1/modules/inbox/domain";
 import { Button } from "@1/ui/components/ButtonV";
 import { Spinner } from "@1/ui/components/Spinner";
@@ -15,14 +15,14 @@ import { useDoor_Value } from "~/app/(main)/door/door.context";
 import { ErrorOccur } from "~/components/ErrorOccur";
 import { Thread_Item } from "~/components/Thread_Item";
 import { useInject } from "~/core/react";
-import { useExchange_item_controller } from "~/modules/exchange";
-import { Get_Deal_ById_UseCase } from "~/modules/exchange/application/get_deal_byid.use-case";
-import { Get_Deals_UseCase } from "~/modules/exchange/application/get_deals.use-case";
-import { useMyProfileId } from "~/modules/user/useProfileId";
 import {
   Exchange_ValueProvider,
   useExchange_Value,
-} from "../../Exchange.context";
+} from "~/modules/exchange/Exchange.context";
+import { Get_Deal_ById_UseCase } from "~/modules/exchange/application/get_deal_byid.use-case";
+import { Get_Deals_UseCase } from "~/modules/exchange/application/get_deals.use-case";
+import { Get_Exchange_ById_UseCase } from "~/modules/exchange/application/get_exchange_byid.use-case";
+import { useMyProfileId } from "~/modules/user/useProfileId";
 import { useExchange_Route_Context } from "../layout.client";
 import { Deal_ValueProvider, useDeal_Value } from "./Deal.context";
 
@@ -30,12 +30,9 @@ import { Deal_ValueProvider, useDeal_Value } from "./Deal.context";
 
 export function MyDeals() {
   const [{ exchange_id }] = useExchange_Route_Context();
-
-  const {
-    item: { useQuery },
-  } = useExchange_item_controller(exchange_id);
-
-  const query_info = useQuery();
+  const query_info = useInject(Get_Exchange_ById_UseCase).execute(
+    Id(exchange_id),
+  );
 
   return match(query_info)
     .with({ status: "error" }, ({ error }) => (
@@ -45,16 +42,8 @@ export function MyDeals() {
     .with(
       {
         status: "success",
-        data: P.not(P.nullish),
       },
-      ({ data }) => {
-        const r_exchange = new Exchange_ItemSchemaToDomain().build(data);
-        if (r_exchange.isFail()) {
-          console.error(r_exchange.error());
-          return null;
-        }
-
-        const exchange = r_exchange.value();
+      ({ data: exchange }) => {
         return (
           <Exchange_ValueProvider initialValue={exchange}>
             <Messaging_Header>
@@ -72,11 +61,6 @@ export function MyDeals() {
         );
       },
     )
-    .with({ status: "success" }, () => (
-      <ErrorOccur
-        error={new UnknownError("useQuery Success with nullish data")}
-      />
-    ))
     .exhaustive();
 }
 
@@ -111,9 +95,12 @@ function Echange_DealLink_Loader() {
 
 export function Echange_DealsNav() {
   const [exchange] = useExchange_Value();
-  const query_info = useInject(Get_Deals_UseCase).execute(exchange.get("id"), {
-    pagination: { pageSize: 6 },
-  });
+  const query_info = useInject(Get_Deals_UseCase).execute(
+    Number(exchange.id.value()),
+    {
+      pagination: { pageSize: 6 },
+    },
+  );
 
   const router = useRouter();
   const pathname = usePathname();

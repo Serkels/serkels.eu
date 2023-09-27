@@ -7,7 +7,7 @@ import { useDoor_Value } from "~/app/(main)/door/door.context";
 import { useContainer, useInject } from "~/core/react";
 import { Deal_Message_Controller } from "~/modules/exchange/Deal_Message.controller";
 import { Deal_Message_Repository } from "~/modules/exchange/Deal_Message.repository";
-import { useExchange_Value } from "../../../Exchange.context";
+import { useExchange_Value } from "~/modules/exchange/Exchange.context";
 import { useDeal_Value } from "../Deal.context";
 
 //

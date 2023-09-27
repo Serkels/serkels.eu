@@ -13,8 +13,8 @@ import { P, match } from "ts-pattern";
 import { avatar_img } from "~/components/Avatar";
 import { ErrorOccur } from "~/components/ErrorOccur";
 import { useUserData } from "~/modules/user";
-import { User_Repository } from "~/modules/user/User_Repository";
-import { useProfile } from "../../(public)/layout.client";
+import { User_Repository_Legacy } from "~/modules/user/User_Repository";
+import { useDoorProfile } from "../../(public)/layout.client";
 
 //
 
@@ -27,7 +27,7 @@ export function Avartar_Form() {
   const { update_avatar, update: update_my_profile } = useUserData();
   const { info: upload_info } = update_avatar.useMutation();
   const { info: profile_info } = update_my_profile.useMutation();
-  const profile = useProfile();
+  const profile = useDoorProfile();
   const [has_changed, set_has_changed] = useBoolean(false);
 
   const revert_to_gravatar_picture = useCallback(async () => {
@@ -94,7 +94,7 @@ export function Avartar_Form() {
           await upload_info.mutateAsync(form_data);
 
           query_client.invalidateQueries(
-            User_Repository.keys.by_id(profile.get("id")),
+            User_Repository_Legacy.keys.by_id(profile.get("id")),
           );
           await update();
         }}

@@ -5,7 +5,7 @@ import type { Next } from "koa";
 import { ZodError, z } from "zod";
 import { fromZodError } from "zod-validation-error";
 import { set_params_to_nope } from "~/src/middlewares/set_params_to_nope";
-import { type KoaContext } from "~/types";
+import { Params, type KoaContext } from "~/types";
 import { deal_state_action_schema } from "../content-types/exchange-deal";
 import { status_patching } from "../middlewares/status_patching";
 import { assert_deal_access } from "../policies/assert_deal_access";
@@ -13,6 +13,12 @@ import { query_filters } from "../services/query_one_filters";
 
 //
 
+const populate_middleware = {
+  config: {
+    populate: { exchange: { populate: { category: true, profile: true } } },
+  } satisfies Params.Pick<"api::exchange-deal.exchange-deal", "populate">,
+  name: "global::populate-all",
+};
 export default {
   routes: [
     {
@@ -24,7 +30,6 @@ export default {
         middlewares: [
           status_patching(),
           set_id_to_deal_id(),
-          "global::populate-all",
           //
           // next()
           //
@@ -55,7 +60,7 @@ export default {
         description: "Get exchange deals",
         middlewares: [
           set_id_to_deal_id(),
-          "global::populate-all",
+          populate_middleware,
           //
           // next()
           //
@@ -87,7 +92,7 @@ export default {
         middlewares: [
           filter_by_exchange_and_user_id,
           set_params_to_nope(),
-          "global::populate-all",
+          populate_middleware,
           //
           // next()
           //

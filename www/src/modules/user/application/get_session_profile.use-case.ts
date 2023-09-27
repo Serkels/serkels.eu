@@ -1,6 +1,6 @@
 //
 
-import { Profile_RecordSchema } from "@1/modules/profile/infra/strapi";
+import { Profile_Record } from "@1/modules/profile/infra/strapi";
 import debug from "debug";
 import { useSession } from "next-auth/react";
 import { useMemo } from "react";
@@ -23,28 +23,16 @@ export class Get_Session_Profile {
     const profile = session?.user?.profile;
     return useMemo(() => {
       if (!profile) return undefined;
-      debugger;
+
       try {
-        return Profile_RecordSchema.parse(
+        return Profile_Record.parse(
           {
             data: profile,
           },
           {
             path: [
-              ...JSON.stringify(
-                {
-                  data: profile,
-                },
-                null,
-                2,
-              )
-                .replaceAll('"', '"')
-                .split("\n"),
-
-              "=",
-              "Get_Session_Profile",
-              "execute",
-              "useMemo",
+              "<Get_Session_Profile.execute>",
+              "<useMemo>",
               "{data: profile}",
             ],
           },

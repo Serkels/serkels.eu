@@ -8,7 +8,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import debug from "debug";
 import { useSession } from "next-auth/react";
 import { useCallback, useEffect } from "react";
-import type { Exchange_Repository } from "./infrastructure";
+import type { Exchange_Repository } from "./Exchange_Repository";
 import { Exchange_QueryKeys } from "./queryKeys";
 
 //

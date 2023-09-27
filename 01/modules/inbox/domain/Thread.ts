@@ -8,22 +8,20 @@ import {
   type ErrorInstance,
 } from "@1/core/domain";
 import { z } from "zod";
-import { Strapi_ID, Strapi_Timestamps } from "../../common/record";
-import { Profile } from "../../profile/domain";
-import { Message } from "./Message";
+import { Entity_Schema } from "../../common/record";
 
 //
 //
 //
 
-export const Thread_PropsSchema = z
-  .object({
-    profile: z.instanceof(Profile).default(Profile.zero),
-    last_message: z.instanceof(Message).optional(),
-    updated_at: z.coerce.date().default(new Date(0)),
-  })
-  .merge(Strapi_ID)
-  .merge(Strapi_Timestamps)
+export const Thread_PropsSchema = Entity_Schema
+  // .object({
+  //   profile: z.instanceof(Profile).default(Profile.zero),
+  //   last_message: z.instanceof(Message).optional(),
+  //   updated_at: z.coerce.date().default(new Date(0)),
+  // })
+  // .merge(Strapi_ID)
+  // .merge(Strapi_Timestamps)
   .describe("Thread_Props");
 // export interface Thread_Props {
 //   id: number;
@@ -53,14 +51,12 @@ export class Thread extends Aggregate<Props> {
     }
   }
 
-  static zero = Thread.create({
-    id: Number.MAX_SAFE_INTEGER,
-  }).value();
+  static zero = z.instanceof(Thread).parse(Thread.create({}).value());
 
   //
-  get profile() {
-    return this.props.profile;
-  }
+  // get profile() {
+  //   return this.props.profile;
+  // }
   get last_message() {
     return {};
     // return this.props.last_message;

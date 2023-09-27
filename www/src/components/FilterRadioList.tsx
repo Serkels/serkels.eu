@@ -1,5 +1,20 @@
 //
 
+import type { Category } from "@1/modules/category/domain";
+
+export function CategoryFilterRadioList(props: {
+  data: Category[];
+  active: string;
+  name: string;
+  onChange: (value: string) => void;
+}) {
+  const data = props.data.map((category) => ({
+    name: category.get("name"),
+    slug: category.get("slug"),
+  }));
+  return <FilterRadioList {...props} data={data} />;
+}
+
 export function FilterRadioList({
   data,
   active,

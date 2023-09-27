@@ -1,8 +1,8 @@
 //
 
+import { ID_Schema, Id } from "@1/core/domain";
 import { Hydrate, dehydrate } from "@tanstack/react-query";
 import type { Metadata, ResolvingMetadata } from "next";
-import { z } from "zod";
 import { injector_session } from "~/core/di";
 import { getQueryClient } from "~/core/getQueryClient";
 import { Exchange_Repository } from "~/modules/exchange/infrastructure";
@@ -29,9 +29,9 @@ export default async function Page({
   params: { exchange_id: string };
 }) {
   try {
-    const exchange_id = z.coerce
-      .number({ description: "exchange_id" })
-      .parse(params.exchange_id, { path: ["params.exchange_id"] });
+    const exchange_id = ID_Schema.parse(params.exchange_id, {
+      path: ["params.exchange_id"],
+    });
 
     //
 
@@ -42,7 +42,7 @@ export default async function Page({
     const queryClient = getQueryClient();
     await queryClient.prefetchQuery({
       queryKey: Exchange_QueryKeys.item(exchange_id),
-      queryFn: () => repository.by_id(exchange_id),
+      queryFn: () => repository.by_id(Id(exchange_id)),
     });
     const dehydratedState = dehydrate(queryClient);
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { createStateContext } from "react-use";
+import type { InjectionToken } from "tsyringe";
 import { Container_Provider } from "~/core/react";
 
 //
@@ -21,6 +22,8 @@ export { Exchange_Route_Provider, useExchange_Route_Context };
 // }
 
 export const Route_Container_Provider = Container_Provider;
+export const ROUTE_EXCHANGE_ID_TOKEN =
+  "ROUTE_EXCHANGE_ID_TOKEN" as InjectionToken<number>;
 // export const Container_Provider = function ContainerRegister_Provider<T>({
 //   children,
 //   initialFn,

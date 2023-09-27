@@ -1,7 +1,7 @@
 //
 
 import type { Deal_QueryProps } from "./Deal.repository";
-import type { Exchanges_QueryProps } from "./infrastructure";
+import type { Exchanges_QueryProps } from "./Exchange_Repository";
 
 export const Exchange_QueryKeys = {
   all: ["exchange"] as const,

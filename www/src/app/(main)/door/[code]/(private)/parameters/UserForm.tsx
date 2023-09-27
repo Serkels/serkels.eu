@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { getCsrfToken } from "next-auth/react";
 import { useUserData } from "~/modules/user";
-import { useProfile } from "../../(public)/layout.client";
+import { useDoorProfile } from "../../(public)/layout.client";
 
 //
 
@@ -20,7 +20,7 @@ export function UserForm() {
     update: { useMutation },
   } = useUserData();
   const { info } = useMutation();
-  const profile = useProfile();
+  const profile = useDoorProfile();
 
   //
 

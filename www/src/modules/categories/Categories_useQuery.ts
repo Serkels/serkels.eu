@@ -1,6 +1,6 @@
 //
 
-import { Category_RecordSchema } from "@1/modules/category/infra/strapi";
+import { Category_Record } from "@1/modules/category/infra/strapi";
 import { useQuery } from "@tanstack/react-query";
 import debug from "debug";
 import { Lifecycle, inject, scoped } from "~/core/di";
@@ -29,7 +29,7 @@ export class Categories_useQuery {
         queryKey: Categories_Repository.keys.exchange(),
         queryFn: () => this.category_repository.exchange(),
         select: (datas) => {
-          return datas.map((data) => Category_RecordSchema.parse({ data }));
+          return datas.map((data) => Category_Record.parse({ data })!);
         },
       });
     },
@@ -41,7 +41,7 @@ export class Categories_useQuery {
         queryKey: Categories_Repository.keys.question(),
         queryFn: () => this.category_repository.question(),
         select: (datas) => {
-          return datas.map((data) => Category_RecordSchema.parse({ data }));
+          return datas.map((data) => Category_Record.parse({ data })!);
         },
       });
     },
@@ -53,7 +53,7 @@ export class Categories_useQuery {
         queryKey: Categories_Repository.keys.opportunity(),
         queryFn: () => this.category_repository.opportunity(),
         select: (datas) => {
-          return datas.map((data) => Category_RecordSchema.parse({ data }));
+          return datas.map((data) => Category_Record.parse({ data })!);
         },
       });
     },

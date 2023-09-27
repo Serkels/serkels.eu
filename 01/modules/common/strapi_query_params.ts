@@ -2,6 +2,7 @@
 
 import { ID_Schema } from "@1/core/domain";
 import { z, type ZodTypeAny } from "zod";
+import { Entity_Schema } from "./record";
 
 export type Strapi_Query_Params<
   Schema extends Record<string, unknown>,
@@ -53,6 +54,11 @@ export const z_strapi_collection = <Z extends ReturnType<typeof z.object>>(
 //   z.object({}, { description: "Strapi unknown attributes" }).passthrough(),
 // );
 
+export const StrapiFlattenDataEntity = z
+  .object({
+    id: ID_Schema,
+  })
+  .and(z.any());
 // export const StrapiFlattenDataEntity = z.object({
 //   attributes: z.any(),
 //   id: ID_Schema,
@@ -109,7 +115,7 @@ export const StrapiDataEntity = z.object(
       .object(
         {
           attributes: z.any(),
-          id: ID_Schema,
+          id: Entity_Schema.shape.id,
         },
         { description: "Strapi Entity" },
       )
@@ -117,41 +123,19 @@ export const StrapiDataEntity = z.object(
   },
   { description: "Strapi Entity Data Maybe" },
 );
-export const StrapiEntity = StrapiDataEntity.transform(
-  function flatten_attributes({ data }) {
-    return data ? { id: Number(data.id), ...data.attributes } : undefined;
-  },
-);
-// export const StrapiEntity = StrapiDataEntity.transform(
-//   function flatten_attributes({ data }) {
-//     return data ? { id: Number(data.id), ...data.attributes } : undefined;
-//   },
-// );
-// export const StrapiEntity = <T extends ZodTypeAny>(schema: T) =>
-//   StrapiDataEntity.transform(({ data: { attributes, id } }) => {
-//     console.log("StrapiEntity", { id });
-//     return { id, ...attributes };
-//   }).pipe(schema);
-// export const StrapiEntity = StrapiDataEntity.transform(
-//   ({ data: { attributes, id } }) => {
-//     console.log("StrapiEntity", { id });
-//     return { id, ...attributes };
-//   },
-// )._output;
-// ) .refine((data) => Number.isNaN(data.id)).sourceType;
-// .refine(StrapiFDataEntity.safeParse)
-//   // export const StrapiEntity = StrapiDataEntity.transform(
-//   //   ({ data: { attributes, id } }) => ({ id, ...attributes }),
-//   // )
-//   // .brand<"StrapiEntity">()
-//   .innerType();
-// .object({})
-// .and(
-//   // z
-//   // .object({
-//   //   id: StrapiDataEntity.shape.data.shape.id,
-//   // })).and(
-//   StrapiDataEntity.pick({ data: true }).required().pick({ data: true }),
-// )
-// .and(StrapiDataEntity.pick({ data: true }).required().pick({ id: true }))
-// .merge(StrapiDataEntity.shape.data.shape.attributes);
+
+export const StrapiEntity = <Z extends ZodTypeAny>(attributes: Z) =>
+  z.object(
+    {
+      data: z
+        .object(
+          {
+            attributes: attributes,
+            id: Entity_Schema.shape.id,
+          },
+          { description: "Strapi Entity" },
+        )
+        .nullable(),
+    },
+    { description: "Strapi Entity Data Maybe" },
+  );

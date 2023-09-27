@@ -4,8 +4,10 @@
     "rootDir": ".",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "resolveJsonModule": true,
     "composite": true
   },
-  "include": ["**/*.ts"],
+  "include": ["**/*.ts", "*/**/*.json"],
+  "exclude": ["**/*.test.ts"],
   "references": [{ "path": "../core" }]
 }

@@ -1,14 +1,15 @@
 //
 
+import type { UID } from "@1/core/domain";
 import { useMemo } from "react";
 import { useInject } from "~/core/react";
 import { Exchange_CreateForm_Controller } from "./CreateForm.controller";
+import { Exchange_Repository } from "./Exchange_Repository";
 import { Exchange_Item_Controller } from "./Item.controller";
-import { Exchange_Repository } from "./infrastructure";
 
 //
 
-export function useExchange_item_controller(exchange_id: number) {
+export function useExchange_item_controller(exchange_id: UID) {
   const repository = useInject(Exchange_Repository);
 
   return useMemo(

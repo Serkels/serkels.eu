@@ -1,8 +1,10 @@
 "use client";
 
+import { Id } from "@1/core/domain";
 import type {
   Exchange,
   Exchange_CreateProps,
+  Exchange_PropsSchema,
 } from "@1/modules/exchange/domain";
 import { Spinner } from "@1/ui/components/Spinner";
 import * as UI from "@1/ui/domains/exchange/CreateForm";
@@ -10,6 +12,7 @@ import type { QueryObserverSuccessResult } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { Formik } from "formik";
 import { P, match } from "ts-pattern";
+import type { z } from "zod";
 import { ErrorOccur } from "~/components/ErrorOccur";
 import { SelectCategoryField } from "~/components/SelectCategoryField";
 import { useInject } from "~/core/react";
@@ -18,7 +21,9 @@ import { Get_Exchange_ById_UseCase } from "~/modules/exchange/application/get_ex
 //
 
 export function Edit_Exchange({ exchange_id }: { exchange_id: number }) {
-  const query_info = useInject(Get_Exchange_ById_UseCase).execute(exchange_id);
+  const query_info = useInject(Get_Exchange_ById_UseCase).execute(
+    Id(exchange_id),
+  );
 
   return match(query_info)
     .with({ status: "error", error: P.select() }, (error) => {
@@ -32,22 +37,34 @@ export function Edit_Exchange({ exchange_id }: { exchange_id: number }) {
 function Edit_Exchange_Form({
   data: exchange,
 }: QueryObserverSuccessResult<Exchange, unknown>) {
+  const {
+    category,
+    in_exchange_of,
+    when,
+    profile,
+    createdAt,
+    updatedAt,
+    ...props
+  } = exchange.toObject<z.TypeOf<typeof Exchange_PropsSchema>>();
+
+  const in_exchange_of_category = exchange.get("in_exchange_of");
   const mutation_info = useInject(Edit_Exchange_UseCase).execute(
-    exchange.get("id"),
+    Number(exchange.id.value()),
   );
 
   const { error, mutateAsync } = mutation_info;
 
   const initialValues = {
-    category: exchange.category.id,
-    description: exchange.description,
-    in_exchange_of: exchange.in_exchange_of?.id ?? "",
-    location: exchange.location,
-    is_online: exchange.is_online,
-    places: 1,
-    title: exchange.title,
-    type: exchange.type,
-    when: format(exchange.when, "yyyy-MM-dd"),
+    ...props,
+    category: exchange.get("category").get("id"),
+    in_exchange_of: in_exchange_of_category?.get("id") ?? "",
+    when: format(when, "yyyy-MM-dd"),
+    // description: exchange.description,
+    // location: exchange.location,
+    // is_online: exchange.is_online,
+    // places: 1,
+    // title: exchange.title,
+    // type: exchange.type,
   } as Exchange_CreateProps;
 
   return (
@@ -57,7 +74,7 @@ function Edit_Exchange_Form({
         initialValues={initialValues}
         onSubmit={async (values) => {
           try {
-            await mutateAsync(values as any);
+            await mutateAsync(values);
           } catch (error) {}
         }}
       >

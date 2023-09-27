@@ -21,7 +21,9 @@
   "devDependencies": {
     "@1/typescript-config": "workspace:*",
     "@types/debug": "4.1.8",
+    "fast-check": "^3.13.0",
     "prettier": "3.0.3",
-    "typescript": "5.2.2"
+    "typescript": "5.2.2",
+    "zod-fast-check": "^0.10.1"
   }
 }

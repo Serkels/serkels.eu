@@ -11,7 +11,7 @@ import type {
 import debug from "debug";
 import { Lifecycle, inject, registry, scoped } from "tsyringe";
 import { OpenAPI_Repository } from "~/app/api/v1/OpenAPI.repository";
-import { Exchange_Repository } from "./infrastructure";
+import { Exchange_Repository } from "./Exchange_Repository";
 
 //
 
