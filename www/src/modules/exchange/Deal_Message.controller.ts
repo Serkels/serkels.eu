@@ -13,7 +13,7 @@ import {
 import debug from "debug";
 import { useSession } from "next-auth/react";
 import { useCallback, useEffect } from "react";
-import { Lifecycle, inject, scoped } from "tsyringe";
+import { Lifecycle, inject, scoped } from "~/core/di";
 import { getNextPageParam, getPreviousPageParam } from "~/core/use-query";
 import { Deal_Message_Repository } from "./Deal_Message.repository";
 import { Deal_QueryKeys } from "./queryKeys";

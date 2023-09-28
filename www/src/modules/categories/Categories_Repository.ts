@@ -2,8 +2,8 @@
 
 import { HTTPError } from "@1/core/error";
 import debug from "debug";
-import { Lifecycle, inject, scoped } from "tsyringe";
 import { OpenAPI_Repository } from "~/app/api/v1/OpenAPI.repository";
+import { Lifecycle, inject, scoped } from "~/core/di";
 
 //
 

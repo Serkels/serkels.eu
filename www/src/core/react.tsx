@@ -2,7 +2,7 @@
 
 import debug from "debug";
 import { type PropsWithChildren } from "react";
-import { childInjector, type InjectionToken } from "~/core/di";
+import { type InjectionToken } from "~/core/di";
 import { Hydrate_Container_Provider, useContainer } from "./react.client";
 
 //
@@ -13,21 +13,16 @@ import { Hydrate_Container_Provider, useContainer } from "./react.client";
 
 const log = debug("~:core:react");
 
+/**
+ * @deprecated use {@link Hydrate_Container_Provider}
+ */
 export async function Container_Provider({
   children,
   registerAll,
 }: PropsWithChildren<{
   registerAll: { registerInstance?: [InjectionToken<unknown>, unknown] }[];
 }>) {
-  childInjector(async (container) => {
-    log("🌲");
-    for (const args of registerAll) {
-      if (Array.isArray(args.registerInstance)) {
-        log(...args.registerInstance);
-        container.registerInstance(...args.registerInstance);
-      }
-    }
-  });
+  log("🌲");
 
   return (
     <Hydrate_Container_Provider registerAll={registerAll}>

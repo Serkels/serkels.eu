@@ -7,7 +7,7 @@ import { tv } from "tailwind-variants";
 import { useDoor_Value } from "~/app/(main)/door/door.context";
 import { AsideBar } from "~/components/layouts/holy/aside";
 import { Container_Provider, useInject } from "~/core/react";
-import { ROUTE_EXCHANGE_ID_TOKEN } from "../layout.client";
+import { ROUTE_EXCHANGE_ID_TOKEN } from "../register";
 
 //
 

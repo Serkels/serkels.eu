@@ -9,8 +9,8 @@ import type {
   Exchange_Deal_Schema,
 } from "@1/strapi-openapi";
 import debug from "debug";
-import { Lifecycle, inject, registry, scoped } from "tsyringe";
 import { OpenAPI_Repository } from "~/app/api/v1/OpenAPI.repository";
+import { Lifecycle, inject, registry, scoped } from "~/core/di";
 import { Exchange_Repository } from "./Exchange_Repository";
 
 //

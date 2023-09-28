@@ -5,9 +5,9 @@ import type { Strapi_Query_Params } from "@1/modules/common";
 import type { Message_Schema } from "@1/modules/inbox/infra/strapi";
 import type { Comment_ListSchema } from "@1/strapi-openapi";
 import debug from "debug";
-import { Lifecycle, inject, scoped, type InjectionToken } from "tsyringe";
 import { OpenAPI_Repository } from "~/app/api/v1/OpenAPI.repository";
 import type { RepositoryPort } from "~/core";
+import { Lifecycle, inject, scoped, type InjectionToken } from "~/core/di";
 
 //
 

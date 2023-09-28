@@ -6,8 +6,8 @@ import type { Message_Schema } from "@1/modules/inbox/infra/strapi";
 import type { Inbox_ItemSchema, Inbox_ListSchema } from "@1/strapi-openapi";
 import debug from "debug";
 import { match } from "ts-pattern";
-import { Lifecycle, inject, scoped } from "tsyringe";
 import { OpenAPI_Repository } from "~/app/api/v1/OpenAPI.repository";
+import { Lifecycle, inject, scoped } from "~/core/di";
 
 //
 

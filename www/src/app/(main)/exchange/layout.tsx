@@ -6,15 +6,15 @@ import { Hydrate, dehydrate } from "@tanstack/react-query";
 import { type PropsWithChildren } from "react";
 import { JWT_TOKEN } from "~/app/api/v1/OpenAPI.repository";
 import { AsideWithTitle } from "~/components/layouts/holy/aside";
-import { injector } from "~/core/di";
 import { Get_Category_UseCase } from "~/modules/categories/application/get_categories.use-case";
+import { register } from "../register";
 import { CategoriesList, SearchForm } from "./page.client";
 
 export default async function Layout({
   children,
   see_also,
 }: PropsWithChildren<{ see_also: React.ReactNode }>) {
-  const container = await injector();
+  const container = await register();
 
   const jwt = container.resolve(JWT_TOKEN);
   if (!jwt) {

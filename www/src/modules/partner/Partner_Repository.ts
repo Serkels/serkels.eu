@@ -3,24 +3,35 @@
 import { HTTPError } from "@1/core/error";
 import type { Partner_RequestSchema } from "@1/strapi-openapi";
 import debug from "debug";
-import { OpenAPI_Repository } from "~/app/api/v1/OpenAPI.repository";
+import type { OpenAPI_Repository } from "~/app/api/v1/OpenAPI.repository";
+import { Lifecycle, inject, scoped } from "~/core/di";
 
 //
 
-export class Partner_Repository extends OpenAPI_Repository {
-  #log = debug(`~:modules:partner:${Partner_Repository.name}`);
+@scoped(Lifecycle.ContainerScoped)
+export class Partner_Repository {
+  #log = debug(`~:modules:partner:Partner_Repository`);
+  constructor(
+    @inject("OpenAPI_Repository") private readonly openapi: OpenAPI_Repository,
+  ) {
+    this.#log("new");
+  }
+
   async find_me() {
-    this.#log("find_me");
+    const trace = this.#log.extend(`find_me`);
+    trace("");
 
     const {
       data: body,
       error: errorBody,
       response,
-    } = await this.client.GET("/partners/me", {
-      headers: this.headers,
+    } = await this.openapi.client.GET("/partners/me", {
+      headers: this.openapi.headers,
     });
 
+    trace(response.status);
     if (errorBody) {
+      trace(errorBody);
       throw new HTTPError(
         [errorBody.error.message, "from " + response.url].join("\n"),
         { cause: errorBody.error },
@@ -31,18 +42,21 @@ export class Partner_Repository extends OpenAPI_Repository {
   }
 
   async create_me(data: Partner_RequestSchema["data"]) {
-    this.#log("create_me");
+    const trace = this.#log.extend(`create_me`);
 
+    trace("");
     const {
       data: body,
       error: errorBody,
       response,
-    } = await this.client.PUT("/partners/me", {
-      headers: this.headers,
+    } = await this.openapi.client.PUT("/partners/me", {
+      headers: this.openapi.headers,
       body: { data },
     });
 
+    trace(response.status);
     if (errorBody) {
+      trace(errorBody);
       throw new HTTPError(
         [errorBody.error.message, "from " + response.url].join("\n"),
         { cause: errorBody.error },

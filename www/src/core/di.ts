@@ -1,6 +1,6 @@
 //
 
-import { AuthError, USER_PROFILE_ID_TOKEN, UnknownError } from "@1/core/domain";
+import { AuthError, USER_PROFILE_ID_TOKEN } from "@1/core/domain";
 import debug from "debug";
 import { cache } from "react";
 import "reflect-metadata";
@@ -15,6 +15,7 @@ export {
   Lifecycle,
   container,
   inject,
+  registry,
   scoped,
   type DependencyContainer,
   type InjectionToken,
@@ -46,44 +47,10 @@ export async function injector_session(root = getInjector()) {
 }
 
 export const getInjector = cache(() => {
-  console.trace();
   const root = root_injector();
-
-  let nope: () => void = () => {
-    throw new UnknownError("O_0");
-  };
-  let ready = nope;
-  let infinit_wait = new Promise<void>((resolve) => {
-    log("getInjector>infinit_wait");
-    ready = resolve;
-    console.log("! new ready", ready);
-  });
-  console.log("! new infinit_wait");
 
   return {
     container: root,
-    start: Promise.resolve(),
-    last_layout_ready() {
-      ready();
-    },
-    registeries: [] as Promise<void>[],
-    async ready() {
-      console.log("! ready");
-
-      await Promise.all([...this.registeries]);
-      ready();
-
-      this.registeries = [];
-      infinit_wait = Promise.resolve();
-      ready = nope;
-      console.log("! infinit_wait = Promise.resolve()");
-    },
-    is_ready() {
-      // console.trace();
-      // console.log(infinit_wait);
-      log("waiting_for", this.registeries.length);
-      return Promise.all([infinit_wait, ...this.registeries]);
-    },
   };
 });
 
@@ -92,22 +59,7 @@ export const setInjector = cache((container: DependencyContainer) => {
   getInjector().container = container;
   return container;
 });
-export const childInjector = (
-  register_callback: (container: DependencyContainer) => Promise<void>,
-  parent = getInjector().container,
-) => {
-  const { registeries } = getInjector();
-  log("childInjector");
-  const child = parent.createChildContainer();
-  registeries.push(register_callback(child));
-  return setInjector(child);
-};
 
-export const injector = cache(async () => {
-  log("injector");
-  await getInjector().is_ready();
-  log("injector", "is_ready");
-  return getInjector().container;
-});
+export const injector = () => getInjector().container;
 
 //

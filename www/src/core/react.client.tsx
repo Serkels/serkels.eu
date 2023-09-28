@@ -42,6 +42,7 @@ export function Hydrate_Container_Provider({
     const child = parent.createChildContainer();
     for (const args of initialFn) {
       if (Array.isArray(args.registerInstance)) {
+        log(...args.registerInstance);
         child.registerInstance(...args.registerInstance);
       }
     }

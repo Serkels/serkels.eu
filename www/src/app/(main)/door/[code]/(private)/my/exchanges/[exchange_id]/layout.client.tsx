@@ -1,7 +1,6 @@
 "use client";
 
 import { createStateContext } from "react-use";
-import type { InjectionToken } from "tsyringe";
 import { Container_Provider } from "~/core/react";
 
 //
@@ -22,34 +21,3 @@ export { Exchange_Route_Provider, useExchange_Route_Context };
 // }
 
 export const Route_Container_Provider = Container_Provider;
-export const ROUTE_EXCHANGE_ID_TOKEN =
-  "ROUTE_EXCHANGE_ID_TOKEN" as InjectionToken<number>;
-// export const Container_Provider = function ContainerRegister_Provider<T>({
-//   children,
-//   initialFn,
-// }: PropsWithChildren<{
-//   initialFn: { registerInstance: [InjectionToken<T>, T] }[];
-// }>) {
-//   const container = useContainer().createChildContainer();
-
-//   useEffect(() => {
-//     for (const args of initialFn) {
-//       container.registerInstance(...args.registerInstance);
-//     }
-//   }, [container, initialFn]);
-
-//   return (
-//     <ContainerContext.Provider value={container}>
-//       {children}
-//     </ContainerContext.Provider>
-//   );
-// };
-// export function Exchange_Provider({ children }: PropsWithChildren) {
-//   const parent = useContainer();
-//   parent.register([])
-//   return (
-//     <ContainerContext.Provider value={parent}>
-//       {children}
-//     </ContainerContext.Provider>
-//   );
-// }

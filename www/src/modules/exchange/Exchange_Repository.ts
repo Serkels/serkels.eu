@@ -12,9 +12,9 @@ import type {
   Exchange_Schema,
 } from "@1/strapi-openapi";
 import debug from "debug";
-import { Lifecycle, inject, scoped, type InjectionToken } from "tsyringe";
 import { OpenAPI_Repository } from "~/app/api/v1/OpenAPI.repository";
 import type { RepositoryPort } from "~/core";
+import { Lifecycle, inject, scoped, type InjectionToken } from "~/core/di";
 
 //
 
@@ -210,6 +210,7 @@ export class Exchange_Repository implements RepositoryPort {
 
   async by_id(id: UID): Promise<Exchange_ItemSchema | undefined> {
     this.#log("findById", id.value());
+
     const {
       data: body,
       error: errorBody,

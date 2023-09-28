@@ -1,22 +1,19 @@
 //
 
-import { ID_Schema, Id } from "@1/core/domain";
+import { Id } from "@1/core/domain";
 import type { Metadata, ResolvingMetadata } from "next";
 import type { PropsWithChildren } from "react";
 import Nest from "react-nest";
-import { injector_session } from "~/core/di";
+import { Hydrate_Container_Provider } from "~/core/react.client";
 import { Exchange_Repository } from "~/modules/exchange/Exchange_Repository";
 import { Get_Deals_UseCase } from "~/modules/exchange/application/get_deals.use-case";
 import { Get_Exchange_ById_UseCase } from "~/modules/exchange/application/get_exchange_byid.use-case";
-import {
-  Exchange_Route_Provider,
-  ROUTE_EXCHANGE_ID_TOKEN,
-  Route_Container_Provider,
-} from "./layout.client";
+import { Exchange_Route_Provider } from "./layout.client";
+import { ROUTE_EXCHANGE_ID_TOKEN, register } from "./register";
 
 //
 
-type Route_Params = { params: { exchange_id: string } };
+export type Route_Params = { params: { exchange_id: string } };
 
 export async function generateMetadata(
   { params }: Route_Params,
@@ -34,11 +31,9 @@ export default async function Layout({
   children,
   params,
 }: PropsWithChildren<Route_Params>) {
-  const exchange_id = ID_Schema.parse(params.exchange_id, {
-    path: ["params.exchange_id"],
-  });
+  const container = await register({ params });
 
-  const container = await injector_session();
+  const exchange_id = container.resolve(ROUTE_EXCHANGE_ID_TOKEN);
   await container.resolve(Get_Exchange_ById_UseCase).prefetch(Id(exchange_id));
   await container
     .resolve(Get_Deals_UseCase)
@@ -48,7 +43,7 @@ export default async function Layout({
 
   return (
     <Nest>
-      <Route_Container_Provider
+      <Hydrate_Container_Provider
         registerAll={[
           {
             registerInstance: [

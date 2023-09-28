@@ -1,3 +1,5 @@
+//
+
 import type { components } from "@1/strapi-openapi/v1";
 import debug from "debug";
 import type { NextAuthOptions, User } from "next-auth";
@@ -5,6 +7,7 @@ import NextAuth, { getServerSession } from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { fromServer } from "~/app/api/v1";
 import { Partner_Repository } from "~/modules/partner/Partner_Repository";
+import { OpenAPI_Repository } from "../../v1/OpenAPI.repository";
 
 //
 
@@ -45,8 +48,8 @@ async function passwordless_login(token: string) {
       university: String(context["name"]),
     };
     await update_user_profile(data.jwt, is_partner ? partner_context : context);
-
-    const partner_repository = new Partner_Repository(fromServer, data.jwt);
+    const openapi = new OpenAPI_Repository(fromServer, data.jwt);
+    const partner_repository = new Partner_Repository(openapi);
 
     if (is_partner) {
       await partner_repository.create_me({
@@ -124,8 +127,8 @@ export const authOptions: NextAuthOptions = {
         const user = await passwordless_login(credentials.token);
         if (!user) return null;
         const profile = await user_profile(user.jwt);
-
-        const partner_repository = new Partner_Repository(fromServer, user.jwt);
+        const openapi = new OpenAPI_Repository(fromServer, user.jwt);
+        const partner_repository = new Partner_Repository(openapi);
         const partner = await partner_repository
           .find_me()
           .catch(() => undefined);

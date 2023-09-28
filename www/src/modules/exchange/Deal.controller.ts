@@ -12,7 +12,7 @@ import {
 import debug from "debug";
 import { useSession } from "next-auth/react";
 import { useCallback } from "react";
-import { Lifecycle, inject, scoped } from "tsyringe";
+import { Lifecycle, inject, scoped } from "~/core/di";
 import { getNextPageParam, getPreviousPageParam } from "~/core/use-query";
 import { Deal_Repository } from "./Deal.repository";
 import { Deal_QueryKeys, Exchange_QueryKeys } from "./queryKeys";
