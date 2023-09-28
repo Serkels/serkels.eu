@@ -50,10 +50,15 @@ async function Aside(props: any) {
       .resolve(Get_Exchange_ById_UseCase)
       .prefetch(Id(id));
 
-    const data = query_client.getQueryData(Exchange_QueryKeys.item(id));
-    const exchange = Exchange_Record.pipe(z.instanceof(Exchange)).parse(data, {
-      path: [`<query_client.getQueryData(Exchange_QueryKeys.item(${id}))>`],
-    });
+    const data = query_client.getQueryData(
+      Exchange_QueryKeys.item(Id(id).value()),
+    );
+    const exchange = Exchange_Record.pipe(z.instanceof(Exchange)).parse(
+      { data },
+      {
+        path: [`<query_client.getQueryData(Exchange_QueryKeys.item(${id}))>`],
+      },
+    );
 
     return (
       <Deals_Aside_Nav>
