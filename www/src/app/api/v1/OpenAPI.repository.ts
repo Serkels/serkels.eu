@@ -1,13 +1,13 @@
 //
 
 import debug from "debug";
-import { Lifecycle, inject, scoped } from "~/core/di";
+import { Lifecycle, inject, scoped, type InjectionToken } from "~/core/di";
 import type { ApiClient } from ".";
 
 //
 
-export const API_TOKEN = Symbol("api");
-export const JWT_TOKEN = Symbol("jwt");
+export const API_TOKEN = Symbol.for("api") as InjectionToken<ApiClient>;
+export const JWT_TOKEN = Symbol.for("jwt") as InjectionToken<string>;
 
 //
 

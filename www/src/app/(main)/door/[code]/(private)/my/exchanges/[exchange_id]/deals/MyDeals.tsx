@@ -5,15 +5,14 @@ import { UnknownError } from "@1/core/error";
 import { Message, Thread } from "@1/modules/inbox/domain";
 import { Button } from "@1/ui/components/ButtonV";
 import { Spinner } from "@1/ui/components/Spinner";
-import { Circle } from "@1/ui/icons";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import ContentLoader from "react-content-loader";
 import tw from "tailwind-styled-components";
+import { tv } from "tailwind-variants";
 import { P, match } from "ts-pattern";
 import { useDoor_Value } from "~/app/(main)/door/door.context";
 import { ErrorOccur } from "~/components/ErrorOccur";
-import { Thread_Item } from "~/components/Thread_Item";
 import { useInject } from "~/core/react";
 import {
   Exchange_ValueProvider,
@@ -22,6 +21,7 @@ import {
 import { Get_Deal_ById_UseCase } from "~/modules/exchange/application/get_deal_byid.use-case";
 import { Get_Deals_UseCase } from "~/modules/exchange/application/get_deals.use-case";
 import { Get_Exchange_ById_UseCase } from "~/modules/exchange/application/get_exchange_byid.use-case";
+import { Get_Last_Message_ById_UseCase } from "~/modules/exchange/application/get_last_message.use-case";
 import { useMyProfileId } from "~/modules/user/useProfileId";
 import { useExchange_Route_Context } from "../layout.client";
 import { Deal_ValueProvider, useDeal_Value } from "./Deal.context";
@@ -113,9 +113,7 @@ export function Echange_DealsNav() {
     }
 
     const deal_id = query_info.data?.pages?.at(0)!;
-    const target = `/@${door_id}/my/exchanges/${exchange.get(
-      "id",
-    )}/deals/${deal_id}`;
+    const target = `/@${door_id}/my/exchanges/${exchange.id.value()}/deals/${deal_id}`;
 
     if (pathname.startsWith(target)) {
       return;
@@ -170,88 +168,76 @@ export function Echange_DealsNav() {
     .exhaustive();
 }
 
+const item = tv({
+  slots: {
+    header: "flex justify-between",
+    time: "text-xs font-bold",
+  },
+});
+
 function Echange_DealLink() {
   const [exchange] = useExchange_Value();
   const [deal] = useDeal_Value();
   const profile_id = useMyProfileId();
 
+  const info = useInject(Get_Last_Message_ById_UseCase).execute(
+    Number(deal?.id.value()),
+  );
+
   const [{ door_id }] = useDoor_Value();
 
   if (!deal) return null;
-  const href = `/@${door_id}/my/exchanges/${exchange.get(
-    "id",
-  )}/deals/${deal.get("id")}`;
+  const href = `/@${door_id}/my/exchanges/${exchange.id.value()}/deals/${deal.id.value()}`;
 
-  const exchange_profile = exchange.get("profile");
-  const is_yours = deal.get("organizer").get("id") === profile_id;
+  const exchange_profile = exchange.profile;
+  const is_yours = deal.organizer.id.equal(Id(profile_id));
   const profile = is_yours ? deal.get("participant_profile") : exchange_profile;
 
   const thread = Thread.create({
-    id: deal.get("id"),
     last_message: Message.zero, //deal.last_message,
     profile,
-    updated_at: deal.updated_at,
+    updatedAt: deal.updated_at,
   }).value();
 
-  return (
-    <Thread_Item
-      href={href}
-      thread={thread}
-      indicator={<Circle className="h-5 w-5 text-Gamboge" />}
-    />
-  );
+  return match(info)
+    .with(undefined, () => null)
+    .otherwise(() => <>{href}</>);
+  // return (
+  //   <Thread_Item
+  //     href={href}
+  //     thread={thread}
+  //     indicator={<Circle className="h-5 w-5 text-Gamboge" />}
+  //   />
+  // );
 }
 
-Echange_DealLink.ui = {
-  header: tw.header`
-  flex
-  justify-between
-`,
-  time: tw.time`
-  text-xs
-  font-bold
-`,
-};
+const empty_list_paragraph = tv({
+  base: [
+    "flex h-1/3 flex-col items-center justify-center text-center font-bold opacity-50",
+  ],
+});
 
 function EmptyList() {
   return (
-    <EmptyList.ui.p>Aucune discussion disponible pour le moment</EmptyList.ui.p>
+    <p className={empty_list_paragraph()}>
+      Aucune discussion disponible pour le moment
+    </p>
   );
 }
 
-EmptyList.ui = {
-  p: tw.p`
-  content-[Aucune
-  discussion
-  disponible
-  pour
-  le
-  moment]
-  flex
-  h-1/3
-  flex-col
-  items-center
-  justify-center
-  text-center
-  font-bold
-  opacity-50
-`,
-};
+//
+
+const loading = tv({ base: "mt-28 text-center" });
 
 function Loading() {
   return (
-    <Loading.ui.figure>
+    <figure className={loading()}>
       <Spinner />
-    </Loading.ui.figure>
+    </figure>
   );
 }
 
-Loading.ui = {
-  figure: tw.figure`
-  mt-28
-  text-center
-`,
-};
+//
 
 const Diviser = tw.hr`
   my-6

@@ -5,7 +5,8 @@ import type { Strapi_Query_Params } from "@1/modules/common";
 import type { Profile_UpdateRecord } from "@1/modules/profile/infra/strapi";
 import type { Profile_Schema } from "@1/strapi-openapi";
 import { type ApiClient } from "~/app/api/v1";
-import type { StrapiRepository } from "~/core/StrapiRepository";
+import type { OpenAPI_Repository } from "~/app/api/v1/OpenAPI.repository";
+import type { Profile_Repository } from "./profile.repository";
 
 /**
  * @example
@@ -36,7 +37,7 @@ import type { StrapiRepository } from "~/core/StrapiRepository";
  *
  * ```
  *
- * @deprecated
+ * @deprecated use {@link Profile_Repository}
  */
 export class User_Repository_Legacy {
   static keys = {
@@ -47,7 +48,7 @@ export class User_Repository_Legacy {
 
   //
 
-  constructor(public repository: StrapiRepository) {}
+  constructor(public repository: OpenAPI_Repository) {}
 
   //
 

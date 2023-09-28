@@ -5,7 +5,7 @@ import { Hydrate, dehydrate } from "@tanstack/react-query";
 import type { Metadata, ResolvingMetadata } from "next";
 import { injector_session } from "~/core/di";
 import { getQueryClient } from "~/core/getQueryClient";
-import { Exchange_Repository } from "~/modules/exchange/infrastructure";
+import { Exchange_Repository } from "~/modules/exchange/Exchange_Repository";
 import { Exchange_QueryKeys } from "~/modules/exchange/queryKeys";
 import { Edit_Exchange } from "./page.client";
 

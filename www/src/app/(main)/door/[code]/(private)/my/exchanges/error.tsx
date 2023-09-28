@@ -19,7 +19,7 @@ export default function ErrorPage({
   }, [error]);
 
   return (
-    <div className="col-span-full md:col-span-4 md:-ml-[20px] xl:col-span-6">
+    <div className="col-span-full md:col-span-6 md:-ml-[20px] xl:col-span-6">
       <NotFoundMain>
         40X
         <br />

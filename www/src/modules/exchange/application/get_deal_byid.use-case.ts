@@ -27,16 +27,11 @@ export class Get_Deal_ById_UseCase {
       queryFn: () => this.repository.find_by_id(id),
       queryKey: Deal_QueryKeys.item(id),
       select: (data) => {
-        console.log("Get_Deal_ById_UseCase.execute.select data=", { data });
         return Deal_Record.parse(
           { data },
           {
             path: [
-              "Get_Deal_ById_UseCase",
-              `execute(${id})`,
-              "select",
-              "Deal_Record.parse",
-              "//",
+              `<${Get_Deal_ById_UseCase.name}.execute(${id}).useQuery.select>`,
               "{data}",
             ],
           },

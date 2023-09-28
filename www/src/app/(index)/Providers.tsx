@@ -12,7 +12,7 @@ import Nest from "react-nest";
 import { P, match } from "ts-pattern";
 import { container } from "~/core/di";
 import { query_client } from "~/core/getQueryClient";
-import { ContainerContext } from "~/core/react";
+import { ContainerContext } from "~/core/react.client";
 import { fromClient } from "../api/v1";
 import { API_TOKEN, JWT_TOKEN } from "../api/v1/OpenAPI.repository";
 

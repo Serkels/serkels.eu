@@ -1,7 +1,7 @@
 "use client";
 
 import { UnknownError } from "@1/core/error";
-import type { Profile } from "@1/modules/profile/domain";
+import { Profile } from "@1/modules/profile/domain";
 import { Profile_Record } from "@1/modules/profile/infra/strapi";
 import { Button } from "@1/ui/components/ButtonV";
 import { Spinner } from "@1/ui/components/Spinner";
@@ -11,6 +11,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useCallback, type PropsWithChildren } from "react";
 import { P, match } from "ts-pattern";
+import { z } from "zod";
 import { AvatarMedia } from "~/components/Avatar";
 import { useInbox_controller } from "~/modules/inbox";
 import { Inbox_QueryKeys } from "~/modules/inbox/query_keys";
@@ -89,10 +90,15 @@ function Contact_List() {
                 .filter((data) => !Number.isNaN(Number(data?.id)))
                 .map((data) => {
                   try {
-                    const profile = Profile_Record.parse({ data });
+                    const profile = Profile_Record.pipe(
+                      z.instanceof(Profile),
+                    ).parse({ data });
 
                     return (
-                      <Contact_Action key={profile.get("id")} profile={profile}>
+                      <Contact_Action
+                        key={profile.id.value()}
+                        profile={profile}
+                      >
                         <Contact_Item profile={profile} />
                       </Contact_Action>
                     );
@@ -128,14 +134,14 @@ function Contact_Action({
   const {
     by_participent: { useQuery, useMutation },
   } = useInbox_controller();
-  const find_query = useQuery(profile.get("id"));
-  const create = useMutation(profile.get("id"));
+  const find_query = useQuery(Number(profile.id.value()));
+  const create = useMutation(Number(profile.id.value()));
   const create_inbox = useCallback(async () => {
     await create.mutate();
 
     query_client.invalidateQueries(Inbox_QueryKeys.lists());
     query_client.invalidateQueries(
-      Inbox_QueryKeys.by_participent(profile.get("id")),
+      Inbox_QueryKeys.by_participent(profile.id.value()),
     );
   }, [query_client]);
 
@@ -173,7 +179,7 @@ function Contact_Action({
 function Contact_Item({ profile }: { profile: Profile }) {
   return (
     <AvatarMedia
-      u={profile.get("id")}
+      u={profile.id.value()}
       username={profile.name}
       $linked={false}
       university={profile.university}

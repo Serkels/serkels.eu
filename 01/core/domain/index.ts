@@ -1,10 +1,12 @@
 //
 
+import type { InjectionToken } from "tsyringe";
 import { z } from "zod";
 
 export * from "rich-domain";
 // export * from "./entity";
 export * from "../error";
+
 //
 
 export const ID_Schema = z.coerce
@@ -18,4 +20,6 @@ export * from "./mapper";
 
 //
 
-export const USER_PROFILE_ID_TOKEN = Symbol("user_profile_id");
+export const USER_PROFILE_ID_TOKEN = Symbol.for(
+  "user_profile_id",
+) as InjectionToken<number>;

@@ -20,7 +20,7 @@ type Props_Input = z.input<typeof Message_PropsSchema>;
 export class Message extends Entity<Props> {
   static override create(props: Props_Input): Result<Message, ZodError> {
     const result = Message_PropsSchema.safeParse(props, {
-      path: ["<Message.create>", "props"],
+      path: [`<${Message.name}.create>`, "props"],
     });
     if (result.success) {
       return Result.Ok(new Message(result.data));

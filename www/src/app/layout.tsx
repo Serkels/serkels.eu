@@ -7,6 +7,7 @@ import { Roboto } from "next/font/google";
 import Script from "next/script";
 import NextTopLoader from "nextjs-toploader";
 import type { PropsWithChildren } from "react";
+import { getInjector } from "~/core/di";
 import Providers from "./(index)/Providers";
 import "./globals.css";
 
@@ -20,6 +21,20 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: PropsWithChildren) {
+  console.log("< src/app/layout.tsx");
+
+  // waiting_list.push(
+  //   new Promise(async (resolve) => {
+  //     console.log("< src/app/layout.tsx", "resolved!");
+  //     resolve();
+  //   }),
+  // );
+
+  // console.log({ waiting_list: waiting_list.length });
+  // console.log("src/app/layout.tsx ready ?");
+  await getInjector().ready();
+  console.log("</ src/app/layout.tsx");
+
   return (
     <html lang="en">
       <body

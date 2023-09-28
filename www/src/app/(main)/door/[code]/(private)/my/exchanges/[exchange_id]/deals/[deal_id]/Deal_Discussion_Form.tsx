@@ -2,7 +2,7 @@
 
 import { Field, Form, Formik, type FieldAttributes } from "formik";
 import tw from "tailwind-styled-components";
-import { useContainer } from "~/core/react";
+import { useContainer } from "~/core/react.client";
 import { Deal_Message_Controller } from "~/modules/exchange/Deal_Message.controller";
 import { Deal_Message_Repository } from "~/modules/exchange/Deal_Message.repository";
 import { useDeal_Value } from "../Deal.context";

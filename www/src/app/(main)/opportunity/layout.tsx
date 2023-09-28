@@ -11,7 +11,8 @@ import { SearchForm } from "./SearchForm";
 import { CategoriesList } from "./page.client";
 
 export default async function Layout({ children }: PropsWithChildren) {
-  const queryClient = await injector()
+  const container = await injector();
+  const queryClient = await container
     .resolve(Get_Category_UseCase)
     .prefetch("opportunity");
   const dehydratedState = dehydrate(queryClient);

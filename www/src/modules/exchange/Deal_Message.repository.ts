@@ -5,7 +5,7 @@ import type { Strapi_Query_Params } from "@1/modules/common";
 import type { Message_Schema } from "@1/modules/inbox/infra/strapi";
 import type { Comment_ListSchema } from "@1/strapi-openapi";
 import debug from "debug";
-import { Lifecycle, inject, scoped } from "tsyringe";
+import { Lifecycle, inject, scoped, type InjectionToken } from "tsyringe";
 import { OpenAPI_Repository } from "~/app/api/v1/OpenAPI.repository";
 import type { RepositoryPort } from "~/core";
 
@@ -13,15 +13,16 @@ import type { RepositoryPort } from "~/core";
 
 @scoped(Lifecycle.ContainerScoped)
 export class Deal_Message_Repository implements RepositoryPort {
-  static DEAL_ID_TOKEN = Symbol("DEAL_ID_TOKEN");
+  static DEAL_ID_TOKEN = Symbol("DEAL_ID_TOKEN") as InjectionToken<number>;
 
   #log = debug(`~:modules:exchange:${Deal_Message_Repository.name}`);
+
   constructor(
     @inject(OpenAPI_Repository) private readonly openapi: OpenAPI_Repository,
     @inject(Deal_Message_Repository.DEAL_ID_TOKEN)
     public readonly deal_id: number,
   ) {
-    this.#log("new");
+    this.#log(`new:${this.deal_id}`);
   }
 
   get is_authorized() {
@@ -29,7 +30,9 @@ export class Deal_Message_Repository implements RepositoryPort {
   }
 
   async create(body: { content: string }) {
-    this.#log("create", body);
+    const trace = this.#log.extend(`create (${JSON.stringify(body)})`);
+
+    trace("");
     const { response, error: errorBody } = await this.openapi.client.POST(
       "/deals/{id}/messages",
       {
@@ -39,8 +42,9 @@ export class Deal_Message_Repository implements RepositoryPort {
       },
     );
 
+    trace(response.status);
     if (errorBody) {
-      this.#log("create", errorBody);
+      trace(errorBody);
       throw new HTTPError(
         [errorBody.error.message, "from " + response.url].join("\n"),
         { cause: errorBody.error },
@@ -51,7 +55,9 @@ export class Deal_Message_Repository implements RepositoryPort {
   async find_all({
     pagination,
   }: Strapi_Query_Params<Message_Schema>): Promise<Comment_ListSchema> {
-    this.#log("find_messages (deal_id=%d)", this.deal_id);
+    const trace = this.#log.extend(`find_all (deal_id=${this.deal_id})`);
+
+    trace("");
     const {
       data: body,
       error: errorBody,
@@ -71,15 +77,15 @@ export class Deal_Message_Repository implements RepositoryPort {
       },
     });
 
+    trace(response.status);
     if (errorBody) {
-      this.#log("find_messages (deal_id=%d)", this.deal_id, errorBody);
+      trace(errorBody);
       throw new HTTPError(
         [errorBody.error.message, "from " + response.url].join("\n"),
         { cause: errorBody.error },
       );
     }
 
-    this.#log("find_messages (deal_id=%d) 200", this.deal_id);
     return body;
   }
 }

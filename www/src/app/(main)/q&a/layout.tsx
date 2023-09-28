@@ -12,7 +12,8 @@ export default async function Layout({
   children,
   see_also,
 }: PropsWithChildren<{ see_also: React.ReactNode }>) {
-  const queryClient = await injector()
+  const container = await injector();
+  const queryClient = await container
     .resolve(Get_Category_UseCase)
     .prefetch("question");
   const dehydratedState = dehydrate(queryClient);

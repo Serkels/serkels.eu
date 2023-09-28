@@ -93,22 +93,3 @@ function Edit_Exchange_Form({
     </div>
   );
 }
-
-function CreationSuccess() {
-  return (
-    <div className="col-span-full flex min-h-full flex-col justify-center bg-black text-white">
-      <h1
-        className={`
-          mx-auto
-          my-0
-          text-center text-6xl
-          font-extrabold
-          sm:text-7xl
-          lg:text-8xl
-        `}
-      >
-        Publication acceptée.
-      </h1>
-    </div>
-  );
-}

@@ -1,8 +1,10 @@
 ///
 
+import { AuthError } from "@1/core/error";
 import { Grid } from "@1/ui/components/Grid";
 import { Hydrate, dehydrate } from "@tanstack/react-query";
 import { type PropsWithChildren } from "react";
+import { JWT_TOKEN } from "~/app/api/v1/OpenAPI.repository";
 import { AsideWithTitle } from "~/components/layouts/holy/aside";
 import { injector } from "~/core/di";
 import { Get_Category_UseCase } from "~/modules/categories/application/get_categories.use-case";
@@ -12,7 +14,15 @@ export default async function Layout({
   children,
   see_also,
 }: PropsWithChildren<{ see_also: React.ReactNode }>) {
-  const queryClient = await injector()
+  const container = await injector();
+
+  const jwt = container.resolve(JWT_TOKEN);
+  if (!jwt) {
+    console.log({ jwt });
+    throw new AuthError("Unauthenticated");
+  }
+
+  const queryClient = await container
     .resolve(Get_Category_UseCase)
     .prefetch("exchange");
 

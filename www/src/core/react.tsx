@@ -1,17 +1,9 @@
 //
 
 import debug from "debug";
-import {
-  createContext,
-  useContext,
-  useMemo,
-  type PropsWithChildren,
-} from "react";
-import {
-  container,
-  type DependencyContainer,
-  type InjectionToken,
-} from "~/core/di";
+import { type PropsWithChildren } from "react";
+import { childInjector, type InjectionToken } from "~/core/di";
+import { Hydrate_Container_Provider, useContainer } from "./react.client";
 
 //
 
@@ -21,39 +13,26 @@ import {
 
 const log = debug("~:core:react");
 
-//
-
-//
-
-//
-
-export const ContainerContext = createContext<DependencyContainer>(container);
-
-export const useContainer = () => {
-  return useContext(ContainerContext);
-};
-
-export function Container_Provider<T>({
+export async function Container_Provider({
   children,
-  initialFn,
+  registerAll,
 }: PropsWithChildren<{
-  initialFn: { registerInstance: [InjectionToken<T>, T] }[];
+  registerAll: { registerInstance?: [InjectionToken<unknown>, unknown] }[];
 }>) {
-  const parent = useContainer();
-  const container = useMemo(() => {
+  childInjector(async (container) => {
     log("🌲");
-
-    const child = parent.createChildContainer();
-    for (const args of initialFn) {
-      child.registerInstance(...args.registerInstance);
+    for (const args of registerAll) {
+      if (Array.isArray(args.registerInstance)) {
+        log(...args.registerInstance);
+        container.registerInstance(...args.registerInstance);
+      }
     }
-    return child;
-  }, [parent, initialFn]);
+  });
 
   return (
-    <ContainerContext.Provider value={container}>
+    <Hydrate_Container_Provider registerAll={registerAll}>
       {children}
-    </ContainerContext.Provider>
+    </Hydrate_Container_Provider>
   );
 }
 

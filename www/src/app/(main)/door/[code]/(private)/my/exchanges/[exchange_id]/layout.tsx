@@ -49,7 +49,7 @@ export default async function Layout({
   return (
     <Nest>
       <Route_Container_Provider
-        initialFn={[
+        registerAll={[
           {
             registerInstance: [
               Exchange_Repository.EXCHANGE_ID_TOKEN,

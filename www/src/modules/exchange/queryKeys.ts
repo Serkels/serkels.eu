@@ -3,6 +3,8 @@
 import type { Deal_QueryProps } from "./Deal.repository";
 import type { Exchanges_QueryProps } from "./Exchange_Repository";
 
+//
+
 export const Exchange_QueryKeys = {
   all: ["exchange"] as const,
   lists(options?: Exchanges_QueryProps["filters"] | undefined) {
@@ -27,11 +29,9 @@ export const Exchange_QueryKeys = {
     return [...this.deal(id), "messages"] as const;
   },
 };
+
 export const Deal_QueryKeys = {
   all: ["deal"] as const,
-  // all(exchange_id: number | string) {
-  //   return [...Exchange_QueryKeys.item(exchange_id), "deal"] as const;
-  // },
   lists(
     exchange_id: number | string,
     options?: Deal_QueryProps["filters"] | undefined,
@@ -48,5 +48,8 @@ export const Deal_QueryKeys = {
   },
   messages(id: number | string) {
     return [...this.item(id), "messages"] as const;
+  },
+  last_message(id: number | string) {
+    return [...this.messages(id), "last"] as const;
   },
 };

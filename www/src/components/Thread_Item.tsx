@@ -27,7 +27,7 @@ export function Thread_Item({
     pathname.split("/").length >= href.split("/").length &&
     href.includes(pathname);
 
-  const author = thread.last_message?.get("author");
+  const author = thread.last_message.get("author");
   const prefix = author?.get("id") === profile_id ? "Vous : " : "";
 
   return (
@@ -35,8 +35,8 @@ export function Thread_Item({
       <Thread_Header>
         <Avatar_Show_Profile profile={thread.profile} />
         <Thread_Time
-          dateTime={thread.get("updated_at").toUTCString()}
-          title={thread.get("updated_at").toUTCString()}
+          dateTime={thread.get("updatedAt").toUTCString()}
+          title={thread.get("updatedAt").toUTCString()}
         >
           {thread.last_update}
         </Thread_Time>

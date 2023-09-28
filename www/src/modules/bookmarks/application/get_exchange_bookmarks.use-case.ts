@@ -34,17 +34,15 @@ export class Get_Exchange_Bookmarks_UseCase {
       queryKey: Bookmarks_Repository.keys.exchange(),
       getNextPageParam,
       getPreviousPageParam,
-      select: (data) => {
-        return {
-          ...data,
-          pages: data.pages
-            .map((page) => page.data!)
-            .flat()
-            .map((data) => {
-              return this.#mapper.build(data).value();
-            }),
-        };
-      },
+      select: (data) => ({
+        pageParams: data.pageParams,
+        pages: data.pages
+          .map((page) => page.data!)
+          .flat()
+          .map((data) => {
+            return this.#mapper.build(data).value();
+          }),
+      }),
     });
   }
 }

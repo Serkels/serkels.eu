@@ -4,8 +4,8 @@ import { Entity, Result } from "@1/core/domain";
 import { formatDistance } from "date-fns";
 import { fr } from "date-fns/locale";
 import { ZodError, z } from "zod";
+import { StrapiEntity } from "../../common";
 import { Entity_Schema } from "../../common/record";
-import { Exchange } from "../../exchange/domain";
 import { Profile } from "../../profile/domain";
 
 //
@@ -18,11 +18,11 @@ export const Deal_Status = z.union([
 ]);
 
 export const Deal_PropsSchema = Entity_Schema.augment({
-  exchange: z.instanceof(Exchange).optional(),
+  exchange: StrapiEntity(z.any()), // z.instanceof(Exchange).optional(),
   // // last_message: z.instanceof(Message),
-  // participant_profile: z.instanceof(Profile),
-  // organizer: z.instanceof(Profile),
-  // status: Deal_Status,
+  participant_profile: z.instanceof(Profile),
+  organizer: z.instanceof(Profile),
+  status: Deal_Status,
 }).describe("Deal_PropsSchema");
 
 //
@@ -79,9 +79,9 @@ export class Deal extends Entity<Props> {
   get updated_at() {
     return this.props.updatedAt;
   }
-  // get last_message() {
-  //   return this.props.last_message;
-  // }
+  get organizer() {
+    return this.props.organizer;
+  }
 }
 
 //

@@ -1,4 +1,4 @@
-import { Profile_Record } from "@1/modules/profile/infra/strapi";
+import { Profile_UpdateRecord } from "@1/modules/profile/infra/strapi";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { Strapi_useQuery } from "./Strapi_useQuery";
 import { User_Repository_Legacy } from "./User_Repository";
@@ -23,16 +23,6 @@ import { getNextPageParam, getPreviousPageParam } from "~/core/use-query";
  */
 export class User_useQuery extends Strapi_useQuery {
   user_repository = new User_Repository_Legacy(this.repository);
-  by_id = {
-    useQuery: (id: number) =>
-      this.query({
-        fetch: User_Repository_Legacy.by_id.bind(null, id),
-        mapper: Profile_Record,
-        query_key: User_Repository_Legacy.keys.by_id(id),
-        domain_deps: [id],
-        require_jwt: true,
-      }),
-  };
 
   contacts = {
     useInfiniteQuery: ({ pageSize }: { pageSize: number }) =>
@@ -51,7 +41,8 @@ export class User_useQuery extends Strapi_useQuery {
   update = {
     useMutation: () =>
       this.mutate({
-        fetch: (data: Profile_Record) => this.user_repository.update(data),
+        fetch: (data: Profile_UpdateRecord) =>
+          this.user_repository.update(data),
       }),
   };
 
