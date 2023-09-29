@@ -1,9 +1,9 @@
 "use client";
 
 import { Id } from "@1/core/domain";
+import { useInject } from "@1/core/ui/di.context.client";
 import type { PropsWithChildren } from "react";
 import { P, match } from "ts-pattern";
-import { useInject } from "~/core/react.client";
 import { Exchange_ValueProvider } from "~/modules/exchange/Exchange.context";
 import { Get_Deal_ById_UseCase } from "~/modules/exchange/application/get_deal_byid.use-case";
 import { Get_Exchange_ById_UseCase } from "~/modules/exchange/application/get_exchange_byid.use-case";

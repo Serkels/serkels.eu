@@ -1,12 +1,12 @@
 "use client";
 
+import { useInject } from "@1/core/ui/di.context.client";
 import type { Exchange_CreateProps } from "@1/modules/exchange/domain";
 import * as UI from "@1/ui/domains/exchange/CreateForm";
 import { Formik } from "formik";
 import { match } from "ts-pattern";
 import { ErrorOccur } from "~/components/ErrorOccur";
 import { SelectCategoryField } from "~/components/SelectCategoryField";
-import { useInject } from "~/core/react.client";
 import { Create_Exchange_UseCase } from "~/modules/exchange/application/create_exchange";
 
 //

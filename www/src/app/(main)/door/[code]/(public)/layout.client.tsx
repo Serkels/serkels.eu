@@ -3,10 +3,10 @@
 //
 
 import { NotFoundError } from "@1/core/error";
+import { useInject } from "@1/core/ui/di.context.client";
 import { School } from "@1/ui/icons";
 import { useMemo } from "react";
 import { Avatar } from "~/components/Avatar";
-import { useInject } from "~/core/react.client";
 import { Get_Profile_UseCase } from "~/modules/user/application/get_profile.use-case";
 import { useDoor_Value } from "../../door.context";
 

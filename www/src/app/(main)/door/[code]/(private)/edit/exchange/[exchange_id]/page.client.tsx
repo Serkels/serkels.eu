@@ -1,6 +1,7 @@
 "use client";
 
 import { Id } from "@1/core/domain";
+import { useInject } from "@1/core/ui/di.context.client";
 import type {
   Exchange,
   Exchange_CreateProps,
@@ -15,7 +16,6 @@ import { P, match } from "ts-pattern";
 import type { z } from "zod";
 import { ErrorOccur } from "~/components/ErrorOccur";
 import { SelectCategoryField } from "~/components/SelectCategoryField";
-import { useInject } from "~/core/react.client";
 import { Edit_Exchange_UseCase } from "~/modules/exchange/application/edit_exchange";
 import { Get_Exchange_ById_UseCase } from "~/modules/exchange/application/get_exchange_byid.use-case";
 //

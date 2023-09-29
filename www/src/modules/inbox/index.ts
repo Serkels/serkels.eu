@@ -1,9 +1,9 @@
 //
 
+import { useInject } from "@1/core/ui/di.context.client";
 import { useSession } from "next-auth/react";
 import { useMemo } from "react";
 import { fromClient } from "~/app/api/v1";
-import { useInject } from "~/core/react.client";
 import { Inbox_Controller } from "./inbox.controller";
 import { Inbox_Repository } from "./inbox.repository";
 import { Inbox_Message_Controller } from "./inbox_message.controller";

@@ -1,11 +1,11 @@
 "use client";
 
 import { UnknownError } from "@1/core/error";
+import { useInject } from "@1/core/ui/di.context.client";
 import ContentLoader from "react-content-loader";
 import { tv } from "tailwind-variants";
 import { P, match } from "ts-pattern";
 import { Thread_Item } from "~/components/Thread_Item";
-import { useInject } from "~/core/react.client";
 import { Get_Inbox_ById_UseCase } from "~/modules/inbox/application/get_inbox_byid.use-case";
 import { useDoor_Value } from "../../../door.context";
 

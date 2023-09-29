@@ -1,5 +1,6 @@
 "use client";
 
+import { useInject } from "@1/core/ui/di.context.client";
 import { Spinner } from "@1/ui/components/Spinner";
 import { useQueryClient } from "@tanstack/react-query";
 import { useCallback, useEffect, type PropsWithChildren } from "react";
@@ -7,7 +8,6 @@ import { P, match } from "ts-pattern";
 import { Avatar_Show_Profile } from "~/components/Avatar_Show_Profile";
 import { Conversation_Form } from "~/components/Conversation/Conversation_Form";
 import { Conversation_Timeline } from "~/components/Conversation/Conversation_Timeline";
-import { useInject } from "~/core/react.client";
 import { useInboxMessage_controller } from "~/modules/inbox";
 import { Get_Inbox_ById_UseCase } from "~/modules/inbox/application/get_inbox_byid.use-case";
 import { Inbox_QueryKeys } from "~/modules/inbox/query_keys";

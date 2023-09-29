@@ -1,6 +1,7 @@
 //
 
 import { ID, USER_PROFILE_ID_TOKEN, type UID } from "@1/core/domain";
+import { useInject } from "@1/core/ui/di.context.client";
 import { Button } from "@1/ui/components/ButtonV";
 import * as UI from "@1/ui/domains/exchange/Card";
 import { OnlineOrLocation } from "@1/ui/domains/exchange/OnlineOrLocation";
@@ -11,7 +12,6 @@ import ContentLoader from "react-content-loader";
 import { P, match } from "ts-pattern";
 import { AvatarMediaHorizontal } from "~/components/Avatar";
 import { BookmarkButton } from "~/components/BookmarkButton";
-import { useInject } from "~/core/react.client";
 import {
   Exchange_ValueProvider,
   useExchange_Value,

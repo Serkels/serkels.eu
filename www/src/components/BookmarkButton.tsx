@@ -1,5 +1,6 @@
 "use client";
 
+import { useInject } from "@1/core/ui/di.context.client";
 import type { Bookmark_Category } from "@1/modules/bookmark/domain";
 import { Spinner } from "@1/ui/components/Spinner";
 import { Bookmark } from "@1/ui/icons";
@@ -7,7 +8,6 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
 import { useCallback, type MouseEventHandler } from "react";
-import { useInject } from "~/core/react.client";
 import { Is_In_Bookmarks_UseCase } from "~/modules/bookmarks/application/is_in_bookmarks.use-case";
 import { Bookmarks_Repository } from "~/modules/bookmarks/bookmarks.repository";
 

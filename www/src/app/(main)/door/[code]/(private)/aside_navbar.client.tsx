@@ -1,5 +1,6 @@
 "use client";
 
+import { useInject } from "@1/core/ui/di.context.client";
 import { School } from "@1/ui/icons";
 import clsx from "clsx";
 import Link from "next/link";
@@ -13,7 +14,6 @@ import {
 import { tv } from "tailwind-variants";
 import { Avatar } from "~/components/Avatar";
 import { AsideBar } from "~/components/layouts/holy/aside";
-import { useInject } from "~/core/react.client";
 import { Get_Session_Profile } from "~/modules/user/application/get_session_profile.use-case";
 import { useDoorProfile } from "../(public)/layout.client";
 import { useDoor_Value } from "../../door.context";

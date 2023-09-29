@@ -1,9 +1,9 @@
 "use client";
 
+import { useInject } from "@1/core/ui/di.context.client";
 import { Category } from "@1/modules/category/domain";
 import { usePathname, useRouter } from "next/navigation";
 import { CategoryFilterRadioList } from "~/components/FilterRadioList";
-import { useInject } from "~/core/react.client";
 import { Get_Category_UseCase } from "~/modules/categories/application/get_categories.use-case";
 import { useOpportunityFilterContext } from "./OpportunityFilter.context";
 

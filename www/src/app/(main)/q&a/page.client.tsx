@@ -1,5 +1,6 @@
 "use client";
 
+import { useInject } from "@1/core/ui/di.context.client";
 import { Category } from "@1/modules/category/domain";
 import { useSession } from "next-auth/react";
 import {
@@ -7,7 +8,6 @@ import {
   FilterRadioList,
 } from "~/components/FilterRadioList";
 import { useSyncSearchQuery } from "~/components/useSyncSearchQuery";
-import { useInject } from "~/core/react.client";
 import { Get_Category_UseCase } from "~/modules/categories/application/get_categories.use-case";
 import { QACreateForm } from "./QACreateForm";
 import type { QAFilterType } from "./models/QAFilterType";

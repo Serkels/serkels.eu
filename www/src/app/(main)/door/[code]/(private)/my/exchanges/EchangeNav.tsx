@@ -1,5 +1,6 @@
 "use client";
 
+import { useInject } from "@1/core/ui/di.context.client";
 import type { Exchange } from "@1/modules/exchange/domain";
 import { Button } from "@1/ui/components/ButtonV";
 import { InputSearch } from "@1/ui/components/InputSearch";
@@ -23,7 +24,6 @@ import { tv } from "tailwind-variants";
 import { P, match } from "ts-pattern";
 import { useDoor_Value } from "~/app/(main)/door/door.context";
 import { Avatar } from "~/components/Avatar";
-import { useInject } from "~/core/react.client";
 import {
   Exchange_ValueProvider,
   useExchange_Value,

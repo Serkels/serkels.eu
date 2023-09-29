@@ -7,9 +7,8 @@ import {
   useMemo,
   type PropsWithChildren,
 } from "react";
-import { Id, type UID } from "rich-domain";
-import { container, type DependencyContainer } from "../di";
-import { register, type Registrations } from "./register";
+import { root_container, type InjectionToken } from "../di";
+import { register_branch, type Registrations } from "./register";
 
 //
 
@@ -17,9 +16,7 @@ const log = debug("~:core:di.context");
 
 //
 
-export const ContainerContext = createContext<
-  DependencyContainer & { _id?: UID }
->(container);
+export const ContainerContext = createContext(root_container);
 
 export function DI_Container_Provider({
   children,
@@ -28,18 +25,12 @@ export function DI_Container_Provider({
   registrations?: Registrations;
 }>) {
   const parent = useContext(ContainerContext);
-  const parent_id = parent._id?.value() ?? "root";
-  // console.log("DI_Container_Provider", { registrations });
+
   const child_container = useMemo(() => {
-    const child = register(registrations, parent) as DependencyContainer & {
-      _id?: UID;
-    };
-    child._id = Id();
-
-    log(`💉 ${child._id.value()} (${parent_id})`);
-
-    return child;
-  }, [parent_id, registrations]);
+    const container = register_branch(registrations, parent);
+    log("⏭️💉", container.id.value());
+    return container;
+  }, [parent.id.value(), registrations]);
 
   return (
     <ContainerContext.Provider value={child_container}>
@@ -47,3 +38,10 @@ export function DI_Container_Provider({
     </ContainerContext.Provider>
   );
 }
+export const useContainer = () => {
+  return useContext(ContainerContext);
+};
+export const useInject = <T extends unknown>(token: InjectionToken<T>) => {
+  const container = useContainer();
+  return container.resolve(token) as T;
+};

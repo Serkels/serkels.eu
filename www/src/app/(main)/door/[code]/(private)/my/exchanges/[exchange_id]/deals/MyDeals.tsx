@@ -2,6 +2,7 @@
 
 import { Id } from "@1/core/domain";
 import { UnknownError } from "@1/core/error";
+import { useInject } from "@1/core/ui/di.context.client";
 import { Message, Thread } from "@1/modules/inbox/domain";
 import { Button } from "@1/ui/components/ButtonV";
 import { Spinner } from "@1/ui/components/Spinner";
@@ -13,7 +14,6 @@ import { tv } from "tailwind-variants";
 import { P, match } from "ts-pattern";
 import { useDoor_Value } from "~/app/(main)/door/door.context";
 import { ErrorOccur } from "~/components/ErrorOccur";
-import { useInject } from "~/core/react.client";
 import {
   Exchange_ValueProvider,
   useExchange_Value,

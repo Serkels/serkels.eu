@@ -2,6 +2,7 @@
 
 import { Id } from "@1/core/domain";
 import { UnknownError } from "@1/core/error";
+import { useContainer, useInject } from "@1/core/ui/di.context.client";
 import { Deal } from "@1/modules/deal/domain";
 import { Message, Thread } from "@1/modules/inbox/domain";
 import { Button } from "@1/ui/components/ButtonV";
@@ -13,14 +14,7 @@ import { P, match } from "ts-pattern";
 import { useDoor_Value } from "~/app/(main)/door/door.context";
 import { OpenAPI_Repository } from "~/app/api/v1/OpenAPI.repository";
 import Loading from "~/app/loading";
-import {
-  ContainerContext,
-  Hydrate_Container_Provider,
-  useContainer,
-  useInject,
-} from "~/core/react.client";
 import { Deal_Repository } from "~/modules/exchange/Deal.repository";
-import { Deal_Message_Repository } from "~/modules/exchange/Deal_Message.repository";
 import { useExchange_Value } from "~/modules/exchange/Exchange.context";
 import { Exchange_Repository } from "~/modules/exchange/Exchange_Repository";
 import { Get_Deal_ById_UseCase } from "~/modules/exchange/application/get_deal_byid.use-case";
@@ -106,9 +100,9 @@ export function Deals_Nav() {
             {pages.map((deal_id) => (
               <li key={deal_id}>
                 <Deal_ValueProvider>
-                  <ContainerContext.Provider value={container}>
+                  {/* <ContainerContext.Provider value={container}>
                     <Echange_Deal id={deal_id} />
-                  </ContainerContext.Provider>
+                  </ContainerContext.Provider> */}
                   {/* <Hydrate_Container_Provider
                     registerAll={[
                       {
@@ -182,7 +176,7 @@ function Echange_Deal_({ id }: { id: number }) {
       if (Deal.zero.isEqual(deal)) return null;
       return (
         <Nest>
-          <Hydrate_Container_Provider
+          {/* <Hydrate_Container_Provider
             registerAll={[
               {
                 registerInstance: [
@@ -191,7 +185,7 @@ function Echange_Deal_({ id }: { id: number }) {
                 ],
               },
             ]}
-          />
+          /> */}
           <Echange_DealLink />
         </Nest>
       );

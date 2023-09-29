@@ -1,20 +1,14 @@
 "use client";
 
-import { container } from "@1/core/di";
-import { USER_PROFILE_ID_TOKEN } from "@1/core/domain";
 import { setUser } from "@sentry/nextjs";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import debug from "debug";
 import { SessionProvider, useSession } from "next-auth/react";
 import { event, usePageViews } from "nextjs-google-analytics";
-import { useEffect, useMemo, type PropsWithChildren } from "react";
-import Nest from "react-nest";
+import { useEffect, type PropsWithChildren } from "react";
 import { P, match } from "ts-pattern";
 import { query_client } from "~/core/getQueryClient";
-import { ContainerContext } from "~/core/react.client";
-import { fromClient } from "../api/v1";
-import { API_TOKEN, JWT_TOKEN } from "../api/v1/OpenAPI.repository";
 
 //
 
@@ -39,7 +33,7 @@ export default function Providers({ children }: PropsWithChildren) {
       <QueryClientProvider client={query_client}>
         <SessionProvider>
           <UserTracking />
-          <ViewProvider>{children}</ViewProvider>
+          {children}
         </SessionProvider>
 
         <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
@@ -71,24 +65,4 @@ function UserTracking() {
   }, [session]);
 
   return null;
-}
-
-function ViewProvider({ children }: PropsWithChildren) {
-  const session = useSession();
-
-  const jwt = session.data?.user?.jwt;
-  const user_profile_id = session.data?.user?.profile.id;
-  const root_container = useMemo(() => {
-    console.info(jwt ? "🗝️" : "🚪");
-    const root = container.createChildContainer();
-    root.registerInstance(JWT_TOKEN, jwt ?? "");
-    root.registerInstance(API_TOKEN, fromClient);
-    root.registerInstance(USER_PROFILE_ID_TOKEN, user_profile_id ?? NaN);
-    return root;
-  }, [jwt]);
-  return (
-    <ContainerContext.Provider value={root_container}>
-      <Nest>{children}</Nest>
-    </ContainerContext.Provider>
-  );
 }

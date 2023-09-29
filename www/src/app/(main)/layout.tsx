@@ -1,33 +1,50 @@
 ///
 
-import { USER_PROFILE_ID_TOKEN } from "@1/core/domain";
+import { $1 } from "@1/core/$1";
+import { ID_Schema, USER_PROFILE_ID_TOKEN } from "@1/core/domain";
 import { Grid } from "@1/ui/components/Grid";
 import type { PropsWithChildren } from "react";
+import { z } from "zod";
 import { AppFooter } from "~/components/AppFooter.server";
 import { UserBar } from "~/components/UserBar";
-import { Hydrate_Container_Provider } from "~/core/react.client";
+import { get_api_session } from "../api/auth/[...nextauth]/route";
 import { JWT_TOKEN } from "../api/v1/OpenAPI.repository";
-import { register } from "./register";
+import { Root_Module } from "../layout";
 
-export default async function Layout({ children }: PropsWithChildren) {
-  const container = await register();
+//
 
-  const jwt = container.resolve(JWT_TOKEN);
-  const profile_id = container.resolve(USER_PROFILE_ID_TOKEN);
+@$1.module({
+  parent: Root_Module,
+  async registrationFn() {
+    const session = await get_api_session();
 
-  //
+    const profile_id =
+      ID_Schema.optional().parse(session?.user?.profile.id, {
+        path: ["session?.user?.profile.id"],
+      }) ?? NaN;
 
-  return (
-    <Hydrate_Container_Provider
-      registerAll={[
-        {
-          registerInstance: [JWT_TOKEN, jwt],
-        },
-        {
-          registerInstance: [USER_PROFILE_ID_TOKEN, profile_id],
-        },
-      ]}
-    >
+    const jwt = z
+      .string()
+      .default("")
+      .parse(session?.user?.jwt, {
+        path: ["session.user?.jwt"],
+      });
+
+    return [
+      {
+        token: JWT_TOKEN,
+        useValue: jwt,
+      },
+      {
+        token: USER_PROFILE_ID_TOKEN,
+        useValue: profile_id,
+      },
+    ];
+  },
+})
+export class Main_Module {
+  static async Provider({ children }: PropsWithChildren) {
+    return (
       <div className="grid min-h-screen grid-rows-[max-content_1fr_max-content]">
         <UserBar />
         <Grid
@@ -38,6 +55,10 @@ export default async function Layout({ children }: PropsWithChildren) {
         </Grid>
         <AppFooter />
       </div>
-    </Hydrate_Container_Provider>
-  );
+    );
+  }
 }
+
+//
+
+export default Main_Module.Provider;

@@ -1,5 +1,6 @@
 "use client";
 
+import { useInject } from "@1/core/ui/di.context.client";
 import { usePathname } from "next/navigation";
 import type { PropsWithChildren } from "react";
 import { createStateContext } from "react-use";
@@ -7,7 +8,6 @@ import { tv } from "tailwind-variants";
 import { useDoor_Value } from "~/app/(main)/door/door.context";
 import { AsideBar } from "~/components/layouts/holy/aside";
 import { Container_Provider } from "~/core/react";
-import { useInject } from "~/core/react.client";
 import { ROUTE_EXCHANGE_ID_TOKEN } from "../register";
 
 //

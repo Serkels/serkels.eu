@@ -1,6 +1,6 @@
 //
 
-import type { PropsWithChildren } from "react";
+import { useMemo, type PropsWithChildren } from "react";
 import { DI_Container_Provider } from "./di.context.client";
 import type { Registrations } from "./register";
 
@@ -23,7 +23,7 @@ export function create_container_provider(
   registrationsFn: () => Registrations,
 ) {
   return function container_provider({ children }: PropsWithChildren) {
-    const registrations = registrationsFn();
+    const registrations = useMemo(registrationsFn, [registrationsFn]);
     return (
       <DI_Container_Provider registrations={registrations}>
         {children}

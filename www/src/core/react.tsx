@@ -1,6 +1,6 @@
 //
 
-import { container, type InjectionToken } from "@1/core/di";
+import { root_container, type InjectionToken } from "@1/core/di";
 import { AuthError, USER_PROFILE_ID_TOKEN } from "@1/core/domain";
 import debug from "debug";
 import { cache, type PropsWithChildren } from "react";
@@ -32,16 +32,20 @@ export async function Container_Provider({
     </Hydrate_Container_Provider>
   );
 }
-
+/**
+ * @deprecated
+ */
 export const root_injector = cache(() => {
   log("root_injector");
-  const root_container = container.createChildContainer();
-  root_container.registerInstance(JWT_TOKEN, "");
-  root_container.registerInstance(API_TOKEN, fromServer);
-  root_container.registerInstance(USER_PROFILE_ID_TOKEN, NaN);
-  return root_container;
+  const container = root_container.createChildContainer();
+  container.registerInstance(JWT_TOKEN, "");
+  container.registerInstance(API_TOKEN, fromServer);
+  container.registerInstance(USER_PROFILE_ID_TOKEN, NaN);
+  return container;
 });
-
+/**
+ * @deprecated
+ */
 export async function injector_session(root = getInjector()) {
   log("injector_session");
   const session = await get_api_session();
@@ -55,7 +59,13 @@ export async function injector_session(root = getInjector()) {
 
   return container;
 }
+/**
+ * @deprecated
+ */
 export const injector = () => getInjector().container;
+/**
+ * @deprecated
+ */
 export const getInjector = cache(() => {
   const root = root_injector();
 

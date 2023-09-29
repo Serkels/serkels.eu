@@ -6,7 +6,7 @@ import type {
   DependencyContainer,
 } from "tsyringe/dist/typings/types";
 import { container as root_container } from "../di";
-import { register, type Registrations } from "./register";
+import { register_branch, type Registrations } from "./register";
 
 //
 
@@ -38,7 +38,7 @@ export function context_injection<T, Parent>(parent: constructor<Parent>) {
         (Reflect.getMetadata(CONTAINER_KEY, parent) as DependencyContainer) ??
         root_container;
 
-      const container = register(registrations, parent_container);
+      const container = register_branch(registrations, parent_container);
       Reflect.defineMetadata(CONTAINER_KEY, container, target);
 
       return <LayoutComponent {...props}>{children}</LayoutComponent>;

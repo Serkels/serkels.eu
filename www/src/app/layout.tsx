@@ -1,5 +1,6 @@
 //
 
+import { $1 } from "@1/core/$1";
 import { Analytics } from "@vercel/analytics/react";
 import clsx from "clsx";
 import type { Metadata } from "next";
@@ -8,7 +9,10 @@ import Script from "next/script";
 import NextTopLoader from "nextjs-toploader";
 import type { PropsWithChildren } from "react";
 import Providers from "./(index)/Providers";
+import { fromServer } from "./api/v1";
+import { API_TOKEN } from "./api/v1/OpenAPI.repository";
 import "./globals.css";
+import { Register_OpenAPI } from "./layout.client";
 
 const roboto = Roboto({ weight: ["400", "500", "700"], subsets: ["latin"] });
 
@@ -19,7 +23,34 @@ export const metadata: Metadata = {
   icons: { icon: "/favicon.svg" },
 };
 
-export default async function RootLayout({ children }: PropsWithChildren) {
+//
+
+// @$1.server_injection([
+//   {
+//     token: API_TOKEN,
+//     useValue: fromServer,
+//   },
+// ])
+// @$1.container(createChildContainer(root_container))
+
+@$1.module({
+  registrationFn: async () => [
+    {
+      token: API_TOKEN,
+      useValue: fromServer,
+    },
+  ],
+  scope: "server-only",
+})
+export class Root_Module {
+  static Provider = RootLayout;
+}
+
+export default Root_Module.Provider;
+
+//
+
+export async function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <body
@@ -31,7 +62,10 @@ export default async function RootLayout({ children }: PropsWithChildren) {
         )}
       >
         <NextTopLoader color="#fff" showSpinner={false} />
-        <Providers>{children}</Providers>
+        <Providers>
+          <Register_OpenAPI>{children}</Register_OpenAPI>
+        </Providers>
+
         <Analytics />
 
         <Script

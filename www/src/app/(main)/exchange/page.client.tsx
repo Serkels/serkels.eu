@@ -1,5 +1,6 @@
 "use client";
 
+import { useInject } from "@1/core/ui/di.context.client";
 import { Category } from "@1/modules/category/domain";
 import { InputSearch } from "@1/ui/components/InputSearch";
 import { Form, Formik, useField } from "formik";
@@ -7,10 +8,9 @@ import { useSearchParams } from "next/navigation";
 import type { ComponentPropsWithoutRef } from "react";
 import { CategoryFilterRadioList } from "~/components/FilterRadioList";
 import { useSyncSearchQuery } from "~/components/useSyncSearchQuery";
-import { useInject } from "~/core/react.client";
 import { Get_Category_UseCase } from "~/modules/categories/application/get_categories.use-case";
-import { Get_Exchanges_UseCase } from "~/modules/exchange/application/get_exchanges.use-case";
 import { Exchange_InfiniteList } from "~/modules/exchange/Exchange_InfiniteList";
+import { Get_Exchanges_UseCase } from "~/modules/exchange/application/get_exchanges.use-case";
 
 //
 

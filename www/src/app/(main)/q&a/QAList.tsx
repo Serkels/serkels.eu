@@ -1,8 +1,8 @@
 "use client";
 
+import { useInject } from "@1/core/ui/di.context.client";
 import { Spinner } from "@1/ui/components/Spinner";
 import { P, match } from "ts-pattern";
-import { useInject } from "~/core/react.client";
 import { Question_Controller } from "~/modules/question/view/react/controller";
 import { QACard } from "./components/QACard/QACard";
 

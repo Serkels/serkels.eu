@@ -2,6 +2,7 @@
 
 //
 
+import { useInject } from "@1/core/ui/di.context.client";
 import { Button } from "@1/ui/components/ButtonV";
 import { InputSearch } from "@1/ui/components/InputSearch";
 import { type InfiniteQueryObserverSuccessResult } from "@tanstack/react-query";
@@ -9,7 +10,6 @@ import { useCallback, useState, type ChangeEvent } from "react";
 import ContentLoader from "react-content-loader";
 import { useDebounce } from "react-use";
 import { P, match } from "ts-pattern";
-import { useInject } from "~/core/react.client";
 import { Get_Inboxes_UseCase } from "~/modules/inbox/application/get_inboxes.use-case";
 import { UserInbox_List, UserThread_Item } from "./UserInbox_List";
 

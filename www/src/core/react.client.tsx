@@ -1,17 +1,9 @@
 "use client";
 
-import {
-  container,
-  type DependencyContainer,
-  type InjectionToken,
-} from "@1/core/di";
+import { createChildContainer, type InjectionToken } from "@1/core/di";
+import { ContainerContext, useContainer } from "@1/core/ui/di.context.client";
 import debug from "debug";
-import {
-  createContext,
-  useContext,
-  useMemo,
-  type PropsWithChildren,
-} from "react";
+import { useMemo, type PropsWithChildren } from "react";
 
 //
 
@@ -19,16 +11,14 @@ const log = debug("~:core:react:client");
 
 //
 
-export const ContainerContext = createContext<DependencyContainer>(container);
-
-export const useContainer = () => {
-  return useContext(ContainerContext);
-};
-
 //
 //
 //
 
+/**
+ *
+ * @deprecated ${@link DI_Container_Provider}
+ */
 export function Hydrate_Container_Provider({
   children,
   registerAll: initialFn,
@@ -39,7 +29,7 @@ export function Hydrate_Container_Provider({
   const container = useMemo(() => {
     log("🌲");
 
-    const child = parent.createChildContainer();
+    const child = createChildContainer(parent);
     // for (const args of initialFn) {
     //   if (Array.isArray(args.registerInstance)) {
     //     log(...args.registerInstance);
@@ -55,8 +45,3 @@ export function Hydrate_Container_Provider({
     </ContainerContext.Provider>
   );
 }
-
-export const useInject = <T extends unknown>(token: InjectionToken<T>) => {
-  const container = useContainer();
-  return container.resolve(token) as T;
-};

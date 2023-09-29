@@ -1,5 +1,6 @@
 "use client";
 
+import { useInject } from "@1/core/ui/di.context.client";
 import type { Opportunity } from "@1/modules/opportunity/domain";
 import { Spinner } from "@1/ui/components/Spinner";
 import type { UseInfiniteQueryResult } from "@tanstack/react-query";
@@ -8,7 +9,6 @@ import {
   Opportunity_Grid,
   Opportunity_Item,
 } from "~/app/(main)/opportunity/Opportunity_Item";
-import { useInject } from "~/core/react.client";
 import { Get_Opportunity_Bookmarks_UseCase } from "~/modules/bookmarks/application/get_opportunity_bookmarks.use-case";
 
 //

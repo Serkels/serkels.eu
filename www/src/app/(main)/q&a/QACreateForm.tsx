@@ -1,12 +1,12 @@
 "use client";
 
+import { useInject } from "@1/core/ui/di.context.client";
 import { Card } from "@1/ui/components/Card";
 import { Spinner } from "@1/ui/components/Spinner";
 import { Suspense, useState } from "react";
 import { match } from "ts-pattern";
 import { Avatar } from "~/components/Avatar";
 import { ErrorOccur } from "~/components/ErrorOccur";
-import { useInject } from "~/core/react.client";
 import { Question_Controller } from "~/modules/question/view/react/controller";
 import { QACardFormBody } from "./components/QAForm/QACardFormBody";
 
