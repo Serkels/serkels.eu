@@ -6,6 +6,7 @@ import { fr } from "date-fns/locale";
 import { ZodError, z } from "zod";
 import { StrapiEntity } from "../../common";
 import { Entity_Schema } from "../../common/record";
+import { Exchange } from "../../exchange/domain";
 import { Profile } from "../../profile/domain";
 
 //
@@ -54,7 +55,15 @@ export class Deal extends Entity<Props> {
 
   //
 
-  static zero = Deal.create({} as any).value();
+  static zero = z.instanceof(Deal).parse(
+    Deal.create({
+      exchange: { data: { id: Exchange.zero.id.value() } },
+      organizer: Profile.zero,
+      participant_profile: Profile.zero,
+      status: "idle",
+    }).value(),
+    { path: ["Deal.zero"] },
+  );
   //
 
   get profile() {

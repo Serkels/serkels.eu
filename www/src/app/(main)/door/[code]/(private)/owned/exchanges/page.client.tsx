@@ -1,6 +1,6 @@
 "use client";
 
-import { useInject } from "~/core/react";
+import { useInject } from "~/core/react.client";
 import { Exchange_InfiniteList } from "~/modules/exchange/Exchange_InfiniteList";
 import { Get_Owned_Exchanges_UseCase } from "~/modules/exchange/application/get_owned_exchanges.use-case";
 

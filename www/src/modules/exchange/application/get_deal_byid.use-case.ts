@@ -1,9 +1,11 @@
 //
 
+import { Lifecycle, inject, scoped } from "@1/core/di";
+import { Deal } from "@1/modules/deal/domain";
 import { Deal_Record } from "@1/modules/deal/infra/strapi";
 import { useQuery } from "@tanstack/react-query";
 import debug from "debug";
-import { Lifecycle, inject, scoped } from "~/core/di";
+import { z } from "zod";
 import { Deal_Repository } from "../Deal.repository";
 import { Deal_QueryKeys } from "../queryKeys";
 
@@ -27,7 +29,7 @@ export class Get_Deal_ById_UseCase {
       queryFn: () => this.repository.find_by_id(id),
       queryKey: Deal_QueryKeys.item(id),
       select: (data) => {
-        return Deal_Record.parse(
+        return Deal_Record.pipe(z.instanceof(Deal)).parse(
           { data },
           {
             path: [

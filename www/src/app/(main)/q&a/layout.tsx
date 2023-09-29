@@ -4,7 +4,7 @@ import { Grid } from "@1/ui/components/Grid";
 import { Hydrate, dehydrate } from "@tanstack/react-query";
 import { type PropsWithChildren } from "react";
 import { AsideWithTitle } from "~/components/layouts/holy/aside";
-import { injector } from "~/core/di";
+import { injector } from "~/core/react";
 import { Get_Category_UseCase } from "~/modules/categories/application/get_categories.use-case";
 import { CategoriesList, QAFilter } from "./page.client";
 

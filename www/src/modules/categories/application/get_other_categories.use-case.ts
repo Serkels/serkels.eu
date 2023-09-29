@@ -1,8 +1,8 @@
 //
 
+import { Lifecycle, inject, scoped } from "@1/core/di";
 import { Category, OTHER_CATEGORY_SLUGS } from "@1/modules/category/domain";
 import debug from "debug";
-import { Lifecycle, inject, scoped } from "~/core/di";
 import { Get_Category_UseCase } from "./get_categories.use-case";
 
 //

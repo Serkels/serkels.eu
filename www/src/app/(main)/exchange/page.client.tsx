@@ -7,7 +7,7 @@ import { useSearchParams } from "next/navigation";
 import type { ComponentPropsWithoutRef } from "react";
 import { CategoryFilterRadioList } from "~/components/FilterRadioList";
 import { useSyncSearchQuery } from "~/components/useSyncSearchQuery";
-import { useInject } from "~/core/react";
+import { useInject } from "~/core/react.client";
 import { Get_Category_UseCase } from "~/modules/categories/application/get_categories.use-case";
 import { Get_Exchanges_UseCase } from "~/modules/exchange/application/get_exchanges.use-case";
 import { Exchange_InfiniteList } from "~/modules/exchange/Exchange_InfiniteList";

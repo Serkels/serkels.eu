@@ -9,7 +9,7 @@ import { useCallback, useState, type ChangeEvent } from "react";
 import ContentLoader from "react-content-loader";
 import { useDebounce } from "react-use";
 import { P, match } from "ts-pattern";
-import { useInject } from "~/core/react";
+import { useInject } from "~/core/react.client";
 import { Get_Inboxes_UseCase } from "~/modules/inbox/application/get_inboxes.use-case";
 import { UserInbox_List, UserThread_Item } from "./UserInbox_List";
 

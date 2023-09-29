@@ -18,13 +18,14 @@ import { register } from "./register";
 
 export default function Layout({
   children,
+  nav,
   params,
-}: PropsWithChildren<{ params: any }>) {
+}: PropsWithChildren<{ params: any; nav: React.ReactNode }>) {
   return (
     <Nest>
       <Deal_Route_Provider />
       {/* <Exchange_ValueProvider /> */}
-      <Aside params={params} />
+      <Aside params={params} nav={nav} />
 
       {/* */}
 
@@ -39,11 +40,11 @@ export default function Layout({
   );
 }
 
-async function Aside(props: any) {
+async function Aside({ params, nav }: { params: any; nav: React.ReactNode }) {
   const { diviser, header, title } = aside();
 
   try {
-    const container = await register(props);
+    const container = await register({ params });
 
     const id = container.resolve(ROUTE_EXCHANGE_ID_TOKEN);
     const query_client = await container
@@ -60,12 +61,18 @@ async function Aside(props: any) {
       },
     );
 
+    console.log(
+      "src/app/(main)/door/[code]/(private)/my/exchanges/[exchange_id]/deals/layout.tsx",
+      { id },
+    );
+
     return (
       <Deals_Aside_Nav>
         <header className={header()}>
           <h6 className={title()}>{exchange.title}</h6>
         </header>
         <hr className={diviser()} />
+        {nav}
       </Deals_Aside_Nav>
     );
   } catch (error) {

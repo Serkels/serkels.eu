@@ -1,9 +1,9 @@
 //
 
+import { Lifecycle, inject, scoped } from "@1/core/di";
 import { Category_Record } from "@1/modules/category/infra/strapi";
 import { useQuery } from "@tanstack/react-query";
 import debug from "debug";
-import { Lifecycle, inject, scoped } from "~/core/di";
 import { Categories_Repository } from "./Categories_Repository";
 
 //

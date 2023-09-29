@@ -1,13 +1,15 @@
 //
 
+import { Lifecycle, inject, scoped } from "@1/core/di";
 import type { Strapi_Query_Params } from "@1/modules/common";
+import { Message } from "@1/modules/inbox/domain";
 import {
   Message_Record,
   type Message_Schema,
 } from "@1/modules/inbox/infra/strapi";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import debug from "debug";
-import { Lifecycle, inject, scoped } from "~/core/di";
+import { z } from "zod";
 import { getNextPageParam, getPreviousPageParam } from "~/core/use-query";
 import { Deal_Message_Repository } from "../Deal_Message.repository";
 import { Deal_QueryKeys } from "../queryKeys";
@@ -47,9 +49,13 @@ export class Get_Messages_ById_UseCase {
           .map((page) => page.data!)
           .flat()
           .map((data) => {
-            return Message_Record.parse(data, {
-              path: [`<${Get_Messages_ById_UseCase.name}.execute>`, "data"],
-            });
+            console.log({ data: { attributes: data, id: data.id } });
+            return Message_Record.pipe(z.instanceof(Message)).parse(
+              { data: { attributes: data, id: data.id } },
+              {
+                path: [`<${Get_Messages_ById_UseCase.name}.execute>`, "data"],
+              },
+            );
           }),
       }),
     });

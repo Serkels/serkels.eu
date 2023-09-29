@@ -1,14 +1,16 @@
 //
 
+import { container, type InjectionToken } from "@1/core/di";
+import { AuthError, USER_PROFILE_ID_TOKEN } from "@1/core/domain";
 import debug from "debug";
-import { type PropsWithChildren } from "react";
-import { type InjectionToken } from "~/core/di";
-import { Hydrate_Container_Provider, useContainer } from "./react.client";
+import { cache, type PropsWithChildren } from "react";
+import { get_api_session } from "~/app/api/auth/[...nextauth]/route";
+import { fromServer } from "~/app/api/v1";
+import { API_TOKEN, JWT_TOKEN } from "~/app/api/v1/OpenAPI.repository";
+import { Hydrate_Container_Provider } from "./react.client";
 
 //
-
 //
-
 //
 
 const log = debug("~:core:react");
@@ -31,37 +33,33 @@ export async function Container_Provider({
   );
 }
 
-export const useInject = <T extends unknown>(token: InjectionToken<T>) => {
-  const container = useContainer();
-  return container.resolve(token) as T;
-};
+export const root_injector = cache(() => {
+  log("root_injector");
+  const root_container = container.createChildContainer();
+  root_container.registerInstance(JWT_TOKEN, "");
+  root_container.registerInstance(API_TOKEN, fromServer);
+  root_container.registerInstance(USER_PROFILE_ID_TOKEN, NaN);
+  return root_container;
+});
 
-// export interface CoreContext {
-//   container
-//   repositories: WeakMap<Class, RepositoryPort>;
+export async function injector_session(root = getInjector()) {
+  log("injector_session");
+  const session = await get_api_session();
+  if (!session) {
+    throw new AuthError("Unauthenticated");
+  }
 
-//   inject: () => {
+  const container = (root.container = root.container.createChildContainer());
+  container.registerInstance(JWT_TOKEN, session.user?.jwt);
+  container.registerInstance(USER_PROFILE_ID_TOKEN, session.user?.profile.id);
 
-//   }
-// }
+  return container;
+}
+export const injector = () => getInjector().container;
+export const getInjector = cache(() => {
+  const root = root_injector();
 
-// export const context = createContext<CoreContext>({
-//   repositories: new WeakMap(),
-//   container: container
-// });
-
-// export const CoreProvider = context.Provider;
-
-// export function useCoreContext() {
-//   const core_context = useContext(context);
-//   if (!core_context) {
-//     throw new Error("useCoreContext must be used within a CoreProvider");
-//   }
-//   return core_context;
-// }
-
-// //
-
-// type Class = {
-//   new (...args: any[]): any;
-// };
+  return {
+    container: root,
+  };
+});

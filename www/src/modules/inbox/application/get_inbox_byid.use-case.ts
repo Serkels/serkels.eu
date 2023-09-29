@@ -1,12 +1,12 @@
 //
 
+import { Lifecycle, inject, scoped } from "@1/core/di";
 import {
   Inbox_Record,
   Inbox_Schema_ToDomain,
 } from "@1/modules/inbox/infra/strapi";
 import { useQuery } from "@tanstack/react-query";
 import debug from "debug";
-import { Lifecycle, inject, scoped } from "~/core/di";
 import { Inbox_Repository } from "../inbox.repository";
 import { Inbox_QueryKeys } from "../query_keys";
 

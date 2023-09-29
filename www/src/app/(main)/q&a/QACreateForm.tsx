@@ -6,7 +6,7 @@ import { Suspense, useState } from "react";
 import { match } from "ts-pattern";
 import { Avatar } from "~/components/Avatar";
 import { ErrorOccur } from "~/components/ErrorOccur";
-import { useInject } from "~/core/react";
+import { useInject } from "~/core/react.client";
 import { Question_Controller } from "~/modules/question/view/react/controller";
 import { QACardFormBody } from "./components/QAForm/QACardFormBody";
 

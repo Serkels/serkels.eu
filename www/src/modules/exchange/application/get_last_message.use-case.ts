@@ -1,8 +1,8 @@
 //
 
-import { useQueryClient } from "@tanstack/react-query";
+import { Lifecycle, inject, scoped } from "@1/core/di";
+import { useQuery } from "@tanstack/react-query";
 import debug from "debug";
-import { Lifecycle, inject, scoped } from "~/core/di";
 import { Deal_QueryKeys } from "../queryKeys";
 import { Get_Messages_ById_UseCase } from "./get_messages.use-case";
 
@@ -22,10 +22,12 @@ export class Get_Last_Message_ById_UseCase {
   //
 
   execute(id: number) {
-    const query_client = useQueryClient();
-    this.get_messages.execute(id, {});
-    const sdf = query_client.getQueryData(Deal_QueryKeys.messages(id));
-    console.log({ sdf });
-    return sdf;
+    const info = this.get_messages.execute(id, {});
+
+    return useQuery({
+      enabled: info.isSuccess,
+      queryFn: () => info.data,
+      queryKey: Deal_QueryKeys.last_message(id),
+    });
   }
 }

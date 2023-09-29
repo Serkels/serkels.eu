@@ -2,9 +2,9 @@
 
 import type { PropsWithChildren } from "react";
 import Nest from "react-nest";
+import { Hydrate_Container_Provider } from "~/core/react.client";
 import { Deal_Message_Repository } from "~/modules/exchange/Deal_Message.repository";
 import { Deal_Route_Provider } from "../layout.client";
-import { Route_Container_Provider } from "./layout.client";
 
 //
 
@@ -16,7 +16,7 @@ export default function Layout({
 
   return (
     <Nest>
-      <Route_Container_Provider
+      <Hydrate_Container_Provider
         registerAll={[
           {
             registerInstance: [Deal_Message_Repository.DEAL_ID_TOKEN, deal_id],

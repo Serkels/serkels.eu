@@ -4,7 +4,7 @@ import { Button } from "@1/ui/components/Button";
 import { Field, Form, Formik } from "formik";
 import { useSearchParams } from "next/navigation";
 import { SelectCategoryField } from "~/components/SelectCategoryField";
-import { useInject } from "~/core/react";
+import { useInject } from "~/core/react.client";
 import { Get_Category_UseCase } from "~/modules/categories/application/get_categories.use-case";
 import { Get_Other_Category_UseCase } from "~/modules/categories/application/get_other_categories.use-case";
 

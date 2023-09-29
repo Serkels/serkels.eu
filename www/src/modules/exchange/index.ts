@@ -2,7 +2,7 @@
 
 import type { UID } from "@1/core/domain";
 import { useMemo } from "react";
-import { useInject } from "~/core/react";
+import { useInject } from "~/core/react.client";
 import { Exchange_CreateForm_Controller } from "./CreateForm.controller";
 import { Exchange_Repository } from "./Exchange_Repository";
 import { Exchange_Item_Controller } from "./Item.controller";

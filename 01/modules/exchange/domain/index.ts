@@ -23,7 +23,7 @@ export const Exchange_PropsSchema = Entity_Schema.augment({
   type: z
     .union([z.literal("proposal"), z.literal("research")])
     .default("research"),
-  when: z.coerce.date().default(new Date(NaN)),
+  when: z.coerce.date().default(new Date(0)),
 }).describe("Exchange_PropsSchema");
 
 type Props = z.TypeOf<typeof Exchange_PropsSchema>;
@@ -34,7 +34,7 @@ type Props_Input = z.input<typeof Exchange_PropsSchema>;
 export class Exchange extends Entity<Props> {
   static override create(props: Props_Input): Result<Exchange, ZodError> {
     const result = Exchange_PropsSchema.safeParse(props, {
-      path: ["<Exchange.create>", "props"],
+      path: [`<${Exchange.name}.create>`, "props"],
     });
     if (result.success) {
       return Result.Ok(new Exchange(result.data));
@@ -43,9 +43,9 @@ export class Exchange extends Entity<Props> {
     }
   }
 
-  static zero = Exchange.create({
-    id: Number.MAX_SAFE_INTEGER,
-  } satisfies Props_Input).value();
+  static zero = z
+    .instanceof(Exchange)
+    .parse(Exchange.create({}).value(), { path: ["Exchange.zero"] });
 
   //
 

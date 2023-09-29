@@ -1,9 +1,9 @@
 //
 
+import { Lifecycle, inject, scoped } from "@1/core/di";
 import { Exchange_ItemSchemaToDomain } from "@1/modules/exchange/infra/strapi";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import debug from "debug";
-import { Lifecycle, inject, scoped } from "~/core/di";
 import { getNextPageParam, getPreviousPageParam } from "~/core/use-query";
 import { Bookmarks_Repository } from "../bookmarks.repository";
 

@@ -1,5 +1,6 @@
 //
 
+import { Lifecycle, inject, scoped } from "@1/core/di";
 import { Exchange } from "@1/modules/exchange/domain";
 import {
   Exchange_ItemSchemaToDomain,
@@ -8,7 +9,6 @@ import {
 import { useInfiniteQuery, type InfiniteData } from "@tanstack/react-query";
 import debug from "debug";
 import { z } from "zod";
-import { Lifecycle, inject, scoped } from "~/core/di";
 import { getQueryClient } from "~/core/getQueryClient";
 import { getNextPageParam, getPreviousPageParam } from "~/core/use-query";
 import {

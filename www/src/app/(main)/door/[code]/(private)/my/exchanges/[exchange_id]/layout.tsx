@@ -39,6 +39,11 @@ export default async function Layout({
     .resolve(Get_Deals_UseCase)
     .prefetch(exchange_id, { pagination: { pageSize: 6 } });
 
+  console.log(
+    "src/app/(main)/door/[code]/(private)/my/exchanges/[exchange_id]/layout.tsx",
+    { exchange_id },
+  );
+
   //
 
   return (

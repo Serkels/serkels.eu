@@ -1,5 +1,10 @@
 "use client";
 
+import {
+  container,
+  type DependencyContainer,
+  type InjectionToken,
+} from "@1/core/di";
 import debug from "debug";
 import {
   createContext,
@@ -7,11 +12,6 @@ import {
   useMemo,
   type PropsWithChildren,
 } from "react";
-import {
-  container,
-  type DependencyContainer,
-  type InjectionToken,
-} from "~/core/di";
 
 //
 
@@ -40,12 +40,12 @@ export function Hydrate_Container_Provider({
     log("🌲");
 
     const child = parent.createChildContainer();
-    for (const args of initialFn) {
-      if (Array.isArray(args.registerInstance)) {
-        log(...args.registerInstance);
-        child.registerInstance(...args.registerInstance);
-      }
-    }
+    // for (const args of initialFn) {
+    //   if (Array.isArray(args.registerInstance)) {
+    //     log(...args.registerInstance);
+    //     child.registerInstance(...args.registerInstance);
+    //   }
+    // }
     return child;
   }, [parent, initialFn]);
 

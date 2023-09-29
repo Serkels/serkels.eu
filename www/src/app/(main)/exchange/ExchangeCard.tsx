@@ -11,7 +11,7 @@ import ContentLoader from "react-content-loader";
 import { P, match } from "ts-pattern";
 import { AvatarMediaHorizontal } from "~/components/Avatar";
 import { BookmarkButton } from "~/components/BookmarkButton";
-import { useInject } from "~/core/react";
+import { useInject } from "~/core/react.client";
 import {
   Exchange_ValueProvider,
   useExchange_Value,

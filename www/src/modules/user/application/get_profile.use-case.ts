@@ -1,11 +1,11 @@
 //
 
+import { Lifecycle, inject, scoped } from "@1/core/di";
 import { Profile } from "@1/modules/profile/domain";
 import { Profile_Record } from "@1/modules/profile/infra/strapi";
 import { useQuery } from "@tanstack/react-query";
 import debug from "debug";
 import { z } from "zod";
-import { Lifecycle, inject, scoped } from "~/core/di";
 import { Profile_Repository } from "../profile.repository";
 
 //

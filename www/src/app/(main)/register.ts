@@ -3,7 +3,7 @@
 import { ID_Schema, USER_PROFILE_ID_TOKEN } from "@1/core/domain";
 import debug from "debug";
 import { z } from "zod";
-import { root_injector } from "~/core/di";
+import { root_injector } from "~/core/react";
 import { get_api_session } from "../api/auth/[...nextauth]/route";
 import { JWT_TOKEN } from "../api/v1/OpenAPI.repository";
 

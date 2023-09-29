@@ -17,7 +17,15 @@
       }
     ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "../01/core/di.ts",
+    "../01/core/ui/register.tsx",
+    "../01/core/ui/registry.tsx"
+  ],
   "exclude": [".next", "node_modules"],
   "references": [{ "path": "../01/core" }, { "path": "../01/modules" }]
 }

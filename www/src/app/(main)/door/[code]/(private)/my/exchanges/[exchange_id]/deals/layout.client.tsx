@@ -6,7 +6,8 @@ import { createStateContext } from "react-use";
 import { tv } from "tailwind-variants";
 import { useDoor_Value } from "~/app/(main)/door/door.context";
 import { AsideBar } from "~/components/layouts/holy/aside";
-import { Container_Provider, useInject } from "~/core/react";
+import { Container_Provider } from "~/core/react";
+import { useInject } from "~/core/react.client";
 import { ROUTE_EXCHANGE_ID_TOKEN } from "../register";
 
 //
@@ -27,6 +28,10 @@ export function Deals_Aside_Nav({ children }: PropsWithChildren) {
   const is_active =
     pathname === `/@${door_id}/my/exchanges/${exchange_id}/deals`;
 
+  console.log(
+    "src/app/(main)/door/[code]/(private)/my/exchanges/[exchange_id]/deals/layout.client.tsx",
+    { exchange_id },
+  );
   return (
     <AsideBar className={navbar({ $alone: is_active })}>{children}</AsideBar>
   );

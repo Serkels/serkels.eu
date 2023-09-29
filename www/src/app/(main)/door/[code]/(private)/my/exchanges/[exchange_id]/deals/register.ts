@@ -2,7 +2,7 @@
 
 import debug from "debug";
 import { register as main_module } from "~/app/(main)/register";
-import { root_injector } from "~/core/di";
+import { root_injector } from "~/core/react";
 import { register as exchange_module } from "../register";
 
 //

@@ -1,9 +1,9 @@
 //
 
+import { Lifecycle, inject, scoped } from "@1/core/di";
 import type { Exchange_CreateProps } from "@1/modules/exchange/domain";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import debug from "debug";
-import { Lifecycle, inject, scoped } from "~/core/di";
 import { Exchange_Repository } from "../Exchange_Repository";
 import { Exchange_QueryKeys } from "../queryKeys";
 

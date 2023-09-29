@@ -12,6 +12,11 @@ overrides:
   websockets: npm:ws@8.14.2
   zod: 3.22.2
 
+patchedDependencies:
+  tsyringe@4.8.0:
+    hash: la73bdfqzw6by54eosu6qlwfsu
+    path: patches/tsyringe@4.8.0.patch
+
 importers:
 
   .:
@@ -166,7 +171,7 @@ importers:
         version: 1.13.1
       tsyringe:
         specifier: 4.8.0
-        version: 4.8.0
+        version: 4.8.0(patch_hash=la73bdfqzw6by54eosu6qlwfsu)
       uuid:
         specifier: 9.0.1
         version: 9.0.1
@@ -206,7 +211,7 @@ importers:
         version: 1.13.1
       tsyringe:
         specifier: 4.8.0
-        version: 4.8.0
+        version: 4.8.0(patch_hash=la73bdfqzw6by54eosu6qlwfsu)
       zod:
         specifier: 3.22.2
         version: 3.22.2
@@ -672,7 +677,7 @@ importers:
         version: 5.0.5
       tsyringe:
         specifier: 4.8.0
-        version: 4.8.0
+        version: 4.8.0(patch_hash=la73bdfqzw6by54eosu6qlwfsu)
       uuid:
         specifier: 9.0.1
         version: 9.0.1
@@ -19597,12 +19602,13 @@ packages:
       typescript: 5.2.2
     dev: false
 
-  /tsyringe@4.8.0:
+  /tsyringe@4.8.0(patch_hash=la73bdfqzw6by54eosu6qlwfsu):
     resolution: {integrity: sha512-YB1FG+axdxADa3ncEtRnQCFq/M0lALGLxSZeVNbTU8NqhOVc51nnv2CISTcvc1kyv6EGPtXVr0v6lWeDxiijOA==}
     engines: {node: '>= 6.0.0'}
     dependencies:
       tslib: 1.14.1
     dev: false
+    patched: true
 
   /tunnel-agent@0.6.0:
     resolution: {integrity: sha512-McnNiV1l8RYeY8tBgEpuodCC1mLUdbSN+CYBL7kJsJNInOP8UjDDEwdk6Mw60vdLLrr5NHKZhMAOSrR2NZuQ+w==}

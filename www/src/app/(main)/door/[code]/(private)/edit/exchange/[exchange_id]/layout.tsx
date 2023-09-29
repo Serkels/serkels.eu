@@ -4,7 +4,7 @@ import { Hydrate, dehydrate } from "@tanstack/react-query";
 import type { PropsWithChildren } from "react";
 import Nest from "react-nest";
 import { tv } from "tailwind-variants";
-import { injector } from "~/core/di";
+import { injector } from "~/core/react";
 import { Get_Category_UseCase } from "~/modules/categories/application/get_categories.use-case";
 
 //

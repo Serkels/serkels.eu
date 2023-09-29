@@ -1,7 +1,7 @@
 //
 
 import Link from "next/link";
-import { injector } from "~/core/di";
+import { injector } from "~/core/react";
 import { Opportunity_Repository } from "~/modules/opportunity/opportunity.repository";
 import { OpportunityCard } from "../../OpportunityCard";
 

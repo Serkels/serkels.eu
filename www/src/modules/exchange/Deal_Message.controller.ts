@@ -1,5 +1,6 @@
 //
 
+import { Lifecycle, inject, scoped } from "@1/core/di";
 import type { Strapi_Query_Params } from "@1/modules/common";
 import type { Message_Schema } from "@1/modules/inbox/infra/strapi";
 import type { Comment_ListSchema } from "@1/strapi-openapi";
@@ -13,7 +14,6 @@ import {
 import debug from "debug";
 import { useSession } from "next-auth/react";
 import { useCallback, useEffect } from "react";
-import { Lifecycle, inject, scoped } from "~/core/di";
 import { getNextPageParam, getPreviousPageParam } from "~/core/use-query";
 import { Deal_Message_Repository } from "./Deal_Message.repository";
 import { Deal_QueryKeys } from "./queryKeys";

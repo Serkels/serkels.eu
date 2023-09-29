@@ -1,8 +1,8 @@
 //
 
+import { Lifecycle, inject, scoped } from "@1/core/di";
 import { useInfiniteQuery, type InfiniteData } from "@tanstack/react-query";
 import debug from "debug";
-import { Lifecycle, inject, scoped } from "~/core/di";
 import { getQueryClient } from "~/core/getQueryClient";
 import { getNextPageParam, getPreviousPageParam } from "~/core/use-query";
 import { Deal_Repository, type Deal_QueryProps } from "../Deal.repository";

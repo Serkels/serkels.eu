@@ -3,8 +3,7 @@
 import dynamic from "next/dynamic";
 import { useCallback, useId } from "react";
 import { match } from "ts-pattern";
-import { useInject } from "~/core/react";
-import { useContainer } from "~/core/react.client";
+import { useContainer, useInject } from "~/core/react.client";
 import { Deal_Message_Controller } from "~/modules/exchange/Deal_Message.controller";
 import { Deal_Message_Repository } from "~/modules/exchange/Deal_Message.repository";
 import { useDeal_Value } from "../Deal.context";

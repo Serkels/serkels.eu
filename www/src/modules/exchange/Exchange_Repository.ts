@@ -1,5 +1,6 @@
 //
 
+import { Lifecycle, inject, scoped, type InjectionToken } from "@1/core/di";
 import { HTTPError, type UID } from "@1/core/domain";
 import type { Strapi_Query_Params } from "@1/modules/common";
 import type { Exchange_CreateProps } from "@1/modules/exchange/domain";
@@ -14,7 +15,6 @@ import type {
 import debug from "debug";
 import { OpenAPI_Repository } from "~/app/api/v1/OpenAPI.repository";
 import type { RepositoryPort } from "~/core";
-import { Lifecycle, inject, scoped, type InjectionToken } from "~/core/di";
 
 //
 
@@ -27,7 +27,9 @@ export type Exchanges_QueryProps = Strapi_Query_Params<
 @scoped(Lifecycle.ContainerScoped)
 export class Exchange_Repository implements RepositoryPort {
   #log = debug(`~:modules:exchange:${Exchange_Repository.name}`);
-  static EXCHANGE_ID_TOKEN = "EXCHANGE_ID_TOKEN" as InjectionToken<number>;
+  static EXCHANGE_ID_TOKEN = Symbol.for(
+    "Exchange_Repository.EXCHANGE_ID_TOKEN",
+  ) as InjectionToken<number>;
 
   constructor(
     @inject(OpenAPI_Repository) private readonly openapi: OpenAPI_Repository,

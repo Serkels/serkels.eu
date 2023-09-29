@@ -1,10 +1,10 @@
 //
 
+import { Lifecycle, inject, scoped } from "@1/core/di";
 import type { Strapi_Query_Params } from "@1/modules/common";
 import type { Message_Schema } from "@1/modules/inbox/infra/strapi";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import debug from "debug";
-import { Lifecycle, inject, scoped } from "~/core/di";
 import { getNextPageParam, getPreviousPageParam } from "~/core/use-query";
 import { Inbox_Repository } from "../inbox.repository";
 import { Inbox_QueryKeys } from "../query_keys";

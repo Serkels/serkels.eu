@@ -6,7 +6,7 @@ import { Formik } from "formik";
 import { match } from "ts-pattern";
 import { ErrorOccur } from "~/components/ErrorOccur";
 import { SelectCategoryField } from "~/components/SelectCategoryField";
-import { useInject } from "~/core/react";
+import { useInject } from "~/core/react.client";
 import { Create_Exchange_UseCase } from "~/modules/exchange/application/create_exchange";
 
 //

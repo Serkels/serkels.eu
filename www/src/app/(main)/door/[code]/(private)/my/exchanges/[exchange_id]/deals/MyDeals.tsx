@@ -13,7 +13,7 @@ import { tv } from "tailwind-variants";
 import { P, match } from "ts-pattern";
 import { useDoor_Value } from "~/app/(main)/door/door.context";
 import { ErrorOccur } from "~/components/ErrorOccur";
-import { useInject } from "~/core/react";
+import { useInject } from "~/core/react.client";
 import {
   Exchange_ValueProvider,
   useExchange_Value,
@@ -24,6 +24,7 @@ import { Get_Exchange_ById_UseCase } from "~/modules/exchange/application/get_ex
 import { Get_Last_Message_ById_UseCase } from "~/modules/exchange/application/get_last_message.use-case";
 import { useMyProfileId } from "~/modules/user/useProfileId";
 import { useExchange_Route_Context } from "../layout.client";
+import { ROUTE_EXCHANGE_ID_TOKEN } from "../register";
 import { Deal_ValueProvider, useDeal_Value } from "./Deal.context";
 
 //
@@ -65,6 +66,12 @@ export function MyDeals() {
 }
 
 export function Echange_Deal({ id }: { id: number }) {
+  const exchange_id = useInject(ROUTE_EXCHANGE_ID_TOKEN);
+
+  console.log(
+    "src/app/(main)/door/[code]/(private)/my/exchanges/[exchange_id]/deals/MyDeals.tsx",
+    { exchange_id },
+  );
   const info = useInject(Get_Deal_ById_UseCase).execute(id);
 
   const [, set_deal] = useDeal_Value();
@@ -199,9 +206,7 @@ function Echange_DealLink() {
     updatedAt: deal.updated_at,
   }).value();
 
-  return match(info)
-    .with(undefined, () => null)
-    .otherwise(() => <>{href}</>);
+  return null;
   // return (
   //   <Thread_Item
   //     href={href}

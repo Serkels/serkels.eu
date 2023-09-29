@@ -1,6 +1,6 @@
 //
 
-import { injector } from "~/core/di";
+import { injector } from "~/core/react";
 import { Opportunity_Repository } from "~/modules/opportunity/opportunity.repository";
 import { OpportunityArticle } from "./OpportunityArticle";
 

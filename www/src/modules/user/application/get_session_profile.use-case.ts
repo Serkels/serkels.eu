@@ -1,10 +1,10 @@
 //
 
+import { Lifecycle, scoped } from "@1/core/di";
 import { Profile_Record } from "@1/modules/profile/infra/strapi";
 import debug from "debug";
 import { useSession } from "next-auth/react";
 import { useMemo } from "react";
-import { Lifecycle, scoped } from "~/core/di";
 
 //
 

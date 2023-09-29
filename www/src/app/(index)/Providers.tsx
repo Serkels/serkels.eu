@@ -1,5 +1,6 @@
 "use client";
 
+import { container } from "@1/core/di";
 import { USER_PROFILE_ID_TOKEN } from "@1/core/domain";
 import { setUser } from "@sentry/nextjs";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -10,7 +11,6 @@ import { event, usePageViews } from "nextjs-google-analytics";
 import { useEffect, useMemo, type PropsWithChildren } from "react";
 import Nest from "react-nest";
 import { P, match } from "ts-pattern";
-import { container } from "~/core/di";
 import { query_client } from "~/core/getQueryClient";
 import { ContainerContext } from "~/core/react.client";
 import { fromClient } from "../api/v1";

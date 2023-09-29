@@ -1,5 +1,6 @@
 //
 
+import { Lifecycle, inject, scoped } from "@1/core/di";
 import { HTTPError } from "@1/core/domain";
 import type { Strapi_Query_Params } from "@1/modules/common";
 import type { Deal_CreateProps } from "@1/modules/deal/domain";
@@ -10,7 +11,6 @@ import type {
 } from "@1/strapi-openapi";
 import debug from "debug";
 import { OpenAPI_Repository } from "~/app/api/v1/OpenAPI.repository";
-import { Lifecycle, inject, registry, scoped } from "~/core/di";
 import { Exchange_Repository } from "./Exchange_Repository";
 
 //
@@ -19,8 +19,15 @@ export type Deal_QueryProps = Strapi_Query_Params<
   Pick<Exchange_Deal_Schema, "updatedAt">
 >;
 
+// @registry([
+//   {
+//     token: Exchange_Repository.EXCHANGE_ID_TOKEN,
+//     useValue: NaN,
+//     // options: { lifecycle: Lifecycle.ContainerScoped },
+//   },
+// ])
+
 @scoped(Lifecycle.ContainerScoped)
-@registry([{ token: Exchange_Repository.EXCHANGE_ID_TOKEN, useValue: NaN }])
 export class Deal_Repository {
   #log = debug(`~:modules:deal:${Deal_Repository.name}`);
   constructor(

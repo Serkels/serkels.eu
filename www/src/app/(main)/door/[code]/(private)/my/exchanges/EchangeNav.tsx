@@ -23,7 +23,7 @@ import { tv } from "tailwind-variants";
 import { P, match } from "ts-pattern";
 import { useDoor_Value } from "~/app/(main)/door/door.context";
 import { Avatar } from "~/components/Avatar";
-import { useInject } from "~/core/react";
+import { useInject } from "~/core/react.client";
 import {
   Exchange_ValueProvider,
   useExchange_Value,

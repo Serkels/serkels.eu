@@ -7,7 +7,7 @@ import {
   FilterRadioList,
 } from "~/components/FilterRadioList";
 import { useSyncSearchQuery } from "~/components/useSyncSearchQuery";
-import { useInject } from "~/core/react";
+import { useInject } from "~/core/react.client";
 import { Get_Category_UseCase } from "~/modules/categories/application/get_categories.use-case";
 import { QACreateForm } from "./QACreateForm";
 import type { QAFilterType } from "./models/QAFilterType";

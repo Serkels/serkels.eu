@@ -1,7 +1,7 @@
 //
 
+import { Lifecycle, inject, scoped, type InjectionToken } from "@1/core/di";
 import debug from "debug";
-import { Lifecycle, inject, scoped, type InjectionToken } from "~/core/di";
 import type { ApiClient } from ".";
 
 //
