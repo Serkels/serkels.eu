@@ -1,27 +1,38 @@
 //
 
-import { DI_Container_Provider } from "@1/core/ui/di.context.client";
+import type React from "react";
 import type { PropsWithChildren } from "react";
 import Nest from "react-nest";
-import { API_TOKEN, JWT_TOKEN } from "~/app/api/v1/OpenAPI.repository";
-import { Exchange_Repository } from "~/modules/exchange/Exchange_Repository";
 import { Foo } from "./layout.client";
 
-//
+// @Reflect.metadata(
+//   "registrations",
+//   async ({ params }: { params: Record<string, string> }) => {
+//     const seesion = await Promise.resolve("doudu");
+//     console.log({ params });
 
-export default async function Layout({
+//     return [
+//       {
+//         token: JWT_TOKEN,
+//         useValue: seesion,
+//       },
+//     ];
+//   },
+// )
+// @context_injection(Root_Module)
+class Layout_Module {
+  static async Layout({ children }: PropsWithChildren) {
+    return <>{children}</>;
+  }
+}
+export default Layout_Module.Layout;
+
+export async function Layout({
   children,
   aside,
 }: PropsWithChildren<{ aside: React.ReactNode }>) {
   return (
     <Nest>
-      <DI_Container_Provider
-        registrations={[
-          { token: Exchange_Repository.EXCHANGE_ID_TOKEN, useValue: 321 },
-          { token: API_TOKEN, useValue: {} as any },
-          { token: JWT_TOKEN, useValue: "JWT TEST FOO" },
-        ]}
-      />
       <Foo />
       <_layout />
     </Nest>
