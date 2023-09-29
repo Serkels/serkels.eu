@@ -11,14 +11,14 @@ import { Exchange_Repository } from "~/modules/exchange/Exchange_Repository";
 function Foo() {
   try {
     const container = useContext(ContainerContext);
-    console.log("Foo container", container._id?.value());
-    console.log("Foo container", container);
+    // console.log("Foo container", container._id?.value());
+    // console.log("Foo container", container);
 
     const id = container.resolve(Exchange_Repository.EXCHANGE_ID_TOKEN);
-    console.log("Foo id", id);
+    // console.log("Foo id", id);
 
     const repository = container.resolve(Deal_Repository);
-    console.log("Foo repository", repository);
+    // console.log("Foo repository", repository);
 
     return <>/test/foo Foo {id}</>;
   } catch (error) {
@@ -32,12 +32,12 @@ function Foo() {
 function Bar() {
   try {
     const container = useContext(ContainerContext);
-    console.log("Bar container", container._id?.value());
+    // console.log("Bar container", container._id?.value());
     const id = container.resolve(JWT_TOKEN);
-    console.log("Bar id", id);
+    // console.log("Bar id", id);
 
     const repository = container.resolve(Deal_Repository);
-    console.log("Bar repository", repository);
+    // console.log("Bar repository", repository);
 
     return <>/test/foo Bar {id}</>;
   } catch (error) {

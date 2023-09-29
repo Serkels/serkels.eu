@@ -1,5 +1,6 @@
 //
 
+import { $1 } from "@1/core/$1";
 import { register, type Registrations } from "@1/core/ui/register";
 import {
   create_async_container_provider,
@@ -11,37 +12,44 @@ import { container, type DependencyContainer } from "tsyringe";
 import { Exchange_Repository } from "~/modules/exchange/Exchange_Repository";
 import { get_api_session } from "../api/auth/[...nextauth]/route";
 import { JWT_TOKEN } from "../api/v1/OpenAPI.repository";
-import { Bar, Register_OpenAPI } from "./layout.client";
+import { Register_OpenAPI } from "./layout.client";
 
 //
 
-// @$1.registrations(async ({ params }: { params: Record<string, string> }) => {
-//   const seesion = await Promise.resolve("doudu");
-//   console.log({ params });
-//   return [
-//     {
-//       token: JWT_TOKEN,
-//       useValue: seesion,
-//     },
-//   ];
-// })
-// @$1.context_injection(class {})
+@$1.registrations(async ({ params }: { params: Record<string, string> }) => {
+  const seesion = await Promise.resolve("doudu");
+  console.log({ params });
+  return [
+    { token: Exchange_Repository.EXCHANGE_ID_TOKEN, useValue: 333 },
+    {
+      token: JWT_TOKEN,
+      useValue: seesion,
+    },
+  ];
+})
+@$1.context_injection(class {})
 class Layout_Module {
   static async Layout({ children }: PropsWithChildren) {
-    return <>{children}</>;
+    return (
+      <Nest>
+        <Register_OpenAPI />
+        {children}
+      </Nest>
+    );
   }
 }
-export default async function Layout({ children }: PropsWithChildren) {
-  return (
-    <Nest>
-      <Register_JWT />
-      <Register_OpenAPI />
-      <Register_EXCHANGE_ID />
-      <Bar />
-      {children}
-    </Nest>
-  );
-}
+export default Layout_Module.Layout;
+// export default async function Layout({ children }: PropsWithChildren) {
+//   return (
+//     <Nest>
+//       <Register_JWT />
+//       <Register_OpenAPI />
+//       <Register_EXCHANGE_ID />
+//       <Bar />
+//       {children}
+//     </Nest>
+//   );
+// }
 
 //
 

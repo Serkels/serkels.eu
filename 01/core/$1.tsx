@@ -1,11 +1,12 @@
 //
 
 import type { PropsWithChildren } from "react";
-import { container as root_container } from "tsyringe";
 import type {
   constructor,
   DependencyContainer,
 } from "tsyringe/dist/typings/types";
+import { container as root_container } from "./di";
+import { DI_Container_Provider } from "./ui/di.context.client";
 import { register, type Registrations } from "./ui/register";
 
 //
@@ -85,7 +86,11 @@ export class $1 {
         const container = register(registrations, parent_container);
         Reflect.defineMetadata($1.CONTAINER, container, target);
 
-        return <LayoutComponent {...props}> {children} </LayoutComponent>;
+        return (
+          <DI_Container_Provider registrations={registrations}>
+            <LayoutComponent {...props}> {children} </LayoutComponent>
+          </DI_Container_Provider>
+        );
       };
     };
   }

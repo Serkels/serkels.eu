@@ -21,7 +21,7 @@ function Foo() {
     // console.log("Foo jwt", jwt);
 
     const repository = container.resolve(Deal_Repository);
-    console.log("Foo repository", repository);
+    // console.log("Foo repository", repository);
 
     return <>{JSON.stringify({ id, jwt }, null, 2)}</>;
   } catch (error) {

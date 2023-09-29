@@ -29,7 +29,7 @@ export function DI_Container_Provider({
 }>) {
   const parent = useContext(ContainerContext);
   const parent_id = parent._id?.value() ?? "root";
-  console.log("DI_Container_Provider", { registrations });
+  // console.log("DI_Container_Provider", { registrations });
   const child_container = useMemo(() => {
     const child = register(registrations, parent) as DependencyContainer & {
       _id?: UID;
