@@ -163,6 +163,9 @@ importers:
       modern-errors-serialize:
         specifier: 5.0.0
         version: 5.0.0(modern-errors@6.0.0)
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
       rich-domain:
         specifier: 1.18.4
         version: 1.18.4

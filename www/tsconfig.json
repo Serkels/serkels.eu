@@ -17,16 +17,7 @@
       }
     ]
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "../01/core/di.ts",
-    "../01/core/ui/register.tsx",
-    "../01/core/ui/registry.tsx",
-    "../01/core/ui/context_injection.tsx"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": [".next", "node_modules"],
   "references": [{ "path": "../01/core" }, { "path": "../01/modules" }]
 }

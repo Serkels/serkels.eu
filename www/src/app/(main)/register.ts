@@ -1,6 +1,6 @@
 //
 
-import type { $1 } from "@1/core/$1";
+import { $1 } from "@1/core/$1";
 import { ID_Schema, USER_PROFILE_ID_TOKEN } from "@1/core/domain";
 import debug from "debug";
 import { z } from "zod";
@@ -13,7 +13,7 @@ import { JWT_TOKEN } from "../api/v1/OpenAPI.repository";
 const log = debug("~:app:(main):register");
 
 /**
- * @deprecated use {@link $1.context_injection}
+ * @deprecated use {@link $1.module}
  */
 export async function register(
   container = root_injector().createChildContainer(),
