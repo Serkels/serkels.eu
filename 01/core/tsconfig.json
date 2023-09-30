@@ -2,8 +2,7 @@
   "extends": ["@1/typescript-config/react.json"],
   "compilerOptions": {
     "composite": true,
-    "lib": ["ESNext"],
-    "types": ["reflect-metadata"]
+    "lib": ["ESNext"]
   },
   "include": ["**/*.ts", "**/*.tsx"],
   "references": []
