@@ -1,25 +1,24 @@
 //
 
 import { z } from "zod";
-import { z_strapi_flatten_page_data } from "../../../common";
-import { Inbox, Inbox_PropsSchema } from "../../domain";
-import { Thread_RecordSchema } from "./Thread_Schema";
+import { StrapiEntity, z_strapi_flatten_page_data } from "../../../common";
+import { Inbox } from "../../domain";
 
 //
 
-export const Inbox_Record = z
-  .object({
-    id: z.number().optional(),
-    thread: Thread_RecordSchema,
-    updatedAt: z.coerce.date(),
-  })
+export const Inbox_Record = StrapiEntity(z.any())
+  .transform(({ data }, ctx) => {
+    if (!data) {
+      return;
+    }
 
-  .transform(Inbox_PropsSchema.parse)
-  .transform(Inbox.create)
-  .transform((result) => {
-    return result.isOk() ? result.value() : Inbox.zero;
+    const entity = Inbox.create({ id: data.id, ...data.attributes });
+    if (entity.isFail()) {
+      entity.error().issues.map(ctx.addIssue);
+    }
+    return entity.value();
   })
-  .describe("Inbox_Schema");
+  .describe("Maybe Inbox Record");
 
 //
 

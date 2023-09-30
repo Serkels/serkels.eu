@@ -39,7 +39,7 @@ export function EchangeNav() {
   });
 
   const [search_value, set_search_value] = useState("");
-  const [filter_name, set_filter_name] = useState("");
+  const [_filter_name, set_filter_name] = useState("");
 
   useDebounce(
     () => {

@@ -157,6 +157,7 @@ function Echange_Deal({ id }: { id: number }) {
   const info = useInject(Get_Deal_ById_UseCase).execute(id);
   return <>{JSON.stringify(info, null, 2)}</>;
 }
+Echange_Deal;
 function Echange_Deal_({ id }: { id: number }) {
   const info = useInject(Get_Deal_ById_UseCase).execute(id);
 
@@ -192,6 +193,7 @@ function Echange_Deal_({ id }: { id: number }) {
     })
     .exhaustive();
 }
+Echange_Deal_;
 
 function Echange_DealLink() {
   const [exchange] = useExchange_Value();
@@ -204,7 +206,7 @@ function Echange_DealLink() {
 
   const [{ door_id }] = useDoor_Value();
 
-  console.log(deal);
+  // console.log(deal);
   const href = `/@${door_id}/my/exchanges/${exchange.id.value()}/deals/${deal.id.value()}`;
 
   const exchange_profile = exchange.profile;
@@ -216,6 +218,7 @@ function Echange_DealLink() {
     profile,
     updatedAt: deal.updated_at,
   }).value();
+  thread;
 
   return match(info)
     .with({ status: "error" }, { status: "loading" }, () => null)

@@ -41,6 +41,14 @@ export class Profile extends Entity<Props> {
 
   //
 
+  get firstname() {
+    return this.props.firstname;
+  }
+
+  get lastname() {
+    return this.props.lastname;
+  }
+
   get university() {
     return this.props.university;
   }

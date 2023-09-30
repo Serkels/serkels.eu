@@ -14,19 +14,6 @@ export const Exchange_Record = StrapiEntity(
     profile: Profile_Record,
   }),
 )
-  // category: StrapiEntity(z.any()),
-  //   z.instanceof(Category).default(Category.unknown),
-  // ).transform(function debug(value) {
-  //   // console.log(
-  //   //   "Exchange_Record.category value=",
-  //   //   value,
-  //   //   value.get("name"),
-  //   // );
-  //   return value;
-  // }),
-  // in_exchange_of: Category_Record,
-  // profile: Profile_RecordSchema,
-
   .transform(({ data }, ctx) => {
     if (!data) {
       return;
@@ -38,9 +25,4 @@ export const Exchange_Record = StrapiEntity(
     }
     return entity.value();
   })
-  // .transform(Exchange.create)
-  // .refine((result) => result.isOk())
-  // .transform((result) => {
-  //   return result.isOk() ? result.value() : z.NEVER;
-  // })
   .describe("Maybe Exchange Record");

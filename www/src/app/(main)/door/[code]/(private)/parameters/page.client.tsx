@@ -44,7 +44,7 @@ export function Avartar_Form() {
   }, [profile.get("image")?.data?.id]);
 
   let [avatar, set_avatar] = useState<string>(
-    `/api/v1/avatars/u/${profile.get("id")}`,
+    `/api/v1/avatars/u/${profile.id.value()}`,
   );
 
   const formRef = useRef<HTMLFormElement>(null);
@@ -86,7 +86,7 @@ export function Avartar_Form() {
 
           form_data.set(
             "files",
-            new File([file], "avatar_" + profile.get("id"), {
+            new File([file], "avatar_" + profile.id.value(), {
               type: file.type,
             }),
           );
@@ -94,7 +94,7 @@ export function Avartar_Form() {
           await upload_info.mutateAsync(form_data);
 
           query_client.invalidateQueries(
-            User_Repository_Legacy.keys.by_id(profile.get("id")),
+            User_Repository_Legacy.keys.by_id(Number(profile.id.value())),
           );
           await update();
         }}
@@ -109,7 +109,7 @@ export function Avartar_Form() {
                 name="ref"
                 value="api::user-profile.user-profile"
               />
-              <Field type="hidden" name="refId" value={profile.get("id")} />
+              <Field type="hidden" name="refId" value={profile.id.value()} />
               <Field type="hidden" name="field" value="image" />
               <DropZone>
                 <FileTrigger

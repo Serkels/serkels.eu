@@ -28,7 +28,7 @@ export function Inbox({ children, id }: PropsWithChildren<{ id: number }>) {
   useEffect(() => {
     set_inbox(inbox);
     set_thread(inbox?.get("thread"));
-  }, [inbox?.get("id")]);
+  }, [inbox?.id.value()]);
   return match(info)
     .with({ status: "error", error: P.select() }, (error) => {
       throw error;
@@ -52,7 +52,7 @@ export function Thread_Conversation() {
 
   const {
     list: { useQuery },
-  } = useInboxMessage_controller(inbox?.get("id"));
+  } = useInboxMessage_controller(Number(inbox?.id.value()));
   const query_info = useQuery({ pagination: { pageSize: 22 } });
 
   //
@@ -64,7 +64,7 @@ export function Thread_Conversation() {
 export function Thread_Conversation_Form() {
   const [inbox] = useInbox_Value();
   const query_client = useQueryClient();
-  const inbox_id = Number(inbox?.get("id"));
+  const inbox_id = Number(inbox?.id.value());
   const {
     create: { useMutation },
   } = useInboxMessage_controller(inbox_id);

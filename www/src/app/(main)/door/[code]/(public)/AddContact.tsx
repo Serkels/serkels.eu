@@ -1,5 +1,6 @@
 //
 
+import { Id } from "@1/core/domain";
 import { Button } from "@1/ui/components/ButtonV";
 import { Spinner } from "@1/ui/components/Spinner";
 import { useQueryClient } from "@tanstack/react-query";
@@ -25,14 +26,14 @@ export function AddContact() {
   const contacts = (
     session_context.data?.user?.profile.attributes?.contacts?.data ?? []
   ).map(({ id }) => ({ id: Number(id) }));
-  const is_a_contact = contacts.some(
-    (contact) => contact.id === profile.get("id"),
+  const is_a_contact = contacts.some((contact) =>
+    profile.id.equal(Id(contact.id)),
   );
 
   const toggle_add_contact = useCallback(async () => {
     const contacts_ids = is_a_contact
-      ? contacts.filter((contact) => contact.id !== profile.get("id"))
-      : contacts.concat([{ id: profile.get("id") }]);
+      ? contacts.filter((contact) => !profile.id.equal(Id(contact.id)))
+      : contacts.concat([{ id: Number(profile.id.value()) }]);
 
     await info.mutateAsync({
       contacts: { set: contacts_ids },
@@ -45,7 +46,7 @@ export function AddContact() {
       await session_context.update();
       info.reset();
     }, 666);
-  }, [profile.get("id"), is_a_contact]);
+  }, [profile.id.value(), is_a_contact]);
 
   //
 

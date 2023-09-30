@@ -6,6 +6,7 @@ import { useInject } from "@1/core/ui/di.context.client";
 import { Message, Thread } from "@1/modules/inbox/domain";
 import { Button } from "@1/ui/components/ButtonV";
 import { Spinner } from "@1/ui/components/Spinner";
+import { Circle } from "@1/ui/icons";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import ContentLoader from "react-content-loader";
@@ -14,6 +15,7 @@ import { tv } from "tailwind-variants";
 import { P, match } from "ts-pattern";
 import { useDoor_Value } from "~/app/(main)/door/door.context";
 import { ErrorOccur } from "~/components/ErrorOccur";
+import { Thread_Item } from "~/components/Thread_Item";
 import {
   Exchange_ValueProvider,
   useExchange_Value,
@@ -181,6 +183,7 @@ const item = tv({
     time: "text-xs font-bold",
   },
 });
+item;
 
 function Echange_DealLink() {
   const [exchange] = useExchange_Value();
@@ -190,6 +193,7 @@ function Echange_DealLink() {
   const info = useInject(Get_Last_Message_ById_UseCase).execute(
     Number(deal?.id.value()),
   );
+  info;
 
   const [{ door_id }] = useDoor_Value();
 
@@ -206,14 +210,14 @@ function Echange_DealLink() {
     updatedAt: deal.updated_at,
   }).value();
 
-  return null;
-  // return (
-  //   <Thread_Item
-  //     href={href}
-  //     thread={thread}
-  //     indicator={<Circle className="h-5 w-5 text-Gamboge" />}
-  //   />
-  // );
+  // return null;
+  return (
+    <Thread_Item
+      href={href}
+      thread={thread}
+      indicator={<Circle className="h-5 w-5 text-Gamboge" />}
+    />
+  );
 }
 
 const empty_list_paragraph = tv({

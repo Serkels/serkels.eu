@@ -71,7 +71,7 @@ export class Inbox_Message_Repository
             pageSize: pagination?.pageSize,
             withCount: true,
           } as any,
-          sort: "createdAt:desc",
+          sort: ["createdAt:desc"],
         },
       },
     });

@@ -2,10 +2,7 @@
 
 import { Lifecycle, inject, scoped } from "@1/core/di";
 import { Exchange } from "@1/modules/exchange/domain";
-import {
-  Exchange_ItemSchemaToDomain,
-  Exchange_Record,
-} from "@1/modules/exchange/infra/strapi";
+import { Exchange_Record } from "@1/modules/exchange/infra/strapi";
 import { useInfiniteQuery, type InfiniteData } from "@tanstack/react-query";
 import debug from "debug";
 import { z } from "zod";
@@ -22,7 +19,6 @@ import { Exchange_QueryKeys } from "../queryKeys";
 @scoped(Lifecycle.ContainerScoped)
 export class Get_Exchanges_UseCase {
   #log = debug(`~:modules:exchange:${Get_Exchanges_UseCase.name}`);
-  #mapper = new Exchange_ItemSchemaToDomain();
 
   constructor(
     @inject(Exchange_Repository)

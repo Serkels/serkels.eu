@@ -1,12 +1,11 @@
 //
 
 import { Lifecycle, inject, scoped } from "@1/core/di";
-import {
-  Inbox_Record,
-  Inbox_Schema_ToDomain,
-} from "@1/modules/inbox/infra/strapi";
+import { Inbox } from "@1/modules/inbox/domain";
+import { Inbox_Record } from "@1/modules/inbox/infra/strapi";
 import { useQuery } from "@tanstack/react-query";
 import debug from "debug";
+import { z } from "zod";
 import { Inbox_Repository } from "../inbox.repository";
 import { Inbox_QueryKeys } from "../query_keys";
 
@@ -18,8 +17,6 @@ export class Get_Inbox_ById_UseCase {
 
   constructor(
     @inject(Inbox_Repository) private readonly repository: Inbox_Repository,
-    @inject(Inbox_Schema_ToDomain)
-    private readonly mapper: Inbox_Schema_ToDomain,
   ) {
     this.#log("new");
   }
@@ -34,8 +31,8 @@ export class Get_Inbox_ById_UseCase {
       },
       queryKey: Inbox_QueryKeys.item(id),
       select: (data) => {
-        return Inbox_Record.parse(data, {
-          path: ["Get_Inbox_ById_UseCase", "data"],
+        return Inbox_Record.pipe(z.instanceof(Inbox)).parse(data, {
+          path: [`<${Get_Inbox_ById_UseCase.name}.execute>`, "data"],
         });
       },
     });
