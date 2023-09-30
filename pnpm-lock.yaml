@@ -628,8 +628,8 @@ importers:
         specifier: 0.2.0
         version: 0.2.0
       openapi-fetch:
-        specifier: 0.7.6
-        version: 0.7.6
+        specifier: 0.7.7
+        version: 0.7.7
       postcss:
         specifier: 8.4.30
         version: 8.4.30
@@ -3719,7 +3719,7 @@ packages:
       graphql: ^14.5.8 || 15.x
     dependencies:
       iterall: 1.3.0
-      tslib: 2.6.1
+      tslib: 2.6.2
     dev: true
 
   /@nicolo-ribaudo/chokidar-2@2.1.8-no-fsevents.3:
@@ -16125,14 +16125,14 @@ packages:
       is-wsl: 2.2.0
     dev: true
 
-  /openapi-fetch@0.7.6:
-    resolution: {integrity: sha512-TmHTmzMqNmVUlRasfaSVsOYnFHHu0L31VGxbk75rk9P7RfOj70kc+Tiuu548koOpB5zs8yiUwW5wsYjeQifHcA==}
+  /openapi-fetch@0.7.7:
+    resolution: {integrity: sha512-AZarznVU9MYVyuHl7tfMwSJbnl98K0emW/A31fKo37tmW6Nj9LG4AwdM7ls7uCK9HuvbU+y+QlpykU6U5t63qQ==}
     dependencies:
-      openapi-typescript-helpers: 0.0.2
+      openapi-typescript-helpers: 0.0.3
     dev: false
 
-  /openapi-typescript-helpers@0.0.2:
-    resolution: {integrity: sha512-r5Z4tlGa2l6jYO1ENT9Giqo/ZWzWPmsYUR41O01kjYr7vg4iBFaMh0W0g8Ef72SpeU2F+TY6CAdKxTv7aq+WXA==}
+  /openapi-typescript-helpers@0.0.3:
+    resolution: {integrity: sha512-lGTzd0j8yx7UX2IPm891SnnUIdFPpIT0Nxea8pic+ff+gK7fBr0VpdG7yzdcBD3afZcKfYTOiwqLBgRK8j1tqw==}
     dev: false
 
   /openapi-typescript@6.6.1:
