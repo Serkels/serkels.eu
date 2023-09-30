@@ -74,8 +74,8 @@ importers:
         specifier: 10.0.0
         version: 10.0.0(eslint@8.49.0)
       eslint-plugin-testing-library:
-        specifier: 6.0.1
-        version: 6.0.1(eslint@8.49.0)(supports-color@8.1.1)(typescript@5.2.2)
+        specifier: 6.0.2
+        version: 6.0.2(eslint@8.49.0)(supports-color@8.1.1)(typescript@5.2.2)
       next:
         specifier: 13.5.3
         version: 13.5.3(react-dom@18.2.0)(react@18.2.0)
@@ -8180,9 +8180,6 @@ packages:
     resolution: {integrity: sha512-aLkWa0C0vO5b4Sr798E26QgOkss68Un0bLjs7u9qxzPT5CG+8DuNTffWES58YzJs3hrVAOs1wonycqEBqNJubA==}
     dev: false
 
-  /@types/json-schema@7.0.12:
-    resolution: {integrity: sha512-Hr5Jfhc9eYOQNPYO5WLDq/n4jqijdHNlDXjuAQkkt+mWdQR+XJToOHrsD4cPaMXpn6KO7y2+wM8AZEs8VpBLVA==}
-
   /@types/json-schema@7.0.13:
     resolution: {integrity: sha512-RbSSoHliUbnXj3ny0CNFOoxrIDV6SUGyStHsvDqosw6CkdPV8TtWGlfecuK4ToyMEAql6pzNxgCFKanovUzlgQ==}
 
@@ -12112,8 +12109,8 @@ packages:
       eslint: 8.49.0(supports-color@8.1.1)
     dev: false
 
-  /eslint-plugin-testing-library@6.0.1(eslint@8.49.0)(supports-color@8.1.1)(typescript@5.2.2):
-    resolution: {integrity: sha512-CEYtjpcF3hAaQtYsTZqciR7s5z+T0LCMTwJeW+pz6kBnGtc866wAKmhaiK2Gsjc2jWNP7Gt6zhNr2DE1ZW4e+g==}
+  /eslint-plugin-testing-library@6.0.2(eslint@8.49.0)(supports-color@8.1.1)(typescript@5.2.2):
+    resolution: {integrity: sha512-3BV6FWtLbpKFb4Y1obSdt8PC9xSqz6T+7EHB/6pSCXqVjKPoS67ck903feKMKQphd5VhrX+N51yHuVaPa7elsw==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0, npm: '>=6'}
     peerDependencies:
       eslint: ^7.5.0 || ^8.0.0
@@ -18318,7 +18315,7 @@ packages:
     resolution: {integrity: sha512-pN/yOAvcC+5rQ5nERGuwrjLlYvLTbCibnZ1I7B1LaiAz9BRBlE9GMgE/eqV30P7aJQUf7Ddimy/RsbYO/GrVGg==}
     engines: {node: '>= 10.13.0'}
     dependencies:
-      '@types/json-schema': 7.0.12
+      '@types/json-schema': 7.0.13
       ajv: 6.12.6
       ajv-keywords: 3.5.2(ajv@6.12.6)
 
@@ -18326,7 +18323,7 @@ packages:
     resolution: {integrity: sha512-L0jRsrPpjdckP3oPug3/VxNKt2trR8TcabrM6FOAAlvC/9Phcmm+cuAgTlxBqdBR1WJx7Naj9WHw+aOmheSVbw==}
     engines: {node: '>= 12.13.0'}
     dependencies:
-      '@types/json-schema': 7.0.12
+      '@types/json-schema': 7.0.13
       ajv: 8.12.0
       ajv-formats: 2.1.1
       ajv-keywords: 5.1.0(ajv@8.12.0)
