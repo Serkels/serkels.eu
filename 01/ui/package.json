@@ -29,7 +29,7 @@
     "@1/strapi-openapi": "workspace:*",
     "@1/tailwindcss-config": "workspace:*",
     "@1/typescript-config": "workspace:*",
-    "@types/react": "18.2.22",
+    "@types/react": "18.2.23",
     "prettier": "3.0.3",
     "prettier-plugin-tailwindcss": "0.5.4",
     "typescript": "5.2.2"
