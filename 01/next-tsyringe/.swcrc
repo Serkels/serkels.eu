@@ -2,14 +2,15 @@
   "$schema": "https://json.schemastore.org/swcrc",
   "jsc": {
     "parser": {
+      "decorators": true,
       "syntax": "typescript",
       "tsx": true
     },
     "target": "esnext",
     "transform": {
-      "react": {
-        "runtime": "automatic"
-      }
+      "decoratorMetadata": true,
+      "legacyDecorator": true,
+      "react": { "runtime": "automatic", "useBuiltins": true }
     }
   },
   "module": {

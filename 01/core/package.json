@@ -8,6 +8,7 @@
     "build": "tsc"
   },
   "dependencies": {
+    "@1/next-tsyringe": "workspace:*",
     "debug": "4.3.4",
     "modern-errors": "6.0.0",
     "modern-errors-serialize": "5.0.0",

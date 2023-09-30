@@ -7,6 +7,7 @@
     { "path": "01/modules", "name": "@1/modules" },
     { "path": "01/core", "name": "@1/core" },
     //
+    { "path": "01/next-tsyringe", "name": "@1/next-tsyringe" },
     { "path": "01/strapi-openapi", "name": "@1/strapi-openapi" },
     { "path": "01/strapi-trpc-router", "name": "@1/strapi-trpc-router" },
     { "path": "01/ui", "name": "@1/ui" },

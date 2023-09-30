@@ -1,7 +1,8 @@
 //
 
+import { NextTsyringe } from "@1/next-tsyringe";
 import Link from "next/link";
-import { injector } from "~/core/react";
+import { Main_Module } from "~/app/(main)/layout";
 import { Opportunity_Repository } from "~/modules/opportunity/opportunity.repository";
 import { OpportunityCard } from "../../OpportunityCard";
 
@@ -9,8 +10,8 @@ import { OpportunityCard } from "../../OpportunityCard";
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const { slug } = params;
-
-  const repository = injector().resolve(Opportunity_Repository);
+  const container = await NextTsyringe.injector(Main_Module);
+  const repository = container.resolve(Opportunity_Repository);
   const opportunity = await repository.find_by_slug(slug);
 
   const category = opportunity.attributes?.category?.data?.attributes?.slug;

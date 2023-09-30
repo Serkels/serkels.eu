@@ -1,18 +1,21 @@
 //
 
 import { Id } from "@1/core/domain";
+import { NextTsyringe } from "@1/next-tsyringe";
 import type { Metadata, ResolvingMetadata } from "next";
 import type { PropsWithChildren } from "react";
 import Nest from "react-nest";
-import { Hydrate_Container_Provider } from "~/core/react.client";
-import { Exchange_Repository } from "~/modules/exchange/Exchange_Repository";
+import type { InjectionToken } from "tsyringe";
+import { Main_Module } from "~/app/(main)/layout";
 import { Get_Deals_UseCase } from "~/modules/exchange/application/get_deals.use-case";
 import { Get_Exchange_ById_UseCase } from "~/modules/exchange/application/get_exchange_byid.use-case";
 import { Exchange_Route_Provider } from "./layout.client";
-import { ROUTE_EXCHANGE_ID_TOKEN, register } from "./register";
 
 //
 
+const ROUTE_EXCHANGE_ID_TOKEN = Symbol.for(
+  "ROUTE_EXCHANGE_ID_TOKEN",
+) as InjectionToken<number>;
 export type Route_Params = { params: { exchange_id: string } };
 
 export async function generateMetadata(
@@ -29,9 +32,8 @@ export async function generateMetadata(
 
 export default async function Layout({
   children,
-  params,
 }: PropsWithChildren<Route_Params>) {
-  const container = await register({ params });
+  const container = await NextTsyringe.injector(Main_Module);
 
   const exchange_id = container.resolve(ROUTE_EXCHANGE_ID_TOKEN);
   await container.resolve(Get_Exchange_ById_UseCase).prefetch(Id(exchange_id));
@@ -48,7 +50,7 @@ export default async function Layout({
 
   return (
     <Nest>
-      <Hydrate_Container_Provider
+      {/* <Hydrate_Container_Provider
         registerAll={[
           {
             registerInstance: [
@@ -60,7 +62,7 @@ export default async function Layout({
             registerInstance: [ROUTE_EXCHANGE_ID_TOKEN, exchange_id],
           },
         ]}
-      />
+      /> */}
 
       <Exchange_Route_Provider initialValue={{ exchange_id }} />
 

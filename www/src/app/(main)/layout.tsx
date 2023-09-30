@@ -1,7 +1,7 @@
 ///
 
-import { $1 } from "@1/core/$1";
 import { ID_Schema, USER_PROFILE_ID_TOKEN } from "@1/core/domain";
+import { NextTsyringe } from "@1/next-tsyringe";
 import { Grid } from "@1/ui/components/Grid";
 import type { PropsWithChildren } from "react";
 import { z } from "zod";
@@ -13,7 +13,7 @@ import { Root_Module } from "../layout";
 
 //
 
-@$1.module({
+@NextTsyringe.module({
   parent: Root_Module,
   async registrationFn() {
     const session = await get_api_session();
@@ -43,20 +43,24 @@ import { Root_Module } from "../layout";
   },
 })
 export class Main_Module {
-  static async Provider({ children }: PropsWithChildren) {
-    return (
-      <div className="grid min-h-screen grid-rows-[max-content_1fr_max-content]">
-        <UserBar />
-        <Grid
-          $padding={false}
-          className="min-h-[calc(100vh_-_theme(spacing.16)-_theme(spacing.8))]"
-        >
-          {children}
-        </Grid>
-        <AppFooter />
-      </div>
-    );
-  }
+  static Provider = MainLayout;
+}
+
+//
+
+function MainLayout({ children }: PropsWithChildren) {
+  return (
+    <div className="grid min-h-screen grid-rows-[max-content_1fr_max-content]">
+      <UserBar />
+      <Grid
+        $padding={false}
+        className="min-h-[calc(100vh_-_theme(spacing.16)-_theme(spacing.8))]"
+      >
+        {children}
+      </Grid>
+      <AppFooter />
+    </div>
+  );
 }
 
 //

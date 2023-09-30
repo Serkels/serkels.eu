@@ -1,12 +1,12 @@
 "use client";
 
 import { Id } from "@1/core/domain";
-import { useInject } from "@1/core/ui/di.context.client";
 import type {
   Exchange,
   Exchange_CreateProps,
   Exchange_PropsSchema,
 } from "@1/modules/exchange/domain";
+import { useInject } from "@1/next-tsyringe";
 import { Spinner } from "@1/ui/components/Spinner";
 import * as UI from "@1/ui/domains/exchange/CreateForm";
 import type { QueryObserverSuccessResult } from "@tanstack/react-query";

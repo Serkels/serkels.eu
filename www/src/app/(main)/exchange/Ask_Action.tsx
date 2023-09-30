@@ -1,7 +1,7 @@
 //
 
 import { UnknownError } from "@1/core/error";
-import { useContainer, useInject } from "@1/core/ui/di.context.client";
+import { useContainer, useInject } from "@1/next-tsyringe";
 import { Button } from "@1/ui/components/ButtonV";
 import { Spinner } from "@1/ui/components/Spinner";
 import * as UI from "@1/ui/domains/exchange/AskModal";

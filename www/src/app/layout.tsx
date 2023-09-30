@@ -1,13 +1,13 @@
 //
 
-import { $1 } from "@1/core/$1";
+import { NextTsyringe, root_container } from "@1/next-tsyringe";
 import { Analytics } from "@vercel/analytics/react";
 import clsx from "clsx";
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import Script from "next/script";
 import NextTopLoader from "nextjs-toploader";
-import type { PropsWithChildren } from "react";
+import { cache, type PropsWithChildren } from "react";
 import Providers from "./(index)/Providers";
 import { fromServer } from "./api/v1";
 import { API_TOKEN } from "./api/v1/OpenAPI.repository";
@@ -25,15 +25,8 @@ export const metadata: Metadata = {
 
 //
 
-// @$1.server_injection([
-//   {
-//     token: API_TOKEN,
-//     useValue: fromServer,
-//   },
-// ])
-// @$1.container(createChildContainer(root_container))
-
-@$1.module({
+@NextTsyringe.module({
+  root_container: cache(() => root_container)(),
   registrationFn: async () => [
     {
       token: API_TOKEN,

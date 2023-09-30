@@ -1,7 +1,7 @@
 "use client";
 
 import { UnknownError } from "@1/core/error";
-import { useInject } from "@1/core/ui/di.context.client";
+import { useInject } from "@1/next-tsyringe";
 import ContentLoader from "react-content-loader";
 import { tv } from "tailwind-variants";
 import { P, match } from "ts-pattern";

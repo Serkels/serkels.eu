@@ -1,6 +1,6 @@
 //
 
-import { useInject } from "@1/core/ui/di.context.client";
+import { useInject } from "@1/next-tsyringe";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { getNextPageParam, getPreviousPageParam } from "~/core/use-query";
 import { Opportunity_Repository } from "~/modules/opportunity/opportunity.repository";

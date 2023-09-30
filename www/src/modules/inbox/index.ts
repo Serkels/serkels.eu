@@ -1,6 +1,6 @@
 //
 
-import { useInject } from "@1/core/ui/di.context.client";
+import { useInject } from "@1/next-tsyringe";
 import { useSession } from "next-auth/react";
 import { useMemo } from "react";
 import { fromClient } from "~/app/api/v1";

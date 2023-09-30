@@ -1,10 +1,11 @@
 //
 
 import { ID_Schema, Id } from "@1/core/domain";
+import { NextTsyringe } from "@1/next-tsyringe";
 import { Hydrate, dehydrate } from "@tanstack/react-query";
 import type { Metadata, ResolvingMetadata } from "next";
+import { Main_Module } from "~/app/(main)/layout";
 import { getQueryClient } from "~/core/getQueryClient";
-import { injector_session } from "~/core/react";
 import { Exchange_Repository } from "~/modules/exchange/Exchange_Repository";
 import { Exchange_QueryKeys } from "~/modules/exchange/queryKeys";
 import { Edit_Exchange } from "./page.client";
@@ -35,7 +36,7 @@ export default async function Page({
 
     //
 
-    const container = await injector_session();
+    const container = await NextTsyringe.injector(Main_Module);
 
     const repository = container.resolve(Exchange_Repository);
 

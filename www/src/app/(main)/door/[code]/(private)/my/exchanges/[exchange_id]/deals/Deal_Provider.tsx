@@ -1,13 +1,14 @@
 "use client";
 
 import { Id } from "@1/core/domain";
-import { useInject } from "@1/core/ui/di.context.client";
+import { useInject } from "@1/next-tsyringe";
 import type { PropsWithChildren } from "react";
 import { P, match } from "ts-pattern";
 import { Exchange_ValueProvider } from "~/modules/exchange/Exchange.context";
 import { Get_Deal_ById_UseCase } from "~/modules/exchange/application/get_deal_byid.use-case";
 import { Get_Exchange_ById_UseCase } from "~/modules/exchange/application/get_exchange_byid.use-case";
-import { ROUTE_EXCHANGE_ID_TOKEN } from "../register";
+
+import type { InjectionToken } from "tsyringe";
 import { Deal_ValueProvider } from "./Deal.context";
 
 //
@@ -16,7 +17,9 @@ export function Deal_Provider({
   children,
   id,
 }: PropsWithChildren<{ id: number }>) {
-  const exchange_id = useInject(ROUTE_EXCHANGE_ID_TOKEN);
+  const exchange_id = useInject(
+    Symbol.for("ROUTE_EXCHANGE_ID_TOKEN") as InjectionToken<number>,
+  );
 
   console.log(
     "src/app/(main)/door/[code]/(private)/my/exchanges/[exchange_id]/deals/Deal_Provider.tsx",

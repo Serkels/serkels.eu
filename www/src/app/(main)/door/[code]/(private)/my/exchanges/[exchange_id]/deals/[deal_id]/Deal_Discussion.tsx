@@ -1,6 +1,6 @@
 "use client";
 
-import { useContainer, useInject } from "@1/core/ui/di.context.client";
+import { useContainer, useInject } from "@1/next-tsyringe";
 import dynamic from "next/dynamic";
 import { useCallback, useId } from "react";
 import { match } from "ts-pattern";

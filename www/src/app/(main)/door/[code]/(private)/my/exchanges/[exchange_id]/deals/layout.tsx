@@ -3,16 +3,17 @@
 import { Id } from "@1/core/domain";
 import { Exchange } from "@1/modules/exchange/domain";
 import { Exchange_Record } from "@1/modules/exchange/infra/strapi";
+import { NextTsyringe } from "@1/next-tsyringe";
 import { notFound } from "next/navigation";
 import type { PropsWithChildren } from "react";
 import Nest from "react-nest";
 import { tv } from "tailwind-variants";
+import type { InjectionToken } from "tsyringe";
 import { z } from "zod";
+import { Main_Module } from "~/app/(main)/layout";
 import { Get_Exchange_ById_UseCase } from "~/modules/exchange/application/get_exchange_byid.use-case";
 import { Exchange_QueryKeys } from "~/modules/exchange/queryKeys";
-import { ROUTE_EXCHANGE_ID_TOKEN } from "../register";
 import { Deal_Route_Provider, Deals_Aside_Nav } from "./layout.client";
-import { register } from "./register";
 
 //
 
@@ -40,13 +41,15 @@ export default function Layout({
   );
 }
 
-async function Aside({ params, nav }: { params: any; nav: React.ReactNode }) {
+async function Aside({ nav }: { params: any; nav: React.ReactNode }) {
   const { diviser, header, title } = aside();
 
   try {
-    const container = await register({ params });
+    const container = await NextTsyringe.injector(Main_Module);
 
-    const id = container.resolve(ROUTE_EXCHANGE_ID_TOKEN);
+    const id = container.resolve(
+      Symbol.for("ROUTE_EXCHANGE_ID_TOKEN") as InjectionToken<number>,
+    );
     const query_client = await container
       .resolve(Get_Exchange_ById_UseCase)
       .prefetch(Id(id));

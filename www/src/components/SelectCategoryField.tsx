@@ -1,7 +1,7 @@
 //
 
-import { useInject } from "@1/core/ui/di.context.client";
 import type { Category_Type } from "@1/modules/category/domain";
+import { useInject } from "@1/next-tsyringe";
 import { Field, type FieldAttributes } from "formik";
 import { Get_Category_UseCase } from "~/modules/categories/application/get_categories.use-case";
 import { Get_Other_Category_UseCase } from "~/modules/categories/application/get_other_categories.use-case";

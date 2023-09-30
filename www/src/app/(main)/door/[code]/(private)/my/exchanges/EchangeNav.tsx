@@ -1,7 +1,7 @@
 "use client";
 
-import { useInject } from "@1/core/ui/di.context.client";
 import type { Exchange } from "@1/modules/exchange/domain";
+import { useInject } from "@1/next-tsyringe";
 import { Button } from "@1/ui/components/ButtonV";
 import { InputSearch } from "@1/ui/components/InputSearch";
 import { Spinner } from "@1/ui/components/Spinner";

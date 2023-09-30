@@ -2,9 +2,9 @@
 
 import { Id } from "@1/core/domain";
 import { UnknownError } from "@1/core/error";
-import { useContainer, useInject } from "@1/core/ui/di.context.client";
 import { Deal } from "@1/modules/deal/domain";
 import { Message, Thread } from "@1/modules/inbox/domain";
+import { useContainer, useInject } from "@1/next-tsyringe";
 import { Button } from "@1/ui/components/ButtonV";
 import { useEffect } from "react";
 import ContentLoader from "react-content-loader";

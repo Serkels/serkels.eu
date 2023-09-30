@@ -1,7 +1,7 @@
 "use client";
 
-import { useInject } from "@1/core/ui/di.context.client";
 import { Category } from "@1/modules/category/domain";
+import { useInject } from "@1/next-tsyringe";
 import { useSession } from "next-auth/react";
 import {
   CategoryFilterRadioList,

@@ -1,14 +1,16 @@
 //
 
-import { injector } from "~/core/react";
+import { NextTsyringe } from "@1/next-tsyringe";
 import { Opportunity_Repository } from "~/modules/opportunity/opportunity.repository";
+import { Main_Module } from "../../layout";
 import { OpportunityArticle } from "./OpportunityArticle";
 
 //
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const { slug } = params;
-  const repository = injector().resolve(Opportunity_Repository);
+  const container = await NextTsyringe.injector(Main_Module);
+  const repository = container.resolve(Opportunity_Repository);
 
   try {
     const data = await repository.find_by_slug(slug);

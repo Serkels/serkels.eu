@@ -1,7 +1,7 @@
 ///
 
-import { $1 } from "@1/core/$1";
 import { AuthError } from "@1/core/error";
+import { NextTsyringe } from "@1/next-tsyringe";
 import { Grid } from "@1/ui/components/Grid";
 import { Hydrate, dehydrate } from "@tanstack/react-query";
 import { type PropsWithChildren } from "react";
@@ -9,12 +9,11 @@ import { JWT_TOKEN } from "~/app/api/v1/OpenAPI.repository";
 import { AsideWithTitle } from "~/components/layouts/holy/aside";
 import { Get_Category_UseCase } from "~/modules/categories/application/get_categories.use-case";
 import { Main_Module } from "../layout";
-import { register } from "../register";
 import { CategoriesList, SearchForm } from "./page.client";
 
 //
 
-@$1.module({
+@NextTsyringe.module({
   parent: Main_Module,
 })
 class Exchange_Module {
@@ -35,14 +34,13 @@ export async function Layout({
   children,
   see_also,
 }: PropsWithChildren<{ see_also: React.ReactNode }>) {
-  const con = $1.use_container(Exchange_Module);
-  console.log("{ con.id.value() }", con.id.value());
+  const container = NextTsyringe.injector(Exchange_Module);
+  console.log("{ con.id.value() }", container.id);
   {
-    const jwt = con.resolve(JWT_TOKEN);
+    const jwt = container.resolve(JWT_TOKEN);
     console.log("{ jwt }", jwt);
   }
 
-  const container = await register();
   const jwt = container.resolve(JWT_TOKEN);
   if (!jwt) {
     console.log({ jwt });

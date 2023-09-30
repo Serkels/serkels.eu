@@ -1,6 +1,6 @@
 "use client";
 
-import { useContainer } from "@1/core/ui/di.context.client";
+import { useContainer } from "@1/next-tsyringe";
 import { Field, Form, Formik, type FieldAttributes } from "formik";
 import tw from "tailwind-styled-components";
 import { Deal_Message_Controller } from "~/modules/exchange/Deal_Message.controller";

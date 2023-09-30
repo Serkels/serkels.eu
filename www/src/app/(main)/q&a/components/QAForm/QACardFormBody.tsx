@@ -1,6 +1,6 @@
 //
 
-import { useInject } from "@1/core/ui/di.context.client";
+import { useInject } from "@1/next-tsyringe";
 import { Button } from "@1/ui/components/Button";
 import { Field, Form, Formik } from "formik";
 import { useSearchParams } from "next/navigation";

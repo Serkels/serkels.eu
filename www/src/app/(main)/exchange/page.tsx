@@ -4,7 +4,9 @@ import { Hydrate, dehydrate } from "@tanstack/react-query";
 import { Suspense } from "react";
 import { getQueryClient } from "~/core/getQueryClient";
 import { Get_Exchanges_UseCase } from "~/modules/exchange/application/get_exchanges.use-case";
-import { register } from "../register";
+
+import { NextTsyringe } from "@1/next-tsyringe";
+import { Main_Module } from "../layout";
 import { Exchange_List } from "./page.client";
 
 //
@@ -24,7 +26,7 @@ export default async function Page({
   const filters = { category, title: search };
   const queryClient = getQueryClient();
 
-  const container = await register();
+  const container = await NextTsyringe.injector(Main_Module);
   await container.resolve(Get_Exchanges_UseCase).prefetch(filters);
 
   const dehydratedState = dehydrate(queryClient);

@@ -1,18 +1,20 @@
 ///
 
+import { NextTsyringe } from "@1/next-tsyringe";
 import { Grid } from "@1/ui/components/Grid";
 import { Hydrate, dehydrate } from "@tanstack/react-query";
 import { type PropsWithChildren } from "react";
 import { AsideWithTitle } from "~/components/layouts/holy/aside";
-import { injector } from "~/core/react";
 import { Get_Category_UseCase } from "~/modules/categories/application/get_categories.use-case";
+import { Main_Module } from "../layout";
 import { CategoriesList, QAFilter } from "./page.client";
 
 export default async function Layout({
   children,
   see_also,
 }: PropsWithChildren<{ see_also: React.ReactNode }>) {
-  const container = await injector();
+  const container = await NextTsyringe.injector(Main_Module);
+
   const queryClient = await container
     .resolve(Get_Category_UseCase)
     .prefetch("question");

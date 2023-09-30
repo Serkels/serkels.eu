@@ -1,7 +1,7 @@
 "use client";
 
-import { useInject } from "@1/core/ui/di.context.client";
 import type { Opportunity } from "@1/modules/opportunity/domain";
+import { useInject } from "@1/next-tsyringe";
 import { Spinner } from "@1/ui/components/Spinner";
 import type { UseInfiniteQueryResult } from "@tanstack/react-query";
 import { P, match } from "ts-pattern";

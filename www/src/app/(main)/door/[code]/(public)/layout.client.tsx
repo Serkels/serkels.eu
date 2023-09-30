@@ -3,7 +3,7 @@
 //
 
 import { NotFoundError } from "@1/core/error";
-import { useInject } from "@1/core/ui/di.context.client";
+import { useInject } from "@1/next-tsyringe";
 import { School } from "@1/ui/icons";
 import { useMemo } from "react";
 import { Avatar } from "~/components/Avatar";

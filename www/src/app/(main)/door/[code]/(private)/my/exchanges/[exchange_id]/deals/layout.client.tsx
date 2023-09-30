@@ -1,14 +1,13 @@
 "use client";
 
-import { useInject } from "@1/core/ui/di.context.client";
+import { useInject } from "@1/next-tsyringe";
 import { usePathname } from "next/navigation";
 import type { PropsWithChildren } from "react";
 import { createStateContext } from "react-use";
 import { tv } from "tailwind-variants";
+import type { InjectionToken } from "tsyringe";
 import { useDoor_Value } from "~/app/(main)/door/door.context";
 import { AsideBar } from "~/components/layouts/holy/aside";
-import { Container_Provider } from "~/core/react";
-import { ROUTE_EXCHANGE_ID_TOKEN } from "../register";
 
 //
 
@@ -18,10 +17,10 @@ const [useDeal_Route_Context, Deal_Route_Provider] = createStateContext({
 
 export { Deal_Route_Provider, useDeal_Route_Context };
 
-export const Route_Container_Provider = Container_Provider;
-
 export function Deals_Aside_Nav({ children }: PropsWithChildren) {
-  const exchange_id = useInject(ROUTE_EXCHANGE_ID_TOKEN);
+  const exchange_id = useInject(
+    Symbol.for("ROUTE_EXCHANGE_ID_TOKEN") as InjectionToken<number>,
+  );
   const pathname = usePathname();
 
   const [{ door_id }] = useDoor_Value();

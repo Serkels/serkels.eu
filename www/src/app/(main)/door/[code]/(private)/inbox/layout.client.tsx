@@ -2,7 +2,7 @@
 
 //
 
-import { useInject } from "@1/core/ui/di.context.client";
+import { useInject } from "@1/next-tsyringe";
 import { Button } from "@1/ui/components/ButtonV";
 import { InputSearch } from "@1/ui/components/InputSearch";
 import { type InfiniteQueryObserverSuccessResult } from "@tanstack/react-query";

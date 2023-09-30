@@ -1,6 +1,6 @@
 "use client";
 
-import { useInject } from "@1/core/ui/di.context.client";
+import { useInject } from "@1/next-tsyringe";
 import { Card } from "@1/ui/components/Card";
 import { Spinner } from "@1/ui/components/Spinner";
 import { Suspense, useState } from "react";

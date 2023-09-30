@@ -2,8 +2,8 @@
 
 import { Id } from "@1/core/domain";
 import { UnknownError } from "@1/core/error";
-import { useInject } from "@1/core/ui/di.context.client";
 import { Message, Thread } from "@1/modules/inbox/domain";
+import { useInject } from "@1/next-tsyringe";
 import { Button } from "@1/ui/components/ButtonV";
 import { Spinner } from "@1/ui/components/Spinner";
 import { Circle } from "@1/ui/icons";
@@ -13,6 +13,7 @@ import ContentLoader from "react-content-loader";
 import tw from "tailwind-styled-components";
 import { tv } from "tailwind-variants";
 import { P, match } from "ts-pattern";
+import type { InjectionToken } from "tsyringe";
 import { useDoor_Value } from "~/app/(main)/door/door.context";
 import { ErrorOccur } from "~/components/ErrorOccur";
 import { Thread_Item } from "~/components/Thread_Item";
@@ -26,7 +27,6 @@ import { Get_Exchange_ById_UseCase } from "~/modules/exchange/application/get_ex
 import { Get_Last_Message_ById_UseCase } from "~/modules/exchange/application/get_last_message.use-case";
 import { useMyProfileId } from "~/modules/user/useProfileId";
 import { useExchange_Route_Context } from "../layout.client";
-import { ROUTE_EXCHANGE_ID_TOKEN } from "../register";
 import { Deal_ValueProvider, useDeal_Value } from "./Deal.context";
 
 //
@@ -68,7 +68,9 @@ export function MyDeals() {
 }
 
 export function Echange_Deal({ id }: { id: number }) {
-  const exchange_id = useInject(ROUTE_EXCHANGE_ID_TOKEN);
+  const exchange_id = useInject(
+    Symbol.for("ROUTE_EXCHANGE_ID_TOKEN") as InjectionToken<number>,
+  );
 
   console.log(
     "src/app/(main)/door/[code]/(private)/my/exchanges/[exchange_id]/deals/MyDeals.tsx",

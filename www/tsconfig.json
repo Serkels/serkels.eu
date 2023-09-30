@@ -2,6 +2,7 @@
   "extends": "@1/typescript-config/next.json",
   "compilerOptions": {
     "rootDir": ".",
+    "moduleResolution": "bundler",
     "baseUrl": "src",
     "declaration": false,
     "declarationMap": false,

@@ -1,6 +1,6 @@
 "use client";
 
-import { useInject } from "@1/core/ui/di.context.client";
+import { useInject } from "@1/next-tsyringe";
 import { Get_Exchange_Bookmarks_UseCase } from "~/modules/bookmarks/application/get_exchange_bookmarks.use-case";
 import { Exchange_InfiniteList } from "~/modules/exchange/Exchange_InfiniteList";
 

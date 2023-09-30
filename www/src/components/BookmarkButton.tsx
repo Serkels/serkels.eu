@@ -1,7 +1,7 @@
 "use client";
 
-import { useInject } from "@1/core/ui/di.context.client";
 import type { Bookmark_Category } from "@1/modules/bookmark/domain";
+import { useInject } from "@1/next-tsyringe";
 import { Spinner } from "@1/ui/components/Spinner";
 import { Bookmark } from "@1/ui/icons";
 import { useMutation, useQueryClient } from "@tanstack/react-query";

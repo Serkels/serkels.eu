@@ -1,6 +1,6 @@
 "use client";
 
-import { useContainer, useInject } from "@1/core/ui/di.context.client";
+import { useContainer, useInject } from "@1/next-tsyringe";
 import { Button } from "@1/ui/components/ButtonV";
 import { useCallback } from "react";
 import tw from "tailwind-styled-components";

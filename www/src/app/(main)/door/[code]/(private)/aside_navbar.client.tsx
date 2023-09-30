@@ -1,6 +1,6 @@
 "use client";
 
-import { useInject } from "@1/core/ui/di.context.client";
+import { useInject } from "@1/next-tsyringe";
 import { School } from "@1/ui/icons";
 import clsx from "clsx";
 import Link from "next/link";

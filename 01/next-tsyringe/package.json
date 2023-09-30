@@ -9,6 +9,7 @@
     }
   },
   "main": "dist/index.js",
+  "types": "./src/index.ts",
   "scripts": {
     "build": "swc src -d dist",
     "dev": "pnpm run build --watch"
@@ -20,7 +21,9 @@
     "debug": "4.3.4",
     "react": "18.2.0",
     "reflect-metadata": "0.1.13",
-    "tsyringe": "4.8.0"
+    "tsyringe": "4.8.0",
+    "uuid": "9.0.1",
+    "zod": "3.22.2"
   },
   "devDependencies": {
     "@1/typescript-config": "workspace:*",

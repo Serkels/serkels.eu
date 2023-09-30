@@ -1,7 +1,7 @@
 //
 
 import { ID, USER_PROFILE_ID_TOKEN, type UID } from "@1/core/domain";
-import { useInject } from "@1/core/ui/di.context.client";
+import { useInject } from "@1/next-tsyringe";
 import { Button } from "@1/ui/components/ButtonV";
 import * as UI from "@1/ui/domains/exchange/Card";
 import { OnlineOrLocation } from "@1/ui/domains/exchange/OnlineOrLocation";
