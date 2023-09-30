@@ -25,7 +25,7 @@
     "@strapi/provider-upload-aws-s3": "4.13.7",
     "@strapi/strapi": "4.13.7",
     "@strapi/utils": "4.13.7",
-    "@trpc/server": "10.38.3",
+    "@trpc/server": "10.38.5",
     "@types/koa": "2.13.9",
     "codemirror": "6.0.1",
     "date-fns": "2.30.0",
