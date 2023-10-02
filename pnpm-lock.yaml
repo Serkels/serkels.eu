@@ -249,9 +249,9 @@ importers:
 
   01/modules:
     dependencies:
-      '@1/core_':
+      '@1/core':
         specifier: workspace:*
-        version: link:../core_
+        version: link:../core
       '@1/strapi-openapi':
         specifier: workspace:*
         version: link:../strapi-openapi

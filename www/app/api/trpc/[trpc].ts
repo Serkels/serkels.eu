@@ -1,7 +1,7 @@
 //
 
 import { passwordlessRouter } from "@1.modules/auth.infra.strapi";
-import { OpenAPI_Repository } from "@1/core";
+import { OpenAPI_Repository } from "@1/core_";
 import { initTRPC, type inferAsyncReturnType } from "@trpc/server";
 import type { CreateNextContextOptions } from "@trpc/server/adapters/next";
 import * as trpcNext from "@trpc/server/adapters/next";
@@ -9,6 +9,7 @@ import { getSession } from "next-auth/react";
 import SuperJSON from "superjson";
 import { ZodError } from "zod";
 import { fromServer } from "../v1";
+import type { TRPCContext } from "@1/core_";
 
 //
 
@@ -20,7 +21,6 @@ export const createContext = async (opts: CreateNextContextOptions) => {
     session,
   };
 };
-export type TRPCContext = inferAsyncReturnType<typeof createContext>;
 
 //
 

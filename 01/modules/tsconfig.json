@@ -9,5 +9,5 @@
   },
   "include": ["**/*.ts", "*/**/*.json"],
   "exclude": ["**/*.test.ts"],
-  "references": []
+  "references": [{ "path": "../core" }]
 }
