@@ -1,11 +1,9 @@
 //
 
-import type { OpenAPI_Repository } from "@1/core_";
+import type { OpenapiTrpc } from "@1/core_";
 import type { ApiClient } from "@1/strapi-openapi";
-import { initTRPC } from "@trpc/server";
 import debug from "debug";
 import { Lifecycle, injectable, scoped } from "tsyringe";
-import { z } from "zod";
 
 //
 
@@ -13,10 +11,31 @@ import { z } from "zod";
 @injectable()
 export class Passwordless_Router {
   #log = debug(`~:modules:partner:Partner_Repository`);
-  constructor(private readonly trpc: TrpcContext<ApiClient>) {
+  constructor(private readonly trpc: OpenapiTrpc<ApiClient>) {
     this.#log("new");
   }
+
+  // router = this.t
+  // router = this.trpc.router({
+  //   send_magic_link: this.
+  //     .input(
+  //       z.object({
+  //         email: z.string().email(),
+  //       }),
+  //     )
+  //     .query(async (opts) => {
+  //       console.log({ opts });
+  //       const { openapi } = opts.ctx;
+  //       const { response } = await openapi.client.POST(
+  //         "/passwordless/send-link",
+  //         {
+  //           body: { email: opts.input.email },
+  //         },
+  //       );
+  //       return response;
+  //     }),
 }
+/*
 const t = initTRPC
   .context<{ openapi: OpenAPI_Repository<ApiClient> }>()
   .create();
@@ -43,3 +62,4 @@ export const passwordlessRouter = router({
 });
 
 export type PasswordlessRouter = typeof passwordlessRouter;
+*/

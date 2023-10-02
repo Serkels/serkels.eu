@@ -1,8 +1,16 @@
 //
 
+import { initTRPC } from "@trpc/server";
 import type { OpenAPI_Repository } from "./openapi.repository";
 
 //
+
+export class OpenapiTrpc<Client> {
+  t = initTRPC.context<{ openapi: OpenAPI_Repository<Client> }>().create();
+  router = this.t.router;
+  procedure = this.t.procedure;
+}
+
 // export const createContext = async (opts: CreateNextContextOptions) => {
 //   const session = await getSession({ req: opts.req });
 
@@ -11,12 +19,12 @@ import type { OpenAPI_Repository } from "./openapi.repository";
 //     session,
 //   };
 // };
-export type TRPCContext<Client> = {
-  openapi: OpenAPI_Repository<Client>;
-  session: {} | null;
-};
+// export type TRPCContext<Client> = {
+//   openapi: OpenAPI_Repository<Client>;
+//   session: {} | null;
+// };
 
-// export const TrpcContext = () => initTRPC
+// export const TrpcContext = initTRPC.context<TRPCContext<Client>>()
 // .context<TRPCContext>()
 // .create({
 //   transformer: SuperJSON,
