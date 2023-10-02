@@ -67,7 +67,7 @@
     "@trpc/server": "10.38.5",
     "@types/debug": "4.1.9",
     "@types/gtag.js": "0.0.14",
-    "@types/node": "20.6.3",
+    "@types/node": "20.8.0",
     "@types/nprogress": "0.2.1",
     "@types/qs": "6.9.8",
     "@types/react": "18.2.24",
