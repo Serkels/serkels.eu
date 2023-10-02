@@ -521,8 +521,8 @@ importers:
         specifier: npm:ws@8.14.2
         version: /ws@8.14.2
       xstate:
-        specifier: 4.37.2
-        version: 4.37.2
+        specifier: 4.38.2
+        version: 4.38.2
       yaml:
         specifier: 2.3.2
         version: 2.3.2
@@ -21124,8 +21124,8 @@ packages:
       commander: 2.20.3
       cssfilter: 0.0.10
 
-  /xstate@4.37.2:
-    resolution: {integrity: sha512-Qm337O49CRTZ3PRyRuK6b+kvI+D3JGxXIZCTul+xEsyFCVkTFDt5jixaL1nBWcUBcaTQ9um/5CRGVItPi7fveg==}
+  /xstate@4.38.2:
+    resolution: {integrity: sha512-Fba/DwEPDLneHT3tbJ9F3zafbQXszOlyCJyQqqdzmtlY/cwE2th462KK48yaANf98jHlP6lJvxfNtN0LFKXPQg==}
     dev: false
 
   /xtend@4.0.2:
