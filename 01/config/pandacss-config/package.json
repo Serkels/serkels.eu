@@ -6,7 +6,7 @@
     "@1/typescript-config": "workspace:*",
     "@pandacss/dev": "0.15.4",
     "autoprefixer": "10.4.16",
-    "postcss": "8.4.30",
+    "postcss": "8.4.31",
     "prettier": "3.0.3",
     "typescript": "5.2.2"
   }
