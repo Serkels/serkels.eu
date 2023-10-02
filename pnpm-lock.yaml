@@ -179,8 +179,8 @@ importers:
         specifier: 1.18.4
         version: 1.18.4
       superjson:
-        specifier: 1.13.1
-        version: 1.13.1
+        specifier: 1.13.3
+        version: 1.13.3
       tsyringe:
         specifier: 4.8.0
         version: 4.8.0(patch_hash=36fswrcuesupx6h7mwzgbhzlue)
@@ -219,8 +219,8 @@ importers:
         specifier: 18.2.0
         version: 18.2.0
       superjson:
-        specifier: 1.13.1
-        version: 1.13.1
+        specifier: 1.13.3
+        version: 1.13.3
       tsyringe:
         specifier: 4.8.0
         version: 4.8.0(patch_hash=36fswrcuesupx6h7mwzgbhzlue)
@@ -318,8 +318,8 @@ importers:
         specifier: 10.38.5
         version: 10.38.5
       superjson:
-        specifier: 1.13.1
-        version: 1.13.1
+        specifier: 1.13.3
+        version: 1.13.3
       ws:
         specifier: 8.14.2
         version: 8.14.2
@@ -506,8 +506,8 @@ importers:
         specifier: 4.0.13
         version: 4.0.13(@strapi/strapi@4.13.7)
       superjson:
-        specifier: 1.13.1
-        version: 1.13.1
+        specifier: 1.13.3
+        version: 1.13.3
       tsconfig-paths:
         specifier: 4.2.0
         version: 4.2.0
@@ -713,8 +713,8 @@ importers:
         specifier: 7.8.1
         version: 7.8.1
       superjson:
-        specifier: 1.13.1
-        version: 1.13.1
+        specifier: 1.13.3
+        version: 1.13.3
       tailwind-styled-components:
         specifier: 2.2.0
         version: 2.2.0(react-dom@18.2.0)(react@18.2.0)
@@ -8103,7 +8103,7 @@ packages:
       '@tanstack/react-query': 4.35.3(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      superjson: 1.13.1
+      superjson: 1.13.3
       use-sync-external-store: 1.2.0(react@18.2.0)
     dev: true
 
@@ -19622,8 +19622,8 @@ packages:
       - supports-color
     dev: true
 
-  /superjson@1.13.1:
-    resolution: {integrity: sha512-AVH2eknm9DEd3qvxM4Sq+LTCkSXE2ssfh1t11MHMXyYXFQyQ1HLgVvV+guLTsaQnJU3gnaVo34TohHPulY/wLg==}
+  /superjson@1.13.3:
+    resolution: {integrity: sha512-mJiVjfd2vokfDxsQPOwJ/PtanO87LhpYY88ubI5dUB1Ab58Txbyje3+jpm+/83R/fevaq/107NNhtYBLuoTrFg==}
     engines: {node: '>=10'}
     dependencies:
       copy-anything: 3.0.5
