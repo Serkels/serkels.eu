@@ -674,8 +674,8 @@ importers:
         specifier: 0.2.0
         version: 0.2.0
       openapi-fetch:
-        specifier: 0.7.7
-        version: 0.7.7
+        specifier: 0.7.8
+        version: 0.7.8
       postcss:
         specifier: 8.4.30
         version: 8.4.30
@@ -3344,7 +3344,7 @@ packages:
   /@formatjs/fast-memoize@2.2.0:
     resolution: {integrity: sha512-hnk/nY8FyrL5YxwP9e4r9dqeM6cAbo8PeU9UjyXojZMNvVad2Z06FAVHyR3Ecw6fza+0GH7vdJgiKIVXTMbSBA==}
     dependencies:
-      tslib: 2.6.1
+      tslib: 2.6.2
 
   /@formatjs/icu-messageformat-parser@2.3.1:
     resolution: {integrity: sha512-knF2AkAKN4Upv4oIiKY4Wd/dLH68TNMPgV/tJMu/T6FP9aQwbv8fpj7U3lkyniPaNVxvia56Gxax8MKOjtxLSQ==}
@@ -3408,7 +3408,7 @@ packages:
   /@formatjs/intl-localematcher@0.4.2:
     resolution: {integrity: sha512-BGdtJFmaNJy5An/Zan4OId/yR9Ih1OojFjcduX/xOvq798OgWSyDtd6Qd5jqJXwJs1ipe4Fxu9+cshic5Ox2tA==}
     dependencies:
-      tslib: 2.6.1
+      tslib: 2.6.2
 
   /@formatjs/intl@2.7.1(typescript@5.2.2):
     resolution: {integrity: sha512-se6vxidsN3PCmzqTsDd3YDT4IX9ZySPy39LYhF7x2ssNvlGMOuW3umkrIhKkXB7ZskqsJGY53LVCdiHsSwhGng==}
@@ -16464,8 +16464,8 @@ packages:
       is-wsl: 2.2.0
     dev: true
 
-  /openapi-fetch@0.7.7:
-    resolution: {integrity: sha512-AZarznVU9MYVyuHl7tfMwSJbnl98K0emW/A31fKo37tmW6Nj9LG4AwdM7ls7uCK9HuvbU+y+QlpykU6U5t63qQ==}
+  /openapi-fetch@0.7.8:
+    resolution: {integrity: sha512-3kSaR+GQFwvPude2+hqxy6FTx6np6lcyn9pHUwhTyf11wW1uqHD5dLQACcWM1psw5KZN9Hp8qkPeOAuxU8eDbw==}
     dependencies:
       openapi-typescript-helpers: 0.0.3
     dev: false
