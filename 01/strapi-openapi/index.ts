@@ -1,7 +1,20 @@
 //
 
-import type { components } from "./v1";
+import createOpenapiClient, { type QuerySerializer } from "openapi-fetch";
+import { stringify } from "qs";
+import type { components, paths } from "./v1";
 
+//
+
+export const createClient: typeof createOpenapiClient<paths> =
+  createOpenapiClient<paths>;
+export type ApiClient = ReturnType<typeof createOpenapiClient<paths>>;
+
+export const querySerializer: QuerySerializer<unknown> = (q) =>
+  stringify(q, { encodeValuesOnly: true });
+
+//
+//
 //
 
 type Schemas = components["schemas"];

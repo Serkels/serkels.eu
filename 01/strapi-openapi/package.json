@@ -9,11 +9,13 @@
     "dev": "chokidar \"*.json\" -c \"pnpm run clean && pnpm run build\" --initial --follow-symlinks"
   },
   "dependencies": {
-    "@1/core": "workspace:*"
+    "@1/core": "workspace:*",
+    "qs": "6.11.2"
   },
   "devDependencies": {
     "@1/typescript-config": "workspace:*",
     "chokidar-cli": "3.0.0",
+    "openapi-fetch": "0.7.7",
     "openapi-typescript": "6.6.1",
     "prettier": "3.0.3",
     "typescript": "5.2.2"

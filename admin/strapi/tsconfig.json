@@ -23,5 +23,5 @@
     "**/*.test.*",
     "src/plugins/**"
   ],
-  "references": [{ "path": "../../01/modules" }, { "path": "../../01/core" }]
+  "references": []
 }

@@ -68,7 +68,7 @@ module.exports = withBundleAnalyzer(module.exports);
 
 const { withSentryConfig } = require("@sentry/nextjs");
 
-module.exports = withSentryConfig(
+withSentryConfig(
   module.exports,
   {
     // For all available options, see:

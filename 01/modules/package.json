@@ -8,7 +8,7 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@1/core": "workspace:*",
+    "@1/core_": "workspace:*",
     "@1/strapi-openapi": "workspace:*",
     "@tanstack/react-query": "4.35.3",
     "date-fns": "2.30.0",

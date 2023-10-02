@@ -1,0 +1,22 @@
+{
+  "extends": ["@1/typescript-config/base.json"],
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "baseUrl": ".",
+    "declaration": false,
+    "declarationMap": false,
+    "emitDecoratorMetadata": true,
+    "exactOptionalPropertyTypes": false,
+    "experimentalDecorators": true,
+    "lib": ["ESNext", "DOM"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "noEmit": true,
+    "outDir": "./dist",
+    "paths": {},
+    "rootDir": "."
+  },
+  "files": ["src/index.ts"],
+  "include": ["src"],
+  "references": []
+}

@@ -3,14 +3,15 @@
   "compilerOptions": {
     "rootDir": ".",
     "moduleResolution": "bundler",
-    "baseUrl": "src",
+    "baseUrl": ".",
     "declaration": false,
     "declarationMap": false,
     "emitDecoratorMetadata": true,
     "exactOptionalPropertyTypes": false,
     "experimentalDecorators": true,
     "paths": {
-      "~/*": ["./*"]
+      ":api/*": ["./app/api/*"],
+      ":components/*": ["./components/*"]
     },
     "plugins": [
       {
@@ -22,11 +23,6 @@
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   // "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": [
-    ".next",
-    "node_modules",
-    "../node_modules/bun-types/types.d.ts",
-    "**/*.test.ts"
-  ],
-  "references": [{ "path": "../01/core" }, { "path": "../01/modules" }]
+  "exclude": ["_", ".next", "node_modules", "**/*.test.ts"],
+  "references": []
 }
