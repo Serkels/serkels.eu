@@ -24,6 +24,7 @@
   // "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": [
     ".next",
+    "_",
     "node_modules",
     "../node_modules/bun-types/types.d.ts",
     "**/*.test.ts"
