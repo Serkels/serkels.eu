@@ -27,16 +27,18 @@ export const metadata: Metadata = {
 
 @NextTsyringe.module({
   root_container: cache(() => root_container)(),
-  registrationFn: async () => [
-    {
-      token: API_TOKEN,
-      useValue: fromServer,
-    },
-  ],
   scope: "server-only",
 })
 export class Root_Module {
   static Provider = RootLayout;
+  static async register() {
+    return [
+      {
+        token: API_TOKEN,
+        useValue: fromServer,
+      },
+    ];
+  }
 }
 
 export default Root_Module.Provider;

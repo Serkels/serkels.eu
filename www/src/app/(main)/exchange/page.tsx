@@ -6,7 +6,7 @@ import { getQueryClient } from "~/core/getQueryClient";
 import { Get_Exchanges_UseCase } from "~/modules/exchange/application/get_exchanges.use-case";
 
 import { NextTsyringe } from "@1/next-tsyringe";
-import { Main_Module } from "../layout";
+import { Exchange_Module } from "./layout";
 import { Exchange_List } from "./page.client";
 
 //
@@ -15,7 +15,19 @@ export const dynamic = "force-dynamic";
 
 //
 
-export default async function Page({
+@NextTsyringe.module({
+  parent: Exchange_Module,
+})
+export class Exchange_PageModule {
+  static Provider = Exchange_Page;
+}
+export default Exchange_PageModule.Provider;
+
+//
+//
+//
+
+export async function Exchange_Page({
   searchParams,
 }: {
   searchParams: { [key: string]: string | undefined };
@@ -26,7 +38,7 @@ export default async function Page({
   const filters = { category, title: search };
   const queryClient = getQueryClient();
 
-  const container = await NextTsyringe.injector(Main_Module);
+  const container = NextTsyringe.injector(Exchange_Module);
   await container.resolve(Get_Exchanges_UseCase).prefetch(filters);
 
   const dehydratedState = dehydrate(queryClient);

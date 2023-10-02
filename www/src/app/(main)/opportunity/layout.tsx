@@ -11,8 +11,22 @@ import { OpportunityFilterContextProvider } from "./OpportunityFilter.context";
 import { SearchForm } from "./SearchForm";
 import { CategoriesList } from "./page.client";
 
-export default async function Layout({ children }: PropsWithChildren) {
-  const container = await NextTsyringe.injector(Main_Module);
+//
+
+@NextTsyringe.module({
+  parent: Main_Module,
+})
+export class Opoortunity_Module {
+  static Provider = Opoortunities_Layout;
+}
+export default Opoortunity_Module.Provider;
+
+//
+//
+//
+
+export async function Opoortunities_Layout({ children }: PropsWithChildren) {
+  const container = await NextTsyringe.injector(Opoortunity_Module);
   const queryClient = await container
     .resolve(Get_Category_UseCase)
     .prefetch("opportunity");

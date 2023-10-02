@@ -15,7 +15,10 @@ import { Root_Module } from "../layout";
 
 @NextTsyringe.module({
   parent: Root_Module,
-  async registrationFn() {
+})
+export class Main_Module {
+  static Provider = MainLayout;
+  static async register() {
     const session = await get_api_session();
 
     const profile_id =
@@ -40,10 +43,7 @@ import { Root_Module } from "../layout";
         useValue: profile_id,
       },
     ];
-  },
-})
-export class Main_Module {
-  static Provider = MainLayout;
+  }
 }
 
 //

@@ -7,7 +7,23 @@ import { OpportunityArticle } from "./OpportunityArticle";
 
 //
 
-export default async function Page({ params }: { params: { slug: string } }) {
+@NextTsyringe.module({
+  parent: Main_Module,
+})
+export class Opoortunity_Module {
+  static Provider = Opoortunity_Page;
+}
+export default Opoortunity_Module.Provider;
+
+//
+//
+//
+
+export async function Opoortunity_Page({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const { slug } = params;
   const container = await NextTsyringe.injector(Main_Module);
   const repository = container.resolve(Opportunity_Repository);

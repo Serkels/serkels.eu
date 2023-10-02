@@ -1,9 +1,23 @@
 ///
 
+import { NextTsyringe } from "@1/next-tsyringe";
 import { Grid } from "@1/ui/components/Grid";
 import { type PropsWithChildren } from "react";
+import { Main_Module } from "../../layout";
 
-export default async function Layout({
+@NextTsyringe.module({
+  parent: Main_Module,
+})
+export class Opoortunity_Module {
+  static Provider = Opoortunity_Layout;
+}
+export default Opoortunity_Module.Provider;
+
+//
+//
+//
+
+export async function Opoortunity_Layout({
   children,
   see_also,
 }: PropsWithChildren<{ see_also: React.ReactNode }>) {

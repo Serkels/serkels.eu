@@ -16,8 +16,8 @@ import { CategoriesList, SearchForm } from "./page.client";
 @NextTsyringe.module({
   parent: Main_Module,
 })
-class Exchange_Module {
-  static Provider = Layout;
+export class Exchange_Module {
+  static Provider = Exchange_Layout;
 }
 export default Exchange_Module.Provider;
 
@@ -30,16 +30,12 @@ export default Exchange_Module.Provider;
 //
 //
 //
-export async function Layout({
+
+async function Exchange_Layout({
   children,
   see_also,
 }: PropsWithChildren<{ see_also: React.ReactNode }>) {
   const container = NextTsyringe.injector(Exchange_Module);
-  console.log("{ con.id.value() }", container.id);
-  {
-    const jwt = container.resolve(JWT_TOKEN);
-    console.log("{ jwt }", jwt);
-  }
 
   const jwt = container.resolve(JWT_TOKEN);
   if (!jwt) {

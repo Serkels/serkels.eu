@@ -9,7 +9,19 @@ import { Get_Category_UseCase } from "~/modules/categories/application/get_categ
 import { Main_Module } from "../layout";
 import { CategoriesList, QAFilter } from "./page.client";
 
-export default async function Layout({
+@NextTsyringe.module({
+  parent: Main_Module,
+})
+export class QA_Module {
+  static Provider = QA_Layout;
+}
+export default QA_Module.Provider;
+
+//
+//
+//
+
+export async function QA_Layout({
   children,
   see_also,
 }: PropsWithChildren<{ see_also: React.ReactNode }>) {
