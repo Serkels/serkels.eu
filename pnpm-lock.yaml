@@ -297,8 +297,8 @@ importers:
         specifier: 3.0.0
         version: 3.0.0
       openapi-typescript:
-        specifier: 6.6.1
-        version: 6.6.1
+        specifier: 6.7.0
+        version: 6.7.0
       prettier:
         specifier: 3.0.3
         version: 3.0.3
@@ -16475,8 +16475,8 @@ packages:
     resolution: {integrity: sha512-lGTzd0j8yx7UX2IPm891SnnUIdFPpIT0Nxea8pic+ff+gK7fBr0VpdG7yzdcBD3afZcKfYTOiwqLBgRK8j1tqw==}
     dev: false
 
-  /openapi-typescript@6.6.1:
-    resolution: {integrity: sha512-jx7bzR6FfkG21icjikrF0k6K8moNg93PuZlfc+zo4Enxwmyw6vAUh4Rl064JN35um/RV8ZX7ANnMrQW8gRsGsQ==}
+  /openapi-typescript@6.7.0:
+    resolution: {integrity: sha512-eoUfJwhnMEug7euZ1dATG7iRiDVsEROwdPkhLUDiaFjcClV4lzft9F0Ii0fYjULCPNIiWiFi0BqMpSxipuvAgQ==}
     hasBin: true
     dependencies:
       ansi-colors: 4.1.3
