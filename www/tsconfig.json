@@ -11,7 +11,8 @@
     "experimentalDecorators": true,
     "paths": {
       ":api/*": ["./app/api/*"],
-      ":components/*": ["./components/*"]
+      ":components/*": ["./components/*"],
+      ":trpc/*": ["./trpc/*"]
     },
     "plugins": [
       {

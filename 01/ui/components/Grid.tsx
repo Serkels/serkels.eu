@@ -1,26 +1,30 @@
 //
 
-import {
-  forwardRef,
-  type ComponentPropsWithoutRef,
-  type ElementRef,
-} from "react";
-import { tv } from "tailwind-variants";
+import { forwardRef, type ComponentPropsWithoutRef } from "react";
+import { tv, type VariantProps } from "tailwind-variants";
 
 //
 
-export const Grid = forwardRef<
-  ElementRef<"div">,
-  ComponentPropsWithoutRef<"div">
->(function Banner({ children, ...props }, forwardedRef) {
-  const { className, ...other_props } = props;
+export const Grid = forwardRef<HTMLDivElement, GridProps>(function Banner(
+  { children, ...props },
+  forwardedRef,
+) {
+  const { className, fluid, ...other_props } = props;
 
   return (
-    <div className={style({ className })} ref={forwardedRef} {...other_props}>
+    <div
+      className={style({ className, fluid })}
+      ref={forwardedRef}
+      {...other_props}
+    >
       {children}
     </div>
   );
 });
+
+export interface GridProps
+  extends ComponentPropsWithoutRef<"div">,
+    VariantProps<typeof style> {}
 
 //
 
@@ -36,11 +40,8 @@ const style = tv({
     "xl:grid-cols-12",
   ],
   variants: {
-    $padding: {
-      true: "px-4 sm:px-8 md:px-6 lg:px-8",
+    fluid: {
+      false: "px-4 sm:px-8 md:px-6 lg:px-8",
     },
-  },
-  defaultVariants: {
-    $padding: true,
   },
 });

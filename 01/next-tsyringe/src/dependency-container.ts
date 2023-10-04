@@ -36,7 +36,6 @@ export const root_container = DependencyContainerEX(container, {
   name: "ROOT",
   namespace: NIL,
 });
-log(`🌱💉 ${root_container.id}`);
 
 //
 
@@ -55,10 +54,12 @@ function DependencyContainerEX(
       return this;
     },
     createNamedChildContainer(child_name: string) {
-      return DependencyContainerEX(container.createChildContainer(), {
+      const child = DependencyContainerEX(container.createChildContainer(), {
         name: child_name,
         namespace: this.id,
       });
+      log(`⏫ (${(container as any)?.id})> |${name}| ${child.id}`);
+      return child;
     },
   }) as DependencyContainerEX;
 }

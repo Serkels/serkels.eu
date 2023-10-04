@@ -23,7 +23,6 @@
     "@1/next-tsyringe": "workspace:*",
     "@trpc/server": "10.38.5",
     "debug": "4.3.4",
-    "i": "^0.3.7",
     "modern-errors": "6.0.0",
     "modern-errors-serialize": "5.0.0",
     "react": "18.2.0",

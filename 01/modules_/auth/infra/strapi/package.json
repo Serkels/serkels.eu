@@ -1,6 +1,7 @@
 {
-  "name": "@1.modules/auth.infra.strapi",
+  "name": "@1.modules.auth/infra.strapi",
   "version": "0.0.0",
+  "private": true,
   "type": "module",
   "exports": {
     ".": {
@@ -8,16 +9,14 @@
       "types": "./src/index.ts"
     }
   },
-  "main": "dist/index.js",
+  "main": "./dist/index.js",
   "types": "./src/index.ts",
   "scripts": {
     "build": "swc src -d dist",
     "dev": "pnpm run build --watch"
   },
-  "keywords": [],
-  "author": "Douglas Duteil <douglasduteil@gmail.com> (https://douglasduteil.github.io/)",
-  "license": "WTFPL",
   "dependencies": {
+    "@1.modules.auth/domain": "workspace:*",
     "@1/next-tsyringe": "workspace:*",
     "@1/strapi-openapi": "workspace:*",
     "@1/core_": "workspace:*",

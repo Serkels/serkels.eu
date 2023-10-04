@@ -1,6 +1,7 @@
 packages:
   - "01/*"
-  - "01/modules_/auth/infra/strapi"
+  - "01/modules_/*/*"
+  - "01/modules_/*/*/*"
   - "01/config/*"
   - "www"
   - "admin/strapi"

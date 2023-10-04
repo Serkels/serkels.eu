@@ -1,7 +1,7 @@
 //
 
 import debug from "debug";
-import { Lifecycle, scoped } from "tsyringe";
+import { Lifecycle, inject, scoped } from "tsyringe";
 
 //
 

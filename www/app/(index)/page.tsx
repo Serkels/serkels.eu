@@ -2,11 +2,15 @@
 
 import { AppFooter } from ":components/AppFooter.server";
 import { MobileNavBar } from ":components/MobileNavBar";
+import { NextTsyringe } from "@1/next-tsyringe";
 import { Grid } from "@1/ui/components/Grid";
+import { VisuallyHidden } from "@1/ui/helpers/VisuallyHidden";
 import { Binoculars, Book, Link, MessageGroup } from "@1/ui/icons";
 import { Banner, BigBar } from "@1/ui/shell";
 import type { _1_HOUR_ } from "@douglasduteil/datatypes...hours-to-seconds";
+import { Root_Module } from "app/Root_Module";
 import clsx from "clsx";
+import debug from "debug";
 import dynamic from "next/dynamic";
 import type {
   ComponentPropsWithoutRef,
@@ -18,6 +22,9 @@ import type {
 
 const TocTocLogo = dynamic(() => import(":components/TocTocLogo"), {
   ssr: false,
+  loading() {
+    return <VisuallyHidden>Toc-Toc</VisuallyHidden>;
+  },
 });
 
 const HomeCarousel = dynamic(() => import("./page.client"), {
@@ -29,7 +36,31 @@ const HomeCarousel = dynamic(() => import("./page.client"), {
 
 export const revalidate: _1_HOUR_ = 3600;
 
-export default async function Home_Page() {
+//
+
+@NextTsyringe.module({
+  parent: Root_Module,
+})
+export class Home_PageModule {
+  static log = debug("~:app/(index)/page.tsx");
+  static Provider = Root_Module.Provider;
+  static async register() {
+    Home_PageModule.log("register");
+    return [];
+  }
+}
+
+export default async function Home_Page_Provider() {
+  return (
+    <Home_PageModule.Provider>
+      <Home_Page />
+    </Home_PageModule.Provider>
+  );
+}
+
+//
+
+function Home_Page() {
   return (
     <main>
       <AppLargeTopBar />

@@ -1,12 +1,12 @@
 "use client";
 
 import { Avatar } from ":components/Avatar";
+import { trpc } from ":trpc/index";
 import { Button } from "@1/ui/components/ButtonV";
 import { Spinner } from "@1/ui/components/Spinner";
 import { LoginForm } from "@1/ui/domains/login/LoginForm";
 import { DomLazyMotion } from "@1/ui/helpers/DomLazyMotion";
 import { useTimeoutEffect } from "@react-hookz/web";
-import { useMutation } from "@tanstack/react-query";
 import constate from "constate";
 import { AnimatePresence, m } from "framer-motion";
 import { signOut, useSession } from "next-auth/react";
@@ -14,6 +14,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
   useCallback,
+  useEffect,
   useState,
   type ComponentProps,
   type PropsWithChildren,
@@ -24,6 +25,7 @@ import { P, match } from "ts-pattern";
 //
 
 type Outlet_State =
+  | { state: "check your mail" }
   | { state: "connected as" }
   | { state: "error"; error: Error }
   | { state: "form" }
@@ -32,26 +34,14 @@ type Outlet_State =
 
 function useOutlet() {
   const [context, setContext] = useState<Outlet_State>({ state: "idle" });
-  const immediate_next = useCallback(
-    (next_context: Outlet_State) =>
-      setTimeout(() => setContext(next_context), 0),
-    // setContext((ctx) => ({ ...ctx, next_context })),
-    [],
-  );
-  const next = useCallback(setContext, []);
-  return { context, immediate_next, next };
+  return { context, set_context: setContext };
 }
 
-const [
-  Outlet_Provider,
-  useOutlet_State,
-  useOutlet_ImmediateNext,
-  useOutlet_Next,
-] = constate(
+const [Outlet_Provider, useOutlet_State, useOutlet_Next] = constate(
   useOutlet,
   ({ context }) => context.state,
-  (value) => value.immediate_next,
-  (value) => value.next,
+
+  (value) => value.set_context,
 );
 
 //
@@ -87,6 +77,7 @@ function ConnectionPanel_Outlet() {
   const state = useOutlet_State();
 
   return match(state)
+    .with("check your mail", () => <CheckYourMail />)
     .with("connected as", () => <ConnectedAs />)
     .with("error", () => <ErrorOccur />)
     .with("form", () => <LoginFormPanel />)
@@ -95,62 +86,70 @@ function ConnectionPanel_Outlet() {
     .exhaustive();
 }
 
+//
+
 function LookForExistingSession() {
   const session = useSession();
-  const next = useOutlet_ImmediateNext();
+  const next = useOutlet_Next();
+
+  useEffect(() => {
+    return match(session)
+      .with({ status: "authenticated" }, () => {
+        next({ state: "connected as" });
+      })
+      .with({ status: "loading" }, () => {})
+      .with({ status: "unauthenticated" }, () => {
+        next({ state: "form" });
+      })
+      .exhaustive();
+  }, [session]);
 
   return match(session)
-    .with({ status: "authenticated" }, () => {
-      next({ state: "connected as" });
-      return null;
-    })
     .with({ status: "loading" }, () => <Loading />)
-    .with({ status: "unauthenticated" }, () => {
-      next({ state: "form" });
-      return null;
-    })
+    .with({ status: P._ }, () => null)
     .exhaustive();
 }
 
 function LoginFormPanel() {
-  const next = useOutlet_ImmediateNext();
+  const next = useOutlet_Next();
   const router = useRouter();
 
-  const mutation_result = useMutation(submitFormHandler, { retry: 3 });
+  const mutation_info = trpc.passwordless.send_magic_link.useMutation();
 
-  const onLoginFormSubmit: ComponentProps<typeof LoginForm>["onLogin"] =
-    useCallback(
-      async ({ email }) => await mutation_result.mutate({ email }),
-      [],
-    );
+  const on_login_form_submit: ComponentProps<typeof LoginForm>["onLogin"] =
+    useCallback(async ({ email }) => await mutation_info.mutate({ email }), []);
 
-  const onSignUpFormSubmit: ComponentProps<typeof LoginForm>["onSignUp"] =
+  const on_sign_up_form_submit: ComponentProps<typeof LoginForm>["onSignUp"] =
     useCallback(async ({ email, as }) => {
       match(as as "student" | "partner")
         .with("student", () => router.push(`/signup/user?email=${email}`))
         .with("partner", () => router.push(`/signup/partener?email=${email}`));
     }, []);
 
-  return match(mutation_result)
-    .with({ status: "error", error: P.select() }, (error) => {
-      next({ state: "error", error: error as Error });
-      return null;
-    })
+  useEffect(() => {
+    return match(mutation_info)
+      .with({ status: "error", error: P.select() }, (error) => {
+        next({ state: "error", error: error as any });
+      })
+      .with({ status: "idle" }, () => {})
+      .with({ status: "loading" }, () => {})
+      .with({ status: "success" }, () => {
+        next({ state: "check your mail" });
+      })
+      .exhaustive();
+  }, [mutation_info.status]);
+
+  return match(mutation_info)
+    .with({ status: "error" }, () => null)
     .with({ status: "idle" }, () => (
-      <LoginForm onLogin={onLoginFormSubmit} onSignUp={onSignUpFormSubmit} />
+      <LoginForm
+        onLogin={on_login_form_submit}
+        onSignUp={on_sign_up_form_submit}
+      />
     ))
     .with({ status: "loading" }, () => <Loading />)
-    .with({ status: "success" }, () => <CheckYourMail />)
+    .with({ status: "success" }, () => null)
     .exhaustive();
-}
-
-async function submitFormHandler({ email }: { email: string }) {
-  const res = await fetch(`/api/auth/magic/${email}`);
-  const result = await res.json();
-  if (result.error) {
-    throw result.error;
-  }
-  return result;
 }
 
 function Loading() {
@@ -217,7 +216,7 @@ function CheckYourMail() {
 }
 
 function ConnectedAs() {
-  const next = useOutlet_ImmediateNext();
+  const next = useOutlet_Next();
 
   try {
     const { data } = useSession();
@@ -249,7 +248,7 @@ function ConnectedAs() {
       </WhiteCard>
     );
   } catch (error) {
-    next({ state: "error", error: error as Error });
+    setTimeout(() => next({ state: "error", error: error as Error }), 0);
     return null;
   }
 }

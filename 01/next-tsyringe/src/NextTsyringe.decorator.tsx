@@ -1,6 +1,6 @@
 //
 
-import debug from "debug";
+import debug, { type Debugger } from "debug";
 import type { PropsWithChildren } from "react";
 import type { constructor } from "tsyringe/types";
 import { z } from "zod";
@@ -36,6 +36,7 @@ type Scope = z.infer<typeof Scope_Schema>;
 export interface LayoutModuleLike {
   register?: RegistrationFn;
   Provider: (props: PropsWithChildren<any>) => any;
+  log?: Debugger;
 }
 
 export class NextTsyringe {
@@ -57,9 +58,9 @@ export class NextTsyringe {
     return function module_decorator<T>(
       target: constructor<T> & LayoutModuleLike,
     ) {
-      const name = target.name ?? "NextTsyringe.Module";
-      const log = logger.extend(`🎍 ${name}`);
-      log(target);
+      const name = target.name ?? `NextTsyringe.Module ${target}`;
+      const log = target.log ?? logger.extend(`🎍 ${name}`);
+      log(`🪄 ${name}`);
 
       const nope_registrationsFn = () => {
         log("nothing to register");

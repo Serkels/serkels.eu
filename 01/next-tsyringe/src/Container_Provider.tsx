@@ -7,7 +7,7 @@ import type { Registration } from "./dependency-container";
 
 //
 
-const log = debug("~:core:di.context");
+const log = debug("~:@1/next-tsyringe:Container_Provider");
 
 //
 
@@ -23,7 +23,7 @@ export function Container_Provider({
 
   const child_container = useMemo(() => {
     const container = parent.createNamedChildContainer(name);
-    log(`⏭️💉 ${name} ${container.id} (${parent.id})`);
+    log(`⏭️💉 |${name}| ${container.id} (${parent.id})`);
     container.registerAll(registrations);
     return container;
   }, [parent.id, registrations]);

@@ -1,14 +1,11 @@
 //
 
 import Analytics from ":components/Analytics";
-import { OpenAPI_Repository } from "@1/core";
-import { NextTsyringe, root_container } from "@1/next-tsyringe";
 import clsx from "clsx";
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { Roboto } from "next/font/google";
-import { cache, type PropsWithChildren } from "react";
-import { fromServer } from "./api/v1";
+import { type PropsWithChildren } from "react";
 import "./globals.css";
 import { RootProviders } from "./layout.client";
 
@@ -33,27 +30,7 @@ export const metadata: Metadata = {
 
 //
 
-@NextTsyringe.module({
-  root_container: cache(() => root_container)(),
-  scope: "server-only",
-})
-export class Root_Module {
-  static Provider = RootLayout;
-  static async register() {
-    return [
-      {
-        token: OpenAPI_Repository.TOKEN.CLIENT,
-        useValue: fromServer,
-      },
-    ];
-  }
-}
-
-export default Root_Module.Provider;
-
-//
-
-export async function RootLayout({ children }: PropsWithChildren) {
+export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <body

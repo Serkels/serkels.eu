@@ -9,7 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@1.modules/auth.infra.strapi": "workspace:*",
+    "@1.modules.auth/domain": "workspace:*",
+    "@1.modules.auth/infra.strapi": "workspace:*",
+    "@1.modules.auth/usecases": "workspace:*",
+    "@1.modules.profile/domain": "workspace:*",
+    "@1.modules.profile/infra.strapi": "workspace:*",
+    "@1.modules.profile/usecases": "workspace:*",
     "@1/core_": "workspace:*",
     "@1/eslint-config": "workspace:*",
     "@1/modules": "workspace:*",

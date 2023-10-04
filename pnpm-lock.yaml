@@ -209,9 +209,6 @@ importers:
       debug:
         specifier: 4.3.4
         version: 4.3.4(supports-color@8.1.1)
-      i:
-        specifier: ^0.3.7
-        version: 0.3.7
       modern-errors:
         specifier: 6.0.0
         version: 6.0.0
@@ -296,8 +293,42 @@ importers:
         specifier: ^0.10.1
         version: 0.10.1(fast-check@3.13.0)(zod@3.22.2)
 
+  01/modules_/auth/domain:
+    dependencies:
+      '@1/core_':
+        specifier: workspace:*
+        version: link:../../../core_
+      '@1/next-tsyringe':
+        specifier: workspace:*
+        version: link:../../../next-tsyringe
+      debug:
+        specifier: 4.3.4
+        version: 4.3.4(supports-color@8.1.1)
+      tsyringe:
+        specifier: 4.8.0
+        version: 4.8.0(patch_hash=36fswrcuesupx6h7mwzgbhzlue)
+    devDependencies:
+      '@1/typescript-config':
+        specifier: workspace:*
+        version: link:../../../config/typescript-config
+      '@swc/cli':
+        specifier: ^0.1.62
+        version: 0.1.62(@swc/core@1.3.53)
+      '@swc/core':
+        specifier: 1.3.53
+        version: 1.3.53
+      prettier:
+        specifier: 3.0.3
+        version: 3.0.3
+      typescript:
+        specifier: 5.2.2
+        version: 5.2.2
+
   01/modules_/auth/infra/strapi:
     dependencies:
+      '@1.modules.auth/domain':
+        specifier: workspace:*
+        version: link:../../domain
       '@1/core_':
         specifier: workspace:*
         version: link:../../../../core_
@@ -317,6 +348,142 @@ importers:
       '@1/typescript-config':
         specifier: workspace:*
         version: link:../../../../config/typescript-config
+      '@swc/cli':
+        specifier: ^0.1.62
+        version: 0.1.62(@swc/core@1.3.53)
+      '@swc/core':
+        specifier: 1.3.53
+        version: 1.3.53
+      prettier:
+        specifier: 3.0.3
+        version: 3.0.3
+      typescript:
+        specifier: 5.2.2
+        version: 5.2.2
+
+  01/modules_/auth/usecases:
+    dependencies:
+      '@1.modules.auth/domain':
+        specifier: workspace:*
+        version: link:../domain
+      '@1/core_':
+        specifier: workspace:*
+        version: link:../../../core_
+      '@1/next-tsyringe':
+        specifier: workspace:*
+        version: link:../../../next-tsyringe
+      debug:
+        specifier: 4.3.4
+        version: 4.3.4(supports-color@8.1.1)
+      tsyringe:
+        specifier: 4.8.0
+        version: 4.8.0(patch_hash=36fswrcuesupx6h7mwzgbhzlue)
+    devDependencies:
+      '@1/typescript-config':
+        specifier: workspace:*
+        version: link:../../../config/typescript-config
+      '@swc/cli':
+        specifier: ^0.1.62
+        version: 0.1.62(@swc/core@1.3.53)
+      '@swc/core':
+        specifier: 1.3.53
+        version: 1.3.53
+      prettier:
+        specifier: 3.0.3
+        version: 3.0.3
+      typescript:
+        specifier: 5.2.2
+        version: 5.2.2
+
+  01/modules_/profile/domain:
+    dependencies:
+      '@1/core_':
+        specifier: workspace:*
+        version: link:../../../core_
+      '@1/next-tsyringe':
+        specifier: workspace:*
+        version: link:../../../next-tsyringe
+      debug:
+        specifier: 4.3.4
+        version: 4.3.4(supports-color@8.1.1)
+      tsyringe:
+        specifier: 4.8.0
+        version: 4.8.0(patch_hash=36fswrcuesupx6h7mwzgbhzlue)
+    devDependencies:
+      '@1/typescript-config':
+        specifier: workspace:*
+        version: link:../../../config/typescript-config
+      '@swc/cli':
+        specifier: ^0.1.62
+        version: 0.1.62(@swc/core@1.3.53)
+      '@swc/core':
+        specifier: 1.3.53
+        version: 1.3.53
+      prettier:
+        specifier: 3.0.3
+        version: 3.0.3
+      typescript:
+        specifier: 5.2.2
+        version: 5.2.2
+
+  01/modules_/profile/infra/strapi:
+    dependencies:
+      '@1.modules.auth/domain':
+        specifier: workspace:*
+        version: link:../../../auth/domain
+      '@1/core_':
+        specifier: workspace:*
+        version: link:../../../../core_
+      '@1/next-tsyringe':
+        specifier: workspace:*
+        version: link:../../../../next-tsyringe
+      '@1/strapi-openapi':
+        specifier: workspace:*
+        version: link:../../../../strapi-openapi
+      debug:
+        specifier: 4.3.4
+        version: 4.3.4(supports-color@8.1.1)
+      tsyringe:
+        specifier: 4.8.0
+        version: 4.8.0(patch_hash=36fswrcuesupx6h7mwzgbhzlue)
+    devDependencies:
+      '@1/typescript-config':
+        specifier: workspace:*
+        version: link:../../../../config/typescript-config
+      '@swc/cli':
+        specifier: ^0.1.62
+        version: 0.1.62(@swc/core@1.3.53)
+      '@swc/core':
+        specifier: 1.3.53
+        version: 1.3.53
+      prettier:
+        specifier: 3.0.3
+        version: 3.0.3
+      typescript:
+        specifier: 5.2.2
+        version: 5.2.2
+
+  01/modules_/profile/usecases:
+    dependencies:
+      '@1.modules.auth/domain':
+        specifier: workspace:*
+        version: link:../../auth/domain
+      '@1/core_':
+        specifier: workspace:*
+        version: link:../../../core_
+      '@1/next-tsyringe':
+        specifier: workspace:*
+        version: link:../../../next-tsyringe
+      debug:
+        specifier: 4.3.4
+        version: 4.3.4(supports-color@8.1.1)
+      tsyringe:
+        specifier: 4.8.0
+        version: 4.8.0(patch_hash=36fswrcuesupx6h7mwzgbhzlue)
+    devDependencies:
+      '@1/typescript-config':
+        specifier: workspace:*
+        version: link:../../../config/typescript-config
       '@swc/cli':
         specifier: ^0.1.62
         version: 0.1.62(@swc/core@1.3.53)
@@ -687,9 +854,24 @@ importers:
 
   www:
     dependencies:
-      '@1.modules/auth.infra.strapi':
+      '@1.modules.auth/domain':
+        specifier: workspace:*
+        version: link:../01/modules_/auth/domain
+      '@1.modules.auth/infra.strapi':
         specifier: workspace:*
         version: link:../01/modules_/auth/infra/strapi
+      '@1.modules.auth/usecases':
+        specifier: workspace:*
+        version: link:../01/modules_/auth/usecases
+      '@1.modules.profile/domain':
+        specifier: workspace:*
+        version: link:../01/modules_/profile/domain
+      '@1.modules.profile/infra.strapi':
+        specifier: workspace:*
+        version: link:../01/modules_/profile/infra/strapi
+      '@1.modules.profile/usecases':
+        specifier: workspace:*
+        version: link:../01/modules_/profile/usecases
       '@1/core_':
         specifier: workspace:*
         version: link:../01/core_
@@ -8453,12 +8635,12 @@ packages:
     resolution: {integrity: sha512-oyl4jvAfTGX9Bt6Or4H9ni1Z447/tQuxnZsytsCaExKlmJiU8sFgnIBRzJUpKwB5eWn9HuBYlUlVA74q/yN0eQ==}
     dependencies:
       '@types/connect': 3.4.36
-      '@types/node': 20.6.3
+      '@types/node': 17.0.45
 
   /@types/bonjour@3.5.11:
     resolution: {integrity: sha512-isGhjmBtLIxdHBDl2xGwUzEM8AOyOvWsADWq7rqirdi/ZQoHnLWErHvsThcEzTX8juDRiZtzp2Qkv5bgNh6mAg==}
     dependencies:
-      '@types/node': 20.6.3
+      '@types/node': 17.0.45
 
   /@types/cacheable-request@6.0.3:
     resolution: {integrity: sha512-IQ3EbTzGxIigb1I3qPZc1rWJnH0BmSKv5QYTalEwweFvyBDLSAe24zP0le/hyi7ecGfZVlIVAg4BZqb8WBwKqw==}
@@ -8472,12 +8654,12 @@ packages:
     resolution: {integrity: sha512-iaQslNbARe8fctL5Lk+DsmgWOM83lM+7FzP0eQUJs1jd3kBE8NWqBTIT2S8SqQOJjxvt2eyIjpOuYeRXq2AdMw==}
     dependencies:
       '@types/express-serve-static-core': 4.17.36
-      '@types/node': 20.6.3
+      '@types/node': 17.0.45
 
   /@types/connect@3.4.36:
     resolution: {integrity: sha512-P63Zd/JUGq+PdrM1lv0Wv5SBYeA2+CORvbrXbngriYY0jzLUWfQMQQxOhjONEz/wlHOAxOdY7CY65rgQdTjq2w==}
     dependencies:
-      '@types/node': 20.6.3
+      '@types/node': 17.0.45
 
   /@types/content-disposition@0.5.6:
     resolution: {integrity: sha512-GmShTb4qA9+HMPPaV2+Up8tJafgi38geFi7vL4qAM7k8BwjoelgHZqEUKJZLvughUw22h6vD/wvwN4IUCaWpDA==}
@@ -8523,7 +8705,7 @@ packages:
   /@types/express-serve-static-core@4.17.36:
     resolution: {integrity: sha512-zbivROJ0ZqLAtMzgzIUC4oNqDG9iF0lSsAqpOD9kbs5xcIM3dTiyuHvBc7R8MtWBp3AAWGaovJa+wzWPjLYW7Q==}
     dependencies:
-      '@types/node': 20.6.3
+      '@types/node': 17.0.45
       '@types/qs': 6.9.8
       '@types/range-parser': 1.2.4
       '@types/send': 0.17.1
@@ -8542,7 +8724,7 @@ packages:
   /@types/formidable@1.2.6:
     resolution: {integrity: sha512-9xwITWH5ok4MrALa7qnUd3McKrvEn5iUZM5/m0AJjOo/sMPUISzuBK/qAHHMV9t5ShjG4fjr0VEm8J+szAKDWA==}
     dependencies:
-      '@types/node': 20.6.3
+      '@types/node': 17.0.45
 
   /@types/glob@7.2.0:
     resolution: {integrity: sha512-ZUxbzKl0IfJILTS6t7ip5fQQM/J3TJYubDm3nMbgubNNYS62eXeUpoLUC8/7fJNiFYHTrGPQn7hspDUzIHX3UA==}
@@ -8591,7 +8773,7 @@ packages:
   /@types/interpret@1.1.1:
     resolution: {integrity: sha512-HZ4d0m2Ebl8DmrOdYZHgYyipj/8Ftq1/ssB/oQR7fqfUrwtTP7IW3BDi2V445nhPBLzZjEkApaPVp83moSCXlA==}
     dependencies:
-      '@types/node': 20.6.3
+      '@types/node': 17.0.45
 
   /@types/js-cookie@2.2.7:
     resolution: {integrity: sha512-aLkWa0C0vO5b4Sr798E26QgOkss68Un0bLjs7u9qxzPT5CG+8DuNTffWES58YzJs3hrVAOs1wonycqEBqNJubA==}
@@ -8663,7 +8845,7 @@ packages:
     dependencies:
       '@types/fined': 1.1.3
       '@types/interpret': 1.1.1
-      '@types/node': 20.6.3
+      '@types/node': 17.0.45
 
   /@types/lodash@4.14.198:
     resolution: {integrity: sha512-trNJ/vtMZYMLhfN45uLq4ShQSw0/S7xCTLLVM+WM1rmFpba/VS42jVUgaO3w/NOLiWR/09lnYk0yMaA/atdIsg==}
@@ -8789,7 +8971,7 @@ packages:
     resolution: {integrity: sha512-Cwo8LE/0rnvX7kIIa3QHCkcuF21c05Ayb0ZfxPiv0W8VRiZiNW/WuRupHKpqqGVGf7SUA44QSOUKaEd9lIrd/Q==}
     dependencies:
       '@types/mime': 1.3.2
-      '@types/node': 20.6.3
+      '@types/node': 17.0.45
 
   /@types/serve-index@1.9.1:
     resolution: {integrity: sha512-d/Hs3nWDxNL2xAczmOVZNj92YZCS6RGxfBPjKzuu/XirCgXdpKEb88dYNbrYGint6IVWLNP+yonwVAuRC0T2Dg==}
@@ -8801,12 +8983,12 @@ packages:
     dependencies:
       '@types/http-errors': 2.0.2
       '@types/mime': 3.0.1
-      '@types/node': 20.6.3
+      '@types/node': 17.0.45
 
   /@types/sockjs@0.3.33:
     resolution: {integrity: sha512-f0KEEe05NvUnat+boPTZ0dgaLZ4SfSouXUgv5noUiefG2ajgKjmETo9ZJyuqsl7dfl2aHlLJUiki6B4ZYldiiw==}
     dependencies:
-      '@types/node': 20.6.3
+      '@types/node': 17.0.45
 
   /@types/styled-components@5.1.27:
     resolution: {integrity: sha512-oY9c1SdztRRF0QDQdwXEenfAjGN4WGUkaMpx5hvdTbYYqw01qoY2GrHi+kAR6SVofynzD6KbGoF5ITP0zh5pvg==}
@@ -8823,7 +9005,7 @@ packages:
   /@types/through@0.0.31:
     resolution: {integrity: sha512-LpKpmb7FGevYgXnBXYs6HWnmiFyVG07Pt1cnbgM1IhEacITTiUaBXXvOR3Y50ksaJWGSfhbEvQFivQEFGCC55w==}
     dependencies:
-      '@types/node': 20.6.3
+      '@types/node': 17.0.45
 
   /@types/triple-beam@1.3.3:
     resolution: {integrity: sha512-6tOUG+nVHn0cJbVp25JFayS5UE6+xlbcNF9Lo9mU7U0zk3zeUShZied4YEQZjy1JBF043FSkdXw8YkUJuVtB5g==}
@@ -8841,7 +9023,7 @@ packages:
   /@types/ws@8.5.5:
     resolution: {integrity: sha512-lwhs8hktwxSjf9UaZ9tG5M03PGogvFaH8gUgLNbN9HKIg0dvv6q+gkSuJ8HN4/VbyxkuLzCjlN7GquQ0gUJfIg==}
     dependencies:
-      '@types/node': 20.6.3
+      '@types/node': 17.0.45
 
   /@types/yargs-parser@21.0.0:
     resolution: {integrity: sha512-iO9ZQHkZxHn4mSakYV0vFHAVDyEOIJQrV2uZ06HxEPcx+mt8swXoZHIbaaJ2crJYFfErySgktuTZ3BeLz+XmFA==}
@@ -14093,11 +14275,6 @@ packages:
       diacritics: 1.3.0
     dev: false
 
-  /i@0.3.7:
-    resolution: {integrity: sha512-FYz4wlXgkQwIPqhzC5TdNMLSE5+GS1IIDJZY/1ZiEPCT2S3COUVZeT5OW4BmW4r5LHLQuOosSwsvnroG9GR59Q==}
-    engines: {node: '>=0.4'}
-    dev: false
-
   /iconv-lite@0.4.13:
     resolution: {integrity: sha512-QwVuTNQv7tXC5mMWFX5N5wGjmybjNBBD8P3BReTkPmipoxTUFgWM2gXNvldHQr6T14DH0Dh6qBVg98iJt7u4mQ==}
     engines: {node: '>=0.8.0'}
@@ -14713,7 +14890,7 @@ packages:
     resolution: {integrity: sha512-7vuh85V5cdDofPyxn58nrPjBktZo0u9x1g8WtjQol+jZDaE+fhN+cIvTj11GndBnMnyfrUOG1sZQxCdjKh+DKg==}
     engines: {node: '>= 10.13.0'}
     dependencies:
-      '@types/node': 20.6.3
+      '@types/node': 17.0.45
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
