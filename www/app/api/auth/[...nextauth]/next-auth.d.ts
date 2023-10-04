@@ -1,6 +1,5 @@
 //
 
-import type { components } from "@1/strapi-openapi/v1";
 import "next-auth";
 //
 
@@ -15,10 +14,8 @@ declare module "next-auth" {
   interface User extends DefaultUser {
     jwt: string;
     id: number;
-    username: string;
+    name: string;
     role: "partner" | "studient";
-    profile: components["schemas"]["UserProfileListResponseDataItem"];
-    partner?: components["schemas"]["PartnerListResponseDataItem"];
   }
 }
 

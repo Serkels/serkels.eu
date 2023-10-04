@@ -6,6 +6,7 @@ import Script from "next/script";
 //
 
 export default function Analytics() {
+  if (process.env.NODE_ENV === "development") return null;
   return (
     <>
       <VercelAnalytics />

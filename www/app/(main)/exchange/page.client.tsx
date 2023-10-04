@@ -1,17 +1,18 @@
 "use client";
 
-import { trpc } from ":trpc/index";
+import { trpc } from ":trpc/client";
 
 //
-export function Exchange_List() {
-  console.log();
-  // const dsf = trpc.useContext();
-  // useEffect(() => {
-  //   console.log({ dsf });
 
-  //   const sdf = dsf.client.profile.me.query().then(console.log);
-  // }, []);
-  console.log();
-  const sdf = trpc.profile.me.useQuery();
-  return <code>{JSON.stringify({ sdf }, null, 2)}</code>;
+export function Exchange_List() {
+  const query_info = trpc.profile.me.useQuery();
+  return (
+    <code>
+      {JSON.stringify(
+        { data: query_info.data, status: query_info.status },
+        null,
+        2,
+      )}
+    </code>
+  );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { Avatar } from ":components/Avatar";
-import { trpc } from ":trpc/index";
+import { trpc } from ":trpc/client";
 import { Button } from "@1/ui/components/ButtonV";
 import { Spinner } from "@1/ui/components/Spinner";
 import { LoginForm } from "@1/ui/domains/login/LoginForm";
@@ -233,7 +233,7 @@ function ConnectedAs() {
       <WhiteCard>
         <Link href={href}>
           <figure>
-            <Avatar className="m-auto aspect-square rounded-full p-11" />
+            <Avatar className="m-auto aspect-square min-h-[60px] rounded-full p-11" />
             <figcaption className="text-center">
               <h3 className="text-center">
                 Vous êtes connecté en tant que : <strong>{user.name}</strong>.

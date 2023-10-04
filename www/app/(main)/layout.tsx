@@ -17,7 +17,10 @@ export default function MainLayout({ children }: PropsWithChildren) {
       </header>
       {/* <UserBar /> */}
 
-      <Grid className="min-h-[calc(100vh_-_theme(spacing.16)-_theme(spacing.8))]">
+      <Grid
+        fluid={true}
+        className="min-h-[calc(100vh_-_theme(spacing.16)-_theme(spacing.8))]"
+      >
         {children}
       </Grid>
       <AppFooter />

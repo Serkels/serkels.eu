@@ -1,22 +1,19 @@
 "use client";
 
-import { trpc } from ":trpc/index";
+import { TrpcProvider } from ":trpc/client";
 import {
   QueryClient,
   QueryClientProvider,
-  useQueryClient,
   type DefaultOptions,
 } from "@tanstack/react-query";
-import { httpBatchLink, loggerLink } from "@trpc/client";
 import debug from "debug";
-import { SessionProvider, useSession } from "next-auth/react";
-import { useMemo, useState, type PropsWithChildren } from "react";
+import { SessionProvider } from "next-auth/react";
+import { useState, type PropsWithChildren } from "react";
 import Nest from "react-nest";
-import SuperJSON from "superjson";
 
 //
 
-const log = debug("~:app/layout.client.tsx");
+export const log = debug("~:app/layout.client.tsx");
 //
 
 if (
@@ -46,57 +43,6 @@ export function RootProviders({ children }: PropsWithChildren) {
   );
 }
 
-function TrpcProvider({ children }: PropsWithChildren) {
-  log("TrpcProvider");
-
-  const session = useSession();
-
-  log("<TrpcProvider> session=", session);
-  const query_client = useQueryClient();
-
-  const trpc_client = useMemo(
-    () =>
-      trpc.createClient({
-        transformer: SuperJSON,
-        links: [
-          loggerLink({
-            enabled: (opts) =>
-              (process.env.NODE_ENV === "development" &&
-                typeof window !== "undefined") ||
-              (opts.direction === "down" && opts.result instanceof Error),
-          }),
-          httpBatchLink({
-            url: "/api/trpc",
-
-            // async headers() {
-            //   await loaded_session;
-            //   const authorization =
-            //     session.status === "authenticated"
-            //       ? {
-            //           authorization: session.data.user?.jwt,
-            //         }
-            //       : {};
-            //   log("<TrpcProvider> authorization=", authorization);
-            //   log(
-            //     "<TrpcProvider.httpBatchLink.headers> authorization=",
-            //     authorization,
-            //   );
-            //   return {
-            //     ...authorization,
-            //   };
-            // },
-          }),
-        ],
-      }),
-    [session.status],
-  );
-
-  return (
-    <trpc.Provider client={trpc_client} queryClient={query_client}>
-      {children}
-    </trpc.Provider>
-  );
-}
 function ReactQueryClientProvider({ children }: PropsWithChildren) {
   log("ReactQueryClientProvider");
   const [query_client] = useState(

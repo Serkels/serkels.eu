@@ -1,5 +1,6 @@
 //
 
+import { app_router, createContext } from ":api/trpc/[trpc]/route";
 import { Passwordless_Repository } from "@1.modules.auth/infra.strapi";
 import { NextTsyringe } from "@1/next-tsyringe";
 import type { components } from "@1/strapi-openapi/v1";
@@ -80,7 +81,8 @@ export async function passwordless_login(token: string) {
   return {
     id: Number(data.user.id),
     email: String(data.user.email),
-    username: String(data.user.username),
+    // username: String(data.user.username),
+    name: "!!!!!!!!!!!!!!!!",
     jwt: data.jwt,
   } satisfies Omit<User, "profile" | "role">;
 }
@@ -132,14 +134,16 @@ export const authOptions: NextAuthOptions = {
   providers: [StrapiPasswordlessProvider()],
   callbacks: {
     async jwt({ user, token, trigger }) {
-      log("jwt", { user, token, trigger });
+      log("jwt", { trigger });
       if (trigger === "update" && token.user) {
-        const profile = await user_profile(token.user.jwt);
+        const trpc = app_router.createCaller(await createContext());
+        const profile = await trpc.profile.me();
+        // const profile = await user_profile(token.user.jwt);
 
-        token.user.profile = profile;
+        // token.user.profile = profile;
         token.user.name = [
-          profile.attributes?.firstname,
-          profile.attributes?.lastname,
+          profile?.data?.attributes?.firstname,
+          profile?.data?.attributes?.lastname,
         ].join(" ");
       }
 
@@ -149,8 +153,8 @@ export const authOptions: NextAuthOptions = {
 
       return token;
     },
-    async session({ session, token }) {
-      log("jwt", { session, token });
+    async session({ session, token, trigger }) {
+      log("session", { trigger });
       if (token.user) {
         session.user = token.user;
       }

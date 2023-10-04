@@ -16,12 +16,9 @@ export function Avatar(
   const { className, u, ...other_props } = props;
 
   const { data: session } = useSession();
-  const id = u ?? session?.user?.profile.id;
+  const id = u ?? session?.user?.id;
 
-  const image = useMemo(
-    () => `/api/v1/avatars/u/${id}`,
-    [id, session?.user?.profile.attributes?.image?.data?.id],
-  );
+  const image = useMemo(() => `/api/v1/avatars/u/${id}`, [id]);
 
   if (!id) {
     return null;
@@ -38,7 +35,7 @@ export function Link_Avatar(
   const { className, u, ...other_props } = props;
 
   const { data: session } = useSession();
-  const id = u ?? session?.user?.profile.id;
+  const id = u ?? session?.user?.id;
 
   const image = useMemo(() => `/api/v1/avatars/u/${id}`, [id]);
 
@@ -57,6 +54,7 @@ export const avatar_img = tv({ base: "max-w-full rounded-full object-cover" });
 export function AvatarMediaVertical(props: ComponentPropsWithoutRef<"figure">) {
   const { className, ...other_props } = props;
   const { data: session } = useSession();
+  const university = "session.user?.profile.attributes?.university";
 
   if (!session) return null;
 
@@ -75,7 +73,7 @@ export function AvatarMediaVertical(props: ComponentPropsWithoutRef<"figure">) {
         </h4>
         <small className="block text-center text-xs text-Dove_Gray">
           <School className="mr-1.5 inline-block w-4" />
-          <span>{session.user?.profile.attributes?.university}</span>
+          <span>{university}</span>
         </small>
       </figcaption>
     </figure>
@@ -87,6 +85,7 @@ export function AvatarMediaHorizontalPrimary(
 ) {
   const { className, ...other_props } = props;
   const { data: session } = useSession();
+  const university = "session.user?.profile.attributes?.university";
 
   if (!session) return null;
 
@@ -105,7 +104,7 @@ export function AvatarMediaHorizontalPrimary(
         </h4>
         <small className="block text-sm text-Dove_Gray">
           <School className="mr-1.5 inline-block w-6" />
-          <span>{session.user?.profile.attributes?.university}</span>
+          <span>{university}</span>
         </small>
       </figcaption>
     </figure>
