@@ -233,6 +233,9 @@ importers:
       uuid:
         specifier: 9.0.1
         version: 9.0.1
+      zod:
+        specifier: 3.22.2
+        version: 3.22.2
     devDependencies:
       '@1/typescript-config':
         specifier: workspace:*
@@ -539,9 +542,15 @@ importers:
       '@1/core':
         specifier: workspace:*
         version: link:../core
+      '@1/core_':
+        specifier: workspace:*
+        version: link:../core_
       qs:
         specifier: 6.11.2
         version: 6.11.2
+      zod:
+        specifier: 3.22.2
+        version: 3.22.2
     devDependencies:
       '@1/typescript-config':
         specifier: workspace:*
@@ -926,6 +935,9 @@ importers:
       '@yornaath/batshit':
         specifier: 0.8.0
         version: 0.8.0
+      await-to-js:
+        specifier: ^3.0.0
+        version: 3.0.0
       clsx:
         specifier: 2.0.0
         version: 2.0.0
@@ -10643,6 +10655,11 @@ packages:
   /available-typed-arrays@1.0.5:
     resolution: {integrity: sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==}
     engines: {node: '>= 0.4'}
+
+  /await-to-js@3.0.0:
+    resolution: {integrity: sha512-zJAaP9zxTcvTHRlejau3ZOY4V7SRpiByf3/dxx2uyKxxor19tpmpV2QRsTKikckwhaPmr2dVpxxMr7jOCYVp5g==}
+    engines: {node: '>=6.0.0'}
+    dev: false
 
   /aws-sdk@2.1437.0:
     resolution: {integrity: sha512-ApsAHaeDQFXM8y6OcRLMzUKXVgDZXPJtq1MLG7cqrKkRIugLMTx3j0UHFfF5j6hLHfX0KWrIOCwXEo6qUjviZQ==}

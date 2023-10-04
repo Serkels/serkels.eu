@@ -16,7 +16,9 @@ import { createTRPCReact } from "@trpc/react-query";
 //   return `http://localhost:${process.env["PORT"] ?? 3000}`;
 // }
 
-export const trpc = createTRPCReact<AppRouter>();
+export const trpc = createTRPCReact<AppRouter>({
+  abortOnUnmount: true,
+});
 
 /*
 export const trpc = createTRPCNext<AppRouter>({

@@ -5,7 +5,7 @@ import { tv, type VariantProps } from "tailwind-variants";
 
 //
 
-export const Grid = forwardRef<HTMLDivElement, GridProps>(function Banner(
+export const Grid = forwardRef<HTMLDivElement, GridProps>(function Grid(
   { children, ...props },
   forwardedRef,
 ) {

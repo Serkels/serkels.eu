@@ -131,28 +131,32 @@ export async function user_profile(token: string) {
 export const authOptions: NextAuthOptions = {
   providers: [StrapiPasswordlessProvider()],
   callbacks: {
-    // async jwt({ user, token, trigger }) {
-    //   log("jwt", { user, token, trigger });
-    //   if (trigger === "update" && token.user) {
-    //     const profile = await user_profile(token.user.jwt);
-    //     token.user.profile = profile;
-    //     token.user.name = [
-    //       profile.attributes?.firstname,
-    //       profile.attributes?.lastname,
-    //     ].join(" ");
-    //   }
-    //   if (user) {
-    //     token.user = user;
-    //   }
-    //   return token;
-    // },
-    // async session({ session, token }) {
-    //   log("jwt", { session, token });
-    //   if (token.user) {
-    //     session.user = token.user;
-    //   }
-    //   return session;
-    // },
+    async jwt({ user, token, trigger }) {
+      log("jwt", { user, token, trigger });
+      if (trigger === "update" && token.user) {
+        const profile = await user_profile(token.user.jwt);
+
+        token.user.profile = profile;
+        token.user.name = [
+          profile.attributes?.firstname,
+          profile.attributes?.lastname,
+        ].join(" ");
+      }
+
+      if (user) {
+        token.user = user;
+      }
+
+      return token;
+    },
+    async session({ session, token }) {
+      log("jwt", { session, token });
+      if (token.user) {
+        session.user = token.user;
+      }
+
+      return session;
+    },
   },
 };
 

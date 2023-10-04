@@ -3,10 +3,10 @@
 import type { InjectionToken } from "tsyringe";
 
 export interface Login_DTO {}
-export interface Auth_Repository {
+export interface Profile_Repository {
   login(loginToken: string): Promise<Login_DTO>;
 }
 
-export const AUTH_REPOSITORY_TOKEN = Symbol.for(
+export const PROFILE_REPOSITORY_TOKEN = Symbol.for(
   "Auth_Repository",
-) as InjectionToken<Auth_Repository>;
+) as InjectionToken<Profile_Repository>;

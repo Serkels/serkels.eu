@@ -9,8 +9,10 @@
     "dev": "chokidar \"*.json\" -c \"pnpm run clean && pnpm run build\" --initial --follow-symlinks"
   },
   "dependencies": {
+    "@1/core_": "workspace:*",
     "@1/core": "workspace:*",
-    "qs": "6.11.2"
+    "qs": "6.11.2",
+    "zod": "3.22.2"
   },
   "devDependencies": {
     "@1/typescript-config": "workspace:*",

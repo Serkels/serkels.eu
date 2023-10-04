@@ -1,4 +1,3 @@
 //
 
-export * from "./passwordless.repository";
-export * from "./passwordless.router";
+export * from "./profile.router";

@@ -1,10 +1,6 @@
 //
 
-import {
-  app_router,
-  create_authorized_context,
-  create_public_context,
-} from ":api/trpc/[trpc]/route";
+import { app_router, create_public_context } from ":api/trpc/[trpc]/route";
 import debug from "debug";
 import type { User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -16,13 +12,27 @@ const log = debug("~:app/api/auth/[...nextauth]/StrapiPasswordlessProvider.ts");
 
 //
 
-const AuthUser = z.object({
+const PasswordlessUser_Schema = z.object({
   jwt: z.string(),
   user: z.object({
     id: z.coerce.number().transform(String),
   }),
   context: z.any(),
 });
+
+async function login(token: string) {
+  const trpc = app_router.createCaller(await create_public_context());
+  const login_response = await trpc.passwordless.login({
+    token,
+  });
+
+  log("<authorize> user", login_response);
+
+  return PasswordlessUser_Schema.parse(login_response, {
+    path: ["login_response.user"],
+  });
+}
+
 export function StrapiPasswordlessProvider() {
   return CredentialsProvider({
     name: "Strapi Passwordless",
@@ -31,30 +41,34 @@ export function StrapiPasswordlessProvider() {
     },
 
     async authorize(credentials) {
-      log("<authorize> credentials", credentials);
+      const trace = log.extend("<authorize>");
+      try {
+        const { token } = z
+          .object({ token: z.string() })
+          .parse(credentials, { path: ["credentials"] });
+        trace("token=", token);
 
-      if (!credentials) return null;
+        const { jwt, user, context } = await login(token);
+        trace("user=", { jwt, user, context });
 
-      //
+        // const partner = await partner_repository.find_me().catch(() => undefined);
+        return {
+          id: Number(user.id),
+          role: "studient",
+          jwt,
+          profile: {},
+          username: "",
+        } satisfies User;
+      } catch (error) {
+        trace("error", error);
+        return null;
+      }
 
-      const { jwt, user, context } = (async (token: string) => {
-        const trpc = app_router.createCaller(await create_public_context());
-        const login_response = await trpc.passwordless.login({
-          token,
-        });
+      // //
+      // const trpc = app_router.createCaller(await create_authorized_context({}));
 
-        log("<authorize> user", login_response);
-
-        return AuthUser.parse(login_response.user, {
-          path: ["login_response.user"],
-        });
-      })(credentials.token);
-
-      //
-      const trpc = app_router.createCaller(await create_authorized_context());
-
-      const profile = await await pubilc_trpc.profile.me();
-      log("<authorize> profile", profile);
+      // const profile = await await trpc.profile.me();
+      // log("<authorize> profile", profile);
 
       // if (!credentials) return null;
       // const user = await passwordless_login(credentials.token);
@@ -71,7 +85,7 @@ export function StrapiPasswordlessProvider() {
       // };
       // const partner = await partner_repository.find_me().catch(() => undefined);
 
-      return auth_user.user satisfies User;
+      // return { id: 42 } satisfies User;
       // return {
       //   ...user,
       //   role: partner ? "partner" : "studient",

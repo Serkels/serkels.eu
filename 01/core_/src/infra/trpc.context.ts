@@ -1,11 +1,26 @@
 //
 
 import { initTRPC } from "@trpc/server";
+import debug from "debug";
+import { Lifecycle, injectable, scoped } from "tsyringe";
 import type { OpenAPI_Repository } from "./openapi.repository";
 
 //
 
-export class OpenapiTrpc<Client> {
+@scoped(Lifecycle.ContainerScoped)
+@injectable()
+export class OpenApiTrpc<Client> {
+  #log = debug(`~:core:infra:OpenApiTrpc`);
+
+  static readonly TOKEN = {
+    CLIENT: Symbol.for("client"),
+    JWT: Symbol.for("jwt"),
+  };
+
+  constructor(public readonly openapi: OpenAPI_Repository<Client>) {
+    this.#log("new");
+  }
+
   t = initTRPC.context<{ openapi: OpenAPI_Repository<Client> }>().create();
   router = this.t.router;
   procedure = this.t.procedure;

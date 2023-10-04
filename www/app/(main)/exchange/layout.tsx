@@ -3,6 +3,7 @@
 import { NextTsyringe } from "@1/next-tsyringe";
 import { Root_Module } from "app/Root_Module";
 import debug from "debug";
+import { type PropsWithChildren } from "react";
 
 //
 
@@ -18,10 +19,18 @@ export class Exchange_LayoutModule {
   }
 }
 
-export default async function Layout() {
+export default async function Layout({
+  children,
+  filter,
+  see_also,
+}: PropsWithChildren<{ filter: React.ReactNode; see_also: React.ReactNode }>) {
   const injector = await NextTsyringe.injector(Exchange_LayoutModule);
   Exchange_LayoutModule.log(`${injector.id}`);
   return (
-    <Exchange_LayoutModule.Provider>exchange</Exchange_LayoutModule.Provider>
+    <Exchange_LayoutModule.Provider>
+      {filter}
+      {children}
+      {see_also}
+    </Exchange_LayoutModule.Provider>
   );
 }
