@@ -6,11 +6,8 @@ export type { ErrorInstance } from "modern-errors";
 
 //
 
-//
-
 export const BaseError = ModernError.subclass("BaseError", {
   plugins: [modernErrorsSerialize],
-
   serialize: { shallow: true },
 });
 

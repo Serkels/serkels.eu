@@ -6,14 +6,12 @@ import {
   QueryClientProvider,
   type DefaultOptions,
 } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import debug from "debug";
 import { SessionProvider } from "next-auth/react";
 import { useState, type PropsWithChildren } from "react";
 import Nest from "react-nest";
 
-//
-
-export const log = debug("~:app/layout.client.tsx");
 //
 
 if (
@@ -32,7 +30,6 @@ const options: DefaultOptions = {
 };
 
 export function RootProviders({ children }: PropsWithChildren) {
-  log("RootProviders");
   return (
     <Nest>
       <AuthSessionProvider />
@@ -44,7 +41,6 @@ export function RootProviders({ children }: PropsWithChildren) {
 }
 
 function ReactQueryClientProvider({ children }: PropsWithChildren) {
-  log("ReactQueryClientProvider");
   const [query_client] = useState(
     () =>
       new QueryClient({
@@ -58,11 +54,14 @@ function ReactQueryClientProvider({ children }: PropsWithChildren) {
       }),
   );
   return (
-    <QueryClientProvider client={query_client}>{children}</QueryClientProvider>
+    <QueryClientProvider client={query_client}>
+      {children}
+
+      <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+    </QueryClientProvider>
   );
 }
 
 function AuthSessionProvider({ children }: PropsWithChildren) {
-  log("AuthSessionProvider");
   return <SessionProvider> {children} </SessionProvider>;
 }

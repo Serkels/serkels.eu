@@ -6,6 +6,7 @@
     //
     { "path": "01/modules_/auth", "name": "@1/modules_/auth" },
     { "path": "01/modules_/profile", "name": "@1/modules_/profile" },
+    { "path": "01/modules_/exchange", "name": "@1/modules_/exchange" },
     { "path": "01/modules", "name": "@1/modules" },
     { "path": "01/core_", "name": "@1/core_" },
     { "path": "01/core", "name": "@1/core" },

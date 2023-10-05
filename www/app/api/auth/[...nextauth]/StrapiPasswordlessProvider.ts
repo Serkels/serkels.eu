@@ -1,6 +1,7 @@
 //
 
-import { app_router, create_public_context } from ":api/trpc/[trpc]/route";
+import { create_public_context } from ":api/trpc/[trpc]/route";
+import { app_router } from ":trpc/router";
 import debug from "debug";
 import type { User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";

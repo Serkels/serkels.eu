@@ -1,17 +1,16 @@
 //
 
-import type { OpenAPI_Repository } from "@1/core_";
-import type { ApiClient } from "@1/strapi-openapi";
+import type { TRPCOpenAPIContext } from "@1/strapi-openapi";
 import { initTRPC } from "@trpc/server";
 
 //
 
-const t = initTRPC
-  .context<{ openapi: OpenAPI_Repository<ApiClient>; headers: Headers }>()
-  .create();
+const { router, procedure } = initTRPC.context<TRPCOpenAPIContext>().create();
 
-export const profileRouter = t.router({
-  me: t.procedure.query(async ({ ctx: { headers, openapi } }) => {
+//
+export type ProfileRouter = typeof profileRouter;
+export const profileRouter = router({
+  me: procedure.query(async ({ ctx: { headers, openapi } }) => {
     const {
       client: { GET },
     } = openapi;
@@ -23,5 +22,3 @@ export const profileRouter = t.router({
     return data;
   }),
 });
-
-export type ProfileRouter = typeof profileRouter;

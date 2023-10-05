@@ -9,7 +9,10 @@ import { Exchange_List } from "./page.client";
 
 export default async function Outlet(props: any) {
   const trpc = await get_trpc();
-  await trpc.profile.me.prefetch();
+  await Promise.all([
+    trpc.profile.me.prefetch(),
+    trpc.exchange.all.prefetchInfinite({}),
+  ]);
 
   const dehydratedState = dehydrate(trpc.queryClient);
 
@@ -29,58 +32,3 @@ export async function Page() {
     </main>
   );
 }
-
-// @NextTsyringe.module({
-//   parent: Root_Module,
-// })
-
-// export class TRPCLayout {
-//   static TRPCLayout_Provider =
-//   static Provider = async (
-//     props: PropsWithChildren<{ params: Record<string, string> }>) => {
-//     const { children, params } = props;
-//     const dehydratedState = dehydrate(trpc.queryClient);
-//     return <Hydrate state={dehydratedState}>
-//       <ProviderComponent {...props}> {children} </ProviderComponent>
-//     </Hydrate>;
-//   };
-
-//   static async register() {
-//   }
-// }
-
-// function _module() {
-
-// }
-
-// interface MyType {
-//   instanceMethod(): void;
-// }
-
-// interface ModuleRegistery {
-//   // new():MyType;
-//   register(): Promise<Registration[]>;
-// }
-
-// function staticImplements<T extends ModuleRegistery>() {
-//   return <U extends T>(constructor: U) => {constructor};
-// }
-
-// @staticImplements()
-// export class Exchange_PageModule  {
-//   static log = debug("~:app/(index)/(main)/exchange/page.tsx");
-//   static Page = Exchange_Page;
-//   static async register() {
-//     const trpc = await get_trpc();
-//     console.log("Exchange_Module register");
-//     return [];
-//   }
-//   static staticMethod() {}
-//   // instanceMethod() {}
-// }
-
-// export default Exchange_PageModule.Page
-
-// export function Exchange_Page() {
-//   return  <Categorie />
-// }

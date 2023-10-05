@@ -1,8 +1,9 @@
 //
 
-import { app_router, createContext } from ":api/trpc/[trpc]/route";
+import { createContext } from ":api/trpc/[trpc]/route";
 import { createServerSideHelpers } from "@trpc/react-query/server";
 import SuperJSON from "superjson";
+import { app_router } from "./router";
 
 //
 

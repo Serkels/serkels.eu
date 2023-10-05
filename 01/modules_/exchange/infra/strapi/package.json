@@ -1,5 +1,5 @@
 {
-  "name": "@1.modules.profile/usecases",
+  "name": "@1.modules.exchange/infra.strapi",
   "version": "0.0.0",
   "sideEffects": false,
   "private": true,
@@ -17,8 +17,9 @@
     "dev": "pnpm run build --watch"
   },
   "dependencies": {
-    "@1.modules.profile/domain": "workspace:*",
+    "@1.modules.exchange/domain": "workspace:*",
     "@1/next-tsyringe": "workspace:*",
+    "@1/strapi-openapi": "workspace:*",
     "@1/core_": "workspace:*",
     "debug": "4.3.4",
     "tsyringe": "4.8.0"

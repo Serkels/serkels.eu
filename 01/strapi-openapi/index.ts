@@ -1,7 +1,9 @@
 //
 
+import { OpenAPI_Repository } from "@1/core_";
 import createOpenapiClient, { type QuerySerializer } from "openapi-fetch";
 import { stringify } from "qs";
+import { z } from "zod";
 import type { components, paths } from "./v1";
 
 //
@@ -12,6 +14,20 @@ export type ApiClient = ReturnType<typeof createOpenapiClient<paths>>;
 
 export const querySerializer: QuerySerializer<unknown> = (q) =>
   stringify(q, { encodeValuesOnly: true });
+
+export interface TRPCOpenAPIContext {
+  openapi: OpenAPI_Repository<ApiClient>;
+  headers: Headers;
+}
+
+export const StrapiPagination_Schema = z.object({
+  pagination: z
+    .object({
+      // page: z.number().int().finite().min(0).default(1),
+      pageSize: z.number().int().finite().min(0).default(8),
+    })
+    .default({}),
+});
 
 //
 //

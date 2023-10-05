@@ -398,6 +398,108 @@ importers:
         specifier: 5.2.2
         version: 5.2.2
 
+  01/modules_/exchange/domain:
+    dependencies:
+      '@1/core_':
+        specifier: workspace:*
+        version: link:../../../core_
+      '@1/next-tsyringe':
+        specifier: workspace:*
+        version: link:../../../next-tsyringe
+      debug:
+        specifier: 4.3.4
+        version: 4.3.4(supports-color@8.1.1)
+      tsyringe:
+        specifier: 4.8.0
+        version: 4.8.0(patch_hash=36fswrcuesupx6h7mwzgbhzlue)
+    devDependencies:
+      '@1/typescript-config':
+        specifier: workspace:*
+        version: link:../../../config/typescript-config
+      '@swc/cli':
+        specifier: 0.1.62
+        version: 0.1.62(@swc/core@1.3.53)
+      '@swc/core':
+        specifier: 1.3.53
+        version: 1.3.53
+      prettier:
+        specifier: 3.0.3
+        version: 3.0.3
+      typescript:
+        specifier: 5.2.2
+        version: 5.2.2
+
+  01/modules_/exchange/infra/strapi:
+    dependencies:
+      '@1.modules.exchange/domain':
+        specifier: workspace:*
+        version: link:../../domain
+      '@1/core_':
+        specifier: workspace:*
+        version: link:../../../../core_
+      '@1/next-tsyringe':
+        specifier: workspace:*
+        version: link:../../../../next-tsyringe
+      '@1/strapi-openapi':
+        specifier: workspace:*
+        version: link:../../../../strapi-openapi
+      debug:
+        specifier: 4.3.4
+        version: 4.3.4(supports-color@8.1.1)
+      tsyringe:
+        specifier: 4.8.0
+        version: 4.8.0(patch_hash=36fswrcuesupx6h7mwzgbhzlue)
+    devDependencies:
+      '@1/typescript-config':
+        specifier: workspace:*
+        version: link:../../../../config/typescript-config
+      '@swc/cli':
+        specifier: 0.1.62
+        version: 0.1.62(@swc/core@1.3.53)
+      '@swc/core':
+        specifier: 1.3.53
+        version: 1.3.53
+      prettier:
+        specifier: 3.0.3
+        version: 3.0.3
+      typescript:
+        specifier: 5.2.2
+        version: 5.2.2
+
+  01/modules_/exchange/usecases:
+    dependencies:
+      '@1.modules.exchange/domain':
+        specifier: workspace:*
+        version: link:../domain
+      '@1/core_':
+        specifier: workspace:*
+        version: link:../../../core_
+      '@1/next-tsyringe':
+        specifier: workspace:*
+        version: link:../../../next-tsyringe
+      debug:
+        specifier: 4.3.4
+        version: 4.3.4(supports-color@8.1.1)
+      tsyringe:
+        specifier: 4.8.0
+        version: 4.8.0(patch_hash=36fswrcuesupx6h7mwzgbhzlue)
+    devDependencies:
+      '@1/typescript-config':
+        specifier: workspace:*
+        version: link:../../../config/typescript-config
+      '@swc/cli':
+        specifier: 0.1.62
+        version: 0.1.62(@swc/core@1.3.53)
+      '@swc/core':
+        specifier: 1.3.53
+        version: 1.3.53
+      prettier:
+        specifier: 3.0.3
+        version: 3.0.3
+      typescript:
+        specifier: 5.2.2
+        version: 5.2.2
+
   01/modules_/notification/domain:
     dependencies:
       '@1/core_':
@@ -533,9 +635,9 @@ importers:
 
   01/modules_/profile/infra/strapi:
     dependencies:
-      '@1.modules.auth/domain':
+      '@1.modules.profile/domain':
         specifier: workspace:*
-        version: link:../../../auth/domain
+        version: link:../../domain
       '@1/core_':
         specifier: workspace:*
         version: link:../../../../core_
@@ -570,9 +672,9 @@ importers:
 
   01/modules_/profile/usecases:
     dependencies:
-      '@1.modules.auth/domain':
+      '@1.modules.profile/domain':
         specifier: workspace:*
-        version: link:../../auth/domain
+        version: link:../domain
       '@1/core_':
         specifier: workspace:*
         version: link:../../../core_
@@ -983,6 +1085,15 @@ importers:
       '@1.modules.auth/usecases':
         specifier: workspace:*
         version: link:../01/modules_/auth/usecases
+      '@1.modules.exchange/domain':
+        specifier: workspace:*
+        version: link:../01/modules_/exchange/domain
+      '@1.modules.exchange/infra.strapi':
+        specifier: workspace:*
+        version: link:../01/modules_/exchange/infra/strapi
+      '@1.modules.exchange/usecases':
+        specifier: workspace:*
+        version: link:../01/modules_/exchange/usecases
       '@1.modules.profile/domain':
         specifier: workspace:*
         version: link:../01/modules_/profile/domain

@@ -1,17 +1,15 @@
 //
 
-import type { OpenAPI_Repository } from "@1/core_";
-import type { ApiClient } from "@1/strapi-openapi";
+import type { TRPCOpenAPIContext } from "@1/strapi-openapi";
 import { initTRPC } from "@trpc/server";
 import { z } from "zod";
 
 //
 
-const t = initTRPC
-  .context<{ openapi: OpenAPI_Repository<ApiClient>; headers: Headers }>()
-  .create();
-export const router = t.router;
-export const procedure = t.procedure;
+const { router, procedure } = initTRPC.context<TRPCOpenAPIContext>().create();
+
+//
+
 export const passwordlessRouter = router({
   login: procedure
     .input(
@@ -42,7 +40,7 @@ export const passwordlessRouter = router({
 
   //
 
-  send_magic_link: t.procedure
+  send_magic_link: procedure
     .input(
       z.object({
         email: z.string().email(),

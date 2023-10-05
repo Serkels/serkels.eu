@@ -1,3 +1,9 @@
 //
 
-export function useActiveRoutes() {}
+export function useActiveRoutes({}: Options) {}
+
+//
+
+interface Options {
+
+}
