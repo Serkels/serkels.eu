@@ -13,6 +13,42 @@ export function Exchange_List() {
         null,
         2,
       )}
+
+      {JSON.stringify(
+        { data: query_info.data, status: query_info.status },
+        null,
+        2,
+      )}
+
+      {JSON.stringify(
+        { data: query_info.data, status: query_info.status },
+        null,
+        2,
+      )}
+
+      {JSON.stringify(
+        { data: query_info.data, status: query_info.status },
+        null,
+        2,
+      )}
+
+      {JSON.stringify(
+        { data: query_info.data, status: query_info.status },
+        null,
+        2,
+      )}
+
+      {JSON.stringify(
+        { data: query_info.data, status: query_info.status },
+        null,
+        2,
+      )}
+
+      {JSON.stringify(
+        { data: query_info.data, status: query_info.status },
+        null,
+        2,
+      )}
     </code>
   );
 }

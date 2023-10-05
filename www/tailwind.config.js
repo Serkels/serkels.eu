@@ -1,6 +1,7 @@
 //
 
 const config = require("@1/tailwindcss-config/tailwind.config.js");
+const { withTV } = require("tailwind-variants/transformer");
 
 module.exports = {
   ...config,
@@ -11,3 +12,5 @@ module.exports = {
   ],
   plugins: [...config.plugins],
 };
+
+module.exports = withTV(module.exports);

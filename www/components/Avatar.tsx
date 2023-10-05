@@ -4,30 +4,37 @@ import { School } from "@1/ui/icons";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { useMemo, type ComponentPropsWithoutRef, type ReactNode } from "react";
+import {
+  forwardRef,
+  useMemo,
+  type ComponentPropsWithoutRef,
+  type ElementRef,
+  type ReactNode,
+} from "react";
 import { tv, type ClassProp, type VariantProps } from "tailwind-variants";
 import { P, match } from "ts-pattern";
 
 //
 
-export function Avatar(
-  props: ComponentPropsWithoutRef<"img"> & { u?: string | number | undefined },
-) {
-  const { className, u, ...other_props } = props;
-
-  const { data: session } = useSession();
-  const id = u ?? session?.user?.id;
-
-  const image = useMemo(() => `/api/v1/avatars/u/${id}`, [id]);
-
-  if (!id) {
-    return null;
-  }
-
-  return (
-    <img className={avatar_img({ className })} src={image} {...other_props} />
-  );
+interface AvatarProps extends ComponentPropsWithoutRef<"figure"> {
+  u?: string | number | undefined;
 }
+export const Avatar = forwardRef<ElementRef<"figure">, AvatarProps>(
+  function Avatar(props, forwardedRef) {
+    const { className, u, ...other_props } = props;
+
+    const { data: session } = useSession();
+    const id = u ?? session?.user?.id ?? "unknown";
+
+    const image = useMemo(() => `/api/v1/avatars/u/${id}`, [id]);
+
+    return (
+      <figure className={avatar_img({ className })} ref={forwardedRef}>
+        <img src={image} alt={`Avatar of the user ${id}`} {...other_props} />
+      </figure>
+    );
+  },
+);
 
 export function Link_Avatar(
   props: ComponentPropsWithoutRef<"img"> & { u?: string | number | undefined },
@@ -49,7 +56,9 @@ export function Link_Avatar(
     </Link>
   );
 }
-export const avatar_img = tv({ base: "max-w-full rounded-full object-cover" });
+export const avatar_img = tv({
+  base: "overflow-hidden rounded-full object-cover",
+});
 
 export function AvatarMediaVertical(props: ComponentPropsWithoutRef<"figure">) {
   const { className, ...other_props } = props;

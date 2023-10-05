@@ -32,9 +32,9 @@ export interface Props
 //
 
 const style = tv({
-  base: ["hidden", "md:col-span-2", "md:block", "xl:col-span-3"],
+  base: [],
   slots: {
     title: ["mb-7", "text-2xl", "font-bold", "uppercase", "text-Congress_Blue"],
-    article: ["sticky", "top-[theme(spacing.14)]", "pt-10"],
+    article: ["pt-10"],
   },
 });

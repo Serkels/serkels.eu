@@ -1,26 +1,19 @@
 //
 
-import Link from "next/link";
+import { CategoriesList, SearchForm } from "./page.client";
 
 export default function Page() {
   return (
     <article>
-      <h2 className="mb-7 text-center  text-lg font-bold text-Congress_Blue">
-        Voir aussi
-      </h2>
+      <h3 className="text-2xl font-bold uppercase text-Congress_Blue">
+        Échanges
+      </h3>
 
-      <Link href="/guide">
-        <figure className="bg-secondary-blue-gradient px-4 py-6 text-white">
-          <h3 className="text-center text-lg uppercase ">
-            Le guide d'étudiant
-          </h3>
-          <div className="h-[110px]"></div>
-          <figcaption className=" text-xs">
-            Trouverez toutes les informations utiles pour bénéficier d'une
-            bourse, faire une demande de logement, bénéficier d'aides …
-          </figcaption>
-        </figure>
-      </Link>
+      <SearchForm />
+
+      <hr className="my-10" />
+
+      <CategoriesList />
     </article>
   );
 }

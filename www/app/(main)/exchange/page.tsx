@@ -22,7 +22,7 @@ export default async function Outlet(props: any) {
 
 export async function Page() {
   return (
-    <main className="col-span-full my-10 md:col-span-6 xl:col-span-6 ">
+    <main>
       <Suspense>
         <Exchange_List />
       </Suspense>
