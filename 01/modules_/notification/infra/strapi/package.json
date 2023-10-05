@@ -1,5 +1,5 @@
 {
-  "name": "@1.modules.auth/infra.strapi",
+  "name": "@1.modules.notification/infra.strapi",
   "version": "0.0.0",
   "sideEffects": false,
   "private": true,

@@ -1,5 +1,5 @@
 {
-  "name": "@1.modules.auth/infra.strapi",
+  "name": "@1.modules.notification/usecases",
   "version": "0.0.0",
   "sideEffects": false,
   "private": true,
@@ -19,7 +19,6 @@
   "dependencies": {
     "@1.modules.auth/domain": "workspace:*",
     "@1/next-tsyringe": "workspace:*",
-    "@1/strapi-openapi": "workspace:*",
     "@1/core_": "workspace:*",
     "debug": "4.3.4",
     "tsyringe": "4.8.0"

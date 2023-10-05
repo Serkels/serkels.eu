@@ -3,7 +3,7 @@
 import type { InjectionToken } from "tsyringe";
 import { z } from "zod";
 
-export * from "rich-domain";
+export { Entity, Result } from "rich-domain";
 
 //
 

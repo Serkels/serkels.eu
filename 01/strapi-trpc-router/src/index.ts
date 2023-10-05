@@ -1,6 +1,6 @@
 //
 
-import type { Notification_New_Answer_Props } from "@1/modules/notification/domain";
+import type { Notification_New_Answer_Props } from "@1.modules.notification/domain";
 import { initTRPC } from "@trpc/server";
 import { type Observable } from "@trpc/server/observable";
 import SuperJSON from "superjson";

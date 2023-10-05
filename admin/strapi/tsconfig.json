@@ -5,6 +5,7 @@
     "rootDir": ".",
     "baseUrl": ".",
     "paths": {
+      "@1/core_/domain": ["../../01/core_/dist/domain"],
       "~/*": ["*"]
     },
     "resolveJsonModule": true,
