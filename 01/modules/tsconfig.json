@@ -8,6 +8,6 @@
     "composite": true
   },
   "include": ["**/*.ts", "*/**/*.json"],
-  "exclude": ["**/*.test.ts"],
+  "exclude": ["**/*.test.ts", "./_"],
   "references": [{ "path": "../core" }]
 }

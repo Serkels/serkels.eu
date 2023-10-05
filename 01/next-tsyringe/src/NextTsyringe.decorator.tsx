@@ -22,6 +22,10 @@ export type RegistrationFn = ({
   params: Record<string, string>;
 }) => Promise<Registration[]>;
 
+export interface NextTsyringeRegister {
+  register?: RegistrationFn;
+}
+
 // TODO(douglasdutiel): remove zod dependency
 // one might not need zod here...
 const Scope_Schema = z.union([
@@ -41,7 +45,7 @@ export interface LayoutModuleLike {
 
 export class NextTsyringe {
   static PARENT = Symbol.for("parent");
-  static REGISTRATIONS = Symbol.for("registrations");
+  static NAME = Symbol.for("name");
   static CONTAINER = Symbol.for("container");
 
   //
@@ -56,32 +60,75 @@ export class NextTsyringe {
     root_container?: DependencyContainerEX;
   }) {
     return function module_decorator<T>(
+<<<<<<< HEAD
       target: constructor<T> & LayoutModuleLike,
+||||||| 603e2f2
+      target: constructor<T> & {
+        Provider: (props: PropsWithChildren<any>) => any;
+      },
+=======
+      target: constructor<T> & {
+        Provider: (props: PropsWithChildren<any>) => any;
+        register?: RegistrationFn;
+      },
+>>>>>>> master
     ) {
+<<<<<<< HEAD
       const name = target.name ?? `NextTsyringe.Module ${target}`;
       const log = target.log ?? logger.extend(`🎍 ${name}`);
       log(`🪄 ${name}`);
+||||||| 603e2f2
+      const name = target.name ?? "NextTsyringe.Module";
+      const log = logger.extend(`🎍 ${name}`);
+      log(target);
+=======
+      const name = target.name ?? "NextTsyringe.Module";
+      const log = logger.extend(`🎍 ${name}`);
+      Reflect.defineMetadata(NextTsyringe.NAME, name, target);
 
-      const nope_registrationsFn = () => {
+      log(target);
+>>>>>>> master
+
+      const nope_registrationsFn: RegistrationFn = () => {
         log("nothing to register");
-        return [] as Registration[];
+        return Promise.resolve([] as Registration[]);
       };
       const register_fn = target.register ?? nope_registrationsFn;
 
       Reflect.defineMetadata(NextTsyringe.PARENT, parent, target);
-      Reflect.defineMetadata(NextTsyringe.REGISTRATIONS, register_fn, target);
 
       const parent_container: DependencyContainerEX =
         Reflect.getMetadata(NextTsyringe.CONTAINER, parent ?? {}) ??
         root_container;
       const container = parent_container.createNamedChildContainer(name);
+      log(`⏮️💉 ${container.id} (${parent_container.id})`);
+
       Reflect.defineMetadata(NextTsyringe.CONTAINER, container, target);
 
       async function register_parent(
+<<<<<<< HEAD
         module_target: object & LayoutModuleLike,
+||||||| 603e2f2
+        module_target: object,
+=======
+        module_target: {
+          register?: RegistrationFn;
+        },
+>>>>>>> master
         { params }: { params: Record<string, string> },
       ) {
+<<<<<<< HEAD
         const parent_module: LayoutModuleLike = Reflect.getMetadata(
+||||||| 603e2f2
+        const parent_module: RegistrationFn = Reflect.getMetadata(
+=======
+        const name: string = Reflect.getMetadata(
+          NextTsyringe.NAME,
+          module_target,
+        );
+        log(`⏮️🎍 ${name}`);
+        const parent_module = Reflect.getMetadata(
+>>>>>>> master
           NextTsyringe.PARENT,
           module_target,
         );
@@ -94,8 +141,17 @@ export class NextTsyringe {
 
         //
 
+<<<<<<< HEAD
         const register_module_fn =
           module_target.register ?? nope_registrationsFn;
+||||||| 603e2f2
+        const register_module_fn: RegistrationFn =
+          Reflect.getMetadata(NextTsyringe.REGISTRATIONS, module_target) ??
+          nope_registrationsFn;
+=======
+        const register_module_fn: RegistrationFn =
+          module_target.register ?? nope_registrationsFn;
+>>>>>>> master
         const container: DependencyContainerEX = Reflect.getMetadata(
           NextTsyringe.CONTAINER,
           module_target,

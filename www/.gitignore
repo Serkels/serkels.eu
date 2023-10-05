@@ -37,5 +37,10 @@ next-env.d.ts
 
 # Sentry Auth Token
 .sentryclirc
+<<<<<<< HEAD
 
 _
+||||||| 603e2f2
+=======
+_
+>>>>>>> master
