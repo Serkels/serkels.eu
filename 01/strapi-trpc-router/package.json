@@ -5,9 +5,12 @@
   "type": "module",
   "exports": {
     ".": {
-      "import": "./dist/esm/index.js",
-      "main": "./dist/cjs/index.js",
-      "types": "./src/index.ts"
+      "node": {
+        "module": "./dist/esm/index.js",
+        "require": "./dist/cjs/index.js",
+        "import": "./dist/esm/index.js",
+        "types": "./src/index.ts"
+      }
     }
   },
   "main": "./dist/cjs/index.js",
