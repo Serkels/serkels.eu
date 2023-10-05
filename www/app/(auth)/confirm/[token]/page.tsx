@@ -1,7 +1,7 @@
 //
 
 import type { Metadata, ResolvingMetadata } from "next";
-import { ConfirmPanel } from "./page.client";
+import Link from "next/link";
 
 //
 
@@ -19,7 +19,20 @@ export async function generateMetadata(
 export default async function Page({ params }: { params: { token: string } }) {
   const { token } = params;
 
-  return <ConfirmPanel token={token} />;
+  return (
+    <div>
+      <p className="mx-auto max-w-xl text-center text-xl">
+        Pour terminer le processus de vérification, veuillez cliquer sur le
+        bouton ci-dessous :
+      </p>
+      <Link
+        href={`/confirm/${token}/verifing`}
+        className="mx-auto my-6 block w-fit rounded-sm bg-white p-3 font-bold text-black"
+      >
+        Confirm
+      </Link>
+    </div>
+  );
 }
 
 //

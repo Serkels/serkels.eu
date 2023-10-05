@@ -1,12 +1,10 @@
 //
 
-import "reflect-metadata";
-
 //
 
-export * from "rich-domain";
+export {} from "rich-domain";
 
-export * from "./error";
-export * from "./infra/dto";
-export * from "./infra/openapi.repository";
-export * from "./infra/trpc.context";
+export { HTTPError } from "./error";
+export {} from "./infra/dto";
+export { OpenAPI_Repository } from "./infra/openapi.repository";
+export { OpenApiTrpc } from "./infra/trpc.context";

@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../src/domain/mapper.ts"],"sourcesContent":["//\n\nimport type { Entity } from \".\";\n\n//\n\nexport interface Mapper<DomainEntity extends Entity<any>, PersistentRecord> {\n  toPersistence(entity: DomainEntity): PersistentRecord;\n  toDomain(record: PersistentRecord): DomainEntity;\n}\n"],"names":[],"mappings":"AAAA,EAAE;AAEF,WAOC"}

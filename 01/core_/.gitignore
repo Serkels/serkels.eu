@@ -1,6 +1,5 @@
-#
+# Dependency directories
+node_modules/
 
-tsconfig.tsbuildinfo
-*.d.*
-*.js
-*.jsx
+# SWC
+dist

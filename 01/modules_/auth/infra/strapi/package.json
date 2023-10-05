@@ -1,6 +1,7 @@
 {
   "name": "@1.modules.auth/infra.strapi",
   "version": "0.0.0",
+  "sideEffects": false,
   "private": true,
   "type": "module",
   "exports": {

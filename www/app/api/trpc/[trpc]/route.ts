@@ -1,5 +1,8 @@
 //
 
+import "reflect-metadata";
+
+//
 import { authOptions } from ":api/auth/[...nextauth]/route";
 import { fromServer } from ":api/v1";
 import { passwordlessRouter } from "@1.modules.auth/infra.strapi";

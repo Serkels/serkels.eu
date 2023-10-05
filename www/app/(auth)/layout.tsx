@@ -16,6 +16,8 @@ const TocTocLogo = dynamic(() => import(":components/TocTocLogo"), {
   },
 });
 
+//
+
 export default function Layout({ children }: PropsWithChildren) {
   return (
     <div className="grid min-h-screen grid-rows-[max-content_1fr_max-content]">
