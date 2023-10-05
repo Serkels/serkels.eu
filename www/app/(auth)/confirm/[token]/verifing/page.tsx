@@ -19,8 +19,13 @@ export async function generateMetadata(
   _: never,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
+  const title = `Verifying :: ${(await parent).title?.absolute}`;
+
   return {
-    title: `Verifying :: ${(await parent).title?.absolute}`,
+    title,
+    openGraph: {
+      title,
+    },
   };
 }
 
