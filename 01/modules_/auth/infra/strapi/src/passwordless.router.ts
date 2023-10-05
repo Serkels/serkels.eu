@@ -3,12 +3,7 @@
 import type { OpenAPI_Repository } from "@1/core_";
 import type { ApiClient } from "@1/strapi-openapi";
 import { initTRPC } from "@trpc/server";
-import debug from "debug";
 import { z } from "zod";
-
-//
-
-const log = debug("~:infra/strapi/src/passwordless.router.ts");
 
 //
 

@@ -3,7 +3,6 @@
 import type { OpenAPI_Repository } from "@1/core_";
 import type { ApiClient } from "@1/strapi-openapi";
 import { initTRPC } from "@trpc/server";
-import { z } from "zod";
 
 //
 
@@ -12,16 +11,17 @@ const t = initTRPC
   .create();
 
 export const profileRouter = t.router({
-  me: t.procedure.query(({ ctx: { headers, openapi } }) => {
+  me: t.procedure.query(async ({ ctx: { headers, openapi } }) => {
     const {
       client: { GET },
     } = openapi;
-    return openapi.fetch(
+    const data = await openapi.fetch(
       GET("/user-profiles/me", {
         headers,
       }),
     );
+    return data;
   }),
 });
 
-export type ProfileRouter = typeof profileRouter; //
+export type ProfileRouter = typeof profileRouter;
