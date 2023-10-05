@@ -1,6 +1,7 @@
 "use client";
 
 import { HTTPError } from "@1/core_";
+import { Spinner } from "@1/ui/components/Spinner";
 import { useQuery } from "@tanstack/react-query";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -24,7 +25,7 @@ export default function Verifying_Flow({ token }: { token: string }) {
       .otherwise(() => {});
   }, [query_info.status]);
 
-  return null;
+  return <Spinner />;
 }
 
 //

@@ -209,12 +209,9 @@ importers:
       debug:
         specifier: 4.3.4
         version: 4.3.4(supports-color@8.1.1)
-      modern-errors:
-        specifier: 6.0.0
-        version: 6.0.0
-      modern-errors-serialize:
-        specifier: 5.0.0
-        version: 5.0.0(modern-errors@6.0.0)
+      error-custom-class:
+        specifier: 9.0.0
+        version: 9.0.0
       react:
         specifier: 18.2.0
         version: 18.2.0
