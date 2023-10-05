@@ -24,25 +24,6 @@
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   // "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-<<<<<<< HEAD
   "exclude": ["_", ".next", "node_modules", "**/*.test.ts"],
   "references": []
-||||||| 603e2f2
-  "exclude": [
-    ".next",
-    "node_modules",
-    "../node_modules/bun-types/types.d.ts",
-    "**/*.test.ts"
-  ],
-  "references": [{ "path": "../01/core" }, { "path": "../01/modules" }]
-=======
-  "exclude": [
-    ".next",
-    "_",
-    "node_modules",
-    "../node_modules/bun-types/types.d.ts",
-    "**/*.test.ts"
-  ],
-  "references": [{ "path": "../01/core" }, { "path": "../01/modules" }]
->>>>>>> master
 }
