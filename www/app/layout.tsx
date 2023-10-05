@@ -26,6 +26,11 @@ export const metadata: Metadata = {
   title: "Toc-Toc",
   description: "Réseau d'échanges étudiant",
   icons: { icon: "/favicon.svg" },
+  openGraph: {
+    title: "Toc-Toc",
+    description: "Réseau d'échanges étudiant",
+    url: new URL("https://toc-toc.org"),
+  },
 };
 
 //
