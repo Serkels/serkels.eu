@@ -3,7 +3,7 @@
 import {
   createClient,
   type ApiClient as OpenApiClient,
-} from "@1/strapi-openapi";
+} from "@1/strapi-trpc-router";
 import { type QuerySerializer } from "openapi-fetch";
 import { stringify } from "qs";
 

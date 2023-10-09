@@ -28,10 +28,10 @@ export class Get_Last_Message_ById_UseCase {
 
     return useQuery({
       enabled: info.isSuccess,
-      queryFn: () => info.data?.pages.pop(),
+      queryFn: () => info.data?.pages,
       queryKey: Deal_QueryKeys.last_message(deal_id.value()),
-      select: (last_message) =>
-        last_message ??
+      select: (messages) =>
+        messages?.pop() ??
         Message.create({
           content: "...",
         }).value(),

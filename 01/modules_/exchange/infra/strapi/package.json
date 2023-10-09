@@ -19,7 +19,7 @@
   "dependencies": {
     "@1.modules.exchange/domain": "workspace:*",
     "@1/next-tsyringe": "workspace:*",
-    "@1/strapi-openapi": "workspace:*",
+    "@1/strapi-trpc-router": "workspace:*",
     "@1/core_": "workspace:*",
     "debug": "4.3.4",
     "tsyringe": "4.8.0"

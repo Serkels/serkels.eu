@@ -1,23 +1,12 @@
 //
 
-import { exchange_router } from "@1.modules.exchange/infra.strapi";
-import type { TRPCOpenAPIContext } from "@1/strapi-openapi";
+import {
+  exchange_router,
+  message_router,
+} from "@1.modules.exchange/infra.strapi";
+import type { AppContext, TRPCOpenAPIContext } from "@1/strapi-trpc-router";
 import { initTRPC } from "@trpc/server";
 import SuperJSON from "superjson";
-
-//
-
-export interface AppContext {
-  // subscription_to: {
-  //   notifications: (
-  //     id: number,
-  //   ) => Observable<Notification_New_Answer_Props, unknown>;
-  //   messages: (
-  //     id: number,
-  //   ) => Observable<Notification_New_Answer_Props, unknown>;
-  // };
-  // verify_jwt: (token: string) => Promise<{ id: number }>;
-}
 
 //
 
@@ -38,7 +27,10 @@ export const app_router = t.mergeRouters(
     //     return ctx.subscription_to.notifications(user_id);
     //   }),
   }),
-  t.router({ exchange: exchange_router }),
+  t.router({
+    exchange: exchange_router,
+    deal: t.router({ message: message_router }),
+  }),
 );
 
 export type AppRouter = typeof app_router;

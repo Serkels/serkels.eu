@@ -77,6 +77,11 @@ function AuthSessionProvider({ children }: PropsWithChildren) {
 }
 
 const AppContainer = create_container_provider(() => {
+  console.log("");
+  console.log("src/app/layout.client.tsx");
+  console.log(TRPC_React);
+  console.log("");
+
   return [
     { token: "foo", useValue: "bar" },
     {
@@ -84,10 +89,10 @@ const AppContainer = create_container_provider(() => {
       useValue: fromClient,
     },
 
-    {
-      token: TRPC_REACT,
-      useFactory: TRPC_React,
-    },
+    // {
+    //   token: TRPC_REACT,
+    //   useFactory: (TRPC_React),
+    // },
     // {
     //   token: TRPC_REACT,
     //   useFactory: (à),

@@ -1,7 +1,6 @@
 //
 
 import type { Metadata, ResolvingMetadata } from "next";
-import Nest from "react-nest";
 import tw from "tailwind-styled-components";
 import { Deal_Provider, Exchange_Provider } from "../Deal_Provider";
 import { Deal_Discussion } from "./Deal_Discussion";
@@ -30,30 +29,35 @@ export default async function Page({
   const exchange_id = Number(params.exchange_id);
   const deal_id = Number(params.deal_id);
 
+  console.log();
+  console.log(
+    "src/app/(main)/door/[code]/(private)/my/exchanges/[exchange_id]/deals/[deal_id]/page.tsx",
+  );
+  console.log({ deal_id, exchange_id });
+  console.log();
+
   return (
-    <Nest>
-      <Main>
-        <Sticky_Container>
-          <Exchange_Provider id={exchange_id}>
-            <Deal_Provider id={deal_id}>
-              <Header>
-                <Thread_Avatar />
-              </Header>
+    <Main>
+      <Sticky_Container>
+        <Exchange_Provider id={exchange_id}>
+          <Deal_Provider id={deal_id}>
+            <Header>
+              <Thread_Avatar />
+            </Header>
 
-              <Scrollable_Part>
-                <Deal_Discussion />
-              </Scrollable_Part>
+            <Scrollable_Part>
+              <Deal_Discussion />
+            </Scrollable_Part>
 
-              <Footer>
-                <Deal_Discussion_Form />
+            <Footer>
+              <Deal_Discussion_Form />
 
-                <SendActionGroup />
-              </Footer>
-            </Deal_Provider>
-          </Exchange_Provider>
-        </Sticky_Container>
-      </Main>
-    </Nest>
+              <SendActionGroup />
+            </Footer>
+          </Deal_Provider>
+        </Exchange_Provider>
+      </Sticky_Container>
+    </Main>
   );
 }
 

@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@1/core": "workspace:*",
-    "@1/eslint-config": "workspace:*",
+    "@1.bff/trpc": "workspace:*",
     "@1/modules": "workspace:*",
     "@1/strapi-openapi": "workspace:*",
     "@1/strapi-trpc-router": "workspace:*",
@@ -59,6 +59,7 @@
     "zod-validation-error": "1.5.0"
   },
   "devDependencies": {
+    "@1/eslint-config": "workspace:*",
     "@douglasduteil/datatypes...hours-to-seconds": "workspace:*",
     "@next/bundle-analyzer": "13.5.2",
     "@sentry/cli": "2.20.7",

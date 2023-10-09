@@ -50,7 +50,6 @@ export class Get_Messages_ById_UseCase {
           .map((page) => page.data!)
           .flat()
           .map((data) => {
-            console.log({ data: { attributes: data, id: data.id } });
             return Message_Record.pipe(z.instanceof(Message)).parse(
               { data: { attributes: data, id: data.id } },
               {

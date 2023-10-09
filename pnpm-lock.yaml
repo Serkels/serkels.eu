@@ -332,9 +332,9 @@ importers:
       '@1/next-tsyringe':
         specifier: workspace:*
         version: link:../../../../next-tsyringe
-      '@1/strapi-openapi':
+      '@1/strapi-trpc-router':
         specifier: workspace:*
-        version: link:../../../../strapi-openapi
+        version: link:../../../../strapi-trpc-router
       debug:
         specifier: 4.3.4
         version: 4.3.4(supports-color@8.1.1)
@@ -450,6 +450,34 @@ importers:
       '@types/node':
         specifier: 20.6.3
         version: 20.6.3
+      prettier:
+        specifier: 3.0.3
+        version: 3.0.3
+      typescript:
+        specifier: 5.2.2
+        version: 5.2.2
+
+  01/trpc-bff:
+    dependencies:
+      '@1.modules.exchange/infra.strapi':
+        specifier: workspace:*
+        version: link:../modules_/exchange/infra/strapi
+      '@1/strapi-trpc-router':
+        specifier: workspace:*
+        version: link:../strapi-trpc-router
+      '@trpc/server':
+        specifier: 10.38.3
+        version: 10.38.3
+      superjson:
+        specifier: 1.13.1
+        version: 1.13.1
+    devDependencies:
+      '@1/typescript-config':
+        specifier: workspace:*
+        version: link:../config/typescript-config
+      openapi-fetch:
+        specifier: 0.7.7
+        version: 0.7.7
       prettier:
         specifier: 3.0.3
         version: 3.0.3
@@ -709,12 +737,12 @@ importers:
 
   www:
     dependencies:
+      '@1.bff/trpc':
+        specifier: workspace:*
+        version: link:../01/trpc-bff
       '@1/core':
         specifier: workspace:*
         version: link:../01/core
-      '@1/eslint-config':
-        specifier: workspace:*
-        version: link:../01/config/eslint-config
       '@1/modules':
         specifier: workspace:*
         version: link:../01/modules
@@ -854,6 +882,9 @@ importers:
         specifier: 1.5.0
         version: 1.5.0(zod@3.22.2)
     devDependencies:
+      '@1/eslint-config':
+        specifier: workspace:*
+        version: link:../01/config/eslint-config
       '@douglasduteil/datatypes...hours-to-seconds':
         specifier: workspace:*
         version: link:../packages/@douglasduteil/datatypes...hours-to-seconds

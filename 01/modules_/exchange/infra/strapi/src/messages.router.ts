@@ -13,10 +13,11 @@ const { router, procedure } = initTRPC.context<TRPCOpenAPIContext>().create();
 
 //
 
-export const exchange_router = router({
+export const message_router = router({
   all: procedure
     .input(
       StrapiPagination_Schema.augment({
+        deal_id: z.number(),
         cursor: z.number().nullish(),
         filters: z
           .object({
@@ -54,9 +55,10 @@ export const exchange_router = router({
       };
 
       const data = await openapi.fetch(
-        GET("/exchanges", {
+        GET("/deals/{id}/messages", {
           headers,
           params: {
+            path: { id: input.deal_id },
             query: {
               filters,
               ...({ pagination } as any),

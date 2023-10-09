@@ -5,7 +5,6 @@ import { Exchange } from "@1/modules/exchange/domain";
 import { Exchange_Record } from "@1/modules/exchange/infra/strapi";
 import { notFound } from "next/navigation";
 import type { PropsWithChildren } from "react";
-import Nest from "react-nest";
 import { tv } from "tailwind-variants";
 import { z } from "zod";
 import { injector_session } from "~/core/react";
@@ -21,21 +20,19 @@ export default function Layout({
   params,
 }: PropsWithChildren<{ params: any; nav: React.ReactNode }>) {
   return (
-    <Nest>
-      <Deal_Route_Provider />
-      {/* <Exchange_ValueProvider /> */}
+    // <Deal_Route_Provider ></Deal_Route_Provider>
+    // {/* <Exchange_ValueProvider /> */}
+    // <Aside params={params} nav={nav} />
+
+    // {/* */}
+
+    // {children}
+    <Deal_Route_Provider>
+      {/* <Deals_Aside_Nav> */}
       <Aside params={params} nav={nav} />
-
-      {/* */}
-
+      {/* </Deals_Aside_Nav> */}
       {children}
-    </Nest>
-    // <Deal_Route_Provider>
-    //   <Deals_Aside_Nav>
-    //     <MyDeals />
-    //   </Deals_Aside_Nav>
-    //   {children}
-    // </Deal_Route_Provider>
+    </Deal_Route_Provider>
   );
 }
 
