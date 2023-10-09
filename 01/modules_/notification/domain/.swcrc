@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json.schemastore.org/swcrc",
+  "jsc": {
+    "parser": {
+      "decorators": true,
+      "syntax": "typescript",
+      "tsx": true
+    },
+    "target": "esnext",
+    "transform": {
+      "decoratorMetadata": true,
+      "legacyDecorator": true,
+      "react": { "runtime": "automatic", "useBuiltins": true }
+    }
+  },
+  "module": {
+    "type": "es6"
+  },
+  "sourceMaps": true
+}

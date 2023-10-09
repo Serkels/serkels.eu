@@ -2,7 +2,9 @@
   "extends": ["@1/typescript-config/react.json"],
   "compilerOptions": {
     "composite": true,
-    "lib": ["ESNext"]
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": ["ESNext", "DOM"]
   },
   "include": ["**/*.ts", "**/*.tsx"],
   "references": []

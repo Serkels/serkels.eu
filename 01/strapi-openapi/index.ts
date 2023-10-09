@@ -1,7 +1,54 @@
 //
 
-import type { components } from "./v1";
+import { OpenAPI_Repository } from "@1/core/infra/openapi.repository";
+import createOpenapiClient, { type QuerySerializer } from "openapi-fetch";
+import { stringify } from "qs";
+import { z } from "zod";
+import type { components, paths } from "./v1";
 
+//
+
+export const createClient = createOpenapiClient<paths>;
+export type ApiClient = ReturnType<typeof createOpenapiClient<paths>>;
+
+export const querySerializer: QuerySerializer<unknown> = (q) =>
+  stringify(q, { encodeValuesOnly: true });
+
+export interface TRPCOpenAPIContext {
+  openapi: OpenAPI_Repository<ApiClient>;
+  headers: Headers;
+}
+
+export const StrapiPagination_Schema = z.object({
+  pagination: z
+    .object({
+      // page: z.number().int().finite().min(0).default(1),
+      pageSize: z.number().int().finite().min(0).default(8),
+    })
+    .default({}),
+});
+
+export function getNextPageParam<
+  TQueryFnData extends Common_PaginationMeta_Schema | undefined,
+>(lastPage: TQueryFnData) {
+  const pagination = lastPage?.meta?.pagination ?? { pageCount: 0, page: 0 };
+  const { pageCount, page } = pagination;
+  if (pageCount === undefined || page === undefined) return;
+  return page >= pageCount ? undefined : page + 1;
+}
+
+export function getPreviousPageParam<
+  TQueryFnData extends Common_PaginationMeta_Schema | undefined,
+>(lastPage: TQueryFnData) {
+  const pagination = lastPage?.meta?.pagination ?? { page: 0 };
+  const { page } = pagination;
+  if (page === undefined) return;
+
+  return page > 0 ? page - 1 : undefined;
+}
+
+//
+//
 //
 
 type Schemas = components["schemas"];

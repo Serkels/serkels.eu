@@ -1,6 +1,7 @@
 //
 
 import { Lifecycle, inject, scoped } from "@1/core/di";
+import type { UID } from "@1/core/domain";
 import type { Strapi_Query_Params } from "@1/modules/common";
 import { Message } from "@1/modules/inbox/domain";
 import {
@@ -29,18 +30,18 @@ export class Get_Messages_ById_UseCase {
 
   //
 
-  execute(id: number, query_params: Strapi_Query_Params<Message_Schema>) {
+  execute(deal_id: UID, query_params: Strapi_Query_Params<Message_Schema>) {
     return useInfiniteQuery({
       enabled: this.repository.is_authorized,
       queryFn: () =>
-        this.repository.find_all({
+        this.repository.find_all(deal_id, {
           ...query_params,
           pagination: {
             pageSize: 25,
             page: query_params.pagination?.page ?? 1,
           },
         }),
-      queryKey: Deal_QueryKeys.messages(id),
+      queryKey: Deal_QueryKeys.messages(deal_id.value()),
       getNextPageParam,
       getPreviousPageParam,
       select: (data) => ({

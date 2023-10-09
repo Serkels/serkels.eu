@@ -2,21 +2,16 @@
 
 import { Id } from "@1/core/domain";
 import { UnknownError } from "@1/core/error";
-import { useContainer, useInject } from "@1/core/ui/di.context.client";
-import { Deal } from "@1/modules/deal/domain";
+import { useInject } from "@1/core/ui/di.context.client";
 import { Message, Thread } from "@1/modules/inbox/domain";
 import { Button } from "@1/ui/components/ButtonV";
-import { useEffect } from "react";
 import ContentLoader from "react-content-loader";
 import Nest from "react-nest";
 import { tv } from "tailwind-variants";
 import { P, match } from "ts-pattern";
 import { useDoor_Value } from "~/app/(main)/door/door.context";
-import { OpenAPI_Repository } from "~/app/api/v1/OpenAPI.repository";
 import Loading from "~/app/loading";
-import { Deal_Repository } from "~/modules/exchange/Deal.repository";
 import { useExchange_Value } from "~/modules/exchange/Exchange.context";
-import { Exchange_Repository } from "~/modules/exchange/Exchange_Repository";
 import { Get_Deal_ById_UseCase } from "~/modules/exchange/application/get_deal_byid.use-case";
 import { Get_Deals_UseCase } from "~/modules/exchange/application/get_deals.use-case";
 import { Get_Last_Message_ById_UseCase } from "~/modules/exchange/application/get_last_message.use-case";
@@ -26,14 +21,61 @@ import { Deal_ValueProvider, useDeal_Value } from "../Deal.context";
 //
 
 export function Deals_Nav() {
-  {
-    const exchange_id = useInject(Exchange_Repository.EXCHANGE_ID_TOKEN);
+  // {
+  //   const exchange_id = useInject(Exchange_Repository.EXCHANGE_ID_TOKEN);
 
-    console.log(
-      "src/app/(main)/door/[code]/(private)/my/exchanges/[exchange_id]/deals/layout.client.tsx",
-      { exchange_id },
-    );
-  }
+  //   console.log(
+  //     "src/app/(main)/door/[code]/(private)/my/exchanges/[exchange_id]/deals/layout.client.tsx",
+  //     { exchange_id },
+  //   );
+  // }
+  // const [exchange] = useExchange_Value();
+  // const query_info = useInject(Get_Deals_UseCase).execute(
+  //   Number(exchange.id.value()),
+  //   {
+  //     pagination: { pageSize: 6 },
+  //   },
+  // );
+  // const container = useContainer().createChildContainer();
+  // {
+  //   console.info(
+  //     "src/app/(main)/door/[code]/(private)/my/exchanges/[exchange_id]/deals/layout.client.tsx",
+  //   );
+  //   console.info("scope container test");
+  //   const root = useContainer();
+  //   const repo1 = root.resolve(Deal_Repository);
+  //   const openapi1 = root.resolve(OpenAPI_Repository);
+
+  //   const scope = root.createChildContainer();
+  //   const repo2 = scope.resolve(Deal_Repository);
+  //   const openapi2 = scope.resolve(OpenAPI_Repository);
+  //   console.log({ repo1, repo2 });
+  //   console.log("openapi1 === openapi2=> ", openapi1 === openapi2);
+  //   console.log("repo1 === repo2 => ", repo1 === repo2);
+  //   console.log("scope === root => ", scope === root);
+  // }
+  // {
+  //   console.info(
+  //     "src/app/(main)/door/[code]/(private)/my/exchanges/[exchange_id]/deals/layout.client.tsx",
+  //   );
+  //   console.info("useContainer().resolve(Deal_Repository)");
+  //   const repo = useContainer().resolve(Deal_Repository);
+  //   const exchange_id = useInject(Exchange_Repository.EXCHANGE_ID_TOKEN);
+  //   console.log({ exchange_id, repo });
+  // }
+  // {
+  //   container.registerInstance(Exchange_Repository.EXCHANGE_ID_TOKEN, 111);
+  //   const exchange_id = container.resolve(
+  //     Exchange_Repository.EXCHANGE_ID_TOKEN,
+  //   );
+  //   const repo = container.resolve(Deal_Repository);
+  //   console.log(
+  //     "useContainer().createChildContainer()",
+  //     "src/app/(main)/door/[code]/(private)/my/exchanges/[exchange_id]/deals/layout.client.tsx",
+  //     { exchange_id, repo },
+  //   );
+  // }
+
   const [exchange] = useExchange_Value();
   const query_info = useInject(Get_Deals_UseCase).execute(
     Number(exchange.id.value()),
@@ -41,45 +83,7 @@ export function Deals_Nav() {
       pagination: { pageSize: 6 },
     },
   );
-  const container = useContainer().createChildContainer();
-  {
-    console.info(
-      "src/app/(main)/door/[code]/(private)/my/exchanges/[exchange_id]/deals/layout.client.tsx",
-    );
-    console.info("scope container test");
-    const root = useContainer();
-    const repo1 = root.resolve(Deal_Repository);
-    const openapi1 = root.resolve(OpenAPI_Repository);
 
-    const scope = root.createChildContainer();
-    const repo2 = scope.resolve(Deal_Repository);
-    const openapi2 = scope.resolve(OpenAPI_Repository);
-    console.log({ repo1, repo2 });
-    console.log("openapi1 === openapi2=> ", openapi1 === openapi2);
-    console.log("repo1 === repo2 => ", repo1 === repo2);
-    console.log("scope === root => ", scope === root);
-  }
-  {
-    console.info(
-      "src/app/(main)/door/[code]/(private)/my/exchanges/[exchange_id]/deals/layout.client.tsx",
-    );
-    console.info("useContainer().resolve(Deal_Repository)");
-    const repo = useContainer().resolve(Deal_Repository);
-    const exchange_id = useInject(Exchange_Repository.EXCHANGE_ID_TOKEN);
-    console.log({ exchange_id, repo });
-  }
-  {
-    container.registerInstance(Exchange_Repository.EXCHANGE_ID_TOKEN, 111);
-    const exchange_id = container.resolve(
-      Exchange_Repository.EXCHANGE_ID_TOKEN,
-    );
-    const repo = container.resolve(Deal_Repository);
-    console.log(
-      "useContainer().createChildContainer()",
-      "src/app/(main)/door/[code]/(private)/my/exchanges/[exchange_id]/deals/layout.client.tsx",
-      { exchange_id, repo },
-    );
-  }
   return match(query_info)
     .with({ status: "error" }, ({ error }) => {
       throw error;
@@ -115,6 +119,7 @@ export function Deals_Nav() {
                   >
                     <Echange_Deal id={deal_id} />
                   </Hydrate_Container_Provider> */}
+                  <Echange_Deal id={deal_id} />
                 </Deal_ValueProvider>
               </li>
             ))}
@@ -154,18 +159,10 @@ const empty_list_paragraph = tv({
 });
 
 function Echange_Deal({ id }: { id: number }) {
-  const info = useInject(Get_Deal_ById_UseCase).execute(id);
-  return <>{JSON.stringify(info, null, 2)}</>;
-}
-Echange_Deal;
-function Echange_Deal_({ id }: { id: number }) {
-  const info = useInject(Get_Deal_ById_UseCase).execute(id);
-
-  const [deal, set_deal] = useDeal_Value();
-
-  useEffect(() => {
-    if (info.data) set_deal(info.data);
-  }, [Number(info.data?.get("updatedAt"))]);
+  const [exchange] = useExchange_Value();
+  const exchange_id = Number(exchange.id.value());
+  const deal_id = id;
+  const info = useInject(Get_Deal_ById_UseCase).execute(exchange_id, deal_id);
 
   return match(info)
     .with({ status: "error", error: P.select() }, (error) => {
@@ -173,27 +170,18 @@ function Echange_Deal_({ id }: { id: number }) {
       return null;
     })
     .with({ status: "loading" }, () => <Echange_DealLink_Loader />)
-    .with({ status: "success" }, () => {
-      if (Deal.zero.isEqual(deal)) return null;
+    .with({ status: "success", data: P.select() }, (data) => {
+      // if (Deal.zero.isEqual(deal)) return null;
+
       return (
         <Nest>
-          {/* <Hydrate_Container_Provider
-            registerAll={[
-              {
-                registerInstance: [
-                  Deal_Message_Repository.DEAL_ID_TOKEN,
-                  deal?.id.value(),
-                ],
-              },
-            ]}
-          /> */}
+          <Deal_ValueProvider initialValue={data} />
           <Echange_DealLink />
         </Nest>
       );
     })
     .exhaustive();
 }
-Echange_Deal_;
 
 function Echange_DealLink() {
   const [exchange] = useExchange_Value();
@@ -223,13 +211,6 @@ function Echange_DealLink() {
   return match(info)
     .with({ status: "error" }, { status: "loading" }, () => null)
     .otherwise(() => <>{href}</>);
-  // return (
-  //   <Thread_Item
-  //     href={href}
-  //     thread={thread}
-  //     indicator={<Circle className="h-5 w-5 text-Gamboge" />}
-  //   />
-  // );
 }
 
 function Echange_DealLink_Loader() {

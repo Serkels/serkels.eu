@@ -1,7 +1,7 @@
 //
 
 import { Lifecycle, inject, scoped, type InjectionToken } from "@1/core/di";
-import { HTTPError } from "@1/core/domain";
+import { HTTPError, type UID } from "@1/core/domain";
 import type { Strapi_Query_Params } from "@1/modules/common";
 import type { Message_Schema } from "@1/modules/inbox/infra/strapi";
 import type { Comment_ListSchema } from "@1/strapi-openapi";
@@ -19,17 +19,15 @@ export class Deal_Message_Repository implements RepositoryPort {
 
   constructor(
     @inject(OpenAPI_Repository) private readonly openapi: OpenAPI_Repository,
-    @inject(Deal_Message_Repository.DEAL_ID_TOKEN)
-    public readonly deal_id: number,
   ) {
-    this.#log(`new:${this.deal_id}`);
+    this.#log(`new`);
   }
 
   get is_authorized() {
     return Boolean(this.openapi.jwt);
   }
 
-  async create(body: { content: string }) {
+  async create(deal_id: UID, body: { content: string }) {
     const trace = this.#log.extend(`create (${JSON.stringify(body)})`);
 
     trace("");
@@ -38,7 +36,7 @@ export class Deal_Message_Repository implements RepositoryPort {
       {
         body,
         headers: this.openapi.headers,
-        params: { path: { id: this.deal_id } },
+        params: { path: { id: Number(deal_id.value()) } },
       },
     );
 
@@ -52,10 +50,11 @@ export class Deal_Message_Repository implements RepositoryPort {
     }
   }
 
-  async find_all({
-    pagination,
-  }: Strapi_Query_Params<Message_Schema>): Promise<Comment_ListSchema> {
-    const trace = this.#log.extend(`find_all (deal_id=${this.deal_id})`);
+  async find_all(
+    deal_id: UID,
+    { pagination }: Strapi_Query_Params<Message_Schema>,
+  ): Promise<Comment_ListSchema> {
+    const trace = this.#log.extend(`find_all (deal_id=${deal_id.value()})`);
 
     trace("");
     const {
@@ -65,7 +64,7 @@ export class Deal_Message_Repository implements RepositoryPort {
     } = await this.openapi.client.GET("/deals/{id}/messages", {
       headers: this.openapi.headers,
       params: {
-        path: { id: this.deal_id },
+        path: { id: Number(deal_id.value()) },
         query: {
           pagination: {
             page: pagination?.page,

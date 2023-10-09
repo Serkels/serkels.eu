@@ -11,7 +11,6 @@ import type {
 } from "@1/strapi-openapi";
 import debug from "debug";
 import { OpenAPI_Repository } from "~/app/api/v1/OpenAPI.repository";
-import { Exchange_Repository } from "./Exchange_Repository";
 
 //
 
@@ -32,8 +31,6 @@ export class Deal_Repository {
   #log = debug(`~:modules:deal:${Deal_Repository.name}`);
   constructor(
     @inject(OpenAPI_Repository) private readonly openapi: OpenAPI_Repository,
-    @inject(Exchange_Repository.EXCHANGE_ID_TOKEN)
-    public readonly exchange_id: number,
   ) {
     this.#log("new");
   }
@@ -115,9 +112,9 @@ export class Deal_Repository {
   }
 
   async find_by_id(
+    exchange_id: number,
     deal_id: number,
   ): Promise<Exchange_Deal_ItemSchema | undefined> {
-    const { exchange_id } = this;
     const trace = this.#log.extend(
       `find_by_id(exchange_id=${exchange_id},deal_id=${deal_id})`,
     );

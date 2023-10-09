@@ -47,6 +47,7 @@
       "*.css": "tailwindcss"
     },
     "files.exclude": {
+      "_/": true,
       ".cache/": true,
       ".next/": true,
       ".swc/": true,

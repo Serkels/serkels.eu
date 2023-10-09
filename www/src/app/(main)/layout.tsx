@@ -1,4 +1,4 @@
-///
+//
 
 import { $1 } from "@1/core/$1";
 import { ID_Schema, USER_PROFILE_ID_TOKEN } from "@1/core/domain";
@@ -9,12 +9,10 @@ import { AppFooter } from "~/components/AppFooter.server";
 import { UserBar } from "~/components/UserBar";
 import { get_api_session } from "../api/auth/[...nextauth]/route";
 import { JWT_TOKEN } from "../api/v1/OpenAPI.repository";
-import { Root_Module } from "../layout";
 
 //
 
 @$1.module({
-  parent: Root_Module,
   async registrationFn() {
     const session = await get_api_session();
 

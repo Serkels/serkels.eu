@@ -8,11 +8,10 @@ import type { PropsWithChildren } from "react";
 import Nest from "react-nest";
 import { tv } from "tailwind-variants";
 import { z } from "zod";
+import { injector_session } from "~/core/react";
 import { Get_Exchange_ById_UseCase } from "~/modules/exchange/application/get_exchange_byid.use-case";
 import { Exchange_QueryKeys } from "~/modules/exchange/queryKeys";
-import { ROUTE_EXCHANGE_ID_TOKEN } from "../register";
 import { Deal_Route_Provider, Deals_Aside_Nav } from "./layout.client";
-import { register } from "./register";
 
 //
 
@@ -44,9 +43,11 @@ async function Aside({ params, nav }: { params: any; nav: React.ReactNode }) {
   const { diviser, header, title } = aside();
 
   try {
-    const container = await register({ params });
-
-    const id = container.resolve(ROUTE_EXCHANGE_ID_TOKEN);
+    const container = await injector_session();
+    //   Exchange.p
+    //   const id = container.resolve(ROUTE_EXCHANGE_ID_TOKEN);
+    // const id = inject.resolve(ROUTE_EXCHANGE_ID_TOKEN);
+    const id = params["exchange_id"];
     const query_client = await container
       .resolve(Get_Exchange_ById_UseCase)
       .prefetch(Id(id));

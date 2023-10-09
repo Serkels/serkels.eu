@@ -24,16 +24,16 @@ export class Get_Deal_ById_UseCase {
 
   //
 
-  execute(id: number) {
+  execute(exchange_id: number, deal_id: number) {
     return useQuery({
-      queryFn: () => this.repository.find_by_id(id),
-      queryKey: Deal_QueryKeys.item(id),
+      queryFn: () => this.repository.find_by_id(exchange_id, deal_id),
+      queryKey: Deal_QueryKeys.item(deal_id),
       select: (data) => {
         return Deal_Record.pipe(z.instanceof(Deal)).parse(
           { data },
           {
             path: [
-              `<${Get_Deal_ById_UseCase.name}.execute(${id}).useQuery.select>`,
+              `<${Get_Deal_ById_UseCase.name}.execute(${exchange_id},${deal_id}).useQuery.select>`,
               "{data}",
             ],
           },

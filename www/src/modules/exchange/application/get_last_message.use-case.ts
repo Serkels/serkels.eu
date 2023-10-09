@@ -1,6 +1,7 @@
 //
 
 import { Lifecycle, inject, scoped } from "@1/core/di";
+import type { UID } from "@1/core/domain";
 import { useQuery } from "@tanstack/react-query";
 import debug from "debug";
 import { Deal_QueryKeys } from "../queryKeys";
@@ -21,13 +22,13 @@ export class Get_Last_Message_ById_UseCase {
 
   //
 
-  execute(id: number) {
-    const info = this.get_messages.execute(id, {});
+  execute(deal_id: UID) {
+    const info = this.get_messages.execute(deal_id, {});
 
     return useQuery({
       enabled: info.isSuccess,
       queryFn: () => info.data,
-      queryKey: Deal_QueryKeys.last_message(id),
+      queryKey: Deal_QueryKeys.last_message(deal_id.value()),
     });
   }
 }

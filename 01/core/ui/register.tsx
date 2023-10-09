@@ -10,11 +10,13 @@ const log = debug("~:core:register");
 
 //
 
+export type Registration = {
+  token: InjectionToken;
+  options?: RegistrationOptions;
+} & Provider;
+
 export function register_branch(
-  registrations: ({
-    token: InjectionToken;
-    options?: RegistrationOptions;
-  } & Provider<any>)[] = [],
+  registrations: Registration[] = [],
   parent: DependencyContainerEntry,
 ) {
   const container = createChildContainer(parent);
@@ -25,4 +27,7 @@ export function register_branch(
   return container;
 }
 
+/**
+ * @deprecated use Registration[]
+ */
 export type Registrations = Parameters<typeof register_branch>[0];

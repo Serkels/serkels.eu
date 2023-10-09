@@ -155,6 +155,7 @@ export class Bookmarks_Repository {
 
     return { ok: response.ok };
   }
+
   async delete(type: Bookmark_Category, id: number) {
     this.#log(`delete ${type} ${id}`);
     const init: FetchOptions<{ parameters: { path: { id: number } } }> = {
@@ -181,6 +182,7 @@ export class Bookmarks_Repository {
 
     return { ok: response.ok };
   }
+
   async check(type: Bookmark_Category, id: number) {
     this.#log(`check ${type} ${id}`);
     const init: FetchOptions<{ parameters: { path: { id: number } } }> = {

@@ -2,14 +2,17 @@
   "extends": "@1/typescript-config/next.json",
   "compilerOptions": {
     "rootDir": ".",
-    "baseUrl": "src",
+    "baseUrl": ".",
     "declaration": false,
     "declarationMap": false,
     "emitDecoratorMetadata": true,
     "exactOptionalPropertyTypes": false,
     "experimentalDecorators": true,
     "paths": {
-      "~/*": ["./*"]
+      ":api/*": ["./src/app/api/*"],
+      ":components/*": ["./components/*"],
+      ":trpc/*": ["./trpc/*"],
+      "~/*": ["./src/*"]
     },
     "plugins": [
       {
@@ -22,6 +25,7 @@
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   // "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": [
+    "_",
     ".next",
     "node_modules",
     "../node_modules/bun-types/types.d.ts",

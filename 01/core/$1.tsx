@@ -10,7 +10,7 @@ import {
   type DependencyContainerEntry,
 } from "./di";
 import { DI_Container_Provider } from "./ui/di.context.client";
-import { type Registrations } from "./ui/register";
+import { type Registration } from "./ui/register";
 
 //
 
@@ -19,7 +19,7 @@ type RegistrationFn = ({
   params,
 }: {
   params: Record<string, string>;
-}) => Promise<Registrations>;
+}) => Promise<Registration[]>;
 
 const Scope_Schema = z.union([
   z.literal("both"),
@@ -30,6 +30,9 @@ type Scope = z.infer<typeof Scope_Schema>;
 
 //
 
+/**
+ * @deprecated or to rename... to NextTsyringe ?
+ */
 export class $1 {
   static PARENT = Symbol.for("parent");
   static REGISTRATIONS = Symbol.for("registrations");
@@ -48,7 +51,7 @@ export class $1 {
   }) {
     const nope_registrationsFn = () => {
       log("nothing to register");
-      return [] as Registrations;
+      return [] as Registration[];
     };
     const register_fn = registrationFn ?? nope_registrationsFn;
 

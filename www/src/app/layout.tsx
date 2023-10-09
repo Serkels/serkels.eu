@@ -1,56 +1,41 @@
 //
 
-import { $1 } from "@1/core/$1";
-import { Analytics } from "@vercel/analytics/react";
+import Analytics from ":components/Analytics";
 import clsx from "clsx";
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { Roboto } from "next/font/google";
-import Script from "next/script";
-import NextTopLoader from "nextjs-toploader";
-import type { PropsWithChildren } from "react";
-import Providers from "./(index)/Providers";
-import { fromServer } from "./api/v1";
-import { API_TOKEN } from "./api/v1/OpenAPI.repository";
+import { type PropsWithChildren } from "react";
 import "./globals.css";
-import { Register_OpenAPI } from "./layout.client";
+import { RootProviders } from "./layout.client";
+
+//
+
+const NextTopLoader = dynamic(() => import(":components/TopLoader"), {
+  ssr: false,
+});
+
+//
 
 const roboto = Roboto({ weight: ["400", "500", "700"], subsets: ["latin"] });
+
+//
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://toc-toc.org"),
   title: "Toc-Toc",
   description: "Réseau d'échanges étudiant",
   icons: { icon: "/favicon.svg" },
+  openGraph: {
+    title: "Toc-Toc",
+    description: "Réseau d'échanges étudiant",
+    url: new URL("https://toc-toc.org"),
+  },
 };
 
 //
 
-// @$1.server_injection([
-//   {
-//     token: API_TOKEN,
-//     useValue: fromServer,
-//   },
-// ])
-// @$1.container(createChildContainer(root_container))
-
-@$1.module({
-  registrationFn: async () => [
-    {
-      token: API_TOKEN,
-      useValue: fromServer,
-    },
-  ],
-  scope: "server-only",
-})
-export class Root_Module {
-  static Provider = RootLayout;
-}
-
-export default Root_Module.Provider;
-
-//
-
-export async function RootLayout({ children }: PropsWithChildren) {
+export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <body
@@ -62,33 +47,10 @@ export async function RootLayout({ children }: PropsWithChildren) {
         )}
       >
         <NextTopLoader color="#fff" showSpinner={false} />
-        <Providers>
-          <Register_OpenAPI>{children}</Register_OpenAPI>
-        </Providers>
+
+        <RootProviders>{children}</RootProviders>
 
         <Analytics />
-
-        <Script
-          src={`/stalker.js?id=${process.env["NEXT_PUBLIC_GA_MEASUREMENT_ID"]}`}
-        />
-        <Script
-          id="google-analytics"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-            window.dataLayer = [];
-            function gtag(){dataLayer.push(arguments);}
-
-            gtag('js', new Date());
-
-            gtag('config', '${process.env["NEXT_PUBLIC_GA_MEASUREMENT_ID"]}', {
-                page_path: window.location.pathname,
-                transport_url: window.location.origin + '/api/stalker',
-                first_party_collection: true,
-            });
-          `,
-          }}
-        />
       </body>
     </html>
   );

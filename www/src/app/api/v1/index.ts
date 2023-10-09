@@ -1,7 +1,10 @@
 //
 
-import type { paths } from "@1/strapi-openapi/v1";
-import createClient, { type QuerySerializer } from "openapi-fetch";
+import {
+  createClient,
+  type ApiClient as OpenApiClient,
+} from "@1/strapi-openapi";
+import { type QuerySerializer } from "openapi-fetch";
 import { stringify } from "qs";
 
 //
@@ -11,14 +14,18 @@ const querySerializer: QuerySerializer<unknown> = (q) =>
 
 //
 
-export type ApiClient = ReturnType<typeof createClient<paths>>;
+/**
+ * @deprecated use `import { ApiClient } from "@1/strapi-openapi";` *
+ * @see {@link OpenApiClient}
+ */
+export type ApiClient = OpenApiClient;
 
-export const fromServer = createClient<paths>({
+export const fromServer = createClient({
   baseUrl: process.env["STRAPI_API_URL"] + "/api",
   querySerializer,
 });
 
-export const fromClient = createClient<paths>({
+export const fromClient = createClient({
   baseUrl: "/api/v1",
   querySerializer,
 });

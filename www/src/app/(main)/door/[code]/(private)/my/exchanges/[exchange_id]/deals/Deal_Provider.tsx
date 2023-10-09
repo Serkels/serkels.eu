@@ -4,10 +4,12 @@ import { Id } from "@1/core/domain";
 import { useInject } from "@1/core/ui/di.context.client";
 import type { PropsWithChildren } from "react";
 import { P, match } from "ts-pattern";
-import { Exchange_ValueProvider } from "~/modules/exchange/Exchange.context";
+import {
+  Exchange_ValueProvider,
+  useExchange_Value,
+} from "~/modules/exchange/Exchange.context";
 import { Get_Deal_ById_UseCase } from "~/modules/exchange/application/get_deal_byid.use-case";
 import { Get_Exchange_ById_UseCase } from "~/modules/exchange/application/get_exchange_byid.use-case";
-import { ROUTE_EXCHANGE_ID_TOKEN } from "../register";
 import { Deal_ValueProvider } from "./Deal.context";
 
 //
@@ -16,13 +18,20 @@ export function Deal_Provider({
   children,
   id,
 }: PropsWithChildren<{ id: number }>) {
-  const exchange_id = useInject(ROUTE_EXCHANGE_ID_TOKEN);
+  // const exchange_id = useInject(ROUTE_EXCHANGE_ID_TOKEN);
+  const [exchange] = useExchange_Value();
+  const exchange_id = Number(exchange.id.value());
+
+  const deal_id = id;
 
   console.log(
     "src/app/(main)/door/[code]/(private)/my/exchanges/[exchange_id]/deals/Deal_Provider.tsx",
     { exchange_id },
   );
-  const query_info = useInject(Get_Deal_ById_UseCase).execute(id);
+  const query_info = useInject(Get_Deal_ById_UseCase).execute(
+    exchange_id,
+    deal_id,
+  );
 
   return match(query_info)
     .with({ status: "error", error: P.select() }, (error) => {

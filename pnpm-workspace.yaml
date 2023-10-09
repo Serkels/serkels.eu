@@ -1,5 +1,7 @@
 packages:
   - "01/*"
+  - "01/modules_/exchange/infra/strapi"
+  - "01/modules_/exchange/domain"
   - "01/config/*"
   - "www"
   - "admin/strapi"
