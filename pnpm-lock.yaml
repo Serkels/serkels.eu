@@ -13,6 +13,9 @@ overrides:
   zod: 3.22.2
 
 patchedDependencies:
+  react-nest@0.1.10:
+    hash: oxxc2okcxsefs22szuakzwvvp4
+    path: patches/react-nest@0.1.10.patch
   tsyringe@4.8.0:
     hash: la73bdfqzw6by54eosu6qlwfsu
     path: patches/tsyringe@4.8.0.patch
@@ -419,9 +422,6 @@ importers:
 
   01/strapi-trpc-router:
     dependencies:
-      '@1.modules.exchange/infra.strapi':
-        specifier: workspace:*
-        version: link:../modules_/exchange/infra/strapi
       '@1/core':
         specifier: workspace:*
         version: link:../core
@@ -841,7 +841,7 @@ importers:
         version: 8.0.7(@types/react@18.2.22)(react@18.2.0)(supports-color@8.1.1)
       react-nest:
         specifier: 0.1.10
-        version: 0.1.10(react-dom@18.2.0)(react@18.2.0)
+        version: 0.1.10(patch_hash=oxxc2okcxsefs22szuakzwvvp4)(react-dom@18.2.0)(react@18.2.0)
       react-stately:
         specifier: 3.26.0
         version: 3.26.0(react@18.2.0)
@@ -17982,7 +17982,7 @@ packages:
       - supports-color
     dev: false
 
-  /react-nest@0.1.10(react-dom@18.2.0)(react@18.2.0):
+  /react-nest@0.1.10(patch_hash=oxxc2okcxsefs22szuakzwvvp4)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-eTln9iBXP08GR98xCzV4S+E2mTgOtBs41Y4+ieEPeAx+3SyHxA/lllkih2WgKIZ+6F1G0lz0QWty3BVIfE8MQQ==}
     peerDependencies:
       react: '>=16.8.0'
@@ -17991,6 +17991,7 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
+    patched: true
 
   /react-query@3.39.3(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-nLfLz7GiohKTJDuT4us4X3h/8unOh+00MLb2yJoGTPjxKs2bc1iDhkNx2bd5MKklXnOD3NrVZ+J2UXujA5In4g==}

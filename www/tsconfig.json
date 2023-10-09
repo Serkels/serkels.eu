@@ -3,6 +3,8 @@
   "compilerOptions": {
     "rootDir": ".",
     "baseUrl": ".",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "declaration": false,
     "declarationMap": false,
     "emitDecoratorMetadata": true,

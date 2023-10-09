@@ -37,7 +37,8 @@
       "zod": "$zod"
     },
     "patchedDependencies": {
-      "tsyringe@4.8.0": "patches/tsyringe@4.8.0.patch"
+      "tsyringe@4.8.0": "patches/tsyringe@4.8.0.patch",
+      "react-nest@0.1.10": "patches/react-nest@0.1.10.patch"
     }
   }
 }

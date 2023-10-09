@@ -16,7 +16,7 @@
     "paths": {},
     "rootDir": "."
   },
-  "files": ["src/index.ts"],
+  "files": ["src/index.ts", "src/react.ts"],
   "include": ["src"],
   "references": []
 }

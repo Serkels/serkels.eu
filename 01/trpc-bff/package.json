@@ -8,6 +8,10 @@
     ".": {
       "import": "./dist/index.js",
       "types": "./src/index.ts"
+    },
+    "./*": {
+      "import": "./dist/*.js",
+      "types": "./src/*.ts"
     }
   },
   "main": "./dist/index.js",

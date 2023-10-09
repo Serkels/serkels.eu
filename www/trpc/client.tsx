@@ -1,6 +1,6 @@
 "use client";
 
-import { TRPC_React } from "@1/strapi-trpc-router/react";
+import { TRPC_React } from "@1.bff/trpc/react";
 import { useQueryClient } from "@tanstack/react-query";
 import { httpBatchLink, loggerLink } from "@trpc/react-query";
 import { useSession } from "next-auth/react";

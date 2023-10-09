@@ -1,7 +1,7 @@
 //
 
 import { createContext } from ":api/trpc/[trpc]/route";
-import { app_router as router } from "@1/strapi-trpc-router";
+import { app_router as router } from "@1.bff/trpc";
 import { createServerSideHelpers } from "@trpc/react-query/server";
 import SuperJSON from "superjson";
 

@@ -1,12 +1,12 @@
 "use client";
 
 import { TrpcProvider } from ":trpc/client";
+import { TRPC_React } from "@1.bff/trpc/react";
 import { root_container } from "@1/core/di";
 import {
   ContainerContext,
   create_container_provider,
 } from "@1/core/ui/di.context.client";
-import { TRPC_React } from "@1/strapi-trpc-router/react";
 import {
   QueryClient,
   QueryClientProvider,

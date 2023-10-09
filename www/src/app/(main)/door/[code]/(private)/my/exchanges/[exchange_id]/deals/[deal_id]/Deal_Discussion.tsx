@@ -1,7 +1,11 @@
 "use client";
 
-import { TRPC_React } from "@1/strapi-trpc-router/react";
+import { TRPC_React } from "@1.bff/trpc/react";
+import type { Comment_ListSchema } from "@1/strapi-openapi";
+import type { UseTRPCInfiniteQueryResult } from "@trpc/react-query/shared";
 import dynamic from "next/dynamic";
+import { useCallback, useId } from "react";
+import { match } from "ts-pattern";
 import { useDeal_Value } from "../Deal.context";
 
 const Exchange_Conversation_Timeline = dynamic(() =>
@@ -14,41 +18,30 @@ const Exchange_Conversation_Timeline = dynamic(() =>
 
 export function Deal_Discussion() {
   const [deal] = useDeal_Value();
-  const lol = TRPC_React.deal.message.all.useQuery({
+  const uid = useId();
+
+  const query_info = TRPC_React.deal.message.all.useInfiniteQuery({
     deal_id: Number(deal.id.value()),
   });
-  return <>sdf{JSON.stringify(lol, null, 2)}</>;
+  const on_refresh = useCallback(() => query_info.refetch(), [query_info]);
+  return (
+    <div onClick={on_refresh}>
+      {match(query_info)
+        .with({ status: "error" }, () => null)
+        .with({ status: "loading" }, () => null)
+        .with({ status: "success" }, () => {
+          const __remove_me_plz__ = query_info as UseTRPCInfiniteQueryResult<
+            Comment_ListSchema,
+            unknown
+          >;
+          return (
+            <Exchange_Conversation_Timeline
+              key={uid}
+              query_info={__remove_me_plz__}
+            />
+          );
+        })
+        .exhaustive()}
+    </div>
+  );
 }
-
-// export function Deal_Discussion_() {
-//   const [deal] = useDeal_Value();
-//   const uid = useId();
-
-//   useContainer().registerInstance(
-//     Deal_Message_Repository.DEAL_ID_TOKEN,
-//     deal.get("id"),
-//   );
-//   const lol = TRPC_React.deal.message.all.useQuery({
-//     deal_id: Number(deal.id.value()),
-//   });
-//   console.log({ lol });
-//   if (1) return <>{JSON.stringify(lol.data, null, 2)}</>;
-//   const query_info = useQuery({
-//     sort: ["createdAt:desc"],
-//     pagination: { pageSize: 42 },
-//   });
-//   const on_refresh = useCallback(() => query_info.refetch(), [query_info]);
-//   return (
-//     <div onClick={on_refresh}>
-//       {match(query_info.status)
-//         .with("error", () => null)
-//         .with("loading", () => null)
-//         .with("success", () => {
-//           return (
-//             <Exchange_Conversation_Timeline key={uid} query_info={query_info} />
-//           );
-//         })
-//         .exhaustive()}
-//     </div>
-//   );
-// }
