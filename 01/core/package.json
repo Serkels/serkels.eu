@@ -12,6 +12,7 @@
     "modern-errors": "6.0.0",
     "modern-errors-serialize": "5.0.0",
     "rich-domain": "1.18.4",
+    "reflect-metadata": "0.1.13",
     "superjson": "1.13.1",
     "tsyringe": "4.8.0",
     "react": "18.2.0",

@@ -166,6 +166,9 @@ importers:
       react:
         specifier: 18.2.0
         version: 18.2.0
+      reflect-metadata:
+        specifier: 0.1.13
+        version: 0.1.13
       rich-domain:
         specifier: 1.18.4
         version: 1.18.4
