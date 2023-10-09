@@ -21,61 +21,6 @@ import { Deal_ValueProvider, useDeal_Value } from "../Deal.context";
 //
 
 export function Deals_Nav() {
-  // {
-  //   const exchange_id = useInject(Exchange_Repository.EXCHANGE_ID_TOKEN);
-
-  //   console.log(
-  //     "src/app/(main)/door/[code]/(private)/my/exchanges/[exchange_id]/deals/layout.client.tsx",
-  //     { exchange_id },
-  //   );
-  // }
-  // const [exchange] = useExchange_Value();
-  // const query_info = useInject(Get_Deals_UseCase).execute(
-  //   Number(exchange.id.value()),
-  //   {
-  //     pagination: { pageSize: 6 },
-  //   },
-  // );
-  // const container = useContainer().createChildContainer();
-  // {
-  //   console.info(
-  //     "src/app/(main)/door/[code]/(private)/my/exchanges/[exchange_id]/deals/layout.client.tsx",
-  //   );
-  //   console.info("scope container test");
-  //   const root = useContainer();
-  //   const repo1 = root.resolve(Deal_Repository);
-  //   const openapi1 = root.resolve(OpenAPI_Repository);
-
-  //   const scope = root.createChildContainer();
-  //   const repo2 = scope.resolve(Deal_Repository);
-  //   const openapi2 = scope.resolve(OpenAPI_Repository);
-  //   console.log({ repo1, repo2 });
-  //   console.log("openapi1 === openapi2=> ", openapi1 === openapi2);
-  //   console.log("repo1 === repo2 => ", repo1 === repo2);
-  //   console.log("scope === root => ", scope === root);
-  // }
-  // {
-  //   console.info(
-  //     "src/app/(main)/door/[code]/(private)/my/exchanges/[exchange_id]/deals/layout.client.tsx",
-  //   );
-  //   console.info("useContainer().resolve(Deal_Repository)");
-  //   const repo = useContainer().resolve(Deal_Repository);
-  //   const exchange_id = useInject(Exchange_Repository.EXCHANGE_ID_TOKEN);
-  //   console.log({ exchange_id, repo });
-  // }
-  // {
-  //   container.registerInstance(Exchange_Repository.EXCHANGE_ID_TOKEN, 111);
-  //   const exchange_id = container.resolve(
-  //     Exchange_Repository.EXCHANGE_ID_TOKEN,
-  //   );
-  //   const repo = container.resolve(Deal_Repository);
-  //   console.log(
-  //     "useContainer().createChildContainer()",
-  //     "src/app/(main)/door/[code]/(private)/my/exchanges/[exchange_id]/deals/layout.client.tsx",
-  //     { exchange_id, repo },
-  //   );
-  // }
-
   const [exchange] = useExchange_Value();
   const query_info = useInject(Get_Deals_UseCase).execute(
     Number(exchange.id.value()),
@@ -104,21 +49,6 @@ export function Deals_Nav() {
             {pages.map((deal_id) => (
               <li key={deal_id}>
                 <Deal_ValueProvider>
-                  {/* <ContainerContext.Provider value={container}>
-                    <Echange_Deal id={deal_id} />
-                  </ContainerContext.Provider> */}
-                  {/* <Hydrate_Container_Provider
-                    registerAll={[
-                      {
-                        registerInstance: [
-                          Exchange_Repository.EXCHANGE_ID_TOKEN,
-                          1111,
-                        ],
-                      },
-                    ]}
-                  >
-                    <Echange_Deal id={deal_id} />
-                  </Hydrate_Container_Provider> */}
                   <Echange_Deal id={deal_id} />
                 </Deal_ValueProvider>
               </li>
@@ -188,9 +118,7 @@ function Echange_DealLink() {
   const [deal] = useDeal_Value();
   const profile_id = useMyProfileId();
 
-  const info = useInject(Get_Last_Message_ById_UseCase).execute(
-    Number(deal.id.value()),
-  );
+  const info = useInject(Get_Last_Message_ById_UseCase).execute(deal.id);
 
   const [{ door_id }] = useDoor_Value();
 
