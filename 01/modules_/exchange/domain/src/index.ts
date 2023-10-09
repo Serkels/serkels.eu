@@ -1,3 +1,3 @@
 //
 
-export * from "./repository";
+export { Exchange, Exchange_PropsSchema } from "./exchange.entity";

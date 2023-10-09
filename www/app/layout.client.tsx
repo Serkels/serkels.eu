@@ -8,6 +8,7 @@ import {
 } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import debug from "debug";
+import { NextTsyringeProvider } from "di/client";
 import { SessionProvider } from "next-auth/react";
 import { useState, type PropsWithChildren } from "react";
 import Nest from "react-nest";
@@ -35,6 +36,7 @@ export function RootProviders({ children }: PropsWithChildren) {
       <AuthSessionProvider />
       <ReactQueryClientProvider />
       <TrpcProvider />
+      <NextTsyringeProvider />
       {children}
     </Nest>
   );
@@ -53,6 +55,7 @@ function ReactQueryClientProvider({ children }: PropsWithChildren) {
         },
       }),
   );
+
   return (
     <QueryClientProvider client={query_client}>
       {children}

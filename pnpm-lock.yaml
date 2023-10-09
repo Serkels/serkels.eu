@@ -777,12 +777,27 @@ importers:
 
   01/strapi-trpc-router:
     dependencies:
+      '@1.modules.auth/infra.strapi':
+        specifier: workspace:*
+        version: link:../modules_/auth/infra/strapi
+      '@1.modules.exchange/infra.strapi':
+        specifier: workspace:*
+        version: link:../modules_/exchange/infra/strapi
       '@1.modules.notification/domain':
         specifier: workspace:*
         version: link:../modules_/notification/domain
+      '@1.modules.profile/infra.strapi':
+        specifier: workspace:*
+        version: link:../modules_/profile/infra/strapi
       '@1/core':
         specifier: workspace:*
         version: link:../core
+      '@1/strapi-openapi':
+        specifier: workspace:*
+        version: link:../strapi-openapi
+      '@trpc/react-query':
+        specifier: 10.38.5
+        version: 10.38.5(@tanstack/react-query@4.35.7)(@trpc/client@10.38.5)(@trpc/server@10.38.5)(react-dom@18.2.0)(react@18.2.0)
       '@trpc/server':
         specifier: 10.38.5
         version: 10.38.5
@@ -1103,6 +1118,9 @@ importers:
       '@1.modules.profile/usecases':
         specifier: workspace:*
         version: link:../01/modules_/profile/usecases
+      '@1/core':
+        specifier: workspace:*
+        version: link:../01/core
       '@1/core_':
         specifier: workspace:*
         version: link:../01/core_
@@ -1178,9 +1196,6 @@ importers:
       framer-motion:
         specifier: 10.16.4
         version: 10.16.4(react-dom@18.2.0)(react@18.2.0)
-      modern-errors:
-        specifier: 6.0.0
-        version: 6.0.0
       ms:
         specifier: 3.0.0-canary.1
         version: 3.0.0-canary.1

@@ -1,17 +1,13 @@
 "use client";
 
+import { TRPC_React } from "@1/strapi-trpc-router/react";
 import { useQueryClient } from "@tanstack/react-query";
-import { createTRPCReact, httpBatchLink, loggerLink } from "@trpc/react-query";
+import { httpBatchLink, loggerLink } from "@trpc/react-query";
 import { useSession } from "next-auth/react";
 import { useMemo, type PropsWithChildren } from "react";
 import SuperJSON from "superjson";
-import type { AppRouter } from "./router";
 
 //
-
-export const trpc = createTRPCReact<AppRouter>({
-  abortOnUnmount: true,
-});
 
 export function TrpcProvider({ children }: PropsWithChildren) {
   const session = useSession();
@@ -20,7 +16,7 @@ export function TrpcProvider({ children }: PropsWithChildren) {
 
   const trpc_client = useMemo(
     () =>
-      trpc.createClient({
+      TRPC_React.createClient({
         transformer: SuperJSON,
         links: [
           loggerLink({
@@ -38,8 +34,8 @@ export function TrpcProvider({ children }: PropsWithChildren) {
   );
 
   return (
-    <trpc.Provider client={trpc_client} queryClient={query_client}>
+    <TRPC_React.Provider client={trpc_client} queryClient={query_client}>
       {children}
-    </trpc.Provider>
+    </TRPC_React.Provider>
   );
 }

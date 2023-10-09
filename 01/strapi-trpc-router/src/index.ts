@@ -1,6 +1,10 @@
 //
 
+import { passwordlessRouter } from "@1.modules.auth/infra.strapi";
+import { exchange_router } from "@1.modules.exchange/infra.strapi";
 import type { Notification_New_Answer_Props } from "@1.modules.notification/domain";
+import { profileRouter } from "@1.modules.profile/infra.strapi";
+import { createTRPCReact, type CreateTRPCReact } from "@trpc/react-query";
 import { initTRPC } from "@trpc/server";
 import { type Observable } from "@trpc/server/observable";
 import SuperJSON from "superjson";
@@ -37,8 +41,22 @@ export const appRouter = t.router({
       const { id: user_id } = await ctx.verify_jwt(token);
       return ctx.subscription_to.notifications(user_id);
     }),
+  exchange: exchange_router,
+  profile: profileRouter,
+  passwordless: passwordlessRouter,
 });
 
 export type AppRouter = typeof appRouter;
 
 //
+
+export const TRPC_React: CreateTRPCReact<AppRouter, AppContext, null> =
+  createTRPCReact<AppRouter, AppContext>({
+    abortOnUnmount: true,
+  });
+
+export const TRPC_REACT: () => CreateTRPCReact<
+  AppRouter,
+  AppContext,
+  null
+> = () => TRPC_React;

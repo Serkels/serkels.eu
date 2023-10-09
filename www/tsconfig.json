@@ -12,6 +12,7 @@
     "paths": {
       ":api/*": ["./app/api/*"],
       ":components/*": ["./components/*"],
+      ":modules/*": ["./modules/*"],
       ":trpc/*": ["./trpc/*"]
     },
     "plugins": [
