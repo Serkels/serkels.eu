@@ -3,14 +3,16 @@
 import { Id } from "@1/core/domain";
 import { UnknownError } from "@1/core/error";
 import { useInject } from "@1/core/ui/di.context.client";
-import { Message, Thread } from "@1/modules/inbox/domain";
+import { Thread } from "@1/modules/inbox/domain";
 import { Button } from "@1/ui/components/ButtonV";
+import { Circle } from "@1/ui/icons";
 import ContentLoader from "react-content-loader";
 import Nest from "react-nest";
 import { tv } from "tailwind-variants";
 import { P, match } from "ts-pattern";
 import { useDoor_Value } from "~/app/(main)/door/door.context";
 import Loading from "~/app/loading";
+import { Thread_Item } from "~/components/Thread_Item";
 import { useExchange_Value } from "~/modules/exchange/Exchange.context";
 import { Get_Deal_ById_UseCase } from "~/modules/exchange/application/get_deal_byid.use-case";
 import { Get_Deals_UseCase } from "~/modules/exchange/application/get_deals.use-case";
@@ -122,23 +124,42 @@ function Echange_DealLink() {
 
   const [{ door_id }] = useDoor_Value();
 
-  // console.log(deal);
   const href = `/@${door_id}/my/exchanges/${exchange.id.value()}/deals/${deal.id.value()}`;
 
   const exchange_profile = exchange.profile;
   const is_yours = deal.organizer.id.equal(Id(profile_id));
   const profile = is_yours ? deal.get("participant_profile") : exchange_profile;
 
-  const thread = Thread.create({
-    last_message: Message.zero, //deal.last_message,
-    profile,
-    updatedAt: deal.updated_at,
-  }).value();
-  thread;
+  return (
+    match(info)
+      // .with({ status: "error" }, { status: "loading" }, () => null)
+      .with({ status: "success", data: P.select() }, (data) => (
+        <Thread_Item
+          href={href}
+          thread={Thread.create({
+            last_message: data, //deal.last_message,
+            profile,
+            updatedAt: deal.updated_at,
+          }).value()}
+          indicator={<Circle className="h-5 w-5 text-Gamboge" />}
+        />
+      ))
+      .otherwise(() => null)
+  );
 
-  return match(info)
-    .with({ status: "error" }, { status: "loading" }, () => null)
-    .otherwise(() => <>{href}</>);
+  // return match(info)
+  //   .with({ status: "error" }, { status: "loading" }, () => null)
+  //   .otherwise(() => (
+  //     <Thread_Item
+  //       href={href}
+  //       thread={Thread.create({
+  //         last_message: info.data, //deal.last_message,
+  //         profile,
+  //         updatedAt: deal.updated_at,
+  //       }).value()}
+  //       indicator={<Circle className="h-5 w-5 text-Gamboge" />}
+  //     />
+  //   ));
 }
 
 function Echange_DealLink_Loader() {

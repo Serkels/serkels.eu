@@ -2,6 +2,7 @@
 
 import { Lifecycle, inject, scoped } from "@1/core/di";
 import type { UID } from "@1/core/domain";
+import { Message } from "@1/modules/inbox/domain";
 import { useQuery } from "@tanstack/react-query";
 import debug from "debug";
 import { Deal_QueryKeys } from "../queryKeys";
@@ -27,8 +28,13 @@ export class Get_Last_Message_ById_UseCase {
 
     return useQuery({
       enabled: info.isSuccess,
-      queryFn: () => info.data,
+      queryFn: () => info.data?.pages.pop(),
       queryKey: Deal_QueryKeys.last_message(deal_id.value()),
+      select: (last_message) =>
+        last_message ??
+        Message.create({
+          content: "...",
+        }).value(),
     });
   }
 }

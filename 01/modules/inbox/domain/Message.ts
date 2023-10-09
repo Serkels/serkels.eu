@@ -3,12 +3,13 @@
 import { Entity, Result } from "@1/core/domain";
 import { z, type ZodError } from "zod";
 import { Entity_Schema } from "../../common/record";
+import { Profile } from "../../profile/domain";
 
 //
 
 export const Message_PropsSchema = Entity_Schema.augment({
   content: z.string().default(""),
-  author: z.any(),
+  author: z.instanceof(Profile).default(Profile.zero),
 });
 
 //

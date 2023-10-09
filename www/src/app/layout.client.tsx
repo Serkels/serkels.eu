@@ -6,7 +6,7 @@ import {
   ContainerContext,
   create_container_provider,
 } from "@1/core/ui/di.context.client";
-import { TRPC_REACT, TRPC_React } from "@1/strapi-trpc-router/react";
+import { TRPC_React } from "@1/strapi-trpc-router/react";
 import {
   QueryClient,
   QueryClientProvider,

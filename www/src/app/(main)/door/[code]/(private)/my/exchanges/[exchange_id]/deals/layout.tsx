@@ -44,9 +44,6 @@ async function Aside({ params, nav }: { params: any; nav: React.ReactNode }) {
 
   try {
     const container = await injector_session();
-    //   Exchange.p
-    //   const id = container.resolve(ROUTE_EXCHANGE_ID_TOKEN);
-    // const id = inject.resolve(ROUTE_EXCHANGE_ID_TOKEN);
     const id = params["exchange_id"];
     const query_client = await container
       .resolve(Get_Exchange_ById_UseCase)
