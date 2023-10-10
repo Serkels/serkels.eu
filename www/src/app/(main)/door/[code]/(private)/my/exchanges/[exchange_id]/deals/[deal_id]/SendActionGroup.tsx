@@ -1,12 +1,11 @@
 "use client";
 
-import { useContainer, useInject } from "@1/core/ui/di.context.client";
+import { useInject } from "@1/core/ui/di.context.client";
 import { Button } from "@1/ui/components/ButtonV";
 import { useCallback } from "react";
 import tw from "tailwind-styled-components";
 import { useDoor_Value } from "~/app/(main)/door/door.context";
 import { Deal_Message_Controller } from "~/modules/exchange/Deal_Message.controller";
-import { Deal_Message_Repository } from "~/modules/exchange/Deal_Message.repository";
 import { useExchange_Value } from "~/modules/exchange/Exchange.context";
 import { useDeal_Value } from "../Deal.context";
 
@@ -19,16 +18,11 @@ export function SendActionGroup() {
   const [exchange] = useExchange_Value();
   const is_owner = exchange.profile.get("id") === door_id;
 
-  useContainer().registerInstance(
-    Deal_Message_Repository.DEAL_ID_TOKEN,
-    deal.get("id"),
-  );
-
   const {
     create: { useMutation },
   } = useInject(Deal_Message_Controller);
 
-  const { mutate: send_message, isLoading } = useMutation();
+  const { mutate: send_message, isLoading } = useMutation(deal.id);
 
   const send_okay = useCallback(async () => {
     send_message(

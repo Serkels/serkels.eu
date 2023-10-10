@@ -2,7 +2,6 @@
 
 import debug from "debug";
 import { type PropsWithChildren } from "react";
-import type { constructor } from "tsyringe/dist/typings/types";
 import { z } from "zod";
 import {
   createChildContainer,
@@ -29,7 +28,12 @@ const Scope_Schema = z.union([
 type Scope = z.infer<typeof Scope_Schema>;
 
 //
-
+// TODO(douglasduteil): remove inline constructor<T>
+// import type { constructor } from "tsyringe/types";
+// import type { constructor } from "tsyringe/dist/typings/types";
+declare type constructor<T> = {
+  new (...args: any[]): T;
+};
 /**
  * @deprecated or to rename... to NextTsyringe ?
  */

@@ -1,6 +1,6 @@
 //
 
-import { appRouter } from "@1/strapi-trpc-router";
+import { app_router } from "@1.bff/trpc";
 import type { Strapi } from "@strapi/strapi";
 import { applyWSSHandler } from "@trpc/server/adapters/ws";
 import { Server, type WebSocket } from "websockets";
@@ -16,7 +16,7 @@ export default function bootstrap({ strapi }: { strapi: Strapi }) {
 
   const handler = applyWSSHandler({
     wss,
-    router: appRouter,
+    router: app_router,
     onError(error) {
       console.error(error.error);
       strapi.log.error(error.error);

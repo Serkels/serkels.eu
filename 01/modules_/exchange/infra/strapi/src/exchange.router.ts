@@ -1,5 +1,6 @@
 //
 
+import { deal_state_action_schema } from "@1.modules.exchange/domain";
 import {
   StrapiPagination_Schema,
   type TRPCOpenAPIContext,
@@ -14,6 +15,34 @@ const { router, procedure } = initTRPC.context<TRPCOpenAPIContext>().create();
 //
 
 export const exchange_router = router({
+  deal: router({
+    status: procedure
+      .input(
+        z.object({
+          deal_id: z.number(),
+          exchange_id: z.number(),
+          action: deal_state_action_schema,
+        }),
+      )
+      .query(async ({ ctx: { headers, openapi }, input }) => {
+        const {
+          client: { PATCH },
+        } = openapi;
+
+        const { deal_id, exchange_id, action } = input;
+
+        const data = await openapi.fetch(
+          PATCH("/exchanges/{exchange_id}/deals/{deal_id}/status/{action}", {
+            headers,
+            params: {
+              path: { action, exchange_id, deal_id },
+            },
+          }),
+        );
+
+        return data;
+      }),
+  }),
   all: procedure
     .input(
       StrapiPagination_Schema.augment({

@@ -1,7 +1,8 @@
 //
 
+import { Id } from "@1/core/domain";
 import { UnknownError } from "@1/core/error";
-import { useContainer, useInject } from "@1/core/ui/di.context.client";
+import { useInject } from "@1/core/ui/di.context.client";
 import { Button } from "@1/ui/components/ButtonV";
 import { Spinner } from "@1/ui/components/Spinner";
 import * as UI from "@1/ui/domains/exchange/AskModal";
@@ -16,7 +17,6 @@ import { P, match } from "ts-pattern";
 import { Link_Avatar } from "~/components/Avatar";
 import { Deal_Controller } from "~/modules/exchange/Deal.controller";
 import { Deal_Message_Controller } from "~/modules/exchange/Deal_Message.controller";
-import { Deal_Message_Repository } from "~/modules/exchange/Deal_Message.repository";
 import { useExchange_Value } from "~/modules/exchange/Exchange.context";
 import { Get_Deals_UseCase } from "~/modules/exchange/application/get_deals.use-case";
 import { useMyProfileId } from "~/modules/user/useProfileId";
@@ -176,13 +176,10 @@ function Sending() {
 
   //
 
-  useContainer().registerInstance(
-    Deal_Message_Repository.DEAL_ID_TOKEN,
-    context.deal_id,
-  );
-
   const message_ctrl = useInject(Deal_Message_Controller);
-  const create_message_info = message_ctrl.create.useMutation();
+  const create_message_info = message_ctrl.create.useMutation(
+    Id(context.deal_id),
+  );
 
   useTimeoutFn(async () => {
     await create_message_info.mutate(context.message);

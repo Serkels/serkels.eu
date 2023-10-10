@@ -14,7 +14,7 @@ type Props_Input = z.input<typeof Exchange_PropsSchema>;
 
 export class Exchange extends Entity<Props> {
   static override create(props: Props_Input): Result<Exchange, ZodError> {
-    const result = Exchange_PropsSchema.safeParse(props, {
+    const result: any = Exchange_PropsSchema.safeParse(props, {
       path: [`<${Exchange.name}.create>`, "props"],
     });
     if (result.success) {

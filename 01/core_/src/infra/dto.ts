@@ -6,7 +6,7 @@ import { z } from "zod";
 
 //
 
-const symbol = Symbol("__RSC_DATA__");
+const symbol = Symbol.for("__RSC_DATA__");
 
 export type SerializedResult<T> = SuperJSONResult & { [symbol]: T };
 

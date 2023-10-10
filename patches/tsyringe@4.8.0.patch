@@ -1,14 +1,25 @@
 diff --git a/package.json b/package.json
-index 8a7ebb7e407a88ac8bd61bab6308ccbb7c54ad6e..cbfe2cd1af6797adb1f7951858c99e3963313e05 100644
+index 8a7ebb7e407a88ac8bd61bab6308ccbb7c54ad6e..9696555e70625a36e3f3861e6b481f088eb71fd3 100644
 --- a/package.json
 +++ b/package.json
-@@ -2,6 +2,10 @@
+@@ -2,6 +2,21 @@
    "name": "tsyringe",
    "version": "4.8.0",
    "description": "Lightweight dependency injection container for JavaScript/TypeScript",
++
 +  "exports": {
-+    "require": "./dist/cjs/index.js",
-+    "import": "./dist/esm2015/index.js"
++    ".": {
++      "module": "./dist/esm2015/index.js",
++      "require": "./dist/cjs/index.js",
++      "import": "./dist/esm2015/index.js",
++      "types": "./dist/typings/index.d.ts"
++    },
++    "./*": {
++      "module": "./dist/esm2015/*.js",
++      "require": "./dist/cjs/*.js",
++      "import": "./dist/esm2015/*.js",
++      "types": "./dist/typings/*.d.ts"
++    }
 +  },
    "main": "dist/cjs/index.js",
    "module": "./dist/esm5/index.js",

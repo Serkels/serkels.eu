@@ -1,10 +1,9 @@
 "use client";
 
-import { useContainer } from "@1/core/ui/di.context.client";
+import { useInject } from "@1/core/ui/di.context.client";
 import { Field, Form, Formik, type FieldAttributes } from "formik";
 import tw from "tailwind-styled-components";
 import { Deal_Message_Controller } from "~/modules/exchange/Deal_Message.controller";
-import { Deal_Message_Repository } from "~/modules/exchange/Deal_Message.repository";
 import { useDeal_Value } from "../Deal.context";
 
 //
@@ -12,15 +11,11 @@ import { useDeal_Value } from "../Deal.context";
 export function Deal_Discussion_Form() {
   const [deal] = useDeal_Value();
 
-  const container = useContainer()
-    .createChildContainer()
-    .registerInstance(Deal_Message_Repository.DEAL_ID_TOKEN, deal.get("id"));
-
   const {
     create: { useMutation },
-  } = container.resolve(Deal_Message_Controller);
+  } = useInject(Deal_Message_Controller);
 
-  const { mutate: send_message } = useMutation();
+  const { mutate: send_message } = useMutation(deal.id);
 
   return (
     <Formik

@@ -1,6 +1,7 @@
 //
 
 import { Lifecycle, inject, scoped } from "@1/core/di";
+import { type UID } from "@1/core/domain";
 import { startTransaction } from "@sentry/nextjs";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import debug from "debug";
@@ -36,14 +37,17 @@ export class Deal_Message_Controller {
   /**
    * @deprecated
    */
-  useCreateMutation() {
+  useCreateMutation(deal_id: UID) {
     const { data: session } = useSession();
     const query_client = useQueryClient();
-    const key = [...Deal_QueryKeys.messages(NaN), "create"] as const;
+    const key = [
+      ...Deal_QueryKeys.messages(deal_id.value()),
+      "create",
+    ] as const;
     const create_message = async (message: string) => {
       this.#log("create_message");
       const trace = startTransaction({
-        name: `Create Message for the deal ${NaN}`,
+        name: `Create Message for the deal ${deal_id.value()}`,
       });
       try {
         trace.startChild({
@@ -51,7 +55,7 @@ export class Deal_Message_Controller {
         });
 
         await query_client.cancelQueries({ queryKey: key });
-        // await this.repository.create({ content: message });
+        await this.repository.create(deal_id, { content: message });
       } finally {
         trace.finish();
       }

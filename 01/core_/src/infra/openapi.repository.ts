@@ -1,5 +1,11 @@
 //
 
+// TODO(douglasduteil): remove import "reflect-metadata";
+// Should not be here...
+import "reflect-metadata";
+
+//
+
 import { TRPCError } from "@trpc/server";
 import debug from "debug";
 import type { FetchResponse } from "openapi-fetch";

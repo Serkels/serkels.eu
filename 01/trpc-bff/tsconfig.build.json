@@ -1,0 +1,23 @@
+{
+  "extends": ["@1/typescript-config/base.json"],
+  "compilerOptions": {
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "inlineSources": true,
+    "sourceMap": true,
+    "module": "ES2020",
+    //
+    "baseUrl": "./",
+    "outDir": "./dist/types",
+    "rootDir": "./src"
+  },
+  "include": ["./src"],
+  "references": [
+    // {
+    //   "path": "../rpc-methods/tsconfig.build.json"
+    // },
+    // {
+    //   "path": "../snaps-utils/tsconfig.build.json"
+    // }
+  ]
+}

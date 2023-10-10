@@ -3,7 +3,7 @@
 import { Id } from "@1/core/domain";
 import { UnknownError } from "@1/core/error";
 import { useInject } from "@1/core/ui/di.context.client";
-import { Message, Thread } from "@1/modules/inbox/domain";
+import { Thread } from "@1/modules/inbox/domain";
 import { Button } from "@1/ui/components/ButtonV";
 import { Spinner } from "@1/ui/components/Spinner";
 import { Circle } from "@1/ui/icons";
@@ -74,7 +74,7 @@ export function Echange_Deal({ id }: { id: number }) {
     "src/app/(main)/door/[code]/(private)/my/exchanges/[exchange_id]/deals/MyDeals.tsx",
     { exchange_id },
   );
-  const info = useInject(Get_Deal_ById_UseCase).execute(id);
+  const info = useInject(Get_Deal_ById_UseCase).execute(exchange_id, id);
 
   const [, set_deal] = useDeal_Value();
 
@@ -190,10 +190,7 @@ function Echange_DealLink() {
   const [deal] = useDeal_Value();
   const profile_id = useMyProfileId();
 
-  const info = useInject(Get_Last_Message_ById_UseCase).execute(
-    Number(deal?.id.value()),
-  );
-  info;
+  const info = useInject(Get_Last_Message_ById_UseCase).execute(deal?.id);
 
   const [{ door_id }] = useDoor_Value();
 
@@ -204,19 +201,21 @@ function Echange_DealLink() {
   const is_yours = deal.organizer.id.equal(Id(profile_id));
   const profile = is_yours ? deal.get("participant_profile") : exchange_profile;
 
-  const thread = Thread.create({
-    last_message: Message.zero, //deal.last_message,
-    profile,
-    updatedAt: deal.updated_at,
-  }).value();
-
-  // return null;
   return (
-    <Thread_Item
-      href={href}
-      thread={thread}
-      indicator={<Circle className="h-5 w-5 text-Gamboge" />}
-    />
+    match(info)
+      // .with({ status: "error" }, { status: "loading" }, () => null)
+      .with({ status: "success", data: P.select() }, (data) => (
+        <Thread_Item
+          href={href}
+          thread={Thread.create({
+            last_message: data,
+            profile,
+            updatedAt: deal.updated_at,
+          }).value()}
+          indicator={<Circle className="h-5 w-5 text-Gamboge" />}
+        />
+      ))
+      .otherwise(() => null)
   );
 }
 

@@ -3,6 +3,7 @@
 import { OpenAPI_Repository } from "@1/core/infra/openapi.repository";
 import type { Common_PaginationMeta_Schema } from "@1/strapi-openapi";
 import type { paths } from "@1/strapi-openapi/v1";
+import type { Observable } from "@trpc/server/observable";
 import createOpenapiClient from "openapi-fetch";
 import { z } from "zod";
 
@@ -47,14 +48,12 @@ export function getPreviousPageParam<
 
 //
 
-export interface AppContext {
-  // subscription_to: {
-  //   notifications: (
-  //     id: number,
-  //   ) => Observable<Notification_New_Answer_Props, unknown>;
-  //   messages: (
-  //     id: number,
-  //   ) => Observable<Notification_New_Answer_Props, unknown>;
-  // };
-  // verify_jwt: (token: string) => Promise<{ id: number }>;
+export interface AppContext extends TRPCOpenAPIContext {
+  subscription_to: {
+    notifications: (id: number) => Observable<any, unknown>;
+    // ) => Observable<Notification_New_Answer_Props, unknown>;
+    messages: (id: number) => Observable<any, unknown>;
+    // ) => Observable<Notification_New_Answer_Props, unknown>;
+  };
+  verify_jwt: (token: string) => Promise<{ id: number }>;
 }

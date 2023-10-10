@@ -1,6 +1,6 @@
 //
 
-import { Lifecycle, inject, scoped, type InjectionToken } from "@1/core/di";
+import { Lifecycle, inject, scoped } from "@1/core/di";
 import { HTTPError, type UID } from "@1/core/domain";
 import type { Strapi_Query_Params } from "@1/modules/common";
 import type { Message_Schema } from "@1/modules/inbox/infra/strapi";
@@ -13,8 +13,6 @@ import type { RepositoryPort } from "~/core";
 
 @scoped(Lifecycle.ContainerScoped)
 export class Deal_Message_Repository implements RepositoryPort {
-  static DEAL_ID_TOKEN = Symbol.for("DEAL_ID_TOKEN") as InjectionToken<number>;
-
   #log = debug(`~:modules:exchange:${Deal_Message_Repository.name}`);
 
   constructor(

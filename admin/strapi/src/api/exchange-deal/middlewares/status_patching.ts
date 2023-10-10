@@ -1,13 +1,11 @@
+import { deal_state_action_schema } from "@1.modules.exchange/domain";
 import { Deal_Status } from "@1/modules/deal/domain";
 import { Next } from "koa";
 import { interpret } from "xstate";
 import { ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
 import { KoaContext, Params } from "~/types";
-import {
-  EXCHANGE_DEAL_API_CONTENT_ID,
-  deal_state_action_schema,
-} from "../content-types/exchange-deal";
+import { EXCHANGE_DEAL_API_CONTENT_ID } from "../content-types/exchange-deal";
 import { deal_flow } from "../services/deal.machine";
 import { query_one_filters } from "../services/query_one_filters";
 
