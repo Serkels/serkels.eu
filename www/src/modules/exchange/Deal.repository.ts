@@ -18,14 +18,6 @@ export type Deal_QueryProps = Strapi_Query_Params<
   Pick<Exchange_Deal_Schema, "updatedAt">
 >;
 
-// @registry([
-//   {
-//     token: Exchange_Repository.EXCHANGE_ID_TOKEN,
-//     useValue: NaN,
-//     // options: { lifecycle: Lifecycle.ContainerScoped },
-//   },
-// ])
-
 @scoped(Lifecycle.ContainerScoped)
 export class Deal_Repository {
   #log = debug(`~:modules:deal:${Deal_Repository.name}`);

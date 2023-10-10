@@ -24,7 +24,7 @@ export const exchange_router = router({
           action: deal_state_action_schema,
         }),
       )
-      .query(async ({ ctx: { headers, openapi }, input }) => {
+      .mutation(async ({ ctx: { headers, openapi }, input }) => {
         const {
           client: { PATCH },
         } = openapi;

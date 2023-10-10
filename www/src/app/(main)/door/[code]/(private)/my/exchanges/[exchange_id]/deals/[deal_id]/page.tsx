@@ -29,13 +29,6 @@ export default async function Page({
   const exchange_id = Number(params.exchange_id);
   const deal_id = Number(params.deal_id);
 
-  console.log();
-  console.log(
-    "src/app/(main)/door/[code]/(private)/my/exchanges/[exchange_id]/deals/[deal_id]/page.tsx",
-  );
-  console.log({ deal_id, exchange_id });
-  console.log();
-
   return (
     <Main>
       <Sticky_Container>

@@ -20,17 +20,8 @@ export default function Layout({
   params,
 }: PropsWithChildren<{ params: any; nav: React.ReactNode }>) {
   return (
-    // <Deal_Route_Provider ></Deal_Route_Provider>
-    // {/* <Exchange_ValueProvider /> */}
-    // <Aside params={params} nav={nav} />
-
-    // {/* */}
-
-    // {children}
     <Deal_Route_Provider>
-      {/* <Deals_Aside_Nav> */}
       <Aside params={params} nav={nav} />
-      {/* </Deals_Aside_Nav> */}
       {children}
     </Deal_Route_Provider>
   );
@@ -56,13 +47,8 @@ async function Aside({ params, nav }: { params: any; nav: React.ReactNode }) {
       },
     );
 
-    console.log(
-      "src/app/(main)/door/[code]/(private)/my/exchanges/[exchange_id]/deals/layout.tsx",
-      { id },
-    );
-
     return (
-      <Deals_Aside_Nav>
+      <Deals_Aside_Nav exchange_id={id}>
         <header className={header()}>
           <h6 className={title()}>{exchange.title}</h6>
         </header>

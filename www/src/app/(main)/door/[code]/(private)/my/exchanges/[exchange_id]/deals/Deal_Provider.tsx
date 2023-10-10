@@ -18,16 +18,11 @@ export function Deal_Provider({
   children,
   id,
 }: PropsWithChildren<{ id: number }>) {
-  // const exchange_id = useInject(ROUTE_EXCHANGE_ID_TOKEN);
   const [exchange] = useExchange_Value();
   const exchange_id = Number(exchange.id.value());
 
   const deal_id = id;
 
-  console.log(
-    "src/app/(main)/door/[code]/(private)/my/exchanges/[exchange_id]/deals/Deal_Provider.tsx",
-    { exchange_id },
-  );
   const query_info = useInject(Get_Deal_ById_UseCase).execute(
     exchange_id,
     deal_id,

@@ -16,7 +16,6 @@ import { getServerSession } from "next-auth";
 //
 
 export async function createContext(): Promise<AppContext> {
-  debugger;
   const session = await getServerSession(authOptions);
   const openapi = new OpenAPI_Repository<ApiClient>(
     fromServer,

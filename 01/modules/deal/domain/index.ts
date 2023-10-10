@@ -67,12 +67,11 @@ export class Deal extends Entity<Props> {
   //
 
   get profile() {
-    return Profile.zero;
-    // return this.props.organizer;
+    // return Profile.zero;
+    return this.props.participant_profile;
   }
   get status() {
-    return Deal_Status.parse("idle");
-    // return this.props.status;
+    return this.props.status;
   }
 
   get exchange() {

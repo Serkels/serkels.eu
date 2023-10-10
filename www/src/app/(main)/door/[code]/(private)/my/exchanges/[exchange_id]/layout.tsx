@@ -5,7 +5,6 @@ import type { Metadata, ResolvingMetadata } from "next";
 import type { PropsWithChildren } from "react";
 import Nest from "react-nest";
 import { Hydrate_Container_Provider } from "~/core/react.client";
-import { Exchange_Repository } from "~/modules/exchange/Exchange_Repository";
 import { Get_Deals_UseCase } from "~/modules/exchange/application/get_deals.use-case";
 import { Get_Exchange_ById_UseCase } from "~/modules/exchange/application/get_exchange_byid.use-case";
 import { Exchange_Route_Provider } from "./layout.client";
@@ -39,23 +38,12 @@ export default async function Layout({
     .resolve(Get_Deals_UseCase)
     .prefetch(exchange_id, { pagination: { pageSize: 6 } });
 
-  console.log(
-    "src/app/(main)/door/[code]/(private)/my/exchanges/[exchange_id]/layout.tsx",
-    { exchange_id },
-  );
-
   //
 
   return (
     <Nest>
       <Hydrate_Container_Provider
         registerAll={[
-          {
-            registerInstance: [
-              Exchange_Repository.EXCHANGE_ID_TOKEN,
-              exchange_id,
-            ],
-          },
           {
             registerInstance: [ROUTE_EXCHANGE_ID_TOKEN, exchange_id],
           },

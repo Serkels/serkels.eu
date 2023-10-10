@@ -37,17 +37,15 @@ export class Deal_Message_Controller {
   /**
    * @deprecated
    */
-  useCreateMutation(deal_id: UID) {
+  useCreateMutation(id: UID) {
     const { data: session } = useSession();
+    const deal_id = id.value();
     const query_client = useQueryClient();
-    const key = [
-      ...Deal_QueryKeys.messages(deal_id.value()),
-      "create",
-    ] as const;
+    const key = [...Deal_QueryKeys.messages(deal_id), "create"] as const;
     const create_message = async (message: string) => {
       this.#log("create_message");
       const trace = startTransaction({
-        name: `Create Message for the deal ${deal_id.value()}`,
+        name: `Create Message for the deal ${deal_id}`,
       });
       try {
         trace.startChild({
@@ -55,7 +53,7 @@ export class Deal_Message_Controller {
         });
 
         await query_client.cancelQueries({ queryKey: key });
-        await this.repository.create(deal_id, { content: message });
+        await this.repository.create(id, { content: message });
       } finally {
         trace.finish();
       }
@@ -71,8 +69,8 @@ export class Deal_Message_Controller {
 
     useEffect(() => {
       Promise.all([
-        query_client.invalidateQueries(Deal_QueryKeys.messages(NaN)),
-        query_client.invalidateQueries(Deal_QueryKeys.item(NaN)),
+        query_client.invalidateQueries(Deal_QueryKeys.messages(deal_id)),
+        query_client.invalidateQueries(Deal_QueryKeys.item(deal_id)),
       ]);
     }, [mutation_result.isSuccess]);
     return mutation_result;

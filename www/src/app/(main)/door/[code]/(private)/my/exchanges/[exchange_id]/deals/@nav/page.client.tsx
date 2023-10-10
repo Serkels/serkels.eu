@@ -6,8 +6,8 @@ import { useInject } from "@1/core/ui/di.context.client";
 import { Thread } from "@1/modules/inbox/domain";
 import { Button } from "@1/ui/components/ButtonV";
 import { Circle } from "@1/ui/icons";
+import { useMemo } from "react";
 import ContentLoader from "react-content-loader";
-import Nest from "react-nest";
 import { tv } from "tailwind-variants";
 import { P, match } from "ts-pattern";
 import { useDoor_Value } from "~/app/(main)/door/door.context";
@@ -18,7 +18,8 @@ import { Get_Deal_ById_UseCase } from "~/modules/exchange/application/get_deal_b
 import { Get_Deals_UseCase } from "~/modules/exchange/application/get_deals.use-case";
 import { Get_Last_Message_ById_UseCase } from "~/modules/exchange/application/get_last_message.use-case";
 import { useMyProfileId } from "~/modules/user/useProfileId";
-import { Deal_ValueProvider, useDeal_Value } from "../Deal.context";
+import { useDeal_Value } from "../Deal.context";
+import { Deal_Provider } from "../Deal_Provider";
 
 //
 
@@ -50,9 +51,9 @@ export function Deals_Nav() {
           <ul className="space-y-5">
             {pages.map((deal_id) => (
               <li key={deal_id}>
-                <Deal_ValueProvider>
+                <Deal_Provider id={deal_id}>
                   <Echange_Deal id={deal_id} />
-                </Deal_ValueProvider>
+                </Deal_Provider>
               </li>
             ))}
             {isFetchingNextPage ? (
@@ -102,15 +103,8 @@ function Echange_Deal({ id }: { id: number }) {
       return null;
     })
     .with({ status: "loading" }, () => <Echange_DealLink_Loader />)
-    .with({ status: "success", data: P.select() }, (data) => {
-      // if (Deal.zero.isEqual(deal)) return null;
-
-      return (
-        <Nest>
-          <Deal_ValueProvider initialValue={data} />
-          <Echange_DealLink />
-        </Nest>
-      );
+    .with({ status: "success" }, () => {
+      return <Echange_DealLink />;
     })
     .exhaustive();
 }
@@ -130,36 +124,33 @@ function Echange_DealLink() {
   const is_yours = deal.organizer.id.equal(Id(profile_id));
   const profile = is_yours ? deal.get("participant_profile") : exchange_profile;
 
+  const indicator = useMemo(() => {
+    return match(deal.status)
+      .with("approved", () => <Circle className="h-5 w-5 text-success" />)
+      .with("approved by the organizer", () => (
+        <Circle className="h-5 w-5 text-tertiary" />
+      ))
+      .with("denied", () => <Circle className="h-5 w-5 text-danger" />)
+      .with("idle", () => <Circle className="h-5 w-5 text-warning" />)
+      .exhaustive();
+  }, [deal.status]);
+
+  const thread = useMemo(() => {
+    return Thread.create({
+      last_message: info.data, //deal.last_message,
+      profile,
+      updatedAt: deal.updated_at,
+    }).value();
+  }, [info.data]);
+
   return (
     match(info)
       // .with({ status: "error" }, { status: "loading" }, () => null)
-      .with({ status: "success", data: P.select() }, (data) => (
-        <Thread_Item
-          href={href}
-          thread={Thread.create({
-            last_message: data, //deal.last_message,
-            profile,
-            updatedAt: deal.updated_at,
-          }).value()}
-          indicator={<Circle className="h-5 w-5 text-Gamboge" />}
-        />
+      .with({ status: "success" }, () => (
+        <Thread_Item href={href} thread={thread} indicator={indicator} />
       ))
       .otherwise(() => null)
   );
-
-  // return match(info)
-  //   .with({ status: "error" }, { status: "loading" }, () => null)
-  //   .otherwise(() => (
-  //     <Thread_Item
-  //       href={href}
-  //       thread={Thread.create({
-  //         last_message: info.data, //deal.last_message,
-  //         profile,
-  //         updatedAt: deal.updated_at,
-  //       }).value()}
-  //       indicator={<Circle className="h-5 w-5 text-Gamboge" />}
-  //     />
-  //   ));
 }
 
 function Echange_DealLink_Loader() {
