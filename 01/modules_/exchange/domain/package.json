@@ -11,6 +11,12 @@
       "import": "./dist/esm/index.js",
       "types": "./src/index.ts"
     },
+    "./src/*": {
+      "module": "./dist/esm/*.js",
+      "require": "./dist/cjs/*.js",
+      "import": "./dist/esm/*.js",
+      "types": "./src/*.ts"
+    },
     "./*": {
       "module": "./dist/esm/*.js",
       "require": "./dist/cjs/*.js",

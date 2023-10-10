@@ -14,7 +14,7 @@
     "@1/core": "workspace:*",
     "@1/modules": "workspace:*",
     "@1/strapi-openapi": "workspace:*",
-    "@1.bff/trpc": "workspace:*",
+    "@1/strapi-trpc-wss": "workspace:*",
     "@1.modules.exchange/domain": "workspace:*",
     "@1/strapi-trpc-router": "workspace:*",
     "@strapi/database": "4.13.7",

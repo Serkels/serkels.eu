@@ -12,6 +12,7 @@
     //
     { "path": "01/strapi-openapi", "name": "@1/strapi-openapi" },
     { "path": "01/strapi-trpc-router", "name": "@1/strapi-trpc-router" },
+    { "path": "01/strapi-trpc-wss", "name": "@1/strapi-trpc-wss" },
     { "path": "01/ui", "name": "@1/ui" },
     //
     { "path": "01/config/eslint-config", "name": "@1/config/eslint-config" },

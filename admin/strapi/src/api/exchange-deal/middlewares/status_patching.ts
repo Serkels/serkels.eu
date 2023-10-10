@@ -1,4 +1,4 @@
-import { deal_state_action_schema } from "@1.modules.exchange/domain";
+import { deal_state_action_schema } from "@1.modules.exchange/domain/src/deal.entity";
 import { Deal_Status } from "@1/modules/deal/domain";
 import { Next } from "koa";
 import { interpret } from "xstate";
