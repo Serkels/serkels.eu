@@ -45,7 +45,7 @@
     "superjson": "1.13.3",
     "tsconfig-paths": "4.2.0",
     "typed-emitter": "2.1.0",
-    "undici": "5.24.0",
+    "undici": "5.26.3",
     "websockets": "npm:ws@8.14.2",
     "xstate": "4.38.2",
     "yaml": "2.3.2",
