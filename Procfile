@@ -1,1 +1,1 @@
-web: pnpm --filter strapi start
+web: pnpm --filter api start

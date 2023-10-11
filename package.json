@@ -9,8 +9,8 @@
     "build": "turbo run build",
     "clean": "turbo run clean",
     "dev": "turbo run dev --parallel --continue",
-    "heroku-prebuild": "pnpx turbo prune --scope=strapi && rm -rf 01 www admin && pnpx cpx \"out/**/*\" .",
-    "heroku-postbuild": "turbo run build --filter=strapi",
+    "heroku-prebuild": "pnpx turbo prune --scope=api && rm -rf apps packages && pnpx cpx \"out/**/*\" .",
+    "heroku-postbuild": "turbo run build --filter=api",
     "lint": "turbo run lint",
     "start": "pnpm -r start"
   },
@@ -19,26 +19,6 @@
     "turbo": "1.10.14",
     "typescript": "5.2.2"
   },
-  "optionalDependencies": {
-    "formik": "2.4.5",
-    "mime": "3.0.0",
-    "supports-color": "8.1.1",
-    "websockets": "npm:ws@8.14.2",
-    "ws": "8.14.2",
-    "zod": "3.22.2"
-  },
-  "pnpm": {
-    "overrides": {
-      "formik": "$formik",
-      "mime": "$mime",
-      "supports-color": "$supports-color",
-      "ws": "$ws",
-      "websockets": "$websockets",
-      "zod": "$zod"
-    },
-    "patchedDependencies": {
-      "tsyringe@4.8.0": "patches/tsyringe@4.8.0.patch",
-      "react-nest@0.1.10": "patches/react-nest@0.1.10.patch"
-    }
-  }
+  "optionalDependencies": {},
+  "pnpm": {}
 }

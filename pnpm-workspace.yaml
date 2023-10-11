@@ -1,7 +1,4 @@
 packages:
-  - "01/*"
-  - "01/config/*"
-  - "www"
-  - "admin/strapi"
+  - "apps/*"
   #
   - "packages/@douglasduteil/*"

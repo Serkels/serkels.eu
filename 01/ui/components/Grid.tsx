@@ -1,25 +1,47 @@
 //
 
-import clsx from "clsx";
-import tw from "tailwind-styled-components";
+import { forwardRef, type ComponentPropsWithoutRef } from "react";
+import { tv, type VariantProps } from "tailwind-variants";
 
 //
 
-export const Grid = tw.div<{ $padding?: boolean }>`
-  grid
-  grid-cols-4
-  gap-4
+export const Grid = forwardRef<HTMLDivElement, GridProps>(function Grid(
+  { children, ...props },
+  forwardedRef,
+) {
+  const { className, fluid, ...other_props } = props;
 
-  sm:grid-cols-6
+  return (
+    <div
+      className={style({ className, fluid: fluid ?? false })}
+      ref={forwardedRef}
+      {...other_props}
+    >
+      {children}
+    </div>
+  );
+});
 
-  md:grid-cols-8
-  md:gap-6
+export interface GridProps
+  extends ComponentPropsWithoutRef<"div">,
+    VariantProps<typeof style> {}
 
-  lg:gap-8
+//
 
-  xl:grid-cols-12
-  ${(p) =>
-    clsx({
-      "px-4 sm:px-8 md:px-6 lg:px-8": p["$padding"] ?? true,
-    })}
-`;
+const style = tv({
+  base: [
+    "grid",
+    "grid-cols-4",
+    "gap-4",
+    "sm:grid-cols-6",
+    "md:grid-cols-8",
+    "md:gap-6",
+    "lg:gap-8",
+    "xl:grid-cols-12",
+  ],
+  variants: {
+    fluid: {
+      false: "px-4 sm:px-8 md:px-6 lg:px-8",
+    },
+  },
+});

@@ -9,6 +9,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "@react-hook/merged-ref": "^1.3.2",
+    "@react-hookz/web": "^23.1.0",
     "@react-types/button": "3.8.0",
     "clsx": "2.0.0",
     "formik": "2.4.5",
@@ -25,8 +27,6 @@
     "ts-pattern": "5.0.5"
   },
   "devDependencies": {
-    "@1/modules": "workspace:*",
-    "@1/strapi-openapi": "workspace:*",
     "@1/tailwindcss-config": "workspace:*",
     "@1/typescript-config": "workspace:*",
     "@types/react": "18.2.24",
