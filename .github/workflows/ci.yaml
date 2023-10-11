@@ -30,8 +30,8 @@ jobs:
           STRAPI_API_URL: https://api.fake.toc-toc.org
           STALKER_URL: https://stalker.fake.toc-toc.org
 
-  admin:
-    name: Build admin
+  api:
+    name: Build api
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -50,6 +50,6 @@ jobs:
           node-version: "latest"
           cache: pnpm
 
-      - run: pnpm --filter strapi...  install
+      - run: pnpm --filter api...  install
 
-      - run: pnpm --filter strapi...  build
+      - run: pnpm --filter api...  build
