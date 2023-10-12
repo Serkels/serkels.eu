@@ -1,4 +1,6 @@
-import { inferAsyncReturnType, initTRPC } from "@trpc/server";
+//
+
+import { appRouter } from "@toctocorg/api";
 import {
   CreateHTTPContextOptions,
   createHTTPServer,
@@ -7,9 +9,11 @@ import {
   CreateWSSContextFnOptions,
   applyWSSHandler,
 } from "@trpc/server/adapters/ws";
-import { observable } from "@trpc/server/observable";
+import cors from "cors";
+import { AddressInfo } from "net";
 import { WebSocketServer } from "ws";
-import { z } from "zod";
+
+//
 
 // This is how you initialize a context for the server
 function createContext(
@@ -17,69 +21,27 @@ function createContext(
 ) {
   return {};
 }
-type Context = inferAsyncReturnType<typeof createContext>;
-
-const t = initTRPC.context<Context>().create();
-
-const publicProcedure = t.procedure;
-const router = t.router;
-
-const greetingRouter = router({
-  hello: publicProcedure
-    .input(
-      z.object({
-        name: z.string(),
-      }),
-    )
-    .query(({ input }) => `Hello, ${input.name}!`),
-});
-
-const postRouter = router({
-  createPost: publicProcedure
-    .input(
-      z.object({
-        title: z.string(),
-        text: z.string(),
-      }),
-    )
-    .mutation(({ input }) => {
-      // imagine db call here
-      return {
-        id: `${Math.random()}`,
-        ...input,
-      };
-    }),
-  randomNumber: publicProcedure.subscription(() => {
-    return observable<{ randomNumber: number }>((emit) => {
-      const timer = setInterval(() => {
-        // emits a number every second
-        emit.next({ randomNumber: Math.random() });
-      }, 200);
-
-      return () => {
-        clearInterval(timer);
-      };
-    });
-  }),
-});
-
-// Merge routers together
-const appRouter = router({
-  greeting: greetingRouter,
-  post: postRouter,
-});
 
 export type AppRouter = typeof appRouter;
 
 // http server
 const { server, listen } = createHTTPServer({
+  middleware: cors(),
   router: appRouter,
   createContext,
 });
 
 // ws server
-const wss = new WebSocketServer({ server });
-applyWSSHandler<AppRouter>({
+const wss = new WebSocketServer({ server, path: "/socket" });
+wss.on("connection", (ws) => {
+  console.log(`➕➕ Connection (${wss.clients.size})`);
+  ws.once("close", () => {
+    console.log(`➖➖ Connection (${wss.clients.size})`);
+  });
+});
+
+applyWSSHandler({
+  batching: { enabled: true },
   wss,
   router: appRouter,
   createContext,
@@ -88,4 +50,8 @@ applyWSSHandler<AppRouter>({
 // setInterval(() => {
 //   console.log('Connected clients', wss.clients.size);
 // }, 1000);
-listen(Number(process.env.PORT) || 2022);
+const port = Number(process.env.PORT) || 2022;
+listen(port);
+
+const info = server.address() as AddressInfo;
+console.log(`🎠\n - Local:  http://${info.address}:${info.port}`);

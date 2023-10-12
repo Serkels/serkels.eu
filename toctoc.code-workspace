@@ -4,6 +4,8 @@
     { "path": "apps/www", "name": "www" },
     { "path": "apps/api", "name": "api" },
     //
+    { "path": "apps/api", "name": "api" },
+    //
     { "path": ".", "name": "root" }
   ],
   "extensions": {

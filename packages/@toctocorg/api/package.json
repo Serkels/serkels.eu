@@ -1,0 +1,19 @@
+{
+  "name": "@toctocorg/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "scripts": {
+    "type-check": "tsc"
+  },
+  "keywords": [],
+  "dependencies": {
+    "@trpc/server": "^10.40.0",
+    "zod": "^3.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2"
+  }
+}
