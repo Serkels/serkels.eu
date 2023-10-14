@@ -9,7 +9,8 @@
     "build": "turbo run build",
     "clean": "turbo run clean",
     "dev": "turbo run dev --parallel --continue",
-    "heroku-postbuild": "pnpm exec turbo run build --filter=api &&  pnpm --prod --filter=strapi... install",
+    "heroku-prebuild": "pnpm exec turbo prune --scope=api && rm -rf apps packages out/patches && pnpx cpx \"out/**/*\" .",
+    "heroku-postbuild": "pnpm exec turbo run build --filter=api",
     "lint": "turbo run lint",
     "start": "pnpm -r start"
   },
