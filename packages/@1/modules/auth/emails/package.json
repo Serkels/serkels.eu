@@ -2,6 +2,7 @@
   "name": "@1.modules/auth.emails",
   "version": "0.0.18",
   "private": true,
+  "sideEffects": false,
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./index.ts",

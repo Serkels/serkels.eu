@@ -2,6 +2,7 @@
   "name": "@1.infra/email",
   "version": "0.1.0",
   "private": true,
+  "sideEffects": false,
   "type": "module",
   "main": "./index.ts",
   "types": "./index.ts",

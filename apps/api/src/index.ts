@@ -40,7 +40,16 @@ function createContext() {
 
 const app = new Hono();
 
-app.all("*", logger(), cors());
+app.all(
+  "*",
+  logger(),
+  cors(),
+  trpcServer({
+    endpoint: "/trpc",
+    router,
+    createContext,
+  }),
+);
 
 app.get("/health", (c) =>
   c.json({
@@ -61,13 +70,6 @@ app.get("/ready", async (c) =>
     database: {
       status: (await prisma.$queryRaw`SELECT 1`) ? "OK" : "FAIL",
     },
-  }),
-);
-
-app.use(
-  trpcServer({
-    router,
-    createContext,
   }),
 );
 
