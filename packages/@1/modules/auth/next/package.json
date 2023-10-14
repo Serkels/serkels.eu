@@ -27,8 +27,8 @@
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
-    "@douglasduteil/datatypes...hours-to-seconds": "workspace:*",
     "@1.infra/trpc": "workspace:*",
+    "@douglasduteil/datatypes...hours-to-seconds": "workspace:*",
     "typescript": "^5.2.2"
   }
 }
