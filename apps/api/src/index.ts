@@ -40,10 +40,9 @@ function createContext() {
 
 const app = new Hono();
 
-app.all(
-  "*",
-  logger(),
-  cors(),
+app.all("*", logger(), cors());
+
+app.use(
   trpcServer({
     endpoint: "/trpc",
     router,
