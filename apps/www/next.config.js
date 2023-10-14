@@ -11,7 +11,12 @@ const nextConfig = {
     return [];
   },
   async rewrites() {
-    return [];
+    return [
+      {
+        source: "/api/trpc/:path*",
+        destination: `${process.env["API_URL"]}/:path*`,
+      },
+    ];
   },
 };
 
