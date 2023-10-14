@@ -1,0 +1,23 @@
+{
+  "name": "@1.infra/email",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "scripts": {
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@react-email/render": "^0.0.7",
+    "debug": "^4.3.4",
+    "nodemailer": "^6.9.5",
+    "zod": "^3.0.0"
+  },
+  "devDependencies": {
+    "@1.config/typescript": "workspace:*",
+    "@types/debug": "^4.1.9",
+    "@types/nodemailer": "^6.4.7",
+    "@types/react": "^18.2.28"
+  }
+}

@@ -1,8 +1,1 @@
-# Dependency directories
-node_modules/
-
-# Turbo
-.turbo/
-
-#
-dist
+node_modules

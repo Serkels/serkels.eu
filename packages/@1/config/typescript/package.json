@@ -1,0 +1,13 @@
+{
+  "name": "@1.config/typescript",
+  "version": "0.0.0",
+  "private": true,
+  "files": [],
+  "dependencies": {
+    "@tsconfig/strictest": "^2.0.2"
+  },
+  "devDependencies": {
+    "prettier": "^3.0.3",
+    "typescript": "^5.2.2"
+  }
+}

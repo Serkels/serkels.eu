@@ -1,0 +1,24 @@
+{
+  "name": "@1.modules/auth.emails",
+  "version": "0.0.18",
+  "private": true,
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./index.ts",
+  "scripts": {
+    "x:dev": "email dev",
+    "build": "tsup index.ts --format esm,cjs",
+    "export": "email export"
+  },
+  "dependencies": {
+    "@react-email/components": "^0.0.6",
+    "react": "^18.2.0",
+    "react-email": "^1.9.3"
+  },
+  "devDependencies": {
+    "@1.config/typescript": "workspace:*",
+    "@types/node": "^20.8.2",
+    "@types/react": "^18.2.25",
+    "tsup": "^7.2.0"
+  }
+}

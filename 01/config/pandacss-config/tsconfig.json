@@ -1,8 +1,0 @@
-{
-  "extends": ["@1/typescript-config/base.json"],
-  "compilerOptions": {
-    "declaration": false,
-    "declarationMap": false
-  },
-  "files": ["panda.config.ts"]
-}

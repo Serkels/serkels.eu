@@ -8,5 +8,9 @@ node_modules/
 .vercel/
 .vercel
 
+# ENV
+.env
+.env*.local
+
 # ...
 _

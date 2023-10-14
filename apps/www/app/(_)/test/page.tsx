@@ -5,7 +5,9 @@ import { Hydrate, dehydrate } from "@tanstack/react-query";
 import { Client_Page } from "./page.client";
 
 export default async function Page() {
-  // await TRPC_SSR.hello.prefetch({ name: "Dino" });
+  console.log("app/(_)/test/page.tsx");
+  await TRPC_SSR.hello.prefetch({ name: "Dino" });
+  console.log("TRPC_SSR.hello.prefetch");
 
   const dehydratedState = dehydrate(TRPC_SSR.queryClient);
 

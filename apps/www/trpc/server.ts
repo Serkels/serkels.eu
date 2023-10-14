@@ -1,21 +1,21 @@
 //
 
-import { appRouter } from "@toctocorg/api";
+import type { Router } from "@1.infra/trpc";
+import { createTRPCProxyClient, httpLink } from "@trpc/client";
 import { createServerSideHelpers } from "@trpc/react-query/server";
 import SuperJSON from "superjson";
-// import { app_router } from "./router";
 
 //
 
-export const TRPC_SSR = createServerSideHelpers({
-  router: appRouter,
-  ctx: {},
+const proxyClient = createTRPCProxyClient<Router>({
+  links: [
+    httpLink({
+      url: `${process.env["API_URL"]}`,
+    }),
+  ],
   transformer: SuperJSON,
 });
-// export async function get_trpc() {
-//   return createServerSideHelpers({
-//     router: app_router,
-//     ctx: await createContext(),
-//     transformer: SuperJSON,
-//   });
-// }
+
+export const TRPC_SSR = createServerSideHelpers({
+  client: proxyClient,
+});

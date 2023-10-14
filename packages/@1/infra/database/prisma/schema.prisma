@@ -1,0 +1,47 @@
+//
+
+datasource db {
+  provider = "postgres"
+  url      = env("DATABASE_URL")
+  // provider = "sqlite"
+  // url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+//
+
+model PasswordlessToken {
+  id         String    @id @default(uuid())
+  body       String    @unique
+  email      String
+  login_date DateTime?
+  is_active  Boolean   @default(true)
+
+  created_at DateTime @unique @default(now())
+  updated_at DateTime @unique @default(now())
+}
+
+model User {
+  id    String @id @default(uuid())
+  email String @unique
+}
+
+//
+
+enum PosterSource {
+  RAW
+  GITHUB
+}
+
+model Post {
+  id     String       @id @default(uuid())
+  name   String
+  text   String
+  source PosterSource @default(RAW)
+
+  createdAt DateTime @unique @default(now())
+  updatedAt DateTime @unique @default(now())
+}
