@@ -9,7 +9,11 @@
     "build": "turbo run build",
     "clean": "turbo run clean",
     "dev": "turbo run dev --parallel --continue",
-    "heroku-prebuild": "NODE_ENV=O_0 pnpm i -w && pnpm exec turbo prune --scope=api && rm -rf apps packages && pnpm exec cpx \"out/**/*\" .",
+    "heroku-prebuild": "pnpx npm-run-all heroku-prebuild:*",
+    "heroku-prebuild:00": "NODE_ENV=O_0 pnpm i -w",
+    "heroku-prebuild:01": "pnpm exec turbo prune --scope=api",
+    "heroku-prebuild:03": "rm -rf apps packages",
+    "heroku-prebuild:04": "pnpm exec cpx \"out/**/*\" .",
     "heroku-postbuild": "pnpm exec turbo run build --filter=api",
     "lint": "turbo run lint",
     "start": "pnpm -r start"
