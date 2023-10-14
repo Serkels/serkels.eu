@@ -15,10 +15,10 @@
     "heroku-prebuild:02": "rm -rf apps packages",
     "heroku-prebuild:03": "pnpm exec cpx \"out/**/*\" .",
     "heroku-postbuild": "npx npm-run-all heroku-postbuild:*",
-    "heroku-postbuild:00": "pnpm --filter @1.infra/database exec prisma migrate deploy",
+    "heroku-postbuild:00": "pnpm --filter @1.infra/database exec prisma generate",
     "heroku-postbuild:01": "pnpm exec turbo run build --filter=api",
     "heroku-release": "npx npm-run-all heroku-release:*",
-    "heroku-release:00": "pnpm --filter @1.infra/database exec prisma generate",
+    "heroku-release:00": "pnpm --filter @1.infra/database exec prisma migrate deploy",
     "lint": "turbo run lint",
     "start": "pnpm -r start"
   },
