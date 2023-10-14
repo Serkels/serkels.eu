@@ -9,7 +9,7 @@
     "build": "turbo run build",
     "clean": "turbo run clean",
     "dev": "turbo run dev --parallel --continue",
-    "heroku-prebuild": "ls -la patches",
+    "heroku-prebuild": "turbo prune --scope=api && ls -la ",
     "heroku-postbuild": "turbo run build --filter=api",
     "lint": "turbo run lint",
     "start": "pnpm -r start"
