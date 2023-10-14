@@ -1,2 +1,2 @@
-release: pnpm --filter @1.infra/database exec prisma generate && pnpm --filter @1.infra/database exec prisma migrate deploy
+release: pnpm run heroku-release
 web: pnpm --filter api start
