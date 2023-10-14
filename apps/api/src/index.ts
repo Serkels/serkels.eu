@@ -42,6 +42,14 @@ const app = new Hono();
 
 app.all("*", logger(), cors());
 
+app.get("/", (c) =>
+  c.json({
+    uptime: process.uptime(),
+    message: "OK",
+    timestamp: Date.now(),
+  }),
+);
+
 app.use(
   trpcServer({
     endpoint: "/trpc",
@@ -73,14 +81,6 @@ app.get("/ready", async (c) =>
   }),
 );
 
-app.all("/", (c) =>
-  c.json({
-    uptime: process.uptime(),
-    message: "OK",
-    timestamp: Date.now(),
-  }),
-);
-
 //
 
 const server = serve({
@@ -106,4 +106,5 @@ process.on("SIGTERM", () => {
   console.log("SIGTERM");
   broadcastReconnectNotification();
   wss.close();
+  process.exit(1);
 });
