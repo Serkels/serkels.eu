@@ -9,7 +9,7 @@
     "build": "turbo run build",
     "clean": "turbo run clean",
     "dev": "turbo run dev --parallel --continue",
-    "heroku-prebuild": "pnpx turbo prune --scope=api && rm -rf apps packages && pnpx cpx \"out/**/*\" .",
+    "heroku-prebuild": "pnpx turbo prune --scope=api && ls -la && echo && ls -la out && rm -rf apps packages out/patches && pnpx cpx \"out/**/*\" .",
     "heroku-postbuild": "turbo run build --filter=api",
     "lint": "turbo run lint",
     "start": "pnpm -r start"
