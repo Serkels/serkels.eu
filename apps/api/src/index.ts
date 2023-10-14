@@ -57,6 +57,7 @@ app.get("/health", (c) =>
     timestamp: Date.now(),
   }),
 );
+
 app.get("/ready", async (c) =>
   c.json({
     app: {
@@ -69,6 +70,14 @@ app.get("/ready", async (c) =>
     database: {
       status: (await prisma.$queryRaw`SELECT 1`) ? "OK" : "FAIL",
     },
+  }),
+);
+
+app.all("/", (c) =>
+  c.json({
+    uptime: process.uptime(),
+    message: "OK",
+    timestamp: Date.now(),
   }),
 );
 
