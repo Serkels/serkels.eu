@@ -2,6 +2,7 @@
   "name": "@1.modules/auth.next",
   "version": "0.1.0",
   "private": true,
+  "sideEffects": false,
   "type": "module",
   "main": "./src/index.ts",
   "types": "./src/index.ts",
