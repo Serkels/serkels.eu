@@ -9,12 +9,13 @@
     "build": "turbo run build",
     "clean": "turbo run clean",
     "dev": "turbo run dev --parallel --continue",
-    "heroku-prebuild": "NODE_ENV=O_0 pnpm i -w && pnpm exec turbo prune --scope=api && rm -rf apps packages && pnpx cpx \"out/**/*\" .",
+    "heroku-prebuild": "NODE_ENV=O_0 pnpm i -w && pnpm exec turbo prune --scope=api && rm -rf apps packages && pnpm exec cpx \"out/**/*\" .",
     "heroku-postbuild": "pnpm exec turbo run build --filter=api",
     "lint": "turbo run lint",
     "start": "pnpm -r start"
   },
   "devDependencies": {
+    "cpx": "1.5.0",
     "prettier": "3.0.3",
     "turbo": "1.10.14",
     "typescript": "5.2.2"
