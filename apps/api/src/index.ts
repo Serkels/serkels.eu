@@ -102,9 +102,12 @@ const { broadcastReconnectNotification } = applyWSSHandler({
   createContext,
 });
 
-process.on("SIGTERM", () => {
+process.on("SIGTERM", async () => {
   console.log("SIGTERM");
-  broadcastReconnectNotification();
-  wss.close();
+  await Promise.all([
+    broadcastReconnectNotification(),
+    wss.close(),
+    prisma.$disconnect(),
+  ]);
   process.exit(1);
 });
