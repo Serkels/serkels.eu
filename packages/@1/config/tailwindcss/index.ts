@@ -1,7 +1,8 @@
 //
 
 import type { Config } from "tailwindcss";
-import { black, gray, white } from "tailwindcss/colors";
+import default_colors from "tailwindcss/colors";
+import { icons } from "./icon";
 
 //
 
@@ -19,9 +20,7 @@ const Silver_Chalice = "#AAAAAA";
 const Violet_Eggplant = "#AA1E8B";
 
 const colors = {
-  black,
-  white,
-  gray,
+  ...default_colors,
   //
   Bittersweet,
   Cerulean,
@@ -67,4 +66,5 @@ export default {
     backgroundImage,
     colors,
   },
+  plugins: [icons()],
 } satisfies Config;

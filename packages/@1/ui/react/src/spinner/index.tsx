@@ -2,7 +2,7 @@
 
 import { forwardRef, type ComponentPropsWithoutRef } from "react";
 import { tv, type VariantProps } from "tailwind-variants";
-import { VisuallyHidden } from "../helpers/VisuallyHidden";
+import { VisuallyHidden } from "../visually_hidden";
 
 //
 
@@ -30,13 +30,13 @@ export interface SpinnerProps
 
 const style = tv({
   base: `
+    border-current
+    border-r-transparent
     inline-block
     animate-spin
     rounded-full
     border-4
     border-solid
-    border-current
-    border-r-transparent
     align-[-0.125em]
     motion-reduce:animate-[spin_1.5s_linear_infinite]
   `,

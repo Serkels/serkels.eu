@@ -1,8 +1,9 @@
 //
 
+import { AuthSessionProvider } from ":components/shell/AuthSessionProvider";
 import { authOptions } from "@1.modules/auth.next";
 import { getServerSession } from "next-auth";
-import { AuthSessionProvider, Client_Page } from "./page.client";
+import { Client_Page } from "./page.client";
 
 export default async function Page() {
   const session = await getServerSession(authOptions);

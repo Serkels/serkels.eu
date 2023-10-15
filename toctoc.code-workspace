@@ -5,6 +5,7 @@
     { "path": "apps/api", "name": "🚀 api" },
     //
     { "path": "packages/@1/modules", "name": "📦 modules" },
+    { "path": "packages/@1/ui", "name": "💄 ui" },
     { "path": "packages/@1/infra", "name": "🏗️ infra" },
     { "path": "packages/@1/config", "name": "⚙️ config" },
     //
@@ -46,7 +47,7 @@
     "javascript.preferences.importModuleSpecifier": "shortest",
     "typescript.preferences.importModuleSpecifier": "shortest",
     "typescript.tsdk": "root/node_modules/typescript/lib",
-    "workbench.editor.labelFormat": "medium",
+    "workbench.editor.labelFormat": "short",
     "autoHide.autoHidePanel": false,
     "tailwindCSS.rootFontSize": 14,
     "editor.quickSuggestions": { "strings": "on" },

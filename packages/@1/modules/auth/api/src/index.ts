@@ -28,14 +28,18 @@ export default router({
     magic: procedure
       .input(z.object({ email: z.string().email() }))
       .mutation(async ({ input, ctx }) => {
+        // console.log(ctx)
         const { email } = input;
         const token = await nanoid(ENV.MAGIC_TOKEN_LENGHT);
         const sender = new Email_Sender();
 
-        await sender.send_react_email(TocTocMagicLinkEmail({ token }), {
-          subject: "[Toc Toc] Connexion",
-          to: email,
-        });
+        await sender.send_react_email(
+          TocTocMagicLinkEmail({ token, base_url: ctx.headers.origin }),
+          {
+            subject: "[Toc Toc] Connexion",
+            to: email,
+          },
+        );
 
         await ctx.prisma.passwordlessToken.create({
           data: { email, body: token },
@@ -52,7 +56,7 @@ export default router({
             where: { body: input.token },
           });
 
-        if (is_active) {
+        if (!is_active) {
           throw new TRPCError({
             code: "BAD_REQUEST",
             cause: "Token already active.",
@@ -70,7 +74,7 @@ export default router({
         }
 
         await ctx.prisma.passwordlessToken.update({
-          data: { is_active: true, login_date: new Date() },
+          data: { is_active: false, login_date: new Date() },
           where: { id },
         });
 
@@ -92,15 +96,16 @@ export default router({
         };
       }),
   }),
-  // sign_in:procedure
-  // .input(z.object({ token: z.string().trim() }))
-  // .query(async ({ input, ctx }) => {
-
-  //   return {
-  //     jwt,
-  //     user,
-  //   };
-  // }),
+  sign_in: procedure
+    .input(z.object({ token: z.string().trim() }))
+    .query(async ({ input, ctx }) => {
+      input;
+      ctx;
+      return {
+        // jwt,
+        // user,
+      };
+    }),
 });
 
 //

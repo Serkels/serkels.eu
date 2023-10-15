@@ -11,10 +11,13 @@
   "dependencies": {
     "@1.modules/auth.next": "workspace:*",
     "@1.modules/core": "workspace:*",
+    "@1.ui/react": "workspace:*",
+    "@react-hookz/web": "^23.1.0",
     "@tanstack/react-query": "4.35.7",
     "@trpc/client": "^10.40.0",
     "@trpc/react-query": "^10.38.5",
     "@vercel/analytics": "^1.0.2",
+    "constate": "^3.3.2",
     "debug": "^4.3.4",
     "formik": "^2.4.5",
     "framer-motion": "^10.16.4",
@@ -22,7 +25,6 @@
     "next-auth": "4.23.2",
     "nextjs-toploader": "^1.4.2",
     "react": "^18.2.0",
-    "react-aria-components": "1.0.0-beta.0",
     "react-dom": "^18.2.0",
     "react-nest": "^0.1.10",
     "superjson": "^1.12.4",
@@ -31,10 +33,12 @@
     "zod": "^3.22.2"
   },
   "devDependencies": {
+    "@1.config/prettier": "workspace:*",
     "@1.config/tailwindcss": "workspace:*",
     "@1.config/typescript": "workspace:*",
     "@1.infra/trpc": "workspace:*",
     "@1.infra/trpc.core": "workspace:*",
+    "@douglasduteil/datatypes...hours-to-seconds": "workspace:*",
     "@tanstack/react-query-devtools": "4.35.7",
     "@types/debug": "^4.1.9",
     "@types/node": "^20.8.2",
@@ -45,8 +49,6 @@
     "eslint-config-next": "13.5.4",
     "postcss": "^8.4.31",
     "prettier": "^3.0.3",
-    "prettier-plugin-tailwind-styled-components": "^0.0.4",
-    "prettier-plugin-tailwindcss": "^0.5.4",
     "tailwindcss": "^3.3.3",
     "tsx": "^3.12.7",
     "typescript": "^5.2.2"

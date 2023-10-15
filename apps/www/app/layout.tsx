@@ -1,6 +1,6 @@
 //
 
-import Analytics from ":components/Analytics";
+import Analytics from ":components/shell/Analytics";
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { Roboto } from "next/font/google";
@@ -38,7 +38,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <body
-        className={`${roboto.className} antialiased bg-[#F5F8FA] text-base`}
+        className={`${roboto.className} bg-[#F5F8FA] text-base antialiased`}
       >
         <NextTopLoader color="#fff" showSpinner={false} />
 

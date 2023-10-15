@@ -1,12 +1,19 @@
 //
 
-import "dotenv/config";
+import "./dotenv";
+
+//
 
 import { prisma } from "@1.infra/database";
 import { router } from "@1.infra/trpc";
+import type { Context } from "@1.infra/trpc.core";
 import { serve } from "@hono/node-server";
 import { trpcServer } from "@hono/trpc-server";
-import { applyWSSHandler } from "@trpc/server/adapters/ws";
+import type { FetchCreateContextFnOptions } from "@trpc/server/adapters/fetch";
+import {
+  applyWSSHandler,
+  type CreateWSSContextFnOptions,
+} from "@trpc/server/adapters/ws";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
@@ -32,8 +39,15 @@ export const ENV = z
 
 //
 
-function createContext() {
-  return { prisma };
+function createContext(
+  opts: FetchCreateContextFnOptions | CreateWSSContextFnOptions,
+) {
+  const headers = new Headers(opts.req.headers as Headers);
+
+  return {
+    prisma,
+    headers: { origin: headers.get("origin") ?? "https://toc-toc.org" },
+  } satisfies Context;
 }
 
 //
@@ -51,8 +65,8 @@ app.get("/", (c) =>
 );
 
 app.use(
+  "/trpc/*",
   trpcServer({
-    endpoint: "/trpc",
     router,
     createContext,
   }),

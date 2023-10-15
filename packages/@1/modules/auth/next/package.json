@@ -20,7 +20,10 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@1.infra/database": "workspace:*",
+    "@next-auth/prisma-adapter": "0.4.4-canary.81",
     "@trpc/client": "^10.40.0",
+    "next": "^13.5.4",
     "next-auth": "^4.23.2",
     "superjson": "^1.12.4",
     "zod": "^3.0.0"

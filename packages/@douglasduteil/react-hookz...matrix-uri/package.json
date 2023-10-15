@@ -1,5 +1,5 @@
 {
-  "name": "@douglasduteil/auth...providers_strapi-plugin-passwordless",
+  "name": "@douglasduteil/react-hookz...matrix-uri",
   "version": "0.0.0",
   "description": "Passwordless Strapi Email provider for Auth.js",
   "main": "index.ts",
@@ -11,10 +11,10 @@
   "author": "Douglas Duteil <douglasduteil@gmail.com> (https://douglasduteil.github.io/)",
   "license": "WTFPL",
   "dependencies": {
-    "next": "13.5.4",
-    "next-auth": "4.23.2",
-    "nodemailer": "6.9.5",
+    "@react-hookz/web": "23.1.0"
+  },
+  "devDependencies": {
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "@types/react": "18.2.28"
   }
 }

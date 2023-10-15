@@ -4,11 +4,24 @@
   "compilerOptions": {
     "exactOptionalPropertyTypes": false,
     "paths": {
+      // TODO(douglasduteil): remove this legacy path
+      "@1/ui/components/ButtonV": [
+        "../../packages/@1/ui/react/src/button/index.tsx"
+      ],
+      // TODO(douglasduteil): remove this legacy path
+      "@1/ui/icons": ["../../packages/@1/ui/react/src/icons/index.ts"],
+      "@1/ui/components/*": ["../../packages/@1/ui/react/src/button/index.tsx"],
       ":app/*": ["./app/*"],
       ":components/*": ["./components/*"],
       ":trpc/*": ["./trpc/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "../../packages/@1/modules/auth/next/src/next-auth.d.ts"
+  ],
   "exclude": ["node_modules"]
 }

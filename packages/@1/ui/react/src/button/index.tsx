@@ -46,7 +46,7 @@ const button = tv({
       outline: "",
     },
     size: {
-      sm: "h-4 px-2 text-sm",
+      sm: "flex h-4 px-2 text-sm",
       md: "h-7 px-4 text-sm",
       lg: "h-8 px-8 text-sm",
     },

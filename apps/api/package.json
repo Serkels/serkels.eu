@@ -8,10 +8,11 @@
     "start": "tsx src/index.ts"
   },
   "dependencies": {
+    "@1.infra/database": "workspace:*",
+    "@1.infra/trpc": "workspace:*",
+    "@1.infra/trpc.core": "workspace:*",
     "@hono/node-server": "^1.2.0",
     "@hono/trpc-server": "^0.1.0",
-    "@1.infra/trpc": "workspace:*",
-    "@1.infra/database": "workspace:*",
     "@trpc/server": "^10.40.0",
     "dotenv": "^16.3.1",
     "hono": "^3.7.2",

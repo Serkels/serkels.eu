@@ -45,7 +45,7 @@ function useTRPCClient() {
             client,
           }),
           false: httpBatchLink({
-            url: "/api/trpc",
+            url: "http://localhost:8080/trpc",
           }),
         }),
       ],

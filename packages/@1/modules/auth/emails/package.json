@@ -8,6 +8,7 @@
   "types": "./index.ts",
   "scripts": {
     "x:dev": "email dev",
+    "dev:build": "pnpm build --watch",
     "build": "tsup index.ts --format esm,cjs",
     "export": "email export"
   },

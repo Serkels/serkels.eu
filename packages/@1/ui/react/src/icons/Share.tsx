@@ -1,0 +1,16 @@
+//
+
+import type { SVGProps } from "react";
+
+//
+
+export function Share(props: SVGProps<any>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8" {...props}>
+      <path
+        fill="currentColor"
+        d="M5 0v2C1 2 0 4.05 0 7c.52-1.98 2-3 4-3h1v2l3-3.16L5 0z"
+      />
+    </svg>
+  );
+}

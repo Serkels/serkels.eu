@@ -1,6 +1,6 @@
 //
 
-import { Spinner } from ":components/shell/Spinner";
+import { Spinner } from "@1.ui/react/spinner";
 import type { Metadata, ResolvingMetadata } from "next";
 import dynamic from "next/dynamic";
 

@@ -10,17 +10,12 @@ import {
   Text,
 } from "@react-email/components";
 
-interface TocTocMagicLinkEmailProps {
-  token?: string;
-}
-
-const baseUrl = process.env["VERCEL_URL"]
-  ? `https://${process.env["VERCEL_URL"]}`
-  : "https://toc-toc.org";
+//
 
 export const TocTocMagicLinkEmail = ({
-  token = "sparo-ndigo-amurt-secan", // loginCode = "sparo-ndigo-amurt-secan",
-}: TocTocMagicLinkEmailProps) => (
+  base_url = "https://toc-toc.org",
+  token = "d258ff22-0834-fdbf-e5d6-4ca8462d7993",
+}) => (
   <Html>
     <Head />
     <Preview>Log in with this magic link</Preview>
@@ -28,7 +23,7 @@ export const TocTocMagicLinkEmail = ({
       <Container style={container}>
         <Heading style={h1}>Login</Heading>
         <Link
-          href={`${baseUrl}/confirm/${token}`}
+          href={`${base_url}/confirm/${token}`}
           target="_blank"
           style={{
             ...link,
@@ -65,7 +60,7 @@ export const TocTocMagicLinkEmail = ({
           account.
         </Text> */}
         <Img
-          src={`${baseUrl}/opengraph-image.png`}
+          src={`${base_url}/opengraph-image.png`}
           width="32"
           height="32"
           alt="TocToc's Logo"

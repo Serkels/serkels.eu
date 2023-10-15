@@ -1,15 +1,14 @@
 //
 
-import { VisuallyHidden } from ":components/helpers/VisuallyHidden";
 import { AppFooter } from ":components/shell/AppFooter.server";
 import { BigBar } from ":components/shell/BigBar";
-import { Grid } from ":components/shell/Grid";
+import { VisuallyHidden } from "@1.ui/react/visually_hidden";
 import dynamic from "next/dynamic";
 import type { PropsWithChildren } from "react";
 
 //
 
-const TocTocLogo = dynamic(() => import(":components/TocTocLogo"), {
+const TocTocLogo = dynamic(() => import(":components/shell/TocTocLogo"), {
   ssr: false,
   loading() {
     return <VisuallyHidden>Toc-Toc</VisuallyHidden>;
@@ -24,7 +23,7 @@ export default function Layout({ children }: PropsWithChildren) {
       <BigBar>
         <TocTocLogo />
       </BigBar>
-      <Grid fluid>{children}</Grid>
+      {children}
       <AppFooter />
     </div>
   );

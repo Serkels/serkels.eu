@@ -1,7 +1,7 @@
 "use client";
 
-import { Spinner } from ":components/shell/Spinner";
 import { HTTPError } from "@1.modules/core/errors";
+import { Spinner } from "@1.ui/react/spinner";
 import { useQuery } from "@tanstack/react-query";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";

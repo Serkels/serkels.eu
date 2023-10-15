@@ -1,9 +1,7 @@
 "use client";
 
 import { TRPC_React } from ":trpc/client";
-import type { Session } from "next-auth";
-import { SessionProvider, signOut, useSession } from "next-auth/react";
-import type { PropsWithChildren } from "react";
+import { signOut, useSession } from "next-auth/react";
 
 //
 
@@ -33,11 +31,4 @@ export function Client_Page() {
       </button>
     </main>
   );
-}
-
-export function AuthSessionProvider({
-  children,
-  session,
-}: PropsWithChildren<{ session: Session | null }>) {
-  return <SessionProvider session={session}> {children} </SessionProvider>;
 }
