@@ -2,7 +2,7 @@
 
 import type { _24_HOURS_ } from "@douglasduteil/datatypes...hours-to-seconds";
 import { NEXTAUTH_TRPCENV } from "@douglasduteil/nextauth...trpc.prisma/config";
-import { create_nexauth_header } from "@douglasduteil/nextauth...trpc.prisma/next/jwt";
+import { create_nexauth_header } from "@douglasduteil/nextauth...trpc.prisma/jwt";
 import type { NextAuth_TRPCAuthRouter } from "@douglasduteil/nextauth...trpc.prisma/trpc";
 import { PrismaTRPCAdapter } from "@douglasduteil/nextauth...trpc.prisma/trpc/PrismaTRPCAdapter";
 import { createTRPCProxyClient, httpBatchLink } from "@trpc/client";

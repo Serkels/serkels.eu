@@ -2,9 +2,9 @@
 
 //
 
-import { TRPCError } from "@trpc/server";
 import { SEND_VERIFICATION_REQUEST_INPUT_SCHEMA } from "../../config";
-import { middleware, procedure, router } from "../trpc";
+import { verify_next_auth_token } from "../guards";
+import { procedure, router } from "../trpc";
 
 //
 
@@ -28,15 +28,7 @@ export function create_EmailProvider_router<Context>(
     resolver: SendEmailResolverFn<Context>;
   },
 ) {
-  // TODO(douglasduteil) : share the middleware
-  const is_next_auth = middleware(async ({ ctx, next }) => {
-    if (ctx.headers.NEXTAUTH_TOKEN === secret) {
-      return next();
-    }
-    throw new TRPCError({ code: "UNAUTHORIZED" });
-  });
-
-  const next_auth_procedure = procedure.use(is_next_auth);
+  const next_auth_procedure = procedure.use(verify_next_auth_token(secret));
 
   return router({
     sendVerificationRequest: next_auth_procedure
