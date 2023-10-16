@@ -38,7 +38,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <body
-        className={`${roboto.className} bg-[#F5F8FA] text-base antialiased`}
+        className={`${roboto.className} bg-[#F5F8FA] text-base text-black antialiased`}
       >
         <NextTopLoader color="#fff" showSpinner={false} />
 

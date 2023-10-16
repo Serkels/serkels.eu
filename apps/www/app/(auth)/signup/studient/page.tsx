@@ -1,6 +1,6 @@
 //
 
-import { get_csrf_token } from "@1.modules/auth.next";
+import { get_csrf_token } from "@1.modules/auth.next/csrf_token";
 import { UserAvatarFilled } from "@1/ui/icons";
 // import { UserAvatarFilled } from "@1.ui/react/icons";
 import type { Metadata, ResolvingMetadata } from "next";

@@ -9,6 +9,8 @@
     { "path": "packages/@1/infra", "name": "🏗️ infra" },
     { "path": "packages/@1/config", "name": "⚙️ config" },
     //
+    { "path": "packages/@douglasduteil", "name": "🎯 douglasduteil" },
+    //
     { "path": ".", "name": "🌱 root" }
   ],
   "extensions": {
@@ -83,7 +85,24 @@
         "args": ["run", "dev"],
         "type": "shell",
         "options": {
-          "cwd": "${workspaceFolder:🚀 api}"
+          "cwd": "${workspaceFolder:🚀 api}",
+          "env": {
+            "NODE_ENV": "development"
+          }
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "group": "build",
+        "runOptions": {
+          "instanceLimit": 1
+        }
+      },
+      {
+        "label": "Database Studio",
+        "command": "bun",
+        "args": ["run", "studio"],
+        "type": "shell",
+        "options": {
+          "cwd": "${workspaceFolder:🏗️ infra}/database"
         },
         "problemMatcher": ["$tsc-watch"],
         "group": "build",

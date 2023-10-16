@@ -1,17 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "Base",
-  "extends": "@tsconfig/strictest/tsconfig.json",
-  "compilerOptions": {
-    "esModuleInterop": true,
-    "ignoreDeprecations": "5.0",
-    "isolatedModules": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "preserveWatchOutput": true,
-    "types": [],
-    "target": "ESNext",
-    "verbatimModuleSyntax": true
-  }
+  "extends": "@douglasduteil/config...typescript/base.json",
+  "compilerOptions": {}
 }

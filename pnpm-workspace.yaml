@@ -6,3 +6,4 @@ packages:
   - "packages/@1/*/*"
   - "packages/@toctocorg/*"
   - "packages/@douglasduteil/*"
+  - "packages/@douglasduteil/config/*"

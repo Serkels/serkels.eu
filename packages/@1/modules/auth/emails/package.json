@@ -7,8 +7,8 @@
   "module": "./dist/index.mjs",
   "types": "./index.ts",
   "scripts": {
-    "x:dev": "email dev",
-    "dev:build": "pnpm build --watch",
+    "dev:studio": "email dev",
+    "dev": "pnpm build --watch",
     "build": "tsup index.ts --format esm,cjs",
     "export": "email export"
   },

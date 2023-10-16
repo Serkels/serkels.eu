@@ -1,8 +1,8 @@
 //
 
+import TailwindcssConfig from "@douglasduteil/config...tailwindcss";
 import type { Config } from "tailwindcss";
-import default_colors from "tailwindcss/colors";
-import { icons } from "./icon";
+import resolveConfig from "tailwindcss/resolveConfig";
 
 //
 
@@ -20,7 +20,6 @@ const Silver_Chalice = "#AAAAAA";
 const Violet_Eggplant = "#AA1E8B";
 
 const colors = {
-  ...default_colors,
   //
   Bittersweet,
   Cerulean,
@@ -61,10 +60,11 @@ const backgroundImage = {
 //
 
 export default {
+  presets: [resolveConfig(TailwindcssConfig)],
   content: [],
   theme: {
     backgroundImage,
     colors,
   },
-  plugins: [icons()],
+  // plugins: [custom_icon_set(resolve(__dirname, "icons"))],
 } satisfies Config;

@@ -13,6 +13,7 @@ export function LoginForm({
   return (
     <div
       className="
+      text-Dove_Gray
       grid
       grid-cols-1
       gap-5
@@ -21,7 +22,7 @@ export function LoginForm({
       bg-white
       px-4
       py-5
-      text-Dove_Gray
+      text-black
       shadow-[10px_10px_10px_#00000029]
     "
     >
@@ -36,7 +37,7 @@ export function SignUp({ onSubmit }: SignUpProps) {
   return (
     <Formik initialValues={{ email: "", as: "" }} onSubmit={onSubmit}>
       {({ isSubmitting, setFieldValue }) => (
-        <Form className="flex flex-col items-center space-y-5">
+        <Form className="flex  flex-col items-center space-y-5 text-black">
           <h1 className="text-center text-sm font-bold uppercase">
             Créer un compte
           </h1>

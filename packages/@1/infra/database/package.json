@@ -15,6 +15,7 @@
     "push": "prisma db push --skip-generate",
     "seed": "prisma db seed",
     "studio": "prisma studio",
+    "dev:studio": "prisma studio",
     "type-check": "tsc --noEmit"
   },
   "prisma": {

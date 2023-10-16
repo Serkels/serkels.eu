@@ -27,7 +27,7 @@ jobs:
       - run: pnpm --filter www... install
       - run: pnpm --filter www... build
         env:
-          STRAPI_API_URL: https://api.fake.toc-toc.org
+          API_URL: https://api.fake.toc-toc.org
           STALKER_URL: https://stalker.fake.toc-toc.org
 
   api:

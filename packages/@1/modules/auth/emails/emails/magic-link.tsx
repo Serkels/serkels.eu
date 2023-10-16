@@ -14,7 +14,7 @@ import {
 
 export const TocTocMagicLinkEmail = ({
   base_url = "https://toc-toc.org",
-  token = "d258ff22-0834-fdbf-e5d6-4ca8462d7993",
+  url = "https://toc-toc.org",
 }) => (
   <Html>
     <Head />
@@ -23,7 +23,7 @@ export const TocTocMagicLinkEmail = ({
       <Container style={container}>
         <Heading style={h1}>Login</Heading>
         <Link
-          href={`${base_url}/confirm/${token}`}
+          href={`${url}`}
           target="_blank"
           style={{
             ...link,

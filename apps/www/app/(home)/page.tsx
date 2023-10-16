@@ -7,7 +7,7 @@ import { AppFooter } from ":components/shell/AppFooter.server";
 import { AuthSessionProvider } from ":components/shell/AuthSessionProvider";
 import { Banner } from ":components/shell/Banner";
 import { BigBar } from ":components/shell/BigBar";
-import { authOptions } from "@1.modules/auth.next";
+import { authOptions } from "@1.modules/auth.next/nextauth.config";
 import { Grid } from "@1.ui/react/grid";
 import { VisuallyHidden } from "@1.ui/react/visually_hidden";
 import type { _1_HOUR_ } from "@douglasduteil/datatypes...hours-to-seconds";

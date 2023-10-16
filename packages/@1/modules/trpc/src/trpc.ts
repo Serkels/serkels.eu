@@ -24,25 +24,3 @@ export const { router, middleware, mergeRouters, procedure } = initTRPC
       };
     },
   });
-
-// const isAuthed = middleware(({ next, ctx }) => {
-//   const user = ctx.session?.user;
-
-//   if (!user?.name) {
-//     throw new TRPCError({ code: 'UNAUTHORIZED' });
-//   }
-
-//   return next({
-//     ctx: {
-//       user: {
-//         ...user,
-//         name: user.name,
-//       },
-//     },
-//   });
-// });
-
-// /**
-//  * Protected base procedure
-//  */
-// export const authedProcedure = t.procedure.use(isAuthed);

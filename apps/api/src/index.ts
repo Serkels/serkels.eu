@@ -5,8 +5,9 @@ import "./dotenv";
 //
 
 import { prisma } from "@1.infra/database";
+import { Email_Sender } from "@1.infra/email";
 import { router } from "@1.infra/trpc";
-import type { Context } from "@1.infra/trpc.core";
+import type { Context } from "@1.module/trpc";
 import { serve } from "@hono/node-server";
 import { trpcServer } from "@hono/trpc-server";
 import type { FetchCreateContextFnOptions } from "@trpc/server/adapters/fetch";
@@ -44,9 +45,14 @@ function createContext(
 ) {
   const headers = new Headers(opts.req.headers as Headers);
 
+  // TODO(douglasduteil): parse with the NEXT_AUTH_HEADER zod validator
   return {
     prisma,
-    headers: { origin: headers.get("origin") ?? "https://toc-toc.org" },
+    headers: {
+      origin: headers.get("origin") ?? "https://toc-toc.org",
+      NEXTAUTH_TOKEN: headers.get("NEXTAUTH_TOKEN") ?? "",
+    },
+    sender: new Email_Sender(),
   } satisfies Context;
 }
 

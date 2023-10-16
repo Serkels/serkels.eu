@@ -1,6 +1,6 @@
 //
 
-import { procedure, router } from "@1.infra/trpc.core";
+import { procedure, router } from "@1.module/trpc";
 import auth_api_router from "@1.modules/auth.api";
 import { observable } from "@trpc/server/observable";
 import { z } from "zod";

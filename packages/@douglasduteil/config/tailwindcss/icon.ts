@@ -8,13 +8,12 @@ import {
   parseColorsSync,
   runSVGO,
 } from "@iconify/tools";
-import { resolve } from "node:path";
 
 //
 
-export function icons() {
+export function custom_icon_set(folder_path: string) {
   // Import icons from directory 'svg'
-  const customSet = importDirectorySync(resolve(__dirname, "icons"));
+  const customSet = importDirectorySync(folder_path);
 
   // Clean up all icons
   customSet.forEachSync((name, type) => {

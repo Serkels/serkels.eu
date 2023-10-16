@@ -37,7 +37,6 @@
     "@1.config/tailwindcss": "workspace:*",
     "@1.config/typescript": "workspace:*",
     "@1.infra/trpc": "workspace:*",
-    "@1.infra/trpc.core": "workspace:*",
     "@douglasduteil/datatypes...hours-to-seconds": "workspace:*",
     "@tanstack/react-query-devtools": "4.35.7",
     "@types/debug": "^4.1.9",

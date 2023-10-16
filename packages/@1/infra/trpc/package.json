@@ -11,7 +11,7 @@
   },
   "keywords": [],
   "dependencies": {
-    "@1.infra/trpc.core": "workspace:*",
+    "@1.module/trpc": "workspace:*",
     "@1.modules/auth.api": "workspace:*",
     "@trpc/server": "^10.40.0",
     "superjson": "^1.12.4",

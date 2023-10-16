@@ -29,7 +29,7 @@ const button = tv({
   `,
   variants: {
     intent: {
-      primary: "bg-primary data-[hovered]:bg-primary/70  text-white",
+      primary: "bg-primary data-[hovered]:bg-primary/70 text-white",
       secondary: "bg-secondary data-[hovered]:bg-secondary/70 text-white",
       tertiary: "bg-tertiary data-[hovered]:bg-tertiary/70 text-white",
       quaternary: "bg-quaternary data-[hovered]:bg-quaternary/70 text-white",

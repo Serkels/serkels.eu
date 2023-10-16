@@ -2,13 +2,14 @@
 
 import { Avatar } from ":components/avatar";
 import { DomLazyMotion } from ":components/shell/DomLazyMotion";
-import { TRPC_React } from ":trpc/client";
+import { HTTPError } from "@1.modules/core/errors";
 import { Spinner } from "@1.ui/react/spinner";
 import { Button } from "@1/ui/components/ButtonV";
 import { useTimeoutEffect } from "@react-hookz/web";
+import { useMutation } from "@tanstack/react-query";
 import constate from "constate";
 import { AnimatePresence, m } from "framer-motion";
-import { signOut, useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
@@ -115,10 +116,10 @@ function LoginFormPanel() {
   const send = useOutlet_Send();
   const router = useRouter();
 
-  const mutation_info = TRPC_React.auth.passwordless.magic.useMutation();
+  const mutation_info = useSignIn_Mutation();
 
   const on_login_form_submit: ComponentProps<typeof LoginForm>["onLogin"] =
-    useCallback(async ({ email }) => await mutation_info.mutate({ email }), []);
+    useCallback(async ({ email }) => await mutation_info.mutate(email), []);
 
   const on_sign_up_form_submit: ComponentProps<typeof LoginForm>["onSignUp"] =
     useCallback(async ({ email, as }) => {
@@ -224,11 +225,14 @@ function ConnectedAs() {
     const user = data!.user!;
 
     const on_logout = useCallback(() => signOut(), [user.email, user.id]);
-
-    const href = match(user.role)
-      .with("studient", () => `/exchange`)
-      .with("partner", () => `/opportunity`)
-      .exhaustive();
+    try {
+      const href = match(user.role)
+        .with("studient", () => `/exchange`)
+        .with("partner", () => `/opportunity`)
+        .exhaustive();
+        href;
+    } catch {}
+    const href = "";
 
     return (
       <WhiteCard>
@@ -254,4 +258,21 @@ function ConnectedAs() {
     setTimeout(() => send({ state: "error", error: error as Error }), 0);
     return null;
   }
+}
+
+function useSignIn_Mutation() {
+  return useMutation({
+    mutationFn: async (email: string) => {
+      const response = await signIn("email", {
+        email,
+        redirect: false,
+      });
+
+      if (!response) throw new HTTPError("Missing response");
+      if (response.error) throw new HTTPError(response.error);
+
+      return response;
+    },
+    mutationKey: ["next_auth", "sign_in"] as const,
+  });
 }

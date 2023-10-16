@@ -20,8 +20,8 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
     "@1.infra/database": "workspace:*",
-    "@next-auth/prisma-adapter": "0.4.4-canary.81",
     "@trpc/client": "^10.40.0",
     "next": "^13.5.4",
     "next-auth": "^4.23.2",
@@ -30,7 +30,8 @@
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
-    "@1.infra/trpc": "workspace:*",
+    "@1.modules/auth.api": "workspace:*",
+    "@auth/core": "^0.16.1",
     "@douglasduteil/datatypes...hours-to-seconds": "workspace:*",
     "typescript": "^5.2.2"
   }

@@ -9,8 +9,9 @@
   },
   "dependencies": {
     "@1.infra/database": "workspace:*",
+    "@1.infra/email": "workspace:*",
     "@1.infra/trpc": "workspace:*",
-    "@1.infra/trpc.core": "workspace:*",
+    "@1.module/trpc": "workspace:*",
     "@hono/node-server": "^1.2.0",
     "@hono/trpc-server": "^0.1.0",
     "@trpc/server": "^10.40.0",
@@ -21,6 +22,7 @@
     "zod": "^3.0.0"
   },
   "devDependencies": {
+    "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
     "@1.config/typescript": "workspace:*",
     "@types/node": "^20.8.2",
     "@types/ws": "^8.2.0"

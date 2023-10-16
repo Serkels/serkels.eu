@@ -1,17 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "Next",
-  "extends": "./react.json",
-  "compilerOptions": {
-    "allowJs": true,
-    "incremental": true,
-    "noEmit": true,
-    "resolveJsonModule": true,
-    "strictNullChecks": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
-  }
+  "extends": "@douglasduteil/config...typescript/next.json",
+  "compilerOptions": {}
 }

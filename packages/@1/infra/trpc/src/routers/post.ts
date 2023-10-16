@@ -1,13 +1,15 @@
+// @ts-nocheck
+
 /**
  *
  * This is an example router, you can delete this file and then update `../pages/api/trpc/[trpc].tsx`
  */
-import { Post } from '@prisma/client';
-import { observable } from '@trpc/server/observable';
-import { EventEmitter } from 'events';
-import { prisma } from '../prisma';
-import { z } from 'zod';
-import { authedProcedure, publicProcedure, router } from '../trpc';
+import { Post } from "@prisma/client";
+import { observable } from "@trpc/server/observable";
+import { EventEmitter } from "events";
+import { z } from "zod";
+import { prisma } from "../prisma";
+import { authedProcedure, publicProcedure, router } from "../trpc";
 
 interface MyEvents {
   add: (data: Post) => void;
@@ -43,10 +45,10 @@ const interval = setInterval(() => {
     }
   }
   if (updated) {
-    ee.emit('isTypingUpdate');
+    ee.emit("isTypingUpdate");
   }
 }, 3e3);
-process.on('SIGTERM', () => {
+process.on("SIGTERM", () => {
   clearInterval(interval);
 });
 
@@ -64,12 +66,12 @@ export const postRouter = router({
         data: {
           ...input,
           name,
-          source: 'GITHUB',
+          source: "GITHUB",
         },
       });
-      ee.emit('add', post);
+      ee.emit("add", post);
       delete currentlyTyping[name];
-      ee.emit('isTypingUpdate');
+      ee.emit("isTypingUpdate");
       return post;
     }),
 
@@ -84,7 +86,7 @@ export const postRouter = router({
           lastTyped: new Date(),
         };
       }
-      ee.emit('isTypingUpdate');
+      ee.emit("isTypingUpdate");
     }),
 
   infinite: publicProcedure
@@ -100,7 +102,7 @@ export const postRouter = router({
 
       const page = await prisma.post.findMany({
         orderBy: {
-          createdAt: 'desc',
+          createdAt: "desc",
         },
         cursor: cursor ? { createdAt: cursor } : undefined,
         take: take + 1,
@@ -124,9 +126,9 @@ export const postRouter = router({
       const onAdd = (data: Post) => {
         emit.next(data);
       };
-      ee.on('add', onAdd);
+      ee.on("add", onAdd);
       return () => {
-        ee.off('add', onAdd);
+        ee.off("add", onAdd);
       };
     });
   }),
@@ -142,9 +144,9 @@ export const postRouter = router({
         }
         prev = newData;
       };
-      ee.on('isTypingUpdate', onIsTypingUpdate);
+      ee.on("isTypingUpdate", onIsTypingUpdate);
       return () => {
-        ee.off('isTypingUpdate', onIsTypingUpdate);
+        ee.off("isTypingUpdate", onIsTypingUpdate);
       };
     });
   }),
