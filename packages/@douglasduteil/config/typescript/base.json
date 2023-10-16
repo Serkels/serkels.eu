@@ -13,5 +13,6 @@
     "types": [],
     "target": "ESNext",
     "verbatimModuleSyntax": true
-  }
+  },
+  "// exclude": ["node_modules", "@ts-nocheck"]
 }

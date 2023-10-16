@@ -7,11 +7,10 @@ import { AppFooter } from ":components/shell/AppFooter.server";
 import { AuthSessionProvider } from ":components/shell/AuthSessionProvider";
 import { Banner } from ":components/shell/Banner";
 import { BigBar } from ":components/shell/BigBar";
-import { authOptions } from "@1.modules/auth.next/nextauth.config";
+import { getServerSession } from "@1.modules/auth.next";
 import { Grid } from "@1.ui/react/grid";
 import { VisuallyHidden } from "@1.ui/react/visually_hidden";
 import type { _1_HOUR_ } from "@douglasduteil/datatypes...hours-to-seconds";
-import { getServerSession } from "next-auth";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import type { ComponentPropsWithoutRef, PropsWithChildren } from "react";
@@ -67,7 +66,7 @@ function AppLargeTopBar() {
 }
 
 async function HomeBanner() {
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession();
 
   return (
     <Banner className="min-h-[45vh]">
@@ -104,21 +103,21 @@ function Explore() {
       <ExploreLink
         href="/opportunity"
         Icon={"Binoculars"}
-        className="col-span-2 text-Congress_Blue md:col-start-2 xl:col-start-4"
+        className="text-Congress_Blue col-span-2 md:col-start-2 xl:col-start-4"
       >
         Opportunités
       </ExploreLink>
       <ExploreLink
         href="/q&a"
         Icon={"MessageGroup"}
-        className="col-span-2 text-Eminence"
+        className="text-Eminence col-span-2"
       >
         Question-Réponse
       </ExploreLink>
       <ExploreLink
         href="/guide"
         Icon={"Book"}
-        className="col-span-2 text-RedViolet"
+        className="text-RedViolet col-span-2"
       >
         Guide d'étudiant
       </ExploreLink>
@@ -129,9 +128,9 @@ function Explore() {
 function ExploreLink({
   className,
   children,
-  href,
-} // Icon,
-: ComponentPropsWithoutRef<typeof Link> & PropsWithChildren<{ Icon: string }>) {
+  href, // Icon,
+}: ComponentPropsWithoutRef<typeof Link> &
+  PropsWithChildren<{ Icon: string }>) {
   return (
     <Link href={href} className={style({ className })}>
       <i className="h-10 w-10" />
