@@ -3,11 +3,10 @@
 import type { _24_HOURS_ } from "@douglasduteil/datatypes...hours-to-seconds";
 import { NEXTAUTH_TRPCENV } from "@douglasduteil/nextauth...trpc.prisma/config";
 import { create_nexauth_header } from "@douglasduteil/nextauth...trpc.prisma/jwt";
+import { PrismaTRPCAdapter } from "@douglasduteil/nextauth...trpc.prisma/next";
 import type { NextAuth_TRPCAuthRouter } from "@douglasduteil/nextauth...trpc.prisma/trpc";
-import { PrismaTRPCAdapter } from "@douglasduteil/nextauth...trpc.prisma/trpc/PrismaTRPCAdapter";
 import { createTRPCProxyClient, httpBatchLink } from "@trpc/client";
 import type { NextAuthOptions } from "next-auth";
-import type { Adapter } from "next-auth/adapters";
 import Email from "next-auth/providers/email";
 import SuperJSON from "superjson";
 import { z } from "zod";
@@ -27,8 +26,6 @@ const trpc = createTRPCProxyClient<NextAuth_TRPCAuthRouter>({
     httpBatchLink({
       url: NEXT_MODULE_ENV.API_URL,
       headers: async ({}) => {
-        console.log(">>>>>>>>>>>>>>>>", NEXTAUTH_TRPCENV.NEXTAUTH_SECRET);
-
         const nexaut_header = await create_nexauth_header({
           secret: NEXTAUTH_TRPCENV.NEXTAUTH_SECRET,
           token: { from: "@1.modules/auth.next" },
@@ -44,7 +41,7 @@ const trpc = createTRPCProxyClient<NextAuth_TRPCAuthRouter>({
 //
 
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaTRPCAdapter(trpc.auth.next_auth_adapter) as Adapter,
+  adapter: PrismaTRPCAdapter(trpc.auth.next_auth_adapter),
   debug: true,
   jwt: {
     maxAge: (86400 satisfies _24_HOURS_) * 30, // 30 days
@@ -59,7 +56,7 @@ export const authOptions: NextAuthOptions = {
     signOut: "/#auth=signOut",
     error: "/#auth=error",
     verifyRequest: "/signup/verifing",
-    newUser: "/welcome",
+    newUser: "/@~/welcome",
   },
 
   callbacks: {

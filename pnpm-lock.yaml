@@ -592,9 +592,6 @@ importers:
         specifier: ^3.0.0
         version: 3.22.2
     devDependencies:
-      '@auth/core':
-        specifier: ^0.16.1
-        version: 0.16.1
       '@douglasduteil/config...typescript':
         specifier: workspace:*
         version: link:../config/typescript

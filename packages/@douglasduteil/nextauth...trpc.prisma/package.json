@@ -11,6 +11,10 @@
       "types": "./src/index.ts",
       "default": "./src/index.ts"
     },
+    "./next": {
+      "types": "./src/next/index.ts",
+      "default": "./src/next/index.ts"
+    },
     "./trpc": {
       "types": "./src/trpc/index.ts",
       "default": "./src/trpc/index.ts"
@@ -42,7 +46,6 @@
     "zod": "^3.0.0"
   },
   "devDependencies": {
-    "@auth/core": "^0.16.1",
     "@douglasduteil/config...typescript": "workspace:*",
     "@douglasduteil/datatypes...hours-to-seconds": "workspace:*",
     "prisma": "^5.4.2",

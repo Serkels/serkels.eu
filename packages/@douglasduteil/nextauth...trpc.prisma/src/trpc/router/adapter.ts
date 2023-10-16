@@ -1,9 +1,10 @@
 //
 
-//
-
-import type { AdapterUser, VerificationToken } from "@auth/core/adapters";
-import type { Adapter } from "next-auth/adapters";
+import type {
+  Adapter,
+  AdapterUser,
+  VerificationToken,
+} from "next-auth/adapters";
 import { z } from "zod";
 import { verify_next_auth_token } from "../guards";
 import { procedure, router } from "../trpc";
