@@ -1,10 +1,9 @@
 "use client";
 
-import type { Metadata } from "next";
-
 import { Banner } from ":components/shell/Banner";
 import { ErrorOccur } from "@1.ui/react/error";
 import { Button } from "@1/ui/components/ButtonV";
+import type { Metadata } from "next";
 
 //
 

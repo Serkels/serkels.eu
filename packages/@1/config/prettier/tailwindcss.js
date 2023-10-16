@@ -1,7 +1,3 @@
 //
 
-/** @type {import("prettier").Config} */
-export default {
-  plugins: ["prettier-plugin-tailwindcss"],
-  tailwindFunctions: ["tv"],
-};
+export { default } from "@douglasduteil/config...tailwindcss/prettier.config.mjs";

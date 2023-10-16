@@ -50,22 +50,3 @@ export const Error_Layout = forwardRef<
     </div>
   );
 });
-
-export const Error_Message = forwardRef<
-  ElementRef<"div">,
-  {
-    error: Error;
-    reset: () => void;
-  }
->(function Error_Page({ error, reset }, forwardedRef) {
-  useMountEffect(() => {
-    signOut();
-  });
-
-  return (
-    <>
-      <ErrorOccur error={error} />
-      <Button onPress={() => reset()}>Toquer de nouveau</Button>
-    </>
-  );
-});

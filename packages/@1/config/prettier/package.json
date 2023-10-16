@@ -6,7 +6,7 @@
   "sideEffects": false,
   "files": [],
   "dependencies": {
-    "prettier-plugin-tailwindcss": "^0.5.4"
+    "@douglasduteil/config...tailwindcss": "workspace:*"
   },
   "devDependencies": {
     "prettier": "^3.0.3",
