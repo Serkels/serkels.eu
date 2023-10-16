@@ -1,6 +1,6 @@
 //
 
-import { authOptions } from "@1.modules/auth.next/nextauth.config";
+import { authOptions } from "@1.modules/auth.next/config";
 import NextAuth from "next-auth";
 
 //

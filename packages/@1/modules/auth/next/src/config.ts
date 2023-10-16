@@ -81,6 +81,10 @@ export const authOptions: NextAuthOptions = {
     async session({ session, user, token, newSession, trigger }) {
       console.log("<session>", { session, user, token, newSession, trigger });
 
+      if (token.user) {
+        session.user = token.user;
+      }
+
       return session;
     },
     async jwt({ token, user, account, profile, isNewUser, session, trigger }) {
@@ -93,6 +97,10 @@ export const authOptions: NextAuthOptions = {
         session,
         trigger,
       });
+
+      if (user) {
+        token.user = user;
+      }
 
       return token;
     },
