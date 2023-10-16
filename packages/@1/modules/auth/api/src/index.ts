@@ -90,7 +90,7 @@ const auth_api_router = router({
           }),
         ]);
 
-        await prisma.user.update({
+        const record = await prisma.user.update({
           where: { id: user.id },
           data: {
             name: payload.name,
@@ -107,7 +107,7 @@ const auth_api_router = router({
           },
         });
 
-        return user;
+        return record;
       }),
   }),
 

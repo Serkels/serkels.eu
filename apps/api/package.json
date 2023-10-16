@@ -22,8 +22,8 @@
     "zod": "^3.0.0"
   },
   "devDependencies": {
-    "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
     "@1.config/typescript": "workspace:*",
+    "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
     "@types/node": "^20.8.2",
     "@types/ws": "^8.2.0"
   }

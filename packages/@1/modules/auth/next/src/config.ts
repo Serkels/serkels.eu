@@ -109,33 +109,16 @@ export const authOptions: NextAuthOptions = {
         return true;
 
       if (!user.id && user.role) return "/signup/verifing";
-      //   const userExists = await trpc..query(
-      //     user?.email ?? "",
-      //   );
-      // if (Boolean(userExists) && Boolean(userExists?.emailVerified))
-      //   // Redirect after ins
-      //   return true;
-      // if (
-      //   Boolean(userExists) &&
-      //   !Boolean(userExists?.emailVerified) &&
-      //   Boolean(user.id)
-      // )
-      //   return true;
-      // if (Boolean(userExists) && !Boolean(userExists?.emailVerified))
-      //   return "/signup/verifing";
-      // if (!Boolean(email?.verificationRequest) && Boolean(user.id)) {
-      //   return true;
-      // }
       return false;
     },
 
     async redirect({ url, baseUrl }) {
-      if (0) console.log("<redirect>", { url, baseUrl });
+      if (1) console.log("<redirect>", { url, baseUrl });
 
       return baseUrl;
     },
     async session({ session, user, token, newSession, trigger }) {
-      if (trigger)
+      if (1)
         console.log("<session>", { session, user, token, newSession, trigger });
 
       if (token.user) {
