@@ -27,20 +27,24 @@ generator client {
 //
 //
 
+model SignupPayload {
+  role  ProfileRole
+  name  String
+  email String      @unique
+}
+
 model Profile {
-  id         String             @id @default(cuid())
+  id         String      @id @default(cuid())
   role       ProfileRole
   //
-  created_at DateTime           @unique @default(now())
-  updated_at DateTime           @unique @default(now())
+  created_at DateTime    @unique @default(now())
+  updated_at DateTime    @unique @default(now())
   //
   bookmarks  Bookmark[]
   partner    Partner?
   studient   Studient?
-  token      VerificationToken? @relation(fields: [token_id], references: [token])
-  token_id   String             @unique
-  user       User?              @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  user_id    String             @unique @map("userId")
+  user       User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id    String      @unique @map("userId")
 }
 
 model Studient {
@@ -221,7 +225,6 @@ model VerificationToken {
   identifier String
   token      String   @unique
   expires    DateTime
-  profile    Profile?
 
   @@unique([identifier, token])
 }

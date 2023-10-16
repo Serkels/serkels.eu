@@ -4,7 +4,7 @@ import "./dotenv";
 
 //
 
-import { prisma } from "@1.infra/database";
+import prisma from "@1.infra/database";
 import { Email_Sender } from "@1.infra/email";
 import { router } from "@1.infra/trpc";
 import type { Context } from "@1.module/trpc";
@@ -47,7 +47,7 @@ function createContext(
 
   // TODO(douglasduteil): parse with the NEXT_AUTH_HEADER zod validator
   return {
-    prisma,
+    prisma: prisma,
     headers: {
       origin: headers.get("origin") ?? "https://toc-toc.org",
       NEXTAUTH_TOKEN: headers.get("NEXTAUTH_TOKEN") ?? "",

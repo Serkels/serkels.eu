@@ -13,6 +13,7 @@
   "dependencies": {
     "@1.module/trpc": "workspace:*",
     "@1.modules/auth.api": "workspace:*",
+    "@1.modules/profile.api": "workspace:*",
     "@trpc/server": "^10.40.0",
     "superjson": "^1.12.4",
     "zod": "^3.0.0"

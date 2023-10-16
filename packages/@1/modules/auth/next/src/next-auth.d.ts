@@ -1,5 +1,6 @@
 //
 
+import type { PROFILE_ROLES } from "@1.modules/profile.domain";
 import "next-auth";
 
 //
@@ -16,7 +17,7 @@ declare module "next-auth" {
     jwt: string;
     id: string;
     name: string;
-    role: "partner" | "studient";
+    role: PROFILE_ROLES;
   }
 }
 

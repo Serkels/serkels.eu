@@ -232,6 +232,7 @@ function ConnectedAs() {
       const href = match(user.role)
         .with("studient", () => `/exchange`)
         .with("partner", () => `/opportunity`)
+        .with("admin", () => `/`)
         .exhaustive();
       href;
     } catch {}

@@ -2,6 +2,7 @@
 
 import { procedure, router } from "@1.module/trpc";
 import auth_api_router from "@1.modules/auth.api";
+import profile_api_router from "@1.modules/profile.api";
 import { observable } from "@trpc/server/observable";
 import { z } from "zod";
 
@@ -9,12 +10,7 @@ import { z } from "zod";
 
 export const root_router = router({
   auth: auth_api_router,
-  user: router({
-    toctoc: procedure.input(z.string()).mutation(async ({ ctx, input }) => {
-
-      return `Hello, ${input}!`;
-    }),
-  }),
+  profile: profile_api_router,
   hello: procedure
     .input(
       z.object({

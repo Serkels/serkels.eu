@@ -1,5 +1,5 @@
 {
-  "name": "@1.modules/auth.api",
+  "name": "@1.modules/profile.api",
   "version": "0.1.0",
   "private": true,
   "sideEffects": false,
@@ -20,6 +20,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@1.modules/profile.domain": "workspace:*",
     "@1.module/trpc": "workspace:*",
     "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
     "@trpc/server": "^10.40.0",

@@ -1,4 +1,10 @@
 //
 
 export type { Context } from "./context";
-export { mergeRouters, middleware, procedure, router } from "./trpc";
+export {
+  mergeRouters,
+  middleware,
+  next_auth_procedure,
+  procedure,
+  router,
+} from "./trpc";

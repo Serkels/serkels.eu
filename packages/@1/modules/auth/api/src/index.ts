@@ -1,11 +1,18 @@
 //
 
-import { procedure, router, type Context } from "@1.module/trpc";
+import {
+  next_auth_procedure,
+  procedure,
+  router,
+  type Context,
+} from "@1.module/trpc";
 import { TocTocMagicLinkEmail } from "@1.modules/auth.emails";
+import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import create_NextAuth_router from "@douglasduteil/nextauth...trpc.prisma/trpc/router/adapter";
 import create_EmailProvider_router, {
   type SendEmailResolverFn,
 } from "@douglasduteil/nextauth...trpc.prisma/trpc/router/email";
+import { ProfileRole } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import addDays from "date-fns/addDays";
 import { SignJWT } from "jose";
@@ -43,11 +50,69 @@ const send_email_resolver: SendEmailResolverFn<Context> = async ({
 
 //
 
-export default router({
+const auth_api_router = router({
   next_auth_adapter: create_NextAuth_router(ENV.NEXTAUTH_SECRET),
   next_auth_provider: create_EmailProvider_router(ENV.NEXTAUTH_SECRET, {
     resolver: send_email_resolver,
   }),
+
+  //
+
+  payload: router({
+    create: next_auth_procedure
+      .input(
+        z.object({
+          identifier: z.string(),
+          name: z.string(),
+          role: PROFILE_ROLES,
+        }),
+      )
+      .mutation(async ({ input, ctx: { prisma } }) => {
+        return prisma.signupPayload.create({
+          data: {
+            name: input.name,
+            email: input.identifier,
+            role: ProfileRole[
+              input.role.toUpperCase() as Uppercase<typeof input.role>
+            ],
+          },
+        });
+      }),
+    use_payload: next_auth_procedure
+      .input(z.string())
+      .mutation(async ({ input: email, ctx: { prisma } }) => {
+        const [user, payload] = await Promise.all([
+          prisma.user.findUniqueOrThrow({
+            where: { email },
+          }),
+          prisma.signupPayload.delete({
+            where: { email },
+          }),
+        ]);
+
+        await prisma.user.update({
+          where: { id: user.id },
+          data: {
+            name: payload.name,
+            profile: {
+              create: {
+                role: ProfileRole[
+                  payload.role.toUpperCase() as Uppercase<typeof payload.role>
+                ],
+              },
+            },
+          },
+          include: {
+            profile: true,
+          },
+        });
+
+        return user;
+      }),
+  }),
+
+  //
+
   passwordless: router({
     magic: procedure
       .input(z.object({ email: z.string().email() }))
@@ -121,3 +186,6 @@ export default router({
       }),
   }),
 });
+
+export default auth_api_router;
+export type AuthApiRouter = typeof auth_api_router;

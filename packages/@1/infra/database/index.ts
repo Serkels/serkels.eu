@@ -11,8 +11,6 @@ const prismaClientSingleton = () => {
       process.env["NODE_ENV"] === "development"
         ? ["query", "error", "warn"]
         : ["error"],
-  }).$extends({
-    result: {},
   });
 };
 

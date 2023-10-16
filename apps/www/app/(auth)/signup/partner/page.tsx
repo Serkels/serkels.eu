@@ -14,7 +14,7 @@ export async function generateMetadata(
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
   return {
-    title: `partner :: ${(await parent).title?.absolute}`,
+    title: `Partner :: ${(await parent).title?.absolute}`,
   };
 }
 

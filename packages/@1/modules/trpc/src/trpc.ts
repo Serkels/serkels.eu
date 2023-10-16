@@ -1,5 +1,7 @@
 //
 
+import { NEXTAUTH_TRPCENV } from "@douglasduteil/nextauth...trpc.prisma/config";
+import { verify_next_auth_token } from "@douglasduteil/nextauth...trpc.prisma/trpc";
 import { initTRPC } from "@trpc/server";
 import SuperJSON from "superjson";
 import { ZodError } from "zod";
@@ -24,3 +26,7 @@ export const { router, middleware, mergeRouters, procedure } = initTRPC
       };
     },
   });
+
+export const next_auth_procedure = procedure.use(
+  verify_next_auth_token(NEXTAUTH_TRPCENV.NEXTAUTH_SECRET),
+);

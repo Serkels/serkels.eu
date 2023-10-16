@@ -1,5 +1,7 @@
 //
 
+import type { Router } from "@1.infra/trpc";
+import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import type { _24_HOURS_ } from "@douglasduteil/datatypes...hours-to-seconds";
 import { NEXTAUTH_TRPCENV } from "@douglasduteil/nextauth...trpc.prisma/config";
 import {
@@ -8,9 +10,8 @@ import {
   type JWT,
 } from "@douglasduteil/nextauth...trpc.prisma/jwt";
 import { PrismaTRPCAdapter } from "@douglasduteil/nextauth...trpc.prisma/next";
-import type { NextAuth_TRPCAuthRouter } from "@douglasduteil/nextauth...trpc.prisma/trpc";
 import { createTRPCProxyClient, httpLink, loggerLink } from "@trpc/client";
-import type { NextAuthOptions } from "next-auth";
+import type { NextAuthOptions, User } from "next-auth";
 import {} from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import Email from "next-auth/providers/email";
@@ -29,7 +30,7 @@ export const NEXT_MODULE_ENV = z
 
 //
 
-const trpc = createTRPCProxyClient<NextAuth_TRPCAuthRouter>({
+const trpc = createTRPCProxyClient<Router>({
   links: [
     loggerLink({
       enabled: (opts) =>
@@ -56,15 +57,7 @@ const trpc = createTRPCProxyClient<NextAuth_TRPCAuthRouter>({
 
 //
 
-// const _LoginEmail_Provider = Email({
-//   async sendVerificationRequest(params) {
-//     await trpc.auth.next_auth_adapter.getUserByEmail.query(params.identifier);
-//     await trpc.auth.next_auth_provider.sendVerificationRequest.mutate(params);
-//   },
-// });
-
-// let { id: _an_id, ...LoginEmail_Provider } = _LoginEmail_Provider;
-let SigninEmail_Provider = Email({
+const SigninEmail_Provider = Email({
   secret: NEXTAUTH_TRPCENV.NEXTAUTH_SECRET,
   async sendVerificationRequest(params) {
     await trpc.auth.next_auth_provider.sendVerificationRequest.mutate(params);
@@ -73,6 +66,14 @@ let SigninEmail_Provider = Email({
 SigninEmail_Provider.sendVerificationRequest = async (params) => {
   await trpc.auth.next_auth_provider.sendVerificationRequest.mutate(params);
 };
+const User_DTO = z.object({
+  id: z.string().default(""),
+  jwt: z.string().default(""),
+  email: z.string().trim().toLowerCase().email(),
+  name: z.string().trim(),
+  role: PROFILE_ROLES,
+});
+
 export const authOptions: NextAuthOptions = {
   adapter: PrismaTRPCAdapter(trpc.auth.next_auth_adapter),
   debug: true,
@@ -98,19 +99,33 @@ export const authOptions: NextAuthOptions = {
       const userExists = await trpc.auth.next_auth_adapter.getUserByEmail.query(
         user?.email ?? "",
       );
-      if (Boolean(userExists) && Boolean(userExists?.emailVerified))
+
+      if (user.id === user.email)
+        // User creation process
         return true;
-      if (
-        Boolean(userExists) &&
-        !Boolean(userExists?.emailVerified) &&
-        Boolean(user.id)
-      )
+
+      if (userExists && userExists.emailVerified)
+        // Login existing user
         return true;
-      if (Boolean(userExists) && !Boolean(userExists?.emailVerified))
-        return "/signup/verifing";
-      if (!Boolean(email?.verificationRequest) && Boolean(user.id)) {
-        return true;
-      }
+
+      if (!user.id && user.role) return "/signup/verifing";
+      //   const userExists = await trpc..query(
+      //     user?.email ?? "",
+      //   );
+      // if (Boolean(userExists) && Boolean(userExists?.emailVerified))
+      //   // Redirect after ins
+      //   return true;
+      // if (
+      //   Boolean(userExists) &&
+      //   !Boolean(userExists?.emailVerified) &&
+      //   Boolean(user.id)
+      // )
+      //   return true;
+      // if (Boolean(userExists) && !Boolean(userExists?.emailVerified))
+      //   return "/signup/verifing";
+      // if (!Boolean(email?.verificationRequest) && Boolean(user.id)) {
+      //   return true;
+      // }
       return false;
     },
 
@@ -145,6 +160,11 @@ export const authOptions: NextAuthOptions = {
         token.user = user;
       }
 
+      if (trigger === "signUp" && user.email) {
+        const record = await trpc.auth.payload.use_payload.mutate(user.email);
+        token.user = record as any;
+      }
+
       return token;
     },
   },
@@ -169,16 +189,18 @@ export const authOptions: NextAuthOptions = {
             .object({
               email: z.string().trim().toLowerCase().email(),
               name: z.string().trim(),
-              role: z.union([z.literal("partner"), z.literal("studient")]),
+              role: PROFILE_ROLES,
             })
             .parse(credentials, {
               path: ["<SigninEmail_Provider.authorize.input>", "credentials"],
             });
 
-          const profile_exists =
+          const user_exists =
             await trpc.auth.next_auth_adapter.getUserByEmail.query(
               credentials?.email ?? "",
             );
+
+          if (user_exists) return null;
 
           const {
             generateVerificationToken = () => randomBytes(32).toString("hex"),
@@ -192,6 +214,7 @@ export const authOptions: NextAuthOptions = {
             .object({ callbackUrl: z.string().url().default(url.href) })
             .parse(req.query, { path: [""] });
           const { email: identifier } = input;
+
           // Generate a link with email, unhashed token and callback url
           const { type } = SigninEmail_Provider;
           const params = new URLSearchParams({
@@ -202,6 +225,9 @@ export const authOptions: NextAuthOptions = {
 
           const _url = new URL(`/api/auth/callback/${type}?${params}`, url);
           // const _url = `${url}/api/auth/magic/${type}/${identifier}/${token}?${params}`;
+          const token_id = hashToken(token, {
+            provider: SigninEmail_Provider.options,
+          });
 
           await Promise.all([
             // Send to user
@@ -216,42 +242,29 @@ export const authOptions: NextAuthOptions = {
             // Save in database
             trpc.auth.next_auth_adapter.createVerificationToken.mutate({
               identifier,
-              token: hashToken(token, {
-                provider: SigninEmail_Provider.options,
-              }),
+              token: token_id,
               expires,
             }),
             //
-            profile_exists
-              ? Promise.resolve(profile_exists)
-              : trpc.profile.create.mutate({
-                  token,
-                  role: input.role.toUpperCase(),
-                }),
           ]);
 
-          // const token =
-          //   (await SigninEmail_Provider.generateVerificationToken?.()) ??
-          //   randomBytes(32).toString("hex");
-          const user_dto = {
-            ...credentials,
-            ...profile_exists,
-            role: profile_exists?.role.toLowerCase() ?? credentials?.role,
-          };
+          const user = await User_DTO.parseAsync(credentials, {
+            path: ["<SigninEmail_Provider.authorize>", "credentials"],
+          });
 
-          const user = await z
-            .object({
-              id: z.string().default(""),
-              jwt: z.string().default(""),
-              email: z.string().trim().toLowerCase().email(),
-              name: z.string().trim(),
-              role: z.union([z.literal("partner"), z.literal("studient")]),
-            })
-            .parseAsync(user_dto, {
-              path: ["<SigninEmail_Provider.authorize>", "user_dto"],
-            });
+          await trpc.auth.payload.create.mutate({
+            name: user.name,
+            role: input.role,
+            identifier,
+          });
 
-          return user;
+          // const user_dto = {
+          //   ...credentials,
+          //   ...profile_exists,
+          //   role: profile_exists?.role.toLowerCase() ?? credentials?.role,
+          // };
+
+          return user satisfies User;
           // return user satisfies User;
         } catch (error) {
           console.error(error);
