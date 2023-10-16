@@ -9,6 +9,12 @@ import { z } from "zod";
 
 export const root_router = router({
   auth: auth_api_router,
+  user: router({
+    toctoc: procedure.input(z.string()).mutation(async ({ ctx, input }) => {
+
+      return `Hello, ${input}!`;
+    }),
+  }),
   hello: procedure
     .input(
       z.object({

@@ -14,7 +14,7 @@ export async function generateMetadata(
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
   return {
-    title: `Studient :: ${(await parent).title?.absolute}`,
+    title: `partner :: ${(await parent).title?.absolute}`,
   };
 }
 
@@ -33,7 +33,7 @@ export default async function Page() {
         action="/api/auth/callback/SigninEmail_Provider"
       >
         <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
-        <input name="role" type="hidden" defaultValue="studient" />
+        <input name="role" type="hidden" defaultValue="partner" />
         <div className="mx-auto">
           <UserAvatarFilled className="h-14 w-14" />
         </div>
@@ -42,7 +42,7 @@ export default async function Page() {
             className={input()}
             id="name"
             name="name"
-            placeholder="Prenom et Nom"
+            placeholder="Nom de l'établissement"
             required
             type="text"
           />

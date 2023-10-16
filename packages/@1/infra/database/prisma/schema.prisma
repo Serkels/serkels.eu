@@ -1,5 +1,13 @@
 //
 
+//
+//
+//
+
+//
+//
+//
+
 datasource db {
   provider = "postgres"
   url      = env("DATABASE_URL")
@@ -10,6 +18,148 @@ datasource db {
 generator client {
   provider = "prisma-client-js"
 }
+
+//
+//
+//
+
+//
+//
+//
+
+model Profile {
+  id         String             @id @default(cuid())
+  role       ProfileRole
+  //
+  created_at DateTime           @unique @default(now())
+  updated_at DateTime           @unique @default(now())
+  //
+  bookmarks  Bookmark[]
+  partner    Partner?
+  studient   Studient?
+  token      VerificationToken? @relation(fields: [token_id], references: [token])
+  token_id   String             @unique
+  user       User?              @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id    String             @unique @map("userId")
+}
+
+model Studient {
+  id         String     @id @default(cuid())
+  //
+  created_at DateTime   @unique @default(now())
+  updated_at DateTime   @unique @default(now())
+  //
+  echanges   Exchange[]
+  profile    Profile    @relation(fields: [profile_id], references: [id], onDelete: Cascade)
+  profile_id String     @unique
+}
+
+model Partner {
+  id            String        @id @default(cuid())
+  location      String
+  //
+  created_at    DateTime      @unique @default(now())
+  updated_at    DateTime      @unique @default(now())
+  //
+  opportunities Opportunity[]
+  profile       Profile       @relation(fields: [profile_id], references: [id], onDelete: Cascade)
+  profile_id    String        @unique
+  role          ProfileRole   @default(PARTNER)
+}
+
+//
+
+enum ProfileRole {
+  ADMIN
+  PARTNER
+  STUDIENT
+}
+
+//
+//
+//
+
+//
+//
+//
+
+model Bookmark {
+  id         String   @id @default(cuid())
+  slug       String   @unique
+  name       String
+  //
+  created_at DateTime @unique @default(now())
+  updated_at DateTime @unique @default(now())
+  //
+  profile    Profile  @relation(fields: [profile_id], references: [id], onDelete: Cascade)
+  profile_id String   @unique
+}
+
+//
+//
+//
+
+//
+//
+//
+
+model Category {
+  id      String            @id @default(cuid())
+  slug    String            @unique
+  name    String
+  //
+  context CategoryContext[]
+}
+
+enum CategoryContext {
+  EXCHANGE
+  OPPORTUNITY
+  FORUM
+}
+
+//
+//
+//
+
+//
+//
+//
+
+model Exchange {
+  id          String   @id @default(cuid())
+  //
+  created_at  DateTime @unique @default(now())
+  updated_at  DateTime @unique @default(now())
+  //
+  studient    Studient @relation(fields: [studient_id], references: [id], onDelete: Cascade)
+  studient_id String   @unique
+}
+
+//
+//
+//
+
+//
+//
+//
+
+model Opportunity {
+  id         String   @id @default(cuid())
+  //
+  created_at DateTime @unique @default(now())
+  updated_at DateTime @unique @default(now())
+  //
+  partner    Partner  @relation(fields: [partner_id], references: [id], onDelete: Cascade)
+  partner_id String   @unique
+}
+
+//
+//
+//
+
+//
+//
+//
 
 //
 
@@ -61,16 +211,27 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+
+  //
+
+  profile Profile?
 }
 
 model VerificationToken {
   identifier String
   token      String   @unique
   expires    DateTime
+  profile    Profile?
 
   @@unique([identifier, token])
 }
 
+//
+//
+//
+
+//
+//
 //
 
 enum PosterSource {

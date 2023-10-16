@@ -3,10 +3,21 @@
 import {
   decode as jwt_decode,
   encode as jwt_encode,
-  type JWT,
   type JWTDecodeParams,
-  type JWTEncodeParams,
+  type JWT as NextAuth_JWT,
+  type JWTEncodeParams as NextAuth_JWTEncodeParams,
 } from "next-auth/jwt";
+import { createHash } from "node:crypto";
+import type { NEXT_AUTH_STRATEGIES } from "./config";
+
+export interface JWT extends NextAuth_JWT {
+  strategies?: NEXT_AUTH_STRATEGIES[];
+  from?: string;
+}
+
+export interface JWTEncodeParams extends NextAuth_JWTEncodeParams {
+  token?: JWT;
+}
 
 //
 
@@ -16,5 +27,18 @@ export async function create_nexauth_header(params: JWTEncodeParams) {
 
 /** Decodes a NextAuth.js issued JWT. */
 export async function decode(params: JWTDecodeParams): Promise<JWT | null> {
-  return jwt_decode(params);
+  return (await jwt_decode(params)) as JWT;
+}
+
+export function hashToken(
+  token: string,
+  options: { provider: { secret?: string }; secret?: string },
+) {
+  const { provider, secret } = options;
+  return (
+    createHash("sha256")
+      // Prefer provider specific secret, but use default secret if none specified
+      .update(`${token}${provider.secret ?? secret}`)
+      .digest("hex")
+  );
 }

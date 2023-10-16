@@ -1,15 +1,22 @@
 //
 
+import { PrismaClient as PrismaClient_Base } from "@prisma/client";
 import process from "node:process";
-import { PrismaClient } from ".";
 
 //
 
-export const prisma = new PrismaClient({
-  log:
-    process.env["NODE_ENV"] === "development"
-      ? ["query", "error", "warn"]
-      : ["error"],
-});
+const prismaClientSingleton = () => {
+  return new PrismaClient_Base({
+    log:
+      process.env["NODE_ENV"] === "development"
+        ? ["query", "error", "warn"]
+        : ["error"],
+  }).$extends({
+    result: {},
+  });
+};
 
-export { PrismaClient } from "@prisma/client";
+const prisma = prismaClientSingleton();
+export type PrismaClient = typeof prisma;
+
+export default prisma;

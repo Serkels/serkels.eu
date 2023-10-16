@@ -3,13 +3,13 @@
  *
  * @link https://www.prisma.io/docs/guides/database/seed-database
  */
-import { PrismaClient } from "@prisma/client";
 import process from "node:process";
 
-const prisma = new PrismaClient();
+import prisma from "../index";
 
 async function main() {
   // Add stuff
+  await prisma.verificationToken.deleteMany({});
 }
 
 main()

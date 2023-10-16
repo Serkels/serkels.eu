@@ -34,10 +34,13 @@ export function create_NextAuth_router(secret: string) {
 
     getUserByEmail: next_auth_procedure
       .input(z.string())
-      .query(
-        async ({ ctx: { prisma }, input: email }): Promise<AdapterUser> =>
-          (await prisma.user.findUnique({ where: { email } })) as AdapterUser,
-      ),
+      .query(async ({ ctx: { prisma }, input: email }) => {
+        const user = await prisma.user.findUnique({
+          where: { email },
+        });
+
+        return user as AdapterUser | null;
+      }),
 
     updateUser: next_auth_procedure
       .input(z.object({ id: z.string() }).passthrough())

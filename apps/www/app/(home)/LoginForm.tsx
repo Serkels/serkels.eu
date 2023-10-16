@@ -22,7 +22,6 @@ export function LoginForm({
       bg-white
       px-4
       py-5
-      text-black
       shadow-[10px_10px_10px_#00000029]
     "
     >

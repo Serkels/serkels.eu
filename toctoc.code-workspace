@@ -71,7 +71,10 @@
         "args": ["run", "dev"],
         "type": "shell",
         "options": {
-          "cwd": "${workspaceFolder:🚀 www}"
+          "cwd": "${workspaceFolder:🚀 www}",
+          "env": {
+            "NODE_ENV": "development"
+          }
         },
         "problemMatcher": ["$tsc-watch"],
         "group": "build",

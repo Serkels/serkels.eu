@@ -1,5 +1,6 @@
 //
 
+import { AuthError } from "@1.modules/core/errors";
 import { Spinner } from "@1.ui/react/spinner";
 import type { Metadata, ResolvingMetadata } from "next";
 import dynamic from "next/dynamic";
@@ -9,7 +10,7 @@ import dynamic from "next/dynamic";
 const Verifying_Flow = dynamic(() => import("./page.client"), {
   ssr: false,
   loading() {
-    return <Spinner />;
+    return <Placeholder />;
   },
 });
 
@@ -31,11 +32,24 @@ export async function generateMetadata(
 
 //
 
-export default async function Page({ params }: { params: { token: string } }) {
-  const { token } = params;
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: { error?: string | string[] | undefined };
+}) {
+  console.log(searchParams.error);
+  if (typeof searchParams.error === "string") {
+    throw new AuthError(searchParams.error);
+  }
 
+  return <Verifying_Flow />;
+}
+
+//
+
+function Placeholder({}) {
   return (
-    <main>
+    <main className="mx-auto text-center ">
       <h1
         className={`
           mx-auto
@@ -49,7 +63,7 @@ export default async function Page({ params }: { params: { token: string } }) {
         Vérification
       </h1>
       <div className="mx-auto mt-5 text-center">
-        <Verifying_Flow token={token} />
+        <Spinner />;
       </div>
     </main>
   );

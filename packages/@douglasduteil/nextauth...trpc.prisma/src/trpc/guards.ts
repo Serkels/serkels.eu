@@ -11,7 +11,7 @@ export function verify_next_auth_token(secret: string) {
     const payload = await decode({ token: ctx.headers.NEXTAUTH_TOKEN, secret });
 
     if (payload) {
-      return next();
+      return next({ ctx: { ...ctx, payload } });
     }
     throw new TRPCError({ code: "UNAUTHORIZED" });
   });

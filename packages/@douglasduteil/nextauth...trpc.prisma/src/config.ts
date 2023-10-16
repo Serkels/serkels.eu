@@ -27,4 +27,10 @@ export const NEXTAUTH_TRPCENV = z
   .object({
     NEXTAUTH_SECRET: z.string(),
   })
-  .parse(process.env, { path: ["<NEXTAUTH_TRPCENV>", "process.env"] });
+  .parse(process.env, { path: ["<NEXTAUTH_TRPCENV>", "process.env"] }); //
+
+export const NEXT_AUTH_STRATEGIES = z.union([
+  z.literal("Everyone can login"),
+  z.literal("Only existing users can login"),
+]);
+export type NEXT_AUTH_STRATEGIES = z.TypeOf<typeof NEXT_AUTH_STRATEGIES>;

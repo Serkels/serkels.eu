@@ -8,7 +8,13 @@ const nextConfig = {
   reactStrictMode: true,
   transpilePackages: [],
   async redirects() {
-    return [];
+    return [
+      {
+        permanent: true,
+        source: "/api/auth/magic/email/:identifier/:token/:path*",
+        destination: "/api/auth/callback/email?email=:identifier&token=:token",
+      },
+    ];
   },
   async rewrites() {
     return [

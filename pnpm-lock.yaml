@@ -255,6 +255,9 @@ importers:
       prisma:
         specifier: ^5.4.2
         version: 5.4.2
+      tsx:
+        specifier: ^3.13.0
+        version: 3.13.0
 
   packages/@1/infra/email:
     dependencies:
@@ -291,7 +294,7 @@ importers:
         version: link:../../modules/trpc
       '@1.modules/auth.api':
         specifier: workspace:*
-        version: link:../../modules/auth/api
+        version: link:../../modules/profile/api
       '@trpc/server':
         specifier: ^10.40.0
         version: 10.40.0
@@ -382,6 +385,9 @@ importers:
       '@1.infra/database':
         specifier: workspace:*
         version: link:../../../infra/database
+      '@1.modules/core':
+        specifier: workspace:*
+        version: link:../../core
       '@douglasduteil/nextauth...trpc.prisma':
         specifier: workspace:*
         version: link:../../../../@douglasduteil/nextauth...trpc.prisma
@@ -406,10 +412,7 @@ importers:
         version: link:../../../config/typescript
       '@1.modules/auth.api':
         specifier: workspace:*
-        version: link:../api
-      '@auth/core':
-        specifier: ^0.16.1
-        version: 0.16.1
+        version: link:../../profile/api
       '@douglasduteil/datatypes...hours-to-seconds':
         specifier: workspace:*
         version: link:../../../../@douglasduteil/datatypes...hours-to-seconds
@@ -435,6 +438,34 @@ importers:
       '@douglasduteil/datatypes...hours-to-seconds':
         specifier: workspace:*
         version: link:../../../@douglasduteil/datatypes...hours-to-seconds
+      typescript:
+        specifier: ^5.2.2
+        version: 5.2.2
+
+  packages/@1/modules/profile/api:
+    dependencies:
+      '@1.module/trpc':
+        specifier: workspace:*
+        version: link:../../trpc
+      '@douglasduteil/nextauth...trpc.prisma':
+        specifier: workspace:*
+        version: link:../../../../@douglasduteil/nextauth...trpc.prisma
+      '@trpc/server':
+        specifier: ^10.40.0
+        version: 10.40.0
+      zod:
+        specifier: ^3.0.0
+        version: 3.22.2
+    devDependencies:
+      '@1.config/typescript':
+        specifier: workspace:*
+        version: link:../../../config/typescript
+      '@prisma/client':
+        specifier: ^5.4.2
+        version: 5.4.2(prisma@5.4.2)
+      '@types/node':
+        specifier: ^20.8.2
+        version: 20.8.2
       typescript:
         specifier: ^5.2.2
         version: 5.2.2
@@ -1789,11 +1820,9 @@ packages:
     dependencies:
       '@prisma/engines-version': 5.4.1-2.ac9d7041ed77bcc8a8dbd2ab6616b39013829574
       prisma: 5.4.2
-    dev: false
 
   /@prisma/engines-version@5.4.1-2.ac9d7041ed77bcc8a8dbd2ab6616b39013829574:
     resolution: {integrity: sha512-wvupDL4AA1vf4TQNANg7kR7y98ITqPsk6aacfBxZKtrJKRIsWjURHkZCGcQliHdqCiW/hGreO6d6ZuSv9MhdAA==}
-    dev: false
 
   /@prisma/engines@5.4.2:
     resolution: {integrity: sha512-fqeucJ3LH0e1eyFdT0zRx+oETLancu5+n4lhiYECyEz6H2RDskPJHJYHkVc0LhkU4Uv7fuEnppKU3nVKNzMh8g==}
@@ -8347,7 +8376,6 @@ packages:
       source-map-support: 0.5.21
     optionalDependencies:
       fsevents: 2.3.3
-    dev: false
 
   /turbo-darwin-64@1.10.14:
     resolution: {integrity: sha512-I8RtFk1b9UILAExPdG/XRgGQz95nmXPE7OiGb6ytjtNIR5/UZBS/xVX/7HYpCdmfriKdVwBKhalCoV4oDvAGEg==}

@@ -116,20 +116,23 @@ function LoginFormPanel() {
   const send = useOutlet_Send();
   const router = useRouter();
 
-  const mutation_info = useSignIn_Mutation();
+  const signin_mutation_info = useSignIn_Mutation();
 
   const on_login_form_submit: ComponentProps<typeof LoginForm>["onLogin"] =
-    useCallback(async ({ email }) => await mutation_info.mutate(email), []);
+    useCallback(
+      async ({ email }) => await signin_mutation_info.mutate(email),
+      [],
+    );
 
   const on_sign_up_form_submit: ComponentProps<typeof LoginForm>["onSignUp"] =
     useCallback(async ({ email, as }) => {
       match(as as "student" | "partner")
         .with("student", () => router.push(`/signup/studient?email=${email}`))
-        .with("partner", () => router.push(`/signup/partener?email=${email}`));
+        .with("partner", () => router.push(`/signup/partner?email=${email}`));
     }, []);
 
   useEffect(() => {
-    return match(mutation_info)
+    return match(signin_mutation_info)
       .with({ status: "error", error: P.select() }, (error) => {
         send({ state: "error", error: error as any });
       })
@@ -139,9 +142,9 @@ function LoginFormPanel() {
         send({ state: "check your mail" });
       })
       .exhaustive();
-  }, [mutation_info.status]);
+  }, [signin_mutation_info.status]);
 
-  return match(mutation_info)
+  return match(signin_mutation_info)
     .with({ status: "error" }, () => null)
     .with({ status: "idle" }, () => (
       <LoginForm
@@ -230,7 +233,7 @@ function ConnectedAs() {
         .with("studient", () => `/exchange`)
         .with("partner", () => `/opportunity`)
         .exhaustive();
-        href;
+      href;
     } catch {}
     const href = "";
 
