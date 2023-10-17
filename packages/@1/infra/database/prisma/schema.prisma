@@ -35,6 +35,8 @@ model SignupPayload {
 
 model Profile {
   id         String      @id @default(cuid())
+  name       String      @default("Unknown Profile")
+  image      String      @default("/opengraph-image.png")
   role       ProfileRole
   //
   created_at DateTime    @unique @default(now())

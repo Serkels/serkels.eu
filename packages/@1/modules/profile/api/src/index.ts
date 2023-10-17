@@ -7,7 +7,7 @@ import { z } from "zod";
 //
 
 const profile_api_router = router({
-  create: next_auth_procedure
+  nope: next_auth_procedure
     .input(z.object({ role: PROFILE_ROLES }))
     .mutation(async ({ input, ctx }) => {
       input;

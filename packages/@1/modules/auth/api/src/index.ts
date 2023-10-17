@@ -19,6 +19,7 @@ import { SignJWT } from "jose";
 import { nanoid } from "nanoid/async";
 import process from "node:process";
 import { z } from "zod";
+import { gravatarUrlFor } from "./gravatarUrlFor";
 
 //
 
@@ -90,12 +91,16 @@ const auth_api_router = router({
           }),
         ]);
 
+        const image = gravatarUrlFor(email);
         const record = await prisma.user.update({
           where: { id: user.id },
           data: {
+            image,
             name: payload.name,
             profile: {
               create: {
+                image,
+                name: payload.name,
                 role: ProfileRole[
                   payload.role.toUpperCase() as Uppercase<typeof payload.role>
                 ],
