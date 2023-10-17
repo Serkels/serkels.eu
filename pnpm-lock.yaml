@@ -43,6 +43,9 @@ importers:
       '@hono/node-server':
         specifier: ^1.2.0
         version: 1.2.0
+      '@hono/sentry':
+        specifier: ^1.0.0
+        version: 1.0.0(hono@3.7.6)
       '@hono/trpc-server':
         specifier: ^0.1.0
         version: 0.1.0(@trpc/server@10.40.0)(hono@3.7.6)
@@ -1442,6 +1445,15 @@ packages:
   /@hono/node-server@1.2.0:
     resolution: {integrity: sha512-aHT8lDMLpd7ioXJ1/057+h+oE/k7rCOWmjklYDsE0jE4CoNB9XzG4f8dRHvw4s5HJFocaYDiGgYM/V0kYbQ0ww==}
     engines: {node: '>=18.0.0'}
+    dev: false
+
+  /@hono/sentry@1.0.0(hono@3.7.6):
+    resolution: {integrity: sha512-GbPxgpGuasM2zRCSaA77MPWu4KDcuk/EMf7JJykjCvnOTbjmtr7FovNxsvg7xlXCIjZDgLmqBaoJMi3AxbeIAA==}
+    peerDependencies:
+      hono: 3.*
+    dependencies:
+      hono: 3.7.6
+      toucan-js: 3.3.0
     dev: false
 
   /@hono/trpc-server@0.1.0(@trpc/server@10.40.0)(hono@3.7.6):
@@ -3298,6 +3310,38 @@ packages:
     dependencies:
       domhandler: 5.0.3
       selderee: 0.10.0
+    dev: false
+
+  /@sentry/core@7.70.0:
+    resolution: {integrity: sha512-voUsGVM+jwRp99AQYFnRvr7sVd2tUhIMj1L6F42LtD3vp7t5ZnKp3NpXagtFW2vWzXESfyJUBhM0qI/bFvn7ZA==}
+    engines: {node: '>=8'}
+    dependencies:
+      '@sentry/types': 7.70.0
+      '@sentry/utils': 7.70.0
+      tslib: 2.6.2
+    dev: false
+
+  /@sentry/integrations@7.70.0:
+    resolution: {integrity: sha512-ffIEuiElROzl4IpYX0O7vtPaadXVycPtyjq86YTHjd2TUFcYuQTPBm5UjEVE0/sSNNCdfWYxNThU/fVyq93l1g==}
+    engines: {node: '>=8'}
+    dependencies:
+      '@sentry/types': 7.70.0
+      '@sentry/utils': 7.70.0
+      localforage: 1.10.0
+      tslib: 2.6.2
+    dev: false
+
+  /@sentry/types@7.70.0:
+    resolution: {integrity: sha512-rY4DqpiDBtXSk4MDNBH3dwWqfPbNBI/9GA7Y5WJSIcObBtfBKp0fzYliHJZD0pgM7d4DPFrDn42K9Iiumgymkw==}
+    engines: {node: '>=8'}
+    dev: false
+
+  /@sentry/utils@7.70.0:
+    resolution: {integrity: sha512-0cChMH0lsGp+5I3D4wOHWwjFN19HVrGUs7iWTLTO5St3EaVbdeLbI1vFXHxMxvopbwgpeZafbreHw/loIdZKpw==}
+    engines: {node: '>=8'}
+    dependencies:
+      '@sentry/types': 7.70.0
+      tslib: 2.6.2
     dev: false
 
   /@swc/helpers@0.4.14:
@@ -5742,6 +5786,10 @@ packages:
     resolution: {integrity: sha512-MAb38BcSbH0eHNBxn7ql2NH/kX33OkB3lZ1BNdh7ENeRChHTYsTvWrMubiIAMNS2llXEEgZ1MUOBtXChP3kaFQ==}
     engines: {node: '>= 4'}
 
+  /immediate@3.0.6:
+    resolution: {integrity: sha512-XXOFtyqDjNDAQxVfYxuF7g9Il/IbWmmlQg2MYKOH8ExIT1qg6xc4zyS3HaEEATgs1btfzxq15ciUiY7gjSXRGQ==}
+    dev: false
+
   /import-fresh@3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
     engines: {node: '>=6'}
@@ -6299,6 +6347,12 @@ packages:
       type-check: 0.4.0
     dev: true
 
+  /lie@3.1.1:
+    resolution: {integrity: sha512-RiNhHysUjhrDQntfYSfY4MU24coXXdEOgw9WGcKHNeEwffDYbF//u87M1EWaMGzuFoSbqW0C9C6lEEhDOAswfw==}
+    dependencies:
+      immediate: 3.0.6
+    dev: false
+
   /lilconfig@2.1.0:
     resolution: {integrity: sha512-utWOt/GHzuUxnLKxB6dk81RoOeoNeHgbrXiuGk4yyF5qlRz+iIVWu56E2fqGHFrXz0QNUhLB/8nKqvRH66JKGQ==}
     engines: {node: '>=10'}
@@ -6318,6 +6372,12 @@ packages:
   /local-pkg@0.4.3:
     resolution: {integrity: sha512-SFppqq5p42fe2qcZQqqEOiVRXl+WCP1MdT6k7BDEW1j++sp5fIY+/fdRQitvKgB5BrBcmrs5m/L0v2FrU5MY1g==}
     engines: {node: '>=14'}
+    dev: false
+
+  /localforage@1.10.0:
+    resolution: {integrity: sha512-14/H1aX7hzBBmmh7sGPd+AOMkkIrHM3Z1PAyGgZigA1H1p5O5ANnMyWzvpAETtG68/dC4pC0ncy3+PPGzXZHPg==}
+    dependencies:
+      lie: 3.1.1
     dev: false
 
   /locate-path@5.0.0:
@@ -8283,6 +8343,15 @@ packages:
       regex-not: 1.0.2
       safe-regex: 1.1.0
     dev: true
+
+  /toucan-js@3.3.0:
+    resolution: {integrity: sha512-G3RZpX0SiLXq62UkQQyKuZKkB6yKrnp73Y97lh+cBt/fQLoj9YXJJ5IZ8YZ1Dq5nxGpSale+xpuGfUd4QLKcXA==}
+    dependencies:
+      '@sentry/core': 7.70.0
+      '@sentry/integrations': 7.70.0
+      '@sentry/types': 7.70.0
+      '@sentry/utils': 7.70.0
+    dev: false
 
   /tr46@0.0.3:
     resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
