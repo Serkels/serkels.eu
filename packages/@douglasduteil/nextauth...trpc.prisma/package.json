@@ -25,7 +25,6 @@
     }
   },
   "scripts": {
-    "build": "prisma generate",
     "format": "prisma format",
     "generate": "prisma generate",
     "migrate:deploy": "prisma migrate deploy",
