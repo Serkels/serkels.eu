@@ -20,7 +20,7 @@ export async function generateMetadata(
 
 //
 
-export default async function Page() {
+export default function Page() {
   const csrfToken = get_csrf_token();
   const { base, form, label, input } = style();
   label;
