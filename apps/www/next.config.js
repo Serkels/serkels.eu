@@ -29,12 +29,22 @@ const nextConfig = {
         source: "/@:code/:path*",
         destination: `/door/:code/:path*`,
       },
+
+      //
+
+      {
+        source: "/stalker.js",
+        destination: `https://www.googletagmanager.com/gtag/js`,
+      },
+      {
+        source: "/api/stalker/:path*",
+        destination: `${process.env["STALKER_URL"]}/:path*`,
+      },
     ];
   },
 };
 
 module.exports = nextConfig;
-
 
 // Injected content via Sentry wizard below
 
@@ -69,5 +79,5 @@ module.exports = withSentryConfig(
 
     // Automatically tree-shake Sentry logger statements to reduce bundle size
     disableLogger: true,
-  }
+  },
 );
