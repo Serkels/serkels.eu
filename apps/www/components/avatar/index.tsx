@@ -25,7 +25,10 @@ export const Avatar = forwardRef<ElementRef<"figure">, AvatarProps>(
     const { data: session } = useSession();
     const id = u ?? session?.user?.id ?? "unknown";
 
-    const image = useMemo(() => `/api/v1/avatars/u/${id}`, [id]);
+    const image = useMemo(
+      () => session?.user?.image ?? "/opengraph-image.png",
+      [session?.user?.image],
+    );
 
     return (
       <figure className={avatar_img({ className })} ref={forwardedRef}>
@@ -43,7 +46,10 @@ export function Link_Avatar(
   const { data: session } = useSession();
   const id = u ?? session?.user?.id;
 
-  const image = useMemo(() => `/api/v1/avatars/u/${id}`, [id]);
+  const image = useMemo(
+    () => session?.user?.image ?? "/opengraph-image.png",
+    [session?.user?.image],
+  );
 
   if (!id) {
     return null;
