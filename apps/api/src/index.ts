@@ -7,7 +7,8 @@ import "./dotenv";
 import prisma from "@1.infra/database";
 import { Email_Sender } from "@1.infra/email";
 import { router } from "@1.infra/trpc";
-import type { Context } from "@1.module/trpc";
+import { HTTPError } from "@1.modules/core/errors";
+import type { Context } from "@1.modules/trpc";
 import { serve } from "@hono/node-server";
 import { sentry } from "@hono/sentry";
 import { trpcServer } from "@hono/trpc-server";
@@ -108,6 +109,12 @@ app.get("/ready", async (c) =>
     },
   }),
 );
+
+app.get("/sentry-example-api/:name", async (c) => {
+  const name = c.req.param("name");
+  if (name) throw new HTTPError(`Sentry Example API Route Error ${name}`);
+  return c.json({ data: "Testing Sentry Error..." });
+});
 
 //
 

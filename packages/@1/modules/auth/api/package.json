@@ -20,7 +20,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@1.module/trpc": "workspace:*",
+    "@1.modules/trpc": "workspace:*",
     "@1.modules/auth.emails": "workspace:*",
     "@1.modules/profile.domain": "workspace:*",
     "@douglasduteil/nextauth...trpc.prisma": "workspace:*",

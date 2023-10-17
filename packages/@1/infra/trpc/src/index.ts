@@ -1,8 +1,8 @@
 //
 
-import { procedure, router } from "@1.module/trpc";
 import auth_api_router from "@1.modules/auth.api";
 import profile_api_router from "@1.modules/profile.api";
+import { procedure, router } from "@1.modules/trpc";
 import { observable } from "@trpc/server/observable";
 import { z } from "zod";
 

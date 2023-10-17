@@ -1,5 +1,5 @@
 {
-  "name": "@1.module/trpc",
+  "name": "@1.modules/trpc",
   "version": "0.1.0",
   "private": true,
   "sideEffects": false,

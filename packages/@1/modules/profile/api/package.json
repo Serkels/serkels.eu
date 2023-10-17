@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@1.modules/profile.domain": "workspace:*",
-    "@1.module/trpc": "workspace:*",
+    "@1.modules/trpc": "workspace:*",
     "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
     "@trpc/server": "^10.40.0",
     "zod": "^3.0.0"

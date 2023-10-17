@@ -11,7 +11,7 @@
   },
   "keywords": [],
   "dependencies": {
-    "@1.module/trpc": "workspace:*",
+    "@1.modules/trpc": "workspace:*",
     "@1.modules/auth.api": "workspace:*",
     "@1.modules/profile.api": "workspace:*",
     "@trpc/server": "^10.40.0",

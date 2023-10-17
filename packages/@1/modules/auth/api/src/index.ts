@@ -1,13 +1,13 @@
 //
 
+import { TocTocMagicLinkEmail } from "@1.modules/auth.emails";
+import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import {
   next_auth_procedure,
   procedure,
   router,
   type Context,
-} from "@1.module/trpc";
-import { TocTocMagicLinkEmail } from "@1.modules/auth.emails";
-import { PROFILE_ROLES } from "@1.modules/profile.domain";
+} from "@1.modules/trpc";
 import create_NextAuth_router from "@douglasduteil/nextauth...trpc.prisma/trpc/router/adapter";
 import create_EmailProvider_router, {
   type SendEmailResolverFn,
