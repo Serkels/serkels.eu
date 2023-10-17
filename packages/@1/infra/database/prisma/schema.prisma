@@ -28,9 +28,10 @@ generator client {
 //
 
 model SignupPayload {
-  role  ProfileRole
-  name  String
-  email String      @unique
+  role   ProfileRole
+  name   String
+  email  String              @unique
+  tokens VerificationToken[]
 }
 
 model Profile {
@@ -227,6 +228,9 @@ model VerificationToken {
   identifier String
   token      String   @unique
   expires    DateTime
+
+  payload       SignupPayload? @relation(fields: [payload_email], references: [email], onDelete: Cascade)
+  payload_email String?
 
   @@unique([identifier, token])
 }

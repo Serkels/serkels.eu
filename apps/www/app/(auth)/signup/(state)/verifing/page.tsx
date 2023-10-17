@@ -32,12 +32,11 @@ export async function generateMetadata(
 
 //
 
-export default async function Page({
+export default function Page({
   searchParams,
 }: {
   searchParams: { error?: string | string[] | undefined };
 }) {
-  console.log(searchParams.error);
   if (typeof searchParams.error === "string") {
     throw new AuthError(searchParams.error);
   }

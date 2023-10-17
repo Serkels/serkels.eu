@@ -96,19 +96,27 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
       console.log("<signIn>", { user, account, profile, email, credentials });
+      debugger;
       const userExists = await trpc.auth.next_auth_adapter.getUserByEmail.query(
         user?.email ?? "",
       );
 
-      if (user.id === user.email)
-        // User creation process
-        return true;
+      if (email?.verificationRequest) {
+        console.log(
+          "<signIn email.verificationRequest>",
+          email?.verificationRequest,
+        );
+        return Boolean(userExists);
+      }
 
       if (userExists && userExists.emailVerified)
         // Login existing user
         return true;
 
       if (!user.id && user.role) return "/signup/verifing";
+
+      if (account?.providerAccountId) return true;
+
       return false;
     },
 
@@ -235,10 +243,11 @@ export const authOptions: NextAuthOptions = {
             path: ["<SigninEmail_Provider.authorize>", "credentials"],
           });
 
-          await trpc.auth.payload.create.mutate({
+          await trpc.auth.payload.link.mutate({
+            identifier,
             name: user.name,
             role: input.role,
-            identifier,
+            token: token_id,
           });
 
           // const user_dto = {

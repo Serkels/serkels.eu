@@ -60,15 +60,27 @@ const auth_api_router = router({
   //
 
   payload: router({
-    create: next_auth_procedure
+    link: next_auth_procedure
       .input(
         z.object({
           identifier: z.string(),
           name: z.string(),
           role: PROFILE_ROLES,
+          token: z.string(),
         }),
       )
       .mutation(async ({ input, ctx: { prisma } }) => {
+        const existing_payload = await prisma.signupPayload.findUnique({
+          where: { email: input.identifier },
+        });
+
+        if (existing_payload) {
+          return prisma.signupPayload.update({
+            data: { tokens: { connect: { token: input.token } } },
+            where: { email: input.identifier },
+          });
+        }
+
         return prisma.signupPayload.create({
           data: {
             name: input.name,
@@ -76,6 +88,7 @@ const auth_api_router = router({
             role: ProfileRole[
               input.role.toUpperCase() as Uppercase<typeof input.role>
             ],
+            tokens: { connect: { token: input.token } },
           },
         });
       }),
@@ -92,6 +105,7 @@ const auth_api_router = router({
         ]);
 
         const image = gravatarUrlFor(email);
+        console.log("<auth_api_router.payload.use_payload>", { image });
         const record = await prisma.user.update({
           where: { id: user.id },
           data: {
