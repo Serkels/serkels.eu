@@ -16,7 +16,7 @@ const proxyClient = createTRPCProxyClient<Router>({
         (opts.direction === "down" && opts.result instanceof Error),
     }),
     httpLink({
-      url: `${process.env["API_URL"]}`,
+      url: `${process.env["API_URL"]}/trpc`,
     }),
   ],
   transformer: SuperJSON,
