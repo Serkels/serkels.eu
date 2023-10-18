@@ -87,7 +87,7 @@ export const authOptions: NextAuthOptions = {
     updateAge: 86400 satisfies _24_HOURS_,
   },
   pages: {
-    signIn: "/signup/verifing#sign_in",
+    signIn: "/",
     signOut: "/#auth=signOut",
     error: "/#auth=error",
     verifyRequest: "/signup/verifing#request",
@@ -124,34 +124,25 @@ export const authOptions: NextAuthOptions = {
     },
 
     async session({ session, token }) {
-      if (token.user) {
-        session.user = token.user;
+      if (token.profile) {
+        session.profile = token.profile;
       }
 
       return session;
     },
-    async jwt({ token, user, account, profile, isNewUser, session, trigger }) {
-      if (trigger)
-        console.log("<jwt>", {
-          token,
-          user,
-          account,
-          profile,
-          isNewUser,
-          session,
-          trigger,
-        });
-
+    async jwt({ token, user, trigger }) {
       try {
         if (trigger === "signUp" && user.email) {
-          token.user = await trpc.auth.payload.use_payload.mutate(user.email);
+          token.profile = await trpc.auth.payload.use_payload.mutate(
+            user.email,
+          );
         }
 
         if (trigger === "signIn" && user.id && user.email) {
-          token.user = await trpc.profile.by_email.query(user.email);
+          token.profile = await trpc.profile.by_email.query(user.email);
         }
         if (trigger === "update" && token.email) {
-          token.user = await trpc.profile.by_email.query(token.email);
+          token.profile = await trpc.profile.by_email.query(token.email);
         }
       } catch (error) {
         console.error(new AuthError("Profile not found", { cause: error }));
@@ -216,7 +207,7 @@ export const authOptions: NextAuthOptions = {
           });
 
           const _url = new URL(`/api/auth/callback/${type}?${params}`, url);
-          // const _url = `${url}/api/auth/magic/${type}/${identifier}/${token}?${params}`;
+
           const token_id = hashToken(token, {
             provider: SigninEmail_Provider.options,
           });
@@ -251,14 +242,7 @@ export const authOptions: NextAuthOptions = {
             token: token_id,
           });
 
-          // const user_dto = {
-          //   ...credentials,
-          //   ...profile_exists,
-          //   role: profile_exists?.role.toLowerCase() ?? credentials?.role,
-          // };
-
-          return { ...user, profile: null } satisfies User;
-          // return user satisfies User;
+          return user satisfies User;
         } catch (error) {
           console.error(error);
         }

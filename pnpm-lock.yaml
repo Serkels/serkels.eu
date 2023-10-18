@@ -462,12 +462,6 @@ importers:
       '@1.config/typescript':
         specifier: workspace:*
         version: link:../../config/typescript
-      '@1.infra/trpc':
-        specifier: workspace:*
-        version: link:../../infra/trpc
-      '@douglasduteil/datatypes...hours-to-seconds':
-        specifier: workspace:*
-        version: link:../../../@douglasduteil/datatypes...hours-to-seconds
       typescript:
         specifier: ^5.2.2
         version: 5.2.2

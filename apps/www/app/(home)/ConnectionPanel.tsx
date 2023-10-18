@@ -3,14 +3,13 @@
 import { Avatar } from ":components/avatar";
 import { DomLazyMotion } from ":components/shell/DomLazyMotion";
 import { HTTPError } from "@1.modules/core/errors";
-import { PROFILE_ROLES } from "@1.modules/profile.domain";
+import { PROFILE_ROLES, type Profile } from "@1.modules/profile.domain";
 import { Spinner } from "@1.ui/react/spinner";
 import { Button } from "@1/ui/components/ButtonV";
 import { useTimeoutEffect } from "@react-hookz/web";
 import { useMutation } from "@tanstack/react-query";
 import constate from "constate";
 import { AnimatePresence, m } from "framer-motion";
-import type { User } from "next-auth";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -230,13 +229,14 @@ function ConnectedAs() {
   const send = useOutlet_Send();
 
   try {
-    const { data } = useSession();
-    const user =
-      data?.profile ?? ({ role: PROFILE_ROLES.Enum.STUDIENT } as User);
+    const { data: session } = useSession();
 
-    const on_logout = useCallback(() => signOut(), [user.id]);
+    const profile =
+      session?.profile ?? ({ role: PROFILE_ROLES.Enum.STUDIENT } as Profile);
 
-    const href = match(user.role)
+    const on_logout = useCallback(() => signOut(), [profile.id]);
+
+    const href = match(profile.role)
       .with("STUDIENT", () => `/exchange`)
       .with("PARTNER", () => `/opportunity`)
       .with("ADMIN", () => `/`)
@@ -249,7 +249,8 @@ function ConnectedAs() {
             <Avatar className="m-auto aspect-square min-h-[60px] rounded-full p-11" />
             <figcaption className="text-center">
               <h3 className="text-center">
-                Vous êtes connecté en tant que : <strong>{user.name}</strong>.
+                Vous êtes connecté en tant que : <strong>{profile.name}</strong>
+                .
               </h3>
             </figcaption>
           </figure>

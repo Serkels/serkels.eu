@@ -17,7 +17,8 @@
     }
   },
   "scripts": {
-    "type-check": "tsc --noEmit"
+    "dev": "tsc --watch",
+    "type-check": "tsc"
   },
   "dependencies": {
     "debug": "^4.3.4",
@@ -26,8 +27,6 @@
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
-    "@douglasduteil/datatypes...hours-to-seconds": "workspace:*",
-    "@1.infra/trpc": "workspace:*",
     "typescript": "^5.2.2"
   }
 }

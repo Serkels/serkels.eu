@@ -1,5 +1,5 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "@1.config/typescript/base.json",
+  "extends": "@1.config/typescript/lib.json",
   "compilerOptions": {}
 }

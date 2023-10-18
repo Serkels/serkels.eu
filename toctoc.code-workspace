@@ -62,7 +62,7 @@
     "tasks": [
       {
         "label": "1. 🚀 Dev",
-        "dependsOn": ["WWW Dev Server", "API Dev Server"],
+        "dependsOn": ["🚀 WWW Dev Server", "🚀 API Dev Server", "📦 Dev"],
         "group": "build"
       },
       {
@@ -100,7 +100,20 @@
         }
       },
       {
-        "label": "🏗️ Migrate Dev",
+        "args": ["x", "turbo", "dev", "--filter='@1.modules/*'"],
+        "command": "bun",
+        "group": "build",
+        "label": "📦 Dev",
+        "options": {
+          "cwd": "${workspaceFolder:🌱 root}",
+          "env": { "NODE_ENV": "development" }
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "runOptions": { "instanceLimit": 1 },
+        "type": "shell"
+      },
+      {
+        "label": "🏗️ Database Migrate Dev",
         "command": "bun",
         "args": ["run", "migrate:dev"],
         "type": "shell",
