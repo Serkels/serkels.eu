@@ -18,7 +18,7 @@ export default async function Layout({
   }
 
   const is_your_door_code =
-    params.code === "~" || session.user?.id === params.code;
+    params.code === "~" || session.profile?.id === params.code;
 
   if (!is_your_door_code) {
     return notFound();
