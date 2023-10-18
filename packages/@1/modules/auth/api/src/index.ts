@@ -80,9 +80,7 @@ const auth_api_router = router({
           data: {
             name: input.name,
             email: input.identifier,
-            role: ProfileRole[
-              input.role.toUpperCase() as Uppercase<typeof input.role>
-            ],
+            role: ProfileRole[input.role],
             tokens: { connect: { token: input.token } },
           },
         });
@@ -111,9 +109,7 @@ const auth_api_router = router({
               create: {
                 image,
                 name: payload.name,
-                role: ProfileRole[
-                  payload.role.toUpperCase() as Uppercase<typeof payload.role>
-                ],
+                role: ProfileRole[payload.role],
               },
             },
           },
