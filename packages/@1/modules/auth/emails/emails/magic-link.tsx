@@ -25,6 +25,7 @@ export const TocTocMagicLinkEmail = ({
         <Link
           href={`${url}`}
           target="_blank"
+          rel="noopener noreferrer"
           style={{
             ...link,
             display: "block",

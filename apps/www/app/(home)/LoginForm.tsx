@@ -1,5 +1,6 @@
 //
 
+import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import { Button } from "@1/ui/components/ButtonV";
 import { Field, Form, Formik, type FormikConfig } from "formik";
 
@@ -13,17 +14,17 @@ export function LoginForm({
   return (
     <div
       className="
-      text-Dove_Gray
-      grid
-      grid-cols-1
-      gap-5
-      rounded-md
-      border
-      bg-white
-      px-4
-      py-5
-      shadow-[10px_10px_10px_#00000029]
-    "
+        grid
+        grid-cols-1
+        gap-5
+        rounded-md
+        border
+        bg-white
+        px-4
+        py-5
+        text-Dove_Gray
+        shadow-[10px_10px_10px_#00000029]
+      "
     >
       <SignUp onSubmit={onSignUp} />
       <hr />
@@ -53,7 +54,7 @@ export function SignUp({ onSubmit }: SignUpProps) {
             intent="secondary"
             type="submit"
             isDisabled={isSubmitting}
-            onPress={() => setFieldValue("as", "student")}
+            onPress={() => setFieldValue("as", PROFILE_ROLES.enum.STUDIENT)}
           >
             Étudiant
           </Button>
@@ -62,7 +63,7 @@ export function SignUp({ onSubmit }: SignUpProps) {
             intent="quinary"
             type="submit"
             isDisabled={isSubmitting}
-            onPress={() => setFieldValue("as", "partner")}
+            onPress={() => setFieldValue("as", PROFILE_ROLES.enum.PARTNER)}
           >
             Partenaire
           </Button>

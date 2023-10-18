@@ -3,6 +3,7 @@
 import { Avatar } from ":components/avatar";
 import { DomLazyMotion } from ":components/shell/DomLazyMotion";
 import { HTTPError } from "@1.modules/core/errors";
+import { PROFILE_ROLES, type Profile } from "@1.modules/profile.domain";
 import { Spinner } from "@1.ui/react/spinner";
 import { Button } from "@1/ui/components/ButtonV";
 import { useTimeoutEffect } from "@react-hookz/web";
@@ -126,9 +127,13 @@ function LoginFormPanel() {
 
   const on_sign_up_form_submit: ComponentProps<typeof LoginForm>["onSignUp"] =
     useCallback(async ({ email, as }) => {
-      match(as as "student" | "partner")
-        .with("student", () => router.push(`/signup/studient?email=${email}`))
-        .with("partner", () => router.push(`/signup/partner?email=${email}`));
+      match(as as PROFILE_ROLES)
+        .with(PROFILE_ROLES.enum.STUDIENT, () =>
+          router.push(`/signup/studient?email=${email}`),
+        )
+        .with(PROFILE_ROLES.enum.PARTNER, () =>
+          router.push(`/signup/partner?email=${email}`),
+        );
     }, []);
 
   useEffect(() => {
@@ -224,19 +229,18 @@ function ConnectedAs() {
   const send = useOutlet_Send();
 
   try {
-    const { data } = useSession();
-    const user = data!.user!;
+    const { data: session } = useSession();
 
-    const on_logout = useCallback(() => signOut(), [user.email, user.id]);
-    try {
-      const href = match(user.role)
-        .with("studient", () => `/exchange`)
-        .with("partner", () => `/opportunity`)
-        .with("admin", () => `/`)
-        .exhaustive();
-      href;
-    } catch {}
-    const href = "";
+    const profile =
+      session?.profile ?? ({ role: PROFILE_ROLES.Enum.STUDIENT } as Profile);
+
+    const on_logout = useCallback(() => signOut(), [profile.id]);
+
+    const href = match(profile.role)
+      .with("STUDIENT", () => `/exchange`)
+      .with("PARTNER", () => `/opportunity`)
+      .with("ADMIN", () => `/`)
+      .exhaustive();
 
     return (
       <WhiteCard>
@@ -245,7 +249,8 @@ function ConnectedAs() {
             <Avatar className="m-auto aspect-square min-h-[60px] rounded-full p-11" />
             <figcaption className="text-center">
               <h3 className="text-center">
-                Vous êtes connecté en tant que : <strong>{user.name}</strong>.
+                Vous êtes connecté en tant que : <strong>{profile.name}</strong>
+                .
               </h3>
             </figcaption>
           </figure>

@@ -1,6 +1,7 @@
 //
 
 import type { Router } from "@1.infra/trpc";
+import { AuthError } from "@1.modules/core/errors";
 import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import type { _24_HOURS_ } from "@douglasduteil/datatypes...hours-to-seconds";
 import { NEXTAUTH_TRPCENV } from "@douglasduteil/nextauth...trpc.prisma/config";
@@ -13,6 +14,7 @@ import { PrismaTRPCAdapter } from "@douglasduteil/nextauth...trpc.prisma/next";
 import { createTRPCProxyClient, httpLink, loggerLink } from "@trpc/client";
 import type { NextAuthOptions, User } from "next-auth";
 import {} from "next-auth";
+import type { AdapterUser } from "next-auth/adapters";
 import Credentials from "next-auth/providers/credentials";
 import Email from "next-auth/providers/email";
 import { parseUrl } from "next/dist/shared/lib/router/utils/parse-url";
@@ -22,9 +24,9 @@ import { z } from "zod";
 
 //
 
-export const NEXT_MODULE_ENV = z
+export const NEXT_AUTH_MODULES_ENV = z
   .object({
-    API_URL: z.string(),
+    _01_NEXT_AUTH_MODULES_TRPC_API_URL: z.string().url(),
   })
   .parse(process.env);
 
@@ -38,7 +40,7 @@ const trpc = createTRPCProxyClient<Router>({
         (opts.direction === "down" && opts.result instanceof Error),
     }),
     httpLink({
-      url: NEXT_MODULE_ENV.API_URL,
+      url: NEXT_AUTH_MODULES_ENV._01_NEXT_AUTH_MODULES_TRPC_API_URL,
       headers: async ({}) => {
         const nexaut_header = await create_nexauth_header({
           secret: NEXTAUTH_TRPCENV.NEXTAUTH_SECRET,
@@ -68,7 +70,6 @@ SigninEmail_Provider.sendVerificationRequest = async (params) => {
 };
 const User_DTO = z.object({
   id: z.string().default(""),
-  jwt: z.string().default(""),
   email: z.string().trim().toLowerCase().email(),
   name: z.string().trim(),
   role: PROFILE_ROLES,
@@ -86,74 +87,65 @@ export const authOptions: NextAuthOptions = {
     updateAge: 86400 satisfies _24_HOURS_,
   },
   pages: {
-    signIn: "/signup/verifing",
+    signIn: "/",
     signOut: "/#auth=signOut",
     error: "/#auth=error",
-    verifyRequest: "/signup/verifing",
+    verifyRequest: "/signup/verifing#request",
     newUser: "/@~/welcome",
   },
 
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
-      console.log("<signIn>", { user, account, profile, email, credentials });
-      debugger;
-      const userExists = await trpc.auth.next_auth_adapter.getUserByEmail.query(
-        user?.email ?? "",
+    async signIn({ user, account, email }) {
+      const is_a_login_verification_request = Boolean(
+        email?.verificationRequest,
       );
-
-      if (email?.verificationRequest) {
-        console.log(
-          "<signIn email.verificationRequest>",
-          email?.verificationRequest,
-        );
+      if (is_a_login_verification_request) {
+        const userExists =
+          await trpc.auth.next_auth_adapter.getUserByEmail.query(
+            user?.email ?? "",
+          );
+        // Only verify existing account on login
         return Boolean(userExists);
       }
 
-      if (userExists && userExists.emailVerified)
-        // Login existing user
-        return true;
+      const is_signin_provider_verification_request = !Boolean(
+        account?.providerAccountId,
+      );
+      if (is_signin_provider_verification_request) return "/signup/verifing";
 
-      if (!user.id && user.role) return "/signup/verifing";
+      const adapter_user = user as AdapterUser;
+      const is_signin_provider_verifivation_response = !Boolean(
+        adapter_user.emailVerified,
+      );
+      if (is_signin_provider_verifivation_response)
+        return Boolean(account?.providerAccountId === user.email);
 
-      if (account?.providerAccountId) return true;
-
-      return false;
+      return Boolean(adapter_user.emailVerified); // # redirect to pages.signIn;
     },
 
-    async redirect({ url, baseUrl }) {
-      if (1) console.log("<redirect>", { url, baseUrl });
-
-      return baseUrl;
-    },
-    async session({ session, user, token, newSession, trigger }) {
-      if (1)
-        console.log("<session>", { session, user, token, newSession, trigger });
-
-      if (token.user) {
-        session.user = token.user;
+    async session({ session, token }) {
+      if (token.profile) {
+        session.profile = token.profile;
       }
 
       return session;
     },
-    async jwt({ token, user, account, profile, isNewUser, session, trigger }) {
-      if (trigger)
-        console.log("<jwt>", {
-          token,
-          user,
-          account,
-          profile,
-          isNewUser,
-          session,
-          trigger,
-        });
+    async jwt({ token, user, trigger }) {
+      try {
+        if (trigger === "signUp" && user.email) {
+          token.profile = await trpc.auth.payload.use_payload.mutate(
+            user.email,
+          );
+        }
 
-      if (user) {
-        token.user = user;
-      }
-
-      if (trigger === "signUp" && user.email) {
-        const record = await trpc.auth.payload.use_payload.mutate(user.email);
-        token.user = record as any;
+        if (trigger === "signIn" && user.id && user.email) {
+          token.profile = await trpc.profile.by_email.query(user.email);
+        }
+        if (trigger === "update" && token.email) {
+          token.profile = await trpc.profile.by_email.query(token.email);
+        }
+      } catch (error) {
+        console.error(new AuthError("Profile not found", { cause: error }));
       }
 
       return token;
@@ -215,7 +207,7 @@ export const authOptions: NextAuthOptions = {
           });
 
           const _url = new URL(`/api/auth/callback/${type}?${params}`, url);
-          // const _url = `${url}/api/auth/magic/${type}/${identifier}/${token}?${params}`;
+
           const token_id = hashToken(token, {
             provider: SigninEmail_Provider.options,
           });
@@ -250,14 +242,7 @@ export const authOptions: NextAuthOptions = {
             token: token_id,
           });
 
-          // const user_dto = {
-          //   ...credentials,
-          //   ...profile_exists,
-          //   role: profile_exists?.role.toLowerCase() ?? credentials?.role,
-          // };
-
           return user satisfies User;
-          // return user satisfies User;
         } catch (error) {
           console.error(error);
         }

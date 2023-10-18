@@ -3,6 +3,7 @@
 import { get_csrf_token } from "@1.modules/auth.next/csrf_token";
 import { UserAvatarFilled } from "@1/ui/icons";
 // import { UserAvatarFilled } from "@1.ui/react/icons";
+import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import type { Metadata, ResolvingMetadata } from "next";
 import { tv } from "tailwind-variants";
 import { EmailInput, SignInButton } from "./page.client";
@@ -33,7 +34,11 @@ export default function Page() {
         action="/api/auth/callback/SigninEmail_Provider"
       >
         <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
-        <input name="role" type="hidden" defaultValue="studient" />
+        <input
+          name="role"
+          type="hidden"
+          defaultValue={PROFILE_ROLES.enum.STUDIENT}
+        />
         <div className="mx-auto">
           <UserAvatarFilled className="h-14 w-14" />
         </div>

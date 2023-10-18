@@ -1,15 +1,32 @@
 //
 
-import { AuthSessionProvider } from ":components/shell/AuthSessionProvider";
-import { getServerSession } from "@1.modules/auth.next";
+import { AppFooter } from ":components/shell/AppFooter.server";
 import type { PropsWithChildren } from "react";
+import { tv } from "tailwind-variants";
+import Header from "./header";
 
 //
 
-export default async function Layout({ children }: PropsWithChildren) {
-  const session = await getServerSession();
-
+export default function Main_Layout({ children }: PropsWithChildren) {
+  const { base, header } = style();
   return (
-    <AuthSessionProvider session={session}>{children}</AuthSessionProvider>
+    <div className={base()}>
+      <header className={header()}>
+        <Header />
+      </header>
+
+      {children}
+
+      <AppFooter />
+    </div>
   );
 }
+
+//
+
+const style = tv({
+  base: ["grid", "min-h-screen", "grid-rows-[max-content_1fr_max-content]"],
+  slots: {
+    header: ["sticky", "top-0", "z-50"],
+  },
+});

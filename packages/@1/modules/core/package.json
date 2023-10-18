@@ -17,16 +17,16 @@
     }
   },
   "scripts": {
-    "type-check": "tsc --noEmit"
+    "dev": "tsc --watch",
+    "type-check": "tsc"
   },
   "dependencies": {
     "debug": "^4.3.4",
-    "error-custom-class": "^9.0.0"
+    "error-custom-class": "^9.0.0",
+    "zod": "^3.0.0"
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
-    "@douglasduteil/datatypes...hours-to-seconds": "workspace:*",
-    "@1.infra/trpc": "workspace:*",
     "typescript": "^5.2.2"
   }
 }

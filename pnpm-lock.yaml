@@ -92,9 +92,15 @@ importers:
       '@1.modules/core':
         specifier: workspace:*
         version: link:../../packages/@1/modules/core
+      '@1.modules/profile.domain':
+        specifier: workspace:*
+        version: link:../../packages/@1/modules/profile/domain
       '@1.ui/react':
         specifier: workspace:*
         version: link:../../packages/@1/ui/react
+      '@douglasduteil/nextauth...trpc.prisma':
+        specifier: workspace:*
+        version: link:../../packages/@douglasduteil/nextauth...trpc.prisma
       '@react-hookz/web':
         specifier: ^23.1.0
         version: 23.1.0(react-dom@18.2.0)(react@18.2.0)
@@ -153,7 +159,7 @@ importers:
         specifier: ^5.0.5
         version: 5.0.5
       zod:
-        specifier: ^3.22.2
+        specifier: ^3.0.0
         version: 3.22.2
     devDependencies:
       '@1.config/prettier':
@@ -449,16 +455,13 @@ importers:
       error-custom-class:
         specifier: ^9.0.0
         version: 9.0.0
+      zod:
+        specifier: ^3.0.0
+        version: 3.22.2
     devDependencies:
       '@1.config/typescript':
         specifier: workspace:*
         version: link:../../config/typescript
-      '@1.infra/trpc':
-        specifier: workspace:*
-        version: link:../../infra/trpc
-      '@douglasduteil/datatypes...hours-to-seconds':
-        specifier: workspace:*
-        version: link:../../../@douglasduteil/datatypes...hours-to-seconds
       typescript:
         specifier: ^5.2.2
         version: 5.2.2
@@ -496,6 +499,9 @@ importers:
 
   packages/@1/modules/profile/domain:
     dependencies:
+      '@1.modules/core':
+        specifier: workspace:*
+        version: link:../../core
       zod:
         specifier: ^3.0.0
         version: 3.22.2

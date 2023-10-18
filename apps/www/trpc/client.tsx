@@ -46,6 +46,9 @@ function useTRPCClient() {
           }),
           false: httpBatchLink({
             url: "/api/trpc",
+            // headers: {
+            //   "cache-control": `s-maxage=1, stale-while-revalidate=${60}`,
+            // },
           }),
         }),
       ],
