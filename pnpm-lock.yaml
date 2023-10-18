@@ -443,6 +443,9 @@ importers:
       '@douglasduteil/datatypes...hours-to-seconds':
         specifier: workspace:*
         version: link:../../../../@douglasduteil/datatypes...hours-to-seconds
+      '@types/react':
+        specifier: ^18.2.28
+        version: 18.2.28
       typescript:
         specifier: ^5.2.2
         version: 5.2.2
