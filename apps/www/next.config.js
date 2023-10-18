@@ -20,7 +20,7 @@ const nextConfig = {
     return [
       {
         source: "/api/trpc/:path*",
-        destination: `${process.env["API_URL"]}/:path*`,
+        destination: `${process.env["API_URL"]}/trpc/:path*`,
       },
 
       //
