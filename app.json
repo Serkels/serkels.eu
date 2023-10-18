@@ -1,0 +1,22 @@
+{
+  "name": "Toc-Toc API",
+  "description": "The toc-toc api.",
+  "env": {
+    "NEXTAUTH_SECRET": {
+      "description": "A secret key to talk with next-auth.",
+      "generator": "secret"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "eco"
+    }
+  },
+  "addons": [],
+  "buildpacks": [
+    {
+      "url": "https://github.com/unfold/heroku-buildpack-pnpm"
+    }
+  ]
+}
