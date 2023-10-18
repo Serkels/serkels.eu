@@ -62,11 +62,11 @@
     "tasks": [
       {
         "label": "1. 🚀 Dev",
-        "dependsOn": ["WWW Dev Server", "API Dev Server"],
+        "dependsOn": ["🚀 WWW Dev Server", "🚀 API Dev Server", "📦 Dev"],
         "group": "build"
       },
       {
-        "label": "WWW Dev Server",
+        "label": "🚀 WWW Dev Server",
         "command": "bun",
         "args": ["run", "dev"],
         "type": "shell",
@@ -83,7 +83,7 @@
         }
       },
       {
-        "label": "API Dev Server",
+        "label": "🚀 API Dev Server",
         "command": "bun",
         "args": ["run", "dev"],
         "type": "shell",
@@ -100,7 +100,34 @@
         }
       },
       {
-        "label": "Database Studio",
+        "args": ["x", "turbo", "dev", "--filter='@1.modules/*'"],
+        "command": "bun",
+        "group": "build",
+        "label": "📦 Dev",
+        "options": {
+          "cwd": "${workspaceFolder:🌱 root}",
+          "env": { "NODE_ENV": "development" }
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "runOptions": { "instanceLimit": 1 },
+        "type": "shell"
+      },
+      {
+        "label": "🏗️ Database Migrate Dev",
+        "command": "bun",
+        "args": ["run", "migrate:dev"],
+        "type": "shell",
+        "options": {
+          "cwd": "${workspaceFolder:🏗️ infra}/database"
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "group": "build",
+        "runOptions": {
+          "instanceLimit": 1
+        }
+      },
+      {
+        "label": "🏗️ Database Studio",
         "command": "bun",
         "args": ["run", "studio"],
         "type": "shell",
