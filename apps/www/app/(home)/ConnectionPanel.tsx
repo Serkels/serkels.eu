@@ -3,12 +3,14 @@
 import { Avatar } from ":components/avatar";
 import { DomLazyMotion } from ":components/shell/DomLazyMotion";
 import { HTTPError } from "@1.modules/core/errors";
+import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import { Spinner } from "@1.ui/react/spinner";
 import { Button } from "@1/ui/components/ButtonV";
 import { useTimeoutEffect } from "@react-hookz/web";
 import { useMutation } from "@tanstack/react-query";
 import constate from "constate";
 import { AnimatePresence, m } from "framer-motion";
+import type { User } from "next-auth";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -126,9 +128,13 @@ function LoginFormPanel() {
 
   const on_sign_up_form_submit: ComponentProps<typeof LoginForm>["onSignUp"] =
     useCallback(async ({ email, as }) => {
-      match(as as "student" | "partner")
-        .with("student", () => router.push(`/signup/studient?email=${email}`))
-        .with("partner", () => router.push(`/signup/partner?email=${email}`));
+      match(as as PROFILE_ROLES)
+        .with(PROFILE_ROLES.enum.STUDIENT, () =>
+          router.push(`/signup/studient?email=${email}`),
+        )
+        .with(PROFILE_ROLES.enum.PARTNER, () =>
+          router.push(`/signup/partner?email=${email}`),
+        );
     }, []);
 
   useEffect(() => {
@@ -225,18 +231,16 @@ function ConnectedAs() {
 
   try {
     const { data } = useSession();
-    const user = data!.user!;
+    const user =
+      data?.profile ?? ({ role: PROFILE_ROLES.Enum.STUDIENT } as User);
 
-    const on_logout = useCallback(() => signOut(), [user.email, user.id]);
-    try {
-      const href = match(user.role)
-        .with("studient", () => `/exchange`)
-        .with("partner", () => `/opportunity`)
-        .with("admin", () => `/`)
-        .exhaustive();
-      href;
-    } catch {}
-    const href = "";
+    const on_logout = useCallback(() => signOut(), [user.id]);
+
+    const href = match(user.role)
+      .with("STUDIENT", () => `/exchange`)
+      .with("PARTNER", () => `/opportunity`)
+      .with("ADMIN", () => `/`)
+      .exhaustive();
 
     return (
       <WhiteCard>

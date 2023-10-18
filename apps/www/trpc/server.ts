@@ -1,6 +1,9 @@
 //
 
 import type { Router } from "@1.infra/trpc";
+import { NEXTAUTH_TRPCENV } from "@douglasduteil/nextauth...trpc.prisma/config";
+import type { JWT } from "@douglasduteil/nextauth...trpc.prisma/jwt";
+import { create_nexauth_header } from "@douglasduteil/nextauth...trpc.prisma/jwt";
 import { createTRPCProxyClient, httpLink, loggerLink } from "@trpc/client";
 import { createServerSideHelpers } from "@trpc/react-query/server";
 import SuperJSON from "superjson";
@@ -17,6 +20,17 @@ const proxyClient = createTRPCProxyClient<Router>({
     }),
     httpLink({
       url: `${process.env["API_URL"]}`,
+      headers: async ({}) => {
+        const nexaut_header = await create_nexauth_header({
+          secret: NEXTAUTH_TRPCENV.NEXTAUTH_SECRET,
+          token: {
+            from: "www",
+            strategies: ["Only existing users can login"],
+          } satisfies JWT,
+          maxAge: 60,
+        });
+        return nexaut_header;
+      },
     }),
   ],
   transformer: SuperJSON,

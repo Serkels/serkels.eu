@@ -1,7 +1,11 @@
 //
 
 import { TocTocMagicLinkEmail } from "@1.modules/auth.emails";
-import { PROFILE_ROLES } from "@1.modules/profile.domain";
+import {
+  PROFILE_ROLES,
+  Profile_Schema,
+  type Profile,
+} from "@1.modules/profile.domain";
 import {
   next_auth_procedure,
   procedure,
@@ -105,7 +109,7 @@ const auth_api_router = router({
         ]);
 
         const image = gravatarUrlFor(email);
-        console.log("<auth_api_router.payload.use_payload>", { image });
+
         const record = await prisma.user.update({
           where: { id: user.id },
           data: {
@@ -126,12 +130,14 @@ const auth_api_router = router({
           },
         });
 
-        return record;
+        return Profile_Schema.parse(record.profile) as Profile;
       }),
   }),
 
   //
-
+  /**
+   * @deprecated
+   */
   passwordless: router({
     magic: procedure
       .input(z.object({ email: z.string().email() }))
@@ -156,6 +162,9 @@ const auth_api_router = router({
         return { sent: true, email: email };
       }),
 
+    /**
+     * @deprecated
+     */
     login: procedure
       .input(z.object({ token: z.string().trim() }))
       .query(async ({ input, ctx }) => {

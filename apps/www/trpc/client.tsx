@@ -45,7 +45,10 @@ function useTRPCClient() {
             client,
           }),
           false: httpBatchLink({
-            url: "http://localhost:8080/trpc",
+            url: "/api/trpc",
+            // headers: {
+            //   "cache-control": `s-maxage=1, stale-while-revalidate=${60}`,
+            // },
           }),
         }),
       ],

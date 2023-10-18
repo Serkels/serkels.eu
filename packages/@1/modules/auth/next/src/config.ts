@@ -1,6 +1,7 @@
 //
 
 import type { Router } from "@1.infra/trpc";
+import { AuthError } from "@1.modules/core/errors";
 import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import type { _24_HOURS_ } from "@douglasduteil/datatypes...hours-to-seconds";
 import { NEXTAUTH_TRPCENV } from "@douglasduteil/nextauth...trpc.prisma/config";
@@ -13,6 +14,7 @@ import { PrismaTRPCAdapter } from "@douglasduteil/nextauth...trpc.prisma/next";
 import { createTRPCProxyClient, httpLink, loggerLink } from "@trpc/client";
 import type { NextAuthOptions, User } from "next-auth";
 import {} from "next-auth";
+import type { AdapterUser } from "next-auth/adapters";
 import Credentials from "next-auth/providers/credentials";
 import Email from "next-auth/providers/email";
 import { parseUrl } from "next/dist/shared/lib/router/utils/parse-url";
@@ -68,7 +70,6 @@ SigninEmail_Provider.sendVerificationRequest = async (params) => {
 };
 const User_DTO = z.object({
   id: z.string().default(""),
-  jwt: z.string().default(""),
   email: z.string().trim().toLowerCase().email(),
   name: z.string().trim(),
   role: PROFILE_ROLES,
@@ -86,49 +87,43 @@ export const authOptions: NextAuthOptions = {
     updateAge: 86400 satisfies _24_HOURS_,
   },
   pages: {
-    signIn: "/signup/verifing",
+    signIn: "/signup/verifing#sign_in",
     signOut: "/#auth=signOut",
     error: "/#auth=error",
-    verifyRequest: "/signup/verifing",
+    verifyRequest: "/signup/verifing#request",
     newUser: "/@~/welcome",
   },
 
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
-      console.log("<signIn>", { user, account, profile, email, credentials });
-      debugger;
-      const userExists = await trpc.auth.next_auth_adapter.getUserByEmail.query(
-        user?.email ?? "",
+    async signIn({ user, account, email }) {
+      const is_a_login_verification_request = Boolean(
+        email?.verificationRequest,
       );
-
-      if (email?.verificationRequest) {
-        console.log(
-          "<signIn email.verificationRequest>",
-          email?.verificationRequest,
-        );
+      if (is_a_login_verification_request) {
+        const userExists =
+          await trpc.auth.next_auth_adapter.getUserByEmail.query(
+            user?.email ?? "",
+          );
+        // Only verify existing account on login
         return Boolean(userExists);
       }
 
-      if (userExists && userExists.emailVerified)
-        // Login existing user
-        return true;
+      const is_signin_provider_verification_request = !Boolean(
+        account?.providerAccountId,
+      );
+      if (is_signin_provider_verification_request) return "/signup/verifing";
 
-      if (!user.id && user.role) return "/signup/verifing";
+      const adapter_user = user as AdapterUser;
+      const is_signin_provider_verifivation_response = !Boolean(
+        adapter_user.emailVerified,
+      );
+      if (is_signin_provider_verifivation_response)
+        return Boolean(account?.providerAccountId === user.email);
 
-      if (account?.providerAccountId) return true;
-
-      return false;
+      return Boolean(adapter_user.emailVerified); // # redirect to pages.signIn;
     },
 
-    async redirect({ url, baseUrl }) {
-      if (1) console.log("<redirect>", { url, baseUrl });
-
-      return baseUrl;
-    },
-    async session({ session, user, token, newSession, trigger }) {
-      if (1)
-        console.log("<session>", { session, user, token, newSession, trigger });
-
+    async session({ session, token }) {
       if (token.user) {
         session.user = token.user;
       }
@@ -147,13 +142,19 @@ export const authOptions: NextAuthOptions = {
           trigger,
         });
 
-      if (user) {
-        token.user = user;
-      }
+      try {
+        if (trigger === "signUp" && user.email) {
+          token.user = await trpc.auth.payload.use_payload.mutate(user.email);
+        }
 
-      if (trigger === "signUp" && user.email) {
-        const record = await trpc.auth.payload.use_payload.mutate(user.email);
-        token.user = record as any;
+        if (trigger === "signIn" && user.id && user.email) {
+          token.user = await trpc.profile.by_email.query(user.email);
+        }
+        if (trigger === "update" && token.email) {
+          token.user = await trpc.profile.by_email.query(token.email);
+        }
+      } catch (error) {
+        console.error(new AuthError("Profile not found", { cause: error }));
       }
 
       return token;
@@ -256,7 +257,7 @@ export const authOptions: NextAuthOptions = {
           //   role: profile_exists?.role.toLowerCase() ?? credentials?.role,
           // };
 
-          return user satisfies User;
+          return { ...user, profile: null } satisfies User;
           // return user satisfies User;
         } catch (error) {
           console.error(error);
