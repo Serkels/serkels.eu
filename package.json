@@ -9,35 +9,26 @@
     "build": "turbo run build",
     "clean": "turbo run clean",
     "dev": "turbo run dev --parallel --continue",
-    "heroku-prebuild": "pnpx turbo prune --scope=strapi && rm -rf 01 www admin && pnpx cpx \"out/**/*\" .",
-    "heroku-postbuild": "turbo run build --filter=strapi",
+    "heroku-prebuild": "npx npm-run-all heroku-prebuild:*",
+    "heroku-prebuild:00": "NODE_ENV=O_0 pnpm i -w",
+    "heroku-prebuild:01": "pnpm exec turbo prune --scope=api",
+    "heroku-prebuild:02": "rm -rf apps packages",
+    "heroku-prebuild:03": "pnpm exec cpx \"out/**/*\" .",
+    "heroku-postbuild": "npx npm-run-all heroku-postbuild:*",
+    "heroku-postbuild:00": "pnpm exec turbo run build",
+    "heroku-release": "npx npm-run-all heroku-release:*",
+    "heroku-release:00": "pnpm --filter @1.infra/database exec prisma migrate deploy",
     "lint": "turbo run lint",
     "start": "pnpm -r start"
   },
   "devDependencies": {
+    "cpx": "1.5.0",
     "prettier": "3.0.3",
     "turbo": "1.10.14",
     "typescript": "5.2.2"
   },
-  "optionalDependencies": {
-    "formik": "2.4.5",
-    "mime": "3.0.0",
-    "supports-color": "8.1.1",
-    "websockets": "npm:ws@8.14.2",
-    "ws": "8.14.2",
-    "zod": "3.22.2"
-  },
   "pnpm": {
-    "overrides": {
-      "formik": "$formik",
-      "mime": "$mime",
-      "supports-color": "$supports-color",
-      "ws": "$ws",
-      "websockets": "$websockets",
-      "zod": "$zod"
-    },
     "patchedDependencies": {
-      "tsyringe@4.8.0": "patches/tsyringe@4.8.0.patch",
       "react-nest@0.1.10": "patches/react-nest@0.1.10.patch"
     }
   }

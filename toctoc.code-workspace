@@ -1,33 +1,17 @@
 {
   "folders": [
     //
-    { "path": "www", "name": "www" },
-    { "path": "admin/strapi", "name": "strapi" },
+    { "path": "apps/www", "name": "🚀 www" },
+    { "path": "apps/api", "name": "🚀 api" },
     //
-    { "path": "01/modules", "name": "@1/modules" },
-    { "path": "01/core", "name": "@1/core" },
+    { "path": "packages/@1/modules", "name": "📦 modules" },
+    { "path": "packages/@1/ui", "name": "💄 ui" },
+    { "path": "packages/@1/infra", "name": "🏗️ infra" },
+    { "path": "packages/@1/config", "name": "⚙️ config" },
     //
-    { "path": "01/next-tsyringe", "name": "@1/next-tsyringe" },
-    { "path": "01/strapi-openapi", "name": "@1/strapi-openapi" },
-    { "path": "01/strapi-trpc-router", "name": "@1/strapi-trpc-router" },
-    { "path": "01/ui", "name": "@1/ui" },
+    { "path": "packages/@douglasduteil", "name": "🎯 douglasduteil" },
     //
-    { "path": "01/config/eslint-config", "name": "@1/config/eslint-config" },
-    {
-      "path": "01/config/pandacss-config",
-      "name": "@1/config/pandacss-config"
-    },
-    {
-      "path": "01/config/tailwindcss-config",
-      "name": "@1/config/tailwindcss-config"
-    },
-    {
-      "path": "01/config/typescript-config",
-      "name": "@1/config/typescript-config"
-    },
-    //
-    { "path": "admin", "name": "admin" },
-    { "path": ".", "name": "root" }
+    { "path": ".", "name": "🌱 root" }
   ],
   "extensions": {
     "recommendations": [
@@ -65,33 +49,32 @@
     "javascript.preferences.importModuleSpecifier": "shortest",
     "typescript.preferences.importModuleSpecifier": "shortest",
     "typescript.tsdk": "root/node_modules/typescript/lib",
-    "workbench.editor.labelFormat": "medium",
+    "workbench.editor.labelFormat": "short",
     "autoHide.autoHidePanel": false,
     "tailwindCSS.rootFontSize": 14,
     "editor.quickSuggestions": { "strings": "on" },
     "tailwindCSS.experimental.classRegex": [
-      // ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"], // clsx(`...`)
       ["tv\\(([^)]*)\\)", "(?:'|\"|`)([^\"'`]*)(?:'|\"|`)"] // tv(`...`)
-      // "tw`([^`]*)", // tw`...`
-      // "tw\\.[^`]+`([^`]*)`", // tw.xxx<xxx>`...`
-      // "tw\\(.*?\\).*?`([^`]*)" // tw(Component)<xxx>`...`
     ]
   },
   "tasks": {
     "version": "2.0.0",
     "tasks": [
       {
-        "label": "1. Dev",
-        "dependsOn": ["Kernel Dev", "NextJs Dev Server", "Strapi Dev Server"],
+        "label": "1. 🚀 Dev",
+        "dependsOn": ["WWW Dev Server", "API Dev Server"],
         "group": "build"
       },
       {
-        "label": "NextJs Dev Server",
+        "label": "WWW Dev Server",
         "command": "bun",
         "args": ["run", "dev"],
         "type": "shell",
         "options": {
-          "cwd": "${workspaceFolder:www}"
+          "cwd": "${workspaceFolder:🚀 www}",
+          "env": {
+            "NODE_ENV": "development"
+          }
         },
         "problemMatcher": ["$tsc-watch"],
         "group": "build",
@@ -100,12 +83,15 @@
         }
       },
       {
-        "label": "Strapi Dev Server",
+        "label": "API Dev Server",
         "command": "bun",
         "args": ["run", "dev"],
         "type": "shell",
         "options": {
-          "cwd": "${workspaceFolder:strapi}"
+          "cwd": "${workspaceFolder:🚀 api}",
+          "env": {
+            "NODE_ENV": "development"
+          }
         },
         "problemMatcher": ["$tsc-watch"],
         "group": "build",
@@ -114,23 +100,18 @@
         }
       },
       {
-        "label": "Kernel Dev",
+        "label": "Database Studio",
+        "command": "bun",
+        "args": ["run", "studio"],
         "type": "shell",
         "options": {
-          "cwd": "${workspaceFolder:root}"
+          "cwd": "${workspaceFolder:🏗️ infra}/database"
         },
-        "command": "bun",
-        "args": ["run", "dev", "--filter=!strapi", "--filter=!www"],
+        "problemMatcher": ["$tsc-watch"],
+        "group": "build",
         "runOptions": {
           "instanceLimit": 1
-        },
-        "problemMatcher": ["$tsc"],
-        "presentation": {
-          "reveal": "never",
-          "group": "kernel"
-        },
-        "dependsOn": [],
-        "group": "build"
+        }
       }
     ]
   }

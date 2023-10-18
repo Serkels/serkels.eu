@@ -1,0 +1,15 @@
+{
+  "name": "@1.config/prettier",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "files": [],
+  "dependencies": {
+    "@douglasduteil/config...tailwindcss": "workspace:*"
+  },
+  "devDependencies": {
+    "prettier": "^3.0.3",
+    "typescript": "^5.2.2"
+  }
+}

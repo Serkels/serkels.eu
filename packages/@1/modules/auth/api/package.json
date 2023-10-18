@@ -1,0 +1,41 @@
+{
+  "name": "@1.modules/auth.api",
+  "version": "0.1.0",
+  "private": true,
+  "sideEffects": false,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "types": "./src/*.ts",
+      "default": "./src/*.ts"
+    }
+  },
+  "scripts": {
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@1.modules/trpc": "workspace:*",
+    "@1.modules/auth.emails": "workspace:*",
+    "@1.modules/profile.domain": "workspace:*",
+    "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
+    "@trpc/server": "^10.40.0",
+    "await-to-js": "^3.0.0",
+    "date-fns": "^2.30.0",
+    "jose": "^4.15.0",
+    "nanoid": "^4.0.2",
+    "zod": "^3.0.0"
+  },
+  "devDependencies": {
+    "@1.config/typescript": "workspace:*",
+    "@prisma/client": "^5.4.2",
+    "@auth/core": "^0.16.1",
+    "@types/node": "^20.8.2",
+    "typescript": "^5.2.2"
+  }
+}

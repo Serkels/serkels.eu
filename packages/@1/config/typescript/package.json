@@ -1,0 +1,11 @@
+{
+  "name": "@1.config/typescript",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "files": [],
+  "dependencies": {
+    "@douglasduteil/config...typescript": "workspace:*"
+  }
+}

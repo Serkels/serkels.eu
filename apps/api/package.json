@@ -1,0 +1,32 @@
+{
+  "name": "api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts --clear-screen=false",
+    "start": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "@1.infra/database": "workspace:*",
+    "@1.infra/email": "workspace:*",
+    "@1.infra/trpc": "workspace:*",
+    "@1.modules/core": "workspace:*",
+    "@1.modules/trpc": "workspace:*",
+    "@hono/node-server": "^1.2.0",
+    "@hono/sentry": "^1.0.0",
+    "@hono/trpc-server": "^0.1.0",
+    "@trpc/server": "^10.40.0",
+    "dotenv": "^16.3.1",
+    "hono": "^3.7.2",
+    "tsx": "^3.13.0",
+    "ws": "^8.0.0",
+    "zod": "^3.0.0"
+  },
+  "devDependencies": {
+    "@1.config/typescript": "workspace:*",
+    "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
+    "@types/node": "^20.8.2",
+    "@types/ws": "^8.2.0"
+  }
+}

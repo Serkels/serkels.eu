@@ -1,0 +1,259 @@
+//
+
+//
+//
+//
+
+//
+//
+//
+
+datasource db {
+  provider = "postgres"
+  url      = env("DATABASE_URL")
+  // provider = "sqlite"
+  // url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+//
+//
+//
+
+//
+//
+//
+
+model SignupPayload {
+  role   ProfileRole
+  name   String
+  email  String              @unique
+  tokens VerificationToken[]
+}
+
+model Profile {
+  id         String      @id @default(cuid())
+  name       String      @default("Unknown Profile")
+  image      String      @default("/opengraph-image.png")
+  role       ProfileRole
+  //
+  created_at DateTime    @unique @default(now())
+  updated_at DateTime    @unique @default(now())
+  //
+  bookmarks  Bookmark[]
+  partner    Partner?
+  studient   Studient?
+  user       User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id    String      @unique @map("userId")
+}
+
+model Studient {
+  id         String     @id @default(cuid())
+  //
+  created_at DateTime   @unique @default(now())
+  updated_at DateTime   @unique @default(now())
+  //
+  echanges   Exchange[]
+  profile    Profile    @relation(fields: [profile_id], references: [id], onDelete: Cascade)
+  profile_id String     @unique
+}
+
+model Partner {
+  id            String        @id @default(cuid())
+  location      String
+  //
+  created_at    DateTime      @unique @default(now())
+  updated_at    DateTime      @unique @default(now())
+  //
+  opportunities Opportunity[]
+  profile       Profile       @relation(fields: [profile_id], references: [id], onDelete: Cascade)
+  profile_id    String        @unique
+  role          ProfileRole   @default(PARTNER)
+}
+
+//
+
+enum ProfileRole {
+  ADMIN
+  PARTNER
+  STUDIENT
+}
+
+//
+//
+//
+
+//
+//
+//
+
+model Bookmark {
+  id         String   @id @default(cuid())
+  slug       String   @unique
+  name       String
+  //
+  created_at DateTime @unique @default(now())
+  updated_at DateTime @unique @default(now())
+  //
+  profile    Profile  @relation(fields: [profile_id], references: [id], onDelete: Cascade)
+  profile_id String   @unique
+}
+
+//
+//
+//
+
+//
+//
+//
+
+model Category {
+  id      String            @id @default(cuid())
+  slug    String            @unique
+  name    String
+  //
+  context CategoryContext[]
+}
+
+enum CategoryContext {
+  EXCHANGE
+  OPPORTUNITY
+  FORUM
+}
+
+//
+//
+//
+
+//
+//
+//
+
+model Exchange {
+  id          String   @id @default(cuid())
+  //
+  created_at  DateTime @unique @default(now())
+  updated_at  DateTime @unique @default(now())
+  //
+  studient    Studient @relation(fields: [studient_id], references: [id], onDelete: Cascade)
+  studient_id String   @unique
+}
+
+//
+//
+//
+
+//
+//
+//
+
+model Opportunity {
+  id         String   @id @default(cuid())
+  //
+  created_at DateTime @unique @default(now())
+  updated_at DateTime @unique @default(now())
+  //
+  partner    Partner  @relation(fields: [partner_id], references: [id], onDelete: Cascade)
+  partner_id String   @unique
+}
+
+//
+//
+//
+
+//
+//
+//
+
+//
+
+model PasswordlessToken {
+  id         String    @id @default(uuid())
+  body       String    @unique
+  email      String
+  login_date DateTime?
+  is_active  Boolean   @default(true)
+
+  created_at DateTime @unique @default(now())
+  updated_at DateTime @unique @default(now())
+}
+
+//
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+
+  //
+
+  profile Profile?
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  payload       SignupPayload? @relation(fields: [payload_email], references: [email], onDelete: Cascade)
+  payload_email String?
+
+  @@unique([identifier, token])
+}
+
+//
+//
+//
+
+//
+//
+//
+
+enum PosterSource {
+  RAW
+  GITHUB
+}
+
+model Post {
+  id     String       @id @default(uuid())
+  name   String
+  text   String
+  source PosterSource @default(RAW)
+
+  createdAt DateTime @unique @default(now())
+  updatedAt DateTime @unique @default(now())
+}

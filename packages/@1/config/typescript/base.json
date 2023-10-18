@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Base",
+  "extends": "@douglasduteil/config...typescript/base.json",
+  "compilerOptions": {}
+}

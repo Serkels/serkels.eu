@@ -1,1 +1,2 @@
-web: pnpm --filter strapi start
+release: pnpm run heroku-release
+web: pnpm --filter api start

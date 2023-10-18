@@ -1,7 +1,9 @@
 packages:
-  - "01/*"
-  - "01/config/*"
-  - "www"
-  - "admin/strapi"
+  - "apps/*"
   #
+  - "packages/@1/modules/*/*/.react-email"
+  - "packages/@1/modules/*/*"
+  - "packages/@1/*/*"
+  - "packages/@toctocorg/*"
   - "packages/@douglasduteil/*"
+  - "packages/@douglasduteil/config/*"

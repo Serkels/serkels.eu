@@ -1,0 +1,25 @@
+{
+  "name": "@1.infra/trpc",
+  "version": "0.1.0",
+  "private": true,
+  "sideEffects": false,
+  "type": "module",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "scripts": {
+    "type-check": "tsc"
+  },
+  "keywords": [],
+  "dependencies": {
+    "@1.modules/trpc": "workspace:*",
+    "@1.modules/auth.api": "workspace:*",
+    "@1.modules/profile.api": "workspace:*",
+    "@trpc/server": "^10.40.0",
+    "superjson": "^1.12.4",
+    "zod": "^3.0.0"
+  },
+  "devDependencies": {
+    "@1.config/typescript": "workspace:*",
+    "typescript": "^5.2.2"
+  }
+}
