@@ -23,7 +23,13 @@ export function useSyncSearchQuery(name: string) {
     if (params === searchParams.toString()) return;
 
     router.push(`${pathname}?${params}`);
-  }, [searchQuery, query, setQuery]);
+  }, [query, setQuery]);
+
+  useEffect(() => {
+    if (searchQuery === query) return;
+
+    setQuery(searchQuery ?? "");
+  }, [searchQuery]);
 
   return { query, setQuery };
 }
@@ -34,7 +40,7 @@ function updateURLSearchParams(
   searchParams: string,
   [queryKey, queryValue]: [string, string | undefined],
 ) {
-  const params = new URLSearchParams(searchParams.toString());
+  const params = new URLSearchParams(searchParams);
 
   if (!queryValue) {
     params.delete(queryKey);

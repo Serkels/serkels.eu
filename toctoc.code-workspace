@@ -127,6 +127,20 @@
         }
       },
       {
+        "label": "🏗️ Database Seed",
+        "command": "bun",
+        "args": ["run", "seed"],
+        "type": "shell",
+        "options": {
+          "cwd": "${workspaceFolder:🏗️ infra}/database"
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "group": "build",
+        "runOptions": {
+          "instanceLimit": 1
+        }
+      },
+      {
         "label": "🏗️ Database Studio",
         "command": "bun",
         "args": ["run", "studio"],

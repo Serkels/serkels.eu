@@ -43,7 +43,7 @@ export default function List() {
     isRefetchError: false,
     isSuccess: true,
     status: "success",
-  } as InfiniteQueryObserverSuccessResult<Exchange>;
+  } as InfiniteQueryObserverSuccessResult<Exchange, unknown>;
 
   return (
     <Exchange_InfiniteList info={info}>
