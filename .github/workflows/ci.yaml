@@ -25,11 +25,15 @@ jobs:
           cache: pnpm
 
       - run: pnpm --filter www... install
-      - run: pnpm --filter www... build
+
+      - run: pnpm exec turbo build --filter www^...
+      - run: pnpm exec turbo type-check --filter www^...
+
+      - run: pnpm exec turbo type-check --filter www
+      - run: pnpm exec turbo build --filter www
         env:
           API_URL: https://api.fake.toc-toc.org
           STALKER_URL: https://stalker.fake.toc-toc.org
-      - run: pnpm exec turbo --filter www... type-check
 
   api:
     name: Build api
@@ -53,4 +57,8 @@ jobs:
 
       - run: pnpm --filter api...  install
 
-      - run: pnpm --filter api...  build
+      - run: pnpm exec turbo build --filter api^...
+      - run: pnpm exec turbo type-check --filter api^...
+
+      - run: pnpm exec turbo type-check --filter api
+      - run: pnpm exec turbo build --filter api

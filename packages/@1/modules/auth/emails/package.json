@@ -3,24 +3,45 @@
   "version": "0.0.18",
   "private": true,
   "sideEffects": false,
-  "main": "./dist/index.js",
+  "type": "module",
+  "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
-  "types": "./index.ts",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "require": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.cjs"
+    },
+    "import": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.mjs"
+    }
+  },
   "scripts": {
-    "dev:studio": "email dev",
-    "dev": "pnpm build --watch",
-    "build": "tsup index.ts --format esm,cjs",
-    "export": "email export"
+    "build": "pkgroll",
+    "dev": "pkgroll --watch",
+    "export": "email export",
+    "studio": "email dev",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@react-email/components": "^0.0.6",
-    "react": "^18.2.0",
-    "react-email": "^1.9.3"
+    "@react-email/body": "^0.0.2",
+    "@react-email/container": "^0.0.8",
+    "@react-email/head": "^0.0.4",
+    "@react-email/heading": "^0.0.8",
+    "@react-email/html": "^0.0.4",
+    "@react-email/img": "^0.0.5",
+    "@react-email/link": "^0.0.5",
+    "@react-email/preview": "^0.0.6",
+    "@react-email/text": "^0.0.5",
+    "@types/react": "^18.2.25",
+    "react": "^18.2.0"
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
     "@types/node": "^20.8.2",
-    "@types/react": "^18.2.25",
-    "tsup": "^7.2.0"
+    "pkgroll": "^2.0.1",
+    "react-email": "^1.9.3",
+    "typescript": "^5.2.2"
   }
 }
