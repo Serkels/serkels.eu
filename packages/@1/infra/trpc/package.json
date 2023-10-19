@@ -17,7 +17,7 @@
     "@1.modules/category.api": "workspace:*",
     "@1.modules/exchange.api": "workspace:*",
     "@trpc/server": "^10.40.0",
-    "superjson": "^1.12.4",
+    "superjson": "^2.0.0",
     "zod": "^3.0.0"
   },
   "devDependencies": {
