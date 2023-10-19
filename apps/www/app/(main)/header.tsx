@@ -78,7 +78,13 @@ export async function Navbar() {
 
 const navbar = tv(
   {
-    base: "bg-primary-gradient-74 min-h-[theme(space.14)] text-white shadow-[0_3px_6px_#00000029]",
+    base: `
+      bg-primary-gradient-74
+      min-h-[theme(space.14)]
+      text-white
+      shadow-[0_3px_6px_#00000029]
+    `,
+
     slots: {
       brand: "flex items-center",
       nav: "",
@@ -178,7 +184,7 @@ const main_nav = tv(
     slots: {
       item: "grid-rows grid h-full content-center items-center justify-center",
       icon: "mx-auto block w-5 self-end",
-      caption: "hidden text-sm font-bold ",
+      caption: "hidden text-sm font-bold",
       list: "grid h-full flex-1 grid-cols-4 justify-between gap-8",
     },
     variants: {

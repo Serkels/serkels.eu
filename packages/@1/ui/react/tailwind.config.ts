@@ -14,4 +14,8 @@ const config = {
   plugins: [],
 } satisfies Config;
 
+export const with_ui = (tailwindConfig: Config) => {
+  return withTV({ ...config, ...tailwindConfig });
+};
+
 export default withTV(config);

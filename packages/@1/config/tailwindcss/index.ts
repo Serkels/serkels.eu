@@ -48,13 +48,21 @@ const colors = {
 
 const backgroundImage = {
   "primary-gradient": `
-  linear-gradient(
-    52deg,
-    ${Cerulean} 0%,
-    ${Eminence} 46%,
-    ${RedViolet_Dark} 100%
-  )
-`,
+    linear-gradient(
+      52deg,
+      ${Cerulean} 0%,
+      ${Eminence} 46%,
+      ${RedViolet_Dark} 100%
+    )
+  `,
+  "primary-gradient-74": `
+    linear-gradient(
+      74deg,
+      ${Cerulean} 0%,
+      ${Eminence} 52%,
+      ${RedViolet_Dark} 100%
+    )
+  `,
 };
 
 //
