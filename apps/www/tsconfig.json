@@ -8,11 +8,10 @@
       "@1/ui/components/ButtonV": [
         "../../packages/@1/ui/react/src/button/index.tsx"
       ],
-      //
-      // TODO(douglasduteil): remove this legacy path
       "@1/ui/icons": ["../../packages/@1/ui/react/src/icons/index.ts"],
-      //
       "@1/ui/components/*": ["../../packages/@1/ui/react/src/button/index.tsx"],
+      "~/*": ["../../packages/__legacy__/www/src/*"],
+      //
       ":app/*": ["./app/*"],
       ":components/*": ["./components/*"],
       ":trpc/*": ["./trpc/*"]

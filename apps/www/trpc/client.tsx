@@ -29,7 +29,6 @@ function useTRPCClient() {
     });
 
     const _trpc_client = TRPC_React.createClient({
-      //     // transformer: SuperJSON,
       links: [
         loggerLink({
           enabled: (opts) =>
@@ -46,9 +45,9 @@ function useTRPCClient() {
           }),
           false: httpBatchLink({
             url: "/api/trpc",
-            // headers: {
-            //   "cache-control": `s-maxage=1, stale-while-revalidate=${60}`,
-            // },
+            headers: {
+              // "cache-control": `s-maxage=1, stale-while-revalidate=${60}`,
+            },
           }),
         }),
       ],

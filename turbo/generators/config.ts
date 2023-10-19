@@ -2,6 +2,7 @@
 
 import { type PlopTypes } from "@turbo/gen";
 import { execSync } from "node:child_process";
+import dependencies from "./transform/packagejson/dependencies";
 
 //
 
@@ -37,6 +38,8 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
       },
     ],
     actions: [
+      //
+      // Domain
       {
         type: "add",
         path: "packages/@1/modules/{{lowerCase name}}/domain/tsconfig.json",
@@ -51,42 +54,30 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
         type: "add",
         path: "packages/@1/modules/{{lowerCase name}}/domain/package.json",
         templateFile: "templates/1.module/[name]/domain/package.json.hbs",
-        async transform(content) {
-          const pkg = JSON.parse(content) as {
-            dependencies: Record<string, string>;
-            devDependencies: Record<string, string>;
-          };
-          const is_workspace_version = (version: string) =>
-            version.startsWith("workspace:");
-          const dependencies = Object.keys(pkg.dependencies);
-          const devDependencies = Object.keys(pkg.devDependencies);
-          //filter((name) => pkg.dependencies[name]?.startsWith("workspace:"))
-          async function get_latest_version(package_name: string) {
-            return fetch(
-              `https://registry.npmjs.org/-/package/${package_name}/dist-tags`,
-            )
-              .then((res) => res.json())
-              .then((json) => json.latest);
-          }
-          await Promise.all([
-            ...dependencies
-              .filter(is_workspace_version)
-              .map(async (package_name) => {
-                const version = await get_latest_version(package_name);
-                pkg.dependencies![package_name] = `^${version}`;
-              }),
-            ...devDependencies
-              .filter(is_workspace_version)
-              .map(async (package_name) => {
-                const version = await get_latest_version(package_name);
-                pkg.devDependencies![package_name] = `^${version}`;
-              }),
-          ]);
-
-          return JSON.stringify(pkg, null, 2);
-        },
+        transform: dependencies,
       },
 
+      //
+      // API
+      {
+        type: "add",
+        path: "packages/@1/modules/{{lowerCase name}}/api/tsconfig.json",
+        templateFile: "templates/1.module/[name]/api/tsconfig.json",
+      },
+      {
+        type: "add",
+        path: "packages/@1/modules/{{lowerCase name}}/api/src/index.ts",
+        templateFile: "templates/1.module/[name]/api/src/index.ts.hbs",
+      },
+      {
+        type: "add",
+        path: "packages/@1/modules/{{lowerCase name}}/api/package.json",
+        templateFile: "templates/1.module/[name]/api/package.json.hbs",
+        transform: dependencies,
+      },
+
+      //
+      // Lastly
       { type: "format" },
       { type: "install" },
     ],

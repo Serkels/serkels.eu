@@ -1,0 +1,35 @@
+{
+  "name": "@1.modules/category.api",
+  "version": "0.1.0",
+  "private": true,
+  "sideEffects": false,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "types": "./src/*.ts",
+      "default": "./src/*.ts"
+    }
+  },
+  "scripts": {
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@1.modules/category.domain": "workspace:*",
+    "@1.modules/trpc": "workspace:*",
+    "@decs/typeschema": "^0.12.1",
+    "@trpc/server": "^10",
+    "zod": "^3.22.2"
+  },
+  "devDependencies": {
+    "@1.config/typescript": "workspace:*",
+    "@prisma/client": "^5",
+    "@types/node": "^20",
+    "typescript": "^5"
+  }
+}

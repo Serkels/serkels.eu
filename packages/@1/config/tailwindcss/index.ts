@@ -63,6 +63,13 @@ const backgroundImage = {
       ${RedViolet_Dark} 100%
     )
   `,
+  "secondary-blue-gradient": `
+    linear-gradient(
+      38deg,
+      #00adee 0%,
+      ${Congress_Blue} 100%
+    )
+  `,
 };
 
 //

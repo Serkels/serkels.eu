@@ -25,9 +25,7 @@ const proxyClient = createTRPCProxyClient<Router>({
           secret: NEXTAUTH_TRPCENV.NEXTAUTH_SECRET,
           token: {
             from: "www",
-            strategies: ["Only existing users can login"],
           } satisfies JWT,
-          maxAge: 60,
         });
         return nexaut_header;
       },

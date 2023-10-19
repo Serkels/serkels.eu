@@ -25,7 +25,7 @@ export function create_NextAuth_router(secret: string) {
   return router({
     //
     createUser: next_auth_procedure
-      .input(z.object({ email: z.string() }).passthrough())
+      .input(z.object({ email: z.string().toLowerCase() }).passthrough())
       .mutation(
         async ({ ctx, input }) =>
           (await ctx.prisma.user.create({ data: input })) as AdapterUser,

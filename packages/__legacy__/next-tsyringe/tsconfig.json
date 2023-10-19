@@ -1,0 +1,18 @@
+{
+  "extends": ["@1/typescript-config/react.json"],
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "baseUrl": ".",
+    "composite": true,
+    "lib": ["ESNext"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "noEmit": true,
+    "outDir": "./dist",
+    "paths": {},
+    "rootDir": "."
+  },
+  "files": ["src/index.ts"],
+  "include": ["src"],
+  "references": []
+}

@@ -1,4 +1,6 @@
 packages:
+  - "packages/__legacy__/*"
+  #
   - "apps/*"
   #
   - "packages/@1/modules/*/*/.react-email"

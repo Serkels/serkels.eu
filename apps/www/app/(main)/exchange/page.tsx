@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 
 //
 
-const Welcome_Flow = dynamic(() => import("./page.client"), {
+const List = dynamic(() => import("./_client/List"), {
   ssr: false,
   loading() {
     return <Spinner />;
@@ -19,7 +19,7 @@ export async function generateMetadata(
   _: never,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const title = `Welcome :: ${(await parent).title?.absolute}`;
+  const title = `Exchange :: ${(await parent).title?.absolute}`;
 
   return {
     title,
@@ -34,21 +34,7 @@ export async function generateMetadata(
 export default async function Page() {
   return (
     <main>
-      <h1
-        className={`
-          mx-auto
-          my-0
-          text-center text-6xl
-          font-extrabold
-          sm:text-7xl
-          lg:text-8xl
-        `}
-      >
-        Welcome
-      </h1>
-      <div className="mx-auto mt-5 text-center">
-        <Welcome_Flow />
-      </div>
+      <List />
     </main>
   );
 }

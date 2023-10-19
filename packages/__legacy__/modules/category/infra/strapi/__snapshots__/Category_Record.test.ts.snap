@@ -1,0 +1,31 @@
+// Bun Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Item 1`] = `
+{
+  "createdAt": 2023-09-08T11:13:21.531Z,
+  "id": 1,
+  "name": "Autres",
+  "slug": "autres",
+  "updatedAt": 2023-09-08T11:13:21.531Z,
+}
+`;
+
+exports[`List: Autres 1`] = `
+{
+  "createdAt": 2023-09-08T11:13:21.531Z,
+  "id": 1,
+  "name": "Autres",
+  "slug": "autres",
+  "updatedAt": 2023-09-08T11:13:21.531Z,
+}
+`;
+
+exports[`List: Activités 1`] = `
+{
+  "createdAt": 2023-09-08T11:20:00.522Z,
+  "id": 2,
+  "name": "Activités",
+  "slug": "activites",
+  "updatedAt": 2023-09-08T11:20:00.522Z,
+}
+`;

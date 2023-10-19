@@ -20,6 +20,10 @@
     "./icons": {
       "types": "./src/icons/index.ts",
       "default": "./src/icons/index.ts"
+    },
+    "./input/*": {
+      "types": "./src/input/*.tsx",
+      "default": "./src/input/*.tsx"
     }
   },
   "scripts": {

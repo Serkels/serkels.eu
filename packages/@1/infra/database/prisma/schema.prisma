@@ -51,14 +51,15 @@ model Profile {
 }
 
 model Studient {
-  id         String     @id @default(cuid())
+  id                     String     @id @default(cuid())
   //
-  created_at DateTime   @unique @default(now())
-  updated_at DateTime   @unique @default(now())
+  created_at             DateTime   @unique @default(now())
+  updated_at             DateTime   @unique @default(now())
   //
-  echanges   Exchange[]
-  profile    Profile    @relation(fields: [profile_id], references: [id], onDelete: Cascade)
-  profile_id String     @unique
+  exchange               Exchange[] @relation("StudientEchanges")
+  participants_exchanges Exchange[] @relation("ParticipantsExchanges")
+  profile                Profile    @relation(fields: [profile_id], references: [id], onDelete: Cascade)
+  profile_id             String     @unique
 }
 
 model Partner {
@@ -91,15 +92,17 @@ enum ProfileRole {
 //
 
 model Bookmark {
-  id         String   @id @default(cuid())
-  slug       String   @unique
-  name       String
+  id            String        @id @default(cuid())
+  slug          String        @unique
+  name          String
   //
-  created_at DateTime @unique @default(now())
-  updated_at DateTime @unique @default(now())
+  created_at    DateTime      @unique @default(now())
+  updated_at    DateTime      @unique @default(now())
   //
-  profile    Profile  @relation(fields: [profile_id], references: [id], onDelete: Cascade)
-  profile_id String   @unique
+  owner         Profile       @relation(fields: [owner_id], references: [id], onDelete: Cascade)
+  owner_id      String        @unique
+  exchanges     Exchange[]
+  opportunities Opportunity[]
 }
 
 //
@@ -111,11 +114,12 @@ model Bookmark {
 //
 
 model Category {
-  id      String            @id @default(cuid())
-  slug    String            @unique
-  name    String
+  id        String            @id @default(cuid())
+  slug      String            @unique
+  name      String
   //
-  context CategoryContext[]
+  contexts  CategoryContext[]
+  exchanges Exchange[]
 }
 
 enum CategoryContext {
@@ -133,13 +137,30 @@ enum CategoryContext {
 //
 
 model Exchange {
-  id          String   @id @default(cuid())
+  id           String       @id @default(cuid())
+  active       Boolean
+  category     Category     @relation(fields: [category_id], references: [id])
+  category_id  String
+  description  String
+  is_online    Boolean
+  location     String?
+  owner        Studient     @relation("StudientEchanges", fields: [owner_id], references: [id], onDelete: Cascade)
+  owner_id     String
+  participants Studient[]   @relation("ParticipantsExchanges")
+  places       Int
+  title        String
+  type         ExchangeType
+  when         DateTime     @unique @default(now())
   //
-  created_at  DateTime @unique @default(now())
-  updated_at  DateTime @unique @default(now())
+  created_at   DateTime     @unique @default(now())
+  updated_at   DateTime     @unique @default(now())
   //
-  studient    Studient @relation(fields: [studient_id], references: [id], onDelete: Cascade)
-  studient_id String   @unique
+  bookmark     Bookmark[]
+}
+
+enum ExchangeType {
+  PROPOSAL
+  RESEARCH
 }
 
 //
@@ -151,13 +172,16 @@ model Exchange {
 //
 
 model Opportunity {
-  id         String   @id @default(cuid())
+  id          String   @id @default(cuid())
   //
-  created_at DateTime @unique @default(now())
-  updated_at DateTime @unique @default(now())
+  created_at  DateTime @unique @default(now())
+  updated_at  DateTime @unique @default(now())
   //
-  partner    Partner  @relation(fields: [partner_id], references: [id], onDelete: Cascade)
-  partner_id String   @unique
+  partner     Partner  @relation(fields: [partner_id], references: [id], onDelete: Cascade)
+  partner_id  String   @unique
+  //
+  bookmark    Bookmark @relation(fields: [bookmark_id], references: [id])
+  bookmark_id String
 }
 
 //

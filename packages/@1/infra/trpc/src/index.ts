@@ -1,6 +1,8 @@
 //
 
 import auth_api_router from "@1.modules/auth.api";
+import category_api_router from "@1.modules/category.api";
+import exchange_api_router from "@1.modules/exchange.api";
 import profile_api_router from "@1.modules/profile.api";
 import { procedure, router } from "@1.modules/trpc";
 import { observable } from "@trpc/server/observable";
@@ -10,7 +12,14 @@ import { z } from "zod";
 
 export const root_router = router({
   auth: auth_api_router,
+  category: category_api_router,
+  exchange: exchange_api_router,
   profile: profile_api_router,
+
+  //
+  //
+  //
+
   hello: procedure
     .input(
       z.object({
