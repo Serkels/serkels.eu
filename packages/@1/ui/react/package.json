@@ -13,6 +13,10 @@
       "types": "./src/*/index.tsx",
       "default": "./src/*/index.tsx"
     },
+    "./*/atom": {
+      "types": "./src/*/atom.ts",
+      "default": "./src/*/atom.ts"
+    },
     "./icons": {
       "types": "./src/icons/index.ts",
       "default": "./src/icons/index.ts"

@@ -1,15 +1,15 @@
 //
 
 // import { MobileNavBar } from ":components/MobileNavBar";
-// import { Binoculars, Book, Link, MessageGroup } from "@1/ui/icons";
-// import { Banner, BigBar } from "@1/ui/shell";
 import { AppFooter } from ":components/shell/AppFooter.server";
 import { AuthSessionProvider } from ":components/shell/AuthSessionProvider";
 import { Banner } from ":components/shell/Banner";
 import { BigBar } from ":components/shell/BigBar";
 import { getServerSession } from "@1.modules/auth.next";
 import { Grid } from "@1.ui/react/grid";
+import type { StylableElementType } from "@1.ui/react/types";
 import { VisuallyHidden } from "@1.ui/react/visually_hidden";
+import { Binoculars, Book, Exchange, MessageGroup } from "@1/ui/icons";
 import type { _1_HOUR_ } from "@douglasduteil/datatypes...hours-to-seconds";
 import dynamic from "next/dynamic";
 import Link from "next/link";
@@ -57,6 +57,87 @@ export default function Home_Page() {
   );
 }
 
+//
+//
+//
+
+function Explore() {
+  const { base, title, link, links } = explore_grid_style({
+    size: { initial: "xs", md: "md", xl: "xl" },
+  });
+  return (
+    <Grid className={base()}>
+      <h2 className={title({ className: "text-2xl" })}>
+        Explorer sans créer un compte !
+      </h2>
+      <Grid fluid className={links()}>
+        <ExploreLink
+          href="#"
+          Icon={Exchange}
+          className={link({
+            className: "text-secondary opacity-50",
+          })}
+        >
+          Opportunités
+        </ExploreLink>
+        <ExploreLink
+          href="/opportunity"
+          Icon={Binoculars}
+          className={link({
+            className: "text-tertiary",
+          })}
+          // className="col-span-2 text-Congress_Blue md:col-start-2 xl:col-start-4"
+        >
+          Opportunités
+        </ExploreLink>
+        <ExploreLink
+          href="/q&a"
+          Icon={MessageGroup}
+          className={link({
+            className: "text-quaternary",
+          })}
+          // className="col-span-2 text-Eminence"
+        >
+          Question-Réponse
+        </ExploreLink>
+        <ExploreLink
+          href="/guide"
+          Icon={Book}
+          className={link({
+            className: "text-quinary",
+          })}
+          // className="col-span-2 text-RedViolet"
+        >
+          Guide d'étudiant
+        </ExploreLink>
+      </Grid>
+    </Grid>
+  );
+}
+
+const explore_grid_style = tv(
+  {
+    base: "my-10",
+    slots: {
+      title: "col-span-full mb-10 w-full text-center",
+      links: "col-span-full xl:col-start-4",
+      link: "col-span-2 sm:col-span-3 md:col-span-2 ",
+    },
+    variants: {
+      size: {
+        xs: { base: "gap-y-12" },
+        md: { link: "my-12" },
+        xl: { link: "my-12" },
+      },
+    },
+  },
+  { responsiveVariants: true },
+);
+
+//
+//
+//
+
 function AppLargeTopBar() {
   return (
     <BigBar>
@@ -94,46 +175,21 @@ function CarouselPlaceholder() {
   );
 }
 
-function Explore() {
-  return (
-    <Grid className="my-10 grid-cols-6 ">
-      <h2 className="col-span-full mb-10 w-full text-center text-2xl">
-        Explorer sans créer un compte !
-      </h2>
-      <ExploreLink
-        href="/opportunity"
-        Icon={"Binoculars"}
-        className="text-Congress_Blue col-span-2 md:col-start-2 xl:col-start-4"
-      >
-        Opportunités
-      </ExploreLink>
-      <ExploreLink
-        href="/q&a"
-        Icon={"MessageGroup"}
-        className="text-Eminence col-span-2"
-      >
-        Question-Réponse
-      </ExploreLink>
-      <ExploreLink
-        href="/guide"
-        Icon={"Book"}
-        className="text-RedViolet col-span-2"
-      >
-        Guide d'étudiant
-      </ExploreLink>
-    </Grid>
-  );
-}
+//
+//
+//
 
 function ExploreLink({
   className,
   children,
-  href, // Icon,
+  href,
+  Icon,
 }: ComponentPropsWithoutRef<typeof Link> &
-  PropsWithChildren<{ Icon: string }>) {
+  PropsWithChildren<{ Icon: StylableElementType }>) {
+  const { base, icon } = explore_link_style({ className });
   return (
-    <Link href={href} className={style({ className })}>
-      <i className="h-10 w-10" />
+    <Link className={base({ className })} href={href}>
+      <Icon className={icon({})} />
       <button className="w-full rounded-full bg-current">
         <span className="text-xs font-semibold uppercase text-white">
           {children}
@@ -143,11 +199,15 @@ function ExploreLink({
   );
 }
 
-const style = tv({
+const explore_link_style = tv({
   base: "grid grid-rows-2 justify-items-center gap-6",
+
   variants: {
     icon: {
       book: "icon-[tt--book]",
     },
+  },
+  slots: {
+    icon: "h-10 w-10",
   },
 });
