@@ -915,6 +915,9 @@ importers:
       uuid:
         specifier: 9.0.1
         version: 9.0.1
+      zod:
+        specifier: 3.22.2
+        version: 3.22.2
     devDependencies:
       '@1/typescript-config':
         specifier: workspace:@1.config/typescript@*
