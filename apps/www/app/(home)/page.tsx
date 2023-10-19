@@ -61,6 +61,18 @@ export default function Home_Page() {
 //
 //
 
+async function HomeBanner() {
+  const session = await getServerSession();
+
+  return (
+    <Banner className="min-h-[45vh]">
+      <AuthSessionProvider session={session}>
+        <HomeCarousel />
+      </AuthSessionProvider>
+    </Banner>
+  );
+}
+
 function Explore() {
   const { base, title, link, links } = explore_grid_style({
     size: { initial: "xs", md: "md", xl: "xl" },
@@ -146,23 +158,11 @@ function AppLargeTopBar() {
   );
 }
 
-async function HomeBanner() {
-  const session = await getServerSession();
-
-  return (
-    <Banner className="min-h-[45vh]">
-      <AuthSessionProvider session={session}>
-        <HomeCarousel />
-      </AuthSessionProvider>
-    </Banner>
-  );
-}
-
 function CarouselPlaceholder() {
   return (
     <Grid className="min-h-[45vh] items-center">
       <aside className="col-span-2 sm:col-span-4 md:col-start-2 xl:col-start-4">
-        <h1 className="mb-6 text-xl font-bold uppercase">
+        <h1 className="mb-12 text-2xl font-bold uppercase">
           Activités, notes de cours et profitez d'autres services" et supprimer
           la mention des opportunités.
         </h1>
