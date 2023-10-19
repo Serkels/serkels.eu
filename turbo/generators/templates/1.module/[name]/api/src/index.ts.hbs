@@ -1,0 +1,20 @@
+//
+
+import { {{pascalCase name}}_Schema, type {{pascalCase name}} } from "@1.modules/{{name}}.domain";
+import { next_auth_procedure, router } from "@1.modules/trpc";
+import { z } from "zod";
+
+//
+
+const {{snakeCase name}}_api_router = router({
+  by_id: next_auth_procedure
+    .input(z.string())
+    .query(async ({ input: id, ctx: { prisma } }) => {
+      return {{pascalCase name}}_Schema.parse(
+        await prisma.{{camelCase name}}.findFirstOrThrow({ where: { id } }),
+      ) as {{pascalCase name}};
+    }),
+});
+
+export default {{lowerCase name}}_api_router;
+export type {{pascalCase name}}ApiRouter = typeof profile_api_router;

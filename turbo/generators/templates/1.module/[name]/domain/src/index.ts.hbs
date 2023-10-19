@@ -1,0 +1,10 @@
+//
+
+import { Entity_Schema } from "@1.modules/core/domain";
+
+//
+
+export const {{pascalCase name}}_Schema = Entity_Schema.augment({
+}).describe("{{pascalCase name}}_PropsSchema");
+
+export interface {{pascalCase name}} extends z.TypeOf<typeof {{pascalCase name}}_Schema> {}
