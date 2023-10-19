@@ -3,10 +3,6 @@
   "version": "0.0.0",
   "type": "module",
   "private": true,
-  "scripts": {
-    "dev": "pnpm run build --watch --preserveWatchOutput",
-    "build": "tsc"
-  },
   "dependencies": {
     "@1/core": "workspace:@0.__legacy__/core@*",
     "@tanstack/react-query": "4.35.7",

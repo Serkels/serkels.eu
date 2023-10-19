@@ -10,10 +10,6 @@
   },
   "main": "dist/index.js",
   "types": "./src/index.ts",
-  "scripts": {
-    "build": "swc src -d dist",
-    "dev": "pnpm run build --watch"
-  },
   "keywords": [],
   "author": "Douglas Duteil <douglasduteil@gmail.com> (https://douglasduteil.github.io/)",
   "license": "WTFPL",
