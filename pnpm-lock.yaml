@@ -367,8 +367,8 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       '@auth/core':
-        specifier: ^0.16.1
-        version: 0.16.1
+        specifier: ^0.17.0
+        version: 0.17.0
       '@prisma/client':
         specifier: ^5.4.2
         version: 5.4.2(prisma@5.4.2)
@@ -759,8 +759,8 @@ packages:
     resolution: {integrity: sha512-pvFiLP2BeOKA/ZOS6jxx4XhKzdVLHDhGlFEaZ2flWWYf2xOqVniqpk38I04DFRyz+L0ASggl7SkItTc+ZLju4w==}
     dev: false
 
-  /@auth/core@0.16.1:
-    resolution: {integrity: sha512-V+YifnjpyOadiiTbxfYDV2xYWo8xpKNtwYVskAEKUSwMvE0FlSlP+10QGBpf0axS/AJFOO61IR6GncFF/IOrHQ==}
+  /@auth/core@0.17.0:
+    resolution: {integrity: sha512-YkbWuXny6sv0gF/sYm7KD3GxnnGxJomoQJzibzhJuwVOYjPUjjYBv/JMTkYcfpBuPHoHZwTVR3y1J+/W18oRxA==}
     peerDependencies:
       nodemailer: ^6.8.0
     peerDependenciesMeta:
