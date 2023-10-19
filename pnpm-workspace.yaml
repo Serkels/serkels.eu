@@ -7,3 +7,5 @@ packages:
   - "packages/@toctocorg/*"
   - "packages/@douglasduteil/*"
   - "packages/@douglasduteil/config/*"
+  #
+  - "turbo/generators"

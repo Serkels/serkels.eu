@@ -29,6 +29,7 @@ jobs:
         env:
           API_URL: https://api.fake.toc-toc.org
           STALKER_URL: https://stalker.fake.toc-toc.org
+      - run: pnpm exec turbo --filter www... type-check
 
   api:
     name: Build api
