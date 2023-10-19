@@ -20,12 +20,12 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@1.modules/core": "workspace:*",
     "@1.modules/category.domain": "workspace:*",
-    "zod": "^3.0.0"
+    "@1.modules/core": "workspace:*",
+    "zod": "3.22.2"
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
-    "typescript": "^5"
+    "typescript": "5"
   }
 }

@@ -1,22 +1,26 @@
 "use client";
 
 import { TRPC_React } from ":trpc/client";
-import { useOpportunityFilterContext } from "@0.__legacy__/www/src/app/(main)/opportunity/OpportunityFilter.context";
 import { CategoryFilterRadioList } from "@0.__legacy__/www/src/components/FilterRadioList";
+import { Category } from "@1/modules/category/domain";
+import { useSyncSearchQuery } from "~/components/useSyncSearchQuery";
 
 //
 
 export function CategoriesList() {
-  const { category, setCategory } = useOpportunityFilterContext();
+  const { query, setQuery } = useSyncSearchQuery("category");
   const { data: categories } = TRPC_React.category.exchange.useQuery();
   // const categories = mock;
   if (!categories) return [];
+
+  const categories_ = [...(categories as any as Category[]), Category.all];
+
   return (
     <CategoryFilterRadioList
-      active={category ?? ""}
-      data={categories as any}
+      active={query ?? ""}
+      data={categories_}
       name="category"
-      onChange={() => console.log("...")}
+      onChange={setQuery}
     />
   );
 }

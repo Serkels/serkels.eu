@@ -10,15 +10,15 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@react-email/render": "^0.0.7",
-    "debug": "^4.3.4",
-    "nodemailer": "^6.9.5",
-    "zod": "^3.0.0"
+    "@react-email/render": "0.0.7",
+    "debug": "4.3.4",
+    "nodemailer": "6.9.5",
+    "zod": "3.22.2"
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
-    "@types/debug": "^4.1.9",
-    "@types/nodemailer": "^6.4.7",
-    "@types/react": "^18.2.28"
+    "@types/debug": "4.1.9",
+    "@types/nodemailer": "6.4.7",
+    "@types/react": "18.2.30"
   }
 }

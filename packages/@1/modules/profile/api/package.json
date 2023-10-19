@@ -23,13 +23,13 @@
     "@1.modules/profile.domain": "workspace:*",
     "@1.modules/trpc": "workspace:*",
     "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
-    "@trpc/server": "^10.40.0",
-    "zod": "^3.0.0"
+    "@trpc/server": "10.40.0",
+    "zod": "3.22.2"
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
-    "@prisma/client": "^5.4.2",
-    "@types/node": "^20.8.2",
-    "typescript": "^5.2.2"
+    "@prisma/client": "5.4.2",
+    "@types/node": "20.8.2",
+    "typescript": "5.2.2"
   }
 }

@@ -6,10 +6,10 @@
   "sideEffects": false,
   "files": [],
   "dependencies": {
-    "@tsconfig/strictest": "^2.0.2"
+    "@tsconfig/strictest": "2.0.2"
   },
   "devDependencies": {
-    "prettier": "^3.0.3",
-    "typescript": "^5.2.2"
+    "prettier": "3.0.3",
+    "typescript": "5.2.2"
   }
 }

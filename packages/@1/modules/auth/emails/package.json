@@ -25,23 +25,23 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@react-email/body": "^0.0.3",
-    "@react-email/container": "^0.0.8",
-    "@react-email/head": "^0.0.4",
-    "@react-email/heading": "^0.0.9",
-    "@react-email/html": "^0.0.4",
-    "@react-email/img": "^0.0.5",
-    "@react-email/link": "^0.0.5",
-    "@react-email/preview": "^0.0.6",
-    "@react-email/text": "^0.0.5",
-    "@types/react": "^18.2.25",
-    "react": "^18.2.0"
+    "@react-email/body": "0.0.3",
+    "@react-email/container": "0.0.8",
+    "@react-email/head": "0.0.5",
+    "@react-email/heading": "0.0.9",
+    "@react-email/html": "0.0.4",
+    "@react-email/img": "0.0.5",
+    "@react-email/link": "0.0.5",
+    "@react-email/preview": "0.0.6",
+    "@react-email/text": "0.0.5",
+    "@types/react": "18.2.30",
+    "react": "18.2.0"
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
-    "@types/node": "^20.8.2",
-    "pkgroll": "^2.0.1",
-    "react-email": "^1.9.3",
-    "typescript": "^5.2.2"
+    "@types/node": "20.8.2",
+    "pkgroll": "2.0.1",
+    "react-email": "1.9.3",
+    "typescript": "5.2.2"
   }
 }

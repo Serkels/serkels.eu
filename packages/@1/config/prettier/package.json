@@ -9,7 +9,7 @@
     "@douglasduteil/config...tailwindcss": "workspace:*"
   },
   "devDependencies": {
-    "prettier": "^3.0.3",
-    "typescript": "^5.2.2"
+    "prettier": "3.0.3",
+    "typescript": "5.2.2"
   }
 }

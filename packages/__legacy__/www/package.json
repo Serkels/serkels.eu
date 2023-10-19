@@ -4,19 +4,19 @@
   "private": true,
   "dependencies": {
     "@1/core": "workspace:@0.__legacy__/core@*",
-    "@1/ui": "workspace:@0.__legacy__/ui@*",
     "@1/modules": "workspace:@0.__legacy__/modules@*",
     "@1/next-tsyringe": "workspace:@0.__legacy__/next-tsyringe@*",
+    "@1/ui": "workspace:@0.__legacy__/ui@*",
     "@tanstack/react-query": "4.35.7",
     "formik": "2.4.5",
-    "next": "13.5.3",
+    "next": "13.5.4",
     "next-auth": "4.23.2",
-    "react": "^18.2.0"
+    "react": "18.2.0"
   },
   "devDependencies": {
     "@1/typescript-config": "workspace:@1.config/typescript@*",
-    "@types/react": "18.2.24",
-    "@types/react-dom": "18.2.8",
+    "@types/react": "18.2.30",
+    "@types/react-dom": "18.2.14",
     "typescript": "5.2.2"
   }
 }

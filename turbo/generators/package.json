@@ -3,7 +3,7 @@
   "devDependencies": {
     "@douglasduteil/config...typescript": "workspace:*",
     "@turbo/gen": "1.10.15",
-    "prettier": "^3",
-    "typescript": "^5"
+    "prettier": "3",
+    "typescript": "5"
   }
 }
