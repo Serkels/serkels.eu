@@ -910,8 +910,8 @@ importers:
         specifier: 1.19.0
         version: 1.19.0
       superjson:
-        specifier: 1.13.3
-        version: 1.13.3
+        specifier: 2.0.0
+        version: 2.0.0
       tsyringe:
         specifier: 4.8.0
         version: 4.8.0
@@ -950,8 +950,8 @@ importers:
         specifier: 18.2.0
         version: 18.2.0
       superjson:
-        specifier: 1.13.3
-        version: 1.13.3
+        specifier: 2.0.0
+        version: 2.0.0
       tsyringe:
         specifier: 4.8.0
         version: 4.8.0
@@ -10436,6 +10436,7 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       copy-anything: 3.0.4
+    dev: true
 
   /superjson@2.0.0:
     resolution: {integrity: sha512-W3n+NJ7TFjaLle8ihIIvsr/bbuKpnxeatsyjmhy7iSkom+/cshaHziCQAWXrHGWJVQSQFDOuES6C3nSEvcbrQg==}

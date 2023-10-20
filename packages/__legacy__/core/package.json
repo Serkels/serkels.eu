@@ -11,7 +11,7 @@
     "react": "18.2.0",
     "reflect-metadata": "0.1.13",
     "rich-domain": "1.19.0",
-    "superjson": "1.13.3",
+    "superjson": "2.0.0",
     "tsyringe": "4.8.0",
     "uuid": "9.0.1",
     "zod": "3.22.2"
