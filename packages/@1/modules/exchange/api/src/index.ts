@@ -24,7 +24,7 @@ const exchange_api_router = router({
     .input(
       z.object({
         category: z.string().optional(),
-        cursor: z.date().optional(),
+        cursor: z.string().optional(),
         limit: z.number().min(1).max(10).default(10),
         search: z.string().optional(),
       }),
@@ -34,28 +34,24 @@ const exchange_api_router = router({
         input: { category, cursor, limit, search },
         ctx: { prisma },
       }) => {
-        const orderBy: NonNullable<
-          Parameters<typeof prisma.exchange.findFirst>[0]
-        >["orderBy"] = { created_at: "asc" };
         const items = await prisma.exchange.findMany({
-          ...(cursor ? { cursor: { created_at: cursor } } : {}),
-          orderBy,
+          // ...(cursor ? { cursor: { created_at: cursor } } : {}),
+          ...(cursor ? { cursor: { id: cursor } } : {}),
+          orderBy: { created_at: "asc" },
           take: limit + 1,
-
           where: {
             OR: [
               { title: { contains: search ?? "" } },
               { description: { contains: search ?? "" } },
             ],
-
             ...(category ? { category: { slug: category } } : {}),
           },
         });
 
         let nextCursor: typeof cursor | undefined = undefined;
         if (items.length > limit) {
-          const nextItem = items.pop();
-          nextCursor = nextItem!.created_at;
+          const nextItem = items.pop()!;
+          nextCursor = nextItem.id;
         }
 
         return { data: items, nextCursor };
