@@ -21,7 +21,7 @@
     "@1/modules": "workspace:@0.__legacy__/modules@*",
     "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
     "@react-hookz/web": "23.1.0",
-    "@sentry/nextjs": "7.69.0",
+    "@sentry/nextjs": "7.74.1",
     "@tanstack/react-query": "4.36.1",
     "@trpc/client": "10.40.0",
     "@trpc/react-query": "10.40.0",
