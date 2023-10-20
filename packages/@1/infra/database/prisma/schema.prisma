@@ -41,8 +41,8 @@ model Profile {
   image      String
   role       ProfileRole
   //
-  created_at DateTime    @unique @default(now())
-  updated_at DateTime    @unique @default(now())
+  created_at DateTime    @default(now())
+  updated_at DateTime    @default(now())
   //
   bookmarks  Bookmark[]
   partner    Partner?
@@ -64,21 +64,20 @@ model Studient {
   profile_id             String     @unique
   university             String
   //
-  created_at             DateTime   @unique @default(now())
-  updated_at             DateTime   @unique @default(now())
+  created_at             DateTime   @default(now())
+  updated_at             DateTime   @default(now())
 }
 
 model Partner {
   id            String        @id @default(cuid())
-  location      String
-  //
-  created_at    DateTime      @unique @default(now())
-  updated_at    DateTime      @unique @default(now())
-  //
+  city          String?
+  link          String
   opportunities Opportunity[]
   profile       Profile       @relation(fields: [profile_id], references: [id], onDelete: Cascade)
   profile_id    String        @unique
-  role          ProfileRole   @default(PARTNER)
+  //
+  created_at    DateTime      @default(now())
+  updated_at    DateTime      @default(now())
 }
 
 //
@@ -99,16 +98,15 @@ enum ProfileRole {
 
 model Bookmark {
   id            String        @id @default(cuid())
-  slug          String        @unique
+  exchanges     Exchange[]    @relation("BookmarkedExchanges")
   name          String
-  //
-  created_at    DateTime      @unique @default(now())
-  updated_at    DateTime      @unique @default(now())
-  //
+  opportunities Opportunity[] @relation("BookmarkedOpportunities")
   owner         Profile       @relation(fields: [owner_id], references: [id], onDelete: Cascade)
   owner_id      String        @unique
-  exchanges     Exchange[]
-  opportunities Opportunity[]
+  slug          String        @unique
+  //
+  created_at    DateTime      @default(now())
+  updated_at    DateTime      @default(now())
 }
 
 //
@@ -128,6 +126,7 @@ model Category {
   studient_interest       Studient[]        @relation("StudientInterestCategory")
   exchange_category       Exchange[]        @relation("ExchangeCategory")
   exchange_in_exchange_of Exchange[]        @relation("InExchangeOfCategory")
+  opportunity_category    Opportunity[]     @relation("OpportunityCategory")
 }
 
 enum CategoryContext {
@@ -160,12 +159,12 @@ model Exchange {
   places            Int
   title             String
   type              ExchangeType
-  when              DateTime     @unique @default(now())
+  when              DateTime     @default(now())
   //
-  created_at        DateTime     @unique @default(now())
-  updated_at        DateTime     @unique @default(now())
+  created_at        DateTime     @default(now())
+  updated_at        DateTime     @default(now())
   //
-  bookmark          Bookmark[]
+  bookmark          Bookmark[]   @relation("BookmarkedExchanges")
 }
 
 enum ExchangeType {
@@ -182,16 +181,21 @@ enum ExchangeType {
 //
 
 model Opportunity {
-  id          String   @id @default(cuid())
+  id          String     @id @default(cuid())
+  bookmark    Bookmark[] @relation("BookmarkedOpportunities")
+  category    Category   @relation("OpportunityCategory", fields: [category_id], references: [id])
+  category_id String
+  cover       String
+  description String
+  link        String
+  location    String?
+  owner       Partner    @relation(fields: [owner_id], references: [id], onDelete: Cascade)
+  owner_id    String
+  slug        String     @unique
+  title       String
   //
-  created_at  DateTime @unique @default(now())
-  updated_at  DateTime @unique @default(now())
-  //
-  partner     Partner  @relation(fields: [partner_id], references: [id], onDelete: Cascade)
-  partner_id  String   @unique
-  //
-  bookmark    Bookmark @relation(fields: [bookmark_id], references: [id])
-  bookmark_id String
+  created_at  DateTime   @default(now())
+  updated_at  DateTime   @default(now())
 }
 
 //
@@ -202,8 +206,6 @@ model Opportunity {
 //
 //
 
-//
-
 model PasswordlessToken {
   id         String    @id @default(uuid())
   body       String    @unique
@@ -211,8 +213,8 @@ model PasswordlessToken {
   login_date DateTime?
   is_active  Boolean   @default(true)
 
-  created_at DateTime @unique @default(now())
-  updated_at DateTime @unique @default(now())
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
 }
 
 //
@@ -267,27 +269,4 @@ model VerificationToken {
   payload_email String?
 
   @@unique([identifier, token])
-}
-
-//
-//
-//
-
-//
-//
-//
-
-enum PosterSource {
-  RAW
-  GITHUB
-}
-
-model Post {
-  id     String       @id @default(uuid())
-  name   String
-  text   String
-  source PosterSource @default(RAW)
-
-  createdAt DateTime @unique @default(now())
-  updatedAt DateTime @unique @default(now())
 }

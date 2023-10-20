@@ -14,6 +14,7 @@
     "@1.modules/auth.api": "workspace:*",
     "@1.modules/category.api": "workspace:*",
     "@1.modules/exchange.api": "workspace:*",
+    "@1.modules/opportunity.api": "workspace:*",
     "@1.modules/profile.api": "workspace:*",
     "@1.modules/trpc": "workspace:*",
     "@trpc/server": "10.41.0",

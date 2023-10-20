@@ -42,6 +42,11 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
       // Domain
       {
         type: "add",
+        path: "packages/@1/modules/{{lowerCase name}}/domain/.gitignore",
+        templateFile: "templates/1.module/[name]/domain/.gitignore",
+      },
+      {
+        type: "add",
         path: "packages/@1/modules/{{lowerCase name}}/domain/tsconfig.json",
         templateFile: "templates/1.module/[name]/domain/tsconfig.json",
       },
@@ -61,6 +66,11 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
       // API
       {
         type: "add",
+        path: "packages/@1/modules/{{lowerCase name}}/api/.gitignore",
+        templateFile: "templates/1.module/[name]/api/.gitignore",
+      },
+      {
+        type: "add",
         path: "packages/@1/modules/{{lowerCase name}}/api/tsconfig.json",
         templateFile: "templates/1.module/[name]/api/tsconfig.json",
       },
@@ -77,9 +87,43 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
       },
 
       //
+      // UI
+      {
+        type: "add",
+        path: "packages/@1/modules/{{lowerCase name}}/ui/src/index.ts",
+        templateFile: "templates/1.module/[name]/ui/src/index.ts",
+      },
+      {
+        type: "add",
+        path: "packages/@1/modules/{{lowerCase name}}/ui/.gitignore",
+        templateFile: "templates/1.module/[name]/ui/.gitignore",
+      },
+      {
+        type: "add",
+        path: "packages/@1/modules/{{lowerCase name}}/ui/package.json",
+        templateFile: "templates/1.module/[name]/ui/package.json.hbs",
+        transform: dependencies,
+      },
+      {
+        type: "add",
+        path: "packages/@1/modules/{{lowerCase name}}/ui/prettier.config.js",
+        templateFile: "templates/1.module/[name]/ui/prettier.config.js",
+      },
+      {
+        type: "add",
+        path: "packages/@1/modules/{{lowerCase name}}/ui/tailwind.config.ts",
+        templateFile: "templates/1.module/[name]/ui/tailwind.config.ts",
+      },
+      {
+        type: "add",
+        path: "packages/@1/modules/{{lowerCase name}}/ui/tsconfig.json",
+        templateFile: "templates/1.module/[name]/ui/tsconfig.json",
+      },
+
+      //
       // Lastly
-      { type: "format" },
       { type: "install" },
+      { type: "format" },
     ],
   });
 }

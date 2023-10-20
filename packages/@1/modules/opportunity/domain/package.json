@@ -1,5 +1,5 @@
 {
-  "name": "@1.modules/{{snakeCase name}}.domain",
+  "name": "@1.modules/opportunity.domain",
   "version": "0.1.0",
   "private": true,
   "sideEffects": false,

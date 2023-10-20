@@ -22,6 +22,7 @@ async function main() {
   await categories();
 
   await studients();
+  await partners();
 }
 
 main()
@@ -106,6 +107,61 @@ async function studients() {
   });
   // const exchange_foo_bar = prisma.exchange.findFirst({where: {owner_id: foo.id})
 }
+
+//
+//
+//
+
+async function partner() {
+  const { image, name } = {
+    image: faker.image.avatar(),
+    name: faker.person.fullName(),
+  };
+  const [category_autres] = await Promise.all([
+    prisma.category.findFirstOrThrow({
+      where: { slug: "autres" },
+    }),
+  ]);
+
+  return prisma.partner.create({
+    data: {
+      profile: {
+        create: {
+          bio: faker.lorem.paragraphs(faker.number.int({ max: 5 })),
+          image,
+          name,
+          role: ProfileRole.PARTNER,
+          user: {
+            create: {
+              email: faker.internet.email().toLowerCase(),
+              image,
+              name,
+            },
+          },
+        },
+      },
+      link: faker.internet.url(),
+      city: faker.location.city(),
+      opportunities: {
+        create: {
+          cover: faker.image.url(),
+          description: faker.lorem.paragraphs({ max: 9, min: 2 }),
+          link: faker.internet.url(),
+          slug: slugify(faker.lorem.sentence()),
+          title: faker.lorem.sentence(),
+          category_id: category_autres.id,
+        },
+      },
+    },
+  });
+}
+async function partners() {
+  return await Promise.all([partner(), partner()]);
+}
+
+//
+//
+//
 
 async function categories() {
   await prisma.category.createMany({
