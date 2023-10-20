@@ -34,7 +34,7 @@
     "@react-hookz/web": "23.1.0",
     "formik": "2.4.5",
     "framer-motion": "10.16.4",
-    "react-aria-components": "1.0.0-beta.0",
+    "react-aria-components": "1.0.0-beta.2",
     "tailwind-variants": "0.1.14"
   },
   "devDependencies": {
