@@ -9,7 +9,8 @@ const config = with_ui({
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "../../packages/@1/ui/react/src/**/*.{ts,tsx}",
+    "../../packages/__legacy__/www/src/**/*.{ts,tsx}",
+    "../../packages/__legacy__/ui/{components,domains,helpers,icons,shell,theme}/**/*.{ts,tsx}",
   ],
 });
-
 export default config;

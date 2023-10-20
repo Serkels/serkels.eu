@@ -6,13 +6,16 @@ import {
   useCallback,
   type ComponentPropsWithoutRef,
   type ElementRef,
+  type PropsWithChildren,
 } from "react";
 
 export const AppSidebar = forwardRef<
   ElementRef<"aside">,
-  ComponentPropsWithoutRef<"aside"> & { onClose?: () => void }
+  PropsWithChildren<
+    ComponentPropsWithoutRef<"aside"> & { onClose?: () => void }
+  >
 >(function InputSearch(props, forwardedRef) {
-  const { className, onClose, hidden, ...other_props } = props;
+  const { className, onClose, hidden, children, ...other_props } = props;
   // const onCloseFn = useCallback(() => onClose, [onClose]);
   const onCloseFn = useCallback(() => onClose && onClose(), [onClose]);
   return (
@@ -39,7 +42,7 @@ export const AppSidebar = forwardRef<
           bg-white
           p-4
           transition-transform
-          dark:bg-gray-800
+
         `,
           { "-translate-x-full": hidden },
         )}
@@ -63,9 +66,7 @@ export const AppSidebar = forwardRef<
             text-sm
             text-gray-400
             hover:bg-gray-200
-            hover:text-gray-900
-            dark:hover:bg-gray-600
-            dark:hover:text-white"
+            hover:text-gray-900"
         >
           <svg
             aria-hidden="true"
@@ -82,6 +83,7 @@ export const AppSidebar = forwardRef<
           </svg>
           <span className="sr-only">Close menu</span>
         </button>
+        {children}
       </div>
     </aside>
   );

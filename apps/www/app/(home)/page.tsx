@@ -1,6 +1,7 @@
 //
 
 // import { MobileNavBar } from ":components/MobileNavBar";
+import { MenuBurger } from ":components/burger";
 import { AppFooter } from ":components/shell/AppFooter.server";
 import { AuthSessionProvider } from ":components/shell/AuthSessionProvider";
 import { Banner } from ":components/shell/Banner";
@@ -153,6 +154,7 @@ const explore_grid_style = tv(
 function AppLargeTopBar() {
   return (
     <BigBar>
+      <MenuBurger />
       <TocTocLogo />
     </BigBar>
   );
