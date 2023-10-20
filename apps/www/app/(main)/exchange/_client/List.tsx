@@ -1,7 +1,6 @@
 "use client";
 
 import { TRPC_React } from ":trpc/client";
-import type { Exchange } from "@1.modules/exchange.domain";
 import {
   Exchange_AsyncCard,
   Exchange_InfiniteList,
@@ -9,25 +8,21 @@ import {
 import { Card } from "@1.modules/exchange.ui/Card";
 import { card } from "@1.ui/react/card/atom";
 import { ErrorOccur } from "@1.ui/react/error";
-import type {
-  QueryObserverSuccessResult,
-  UseInfiniteQueryResult,
-} from "@tanstack/react-query";
+import type { ComponentProps } from "react";
 
 //
 
 export default function List() {
-  // const { query, setQuery } = useSyncSearchQuery("q");
-  // const info = TRPC_React.exchange.find.useInfiniteQuery(
-  //   {},
-  // ) as UseInfiniteQueryResult<Exchange>;*
   try {
     const info = TRPC_React.exchange.find.useInfiniteQuery(
       {},
       {
         getNextPageParam: (lastPage) => lastPage.nextCursor,
+        // select({ pages, pageParams }) {
+        //   return { pages: pages.map((page) => page.data), pageParams };
+        // },
       },
-    ) as UseInfiniteQueryResult<Exchange>;
+    ) as ComponentProps<typeof Exchange_InfiniteList>["info"];
 
     return (
       <Exchange_InfiniteList info={info}>
@@ -41,39 +36,30 @@ export default function List() {
 }
 
 function Item({ id }: { id: string }) {
-  id;
-  // const { query, setQuery } = useSyncSearchQuery("q");
-  // const info = TRPC_React.exchange.find.useInfiniteQuery(
-  //   {},
-  // ) as UseInfiniteQueryResult<Exchange>;
-  const info = {
-    data: {},
-    error: null,
-    isError: false,
-    isLoading: false,
-    isLoadingError: false,
-    isRefetchError: false,
-    isSuccess: true,
-    status: "success",
-  } as QueryObserverSuccessResult<Exchange>;
   const { header } = card();
-  console.log({ id });
-  return (
-    <Exchange_AsyncCard info={info}>
-      {({ exchange }) => (
-        <Card
-          header={<header className={header()}>header</header>}
-          body={
-            <div>
-              <div className="inline-flex"></div>
-              <code>{JSON.stringify(exchange, null, 2)}</code>;
-              <hr className="my-2" />
-              <div className="items-center justify-between text-xs text-[#707070] sm:flex"></div>
-            </div>
-          }
-          footer={<>footer</>}
-        />
-      )}
-    </Exchange_AsyncCard>
-  );
+  try {
+    const info = TRPC_React.exchange.by_id.useQuery(id) as ComponentProps<
+      typeof Exchange_AsyncCard
+    >["info"];
+    return (
+      <Exchange_AsyncCard info={info}>
+        {({ exchange }) => (
+          <Card
+            header={<header className={header()}>header</header>}
+            body={
+              <div>
+                <div className="inline-flex"></div>
+                <code>{JSON.stringify(exchange, null, 2)}</code>;
+                <hr className="my-2" />
+                <div className="items-center justify-between text-xs text-[#707070] sm:flex"></div>
+              </div>
+            }
+            footer={<>footer</>}
+          />
+        )}
+      </Exchange_AsyncCard>
+    );
+  } catch (error) {
+    return <ErrorOccur error={error as Error} />;
+  }
 }

@@ -1,18 +1,22 @@
 //
 
-import { Exchange_Schema, type Exchange } from "@1.modules/exchange.domain";
-import { next_auth_procedure, procedure, router } from "@1.modules/trpc";
+import { procedure, router } from "@1.modules/trpc";
 import { z } from "zod";
 
 //
 
 const exchange_api_router = router({
-  by_id: next_auth_procedure
+  by_id: procedure
     .input(z.string())
     .query(async ({ input: id, ctx: { prisma } }) => {
-      return Exchange_Schema.parse(
-        await prisma.exchange.findFirstOrThrow({ where: { id } }),
-      ) as Exchange;
+      return await prisma.exchange.findUniqueOrThrow({
+        where: { id },
+        include: {
+          category: true,
+          owner: { include: { profile: true } },
+          participants: true,
+        },
+      });
     }),
 
   find: procedure

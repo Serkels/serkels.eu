@@ -10,7 +10,7 @@ export function Exchange_InfiniteList({
   info,
   children,
 }: {
-  info: UseInfiniteQueryResult<Exchange>;
+  info: UseInfiniteQueryResult<{ data: Exchange[] }>;
   children: (props: { id: string }) => React.ReactNode;
 }) {
   return match(info)
@@ -29,7 +29,10 @@ export function Exchange_InfiniteList({
       { status: "success" },
       ({ data: { pages }, isFetchingNextPage, hasNextPage, fetchNextPage }) => (
         <ul className="grid grid-cols-1 gap-9">
-          {pages.flat().map((exchange) => children({ id: exchange.id }))}
+          {pages
+            .map((page) => page.data)
+            .flat()
+            .map((exchange) => children({ id: exchange.id }))}
           <li className="col-span-full mx-auto">
             {isFetchingNextPage ? <Loading /> : null}
           </li>
