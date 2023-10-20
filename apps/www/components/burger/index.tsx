@@ -8,7 +8,7 @@ import { AppSidebar } from "~/app/(index)/AppSidebar";
 
 //
 
-export function MenuBurger({ className }: { className: string }) {
+export function MenuBurger({ className }: { className?: string }) {
   const [showSideBar, setShowSideBar] = useState(false);
   const base = menu_burger({ className });
   return (
