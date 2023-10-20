@@ -31,6 +31,7 @@ const nextConfig = {
         {
           source: `/:path((?!${[
             "_next",
+            "opengraph-image.png$",
             "favicon.ico$",
             "monitoring$",
             "stalker.js$",
