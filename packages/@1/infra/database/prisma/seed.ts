@@ -143,13 +143,17 @@ async function partner() {
       link: faker.internet.url(),
       city: faker.location.city(),
       opportunities: {
-        create: {
-          cover: faker.image.url(),
-          description: faker.lorem.paragraphs({ max: 9, min: 2 }),
-          link: faker.internet.url(),
-          slug: slugify(faker.lorem.sentence()),
-          title: faker.lorem.sentence(),
-          category_id: category_autres.id,
+        createMany: {
+          data: Array.from({ length: 10 }).map(() => ({
+            category_id: category_autres.id,
+            cover: faker.image.url(),
+            description: faker.lorem.paragraphs({ max: 9, min: 2 }),
+            link: faker.internet.url(),
+            location: faker.location.city(),
+            slug: slugify(faker.lorem.sentence()).slice(0, 16).toLowerCase(),
+            title: faker.lorem.sentence(),
+            when: faker.date.future(),
+          })),
         },
       },
     },

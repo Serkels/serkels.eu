@@ -35,7 +35,6 @@ const exchange_api_router = router({
         ctx: { prisma },
       }) => {
         const items = await prisma.exchange.findMany({
-          // ...(cursor ? { cursor: { created_at: cursor } } : {}),
           ...(cursor ? { cursor: { id: cursor } } : {}),
           orderBy: { created_at: "asc" },
           take: limit + 1,

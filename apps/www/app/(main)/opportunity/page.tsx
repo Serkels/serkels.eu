@@ -19,7 +19,7 @@ export async function generateMetadata(
   _: never,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const title = `Exchange :: ${(await parent).title?.absolute}`;
+  const title = `Opportunité :: ${(await parent).title?.absolute}`;
 
   return {
     title,
@@ -32,11 +32,11 @@ export async function generateMetadata(
 //
 
 export default async function Page() {
-  await TRPC_SSR.exchange.find.prefetchInfinite({});
+  await TRPC_SSR.opportunity.find.prefetchInfinite({});
 
   return (
     <TRPC_Hydrate>
-      <main>
+      <main className="my-10 ">
         <List />
       </main>
     </TRPC_Hydrate>

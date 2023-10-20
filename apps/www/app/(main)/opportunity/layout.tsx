@@ -42,7 +42,9 @@ export default async function Layout({ children }: PropsWithChildren<{}>) {
 
           {/* <CategoriesList /> */}
         </AsideFilter>
-        <div className="col-span-full my-10 md:col-span-6">{children}</div>
+        <div className="col-span-full my-10 md:col-span-6 xl:col-span-9">
+          {children}
+        </div>
       </Grid>
     </TRPC_Hydrate>
   );

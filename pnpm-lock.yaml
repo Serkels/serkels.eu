@@ -104,6 +104,9 @@ importers:
       '@1.modules/exchange.ui':
         specifier: workspace:*
         version: link:../../packages/@1/modules/exchange/ui
+      '@1.modules/opportunity.domain':
+        specifier: workspace:*
+        version: link:../../packages/@1/modules/opportunity/domain
       '@1.modules/opportunity.ui':
         specifier: workspace:*
         version: link:../../packages/@1/modules/opportunity/ui
@@ -723,9 +726,15 @@ importers:
 
   packages/@1/modules/opportunity/domain:
     dependencies:
+      '@1.modules/category.domain':
+        specifier: workspace:*
+        version: link:../../category/domain
       '@1.modules/core':
         specifier: workspace:*
         version: link:../../core
+      '@1.modules/profile.domain':
+        specifier: workspace:*
+        version: link:../../profile/domain
       zod:
         specifier: 3.22.4
         version: 3.22.4
@@ -751,6 +760,9 @@ importers:
       '@tanstack/react-query':
         specifier: 4.36.1
         version: 4.36.1(react-dom@18.2.0)(react@18.2.0)
+      date-fns:
+        specifier: 2.30.0
+        version: 2.30.0
       react:
         specifier: 18.2.0
         version: 18.2.0

@@ -193,6 +193,7 @@ model Opportunity {
   owner_id    String
   slug        String     @unique
   title       String
+  when        DateTime
   //
   created_at  DateTime   @default(now())
   updated_at  DateTime   @default(now())

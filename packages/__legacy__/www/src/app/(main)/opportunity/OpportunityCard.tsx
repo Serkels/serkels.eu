@@ -63,7 +63,7 @@ export function OpportunityCard(props: Props) {
         />
         <figcaption className="flex flex-1 flex-col p-3">
           <small className="font-bold text-Chateau_Green">
-            Date limite :{" "}
+            Date limite :
             <time dateTime={date.toUTCString()}>
               {date.toLocaleDateString(locale)}
             </time>
