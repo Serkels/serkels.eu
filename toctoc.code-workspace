@@ -9,6 +9,7 @@
     { "path": "packages/@1/infra", "name": "🏗️ infra" },
     { "path": "packages/@1/config", "name": "⚙️ config" },
     //
+    { "path": "packages/__legacy__", "name": "🧐 legacy" },
     { "path": "packages/@douglasduteil", "name": "🎯 douglasduteil" },
     //
     { "path": ".", "name": "🌱 root" }
