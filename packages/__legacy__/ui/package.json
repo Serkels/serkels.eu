@@ -6,7 +6,7 @@
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "dependencies": {
-    "@react-types/button": "3.8.0",
+    "@react-types/button": "3.9.0",
     "clsx": "2.0.0",
     "formik": "2.4.5",
     "framer-motion": "10.16.4",
