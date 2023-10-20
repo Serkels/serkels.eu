@@ -22,7 +22,7 @@ export default function List() {
     const info = TRPC_React.exchange.find.useInfiniteQuery(
       {
         category,
-        title: search,
+        search: search,
       },
       {
         getNextPageParam: (lastPage) => lastPage.nextCursor,

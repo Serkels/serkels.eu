@@ -40,7 +40,7 @@ export default async function Layout({
           slot-title="Échanges"
         >
           <SearchForm />
-          {/* <ExhangesFilter /> */}
+
           <hr className="my-10" />
 
           <CategoriesList />

@@ -25,12 +25,12 @@ const exchange_api_router = router({
         category: z.string().optional(),
         cursor: z.date().optional(),
         limit: z.number().min(1).max(10).default(10),
-        title: z.string().optional(),
+        search: z.string().optional(),
       }),
     )
     .query(
       async ({
-        input: { category, cursor, limit, title },
+        input: { category, cursor, limit, search },
         ctx: { prisma },
       }) => {
         const orderBy: NonNullable<
@@ -40,9 +40,14 @@ const exchange_api_router = router({
           ...(cursor ? { cursor: { created_at: cursor } } : {}),
           orderBy,
           take: limit + 1,
+
           where: {
+            OR: [
+              { title: { contains: search ?? "" } },
+              { description: { contains: search ?? "" } },
+            ],
+
             ...(category ? { category: { slug: category } } : {}),
-            ...(title ? { title } : {}),
           },
         });
 

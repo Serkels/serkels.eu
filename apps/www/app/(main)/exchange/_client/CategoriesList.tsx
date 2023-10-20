@@ -10,7 +10,7 @@ import { useSyncSearchQuery } from "~/components/useSyncSearchQuery";
 export function CategoriesList() {
   const { query, setQuery } = useSyncSearchQuery("category");
   const { data: categories } = TRPC_React.category.exchange.useQuery();
-  // const categories = mock;
+
   if (!categories) return [];
 
   const categories_ = [...(categories as any as Category[]), Category.all];
