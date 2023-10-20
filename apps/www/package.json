@@ -50,7 +50,7 @@
     "@douglasduteil/datatypes...hours-to-seconds": "workspace:*",
     "@tanstack/react-query-devtools": "4.36.1",
     "@types/debug": "4.1.10",
-    "@types/node": "20.8.2",
+    "@types/node": "20.8.7",
     "@types/react": "18.2.30",
     "@types/react-dom": "18.2.14",
     "autoprefixer": "10.4.16",

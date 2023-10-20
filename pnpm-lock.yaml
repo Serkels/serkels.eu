@@ -78,8 +78,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/@douglasduteil/nextauth...trpc.prisma
       '@types/node':
-        specifier: 20.8.2
-        version: 20.8.2
+        specifier: 20.8.7
+        version: 20.8.7
       '@types/ws':
         specifier: 8.5.8
         version: 8.5.8
@@ -202,8 +202,8 @@ importers:
         specifier: 4.1.10
         version: 4.1.10
       '@types/node':
-        specifier: 20.8.2
-        version: 20.8.2
+        specifier: 20.8.7
+        version: 20.8.7
       '@types/react':
         specifier: 18.2.30
         version: 18.2.30
@@ -261,8 +261,8 @@ importers:
         specifier: workspace:*
         version: link:../typescript
       '@types/node':
-        specifier: 20.8.2
-        version: 20.8.2
+        specifier: 20.8.7
+        version: 20.8.7
       typescript:
         specifier: 5.2.2
         version: 5.2.2
@@ -289,8 +289,8 @@ importers:
         specifier: workspace:*
         version: link:../../config/typescript
       '@types/node':
-        specifier: 20.8.2
-        version: 20.8.2
+        specifier: 20.8.7
+        version: 20.8.7
       prisma:
         specifier: 5.4.2
         version: 5.4.2
@@ -400,8 +400,8 @@ importers:
         specifier: 5.4.2
         version: 5.4.2(prisma@5.4.2)
       '@types/node':
-        specifier: 20.8.2
-        version: 20.8.2
+        specifier: 20.8.7
+        version: 20.8.7
       typescript:
         specifier: 5.2.2
         version: 5.2.2
@@ -446,8 +446,8 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       '@types/node':
-        specifier: 20.8.2
-        version: 20.8.2
+        specifier: 20.8.7
+        version: 20.8.7
       pkgroll:
         specifier: 2.0.1
         version: 2.0.1(typescript@5.2.2)
@@ -688,8 +688,8 @@ importers:
         specifier: 5.4.2
         version: 5.4.2(prisma@5.4.2)
       '@types/node':
-        specifier: 20.8.2
-        version: 20.8.2
+        specifier: 20.8.7
+        version: 20.8.7
       typescript:
         specifier: 5.2.2
         version: 5.2.2
@@ -1126,7 +1126,7 @@ importers:
         version: link:../../packages/@douglasduteil/config/typescript
       '@turbo/gen':
         specifier: 1.10.15
-        version: 1.10.15(@types/node@20.8.2)(typescript@5.2.2)
+        version: 1.10.15(@types/node@20.8.7)(typescript@5.2.2)
       prettier:
         specifier: '3'
         version: 3.0.3
@@ -5387,7 +5387,7 @@ packages:
     resolution: {integrity: sha512-jt4jIsWKvUvuY6adJnQJlb/UR7DdjC8CjHI/OaSQruj2yX9/K6+KOvDt/vD6udqos/FUk5Op66CvYT7TBLYO5Q==}
     dev: false
 
-  /@turbo/gen@1.10.15(@types/node@20.8.2)(typescript@5.2.2):
+  /@turbo/gen@1.10.15(@types/node@20.8.7)(typescript@5.2.2):
     resolution: {integrity: sha512-nvCiw2Como/K1LfqBQBpp+IiFEWQtlhx5f6iXIpmioj2DtVTg+RmyQM+5nIqbi8iaXg3zaF5vQo29bTyuohUuw==}
     hasBin: true
     dependencies:
@@ -5399,7 +5399,7 @@ packages:
       minimatch: 9.0.0
       node-plop: 0.26.3
       proxy-agent: 6.3.1
-      ts-node: 10.9.1(@types/node@20.8.2)(typescript@5.2.2)
+      ts-node: 10.9.1(@types/node@20.8.7)(typescript@5.2.2)
       update-check: 1.5.4
       validate-npm-package-name: 5.0.0
     transitivePeerDependencies:
@@ -5433,14 +5433,14 @@ packages:
     dependencies:
       '@types/http-cache-semantics': 4.0.1
       '@types/keyv': 3.1.4
-      '@types/node': 20.8.2
+      '@types/node': 20.8.7
       '@types/responselike': 1.0.0
     dev: true
 
   /@types/cheerio@0.22.32:
     resolution: {integrity: sha512-4RrpCp5ufWTLb6/1RCOjazRhUM6DTD79l763det29n8kLmPB7XeN46cxlUf2GsSF+0g6CbWT5nYl8C/Gs15bdg==}
     dependencies:
-      '@types/node': 20.8.2
+      '@types/node': 20.8.7
     dev: false
 
   /@types/debug@4.1.10:
@@ -5456,7 +5456,7 @@ packages:
     resolution: {integrity: sha512-ZUxbzKl0IfJILTS6t7ip5fQQM/J3TJYubDm3nMbgubNNYS62eXeUpoLUC8/7fJNiFYHTrGPQn7hspDUzIHX3UA==}
     dependencies:
       '@types/minimatch': 5.1.2
-      '@types/node': 20.8.2
+      '@types/node': 20.8.7
     dev: true
 
   /@types/hoist-non-react-statics@3.3.1:
@@ -5488,7 +5488,7 @@ packages:
   /@types/keyv@3.1.4:
     resolution: {integrity: sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==}
     dependencies:
-      '@types/node': 20.8.2
+      '@types/node': 20.8.7
     dev: true
 
   /@types/minimatch@5.1.2:
@@ -5505,11 +5505,17 @@ packages:
 
   /@types/node@20.8.2:
     resolution: {integrity: sha512-Vvycsc9FQdwhxE3y3DzeIxuEJbWGDsnrxvMADzTDF/lcdR9/K+AQIeAghTQsHtotg/q0j3WEOYS/jQgSdWue3w==}
+    dev: true
+
+  /@types/node@20.8.7:
+    resolution: {integrity: sha512-21TKHHh3eUHIi2MloeptJWALuCu5H7HQTdTrWIFReA8ad+aggoX+lRes3ex7/FtpC+sVUpFMQ+QTfYr74mruiQ==}
+    dependencies:
+      undici-types: 5.25.3
 
   /@types/nodemailer@6.4.7:
     resolution: {integrity: sha512-f5qCBGAn/f0qtRcd4SEn88c8Fp3Swct1731X4ryPKqS61/A3LmmzN8zaEz7hneJvpjFbUUgY7lru/B/7ODTazg==}
     dependencies:
-      '@types/node': 20.8.2
+      '@types/node': 20.8.7
     dev: true
 
   /@types/normalize-package-data@2.4.1:
@@ -5543,7 +5549,7 @@ packages:
   /@types/responselike@1.0.0:
     resolution: {integrity: sha512-85Y2BjiufFzaMIlvJDvTTB8Fxl2xfLo4HgmHzVBz08w4wDePCTjYw66PdrolO0kzli3yam/YCgRufyo1DdQVTA==}
     dependencies:
-      '@types/node': 20.8.2
+      '@types/node': 20.8.7
     dev: true
 
   /@types/scheduler@0.16.3:
@@ -5552,14 +5558,14 @@ packages:
   /@types/tar@6.1.6:
     resolution: {integrity: sha512-HQ06kiiDXz9uqtmE9ksQUn1ovcPr1gGV9EgaCWo6FGYKD0onNBCetBzL0kfcS8Kbj1EFxJWY9jL2W4ZvvtGI8Q==}
     dependencies:
-      '@types/node': 20.8.2
+      '@types/node': 20.8.7
       minipass: 4.2.8
     dev: false
 
   /@types/through@0.0.30:
     resolution: {integrity: sha512-FvnCJljyxhPM3gkRgWmxmDZyAQSiBQQWLI0A0VFL0K7W1oRUrPJSqNO0NvTnLkBcotdlp3lKvaT0JrnyRDkzOg==}
     dependencies:
-      '@types/node': 20.8.2
+      '@types/node': 20.8.7
     dev: true
 
   /@types/tinycolor2@1.4.3:
@@ -5569,14 +5575,14 @@ packages:
   /@types/ws@8.5.8:
     resolution: {integrity: sha512-flUksGIQCnJd6sZ1l5dqCEG/ksaoAg/eUwiLAGTJQcfgvZJKF++Ta4bJA6A5aPSJmsr+xlseHn4KLgVlNnvPTg==}
     dependencies:
-      '@types/node': 20.8.2
+      '@types/node': 20.8.7
     dev: true
 
   /@types/yauzl@2.10.1:
     resolution: {integrity: sha512-CHzgNU3qYBnp/O4S3yv2tXPlvMTq0YWSTVg2/JYLqWZGHwwgJGAwd00poay/11asPq8wLFwHzubyInqHIFmmiw==}
     requiresBuild: true
     dependencies:
-      '@types/node': 20.8.2
+      '@types/node': 20.8.7
     dev: false
     optional: true
 
@@ -11689,7 +11695,7 @@ packages:
   /ts-interface-checker@0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
 
-  /ts-node@10.9.1(@types/node@20.8.2)(typescript@5.2.2):
+  /ts-node@10.9.1(@types/node@20.8.7)(typescript@5.2.2):
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -11708,7 +11714,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.3
-      '@types/node': 20.8.2
+      '@types/node': 20.8.7
       acorn: 8.10.0
       acorn-walk: 8.2.0
       arg: 4.1.3
@@ -11903,6 +11909,9 @@ packages:
       has-symbols: 1.0.3
       which-boxed-primitive: 1.0.2
     dev: true
+
+  /undici-types@5.25.3:
+    resolution: {integrity: sha512-Ga1jfYwRn7+cP9v8auvEXN1rX3sWqlayd4HP7OKk4mZWylEmu3KzXDUGrQUN6Ol7qo1gPvB2e5gX6udnyEPgdA==}
 
   /union-value@1.0.1:
     resolution: {integrity: sha512-tJfXmxMeWYnczCVs7XAEvIV7ieppALdyepWMkHkwciRpZraG/xwT+s2JN8+pr1+8jCRf80FFzvr+MpQeeoF4Xg==}
