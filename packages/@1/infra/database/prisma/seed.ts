@@ -51,6 +51,11 @@ async function studient() {
 
   return prisma.studient.create({
     data: {
+      citizenship: faker.location.country(),
+      city: faker.location.city(),
+      field_of_study: faker.word.noun(),
+      interest: { connect: { id: category_autres.id } },
+      university: faker.company.name(),
       exchange: {
         create: {
           active: true,
@@ -61,10 +66,13 @@ async function studient() {
           type: "RESEARCH",
           location: faker.location.city(),
           category_id: category_autres.id,
+          in_exchange_of_id: category_autres.id,
+          when: faker.date.future(),
         },
       },
       profile: {
         create: {
+          bio: faker.lorem.paragraphs(faker.number.int({ max: 5 })),
           image,
           name,
           role: ProfileRole.STUDIENT,
@@ -82,7 +90,11 @@ async function studient() {
 }
 
 async function studients() {
-  const [foo, bar] = await Promise.all([studient(), studient()]);
+  const [foo, bar] = await Promise.all([
+    studient(),
+    studient(),
+    ...Array.from({ length: 10 }).map(studient),
+  ]);
 
   const foo_exchange_1 = await prisma.exchange.findFirstOrThrow({
     where: { owner_id: foo.id },

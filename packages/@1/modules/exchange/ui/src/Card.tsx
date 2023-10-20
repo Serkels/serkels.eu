@@ -1,31 +1,12 @@
 //
 
-// import { ID, USER_PROFILE_ID_TOKEN, type UID } from "@1/core/domain";
-// import { useInject } from "@1/next-tsyringe";
-// import { Button } from "@1/ui/components/ButtonV";
-// import * as UI from "@1/ui/domains/exchange/Card";
-// import { OnlineOrLocation } from "@1/ui/domains/exchange/OnlineOrLocation";
-// import { Exchange as ExchangeIcon } from "@1/ui/icons";
-// import clsx from "clsx";
-// import Link from "next/link";
-import type { Exchange } from "@1.modules/exchange.domain";
+import { Exchange_TypeSchema, type Exchange } from "@1.modules/exchange.domain";
 import { card } from "@1.ui/react/card/atom";
 import type { UseQueryResult } from "@tanstack/react-query";
-import type { ReactNode } from "react";
 import ContentLoader from "react-content-loader";
+import { tv } from "tailwind-variants";
 import { P, match } from "ts-pattern";
-import { Exchange_ValueProvider, useExchange_Value } from ".";
-// import { P, match } from "ts-pattern";
-// import { AvatarMediaHorizontal } from "~/components/Avatar";
-// import { BookmarkButton } from "~/components/BookmarkButton";
-// import {
-//   Exchange_ValueProvider,
-//   useExchange_Value,
-// } from "~/modules/exchange/Exchange.context";
-// import { Get_Exchange_ById_UseCase } from "~/modules/exchange/application/get_exchange_byid.use-case";
-// import { Ask_Action } from "./Ask_Action";
-
-//
+import { Exchange_ValueProvider } from ".";
 
 //
 
@@ -87,22 +68,26 @@ export function Loader() {
   );
 }
 
-export function Card({
-  body: body_slot,
-  footer: footer_slot,
-  header: header_slot,
-}: {
-  body: ReactNode;
-  footer: ReactNode;
-  header: ReactNode;
-}) {
-  const [exchange] = useExchange_Value();
-  const { base, body, footer } = card();
-  return (
-    <div className={base()}>
-      <header>{header_slot}</header>
-      <div className={body()}>{body_slot}</div>
-      <footer className={footer({ type: exchange.type })}>{footer_slot}</footer>
-    </div>
-  );
-}
+export const exchange_card = tv({
+  extend: card,
+  base: "",
+  slots: {
+    exchange_icon: "mx-1 w-5",
+  },
+  variants: {
+    type: {
+      [Exchange_TypeSchema.Enum.PROPOSAL]: {
+        category: "text-secondary",
+        exchange_icon: "text-secondary",
+      },
+      [Exchange_TypeSchema.Enum.RESEARCH]: {
+        category: "text-quaternary",
+        exchange_icon: "text-secondary",
+      },
+    },
+    is_in_exchange_of: {
+      false: "text-Chateau_Green",
+      true: "text-Gamboge",
+    },
+  },
+});

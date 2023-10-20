@@ -16,11 +16,6 @@ export const card = tv({
     body: "p-6",
     header: "mb-4 flex flex-1 justify-between",
     footer: "mt-4 bg-black px-5 py-3 text-white",
-  },
-  variants: {
-    type: {
-      proposal: "bg-quaternary",
-      research: "bg-secondary",
-    },
+    category: "text-xs text-[#707070] ",
   },
 });

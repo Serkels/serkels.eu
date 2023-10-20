@@ -19,6 +19,7 @@
     "@1.modules/profile.domain": "workspace:*",
     "@1.ui/react": "workspace:*",
     "@1/modules": "workspace:@0.__legacy__/modules@*",
+    "@1/ui": "workspace:@0.__legacy__/ui@*",
     "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
     "@react-hookz/web": "23.1.0",
     "@sentry/nextjs": "7.74.1",

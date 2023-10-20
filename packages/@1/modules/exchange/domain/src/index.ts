@@ -5,7 +5,8 @@ import { z } from "zod";
 
 //
 
-export const Exchange_Schema = Entity_Schema.augment({
+export const Exchange_TypeSchema = z.enum(["PROPOSAL", "RESEARCH"]);
+export const Exchange_Schema = Entity_Schema.extend({
   available_places: z.coerce.number().default(Number.MIN_SAFE_INTEGER),
   // category: z.instanceof(Category).default(Category.unknown), //Category_DataRecord,
   description: z.string().default(""),
@@ -17,9 +18,7 @@ export const Exchange_Schema = Entity_Schema.augment({
   // owner: z.instanceof(Profile).default(Profile.zero),
   slug: z.string().default(""),
   title: z.string().default(""),
-  type: z
-    .union([z.literal("proposal"), z.literal("research")])
-    .default("research"),
+  type: Exchange_TypeSchema.default(Exchange_TypeSchema.Enum.RESEARCH),
   when: z.coerce.date().default(new Date(0)),
 }).describe("Exchange_PropsSchema");
 

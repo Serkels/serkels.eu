@@ -39,12 +39,12 @@ export const Avatar = forwardRef<ElementRef<"figure">, AvatarProps>(
 export function AvatarMediaHorizontal(
   props: AvatarProps & { name: string; university?: string },
 ) {
-  const { className, university, name, ...other_props } = props;
+  const { className, image, id, university, name, ...other_props } = props;
   const style = tv({ base: "flex items-center space-x-7" });
 
   return (
     <figure className={style({ className })} {...other_props}>
-      <Avatar className="h-14 w-14" />
+      <Avatar className="h-14 w-14" {...{ image, id }} />
       <figcaption>
         <h4 className="text-xl font-bold text-Cerulean" title={name}>
           {name}

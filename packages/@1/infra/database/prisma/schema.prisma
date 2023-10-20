@@ -36,6 +36,7 @@ model SignupPayload {
 
 model Profile {
   id         String      @id @default(cuid())
+  bio        String?
   name       String
   image      String
   role       ProfileRole
@@ -52,14 +53,19 @@ model Profile {
 
 model Studient {
   id                     String     @id @default(cuid())
-  //
-  created_at             DateTime   @unique @default(now())
-  updated_at             DateTime   @unique @default(now())
-  //
+  citizenship            String?
+  city                   String?
   exchange               Exchange[] @relation("StudientEchanges")
+  field_of_study         String?
+  interest               Category?  @relation("StudientInterestCategory", fields: [interest_id], references: [id])
+  interest_id            String?
   participants_exchanges Exchange[] @relation("ParticipantsExchanges")
   profile                Profile    @relation(fields: [profile_id], references: [id], onDelete: Cascade)
   profile_id             String     @unique
+  university             String
+  //
+  created_at             DateTime   @unique @default(now())
+  updated_at             DateTime   @unique @default(now())
 }
 
 model Partner {
@@ -114,12 +120,14 @@ model Bookmark {
 //
 
 model Category {
-  id        String            @id @default(cuid())
-  slug      String            @unique
-  name      String
+  id                      String            @id @default(cuid())
+  slug                    String            @unique
+  name                    String
   //
-  contexts  CategoryContext[]
-  exchanges Exchange[]
+  contexts                CategoryContext[]
+  studient_interest       Studient[]        @relation("StudientInterestCategory")
+  exchange_category       Exchange[]        @relation("ExchangeCategory")
+  exchange_in_exchange_of Exchange[]        @relation("InExchangeOfCategory")
 }
 
 enum CategoryContext {
@@ -137,25 +145,27 @@ enum CategoryContext {
 //
 
 model Exchange {
-  id           String       @id @default(cuid())
-  active       Boolean
-  category     Category     @relation(fields: [category_id], references: [id])
-  category_id  String
-  description  String
-  is_online    Boolean
-  location     String?
-  owner        Studient     @relation("StudientEchanges", fields: [owner_id], references: [id], onDelete: Cascade)
-  owner_id     String
-  participants Studient[]   @relation("ParticipantsExchanges")
-  places       Int
-  title        String
-  type         ExchangeType
-  when         DateTime     @unique @default(now())
+  id                String       @id @default(cuid())
+  active            Boolean
+  category          Category     @relation("ExchangeCategory", fields: [category_id], references: [id])
+  category_id       String
+  description       String
+  in_exchange_of    Category?    @relation("InExchangeOfCategory", fields: [in_exchange_of_id], references: [id])
+  in_exchange_of_id String?
+  is_online         Boolean
+  location          String?
+  owner             Studient     @relation("StudientEchanges", fields: [owner_id], references: [id], onDelete: Cascade)
+  owner_id          String
+  participants      Studient[]   @relation("ParticipantsExchanges")
+  places            Int
+  title             String
+  type              ExchangeType
+  when              DateTime     @unique @default(now())
   //
-  created_at   DateTime     @unique @default(now())
-  updated_at   DateTime     @unique @default(now())
+  created_at        DateTime     @unique @default(now())
+  updated_at        DateTime     @unique @default(now())
   //
-  bookmark     Bookmark[]
+  bookmark          Bookmark[]
 }
 
 enum ExchangeType {
