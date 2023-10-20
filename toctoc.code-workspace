@@ -49,7 +49,7 @@
     },
     "javascript.preferences.importModuleSpecifier": "shortest",
     "typescript.preferences.importModuleSpecifier": "shortest",
-    "typescript.tsdk": "root/node_modules/typescript/lib",
+    "typescript.tsdk": "🌱 root/node_modules/typescript/lib",
     "workbench.editor.labelFormat": "short",
     "autoHide.autoHidePanel": false,
     "tailwindCSS.rootFontSize": 14,

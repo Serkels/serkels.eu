@@ -1,5 +1,22 @@
 //
 
+import process from "node:process";
+import { withSentryConfig } from "@sentry/nextjs";
+import { z } from "zod";
+
+//
+
+/** @type {import('next').NextConfig} */
+let config;
+
+const ENV = z
+  .object({
+    API_URL: z.string().url(),
+    MAINTENANCE: z.coerce.boolean().default(false),
+    STALKER_URL: z.string().url(),
+  })
+  .parse(process.env);
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
@@ -8,6 +25,23 @@ const nextConfig = {
   reactStrictMode: true,
   transpilePackages: [],
   async redirects() {
+    if (ENV.MAINTENANCE)
+      return [
+        // { source: "/", destination: "/maintenance", permanent: false },
+        {
+          source: `/:path((?!${[
+            "_next",
+            "favicon.ico$",
+            "monitoring$",
+            "stalker.js$",
+            "api",
+            "maintenance$",
+            "toc-toc.svg$",
+          ].join("|")}).*)`,
+          destination: "/maintenance",
+          permanent: false,
+        },
+      ];
     return [
       {
         permanent: true,
@@ -17,6 +51,7 @@ const nextConfig = {
     ];
   },
   async rewrites() {
+    if (ENV.MAINTENANCE) return [{ source: "/", destination: "/maintenance" }];
     return [
       {
         source: "/api/trpc/:path*",
@@ -44,14 +79,12 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+config = nextConfig;
 
 // Injected content via Sentry wizard below
 
-const { withSentryConfig } = require("@sentry/nextjs");
-
-module.exports = withSentryConfig(
-  module.exports,
+config = withSentryConfig(
+  config,
   {
     // For all available options, see:
     // https://github.com/getsentry/sentry-webpack-plugin#options
@@ -81,3 +114,5 @@ module.exports = withSentryConfig(
     disableLogger: true,
   },
 );
+
+export default config;
