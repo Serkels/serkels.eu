@@ -48,10 +48,10 @@ importers:
         version: 1.2.0
       '@hono/sentry':
         specifier: 1.0.0
-        version: 1.0.0(hono@3.7.6)
+        version: 1.0.0(hono@3.8.1)
       '@hono/trpc-server':
         specifier: 0.1.0
-        version: 0.1.0(@trpc/server@10.41.0)(hono@3.7.6)
+        version: 0.1.0(@trpc/server@10.41.0)(hono@3.8.1)
       '@trpc/server':
         specifier: 10.41.0
         version: 10.41.0
@@ -59,8 +59,8 @@ importers:
         specifier: 16.3.1
         version: 16.3.1
       hono:
-        specifier: 3.7.6
-        version: 3.7.6
+        specifier: 3.8.1
+        version: 3.8.1
       tsx:
         specifier: 3.14.0
         version: 3.14.0
@@ -1126,7 +1126,7 @@ importers:
         version: link:../../packages/@douglasduteil/config/typescript
       '@turbo/gen':
         specifier: 1.10.15
-        version: 1.10.15(@types/node@20.8.2)(typescript@5.2.2)
+        version: 1.10.15(@types/node@20.8.7)(typescript@5.2.2)
       prettier:
         specifier: '3'
         version: 3.0.3
@@ -1732,16 +1732,16 @@ packages:
     engines: {node: '>=18.0.0'}
     dev: false
 
-  /@hono/sentry@1.0.0(hono@3.7.6):
+  /@hono/sentry@1.0.0(hono@3.8.1):
     resolution: {integrity: sha512-GbPxgpGuasM2zRCSaA77MPWu4KDcuk/EMf7JJykjCvnOTbjmtr7FovNxsvg7xlXCIjZDgLmqBaoJMi3AxbeIAA==}
     peerDependencies:
       hono: 3.*
     dependencies:
-      hono: 3.7.6
+      hono: 3.8.1
       toucan-js: 3.3.0
     dev: false
 
-  /@hono/trpc-server@0.1.0(@trpc/server@10.41.0)(hono@3.7.6):
+  /@hono/trpc-server@0.1.0(@trpc/server@10.41.0)(hono@3.8.1):
     resolution: {integrity: sha512-tgXG/ndgHxLqC09o1bwq8SzLLgzwoCr6KBRDdz9l0k7p0yuW5h67oVSUxCbmFp94hP+ahdIyqnRL84Aw8GvZxQ==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
@@ -1749,7 +1749,7 @@ packages:
       hono: 3.*
     dependencies:
       '@trpc/server': 10.41.0
-      hono: 3.7.6
+      hono: 3.8.1
     dev: false
 
   /@humanwhocodes/config-array@0.11.11:
@@ -4463,7 +4463,7 @@ packages:
     resolution: {integrity: sha512-jt4jIsWKvUvuY6adJnQJlb/UR7DdjC8CjHI/OaSQruj2yX9/K6+KOvDt/vD6udqos/FUk5Op66CvYT7TBLYO5Q==}
     dev: false
 
-  /@turbo/gen@1.10.15(@types/node@20.8.2)(typescript@5.2.2):
+  /@turbo/gen@1.10.15(@types/node@20.8.7)(typescript@5.2.2):
     resolution: {integrity: sha512-nvCiw2Como/K1LfqBQBpp+IiFEWQtlhx5f6iXIpmioj2DtVTg+RmyQM+5nIqbi8iaXg3zaF5vQo29bTyuohUuw==}
     hasBin: true
     dependencies:
@@ -4475,7 +4475,7 @@ packages:
       minimatch: 9.0.0
       node-plop: 0.26.3
       proxy-agent: 6.3.1
-      ts-node: 10.9.1(@types/node@20.8.2)(typescript@5.2.2)
+      ts-node: 10.9.1(@types/node@20.8.7)(typescript@5.2.2)
       update-check: 1.5.4
       validate-npm-package-name: 5.0.0
     transitivePeerDependencies:
@@ -7277,8 +7277,8 @@ packages:
       react-is: 16.13.1
     dev: false
 
-  /hono@3.7.6:
-    resolution: {integrity: sha512-nuLNH9+nV6ojXK6b9I0RGZgdMuLTOXeQPs6xsIw/G5iyT8j8m7Nnx8pTxQprmSmCaEYIPv91rCcq45PQNfW68A==}
+  /hono@3.8.1:
+    resolution: {integrity: sha512-im5K3bEyb6iMQP5Tfei5vfoHLnIKrsAqT/GNJJ4lxS75MvNaecUbPX0Xgi0ibTIos31lA5oYevMDGNNXhHJ9wA==}
     engines: {node: '>=16.0.0'}
     dev: false
 
@@ -10720,7 +10720,7 @@ packages:
   /ts-interface-checker@0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
 
-  /ts-node@10.9.1(@types/node@20.8.2)(typescript@5.2.2):
+  /ts-node@10.9.1(@types/node@20.8.7)(typescript@5.2.2):
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -10739,7 +10739,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.3
-      '@types/node': 20.8.2
+      '@types/node': 20.8.7
       acorn: 8.10.0
       acorn-walk: 8.2.0
       arg: 4.1.3
