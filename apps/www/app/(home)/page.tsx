@@ -91,7 +91,7 @@ function Explore() {
             className: "text-secondary opacity-50",
           })}
         >
-          Opportunités
+          Échanges
         </ExploreLink>
         <ExploreLink
           href="/opportunity"
