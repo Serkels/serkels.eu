@@ -8,14 +8,22 @@ import {
 import { Card } from "@1.modules/exchange.ui/Card";
 import { card } from "@1.ui/react/card/atom";
 import { ErrorOccur } from "@1.ui/react/error";
+import { useSearchParams } from "next/navigation";
 import type { ComponentProps } from "react";
 
 //
 
 export default function List() {
+  const search_params = useSearchParams();
+  const category = search_params.get("category") ?? undefined;
+  const search = search_params.get("q") ?? undefined;
+
   try {
     const info = TRPC_React.exchange.find.useInfiniteQuery(
-      {},
+      {
+        category,
+        title: search,
+      },
       {
         getNextPageParam: (lastPage) => lastPage.nextCursor,
         // select({ pages, pageParams }) {

@@ -21,7 +21,9 @@ export function Exchange_InfiniteList({
     .with(
       {
         status: "success",
-        data: P.when((list) => list.pages.flat().length === 0),
+        data: P.when(
+          (list) => list.pages.map((page) => page.data).flat().length === 0,
+        ),
       },
       () => <EmptyList />,
     )

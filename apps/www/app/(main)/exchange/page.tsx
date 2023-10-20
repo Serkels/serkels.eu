@@ -1,5 +1,6 @@
 //
 
+import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
 import { Spinner } from "@1.ui/react/spinner";
 import type { Metadata, ResolvingMetadata } from "next";
 import dynamic from "next/dynamic";
@@ -32,9 +33,13 @@ export async function generateMetadata(
 //
 
 export default async function Page() {
+  await TRPC_SSR.exchange.find.prefetchInfinite({});
+
   return (
-    <main>
-      <List />
-    </main>
+    <TRPC_Hydrate>
+      <main>
+        <List />
+      </main>
+    </TRPC_Hydrate>
   );
 }
