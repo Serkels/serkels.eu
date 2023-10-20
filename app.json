@@ -6,6 +6,9 @@
       "description": "A secret key to talk with next-auth.",
       "generator": "secret"
     },
+    "SENTRY_DSN": {
+      "value": "https://user@verysecret.ingest.sentry.io/token"
+    },
     "SMTP_HOST": {
       "value": "smtp.ethereal.email"
     },
