@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://toc-toc.org"),
   title: "Toc-Toc",
   description: "Réseau d'échanges étudiant",
-  icons: { icon: "/favicon.svg" },
+  icons: { icon: "/favicon.ico" },
   openGraph: {
     title: "Toc-Toc",
     description: "Réseau d'échanges étudiant",
