@@ -8,6 +8,7 @@ import InputSearch from "@1.ui/react/input/InputSearch";
 import dynamic from "next/dynamic";
 import type { PropsWithChildren, ReactNode } from "react";
 import { CategoriesList } from "./_client/CategoriesList";
+import { ExchangeFilter } from "./_client/ExchangeFilter";
 
 //
 
@@ -40,6 +41,7 @@ export default async function Layout({
           slot-title="Échanges"
         >
           <SearchForm />
+          <ExchangeFilter />
 
           <hr className="my-10" />
 
