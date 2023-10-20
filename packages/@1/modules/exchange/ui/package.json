@@ -23,7 +23,7 @@
     "@1.modules/core": "workspace:*",
     "@1.modules/exchange.domain": "workspace:*",
     "@1.ui/react": "workspace:*",
-    "@tanstack/react-query": "4.36.1",
+    "@tanstack/react-query": "5.0.0",
     "react": "18.2.0",
     "react-content-loader": "6.2.1",
     "react-use": "17.4.0",
