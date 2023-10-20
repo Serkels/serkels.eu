@@ -21,11 +21,16 @@ interface AvatarProps
 export const Avatar = forwardRef<ElementRef<"figure">, AvatarProps>(
   function Avatar(props, forwardedRef) {
     const { className, image: src, id, ...other_props } = props;
-    const { image } = avatar();
+    const { base, image } = avatar();
 
     return (
-      <figure className={image({ className })} ref={forwardedRef}>
-        <img src={src} alt={`Avatar of the user ${id}`} {...other_props} />
+      <figure className={base({ className })} ref={forwardedRef}>
+        <img
+          className={image()}
+          src={src}
+          alt={`Avatar of the user ${id}`}
+          {...other_props}
+        />
       </figure>
     );
   },

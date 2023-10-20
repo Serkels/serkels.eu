@@ -3,7 +3,7 @@
 import { AppFooter } from ":components/shell/AppFooter.server";
 import type { PropsWithChildren } from "react";
 import { tv } from "tailwind-variants";
-import Header from "./header";
+import Header from "./navbar";
 
 //
 

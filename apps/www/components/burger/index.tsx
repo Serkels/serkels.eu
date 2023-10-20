@@ -3,19 +3,17 @@
 import { link } from "@1.ui/react/link/atom";
 import { HamburgerMenu } from "@1/ui/icons";
 import { useState } from "react";
+import { tv } from "tailwind-variants";
 import { AppSidebar } from "~/app/(index)/AppSidebar";
 
 //
 
-export function MenuBurger() {
+export function MenuBurger({ className }: { className: string }) {
   const [showSideBar, setShowSideBar] = useState(false);
-
+  const base = menu_burger({ className });
   return (
     <>
-      <button
-        className="absolute left-0 top-0 p-6"
-        onClick={() => setShowSideBar(true)}
-      >
+      <button className={base} onClick={() => setShowSideBar(true)}>
         <HamburgerMenu />
       </button>
       <AppSidebar hidden={!showSideBar} onClose={() => setShowSideBar(false)}>
@@ -35,3 +33,5 @@ export function MenuBurger() {
     </>
   );
 }
+
+const menu_burger = tv({ base: "absolute left-0 top-0 p-6" });

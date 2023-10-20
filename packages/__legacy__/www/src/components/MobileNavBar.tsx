@@ -60,10 +60,10 @@ export function MobileNavBar({ className }: ComponentPropsWithoutRef<"nav">) {
               "border-white": pathname.includes("/q&a"),
               "border-transparent": !pathname.includes("/q&a"),
             })}
-            href="/q&a"
+            href="/forum"
           >
             <NavItem Icon={MessageGroup} isActive={pathname.includes("/q&a")}>
-              Question-Réponse
+              Forum StudHlep
             </NavItem>
           </Link>
         </li>

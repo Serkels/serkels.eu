@@ -79,8 +79,8 @@ export async function Navbar() {
 const navbar = tv(
   {
     base: `
-      bg-primary-gradient-74
       min-h-[theme(space.14)]
+      bg-primary-gradient-74
       text-white
       shadow-[0_3px_6px_#00000029]
     `,

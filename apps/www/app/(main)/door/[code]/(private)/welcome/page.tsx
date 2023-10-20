@@ -33,10 +33,9 @@ export async function generateMetadata(
 
 export default async function Page() {
   return (
-    <main>
+    <main className="flex flex-col items-center justify-center">
       <h1
         className={`
-          mx-auto
           my-0
           text-center text-6xl
           font-extrabold
