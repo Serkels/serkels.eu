@@ -74,7 +74,7 @@ function Loader() {
   );
 }
 
-function Card() {
+export function Card() {
   const { base, body, header } = UI.card();
   const [exchange] = useExchange_Value();
   return (

@@ -612,6 +612,9 @@ importers:
       '@1.modules/core':
         specifier: workspace:*
         version: link:../../core
+      '@1.modules/profile.domain':
+        specifier: workspace:*
+        version: link:../../profile/domain
       zod:
         specifier: 3.22.4
         version: 3.22.4

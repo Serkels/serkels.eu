@@ -5,7 +5,7 @@ import {
   Exchange_AsyncCard,
   Exchange_InfiniteList,
 } from "@1.modules/exchange.ui";
-import { Card } from "@1.modules/exchange.ui/Card";
+import { AvatarMediaHorizontal } from "@1.ui/react/avatar";
 import { card } from "@1.ui/react/card/atom";
 import { ErrorOccur } from "@1.ui/react/error";
 import { useSearchParams } from "next/navigation";
@@ -26,9 +26,6 @@ export default function List() {
       },
       {
         getNextPageParam: (lastPage) => lastPage.nextCursor,
-        // select({ pages, pageParams }) {
-        //   return { pages: pages.map((page) => page.data), pageParams };
-        // },
       },
     ) as ComponentProps<typeof Exchange_InfiniteList>["info"];
 
@@ -36,7 +33,6 @@ export default function List() {
       <Exchange_InfiniteList info={info}>
         {({ id }) => <Item key={id} id={id} />}
       </Exchange_InfiniteList>
-      // <InputSearch {...field} {...props} />;
     );
   } catch (error) {
     return <ErrorOccur error={error as Error} />;
@@ -44,26 +40,48 @@ export default function List() {
 }
 
 function Item({ id }: { id: string }) {
-  const { header } = card();
+  const { base, body, header } = card();
   try {
-    const info = TRPC_React.exchange.by_id.useQuery(id) as ComponentProps<
-      typeof Exchange_AsyncCard
-    >["info"];
+    const info = TRPC_React.exchange.by_id.useQuery(id);
+    const data = info.data!;
     return (
-      <Exchange_AsyncCard info={info}>
-        {({ exchange }) => (
-          <Card
-            header={<header className={header()}>header</header>}
-            body={
-              <div>
-                <div className="inline-flex"></div>
-                <code>{JSON.stringify(exchange, null, 2)}</code>;
-                <hr className="my-2" />
-                <div className="items-center justify-between text-xs text-[#707070] sm:flex"></div>
-              </div>
-            }
-            footer={<>footer</>}
-          />
+      <Exchange_AsyncCard
+        info={info as ComponentProps<typeof Exchange_AsyncCard>["info"]}
+      >
+        {({}) => (
+          <div className={base()}>
+            <div className={body()}>
+              <header className={header()}>
+                <AvatarMediaHorizontal
+                  name={data.owner.profile.name}
+                  // u={data.id}
+                  // university={exchange.profile.university}
+                  // username={exchange.profile.name}
+                />
+                <div className="flex items-start space-x-2">
+                  {/* <Exchange_EditButton /> */}
+                  <time
+                    className="mt-3 text-xs"
+                    // dateTime={exchange.get("updatedAt").toUTCString()}
+                    // title={exchange.get("updatedAt").toUTCString()}
+                  >
+                    {/* {exchange.get("updatedAt").toLocaleDateString("fr")} */}
+                  </time>
+                </div>
+              </header>
+            </div>
+          </div>
+          // header={<header className={header()}>header</header>}
+          // body={
+          //   <div>
+          //     <div className="inline-flex"></div>
+          //     <code>{JSON.stringify(exchange, null, 2)}</code>;
+          //     <hr className="my-2" />
+          //     <div className="items-center justify-between text-xs text-[#707070] sm:flex"></div>
+          //   </div>
+          // }
+          // footer={<>footer</>}
+          // />
         )}
       </Exchange_AsyncCard>
     );

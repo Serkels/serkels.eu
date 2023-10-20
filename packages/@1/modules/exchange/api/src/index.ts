@@ -9,7 +9,16 @@ const exchange_api_router = router({
   by_id: procedure
     .input(z.string())
     .query(async ({ input: id, ctx: { prisma } }) => {
-      return await prisma.exchange.findUniqueOrThrow({
+      // const sdf = await prisma.exchange.findUniqueOrThrow({
+      //   where: { id },
+      //   include: {
+      //     category: true,
+      //     owner: { include: { profile: true } },
+      //     participants: true,
+      //   },
+      // });
+
+      return prisma.exchange.findUniqueOrThrow({
         where: { id },
         include: {
           category: true,

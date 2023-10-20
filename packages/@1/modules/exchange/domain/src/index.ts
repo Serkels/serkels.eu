@@ -14,6 +14,7 @@ export const Exchange_Schema = Entity_Schema.augment({
   location: z.string().default(""),
   places: z.coerce.number().default(Number.MIN_SAFE_INTEGER),
   // profile: z.instanceof(Profile).default(Profile.zero),
+  // owner: z.instanceof(Profile).default(Profile.zero),
   slug: z.string().default(""),
   title: z.string().default(""),
   type: z
