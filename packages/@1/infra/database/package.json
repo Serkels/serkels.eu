@@ -30,6 +30,6 @@
     "@1.config/typescript": "workspace:*",
     "@types/node": "20.8.7",
     "prisma": "5.4.2",
-    "tsx": "3.13.0"
+    "tsx": "3.14.0"
   }
 }
