@@ -42,7 +42,7 @@ export function Opoortunity_Card(props: Opportunity) {
             </figcaption>
           </figure>
 
-          <p className="line-clamp-1" title={location}>
+          <p className="line-clamp-1" title={location ?? ""}>
             <LocationRadius className="inline-block h-[14px] w-[14px]" />{" "}
             {location}
           </p>

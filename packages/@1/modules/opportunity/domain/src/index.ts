@@ -10,7 +10,8 @@ import { z } from "zod";
 export const Opportunity_Schema = Entity_Schema.extend({
   category: Category_Schema,
   cover: z.string(),
-  location: z.string(),
+  description: z.string(),
+  location: z.string().nullable(),
   owner: z.object({ profile: Profile_Schema }),
   slug: z.string(),
   title: z.string(),

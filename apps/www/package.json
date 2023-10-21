@@ -32,6 +32,7 @@
     "@trpc/client": "10.41.0",
     "@trpc/react-query": "10.41.0",
     "@vercel/analytics": "1.1.1",
+    "react-markdown": "9.0.0",
     "constate": "3.3.2",
     "date-fns": "2.30.0",
     "debug": "4.3.4",

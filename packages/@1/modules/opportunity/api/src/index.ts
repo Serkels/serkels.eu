@@ -18,6 +18,18 @@ const opportunity_api_router = router({
       });
     }),
 
+  by_slug: next_auth_procedure
+    .input(z.string())
+    .query(async ({ input: slug, ctx: { prisma } }) => {
+      return prisma.opportunity.findUniqueOrThrow({
+        where: { slug },
+        include: {
+          category: true,
+          owner: { include: { profile: true } },
+        },
+      });
+    }),
+
   find: procedure
     .input(
       z.object({
