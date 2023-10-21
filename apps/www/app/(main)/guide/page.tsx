@@ -10,7 +10,10 @@ export default function Page() {
          [&>details>a]:text-secondary
          [&>details>summary]:cursor-pointer
          [&>details[open]>summary]:mb-1
-         [&>details[open]]:mb-8"
+         [&>details[open]]:mb-8
+         [&_a]:text-secondary
+         [&_a]:underline
+         "
       >
         <details>
           <summary className="text-lg font-bold">
