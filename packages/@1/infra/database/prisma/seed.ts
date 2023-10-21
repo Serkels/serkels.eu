@@ -228,7 +228,7 @@ async function categories() {
       },
       {
         name: "Cours de français",
-        contexts: [CategoryContext.OPPORTUNITY],
+        contexts: [CategoryContext.OPPORTUNITY, CategoryContext.FORUM],
       },
       {
         name: "Bourses",
@@ -247,12 +247,24 @@ async function categories() {
         contexts: [CategoryContext.OPPORTUNITY, CategoryContext.FORUM],
       },
       {
-        name: "Aide financière",
+        name: "Aides financières",
         contexts: [CategoryContext.OPPORTUNITY, CategoryContext.FORUM],
       },
       {
         name: "Administratifs",
         contexts: [CategoryContext.FORUM],
+      },
+      {
+        name: "Soutien académique",
+        contexts: [CategoryContext.OPPORTUNITY],
+      },
+      {
+        name: "Activités socio-culturelles",
+        contexts: [CategoryContext.OPPORTUNITY],
+      },
+      {
+        name: "Vie associative​",
+        contexts: [CategoryContext.OPPORTUNITY],
       },
     ].map((data) => ({ ...data, slug: slugify(data.name.toLowerCase()) })),
   });
