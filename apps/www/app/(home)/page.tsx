@@ -104,14 +104,14 @@ function Explore() {
           Opportunités
         </ExploreLink>
         <ExploreLink
-          href="/q&a"
+          href="/forum"
           Icon={MessageGroup}
           className={link({
             className: "text-quaternary",
           })}
           // className="col-span-2 text-Eminence"
         >
-          Question-Réponse
+          Forum StudHelp
         </ExploreLink>
         <ExploreLink
           href="/guide"
