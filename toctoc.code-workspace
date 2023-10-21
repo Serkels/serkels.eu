@@ -44,7 +44,6 @@
       "e2e-results/": true,
       "node_modules/": true,
       "out/": true,
-      "admin/xxx/**/*": true,
       "storybook-static/": true,
       ".eslintcache": true
     },
