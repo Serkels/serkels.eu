@@ -1,14 +1,11 @@
 //
 
 // import { MobileNavBar } from ":components/MobileNavBar";
-import { MenuBurger } from ":components/burger";
 import { AuthSessionProvider } from ":components/shell/AuthSessionProvider";
 import { Banner } from ":components/shell/Banner";
-import { BigBar } from ":components/shell/BigBar";
 import { getServerSession } from "@1.modules/auth.next";
 import { Grid } from "@1.ui/react/grid";
 import type { StylableElementType } from "@1.ui/react/types";
-import { VisuallyHidden } from "@1.ui/react/visually_hidden";
 import { Binoculars, Book, Exchange, MessageGroup } from "@1/ui/icons";
 import type { _1_HOUR_ } from "@douglasduteil/datatypes...hours-to-seconds";
 import dynamic from "next/dynamic";
@@ -17,13 +14,6 @@ import type { ComponentPropsWithoutRef, PropsWithChildren } from "react";
 import { tv } from "tailwind-variants";
 
 //
-
-const TocTocLogo = dynamic(() => import(":components/shell/TocTocLogo"), {
-  ssr: false,
-  loading() {
-    return <VisuallyHidden>Toc-Toc</VisuallyHidden>;
-  },
-});
 
 const HomeCarousel = dynamic(() => import("./page.client"), {
   ssr: false,
@@ -144,15 +134,6 @@ const explore_grid_style = tv(
 //
 //
 //
-
-function AppLargeTopBar() {
-  return (
-    <BigBar>
-      <MenuBurger />
-      <TocTocLogo />
-    </BigBar>
-  );
-}
 
 function CarouselPlaceholder() {
   return (
