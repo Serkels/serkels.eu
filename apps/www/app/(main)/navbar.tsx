@@ -33,7 +33,8 @@ export default function UserBar() {
         <MobileNavBar
           className="
             fixed bottom-0 left-0 right-0 z-50 h-16
-            sm:relative sm:col-auto sm:h-full
+            sm:relative
+            sm:z-auto sm:col-auto sm:h-full
             md:col-span-4
             xl:col-span-6
             sm:[&>ul]:w-full

@@ -63,7 +63,7 @@ const aside_bar = tv({
       fixed
       left-0
       top-0
-      z-40
+      z-50
       h-screen
       w-72
       overflow-y-auto
@@ -71,6 +71,7 @@ const aside_bar = tv({
       transition-transform
     `,
     close_button: `
+      z-60
       absolute
       right-4
       top-4

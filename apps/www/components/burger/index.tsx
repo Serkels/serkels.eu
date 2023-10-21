@@ -10,10 +10,10 @@ import { tv } from "tailwind-variants";
 
 export function MenuBurger({ className }: { className?: string }) {
   const [hidden, toggle] = useToggle(true);
-  const { base, list, link } = menu_burger({ className });
+  const { base, list, link } = menu_burger();
   return (
     <>
-      <button className={base()} onClick={toggle}>
+      <button className={base({ className })} onClick={toggle}>
         <HamburgerMenu />
       </button>
       <AppSidebar hidden={hidden} onClose={toggle}>
