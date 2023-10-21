@@ -1,6 +1,7 @@
 //
 
 import TailwindcssConfig from "@douglasduteil/config...tailwindcss";
+import typography from "@tailwindcss/typography";
 import type { Config } from "tailwindcss";
 import resolveConfig from "tailwindcss/resolveConfig";
 
@@ -81,5 +82,6 @@ export default {
     backgroundImage,
     colors,
   },
+  plugins: [typography()],
   // plugins: [custom_icon_set(resolve(__dirname, "icons"))],
 } satisfies Config;

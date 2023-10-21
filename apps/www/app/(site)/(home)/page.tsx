@@ -2,7 +2,6 @@
 
 // import { MobileNavBar } from ":components/MobileNavBar";
 import { MenuBurger } from ":components/burger";
-import { AppFooter } from ":components/shell/AppFooter.server";
 import { AuthSessionProvider } from ":components/shell/AuthSessionProvider";
 import { Banner } from ":components/shell/Banner";
 import { BigBar } from ":components/shell/BigBar";
@@ -40,8 +39,6 @@ export const revalidate: _1_HOUR_ = 3600;
 export default function Home_Page() {
   return (
     <main>
-      <AppLargeTopBar />
-
       <HomeBanner />
 
       <div className="overflow-hidden bg-white">
@@ -51,9 +48,6 @@ export default function Home_Page() {
 
         <hr className="my-8 border-none"></hr>
       </div>
-
-      <AppFooter />
-      {/* <MobileNavBar className="fixed bottom-0 left-0 right-0 z-50 sm:hidden" /> */}
     </main>
   );
 }

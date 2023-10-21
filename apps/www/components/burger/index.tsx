@@ -1,32 +1,37 @@
 "use client";
 
-import { link } from "@1.ui/react/link/atom";
+import { AppSidebar } from ":components/shell/AppSidebar";
 import { HamburgerMenu } from "@1/ui/icons";
-import { useState } from "react";
+import { useToggle } from "@react-hookz/web";
+import Link from "next/link";
 import { tv } from "tailwind-variants";
-import { AppSidebar } from "~/app/(index)/AppSidebar";
 
 //
 
 export function MenuBurger({ className }: { className?: string }) {
-  const [showSideBar, setShowSideBar] = useState(false);
-  const base = menu_burger({ className });
+  const [hidden, toggle] = useToggle(true);
+  const { base, list, link } = menu_burger({ className });
   return (
     <>
-      <button className={base} onClick={() => setShowSideBar(true)}>
+      <button className={base()} onClick={toggle}>
         <HamburgerMenu />
       </button>
-      <AppSidebar hidden={!showSideBar} onClose={() => setShowSideBar(false)}>
-        <ul>
+      <AppSidebar hidden={hidden} onClose={toggle}>
+        <ul className={list()}>
           <li>
-            <a className={link()} href="/legal">
-              Mentions légales
-            </a>
+            <Link className={link()} href="/who" onClick={toggle}>
+              Qui sommes-nous ?
+            </Link>
           </li>
           <li>
-            <a className={link()} href="/about">
-              À propos
-            </a>
+            <Link className={link()} href="/legal" onClick={toggle}>
+              Politique d'utilisation
+            </Link>
+          </li>
+          <li>
+            <Link className={link()} href="/faq" onClick={toggle}>
+              FAQ
+            </Link>
           </li>
         </ul>
       </AppSidebar>
@@ -34,4 +39,10 @@ export function MenuBurger({ className }: { className?: string }) {
   );
 }
 
-const menu_burger = tv({ base: "absolute left-0 top-0 p-6" });
+const menu_burger = tv({
+  base: "absolute left-0 top-0 p-6",
+  slots: {
+    list: "",
+    link: "block p-4 text-center text-lg hover:bg-gray-100 ",
+  },
+});

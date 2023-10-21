@@ -11,7 +11,7 @@ const config = {
   theme: {
     extend: base.theme,
   },
-  plugins: [],
+  plugins: [...base.plugins],
 } satisfies Config;
 
 export const with_ui = (tailwindConfig: Config) => {
