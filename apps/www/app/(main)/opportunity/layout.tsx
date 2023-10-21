@@ -4,18 +4,20 @@ import { AsideFilter } from ":components/shell/AsideFilter";
 import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
 import { getServerSession } from "@1.modules/auth.next";
 import { Grid } from "@1.ui/react/grid";
+import InputSearch from "@1.ui/react/input/InputSearch";
+import dynamic from "next/dynamic";
 import type { PropsWithChildren } from "react";
 // import { CategoriesList } from "./_client/CategoriesList";
 // import { ExchangeFilter } from "./_client/ExchangeFilter";
 
 //
 
-// const SearchForm = dynamic(() => import("./_client/SearchForm"), {
-//   ssr: false,
-//   loading() {
-//     return <InputSearch />;
-//   },
-// });
+const SearchForm = dynamic(() => import("./_client/SearchForm"), {
+  ssr: false,
+  loading() {
+    return <InputSearch />;
+  },
+});
 
 //
 
@@ -35,7 +37,7 @@ export default async function Layout({ children }: PropsWithChildren<{}>) {
           className="mt-10 hidden md:col-span-2 md:block xl:col-span-3"
           slot-title="Opportunités"
         >
-          {/* <SearchForm /> */}
+          <SearchForm />
           {/* <ExchangeFilter /> */}
 
           <hr className="my-10" />
