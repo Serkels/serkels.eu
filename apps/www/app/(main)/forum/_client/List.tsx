@@ -25,7 +25,7 @@ export default function List() {
     const info = TRPC_React.forum.question.find.useInfiniteQuery(
       {
         category,
-        search: search,
+        search,
       },
       {
         getNextPageParam: (lastPage) => lastPage.nextCursor,
