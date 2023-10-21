@@ -1,7 +1,10 @@
 "use client";
 
 import { TRPC_React } from ":trpc/client";
-import { Exchange_TypeSchema } from "@1.modules/exchange.domain";
+import {
+  Exchange_Filter,
+  Exchange_TypeSchema,
+} from "@1.modules/exchange.domain";
 import {
   Exchange_AsyncCard,
   Exchange_InfiniteList,
@@ -26,12 +29,19 @@ export default function List() {
   const search_params = useSearchParams();
   const category = search_params.get("category") ?? undefined;
   const search = search_params.get("q") ?? undefined;
+  const filter_parsed_return = Exchange_Filter.safeParse(
+    search_params.get("f"),
+  );
+  const filter = filter_parsed_return.success
+    ? filter_parsed_return.data
+    : undefined;
 
   try {
     const info = TRPC_React.exchange.find.useInfiniteQuery(
       {
         category,
-        search: search,
+        filter,
+        search,
       },
       {
         getNextPageParam: (lastPage) => lastPage.nextCursor,

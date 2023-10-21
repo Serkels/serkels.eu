@@ -23,3 +23,11 @@ export const Exchange_Schema = Entity_Schema.extend({
 }).describe("Exchange_PropsSchema");
 
 export interface Exchange extends z.TypeOf<typeof Exchange_Schema> {}
+
+export const Exchange_Filter = z.enum([
+  "ALL",
+  "ON_SITE",
+  "ONLINE",
+  "WITHOUT_RETURN",
+  "WITH_RETURN",
+]);
