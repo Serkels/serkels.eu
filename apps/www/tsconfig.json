@@ -9,7 +9,7 @@
         "../../packages/@1/ui/react/src/button/index.tsx"
       ],
       "@1/ui/icons": ["../../packages/@1/ui/react/src/icons/index.ts"],
-      "@1/ui/components/*": ["../../packages/@1/ui/react/src/button/index.tsx"],
+      "@1/ui/components/*": ["../../packages/@1/ui/react/src/*"],
       "~/*": ["../../packages/__legacy__/www/src/*"],
       //
       ":app/*": ["./app/*"],

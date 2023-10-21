@@ -8,6 +8,13 @@ import { z } from "zod";
 //
 
 const question_api_router = router({
+  create: procedure
+    .input(z.object({ title: z.string(), category: z.string() }))
+    .mutation(async ({}) => {
+      console.log({ user: null });
+      return {};
+    }),
+
   by_id: procedure
     .input(z.string())
     .query(async ({ input: id, ctx: { prisma } }) => {

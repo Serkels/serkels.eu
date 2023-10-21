@@ -16,7 +16,7 @@ import {
 
 //
 
-interface AvatarProps
+export interface AvatarProps
   extends ComponentPropsWithoutRef<"figure">,
     AvatarVariantProps {
   image?: string;

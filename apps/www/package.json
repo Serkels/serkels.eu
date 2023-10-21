@@ -21,6 +21,7 @@
     "@1.modules/opportunity.domain": "workspace:*",
     "@1.modules/opportunity.ui": "workspace:*",
     "@1.modules/profile.domain": "workspace:*",
+    "@1.modules/profile.ui": "workspace:*",
     "@1.ui/react": "workspace:*",
     "@1/modules": "workspace:@0.__legacy__/modules@*",
     "@1/ui": "workspace:@0.__legacy__/ui@*",

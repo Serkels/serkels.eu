@@ -2,8 +2,6 @@
 
 import { Button } from "@1.ui/react/button";
 import { ErrorOccur } from "@1.ui/react/error";
-import { useMountEffect } from "@react-hookz/web";
-import { signOut } from "next-auth/react";
 import {
   forwardRef,
   type ComponentPropsWithoutRef,
@@ -19,9 +17,9 @@ export default function Error({
   error: Error;
   reset: () => void;
 }) {
-  useMountEffect(() => {
-    signOut();
-  });
+  // useMountEffect(() => {
+  //   signOut();
+  // });
 
   return (
     <Error_Layout>

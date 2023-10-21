@@ -11,13 +11,13 @@ declare module "next-auth" {
    * a prop on the `SessionProvider` React Context
    */
   interface Session extends DefaultSession {
-    profile?: Profile;
+    profile: Profile;
   }
 }
 
 declare module "next-auth/jwt" {
   /** Returned by the `jwt` callback and `getToken`, when using JWT sessions */
   interface JWT {
-    profile?: Profile;
+    profile: Profile;
   }
 }

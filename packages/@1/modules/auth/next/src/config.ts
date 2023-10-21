@@ -27,6 +27,9 @@ import { z } from "zod";
 export const NEXT_AUTH_MODULES_ENV = z
   .object({
     _01_NEXT_AUTH_MODULES_TRPC_API_URL: z.string().url(),
+    _01_NEXT_AUTH_JWT_MAX_AGE: z.coerce
+      .number()
+      .default((86400 satisfies _24_HOURS_) * 30), // 30 days
   })
   .parse(process.env);
 
@@ -47,8 +50,9 @@ const trpc = createTRPCProxyClient<Router>({
           token: {
             from: "@1.modules/auth.next",
             strategies: ["Only existing users can login"],
+            profile: { id: "", image: "", name: "", role: "ADMIN" },
           } satisfies JWT,
-          maxAge: 60,
+          maxAge: NEXT_AUTH_MODULES_ENV._01_NEXT_AUTH_JWT_MAX_AGE,
         });
         return nexaut_header;
       },
@@ -79,10 +83,10 @@ export const authOptions: NextAuthOptions = {
   adapter: PrismaTRPCAdapter(trpc.auth.next_auth_adapter),
   debug: true,
   jwt: {
-    maxAge: (86400 satisfies _24_HOURS_) * 30, // 30 days
+    maxAge: NEXT_AUTH_MODULES_ENV._01_NEXT_AUTH_JWT_MAX_AGE,
   },
   session: {
-    maxAge: (86400 satisfies _24_HOURS_) * 30, // 30 days
+    maxAge: NEXT_AUTH_MODULES_ENV._01_NEXT_AUTH_JWT_MAX_AGE,
     strategy: "jwt",
     updateAge: 86400 satisfies _24_HOURS_,
   },

@@ -16,14 +16,15 @@ export const Card: FC<Question> = (props) => {
   return (
     <Provider question={props}>
       <div
-        className={`overflow-hidden
-        rounded-xl
-        border
-        border-[#00000017]
-        bg-white
-        p-6
-        text-black shadow-[5px_5px_10px_#7E7E7E33]
-      `}
+        className={`
+          overflow-hidden
+          rounded-xl
+          border
+          border-[#00000017]
+          bg-white
+          p-6
+          text-black shadow-[5px_5px_10px_#7E7E7E33]
+        `}
         id={id}
       >
         <Header />
