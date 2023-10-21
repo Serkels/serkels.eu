@@ -13,10 +13,7 @@ const question_api_router = router({
     .query(async ({ input: id, ctx: { prisma } }) => {
       return prisma.question.findUniqueOrThrow({
         where: { id },
-        include: {
-          category: true,
-          owner: { include: { profile: true } },
-        },
+        include: { category: true, owner: { include: { profile: true } } },
       });
     }),
 
