@@ -5,6 +5,18 @@
     "NEXTAUTH_SECRET": {
       "description": "A secret key to talk with next-auth.",
       "generator": "secret"
+    },
+    "SENTRY_DSN": {
+      "value": "https://user@verysecret.ingest.sentry.io/token"
+    },
+    "SMTP_HOST": {
+      "value": "smtp.ethereal.email"
+    },
+    "SMTP_USERNAME": {
+      "value": "ethereal.user@ethereal.email"
+    },
+    "SMTP_PASSWORD": {
+      "value": "verysecret"
     }
   },
   "formation": {
