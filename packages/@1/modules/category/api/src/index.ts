@@ -22,6 +22,16 @@ const category_api_router = router({
   exchange: procedure.query(async ({ ctx: { prisma } }) => {
     return (await prisma.category.findMany({
       where: { contexts: { has: CategoryContext.EXCHANGE } },
+      orderBy: { slug: "asc" },
+    })) as Category[];
+  }),
+
+  //
+
+  forum: procedure.query(async ({ ctx: { prisma } }) => {
+    return (await prisma.category.findMany({
+      where: { contexts: { has: CategoryContext.FORUM } },
+      orderBy: { slug: "asc" },
     })) as Category[];
   }),
 
@@ -30,6 +40,7 @@ const category_api_router = router({
   opportunity: procedure.query(async ({ ctx: { prisma } }) => {
     return (await prisma.category.findMany({
       where: { contexts: { has: CategoryContext.OPPORTUNITY } },
+      orderBy: { slug: "asc" },
     })) as Category[];
   }),
 });

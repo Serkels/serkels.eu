@@ -49,26 +49,26 @@ model Profile {
   //
   partner          Partner?
   studient         Studient?
-  asked_questions  Question[]  @relation("AskedQuestions")
   written_messages Message[]   @relation("WrittenMessages")
 }
 
 model Studient {
-  id             String     @id @default(cuid())
+  id             String    @id @default(cuid())
   citizenship    String?
   city           String?
-  exchange       Exchange[] @relation("StudientEchanges")
   field_of_study String?
-  interest       Category?  @relation("CategorizedStudientInterest", fields: [interest_id], references: [id])
+  interest       Category? @relation("CategorizedStudientInterest", fields: [interest_id], references: [id])
   interest_id    String?
-  profile        Profile    @relation(fields: [profile_id], references: [id], onDelete: Cascade)
-  profile_id     String     @unique
+  profile        Profile   @relation(fields: [profile_id], references: [id], onDelete: Cascade)
+  profile_id     String    @unique
   university     String
   //
-  created_at     DateTime   @default(now())
-  updated_at     DateTime   @default(now())
+  created_at     DateTime  @default(now())
+  updated_at     DateTime  @default(now())
   //
 
+  asked_questions           Question[] @relation("AskedQuestions")
+  proposed_exchanges        Exchange[] @relation("ProposedExchanges")
   participants_in_exchanges Exchange[] @relation("ParticipantsInExchanges")
 }
 
@@ -128,9 +128,9 @@ model Category {
   slug                          String            @unique
   //
   categorized_exchanges         Exchange[]        @relation("CategorizedExchanges")
-  categorized_return_exchanges  Exchange[]        @relation("CategorizedReturnExchanges")
   categorized_opportunities     Opportunity[]     @relation("CategorizedOpportunities")
   categorized_questions         Question[]        @relation("CategorizedQuestions")
+  categorized_return_exchanges  Exchange[]        @relation("CategorizedReturnExchanges")
   categorized_studient_interest Studient[]        @relation("CategorizedStudientInterest")
 }
 
@@ -158,7 +158,7 @@ model Exchange {
   return_id            String?
   is_online            Boolean
   location             String?
-  owner                Studient     @relation("StudientEchanges", fields: [owner_id], references: [id], onDelete: Cascade)
+  owner                Studient     @relation("ProposedExchanges", fields: [owner_id], references: [id], onDelete: Cascade)
   owner_id             String
   participants         Studient[]   @relation("ParticipantsInExchanges")
   places               Int
@@ -217,7 +217,7 @@ model Question {
   id          String   @id @default(cuid())
   category    Category @relation("CategorizedQuestions", fields: [category_id], references: [id])
   category_id String
-  owner       Profile  @relation("AskedQuestions", fields: [owner_id], references: [id], onDelete: Cascade)
+  owner       Studient @relation("AskedQuestions", fields: [owner_id], references: [id], onDelete: Cascade)
   owner_id    String
   title       String
   //

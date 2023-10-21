@@ -20,13 +20,13 @@ export default async function dependencies(content: string) {
   await Promise.all([
     ...dependencies.filter(is_workspace_version).map(async (package_name) => {
       const version = await get_latest_version(package_name);
-      pkg.dependencies![package_name] = `^${version}`;
+      pkg.dependencies![package_name] = `${version}`;
     }),
     ...devDependencies
       .filter(is_workspace_version)
       .map(async (package_name) => {
         const version = await get_latest_version(package_name);
-        pkg.devDependencies![package_name] = `^${version}`;
+        pkg.devDependencies![package_name] = `${version}`;
       }),
   ]);
 

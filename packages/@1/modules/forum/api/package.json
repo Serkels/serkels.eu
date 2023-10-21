@@ -1,5 +1,5 @@
 {
-  "name": "@1.modules/exchange.api",
+  "name": "@1.modules/forum.api",
   "version": "0.1.0",
   "private": true,
   "sideEffects": false,
@@ -20,7 +20,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@1.modules/exchange.domain": "workspace:*",
+    "@1.modules/forum.domain": "workspace:*",
     "@1.modules/trpc": "workspace:*",
     "@trpc/server": "10.40.0",
     "date-fns": "2.30.0",

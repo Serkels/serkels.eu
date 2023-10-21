@@ -12,7 +12,7 @@ export type PROFILE_ROLES = z.TypeOf<typeof PROFILE_ROLES>;
 
 //
 
-export const Profile_Schema = Entity_Schema.augment({
+export const Profile_Schema = Entity_Schema.extend({
   name: z.string().default("Unkown Profile"),
   image: z.string().default("/opengraph-image.png"),
   role: PROFILE_ROLES,
@@ -24,7 +24,7 @@ export interface Profile extends z.TypeOf<typeof Profile_Schema> {}
 
 //
 
-export const Partner_Schema = Entity_Schema.augment({
+export const Partner_Schema = Entity_Schema.extend({
   // name: z.string().default("Unkown Profile"),
   // image: z.string().default("/opengraph-image.png"),
   // role: PROFILE_ROLES,
@@ -33,3 +33,16 @@ export const Partner_Schema = Entity_Schema.augment({
 }).describe("Partner_PropsSchema");
 
 export interface Partner extends z.TypeOf<typeof Partner_Schema> {}
+
+//
+
+export const Studient_Schema = Entity_Schema.extend({
+  citizenship: z.string().default("Unkown citizenship"),
+  city: z.string().default("Unkown city"),
+  field_of_study: z.string().default("Unkown field_of_study"),
+  // interest: Category,
+  profile: Profile_Schema,
+  university: z.string().default("Unkown university"),
+}).describe("Studient_Schema");
+
+export interface Studient extends z.TypeOf<typeof Studient_Schema> {}

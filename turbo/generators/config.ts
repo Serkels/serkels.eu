@@ -29,7 +29,7 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
   //
 
   plop.setGenerator("1.module", {
-    description: "Generate a @1.modules/<name>/{domain,api}",
+    description: "Generate a @1.modules/<name>/{api,domain,ui}",
     prompts: [
       {
         type: "input",

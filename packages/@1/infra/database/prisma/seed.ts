@@ -4,7 +4,7 @@
  * @link https://www.prisma.io/docs/guides/database/seed-database
  */
 import { faker } from "@faker-js/faker";
-import { CategoryContext, ProfileRole } from "@prisma/client";
+import { CategoryContext, ExchangeType, ProfileRole } from "@prisma/client";
 import process from "node:process";
 import slugify from "slugify";
 import prisma from "../index";
@@ -49,6 +49,11 @@ async function studient() {
       where: { slug: "autres" },
     }),
   ]);
+  const forum_categories_id = (
+    await prisma.category.findMany({
+      where: { contexts: { has: "FORUM" } },
+    })
+  ).map(({ id }) => id);
 
   return prisma.studient.create({
     data: {
@@ -57,18 +62,39 @@ async function studient() {
       field_of_study: faker.word.noun(),
       interest: { connect: { id: category_autres.id } },
       university: faker.company.name(),
-      exchange: {
-        create: {
-          active: true,
-          description: faker.lorem.paragraph(),
-          is_online: true,
-          places: 1,
-          title: faker.lorem.sentence(),
-          type: "RESEARCH",
-          location: faker.location.city(),
-          category_id: category_autres.id,
-          return_id: category_autres.id,
-          when: faker.date.future(),
+      //
+      asked_questions: {
+        createMany: {
+          data: faker.helpers.multiple(
+            () => ({
+              category_id: faker.helpers.arrayElement(forum_categories_id),
+              title: faker.lorem.sentence(),
+              created_at: faker.date.past(),
+            }),
+            { count: { min: 0, max: 5 } },
+          ),
+        },
+      },
+      proposed_exchanges: {
+        createMany: {
+          data: faker.helpers.multiple(
+            () => ({
+              active: true,
+              description: faker.lorem.paragraph(),
+              is_online: faker.number.int(100) > 50,
+              places: faker.number.int(100),
+              title: faker.lorem.sentence(),
+              type: faker.helpers.arrayElement([
+                ExchangeType.PROPOSAL,
+                ExchangeType.RESEARCH,
+              ]),
+              location: faker.location.city(),
+              category_id: category_autres.id,
+              return_id: faker.helpers.maybe(() => category_autres.id) ?? null,
+              when: faker.date.future(),
+            }),
+            { count: { min: 0, max: 5 } },
+          ),
         },
       },
       profile: {

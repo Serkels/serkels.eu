@@ -39,12 +39,21 @@ export const button = tv({
       outline: "",
     },
     size: {
-      sm: "flex h-4 px-2 text-sm",
-      md: "h-7 px-4 text-sm",
-      lg: "h-8 px-8 text-sm",
+      sm: "h-4 px-2 text-sm",
+      md: "h-7 px-4 text-base",
+      lg: "h-8 px-8 text-lg",
     },
   },
   compoundVariants: [
+    {
+      intent: "primary",
+      state: "ghost",
+      class: `
+        bg-transparent
+        text-primary
+        data-[hovered]:bg-primary/30
+      `,
+    },
     {
       intent: "danger",
       state: "outline",
