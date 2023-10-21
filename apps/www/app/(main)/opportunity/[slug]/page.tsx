@@ -21,7 +21,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
     return (
       <Article opportunity={opportunity}>
         <Article.Description>
-          {(description) => <ReactMarkdown>{description}</ReactMarkdown>}
+          {({ description }) => <ReactMarkdown>{description}</ReactMarkdown>}
         </Article.Description>
       </Article>
     );
