@@ -730,13 +730,13 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       '@prisma/client':
-        specifier: '5'
+        specifier: 5.4.2
         version: 5.4.2(prisma@5.4.2)
       '@types/node':
         specifier: 20.8.7
         version: 20.8.7
       typescript:
-        specifier: '5'
+        specifier: 5.2.2
         version: 5.2.2
 
   packages/@1/modules/forum/domain:
