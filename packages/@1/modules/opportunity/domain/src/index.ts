@@ -15,6 +15,7 @@ export const Opportunity_Schema = Entity_Schema.extend({
   owner: z.object({ profile: Profile_Schema }),
   slug: z.string(),
   title: z.string(),
+  link: z.string().url(),
   when: z.date(),
 }).describe("Opportunity_PropsSchema");
 
