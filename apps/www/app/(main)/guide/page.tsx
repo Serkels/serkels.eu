@@ -65,14 +65,20 @@ export default function Page() {
           La bourse sur critères sociaux peut-être demandée même une fois les
           délais officiels dépassés. Vous devez effectuer la demande via le site
           du CROUS{" "}
-          <a href="https://www.messervices.etudiant.gouv.fr">
+          <a
+            rel="noopener noreferrer"
+            href="https://www.messervices.etudiant.gouv.fr"
+          >
             (https://www.messervices.etudiant.gouv.fr)
           </a>{" "}
           en constituant votre dossier social étudiant.
           <br />
           <br />
           Lien vers la vidéo explicative :{" "}
-          <a href="https://www.youtube.com/watch?v=gkHuuf0MowQ">
+          <a
+            rel="noopener noreferrer"
+            href="https://www.youtube.com/watch?v=gkHuuf0MowQ"
+          >
             Demande de bourses et de logement - YouTube
           </a>
         </details>
@@ -120,7 +126,10 @@ export default function Page() {
           obtenu un diplôme (baccalauréat, licence, master) : vous devez
           demandez une attestation de comparabilité sur la plateforme nationale
           ERIC NARIC
-          <a href="https://phoenix.france-education-international.fr/inscriptions">
+          <a
+            rel="noopener noreferrer"
+            href="https://phoenix.france-education-international.fr/inscriptions"
+          >
             (https://phoenix.france-education-international.fr/inscriptions)
           </a>
           . Ce service est payant et coûte au total 70€ (20€ lors du dépôt du
@@ -164,7 +173,10 @@ export default function Page() {
             </li>
           </ul>
           Source :{" "}
-          <a href="https://www.service-public.fr/particuliers/vosdroits/R38515">
+          <a
+            rel="noopener noreferrer"
+            href="https://www.service-public.fr/particuliers/vosdroits/R38515"
+          >
             Demander une attestation de comparabilité d'un diplôme étranger
             (Démarche en ligne) | Service-public.fr
           </a>{" "}
@@ -223,7 +235,10 @@ export default function Page() {
 
         <p className="mt-10">
           Source :{" "}
-          <a href="https://www.service-public.fr/particuliers/vosdroits/F2741">
+          <a
+            rel="noopener noreferrer"
+            href="https://www.service-public.fr/particuliers/vosdroits/F2741"
+          >
             Accès au travail du demandeur d'asile | Service-public.fr
           </a>
         </p>
