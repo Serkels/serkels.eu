@@ -10,4 +10,3 @@ const forum_api_router = router({
 });
 
 export default forum_api_router;
-export type ForumApiRouter = typeof forum_api_router;

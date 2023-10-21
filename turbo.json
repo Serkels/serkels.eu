@@ -3,6 +3,7 @@
   "globalDependencies": ["**/.env.*local"],
   "globalEnv": ["CI", "NODE_ENV"],
   "pipeline": {
+    "@1.infra/database#build": { "cache": false },
     "build": { "dependsOn": ["^build"], "outputs": [".next/**", "dist/**"] },
     "clean": { "cache": false },
     "dev": { "cache": false, "dependsOn": ["^build"] },
