@@ -3,5 +3,6 @@
   "extends": "@1.config/typescript/lib.json",
   "compilerOptions": {
     "types": ["node"]
-  }
+  },
+  "include": ["src"]
 }

@@ -1,13 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "@1.config/typescript/lib.json",
-  "compilerOptions": {
-    "plugins": [
-      {
-        "transform": "typia/lib/transform"
-      }
-    ],
-    "strictNullChecks": true,
-    "strict": true
-  }
+  "compilerOptions": {},
+  "include": ["src"]
 }

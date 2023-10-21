@@ -5,5 +5,6 @@
     "exactOptionalPropertyTypes": false,
     "incremental": true,
     "noEmit": true
-  }
+  },
+  "include": ["src"]
 }
