@@ -92,6 +92,7 @@ async function studient() {
               category_id: category_autres.id,
               return_id: faker.helpers.maybe(() => category_autres.id) ?? null,
               when: faker.date.future(),
+              created_at: faker.date.past(),
             }),
             { count: { min: 0, max: 5 } },
           ),
@@ -149,6 +150,12 @@ async function partner() {
     }),
   ]);
 
+  const opportunity_categories_id = (
+    await prisma.category.findMany({
+      where: { contexts: { has: "OPPORTUNITY" } },
+    })
+  ).map(({ id }) => id);
+
   return prisma.partner.create({
     data: {
       profile: {
@@ -170,16 +177,21 @@ async function partner() {
       city: faker.location.city(),
       opportunities: {
         createMany: {
-          data: Array.from({ length: 10 }).map(() => ({
-            category_id: category_autres.id,
-            cover: faker.image.url(),
-            description: faker.lorem.paragraphs({ max: 9, min: 2 }),
-            link: faker.internet.url(),
-            location: faker.location.city(),
-            slug: slugify(faker.lorem.sentence()).slice(0, 16).toLowerCase(),
-            title: faker.lorem.sentence(),
-            when: faker.date.future(),
-          })),
+          data: faker.helpers.multiple(
+            () => ({
+              category_id: faker.helpers.arrayElement(
+                opportunity_categories_id,
+              ),
+              cover: faker.image.url(),
+              description: faker.lorem.paragraphs({ max: 9, min: 2 }),
+              link: faker.internet.url(),
+              location: faker.location.city(),
+              slug: slugify(faker.lorem.sentence()).slice(0, 16).toLowerCase(),
+              title: faker.lorem.sentence(),
+              when: faker.date.future(),
+            }),
+            { count: { min: 0, max: 5 } },
+          ),
         },
       },
     },
