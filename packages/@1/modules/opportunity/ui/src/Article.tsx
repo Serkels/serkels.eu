@@ -68,7 +68,7 @@ export function Article({
           <a
             href={`https://www.openstreetmap.org/search?query=${location}`}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             <figure className="flex items-center">
               <IconWithBgCircle
@@ -79,7 +79,7 @@ export function Article({
             </figure>
           </a>
 
-          <a href={link} target="_blank" rel="noreferrer">
+          <a href={link} target="_blank" rel="noopener noreferrer">
             <figure className="flex items-center">
               <IconWithBgCircle
                 className="h-[30px] basis-[30px]"
