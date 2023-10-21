@@ -28,6 +28,6 @@ export const Exchange_Filter = z.enum([
   "ALL",
   "ON_SITE",
   "ONLINE",
-  "WITHOUT_RETURN",
   "WITH_RETURN",
+  "WITHOUT_RETURN",
 ]);

@@ -1267,7 +1267,7 @@ importers:
         version: link:../../packages/@douglasduteil/config/typescript
       '@turbo/gen':
         specifier: 1.10.16
-        version: 1.10.16(@types/node@20.8.7)(typescript@5.2.2)
+        version: 1.10.16(@types/node@20.8.2)(typescript@5.2.2)
       prettier:
         specifier: '3'
         version: 3.0.3
@@ -4308,7 +4308,7 @@ packages:
     resolution: {integrity: sha512-jt4jIsWKvUvuY6adJnQJlb/UR7DdjC8CjHI/OaSQruj2yX9/K6+KOvDt/vD6udqos/FUk5Op66CvYT7TBLYO5Q==}
     dev: false
 
-  /@turbo/gen@1.10.16(@types/node@20.8.7)(typescript@5.2.2):
+  /@turbo/gen@1.10.16(@types/node@20.8.2)(typescript@5.2.2):
     resolution: {integrity: sha512-PzyluADjVuy5OcIi+/aRcD70OElQpRVRDdfZ9fH8G5Fv75lQcNrjd1bBGKmhjSw+g+eTEkXMGnY7s6gsCYjYTQ==}
     hasBin: true
     dependencies:
@@ -4320,7 +4320,7 @@ packages:
       minimatch: 9.0.3
       node-plop: 0.26.3
       proxy-agent: 6.3.1
-      ts-node: 10.9.1(@types/node@20.8.7)(typescript@5.2.2)
+      ts-node: 10.9.1(@types/node@20.8.2)(typescript@5.2.2)
       update-check: 1.5.4
       validate-npm-package-name: 5.0.0
     transitivePeerDependencies:
@@ -4420,6 +4420,10 @@ packages:
     resolution: {integrity: sha512-AuHIyzR5Hea7ij0P9q7vx7xu4z0C28ucwjAZC0ja7JhINyCnOw8/DnvAPQQ9TfOlCtZAmCERKQX9+o1mgQhuOQ==}
     dev: true
 
+  /@types/node@20.8.2:
+    resolution: {integrity: sha512-Vvycsc9FQdwhxE3y3DzeIxuEJbWGDsnrxvMADzTDF/lcdR9/K+AQIeAghTQsHtotg/q0j3WEOYS/jQgSdWue3w==}
+    dev: true
+
   /@types/node@20.8.7:
     resolution: {integrity: sha512-21TKHHh3eUHIi2MloeptJWALuCu5H7HQTdTrWIFReA8ad+aggoX+lRes3ex7/FtpC+sVUpFMQ+QTfYr74mruiQ==}
     dependencies:
@@ -4491,8 +4495,8 @@ packages:
       '@types/node': 20.8.7
     dev: true
 
-  /@types/yauzl@2.10.2:
-    resolution: {integrity: sha512-Km7XAtUIduROw7QPgvcft0lIupeG8a8rdKL8RiSyKvlE7dYY31fEn41HVuQsRFDuROA8tA4K2UVL+WdfFmErBA==}
+  /@types/yauzl@2.10.1:
+    resolution: {integrity: sha512-CHzgNU3qYBnp/O4S3yv2tXPlvMTq0YWSTVg2/JYLqWZGHwwgJGAwd00poay/11asPq8wLFwHzubyInqHIFmmiw==}
     requiresBuild: true
     dependencies:
       '@types/node': 20.8.7
@@ -6460,7 +6464,7 @@ packages:
       get-stream: 5.2.0
       yauzl: 2.10.0
     optionalDependencies:
-      '@types/yauzl': 2.10.2
+      '@types/yauzl': 2.10.1
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -6750,7 +6754,7 @@ packages:
     requiresBuild: true
     dependencies:
       bindings: 1.5.0
-      nan: 2.18.0
+      nan: 2.17.0
     dev: true
     optional: true
 
@@ -8242,8 +8246,8 @@ packages:
       object-assign: 4.1.1
       thenify-all: 1.6.0
 
-  /nan@2.18.0:
-    resolution: {integrity: sha512-W7tfG7vMOGtD30sHoZSSc/JVYiyDPEyQVso/Zz+/uQd0B0L46gtC+pHha5FFMRpil6fm/AoEcRWyOVi4+E/f8w==}
+  /nan@2.17.0:
+    resolution: {integrity: sha512-2ZTgtl0nJsO0KQCjEpxcIr5D+Yv90plTitZt9JBfQvVJDS5seMl3FOvsh3+9CoYWXf/1l5OaZzzF6nDm4cagaQ==}
     requiresBuild: true
     dev: true
     optional: true
@@ -10511,7 +10515,7 @@ packages:
   /ts-interface-checker@0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
 
-  /ts-node@10.9.1(@types/node@20.8.7)(typescript@5.2.2):
+  /ts-node@10.9.1(@types/node@20.8.2)(typescript@5.2.2):
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -10530,7 +10534,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 20.8.7
+      '@types/node': 20.8.2
       acorn: 8.10.0
       acorn-walk: 8.2.0
       arg: 4.1.3
