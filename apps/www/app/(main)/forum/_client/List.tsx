@@ -7,7 +7,6 @@ import {
   Question_Card,
   Question_InfiniteList,
 } from "@1.modules/forum.ui";
-import type { Opportunity } from "@1.modules/opportunity.domain";
 import { ErrorOccur } from "@1.ui/react/error";
 import type {
   UseInfiniteQueryResult,
@@ -31,7 +30,7 @@ export default function List() {
       {
         getNextPageParam: (lastPage) => lastPage.nextCursor,
       },
-    ) as UseInfiniteQueryResult<{ data: Opportunity[] }>;
+    ) as UseInfiniteQueryResult<{ data: Question[] }>;
 
     return (
       <Question_InfiniteList info={info}>
