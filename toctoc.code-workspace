@@ -4,14 +4,15 @@
     { "path": "apps/www", "name": "🚀 www" },
     { "path": "apps/api", "name": "🚀 api" },
     //
-    { "path": "packages/@1/modules", "name": "📦 modules" },
-    { "path": "packages/@1/ui", "name": "💄 ui" },
-    { "path": "packages/@1/infra", "name": "🏗️ infra" },
+    // { "path": "packages/@1/modules", "name": "📦 modules" },
+    { "path": "packages/@1/modules/exchange/ui", "name": "📦💄/exchange" },
+    { "path": "packages/@1/ui/react", "name": "💄/react" },
+    // { "path": "packages/@1/infra", "name": "🏗️ infra" },
     { "path": "packages/@1/infra/database", "name": "🏗️ infra/database" },
-    { "path": "packages/@1/config", "name": "⚙️ config" },
+    // { "path": "packages/@1/config", "name": "⚙️ config" },
     //
-    { "path": "packages/__legacy__", "name": "🧐 legacy" },
-    { "path": "packages/@douglasduteil", "name": "🎯 douglasduteil" },
+    // { "path": "packages/__legacy__", "name": "🧐 legacy" },
+    // { "path": "packages/@douglasduteil", "name": "🎯 douglasduteil" },
     //
     { "path": ".", "name": "root" }
   ],

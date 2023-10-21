@@ -6,7 +6,7 @@ import type { UseQueryResult } from "@tanstack/react-query";
 import ContentLoader from "react-content-loader";
 import { tv } from "tailwind-variants";
 import { P, match } from "ts-pattern";
-import { Exchange_ValueProvider } from ".";
+import { Exchange_ValueProvider } from "./context";
 
 //
 

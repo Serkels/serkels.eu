@@ -7,9 +7,9 @@ import {
 } from "@1.modules/exchange.domain";
 import {
   Exchange_AsyncCard,
-  Exchange_InfiniteList,
-} from "@1.modules/exchange.ui";
-import { exchange_card } from "@1.modules/exchange.ui/Card";
+  exchange_card,
+} from "@1.modules/exchange.ui/Card/AsyncCard";
+import { Exchange_InfiniteList } from "@1.modules/exchange.ui/InfiniteList";
 import { AvatarMediaHorizontal } from "@1.ui/react/avatar";
 import { ErrorOccur } from "@1.ui/react/error";
 import { Button } from "@1/ui/components/ButtonV";
