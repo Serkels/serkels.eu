@@ -13,7 +13,7 @@ const exchange_api_router = router({
         where: { id },
         include: {
           category: true,
-          in_exchange_of: true,
+          return: true,
           owner: { include: { profile: true } },
           participants: true,
         },

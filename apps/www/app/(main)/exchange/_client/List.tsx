@@ -123,9 +123,9 @@ function Item({ id }: { id: string }) {
                     })}
                   />
                   <span className="whitespace-nowrap font-bold">
-                    {match(data.in_exchange_of)
+                    {match(data.return)
                       .with(null, () => "Sans échange")
-                      .with(P._, (in_exchange_of) => in_exchange_of.name)
+                      .with(P._, (category) => category.name)
                       .exhaustive()}
                   </span>
                 </div>

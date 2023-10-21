@@ -2,14 +2,11 @@
 
 import { AsideFilter } from ":components/shell/AsideFilter";
 import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
-import { getServerSession } from "@1.modules/auth.next";
 import { Grid } from "@1.ui/react/grid";
 import InputSearch from "@1.ui/react/input/InputSearch";
 import dynamic from "next/dynamic";
 import type { PropsWithChildren } from "react";
-// import { CategoriesList } from "./_client/CategoriesList";
-// import { ExchangeFilter } from "./_client/ExchangeFilter";
-
+import { Categoriy_Filter } from "./_client/Categoriy_Filter";
 //
 
 const SearchForm = dynamic(() => import("./_client/SearchForm"), {
@@ -22,13 +19,7 @@ const SearchForm = dynamic(() => import("./_client/SearchForm"), {
 //
 
 export default async function Layout({ children }: PropsWithChildren<{}>) {
-  const session = await getServerSession();
-  console.log({ session });
-  // if (!session) {
-  //   return notFound();
-  // }
-
-  await TRPC_SSR.category.exchange.prefetch();
+  await TRPC_SSR.category.opportunity.prefetch();
 
   return (
     <TRPC_Hydrate>
@@ -38,13 +29,12 @@ export default async function Layout({ children }: PropsWithChildren<{}>) {
           slot-title="Opportunités"
         >
           <SearchForm />
-          {/* <ExchangeFilter /> */}
 
           <hr className="my-10" />
 
-          {/* <CategoriesList /> */}
+          <Categoriy_Filter />
         </AsideFilter>
-        <div className="col-span-full my-10 md:col-span-6 xl:col-span-9">
+        <div className="col-span-full  md:col-span-6 xl:col-span-9">
           {children}
         </div>
       </Grid>

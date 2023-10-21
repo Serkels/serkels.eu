@@ -67,7 +67,7 @@ async function studient() {
           type: "RESEARCH",
           location: faker.location.city(),
           category_id: category_autres.id,
-          in_exchange_of_id: category_autres.id,
+          return_id: category_autres.id,
           when: faker.date.future(),
         },
       },

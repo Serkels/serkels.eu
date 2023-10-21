@@ -24,6 +24,14 @@ const category_api_router = router({
       where: { contexts: { has: CategoryContext.EXCHANGE } },
     })) as Category[];
   }),
+
+  //
+
+  opportunity: procedure.query(async ({ ctx: { prisma } }) => {
+    return (await prisma.category.findMany({
+      where: { contexts: { has: CategoryContext.OPPORTUNITY } },
+    })) as Category[];
+  }),
 });
 
 export default category_api_router;

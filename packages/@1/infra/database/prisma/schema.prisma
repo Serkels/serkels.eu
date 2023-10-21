@@ -35,37 +35,41 @@ model SignupPayload {
 }
 
 model Profile {
-  id         String      @id @default(cuid())
-  bio        String?
-  name       String
-  image      String
-  role       ProfileRole
+  id               String      @id @default(cuid())
+  bio              String?
+  bookmarks        Bookmark[]
+  image            String
+  name             String
+  role             ProfileRole
+  user             User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id          String      @unique @map("userId")
   //
-  created_at DateTime    @default(now())
-  updated_at DateTime    @default(now())
+  created_at       DateTime    @default(now())
+  updated_at       DateTime    @default(now())
   //
-  bookmarks  Bookmark[]
-  partner    Partner?
-  studient   Studient?
-  user       User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  user_id    String      @unique @map("userId")
+  partner          Partner?
+  studient         Studient?
+  asked_questions  Question[]  @relation("AskedQuestions")
+  written_messages Message[]   @relation("WrittenMessages")
 }
 
 model Studient {
-  id                     String     @id @default(cuid())
-  citizenship            String?
-  city                   String?
-  exchange               Exchange[] @relation("StudientEchanges")
-  field_of_study         String?
-  interest               Category?  @relation("StudientInterestCategory", fields: [interest_id], references: [id])
-  interest_id            String?
-  participants_exchanges Exchange[] @relation("ParticipantsExchanges")
-  profile                Profile    @relation(fields: [profile_id], references: [id], onDelete: Cascade)
-  profile_id             String     @unique
-  university             String
+  id             String     @id @default(cuid())
+  citizenship    String?
+  city           String?
+  exchange       Exchange[] @relation("StudientEchanges")
+  field_of_study String?
+  interest       Category?  @relation("CategorizedStudientInterest", fields: [interest_id], references: [id])
+  interest_id    String?
+  profile        Profile    @relation(fields: [profile_id], references: [id], onDelete: Cascade)
+  profile_id     String     @unique
+  university     String
   //
-  created_at             DateTime   @default(now())
-  updated_at             DateTime   @default(now())
+  created_at     DateTime   @default(now())
+  updated_at     DateTime   @default(now())
+  //
+
+  participants_in_exchanges Exchange[] @relation("ParticipantsInExchanges")
 }
 
 model Partner {
@@ -118,15 +122,16 @@ model Bookmark {
 //
 
 model Category {
-  id                      String            @id @default(cuid())
-  slug                    String            @unique
-  name                    String
+  id                            String            @id @default(cuid())
+  contexts                      CategoryContext[]
+  name                          String
+  slug                          String            @unique
   //
-  contexts                CategoryContext[]
-  studient_interest       Studient[]        @relation("StudientInterestCategory")
-  exchange_category       Exchange[]        @relation("ExchangeCategory")
-  exchange_in_exchange_of Exchange[]        @relation("InExchangeOfCategory")
-  opportunity_category    Opportunity[]     @relation("OpportunityCategory")
+  categorized_exchanges         Exchange[]        @relation("CategorizedExchanges")
+  categorized_return_exchanges  Exchange[]        @relation("CategorizedReturnExchanges")
+  categorized_opportunities     Opportunity[]     @relation("CategorizedOpportunities")
+  categorized_questions         Question[]        @relation("CategorizedQuestions")
+  categorized_studient_interest Studient[]        @relation("CategorizedStudientInterest")
 }
 
 enum CategoryContext {
@@ -144,27 +149,27 @@ enum CategoryContext {
 //
 
 model Exchange {
-  id                String       @id @default(cuid())
-  active            Boolean
-  category          Category     @relation("ExchangeCategory", fields: [category_id], references: [id])
-  category_id       String
-  description       String
-  in_exchange_of    Category?    @relation("InExchangeOfCategory", fields: [in_exchange_of_id], references: [id])
-  in_exchange_of_id String?
-  is_online         Boolean
-  location          String?
-  owner             Studient     @relation("StudientEchanges", fields: [owner_id], references: [id], onDelete: Cascade)
-  owner_id          String
-  participants      Studient[]   @relation("ParticipantsExchanges")
-  places            Int
-  title             String
-  type              ExchangeType
-  when              DateTime     @default(now())
+  id                   String       @id @default(cuid())
+  active               Boolean
+  category             Category     @relation("CategorizedExchanges", fields: [category_id], references: [id])
+  category_id          String
+  description          String
+  return               Category?    @relation("CategorizedReturnExchanges", fields: [return_id], references: [id])
+  return_id            String?
+  is_online            Boolean
+  location             String?
+  owner                Studient     @relation("StudientEchanges", fields: [owner_id], references: [id], onDelete: Cascade)
+  owner_id             String
+  participants         Studient[]   @relation("ParticipantsInExchanges")
+  places               Int
+  title                String
+  type                 ExchangeType
+  when                 DateTime     @default(now())
   //
-  created_at        DateTime     @default(now())
-  updated_at        DateTime     @default(now())
+  created_at           DateTime     @default(now())
+  updated_at           DateTime     @default(now())
   //
-  bookmark          Bookmark[]   @relation("BookmarkedExchanges")
+  bookmarked_exchanges Bookmark[]   @relation("BookmarkedExchanges")
 }
 
 enum ExchangeType {
@@ -181,22 +186,61 @@ enum ExchangeType {
 //
 
 model Opportunity {
-  id          String     @id @default(cuid())
-  bookmark    Bookmark[] @relation("BookmarkedOpportunities")
-  category    Category   @relation("OpportunityCategory", fields: [category_id], references: [id])
-  category_id String
-  cover       String
-  description String
-  link        String
-  location    String?
-  owner       Partner    @relation(fields: [owner_id], references: [id], onDelete: Cascade)
-  owner_id    String
-  slug        String     @unique
-  title       String
-  when        DateTime
+  id                       String     @id @default(cuid())
+  category                 Category   @relation("CategorizedOpportunities", fields: [category_id], references: [id])
+  category_id              String
+  cover                    String
+  description              String
+  link                     String
+  location                 String?
+  owner                    Partner    @relation(fields: [owner_id], references: [id], onDelete: Cascade)
+  owner_id                 String
+  slug                     String     @unique
+  title                    String
+  when                     DateTime
   //
-  created_at  DateTime   @default(now())
-  updated_at  DateTime   @default(now())
+  created_at               DateTime   @default(now())
+  updated_at               DateTime   @default(now())
+  //
+  bookmarked_opportunities Bookmark[] @relation("BookmarkedOpportunities")
+}
+
+//
+//
+//
+
+//
+//
+//
+
+model Question {
+  id          String   @id @default(cuid())
+  category    Category @relation("CategorizedQuestions", fields: [category_id], references: [id])
+  category_id String
+  owner       Profile  @relation("AskedQuestions", fields: [owner_id], references: [id], onDelete: Cascade)
+  owner_id    String
+  title       String
+  //
+  created_at  DateTime @default(now())
+  updated_at  DateTime @default(now())
+}
+
+//
+//
+//
+
+//
+//
+//
+
+model Message {
+  id         String   @id @default(cuid())
+  author     Profile  @relation("WrittenMessages", fields: [author_id], references: [id], onDelete: Cascade)
+  author_id  String
+  content    String
+  //
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
 }
 
 //
