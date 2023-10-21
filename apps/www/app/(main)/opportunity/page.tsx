@@ -31,8 +31,18 @@ export async function generateMetadata(
 
 //
 
-export default async function Page() {
-  await TRPC_SSR.opportunity.find.prefetchInfinite({});
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
+  const category = String(searchParams["category"]) ?? undefined;
+  const search = String(searchParams["q"]) ?? undefined;
+
+  await TRPC_SSR.opportunity.find.prefetchInfinite({
+    category,
+    search,
+  });
 
   return (
     <TRPC_Hydrate>

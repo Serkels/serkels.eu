@@ -144,11 +144,6 @@ async function partner() {
     image: faker.image.avatar(),
     name: faker.person.fullName(),
   };
-  const [category_autres] = await Promise.all([
-    prisma.category.findFirstOrThrow({
-      where: { slug: "autres" },
-    }),
-  ]);
 
   const opportunity_categories_id = (
     await prisma.category.findMany({
@@ -190,7 +185,7 @@ async function partner() {
               title: faker.lorem.sentence(),
               when: faker.date.future(),
             }),
-            { count: { min: 0, max: 5 } },
+            { count: { min: 1, max: 5 } },
           ),
         },
       },
@@ -198,7 +193,9 @@ async function partner() {
   });
 }
 async function partners() {
-  return await Promise.all([partner(), partner()]);
+  return await Promise.all(
+    faker.helpers.multiple(partner, { count: { max: 10, min: 5 } }),
+  );
 }
 
 //
