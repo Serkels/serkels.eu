@@ -43,7 +43,7 @@ export const Avatar = forwardRef<ElementRef<"figure">, AvatarProps>(
 
 //
 
-interface AvatarMediaProps
+export interface AvatarMediaProps
   extends AvatarProps,
     AvatarVariantProps,
     AvatarMediaVariantProps {

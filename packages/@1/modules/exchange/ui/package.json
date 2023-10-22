@@ -4,12 +4,14 @@
   "private": true,
   "sideEffects": false,
   "type": "module",
-  "main": "./src/index.ts",
-  "types": "./src/index.ts",
   "exports": {
     ".": {
       "types": "./src/index.ts",
       "default": "./src/index.ts"
+    },
+    "./tailwind.config.ts": {
+      "types": "./tailwind.config.ts",
+      "default": "./tailwind.config.ts"
     },
     "./*": {
       "types": "./src/*.tsx",
@@ -24,6 +26,8 @@
     "@1.modules/exchange.domain": "workspace:*",
     "@1.ui/react": "workspace:*",
     "@tanstack/react-query": "4.36.1",
+    "date-fns": "2.30.0",
+    "constate": "3.3.2",
     "react": "18.2.0",
     "react-content-loader": "6.2.1",
     "react-slotify": "0.2.2",

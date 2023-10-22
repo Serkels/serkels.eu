@@ -1,10 +1,9 @@
 //
 
-import { Exchange_TypeSchema, type Exchange } from "@1.modules/exchange.domain";
+import { type Exchange } from "@1.modules/exchange.domain";
 import { card } from "@1.ui/react/card/atom";
 import type { UseQueryResult } from "@tanstack/react-query";
 import ContentLoader from "react-content-loader";
-import { tv } from "tailwind-variants";
 import { P, match } from "ts-pattern";
 import { Exchange_ValueProvider } from "./context";
 
@@ -67,27 +66,3 @@ export function Loader() {
     </div>
   );
 }
-
-export const exchange_card = tv({
-  extend: card,
-  base: "",
-  slots: {
-    exchange_icon: "mx-1 w-5",
-  },
-  variants: {
-    type: {
-      [Exchange_TypeSchema.Enum.PROPOSAL]: {
-        category: "text-secondary",
-        exchange_icon: "text-secondary",
-      },
-      [Exchange_TypeSchema.Enum.RESEARCH]: {
-        category: "text-quaternary",
-        exchange_icon: "text-secondary",
-      },
-    },
-    is_in_exchange_of: {
-      false: "text-Chateau_Green",
-      true: "text-Gamboge",
-    },
-  },
-});

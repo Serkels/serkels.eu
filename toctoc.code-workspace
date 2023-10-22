@@ -6,6 +6,13 @@
     //
     // { "path": "packages/@1/modules", "name": "📦 modules" },
     { "path": "packages/@1/modules/exchange/ui", "name": "📦💄/exchange" },
+    {
+      "path": "packages/@1/modules/opportunity/ui",
+      "name": "📦💄/opportunity"
+    },
+    { "path": "packages/@1/modules/forum/ui", "name": "📦💄/forum" },
+    { "path": "packages/@1/modules/profile/ui", "name": "📦💄/profile" },
+    { "path": "packages/@1/modules/profile/ui", "name": "📦💄/profile" },
     { "path": "packages/@1/ui/react", "name": "💄/react" },
     // { "path": "packages/@1/infra", "name": "🏗️ infra" },
     { "path": "packages/@1/infra/database", "name": "🏗️ infra/database" },
