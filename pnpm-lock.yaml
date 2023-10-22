@@ -549,8 +549,8 @@ importers:
         specifier: 0.12.1
         version: 0.12.1(zod@3.22.4)
       '@trpc/server':
-        specifier: 10.40.0
-        version: 10.40.0
+        specifier: 10.41.0
+        version: 10.41.0
       zod:
         specifier: 3.22.4
         version: 3.22.4
@@ -667,8 +667,8 @@ importers:
         specifier: workspace:*
         version: link:../../trpc
       '@trpc/server':
-        specifier: 10.40.0
-        version: 10.40.0
+        specifier: 10.41.0
+        version: 10.41.0
       date-fns:
         specifier: 2.30.0
         version: 2.30.0
@@ -796,8 +796,8 @@ importers:
         specifier: workspace:*
         version: link:../../trpc
       '@trpc/server':
-        specifier: 10.40.0
-        version: 10.40.0
+        specifier: 10.41.0
+        version: 10.41.0
       date-fns:
         specifier: 2.30.0
         version: 2.30.0
@@ -922,8 +922,8 @@ importers:
         specifier: workspace:*
         version: link:../../trpc
       '@trpc/server':
-        specifier: 10.40.0
-        version: 10.40.0
+        specifier: 10.41.0
+        version: 10.41.0
       date-fns:
         specifier: 2.30.0
         version: 2.30.0
@@ -4576,10 +4576,6 @@ packages:
       '@trpc/server': 10.41.0
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-    dev: false
-
-  /@trpc/server@10.40.0:
-    resolution: {integrity: sha512-49SUOMWzSZtu5+OdrADmJD+u+sjSE0qj1cWgYk2FY4jLkPJunLuNRuhzM7aOeBhiUjyfhg2YTfur8FN1WBmvEw==}
     dev: false
 
   /@trpc/server@10.41.0:
