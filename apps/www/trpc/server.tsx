@@ -1,6 +1,8 @@
 //
 
 import type { Router } from "@1.infra/trpc";
+import { getServerSession } from "@1.modules/auth.next";
+import type { Profile } from "@1.modules/profile.domain";
 import { NEXTAUTH_TRPCENV } from "@douglasduteil/nextauth...trpc.prisma/config";
 import type { JWT } from "@douglasduteil/nextauth...trpc.prisma/jwt";
 import { create_nexauth_header } from "@douglasduteil/nextauth...trpc.prisma/jwt";
@@ -23,11 +25,22 @@ const proxyClient = createTRPCProxyClient<Router>({
     httpLink({
       url: `${process.env["API_URL"]}/trpc`,
       headers: async ({}) => {
+        const session = await getServerSession();
+        const profile = session?.profile
+          ? ({
+              id: session.profile.id,
+              name: "",
+              image: "",
+              role: session.profile.role,
+              bio: "",
+            } satisfies Profile)
+          : undefined;
+
         const nexaut_header = await create_nexauth_header({
           secret: NEXTAUTH_TRPCENV.NEXTAUTH_SECRET,
           token: {
             from: "www",
-            profile: { id: "", image: "", name: "", role: "ADMIN" },
+            profile,
           } satisfies JWT,
         });
         return nexaut_header;

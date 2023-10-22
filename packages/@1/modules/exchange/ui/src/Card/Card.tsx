@@ -58,34 +58,6 @@ function OnlineOrLocation(props: {
   );
 }
 
-/*
-function Header({children}: PropsWithChildren<{ exchange: Exchange }>) {
-  const { base, body, header, category, exchange_icon } = exchange_card();
-  const exchange = useExchange();
-  return (<header className={header()}>
-<Card.Avatar.Renderer childs={children}></Card.Avatar.Renderer>
-  <div>
-    <figure className="flex flex-col items-center">
-        <div className="text-xl font-bold text-primary">{`${data.participants.length} / ${data.places}`}</div>
-      <figcaption>places disponible</figcaption>
-    </figure>
-  </div>
-
-  <div className="flex items-start space-x-2">
-    // { <Exchange_EditButton /> }
-    <time
-      className="mt-3 text-xs"
-      dateTime={data.updated_at.toUTCString()}
-      title={data.updated_at.toUTCString()}
-    >
-      {format(data.updated_at, "P", { locale: fr })}
-    </time>
-  </div>
-</header>);
-}
-
-*/
-
 function Header({ children }: PropsWithChildren) {
   const exchange = useExchange();
   const { header } = exchange_card({ type: exchange.type });
@@ -107,7 +79,7 @@ function Header({ children }: PropsWithChildren) {
         </div>
       </Card.Header.Center.Renderer>
       <Card.Header.Right.Renderer childs={children}>
-        <div className="flex items-start space-x-2">
+        <div className="flex items-start justify-end space-x-2">
           <time
             className="mt-3 text-xs"
             dateTime={exchange.updated_at.toUTCString()}
@@ -209,6 +181,7 @@ export const exchange_card = tv({
   extend: card,
   base: "",
   slots: {
+    header: "grid grid-cols-3",
     exchange_icon: "mx-1 w-5",
     footer: "mt-4 bg-gray-500 px-5 py-3 text-white",
     info_bar: "items-center justify-between text-xs text-[#707070] sm:flex",

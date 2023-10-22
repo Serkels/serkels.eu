@@ -302,25 +302,28 @@ importers:
 
   packages/@1/infra/database:
     dependencies:
-      '@faker-js/faker':
-        specifier: 8.2.0
-        version: 8.2.0
       '@prisma/client':
         specifier: 5.4.2
         version: 5.4.2(prisma@5.4.2)
-      slugify:
-        specifier: 1.6.6
-        version: 1.6.6
     devDependencies:
       '@1.config/typescript':
         specifier: workspace:*
         version: link:../../config/typescript
+      '@faker-js/faker':
+        specifier: 8.2.0
+        version: 8.2.0
       '@types/node':
         specifier: 20.8.7
         version: 20.8.7
+      dedent:
+        specifier: 1.5.1
+        version: 1.5.1
       prisma:
         specifier: 5.4.2
         version: 5.4.2
+      slugify:
+        specifier: 1.6.6
+        version: 1.6.6
       tsx:
         specifier: 3.14.0
         version: 3.14.0
@@ -996,6 +999,9 @@ importers:
 
   packages/@1/modules/profile/domain:
     dependencies:
+      '@1.modules/category.domain':
+        specifier: workspace:*
+        version: link:../../category/domain
       '@1.modules/core':
         specifier: workspace:*
         version: link:../../core
@@ -2062,7 +2068,7 @@ packages:
   /@faker-js/faker@8.2.0:
     resolution: {integrity: sha512-VacmzZqVxdWdf9y64lDOMZNDMM/FQdtM9IsaOPKOm2suYwEatb8VkdHqOzXcDnZbk7YDE2BmsJmy/2Hmkn563g==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0, npm: '>=6.14.13'}
-    dev: false
+    dev: true
 
   /@formatjs/ecma402-abstract@1.17.2:
     resolution: {integrity: sha512-k2mTh0m+IV1HRdU0xXM617tSQTi53tVR2muvYOsBeYcUgEAyxV1FOC7Qj279th3fBVQ+Dj6muvNJZcHSPNdbKg==}
@@ -5894,6 +5900,15 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       mimic-response: 3.1.0
+    dev: true
+
+  /dedent@1.5.1:
+    resolution: {integrity: sha512-+LxW+KLWxu3HW3M2w2ympwtqPrqYRzU8fqi6Fhd18fBALe15blJPI/I4+UHveMVG6lJqB4JNd4UG0S5cnVHwIg==}
+    peerDependencies:
+      babel-plugin-macros: ^3.1.0
+    peerDependenciesMeta:
+      babel-plugin-macros:
+        optional: true
     dev: true
 
   /deep-extend@0.6.0:
@@ -10526,7 +10541,7 @@ packages:
   /slugify@1.6.6:
     resolution: {integrity: sha512-h+z7HKHYXj6wJU+AnS/+IH8Uh9fdcX1Lrhg1/VMdf9PwoBQXFcXiAdsy2tSK0P6gKwJLXp02r90ahUCqHk9rrw==}
     engines: {node: '>=8.0.0'}
-    dev: false
+    dev: true
 
   /smart-buffer@4.2.0:
     resolution: {integrity: sha512-94hK0Hh8rPqQl2xXc3HsaBoOXKV20MToPkcXvwbISWLEs+64sBq5kFgn2kJDHb1Pry9yrP0dxrCI9RRci7RXKg==}

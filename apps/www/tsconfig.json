@@ -16,6 +16,7 @@
       //
       ":app/*": ["./app/*"],
       ":components/*": ["./components/*"],
+      ":pipes/*": ["./pipes/*"],
       ":trpc/*": ["./trpc/*"]
     }
   },

@@ -10,6 +10,7 @@ import {
   splitLink,
   wsLink,
 } from "@trpc/react-query";
+import { useSession } from "next-auth/react";
 import { useEffect, useState, type PropsWithChildren } from "react";
 import SuperJSON from "superjson";
 
@@ -20,6 +21,7 @@ export const TRPC_React = createTRPCReact<Router>({
 });
 
 function useTRPCClient() {
+  const { data: session } = useSession();
   const [trpc_client, set_trpc_client] =
     useState<ReturnType<typeof TRPC_React.createClient>>();
 
@@ -45,12 +47,11 @@ function useTRPCClient() {
           }),
           false: httpBatchLink({
             url: "/api/trpc",
-            headers: {
-              // "cache-control": `s-maxage=1, stale-while-revalidate=${60}`,
-            },
+            headers: { ...session?.header },
           }),
         }),
       ],
+
       transformer: SuperJSON,
     });
 

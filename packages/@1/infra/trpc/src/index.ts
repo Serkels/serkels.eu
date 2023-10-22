@@ -15,7 +15,7 @@ import { z } from "zod";
 export const root_router = router({
   auth: auth_api_router,
   category: category_api_router,
-  exchange: exchange_api_router,
+  exchanges: exchange_api_router,
   forum: forum_api_router,
   opportunity: opportunity_api_router,
   profile: profile_api_router,

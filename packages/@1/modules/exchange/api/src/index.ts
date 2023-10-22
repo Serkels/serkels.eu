@@ -22,6 +22,44 @@ const exchange_api_router = router({
       });
     }),
 
+  by_particitpant: procedure
+    .input(
+      z.object({
+        profile_id: z.string(),
+        limit: z.number().min(1).max(10).default(10),
+      }),
+    )
+    .query(async ({ input, ctx: { prisma } }) => {
+      const { profile_id, limit } = input;
+
+      const data = await prisma.exchange.findMany({
+        take: limit,
+        where: { participants: { some: { profile_id } } },
+        orderBy: { created_at: "asc" },
+      });
+
+      return { data };
+    }),
+
+  by_profile: procedure
+    .input(
+      z.object({
+        profile_id: z.string(),
+        limit: z.number().min(1).max(10).default(10),
+      }),
+    )
+    .query(async ({ input, ctx: { prisma } }) => {
+      const { profile_id, limit } = input;
+
+      const data = await prisma.exchange.findMany({
+        take: limit,
+        where: { owner: { profile_id: profile_id } },
+        orderBy: { created_at: "asc" },
+      });
+
+      return { data };
+    }),
+
   find: procedure
     .input(
       z.object({

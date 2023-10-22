@@ -2,7 +2,7 @@
 
 import type { Router } from "@1.infra/trpc";
 import { AuthError } from "@1.modules/core/errors";
-import { PROFILE_ROLES } from "@1.modules/profile.domain";
+import { PROFILE_ROLES, type Profile } from "@1.modules/profile.domain";
 import type { _24_HOURS_ } from "@douglasduteil/datatypes...hours-to-seconds";
 import { NEXTAUTH_TRPCENV } from "@douglasduteil/nextauth...trpc.prisma/config";
 import {
@@ -50,9 +50,9 @@ const trpc = createTRPCProxyClient<Router>({
           token: {
             from: "@1.modules/auth.next",
             strategies: ["Only existing users can login"],
-            profile: { id: "", image: "", name: "", role: "ADMIN" },
+            profile: { id: "", image: "", name: "", role: "ADMIN", bio: "" },
           } satisfies JWT,
-          maxAge: NEXT_AUTH_MODULES_ENV._01_NEXT_AUTH_JWT_MAX_AGE,
+          maxAge: 60,
         });
         return nexaut_header;
       },
@@ -130,6 +130,18 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       if (token.profile) {
         session.profile = token.profile;
+        session.header = await create_nexauth_header({
+          secret: NEXTAUTH_TRPCENV.NEXTAUTH_SECRET,
+          token: {
+            profile: {
+              id: session.profile.id,
+              name: "",
+              image: "",
+              role: session.profile.role,
+              bio: "",
+            } satisfies Profile,
+          } satisfies JWT,
+        });
       }
 
       return session;

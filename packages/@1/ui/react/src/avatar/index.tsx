@@ -53,12 +53,13 @@ export interface AvatarMediaProps
 export function AvatarMedia(
   props: AvatarMediaProps & { name: string; university?: string },
 ) {
-  const { className, image, id, university, name, ...other_props } = props;
-  const { figure } = avatar_media();
+  const { className, image, id, university, name, tv$size, ...other_props } =
+    props;
+  const { figure, avatar } = avatar_media();
 
   return (
     <figure className={figure({ className })} {...other_props}>
-      <Avatar className="h-14 w-14" {...{ image, id }} />
+      <Avatar className={avatar({ tv$size })} {...{ image, id }} />
       <figcaption>
         <h4 className="text-xl font-bold text-Cerulean" title={name}>
           {name}

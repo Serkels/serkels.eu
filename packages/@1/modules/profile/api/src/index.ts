@@ -14,6 +14,14 @@ const profile_api_router = router({
         await prisma.profile.findFirstOrThrow({ where: { user: { email } } }),
       ) as Profile;
     }),
+
+  by_id: next_auth_procedure
+    .input(z.string())
+    .query(async ({ input: id, ctx: { prisma } }) => {
+      return Profile_Schema.parse(
+        await prisma.profile.findFirstOrThrow({ where: { id } }),
+      ) as Profile;
+    }),
 });
 
 export default profile_api_router;

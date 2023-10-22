@@ -45,7 +45,7 @@ export default async function Page({
     ? filter_parsed_return.data
     : undefined;
 
-  await TRPC_SSR.exchange.find.prefetchInfinite({ category, filter, search });
+  await TRPC_SSR.exchanges.find.prefetchInfinite({ category, filter, search });
 
   return (
     <TRPC_Hydrate>

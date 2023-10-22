@@ -14,7 +14,7 @@ export const card = tv({
   `,
   slots: {
     body: "p-6",
-    header: "mb-4 flex flex-1 justify-between",
+    header: "mb-4",
     footer: "mt-4 bg-black px-5 py-3 text-white",
     category: "text-xs text-[#707070] ",
   },

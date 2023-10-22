@@ -29,7 +29,7 @@ export default function List() {
     : undefined;
 
   try {
-    const info = TRPC_React.exchange.find.useInfiniteQuery(
+    const info = TRPC_React.exchanges.find.useInfiniteQuery(
       {
         category,
         filter,
@@ -50,11 +50,11 @@ export default function List() {
   }
 }
 
-function Item({ id }: { id: string }) {
+export function Item({ id }: { id: string }) {
   const { data: session } = useSession();
   const my_profile_id = session?.profile.id ?? "";
   try {
-    const info = TRPC_React.exchange.by_id.useQuery(id);
+    const info = TRPC_React.exchanges.by_id.useQuery(id);
     return (
       <Exchange_AsyncCard
         info={info as ComponentProps<typeof Exchange_AsyncCard>["info"]}
@@ -62,7 +62,9 @@ function Item({ id }: { id: string }) {
         {({ exchange }) => (
           <Card exchange={exchange}>
             <Card.Header.Left>
-              <StudientAvatarMedia studient={exchange.owner} />
+              <Link href={`@${exchange.owner.profile.id}`}>
+                <StudientAvatarMedia studient={exchange.owner} />
+              </Link>
             </Card.Header.Left>
             <Card.Footer.Left>
               <Bookmark className="h-5 w-5" />
