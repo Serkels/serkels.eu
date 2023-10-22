@@ -1,13 +1,9 @@
 "use client";
 
+import { Error_Layout } from ":components/Error_Layout";
 import { Button } from "@1.ui/react/button";
 import { ErrorOccur } from "@1.ui/react/error";
-import {
-  forwardRef,
-  type ComponentPropsWithoutRef,
-  type ElementRef,
-} from "react";
-import { tv } from "tailwind-variants";
+
 //
 
 export default function Error({
@@ -22,29 +18,9 @@ export default function Error({
   // });
 
   return (
-    <Error_Layout>
+    <Error_Layout className="min-h-[100dvh]">
       <ErrorOccur error={error} />
       <Button onPress={() => reset()}>Toquer de nouveau</Button>
     </Error_Layout>
   );
 }
-
-const style = tv({
-  base:
-    "col-span-full flex min-h-[100dvh] " +
-    "flex-col items-center justify-center space-y-5 px-4 sm:col-span-6 xl:col-start-6",
-});
-
-//
-
-export const Error_Layout = forwardRef<
-  ElementRef<"div">,
-  ComponentPropsWithoutRef<"div">
->(function Error_Page(props, forwardedRef) {
-  const { className, children, ...other_props } = props;
-  return (
-    <div ref={forwardedRef} className={style()} {...other_props}>
-      {children}
-    </div>
-  );
-});

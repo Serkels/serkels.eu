@@ -1,6 +1,11 @@
 //
 
-import { type CodeParms } from ":pipes/code";
+import {
+  Partner_NavBar,
+  Studient_NavBar,
+} from ":components/navbar/aside_navbar";
+import { code_to_profile_id, type CodeParms } from ":pipes/code";
+import { TRPC_SSR } from ":trpc/server";
 import { getServerSession } from "@1.modules/auth.next";
 import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import { Grid } from "@1.ui/react/grid";
@@ -21,7 +26,7 @@ export default async function Layout({
   header: ReactNode;
   navbar: ReactNode;
 }>) {
-  // const profile_id = await code_to_profile_id(params);
+  const profile_id = await code_to_profile_id(params);
 
   const session = await getServerSession();
 
@@ -31,29 +36,36 @@ export default async function Layout({
       session,
     },
   );
-  if (!session) {
+  if (!session || !profile_id) {
     return notFound();
   }
 
   const role = session.profile.role;
+
   const is_yours = params.code === "~";
   console.log(
     "/home/x/zzz/github/toctocorg/toctoc/apps/www/app/(main)/door/[code]/(public)/layout.tsx",
-    { is_yours },
+    { is_yours, profile_id },
   );
-  const aside = match({ is_yours, role })
-    .with({ role: PROFILE_ROLES.Enum.STUDIENT, is_yours: true }, () => (
-      <Studient_NavBar />
-    ))
-    .with({ role: PROFILE_ROLES.Enum.PARTNER, is_yours: true }, () => (
-      <Partner_NavBar />
-    ))
+
+  const aside = await match({ is_yours, role })
+    .with({ role: PROFILE_ROLES.Enum.STUDIENT, is_yours: true }, async () => {
+      const studient =
+        await TRPC_SSR.profile.studient.by_profile_id.fetch(profile_id);
+      return <Studient_NavBar studient={studient} />;
+    })
+    .with({ role: PROFILE_ROLES.Enum.PARTNER, is_yours: true }, async () => {
+      const partner =
+        await TRPC_SSR.profile.partner.by_profile_id.fetch(profile_id);
+      partner;
+      return <Partner_NavBar />;
+    })
     .otherwise(() => null);
 
   return (
     <Grid fluid>
       {aside ? (
-        <aside className="mt-10 hidden md:col-span-2 md:block xl:col-span-3">
+        <aside className="hidden bg-white md:col-span-2 md:block xl:col-span-3">
           {aside}
         </aside>
       ) : null}
@@ -87,11 +99,3 @@ const container = tv({
     },
   },
 });
-
-function Studient_NavBar() {
-  return <>Studient_NavBar</>;
-}
-
-function Partner_NavBar() {
-  return <>Studient_NavBar</>;
-}

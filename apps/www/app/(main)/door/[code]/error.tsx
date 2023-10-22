@@ -1,6 +1,6 @@
 "use client";
 
-import { Error_Layout } from ":app/error";
+import { Error_Layout } from ":components/Error_Layout";
 import { Button } from "@1.ui/react/button";
 import { ErrorOccur } from "@1.ui/react/error";
 

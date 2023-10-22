@@ -21,6 +21,11 @@ export const avatar_media = tv({
     subtitle: "block text-sm font-light leading-snug text-gray-500",
   },
   variants: {
+    tv$direction: {
+      column: {
+        figure: "flex-col items-center",
+      },
+    },
     tv$size: {
       base: {
         avatar: "h-9 w-9",
@@ -29,6 +34,7 @@ export const avatar_media = tv({
         avatar: "h-14 w-14",
       },
     },
+
     $linked: { true: {}, false: {} },
   },
 });

@@ -53,9 +53,17 @@ export interface AvatarMediaProps
 export function AvatarMedia(
   props: AvatarMediaProps & { name: string; university?: string },
 ) {
-  const { className, image, id, university, name, tv$size, ...other_props } =
-    props;
-  const { figure, avatar } = avatar_media();
+  const {
+    className,
+    image,
+    id,
+    university,
+    name,
+    tv$size,
+    tv$direction,
+    ...other_props
+  } = props;
+  const { figure, avatar } = avatar_media({ tv$direction });
 
   return (
     <figure className={figure({ className })} {...other_props}>
