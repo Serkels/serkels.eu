@@ -237,8 +237,8 @@ function ConnectedAs() {
     const on_logout = useCallback(() => signOut(), [profile.id]);
 
     const href = match(profile.role)
-      .with("STUDIENT", () => `/exchange`)
-      .with("PARTNER", () => `/opportunity`)
+      .with("STUDIENT", () => `/exchanges`)
+      .with("PARTNER", () => `/opportunities`)
       .with("ADMIN", () => `/`)
       .exhaustive();
 

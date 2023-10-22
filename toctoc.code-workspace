@@ -12,7 +12,7 @@
     //
     { "path": "packages/@1/modules/category/api", "name": "📦⛽/category" },
     { "path": "packages/@1/modules/category/domain", "name": "📦📜/category" },
-    { "path": "packages/@1/modules/category/ui", "name": "📦💄/category" },
+    // { "path": "packages/@1/modules/category/ui", "name": "📦💄/category" },
     //
     { "path": "packages/@1/modules/exchange/api", "name": "📦⛽/exchange" },
     { "path": "packages/@1/modules/exchange/domain", "name": "📦📜/exchange" },
