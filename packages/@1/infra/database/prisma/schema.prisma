@@ -50,6 +50,8 @@ model Profile {
   partner          Partner?
   studient         Studient?
   written_messages Message[]   @relation("WrittenMessages")
+  followed_by      Profile[]   @relation("ProfileFollows")
+  following        Profile[]   @relation("ProfileFollows")
 }
 
 model Studient {

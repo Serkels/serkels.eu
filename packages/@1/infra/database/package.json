@@ -22,14 +22,15 @@
     "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
-    "@faker-js/faker": "8.2.0",
-    "@prisma/client": "5.4.2",
-    "slugify": "1.6.6"
+    "@prisma/client": "5.4.2"
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
+    "@faker-js/faker": "8.2.0",
     "@types/node": "20.8.7",
+    "dedent": "1.5.1",
     "prisma": "5.4.2",
+    "slugify": "1.6.6",
     "tsx": "3.14.0"
   }
 }

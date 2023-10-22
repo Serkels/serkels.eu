@@ -5,6 +5,7 @@
  */
 import { faker } from "@faker-js/faker";
 import { CategoryContext, ExchangeType, ProfileRole } from "@prisma/client";
+import dedent from "dedent";
 import process from "node:process";
 import slugify from "slugify";
 import prisma from "../index";
@@ -100,7 +101,27 @@ async function studient() {
       },
       profile: {
         create: {
-          bio: faker.lorem.paragraphs(faker.number.int({ max: 5 })),
+          bio: dedent`
+          # ${faker.company.buzzPhrase()}
+
+          > ${faker.company.catchPhrase()}
+
+          ${faker.lorem.paragraphs(faker.number.int({ max: 5 }))},
+
+          ## ${faker.lorem.words()}
+
+          ${faker.lorem.paragraphs()}
+
+          - ${faker.lorem.sentence()}
+          - ${faker.lorem.sentence()}
+          - ${faker.lorem.sentence()}
+
+          ${faker.lorem.paragraphs()}
+
+          ---
+
+          👋
+          `,
           image,
           name,
           role: ProfileRole.STUDIENT,
@@ -124,6 +145,12 @@ async function studients() {
     ...Array.from({ length: 10 }).map(studient),
   ]);
 
+  const foo_profile_1 = await prisma.profile.findFirstOrThrow({
+    where: { id: foo.profile_id },
+  });
+  const bar_profile_1 = await prisma.profile.findFirstOrThrow({
+    where: { id: bar.profile_id },
+  });
   const foo_exchange_1 = await prisma.exchange.findFirstOrThrow({
     where: { owner_id: foo.id },
   });
@@ -132,6 +159,14 @@ async function studients() {
     data: { participants: { connect: { id: bar.id } } },
     where: { id: foo_exchange_1.id },
   });
+
+  await prisma.profile.update({
+    data: { following: { connect: { id: bar_profile_1.id } } },
+    where: { id: foo_profile_1.id },
+  });
+  // const foo_con_1 = await prisma.exchange.findFirstOrThrow({
+  //   where: { owner_id: foo.id },
+  // });
   // const exchange_foo_bar = prisma.exchange.findFirst({where: {owner_id: foo.id})
 }
 
