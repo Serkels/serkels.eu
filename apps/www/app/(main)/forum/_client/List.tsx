@@ -56,10 +56,4 @@ function Item(props: Question) {
   } catch (error) {
     return <ErrorOccur error={error as Error} />;
   }
-  // const { slug } = props;
-  // return (
-  //   <Link className="h-full" href={`/opportunity/${slug}`}>
-  //     <Opoortunity_Card {...props} />
-  //   </Link>
-  // );
 }

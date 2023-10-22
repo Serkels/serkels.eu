@@ -58,7 +58,8 @@ async function HomeBanner() {
   );
 }
 
-function Explore() {
+async function Explore() {
+  const session = await getServerSession();
   const { base, title, link, links } = explore_grid_style({
     size: { initial: "xs", md: "md", xl: "xl" },
   });
@@ -69,16 +70,17 @@ function Explore() {
       </h2>
       <Grid fluid className={links()}>
         <ExploreLink
-          href="#"
+          href={session ? "/exchanges" : "#"}
           Icon={Exchange}
           className={link({
-            className: "text-secondary opacity-50",
+            className: "text-secondary ",
+            is_protected: !session,
           })}
         >
           Échanges
         </ExploreLink>
         <ExploreLink
-          href="/opportunity"
+          href="/opportunities"
           Icon={Binoculars}
           className={link({
             className: "text-tertiary",
@@ -125,6 +127,9 @@ const explore_grid_style = tv(
         xs: { base: "gap-y-12" },
         md: { link: "my-12" },
         xl: { link: "my-12" },
+      },
+      is_protected: {
+        true: { link: "pointer-events-none opacity-40" },
       },
     },
   },

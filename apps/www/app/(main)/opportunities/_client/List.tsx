@@ -42,7 +42,7 @@ export default function List() {
 function Item(props: Opportunity) {
   const { slug } = props;
   return (
-    <Link className="h-full" href={`/opportunity/${slug}`}>
+    <Link className="h-full" href={`/opportunities/${slug}`}>
       <Opoortunity_Card {...props} />
     </Link>
   );

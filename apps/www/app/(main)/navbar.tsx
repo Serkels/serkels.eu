@@ -1,10 +1,10 @@
 //
 
 import { MenuBurger } from ":components/burger";
+import { MobileNavBar } from ":components/shell/MobileNavBar";
 import { Grid } from "@1.ui/react/grid";
 import { Logo } from "@1/ui/icons";
 import Link from "next/link";
-import { MobileNavBar } from "~/components/MobileNavBar";
 
 //
 
