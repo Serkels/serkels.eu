@@ -137,7 +137,8 @@
         }
       },
       {
-        "args": ["x", "turbo", "dev", "--filter='@1.modules/*'"],
+        "args": ["x", "turbo", "type-check", "--filter='www'"],
+        // "args": ["x", "turbo", "dev", "--filter='@1.modules/*'"],
         "command": "bun",
         "group": "build",
         "label": "📦 Dev",

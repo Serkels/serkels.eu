@@ -11,9 +11,7 @@ export function Filter() {
 
   const filters = [
     { name: "Les dernières questions", slug: Forum_Filter.Enum.LAST_QUESTIONS },
-    { name: "Questions fréquentes", slug: Forum_Filter.Enum.FREQUENTLY_ASKED },
     { name: "Mes questions", slug: Forum_Filter.Enum.MINE },
-    { name: "Les dernières réponses", slug: Forum_Filter.Enum.LASTEST_ANSWERS },
     { name: "Questions répondus", slug: Forum_Filter.Enum.ALL },
   ];
 

@@ -20,8 +20,6 @@ export interface Question extends z.TypeOf<typeof Question_Schema> {}
 export const Forum_Filter = z.enum([
   "ALL",
   "AWNSERED",
-  "FREQUENTLY_ASKED",
   "LAST_QUESTIONS",
-  "LASTEST_ANSWERS",
   "MINE",
 ]);
