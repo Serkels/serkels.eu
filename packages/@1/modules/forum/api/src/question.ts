@@ -39,14 +39,12 @@ const question_api_router = router({
       type QuestionWhere = NonNullable<
         Parameters<typeof prisma.question.findMany>[0]
       >["where"];
-      const nerrow = match(filter)
+      const narrow = match(filter)
         .with(Forum_Filter.Enum.ALL, (): QuestionWhere => ({}))
         .with(Forum_Filter.Enum.AWNSERED, (): QuestionWhere => ({}))
-        .with(Forum_Filter.Enum.FREQUENTLY_ASKED, (): QuestionWhere => ({}))
-        .with(Forum_Filter.Enum.LASTEST_ANSWERS, (): QuestionWhere => ({}))
         .with(Forum_Filter.Enum.LAST_QUESTIONS, (): QuestionWhere => ({}))
         .with(Forum_Filter.Enum.MINE, (): QuestionWhere => ({}))
-        .exhaustive();
+        .otherwise(() => ({}));
 
       const items = await prisma.question.findMany({
         ...(cursor ? { cursor: { id: cursor } } : {}),
@@ -55,7 +53,7 @@ const question_api_router = router({
         where: {
           title: { contains: search ?? "" },
           ...(category ? { category: { slug: category } } : {}),
-          ...nerrow,
+          ...narrow,
         },
       });
 
