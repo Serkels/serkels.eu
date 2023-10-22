@@ -22,7 +22,7 @@
     "dev": "pkgroll --watch",
     "export": "email export",
     "studio": "email dev",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --build"
   },
   "dependencies": {
     "@react-email/body": "0.0.3",

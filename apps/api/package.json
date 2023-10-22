@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "type-check": "tsc --build",
     "dev": "tsx watch src/index.ts --clear-screen=false",
     "start": "node --import tsx src/index.ts"
   },

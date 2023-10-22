@@ -2,7 +2,9 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "@1.config/typescript/next.json",
   "compilerOptions": {
+    "incremental": true,
     "exactOptionalPropertyTypes": false,
+    "outDir": "./node_modules/.cache/tsc",
     "paths": {
       // TODO(douglasduteil): remove this legacy path
       "@1/ui/components/ButtonV": [

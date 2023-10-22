@@ -17,8 +17,8 @@
     }
   },
   "scripts": {
-    "dev": "tsc --watch",
-    "type-check": "tsc --noEmit"
+    "dev": "tsc --build --watch",
+    "type-check": "tsc --build"
   },
   "dependencies": {
     "@1.modules/auth.emails": "workspace:*",

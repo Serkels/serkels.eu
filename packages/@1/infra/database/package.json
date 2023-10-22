@@ -16,7 +16,7 @@
     "seed": "prisma db seed",
     "studio": "prisma studio",
     "dev:studio": "prisma studio",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --build"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"

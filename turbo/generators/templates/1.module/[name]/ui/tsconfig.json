@@ -4,7 +4,8 @@
   "compilerOptions": {
     "exactOptionalPropertyTypes": false,
     "incremental": true,
-    "noEmit": true
+    "noEmit": true,
+    "outDir": "./node_modules/.cache/tsc"
   },
   "include": ["src"]
 }

@@ -2,6 +2,7 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "@1.config/typescript/lib.json",
   "compilerOptions": {
+    "outDir": "./node_modules/.cache/tsc",
     "types": ["node"]
   },
   "include": ["src"]
