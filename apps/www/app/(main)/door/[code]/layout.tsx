@@ -12,8 +12,15 @@ export default async function Layout({
   children,
   params,
 }: PropsWithChildren<{ params: CodeParms }>) {
+  if (1) return <>{children}</>;
   const session = await getServerSession();
 
+  console.log(
+    "/home/x/zzz/github/toctocorg/toctoc/apps/www/app/(main)/door/[code]/layout.tsx",
+    {
+      session,
+    },
+  );
   if (!session) {
     return notFound();
   }

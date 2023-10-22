@@ -25,6 +25,12 @@ export default async function Layout({
 
   const session = await getServerSession();
 
+  console.log(
+    "/home/x/zzz/github/toctocorg/toctoc/apps/www/app/(main)/door/[code]/(public)/layout.tsx",
+    {
+      session,
+    },
+  );
   if (!session) {
     return notFound();
   }
@@ -43,6 +49,7 @@ export default async function Layout({
       <Partner_NavBar />
     ))
     .otherwise(() => null);
+
   return (
     <Grid fluid>
       {aside ? (

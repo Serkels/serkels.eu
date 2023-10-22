@@ -125,12 +125,6 @@ importers:
       '@1.ui/react':
         specifier: workspace:*
         version: link:../../packages/@1/ui/react
-      '@1/modules':
-        specifier: workspace:@0.__legacy__/modules@*
-        version: link:../../packages/__legacy__/modules
-      '@1/ui':
-        specifier: workspace:@0.__legacy__/ui@*
-        version: link:../../packages/__legacy__/ui
       '@douglasduteil/nextauth...trpc.prisma':
         specifier: workspace:*
         version: link:../../packages/@douglasduteil/nextauth...trpc.prisma

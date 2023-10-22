@@ -2,11 +2,9 @@
 
 import { TRPC_React } from ":trpc/client";
 import type { Question } from "@1.modules/forum.domain";
-import {
-  Question_AsyncCard,
-  Question_Card,
-  Question_InfiniteList,
-} from "@1.modules/forum.ui";
+import { Question_InfiniteList } from "@1.modules/forum.ui/InfiniteList";
+import { Question_AsyncCard } from "@1.modules/forum.ui/QuestionCard/AsyncCard";
+import { Question_Card } from "@1.modules/forum.ui/QuestionCard/Card";
 import { ErrorOccur } from "@1.ui/react/error";
 import type {
   UseInfiniteQueryResult,

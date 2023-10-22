@@ -11,7 +11,7 @@ import { Provider } from "./context";
 
 //
 
-export const Card: FC<Question> = (props) => {
+export const Question_Card: FC<Question> = (props) => {
   const { id } = props;
   return (
     <Provider question={props}>

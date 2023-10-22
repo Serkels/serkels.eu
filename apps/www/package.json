@@ -23,8 +23,6 @@
     "@1.modules/profile.domain": "workspace:*",
     "@1.modules/profile.ui": "workspace:*",
     "@1.ui/react": "workspace:*",
-    "@1/modules": "workspace:@0.__legacy__/modules@*",
-    "@1/ui": "workspace:@0.__legacy__/ui@*",
     "@douglasduteil/react-hookz...matrix-uri": "workspace:*",
     "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
     "@react-hookz/web": "23.1.0",

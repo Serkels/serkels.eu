@@ -19,6 +19,12 @@ export async function generateMetadata(
 
 export default async function Page({ params }: { params: CodeParms }) {
   const profile_id = await code_to_profile_id(params);
+  console.log(
+    "/home/x/zzz/github/toctocorg/toctoc/apps/www/app/(main)/door/[code]/(public)/history/page.tsx",
+    {
+      profile_id,
+    },
+  );
   if (!profile_id) {
     return notFound();
   }

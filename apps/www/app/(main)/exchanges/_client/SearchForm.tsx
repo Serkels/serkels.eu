@@ -1,9 +1,9 @@
 "use client";
 
+import { useSyncSearchQuery } from ":components/hooks/useSyncSearchQuery";
 import InputSearch from "@1.ui/react/input/InputSearch";
 import { useDebouncedCallback } from "@react-hookz/web";
 import type { ComponentProps } from "react";
-import { useSyncSearchQuery } from "~/components/useSyncSearchQuery";
 
 //
 

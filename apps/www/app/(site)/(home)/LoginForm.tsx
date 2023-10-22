@@ -1,7 +1,7 @@
 //
 
 import { PROFILE_ROLES } from "@1.modules/profile.domain";
-import { Button } from "@1/ui/components/ButtonV";
+import { Button } from "@1.ui/react/button";
 import { Field, Form, Formik, type FormikConfig } from "formik";
 
 export function LoginForm({

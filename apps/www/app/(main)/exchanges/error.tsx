@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@1/ui/components/ButtonV";
-import { ErrorOccur } from "~/components/ErrorOccur";
+import { Button } from "@1.ui/react/button";
+import { ErrorOccur } from "@1.ui/react/error";
 
 export default function Error({
   error,

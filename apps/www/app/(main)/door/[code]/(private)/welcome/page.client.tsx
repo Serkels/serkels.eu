@@ -1,7 +1,7 @@
 "use client";
 
 import { Avatar } from "@1.ui/react/avatar";
-import { Button } from "@1/ui/components/ButtonV";
+import { Button } from "@1.ui/react/button";
 import { signOut, useSession } from "next-auth/react";
 
 //

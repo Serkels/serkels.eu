@@ -5,7 +5,7 @@ import { Field, Form, Formik } from "formik";
 import type { ComponentPropsWithoutRef } from "react";
 // import { SelectCategoryField } from "~/components/SelectCategoryField";
 // import { Avatar } from "~/components/Avatar";
-// import { ErrorOccur } from "~/components/ErrorOccur";
+// import { ErrorOccur } from "@1.ui/react/error";
 // import { Question_Controller } from "~/modules/question/view/react/controller";
 // import { QACardFormBody } from "./components/QAForm/QACardFormBody";
 
@@ -31,15 +31,15 @@ export function CreateQuestionForm({
         <Form className="flex-1">
           <Field
             className="
-          mb-7
-          w-full
-          rounded-sm border border-solid border-[#dddddd]
-          px-4 py-3
+              mb-7
+              w-full
+              rounded-sm border border-solid border-[#dddddd]
+              px-4 py-3
 
-          placeholder-black
+              placeholder-black
 
-          md:col-span-6
-        "
+              md:col-span-6
+            "
             disabled={isSubmitting}
             name="title"
             placeholder="Pose une questions aux étudiants ..."

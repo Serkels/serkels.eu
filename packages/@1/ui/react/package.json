@@ -24,6 +24,10 @@
     "./input/*": {
       "types": "./src/input/*.tsx",
       "default": "./src/input/*.tsx"
+    },
+    "./form/*": {
+      "types": "./src/form/*.tsx",
+      "default": "./src/form/*.tsx"
     }
   },
   "scripts": {

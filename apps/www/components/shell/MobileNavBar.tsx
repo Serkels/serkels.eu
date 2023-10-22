@@ -1,9 +1,6 @@
 "use client";
 
-//
-
-import { Binoculars, Book, Exchange, MessageGroup } from "@1/ui/icons";
-
+import { Binoculars, Book, Exchange, MessageGroup } from "@1.ui/react/icons";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";

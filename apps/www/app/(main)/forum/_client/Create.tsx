@@ -5,13 +5,12 @@ import { CreateQuestionForm } from "@1.modules/forum.ui/CreateCard/Form";
 import { Idle } from "@1.modules/forum.ui/CreateCard/Idle";
 import type { Profile } from "@1.modules/profile.domain";
 import { Avatar } from "@1.modules/profile.ui/avatar";
-import { Card } from "@1/ui/components/Card";
-import { Spinner } from "@1/ui/components/spinner";
+import { Card } from "@1.ui/react/card";
+import { ErrorOccur } from "@1.ui/react/error";
+import { Spinner } from "@1.ui/react/spinner";
 import { useToggle } from "@react-hookz/web";
 import { useSession } from "next-auth/react";
 import { P, match } from "ts-pattern";
-import { ErrorOccur } from "~/components/ErrorOccur";
-// import { Card } from "@1.modules/forum.ui/Card/Card";
 
 //
 

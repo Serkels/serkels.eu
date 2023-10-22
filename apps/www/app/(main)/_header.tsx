@@ -2,7 +2,6 @@
 
 import { Avatar } from ":components/avatar";
 import { Grid } from "@1.ui/react/grid";
-import { VisuallyHidden } from "@1.ui/react/visually_hidden";
 import {
   Binoculars,
   Book,
@@ -11,7 +10,8 @@ import {
   MessageGroup,
   Messenger,
   Plus,
-} from "@1/ui/icons";
+} from "@1.ui/react/icons";
+import { VisuallyHidden } from "@1.ui/react/visually_hidden";
 import Link from "next/link";
 import { forwardRef, type ComponentPropsWithoutRef } from "react";
 import { tv } from "tailwind-variants";

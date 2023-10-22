@@ -1,8 +1,8 @@
 "use client";
 
-import { FilterRadioList } from "@0.__legacy__/www/src/components/FilterRadioList";
+import { useSyncSearchQuery } from ":components/hooks/useSyncSearchQuery";
 import { Exchange_Filter } from "@1.modules/exchange.domain";
-import { useSyncSearchQuery } from "~/components/useSyncSearchQuery";
+import { FilterRadioList } from "@1.ui/react/form/FilterRadioList";
 
 //
 

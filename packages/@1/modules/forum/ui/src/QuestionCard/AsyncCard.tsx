@@ -9,7 +9,7 @@ import { P, match } from "ts-pattern";
 
 //
 
-export function AsyncCard({
+export function Question_AsyncCard({
   info,
   children,
 }: {

@@ -1,6 +1,6 @@
 "use client";
 
-import { School } from "@1/ui/icons";
+import { School } from "@1.ui/react/icons";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import {

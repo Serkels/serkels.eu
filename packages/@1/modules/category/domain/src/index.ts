@@ -11,3 +11,9 @@ export const Category_Schema = Entity_Schema.augment({
 }).describe("Category_PropsSchema");
 
 export interface Category extends z.TypeOf<typeof Category_Schema> {}
+
+export const CATEGORY_ALL: Category = {
+  id: "ALL",
+  name: "Tout",
+  slug: "",
+};

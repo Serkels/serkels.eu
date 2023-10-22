@@ -1,7 +1,7 @@
 "use client";
 
 import { AppSidebar } from ":components/shell/AppSidebar";
-import { HamburgerMenu } from "@1/ui/icons";
+import { HamburgerMenu } from "@1.ui/react/icons";
 import { useToggle } from "@react-hookz/web";
 import Link from "next/link";
 import { tv } from "tailwind-variants";
