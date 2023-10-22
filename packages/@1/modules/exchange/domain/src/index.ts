@@ -8,6 +8,7 @@ import { z } from "zod";
 //
 
 export const Exchange_TypeSchema = z.enum(["PROPOSAL", "RESEARCH"]);
+export type Exchange_Type = z.TypeOf<typeof Exchange_TypeSchema>;
 export const Exchange_Schema = Entity_Schema.merge(Entity_Timestamps)
   .extend({
     available_places: z.coerce.number().default(Number.MIN_SAFE_INTEGER),

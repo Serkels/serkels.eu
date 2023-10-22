@@ -25,6 +25,10 @@
       "types": "./src/input/*.tsx",
       "default": "./src/input/*.tsx"
     },
+    "./form/atom": {
+      "types": "./src/form/atom.ts",
+      "default": "./src/form/atom.ts"
+    },
     "./form/*": {
       "types": "./src/form/*.tsx",
       "default": "./src/form/*.tsx"

@@ -21,12 +21,6 @@ export default async function Layout({
 
   const session = await getServerSession();
 
-  console.log(
-    "/home/x/zzz/github/toctocorg/toctoc/apps/www/app/(main)/door/[code]/(public)/layout.tsx",
-    {
-      session,
-    },
-  );
   if (!session || !profile_id) {
     notFound();
   }

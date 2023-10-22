@@ -1,17 +1,15 @@
 {
-  "name": "@1.modules/exchange.ui",
+  "name": "@1.modules/category.ui",
   "version": "0.1.0",
   "private": true,
   "sideEffects": false,
   "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
   "exports": {
     ".": {
       "types": "./src/index.ts",
       "default": "./src/index.ts"
-    },
-    "./tailwind.config.ts": {
-      "types": "./tailwind.config.ts",
-      "default": "./tailwind.config.ts"
     },
     "./*": {
       "types": "./src/*.tsx",
@@ -24,17 +22,11 @@
   "dependencies": {
     "@1.modules/core": "workspace:*",
     "@1.modules/category.domain": "workspace:*",
-    "@1.modules/category.ui": "workspace:*",
-    "@1.modules/exchange.domain": "workspace:*",
     "@1.ui/react": "workspace:*",
     "@tanstack/react-query": "4.36.1",
-    "constate": "3.3.2",
-    "date-fns": "2.30.0",
     "formik": "2.4.5",
-    "react-content-loader": "6.2.1",
-    "react-slotify": "0.2.2",
-    "react-use": "17.4.0",
     "react": "18.2.0",
+    "react-content-loader": "6.2.1",
     "tailwind-variants": "0.1.14",
     "ts-pattern": "5.0.5",
     "zod": "3.22.4"
@@ -43,7 +35,7 @@
     "@1.config/prettier": "workspace:*",
     "@1.config/tailwindcss": "workspace:*",
     "@1.config/typescript": "workspace:*",
-    "@types/react": "18.2.31",
+    "@types/react": "18.2.30",
     "prettier": "3.0.3",
     "tailwindcss": "3.3.3",
     "typescript": "5.2.2"

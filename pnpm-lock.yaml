@@ -584,6 +584,61 @@ importers:
         specifier: '5'
         version: 5.2.2
 
+  packages/@1/modules/category/ui:
+    dependencies:
+      '@1.modules/category.domain':
+        specifier: workspace:*
+        version: link:../domain
+      '@1.modules/core':
+        specifier: workspace:*
+        version: link:../../core
+      '@1.ui/react':
+        specifier: workspace:*
+        version: link:../../../ui/react
+      '@tanstack/react-query':
+        specifier: 4.36.1
+        version: 4.36.1(react-dom@18.2.0)(react@18.2.0)
+      formik:
+        specifier: 2.4.5
+        version: 2.4.5(react@18.2.0)
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+      react-content-loader:
+        specifier: 6.2.1
+        version: 6.2.1(react@18.2.0)
+      tailwind-variants:
+        specifier: 0.1.14
+        version: 0.1.14(tailwindcss@3.3.3)
+      ts-pattern:
+        specifier: 5.0.5
+        version: 5.0.5
+      zod:
+        specifier: 3.22.4
+        version: 3.22.4
+    devDependencies:
+      '@1.config/prettier':
+        specifier: workspace:*
+        version: link:../../../config/prettier
+      '@1.config/tailwindcss':
+        specifier: workspace:*
+        version: link:../../../config/tailwindcss
+      '@1.config/typescript':
+        specifier: workspace:*
+        version: link:../../../config/typescript
+      '@types/react':
+        specifier: 18.2.30
+        version: 18.2.30
+      prettier:
+        specifier: 3.0.3
+        version: 3.0.3
+      tailwindcss:
+        specifier: 3.3.3
+        version: 3.3.3
+      typescript:
+        specifier: 5.2.2
+        version: 5.2.2
+
   packages/@1/modules/core:
     dependencies:
       debug:
@@ -661,6 +716,12 @@ importers:
 
   packages/@1/modules/exchange/ui:
     dependencies:
+      '@1.modules/category.domain':
+        specifier: workspace:*
+        version: link:../../category/domain
+      '@1.modules/category.ui':
+        specifier: workspace:*
+        version: link:../../category/ui
       '@1.modules/core':
         specifier: workspace:*
         version: link:../../core
@@ -679,6 +740,9 @@ importers:
       date-fns:
         specifier: 2.30.0
         version: 2.30.0
+      formik:
+        specifier: 2.4.5
+        version: 2.4.5(react@18.2.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -2214,7 +2278,7 @@ packages:
     dependencies:
       '@jridgewell/set-array': 1.1.2
       '@jridgewell/sourcemap-codec': 1.4.15
-      '@jridgewell/trace-mapping': 0.3.20
+      '@jridgewell/trace-mapping': 0.3.9
 
   /@jridgewell/resolve-uri@3.1.1:
     resolution: {integrity: sha512-dSYZh7HhCDtCKm4QakX0xFpsRDqjjtZf/kjI/v3T3Nwt5r8/qz/M19F9ySyOqU94SXBmeG9ttTul+YnR4LOxFA==}
@@ -2227,18 +2291,11 @@ packages:
   /@jridgewell/sourcemap-codec@1.4.15:
     resolution: {integrity: sha512-eF2rxCRulEKXHTRiDrDy6erMYWqNw4LPdQ8UQA4huuxaQsVeRPFl2oM8oDGxMFhJUWZf9McpLtJasDDZb/Bpeg==}
 
-  /@jridgewell/trace-mapping@0.3.20:
-    resolution: {integrity: sha512-R8LcPeWZol2zR8mmH3JeKQ6QRCFb7XgUhV9ZlGhHLGyg4wpPiPZNQOOWhFZhxKw8u//yTbNGI42Bx/3paXEQ+Q==}
-    dependencies:
-      '@jridgewell/resolve-uri': 3.1.1
-      '@jridgewell/sourcemap-codec': 1.4.15
-
   /@jridgewell/trace-mapping@0.3.9:
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
     dependencies:
       '@jridgewell/resolve-uri': 3.1.1
       '@jridgewell/sourcemap-codec': 1.4.15
-    dev: true
 
   /@manypkg/find-root@2.2.1:
     resolution: {integrity: sha512-34NlypD5mmTY65cFAK7QPgY5Tzt0qXR4ZRXdg97xAlkiLuwXUPBEXy5Hsqzd+7S2acsLxUz6Cs50rlDZQr4xUA==}
@@ -4631,10 +4688,10 @@ packages:
       '@types/unist': 2.0.6
     dev: false
 
-  /@types/hoist-non-react-statics@3.3.4:
-    resolution: {integrity: sha512-ZchYkbieA+7tnxwX/SCBySx9WwvWR8TaP5tb2jRAzwvLb/rWchGw3v0w3pqUbUvj0GCwW2Xz/AVPSk6kUGctXQ==}
+  /@types/hoist-non-react-statics@3.3.1:
+    resolution: {integrity: sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA==}
     dependencies:
-      '@types/react': 18.2.31
+      '@types/react': 18.2.30
       hoist-non-react-statics: 3.3.2
     dev: false
 
@@ -4703,6 +4760,13 @@ packages:
     dependencies:
       '@types/react': 18.2.31
     dev: true
+
+  /@types/react@18.2.30:
+    resolution: {integrity: sha512-OfqdJnDsSo4UNw0bqAjFCuBpLYQM7wvZidz0hVxHRjrEkzRlvZL1pJVyOSY55HMiKvRNEo9DUBRuEl7FNlJ/Vg==}
+    dependencies:
+      '@types/prop-types': 15.7.5
+      '@types/scheduler': 0.16.3
+      csstype: 3.1.2
 
   /@types/react@18.2.31:
     resolution: {integrity: sha512-c2UnPv548q+5DFh03y8lEDeMfDwBn9G3dRwfkrxQMo/dOtRHUUO57k6pHvBIfH/VF4Nh+98mZ5aaSe+2echD5g==}
@@ -6972,7 +7036,7 @@ packages:
     peerDependencies:
       react: '>=16.8.0'
     dependencies:
-      '@types/hoist-non-react-statics': 3.3.4
+      '@types/hoist-non-react-statics': 3.3.1
       deepmerge: 2.2.1
       hoist-non-react-statics: 3.3.2
       lodash: 4.17.21
