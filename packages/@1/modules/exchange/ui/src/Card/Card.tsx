@@ -18,8 +18,7 @@ export function Card({
   exchange,
   children,
 }: PropsWithChildren<{ exchange: Exchange }>) {
-  const { base, body, info_bar, header, category, exchange_icon } =
-    exchange_card();
+  const { base, body } = exchange_card();
   const { title, description } = exchange;
   return (
     <Provider exchange={exchange}>
