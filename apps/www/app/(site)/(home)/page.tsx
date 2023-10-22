@@ -60,14 +60,11 @@ async function HomeBanner() {
 
 async function Explore() {
   const session = await getServerSession();
-  const { base, title, link, links } = explore_grid_style({
+  const { base, link, links } = explore_grid_style({
     size: { initial: "xs", md: "md", xl: "xl" },
   });
   return (
     <Grid className={base()}>
-      <h2 className={title({ className: "text-2xl" })}>
-        Explorer sans créer un compte !
-      </h2>
       <Grid fluid className={links()}>
         <ExploreLink
           href={session ? "/exchanges" : "#"}
@@ -118,7 +115,6 @@ const explore_grid_style = tv(
   {
     base: "my-10",
     slots: {
-      title: "col-span-full mb-10 w-full text-center",
       links: "col-span-full xl:col-start-4",
       link: "col-span-2 sm:col-span-3 md:col-span-2 ",
     },
