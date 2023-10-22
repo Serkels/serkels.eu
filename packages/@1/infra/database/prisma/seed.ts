@@ -188,6 +188,8 @@ async function studients() {
     data: { following: { connect: [{ id: bar_profile_1.id }] } },
     where: { id: foo_profile_1.id },
   });
+
+  random_other_profiles;
   // const profile_count = await prisma.profile.count();
   // await prisma.profile.updateMany({
   //   data: { following: { connect: [{ id: bar_profile_1.id }] } },
