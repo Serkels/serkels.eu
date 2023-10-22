@@ -1,7 +1,18 @@
 //
 
 import { TRPC_SSR } from ":trpc/server";
+import type { Metadata, ResolvingMetadata } from "next";
 import { CreateExchangeForm } from "./page.client";
+
+//
+export async function generateMetadata(
+  _: any,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  return {
+    title: `New Exchange :: ${(await parent).title?.absolute}`,
+  };
+}
 
 //
 
