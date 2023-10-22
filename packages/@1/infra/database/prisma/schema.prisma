@@ -55,18 +55,17 @@ model Profile {
 }
 
 model Studient {
-  id             String    @id @default(cuid())
+  id             String     @id @default(cuid())
   citizenship    String?
   city           String?
   field_of_study String?
-  interest       Category? @relation("CategorizedStudientInterest", fields: [interest_id], references: [id])
-  interest_id    String?
-  profile        Profile   @relation(fields: [profile_id], references: [id], onDelete: Cascade)
-  profile_id     String    @unique
+  interest       Category[] @relation("CategorizedStudientInterest")
+  profile        Profile    @relation(fields: [profile_id], references: [id], onDelete: Cascade)
+  profile_id     String     @unique
   university     String
   //
-  created_at     DateTime  @default(now())
-  updated_at     DateTime  @default(now())
+  created_at     DateTime   @default(now())
+  updated_at     DateTime   @default(now())
   //
 
   asked_questions           Question[] @relation("AskedQuestions")

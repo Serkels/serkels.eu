@@ -50,6 +50,13 @@ async function studient() {
       where: { slug: "autres" },
     }),
   ]);
+
+  const exchange_categories_id = (
+    await prisma.category.findMany({
+      where: { contexts: { has: "EXCHANGE" } },
+    })
+  ).map(({ id }) => id);
+
   const forum_categories_id = (
     await prisma.category.findMany({
       where: { contexts: { has: "FORUM" } },
@@ -61,7 +68,11 @@ async function studient() {
       citizenship: faker.location.country(),
       city: faker.location.city(),
       field_of_study: faker.word.noun(),
-      interest: { connect: { id: category_autres.id } },
+      interest: {
+        connect: faker.helpers.arrayElements(
+          exchange_categories_id.map((id) => ({ id })),
+        ),
+      },
       university: faker.company.name(),
       //
       asked_questions: {
@@ -138,6 +149,14 @@ async function studient() {
   });
 }
 
+async function random_other_profiles(profile_id: string) {
+  const profile_count = await prisma.profile.count();
+  return prisma.profile.findMany({
+    take: faker.number.int({ min: 5, max: 10 }),
+    skip: faker.number.int({ min: 0, max: profile_count }),
+    where: { NOT: { id: profile_id } },
+  });
+}
 async function studients() {
   const [foo, bar] = await Promise.all([
     studient(),
@@ -145,25 +164,36 @@ async function studients() {
     ...Array.from({ length: 10 }).map(studient),
   ]);
 
-  const foo_profile_1 = await prisma.profile.findFirstOrThrow({
-    where: { id: foo.profile_id },
-  });
-  const bar_profile_1 = await prisma.profile.findFirstOrThrow({
-    where: { id: bar.profile_id },
-  });
+  const [foo_profile_1, bar_profile_1] = await prisma.$transaction([
+    prisma.profile.findFirstOrThrow({
+      where: { id: foo.profile_id },
+    }),
+    prisma.profile.findFirstOrThrow({
+      where: { id: bar.profile_id },
+    }),
+  ]);
+
+  //
+
   const foo_exchange_1 = await prisma.exchange.findFirstOrThrow({
     where: { owner_id: foo.id },
   });
 
   await prisma.exchange.update({
-    data: { participants: { connect: { id: bar.id } } },
+    data: { participants: { connect: [{ id: bar.id }] } },
     where: { id: foo_exchange_1.id },
   });
 
   await prisma.profile.update({
-    data: { following: { connect: { id: bar_profile_1.id } } },
+    data: { following: { connect: [{ id: bar_profile_1.id }] } },
     where: { id: foo_profile_1.id },
   });
+  // const profile_count = await prisma.profile.count();
+  // await prisma.profile.updateMany({
+  //   data: { following: { connect: [{ id: bar_profile_1.id }] } },
+  //   where: { id: foo_profile_1.id },
+  // });
+
   // const foo_con_1 = await prisma.exchange.findFirstOrThrow({
   //   where: { owner_id: foo.id },
   // });

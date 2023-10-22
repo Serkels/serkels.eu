@@ -40,7 +40,7 @@ export const Studient_Schema = Entity_Schema.extend({
   citizenship: z.string().default("Unkown citizenship"),
   city: z.string().default("Unkown city"),
   field_of_study: z.string().default("Unkown field_of_study"),
-  interest: Category_Schema,
+  interest: z.array(Category_Schema),
   profile: Profile_Schema,
   university: z.string().default("Unkown university"),
 }).describe("Studient_Schema");

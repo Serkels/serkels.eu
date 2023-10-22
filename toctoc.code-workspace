@@ -155,7 +155,7 @@
         "args": ["run", "migrate:dev"],
         "type": "shell",
         "options": {
-          "cwd": "${workspaceFolder:🏗️ infra}/database"
+          "cwd": "${workspaceFolder:🏗️/database}"
         },
         "problemMatcher": ["$tsc-watch"],
         "group": "build",
@@ -169,7 +169,7 @@
         "args": ["run", "seed"],
         "type": "shell",
         "options": {
-          "cwd": "${workspaceFolder:🏗️ infra}/database"
+          "cwd": "${workspaceFolder:🏗️/database}"
         },
         "problemMatcher": ["$tsc-watch"],
         "group": "build",
@@ -183,7 +183,7 @@
         "args": ["run", "studio"],
         "type": "shell",
         "options": {
-          "cwd": "${workspaceFolder:🏗️ infra}/database"
+          "cwd": "${workspaceFolder:🏗️/database}"
         },
         "problemMatcher": ["$tsc-watch"],
         "group": "build",
