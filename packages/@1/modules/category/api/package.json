@@ -23,7 +23,7 @@
     "@1.modules/category.domain": "workspace:*",
     "@1.modules/trpc": "workspace:*",
     "@decs/typeschema": "0.12.1",
-    "@trpc/server": "10.40.0",
+    "@trpc/server": "10.41.0",
     "zod": "3.22.4"
   },
   "devDependencies": {
