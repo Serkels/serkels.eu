@@ -35,7 +35,7 @@ const opportunity_api_router = router({
       z.object({
         category: z.string().optional(),
         cursor: z.string().optional(),
-        limit: z.number().min(1).max(10).default(10),
+        limit: z.number().min(1).max(12).default(12),
         search: z.string().optional(),
       }),
     )

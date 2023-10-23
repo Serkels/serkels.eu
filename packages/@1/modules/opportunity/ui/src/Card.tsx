@@ -56,7 +56,10 @@ export function Opoortunity_Card({
         <hr />
 
         <footer className="flex cursor-default justify-between p-3">
-          <aside className="text-xs font-bold uppercase leading-[inherit] text-Dove_Gray">
+          <aside
+            className="line-clamp-1 h-fit flex-1 text-xs font-bold uppercase leading-[inherit] text-Dove_Gray"
+            title={category.name}
+          >
             {category.name}
           </aside>
           <aside className="space-x-3" onClick={() => {}}>

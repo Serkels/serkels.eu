@@ -2,7 +2,6 @@
 
 import { AsideFilter } from ":components/shell/AsideFilter";
 import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
-import { getServerSession } from "@1.modules/auth.next";
 import { Grid } from "@1.ui/react/grid";
 import InputSearch from "@1.ui/react/input/InputSearch";
 import dynamic from "next/dynamic";
@@ -25,12 +24,6 @@ export default async function Layout({
   children,
   see_also,
 }: PropsWithChildren<{ see_also: ReactNode }>) {
-  const session = await getServerSession();
-  console.log({ session });
-  // if (!session) {
-  //   return notFound();
-  // }
-
   await TRPC_SSR.category.exchange.prefetch();
 
   return (

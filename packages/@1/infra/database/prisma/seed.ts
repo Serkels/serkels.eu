@@ -261,7 +261,7 @@ async function partner() {
 }
 async function partners() {
   return await Promise.all(
-    faker.helpers.multiple(partner, { count: { max: 10, min: 5 } }),
+    faker.helpers.multiple(partner, { count: { max: 15, min: 10 } }),
   );
 }
 
