@@ -188,6 +188,7 @@ export const authOptions: NextAuthOptions = {
             .object({
               email: z.string().trim().toLowerCase().email(),
               name: z.string().trim(),
+              university: z.string().optional(),
               role: PROFILE_ROLES,
             })
             .parse(credentials, {
@@ -255,6 +256,10 @@ export const authOptions: NextAuthOptions = {
             identifier,
             name: user.name,
             role: input.role,
+            context:
+              input.role === PROFILE_ROLES.Enum.STUDIENT
+                ? { university: input.university }
+                : {},
             token: token_id,
           });
 

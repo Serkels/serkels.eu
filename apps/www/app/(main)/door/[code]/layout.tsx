@@ -5,15 +5,16 @@ import type { CodeParms } from ":pipes/code";
 import { getServerSession } from "@1.modules/auth.next";
 import { Grid } from "@1.ui/react/grid";
 import { notFound, redirect } from "next/navigation";
-import type { PropsWithChildren, ReactNode } from "react";
+import type { PropsWithChildren } from "react";
+import Navbar_Page from "./_@navbar/page";
 
 //
 
 export default async function Layout({
   children,
   params,
-  navbar,
-}: PropsWithChildren<{ params: CodeParms; navbar: ReactNode }>) {
+}: PropsWithChildren<{ params: CodeParms }>) {
+  const navbar = <Navbar_Page params={params} />;
   const session = await getServerSession();
   if (!session) {
     return notFound();

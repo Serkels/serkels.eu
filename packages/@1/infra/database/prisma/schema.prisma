@@ -28,10 +28,11 @@ generator client {
 //
 
 model SignupPayload {
-  role   ProfileRole
-  name   String
-  email  String              @unique
-  tokens VerificationToken[]
+  role    ProfileRole
+  name    String
+  email   String              @unique
+  tokens  VerificationToken[]
+  context Json
 }
 
 model Profile {

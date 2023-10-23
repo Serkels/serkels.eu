@@ -62,6 +62,7 @@ const auth_api_router = router({
           name: z.string(),
           role: PROFILE_ROLES,
           token: z.string(),
+          context: z.any(),
         }),
       )
       .mutation(async ({ input, ctx: { prisma } }) => {
@@ -82,6 +83,7 @@ const auth_api_router = router({
             email: input.identifier,
             role: ProfileRole[input.role],
             tokens: { connect: { token: input.token } },
+            context: input.context,
           },
         });
       }),
@@ -100,6 +102,10 @@ const auth_api_router = router({
 
         const image = gravatarUrlFor(email);
 
+        // const studient =
+        //   payload.role === ProfileRole.STUDIENT
+        //     ? Studient_Schema.parse(payload.context)
+        //     : undefined;
         const record = await prisma.user.update({
           where: { id: user.id },
           data: {
@@ -110,6 +116,19 @@ const auth_api_router = router({
                 image,
                 name: payload.name,
                 role: ProfileRole[payload.role],
+                bio: "N/A",
+                ...(payload.role === ProfileRole.STUDIENT
+                  ? {
+                      studient: {
+                        create: {
+                          citizenship: "N/A",
+                          city: "N/A",
+                          field_of_study: "N/A",
+                          university: "N/A",
+                        },
+                      },
+                    }
+                  : {}),
               },
             },
           },
