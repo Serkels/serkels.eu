@@ -9,7 +9,7 @@ import { match, P } from "ts-pattern";
 
 //
 
-export function Opoortunity_InfiniteList({
+export function Opportunity_InfiniteList({
   info,
   children,
 }: {

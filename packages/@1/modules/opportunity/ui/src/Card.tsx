@@ -4,13 +4,18 @@ import type { Opportunity } from "@1.modules/opportunity.domain";
 import { Bookmark, LocationRadius, Share } from "@1.ui/react/icons";
 import { format, formatISO, isPast } from "date-fns";
 import { fr } from "date-fns/locale";
+import type { PropsWithChildren } from "react";
+import { createSlot } from "react-slotify";
 import { tv } from "tailwind-variants";
 
 //
 
-export function Opoortunity_Card(props: Opportunity) {
+export function Opoortunity_Card({
+  opportunity,
+  children,
+}: PropsWithChildren<{ opportunity: Opportunity }>) {
   // return <>{JSON.stringify(props, null, 2)}</>;
-  const { cover, when, title, owner, location, category } = props;
+  const { cover, when, title, owner, location, category } = opportunity;
   const { base, date } = opoortunity_card();
   return (
     <article className={base()}>
@@ -43,7 +48,7 @@ export function Opoortunity_Card(props: Opportunity) {
           </figure>
 
           <p className="line-clamp-1" title={location ?? ""}>
-            <LocationRadius className="inline-block h-[14px] w-[14px]" />{" "}
+            <LocationRadius className="inline-block h-4 w-4 text-primary" />{" "}
             {location}
           </p>
         </figcaption>
@@ -55,15 +60,10 @@ export function Opoortunity_Card(props: Opportunity) {
             {category.name}
           </aside>
           <aside className="space-x-3" onClick={() => {}}>
-            <BookmarkButton
-            // id={Number(id)}
-            // type="opportunity"
-            // className={({ isActive }) =>
-            //   `inline-block h-4 w-4 ${
-            //     isActive ? "text-Chateau_Green" : "text-Dove_Gray"
-            //   }`
-            // }
-            />
+            <Opoortunity_Card.Footer_Actions.Renderer childs={children}>
+              <Bookmark className="inline-block h-4 w-4 text-Dove_Gray" />
+            </Opoortunity_Card.Footer_Actions.Renderer>
+
             <button>
               <Share className="inline-block h-4 w-4 text-Dove_Gray" />
             </button>
@@ -74,8 +74,9 @@ export function Opoortunity_Card(props: Opportunity) {
   );
 }
 
+Opoortunity_Card.Footer_Actions = createSlot();
 export const opoortunity_card = tv({
-  base: "rounded border border-neutral-200 bg-white shadow-md",
+  base: "h-full rounded border border-neutral-200 bg-white shadow-md",
   slots: {
     figure: "",
     date: "font-bold",
@@ -87,7 +88,3 @@ export const opoortunity_card = tv({
     },
   },
 });
-
-function BookmarkButton() {
-  return <Bookmark className="inline-block h-4 w-4 text-Dove_Gray" />;
-}
