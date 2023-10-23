@@ -40,7 +40,7 @@ export default async function Layout({
             "
           >
             {children}
-          </div>{" "}
+          </div>
         </Grid>
       </AuthSessionProvider>
     );
