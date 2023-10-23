@@ -28,22 +28,21 @@ export default function HomeCarousel() {
         <Carousel className="h-full w-full" autoplay={true}>
           <article>
             <h1 className="mb-12 text-2xl font-bold uppercase">
-              Activités, notes de cours et profitez d'autres services" et
-              supprimer la mention des opportunités.
+              Avec toc toc échangez des expériences cours de langue activités
+              notes de cours et profitez d autres services
             </h1>
-            <p>Inscrivez-vous pour échanger entre pairs</p>
+            <p>Inscrivez-vous pour échanger entre pairs !</p>
           </article>
           <article>
             <h1 className="mb-6 text-2xl font-bold uppercase">
-              Une question ? Posez-la directement à la communauté sur la
-              rubrique "Forum"
+              Une question ? Posez la directement à la communauté sur la
+              rubrique “forum”...
             </h1>
-            <p>Connectez-vous pour voir toutes les offres d'échanges !</p>
           </article>
           <article>
             <h1 className="mb-6 text-2xl font-bold uppercase">
-              … et ne ratez aucune opportunité proposée par nos partenaires
-              (bourses, activités etc..)​
+              ... et ne ratez aucune opportunité proposée par nos partenaires
+              bourses activités etc..​
             </h1>
           </article>
         </Carousel>

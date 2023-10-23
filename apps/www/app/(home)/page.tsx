@@ -102,7 +102,7 @@ async function Explore() {
           className={link({
             className: "text-quinary",
           })}
-          // className="col-span-2 text-RedViolet"
+          title="Guide pour continuer les études en France…"
         >
           Guide d'étudiant
         </ExploreLink>
@@ -141,10 +141,10 @@ function CarouselPlaceholder() {
     <Grid className="min-h-[45vh] items-center">
       <aside className="col-span-2 sm:col-span-4 md:col-start-2 xl:col-start-4">
         <h1 className="mb-12 text-2xl font-bold uppercase">
-          Activités, notes de cours et profitez d'autres services" et supprimer
-          la mention des opportunités.
+          Avec toc toc échangez des expériences cours de langue activités notes
+          de cours et profitez d'autres services
         </h1>
-        <p>Inscrivez-vous pour échanger entre pairs</p>
+        <p>Inscrivez-vous pour échanger entre pairs !</p>
       </aside>
       <aside className="col-span-2 sm:col-span-2">
         {/* <ConnectionPanel /> */}
