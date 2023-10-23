@@ -31,7 +31,7 @@ export default function List() {
 
     return (
       <Opportunity_InfiniteList info={info}>
-        {(data) => <Item {...data} />}
+        {(data) => <Item opportunity={data} />}
       </Opportunity_InfiniteList>
     );
   } catch (error) {
@@ -39,12 +39,13 @@ export default function List() {
   }
 }
 
-function Item(props: Opportunity) {
+export function Item({ opportunity }: { opportunity: Opportunity }) {
   const { status } = useSession();
-  const { slug } = props;
+  console.log({ opportunity });
+  const { slug } = opportunity;
   return (
     <Link href={`/opportunities/${slug}`}>
-      <Opoortunity_Card opportunity={props}>
+      <Opoortunity_Card opportunity={opportunity}>
         <Opoortunity_Card.Footer_Actions>
           {status === "authenticated" ? <BookmarkButton /> : null}
         </Opoortunity_Card.Footer_Actions>

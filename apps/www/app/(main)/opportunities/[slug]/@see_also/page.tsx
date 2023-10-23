@@ -1,28 +1,20 @@
 //
 
-import Link from "next/link";
+import { TRPC_SSR } from ":trpc/server";
+import { ErrorOccur } from "@1.ui/react/error";
+import Page_Client from "./page.client";
 
 //
 
-export default function Page() {
-  return (
-    <article>
-      <h2 className="mb-7 text-center  text-lg font-bold text-Congress_Blue">
-        Voir aussi
-      </h2>
+export default async function Page({ params }: { params: { slug: string } }) {
+  const { slug } = params;
+  try {
+    const opportunity = await TRPC_SSR.opportunity.by_slug.fetch(slug);
 
-      <Link href="/guide">
-        <figure className="bg-secondary-blue-gradient px-4 py-6 text-white">
-          <h3 className="text-center text-lg uppercase ">
-            Le guide d'étudiant
-          </h3>
-          <div className="h-[110px]"></div>
-          <figcaption className=" text-xs">
-            Trouverez toutes les informations utiles pour bénéficier d'une
-            bourse, faire une demande de logement, bénéficier d'aides …
-          </figcaption>
-        </figure>
-      </Link>
-    </article>
-  );
+    const { category } = opportunity;
+
+    return <Page_Client category={category.slug} />;
+  } catch (error) {
+    return <ErrorOccur error={error as Error} />;
+  }
 }

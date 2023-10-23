@@ -7,7 +7,7 @@ import { NEXTAUTH_TRPCENV } from "@douglasduteil/nextauth...trpc.prisma/config";
 import type { JWT } from "@douglasduteil/nextauth...trpc.prisma/jwt";
 import { create_nexauth_header } from "@douglasduteil/nextauth...trpc.prisma/jwt";
 import { Hydrate, dehydrate } from "@tanstack/react-query";
-import { createTRPCProxyClient, httpLink, loggerLink } from "@trpc/client";
+import { createTRPCProxyClient, httpBatchLink, loggerLink } from "@trpc/client";
 import { createServerSideHelpers } from "@trpc/react-query/server";
 import type { ComponentProps } from "react";
 import SuperJSON from "superjson";
@@ -22,7 +22,7 @@ const proxyClient = createTRPCProxyClient<Router>({
           typeof window !== "undefined") ||
         (opts.direction === "down" && opts.result instanceof Error),
     }),
-    httpLink({
+    httpBatchLink({
       url: `${process.env["API_URL"]}/trpc`,
       headers: async ({}) => {
         const session = await getServerSession();
