@@ -17,6 +17,8 @@ import {
 import { createSlot } from "react-slotify";
 import { tv } from "tailwind-variants";
 
+//
+
 export function Article({
   opportunity,
   children,
@@ -28,16 +30,18 @@ export function Article({
       <h1 className="text-4xl font-bold">{title}</h1>
 
       <header className="flex items-center justify-between py-6">
-        <figure className="flex items-center">
-          <img
-            className="mr-4 block rounded-full"
-            width="30"
-            height="30"
-            src={owner.profile.image}
-          />
+        <Article.Avatar.Renderer childs={children}>
+          <figure className="flex items-center">
+            <img
+              className="mr-4 block rounded-full"
+              width="30"
+              height="30"
+              src={owner.profile.image}
+            />
 
-          <figcaption className="text-lg">{owner.profile.name}</figcaption>
-        </figure>
+            <figcaption className="text-lg">{owner.profile.name}</figcaption>
+          </figure>
+        </Article.Avatar.Renderer>
         <small className="text-lg font-bold text-Chateau_Green">
           Date limite :{" "}
           <time dateTime={when.toUTCString()}>
@@ -100,6 +104,7 @@ export function Article({
 }
 
 Article.Description = createSlot<{ description: string }>();
+Article.Avatar = createSlot();
 
 function IconWithBgCircle({
   className,

@@ -129,6 +129,16 @@ const auth_api_router = router({
                       },
                     }
                   : {}),
+                ...(payload.role === ProfileRole.PARTNER
+                  ? {
+                      partner: {
+                        create: {
+                          link: "N/A",
+                          city: "N/A",
+                        },
+                      },
+                    }
+                  : {}),
               },
             },
           },

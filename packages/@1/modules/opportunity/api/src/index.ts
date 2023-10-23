@@ -29,7 +29,22 @@ const opportunity_api_router = router({
         },
       });
     }),
+  //
 
+  by_profile_id: procedure
+    .input(z.object({ profile_id: z.string(), cursor: z.string().optional() }))
+    .query(async ({ input: { profile_id }, ctx: { prisma } }) => {
+      const data = await prisma.opportunity.findMany({
+        where: { owner: { profile_id } },
+        include: {
+          category: true,
+          owner: { include: { profile: true } },
+        },
+      });
+      return { data };
+    }),
+
+  //
   find: procedure
     .input(
       z.object({

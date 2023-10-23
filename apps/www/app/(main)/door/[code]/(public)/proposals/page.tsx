@@ -3,8 +3,9 @@
 import { Item } from ":app/(main)/exchanges/_client/List";
 import { code_to_profile_id, type CodeParms } from ":pipes/code";
 import { TRPC_SSR } from ":trpc/server";
+import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import type { Metadata, ResolvingMetadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 //
 
@@ -21,6 +22,11 @@ export default async function Page({ params }: { params: CodeParms }) {
   const profile_id = await code_to_profile_id(params);
   if (!profile_id) {
     return notFound();
+  }
+
+  const profile = await TRPC_SSR.profile.by_id.fetch(profile_id);
+  if (profile.role !== PROFILE_ROLES.Enum.STUDIENT) {
+    redirect(`/@${params.code}`);
   }
 
   const { data: exchanges } = await TRPC_SSR.exchanges.by_profile.fetch({

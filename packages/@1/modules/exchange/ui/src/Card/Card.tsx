@@ -3,7 +3,7 @@
 import { Exchange_TypeSchema, type Exchange } from "@1.modules/exchange.domain";
 import { AvatarMedia } from "@1.ui/react/avatar";
 import { card } from "@1.ui/react/card/atom";
-import { Exchange as ExchangeIcon, Share } from "@1.ui/react/icons";
+import { Exchange as ExchangeIcon, School, Share } from "@1.ui/react/icons";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { type PropsWithChildren } from "react";
@@ -64,11 +64,12 @@ function Header({ children }: PropsWithChildren) {
   return (
     <header className={header()}>
       <Card.Header.Left.Renderer childs={children}>
-        <AvatarMedia
-          name="Unknow user"
-          image="/opengraph-image.png"
-          university=""
-        />
+        <AvatarMedia name="Unknow user" image="/opengraph-image.png">
+          <AvatarMedia.Title>
+            <School className="mr-1.5 inline-block w-6" />
+            <span>{exchange.owner.university}</span>
+          </AvatarMedia.Title>
+        </AvatarMedia>
       </Card.Header.Left.Renderer>
       <Card.Header.Center.Renderer childs={children}>
         <div>

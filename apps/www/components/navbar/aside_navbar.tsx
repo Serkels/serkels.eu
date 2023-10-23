@@ -1,8 +1,11 @@
 //
 
-import type { Studient } from "@1.modules/profile.domain";
+import type { Partner, Studient } from "@1.modules/profile.domain";
 import { Avatar } from "@1.modules/profile.ui";
-import { StudientAvatarMedia } from "@1.modules/profile.ui/avatar";
+import {
+  PartnerAvatarMedia,
+  StudientAvatarMedia,
+} from "@1.modules/profile.ui/avatar";
 import {
   Archive,
   Binoculars,
@@ -16,35 +19,8 @@ import {
 import { tv } from "tailwind-variants";
 import { Li_Link, SubNav_Bookmarks } from "./aside_navbar.client";
 
-// import { Aside_NavBar } from "./aside_navbar.client";
-
-// import {
-//   Aside_NavBar,
-//   Header,
-//   Li_Link,
-//   SubNav_Bookmarks,
-// } from "./aside_navbar.client";
-
 //
 
-// export function Studient_NavBar() {
-//   return;
-//   // return (
-//   //   <Aside_NavBar>
-//   //     <Header className="py-5" />
-//   //     {/* <Studient_Nav /> */}
-//   //   </Aside_NavBar>
-//   // );
-// }
-
-// export function Partner_NavBar() {
-//   // return (
-//   //   <Aside_NavBar>
-//   //     <Header className="py-5" />
-//   //     {/* <Partner_Nav /> */}
-//   //   </Aside_NavBar>
-//   // );
-// }
 export function Studient_NavBar({ studient }: { studient: Studient }) {
   return (
     <nav className={navbar()}>
@@ -97,8 +73,32 @@ export function Studient_NavBar({ studient }: { studient: Studient }) {
     </nav>
   );
 }
-export function Partner_NavBar() {
-  return <aside className={navbar()}>Studient_NavBar</aside>;
+
+//
+
+export function Partner_NavBar({ partner }: { partner: Partner }) {
+  const { profile } = partner;
+  return (
+    <nav className={navbar()}>
+      <PartnerAvatarMedia
+        tv$direction="column"
+        className="py-5"
+        partner={partner}
+      />
+      <ul>
+        <Li_Link
+          icon={<Avatar className="h-6" profile={profile} />}
+          href="./"
+          is_active_includes={["./history", "./exchanges"]}
+        >
+          Profil
+        </Li_Link>
+        <Li_Link icon={<Gear />} href="./parameters">
+          Paramètres
+        </Li_Link>
+      </ul>
+    </nav>
+  );
 }
 export const aside_navbar = tv({
   base: "py-5 pt-10 ",

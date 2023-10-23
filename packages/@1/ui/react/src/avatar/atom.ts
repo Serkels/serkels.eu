@@ -23,7 +23,7 @@ export const avatar_media = tv({
   variants: {
     tv$direction: {
       column: {
-        figure: "flex-col items-center",
+        figure: "flex-col items-center text-center",
       },
     },
     tv$size: {

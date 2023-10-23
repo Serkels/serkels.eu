@@ -30,7 +30,7 @@ export default async function Page({ params }: { params: CodeParms }) {
       const partner =
         await TRPC_SSR.profile.partner.by_profile_id.fetch(profile_id);
       partner;
-      return <Partner_NavBar />;
+      return <Partner_NavBar partner={partner} />;
     })
     .otherwise(() => null);
 }

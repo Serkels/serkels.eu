@@ -4,6 +4,7 @@ import { get_csrf_token } from "@1.modules/auth.next/csrf_token";
 import { UserAvatarFilled } from "@1.ui/react/icons";
 // import { UserAvatarFilled } from "@1.ui/react/icons";
 import { PROFILE_ROLES } from "@1.modules/profile.domain";
+import { input } from "@1.ui/react/form/atom";
 import type { Metadata, ResolvingMetadata } from "next";
 import { tv } from "tailwind-variants";
 import { EmailInput, SignInButton } from "./page.client";
@@ -23,9 +24,8 @@ export async function generateMetadata(
 
 export default function Page() {
   const csrfToken = get_csrf_token();
-  const { base, form, label, input } = style();
-  label;
-  input;
+  const { base, form, label } = style();
+
   return (
     <main className={base()}>
       <form
@@ -39,12 +39,14 @@ export default function Page() {
           type="hidden"
           defaultValue={PROFILE_ROLES.enum.PARTNER}
         />
+
         <div className="mx-auto">
-          <UserAvatarFilled className="h-14 w-14" />
+          <UserAvatarFilled className="h-14 w-14 text-gray-400" />
         </div>
-        <div className="grid grid-cols-12 gap-5">
+
+        <div className="container mx-auto grid grid-cols-12 gap-5 xl:max-w-4xl">
           <input
-            className={input()}
+            className={input({ className: "col-span-full " })}
             id="name"
             name="name"
             placeholder="Nom de l'établissement"
@@ -52,9 +54,9 @@ export default function Page() {
             type="text"
           />
           <label className={label()}>
-            Email address
+            <div className="flex-1">Email address</div>
             <EmailInput
-              className={input()}
+              className={input({ className: "w-fit flex-grow opacity-50" })}
               id="email"
               name="email"
               placeholder="Email"
@@ -72,9 +74,9 @@ export default function Page() {
 //
 
 const style = tv({
-  base: "mx-auto flex flex-col justify-center",
+  base: "container mx-auto my-10 flex max-w-4xl flex-col justify-center",
   slots: {
-    form: "flex flex-col justify-center space-y-5",
+    form: "flex flex-col justify-center space-y-10",
     label: "col-span-full flex items-center space-x-1",
     input:
       "col-span-full h-8 rounded-sm border border-solid border-[#dddddd] px-3 py-2 text-xs placeholder-[#AAAAAA]",

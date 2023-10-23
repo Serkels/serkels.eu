@@ -75,9 +75,9 @@ export default function Page() {
             placeholder="À propos"
           /> */}
           <label className={label()}>
-            Email address
+            <div className="flex-1">Email address</div>
             <EmailInput
-              className={input()}
+              className={input({ className: "w-fit flex-grow opacity-50" })}
               id="email"
               name="email"
               placeholder="Email"
@@ -95,9 +95,9 @@ export default function Page() {
 //
 
 const style = tv({
-  base: "mx-auto flex flex-col justify-center",
+  base: "container mx-auto my-10 flex max-w-4xl flex-col justify-center",
   slots: {
-    form: "flex flex-col justify-center space-y-5",
+    form: "flex flex-col justify-center space-y-10",
     label: "col-span-full flex items-center space-x-1",
   },
 });

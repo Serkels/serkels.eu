@@ -1,7 +1,7 @@
 //
 
 import { AvatarMedia } from "@1.ui/react/avatar";
-import { Circle } from "@1.ui/react/icons";
+import { Circle, School } from "@1.ui/react/icons";
 import { TimeInfo } from "@1.ui/react/time";
 import { tv } from "tailwind-variants";
 import { useQuestion } from "./context";
@@ -10,14 +10,16 @@ import { useQuestion } from "./context";
 
 export function Header() {
   const question = useQuestion();
-
+  const { owner: studient } = question;
+  const { profile, university } = studient;
   return (
     <header className="mb-4 flex justify-between">
-      <AvatarMedia
-        name={question.owner.profile.name}
-        image={question.owner.profile.image}
-        university={question.owner.university}
-      />
+      <AvatarMedia name={profile.name} image={profile.image}>
+        <AvatarMedia.Title>
+          <School className="mr-1.5 inline-block w-6" />
+          <span>{university}</span>
+        </AvatarMedia.Title>
+      </AvatarMedia>
       <div className="flex items-start space-x-2">
         <ActionGroup />
         <StateIndicator />

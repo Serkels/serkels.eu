@@ -1,11 +1,12 @@
 //
 
-import type { Profile, Studient } from "@1.modules/profile.domain";
+import type { Partner, Profile, Studient } from "@1.modules/profile.domain";
 import type { AvatarMediaProps, AvatarProps } from "@1.ui/react/avatar";
 import {
   Avatar as UI_Avatar,
   AvatarMedia as UI_AvatarMedia,
 } from "@1.ui/react/avatar";
+import { LocationRadius, School } from "@1.ui/react/icons";
 
 //
 
@@ -18,14 +19,38 @@ export function StudientAvatarMedia(
   props: AvatarMediaProps & { studient: Studient },
 ) {
   const { studient, ...other_props } = props;
-  const { profile } = studient;
+  const { profile, university } = studient;
   return (
     <UI_AvatarMedia
       image={profile.image}
       id={profile.id}
       name={profile.name}
-      university={studient.university}
       {...other_props}
-    />
+    >
+      <UI_AvatarMedia.Title>
+        <School className="mr-1.5 inline-block w-6" />
+        <span>{university}</span>
+      </UI_AvatarMedia.Title>
+    </UI_AvatarMedia>
+  );
+}
+
+export function PartnerAvatarMedia(
+  props: AvatarMediaProps & { partner: Partner },
+) {
+  const { partner, ...other_props } = props;
+  const { profile, city } = partner;
+  return (
+    <UI_AvatarMedia
+      image={profile.image}
+      id={profile.id}
+      name={profile.name}
+      {...other_props}
+    >
+      <UI_AvatarMedia.Title>
+        <LocationRadius className="mr-1.5 inline-block w-6" />
+        <span>{city}</span>
+      </UI_AvatarMedia.Title>
+    </UI_AvatarMedia>
   );
 }

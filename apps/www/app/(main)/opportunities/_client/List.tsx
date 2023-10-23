@@ -4,6 +4,7 @@ import { TRPC_React } from ":trpc/client";
 import type { Opportunity } from "@1.modules/opportunity.domain";
 import { Opoortunity_Card } from "@1.modules/opportunity.ui/Card";
 import { Opportunity_InfiniteList } from "@1.modules/opportunity.ui/InfiniteList";
+import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import { ErrorOccur } from "@1.ui/react/error";
 import { Bookmark } from "@1.ui/react/icons";
 import type { UseInfiniteQueryResult } from "@tanstack/react-query";
@@ -40,14 +41,14 @@ export default function List() {
 }
 
 export function Item({ opportunity }: { opportunity: Opportunity }) {
-  const { status } = useSession();
-  console.log({ opportunity });
+  const { data: session } = useSession();
   const { slug } = opportunity;
+  const is_studient = session?.profile.role === PROFILE_ROLES.Enum.STUDIENT;
   return (
     <Link href={`/opportunities/${slug}`}>
       <Opoortunity_Card opportunity={opportunity}>
         <Opoortunity_Card.Footer_Actions>
-          {status === "authenticated" ? <BookmarkButton /> : null}
+          {is_studient ? <BookmarkButton /> : null}
         </Opoortunity_Card.Footer_Actions>
       </Opoortunity_Card>
     </Link>

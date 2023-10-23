@@ -4,7 +4,9 @@ import {
   forwardRef,
   type ComponentPropsWithoutRef,
   type ElementRef,
+  type PropsWithChildren,
 } from "react";
+import { createSlot } from "react-slotify";
 import { tv } from "tailwind-variants";
 import { School } from "../icons";
 import {
@@ -51,16 +53,16 @@ export interface AvatarMediaProps
   id?: string;
 }
 export function AvatarMedia(
-  props: AvatarMediaProps & { name: string; university?: string },
+  props: PropsWithChildren<AvatarMediaProps & { name: string }>,
 ) {
   const {
     className,
     image,
     id,
-    university,
     name,
     tv$size,
     tv$direction,
+    children,
     ...other_props
   } = props;
   const { figure, avatar } = avatar_media({ tv$direction });
@@ -73,13 +75,18 @@ export function AvatarMedia(
           {name}
         </h4>
         <small className="block text-sm text-Dove_Gray">
-          <School className="mr-1.5 inline-block w-6" />
-          <span>{university}</span>
+          <AvatarMedia.Title.Renderer
+            childs={children}
+          ></AvatarMedia.Title.Renderer>
         </small>
       </figcaption>
     </figure>
   );
 }
+
+AvatarMedia.Title = createSlot();
+
+//
 
 export function AvatarMediaHorizontal(
   props: AvatarProps & { name: string; university?: string },

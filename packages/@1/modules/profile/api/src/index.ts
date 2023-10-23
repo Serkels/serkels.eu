@@ -59,7 +59,10 @@ const profile_api_router = router({
       .input(z.string())
       .query(async ({ input: profile_id, ctx: { prisma } }) => {
         return Partner_Schema.parse(
-          await prisma.partner.findFirstOrThrow({ where: { profile_id } }),
+          await prisma.partner.findFirstOrThrow({
+            where: { profile_id },
+            include: { profile: true },
+          }),
           {
             path: ["<partner.by_profile_id>.prisma.studient.findFirstOrThrow"],
           },

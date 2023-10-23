@@ -17,7 +17,6 @@ export default function Page_Client({ category }: { category: string }) {
     if (!data) return null;
     const { data: opportunities } = data;
 
-    console.log({ opportunities });
     return (
       <aside>
         <h2 className="my-8 text-center  text-lg font-bold text-Congress_Blue">
@@ -26,7 +25,7 @@ export default function Page_Client({ category }: { category: string }) {
 
         <div className="grid grid-cols-1 gap-8">
           {opportunities.map((data) => (
-            <Item opportunity={data} />
+            <Item key={data.id} opportunity={data} />
           ))}
         </div>
       </aside>

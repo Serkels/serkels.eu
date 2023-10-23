@@ -25,11 +25,9 @@ export interface Profile extends z.TypeOf<typeof Profile_Schema> {}
 //
 
 export const Partner_Schema = Entity_Schema.extend({
-  // name: z.string().default("Unkown Profile"),
-  // image: z.string().default("/opengraph-image.png"),
-  // role: PROFILE_ROLES,
-  // about: z.string().default(""),
-  // university: z.string(),
+  city: z.string().default("Unkown city"),
+  link: z.string().url().optional(),
+  profile: Profile_Schema,
 }).describe("Partner_PropsSchema");
 
 export interface Partner extends z.TypeOf<typeof Partner_Schema> {}

@@ -1,6 +1,6 @@
 //
 
-import { Item } from ":app/(main)/exchanges/_client/List";
+import { Item } from ":app/(main)/opportunities/_client/List";
 import { code_to_profile_id, type CodeParms } from ":pipes/code";
 import { TRPC_SSR } from ":trpc/server";
 import { PROFILE_ROLES } from "@1.modules/profile.domain";
@@ -14,7 +14,7 @@ export async function generateMetadata(
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
   return {
-    title: `History :: ${(await parent).title?.absolute}`,
+    title: `Opportunities :: ${(await parent).title?.absolute}`,
   };
 }
 
@@ -26,18 +26,31 @@ export default async function Page({ params }: { params: CodeParms }) {
   }
 
   const profile = await TRPC_SSR.profile.by_id.fetch(profile_id);
-  if (profile.role !== PROFILE_ROLES.Enum.STUDIENT) {
+  if (profile.role !== PROFILE_ROLES.Enum.PARTNER) {
     redirect(`/@${params.code}`);
   }
 
-  const { data: exchanges } = await TRPC_SSR.exchanges.by_particitpant.fetch({
-    profile_id,
-  });
-  if (exchanges.length === 0) return <>N/A History</>;
+  const { data: opportunities } =
+    await TRPC_SSR.opportunity.by_profile_id.fetch({
+      profile_id,
+    });
+
+  if (opportunities.length === 0) return <>N/A Opportunities</>;
+
   return (
-    <main className="grid grid-cols-1 gap-y-5">
-      {exchanges.map(({ id }) => (
-        <Item key={id} id={id} />
+    <main
+      className="
+        my-10
+        grid
+        grid-flow-row
+        grid-cols-2
+        gap-8
+
+        lg:grid-cols-3
+      "
+    >
+      {opportunities.map((data) => (
+        <Item key={data.id} opportunity={data} />
       ))}
     </main>
   );
