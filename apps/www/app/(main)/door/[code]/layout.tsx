@@ -51,7 +51,7 @@ export default async function Layout({
         <aside className="hidden bg-white md:col-span-2 md:block xl:col-span-3">
           {navbar}
         </aside>
-        <div className="col-span-full md:col-span-6 xl:col-span-9">
+        <div className="col-span-full my-10 md:col-span-6 xl:col-span-9">
           {children}
         </div>
       </Grid>
