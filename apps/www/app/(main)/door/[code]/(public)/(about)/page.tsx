@@ -57,7 +57,7 @@ async function StudientMeta({ profile_id }: { profile_id: string }) {
         <b>Ville : </b> <span>{studient.city}</span>
       </li>
       <li>
-        <b>intéressé par : </b>{" "}
+        <b>Intéressé par : </b>{" "}
         <span>{studient.interest.map(({ name }) => name).join(", ")}</span>
       </li>
       <li>
