@@ -53,13 +53,13 @@ async function studient() {
 
   const exchange_categories_id = (
     await prisma.category.findMany({
-      where: { contexts: { has: "EXCHANGE" } },
+      where: { context: CategoryContext.EXCHANGE },
     })
   ).map(({ id }) => id);
 
   const forum_categories_id = (
     await prisma.category.findMany({
-      where: { contexts: { has: "FORUM" } },
+      where: { context: CategoryContext.FORUM },
     })
   ).map(({ id }) => id);
 
@@ -79,7 +79,10 @@ async function studient() {
         createMany: {
           data: faker.helpers.multiple(
             () => ({
-              category_id: faker.helpers.arrayElement(forum_categories_id),
+              category_id: faker.helpers.arrayElement([
+                category_autres.id,
+                ...forum_categories_id,
+              ]),
               title: faker.lorem.sentence(),
               created_at: faker.date.past(),
             }),
@@ -101,8 +104,17 @@ async function studient() {
                 ExchangeType.RESEARCH,
               ]),
               location: faker.location.city(),
-              category_id: category_autres.id,
-              return_id: faker.helpers.maybe(() => category_autres.id) ?? null,
+              category_id: faker.helpers.arrayElement([
+                category_autres.id,
+                ...exchange_categories_id,
+              ]),
+              return_id:
+                faker.helpers.maybe(() =>
+                  faker.helpers.arrayElement([
+                    category_autres.id,
+                    ...exchange_categories_id,
+                  ]),
+                ) ?? null,
               when: faker.date.future(),
               created_at: faker.date.past(),
             }),
@@ -214,7 +226,9 @@ async function partner() {
 
   const opportunity_categories_id = (
     await prisma.category.findMany({
-      where: { contexts: { has: "OPPORTUNITY" } },
+      where: {
+        OR: [{ context: CategoryContext.OPPORTUNITY }, { context: null }],
+      },
     })
   ).map(({ id }) => id);
 
@@ -269,70 +283,82 @@ async function partners() {
 //
 //
 
+interface Category {
+  name: string;
+  context: CategoryContext | null;
+  rank?: number;
+  slug?: string;
+}
+async function create_categories(categories: Category[]) {
+  for (let rank = 0; rank < categories.length; rank++) {
+    const category = categories[rank];
+    if (!category) continue;
+    const { name, context } = category;
+    const slug = category.slug ?? slugify(name).toLocaleLowerCase();
+
+    await prisma.category.create({
+      data: {
+        name,
+        slug,
+        context,
+        rank: category.rank === undefined ? rank + 1 : category.rank,
+      },
+    });
+  }
+}
 async function categories() {
-  await prisma.category.createMany({
-    data: [
+  await create_categories(
+    [
       {
         name: "Autres",
-        slug: "autres",
-        contexts: [
-          CategoryContext.EXCHANGE,
-          CategoryContext.FORUM,
-          CategoryContext.OPPORTUNITY,
-        ],
+        rank: 0,
       },
-      {
-        name: "Échange de langue",
-        contexts: [CategoryContext.EXCHANGE],
-      },
-      {
-        name: "Notes des cours",
-        contexts: [CategoryContext.EXCHANGE],
-      },
-      {
-        name: "Activités",
-        contexts: [CategoryContext.EXCHANGE, CategoryContext.FORUM],
-      },
-      {
-        name: "Cours de français",
-        contexts: [CategoryContext.OPPORTUNITY, CategoryContext.FORUM],
-      },
-      {
-        name: "Bourses",
-        contexts: [CategoryContext.OPPORTUNITY, CategoryContext.FORUM],
-      },
-      {
-        name: "Logements",
-        contexts: [CategoryContext.OPPORTUNITY, CategoryContext.FORUM],
-      },
-      {
-        name: "Job étudiant",
-        contexts: [CategoryContext.OPPORTUNITY, CategoryContext.FORUM],
-      },
-      {
-        name: "Concours",
-        contexts: [CategoryContext.OPPORTUNITY, CategoryContext.FORUM],
-      },
-      {
-        name: "Aides financières",
-        contexts: [CategoryContext.OPPORTUNITY, CategoryContext.FORUM],
-      },
-      {
-        name: "Administratifs",
-        contexts: [CategoryContext.FORUM],
-      },
-      {
-        name: "Soutien académique",
-        contexts: [CategoryContext.OPPORTUNITY],
-      },
-      {
-        name: "Activités socio-culturelles",
-        contexts: [CategoryContext.OPPORTUNITY],
-      },
-      {
-        name: "Vie associative​",
-        contexts: [CategoryContext.OPPORTUNITY],
-      },
-    ].map((data) => ({ ...data, slug: slugify(data.name.toLowerCase()) })),
-  });
+    ].map((draft) => ({ ...draft, context: null })),
+  );
+
+  //
+
+  await create_categories(
+    [
+      { name: "Activités socio-culturelles​" },
+      { name: "Cours de langues" },
+      { name: "Notes des cours" },
+      { name: "Soutien académique​" },
+    ]
+      .reverse()
+      .map((draft) => ({ ...draft, context: CategoryContext.EXCHANGE })),
+  );
+  //
+
+  await create_categories(
+    [
+      { name: "Cours et Matières" },
+      { name: "Logement" },
+      { name: "Stages et Alternance" },
+      { name: "Santé et Bien-être" },
+      { name: "Vie estudiantine" },
+      { name: "Transport et Mobilité" },
+      { name: "Technologie et Informatique" },
+      { name: "International et Échanges" },
+      { name: "Finances et Bourses" },
+    ]
+      .reverse()
+      .map((draft) => ({ ...draft, context: CategoryContext.FORUM })),
+  );
+
+  //
+
+  await create_categories(
+    [
+      { name: "Activités" },
+      { name: "Aides financières" },
+      { name: "Bourses" },
+      { name: "Concours" },
+      { name: "Cours de langues" },
+      { name: "Job étudiant" },
+      { name: "Logements" },
+    ]
+      .reverse()
+      .map((draft) => ({ ...draft, context: CategoryContext.OPPORTUNITY })),
+  );
 }

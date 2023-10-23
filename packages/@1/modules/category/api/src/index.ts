@@ -19,10 +19,23 @@ const category_api_router = router({
 
   //
 
+  // by_cateogy: procedure.input(z).query(async ({ ctx: { prisma } }) => {
+  //   return (await prisma.category.findMany({
+  //     where: {
+  //       OR: [{ context: CategoryContext.EXCHANGE }, { context: null }],
+  //     },
+  //     orderBy: { rank: "asc" },
+  //   })) as Category[];
+  // }),
+
+  //
+
   exchange: procedure.query(async ({ ctx: { prisma } }) => {
     return (await prisma.category.findMany({
-      where: { contexts: { has: CategoryContext.EXCHANGE } },
-      orderBy: { slug: "asc" },
+      where: {
+        OR: [{ context: CategoryContext.EXCHANGE }, { context: null }],
+      },
+      orderBy: { rank: "desc" },
     })) as Category[];
   }),
 
@@ -30,8 +43,8 @@ const category_api_router = router({
 
   forum: procedure.query(async ({ ctx: { prisma } }) => {
     return (await prisma.category.findMany({
-      where: { contexts: { has: CategoryContext.FORUM } },
-      orderBy: { slug: "asc" },
+      where: { OR: [{ context: CategoryContext.FORUM }, { context: null }] },
+      orderBy: { rank: "desc" },
     })) as Category[];
   }),
 
@@ -39,8 +52,10 @@ const category_api_router = router({
 
   opportunity: procedure.query(async ({ ctx: { prisma } }) => {
     return (await prisma.category.findMany({
-      where: { contexts: { has: CategoryContext.OPPORTUNITY } },
-      orderBy: { slug: "asc" },
+      where: {
+        OR: [{ context: CategoryContext.OPPORTUNITY }, { context: null }],
+      },
+      orderBy: { rank: "desc" },
     })) as Category[];
   }),
 });
