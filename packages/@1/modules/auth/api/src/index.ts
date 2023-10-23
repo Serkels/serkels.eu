@@ -133,7 +133,7 @@ const auth_api_router = router({
                   ? {
                       partner: {
                         create: {
-                          link: "N/A",
+                          link: "https://beta.toc-toc.org/",
                           city: "N/A",
                         },
                       },
