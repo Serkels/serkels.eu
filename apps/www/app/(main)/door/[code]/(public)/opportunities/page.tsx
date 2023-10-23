@@ -40,12 +40,10 @@ export default async function Page({ params }: { params: CodeParms }) {
   return (
     <main
       className="
-        my-10
         grid
         grid-flow-row
         grid-cols-2
         gap-8
-
         lg:grid-cols-3
       "
     >

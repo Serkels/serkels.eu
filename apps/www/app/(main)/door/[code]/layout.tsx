@@ -27,7 +27,7 @@ export default async function Layout({
   if (!is_yours)
     return (
       <AuthSessionProvider session={session}>
-        <Grid className="mt-10">
+        <Grid className="my-10">
           <div
             className="
               col-span-full

@@ -45,7 +45,7 @@ export default async function Page({ params }: { params: CodeParms }) {
 }
 
 const style = tv({
-  base: "my-5 flex justify-between space-x-5",
+  base: "flex justify-between space-x-5",
   slots: {
     link: "",
   },
