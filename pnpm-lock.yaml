@@ -186,8 +186,8 @@ importers:
         specifier: 0.1.10
         version: 0.1.10(patch_hash=oxxc2okcxsefs22szuakzwvvp4)(react-dom@18.2.0)(react@18.2.0)
       superjson:
-        specifier: 2.0.0
-        version: 2.0.0
+        specifier: 2.1.0
+        version: 2.1.0
       tailwind-variants:
         specifier: 0.1.14
         version: 0.1.14(tailwindcss@3.3.3)
@@ -377,8 +377,8 @@ importers:
         specifier: 10.41.0
         version: 10.41.0
       superjson:
-        specifier: 2.0.0
-        version: 2.0.0
+        specifier: 2.1.0
+        version: 2.1.0
       zod:
         specifier: 3.22.4
         version: 3.22.4
@@ -512,8 +512,8 @@ importers:
         specifier: 4.24.3
         version: 4.24.3(next@13.5.6)(react-dom@18.2.0)(react@18.2.0)
       superjson:
-        specifier: 2.0.0
-        version: 2.0.0
+        specifier: 2.1.0
+        version: 2.1.0
       zod:
         specifier: 3.22.4
         version: 3.22.4
@@ -1144,8 +1144,8 @@ importers:
         specifier: 10.41.0
         version: 10.41.0
       superjson:
-        specifier: 2.0.0
-        version: 2.0.0
+        specifier: 2.1.0
+        version: 2.1.0
       zod:
         specifier: 3.22.4
         version: 3.22.4
@@ -1282,8 +1282,8 @@ importers:
         specifier: 4.24.3
         version: 4.24.3(next@13.5.6)(react-dom@18.2.0)(react@18.2.0)
       superjson:
-        specifier: 2.0.0
-        version: 2.0.0
+        specifier: 2.1.0
+        version: 2.1.0
       zod:
         specifier: 3.22.4
         version: 3.22.4
@@ -1314,8 +1314,8 @@ importers:
         specifier: 18.2.0
         version: 18.2.0
       superjson:
-        specifier: 2.0.0
-        version: 2.0.0
+        specifier: 2.1.0
+        version: 2.1.0
 
   packages/__legacy__/core:
     dependencies:
@@ -1341,8 +1341,8 @@ importers:
         specifier: 1.19.0
         version: 1.19.0
       superjson:
-        specifier: 2.0.0
-        version: 2.0.0
+        specifier: 2.1.0
+        version: 2.1.0
       tsyringe:
         specifier: 4.8.0
         version: 4.8.0
@@ -1381,8 +1381,8 @@ importers:
         specifier: 18.2.0
         version: 18.2.0
       superjson:
-        specifier: 2.0.0
-        version: 2.0.0
+        specifier: 2.1.0
+        version: 2.1.0
       tsyringe:
         specifier: 4.8.0
         version: 4.8.0
@@ -10917,8 +10917,8 @@ packages:
       copy-anything: 3.0.5
     dev: true
 
-  /superjson@2.0.0:
-    resolution: {integrity: sha512-W3n+NJ7TFjaLle8ihIIvsr/bbuKpnxeatsyjmhy7iSkom+/cshaHziCQAWXrHGWJVQSQFDOuES6C3nSEvcbrQg==}
+  /superjson@2.1.0:
+    resolution: {integrity: sha512-VrMxSzMeE2nLmTvxOl0gEuz45kErw5oNNIzmZJ+eCmtSO89sUzRIIOhATJOdkSOn4eChekU835RtmPqp33S7JQ==}
     engines: {node: '>=16'}
     dependencies:
       copy-anything: 3.0.5
