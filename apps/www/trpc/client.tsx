@@ -47,7 +47,9 @@ function useTRPCClient() {
           }),
           false: httpBatchLink({
             url: "/api/trpc",
-            headers: { ...session?.header },
+            headers: () => {
+              return { ...session?.header };
+            },
           }),
         }),
       ],
@@ -62,7 +64,7 @@ function useTRPCClient() {
     return () => {
       client.close();
     };
-  }, []);
+  }, [session]);
 
   return trpc_client;
 }

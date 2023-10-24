@@ -8,10 +8,14 @@ import {
   type Partner,
   type Studient,
 } from "@1.modules/profile.domain";
-import { Avatar } from "@1.modules/profile.ui/avatar";
 import type { Metadata, ResolvingMetadata } from "next";
+import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
 import { match } from "ts-pattern";
+
+//
+
+const AvatarEditor = dynamic(() => import("./_client/AvatarEditor"));
 
 //
 
@@ -51,15 +55,10 @@ export default async function Page({ params }: { params: CodeParms }) {
   return (
     <main className="container mx-auto flex flex-col justify-center space-y-5">
       <h1 className="my-10 text-3xl font-bold">Paramètres</h1>
-      <hr className="my-10" />
-      <form className="grid grid-cols-2 gap-5">
-        <label className="md:col-span-1" htmlFor="avatar">
-          <h4>Avatar: </h4>
-        </label>
-        <div className="md:col-span-1">
-          <Avatar className="h-48" profile={profile} />
-        </div>
-      </form>
+
+      <hr className="my-10 py-5" />
+
+      <AvatarEditor profile={profile} />
 
       {form}
     </main>

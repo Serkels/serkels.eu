@@ -6,13 +6,13 @@ import { middleware } from "./trpc";
 
 //
 
-export function verify_next_auth_token(secret: string) {
+export function verify_next_auth_token<T>(secret: string) {
   return middleware(async ({ ctx, next }) => {
     try {
-      const payload = await decode({
+      const payload = (await decode({
         token: ctx.headers.NEXTAUTH_TOKEN,
         secret,
-      });
+      })) as T;
 
       if (payload) {
         return next({ ctx: { ...ctx, payload } });

@@ -49,8 +49,7 @@ const trpc = createTRPCProxyClient<Router>({
           secret: NEXTAUTH_TRPCENV.NEXTAUTH_SECRET,
           token: {
             from: "@1.modules/auth.next",
-            strategies: ["Only existing users can login"],
-            profile: { id: "", image: "", name: "", role: "ADMIN", bio: "" },
+            profile: { id: "SSR", image: "", name: "", role: "ADMIN", bio: "" },
           } satisfies JWT,
           maxAge: 60,
         });

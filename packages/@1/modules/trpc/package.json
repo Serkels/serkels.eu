@@ -14,6 +14,7 @@
   "dependencies": {
     "@1.infra/database": "workspace:*",
     "@1.infra/email": "workspace:*",
+    "@1.modules/profile.domain": "workspace:*",
     "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
     "@trpc/server": "10.41.0",
     "superjson": "2.1.0",

@@ -71,6 +71,18 @@ const profile_api_router = router({
   }),
 
   //
+
+  me: router({
+    update: next_auth_procedure
+      .input(Profile_Schema.omit({ id: true, role: true }))
+      .mutation(({ input, ctx: { prisma, payload } }) => {
+        const { id } = payload.profile;
+        return prisma.profile.update({
+          data: input,
+          where: { id },
+        });
+      }),
+  }),
 });
 
 export default profile_api_router;

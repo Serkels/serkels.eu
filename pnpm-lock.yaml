@@ -1137,6 +1137,9 @@ importers:
       '@1.infra/email':
         specifier: workspace:*
         version: link:../../infra/email
+      '@1.modules/profile.domain':
+        specifier: workspace:*
+        version: link:../profile/domain
       '@douglasduteil/nextauth...trpc.prisma':
         specifier: workspace:*
         version: link:../../../@douglasduteil/nextauth...trpc.prisma

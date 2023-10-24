@@ -8,10 +8,8 @@ import {
   type JWTEncodeParams as NextAuth_JWTEncodeParams,
 } from "next-auth/jwt";
 import { createHash } from "node:crypto";
-import type { NEXT_AUTH_STRATEGIES } from "./config";
 
 export interface JWT extends NextAuth_JWT {
-  strategies?: NEXT_AUTH_STRATEGIES[];
   from?: string;
 }
 

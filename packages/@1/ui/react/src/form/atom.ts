@@ -4,19 +4,62 @@ import { tv } from "tailwind-variants";
 
 //
 
+export const label = tv({
+  base: `
+    mb-2
+    block
+    text-base
+    font-medium
+    text-gray-900
+  `,
+  variants: {
+    tv$color: {
+      success: "border-success",
+    },
+    tv$size: {
+      base: `
+      `,
+    },
+  },
+  defaultVariants: {
+    tv$size: "base",
+  },
+});
+
+//
+
 export const input = tv({
   base: `
-  w-full
-  rounded-sm
-  border
-  border-solid
-  border-Silver_Chalice
-  px-4 py-3
-  placeholder-black
-  disabled:pointer-events-none
-  disabled:opacity-50
+    block
+    w-full
+    rounded-sm
+    border
+    border-solid
+    border-Silver_Chalice
+    placeholder-black
+    focus:ring-gray-900
+    disabled:pointer-events-none
+    disabled:opacity-50
   `,
+  variants: {
+    tv$color: {
+      success: "border-success",
+    },
+    tv$size: {
+      base: `
+        p-2.5
+        text-sm
+        text-gray-900
+        focus:border-gray-500
+      `,
+    },
+  },
+  defaultVariants: {
+    tv$size: "base",
+  },
 });
+
+//
 
 export const fieldset = tv({
   base: `
