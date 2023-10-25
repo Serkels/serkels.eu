@@ -43,7 +43,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-nest": "0.1.10",
-    "superjson": "2.1.0",
+    "superjson": "2.2.0",
     "tailwind-variants": "0.1.16",
     "ts-pattern": "5.0.5",
     "zod": "3.22.4"
