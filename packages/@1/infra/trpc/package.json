@@ -18,7 +18,7 @@
     "@1.modules/opportunity.api": "workspace:*",
     "@1.modules/profile.api": "workspace:*",
     "@1.modules/trpc": "workspace:*",
-    "@trpc/server": "10.41.0",
+    "@trpc/server": "10.42.0",
     "superjson": "2.2.0",
     "zod": "3.22.4"
   },
