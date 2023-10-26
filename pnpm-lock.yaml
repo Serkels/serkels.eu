@@ -170,6 +170,9 @@ importers:
       next-auth:
         specifier: 4.24.3
         version: 4.24.3(next@13.5.6)(react-dom@18.2.0)(react@18.2.0)
+      nextjs-google-analytics:
+        specifier: 2.3.3
+        version: 2.3.3(next@13.5.6)(react@18.2.0)
       nextjs-toploader:
         specifier: 1.5.3
         version: 1.5.3(next@13.5.6)(react-dom@18.2.0)(react@18.2.0)
@@ -219,6 +222,9 @@ importers:
       '@types/debug':
         specifier: 4.1.10
         version: 4.1.10
+      '@types/gtag.js':
+        specifier: 0.0.14
+        version: 0.0.14
       '@types/node':
         specifier: 20.8.9
         version: 20.8.9
@@ -4664,6 +4670,10 @@ packages:
       '@types/node': 20.8.9
     dev: true
 
+  /@types/gtag.js@0.0.14:
+    resolution: {integrity: sha512-NcR9rf3B93ie5T086NIpXGTtoIJeOeQ14+IBIBwfNBztb175e/0gONc60ywUU4+f9dwctgz9L3I4h5Gs/hl31g==}
+    dev: true
+
   /@types/hast@3.0.2:
     resolution: {integrity: sha512-B5hZHgHsXvfCoO3xgNJvBnX7N8p86TqQeGKXcokW4XXi+qY4vxxPSFYofytvVmpFxzPv7oxDQzjg5Un5m2/xiw==}
     dependencies:
@@ -8963,6 +8973,18 @@ packages:
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
+    dev: false
+
+  /nextjs-google-analytics@2.3.3(next@13.5.6)(react@18.2.0):
+    resolution: {integrity: sha512-Y6sI6A7wt5dji8hYBnVkOh9LTyImSLFZXx3FpyQgVW7W4b4qEFHjH2u3fhDJsrRZeLlUGM8/RuHD/mhHc2Axfg==}
+    peerDependencies:
+      next: '>=11.0.0'
+      react: '>=17.0.0'
+    dependencies:
+      next: 13.5.6(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+    optionalDependencies:
+      fsevents: 2.3.3
     dev: false
 
   /nextjs-toploader@1.5.3(next@13.5.6)(react-dom@18.2.0)(react@18.2.0):

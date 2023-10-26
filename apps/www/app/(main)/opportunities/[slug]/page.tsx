@@ -1,7 +1,8 @@
 //
 
-import { TRPC_SSR } from ":trpc/server";
+import { slug_to_opportunity, type Params } from ":pipes/opportunity_slug";
 import { Article } from "@1.modules/opportunity.ui/Article";
+import type { Metadata, ResolvingMetadata } from "next";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -13,11 +14,26 @@ const ReactMarkdown = dynamic<any>(() => import("react-markdown"));
 
 //
 
-export default async function Page({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+export async function generateMetadata(
+  { params }: { params: Params },
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const opportunity = await slug_to_opportunity(params);
+  const title = `${opportunity.title} :: ${(await parent).title?.absolute}`;
 
+  return {
+    title,
+    openGraph: {
+      title,
+    },
+  };
+}
+
+//
+
+export default async function Page({ params }: { params: Params }) {
   try {
-    const opportunity = await TRPC_SSR.opportunity.by_slug.fetch(slug);
+    const opportunity = await slug_to_opportunity(params);
     const { owner: partner } = opportunity;
     const { profile } = partner;
 

@@ -14,6 +14,7 @@ const ENV = z
     API_URL: z.string().url(),
     MAINTENANCE: z.coerce.boolean().default(false),
     STALKER_URL: z.string().url(),
+    STALKER_TRANSPORT_URL: z.string().url(),
   })
   .parse(process.env);
 
@@ -56,7 +57,7 @@ const nextConfig = {
     return [
       {
         source: "/api/trpc/:path*",
-        destination: `${process.env["API_URL"]}/trpc/:path*`,
+        destination: `${ENV.API_URL}/trpc/:path*`,
       },
 
       //
@@ -70,11 +71,11 @@ const nextConfig = {
 
       {
         source: "/stalker.js",
-        destination: `https://www.googletagmanager.com/gtag/js`,
+        destination: `${ENV.STALKER_URL}`,
       },
       {
         source: "/api/stalker/:path*",
-        destination: `${process.env["STALKER_URL"]}/:path*`,
+        destination: `${ENV.STALKER_TRANSPORT_URL}/:path*`,
       },
     ];
   },

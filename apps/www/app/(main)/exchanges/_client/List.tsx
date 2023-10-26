@@ -12,7 +12,7 @@ import { Bookmark } from "@1.ui/react/icons";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import type { ComponentProps } from "react";
+import { useEffect, type ComponentProps } from "react";
 import { match } from "ts-pattern";
 
 //
@@ -27,6 +27,10 @@ export default function List() {
   const filter = filter_parsed_return.success
     ? filter_parsed_return.data
     : undefined;
+
+  useEffect(() => {
+    gtag("event", "search", { search_term: search });
+  }, [search]);
 
   try {
     const info = TRPC_React.exchanges.find.useInfiniteQuery(

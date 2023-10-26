@@ -11,6 +11,7 @@ import type { UseInfiniteQueryResult } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
 //
 
@@ -18,6 +19,10 @@ export default function List() {
   const search_params = useSearchParams();
   const category = search_params.get("category") ?? undefined;
   const search = search_params.get("q") ?? undefined;
+
+  useEffect(() => {
+    gtag("event", "search", { search_term: search });
+  }, [search]);
 
   try {
     const info = TRPC_React.opportunity.find.useInfiniteQuery(

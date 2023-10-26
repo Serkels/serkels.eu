@@ -10,7 +10,8 @@
       ":components/*": ["./components/*"],
       ":pipes/*": ["./pipes/*"],
       ":trpc/*": ["./trpc/*"]
-    }
+    },
+    "types": ["gtag.js"]
   },
   "include": [
     "next-env.d.ts",
