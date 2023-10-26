@@ -10,7 +10,7 @@ export async function generateMetadata(
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
   return {
-    title: `New Exchange :: ${(await parent).title?.absolute}`,
+    title: `New :: ${(await parent).title?.absolute}`,
   };
 }
 

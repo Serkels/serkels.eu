@@ -13,7 +13,7 @@ export async function generateMetadata(
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
   return {
-    title: `My Exchanges :: ${(await parent).title?.absolute}`,
+    title: `Mine :: ${(await parent).title?.absolute}`,
   };
 }
 

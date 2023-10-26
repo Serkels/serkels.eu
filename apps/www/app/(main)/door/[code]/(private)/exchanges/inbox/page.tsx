@@ -9,7 +9,7 @@ export async function generateMetadata(
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
   return {
-    title: `My Exchanges :: ${(await parent).title?.absolute}`,
+    title: `Inbox :: ${(await parent).title?.absolute}`,
   };
 }
 
