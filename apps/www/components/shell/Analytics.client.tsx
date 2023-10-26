@@ -5,7 +5,6 @@ import { useEffect } from "react";
 
 //
 
-export const gtag = window.gtag ?? function gtag_nopê() {};
 export function Analytics_Client() {
   const pathname = usePathname();
   const searchParams = useSearchParams();

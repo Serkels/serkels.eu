@@ -1,5 +1,6 @@
 //
 
+import { Entity_Schema } from "@1.modules/core/domain";
 import {
   Partner_Schema,
   Profile_Schema,
@@ -28,10 +29,17 @@ const profile_api_router = router({
   by_id: next_auth_procedure
     .input(z.string())
     .query(async ({ input: id, ctx: { prisma } }) => {
-      return Profile_Schema.parse(
-        await prisma.profile.findFirstOrThrow({ where: { id } }),
-        { path: ["<by_id>.prisma.profile.findFirstOrThrow"] },
-      ) as Profile;
+      return Profile_Schema.extend({
+        followed_by: z.array(Entity_Schema),
+      }).parse(
+        await prisma.profile.findFirstOrThrow({
+          include: { followed_by: true },
+          where: { id },
+        }),
+        {
+          path: ["<by_id>.prisma.profile.findFirstOrThrow"],
+        },
+      );
     }),
 
   //

@@ -103,16 +103,20 @@ enum ProfileRole {
 //
 
 model Bookmark {
-  id            String        @id @default(cuid())
-  exchanges     Exchange[]    @relation("BookmarkedExchanges")
-  name          String
-  opportunities Opportunity[] @relation("BookmarkedOpportunities")
-  owner         Profile       @relation(fields: [owner_id], references: [id], onDelete: Cascade)
-  owner_id      String        @unique
-  slug          String        @unique
+  id             String       @id @default(cuid())
+  exchange       Exchange?    @relation("BookmarkedExchanges", fields: [exchange_id], references: [id])
+  exchange_id    String?
+  opportunity    Opportunity? @relation("BookmarkedOpportunities", fields: [opportunity_id], references: [id])
+  opportunity_id String?
+  owner          Profile      @relation(fields: [owner_id], references: [id], onDelete: Cascade)
+  owner_id       String
   //
-  created_at    DateTime      @default(now())
-  updated_at    DateTime      @default(now())
+  created_at     DateTime     @default(now())
+  updated_at     DateTime     @default(now())
+  //
+
+  @@unique(fields: [owner_id, exchange_id], name: "bookmarked_exchange")
+  @@unique(fields: [owner_id, opportunity_id], name: "bookmarked_opportunity")
 }
 
 //

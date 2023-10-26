@@ -38,7 +38,7 @@ export default async function Page({ params }: { params: CodeParms }) {
       {avatar}
 
       <div className="flex flex-col items-center">
-        <div>48</div> Abonnés
+        <div>{profile.followed_by.length}</div> Abonnés
       </div>
     </header>
   );

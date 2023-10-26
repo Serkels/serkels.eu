@@ -50,6 +50,12 @@ const nextConfig = {
         source: "/api/auth/magic/email/:identifier/:token/:path*",
         destination: "/api/auth/callback/email?email=:identifier&token=:token",
       },
+
+      {
+        source: "/@~/bookmarks",
+        destination: "/@~/bookmarks/opportunities",
+        permanent: true,
+      },
     ];
   },
   async rewrites() {

@@ -24,6 +24,9 @@ async function main() {
 
   await studients();
   await partners();
+
+  await studients_bookmarks();
+  await profile_contacts();
 }
 
 main()
@@ -83,7 +86,7 @@ async function studient() {
                 category_autres.id,
                 ...forum_categories_id,
               ]),
-              title: faker.lorem.sentence(),
+              title: faker.company.catchPhrase(),
               created_at: faker.date.past(),
             }),
             { count: { min: 0, max: 5 } },
@@ -98,7 +101,7 @@ async function studient() {
               description: faker.lorem.paragraph(),
               is_online: faker.number.int(100) > 50,
               places: faker.number.int(100),
-              title: faker.lorem.sentence(),
+              title: faker.company.catchPhrase(),
               type: faker.helpers.arrayElement([
                 ExchangeType.PROPOSAL,
                 ExchangeType.RESEARCH,
@@ -161,47 +164,13 @@ async function studient() {
   });
 }
 
-async function random_other_profiles(profile_id: string) {
-  const profile_count = await prisma.profile.count();
-  return prisma.profile.findMany({
-    take: faker.number.int({ min: 5, max: 10 }),
-    skip: faker.number.int({ min: 0, max: profile_count }),
-    where: { NOT: { id: profile_id } },
-  });
-}
 async function studients() {
-  const [foo, bar] = await Promise.all([
-    studient(),
-    studient(),
-    ...Array.from({ length: 10 }).map(studient),
-  ]);
-
-  const [foo_profile_1, bar_profile_1] = await prisma.$transaction([
-    prisma.profile.findFirstOrThrow({
-      where: { id: foo.profile_id },
-    }),
-    prisma.profile.findFirstOrThrow({
-      where: { id: bar.profile_id },
-    }),
-  ]);
+  await Promise.all(Array.from({ length: 10 }).map(studient));
 
   //
+  //
+  //
 
-  const foo_exchange_1 = await prisma.exchange.findFirstOrThrow({
-    where: { owner_id: foo.id },
-  });
-
-  await prisma.exchange.update({
-    data: { participants: { connect: [{ id: bar.id }] } },
-    where: { id: foo_exchange_1.id },
-  });
-
-  await prisma.profile.update({
-    data: { following: { connect: [{ id: bar_profile_1.id }] } },
-    where: { id: foo_profile_1.id },
-  });
-
-  random_other_profiles;
   // const profile_count = await prisma.profile.count();
   // await prisma.profile.updateMany({
   //   data: { following: { connect: [{ id: bar_profile_1.id }] } },
@@ -236,7 +205,13 @@ async function partner() {
     data: {
       profile: {
         create: {
-          bio: faker.lorem.paragraphs(faker.number.int({ max: 5 })),
+          bio: dedent`
+          # ${faker.company.buzzPhrase()}
+
+          > ${faker.company.catchPhrase()}
+
+          ${faker.lorem.paragraphs(faker.number.int({ max: 5 }))},
+          `,
           image,
           name,
           role: ProfileRole.PARTNER,
@@ -289,6 +264,7 @@ interface Category {
   rank?: number;
   slug?: string;
 }
+
 async function create_categories(categories: Category[]) {
   for (let rank = 0; rank < categories.length; rank++) {
     const category = categories[rank];
@@ -306,6 +282,7 @@ async function create_categories(categories: Category[]) {
     });
   }
 }
+
 async function categories() {
   await create_categories(
     [
@@ -361,4 +338,44 @@ async function categories() {
       .reverse()
       .map((draft) => ({ ...draft, context: CategoryContext.OPPORTUNITY })),
   );
+}
+
+async function studients_bookmarks() {
+  const studients = await prisma.studient.findMany({
+    include: { profile: true },
+  });
+  const opportunities = await prisma.opportunity.findMany();
+  const exchanges = await prisma.exchange.findMany();
+
+  await prisma.bookmark.createMany({
+    data: [
+      ...Array.from({ length: 20 }).map(() => ({
+        owner_id: faker.helpers.arrayElement(studients).profile_id,
+        opportunity_id: faker.helpers.arrayElement(opportunities).id,
+      })),
+      ...Array.from({ length: 20 }).map(() => ({
+        owner_id: faker.helpers.arrayElement(studients).profile_id,
+        exchange_id: faker.helpers.arrayElement(exchanges).id,
+      })),
+    ],
+    skipDuplicates: true,
+  });
+}
+
+async function profile_contacts() {
+  const profiles = await prisma.profile.findMany();
+  const profile_ids = profiles.map(({ id }) => ({ id }));
+
+  for (const profile of profiles) {
+    await prisma.profile.update({
+      data: {
+        following: {
+          connect: faker.helpers.arrayElements(
+            profile_ids.filter(({ id }) => id !== profile.id),
+          ),
+        },
+      },
+      where: { id: profile.id },
+    });
+  }
 }

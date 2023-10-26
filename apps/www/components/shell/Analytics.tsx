@@ -9,7 +9,18 @@ import { Analytics_Client } from "./Analytics.client";
 export const GA_TRACKING_ID = process.env["NEXT_PUBLIC_GA_MEASUREMENT_ID"];
 
 export default function Analytics() {
-  // if (process.env.NODE_ENV === "development") return null;
+  if (process.env.NODE_ENV === "development")
+    return (
+      <Script
+        id="google-analytics-mock"
+        dangerouslySetInnerHTML={{
+          __html: `
+window.dataLayer = [];
+function gtag(){dataLayer.push(arguments);}
+`,
+        }}
+      ></Script>
+    );
 
   return (
     <>

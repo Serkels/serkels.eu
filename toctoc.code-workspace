@@ -6,21 +6,28 @@
     //
     // { "path": "packages/@1/modules", "name": "📦 modules" },
     //
-    { "path": "packages/@1/modules/auth/api", "name": "📦⛽/auth" },
-    { "path": "packages/@1/modules/auth/emails", "name": "📦📮/auth" },
-    { "path": "packages/@1/modules/auth/next", "name": "📦/auth/next" },
+    { "path": "packages/@1/modules/auth/api", "name": "📦 auth/api" },
+    { "path": "packages/@1/modules/auth/emails", "name": "📦 auth/emails" },
+    { "path": "packages/@1/modules/auth/next", "name": "📦 auth/next" },
     //
-    { "path": "packages/@1/modules/category/api", "name": "📦⛽/category" },
+    { "path": "packages/@1/modules/bookmark/api", "name": "📦 bookmark/api" },
+    {
+      "path": "packages/@1/modules/bookmark/domain",
+      "name": "📦📜/bookmark"
+    },
+    { "path": "packages/@1/modules/bookmark/ui", "name": "📦💄 bookmark.ui" },
+    //
+    { "path": "packages/@1/modules/category/api", "name": "📦 category/api" },
     { "path": "packages/@1/modules/category/domain", "name": "📦📜/category" },
-    { "path": "packages/@1/modules/category/ui", "name": "📦💄/category" },
+    { "path": "packages/@1/modules/category/ui", "name": "📦💄 category.ui" },
     //
-    { "path": "packages/@1/modules/exchange/api", "name": "📦⛽/exchange" },
+    { "path": "packages/@1/modules/exchange/api", "name": "📦 exchange/api" },
     { "path": "packages/@1/modules/exchange/domain", "name": "📦📜/exchange" },
-    { "path": "packages/@1/modules/exchange/ui", "name": "📦💄/exchange" },
+    { "path": "packages/@1/modules/exchange/ui", "name": "📦💄 exchange.ui" },
     //
     {
       "path": "packages/@1/modules/opportunity/api",
-      "name": "📦⛽/opportunity"
+      "name": "📦 opportunity/api"
     },
     {
       "path": "packages/@1/modules/opportunity/domain",
@@ -28,18 +35,18 @@
     },
     {
       "path": "packages/@1/modules/opportunity/ui",
-      "name": "📦💄/opportunity"
+      "name": "📦💄 opportunity.ui"
     },
     //
-    { "path": "packages/@1/modules/forum/api", "name": "📦⛽/forum" },
+    { "path": "packages/@1/modules/forum/api", "name": "📦 forum/api" },
     { "path": "packages/@1/modules/forum/domain", "name": "📦📜/forum" },
-    { "path": "packages/@1/modules/forum/ui", "name": "📦💄/forum" },
+    { "path": "packages/@1/modules/forum/ui", "name": "📦💄 forum.ui" },
     //
-    { "path": "packages/@1/modules/profile/api", "name": "📦⛽/profile" },
+    { "path": "packages/@1/modules/profile/api", "name": "📦 profile/api" },
     { "path": "packages/@1/modules/profile/domain", "name": "📦📜/profile" },
-    { "path": "packages/@1/modules/profile/ui", "name": "📦💄/profile" },
+    { "path": "packages/@1/modules/profile/ui", "name": "📦💄 profile.ui" },
     //
-    { "path": "packages/@1/ui/react", "name": "💄/react" },
+    { "path": "packages/@1/ui/react", "name": "💄 react/ui" },
     // { "path": "packages/@1/infra", "name": "🏗️ infra" },
     { "path": "packages/@1/infra/database", "name": "🏗️/database" },
     { "path": "packages/@1/infra/email", "name": "🏗️/email" },

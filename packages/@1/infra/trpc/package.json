@@ -12,6 +12,7 @@
   "keywords": [],
   "dependencies": {
     "@1.modules/auth.api": "workspace:*",
+    "@1.modules/bookmark.api": "workspace:*",
     "@1.modules/category.api": "workspace:*",
     "@1.modules/exchange.api": "workspace:*",
     "@1.modules/forum.api": "workspace:*",

@@ -1,5 +1,5 @@
 {
-  "name": "@1.modules/profile.api",
+  "name": "@1.modules/bookmark.api",
   "version": "0.1.0",
   "private": true,
   "sideEffects": false,
@@ -20,17 +20,16 @@
     "type-check": "tsc --build"
   },
   "dependencies": {
-    "@1.modules/core": "workspace:*",
-    "@1.modules/profile.domain": "workspace:*",
+    "@1.modules/bookmark.domain": "workspace:*",
     "@1.modules/trpc": "workspace:*",
-    "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
-    "@trpc/server": "10.42.0",
+    "@trpc/server": "10.40.0",
+    "date-fns": "2.30.0",
     "zod": "3.22.4"
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
-    "@prisma/client": "5.4.2",
-    "@types/node": "20.8.9",
-    "typescript": "5.2.2"
+    "@prisma/client": "5",
+    "@types/node": "20",
+    "typescript": "5"
   }
 }
