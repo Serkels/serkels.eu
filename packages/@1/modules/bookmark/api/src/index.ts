@@ -10,15 +10,22 @@ const bookmarks_api_router = router({
   exchanges: router({
     find: next_auth_procedure.query(async ({ ctx: { prisma, payload } }) => {
       const { id: owner_id } = payload.profile;
-      const data = await prisma.bookmark.findMany({
+      const bookmarks = await prisma.bookmark.findMany({
         where: { owner_id, exchange_id: { not: null } },
         include: {
-          // category: true,
-          exchange: true,
-          owner: true,
+          exchange: {
+            include: {
+              category: true,
+              return: true,
+              owner: { include: { profile: true } },
+              participants: true,
+            },
+          },
         },
+        orderBy: { created_at: "asc" },
       });
-      return { data };
+
+      return { data: bookmarks.map(({ exchange }) => exchange!) };
     }),
   }),
 

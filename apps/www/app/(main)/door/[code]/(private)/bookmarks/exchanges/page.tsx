@@ -1,5 +1,7 @@
 //
 
+import { Item } from ":app/(main)/exchanges/_client/List";
+import { TRPC_SSR } from ":trpc/server";
 import type { Metadata, ResolvingMetadata } from "next";
 
 //
@@ -9,15 +11,21 @@ export async function generateMetadata(
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
   return {
-    title: `Opportunities :: ${(await parent).title?.absolute}`,
+    title: `Exchanges :: ${(await parent).title?.absolute}`,
   };
 }
 
 //
-export default function Page() {
+export default async function Page() {
+  const { data: exchanges } = await TRPC_SSR.bookmarks.exchanges.find.fetch();
+
+  if (exchanges.length === 0) return <>N/A exchanges</>;
+
   return (
-    <>
-      /home/x/zzz/github/toctocorg/toctoc/apps/www/app/(main)/door/[code]/(private)/bookmarks/opportunities/page.tsx
-    </>
+    <main className="grid grid-cols-1 gap-y-5">
+      {exchanges.map(({ id }) => (
+        <Item key={id} id={id} />
+      ))}
+    </main>
   );
 }
