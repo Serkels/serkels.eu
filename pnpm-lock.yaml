@@ -448,8 +448,8 @@ importers:
   packages/@1/modules/auth/emails:
     dependencies:
       '@react-email/body':
-        specifier: 0.0.3
-        version: 0.0.3
+        specifier: 0.0.4
+        version: 0.0.4(react@18.2.0)
       '@react-email/container':
         specifier: 0.0.8
         version: 0.0.8
@@ -3402,8 +3402,10 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@react-email/body@0.0.3:
-    resolution: {integrity: sha512-HI07SYrfKUlMXLQTwDmMgtUucZmuMnxKjZ4auYaNNfM7Chmx6RkXfD09bvgY3G+k3Z7W8H+QbpiXgx/ABD1JUg==}
+  /@react-email/body@0.0.4(react@18.2.0):
+    resolution: {integrity: sha512-NmHOumdmyjWvOXomqhQt06KbgRxhHrVznxQp/oWiPWes8nAJo2Y4L27aPHR9nTcs7JF7NmcJe9YSN42pswK+GQ==}
+    peerDependencies:
+      react: 18.2.0
     dependencies:
       react: 18.2.0
     dev: false
