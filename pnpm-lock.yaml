@@ -195,8 +195,8 @@ importers:
         specifier: 2.2.0
         version: 2.2.0
       tailwind-variants:
-        specifier: 0.1.16
-        version: 0.1.16(tailwindcss@3.3.5)
+        specifier: 0.1.17
+        version: 0.1.17(tailwindcss@3.3.5)
       ts-pattern:
         specifier: 5.0.5
         version: 5.0.5
@@ -614,8 +614,8 @@ importers:
         specifier: 6.2.1
         version: 6.2.1(react@18.2.0)
       tailwind-variants:
-        specifier: 0.1.14
-        version: 0.1.14(tailwindcss@3.3.5)
+        specifier: 0.1.17
+        version: 0.1.17(tailwindcss@3.3.5)
       ts-pattern:
         specifier: 5.0.5
         version: 5.0.5
@@ -716,8 +716,8 @@ importers:
         specifier: 6.2.1
         version: 6.2.1(react@18.2.0)
       tailwind-variants:
-        specifier: 0.1.16
-        version: 0.1.16(tailwindcss@3.3.5)
+        specifier: 0.1.17
+        version: 0.1.17(tailwindcss@3.3.5)
       ts-pattern:
         specifier: 5.0.5
         version: 5.0.5
@@ -864,8 +864,8 @@ importers:
         specifier: 17.4.0
         version: 17.4.0(react-dom@18.2.0)(react@18.2.0)
       tailwind-variants:
-        specifier: 0.1.16
-        version: 0.1.16(tailwindcss@3.3.5)
+        specifier: 0.1.17
+        version: 0.1.17(tailwindcss@3.3.5)
       ts-pattern:
         specifier: 5.0.5
         version: 5.0.5
@@ -990,8 +990,8 @@ importers:
         specifier: 6.2.1
         version: 6.2.1(react@18.2.0)
       tailwind-variants:
-        specifier: 0.1.16
-        version: 0.1.16(tailwindcss@3.3.5)
+        specifier: 0.1.17
+        version: 0.1.17(tailwindcss@3.3.5)
       ts-pattern:
         specifier: 5.0.5
         version: 5.0.5
@@ -1101,8 +1101,8 @@ importers:
         specifier: 0.2.2
         version: 0.2.2(react@18.2.0)
       tailwind-variants:
-        specifier: 0.1.16
-        version: 0.1.16(tailwindcss@3.3.5)
+        specifier: 0.1.17
+        version: 0.1.17(tailwindcss@3.3.5)
       ts-pattern:
         specifier: 5.0.5
         version: 5.0.5
@@ -1209,8 +1209,8 @@ importers:
         specifier: 17.4.0
         version: 17.4.0(react-dom@18.2.0)(react@18.2.0)
       tailwind-variants:
-        specifier: 0.1.16
-        version: 0.1.16(tailwindcss@3.3.5)
+        specifier: 0.1.17
+        version: 0.1.17(tailwindcss@3.3.5)
       ts-pattern:
         specifier: 5.0.5
         version: 5.0.5
@@ -1298,8 +1298,8 @@ importers:
         specifier: 0.2.2
         version: 0.2.2(react@18.2.0)
       tailwind-variants:
-        specifier: 0.1.16
-        version: 0.1.16(tailwindcss@3.3.5)
+        specifier: 0.1.17
+        version: 0.1.17(tailwindcss@3.3.5)
     devDependencies:
       '@1.config/prettier':
         specifier: workspace:*
@@ -1344,8 +1344,8 @@ importers:
         specifier: 0.5.6
         version: 0.5.6(prettier@3.0.3)
       tailwind-variants:
-        specifier: 0.1.16
-        version: 0.1.16(tailwindcss@3.3.5)
+        specifier: 0.1.17
+        version: 0.1.17(tailwindcss@3.3.5)
       tailwindcss:
         specifier: 3.3.5
         version: 3.3.5
@@ -1593,8 +1593,8 @@ importers:
         specifier: 2.2.0
         version: 2.2.0(react-dom@18.2.0)(react@18.2.0)
       tailwind-variants:
-        specifier: 0.1.16
-        version: 0.1.16(tailwindcss@3.3.5)
+        specifier: 0.1.17
+        version: 0.1.17(tailwindcss@3.3.5)
       tailwindcss:
         specifier: 3.3.5
         version: 3.3.5
@@ -11103,18 +11103,8 @@ packages:
       tailwind-merge: 1.14.0
     dev: false
 
-  /tailwind-variants@0.1.14(tailwindcss@3.3.5):
-    resolution: {integrity: sha512-qfOkSGP+cSolTTkJboldGmiM+w5uE77pazCRkwixEBsuaml9CmhN0E8qgH7QnZNmOTVSsgRK1tn/MsKOvOKVWA==}
-    engines: {node: '>=16.x', pnpm: '>=7.x'}
-    peerDependencies:
-      tailwindcss: '*'
-    dependencies:
-      tailwind-merge: 1.14.0
-      tailwindcss: 3.3.5
-    dev: false
-
-  /tailwind-variants@0.1.16(tailwindcss@3.3.5):
-    resolution: {integrity: sha512-WXwbKhmPMyPuzqRB68yBZIyqEv31qHfodbhDPXWP/sxww2wa4vq+T0/i5cQvJ8DV2mR3UQ8YWTQQ9VUBrf7Qjg==}
+  /tailwind-variants@0.1.17(tailwindcss@3.3.5):
+    resolution: {integrity: sha512-EJsiQPCdFbTEju6mW8xL/QQnSl1LBVWowhCfjvHTK4JLuOzpXD5+47q1nWNhSOa2W42mJGtY9d5TAtmnAfdK4g==}
     engines: {node: '>=16.x', pnpm: '>=7.x'}
     peerDependencies:
       tailwindcss: '*'
