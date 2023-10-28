@@ -22,6 +22,11 @@ export const Profile_Schema = Entity_Schema.extend({
 
 export interface Profile extends z.TypeOf<typeof Profile_Schema> {}
 
+export const PROFILE_UNKNOWN: Profile = Profile_Schema.parse(
+  { id: "PROFILE_UNKNOWN", role: "STUDIENT" },
+  { path: ["PROFILE_UNKNOWN"] },
+);
+
 //
 
 export const Partner_Schema = Entity_Schema.extend({

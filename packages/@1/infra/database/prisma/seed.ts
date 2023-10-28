@@ -12,10 +12,14 @@ import prisma from "../index";
 
 async function main() {
   await prisma.user.deleteMany();
+
+  // secu
   await prisma.profile.deleteMany();
   await prisma.studient.deleteMany();
   await prisma.exchange.deleteMany();
+  await prisma.inboxThread.deleteMany();
 
+  await prisma.thread.deleteMany();
   await prisma.category.deleteMany();
 
   //
@@ -26,6 +30,7 @@ async function main() {
   await partners();
 
   await studients_bookmarks();
+  await studients_messages();
   await profile_contacts();
 }
 
@@ -100,7 +105,7 @@ async function studient() {
               active: true,
               description: faker.lorem.paragraph(),
               is_online: faker.number.int(100) > 50,
-              places: faker.number.int(100),
+              places: faker.number.int({ min: 1, max: 9 }),
               title: faker.company.catchPhrase(),
               type: faker.helpers.arrayElement([
                 ExchangeType.PROPOSAL,
@@ -376,6 +381,63 @@ async function profile_contacts() {
         },
       },
       where: { id: profile.id },
+    });
+  }
+}
+
+async function studients_messages() {
+  const studients = await prisma.studient.findMany();
+
+  for (const studient of studients) {
+    const recipient_studient = faker.helpers.arrayElement(
+      studients.filter(({ id }) => id !== studient.id),
+    );
+    const { thread_id } = await prisma.inboxThread.create({
+      data: {
+        owner: { connect: { id: studient.id } },
+        thread: {
+          create: {
+            created_at: faker.date.past(),
+            participants: {
+              connect: [
+                { id: studient.profile_id },
+                { id: recipient_studient.profile_id },
+              ],
+            },
+            messages: {
+              createMany: {
+                data: faker.helpers.multiple(
+                  () => ({
+                    author_id: faker.helpers.arrayElement([
+                      { id: studient.profile_id },
+                      { id: recipient_studient.profile_id },
+                    ]).id,
+                    content: faker.lorem.sentences(),
+                    created_at: faker.helpers.weightedArrayElement([
+                      { value: faker.date.past(), weight: 1 },
+                      { value: faker.date.recent(), weight: 5 },
+                    ]),
+                  }),
+                  { count: { min: 15, max: 30 } },
+                ),
+              },
+            },
+          },
+        },
+      },
+    });
+    if (
+      await prisma.inboxThread.findFirst({
+        where: { owner_id: recipient_studient.id, thread_id },
+      })
+    ) {
+      continue;
+    }
+    await prisma.inboxThread.create({
+      data: {
+        owner: { connect: { id: recipient_studient.id } },
+        thread: { connect: { id: thread_id } },
+      },
     });
   }
 }

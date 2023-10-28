@@ -17,5 +17,5 @@ const config = {
 export const with_ui = (tailwindConfig: Config) => {
   return withTV({ ...config, ...tailwindConfig });
 };
-
+export const root = __dirname;
 export default withTV(config);

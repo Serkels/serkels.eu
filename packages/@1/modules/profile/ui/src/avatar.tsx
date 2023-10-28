@@ -10,7 +10,9 @@ import { LocationRadius, School } from "@1.ui/react/icons";
 
 //
 
-export function Avatar(props: AvatarProps & { profile: Profile }) {
+export function Avatar(
+  props: AvatarProps & { profile: Pick<Profile, "image" | "id"> },
+) {
   const { profile, ...other_props } = props;
   return <UI_Avatar image={profile.image} id={profile.id} {...other_props} />;
 }
@@ -27,10 +29,10 @@ export function StudientAvatarMedia(
       name={profile.name}
       {...other_props}
     >
-      <UI_AvatarMedia.Title>
+      <UI_AvatarMedia.SubTitle>
         <School className="mr-1.5 inline-block w-6" />
         <span>{university}</span>
-      </UI_AvatarMedia.Title>
+      </UI_AvatarMedia.SubTitle>
     </UI_AvatarMedia>
   );
 }
@@ -47,10 +49,10 @@ export function PartnerAvatarMedia(
       name={profile.name}
       {...other_props}
     >
-      <UI_AvatarMedia.Title>
+      <UI_AvatarMedia.SubTitle>
         <LocationRadius className="mr-1.5 inline-block w-6" />
         <span>{city}</span>
-      </UI_AvatarMedia.Title>
+      </UI_AvatarMedia.SubTitle>
     </UI_AvatarMedia>
   );
 }

@@ -65,10 +65,10 @@ function Header({ children }: PropsWithChildren) {
     <header className={header()}>
       <Card.Header.Left.Renderer childs={children}>
         <AvatarMedia name="Unknow user" image="/opengraph-image.png">
-          <AvatarMedia.Title>
+          <AvatarMedia.SubTitle>
             <School className="mr-1.5 inline-block w-6" />
             <span>{exchange.owner.university}</span>
-          </AvatarMedia.Title>
+          </AvatarMedia.SubTitle>
         </AvatarMedia>
       </Card.Header.Left.Renderer>
       <Card.Header.Center.Renderer childs={children}>

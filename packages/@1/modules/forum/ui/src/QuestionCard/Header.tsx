@@ -15,10 +15,10 @@ export function Header() {
   return (
     <header className="mb-4 flex justify-between">
       <AvatarMedia name={profile.name} image={profile.image}>
-        <AvatarMedia.Title>
+        <AvatarMedia.SubTitle>
           <School className="mr-1.5 inline-block w-6" />
           <span>{university}</span>
-        </AvatarMedia.Title>
+        </AvatarMedia.SubTitle>
       </AvatarMedia>
       <div className="flex items-start space-x-2">
         <ActionGroup />

@@ -133,7 +133,7 @@ export function Exchange_CreateForm({
         <Field
           className={input()}
           disabled={isSubmitting}
-          maxLength={100}
+          maxLength={9}
           minLength={1}
           name="places"
           required

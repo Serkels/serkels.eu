@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "@1.config/typescript/react.json",
+  "compilerOptions": {
+    "exactOptionalPropertyTypes": false,
+    "incremental": true,
+    "noEmit": true,
+    "types": ["react"],
+    "outDir": "./node_modules/.cache/tsc"
+  },
+  "include": ["src"]
+}

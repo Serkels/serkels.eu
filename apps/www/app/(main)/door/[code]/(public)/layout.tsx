@@ -27,7 +27,7 @@ export default async function Layout({
   }
 
   return (
-    <div className="mx-auto flex flex-col space-y-10 md:max-w-4xl">
+    <div className="mx-auto my-10 flex flex-col space-y-10 px-6 md:max-w-4xl md:pl-0">
       {header}
       {navbar}
       {children}

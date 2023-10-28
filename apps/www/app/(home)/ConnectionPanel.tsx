@@ -3,7 +3,7 @@
 import { Avatar } from ":components/avatar";
 import { DomLazyMotion } from ":components/shell/DomLazyMotion";
 import { HTTPError } from "@1.modules/core/errors";
-import { PROFILE_ROLES, type Profile } from "@1.modules/profile.domain";
+import { PROFILE_ROLES, PROFILE_UNKNOWN } from "@1.modules/profile.domain";
 import { Button } from "@1.ui/react/button";
 import { Spinner } from "@1.ui/react/spinner";
 import { useTimeoutEffect } from "@react-hookz/web";
@@ -231,8 +231,7 @@ function ConnectedAs() {
   try {
     const { data: session } = useSession();
 
-    const profile =
-      session?.profile ?? ({ role: PROFILE_ROLES.Enum.STUDIENT } as Profile);
+    const profile = session?.profile ?? PROFILE_UNKNOWN;
 
     const on_logout = useCallback(() => signOut(), [profile.id]);
 

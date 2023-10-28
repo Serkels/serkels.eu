@@ -15,7 +15,7 @@ export type AvatarVariantProps = VariantProps<typeof avatar>;
 export const avatar_media = tv({
   slots: {
     figure: "flex ",
-    avatar: "h-12 w-12",
+    avatar: "",
     figcaption: "ml-2 mt-0.5",
     title: "block text-left text-base font-medium leading-snug text-black",
     subtitle: "block text-sm font-light leading-snug text-gray-500",
@@ -24,6 +24,10 @@ export const avatar_media = tv({
     tv$direction: {
       column: {
         figure: "flex-col items-center text-center",
+        title: "text-center",
+      },
+      row: {
+        figure: "flex-row space-x-2",
       },
     },
     tv$size: {
@@ -34,8 +38,17 @@ export const avatar_media = tv({
         avatar: "h-14 w-14",
       },
     },
+    tv$color: {
+      secondary: {
+        title: "text-secondary",
+      },
+    },
 
     $linked: { true: {}, false: {} },
+  },
+  defaultVariants: {
+    tv$size: "base",
+    tv$direction: "row",
   },
 });
 

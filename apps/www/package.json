@@ -19,6 +19,8 @@
     "@1.modules/exchange.ui": "workspace:*",
     "@1.modules/forum.domain": "workspace:*",
     "@1.modules/forum.ui": "workspace:*",
+    "@1.modules/inbox.domain": "workspace:*",
+    "@1.modules/inbox.ui": "workspace:*",
     "@1.modules/opportunity.domain": "workspace:*",
     "@1.modules/opportunity.ui": "workspace:*",
     "@1.modules/profile.domain": "workspace:*",

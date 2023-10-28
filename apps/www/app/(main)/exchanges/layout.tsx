@@ -30,7 +30,7 @@ export default async function Layout({
     <TRPC_Hydrate>
       <Grid>
         <AsideFilter
-          className="mt-10 hidden md:col-span-2 md:block xl:col-span-3"
+          className="hidden md:col-span-2 md:block xl:col-span-3"
           slot-title="Échanges"
         >
           <SearchForm />

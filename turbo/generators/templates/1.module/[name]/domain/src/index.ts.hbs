@@ -5,7 +5,7 @@ import { z } from "zod";
 
 //
 
-export const {{pascalCase name}}_Schema = Entity_Schema.augment({
+export const {{pascalCase name}}_Schema = Entity_Schema.extend({
 }).describe("{{pascalCase name}}_PropsSchema");
 
 export interface {{pascalCase name}} extends z.TypeOf<typeof {{pascalCase name}}_Schema> {}

@@ -36,37 +36,39 @@ model SignupPayload {
 }
 
 model Profile {
-  id               String      @id @default(cuid())
-  bio              String?
-  bookmarks        Bookmark[]
-  image            String
-  name             String
-  role             ProfileRole
-  user             User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  user_id          String      @unique @map("userId")
+  id                     String      @id @default(cuid())
+  bio                    String?
+  bookmarks              Bookmark[]
+  image                  String
+  name                   String
+  role                   ProfileRole
+  user                   User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id                String      @unique @map("userId")
   //
-  created_at       DateTime    @default(now())
-  updated_at       DateTime    @default(now())
+  created_at             DateTime    @default(now())
+  updated_at             DateTime    @default(now())
   //
-  partner          Partner?
-  studient         Studient?
-  written_messages Message[]   @relation("WrittenMessages")
-  followed_by      Profile[]   @relation("ProfileFollows")
-  following        Profile[]   @relation("ProfileFollows")
+  partner                Partner?
+  studient               Studient?
+  written_messages       Message[]   @relation("WrittenMessages")
+  followed_by            Profile[]   @relation("ProfileFollows")
+  following              Profile[]   @relation("ProfileFollows")
+  participants_in_thread Thread[]    @relation("ParticipantsInThread")
 }
 
 model Studient {
-  id             String     @id @default(cuid())
+  id             String        @id @default(cuid())
   citizenship    String?
   city           String?
   field_of_study String?
-  interest       Category[] @relation("CategorizedStudientInterest")
-  profile        Profile    @relation(fields: [profile_id], references: [id], onDelete: Cascade)
-  profile_id     String     @unique
+  inbox          InboxThread[]
+  interest       Category[]    @relation("CategorizedStudientInterest")
+  profile        Profile       @relation(fields: [profile_id], references: [id], onDelete: Cascade)
+  profile_id     String        @unique
   university     String
   //
-  created_at     DateTime   @default(now())
-  updated_at     DateTime   @default(now())
+  created_at     DateTime      @default(now())
+  updated_at     DateTime      @default(now())
   //
 
   asked_questions           Question[] @relation("AskedQuestions")
@@ -244,14 +246,41 @@ model Question {
 //
 //
 
+model InboxThread {
+  id             String   @id @default(cuid())
+  is_archived    Boolean  @default(false)
+  last_seen_date DateTime @default(now())
+  owner          Studient @relation(fields: [owner_id], references: [id], onDelete: Cascade)
+  owner_id       String
+  thread         Thread   @relation(fields: [thread_id], references: [id], onDelete: Cascade)
+  thread_id      String
+
+  @@unique([owner_id, thread_id])
+}
+
+model Thread {
+  id            String        @id @default(cuid())
+  messages      Message[]
+  participants  Profile[]     @relation("ParticipantsInThread")
+  //
+  created_at    DateTime      @default(now())
+  updated_at    DateTime      @default(now())
+  //
+  inbox_threads InboxThread[]
+}
+
 model Message {
   id         String   @id @default(cuid())
   author     Profile  @relation("WrittenMessages", fields: [author_id], references: [id], onDelete: Cascade)
   author_id  String
   content    String
+  thread     Thread   @relation(fields: [thread_id], references: [id])
+  thread_id  String
   //
   created_at DateTime @default(now())
   updated_at DateTime @default(now())
+
+  @@unique(name: "unique_date_in_thread", fields: [thread_id, created_at])
 }
 
 //

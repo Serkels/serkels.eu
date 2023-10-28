@@ -10,6 +10,7 @@ export function Exchange(props: SVGProps<any>) {
       {...props}
     >
       <path
+        className="fill-current"
         d="m3712.764 940.673-9.916 9.916v-4.958h-14.874l9.916-9.916v4.958l10.93.008Z"
         transform="translate(-3613.608 -925.799)"
         fill="currentColor"
