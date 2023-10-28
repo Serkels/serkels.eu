@@ -171,8 +171,8 @@ importers:
         specifier: 14.0.0
         version: 14.0.0(react-dom@18.2.0)(react@18.2.0)
       next-auth:
-        specifier: 4.24.3
-        version: 4.24.3(next@14.0.0)(react-dom@18.2.0)(react@18.2.0)
+        specifier: 4.24.4
+        version: 4.24.4(next@14.0.0)(react-dom@18.2.0)(react@18.2.0)
       nextjs-google-analytics:
         specifier: 2.3.3
         version: 2.3.3(next@14.0.0)(react@18.2.0)
@@ -518,8 +518,8 @@ importers:
         specifier: 14.0.0
         version: 14.0.0(react-dom@18.2.0)(react@18.2.0)
       next-auth:
-        specifier: 4.24.3
-        version: 4.24.3(next@14.0.0)(react-dom@18.2.0)(react@18.2.0)
+        specifier: 4.24.4
+        version: 4.24.4(next@14.0.0)(react-dom@18.2.0)(react@18.2.0)
       superjson:
         specifier: 2.2.0
         version: 2.2.0
@@ -1393,8 +1393,8 @@ importers:
         specifier: 14.0.0
         version: 14.0.0(react-dom@18.2.0)(react@18.2.0)
       next-auth:
-        specifier: 4.24.3
-        version: 4.24.3(next@14.0.0)(react-dom@18.2.0)(react@18.2.0)
+        specifier: 4.24.4
+        version: 4.24.4(next@14.0.0)(react-dom@18.2.0)(react@18.2.0)
       superjson:
         specifier: 2.2.0
         version: 2.2.0
@@ -1645,8 +1645,8 @@ importers:
         specifier: 14.0.0
         version: 14.0.0(react-dom@18.2.0)(react@18.2.0)
       next-auth:
-        specifier: 4.24.3
-        version: 4.24.3(next@14.0.0)(react-dom@18.2.0)(react@18.2.0)
+        specifier: 4.24.4
+        version: 4.24.4(next@14.0.0)(react-dom@18.2.0)(react@18.2.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -9050,10 +9050,10 @@ packages:
     engines: {node: '>= 0.4.0'}
     dev: true
 
-  /next-auth@4.24.3(next@14.0.0)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-n1EvmY7MwQMSOkCh6jhI6uBneB6VVtkYELVMEwVaCLD1mBD3IAAucwk+90kgxramW09nSp5drvynwfNCi1JjaQ==}
+  /next-auth@4.24.4(next@14.0.0)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-5DGffi+OpkbU62vPQIJ1z+hFnmow+ec5Qrn9m6eoglIO51m0DlrmLxBduZEwKAYDEg9k2joi1yelgmq1vqK3aQ==}
     peerDependencies:
-      next: ^12.2.5 || ^13
+      next: ^12.2.5 || ^13 || ^14
       nodemailer: ^6.6.5
       react: ^17.0.2 || ^18
       react-dom: ^17.0.2 || ^18
@@ -10476,7 +10476,7 @@ packages:
   /rtl-css-js@1.16.1:
     resolution: {integrity: sha512-lRQgou1mu19e+Ya0LsTvKrVJ5TYUbqCVPAiImX3UfLTenarvPUl1QFdvu5Z3PYmHT9RCcwIfbjRQBntExyj3Zg==}
     dependencies:
-      '@babel/runtime': 7.21.0
+      '@babel/runtime': 7.23.2
     dev: false
 
   /run-async@2.4.1:
