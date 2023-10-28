@@ -3,6 +3,8 @@
 import type { Message as Message_Type } from "@1.modules/inbox.domain";
 import type { Profile } from "@1.modules/profile.domain";
 import { Avatar } from "@1.ui/react/avatar";
+import { format } from "date-fns";
+import { fr } from "date-fns/locale";
 import { tv } from "tailwind-variants";
 import { Message } from "./Message";
 
@@ -32,8 +34,14 @@ export function ProfileMessages({
               is_you,
             }}
           >
-            {message.created_at.toLocaleString()}
-            <br />
+            <time
+              className="mt-3 text-xs opacity-30"
+              dateTime={message.created_at.toUTCString()}
+              title={message.created_at.toUTCString()}
+            >
+              {format(message.created_at, "Pp", { locale: fr })}
+              <br />
+            </time>
             {message.content}
           </Message>
         ))}

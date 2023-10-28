@@ -398,6 +398,7 @@ async function studients_messages() {
         thread: {
           create: {
             created_at: faker.date.past(),
+            updated_at: faker.date.past(),
             participants: {
               connect: [
                 { id: studient.profile_id },

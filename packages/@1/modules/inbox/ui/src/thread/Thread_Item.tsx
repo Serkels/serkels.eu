@@ -24,7 +24,7 @@ export function Thread_Item({
           dateTime={last_update.toUTCString()}
           title={last_update.toUTCString()}
         >
-          {format(last_update, "P", { locale: fr })}
+          {format(last_update, "PPp", { locale: fr })}
         </time>
       </header>
       <div className={excerpt()}>

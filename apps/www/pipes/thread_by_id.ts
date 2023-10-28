@@ -17,6 +17,11 @@ export function thread_by_id({ thread_id }: Params) {
 }
 
 // TODO(douglasduteil): might want to move this to "@1.modules/inbox.domain"
+/**
+ *
+ * @param param0
+ * @deprecated
+ */
 export function thread_recipient({
   participants,
   profile_id,
