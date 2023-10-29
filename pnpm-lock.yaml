@@ -1440,11 +1440,11 @@ importers:
         specifier: 4.3.4
         version: 4.3.4
       modern-errors:
-        specifier: 6.0.0
-        version: 6.0.0
+        specifier: 7.0.0
+        version: 7.0.0
       modern-errors-serialize:
         specifier: 5.0.0
-        version: 5.0.0(modern-errors@6.0.0)
+        version: 5.0.0(modern-errors@7.0.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -6311,11 +6311,6 @@ packages:
     resolution: {integrity: sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw==}
     engines: {node: '>=0.12'}
 
-  /error-class-utils@3.0.0:
-    resolution: {integrity: sha512-L26cyYkaV6nzbUbmDRNSXAZfcuQy4cvEDvD+WoRF6c6nIEEydfgn7grd+idf2xLVYaTHnn7yYQjaz+Dnx+N1lQ==}
-    engines: {node: '>=16.17.0'}
-    dev: false
-
   /error-class-utils@4.0.0:
     resolution: {integrity: sha512-przSMatQ20oCvuiKYOX9hHDsXMA2AhFrGRCiR7RwoixDzu7ChsWx41XshLBpGKc+qgC2FOSvOX69FNFaBYArhg==}
     engines: {node: '>=18.18.0'}
@@ -6326,13 +6321,6 @@ packages:
     engines: {node: '>=18.18.0'}
     dependencies:
       error-class-utils: 4.0.0
-    dev: false
-
-  /error-custom-class@9.0.0:
-    resolution: {integrity: sha512-cfXOxbwRQpXLUSecZctO/GPtKm9auTd2v1eY4CsclMgRkse/h5w59V1u1p7LdStVnw/SCbROcsd5zLenauvlRw==}
-    engines: {node: '>=16.17.0'}
-    dependencies:
-      error-class-utils: 3.0.0
     dev: false
 
   /error-ex@1.3.2:
@@ -7992,6 +7980,11 @@ packages:
     engines: {node: '>=16.17.0'}
     dev: false
 
+  /is-error-instance@3.0.0:
+    resolution: {integrity: sha512-K0NeIwAWZGE4KoH1b6xw2+feyE80RqUq0OvZgr8z4gKb1BrF78B9Bo4HWRIe3xMHXbLKkxqhhT6oSNwXFqauJw==}
+    engines: {node: '>=18.18.0'}
+    dev: false
+
   /is-extendable@0.1.1:
     resolution: {integrity: sha512-5BMULNob1vgFX6EjQw5izWDxrecWK9AM72rugNr0TFldMOi0fj6Jk+zeKIt0xGj4cEfQIJth4w3OKWOJ4f+AFw==}
     engines: {node: '>=0.10.0'}
@@ -8617,14 +8610,14 @@ packages:
     resolution: {integrity: sha512-GaqWWShW4kv/G9IEucWScBx9G1/vsFZZJUO+tD26M8J8z3Kw5RDQjaoZe03YAClgeS/SWPOcb4nkFBTEi5DUEA==}
     dev: false
 
-  /merge-error-cause@4.0.1:
-    resolution: {integrity: sha512-fTPQshSNjhq6BGvoe5F6xezzcWTn98rog8Ra0gJ0jqgwZXizPNRyg/pjhWX5+pXYanecSPUXa17uEM/RwZfKXw==}
-    engines: {node: '>=16.17.0'}
+  /merge-error-cause@5.0.0:
+    resolution: {integrity: sha512-px3J5V6QJnq5j3WC8gQJPOlCnm3IMz6I4IBU7A/D8713Fk8ptKt1UD1tvEksrsivA3vI39lAr2b/H7A3n9MqKA==}
+    engines: {node: '>=18.18.0'}
     dependencies:
       normalize-exception: 3.0.0
-      set-error-class: 2.0.0
-      set-error-props: 5.0.0
-      wrap-error-message: 2.0.1
+      set-error-class: 3.0.0
+      set-error-props: 6.0.0
+      wrap-error-message: 3.0.0
     dev: false
 
   /merge-stream@2.0.0:
@@ -8947,7 +8940,7 @@ packages:
     hasBin: true
     dev: false
 
-  /modern-errors-serialize@5.0.0(modern-errors@6.0.0):
+  /modern-errors-serialize@5.0.0(modern-errors@7.0.0):
     resolution: {integrity: sha512-vKtplFTL+nooOabeOsX2ur9tSgXCzvKOY15WAx1bwq9Cz6yETipqKilZX+bGXFrTRptUOotuACRWhQ+46wWguQ==}
     engines: {node: '>=16.17.0'}
     peerDependencies:
@@ -8955,21 +8948,21 @@ packages:
     dependencies:
       error-serializer: 6.0.1
       is-plain-obj: 4.1.0
-      modern-errors: 6.0.0
+      modern-errors: 7.0.0
     dev: false
 
-  /modern-errors@6.0.0:
-    resolution: {integrity: sha512-IgtbY9ITQfbtZUdoIiqOwReV+Z2iL82OtwWTNV9cusKT/SvNivIAXKyGjEGcoCpLc+32UZp0DuqXViIDAG44Zg==}
-    engines: {node: '>=16.17.0'}
+  /modern-errors@7.0.0:
+    resolution: {integrity: sha512-4H55sVGQe0JxbBIH9ea9QUkY3BDSpxauyWYXB5W4LCeYEvjEScYxnoHp9cFHxeCvUuf1a1lqJILo/H2kRV37og==}
+    engines: {node: '>=18.18.0'}
     dependencies:
-      error-class-utils: 3.0.0
-      error-custom-class: 9.0.0
+      error-class-utils: 4.0.0
+      error-custom-class: 10.0.0
       filter-obj: 5.1.0
       is-plain-obj: 4.1.0
-      merge-error-cause: 4.0.1
+      merge-error-cause: 5.0.0
       normalize-exception: 3.0.0
-      set-error-message: 2.0.1
-      set-error-props: 5.0.0
+      set-error-message: 3.0.0
+      set-error-props: 6.0.0
       set-error-stack: 2.0.0
     dev: false
 
@@ -10270,9 +10263,9 @@ packages:
       resolve: 1.22.8
     dev: true
 
-  /redefine-property@2.0.0:
-    resolution: {integrity: sha512-7UfHFiHkePd9mb/vYMPYuAPjAa/77xGQ1S6laaWNQkz5gVJAtYpoWYQ5iFL/ZcDxXZVqnD7N4aFFnIn4T36Sbw==}
-    engines: {node: '>=16.17.0'}
+  /redefine-property@3.0.0:
+    resolution: {integrity: sha512-ccnADJaJkclGGzRuc8kaNBHmoyOwW+Da2DyPQdiccMdlMyvPvCtIa6kN0sKz+JiW43dQEGFiCSNjyObi372ptA==}
+    engines: {node: '>=18.18.0'}
     dependencies:
       is-plain-obj: 4.1.0
     dev: false
@@ -10627,20 +10620,27 @@ packages:
       normalize-exception: 3.0.0
     dev: false
 
-  /set-error-message@2.0.1:
-    resolution: {integrity: sha512-s/eeP0f4ed1S3fl0KbxZoy5Pbeg5D6Nbple9nut4VPwHTvEIk5r7vKq0FwjNjszdUPdlTrs4GJCOkWUqWeTeWg==}
-    engines: {node: '>=16.17.0'}
+  /set-error-class@3.0.0:
+    resolution: {integrity: sha512-a2Ham0lVgvzp14cm2Z2LM2Ae1HzxI8G+LX6Rv+eTVzM5+pfPU7UtJBSOXktxoBlqlmaPsZmZRR84qY+CoHt6bg==}
+    engines: {node: '>=18.18.0'}
     dependencies:
       normalize-exception: 3.0.0
     dev: false
 
-  /set-error-props@5.0.0:
-    resolution: {integrity: sha512-AKeNtJ7f9HUzB9Vw9KWiKKe6NR5b8hJoVVnXGN+ZkEj0jTfM0ggL+I2O/14zfJn9lgUqGgMgyjjRhldp7eTpeA==}
-    engines: {node: '>=16.17.0'}
+  /set-error-message@3.0.0:
+    resolution: {integrity: sha512-CaNAe+/oXwT2XqGtK1plJOZYBi+cpwliSiL8yqO00c3Hvp3w4Tjo95ndv/bEJUM/7sWSw+ctF6J5GbiqF98lFQ==}
+    engines: {node: '>=18.18.0'}
     dependencies:
-      is-error-instance: 2.0.0
+      normalize-exception: 3.0.0
+    dev: false
+
+  /set-error-props@6.0.0:
+    resolution: {integrity: sha512-vJ7lRuvcn5NTbuT7QS8k+dh6AN5y1R/V2xZmlwvB48bJ2b8v46z+dgx5k1VGrB9xt7ZnC98jWcikHb6gyIJgAg==}
+    engines: {node: '>=18.18.0'}
+    dependencies:
+      is-error-instance: 3.0.0
       is-plain-obj: 4.1.0
-      redefine-property: 2.0.0
+      redefine-property: 3.0.0
     dev: false
 
   /set-error-stack@2.0.0:
@@ -11899,12 +11899,12 @@ packages:
       strip-ansi: 6.0.1
     dev: true
 
-  /wrap-error-message@2.0.1:
-    resolution: {integrity: sha512-LrBMsWJ85HKjLs5ABjhZeW7mWpwsAoV16iqmhEXUf4Y2GvdLwrqK4FPGNNoAi7a20wy4wHU2ci61wQfcOgz/Kw==}
-    engines: {node: '>=16.17.0'}
+  /wrap-error-message@3.0.0:
+    resolution: {integrity: sha512-QoePG1A6p9t6kY6RjOucIJvItmJfViuDs9C84TifNr8zN2oFmeky8SQ3OkUAY7vfefPPB7TUtKbiXjsV29EhLw==}
+    engines: {node: '>=18.18.0'}
     dependencies:
       normalize-exception: 3.0.0
-      set-error-message: 2.0.1
+      set-error-message: 3.0.0
     dev: false
 
   /wrappy@1.0.2:
