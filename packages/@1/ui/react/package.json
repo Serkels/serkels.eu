@@ -46,7 +46,7 @@
     "formik": "2.4.5",
     "framer-motion": "10.16.4",
     "react-aria-components": "1.0.0-beta.2",
-    "tailwind-variants": "0.1.17"
+    "tailwind-variants": "0.1.18"
   },
   "devDependencies": {
     "@1.config/prettier": "workspace:*",
