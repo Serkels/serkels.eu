@@ -47,14 +47,18 @@ function UserThread_Item({ inbox_id }: { inbox_id: string }) {
     <Thread_AsyncItem info={info}>
       {({ inbox }) => {
         const { thread } = inbox;
-        const last_message = thread.messages.pop();
-        console.log({ thread, last_message });
+        const last_message =
+          thread.messages.at(0) ??
+          ({
+            content: "...",
+            created_at: new Date(),
+            updated_at: new Date(),
+          } satisfies Omit<Message, "author" | "id">);
+
         const participant = thread_recipient({
           participants: thread.participants,
           profile_id,
         });
-
-        if (!last_message) return null;
 
         return (
           <Thread_Item last_update={last_message.updated_at}>
@@ -63,7 +67,7 @@ function UserThread_Item({ inbox_id }: { inbox_id: string }) {
             </Thread_Item.Avatar>
             <Thread_Item.Body>
               <Link href={`/@~/inbox/${thread.id}`}>
-                {last_message?.content}
+                {last_message.content}
               </Link>
             </Thread_Item.Body>
           </Thread_Item>
