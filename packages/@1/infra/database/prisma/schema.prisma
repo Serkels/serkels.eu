@@ -39,6 +39,8 @@ model Profile {
   id                     String      @id @default(cuid())
   bio                    String?
   bookmarks              Bookmark[]
+  contacts               Profile[]   @relation("Contacts")
+  following              Profile[]   @relation("ProfileFollows")
   image                  String
   name                   String
   role                   ProfileRole
@@ -52,8 +54,8 @@ model Profile {
   studient               Studient?
   written_messages       Message[]   @relation("WrittenMessages")
   followed_by            Profile[]   @relation("ProfileFollows")
-  following              Profile[]   @relation("ProfileFollows")
   participants_in_thread Thread[]    @relation("ParticipantsInThread")
+  in_contact_with        Profile[]   @relation("Contacts")
 }
 
 model Studient {

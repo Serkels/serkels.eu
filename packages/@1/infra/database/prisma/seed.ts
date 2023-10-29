@@ -30,7 +30,10 @@ async function main() {
   await partners();
 
   await studients_bookmarks();
+
   await studients_messages();
+  await studients_messages(); // more messages
+
   await profile_contacts();
 }
 
@@ -170,22 +173,7 @@ async function studient() {
 }
 
 async function studients() {
-  await Promise.all(Array.from({ length: 10 }).map(studient));
-
-  //
-  //
-  //
-
-  // const profile_count = await prisma.profile.count();
-  // await prisma.profile.updateMany({
-  //   data: { following: { connect: [{ id: bar_profile_1.id }] } },
-  //   where: { id: foo_profile_1.id },
-  // });
-
-  // const foo_con_1 = await prisma.exchange.findFirstOrThrow({
-  //   where: { owner_id: foo.id },
-  // });
-  // const exchange_foo_bar = prisma.exchange.findFirst({where: {owner_id: foo.id})
+  await Promise.all(Array.from({ length: 22 }).map(studient));
 }
 
 //
@@ -368,16 +356,17 @@ async function studients_bookmarks() {
 }
 
 async function profile_contacts() {
-  const profiles = await prisma.profile.findMany();
-  const profile_ids = profiles.map(({ id }) => ({ id }));
+  const profile_ids = await prisma.profile.findMany({ select: { id: true } });
 
-  for (const profile of profiles) {
+  for (const profile of profile_ids) {
+    const other_profiles = profile_ids.filter(({ id }) => id !== profile.id);
     await prisma.profile.update({
       data: {
+        contacts: {
+          connect: faker.helpers.arrayElements(other_profiles),
+        },
         following: {
-          connect: faker.helpers.arrayElements(
-            profile_ids.filter(({ id }) => id !== profile.id),
-          ),
+          connect: faker.helpers.arrayElements(other_profiles),
         },
       },
       where: { id: profile.id },
@@ -419,7 +408,7 @@ async function studients_messages() {
                       { value: faker.date.recent(), weight: 5 },
                     ]),
                   }),
-                  { count: { min: 15, max: 30 } },
+                  { count: { min: 5, max: 30 } },
                 ),
               },
             },

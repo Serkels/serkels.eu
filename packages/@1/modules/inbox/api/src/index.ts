@@ -8,6 +8,55 @@ import { z } from "zod";
 const inbox_api_router = router({
   //
 
+  talk_to: next_auth_procedure
+    .input(z.string())
+    .mutation(
+      async ({ ctx: { payload, prisma }, input: recipient_profile_id }) => {
+        const { profile } = payload;
+        const { id: studient_id } = await prisma.studient.findUniqueOrThrow({
+          select: { id: true },
+          where: { profile_id: profile.id },
+        });
+
+        const existing_inbox_thread = await prisma.inboxThread.findFirst({
+          where: {
+            owner_id: studient_id,
+            thread: { participants: { some: { id: recipient_profile_id } } },
+          },
+        });
+
+        if (existing_inbox_thread) return existing_inbox_thread;
+
+        const existing_thread = await prisma.thread.findFirst({
+          where: {
+            participants: {
+              every: { id: { in: [profile.id, recipient_profile_id] } },
+            },
+          },
+        });
+
+        if (existing_thread)
+          return await prisma.inboxThread.create({
+            data: { owner_id: studient_id, thread_id: existing_thread.id },
+          });
+
+        return await prisma.inboxThread.create({
+          data: {
+            owner: { connect: { id: studient_id } },
+            thread: {
+              create: {
+                participants: {
+                  connect: [{ id: profile.id }, { id: recipient_profile_id }],
+                },
+              },
+            },
+          },
+        });
+      },
+    ),
+
+  //
+
   find: next_auth_procedure
     .input(
       z.object({
