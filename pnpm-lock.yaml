@@ -1443,8 +1443,8 @@ importers:
         specifier: 7.0.0
         version: 7.0.0
       modern-errors-serialize:
-        specifier: 5.0.0
-        version: 5.0.0(modern-errors@7.0.0)
+        specifier: 6.0.0
+        version: 6.0.0(modern-errors@7.0.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -6329,15 +6329,15 @@ packages:
       is-arrayish: 0.2.1
     dev: true
 
-  /error-serializer@6.0.1:
-    resolution: {integrity: sha512-SDEXcpWyys6yd6zLcC+s5bGnfe+xWxBJoC7p+o72c5F+hDdgdWc8LB8EOvcdqs7U+rzInYldFpiqSwmC3VZUeg==}
-    engines: {node: '>=16.17.0'}
+  /error-serializer@7.0.0:
+    resolution: {integrity: sha512-VKXwvqgZEDBKmxLUrAzOW6mLtlBnwvvIBDCe0vYnybOYMikWN2uUC+8edKFYMYgbvp8ouTlPM/VPC26G+XVvoQ==}
+    engines: {node: '>=18.18.0'}
     dependencies:
-      is-error-instance: 2.0.0
+      is-error-instance: 3.0.0
       is-plain-obj: 4.1.0
       normalize-exception: 3.0.0
-      safe-json-value: 2.0.1
-      set-error-class: 2.0.0
+      safe-json-value: 3.0.0
+      set-error-class: 3.0.0
     dev: false
 
   /error-stack-parser@2.1.4:
@@ -8940,13 +8940,13 @@ packages:
     hasBin: true
     dev: false
 
-  /modern-errors-serialize@5.0.0(modern-errors@7.0.0):
-    resolution: {integrity: sha512-vKtplFTL+nooOabeOsX2ur9tSgXCzvKOY15WAx1bwq9Cz6yETipqKilZX+bGXFrTRptUOotuACRWhQ+46wWguQ==}
-    engines: {node: '>=16.17.0'}
+  /modern-errors-serialize@6.0.0(modern-errors@7.0.0):
+    resolution: {integrity: sha512-oqfY6NeiZtFcZW4VIoL8fu3xoP/YMswEsUe6cMKZmj6s8M1f8pTVqC5uhQN9sKmTRxDcA6E00V2Cb3NY8b72SQ==}
+    engines: {node: '>=18.18.0'}
     peerDependencies:
-      modern-errors: ^6.0.0
+      modern-errors: ^7.0.0
     dependencies:
-      error-serializer: 6.0.1
+      error-serializer: 7.0.0
       is-plain-obj: 4.1.0
       modern-errors: 7.0.0
     dev: false
@@ -10525,9 +10525,9 @@ packages:
     resolution: {integrity: sha512-rp3So07KcdmmKbGvgaNxQSJr7bGVSVk5S9Eq1F+ppbRo70+YeaDxkw5Dd8NPN+GD6bjnYm2VuPuCXmpuYvmCXQ==}
     dev: true
 
-  /safe-json-value@2.0.1:
-    resolution: {integrity: sha512-vvoBxKVyksxwqzNDoD2vLVkcvbjYBFXS/CghUrFDsrP0wgTaw+/gIyOADNYa1vyPmICLUWH7RNh0FtwmFsEQCQ==}
-    engines: {node: '>=16.17.0'}
+  /safe-json-value@3.0.0:
+    resolution: {integrity: sha512-d9NN/9QDNTfhHr3K1gGdDCn7K0OBvBHrNDwA4PqGPkn6nUmQL7GzMPBC+nmkY7G450B26wkfu7lZTVH7CJ+Jgw==}
+    engines: {node: '>=18.18.0'}
     dependencies:
       is-plain-obj: 4.1.0
       normalize-exception: 3.0.0
@@ -10611,13 +10611,6 @@ packages:
 
   /server-only@0.0.1:
     resolution: {integrity: sha512-qepMx2JxAa5jjfzxG79yPPq+8BuFToHd1hm7kI+Z4zAq1ftQiP7HcxMhDDItrbtwVeLg/cY2JnKnrcFkmiswNA==}
-    dev: false
-
-  /set-error-class@2.0.0:
-    resolution: {integrity: sha512-ZBXDmoj+bWd+vJbA8VZE/aVQ6NL5iu2AVMtUyVIVXVMEi4oozCGPZAPjaJJZ4k8koLYb0OAFcyIRb0T6XiCuXg==}
-    engines: {node: '>=16.17.0'}
-    dependencies:
-      normalize-exception: 3.0.0
     dev: false
 
   /set-error-class@3.0.0:
