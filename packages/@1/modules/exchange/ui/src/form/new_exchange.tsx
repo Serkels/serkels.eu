@@ -147,7 +147,7 @@ export function Exchange_CreateForm({
           <Field disabled={isSubmitting} value="" name="return" type="radio" />
         </label>
         <label>
-          <span> Sur place</span>{" "}
+          <span className="w-full"> Contre un échange</span>
           <Field
             checked={Boolean(values.return)}
             disabled={true}

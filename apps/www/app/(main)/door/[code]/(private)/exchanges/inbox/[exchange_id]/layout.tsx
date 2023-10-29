@@ -11,7 +11,7 @@ export async function generateMetadata(
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
   return {
-    title: `Inbox :: ${(await parent).title?.absolute}`,
+    title: `<Echange Title> :: ${(await parent).title?.absolute}`,
   };
 }
 
@@ -19,9 +19,9 @@ export async function generateMetadata(
 export default function Layout({ children }: PropsWithChildren) {
   const navbar = <Navbar_Page />;
   return (
-    <div className="grid h-full md:grid-cols-6 xl:grid-cols-10">
-      <aside className="col-span-3 hidden pt-10 md:block">{navbar}</aside>
-      <div className="col-span-3 bg-white xl:col-span-7">{children}</div>
+    <div className="grid h-full xl:grid-cols-[minmax(0,_300px),_1fr]">
+      <aside className="hidden pt-10 md:block">{navbar}</aside>
+      <div className="bg-white">{children}</div>
     </div>
   );
 }

@@ -44,20 +44,28 @@ const exchange_api_router = router({
   by_profile: procedure
     .input(
       z.object({
-        profile_id: z.string(),
+        cursor: z.string().optional(),
         limit: z.number().min(1).max(10).default(10),
+        profile_id: z.string(),
       }),
     )
     .query(async ({ input, ctx: { prisma } }) => {
-      const { profile_id, limit } = input;
+      const { cursor, profile_id, limit } = input;
 
       const data = await prisma.exchange.findMany({
+        ...(cursor ? { cursor: { id: cursor } } : {}),
         take: limit,
         where: { owner: { profile_id: profile_id } },
         orderBy: { created_at: "asc" },
       });
 
-      return { data };
+      let next_cursor: typeof cursor | undefined = undefined;
+      if (data.length > limit) {
+        const next_item = data.pop()!;
+        next_cursor = next_item.id;
+      }
+
+      return { data, next_cursor };
     }),
 
   find: procedure

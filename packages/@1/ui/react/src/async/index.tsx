@@ -1,11 +1,9 @@
 //
 
 import type { InfiniteData } from "@tanstack/react-query";
-import { tv } from "tailwind-variants";
 import { Spinner } from "../spinner";
 
 //
-
 
 export function flatten_pages_are_empty<TData extends { data: any[] }>(
   value: InfiniteData<TData>,
@@ -41,4 +39,3 @@ export function Loading() {
     </div>
   );
 }
-

@@ -19,7 +19,7 @@ export async function generateMetadata(
 export default async function Page() {
   const categories = await TRPC_SSR.category.exchange.fetch();
   return (
-    <main className="col-span-full my-10 px-4 md:col-span-6 xl:col-span-8">
+    <main className="mx-auto my-10 max-w-3xl px-4">
       <CreateExchangeForm categories={categories} />
     </main>
   );
