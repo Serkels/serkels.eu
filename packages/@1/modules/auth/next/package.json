@@ -25,7 +25,7 @@
     "@1.modules/profile.domain": "workspace:*",
     "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
     "@trpc/client": "10.43.0",
-    "next": "14.0.0",
+    "next": "14.0.1",
     "next-auth": "4.24.4",
     "superjson": "2.2.0",
     "zod": "3.22.4"
