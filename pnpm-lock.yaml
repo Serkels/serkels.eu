@@ -1039,8 +1039,8 @@ importers:
         specifier: workspace:*
         version: link:../../trpc
       '@trpc/server':
-        specifier: 10.40.0
-        version: 10.40.0
+        specifier: 10.43.0
+        version: 10.43.0
       date-fns:
         specifier: 2.30.0
         version: 2.30.0
@@ -4841,10 +4841,6 @@ packages:
       '@trpc/server': 10.43.0
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-    dev: false
-
-  /@trpc/server@10.40.0:
-    resolution: {integrity: sha512-49SUOMWzSZtu5+OdrADmJD+u+sjSE0qj1cWgYk2FY4jLkPJunLuNRuhzM7aOeBhiUjyfhg2YTfur8FN1WBmvEw==}
     dev: false
 
   /@trpc/server@10.43.0:
