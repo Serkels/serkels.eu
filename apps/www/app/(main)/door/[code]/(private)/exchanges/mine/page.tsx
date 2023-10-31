@@ -22,7 +22,7 @@ export async function generateMetadata(
 export default async function Page({ params }: { params: CodeParms }) {
   const profile_id = await code_to_profile_id(params);
   if (!profile_id) {
-    return notFound();
+    notFound();
   }
 
   const { data: exchanges } = await TRPC_SSR.exchanges.by_profile.fetch({

@@ -21,7 +21,7 @@ export default async function Page() {
   await TRPC_SSR.inbox.find.prefetchInfinite({});
 
   return (
-    <div className={column_screen()}>
+    <div className={column_screen({ className: "[&>*]:px-8" })}>
       <SearchForm />
       <nav
         className="

@@ -11,6 +11,5 @@ export const column_screen = tv({
     max-h-[calc(100vh_-_theme(spacing.36))]
     flex-col
     space-y-6
-    [&>*]:px-8
   `,
 });

@@ -24,7 +24,7 @@ export default async function Page() {
   await TRPC_SSR.inbox.find.prefetchInfinite({});
 
   return (
-    <div className={column_screen()}>
+    <div className={column_screen({ className: "[&>*]:px-8" })}>
       <div className="flex justify-between">
         <h6 className="px-8 text-2xl font-bold">Messages</h6>
         <Link

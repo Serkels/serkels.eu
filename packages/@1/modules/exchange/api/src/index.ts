@@ -1,13 +1,15 @@
 //
 
 import { Exchange_Filter } from "@1.modules/exchange.domain";
-import { procedure, router } from "@1.modules/trpc";
+import { next_auth_procedure, procedure, router } from "@1.modules/trpc";
 import { match } from "ts-pattern";
 import { z } from "zod";
 
 //
 
 const exchange_api_router = router({
+  //
+
   by_id: procedure
     .input(z.string())
     .query(async ({ input: id, ctx: { prisma } }) => {
@@ -21,6 +23,8 @@ const exchange_api_router = router({
         },
       });
     }),
+
+  //
 
   by_particitpant: procedure
     .input(
@@ -40,6 +44,8 @@ const exchange_api_router = router({
 
       return { data };
     }),
+
+  //
 
   by_profile: procedure
     .input(
@@ -67,6 +73,45 @@ const exchange_api_router = router({
 
       return { data, next_cursor };
     }),
+
+  //
+
+  me: router({
+    find_active: next_auth_procedure
+      .input(
+        z.object({
+          cursor: z.string().optional(),
+          limit: z.number().min(1).max(10).default(10),
+        }),
+      )
+      .query(async ({ input, ctx: { payload, prisma } }) => {
+        const { profile } = payload;
+        const { cursor, limit } = input;
+
+        const data = await prisma.exchange.findMany({
+          ...(cursor ? { cursor: { id: cursor } } : {}),
+          take: limit,
+          where: {
+            active: true,
+            OR: [
+              { owner: { profile_id: profile.id } },
+              { participants: { some: { profile_id: profile.id } } },
+            ],
+          },
+          orderBy: { updated_at: "asc" },
+        });
+
+        let next_cursor: typeof cursor | undefined = undefined;
+        if (data.length > limit) {
+          const next_item = data.pop()!;
+          next_cursor = next_item.id;
+        }
+
+        return { data, next_cursor };
+      }),
+  }),
+
+  //
 
   find: procedure
     .input(
@@ -125,6 +170,8 @@ const exchange_api_router = router({
 
       return { data: items, nextCursor };
     }),
+
+  //
 });
 
 export default exchange_api_router;

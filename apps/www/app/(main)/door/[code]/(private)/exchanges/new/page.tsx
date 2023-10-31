@@ -5,6 +5,7 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { CreateExchangeForm } from "./page.client";
 
 //
+
 export async function generateMetadata(
   _: any,
   parent: ResolvingMetadata,

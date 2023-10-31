@@ -4,7 +4,12 @@
  * @link https://www.prisma.io/docs/guides/database/seed-database
  */
 import { faker } from "@faker-js/faker";
-import { CategoryContext, ExchangeType, ProfileRole } from "@prisma/client";
+import {
+  CategoryContext,
+  ExchangeThreadStatus,
+  ExchangeType,
+  ProfileRole,
+} from "@prisma/client";
 import dedent from "dedent";
 import process from "node:process";
 import slugify from "slugify";
@@ -30,6 +35,7 @@ async function main() {
   await partners();
 
   await studients_bookmarks();
+  await studients_participants_in_exchanges();
 
   await studients_messages();
   await studients_messages(); // more messages
@@ -106,19 +112,15 @@ async function studient() {
           data: faker.helpers.multiple(
             () => ({
               active: true,
-              description: faker.lorem.paragraph(),
-              is_online: faker.number.int(100) > 50,
-              places: faker.number.int({ min: 1, max: 9 }),
-              title: faker.company.catchPhrase(),
-              type: faker.helpers.arrayElement([
-                ExchangeType.PROPOSAL,
-                ExchangeType.RESEARCH,
-              ]),
-              location: faker.location.city(),
               category_id: faker.helpers.arrayElement([
                 category_autres.id,
                 ...exchange_categories_id,
               ]),
+              created_at: faker.date.past(),
+              description: faker.lorem.paragraph(),
+              is_online: faker.number.int(100) > 50,
+              location: faker.location.city(),
+              places: faker.number.int({ min: 1, max: 9 }),
               return_id:
                 faker.helpers.maybe(() =>
                   faker.helpers.arrayElement([
@@ -126,8 +128,12 @@ async function studient() {
                     ...exchange_categories_id,
                   ]),
                 ) ?? null,
+              title: faker.company.catchPhrase(),
+              type: faker.helpers.arrayElement([
+                ExchangeType.PROPOSAL,
+                ExchangeType.RESEARCH,
+              ]),
               when: faker.date.future(),
-              created_at: faker.date.past(),
             }),
             { count: { min: 0, max: 5 } },
           ),
@@ -353,6 +359,100 @@ async function studients_bookmarks() {
     ],
     skipDuplicates: true,
   });
+}
+
+async function studients_participants_in_exchanges() {
+  const studients = await prisma.studient.findMany();
+  const exchanges = await prisma.exchange.findMany({
+    include: { owner: true },
+  });
+
+  for (const exchange of exchanges) {
+    const participants = faker.helpers.arrayElements(
+      studients.filter(({ id }) => id !== exchange.owner_id),
+      { max: exchange.places, min: 0 },
+    );
+    await prisma.exchange.update({
+      data: {
+        deals: {
+          create: {
+            status: faker.helpers.arrayElement(
+              Object.values(ExchangeThreadStatus),
+            ),
+            // exchange_threads: {
+            //   connectOrCreate: {
+            //     create: {owner_id},
+            //     where: {owner_id_deal_id: [owner_id]},
+            //   },
+            // connectOrCreate: participants.map((studient)[ {
+            //   create: {owner_id: exchange.owner_id}
+            // }, {
+            //   create: {owner_id: }
+            // }]
+            // },
+          },
+        },
+      },
+      where: { id: exchange.id },
+    });
+
+    // for (const recipient_studient of participants) {
+    //   const { status, thread_id } = await prisma.exchangeThread.create({
+    //     data: {
+    //       parent: { connect: { id: exchange.id } },
+    //       status: faker.helpers.arrayElement(
+    //         Object.values(ExchangeThreadStatus),
+    //       ),
+    //       thread: {
+    //         create: {
+    //           created_at: faker.date.past(),
+    //           updated_at: faker.date.past(),
+    //           participants: {
+    //             connect: [
+    //               { id: exchange.owner.profile_id },
+    //               { id: recipient_studient.profile_id },
+    //             ],
+    //           },
+    //           messages: {
+    //             createMany: {
+    //               data: faker.helpers.multiple(
+    //                 () => ({
+    //                   author_id: faker.helpers.arrayElement([
+    //                     { id: recipient_studient.profile_id },
+    //                     { id: exchange.owner.profile_id },
+    //                   ]).id,
+    //                   content: faker.lorem.sentences(),
+    //                   created_at: faker.helpers.weightedArrayElement([
+    //                     { value: faker.date.past(), weight: 1 },
+    //                     { value: faker.date.recent(), weight: 5 },
+    //                   ]),
+    //                 }),
+    //                 { count: { min: 5, max: 30 } },
+    //               ),
+    //             },
+    //           },
+    //         },
+    //       },
+    //     },
+    //   });
+
+    //   if (
+    //     await prisma.exchangeThread.findFirst({
+    //       where: { parent_id: exchange.id, thread_id },
+    //     })
+    //   ) {
+    //     continue;
+    //   }
+
+    //   await prisma.exchangeThread.create({
+    //     data: {
+    //       parent_id: exchange.id,
+    //       status,
+    //       thread_id,
+    //     },
+    //   });
+    // }
+  }
 }
 
 async function profile_contacts() {
