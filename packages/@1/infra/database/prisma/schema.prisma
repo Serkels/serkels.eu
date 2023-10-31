@@ -36,23 +36,28 @@ model SignupPayload {
 }
 
 model Profile {
-  id               String      @id @default(cuid())
-  bio              String?
-  bookmarks        Bookmark[]
-  image            String
-  name             String
-  role             ProfileRole
-  user             User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  user_id          String      @unique @map("userId")
+  id        String      @id @default(cuid())
+  bio       String?
+  bookmarks Bookmark[]
+  contacts  Profile[]   @relation("Contacts")
+  following Profile[]   @relation("ProfileFollows")
+  image     String
+  name      String
+  role      ProfileRole
+  user      User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id   String      @unique @map("userId")
   //
-  created_at       DateTime    @default(now())
-  updated_at       DateTime    @default(now())
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
   //
-  partner          Partner?
-  studient         Studient?
-  written_messages Message[]   @relation("WrittenMessages")
-  followed_by      Profile[]   @relation("ProfileFollows")
-  following        Profile[]   @relation("ProfileFollows")
+
+  partner                Partner?
+  studient               Studient?
+  written_messages       Message[] @relation("WrittenMessages")
+  followed_by            Profile[] @relation("ProfileFollows")
+  participants_in_thread Thread[]  @relation("ParticipantsInThread")
+  in_contact_with        Profile[] @relation("Contacts")
 }
 
 model Studient {
@@ -65,13 +70,16 @@ model Studient {
   profile_id     String     @unique
   university     String
   //
-  created_at     DateTime   @default(now())
-  updated_at     DateTime   @default(now())
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
   //
 
-  asked_questions           Question[] @relation("AskedQuestions")
-  proposed_exchanges        Exchange[] @relation("ProposedExchanges")
-  participants_in_exchanges Exchange[] @relation("ParticipantsInExchanges")
+  asked_questions      Question[]       @relation("AskedQuestions")
+  exchange_threads     ExchangeThread[]
+  inbox_threads        InboxThread[]
+  participants_in_deal Deal[]
+  proposed_exchanges   Exchange[]       @relation("ProposedExchanges")
 }
 
 model Partner {
@@ -82,8 +90,9 @@ model Partner {
   profile       Profile       @relation(fields: [profile_id], references: [id], onDelete: Cascade)
   profile_id    String        @unique
   //
-  created_at    DateTime      @default(now())
-  updated_at    DateTime      @default(now())
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
 }
 
 //
@@ -111,8 +120,9 @@ model Bookmark {
   owner          Profile      @relation(fields: [owner_id], references: [id], onDelete: Cascade)
   owner_id       String
   //
-  created_at     DateTime     @default(now())
-  updated_at     DateTime     @default(now())
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
   //
 
   @@unique(fields: [owner_id, exchange_id], name: "bookmarked_exchange")
@@ -128,18 +138,18 @@ model Bookmark {
 //
 
 model Category {
-  id                            String           @id @default(cuid())
-  context                       CategoryContext? @default(EXCHANGE)
-  rank                          Int?
-  name                          String
-  slug                          String
+  id      String           @id @default(cuid())
+  context CategoryContext? @default(EXCHANGE)
+  rank    Int?
+  name    String
+  slug    String
   //
-  categorized_exchanges         Exchange[]       @relation("CategorizedExchanges")
-  categorized_opportunities     Opportunity[]    @relation("CategorizedOpportunities")
-  categorized_questions         Question[]       @relation("CategorizedQuestions")
-  categorized_return_exchanges  Exchange[]       @relation("CategorizedReturnExchanges")
-  categorized_studient_interest Studient[]       @relation("CategorizedStudientInterest")
 
+  categorized_exchanges         Exchange[]    @relation("CategorizedExchanges")
+  categorized_opportunities     Opportunity[] @relation("CategorizedOpportunities")
+  categorized_questions         Question[]    @relation("CategorizedQuestions")
+  categorized_return_exchanges  Exchange[]    @relation("CategorizedReturnExchanges")
+  categorized_studient_interest Studient[]    @relation("CategorizedStudientInterest")
   //
 
   @@unique(fields: [slug, context], name: "slug_in_context")
@@ -160,32 +170,70 @@ enum CategoryContext {
 //
 
 model Exchange {
-  id                   String       @id @default(cuid())
-  active               Boolean
-  category             Category     @relation("CategorizedExchanges", fields: [category_id], references: [id])
-  category_id          String
-  description          String
-  return               Category?    @relation("CategorizedReturnExchanges", fields: [return_id], references: [id])
-  return_id            String?
-  is_online            Boolean
-  location             String?
-  owner                Studient     @relation("ProposedExchanges", fields: [owner_id], references: [id], onDelete: Cascade)
-  owner_id             String
-  participants         Studient[]   @relation("ParticipantsInExchanges")
-  places               Int
-  title                String
-  type                 ExchangeType
-  when                 DateTime     @default(now())
+  id          String       @id @default(cuid())
+  active      Boolean
+  category    Category     @relation("CategorizedExchanges", fields: [category_id], references: [id])
+  category_id String
+  description String
+  return      Category?    @relation("CategorizedReturnExchanges", fields: [return_id], references: [id])
+  return_id   String?
+  is_online   Boolean
+  location    String?
+  owner       Studient     @relation("ProposedExchanges", fields: [owner_id], references: [id], onDelete: Cascade)
+  owner_id    String
+  deals       Deal[]
+  places      Int
+  title       String
+  type        ExchangeType
+  when        DateTime     @default(now())
   //
-  created_at           DateTime     @default(now())
-  updated_at           DateTime     @default(now())
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
   //
-  bookmarked_exchanges Bookmark[]   @relation("BookmarkedExchanges")
+
+  bookmarked_exchanges Bookmark[] @relation("BookmarkedExchanges")
 }
 
 enum ExchangeType {
   PROPOSAL
   RESEARCH
+}
+
+model Deal {
+  id             String               @id @default(cuid())
+  status         ExchangeThreadStatus @default(IDLE)
+  parent         Exchange             @relation(fields: [parent_id], references: [id], onDelete: Cascade)
+  parent_id      String               @unique
+  participant    Studient             @relation(fields: [participant_id], references: [id], onDelete: Cascade)
+  participant_id String
+  //
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+  //
+
+  exchange_threads ExchangeThread[]
+}
+
+model ExchangeThread {
+  id             String   @id @default(cuid())
+  last_seen_date DateTime @default(now())
+  owner          Studient @relation(fields: [owner_id], references: [id], onDelete: Cascade)
+  owner_id       String
+  deal           Deal     @relation(fields: [deal_id], references: [id], onDelete: Cascade)
+  deal_id        String
+  thread         Thread   @relation(fields: [thread_id], references: [id], onDelete: Cascade)
+  thread_id      String
+
+  @@unique([owner_id, deal_id])
+}
+
+enum ExchangeThreadStatus {
+  IDLE
+  DENIED
+  APPROVED_BY_THE_ORGANIZER
+  APPROVED
 }
 
 //
@@ -197,22 +245,24 @@ enum ExchangeType {
 //
 
 model Opportunity {
-  id                       String     @id @default(cuid())
-  category                 Category   @relation("CategorizedOpportunities", fields: [category_id], references: [id])
-  category_id              String
-  cover                    String
-  description              String
-  link                     String
-  location                 String?
-  owner                    Partner    @relation(fields: [owner_id], references: [id], onDelete: Cascade)
-  owner_id                 String
-  slug                     String     @unique
-  title                    String
-  when                     DateTime
+  id          String   @id @default(cuid())
+  category    Category @relation("CategorizedOpportunities", fields: [category_id], references: [id])
+  category_id String
+  cover       String
+  description String
+  link        String
+  location    String?
+  owner       Partner  @relation(fields: [owner_id], references: [id], onDelete: Cascade)
+  owner_id    String
+  slug        String   @unique
+  title       String
+  when        DateTime
   //
-  created_at               DateTime   @default(now())
-  updated_at               DateTime   @default(now())
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
   //
+
   bookmarked_opportunities Bookmark[] @relation("BookmarkedOpportunities")
 }
 
@@ -232,8 +282,9 @@ model Question {
   owner_id    String
   title       String
   //
-  created_at  DateTime @default(now())
-  updated_at  DateTime @default(now())
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
 }
 
 //
@@ -244,14 +295,45 @@ model Question {
 //
 //
 
-model Message {
-  id         String   @id @default(cuid())
-  author     Profile  @relation("WrittenMessages", fields: [author_id], references: [id], onDelete: Cascade)
-  author_id  String
-  content    String
+model InboxThread {
+  id             String   @id @default(cuid())
+  is_archived    Boolean  @default(false)
+  last_seen_date DateTime @default(now())
+  owner          Studient @relation(fields: [owner_id], references: [id], onDelete: Cascade)
+  owner_id       String
+  thread         Thread   @relation(fields: [thread_id], references: [id], onDelete: Cascade)
+  thread_id      String
+
+  @@unique([owner_id, thread_id])
+}
+
+model Thread {
+  id           String    @id @default(cuid())
+  messages     Message[]
+  participants Profile[] @relation("ParticipantsInThread")
   //
+
   created_at DateTime @default(now())
   updated_at DateTime @default(now())
+  //
+
+  inbox_threads    InboxThread[]
+  exchange_threads ExchangeThread[]
+}
+
+model Message {
+  id        String  @id @default(cuid())
+  author    Profile @relation("WrittenMessages", fields: [author_id], references: [id], onDelete: Cascade)
+  author_id String
+  content   String
+  thread    Thread  @relation(fields: [thread_id], references: [id])
+  thread_id String
+  //
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+
+  @@unique(name: "unique_date_in_thread", fields: [thread_id, created_at])
 }
 
 //
@@ -268,6 +350,7 @@ model PasswordlessToken {
   email      String
   login_date DateTime?
   is_active  Boolean   @default(true)
+  //
 
   created_at DateTime @default(now())
   updated_at DateTime @default(now())

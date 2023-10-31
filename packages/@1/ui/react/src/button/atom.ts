@@ -1,6 +1,9 @@
+//
+
 import { tv } from "tailwind-variants";
 
 //
+
 export const button = tv({
   base: `
     ring-offset-surface
@@ -34,9 +37,9 @@ export const button = tv({
     },
     state: {
       filled: "",
-      ghost: "",
+      ghost: "bg-transparent",
       soft: "",
-      outline: "",
+      outline: "border-2 bg-transparent",
     },
     size: {
       sm: "h-4 px-2 text-sm",
@@ -49,19 +52,17 @@ export const button = tv({
       intent: "primary",
       state: "ghost",
       class: `
-        bg-transparent
         text-primary
         data-[hovered]:bg-primary/30
       `,
     },
+    //
     {
       intent: "danger",
       state: "outline",
       class: `
         data-[hovered]:text-danger-fg
-        border-2
         border-danger
-        bg-transparent
         data-[hovered]:bg-danger
       `,
     },

@@ -74,11 +74,8 @@ export default function AvatarEditor({ profile }: { profile: Profile }) {
             <Avatar
               className="mx-auto h-48"
               profile={{
-                bio: "",
                 id: profile.id,
                 image: values.url,
-                name: "",
-                role: "STUDIENT",
               }}
             />
           </div>

@@ -18,7 +18,7 @@ const bookmarks_api_router = router({
               category: true,
               return: true,
               owner: { include: { profile: true } },
-              participants: true,
+              deals: true,
             },
           },
         },

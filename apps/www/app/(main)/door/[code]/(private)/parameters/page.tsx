@@ -53,7 +53,7 @@ export default async function Page({ params }: { params: CodeParms }) {
     .otherwise(() => null);
 
   return (
-    <main className="container mx-auto flex flex-col justify-center space-y-5">
+    <main className="mx-auto my-10 max-w-3xl px-4">
       <h1 className="my-10 text-3xl font-bold">Paramètres</h1>
 
       <hr className="my-10 py-5" />

@@ -91,7 +91,7 @@ config = nextConfig;
 
 // Injected content via Sentry wizard below
 
-config = withSentryConfig(
+withSentryConfig(
   config,
   {
     // For all available options, see:

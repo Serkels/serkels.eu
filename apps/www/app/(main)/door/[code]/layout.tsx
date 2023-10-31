@@ -47,14 +47,12 @@ export default async function Layout({
 
   return (
     <AuthSessionProvider session={session}>
-      <Grid fluid>
-        <aside className="hidden bg-white md:col-span-2 md:block xl:col-span-3">
+      <div className="grid md:grid-cols-[minmax(0,_300px),_1fr]">
+        <aside className="hidden bg-white shadow-[20px_0px_40px_#00000014]  md:block ">
           {navbar}
         </aside>
-        <div className="col-span-full my-10 md:col-span-6 xl:col-span-9">
-          {children}
-        </div>
-      </Grid>
+        <div className="">{children}</div>
+      </div>
     </AuthSessionProvider>
   );
 }

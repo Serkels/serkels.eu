@@ -16,6 +16,7 @@
     "@1.modules/category.api": "workspace:*",
     "@1.modules/exchange.api": "workspace:*",
     "@1.modules/forum.api": "workspace:*",
+    "@1.modules/inbox.api": "workspace:*",
     "@1.modules/opportunity.api": "workspace:*",
     "@1.modules/profile.api": "workspace:*",
     "@1.modules/trpc": "workspace:*",

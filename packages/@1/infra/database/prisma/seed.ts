@@ -4,7 +4,12 @@
  * @link https://www.prisma.io/docs/guides/database/seed-database
  */
 import { faker } from "@faker-js/faker";
-import { CategoryContext, ExchangeType, ProfileRole } from "@prisma/client";
+import {
+  CategoryContext,
+  ExchangeThreadStatus,
+  ExchangeType,
+  ProfileRole,
+} from "@prisma/client";
 import dedent from "dedent";
 import process from "node:process";
 import slugify from "slugify";
@@ -12,10 +17,14 @@ import prisma from "../index";
 
 async function main() {
   await prisma.user.deleteMany();
+
+  // secu
   await prisma.profile.deleteMany();
   await prisma.studient.deleteMany();
   await prisma.exchange.deleteMany();
+  await prisma.inboxThread.deleteMany();
 
+  await prisma.thread.deleteMany();
   await prisma.category.deleteMany();
 
   //
@@ -26,6 +35,11 @@ async function main() {
   await partners();
 
   await studients_bookmarks();
+  await studients_participants_in_exchanges();
+
+  await studients_messages();
+  await studients_messages(); // more messages
+
   await profile_contacts();
 }
 
@@ -98,19 +112,15 @@ async function studient() {
           data: faker.helpers.multiple(
             () => ({
               active: true,
-              description: faker.lorem.paragraph(),
-              is_online: faker.number.int(100) > 50,
-              places: faker.number.int(100),
-              title: faker.company.catchPhrase(),
-              type: faker.helpers.arrayElement([
-                ExchangeType.PROPOSAL,
-                ExchangeType.RESEARCH,
-              ]),
-              location: faker.location.city(),
               category_id: faker.helpers.arrayElement([
                 category_autres.id,
                 ...exchange_categories_id,
               ]),
+              created_at: faker.date.past(),
+              description: faker.lorem.paragraph(),
+              is_online: faker.number.int(100) > 50,
+              location: faker.location.city(),
+              places: faker.number.int({ min: 1, max: 9 }),
               return_id:
                 faker.helpers.maybe(() =>
                   faker.helpers.arrayElement([
@@ -118,8 +128,12 @@ async function studient() {
                     ...exchange_categories_id,
                   ]),
                 ) ?? null,
+              title: faker.company.catchPhrase(),
+              type: faker.helpers.arrayElement([
+                ExchangeType.PROPOSAL,
+                ExchangeType.RESEARCH,
+              ]),
               when: faker.date.future(),
-              created_at: faker.date.past(),
             }),
             { count: { min: 0, max: 5 } },
           ),
@@ -165,22 +179,7 @@ async function studient() {
 }
 
 async function studients() {
-  await Promise.all(Array.from({ length: 10 }).map(studient));
-
-  //
-  //
-  //
-
-  // const profile_count = await prisma.profile.count();
-  // await prisma.profile.updateMany({
-  //   data: { following: { connect: [{ id: bar_profile_1.id }] } },
-  //   where: { id: foo_profile_1.id },
-  // });
-
-  // const foo_con_1 = await prisma.exchange.findFirstOrThrow({
-  //   where: { owner_id: foo.id },
-  // });
-  // const exchange_foo_bar = prisma.exchange.findFirst({where: {owner_id: foo.id})
+  await Promise.all(Array.from({ length: 22 }).map(studient));
 }
 
 //
@@ -362,20 +361,223 @@ async function studients_bookmarks() {
   });
 }
 
-async function profile_contacts() {
-  const profiles = await prisma.profile.findMany();
-  const profile_ids = profiles.map(({ id }) => ({ id }));
+async function studients_participants_in_exchanges() {
+  const studients = await prisma.studient.findMany();
+  const exchanges = await prisma.exchange.findMany({
+    include: { owner: true },
+  });
 
-  for (const profile of profiles) {
+  for (const exchange of exchanges) {
+    const other_studients = studients.filter(
+      ({ id }) => id !== exchange.owner_id,
+    );
+    const participant = faker.helpers.arrayElement(other_studients);
+    const participant_id = participant.id;
+
+    const { deal_id, thread_id } = await prisma.exchangeThread.create({
+      data: {
+        deal: {
+          connectOrCreate: {
+            create: {
+              parent_id: exchange.id,
+              participant_id,
+              status: faker.helpers.arrayElement(
+                Object.values(ExchangeThreadStatus),
+              ),
+            },
+            where: { parent_id: exchange.id, participant_id },
+          },
+        },
+        owner: { connect: { id: exchange.owner_id } },
+        thread: {
+          create: {
+            created_at: faker.date.past(),
+            updated_at: faker.date.past(),
+            participants: {
+              connect: [
+                { id: exchange.owner.profile_id },
+                { id: participant.profile_id },
+              ],
+            },
+            messages: {
+              createMany: {
+                data: faker.helpers.multiple(
+                  () => ({
+                    author_id: faker.helpers.arrayElement([
+                      { id: exchange.owner.profile_id },
+                      { id: participant.profile_id },
+                    ]).id,
+                    content: faker.lorem.sentences(),
+                    created_at: faker.helpers.weightedArrayElement([
+                      { value: faker.date.past(), weight: 1 },
+                      { value: faker.date.recent(), weight: 5 },
+                    ]),
+                  }),
+                  { count: { min: 5, max: 30 } },
+                ),
+              },
+            },
+          },
+        },
+      },
+    });
+
+    await prisma.exchangeThread.create({
+      data: { deal_id, thread_id, owner_id: participant_id },
+    });
+    // await prisma.deal.createMany({
+    //   data: {
+    //     parent_id: exchange.id,
+    //     status: faker.helpers.arrayElement(Object.values(ExchangeThreadStatus)),
+    //     participant_id: "",
+    //   },
+    //   // data: faker.helpers.multiple(
+    //   //   () => ({
+    //   //     parent_id: exchange.id,
+    //   //     status: faker.helpers.arrayElement(
+    //   //       Object.values(ExchangeThreadStatus),
+    //   //     ),
+    //   //     participant_id: faker.helpers.arrayElement(
+    //   //       studient_ids.map(({ id }) => id),
+    //   //     ),
+
+    //   //   }),
+    //   //   { count: { min: 0, max: exchange.places } },
+    //   // ),
+    // });
+
+    // for (const recipient_studient of participants) {
+    //   const { status, thread_id } = await prisma.exchangeThread.create({
+    //     data: {
+    //       parent: { connect: { id: exchange.id } },
+    //       status: faker.helpers.arrayElement(
+    //         Object.values(ExchangeThreadStatus),
+    //       ),
+    //       thread: {
+    //         create: {
+    //           created_at: faker.date.past(),
+    //           updated_at: faker.date.past(),
+    //           participants: {
+    //             connect: [
+    //               { id: exchange.owner.profile_id },
+    //               { id: recipient_studient.profile_id },
+    //             ],
+    //           },
+    //           messages: {
+    //             createMany: {
+    //               data: faker.helpers.multiple(
+    //                 () => ({
+    //                   author_id: faker.helpers.arrayElement([
+    //                     { id: recipient_studient.profile_id },
+    //                     { id: exchange.owner.profile_id },
+    //                   ]).id,
+    //                   content: faker.lorem.sentences(),
+    //                   created_at: faker.helpers.weightedArrayElement([
+    //                     { value: faker.date.past(), weight: 1 },
+    //                     { value: faker.date.recent(), weight: 5 },
+    //                   ]),
+    //                 }),
+    //                 { count: { min: 5, max: 30 } },
+    //               ),
+    //             },
+    //           },
+    //         },
+    //       },
+    //     },
+    //   });
+
+    //   if (
+    //     await prisma.exchangeThread.findFirst({
+    //       where: { parent_id: exchange.id, thread_id },
+    //     })
+    //   ) {
+    //     continue;
+    //   }
+
+    //   await prisma.exchangeThread.create({
+    //     data: {
+    //       parent_id: exchange.id,
+    //       status,
+    //       thread_id,
+    //     },
+    //   });
+    // }
+  }
+}
+
+async function profile_contacts() {
+  const profile_ids = await prisma.profile.findMany({ select: { id: true } });
+
+  for (const profile of profile_ids) {
+    const other_profiles = profile_ids.filter(({ id }) => id !== profile.id);
     await prisma.profile.update({
       data: {
+        contacts: {
+          connect: faker.helpers.arrayElements(other_profiles),
+        },
         following: {
-          connect: faker.helpers.arrayElements(
-            profile_ids.filter(({ id }) => id !== profile.id),
-          ),
+          connect: faker.helpers.arrayElements(other_profiles),
         },
       },
       where: { id: profile.id },
+    });
+  }
+}
+
+async function studients_messages() {
+  const studients = await prisma.studient.findMany();
+
+  for (const studient of studients) {
+    const recipient_studient = faker.helpers.arrayElement(
+      studients.filter(({ id }) => id !== studient.id),
+    );
+    const { thread_id } = await prisma.inboxThread.create({
+      data: {
+        owner: { connect: { id: studient.id } },
+        thread: {
+          create: {
+            created_at: faker.date.past(),
+            updated_at: faker.date.past(),
+            participants: {
+              connect: [
+                { id: studient.profile_id },
+                { id: recipient_studient.profile_id },
+              ],
+            },
+            messages: {
+              createMany: {
+                data: faker.helpers.multiple(
+                  () => ({
+                    author_id: faker.helpers.arrayElement([
+                      { id: studient.profile_id },
+                      { id: recipient_studient.profile_id },
+                    ]).id,
+                    content: faker.lorem.sentences(),
+                    created_at: faker.helpers.weightedArrayElement([
+                      { value: faker.date.past(), weight: 1 },
+                      { value: faker.date.recent(), weight: 5 },
+                    ]),
+                  }),
+                  { count: { min: 5, max: 30 } },
+                ),
+              },
+            },
+          },
+        },
+      },
+    });
+    if (
+      await prisma.inboxThread.findFirst({
+        where: { owner_id: recipient_studient.id, thread_id },
+      })
+    ) {
+      continue;
+    }
+    await prisma.inboxThread.create({
+      data: {
+        owner: { connect: { id: recipient_studient.id } },
+        thread: { connect: { id: thread_id } },
+      },
     });
   }
 }

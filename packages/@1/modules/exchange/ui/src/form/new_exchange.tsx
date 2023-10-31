@@ -133,7 +133,7 @@ export function Exchange_CreateForm({
         <Field
           className={input()}
           disabled={isSubmitting}
-          maxLength={100}
+          maxLength={9}
           minLength={1}
           name="places"
           required
@@ -147,7 +147,7 @@ export function Exchange_CreateForm({
           <Field disabled={isSubmitting} value="" name="return" type="radio" />
         </label>
         <label>
-          <span> Sur place</span>{" "}
+          <span className="w-full"> Contre un échange</span>
           <Field
             checked={Boolean(values.return)}
             disabled={true}

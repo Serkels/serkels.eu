@@ -16,5 +16,5 @@ export async function generateMetadata(
 
 //
 export default function Layout({ children }: PropsWithChildren) {
-  return children;
+  return <div className="my-10 ml-16 max-w-3xl">{children}</div>;
 }

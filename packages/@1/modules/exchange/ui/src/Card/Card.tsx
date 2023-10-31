@@ -3,7 +3,12 @@
 import { Exchange_TypeSchema, type Exchange } from "@1.modules/exchange.domain";
 import { AvatarMedia } from "@1.ui/react/avatar";
 import { card } from "@1.ui/react/card/atom";
-import { Exchange as ExchangeIcon, School, Share } from "@1.ui/react/icons";
+import {
+  Exchange as ExchangeIcon,
+  LocationRadius,
+  School,
+  Share,
+} from "@1.ui/react/icons";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { type PropsWithChildren } from "react";
@@ -49,7 +54,7 @@ function OnlineOrLocation(props: {
 }) {
   return (
     <span className="font-bold">
-      📍
+      <LocationRadius className="inline-block h-3 w-3" />{" "}
       {match(props.is_online)
         .with(true, () => "En ligne")
         .with(false, () => props.location)
@@ -65,16 +70,16 @@ function Header({ children }: PropsWithChildren) {
     <header className={header()}>
       <Card.Header.Left.Renderer childs={children}>
         <AvatarMedia name="Unknow user" image="/opengraph-image.png">
-          <AvatarMedia.Title>
+          <AvatarMedia.SubTitle>
             <School className="mr-1.5 inline-block w-6" />
             <span>{exchange.owner.university}</span>
-          </AvatarMedia.Title>
+          </AvatarMedia.SubTitle>
         </AvatarMedia>
       </Card.Header.Left.Renderer>
       <Card.Header.Center.Renderer childs={children}>
         <div>
           <figure className="flex flex-col items-center">
-            <div className="text-xl font-bold text-primary">{`${exchange.participants.length} / ${exchange.places}`}</div>
+            <div className="text-xl font-bold text-primary">{`${exchange.deals.length} / ${exchange.places}`}</div>
             <figcaption>places disponible</figcaption>
           </figure>
         </div>

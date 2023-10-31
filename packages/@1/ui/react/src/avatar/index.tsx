@@ -34,7 +34,7 @@ export const Avatar = forwardRef<ElementRef<"figure">, AvatarProps>(
       <figure className={base({ className })} ref={forwardedRef}>
         <img
           className={image()}
-          src={src}
+          src={src ?? "/opengraph-image.png"}
           alt={`Avatar of the user ${id}`}
           {...other_props}
         />
@@ -56,35 +56,41 @@ export function AvatarMedia(
   props: PropsWithChildren<AvatarMediaProps & { name: string }>,
 ) {
   const {
-    className,
-    image,
-    id,
-    name,
-    tv$size,
-    tv$direction,
     children,
+    className,
+    id,
+    image,
+    name,
+    tv$color,
+    tv$direction,
+    tv$size,
     ...other_props
   } = props;
-  const { figure, avatar } = avatar_media({ tv$direction });
+
+  const { figure, avatar, title, subtitle } = avatar_media({
+    tv$direction,
+    tv$size,
+    tv$color,
+  });
 
   return (
     <figure className={figure({ className })} {...other_props}>
       <Avatar className={avatar({ tv$size })} {...{ image, id }} />
       <figcaption>
-        <h4 className="text-xl font-bold text-Cerulean" title={name}>
+        <h4 className={title()} title={name}>
           {name}
         </h4>
-        <small className="block text-sm text-Dove_Gray">
-          <AvatarMedia.Title.Renderer
+        <small className={subtitle()}>
+          <AvatarMedia.SubTitle.Renderer
             childs={children}
-          ></AvatarMedia.Title.Renderer>
+          ></AvatarMedia.SubTitle.Renderer>
         </small>
       </figcaption>
     </figure>
   );
 }
 
-AvatarMedia.Title = createSlot();
+AvatarMedia.SubTitle = createSlot();
 
 //
 

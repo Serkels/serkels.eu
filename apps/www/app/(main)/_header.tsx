@@ -1,6 +1,8 @@
 //
 
-import { Avatar } from ":components/avatar";
+import { getServerSession } from "@1.modules/auth.next";
+import { PROFILE_UNKNOWN } from "@1.modules/profile.domain";
+import { Avatar } from "@1.modules/profile.ui";
 import { Grid } from "@1.ui/react/grid";
 import {
   Binoculars,
@@ -204,7 +206,9 @@ const main_nav = tv(
 export const UserNavGroup = forwardRef<
   HTMLDivElement,
   ComponentPropsWithoutRef<"nav">
->(function MainNav(props, forwardedRef) {
+>(async function MainNav(props, forwardedRef) {
+  const session = await getServerSession();
+  const profile = session?.profile ?? PROFILE_UNKNOWN;
   const { className } = props;
 
   // const {} = useActiveRoutes ({ activeClass: "active-link" });
@@ -238,7 +242,10 @@ export const UserNavGroup = forwardRef<
         <li>
           <Link href={``}>
             <VisuallyHidden>Moi</VisuallyHidden>
-            <Avatar className="h-6 w-6 border-2 border-white" />
+            <Avatar
+              className="h-6 w-6 border-2 border-white"
+              profile={profile}
+            />
           </Link>
         </li>
       </ul>

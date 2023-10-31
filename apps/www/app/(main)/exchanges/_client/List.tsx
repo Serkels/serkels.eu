@@ -76,7 +76,7 @@ export function Item({ id }: { id: string }) {
             <Card.Footer.Center>
               {match(exchange.owner.profile.id)
                 .with(my_profile_id, () => (
-                  <Link href={`/@~/my/exchanges/${exchange.id}`}>
+                  <Link href={`/@~/exchanges/inbox/${exchange.id}`}>
                     <Button>Voir mes échanges</Button>
                   </Link>
                 ))
