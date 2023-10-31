@@ -126,7 +126,7 @@ function Item({
         </span>
         <div>
           <span className={badge({ color: "primary" })}>
-            {exchange.participants.length} / {exchange.places}
+            {exchange.deals.length} / {exchange.places}
           </span>{" "}
           <span className="text-sm font-bold ">dispo</span>
         </div>

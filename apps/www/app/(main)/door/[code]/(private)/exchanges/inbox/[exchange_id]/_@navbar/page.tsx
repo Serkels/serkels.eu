@@ -1,5 +1,6 @@
 //
 
+import type { Params } from ":pipes/exchange_by_id";
 import { TRPC_SSR } from ":trpc/server";
 import { column_screen } from "@1.ui/react/grid/atom";
 import InputSearch from "@1.ui/react/input/InputSearch";
@@ -17,8 +18,11 @@ const SearchForm = dynamic(() => import("./_client/SearchForm"), {
 
 //
 
-export default async function Page() {
-  await TRPC_SSR.inbox.find.prefetchInfinite({});
+export default async function Page({ params }: { params: Params }) {
+  const { exchange_id } = params;
+  await TRPC_SSR.exchanges.me.inbox.by_exchange_id.prefetchInfinite({
+    exchange_id,
+  });
 
   return (
     <div className={column_screen({ className: "[&>*]:px-8" })}>
@@ -32,7 +36,7 @@ export default async function Page() {
           px-8
         "
       >
-        <Infinite_Thread_List />
+        <Infinite_Thread_List exchange_id={exchange_id} />
       </nav>
     </div>
   );

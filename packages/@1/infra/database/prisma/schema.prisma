@@ -75,10 +75,11 @@ model Studient {
   updated_at DateTime @default(now())
   //
 
-  asked_questions    Question[]       @relation("AskedQuestions")
-  inbox_threads      InboxThread[]
-  proposed_exchanges Exchange[]       @relation("ProposedExchanges")
-  ExchangeThread     ExchangeThread[]
+  asked_questions      Question[]       @relation("AskedQuestions")
+  exchange_threads     ExchangeThread[]
+  inbox_threads        InboxThread[]
+  participants_in_deal Deal[]
+  proposed_exchanges   Exchange[]       @relation("ProposedExchanges")
 }
 
 model Partner {
@@ -200,10 +201,12 @@ enum ExchangeType {
 }
 
 model Deal {
-  id        String               @id @default(cuid())
-  status    ExchangeThreadStatus @default(IDLE)
-  parent    Exchange             @relation(fields: [parent_id], references: [id], onDelete: Cascade)
-  parent_id String               @unique
+  id             String               @id @default(cuid())
+  status         ExchangeThreadStatus @default(IDLE)
+  parent         Exchange             @relation(fields: [parent_id], references: [id], onDelete: Cascade)
+  parent_id      String               @unique
+  participant    Studient             @relation(fields: [participant_id], references: [id], onDelete: Cascade)
+  participant_id String
   //
 
   created_at DateTime @default(now())
@@ -220,6 +223,8 @@ model ExchangeThread {
   owner_id       String
   deal           Deal     @relation(fields: [deal_id], references: [id], onDelete: Cascade)
   deal_id        String
+  thread         Thread   @relation(fields: [thread_id], references: [id], onDelete: Cascade)
+  thread_id      String
 
   @@unique([owner_id, deal_id])
 }
@@ -312,7 +317,8 @@ model Thread {
   updated_at DateTime @default(now())
   //
 
-  inbox_threads InboxThread[]
+  inbox_threads    InboxThread[]
+  exchange_threads ExchangeThread[]
 }
 
 model Message {
