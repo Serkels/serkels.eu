@@ -475,59 +475,65 @@ async function studients_messages() {
   const studients = await prisma.studient.findMany();
 
   for (const studient of studients) {
-    const recipient_studient = faker.helpers.arrayElement(
+    const other_studients = faker.helpers.arrayElements(
       studients.filter(({ id }) => id !== studient.id),
     );
 
-    const { thread_id } = await prisma.inboxThread.create({
-      data: {
-        owner: { connect: { id: studient.id } },
-        thread: {
-          create: {
-            created_at: faker.date.past(),
-            updated_at: faker.date.past(),
-            participants: {
-              connect: [
-                { id: studient.profile_id },
-                { id: recipient_studient.profile_id },
-              ],
-            },
-            messages: {
-              createMany: {
-                data: faker.helpers.multiple(
-                  () => ({
-                    author_id: faker.helpers.arrayElement([
+    await Promise.all(
+      faker.helpers
+        .arrayElements(other_studients, { min: 0, max: 20 })
+        .map(async (recipient_studient) => {
+          const { thread_id } = await prisma.inboxThread.create({
+            data: {
+              owner: { connect: { id: studient.id } },
+              thread: {
+                create: {
+                  created_at: faker.date.past(),
+                  updated_at: faker.date.past(),
+                  participants: {
+                    connect: [
                       { id: studient.profile_id },
                       { id: recipient_studient.profile_id },
-                    ]).id,
-                    content: faker.lorem.sentences(),
-                    created_at: faker.helpers.weightedArrayElement([
-                      { value: faker.date.past(), weight: 1 },
-                      { value: faker.date.recent(), weight: 5 },
-                    ]),
-                  }),
-                  { count: { min: 5, max: 30 } },
-                ),
+                    ],
+                  },
+                  messages: {
+                    createMany: {
+                      data: faker.helpers.multiple(
+                        () => ({
+                          author_id: faker.helpers.arrayElement([
+                            { id: studient.profile_id },
+                            { id: recipient_studient.profile_id },
+                          ]).id,
+                          content: faker.lorem.sentences(),
+                          created_at: faker.helpers.weightedArrayElement([
+                            { value: faker.date.past(), weight: 1 },
+                            { value: faker.date.recent(), weight: 5 },
+                          ]),
+                        }),
+                        { count: { min: 5, max: 20 } },
+                      ),
+                    },
+                  },
+                },
               },
             },
-          },
-        },
-      },
-    });
+          });
 
-    if (
-      await prisma.inboxThread.findFirst({
-        where: { owner_id: recipient_studient.id, thread_id },
-      })
-    ) {
-      continue;
-    }
+          if (
+            await prisma.inboxThread.findFirst({
+              where: { owner_id: recipient_studient.id, thread_id },
+            })
+          ) {
+            return;
+          }
 
-    await prisma.inboxThread.create({
-      data: {
-        owner: { connect: { id: recipient_studient.id } },
-        thread: { connect: { id: thread_id } },
-      },
-    });
+          await prisma.inboxThread.create({
+            data: {
+              owner: { connect: { id: recipient_studient.id } },
+              thread: { connect: { id: thread_id } },
+            },
+          });
+        }),
+    );
   }
 }
