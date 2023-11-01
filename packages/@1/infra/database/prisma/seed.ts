@@ -16,16 +16,24 @@ import slugify from "slugify";
 import prisma from "../index";
 
 async function main() {
-  await prisma.user.deleteMany();
-
-  // secu
-  await prisma.profile.deleteMany();
-  await prisma.studient.deleteMany();
-  await prisma.exchange.deleteMany();
-  await prisma.inboxThread.deleteMany();
-
-  await prisma.thread.deleteMany();
-  await prisma.category.deleteMany();
+  await prisma.$transaction([
+    prisma.user.deleteMany(),
+    prisma.account.deleteMany(),
+    prisma.bookmark.deleteMany(),
+    prisma.category.deleteMany(),
+    prisma.deal.deleteMany(),
+    prisma.exchange.deleteMany(),
+    prisma.exchangeThread.deleteMany(),
+    prisma.inboxThread.deleteMany(),
+    prisma.message.deleteMany(),
+    prisma.opportunity.deleteMany(),
+    prisma.partner.deleteMany(),
+    prisma.profile.deleteMany(),
+    prisma.question.deleteMany(),
+    prisma.signupPayload.deleteMany(),
+    prisma.studient.deleteMany(),
+    prisma.thread.deleteMany(),
+  ]);
 
   //
 
