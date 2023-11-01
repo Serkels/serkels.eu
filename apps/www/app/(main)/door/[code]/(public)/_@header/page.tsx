@@ -9,7 +9,6 @@ import {
   StudientAvatarMedia,
 } from "@1.modules/profile.ui/avatar";
 import { notFound } from "next/navigation";
-import { tv } from "tailwind-variants";
 import { match } from "ts-pattern";
 
 //
@@ -36,13 +35,18 @@ export default async function Page({ params }: { params: CodeParms }) {
       })
       .otherwise(() => null);
 
-    const { base } = style();
     return (
-      <header className={base()}>
+      <header className="flex justify-between space-x-5">
         {avatar}
 
-        <div className="flex flex-col items-center">
-          <div>{profile.followed_by.length}</div> Abonnés
+        <div className="flex flex-row space-x-5">
+          <div className="flex flex-col items-center">
+            <div>{profile.followed_by.length}</div> Abonnés
+          </div>
+
+          {profile.role === PROFILE_ROLES.Enum.STUDIENT ? (
+            <ContactsCount profile_id={profile_id} />
+          ) : null}
         </div>
       </header>
     );
@@ -52,9 +56,11 @@ export default async function Page({ params }: { params: CodeParms }) {
   }
 }
 
-const style = tv({
-  base: "flex justify-between space-x-5",
-  slots: {
-    link: "",
-  },
-});
+async function ContactsCount({ profile_id }: { profile_id: string }) {
+  const profile = await TRPC_SSR.profile.by_id.fetch(profile_id);
+  return (
+    <div className="flex flex-col items-center">
+      <div>{profile.in_contact_with.length}</div> Contacts
+    </div>
+  );
+}

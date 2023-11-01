@@ -34,6 +34,7 @@
     "@trpc/client": "10.43.0",
     "@trpc/react-query": "10.43.0",
     "@vercel/analytics": "1.1.1",
+    "await-to-js": "3.0.0",
     "constate": "3.3.2",
     "date-fns": "2.30.0",
     "debug": "4.3.4",
