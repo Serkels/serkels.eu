@@ -66,7 +66,7 @@ export function Item({ id }: { id: string }) {
         {({ exchange }) => (
           <Card exchange={exchange}>
             <Card.Header.Left>
-              <Link href={`@${exchange.owner.profile.id}`}>
+              <Link href={`/@${exchange.owner.profile.id}`}>
                 <StudientAvatarMedia studient={exchange.owner} />
               </Link>
             </Card.Header.Left>

@@ -478,6 +478,7 @@ async function studients_messages() {
     const recipient_studient = faker.helpers.arrayElement(
       studients.filter(({ id }) => id !== studient.id),
     );
+
     const { thread_id } = await prisma.inboxThread.create({
       data: {
         owner: { connect: { id: studient.id } },
@@ -513,6 +514,7 @@ async function studients_messages() {
         },
       },
     });
+
     if (
       await prisma.inboxThread.findFirst({
         where: { owner_id: recipient_studient.id, thread_id },
@@ -520,6 +522,7 @@ async function studients_messages() {
     ) {
       continue;
     }
+
     await prisma.inboxThread.create({
       data: {
         owner: { connect: { id: recipient_studient.id } },
