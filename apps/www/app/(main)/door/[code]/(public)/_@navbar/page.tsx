@@ -2,6 +2,7 @@
 
 import { code_to_profile_id, type CodeParms } from ":pipes/code";
 import { TRPC_SSR } from ":trpc/server";
+import { AuthError } from "@1.modules/core/errors";
 import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -9,16 +10,24 @@ import { tv } from "tailwind-variants";
 import { match } from "ts-pattern";
 
 export default async function Page({ params }: { params: CodeParms }) {
-  const profile_id = await code_to_profile_id(params);
-  if (!profile_id) {
+  try {
+    const profile_id = await code_to_profile_id(params);
+    if (!profile_id) {
+      throw new AuthError("No profile id");
+    }
+
+    const profile = await TRPC_SSR.profile.by_id.fetch(profile_id);
+
+    return match(profile.role)
+      .with(PROFILE_ROLES.Enum.PARTNER, () => <Partner_Page params={params} />)
+      .with(PROFILE_ROLES.Enum.STUDIENT, () => (
+        <Studient_Page params={params} />
+      ))
+      .otherwise(() => null);
+  } catch (error) {
+    console.error(error);
     notFound();
   }
-  const profile = await TRPC_SSR.profile.by_id.fetch(profile_id);
-
-  return match(profile.role)
-    .with(PROFILE_ROLES.Enum.PARTNER, () => <Partner_Page params={params} />)
-    .with(PROFILE_ROLES.Enum.STUDIENT, () => <Studient_Page params={params} />)
-    .otherwise(() => null);
 }
 
 function Studient_Page({ params }: { params: CodeParms }) {

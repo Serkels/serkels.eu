@@ -7,6 +7,8 @@ import { BigBar } from ":components/shell/BigBar";
 import { Button } from "@1.ui/react/button";
 import { ErrorOccur } from "@1.ui/react/error";
 import { VisuallyHidden } from "@1.ui/react/visually_hidden";
+import { useMountEffect } from "@react-hookz/web";
+import { signOut } from "next-auth/react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 
@@ -28,9 +30,9 @@ export default function Error({
   error: Error;
   reset: () => void;
 }) {
-  // useMountEffect(() => {
-  //   signOut();
-  // });
+  useMountEffect(() => {
+    signOut();
+  });
   return (
     <main className="flex min-h-screen flex-col">
       <BigBar>

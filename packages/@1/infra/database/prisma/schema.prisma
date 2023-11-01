@@ -204,7 +204,7 @@ model Deal {
   id             String               @id @default(cuid())
   status         ExchangeThreadStatus @default(IDLE)
   parent         Exchange             @relation(fields: [parent_id], references: [id], onDelete: Cascade)
-  parent_id      String               @unique
+  parent_id      String
   participant    Studient             @relation(fields: [participant_id], references: [id], onDelete: Cascade)
   participant_id String
   //
@@ -214,6 +214,9 @@ model Deal {
   //
 
   exchange_threads ExchangeThread[]
+  //
+
+  @@unique(name: "participant_per_exchange", fields: [parent_id, participant_id])
 }
 
 model ExchangeThread {

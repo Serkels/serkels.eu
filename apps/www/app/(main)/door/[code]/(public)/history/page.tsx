@@ -22,7 +22,7 @@ export default async function Page({ params }: { params: CodeParms }) {
   const profile_id = await code_to_profile_id(params);
 
   if (!profile_id) {
-    return notFound();
+    notFound();
   }
 
   const profile = await TRPC_SSR.profile.by_id.fetch(profile_id);

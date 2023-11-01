@@ -24,16 +24,21 @@ export default async function Layout({
   children,
   params,
 }: PropsWithChildren<{ params: CodeParms }>) {
-  const profile_id = await code_to_profile_id(params);
+  try {
+    const profile_id = await code_to_profile_id(params);
 
-  if (!profile_id) {
-    return notFound();
+    if (!profile_id) {
+      return notFound();
+    }
+
+    const profile = await TRPC_SSR.profile.by_id.fetch(profile_id);
+    if (profile.role !== PROFILE_ROLES.Enum.STUDIENT) {
+      redirect(`/@${params.code}`);
+    }
+
+    return <>{children}</>;
+  } catch (error) {
+    console.error(error);
+    notFound();
   }
-
-  const profile = await TRPC_SSR.profile.by_id.fetch(profile_id);
-  if (profile.role !== PROFILE_ROLES.Enum.STUDIENT) {
-    redirect(`/@${params.code}`);
-  }
-
-  return <>{children}</>;
 }

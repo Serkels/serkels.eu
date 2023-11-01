@@ -1,6 +1,9 @@
 //
 
-import { Exchange_Filter } from "@1.modules/exchange.domain";
+import {
+  Deal_Status_Schema,
+  Exchange_Filter,
+} from "@1.modules/exchange.domain";
 import { next_auth_procedure, procedure, router } from "@1.modules/trpc";
 import { match } from "ts-pattern";
 import { z } from "zod";
@@ -19,8 +22,7 @@ const exchange_api_router = router({
           category: true,
           return: true,
           owner: { include: { profile: true } },
-          // TODO(douglasdutiel): filter only approuved deals !
-          deals: true,
+          deals: { where: { status: Deal_Status_Schema.Enum.APPROVED } },
         },
       });
     }),
@@ -39,8 +41,14 @@ const exchange_api_router = router({
 
       const data = await prisma.exchange.findMany({
         take: limit,
-        // FIXME(douglasdutiel): filter only approuved deals !
-        where: { deals: { some: { participant_id: profile_id } } },
+        where: {
+          deals: {
+            some: {
+              participant_id: profile_id,
+              status: Deal_Status_Schema.Enum.APPROVED,
+            },
+          },
+        },
         orderBy: { created_at: "asc" },
       });
 
@@ -98,7 +106,11 @@ const exchange_api_router = router({
             active: true,
             OR: [
               { owner: { profile_id: profile.id } },
-              // { deals: { some: {  exchange_threads: { some: {} }} } },
+              {
+                deals: {
+                  some: { participant: { profile: { id: profile.id } } },
+                },
+              },
             ],
           },
           orderBy: { updated_at: "asc" },
@@ -134,7 +146,10 @@ const exchange_api_router = router({
 
           const data = await prisma.exchangeThread.findMany({
             ...(cursor ? { cursor: { id: cursor } } : {}),
-            orderBy: { thread: { updated_at: "asc" } },
+            orderBy: {
+              // deal: { status: "asc" },
+              thread: { updated_at: "asc" },
+            },
             take: limit + 1,
             where: { owner_id: studient_id, deal: { parent_id: exchange_id } },
           });

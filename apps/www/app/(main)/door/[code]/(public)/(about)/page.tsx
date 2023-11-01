@@ -2,6 +2,7 @@
 
 import { code_to_profile_id, type CodeParms } from ":pipes/code";
 import { TRPC_SSR } from ":trpc/server";
+import { AuthError } from "@1.modules/core/errors";
 import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import type { Metadata, ResolvingMetadata } from "next";
 import dynamic from "next/dynamic";
@@ -23,22 +24,27 @@ export async function generateMetadata(
 }
 
 export default async function Page({ params }: { params: CodeParms }) {
-  const profile_id = await code_to_profile_id(params);
-  if (!profile_id) {
-    return notFound();
+  try {
+    const profile_id = await code_to_profile_id(params);
+    if (!profile_id) {
+      throw new AuthError("No profile id");
+    }
+
+    const profile = await TRPC_SSR.profile.by_id.fetch(profile_id);
+
+    return (
+      <main className="prose lg:prose-xl">
+        <ReactMarkdown>{profile.bio}</ReactMarkdown>
+
+        {PROFILE_ROLES.Enum.STUDIENT === profile.role ? (
+          <StudientMeta profile_id={profile.id} />
+        ) : null}
+      </main>
+    );
+  } catch (error) {
+    console.error(error);
+    notFound();
   }
-
-  const profile = await TRPC_SSR.profile.by_id.fetch(profile_id);
-
-  return (
-    <main className="prose lg:prose-xl">
-      <ReactMarkdown>{profile.bio}</ReactMarkdown>
-
-      {PROFILE_ROLES.Enum.STUDIENT === profile.role ? (
-        <StudientMeta profile_id={profile.id} />
-      ) : null}
-    </main>
-  );
 }
 
 async function StudientMeta({ profile_id }: { profile_id: string }) {

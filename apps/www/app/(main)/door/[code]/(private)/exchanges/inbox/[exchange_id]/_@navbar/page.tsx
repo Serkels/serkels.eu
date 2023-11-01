@@ -30,12 +30,12 @@ export default async function Page({ params }: { params: Params }) {
 
         <nav
           className="
-          my-8
-          min-h-0
-          flex-1
-          overflow-y-auto
-          px-8
-        "
+            my-8
+            min-h-0
+            flex-1
+            overflow-y-auto
+            px-8
+          "
         >
           <Infinite_Thread_List exchange_id={exchange_id} />
         </nav>
