@@ -19,17 +19,6 @@ const category_api_router = router({
 
   //
 
-  // by_cateogy: procedure.input(z).query(async ({ ctx: { prisma } }) => {
-  //   return (await prisma.category.findMany({
-  //     where: {
-  //       OR: [{ context: CategoryContext.EXCHANGE }, { context: null }],
-  //     },
-  //     orderBy: { rank: "asc" },
-  //   })) as Category[];
-  // }),
-
-  //
-
   exchange: procedure.query(async ({ ctx: { prisma } }) => {
     return (await prisma.category.findMany({
       where: {
