@@ -24,7 +24,7 @@ export function Thread_Item({
           dateTime={last_update.toUTCString()}
           title={last_update.toUTCString()}
         >
-          {format(last_update, "PPp", { locale: fr })}
+          {format(last_update, "E p", { locale: fr })}
         </time>
       </header>
       <div className={excerpt()}>
@@ -53,7 +53,7 @@ export const thread_item = tv({
   `,
   slots: {
     header: "flex justify-between",
-    time: "text-xs font-bold",
+    time: "whitespace-nowrap text-xs font-bold",
     excerpt: "mb-1 line-clamp-1",
   },
 });

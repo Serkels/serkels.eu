@@ -16,8 +16,9 @@ export const avatar_media = tv({
   slots: {
     figure: "flex ",
     avatar: "",
-    figcaption: "ml-2 mt-0.5",
-    title: "block text-left text-base font-medium leading-snug text-black",
+    figcaption: "ml-2 flex-grow",
+    title:
+      "line-clamp-1 text-left text-base font-medium leading-snug text-black",
     subtitle: "block text-sm font-light leading-snug text-gray-500",
   },
   variants: {

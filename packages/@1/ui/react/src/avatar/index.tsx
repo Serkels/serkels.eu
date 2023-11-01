@@ -67,7 +67,7 @@ export function AvatarMedia(
     ...other_props
   } = props;
 
-  const { figure, avatar, title, subtitle } = avatar_media({
+  const { figcaption, figure, avatar, title, subtitle } = avatar_media({
     tv$direction,
     tv$size,
     tv$color,
@@ -76,7 +76,7 @@ export function AvatarMedia(
   return (
     <figure className={figure({ className })} {...other_props}>
       <Avatar className={avatar({ tv$size })} {...{ image, id }} />
-      <figcaption>
+      <figcaption className={figcaption()}>
         <h4 className={title()} title={name}>
           {name}
         </h4>
