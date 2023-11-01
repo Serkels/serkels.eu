@@ -58,7 +58,7 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
       {
         type: "add",
         path: "packages/@1/modules/{{lowerCase name}}/domain/package.json",
-        templateFile: "templates/1.module/[name]/domain/package.json.hbs",
+        templateFile: "templates/1.module/[name]/domain/package.json",
         transform: dependencies,
       },
 
@@ -82,7 +82,7 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
       {
         type: "add",
         path: "packages/@1/modules/{{lowerCase name}}/api/package.json",
-        templateFile: "templates/1.module/[name]/api/package.json.hbs",
+        templateFile: "templates/1.module/[name]/api/package.json",
         transform: dependencies,
       },
 
@@ -101,7 +101,7 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
       {
         type: "add",
         path: "packages/@1/modules/{{lowerCase name}}/ui/package.json",
-        templateFile: "templates/1.module/[name]/ui/package.json.hbs",
+        templateFile: "templates/1.module/[name]/ui/package.json",
         transform: dependencies,
       },
       {

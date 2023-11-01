@@ -577,13 +577,13 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       '@prisma/client':
-        specifier: '5'
-        version: 5.4.2
+        specifier: 5.5.2
+        version: 5.5.2(prisma@5.5.2)
       '@types/node':
-        specifier: '20'
-        version: 20.8.9
+        specifier: 20.8.10
+        version: 20.8.10
       typescript:
-        specifier: '5'
+        specifier: 5.2.2
         version: 5.2.2
 
   packages/@1/modules/bookmark/domain:
@@ -599,7 +599,7 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       typescript:
-        specifier: '5'
+        specifier: 5.2.2
         version: 5.2.2
 
   packages/@1/modules/bookmark/ui:
@@ -676,13 +676,13 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       '@prisma/client':
-        specifier: '5'
-        version: 5.4.2
+        specifier: 5.5.2
+        version: 5.5.2(prisma@5.5.2)
       '@types/node':
         specifier: 20.8.10
         version: 20.8.10
       typescript:
-        specifier: '5'
+        specifier: 5.2.2
         version: 5.2.2
 
   packages/@1/modules/category/domain:
@@ -698,7 +698,7 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       typescript:
-        specifier: '5'
+        specifier: 5.2.2
         version: 5.2.2
 
   packages/@1/modules/category/ui:
@@ -800,13 +800,13 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       '@prisma/client':
-        specifier: '5'
-        version: 5.4.2
+        specifier: 5.5.2
+        version: 5.5.2(prisma@5.5.2)
       '@types/node':
         specifier: 20.8.10
         version: 20.8.10
       typescript:
-        specifier: '5'
+        specifier: 5.2.2
         version: 5.2.2
 
   packages/@1/modules/exchange/domain:
@@ -828,7 +828,7 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       typescript:
-        specifier: '5'
+        specifier: 5.2.2
         version: 5.2.2
 
   packages/@1/modules/exchange/ui:
@@ -957,7 +957,7 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       typescript:
-        specifier: '5'
+        specifier: 5.2.2
         version: 5.2.2
 
   packages/@1/modules/forum/ui:
@@ -1052,13 +1052,13 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       '@prisma/client':
-        specifier: '5'
-        version: 5.4.2
+        specifier: 5.5.2
+        version: 5.5.2(prisma@5.5.2)
       '@types/node':
-        specifier: '20'
-        version: 20.8.9
+        specifier: 20.8.10
+        version: 20.8.10
       typescript:
-        specifier: '5'
+        specifier: 5.2.2
         version: 5.2.2
 
   packages/@1/modules/inbox/domain:
@@ -1077,7 +1077,7 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       typescript:
-        specifier: '5'
+        specifier: 5.2.2
         version: 5.2.2
 
   packages/@1/modules/inbox/ui:
@@ -1163,13 +1163,13 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       '@prisma/client':
-        specifier: '5'
-        version: 5.4.2
+        specifier: 5.5.2
+        version: 5.5.2(prisma@5.5.2)
       '@types/node':
         specifier: 20.8.10
         version: 20.8.10
       typescript:
-        specifier: '5'
+        specifier: 5.2.2
         version: 5.2.2
 
   packages/@1/modules/opportunity/domain:
@@ -1191,7 +1191,7 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       typescript:
-        specifier: '5'
+        specifier: 5.2.2
         version: 5.2.2
 
   packages/@1/modules/opportunity/ui:
@@ -1802,7 +1802,7 @@ importers:
         specifier: '3'
         version: 3.0.3
       typescript:
-        specifier: '5'
+        specifier: 5.2.2
         version: 5.2.2
 
 packages:
@@ -2821,19 +2821,6 @@ packages:
     resolution: {integrity: sha512-dhPeilub1NuIG0X5Kvhh9lH4iW3ZsHlnzwgwbOlgwQ2wG1IqFzsgHqmKPk3WzsdWAeaxKJxgM0+W433RmN45GA==}
     dev: false
 
-  /@prisma/client@5.4.2:
-    resolution: {integrity: sha512-2xsPaz4EaMKj1WS9iW6MlPhmbqtBsXAOeVttSePp8vTFTtvzh2hZbDgswwBdSCgPzmmwF+tLB259QzggvCmJqA==}
-    engines: {node: '>=16.13'}
-    requiresBuild: true
-    peerDependencies:
-      prisma: '*'
-    peerDependenciesMeta:
-      prisma:
-        optional: true
-    dependencies:
-      '@prisma/engines-version': 5.4.1-2.ac9d7041ed77bcc8a8dbd2ab6616b39013829574
-    dev: true
-
   /@prisma/client@5.5.2(prisma@5.5.2):
     resolution: {integrity: sha512-54XkqR8M+fxbzYqe+bIXimYnkkcGqgOh0dn0yWtIk6CQT4IUCAvNFNcQZwk2KqaLU+/1PHTSWrcHtx4XjluR5w==}
     engines: {node: '>=16.13'}
@@ -2846,10 +2833,6 @@ packages:
     dependencies:
       '@prisma/engines-version': 5.5.1-1.aebc046ce8b88ebbcb45efe31cbe7d06fd6abc0a
       prisma: 5.5.2
-
-  /@prisma/engines-version@5.4.1-2.ac9d7041ed77bcc8a8dbd2ab6616b39013829574:
-    resolution: {integrity: sha512-wvupDL4AA1vf4TQNANg7kR7y98ITqPsk6aacfBxZKtrJKRIsWjURHkZCGcQliHdqCiW/hGreO6d6ZuSv9MhdAA==}
-    dev: true
 
   /@prisma/engines-version@5.5.1-1.aebc046ce8b88ebbcb45efe31cbe7d06fd6abc0a:
     resolution: {integrity: sha512-O+qHFnZvAyOFk1tUco2/VdiqS0ym42a3+6CYLScllmnpbyiTplgyLt2rK/B9BTjYkSHjrgMhkG47S0oqzdIckA==}
@@ -5019,12 +5002,6 @@ packages:
     resolution: {integrity: sha512-TlgT8JntpcbmKUFzjhsyhGfP2fsiz1Mv56im6enJ905xG1DAYesxJaeSbGqQmAw8OWPdhyJGhGSQGKRNJ45u9w==}
     dependencies:
       undici-types: 5.26.5
-
-  /@types/node@20.8.9:
-    resolution: {integrity: sha512-UzykFsT3FhHb1h7yD4CA4YhBHq545JC0YnEz41xkipN88eKQtL6rSgocL5tbAP6Ola9Izm/Aw4Ora8He4x0BHg==}
-    dependencies:
-      undici-types: 5.26.5
-    dev: true
 
   /@types/nodemailer@6.4.13:
     resolution: {integrity: sha512-889Vq/77eEpidCwh52sVWpbnqQmIwL8yVBekNbrztVEaWKOCRH3Eq6hjIJh1jwsGDEAJEH0RR+YhpH9mfELLKA==}

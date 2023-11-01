@@ -1,5 +1,5 @@
 {
-  "name": "@1.modules/{{snakeCase name}}.domain",
+  "name": "@1.modules/{{snakeCase name}}.api",
   "version": "0.1.0",
   "private": true,
   "sideEffects": false,
@@ -20,11 +20,16 @@
     "type-check": "tsc --build"
   },
   "dependencies": {
-    "@1.modules/core": "workspace:*",
+    "@1.modules/{{snakeCase name}}.domain": "workspace:*",
+    "@1.modules/trpc": "workspace:*",
+    "@trpc/server": "10.40.0",
+    "date-fns": "2.30.0",
     "zod": "3.22.4"
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
-    "typescript": "5"
+    "@prisma/client": "5.5.2",
+    "@types/node": "20.8.10",
+    "typescript": "5.2.2"
   }
 }
