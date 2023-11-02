@@ -37,8 +37,8 @@
   },
   "dependencies": {
     "@prisma/client": "5.5.2",
-    "@trpc/client": "10.43.0",
-    "@trpc/server": "10.43.0",
+    "@trpc/client": "10.43.1",
+    "@trpc/server": "10.43.1",
     "next": "14.0.1",
     "next-auth": "4.24.4",
     "superjson": "2.2.0",
