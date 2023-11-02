@@ -128,7 +128,7 @@ export function Opportunity_CreateForm({
               setFieldValue("is_online", true);
               setFieldValue("location", undefined);
             }}
-            required
+            required={true}
             type="radio"
           />
         </label>
@@ -139,7 +139,7 @@ export function Opportunity_CreateForm({
             disabled={isSubmitting}
             name="is_online"
             onChange={() => setFieldValue("is_online", false)}
-            required
+            required={true}
             type="radio"
           />
         </label>
@@ -193,7 +193,7 @@ export function Opportunity_CreateForm({
           type="url"
           name="link"
           id="link"
-          required
+          required={true}
         />
         <ErrorMessage name="link">
           {(msg) => <div className="text-danger">{msg}</div>}

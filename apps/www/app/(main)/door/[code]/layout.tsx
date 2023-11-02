@@ -15,9 +15,9 @@ export default async function Layout({
   children,
   params,
 }: PropsWithChildren<{ params: CodeParms }>) {
-  let err, session;
+  let session;
 
-  [err, session] = await to(getServerSession());
+  [, session] = await to(getServerSession());
   if (!session) return notFound();
 
   if (params.code === session.profile.id) {

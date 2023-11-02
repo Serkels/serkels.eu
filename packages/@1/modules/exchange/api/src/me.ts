@@ -22,7 +22,7 @@ export const me = router({
         ...(cursor ? { cursor: { id: cursor } } : {}),
         take: limit,
         where: {
-          active: true,
+          is_active: true,
           OR: [
             { owner: { profile_id: profile.id } },
             {
