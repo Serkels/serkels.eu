@@ -62,3 +62,23 @@ col de gauche sa ns shadom 5px 5px
 - Gestion de group (privé / public)
 - recherche de group par nom / ville / category (nom unique)
 - recherche d'utilisateur
+
+# 02/11/2023
+
+- Exchange
+
+  - Change "When" date to "expiry_date" (date limite)
+  - date should be greater than today
+  - Display expiry_date in exchange header
+    - danger => if the date is in the past
+    - warning => if the date is today
+    - success => if the date is in the futur
+  - Sort exchange by expiry_date in exchange header
+  - Add filter to allow display old exchanges (successful or not)
+  - A exchange is successful if all the places are taken
+
+- opportunity
+  - Display expiry_date in exchange header
+    - danger => if the date is in the past
+    - warning => if the date is today
+    - success => if the date is in the futur
