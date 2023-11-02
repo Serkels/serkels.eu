@@ -19,6 +19,7 @@ export * from "./LocationRadius";
 export * from "./Logo";
 export * from "./MessageGroup";
 export * from "./Messenger";
+export * from "./Montains";
 export * from "./PaperPlane";
 export * from "./PenSquare";
 export * from "./Person";

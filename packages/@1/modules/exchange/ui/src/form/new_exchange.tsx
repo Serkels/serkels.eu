@@ -7,7 +7,7 @@ import {
   type Exchange_Type,
 } from "@1.modules/exchange.domain";
 import { Button } from "@1.ui/react/button";
-import { fieldset, input } from "@1.ui/react/form/atom";
+import { fieldset, input, select } from "@1.ui/react/form/atom";
 import { Field, Form, type FormikProps } from "formik";
 import type { ChangeEvent } from "react";
 
@@ -78,13 +78,7 @@ export function Exchange_CreateForm({
           categories={categories}
           disabled={isSubmitting}
           name="category"
-          className={`
-            w-full
-            border
-            border-Silver_Chalice
-            px-5
-            py-2
-          `}
+          className={select()}
           placeholder="Dans quelle categorie ?"
           required={true}
         />
@@ -157,11 +151,7 @@ export function Exchange_CreateForm({
             categories={categories}
             disabled={isSubmitting}
             name="return"
-            className={`
-              w-full
-              border
-              border-Silver_Chalice
-            `}
+            className={select()}
             placeholder="Dans quelle categorie ?"
             onChange={(event: ChangeEvent<HTMLSelectElement>) => {
               console.log(event.target.value);

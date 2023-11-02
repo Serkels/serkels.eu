@@ -86,6 +86,12 @@ export function Partner_NavBar({ partner }: { partner: Partner }) {
         partner={partner}
       />
       <ul>
+        <Li_Link icon={<PlusBox />} href="./opportunities/new">
+          Créer une opportunité
+        </Li_Link>
+        <Li_Link icon={<Archive />} href="./opportunities/mine">
+          Mes publications
+        </Li_Link>
         <Li_Link
           icon={<Avatar className="h-6" profile={profile} />}
           href="./"

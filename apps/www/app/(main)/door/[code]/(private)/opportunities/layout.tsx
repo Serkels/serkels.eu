@@ -14,7 +14,7 @@ export async function generateMetadata(
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
   return {
-    title: `Exchanges :: ${(await parent).title?.absolute}`,
+    title: `Opportunities :: ${(await parent).title?.absolute}`,
   };
 }
 
@@ -31,7 +31,7 @@ export default async function Layout({
   }
 
   const profile = await TRPC_SSR.profile.by_id.fetch(profile_id);
-  if (profile.role !== PROFILE_ROLES.Enum.STUDIENT) {
+  if (profile.role !== PROFILE_ROLES.Enum.PARTNER) {
     redirect(`/@${params.code}`);
   }
 

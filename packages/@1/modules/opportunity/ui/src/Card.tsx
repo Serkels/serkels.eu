@@ -15,7 +15,7 @@ export function Opoortunity_Card({
   children,
 }: PropsWithChildren<{ opportunity: Opportunity }>) {
   // return <>{JSON.stringify(props, null, 2)}</>;
-  const { cover, when, title, owner, location, category } = opportunity;
+  const { cover, expiry_date, title, owner, location, category } = opportunity;
   const { base, date } = opoortunity_card();
   return (
     <article className={base()}>
@@ -26,10 +26,10 @@ export function Opoortunity_Card({
         />
 
         <figcaption className="flex flex-1 flex-col p-3">
-          <small className={date({ is_over: isPast(when) })}>
+          <small className={date({ is_over: isPast(expiry_date) })}>
             Date limite :
-            <time dateTime={formatISO(when)}>
-              {format(when, "P", { locale: fr })}
+            <time dateTime={formatISO(expiry_date)}>
+              {format(expiry_date, "P", { locale: fr })}
             </time>
           </small>
 
@@ -47,9 +47,9 @@ export function Opoortunity_Card({
             </figcaption>
           </figure>
 
-          <p className="line-clamp-1" title={location ?? ""}>
+          <p className="line-clamp-1" title={location ?? "En ligne"}>
             <LocationRadius className="inline-block h-4 w-4 text-primary" />{" "}
-            {location}
+            {location ?? "En ligne"}
           </p>
         </figcaption>
 

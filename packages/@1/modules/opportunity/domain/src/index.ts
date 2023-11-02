@@ -16,7 +16,22 @@ export const Opportunity_Schema = Entity_Schema.extend({
   slug: z.string(),
   title: z.string(),
   link: z.string().url(),
-  when: z.date(),
+  expiry_date: z.date(),
 }).describe("Opportunity_PropsSchema");
 
 export interface Opportunity extends z.TypeOf<typeof Opportunity_Schema> {}
+
+//
+
+export const Opportunity_Create_Schema = z.object({
+  is_online: z.boolean(),
+  category: z.string(),
+  cover: z.string().url(),
+  link: z.string().url(),
+  title: z.string().trim().min(11),
+  expiry_date: z.coerce.date(),
+  location: z.string().trim().min(1).optional(),
+  description: z.string().trim().min(11),
+});
+export interface Opportunity_Create
+  extends z.TypeOf<typeof Opportunity_Create_Schema> {}

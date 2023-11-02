@@ -119,7 +119,7 @@ async function studient() {
         createMany: {
           data: faker.helpers.multiple(
             () => ({
-              active: true,
+              is_active: true,
               category_id: faker.helpers.arrayElement([
                 category_autres.id,
                 ...exchange_categories_id,
@@ -142,7 +142,7 @@ async function studient() {
                 ExchangeType.PROPOSAL,
                 ExchangeType.RESEARCH,
               ]),
-              when: faker.date.future(),
+              expiry_date: faker.date.future(),
             }),
             { count: { min: 0, max: 5 } },
           ),
@@ -247,7 +247,7 @@ async function partner() {
               location: faker.location.city(),
               slug: slugify(faker.lorem.sentence()).slice(0, 16).toLowerCase(),
               title: faker.lorem.sentence(),
-              when: faker.date.future(),
+              expiry_date: faker.date.future(),
             }),
             { count: { min: 1, max: 5 } },
           ),

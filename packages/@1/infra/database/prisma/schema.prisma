@@ -171,21 +171,21 @@ enum CategoryContext {
 
 model Exchange {
   id          String       @id @default(cuid())
-  active      Boolean
   category    Category     @relation("CategorizedExchanges", fields: [category_id], references: [id])
   category_id String
+  deals       Deal[]
   description String
-  return      Category?    @relation("CategorizedReturnExchanges", fields: [return_id], references: [id])
-  return_id   String?
+  expiry_date DateTime     @default(now())
+  is_active   Boolean
   is_online   Boolean
   location    String?
   owner       Studient     @relation("ProposedExchanges", fields: [owner_id], references: [id], onDelete: Cascade)
   owner_id    String
-  deals       Deal[]
   places      Int
+  return      Category?    @relation("CategorizedReturnExchanges", fields: [return_id], references: [id])
+  return_id   String?
   title       String
   type        ExchangeType
-  when        DateTime     @default(now())
   //
 
   created_at DateTime @default(now())
@@ -253,13 +253,13 @@ model Opportunity {
   category_id String
   cover       String
   description String
+  expiry_date DateTime
   link        String
   location    String?
   owner       Partner  @relation(fields: [owner_id], references: [id], onDelete: Cascade)
   owner_id    String
   slug        String   @unique
   title       String
-  when        DateTime
   //
 
   created_at DateTime @default(now())
