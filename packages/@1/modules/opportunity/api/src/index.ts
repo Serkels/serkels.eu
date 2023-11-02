@@ -2,6 +2,7 @@
 
 import { Opportunity_Create_Schema } from "@1.modules/opportunity.domain";
 import { next_auth_procedure, procedure, router } from "@1.modules/trpc";
+import { startOfToday } from "date-fns";
 import slugify from "slugify";
 import { z } from "zod";
 
@@ -92,13 +93,14 @@ const opportunity_api_router = router({
       }) => {
         const items = await prisma.opportunity.findMany({
           ...(cursor ? { cursor: { id: cursor } } : {}),
-          orderBy: { created_at: "asc" },
+          orderBy: { expiry_date: "asc" },
           take: limit + 1,
           where: {
             OR: [
               { title: { contains: search ?? "" } },
               { description: { contains: search ?? "" } },
             ],
+            expiry_date: { gte: startOfToday() },
             ...(category ? { category: { slug: category } } : {}),
           },
           include: {
