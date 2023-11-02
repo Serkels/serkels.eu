@@ -34,21 +34,30 @@ async function main() {
     prisma.studient.deleteMany(),
     prisma.thread.deleteMany(),
   ]);
+  console.log("🗑️");
 
   //
 
   await categories();
+  console.log("🌱 . Categories.");
 
   await studients();
+  console.log("🌱 . Studients.");
   await partners();
+  console.log("🌱 . Partners.");
 
   await studients_bookmarks();
+  console.log("🌱 . Studients bookmarks.");
   await studients_participants_in_exchanges();
+  console.log("🌱 . Studients participe to exchanges.");
 
   await studients_messages();
+  console.log("🌱 . Studients sent some messages.");
   await studients_messages(); // more messages
+  console.log("🌱 . Studients sent more messages.");
 
   await profile_contacts();
+  console.log("🌱 . Profiles add contacts.");
 }
 
 main()
