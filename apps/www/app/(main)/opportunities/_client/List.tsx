@@ -1,12 +1,12 @@
 "use client";
 
 import { TRPC_React } from ":trpc/client";
+import { BookmarkButton } from "@1.modules/bookmark.ui/BookmarkButton";
 import type { Opportunity } from "@1.modules/opportunity.domain";
 import { Opoortunity_Card } from "@1.modules/opportunity.ui/Card";
 import { Opportunity_InfiniteList } from "@1.modules/opportunity.ui/InfiniteList";
 import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import { ErrorOccur } from "@1.ui/react/error";
-import { Bookmark } from "@1.ui/react/icons";
 import type { UseInfiniteQueryResult } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -53,13 +53,13 @@ export function Item({ opportunity }: { opportunity: Opportunity }) {
     <Link href={`/opportunities/${slug}`}>
       <Opoortunity_Card opportunity={opportunity}>
         <Opoortunity_Card.Footer_Actions>
-          {is_studient ? <BookmarkButton /> : null}
+          {is_studient ? (
+            <BookmarkButton className="inline-block" />
+          ) : (
+            <span></span>
+          )}
         </Opoortunity_Card.Footer_Actions>
       </Opoortunity_Card>
     </Link>
   );
-}
-
-function BookmarkButton() {
-  return <Bookmark className="inline-block h-4 w-4 text-Dove_Gray" />;
 }
