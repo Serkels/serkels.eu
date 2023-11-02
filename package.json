@@ -5,7 +5,7 @@
     "npm": ">=9",
     "pnpm": ">=8"
   },
-  "packageManager": "pnpm@8.10.1+sha256.e2e075fbed017bd9a4f2c222c1c719d564d8118e36f949c7515051b9312da446",
+  "packageManager": "pnpm@8.10.2",
   "scripts": {
     "build": "turbo run build",
     "clean": "turbo run clean",
