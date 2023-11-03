@@ -62,7 +62,7 @@ export function Opoortunity_Card({
           >
             {category.name}
           </aside>
-          <aside className="space-x-3" onClick={() => {}}>
+          <aside className="flex items-center space-x-3">
             <Opoortunity_Card.Footer_Actions.Renderer childs={children}>
               <Bookmark className="inline-block h-4 w-4 text-Dove_Gray" />
             </Opoortunity_Card.Footer_Actions.Renderer>

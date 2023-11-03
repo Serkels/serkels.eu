@@ -73,7 +73,11 @@ export function Item({ id }: { id: string }) {
               </Link>
             </Card.Header.Left>
             <Card.Footer.Left>
-              {is_studient ? <BookmarkButton /> : <div></div>}
+              {is_studient ? (
+                <BookmarkButton target_id={exchange.id} type="exchange" />
+              ) : (
+                <div></div>
+              )}
             </Card.Footer.Left>
             <Card.Footer.Center>
               {match(exchange.owner.profile.id)
