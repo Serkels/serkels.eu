@@ -1,6 +1,6 @@
 //
 
-import { Item } from ":app/(main)/exchanges/_client/List";
+import { Exchange_Card } from ":app/(main)/exchanges/_client/List";
 import { TRPC_SSR } from ":trpc/server";
 import type { Metadata, ResolvingMetadata } from "next";
 
@@ -23,8 +23,8 @@ export default async function Page() {
 
   return (
     <main className="grid grid-cols-1 gap-y-5">
-      {exchanges.map(({ id }) => (
-        <Item key={id} id={id} />
+      {exchanges.map((exchange) => (
+        <Exchange_Card {...exchange} />
       ))}
     </main>
   );

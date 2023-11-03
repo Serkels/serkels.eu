@@ -14,19 +14,17 @@ export type Exchange_Type = z.TypeOf<typeof Exchange_TypeSchema>;
 
 export const Exchange_Schema = Entity_Schema.merge(Entity_Timestamps)
   .extend({
-    available_places: z.coerce.number().default(Number.MIN_SAFE_INTEGER),
     category: Category_Schema,
+    deals: z.array(Entity_Schema),
     description: z.string().default(""),
+    expiry_date: z.coerce.date().default(new Date(0)),
     is_online: z.boolean().default(true),
-    location: z.string().default(""),
-    owner: Studient_Schema,
-    deals: z.array(Studient_Schema),
+    location: z.string().nullable().default(""),
+    owner: Studient_Schema.pick({ profile: true, university: true }),
     places: z.coerce.number().default(Number.MIN_SAFE_INTEGER),
     return: Category_Schema.nullable(),
-    slug: z.string().default(""),
     title: z.string().default(""),
     type: Exchange_TypeSchema.default(Exchange_TypeSchema.Enum.RESEARCH),
-    when: z.coerce.date().default(new Date(0)),
   })
   .describe("Exchange_Schema");
 

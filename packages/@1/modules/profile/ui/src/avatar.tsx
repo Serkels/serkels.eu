@@ -18,7 +18,9 @@ export function Avatar(
 }
 
 export function StudientAvatarMedia(
-  props: AvatarMediaProps & { studient: Studient },
+  props: AvatarMediaProps & {
+    studient: Pick<Studient, "profile" | "university">;
+  },
 ) {
   const { studient, ...other_props } = props;
   const { profile, university } = studient;

@@ -82,7 +82,7 @@ const bookmarks_api_router = router({
               category: true,
               return: true,
               owner: { include: { profile: true } },
-              deals: true,
+              deals: { select: { id: true } },
             },
           },
         },
