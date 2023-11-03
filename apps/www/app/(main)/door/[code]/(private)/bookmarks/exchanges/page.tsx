@@ -24,7 +24,7 @@ export default async function Page() {
   return (
     <main className="grid grid-cols-1 gap-y-5">
       {exchanges.map((exchange) => (
-        <Exchange_Card {...exchange} />
+        <Exchange_Card key={exchange.id} {...exchange} />
       ))}
     </main>
   );
