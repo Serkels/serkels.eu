@@ -16,10 +16,7 @@ import {
   Denied,
   Idle,
 } from "@1.ui/react/icons";
-import type {
-  UseInfiniteQueryResult,
-  UseQueryResult,
-} from "@tanstack/react-query";
+import type { UseQueryResult } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import type { ComponentPropsWithoutRef } from "react";
@@ -34,14 +31,14 @@ export default function Infinite_Thread_List(params: Params) {
     TRPC_React.exchanges.me.inbox.by_exchange_id.useInfiniteQuery(
       { exchange_id },
       { getNextPageParam: ({ next_cursor }) => next_cursor },
-    ) as UseInfiniteQueryResult<{ data: Message[] }>;
+    );
 
   return (
     <Thread_InfiniteList info={query_info}>
-      {({ id }) => {
+      {({ id, thread_id }) => {
         return (
           <li key={id}>
-            <UserThread_Item inbox_id={id} />
+            <UserThread_Item thread_id={thread_id} />
           </li>
         );
       }}
@@ -49,11 +46,11 @@ export default function Infinite_Thread_List(params: Params) {
   );
 }
 
-function UserThread_Item({ inbox_id }: { inbox_id: string }) {
+function UserThread_Item({ thread_id }: { thread_id: string }) {
   const { data: session } = useSession();
   const profile_id = session?.profile.id ?? PROFILE_UNKNOWN.id;
-  const info = TRPC_React.exchanges.me.inbox.by_id.useQuery(
-    inbox_id,
+  const info = TRPC_React.exchanges.me.inbox.by_thread_id.useQuery(
+    thread_id,
   ) as UseQueryResult<Inbox & { deal: { parent_id: string } }>;
 
   return (

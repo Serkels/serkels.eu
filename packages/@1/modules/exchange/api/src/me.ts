@@ -83,9 +83,10 @@ export const me = router({
       }),
 
     //
-    by_id: next_auth_procedure
+
+    by_thread_id: next_auth_procedure
       .input(z.string())
-      .query(async ({ ctx: { payload, prisma }, input: id }) => {
+      .query(async ({ ctx: { payload, prisma }, input: thread_id }) => {
         const { profile } = payload;
         const { id: studient_id } = await prisma.studient.findUniqueOrThrow({
           select: { id: true },
@@ -103,7 +104,7 @@ export const me = router({
               },
             },
           },
-          where: { owner_id: studient_id, id },
+          where: { owner_id_thread_id: { owner_id: studient_id, thread_id } },
         });
       }),
   }),

@@ -230,6 +230,7 @@ model ExchangeThread {
   thread_id      String
 
   @@unique([owner_id, deal_id])
+  @@unique([owner_id, thread_id])
 }
 
 enum ExchangeThreadStatus {

@@ -8,12 +8,11 @@ import {
   type Params,
 } from ":pipes/thread_by_id";
 import { TRPC_SSR } from ":trpc/server";
-import { input } from "@1.ui/react/form/atom";
-import { PaperPlane } from "@1.ui/react/icons";
 import { Spinner } from "@1.ui/react/spinner";
 import type { Metadata, ResolvingMetadata } from "next";
 import dynamic from "next/dynamic";
 import { tv } from "tailwind-variants";
+import Conversation_Form from "./_client/Conversation_Form";
 
 //
 
@@ -58,16 +57,6 @@ export default async function Page({ params }: { params: Params }) {
   await TRPC_SSR.inbox.thread.messages.prefetchInfinite({
     thread_id,
   });
-  async function send_message(formData: FormData) {
-    "use server";
-
-    // mutate data
-    // revalidate cache
-    console.log(
-      "app/(main)/door/[code]/(private)/inbox/[thread_id]/page.tsx",
-      formData,
-    );
-  }
 
   const { base, footer, header } = layout();
   return (
@@ -79,24 +68,7 @@ export default async function Page({ params }: { params: Params }) {
         <Thread_Timeline profile_id={profile_id} />
       </div>
       <footer className={footer()}>
-        <form action={send_message} className="w-full">
-          <div className="relative">
-            <textarea
-              className={input({ className: "peer w-full rounded-2xl pr-10" })}
-              placeholder="Envoie un Message…"
-              autoComplete="off"
-              name="content"
-            />
-            <span className="absolute inset-y-0 right-5 flex items-center pl-2">
-              <button
-                type="submit"
-                className="focus:shadow-outline p-1 focus:outline-none"
-              >
-                <PaperPlane className="h-6 w-6 text-success" />
-              </button>
-            </span>
-          </div>
-        </form>
+        <Conversation_Form thread_id={thread_id} />
       </footer>
     </main>
   );
