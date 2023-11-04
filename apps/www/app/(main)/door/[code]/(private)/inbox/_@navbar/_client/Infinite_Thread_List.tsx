@@ -8,10 +8,7 @@ import { Thread_InfiniteList } from "@1.modules/inbox.ui/thread/InfiniteList";
 import { Thread_AsyncItem } from "@1.modules/inbox.ui/thread/Thread_AsyncItem";
 import { Thread_Item } from "@1.modules/inbox.ui/thread/Thread_Item";
 import { PROFILE_UNKNOWN } from "@1.modules/profile.domain";
-import type {
-  UseInfiniteQueryResult,
-  UseQueryResult,
-} from "@tanstack/react-query";
+import type { UseQueryResult } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 
@@ -21,14 +18,13 @@ export default function Infinite_Thread_List() {
   const query_info = TRPC_React.inbox.find.useInfiniteQuery(
     {},
     { getNextPageParam: ({ next_cursor }) => next_cursor },
-  ) as UseInfiniteQueryResult<{ data: Message[] }>;
-
+  );
   return (
     <Thread_InfiniteList info={query_info}>
-      {({ id }) => {
+      {({ id, thread }) => {
         return (
           <li key={id}>
-            <UserThread_Item inbox_id={id} />
+            <UserThread_Item thread_id={thread.id} />
           </li>
         );
       }}
@@ -36,11 +32,11 @@ export default function Infinite_Thread_List() {
   );
 }
 
-function UserThread_Item({ inbox_id }: { inbox_id: string }) {
+function UserThread_Item({ thread_id }: { thread_id: string }) {
   const { data: session } = useSession();
   const profile_id = session?.profile.id ?? PROFILE_UNKNOWN.id;
-  const info = TRPC_React.inbox.by_id.useQuery(
-    inbox_id,
+  const info = TRPC_React.inbox.by_thread_id.useQuery(
+    thread_id,
   ) as UseQueryResult<Inbox>;
 
   return (

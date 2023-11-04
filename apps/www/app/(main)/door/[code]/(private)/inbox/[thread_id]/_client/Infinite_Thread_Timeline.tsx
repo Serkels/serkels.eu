@@ -41,7 +41,7 @@ export default function Infinite_Thread_Timeline({
       behavior: "smooth",
       block: "end",
     });
-  }, [query_info.status, scroll_target_ref]);
+  }, [query_info.isFetching, scroll_target_ref]);
 
   return match(query_info)
     .with({ status: "error", error: P.select() }, (error) => {

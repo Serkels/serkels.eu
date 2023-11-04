@@ -1,6 +1,5 @@
 //
 
-import type { Message } from "@1.modules/inbox.domain";
 import { Button } from "@1.ui/react/button";
 import { Spinner } from "@1.ui/react/spinner";
 import type { UseInfiniteQueryResult } from "@tanstack/react-query";
@@ -8,12 +7,12 @@ import { match, P } from "ts-pattern";
 
 //
 
-export function Thread_InfiniteList({
+export function Thread_InfiniteList<T>({
   info,
   children,
 }: {
-  info: UseInfiniteQueryResult<{ data: Message[] }>;
-  children: (props: { id: string }) => React.ReactNode;
+  info: UseInfiniteQueryResult<{ data: T[] }>;
+  children: (props: T) => React.ReactNode;
 }) {
   return match(info)
     .with({ status: "error", error: P.select() }, (error) => {
@@ -36,7 +35,7 @@ export function Thread_InfiniteList({
           {pages
             .map((page) => page.data)
             .flat()
-            .map((item) => children({ id: item.id }))}
+            .map((item) => children(item))}
           <li className="col-span-full mx-auto">
             {isFetchingNextPage ? <Loading /> : null}
           </li>
