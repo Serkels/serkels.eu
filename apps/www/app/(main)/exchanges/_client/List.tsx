@@ -120,9 +120,6 @@ function Exchange_Actions(exchange: Exchange) {
 }
 
 function Exchange_Action_Ask(exchange: Exchange) {
-  const { data: session } = useSession();
-  const my_profile_id = session?.profile.id ?? "";
-
   const query = TRPC_React.exchanges.me.deal_by_exchange_id.useQuery(
     exchange.id,
   );

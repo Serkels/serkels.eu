@@ -20,13 +20,13 @@ const exchange_api_router = router({
     .input(z.string())
     .query(async ({ input: id, ctx: { prisma } }) => {
       return prisma.exchange.findUniqueOrThrow({
-        where: { id },
         include: {
           category: true,
           return: true,
           owner: { include: { profile: true } },
           deals: { where: { status: Deal_Status_Schema.Enum.APPROVED } },
         },
+        where: { id },
       });
     }),
 
@@ -43,6 +43,13 @@ const exchange_api_router = router({
       const { profile_id, limit } = input;
 
       const data = await prisma.exchange.findMany({
+        include: {
+          category: true,
+          return: true,
+          owner: { include: { profile: true } },
+          deals: { where: { status: Deal_Status_Schema.Enum.APPROVED } },
+        },
+        orderBy: { created_at: "asc" },
         take: limit,
         where: {
           deals: {
@@ -52,7 +59,6 @@ const exchange_api_router = router({
             },
           },
         },
-        orderBy: { created_at: "asc" },
       });
 
       return { data };
@@ -73,6 +79,12 @@ const exchange_api_router = router({
 
       const data = await prisma.exchange.findMany({
         ...(cursor ? { cursor: { id: cursor } } : {}),
+        include: {
+          category: true,
+          return: true,
+          owner: { include: { profile: true } },
+          deals: { where: { status: Deal_Status_Schema.Enum.APPROVED } },
+        },
         take: limit,
         where: { owner: { profile_id: profile_id } },
         orderBy: { created_at: "asc" },

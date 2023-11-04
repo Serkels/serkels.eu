@@ -1,6 +1,6 @@
 //
 
-import { _query_exchange } from ":app/(main)/exchanges/_client/List";
+import { Exchange_Card } from ":app/(main)/exchanges/_client/List";
 import { code_to_profile_id, type CodeParms } from ":pipes/code";
 import { TRPC_SSR } from ":trpc/server";
 import { PROFILE_ROLES } from "@1.modules/profile.domain";
@@ -35,8 +35,8 @@ export default async function Page({ params }: { params: CodeParms }) {
 
   return (
     <main className="grid grid-cols-1 gap-y-5">
-      {exchanges.map(({ id }) => (
-        <_query_exchange key={id} id={id} />
+      {exchanges.map((exchange) => (
+        <Exchange_Card key={exchange.id} {...exchange} />
       ))}
     </main>
   );
