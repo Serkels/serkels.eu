@@ -134,7 +134,7 @@ async function studient() {
                 ...exchange_categories_id,
               ]),
               created_at: faker.date.past(),
-              updated_at: faker.date.recent(),
+              updated_at: faker.date.recent({ days: 66 }),
               description: faker.lorem.paragraph(),
               is_online: faker.number.int(100) > 50,
               location: faker.location.city(),
@@ -405,7 +405,7 @@ async function studients_participants_in_exchanges() {
                 Object.values(ExchangeThreadStatus),
               ),
               created_at: faker.date.past(),
-              updated_at: faker.date.recent(),
+              updated_at: faker.date.recent({ days: 66 }),
             },
             update: {},
             where: {
@@ -441,7 +441,10 @@ async function studients_participants_in_exchanges() {
                           content: faker.lorem.sentences(),
                           created_at: faker.helpers.weightedArrayElement([
                             { value: faker.date.past(), weight: 1 },
-                            { value: faker.date.recent(), weight: 5 },
+                            {
+                              value: faker.date.recent({ days: 66 }),
+                              weight: 5,
+                            },
                           ]),
                         }),
                         { count: { min: 1, max: 5 } },
@@ -516,7 +519,10 @@ async function studients_messages() {
                           content: faker.lorem.sentences(),
                           created_at: faker.helpers.weightedArrayElement([
                             { value: faker.date.past(), weight: 1 },
-                            { value: faker.date.recent(), weight: 5 },
+                            {
+                              value: faker.date.recent({ days: 66 }),
+                              weight: 5,
+                            },
                           ]),
                         }),
                         { count: { min: 5, max: 20 } },

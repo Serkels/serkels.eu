@@ -7,6 +7,7 @@ import { z } from "zod";
 
 export const me = router({
   //
+
   find_active: next_auth_procedure
     .input(
       z.object({
@@ -32,7 +33,7 @@ export const me = router({
             },
           ],
         },
-        orderBy: { updated_at: "asc" },
+        orderBy: { updated_at: "desc" },
       });
 
       let next_cursor: typeof cursor | undefined = undefined;
@@ -67,7 +68,7 @@ export const me = router({
           ...(cursor ? { cursor: { id: cursor } } : {}),
           orderBy: {
             // deal: { status: "asc" },
-            thread: { updated_at: "asc" },
+            thread: { updated_at: "desc" },
           },
           take: limit + 1,
           where: { owner_id: studient_id, deal: { parent_id: exchange_id } },
@@ -107,6 +108,63 @@ export const me = router({
           where: { owner_id_thread_id: { owner_id: studient_id, thread_id } },
         });
       }),
+
+    //
+
+    create: next_auth_procedure
+      .input(z.object({ content: z.string(), exchange_id: z.string() }))
+      .mutation(async ({ ctx: { payload, prisma }, input }) => {
+        const { profile } = payload;
+        const { content, exchange_id } = input;
+
+        const {
+          owner: {
+            id: owner_id,
+            profile: { id: owner_profile_id },
+          },
+        } = await prisma.exchange.findUniqueOrThrow({
+          include: {
+            owner: { include: { profile: { select: { id: true } } } },
+          },
+          where: { id: exchange_id },
+        });
+
+        const { id: studient_id } = await prisma.studient.findUniqueOrThrow({
+          select: { id: true },
+          where: { profile_id: profile.id },
+        });
+
+        const { id: thread_id } = await prisma.thread.create({
+          data: {
+            participants: {
+              connect: [{ id: profile.id }, { id: owner_profile_id }],
+            },
+            messages: { create: { content, author_id: profile.id } },
+          },
+        });
+
+        return prisma.deal.create({
+          data: {
+            parent: { connect: { id: exchange_id } },
+            participant: { connect: { id: studient_id } },
+            exchange_threads: {
+              createMany: {
+                data: [
+                  {
+                    owner_id,
+                    thread_id,
+                  },
+                  {
+                    owner_id: studient_id,
+                    thread_id,
+                  },
+                ],
+              },
+            },
+          },
+        });
+      }),
   }),
+
   //
 });

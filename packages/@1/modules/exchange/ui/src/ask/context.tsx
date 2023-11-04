@@ -9,13 +9,7 @@ import { useState } from "react";
 
 type Outlet_State =
   | { state: "creating deal"; message: string }
-  | { state: "form" }
   | { state: "idle" }
-  | { state: "loading" }
-  | {
-      state: "sending message";
-      message: string;
-    }
   | { state: "sent" };
 
 function useOutlet({ exchange }: { exchange: Exchange }) {

@@ -1,6 +1,7 @@
 "use client";
 
 import { SeeProfileAvatarMedia } from ":components/avatar";
+import { TRPC_React } from ":trpc/client";
 import type { Exchange } from "@1.modules/exchange.domain";
 import {
   Outlet_Provider,
@@ -16,9 +17,7 @@ import { MessageSent } from "@1.modules/exchange.ui/ask/sent";
 import { useTimeoutEffect } from "@react-hookz/web";
 import { type PropsWithChildren } from "react";
 import { createSlot } from "react-slotify";
-import { P, match } from "ts-pattern";
-
-//
+import { match } from "ts-pattern";
 
 //
 
@@ -49,42 +48,41 @@ Ask_Action.Trigger = createSlot();
 function Ask_Body() {
   const context = useOutlet_Context();
   const exchange = useOutlet_Exchange();
-  console.log({ context });
-  return (
-    match(context)
-      .with({ state: "idle" }, () => (
-        <Ask_Form>
-          <Ask_Form.AvatarFigure>
-            <SeeProfileAvatarMedia profile={exchange.owner.profile} />
-          </Ask_Form.AvatarFigure>
-        </Ask_Form>
-      ))
-      .with({ state: "creating deal" }, () => <MessageSent />)
-      .with({ state: "sending message" }, () => <Sending />)
-      .with({ state: "sent" }, () => <MessageSent />)
-      .with(P._, () => <>Nope</>)
-      // .with({ state: "form" }, () => <Ask_Form />)
-      // .with({ state: "creating deal" }, () => <CreatingDeal />)
-      // .with({ state: "sent" }, () => <MessageSent />)
-      // .with({ state: "redirect", deal_id: P.select() }, (deal_id) => (
-      //   <RedirectToExistingDeal deal_id={deal_id} />
-      // ))
-      .exhaustive()
-  );
+
+  return match(context)
+    .with({ state: "idle" }, () => (
+      <Ask_Form>
+        <Ask_Form.AvatarFigure>
+          <SeeProfileAvatarMedia profile={exchange.owner.profile} />
+        </Ask_Form.AvatarFigure>
+      </Ask_Form>
+    ))
+    .with({ state: "creating deal" }, () => <Sending />)
+    .with({ state: "sent" }, () => <MessageSent />)
+    .exhaustive();
 }
 
 //
 
 function Sending() {
-  const context = useOutlet_RequireContext({ state: "sending message" });
+  const context = useOutlet_RequireContext({ state: "creating deal" });
+  const exchange = useOutlet_Exchange();
   const send = useOutlet_Send();
+  const exchange_id = exchange.id;
 
   //
 
-  // const create_message_info = TRPC_React.
+  const create = TRPC_React.exchanges.me.inbox.create.useMutation();
+  const utils = TRPC_React.useUtils();
 
   useTimeoutEffect(async () => {
-    // await create_message_info.mutate(context.message);
+    await create.mutateAsync({
+      content: context.message,
+      exchange_id,
+    });
+
+    await utils.exchanges.me.inbox.by_exchange_id.invalidate({ exchange_id });
+
     send({ state: "sent" });
   }, 1_111);
 
@@ -92,18 +90,3 @@ function Sending() {
 
   return <SendingInProgress />;
 }
-
-// function Ask_Form() {
-//   const exchange = useOutlet_Exchange();
-//   return (
-//     <>
-//       <h3
-//         className="my-5 line-clamp-2 text-2xl font-bold"
-//         title={exchange.title}
-//       >
-//         {exchange.title}
-//       </h3>{" "}
-//       {exchange.id}
-//     </>
-//   );
-// }
