@@ -82,8 +82,8 @@ export function Exchange_byId({
 }
 
 export function Exchange_Card(exchange: Exchange) {
-  const { data: session } = useSession();
-  const my_profile_id = session?.profile.id ?? "";
+  //
+
   return (
     <Card exchange={exchange}>
       <Card.Header.Left>
@@ -99,27 +99,59 @@ export function Exchange_Card(exchange: Exchange) {
         }
       </Card.Footer.Left>
       <Card.Footer.Center>
-        {match(exchange.owner.profile.id)
-          .with(my_profile_id, () => (
-            <Link href={`/@~/exchanges/inbox/${exchange.id}`}>
-              <Button>Voir mes échanges</Button>
-            </Link>
-          ))
-          .otherwise(() => (
-            <Ask_Action exchange={exchange}>
-              <Ask_Action.Trigger>
-                {exchange.return ? (
-                  <Button intent="warning">Échanger</Button>
-                ) : (
-                  <Button>Demander</Button>
-                )}
-              </Ask_Action.Trigger>
-            </Ask_Action>
-          ))}
+        <Exchange_Actions {...exchange} />
       </Card.Footer.Center>
       {/* <Card.Footer.Right /> */}
     </Card>
   );
+}
+
+function Exchange_Actions(exchange: Exchange) {
+  const { data: session } = useSession();
+  const my_profile_id = session?.profile.id ?? "";
+
+  return match(exchange.owner.profile.id)
+    .with(my_profile_id, () => (
+      <Link href={`/@~/exchanges/inbox/${exchange.id}`}>
+        <Button>Voir mes échanges</Button>
+      </Link>
+    ))
+    .otherwise(() => <Exchange_Action_Ask {...exchange} />);
+}
+
+function Exchange_Action_Ask(exchange: Exchange) {
+  const { data: session } = useSession();
+  const my_profile_id = session?.profile.id ?? "";
+
+  const query = TRPC_React.exchanges.me.deal_by_exchange_id.useQuery(
+    exchange.id,
+  );
+  return match(query)
+    .with({ status: "error", error: P.select() }, (error) => {
+      console.error(error);
+      return null;
+    })
+    .with({ status: "loading" }, () => <Spinner className="h-4 w-4" />)
+    .with({ status: "success", data: P.nullish }, () => (
+      <Ask_Action exchange={exchange}>
+        <Ask_Action.Trigger>
+          {exchange.return ? (
+            <Button intent="warning">Échanger</Button>
+          ) : (
+            <Button>Demander</Button>
+          )}
+        </Ask_Action.Trigger>
+      </Ask_Action>
+    ))
+    .with({ status: "success", data: P.select() }, function (deal) {
+      const thread_id = deal?.exchange_threads.at(0)?.thread_id ?? "";
+      return (
+        <Link href={`/@~/exchanges/inbox/${exchange.id}/${thread_id}`}>
+          <Button>Voir l'échange</Button>
+        </Link>
+      );
+    })
+    .exhaustive();
 }
 
 function Exchange_Bookmark(exchange: Exchange) {

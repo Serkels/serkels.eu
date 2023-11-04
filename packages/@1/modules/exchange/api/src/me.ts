@@ -8,6 +8,29 @@ import { z } from "zod";
 export const me = router({
   //
 
+  deal_by_exchange_id: next_auth_procedure
+    .input(z.string())
+    .query(async ({ ctx: { payload, prisma }, input: parent_id }) => {
+      const { profile } = payload;
+      const { id: studient_id } = await prisma.studient.findUniqueOrThrow({
+        select: { id: true },
+        where: { profile_id: profile.id },
+      });
+
+      return prisma.deal.findUnique({
+        include: {
+          exchange_threads: {
+            where: { owner_id: studient_id },
+            include: { thread: true },
+          },
+        },
+        where: {
+          participant_per_exchange: { parent_id, participant_id: studient_id },
+        },
+      });
+    }),
+
+  //
   find_active: next_auth_procedure
     .input(
       z.object({
