@@ -203,6 +203,9 @@ importers:
       react-nest:
         specifier: 0.1.10
         version: 0.1.10(patch_hash=oxxc2okcxsefs22szuakzwvvp4)(react-dom@18.2.0)(react@18.2.0)
+      react-slotify:
+        specifier: 0.2.2
+        version: 0.2.2(react@18.2.0)
       superjson:
         specifier: 2.2.0
         version: 2.2.0
@@ -863,6 +866,9 @@ importers:
       '@1.ui/react':
         specifier: workspace:*
         version: link:../../../ui/react
+      '@react-hookz/web':
+        specifier: 23.1.0
+        version: 23.1.0(react-dom@18.2.0)(react@18.2.0)
       '@tanstack/react-query':
         specifier: 4.36.1
         version: 4.36.1(react-dom@18.2.0)(react@18.2.0)
@@ -878,6 +884,9 @@ importers:
       react:
         specifier: 18.2.0
         version: 18.2.0
+      react-aria-components:
+        specifier: 1.0.0-beta.2
+        version: 1.0.0-beta.2(react-dom@18.2.0)(react@18.2.0)
       react-content-loader:
         specifier: 6.2.1
         version: 6.2.1(react@18.2.0)

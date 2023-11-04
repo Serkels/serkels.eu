@@ -3,18 +3,14 @@
 import { Exchange_TypeSchema, type Exchange } from "@1.modules/exchange.domain";
 import { AvatarMedia } from "@1.ui/react/avatar";
 import { card } from "@1.ui/react/card/atom";
-import {
-  Exchange as ExchangeIcon,
-  LocationRadius,
-  School,
-  Share,
-} from "@1.ui/react/icons";
+import { Exchange as ExchangeIcon, School, Share } from "@1.ui/react/icons";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { type PropsWithChildren } from "react";
 import { createSlot } from "react-slotify";
 import { tv } from "tailwind-variants";
 import { P, match } from "ts-pattern";
+import { OnlineOrLocation } from "../OnlineOrLocation";
 import { Provider, useExchange } from "./context";
 
 //
@@ -45,21 +41,6 @@ export function Card({
         <Footer>{children}</Footer>
       </div>
     </Provider>
-  );
-}
-
-function OnlineOrLocation(props: {
-  is_online: boolean;
-  location?: string | undefined;
-}) {
-  return (
-    <span className="font-bold">
-      <LocationRadius className="inline-block h-3 w-3" />{" "}
-      {match(props.is_online)
-        .with(true, () => "En ligne")
-        .with(false, () => props.location)
-        .exhaustive()}
-    </span>
   );
 }
 

@@ -19,6 +19,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, type ComponentProps, type ReactNode } from "react";
 import { tv } from "tailwind-variants";
 import { P, match } from "ts-pattern";
+import { Ask_Action } from "./Ask_Action";
 
 //
 
@@ -90,7 +91,13 @@ export function Exchange_Card(exchange: Exchange) {
           <StudientAvatarMedia studient={exchange.owner} />
         </Link>
       </Card.Header.Left>
-      <Card.Footer.Left>{<Exchange_Bookmark {...exchange} />}</Card.Footer.Left>
+      <Card.Footer.Left>
+        {
+          <div>
+            <Exchange_Bookmark {...exchange} />
+          </div>
+        }
+      </Card.Footer.Left>
       <Card.Footer.Center>
         {match(exchange.owner.profile.id)
           .with(my_profile_id, () => (
@@ -99,7 +106,15 @@ export function Exchange_Card(exchange: Exchange) {
             </Link>
           ))
           .otherwise(() => (
-            <Ask_Action />
+            <Ask_Action exchange={exchange}>
+              <Ask_Action.Trigger>
+                {exchange.return ? (
+                  <Button intent="warning">Échanger</Button>
+                ) : (
+                  <Button>Demander</Button>
+                )}
+              </Ask_Action.Trigger>
+            </Ask_Action>
           ))}
       </Card.Footer.Center>
       {/* <Card.Footer.Right /> */}
@@ -116,7 +131,7 @@ function Exchange_Bookmark(exchange: Exchange) {
   });
 
   if (!is_studient) {
-    return <div></div>;
+    return null;
   }
 
   return match(query)
@@ -153,10 +168,6 @@ function BookmarkItem_Toggle_Mutation(props: BookmarkButton_Props) {
       <Bookmark className={icon()} />
     </button>
   );
-}
-
-function Ask_Action() {
-  return null;
 }
 
 const style = tv({

@@ -11,7 +11,7 @@ export function OnlineOrLocation(props: {
 }) {
   return (
     <span className="font-bold">
-      <LocationRadius className="h-4 w-4" />
+      <LocationRadius className="inline-block h-4 w-4" />{" "}
       {match(props.is_online)
         .with(true, () => "En ligne")
         .with(false, () => props.location)
