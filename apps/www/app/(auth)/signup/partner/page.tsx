@@ -28,11 +28,7 @@ export default function Page() {
 
   return (
     <main className={base()}>
-      <form
-        className={form()}
-        method="post"
-        action="/api/auth/callback/SigninEmail_Provider"
-      >
+      <form className={form()} method="post" action="/api/auth/callback/signin">
         <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
         <input
           name="role"
@@ -50,6 +46,14 @@ export default function Page() {
             id="name"
             name="name"
             placeholder="Nom de l'établissement"
+            required
+            type="text"
+          />
+          <input
+            className={input({ className: "col-span-full " })}
+            id="city"
+            name="city"
+            placeholder="Ville"
             required
             type="text"
           />

@@ -3,6 +3,7 @@
 import { get_csrf_token } from "@1.modules/auth.next/csrf_token";
 import { UserAvatarFilled } from "@1.ui/react/icons";
 // import { UserAvatarFilled } from "@1.ui/react/icons";
+import { TRPC_SSR } from ":trpc/server";
 import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import { input } from "@1.ui/react/form/atom";
 import type { Metadata, ResolvingMetadata } from "next";
@@ -22,17 +23,15 @@ export async function generateMetadata(
 
 //
 
-export default function Page() {
+export default async function Page() {
   const csrfToken = get_csrf_token();
+
+  const categories = await TRPC_SSR.category.exchange.fetch();
 
   const { base, form, label } = style();
   return (
     <main className={base()}>
-      <form
-        className={form()}
-        method="post"
-        action="/api/auth/callback/SigninEmail_Provider"
-      >
+      <form className={form()} method="post" action="/api/auth/callback/signin">
         <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
         <input
           name="role"
@@ -53,7 +52,7 @@ export default function Page() {
             required
             type="text"
           />
-          {/* <input
+          <input
             className={input({ className: "col-span-full " })}
             id="university"
             name="university"
@@ -65,7 +64,7 @@ export default function Page() {
             className={input({ className: "col-span-full " })}
             id="field_of_study"
             name="field_of_study"
-            placeholder="Domaine"
+            placeholder="Domain d'étude"
             type="text"
           />
           <textarea
@@ -73,7 +72,31 @@ export default function Page() {
             id="bio"
             name="bio"
             placeholder="À propos"
-          /> */}
+          />
+          <input
+            className={input({ className: "col-span-full " })}
+            id="city"
+            name="city"
+            placeholder="Ville"
+            type="text"
+          />
+          <input
+            className={input({ className: "col-span-full " })}
+            id="citizenship"
+            name="citizenship"
+            placeholder="Nationalité"
+            type="text"
+          />
+          <select className={input({ className: "col-span-full " })}>
+            <option hidden value={""}>
+              Intéressé par
+            </option>
+            {categories.map(({ name, id }) => (
+              <option value={String(id)} key={id}>
+                {name}
+              </option>
+            ))}
+          </select>
           <label className={label()}>
             <div className="flex-1">Email address</div>
             <EmailInput

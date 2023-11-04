@@ -3,7 +3,9 @@
 import { TocTocMagicLinkEmail } from "@1.modules/auth.emails";
 import {
   PROFILE_ROLES,
+  Partner_Schema,
   Profile_Schema,
+  Studient_Schema,
   type Profile,
 } from "@1.modules/profile.domain";
 import { next_auth_procedure, router, type Context } from "@1.modules/trpc";
@@ -11,8 +13,9 @@ import create_NextAuth_router from "@douglasduteil/nextauth...trpc.prisma/trpc/r
 import create_EmailProvider_router, {
   type SendEmailResolverFn,
 } from "@douglasduteil/nextauth...trpc.prisma/trpc/router/email";
-import { ProfileRole } from "@prisma/client";
+import { Prisma, ProfileRole } from "@prisma/client";
 import process from "node:process";
+import { match } from "ts-pattern";
 import { z } from "zod";
 import { gravatarUrlFor } from "./gravatarUrlFor";
 
@@ -101,11 +104,48 @@ const auth_api_router = router({
         ]);
 
         const image = gravatarUrlFor(email);
+        const bio = z
+          .object({ bio: z.string().default("") })
+          .parse(payload.context).bio;
 
-        // const studient =
-        //   payload.role === ProfileRole.STUDIENT
-        //     ? Studient_Schema.parse(payload.context)
-        //     : undefined;
+        //
+
+        const studient_context = Studient_Schema.omit({
+          id: true,
+          interest: true,
+          profile: true,
+        }).parse(payload.context);
+
+        const partner_context = Partner_Schema.omit({
+          id: true,
+          profile: true,
+        }).parse(payload.context);
+
+        //
+
+        const profile_role_data = match(payload.role)
+          .with("ADMIN", () => ({}))
+          .with("PARTNER", () => ({
+            partner: {
+              create: partner_context as Omit<
+                Prisma.PartnerCreateInput,
+                "profile"
+              >,
+            },
+          }))
+          .with("STUDIENT", () => ({
+            studient: {
+              create: studient_context as Omit<
+                Prisma.StudientCreateInput,
+                "profile"
+              >,
+            },
+          }))
+          .exhaustive();
+
+        //
+        console.log({ profile_role_data });
+
         const record = await prisma.user.update({
           where: { id: user.id },
           data: {
@@ -116,29 +156,8 @@ const auth_api_router = router({
                 image,
                 name: payload.name,
                 role: ProfileRole[payload.role],
-                bio: "N/A",
-                ...(payload.role === ProfileRole.STUDIENT
-                  ? {
-                      studient: {
-                        create: {
-                          citizenship: "N/A",
-                          city: "N/A",
-                          field_of_study: "N/A",
-                          university: "N/A",
-                        },
-                      },
-                    }
-                  : {}),
-                ...(payload.role === ProfileRole.PARTNER
-                  ? {
-                      partner: {
-                        create: {
-                          link: "https://beta.toc-toc.org/",
-                          city: "N/A",
-                        },
-                      },
-                    }
-                  : {}),
+                bio,
+                ...profile_role_data,
               },
             },
           },

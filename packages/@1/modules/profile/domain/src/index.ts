@@ -32,7 +32,7 @@ export const PROFILE_UNKNOWN: Profile = Profile_Schema.parse(
 export const Partner_Schema = Entity_Schema.extend({
   city: z.string().default("Unkown city"),
   link: z.string().url().optional(),
-  profile: Profile_Schema,
+  profile: Profile_Schema.default(PROFILE_UNKNOWN),
 }).describe("Partner_PropsSchema");
 
 export interface Partner extends z.TypeOf<typeof Partner_Schema> {}
@@ -43,8 +43,8 @@ export const Studient_Schema = Entity_Schema.extend({
   citizenship: z.string().default("Unkown citizenship"),
   city: z.string().default("Unkown city"),
   field_of_study: z.string().default("Unkown field_of_study"),
-  interest: z.array(Category_Schema),
-  profile: Profile_Schema,
+  interest: z.array(Category_Schema).default([]),
+  profile: Profile_Schema.default(PROFILE_UNKNOWN),
   university: z.string().default("Unkown university"),
 }).describe("Studient_Schema");
 

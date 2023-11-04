@@ -30,7 +30,13 @@ export function create_NextAuth_router(secret: string) {
         async ({ ctx, input }) =>
           (await ctx.prisma.user.create({ data: input })) as AdapterUser,
       ),
-    //   getUser: (id) => p.user.findUnique({ where: { id } }),
+
+    getUser: next_auth_procedure
+      .input(z.string())
+      .query(
+        async ({ ctx: { prisma }, input: id }) =>
+          (await prisma.user.findUnique({ where: { id } })) as AdapterUser,
+      ),
 
     getUserByEmail: next_auth_procedure
       .input(z.string())

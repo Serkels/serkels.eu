@@ -22,8 +22,8 @@ export function PrismaTRPCAdapter(
       return user as AdapterUser;
     },
     async getUser(id) {
-      console.log("getUser", id);
-      throw new Error("Not implemented");
+      const user = await trpc.getUser.query(id);
+      return user as AdapterUser;
     },
     async getUserByEmail(email) {
       const user = await trpc.getUserByEmail.query(email);

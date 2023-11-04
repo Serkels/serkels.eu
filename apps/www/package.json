@@ -14,6 +14,7 @@
     "@1.modules/auth.next": "workspace:*",
     "@1.modules/bookmark.ui": "workspace:*",
     "@1.modules/category.domain": "workspace:*",
+    "@1.modules/category.ui": "workspace:*",
     "@1.modules/core": "workspace:*",
     "@1.modules/exchange.domain": "workspace:*",
     "@1.modules/exchange.ui": "workspace:*",
