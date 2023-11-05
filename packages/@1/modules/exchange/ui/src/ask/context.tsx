@@ -10,7 +10,7 @@ import { useState } from "react";
 type Outlet_State =
   | { state: "creating deal"; message: string }
   | { state: "idle" }
-  | { state: "sent" };
+  | { state: "sent"; href: string };
 
 function useOutlet({ exchange }: { exchange: Exchange }) {
   const [context, setContext] = useState<Outlet_State>({ state: "idle" });

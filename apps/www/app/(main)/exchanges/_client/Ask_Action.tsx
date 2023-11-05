@@ -15,6 +15,7 @@ import { Exchange_Ask_Modal } from "@1.modules/exchange.ui/ask/modal";
 import { SendingInProgress } from "@1.modules/exchange.ui/ask/sending";
 import { MessageSent } from "@1.modules/exchange.ui/ask/sent";
 import { useTimeoutEffect } from "@react-hookz/web";
+import { useRouter } from "next/navigation";
 import { type PropsWithChildren } from "react";
 import { createSlot } from "react-slotify";
 import { match } from "ts-pattern";
@@ -58,11 +59,22 @@ function Ask_Body() {
       </Ask_Form>
     ))
     .with({ state: "creating deal" }, () => <Sending />)
-    .with({ state: "sent" }, () => <MessageSent />)
+    .with({ state: "sent" }, () => <Sent />)
     .exhaustive();
 }
 
 //
+
+function Sent() {
+  const { href } = useOutlet_RequireContext({ state: "sent" });
+  const router = useRouter();
+
+  useTimeoutEffect(() => {
+    router.push(href);
+  }, 3_333);
+
+  return <MessageSent />;
+}
 
 function Sending() {
   const context = useOutlet_RequireContext({ state: "creating deal" });
@@ -76,14 +88,19 @@ function Sending() {
   const utils = TRPC_React.useUtils();
 
   useTimeoutEffect(async () => {
-    await create.mutateAsync({
+    const { exchange_threads } = await create.mutateAsync({
       content: context.message,
       exchange_id,
     });
 
     await utils.exchanges.me.inbox.by_exchange_id.invalidate({ exchange_id });
+    await utils.exchanges.me.find_active.invalidate();
+    const inbox = exchange_threads.at(0);
+    if (!inbox) return;
 
-    send({ state: "sent" });
+    const href = `/@~/exchanges/inbox/${exchange_id}/${inbox.thread_id}`;
+
+    send({ state: "sent", href });
   }, 1_111);
 
   //

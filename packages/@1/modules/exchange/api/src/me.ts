@@ -185,6 +185,12 @@ export const me = router({
               },
             },
           },
+          include: {
+            exchange_threads: {
+              take: 1,
+              where: { owner_id: studient_id },
+            },
+          },
         });
       }),
   }),
