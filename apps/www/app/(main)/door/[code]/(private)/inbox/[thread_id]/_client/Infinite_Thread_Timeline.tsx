@@ -5,6 +5,7 @@ import type { Message } from "@1.modules/inbox.domain";
 import { Timeline } from "@1.modules/inbox.ui/conversation/Timeline";
 import { Spinner } from "@1.ui/react/spinner";
 import type { UseInfiniteQueryResult } from "@tanstack/react-query";
+import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
 import { useLayoutEffect, useRef } from "react";
 import { P, match } from "ts-pattern";
@@ -42,6 +43,27 @@ export default function Infinite_Thread_Timeline({
       block: "end",
     });
   }, [query_info.isFetching, scroll_target_ref]);
+
+  const utils = TRPC_React.useUtils();
+  const { data: session, status } = useSession();
+
+  TRPC_React.inbox.thread.on_new_message.useSubscription(
+    { token: session?.header.NEXTAUTH_TOKEN!, thread_id },
+    {
+      enabled: status === "authenticated",
+      onData() {
+        utils.inbox.thread.messages.invalidate({ thread_id });
+      },
+      onError(err) {
+        console.error(
+          "TRPC_React.inbox.thread.on_new_message > Subscription error:",
+          err,
+        );
+        // we might have missed a message - invalidate cache
+        utils.inbox.thread.messages.invalidate({ thread_id });
+      },
+    },
+  );
 
   return match(query_info)
     .with({ status: "error", error: P.select() }, (error) => {

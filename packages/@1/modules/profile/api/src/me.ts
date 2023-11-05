@@ -1,5 +1,6 @@
 import { Profile_Schema } from "@1.modules/profile.domain";
 import { next_auth_procedure, router } from "@1.modules/trpc";
+import type { Prisma } from "@prisma/client";
 import { z } from "zod";
 
 //
@@ -36,6 +37,40 @@ export const me = router({
 
       return { data, next_cursor };
     }),
+
+  //
+
+  find_contact: next_auth_procedure
+    .input(z.string())
+    .query(async ({ input: profile_id, ctx: { prisma, payload } }) => {
+      const { id } = payload.profile;
+
+      return prisma.profile.findUnique({
+        where: { id, contacts: { some: { id: profile_id } } },
+      });
+    }),
+
+  toggle_contact: next_auth_procedure
+    .input(z.string())
+    .mutation(async ({ input: profile_id, ctx: { prisma, payload } }) => {
+      const { id } = payload.profile;
+
+      const existing = await prisma.profile.findUnique({
+        include: { contacts: true },
+        where: { id, contacts: { some: { id: profile_id } } },
+      });
+
+      const data: Prisma.ProfileUpdateInput = existing
+        ? { contacts: { disconnect: { id: profile_id } } }
+        : { contacts: { connect: { id: profile_id } } };
+
+      return prisma.profile.update({
+        data,
+        where: { id },
+      });
+    }),
+
+  //
 
   update: next_auth_procedure
     .input(Profile_Schema.omit({ id: true, role: true }))

@@ -16,7 +16,6 @@ const inbox_api_router = router({
           select: { id: true },
           where: { profile_id: profile.id },
         });
-
         const existing_inbox_thread = await prisma.inboxThread.findFirst({
           where: {
             owner_id: studient_id,
@@ -26,29 +25,31 @@ const inbox_api_router = router({
 
         if (existing_inbox_thread) return existing_inbox_thread;
 
-        const existing_thread = await prisma.thread.findFirst({
-          where: {
+        const { id: recipient_studient_id } =
+          await prisma.studient.findUniqueOrThrow({
+            select: { id: true },
+            where: { profile_id: recipient_profile_id },
+          });
+
+        await prisma.thread.create({
+          data: {
             participants: {
-              every: { id: { in: [profile.id, recipient_profile_id] } },
+              connect: [{ id: profile.id }, { id: recipient_profile_id }],
+            },
+            inbox_threads: {
+              createMany: {
+                data: [
+                  { owner_id: studient_id },
+                  { owner_id: recipient_studient_id },
+                ],
+              },
             },
           },
         });
-
-        if (existing_thread)
-          return await prisma.inboxThread.create({
-            data: { owner_id: studient_id, thread_id: existing_thread.id },
-          });
-
-        return await prisma.inboxThread.create({
-          data: {
-            owner: { connect: { id: studient_id } },
-            thread: {
-              create: {
-                participants: {
-                  connect: [{ id: profile.id }, { id: recipient_profile_id }],
-                },
-              },
-            },
+        return prisma.inboxThread.findFirstOrThrow({
+          where: {
+            owner_id: studient_id,
+            thread: { participants: { some: { id: recipient_profile_id } } },
           },
         });
       },
@@ -73,7 +74,7 @@ const inbox_api_router = router({
 
       const data = await prisma.inboxThread.findMany({
         ...(cursor ? { cursor: { id: cursor } } : {}),
-        orderBy: { thread: { updated_at: "asc" } },
+        orderBy: { thread: { updated_at: "desc" } },
         include: { thread: { select: { id: true } } },
         take: limit + 1,
         where: { owner_id: studient_id },

@@ -8,6 +8,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { tv } from "tailwind-variants";
 import { match } from "ts-pattern";
+import AddContact from "./_client/AddContact";
+
+//
 
 export default async function Page({ params }: { params: CodeParms }) {
   try {
@@ -33,6 +36,7 @@ export default async function Page({ params }: { params: CodeParms }) {
 function Studient_Page({ params }: { params: CodeParms }) {
   const { code } = params;
   const { base, link } = style();
+
   return (
     <nav className={base()}>
       <div className="flex items-center">
@@ -48,7 +52,7 @@ function Studient_Page({ params }: { params: CodeParms }) {
       </div>
 
       <div className="flex items-center">
-        <button>Ajouter</button>
+        <AddContact profile_id={code}/>
       </div>
     </nav>
   );
@@ -68,7 +72,7 @@ function Partner_Page({ params }: { params: CodeParms }) {
       </div>
 
       <div className="flex items-center">
-        <button>Ajouter</button>
+        <button>...</button>
       </div>
     </nav>
   );
