@@ -244,8 +244,8 @@ function ConnectedAs() {
     return (
       <WhiteCard>
         <Link href={href}>
-          <figure>
-            <Avatar className="m-6" profile={profile} />
+          <figure className="space-y-6">
+            <Avatar className="mx-auto block w-[50%]" profile={profile} />
             <figcaption className="text-center">
               <h3 className="text-center">
                 Vous êtes connecté en tant que : <strong>{profile.name}</strong>
