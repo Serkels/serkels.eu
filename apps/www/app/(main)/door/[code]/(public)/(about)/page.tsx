@@ -7,6 +7,7 @@ import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import type { Metadata, ResolvingMetadata } from "next";
 import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
+import { match } from "ts-pattern";
 
 //
 
@@ -36,9 +37,17 @@ export default async function Page({ params }: { params: CodeParms }) {
       <main className="prose lg:prose-xl">
         <ReactMarkdown>{profile.bio}</ReactMarkdown>
 
-        {PROFILE_ROLES.Enum.STUDIENT === profile.role ? (
-          <StudientMeta profile_id={profile.id} />
-        ) : null}
+        <hr />
+
+        {match(profile.role)
+          .with(PROFILE_ROLES.Enum.ADMIN, () => null)
+          .with(PROFILE_ROLES.Enum.PARTNER, () => (
+            <PartnerMeta profile_id={profile.id} />
+          ))
+          .with(PROFILE_ROLES.Enum.STUDIENT, () => (
+            <StudientMeta profile_id={profile.id} />
+          ))
+          .exhaustive()}
       </main>
     );
   } catch (error) {
@@ -70,6 +79,25 @@ async function StudientMeta({ profile_id }: { profile_id: string }) {
         <b>Nationalité : </b> <span>{studient.citizenship}</span>
       </li>
       {/* <li><b>Langues : </b> <span>Français, Anglais</span></li> */}
+    </ul>
+  );
+}
+
+async function PartnerMeta({ profile_id }: { profile_id: string }) {
+  const partner =
+    await TRPC_SSR.profile.partner.by_profile_id.fetch(profile_id);
+
+  return (
+    <ul>
+      <li>
+        <b>Site web : </b>{" "}
+        <a href={partner.link} rel="noopener noreferrer">
+          {partner.link}
+        </a>
+      </li>
+      <li>
+        <b>Ville : </b> <span>{partner.city}</span>
+      </li>
     </ul>
   );
 }
