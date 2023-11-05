@@ -144,7 +144,9 @@ function Exchange_Action_Ask(exchange: Exchange) {
       const thread_id = deal?.exchange_threads.at(0)?.thread_id ?? "";
       return (
         <Link href={`/@~/exchanges/inbox/${exchange.id}/${thread_id}`}>
-          <Button>Voir l'échange</Button>
+          <Button intent={exchange.return ? "warning" : "primary"}>
+            Voir l'échange
+          </Button>
         </Link>
       );
     })

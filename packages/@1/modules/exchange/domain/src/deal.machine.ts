@@ -1,40 +1,40 @@
 //
 
 import { createMachine } from "xstate";
+import { Deal_Status_Schema } from ".";
 
 //
 
 export const deal_flow = createMachine({
   id: "deal",
-  initial: "idle",
+  initial: Deal_Status_Schema.Enum.IDLE,
   states: {
-    idle: {
-      id: "idle",
+    [Deal_Status_Schema.Enum.IDLE]: {
       on: {
         DENIE: {
-          target: "denied",
+          target: Deal_Status_Schema.Enum.DENIED,
         },
         APPROVE: {
-          target: "approved by the organizer",
+          target: Deal_Status_Schema.Enum.APPROVED_BY_THE_ORGANIZER,
           cond: "is_organizer",
         },
       },
     },
-    denied: {
+    [Deal_Status_Schema.Enum.DENIED]: {
       type: "final",
     },
-    "approved by the organizer": {
+    [Deal_Status_Schema.Enum.APPROVED_BY_THE_ORGANIZER]: {
       on: {
         DENIE: {
-          target: "denied",
+          target: Deal_Status_Schema.Enum.DENIED,
         },
         APPROVE: {
-          target: "approved",
+          target: Deal_Status_Schema.Enum.APPROVED,
           cond: "is_participant",
         },
       },
     },
-    approved: {
+    [Deal_Status_Schema.Enum.APPROVED]: {
       type: "final",
     },
   },

@@ -2,6 +2,7 @@
 
 import { SeeProfileAvatarMedia } from ":components/avatar";
 import { TRPC_React } from ":trpc/client";
+import { StateError } from "@1.modules/core/errors";
 import type { Exchange } from "@1.modules/exchange.domain";
 import {
   Outlet_Provider,
@@ -93,10 +94,17 @@ function Sending() {
       exchange_id,
     });
 
-    await utils.exchanges.me.inbox.by_exchange_id.invalidate({ exchange_id });
-    await utils.exchanges.me.find_active.invalidate();
+    await Promise.all([
+      utils.exchanges.me.inbox.by_exchange_id.invalidate({ exchange_id }),
+      utils.exchanges.me.find_active.invalidate({}),
+      utils.exchanges.me.deal_by_exchange_id.invalidate(exchange_id),
+    ]);
+
     const inbox = exchange_threads.at(0);
-    if (!inbox) return;
+
+    if (!inbox) {
+      throw new StateError("Exchange Inbox Thread not found");
+    }
 
     const href = `/@~/exchanges/inbox/${exchange_id}/${inbox.thread_id}`;
 

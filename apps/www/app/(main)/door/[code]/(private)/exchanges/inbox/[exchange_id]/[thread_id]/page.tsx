@@ -10,8 +10,10 @@ import {
 } from ":pipes/thread_by_id";
 import { TRPC_SSR } from ":trpc/server";
 import { Spinner } from "@1.ui/react/spinner";
+import to from "await-to-js";
 import type { Metadata, ResolvingMetadata } from "next";
 import dynamic from "next/dynamic";
+import { notFound } from "next/navigation";
 import { tv } from "tailwind-variants";
 import Conversation_Form from "./_client/Conversation_Form";
 
@@ -53,15 +55,23 @@ export default async function Page({
   params: ThreadParams & ExchangeParams;
 }) {
   const { thread_id, exchange_id } = params;
-  const thread = await thread_by_id(params);
+  const [thread_err, thread] = await to(
+    TRPC_SSR.inbox.thread.by_id.fetch(thread_id),
+  );
+  if (thread_err) {
+    notFound();
+  }
   const profile_id = await session_profile_id();
   const participant = thread_recipient({
     participants: thread.participants,
     profile_id,
   });
+
   await TRPC_SSR.inbox.thread.messages.prefetchInfinite({
     thread_id,
   });
+  await TRPC_SSR.exchanges.me.inbox.by_thread_id.prefetch(thread_id);
+
   const exchange = await TRPC_SSR.exchanges.by_id.fetch(exchange_id);
 
   const { base, footer, header } = layout();
@@ -74,7 +84,7 @@ export default async function Page({
         <Thread_Timeline exchange={exchange} profile_id={profile_id} />
       </div>
       <footer className={footer()}>
-        <Conversation_Form thread_id={thread_id} />
+        <Conversation_Form exchange={exchange} thread_id={thread_id} />
       </footer>
     </main>
   );

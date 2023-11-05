@@ -16,7 +16,7 @@ export function Approved(props: ComponentPropsWithoutRef<"svg">) {
         transform="translate(8537.744 871.538)"
         fill="none"
         stroke="#fff"
-        stroke-width="2"
+        strokeWidth="2"
       />
     </svg>
   );
