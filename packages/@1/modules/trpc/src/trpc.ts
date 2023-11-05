@@ -2,10 +2,11 @@
 
 import type { Profile } from "@1.modules/profile.domain";
 import { NEXTAUTH_TRPCENV } from "@douglasduteil/nextauth...trpc.prisma/config";
+import { decode } from "@douglasduteil/nextauth...trpc.prisma/jwt";
 import { verify_next_auth_token } from "@douglasduteil/nextauth...trpc.prisma/trpc";
-import { initTRPC } from "@trpc/server";
+import { TRPCError, initTRPC } from "@trpc/server";
 import SuperJSON from "superjson";
-import { ZodError } from "zod";
+import { ZodError, z } from "zod";
 import type { Context } from "./context";
 
 //
@@ -33,3 +34,25 @@ export const next_auth_procedure = procedure.use(
     NEXTAUTH_TRPCENV.NEXTAUTH_SECRET,
   ),
 );
+
+export const next_auth_input_token = procedure
+  .input(z.object({ token: z.string() }))
+  .use(async ({ input, ctx, next }) => {
+    try {
+      const payload = (await decode({
+        token: input.token,
+        secret: NEXTAUTH_TRPCENV.NEXTAUTH_SECRET,
+      })) as { profile: Profile };
+
+      if (payload) {
+        return next({ ctx: { ...ctx, payload } });
+      }
+
+      throw new TRPCError({
+        code: "UNAUTHORIZED",
+        cause: new Error("No payload"),
+      });
+    } catch (cause) {
+      throw new TRPCError({ code: "PARSE_ERROR", cause });
+    }
+  });

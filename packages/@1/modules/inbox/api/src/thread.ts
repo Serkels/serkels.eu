@@ -1,7 +1,13 @@
 import { next_auth_procedure, router } from "@1.modules/trpc";
+import { next_auth_input_token } from "@1.modules/trpc/src/trpc";
+import { observable } from "@trpc/server/observable";
+import { EventEmitter } from "events";
 import { z } from "zod";
 
 //
+
+class MyEventEmitter extends EventEmitter {}
+const ee = new MyEventEmitter();
 
 export const thread = router({
   by_id: next_auth_procedure
@@ -52,6 +58,32 @@ export const thread = router({
 
   //
 
+  on_new_message: next_auth_input_token
+    .input(z.object({ thread_id: z.string() }))
+    .subscription(async ({ ctx: { prisma, payload }, input }) => {
+      const { thread_id } = input;
+      const {
+        profile: { id: profile_id },
+      } = payload;
+
+      // guard : Only subscribe to participating threads
+      await prisma.thread.findUniqueOrThrow({
+        where: { id: thread_id, participants: { some: { id: profile_id } } },
+      });
+
+      return observable<void>((emit) => {
+        const new_message = () => {
+          emit.next();
+        };
+        ee.on(`${thread_id}>new_message`, new_message);
+        return () => {
+          ee.off(`${thread_id}>new_message`, new_message);
+        };
+      });
+    }),
+
+  //
+
   send: next_auth_procedure
     .input(
       z.object({
@@ -68,7 +100,7 @@ export const thread = router({
         where: { id: thread_id, participants: { some: { id: profile.id } } },
       });
 
-      return await prisma.thread.update({
+      const thread = await prisma.thread.update({
         data: {
           updated_at: new Date(),
           messages: {
@@ -80,5 +112,8 @@ export const thread = router({
         },
         where: { id: thread_id },
       });
+
+      ee.emit(`${thread_id}>new_message`);
+      return thread;
     }),
 });

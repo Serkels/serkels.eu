@@ -36,12 +36,13 @@ model SignupPayload {
 }
 
 model Profile {
-  id        String      @id @default(cuid())
   bio       String?
   bookmarks Bookmark[]
   contacts  Profile[]   @relation("Contacts")
   following Profile[]   @relation("ProfileFollows")
+  id        String      @id @default(cuid())
   image     String
+  is_online Boolean     @default(false)
   name      String
   role      ProfileRole
   user      User        @relation(fields: [user_id], references: [id], onDelete: Cascade)

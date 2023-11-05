@@ -1,7 +1,6 @@
 //
 
 import { AuthSessionProvider } from ":components/shell/AuthSessionProvider";
-import { TrpcProvider } from ":trpc/client";
 import { getServerSession } from "@1.modules/auth.next";
 import { notFound } from "next/navigation";
 import type { PropsWithChildren } from "react";
@@ -26,8 +25,6 @@ export default async function Layout({
   }
 
   return (
-    <AuthSessionProvider session={session}>
-      <TrpcProvider>{children}</TrpcProvider>
-    </AuthSessionProvider>
+    <AuthSessionProvider session={session}>{children}</AuthSessionProvider>
   );
 }

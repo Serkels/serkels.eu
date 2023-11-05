@@ -4,7 +4,6 @@ import { SeeProfileAvatarMedia } from ":components/avatar";
 import type { Params as ExchangeParams } from ":pipes/exchange_by_id";
 import { session_profile_id } from ":pipes/session_profile_id";
 import {
-  thread_by_id,
   thread_recipient,
   type Params as ThreadParams,
 } from ":pipes/thread_by_id";
@@ -36,8 +35,7 @@ export async function generateMetadata(
   { params }: { params: ThreadParams },
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const thread = await thread_by_id(params);
-  const title = `${thread.id} :: ${(await parent).title?.absolute}`;
+  const title = `${params.thread_id} :: ${(await parent).title?.absolute}`;
 
   return {
     title,

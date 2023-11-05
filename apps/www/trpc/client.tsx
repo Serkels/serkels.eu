@@ -27,7 +27,12 @@ function useTRPCClient() {
     useState<ReturnType<typeof TRPC_React.createClient>>();
 
   useEffect(() => {
-    let client: ReturnType<typeof createWSClient>;
+    if (status === "loading") return;
+
+    const client = createWSClient({
+      url: `${process.env["NEXT_PUBLIC_WEBSOCKET_URL"]}`,
+    });
+
     const links = [
       loggerLink({
         enabled: (opts) =>
@@ -35,49 +40,26 @@ function useTRPCClient() {
             typeof window !== "undefined") ||
           (opts.direction === "down" && opts.result instanceof Error),
       }),
-    ];
-    if (status === "authenticated") {
-      const http_link = httpBatchLink({
-        url: "/api/trpc",
-        headers: () => {
-          console.log({ session, status });
-          return { ...session.header };
+      splitLink({
+        condition(op) {
+          return op.type === "subscription";
         },
-      });
-      links.push(http_link);
-
-      //
-
-      client = createWSClient({
-        url: `${process.env["NEXT_PUBLIC_WEBSOCKET_URL"]}`,
-      });
-      const wss_link = wsLink({
-        client,
-      });
-
-      links.push(
-        splitLink({
-          condition(op) {
-            return op.type === "subscription";
-          },
-          true: wss_link,
-          false: http_link,
+        true: wsLink({
+          client,
         }),
-      );
-    } else {
-      const http_link = httpBatchLink({
-        url: "/api/trpc",
-      });
-      links.push(http_link);
-    }
+        false: httpBatchLink({
+          url: "/api/trpc",
+          headers: () => {
+            return { ...session?.header };
+          },
+        }),
+      }),
+    ];
 
     //
 
-    // const links = status === "authenticated" []
-
     const _trpc_client = TRPC_React.createClient({
       links,
-
       transformer: SuperJSON,
     });
 

@@ -2,15 +2,13 @@
 
 import { SeeProfileAvatarMedia } from ":components/avatar";
 import { session_profile_id } from ":pipes/session_profile_id";
-import {
-  thread_by_id,
-  thread_recipient,
-  type Params,
-} from ":pipes/thread_by_id";
+import { thread_recipient, type Params } from ":pipes/thread_by_id";
 import { TRPC_SSR } from ":trpc/server";
 import { Spinner } from "@1.ui/react/spinner";
+import to from "await-to-js";
 import type { Metadata, ResolvingMetadata } from "next";
 import dynamic from "next/dynamic";
+import { notFound } from "next/navigation";
 import { tv } from "tailwind-variants";
 import Conversation_Form from "./_client/Conversation_Form";
 
@@ -33,8 +31,7 @@ export async function generateMetadata(
   { params }: { params: Params },
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const thread = await thread_by_id(params);
-  const title = `${thread.id} :: ${(await parent).title?.absolute}`;
+  const title = `${params.thread_id} :: ${(await parent).title?.absolute}`;
 
   return {
     title,
@@ -48,12 +45,20 @@ export async function generateMetadata(
 
 export default async function Page({ params }: { params: Params }) {
   const { thread_id } = params;
-  const thread = await thread_by_id(params);
+
+  const [thread_err, thread] = await to(
+    TRPC_SSR.inbox.thread.by_id.fetch(thread_id),
+  );
+  if (thread_err) {
+    notFound();
+  }
+
   const profile_id = await session_profile_id();
   const participant = thread_recipient({
     participants: thread.participants,
     profile_id,
   });
+
   await TRPC_SSR.inbox.thread.messages.prefetchInfinite({
     thread_id,
   });
