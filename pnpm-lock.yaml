@@ -1010,6 +1010,9 @@ importers:
       '@1.modules/category.domain':
         specifier: workspace:*
         version: link:../../category/domain
+      '@1.modules/category.ui':
+        specifier: workspace:*
+        version: link:../../category/ui
       '@1.modules/core':
         specifier: workspace:*
         version: link:../../core

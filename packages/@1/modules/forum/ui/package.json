@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@1.modules/category.domain": "workspace:*",
+    "@1.modules/category.ui": "workspace:*",
     "@1.modules/core": "workspace:*",
     "@1.modules/forum.domain": "workspace:*",
     "@1.modules/profile.domain": "workspace:*",

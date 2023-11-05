@@ -60,6 +60,7 @@ export default async function Page({
 
   const category = String(searchParams["category"]) ?? undefined;
   const search = String(searchParams["q"]) ?? undefined;
+  const categories = await TRPC_SSR.category.forum.fetch();
   const filter_parsed_return = Forum_Filter.safeParse(searchParams["f"]);
   const filter = filter_parsed_return.success
     ? filter_parsed_return.data
@@ -79,7 +80,7 @@ export default async function Page({
           .with({ profile: { role: "STUDIENT" } }, () => (
             <>
               <hr className="my-5 border-none" />
-              <Create />
+              <Create categories={categories} />
             </>
           ))
           .otherwise(() => null)}

@@ -1,20 +1,18 @@
 "use client";
 
+import type { Category } from "@1.modules/category.domain";
+import { SelectCategoryField } from "@1.modules/category.ui/form/SelectCategoryField";
 import { Button } from "@1.ui/react/button";
 import { Field, Form, Formik } from "formik";
-import type { ComponentPropsWithoutRef } from "react";
-// import { SelectCategoryField } from "~/components/SelectCategoryField";
-// import { Avatar } from "~/components/Avatar";
-// import { ErrorOccur } from "@1.ui/react/error";
-// import { Question_Controller } from "~/modules/question/view/react/controller";
-// import { QACardFormBody } from "./components/QAForm/QACardFormBody";
 
 //
 
 export function CreateQuestionForm({
+  categories,
   initialValues = {},
   onSubmit,
 }: {
+  categories: Category[];
   initialValues?: { title?: string; category?: string };
   onSubmit: (values: { title: string; category: string }) => void;
 }) {
@@ -30,6 +28,7 @@ export function CreateQuestionForm({
       {({ isSubmitting }) => (
         <Form className="flex-1">
           <Field
+            as="textarea"
             className="
               mb-7
               w-full
@@ -47,6 +46,7 @@ export function CreateQuestionForm({
           />
           <div className="flex justify-between">
             <SelectCategoryField
+              categories={categories}
               type="question"
               className="min-w-[25%] border border-[#dddddd]"
               disabled={isSubmitting}
@@ -69,75 +69,3 @@ export function CreateQuestionForm({
     </Formik>
   );
 }
-
-function SelectCategoryField({}: ComponentPropsWithoutRef<"select"> & {
-  type: string;
-}) {
-  return <select name="" id=""></select>;
-}
-// export function Form({
-//   info,
-//   profile,
-// }: {
-//   info: UseMutationResult<{}, Error>;
-//   profile: Profile;
-// }) {
-//   return <>form</>;
-// export function Form({
-//   info,
-//   profile,
-// }: {
-//   info: UseMutationResult<{}, Error>;
-//   profile: Profile;
-// }) {
-//   return <>form</>;
-// const { mutateAsync, status, error, reset } =info;
-
-// const [isOpen, setIsOpen] = useState(false);
-
-// return match(status)
-//   .with("error", () => (
-//     <Card>
-//       <ErrorOccur error={error as Error} />
-//     </Card>
-//   ))
-//   .with("idle", () => (
-//     <Card>
-//       <AvatarProfile className="h-10" profile={} />
-//       {isOpen ? (
-//         <Suspense>
-//           <QACardFormBody onSubmit={(values) => mutateAsync(values)} />
-//         </Suspense>
-//       ) : (
-//         <button
-//           className="
-//             w-full
-//             rounded-sm border border-solid border-[#dddddd]
-//             px-4 py-2
-//             text-left
-//             hover:bg-gray-200
-//           "
-//           onClick={() => setIsOpen(true)}
-//         >
-//           Posez une questions aux étudiants...
-//         </button>
-//       )}
-//     </Card>
-//   ))
-//   .with("loading", () => (
-//     <Card>
-//       <Spinner className="mx-auto my-5" />
-//     </Card>
-//   ))
-//   .with("success", () => {
-//     setTimeout(reset, 3_333);
-//     return (
-//       <Card>
-//         <h1 className="flex-1 py-3 text-center text-lg font-bold text-Chateau_Green">
-//           Question postée
-//         </h1>
-//       </Card>
-//     );
-//   })
-//   .exhaustive();
-// }

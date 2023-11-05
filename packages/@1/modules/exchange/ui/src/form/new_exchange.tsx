@@ -14,10 +14,10 @@ import type { ChangeEvent } from "react";
 //
 
 export function Exchange_CreateForm({
+  categories,
+  isSubmitting,
   setFieldValue,
   values,
-  isSubmitting,
-  categories,
 }: FormikProps<Exchange_CreateProps> & {
   categories: Category[];
 }) {

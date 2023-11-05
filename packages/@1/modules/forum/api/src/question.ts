@@ -1,18 +1,28 @@
 //
 
 import { Forum_Filter } from "@1.modules/forum.domain";
-import { procedure, router } from "@1.modules/trpc";
+import { next_auth_procedure, procedure, router } from "@1.modules/trpc";
 import { match } from "ts-pattern";
 import { z } from "zod";
 
 //
 
 const question_api_router = router({
-  create: procedure
+  create: next_auth_procedure
     .input(z.object({ title: z.string(), category: z.string() }))
-    .mutation(async ({}) => {
-      console.log({ user: null });
-      return {};
+    .mutation(async ({ input, ctx: { prisma, payload } }) => {
+      const {
+        profile: { id: profile_id },
+      } = payload;
+      const { title, category } = input;
+
+      return prisma.question.create({
+        data: {
+          title,
+          category: { connect: { id: category } },
+          owner: { connect: { profile_id } },
+        },
+      });
     }),
 
   by_id: procedure
@@ -48,7 +58,7 @@ const question_api_router = router({
 
       const items = await prisma.question.findMany({
         ...(cursor ? { cursor: { id: cursor } } : {}),
-        orderBy: { created_at: "asc" },
+        orderBy: { created_at: "desc" },
         take: limit + 1,
         where: {
           title: { contains: search ?? "" },
