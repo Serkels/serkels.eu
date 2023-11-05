@@ -53,11 +53,6 @@ async function main() {
 
   await studients_messages();
   console.log("🌱 . Studients sent some messages.");
-  await studients_messages(); // more messages
-  console.log("🌱 . Studients sent more messages.");
-
-  await profile_contacts();
-  console.log("🌱 . Profiles add contacts.");
 }
 
 main()
@@ -464,25 +459,6 @@ async function studients_participants_in_exchanges() {
   }
 }
 
-async function profile_contacts() {
-  const profile_ids = await prisma.profile.findMany({ select: { id: true } });
-
-  for (const profile of profile_ids) {
-    const other_profiles = profile_ids.filter(({ id }) => id !== profile.id);
-    await prisma.profile.update({
-      data: {
-        contacts: {
-          connect: faker.helpers.arrayElements(other_profiles),
-        },
-        following: {
-          connect: faker.helpers.arrayElements(other_profiles),
-        },
-      },
-      where: { id: profile.id },
-    });
-  }
-}
-
 async function studients_messages() {
   const studients = await prisma.studient.findMany();
 
@@ -491,64 +467,69 @@ async function studients_messages() {
       studients.filter(({ id }) => id !== studient.id),
     );
 
+    const contacts = faker.helpers.arrayElements(other_studients, {
+      min: 0,
+      max: 10,
+    });
+
+    await prisma.profile.update({
+      data: {
+        contacts: {
+          connect: contacts.map(({ profile_id }) => ({ id: profile_id })),
+        },
+        following: {
+          connect: faker.helpers
+            .arrayElements(contacts)
+            .map(({ profile_id }) => ({ id: profile_id })),
+        },
+      },
+      where: { id: studient.profile_id },
+    });
+
     await Promise.all(
-      faker.helpers
-        .arrayElements(other_studients, { min: 0, max: 20 })
-        .map(async (recipient_studient) => {
-          const { thread_id } = await prisma.inboxThread.create({
-            data: {
-              owner: { connect: { id: studient.id } },
-              thread: {
-                create: {
-                  created_at: faker.date.past(),
-                  updated_at: faker.date.past(),
-                  participants: {
-                    connect: [
-                      { id: studient.profile_id },
-                      { id: recipient_studient.profile_id },
-                    ],
-                  },
-                  messages: {
-                    createMany: {
-                      data: faker.helpers.multiple(
-                        () => ({
-                          author_id: faker.helpers.arrayElement([
-                            { id: studient.profile_id },
-                            { id: recipient_studient.profile_id },
-                          ]).id,
-                          content: faker.lorem.sentences(),
-                          created_at: faker.helpers.weightedArrayElement([
-                            { value: faker.date.past(), weight: 1 },
-                            {
-                              value: faker.date.recent({ days: 66 }),
-                              weight: 5,
-                            },
-                          ]),
-                        }),
-                        { count: { min: 5, max: 20 } },
-                      ),
-                    },
-                  },
-                },
+      contacts.map(async (recipient_studient) => {
+        await prisma.thread.create({
+          data: {
+            created_at: faker.date.past(),
+            updated_at: faker.date.recent({ days: 66 }),
+            participants: {
+              connect: [
+                { id: studient.profile_id },
+                { id: recipient_studient.profile_id },
+              ],
+            },
+            inbox_threads: {
+              createMany: {
+                data: [
+                  { owner_id: studient.id },
+                  { owner_id: recipient_studient.id },
+                ],
               },
             },
-          });
-
-          if (
-            await prisma.inboxThread.findFirst({
-              where: { owner_id: recipient_studient.id, thread_id },
-            })
-          ) {
-            return;
-          }
-
-          await prisma.inboxThread.create({
-            data: {
-              owner: { connect: { id: recipient_studient.id } },
-              thread: { connect: { id: thread_id } },
+            messages: {
+              createMany: {
+                data: faker.helpers.multiple(
+                  () => ({
+                    author_id: faker.helpers.arrayElement([
+                      { id: studient.profile_id },
+                      { id: recipient_studient.profile_id },
+                    ]).id,
+                    content: faker.lorem.sentences(),
+                    created_at: faker.helpers.weightedArrayElement([
+                      { value: faker.date.past(), weight: 1 },
+                      {
+                        value: faker.date.recent({ days: 66 }),
+                        weight: 5,
+                      },
+                    ]),
+                  }),
+                  { count: { min: 1, max: 11 } },
+                ),
+              },
             },
-          });
-        }),
+          },
+        });
+      }),
     );
   }
 }
