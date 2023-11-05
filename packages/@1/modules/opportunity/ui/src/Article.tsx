@@ -84,11 +84,12 @@ export function Article({
               <figcaption className="ml-4 flex-1">Lien web</figcaption>
             </figure>
           </a>
-
-          <figure className="flex items-center">
-            <Share className={icon_link()} />
-            <figcaption className="ml-4 flex-1">Partager</figcaption>
-          </figure>
+          <Article.ShareFigure.Renderer childs={children}>
+            <figure className="flex items-center">
+              <Share className={icon_link()} />
+              <figcaption className="ml-4 flex-1">Partager</figcaption>
+            </figure>
+          </Article.ShareFigure.Renderer>
         </footer>
       </div>
     </article>
@@ -97,9 +98,10 @@ export function Article({
 
 Article.Description = createSlot<{ description: string }>();
 Article.Avatar = createSlot();
+Article.ShareFigure = createSlot();
 
 const icon_with_circle = tv({ base: "rounded-full" });
-const icon_link = tv({
+export const icon_link = tv({
   extend: icon_with_circle,
   base: "box-content h-5 w-5 bg-Cerulean p-2 text-white",
 });

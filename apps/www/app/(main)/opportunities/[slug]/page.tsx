@@ -1,7 +1,9 @@
 //
 
+import { Share_Button } from ":components/Share_Button";
 import { slug_to_opportunity, type Params } from ":pipes/opportunity_slug";
-import { Article } from "@1.modules/opportunity.ui/Article";
+import { Article, icon_link } from "@1.modules/opportunity.ui/Article";
+import { Share } from "@1.ui/react/icons";
 import type { Metadata, ResolvingMetadata } from "next";
 import dynamic from "next/dynamic";
 import Link from "next/link";
@@ -56,6 +58,16 @@ export default async function Page({ params }: { params: Params }) {
         <Article.Description>
           {({ description }) => <ReactMarkdown>{description}</ReactMarkdown>}
         </Article.Description>
+        <Article.ShareFigure>
+          <Share_Button
+            href={`${process.env["APP_URL"]}/opportunities/${opportunity.slug}`}
+          >
+            <figure className="flex items-center">
+              <Share className={icon_link()} />
+              <figcaption className="ml-4 flex-1">Partager</figcaption>
+            </figure>
+          </Share_Button>
+        </Article.ShareFigure>
       </Article>
     );
   } catch (error) {

@@ -65,11 +65,10 @@ export function Opoortunity_Card({
           <aside className="flex items-center space-x-3">
             <Opoortunity_Card.Footer_Actions.Renderer childs={children}>
               <Bookmark className="inline-block h-4 w-4 text-Dove_Gray" />
+              <button>
+                <Share className="inline-block h-4 w-4 text-Dove_Gray" />
+              </button>
             </Opoortunity_Card.Footer_Actions.Renderer>
-
-            <button>
-              <Share className="inline-block h-4 w-4 text-Dove_Gray" />
-            </button>
           </aside>
         </footer>
       </figure>
