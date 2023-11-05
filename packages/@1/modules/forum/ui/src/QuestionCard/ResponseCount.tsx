@@ -7,5 +7,20 @@ import { useQuestion } from "./context";
 
 export function ResponseCount() {
   const question = useQuestion();
-  return match(question).otherwise(() => <p>...</p>);
+  return (
+    <p className="flex items-center space-x-1 text-sm font-bold text-Dove_Gray">
+      {match(question)
+        .with({ answers: [] }, () => (
+          <>
+            <span className="text-danger">0</span> <span>réponses</span>
+          </>
+        ))
+        .otherwise(({ answers }) => (
+          <>
+            <span className="text-success">{answers.length}</span>
+            <span>réponse{answers.length > 0 ? "s" : ""}</span>
+          </>
+        ))}
+    </p>
+  );
 }

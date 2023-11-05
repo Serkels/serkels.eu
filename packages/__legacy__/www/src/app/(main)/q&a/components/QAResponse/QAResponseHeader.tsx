@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 //
 
 import { useSession } from "next-auth/react";

@@ -1,7 +1,7 @@
 //
 
 import { AvatarMedia } from "@1.ui/react/avatar";
-import { Circle, School } from "@1.ui/react/icons";
+import { Approved, Circle, School } from "@1.ui/react/icons";
 import { TimeInfo } from "@1.ui/react/time";
 import { tv } from "tailwind-variants";
 import { useQuestion } from "./context";
@@ -37,8 +37,13 @@ const state_indicator = tv({
   base: "mt-3 inline-block h-4",
   variants: { is_accepted: { true: "text-success", false: "text-error" } },
 });
-function StateIndicator() {
-  const is_accepted = true;
 
-  return <Circle className={state_indicator({ is_accepted })} />;
+function StateIndicator() {
+  const question = useQuestion();
+  const is_accepted = Boolean(question.accepted_answer);
+  return question.accepted_answer ? (
+    <Approved className={state_indicator({ is_accepted })} />
+  ) : (
+    <Circle className={state_indicator({ is_accepted })} />
+  );
 }

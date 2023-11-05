@@ -19,7 +19,9 @@ export function Avatar(
 
 export function StudientAvatarMedia(
   props: AvatarMediaProps & {
-    studient: Pick<Studient, "profile" | "university">;
+    studient: Pick<Studient, "university"> & {
+      profile: Pick<Profile, "image" | "name" | "id">;
+    };
   },
 ) {
   const { studient, ...other_props } = props;
@@ -32,7 +34,7 @@ export function StudientAvatarMedia(
       {...other_props}
     >
       <UI_AvatarMedia.SubTitle>
-        <School className="mr-1.5 inline-block w-6" />
+        <School className="mr-1.5 inline-block w-5" />
         <span className="align-bottom">{university}</span>
       </UI_AvatarMedia.SubTitle>
     </UI_AvatarMedia>

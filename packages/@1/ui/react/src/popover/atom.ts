@@ -27,4 +27,12 @@ export const popover = tv({
     before:bg-inherit
     before:content-['']
   `,
+  variants: {
+    position: {
+      left: `
+      -translate-x-[80%]
+      before:left-[84%]
+    `,
+    },
+  },
 });

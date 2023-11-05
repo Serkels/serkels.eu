@@ -1,6 +1,5 @@
 //
 
-import type { Question } from "@1.modules/forum.domain";
 import { card } from "@1.ui/react/card/atom";
 import type { UseQueryResult } from "@tanstack/react-query";
 import type { ReactNode } from "react";
@@ -9,12 +8,12 @@ import { P, match } from "ts-pattern";
 
 //
 
-export function Question_AsyncCard({
+export function Question_AsyncCard<T>({
   info,
   children,
 }: {
-  info: UseQueryResult<Question>;
-  children: (props: { question: Question }) => ReactNode;
+  info: UseQueryResult<T>;
+  children: (question: T) => ReactNode;
 }) {
   return match(info)
     .with({ status: "error" }, ({ error }) => {
@@ -22,7 +21,7 @@ export function Question_AsyncCard({
     })
     .with({ status: "loading" }, () => <Loader />)
     .with({ status: "success", data: P.select() }, (question) =>
-      children({ question }),
+      children(question as T),
     )
     .exhaustive();
 }

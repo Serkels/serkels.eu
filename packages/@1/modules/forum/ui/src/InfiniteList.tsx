@@ -1,6 +1,6 @@
 //
 
-import type { Question } from "@1.modules/forum.domain";
+import type { Entity_Schema } from "@1.modules/core/domain";
 import { Button } from "@1.ui/react/button";
 import { Spinner } from "@1.ui/react/spinner";
 import type { UseInfiniteQueryResult } from "@tanstack/react-query";
@@ -9,12 +9,12 @@ import { match, P } from "ts-pattern";
 
 //
 
-export function Question_InfiniteList({
+export function Question_InfiniteList<T extends Entity_Schema>({
   info,
   children,
 }: {
-  info: UseInfiniteQueryResult<{ data: Question[] }>;
-  children: (props: Question) => React.ReactNode;
+  info: UseInfiniteQueryResult<{ data: T[] }>;
+  children: (props: T) => React.ReactNode;
 }) {
   const { base, item } = forum_list();
   return match(info)
@@ -62,7 +62,65 @@ export function Question_InfiniteList({
     )
     .exhaustive();
 }
+export function Answer_InfiniteList<T extends Entity_Schema>({
+  info,
+  children,
+}: {
+  info: UseInfiniteQueryResult<{ data: T[] }>;
+  children: (props: T) => React.ReactNode;
+}) {
+  return match(info)
+    .with({ status: "error", error: P.select() }, (error) => {
+      throw error;
+    })
+    .with({ status: "loading" }, () => (
+      <div className="my-9 text-center">
+        <Spinner />
+      </div>
+    ))
+    .with(
+      {
+        status: "success",
+        data: P.when(
+          (list) => list.pages.map((page) => page.data).flat().length === 0,
+        ),
+      },
+      () => <p className="my-8 text-center">Pas de réponses</p>,
+    )
+    .with(
+      { status: "success" },
+      ({ data: { pages }, isFetchingNextPage, hasNextPage, fetchNextPage }) => (
+        <ul className=" grid grid-cols-1 gap-4">
+          {pages
+            .map((page) => page.data)
+            .flat()
+            .map((data) => (
+              <li key={data.id}>{children(data)}</li>
+            ))}
 
+          <li className="col-span-full mx-auto">
+            {isFetchingNextPage ? (
+              <div className="my-9 text-center">
+                <Spinner />
+              </div>
+            ) : null}
+          </li>
+          <li className="col-span-full mx-auto">
+            {hasNextPage ? (
+              <Button
+                intent="light"
+                onPress={() => fetchNextPage()}
+                isDisabled={!hasNextPage || isFetchingNextPage}
+              >
+                Plus de réponses
+              </Button>
+            ) : null}
+          </li>
+        </ul>
+      ),
+    )
+    .exhaustive();
+}
 //
 
 function EmptyList() {

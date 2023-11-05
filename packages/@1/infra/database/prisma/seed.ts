@@ -8,6 +8,7 @@ import {
   CategoryContext,
   ExchangeThreadStatus,
   ExchangeType,
+  Prisma,
   ProfileRole,
 } from "@prisma/client";
 import dedent from "dedent";
@@ -53,6 +54,9 @@ async function main() {
 
   await studients_messages();
   console.log("🌱 . Studients sent some messages.");
+
+  await studients_awnsers();
+  console.log("🌱 . Studients awnser to questions.");
 }
 
 main()
@@ -92,6 +96,22 @@ async function studient() {
     })
   ).map(({ id }) => id);
 
+  const asked_questions: Prisma.QuestionCreateNestedManyWithoutOwnerInput = {
+    createMany: {
+      data: faker.helpers.multiple<Prisma.QuestionUncheckedCreateWithoutOwnerInput>(
+        () => ({
+          category_id: faker.helpers.arrayElement([
+            category_autres.id,
+            ...forum_categories_id,
+          ]),
+          title: faker.company.catchPhrase(),
+          created_at: faker.date.past(),
+        }),
+        { count: { min: 0, max: 5 } },
+      ),
+    },
+  };
+
   return prisma.studient.create({
     data: {
       citizenship: faker.location.country(),
@@ -104,21 +124,7 @@ async function studient() {
       },
       university: faker.company.name(),
       //
-      asked_questions: {
-        createMany: {
-          data: faker.helpers.multiple(
-            () => ({
-              category_id: faker.helpers.arrayElement([
-                category_autres.id,
-                ...forum_categories_id,
-              ]),
-              title: faker.company.catchPhrase(),
-              created_at: faker.date.past(),
-            }),
-            { count: { min: 0, max: 5 } },
-          ),
-        },
-      },
+      asked_questions,
       proposed_exchanges: {
         createMany: {
           data: faker.helpers.multiple(
@@ -459,6 +465,38 @@ async function studients_participants_in_exchanges() {
   }
 }
 
+async function studients_awnsers() {
+  const studients = await prisma.studient.findMany();
+  const questions = await prisma.question.findMany({
+    include: { owner: { select: { id: true } } },
+  });
+
+  for (const question of questions) {
+    const { owner } = question;
+    const other_studients = faker.helpers.arrayElements(
+      studients.filter(({ id }) => id !== owner.id),
+    );
+
+    await prisma.question.update({
+      data: {
+        answers: {
+          createMany: {
+            data: faker.helpers
+              .arrayElements(other_studients, {
+                min: 0,
+                max: other_studients.length,
+              })
+              .map<Prisma.AnswerCreateManyParentInput>(({ id: owner_id }) => ({
+                content: faker.company.catchPhrase(),
+                owner_id,
+              })),
+          },
+        },
+      },
+      where: { id: question.id },
+    });
+  }
+}
 async function studients_messages() {
   const studients = await prisma.studient.findMany();
 

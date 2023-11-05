@@ -78,6 +78,7 @@ model Studient {
 
   asked_questions      Question[]       @relation("AskedQuestions")
   exchange_threads     ExchangeThread[]
+  given_answers        Answer[]         @relation("GivenAnswers")
   inbox_threads        InboxThread[]
   participants_in_deal Deal[]
   proposed_exchanges   Exchange[]       @relation("ProposedExchanges")
@@ -280,16 +281,35 @@ model Opportunity {
 //
 
 model Question {
-  id          String   @id @default(cuid())
-  category    Category @relation("CategorizedQuestions", fields: [category_id], references: [id])
-  category_id String
-  owner       Studient @relation("AskedQuestions", fields: [owner_id], references: [id], onDelete: Cascade)
-  owner_id    String
-  title       String
+  id                 String   @id @default(cuid())
+  accepted_answer    Answer?  @relation("AcceptedAnswer", fields: [accepted_answer_id], references: [id])
+  accepted_answer_id String?  @unique
+  answers            Answer[] @relation("ParentQuestion")
+  category           Category @relation("CategorizedQuestions", fields: [category_id], references: [id])
+  category_id        String
+  owner              Studient @relation("AskedQuestions", fields: [owner_id], references: [id], onDelete: Cascade)
+  owner_id           String
+  title              String
   //
 
   created_at DateTime @default(now())
   updated_at DateTime @default(now())
+}
+
+model Answer {
+  id        String   @id @default(cuid())
+  content   String
+  owner     Studient @relation("GivenAnswers", fields: [owner_id], references: [id], onDelete: Cascade)
+  owner_id  String
+  parent    Question @relation("ParentQuestion", fields: [parent_id], references: [id], onDelete: Cascade)
+  parent_id String
+  //
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+  //
+
+  accepted_for Question? @relation("AcceptedAnswer")
 }
 
 //

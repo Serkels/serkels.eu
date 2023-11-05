@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 "use client";
 
 import { Spinner } from "@1/ui/components/Spinner";

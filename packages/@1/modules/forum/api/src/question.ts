@@ -4,10 +4,10 @@ import { Forum_Filter } from "@1.modules/forum.domain";
 import { next_auth_procedure, procedure, router } from "@1.modules/trpc";
 import { match } from "ts-pattern";
 import { z } from "zod";
-
-//
+import { answers_api_router } from "./answers";
 
 const question_api_router = router({
+  answers: answers_api_router,
   create: next_auth_procedure
     .input(z.object({ title: z.string(), category: z.string() }))
     .mutation(async ({ input, ctx: { prisma, payload } }) => {
@@ -30,7 +30,17 @@ const question_api_router = router({
     .query(async ({ input: id, ctx: { prisma } }) => {
       return prisma.question.findUniqueOrThrow({
         where: { id },
-        include: { category: true, owner: { include: { profile: true } } },
+        include: {
+          answers: { select: { id: true } },
+          // category: true,
+          owner: {
+            select: {
+              id: true,
+              profile: { select: { id: true, name: true, image: true } },
+              university: true,
+            },
+          },
+        },
       });
     }),
 

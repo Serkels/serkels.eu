@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 "use client";
 
 import { Button } from "@1/ui/components/Button";
@@ -77,7 +79,7 @@ function ResponseButtons() {
             text-white
             before:pointer-events-none
             before:absolute
-            before:bottom-0 
+            before:bottom-0
             before:left-1/2
             before:box-border before:h-3
             before:w-3

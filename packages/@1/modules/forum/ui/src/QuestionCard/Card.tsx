@@ -1,23 +1,24 @@
 //
 
 import type { Question } from "@1.modules/forum.domain";
-import type { FC } from "react";
+import { type PropsWithChildren } from "react";
+import { createSlot } from "react-slotify";
 import { tv } from "tailwind-variants";
+import { match } from "ts-pattern";
 import { Body } from "./Body";
-import { Footer } from "./Footer";
 import { Header } from "./Header";
-import { Responses } from "./Responses";
-import { Provider } from "./context";
+import { Provider, useAwnsersOutletState } from "./context";
 
 //
 
-export const Question_Card: FC<Question> = (props) => {
-  const { id } = props;
+export function Question_Card<T extends Question>(
+  props: PropsWithChildren<{ question: T }>,
+) {
+  const { children, question } = props;
   return (
-    <Provider question={props}>
+    <Provider question={question}>
       <div
         className={`
-          overflow-hidden
           rounded-xl
           border
           border-[#00000017]
@@ -25,18 +26,33 @@ export const Question_Card: FC<Question> = (props) => {
           p-6
           text-black shadow-[5px_5px_10px_#7E7E7E33]
         `}
-        id={id}
+        id={question.id}
       >
         <Header />
         <Body />
-        <Responses />
+        <Responses>
+          <Question_Card.Responses.Renderer childs={children} />
+        </Responses>
         <hr className="my-2" />
-        <Footer />
+        <Question_Card.Footer.Renderer childs={children} />
       </div>
     </Provider>
   );
-};
+}
+
+Question_Card.Footer = createSlot();
+Question_Card.Responses = createSlot();
 
 export const card = tv({
   base: "",
 });
+
+//
+
+function Responses({ children }: PropsWithChildren) {
+  const [outlet] = useAwnsersOutletState();
+  return match(outlet)
+    .with({ state: "hidden" }, () => null)
+    .with({ state: "idle" }, () => <>{children}</>)
+    .otherwise(() => null);
+}

@@ -1,6 +1,6 @@
 //
 
-import type { Question } from "@1.modules/forum.domain";
+import type { Answer } from "@1.modules/forum.domain";
 import constate from "constate";
 import { useState } from "react";
 
@@ -12,12 +12,11 @@ type Outlet_State =
   | { state: "idle" }
   | { state: "loading" };
 
-function useCardContext({ question }: { question: Question }) {
+function useCardContext({ answer }: { answer: Answer }) {
   const outlet = useState<Outlet_State>({ state: "idle" });
-  return { outlet, question };
+  return { outlet, answer };
 }
-export const [Provider, useQuestion, useOutletState] = constate(
+export const [Provider, useAnswer] = constate(
   useCardContext,
-  ({ question }) => question,
-  ({ outlet }) => outlet,
+  ({ answer }) => answer,
 );

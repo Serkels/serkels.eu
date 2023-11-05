@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 "use client";
 import { useContext } from "react";
 import { QACardResponseList } from "../QAResponse/QAResponseList";

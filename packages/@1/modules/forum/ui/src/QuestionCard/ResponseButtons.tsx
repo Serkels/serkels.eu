@@ -6,15 +6,11 @@ import { useTimeoutEffect, useToggle } from "@react-hookz/web";
 
 //
 
-export function ResponseButtons() {
-  return <SignUpToAnswer />;
-}
-
-function SignUpToAnswer() {
+export function SignUpToAnswer() {
   const [shouldSignUp, setShouldSignUp] = useToggle(false);
-  const [, reset] = useTimeoutEffect(() => setShouldSignUp(false), 5000);
+  const [, reset] = useTimeoutEffect(() => setShouldSignUp(false), 6_666);
   return (
-    <div className="relative">
+    <div className="relative -ml-4">
       {shouldSignUp ? (
         <div className={popover()}>Connectez-vous pour répondre</div>
       ) : null}
