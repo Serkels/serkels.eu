@@ -1,11 +1,12 @@
 //
 
 import { SeeProfileAvatarMedia } from ":components/avatar";
+import type { Params as ExchangeParams } from ":pipes/exchange_by_id";
 import { session_profile_id } from ":pipes/session_profile_id";
 import {
   thread_by_id,
   thread_recipient,
-  type Params,
+  type Params as ThreadParams,
 } from ":pipes/thread_by_id";
 import { TRPC_SSR } from ":trpc/server";
 import { Spinner } from "@1.ui/react/spinner";
@@ -30,7 +31,7 @@ const Thread_Timeline = dynamic(
 //
 
 export async function generateMetadata(
-  { params }: { params: Params },
+  { params }: { params: ThreadParams },
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
   const thread = await thread_by_id(params);
@@ -46,8 +47,12 @@ export async function generateMetadata(
 
 //
 
-export default async function Page({ params }: { params: Params }) {
-  const { thread_id } = params;
+export default async function Page({
+  params,
+}: {
+  params: ThreadParams & ExchangeParams;
+}) {
+  const { thread_id, exchange_id } = params;
   const thread = await thread_by_id(params);
   const profile_id = await session_profile_id();
   const participant = thread_recipient({
@@ -57,6 +62,7 @@ export default async function Page({ params }: { params: Params }) {
   await TRPC_SSR.inbox.thread.messages.prefetchInfinite({
     thread_id,
   });
+  const exchange = await TRPC_SSR.exchanges.by_id.fetch(exchange_id);
 
   const { base, footer, header } = layout();
   return (
@@ -65,7 +71,7 @@ export default async function Page({ params }: { params: Params }) {
         <SeeProfileAvatarMedia profile={participant} />
       </header>
       <div className="overflow-y-auto py-4 pr-5">
-        <Thread_Timeline profile_id={profile_id} />
+        <Thread_Timeline exchange={exchange} profile_id={profile_id} />
       </div>
       <footer className={footer()}>
         <Conversation_Form thread_id={thread_id} />

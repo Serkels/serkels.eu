@@ -64,7 +64,7 @@ async function Private_Layout({
 }: PropsWithChildren<{ params: CodeParms }>) {
   const navbar = <Navbar_Page params={params} />;
   return (
-    <div className="grid md:grid-cols-[minmax(0,_300px),_1fr]">
+    <div className="grid md:grid-cols-[minmax(0,_200px),_1fr] xl:grid-cols-[minmax(0,_300px),_1fr]">
       <aside className="hidden bg-white shadow-[20px_0px_40px_#00000014] md:block ">
         {navbar}
       </aside>

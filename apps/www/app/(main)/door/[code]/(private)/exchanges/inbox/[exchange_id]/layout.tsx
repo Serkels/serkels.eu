@@ -23,7 +23,7 @@ export default function Layout({
 }: PropsWithChildren<{ params: Params }>) {
   const navbar = <Navbar_Page params={params} />;
   return (
-    <div className="grid h-full xl:grid-cols-[minmax(0,_300px),_1fr]">
+    <div className="grid h-full lg:grid-cols-[minmax(0,_300px),_1fr]">
       <aside className="hidden pt-10 md:block">{navbar}</aside>
       <div className="bg-white">{children}</div>
     </div>

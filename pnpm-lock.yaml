@@ -850,6 +850,9 @@ importers:
       '@1.modules/profile.domain':
         specifier: workspace:*
         version: link:../../profile/domain
+      xstate:
+        specifier: 4.38.2
+        version: 4.38.2
       zod:
         specifier: 3.22.4
         version: 3.22.4
@@ -12074,6 +12077,10 @@ packages:
         optional: true
       utf-8-validate:
         optional: true
+    dev: false
+
+  /xstate@4.38.2:
+    resolution: {integrity: sha512-Fba/DwEPDLneHT3tbJ9F3zafbQXszOlyCJyQqqdzmtlY/cwE2th462KK48yaANf98jHlP6lJvxfNtN0LFKXPQg==}
     dev: false
 
   /yallist@2.1.2:

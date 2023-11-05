@@ -20,7 +20,7 @@ export async function generateMetadata(
 export default function Layout({ children }: PropsWithChildren) {
   const navbar = <Navbar_Page />;
   return (
-    <div className="grid h-full xl:grid-cols-[minmax(0,_300px),_1fr]">
+    <div className="grid h-full lg:grid-cols-[minmax(0,_300px),_1fr]">
       <aside className="hidden pt-10 md:block">{navbar}</aside>
       <div>{children}</div>
     </div>

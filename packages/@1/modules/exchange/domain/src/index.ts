@@ -58,3 +58,9 @@ export const Deal_Schema = Entity_Schema.merge(Entity_Timestamps)
   .describe("Deal_Schema");
 
 export type Deal = z.TypeOf<typeof Deal_Schema>;
+
+//
+
+export const HANDSHAKE_ACCEPETED = "/exchange handshake accepeted";
+export const HANDSHAKE_DENIED = "/exchange handshake denied";
+export const HANDSHAKE_COMPLETED = "/exchange handshake completed";

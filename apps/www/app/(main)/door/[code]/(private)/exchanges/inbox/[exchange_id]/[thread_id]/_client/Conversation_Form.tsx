@@ -1,6 +1,10 @@
 "use client";
 
 import { TRPC_React } from ":trpc/client";
+import {
+  HANDSHAKE_ACCEPETED,
+  HANDSHAKE_DENIED,
+} from "@1.modules/exchange.domain";
 import { Button } from "@1.ui/react/button";
 import { input } from "@1.ui/react/form/atom";
 import { PaperPlane } from "@1.ui/react/icons";
@@ -14,7 +18,7 @@ export default function Conversation_Form({
 }: {
   thread_id: string;
 }) {
-  const { mutateAsync } = TRPC_React.inbox.thread.send.useMutation();
+  const { isLoading, mutateAsync } = TRPC_React.inbox.thread.send.useMutation();
   const utils = TRPC_React.useUtils();
   const send_message = useCallback(
     async (content: string) => {
@@ -24,6 +28,12 @@ export default function Conversation_Form({
     },
     [mutateAsync, thread_id],
   );
+  const send_okay = useCallback(() => {
+    send_message(HANDSHAKE_ACCEPETED);
+  }, [thread_id]);
+  const send_nope = useCallback(() => {
+    send_message(HANDSHAKE_DENIED);
+  }, [thread_id]);
 
   return (
     <Formik
@@ -41,19 +51,31 @@ export default function Conversation_Form({
               className={input({ className: "peer w-full rounded-2xl pr-10" })}
               placeholder="Envoie un Message…"
               autoComplete="off"
-              disabled={isSubmitting}
+              disabled={isSubmitting || isLoading}
               name="message"
             />
             <span className="absolute inset-y-0 right-5 flex items-center pl-2">
               <Button
                 intent="light"
                 type="submit"
-                isDisabled={isSubmitting}
+                isDisabled={isSubmitting || isLoading}
                 className="focus:shadow-outline p-1 focus:outline-none"
               >
                 <PaperPlane className="h-6 w-6 text-success" />
               </Button>
             </span>
+          </div>
+          <div className="mt-5 flex justify-center space-x-5">
+            <Button
+              intent="warning"
+              isDisabled={isSubmitting || isLoading}
+              onPress={send_nope}
+            >
+              Indisponible
+            </Button>
+            <Button isDisabled={isSubmitting || isLoading} onPress={send_okay}>
+              Accepter
+            </Button>
           </div>
         </Form>
       )}
