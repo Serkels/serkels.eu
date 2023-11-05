@@ -16,7 +16,12 @@ import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
-import { useLayoutEffect, useRef, type ComponentProps } from "react";
+import {
+  useCallback,
+  useLayoutEffect,
+  useRef,
+  type ComponentProps,
+} from "react";
 import { P, match } from "ts-pattern";
 import { z } from "zod";
 
@@ -56,13 +61,21 @@ export default function Infinite_Thread_Timeline({
   }, [query_info.isFetched, scroll_target_ref]);
 
   const { data: session, status } = useSession();
+  const invalidate = useCallback(async () => {
+    await Promise.all([
+      utils.inbox.thread.messages.invalidate({ thread_id }),
+      utils.exchanges.me.inbox.by_thread_id.invalidate(thread_id),
+      utils.exchanges.me.inbox.next_actions.invalidate(),
+      utils.exchanges.by_id.invalidate(exchange.id),
+    ]);
+  }, [utils, thread_id]);
 
   TRPC_React.inbox.thread.on_new_message.useSubscription(
     { token: session?.header.NEXTAUTH_TOKEN!, thread_id },
     {
       enabled: status === "authenticated",
       onData() {
-        utils.inbox.thread.messages.invalidate({ thread_id });
+        invalidate();
       },
       onError(err) {
         console.error(
@@ -70,7 +83,7 @@ export default function Infinite_Thread_Timeline({
           err,
         );
         // we might have missed a message - invalidate cache
-        utils.inbox.thread.messages.invalidate({ thread_id });
+        invalidate();
       },
     },
   );

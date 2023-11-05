@@ -31,8 +31,9 @@ export default function Conversation_Form({
       utils.inbox.thread.messages.invalidate({ thread_id }),
       utils.exchanges.me.inbox.by_thread_id.invalidate(thread_id),
       utils.exchanges.me.inbox.next_actions.invalidate(),
+      utils.exchanges.by_id.invalidate(exchange.id),
     ]);
-  }, [utils]);
+  }, [utils, thread_id]);
   const send_message = useCallback(
     async (content: string) => {
       await send.mutateAsync({ content, thread_id });
@@ -57,7 +58,10 @@ export default function Conversation_Form({
     await invalidate();
   }, [thread_id]);
 
-  const isLoading = send.isLoading || action.isLoading;
+  const isLoading =
+    send.isLoading ||
+    action.isLoading ||
+    exchange.deals.length >= exchange.places;
   const next = next_actions.data ?? { can_approuve: false, can_denie: false };
   if (!next_actions.data) {
     return null;
