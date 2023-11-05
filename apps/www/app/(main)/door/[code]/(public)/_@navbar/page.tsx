@@ -52,7 +52,7 @@ function Studient_Page({ params }: { params: CodeParms }) {
       </div>
 
       <div className="flex items-center">
-        <AddContact profile_id={code}/>
+        {code === "~" ? null : <AddContact profile_id={code} />}
       </div>
     </nav>
   );

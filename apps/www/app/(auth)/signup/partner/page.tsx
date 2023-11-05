@@ -49,11 +49,25 @@ export default function Page() {
             required
             type="text"
           />
+          <textarea
+            className={input({ className: "col-span-full " })}
+            id="bio"
+            name="bio"
+            placeholder="À propos"
+          />
           <input
             className={input({ className: "col-span-full " })}
             id="city"
             name="city"
             placeholder="Ville"
+            required
+            type="text"
+          />
+          <input
+            className={input({ className: "col-span-full " })}
+            id="link"
+            name="link"
+            placeholder="Site web"
             required
             type="text"
           />

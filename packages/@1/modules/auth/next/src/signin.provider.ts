@@ -117,7 +117,6 @@ async function create_payload({
   });
   const { email: identifier } = credentials;
   const { name, role } = Profile_Schema.pick({
-    bio: true,
     name: true,
     role: true,
   }).parse(credentials, { path: ["credentials"] });
@@ -125,16 +124,16 @@ async function create_payload({
   const context = match(role)
     .with(PROFILE_ROLES.Enum.ADMIN, () => ({}))
     .with(PROFILE_ROLES.Enum.PARTNER, () =>
-      Partner_Schema.omit({ id: true, profile: true }).parse(credentials),
+      Partner_Schema.extend({ bio: z.string() })
+        .omit({ id: true, profile: true })
+        .parse(credentials),
     )
     .with(PROFILE_ROLES.Enum.STUDIENT, () =>
-      Studient_Schema.omit({ id: true, profile: true, interest: true }).parse(
-        credentials,
-      ),
+      Studient_Schema.extend({ bio: z.string() })
+        .omit({ id: true, profile: true, interest: true })
+        .parse(credentials),
     )
     .exhaustive();
-
-  console.log({ context });
 
   await trpc.auth.payload.link.mutate({
     identifier,
