@@ -60,7 +60,9 @@ function Header({ children }: PropsWithChildren) {
       <Card.Header.Center.Renderer childs={children}>
         <div>
           <figure className="flex flex-col items-center">
-            <div className="text-xl font-bold text-primary">{`${exchange.deals.length} / ${exchange.places}`}</div>
+            <div className="text-xl font-bold text-primary">
+              {`${exchange.deals.length} / ${exchange.places}`}
+            </div>
             <figcaption>places disponible</figcaption>
           </figure>
         </div>
@@ -134,17 +136,23 @@ function Footer({ children }: PropsWithChildren) {
   return (
     <footer className={footer()}>
       <div className="flex justify-between">
-        <Card.Footer.Left.Renderer childs={children}>
-          <div>...</div>
-        </Card.Footer.Left.Renderer>
-        <Card.Footer.Center.Renderer childs={children}>
-          <div>...</div>
-        </Card.Footer.Center.Renderer>
-        <Card.Footer.Right.Renderer childs={children}>
-          <button className="block">
-            <Share className="h-5 w-5" />
-          </button>
-        </Card.Footer.Right.Renderer>
+        <div>
+          <Card.Footer.Left.Renderer childs={children}>
+            ...
+          </Card.Footer.Left.Renderer>
+        </div>
+        <div>
+          <Card.Footer.Center.Renderer childs={children}>
+            ...
+          </Card.Footer.Center.Renderer>
+        </div>
+        <div>
+          <Card.Footer.Right.Renderer childs={children}>
+            <button className="block">
+              <Share className="h-5 w-5" />
+            </button>
+          </Card.Footer.Right.Renderer>
+        </div>
       </div>
     </footer>
   );
@@ -170,7 +178,7 @@ export const exchange_card = tv({
   slots: {
     header: "grid grid-cols-3",
     exchange_icon: "mx-1 w-5",
-    footer: "mt-4 bg-gray-500 px-5 py-3 text-white",
+    footer: "mt-4 rounded-b-xl bg-gray-500 px-5 py-3 text-white",
     info_bar: "items-center justify-between text-xs text-[#707070] sm:flex",
   },
   variants: {

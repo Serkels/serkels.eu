@@ -6,7 +6,6 @@ import { tv } from "tailwind-variants";
 
 export const card = tv({
   base: `
-    overflow-hidden
     rounded-xl
     bg-white
     text-black

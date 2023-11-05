@@ -11,12 +11,19 @@ import { StudientAvatarMedia } from "@1.modules/profile.ui/avatar";
 import { Button } from "@1.ui/react/button";
 import { button } from "@1.ui/react/button/atom";
 import { ErrorOccur } from "@1.ui/react/error";
-import { Bookmark } from "@1.ui/react/icons";
+import { Bookmark, Share } from "@1.ui/react/icons";
+import { popover } from "@1.ui/react/popover/atom";
 import { Spinner } from "@1.ui/react/spinner";
+import { useTimeoutEffect, useToggle } from "@react-hookz/web";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useEffect, type ComponentProps, type ReactNode } from "react";
+import {
+  useCallback,
+  useEffect,
+  type ComponentProps,
+  type ReactNode,
+} from "react";
 import { tv } from "tailwind-variants";
 import { P, match } from "ts-pattern";
 import { Ask_Action } from "./Ask_Action";
@@ -92,16 +99,14 @@ export function Exchange_Card(exchange: Exchange) {
         </Link>
       </Card.Header.Left>
       <Card.Footer.Left>
-        {
-          <div>
-            <Exchange_Bookmark {...exchange} />
-          </div>
-        }
+        <Exchange_Bookmark {...exchange} />
       </Card.Footer.Left>
       <Card.Footer.Center>
         <Exchange_Actions {...exchange} />
       </Card.Footer.Center>
-      {/* <Card.Footer.Right /> */}
+      <Card.Footer.Right>
+        <Exchange_Share {...exchange} />
+      </Card.Footer.Right>
     </Card>
   );
 }
@@ -153,6 +158,37 @@ function Exchange_Action_Ask(exchange: Exchange) {
     .exhaustive();
 }
 
+function Exchange_Share(exchange: Exchange) {
+  const href = `${window.location.origin}/exchanges?q=${exchange.title
+    .split(" ")
+    .join("+")}`;
+  const [diplay_in_clipboard, set_diplay_in_clipboard] = useToggle(false);
+  const [, reset] = useTimeoutEffect(
+    () => set_diplay_in_clipboard(false),
+    5000,
+  );
+  const copy_to_clipboard = useCallback(async () => {
+    await navigator.clipboard.writeText(href);
+    set_diplay_in_clipboard(true);
+    reset();
+  }, [href]);
+  return (
+    <div className="relative">
+      {diplay_in_clipboard ? (
+        <div className={popover()}>Copié dans le Presse-papiers</div>
+      ) : null}
+      <Button
+        state="ghost"
+        intent="light"
+        size="md"
+        className="text-white"
+        onPress={copy_to_clipboard}
+      >
+        <Share className="h-5 w-5" />
+      </Button>
+    </div>
+  );
+}
 function Exchange_Bookmark(exchange: Exchange) {
   const { data: session } = useSession();
   const is_studient = session?.profile.role === PROFILE_ROLES.Enum.STUDIENT;

@@ -6,8 +6,9 @@ export const popover = tv({
   base: `
     absolute
     bottom-full
+    left-1/2
     w-max
-    -translate-x-1/4
+    -translate-x-1/2
     -translate-y-1/3
     rounded-full
     bg-[#707070]
