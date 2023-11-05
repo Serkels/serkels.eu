@@ -20,6 +20,9 @@ export async function generateMetadata(
   { params }: { params: Params },
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
+  //! HACK(douglasduteil): Investigate way the param is "undefined" on direct page access
+  if (params.slug === "undefined") return {};
+
   const opportunity = await slug_to_opportunity(params);
   const title = `${opportunity.title} :: ${(await parent).title?.absolute}`;
 
@@ -34,6 +37,9 @@ export async function generateMetadata(
 //
 
 export default async function Page({ params }: { params: Params }) {
+  //! HACK(douglasduteil): Investigate way the param is "undefined" on direct page access
+  if (params.slug === "undefined") return null;
+
   try {
     const opportunity = await slug_to_opportunity(params);
     const { owner: partner } = opportunity;

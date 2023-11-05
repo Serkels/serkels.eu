@@ -8,6 +8,9 @@ import Page_Client from "./page.client";
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const { slug } = params;
+  //! HACK(douglasduteil): Investigate way the param is "undefined" on direct page access
+  if (slug === "undefined") return null;
+
   try {
     const opportunity = await TRPC_SSR.opportunity.by_slug.fetch(slug);
 

@@ -21,6 +21,9 @@ export default function Layout({
   children,
   params,
 }: PropsWithChildren<{ params: Params }>) {
+  //! HACK(douglasduteil): Investigate way the param is "undefined" on direct page access
+  if (params.exchange_id === "undefined") return null;
+
   const navbar = <Navbar_Page params={params} />;
   return (
     <div className="grid h-full lg:grid-cols-[minmax(0,_300px),_1fr]">

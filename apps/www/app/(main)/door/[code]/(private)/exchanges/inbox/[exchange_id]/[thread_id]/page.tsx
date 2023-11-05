@@ -53,6 +53,10 @@ export default async function Page({
   params: ThreadParams & ExchangeParams;
 }) {
   const { thread_id, exchange_id } = params;
+
+  //! HACK(douglasduteil): Investigate way the param is "undefined" on direct page access
+  if (thread_id === "undefined") return null;
+
   const [thread_err, thread] = await to(
     TRPC_SSR.inbox.thread.by_id.fetch(thread_id),
   );
