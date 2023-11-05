@@ -42,7 +42,6 @@ export default async function Page() {
           min-h-0
           flex-1
           overflow-y-auto
-
         "
       >
         <Infinite_Thread_List />

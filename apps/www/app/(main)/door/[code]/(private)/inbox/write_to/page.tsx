@@ -1,10 +1,10 @@
 //
 
 import { TRPC_SSR } from ":trpc/server";
+import { column_screen } from "@1.ui/react/grid/atom";
 import { Spinner } from "@1.ui/react/spinner";
 import type { Metadata, ResolvingMetadata } from "next";
 import dynamic from "next/dynamic";
-import { tv } from "tailwind-variants";
 
 //
 
@@ -40,24 +40,10 @@ export async function generateMetadata(
 export default async function Page() {
   await TRPC_SSR.profile.me.contacts.prefetchInfinite({});
 
-  const { base } = layout();
   return (
-    <main className={base()}>
+    <main className={column_screen({ className: "bg-white text-black" })}>
       <h6 className="my-10 px-8 text-2xl font-bold">Écrire à</h6>
       <Infinite_Contacts_List />
     </main>
   );
 }
-
-const layout = tv({
-  base: `
-    grid
-    h-full
-    max-h-[calc(100vh_-_theme(spacing.16)-_theme(spacing.8))]
-    bg-white
-    text-black
-  `,
-  slots: {
-    list: "",
-  },
-});
