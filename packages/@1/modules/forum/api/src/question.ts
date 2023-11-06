@@ -2,6 +2,7 @@
 
 import { Forum_Filter } from "@1.modules/forum.domain";
 import { next_auth_procedure, procedure, router } from "@1.modules/trpc";
+import { Prisma } from "@prisma/client";
 import { match } from "ts-pattern";
 import { z } from "zod";
 import { answers_api_router } from "./answers";
@@ -32,7 +33,7 @@ const question_api_router = router({
         where: { id },
         include: {
           answers: { select: { id: true } },
-          // category: true,
+          accepted_answer: { select: { id: true } },
           owner: {
             select: {
               id: true,
@@ -52,18 +53,33 @@ const question_api_router = router({
         filter: Forum_Filter.default(Forum_Filter.Enum.ALL),
         limit: z.number().min(1).max(10).default(10),
         search: z.string().optional(),
+        profile_id: z.string().nullable().optional(),
       }),
     )
     .query(async ({ input, ctx: { prisma } }) => {
-      const { category, cursor, limit, search, filter } = input;
-      type QuestionWhere = NonNullable<
-        Parameters<typeof prisma.question.findMany>[0]
-      >["where"];
+      const { category, cursor, limit, search, filter, profile_id } = input;
+
       const narrow = match(filter)
-        .with(Forum_Filter.Enum.ALL, (): QuestionWhere => ({}))
-        .with(Forum_Filter.Enum.AWNSERED, (): QuestionWhere => ({}))
-        .with(Forum_Filter.Enum.LAST_QUESTIONS, (): QuestionWhere => ({}))
-        .with(Forum_Filter.Enum.MINE, (): QuestionWhere => ({}))
+        .with(Forum_Filter.Enum.ALL, (): Prisma.QuestionWhereInput => ({}))
+        .with(
+          Forum_Filter.Enum.AWNSERED,
+          (): Prisma.QuestionWhereInput => ({
+            NOT: [{ answers: { none: {} } }],
+          }),
+        )
+        .with(
+          Forum_Filter.Enum.LAST_QUESTIONS,
+          (): Prisma.QuestionWhereInput => ({}),
+        )
+        .with(
+          Forum_Filter.Enum.MINE,
+          (): Prisma.QuestionWhereInput =>
+            profile_id
+              ? {
+                  owner: { profile_id },
+                }
+              : {},
+        )
         .otherwise(() => ({}));
 
       const items = await prisma.question.findMany({

@@ -12,6 +12,46 @@ const answers_procedure = next_auth_procedure.input(
 export const answers_api_router = router({
   //
 
+  approve: answers_procedure
+    .input(z.object({ answer_id: z.string() }))
+    .mutation(async ({ input, ctx: { prisma, payload } }) => {
+      const { question_id, answer_id: id } = input;
+      const {
+        profile: { id: profile_id },
+      } = payload;
+      return prisma.answer.update({
+        data: {
+          accepted_for: { connect: { id: question_id } },
+        },
+        where: {
+          id,
+          parent: { id: question_id, owner: { profile_id } },
+        },
+      });
+    }),
+
+  //
+
+  by_id: next_auth_procedure
+    .input(z.string())
+    .query(async ({ input: id, ctx: { prisma } }) => {
+      return prisma.answer.findUniqueOrThrow({
+        where: { id },
+        include: {
+          accepted_for: { select: { id: true } },
+          owner: {
+            select: {
+              id: true,
+              profile: { select: { id: true, name: true, image: true } },
+              university: true,
+            },
+          },
+        },
+      });
+    }),
+
+  //
+
   create: answers_procedure
     .input(z.object({ content: z.string() }))
     .mutation(async ({ input, ctx: { prisma, payload } }) => {

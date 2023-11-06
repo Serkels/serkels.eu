@@ -70,6 +70,7 @@ export default async function Page({
     category,
     search,
     filter,
+    profile_id: session?.profile.id,
   });
 
   return (

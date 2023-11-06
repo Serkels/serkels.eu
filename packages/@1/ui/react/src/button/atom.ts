@@ -42,7 +42,7 @@ export const button = tv({
       outline: "border-2 bg-transparent",
     },
     size: {
-      sm: "h-4 px-2 text-sm",
+      sm: "h-5 px-2 text-sm",
       md: "h-7 px-4 text-base",
       lg: "h-8 px-8 text-lg",
     },
@@ -56,13 +56,29 @@ export const button = tv({
         data-[hovered]:bg-primary/30
       `,
     },
+    {
+      intent: "primary",
+      state: "outline",
+      class: `
+      border-primary
+        text-primary
+        data-[hovered]:bg-primary/10
+      `,
+    },
     //
+    {
+      intent: "danger",
+      state: "ghost",
+      class: `
+      text-danger
+        data-[hovered]:bg-danger/30
+      `,
+    },
     {
       intent: "danger",
       state: "outline",
       class: `
-        data-[hovered]:text-danger-fg
-        border-danger
+      border-danger
         data-[hovered]:bg-danger
       `,
     },

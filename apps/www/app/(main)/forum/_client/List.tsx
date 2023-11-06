@@ -3,8 +3,9 @@
 import { Share_Button } from ":components/Share_Button";
 import { TRPC_React } from ":trpc/client";
 import type { Entity_Schema } from "@1.modules/core/domain";
-import type { Answer } from "@1.modules/forum.domain";
+import { Forum_Filter, type Answer } from "@1.modules/forum.domain";
 import { Answer_Card } from "@1.modules/forum.ui/Answer/Card";
+import { useAnswer } from "@1.modules/forum.ui/Answer/context";
 import {
   Answer_InfiniteList,
   Question_InfiniteList,
@@ -21,14 +22,19 @@ import { Button } from "@1.ui/react/button";
 import { Share } from "@1.ui/react/icons";
 import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 
 //
 
 export default function List() {
+  const { data: session } = useSession();
   const search_params = useSearchParams();
   const category = search_params.get("category") ?? undefined;
   const search = search_params.get("q") ?? undefined;
+  const filter_parsed_return = Forum_Filter.safeParse(search_params.get("f"));
+  const filter = filter_parsed_return.success
+    ? filter_parsed_return.data
+    : undefined;
 
   useEffect(() => {
     gtag("event", "search", { search_term: search });
@@ -36,8 +42,10 @@ export default function List() {
 
   const info = TRPC_React.forum.question.find.useInfiniteQuery(
     {
+      profile_id: session?.profile.id,
       category,
       search,
+      filter,
     },
     {
       getNextPageParam: (lastPage) => lastPage.nextCursor,
@@ -58,6 +66,9 @@ function Item(props: Entity_Schema) {
     <Question_AsyncCard info={info}>
       {(question) => (
         <Question_Card question={question}>
+          <Question_Card.Approved_Response>
+            <Query_Approved_Response />
+          </Question_Card.Approved_Response>
           <Question_Card.Responses>
             <QueryResponses />
           </Question_Card.Responses>
@@ -121,7 +132,7 @@ export function QueryResponses() {
   );
 
   return (
-    <>
+    <div className="my-5">
       <div className="relative mb-4 mt-3">
         <hr className="absolute top-0 my-3 w-full" />
         <h5 className="relative inline-block bg-white pr-3 text-sm font-bold uppercase text-Dove_Gray">
@@ -131,12 +142,81 @@ export function QueryResponses() {
       <Answer_InfiniteList info={info}>
         {(data) => <AnswerItem {...data} />}
       </Answer_InfiniteList>
-    </>
+    </div>
+  );
+}
+export function Query_Approved_Response() {
+  const question = useQuestion();
+
+  const info = TRPC_React.forum.question.answers.by_id.useQuery(
+    question.accepted_answer?.id!,
+    { enabled: Boolean(question.accepted_answer?.id) },
+  );
+  if (!info.data) return null;
+
+  return (
+    <div className="my-5">
+      <div className="relative  my-5">
+        <hr className="absolute top-0 my-3 w-full" />
+        <h5 className="relative inline-block bg-white pr-3 text-sm font-bold uppercase text-Dove_Gray">
+          Réponse approuvé
+        </h5>
+      </div>
+      <AnswerItem {...info.data} />
+    </div>
   );
 }
 
-function AnswerItem(answer: Answer) {
-  // if (1) return <code>{JSON.stringify(answers)}</code>;
-  // return <Answer_Card answers={answers}>
-  return <Answer_Card answer={answer}></Answer_Card>;
+function AnswerItem(initial: Omit<Answer, "accepted_for">) {
+  const question = useQuestion();
+  const info = TRPC_React.forum.question.answers.by_id.useQuery(initial.id);
+  const { data: session } = useSession();
+  const is_yours = question.owner.profile.id === session?.profile.id;
+  const answer = (info.data ?? initial) as Answer;
+  const can_mutate =
+    is_yours && answer.accepted_for?.id !== question.accepted_answer?.id;
+  return (
+    <Answer_Card answer={answer}>
+      <Answer_Card.Footer>
+        <Answer_Card.Indicator />
+        {can_mutate ? <Approve_Mutation /> : null}
+      </Answer_Card.Footer>
+    </Answer_Card>
+  );
+}
+
+function Approve_Mutation() {
+  const { id: question_id, accepted_answer } = useQuestion();
+  const { id: answer_id } = useAnswer();
+  const utils = TRPC_React.useUtils();
+  const do_approve = TRPC_React.forum.question.answers.approve.useMutation();
+  const submit = useCallback(async () => {
+    await do_approve.mutateAsync({
+      answer_id,
+      question_id,
+    });
+
+    await Promise.all([
+      utils.forum.question.by_id.invalidate(question_id),
+      utils.forum.question.answers.by_id.invalidate(answer_id),
+      utils.forum.question.answers.by_id.invalidate(accepted_answer?.id),
+    ]);
+  }, [question_id, do_approve, answer_id, accepted_answer?.id]);
+  if (accepted_answer?.id === answer_id) return null;
+  return (
+    <div className="ml-12 flex justify-between">
+      <Button
+        variant={{
+          intent: accepted_answer?.id ? "danger" : "primary",
+          state: accepted_answer?.id ? "ghost" : "outline",
+          size: "sm",
+        }}
+        onPress={submit}
+        className="text-black/50
+        data-[hovered]:text-danger"
+      >
+        Approve
+      </Button>
+    </div>
+  );
 }

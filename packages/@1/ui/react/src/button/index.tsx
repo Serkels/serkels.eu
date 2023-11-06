@@ -13,6 +13,7 @@ type ButtonVariantProps = VariantProps<typeof button>;
 
 export interface ButtonProps extends AriaButtonProps, ButtonVariantProps {
   className?: string;
+  variant?: ButtonVariantProps;
 }
 
 export function Button({
@@ -21,11 +22,12 @@ export function Button({
   intent,
   state,
   children,
+  variant,
   ...props
 }: ButtonProps) {
   return (
     <AriaButton
-      className={button({ className, size, intent, state })}
+      className={button({ className, size, intent, state, ...variant })}
       {...props}
     >
       {children}

@@ -477,7 +477,7 @@ async function studients_awnsers() {
       studients.filter(({ id }) => id !== owner.id),
     );
 
-    await prisma.question.update({
+    const { answers } = await prisma.question.update({
       data: {
         answers: {
           createMany: {
@@ -493,8 +493,28 @@ async function studients_awnsers() {
           },
         },
       },
+      include: { answers: true },
       where: { id: question.id },
     });
+
+    if (faker.helpers.rangeToNumber({ min: 0, max: 100 }) > 0) {
+      const accepted_answer = faker.helpers.arrayElement([
+        { id: null },
+        ...answers,
+      ]);
+      await prisma.question.update({
+        data: { accepted_answer_id: accepted_answer.id },
+        where: { id: question.id },
+      });
+    }
+    // await faker.helpers.maybe(
+    //   () =>
+    //     prisma.question.update({
+    //       data: { accepted_answer_id: faker.helpers.arrayElement(q_answer).id },
+    //       where: { id: question.id },
+    //     }),
+    //   { probability: 0.2 },
+    // );
   }
 }
 async function studients_messages() {
