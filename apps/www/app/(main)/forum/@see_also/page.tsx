@@ -1,5 +1,6 @@
 //
 
+import { StudientGuide } from ":components/StudientGuide";
 import Link from "next/link";
 
 //
@@ -12,15 +13,8 @@ export default function Page() {
       </h2>
 
       <Link href="/guide">
-        <figure className="bg-secondary-blue-gradient px-4 py-6 text-white">
-          <h3 className="text-center text-lg uppercase ">
-            Le guide d'étudiant
-          </h3>
-          <div className="h-[110px]"></div>
-          <figcaption className=" text-xs">
-            Trouverez toutes les informations utiles pour bénéficier d'une
-            bourse, faire une demande de logement, bénéficier d'aides …
-          </figcaption>
+        <figure className="mx-auto w-fit">
+          <StudientGuide />
         </figure>
       </Link>
     </article>

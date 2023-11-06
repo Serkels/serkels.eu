@@ -1,5 +1,8 @@
-"use client";
+//
+
 import type { ComponentPropsWithoutRef } from "react";
+
+//
 
 export function ApprovedByTheOrganizer(props: ComponentPropsWithoutRef<"svg">) {
   return (
