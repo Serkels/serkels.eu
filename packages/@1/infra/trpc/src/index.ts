@@ -8,6 +8,7 @@ import forum_api_router from "@1.modules/forum.api";
 import inbox_api_router from "@1.modules/inbox.api";
 import opportunity_api_router from "@1.modules/opportunity.api";
 import profile_api_router from "@1.modules/profile.api";
+import { partner_api_router } from "@1.modules/profile.api/partner";
 import { studient_api_router } from "@1.modules/profile.api/studient";
 import { procedure, router } from "@1.modules/trpc";
 import { observable } from "@trpc/server/observable";
@@ -23,6 +24,7 @@ export const root_router = router({
   forum: forum_api_router,
   inbox: inbox_api_router,
   opportunity: opportunity_api_router,
+  partner: partner_api_router,
   profile: profile_api_router,
   studient: studient_api_router,
 

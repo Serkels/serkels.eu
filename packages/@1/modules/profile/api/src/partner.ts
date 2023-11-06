@@ -4,7 +4,15 @@ import { z } from "zod";
 
 //
 
-export const partner = router({
+export const partner_api_router = router({
+  by_id: next_auth_procedure
+    .input(z.string())
+    .query(async ({ input: id, ctx: { prisma } }) => {
+      return prisma.partner.findUniqueOrThrow({
+        where: { id },
+      });
+    }),
+
   by_profile_id: next_auth_procedure
     .input(z.string())
     .query(async ({ input: profile_id, ctx: { prisma } }) => {
@@ -18,4 +26,20 @@ export const partner = router({
         },
       ) as Partner;
     }),
+
+  //
+
+  me: router({
+    update: next_auth_procedure
+      .input(Partner_Schema.omit({ id: true, profile: true }))
+      .mutation(({ input, ctx: { prisma, payload } }) => {
+        const { id: profile_id } = payload.profile;
+        return prisma.partner.update({
+          data: {
+            ...input,
+          },
+          where: { profile_id },
+        });
+      }),
+  }),
 });

@@ -4,7 +4,7 @@ import { Profile_Schema, type Profile } from "@1.modules/profile.domain";
 import { next_auth_procedure, router } from "@1.modules/trpc";
 import { z } from "zod";
 import { me } from "./me";
-import { partner } from "./partner";
+import { partner_api_router } from "./partner";
 import { studient_api_router } from "./studient";
 
 const profile_api_router = router({
@@ -22,7 +22,7 @@ const profile_api_router = router({
   by_id: next_auth_procedure
     .input(z.string())
     .query(async ({ input: id, ctx: { prisma } }) => {
-      return prisma.profile.findFirstOrThrow({
+      return prisma.profile.findUniqueOrThrow({
         include: {
           followed_by: { select: { id: true } },
           in_contact_with: { select: { id: true } },
@@ -33,11 +33,17 @@ const profile_api_router = router({
 
   //
 
+  /**
+   * @deprecated use flatten style
+   */
   studient: studient_api_router,
 
   //
 
-  partner,
+  /**
+   * @deprecated use flatten style
+   */
+  partner: partner_api_router,
 
   //
 

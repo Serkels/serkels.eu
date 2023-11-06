@@ -31,7 +31,7 @@ export const PROFILE_UNKNOWN: Profile = Profile_Schema.parse(
 
 export const Partner_Schema = Entity_Schema.extend({
   city: z.string().default("Unkown city"),
-  link: z.string().url().optional(),
+  link: z.string().url(),
   profile: Profile_Schema.default(PROFILE_UNKNOWN),
 }).describe("Partner_PropsSchema");
 
