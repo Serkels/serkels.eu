@@ -8,6 +8,7 @@ import {
   Studient_Schema,
   type Profile,
 } from "@1.modules/profile.domain";
+import { gravatarUrlFor } from "@1.modules/profile.domain/gravatarUrlFor";
 import { next_auth_procedure, router, type Context } from "@1.modules/trpc";
 import create_NextAuth_router from "@douglasduteil/nextauth...trpc.prisma/trpc/router/adapter";
 import create_EmailProvider_router, {
@@ -17,7 +18,6 @@ import { Prisma, ProfileRole } from "@prisma/client";
 import process from "node:process";
 import { match } from "ts-pattern";
 import { z } from "zod";
-import { gravatarUrlFor } from "./gravatarUrlFor";
 
 //
 
@@ -144,7 +144,6 @@ const auth_api_router = router({
           .exhaustive();
 
         //
-        console.log({ profile_role_data });
 
         const record = await prisma.user.update({
           where: { id: user.id },

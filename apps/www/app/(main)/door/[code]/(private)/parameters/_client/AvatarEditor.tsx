@@ -12,11 +12,10 @@ import { useSession } from "next-auth/react";
 
 export default function AvatarEditor({ profile }: { profile: Profile }) {
   const { update } = useSession();
+  const update_image_to_gravatar =
+    TRPC_React.profile.me.update_image_to_gravatar.useMutation();
   const { mutateAsync: save } = TRPC_React.profile.me.update.useMutation();
 
-  function revert_to_gravatar_picture() {
-    console.log("revert_to_gravatar_picture");
-  }
   return (
     <Formik
       initialValues={{ url: profile.image }}
@@ -25,7 +24,7 @@ export default function AvatarEditor({ profile }: { profile: Profile }) {
         return update();
       }}
     >
-      {({ dirty, values }) => (
+      {({ dirty, values, setFieldValue }) => (
         <Form className="grid grid-cols-2 gap-5">
           <fieldset className="md:col-span-1">
             <label className={label()} htmlFor="avatar">
@@ -42,7 +41,12 @@ export default function AvatarEditor({ profile }: { profile: Profile }) {
               <summary>
                 <Button
                   intent="secondary"
-                  onPress={revert_to_gravatar_picture}
+                  onPress={async () => {
+                    const new_profile =
+                      await update_image_to_gravatar.mutateAsync();
+                    await update();
+                    await setFieldValue("url", new_profile.image);
+                  }}
                   type="button"
                 >
                   Revenir à l'image Gravatar

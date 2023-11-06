@@ -1,4 +1,5 @@
 import { Profile_Schema } from "@1.modules/profile.domain";
+import { gravatarUrlFor } from "@1.modules/profile.domain/gravatarUrlFor";
 import { next_auth_procedure, router } from "@1.modules/trpc";
 import type { Prisma } from "@prisma/client";
 import { z } from "zod";
@@ -50,6 +51,8 @@ export const me = router({
       });
     }),
 
+  //
+
   toggle_contact: next_auth_procedure
     .input(z.string())
     .mutation(async ({ input: profile_id, ctx: { prisma, payload } }) => {
@@ -69,6 +72,26 @@ export const me = router({
         where: { id },
       });
     }),
+
+  //
+
+  update_image_to_gravatar: next_auth_procedure.mutation(
+    async ({ ctx: { prisma, payload } }) => {
+      const { id } = payload.profile;
+      const { email } = await prisma.user.findFirstOrThrow({
+        where: { profile: { id } },
+      });
+      const image = gravatarUrlFor(email ?? "");
+
+      return prisma.profile.update({
+        data: {
+          image,
+          user: { update: { image: image } },
+        },
+        where: { id },
+      });
+    },
+  ),
 
   //
 
