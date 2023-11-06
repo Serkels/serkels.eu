@@ -37,9 +37,9 @@ export const button = tv({
     },
     state: {
       filled: "",
-      ghost: "bg-transparent",
+      ghost: "bg-transparent text-black/50",
       soft: "",
-      outline: "border-2 bg-transparent",
+      outline: "border-2 bg-transparent text-black/50",
     },
     size: {
       sm: "h-5 px-2 text-sm",
@@ -63,6 +63,24 @@ export const button = tv({
         border-primary
         text-primary
         data-[hovered]:bg-primary/10
+      `,
+    },
+    //
+    {
+      intent: "warning",
+      state: "ghost",
+      class: `
+        text-warning
+        data-[hovered]:bg-warning/30
+      `,
+    },
+    {
+      intent: "warning",
+      state: "outline",
+      class: `
+        border-warning
+        text-warning
+        data-[hovered]:bg-warning
       `,
     },
     //

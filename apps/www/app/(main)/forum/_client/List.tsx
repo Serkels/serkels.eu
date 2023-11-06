@@ -216,17 +216,16 @@ function Approve_Mutation() {
     ]);
   }, [question_id, do_approve, answer_id, accepted_answer?.id]);
   if (accepted_answer?.id === answer_id) return null;
+
   return (
     <div className="ml-12 flex justify-between">
       <Button
         variant={{
-          intent: accepted_answer?.id ? "danger" : "primary",
+          intent: accepted_answer?.id ? "light" : "primary",
           state: accepted_answer?.id ? "ghost" : "outline",
           size: "sm",
         }}
         onPress={submit}
-        className="text-black/50
-        data-[hovered]:text-danger"
       >
         Approve
       </Button>
