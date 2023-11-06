@@ -60,7 +60,7 @@ export const button = tv({
       intent: "primary",
       state: "outline",
       class: `
-      border-primary
+        border-primary
         text-primary
         data-[hovered]:bg-primary/10
       `,
@@ -70,7 +70,7 @@ export const button = tv({
       intent: "danger",
       state: "ghost",
       class: `
-      text-danger
+        text-danger
         data-[hovered]:bg-danger/30
       `,
     },
@@ -78,7 +78,8 @@ export const button = tv({
       intent: "danger",
       state: "outline",
       class: `
-      border-danger
+        border-danger
+        text-danger
         data-[hovered]:bg-danger
       `,
     },

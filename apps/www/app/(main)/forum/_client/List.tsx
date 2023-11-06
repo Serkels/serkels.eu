@@ -5,6 +5,7 @@ import { TRPC_React } from ":trpc/client";
 import type { Entity_Schema } from "@1.modules/core/domain";
 import { Forum_Filter, type Answer } from "@1.modules/forum.domain";
 import { Answer_Card } from "@1.modules/forum.ui/Answer/Card";
+import { CreateAnswerForm } from "@1.modules/forum.ui/Answer/Form";
 import { useAnswer } from "@1.modules/forum.ui/Answer/context";
 import {
   Answer_InfiniteList,
@@ -12,17 +13,25 @@ import {
 } from "@1.modules/forum.ui/InfiniteList";
 import { Question_AsyncCard } from "@1.modules/forum.ui/QuestionCard/AsyncCard";
 import { Question_Card } from "@1.modules/forum.ui/QuestionCard/Card";
-import { SignUpToAnswer } from "@1.modules/forum.ui/QuestionCard/ResponseButtons";
+import {
+  SignUpToAnswer,
+  ToggleOutlet,
+} from "@1.modules/forum.ui/QuestionCard/ResponseButtons";
 import { ResponseCount } from "@1.modules/forum.ui/QuestionCard/ResponseCount";
 import {
   useAwnsersOutletState,
+  useNewOutletState,
   useQuestion,
 } from "@1.modules/forum.ui/QuestionCard/context";
+import { Avatar } from "@1.modules/profile.ui";
 import { Button } from "@1.ui/react/button";
+import { ErrorOccur } from "@1.ui/react/error";
 import { Share } from "@1.ui/react/icons";
+import { Spinner } from "@1.ui/react/spinner";
 import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect } from "react";
+import { P, match } from "ts-pattern";
 
 //
 
@@ -69,6 +78,12 @@ function Item(props: Entity_Schema) {
           <Question_Card.Approved_Response>
             <Query_Approved_Response />
           </Question_Card.Approved_Response>
+          <Question_Card.NewAnswer>
+            <div className="my-6">
+              <hr className="my-6" />
+              <Mutate_CreateQuestion />
+            </div>
+          </Question_Card.NewAnswer>
           <Question_Card.Responses>
             <QueryResponses />
           </Question_Card.Responses>
@@ -103,7 +118,7 @@ export function Footer() {
         ) : (
           <ResponseCount />
         )}
-        {status === "authenticated" ? <ResponseButtons /> : <SignUpToAnswer />}
+        {status === "authenticated" ? <ToggleOutlet /> : <SignUpToAnswer />}
         <Share_Button
           className="-mr-4"
           popover_variant={{ position: "left" }}
@@ -114,9 +129,6 @@ export function Footer() {
       </div>
     </footer>
   );
-}
-export function ResponseButtons() {
-  return <SignUpToAnswer />;
 }
 
 export function QueryResponses() {
@@ -132,7 +144,7 @@ export function QueryResponses() {
   );
 
   return (
-    <div className="my-5">
+    <div className="my-6">
       <div className="relative mb-4 mt-3">
         <hr className="absolute top-0 my-3 w-full" />
         <h5 className="relative inline-block bg-white pr-3 text-sm font-bold uppercase text-Dove_Gray">
@@ -155,8 +167,8 @@ export function Query_Approved_Response() {
   if (!info.data) return null;
 
   return (
-    <div className="my-5">
-      <div className="relative  my-5">
+    <div className="my-6">
+      <div className="relative my-6">
         <hr className="absolute top-0 my-3 w-full" />
         <h5 className="relative inline-block bg-white pr-3 text-sm font-bold uppercase text-Dove_Gray">
           Réponse approuvé
@@ -174,7 +186,7 @@ function AnswerItem(initial: Omit<Answer, "accepted_for">) {
   const is_yours = question.owner.profile.id === session?.profile.id;
   const answer = (info.data ?? initial) as Answer;
   const can_mutate =
-    is_yours && answer.accepted_for?.id !== question.accepted_answer?.id;
+    is_yours || answer.accepted_for?.id !== question.accepted_answer?.id;
   return (
     <Answer_Card answer={answer}>
       <Answer_Card.Footer>
@@ -219,4 +231,55 @@ function Approve_Mutation() {
       </Button>
     </div>
   );
+}
+
+function Mutate_CreateQuestion() {
+  const { id: question_id } = useQuestion();
+  const { data: session } = useSession();
+  const [, set_awnser_outlet] = useNewOutletState();
+  const create_info = TRPC_React.forum.question.answers.create.useMutation();
+  const utils = TRPC_React.useUtils();
+
+  const invalidate = useCallback(
+    () =>
+      Promise.all([
+        utils.forum.question.by_id.invalidate(question_id),
+        utils.forum.question.answers.find.invalidate({ question_id }),
+      ]),
+    [question_id, utils],
+  );
+
+  if (!session?.profile) return null;
+
+  return match(create_info)
+    .with({ status: "error", error: P.select() }, (error) => (
+      <ErrorOccur error={new Error(error.message)} />
+    ))
+    .with({ status: "idle" }, () => (
+      <div className="flex space-x-4">
+        <Avatar className="h-10" profile={session.profile} />
+        <CreateAnswerForm
+          onSubmit={async (values) => {
+            await create_info.mutateAsync({ ...values, question_id });
+            await invalidate();
+          }}
+        />
+      </div>
+    ))
+    .with({ status: "loading" }, () => (
+      <div className="flex justify-center">
+        <Spinner className="mx-auto my-6" />
+      </div>
+    ))
+    .with({ status: "success" }, () => {
+      setTimeout(() => {
+        set_awnser_outlet({ state: "hidden" });
+      }, 6_666);
+      return (
+        <h1 className="py-3 text-center text-lg font-bold text-Chateau_Green">
+          Réponse envoyé.
+        </h1>
+      );
+    })
+    .exhaustive();
 }

@@ -83,7 +83,7 @@ export const answers_api_router = router({
 
       const items = await prisma.answer.findMany({
         ...(cursor ? { cursor: { id: cursor } } : {}),
-        orderBy: { created_at: "desc" },
+        orderBy: { created_at: "asc" },
         take: limit + 1,
         include: {
           owner: {

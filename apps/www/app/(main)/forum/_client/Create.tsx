@@ -27,7 +27,7 @@ export default function Create({ categories }: { categories: Category[] }) {
   if (!session) return null;
   return match(isOpen)
     .with(true, () => (
-      <CreateFrom
+      <Mutate_CreateQuestion
         initialValues={{ category }}
         categories={categories}
         profile={session.profile}
@@ -37,7 +37,7 @@ export default function Create({ categories }: { categories: Category[] }) {
     .exhaustive();
 }
 
-function CreateFrom({
+function Mutate_CreateQuestion({
   categories,
   initialValues,
   profile,

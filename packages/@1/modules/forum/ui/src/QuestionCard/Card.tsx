@@ -7,7 +7,12 @@ import { tv } from "tailwind-variants";
 import { match } from "ts-pattern";
 import { Body } from "./Body";
 import { Header } from "./Header";
-import { Provider, useAwnsersOutletState, useQuestion } from "./context";
+import {
+  Provider,
+  useAwnsersOutletState,
+  useNewOutletState,
+  useQuestion,
+} from "./context";
 
 //
 
@@ -36,6 +41,9 @@ export function Question_Card<T extends Question>(
         <Responses>
           <Question_Card.Responses.Renderer childs={children} />
         </Responses>
+        <NewAnswer>
+          <Question_Card.NewAnswer.Renderer childs={children} />
+        </NewAnswer>
         <hr className="my-2" />
         <Question_Card.Footer.Renderer childs={children} />
       </div>
@@ -45,6 +53,7 @@ export function Question_Card<T extends Question>(
 
 Question_Card.Approved_Response = createSlot();
 Question_Card.Footer = createSlot();
+Question_Card.NewAnswer = createSlot();
 Question_Card.Responses = createSlot();
 
 export const card = tv({
@@ -64,5 +73,11 @@ function Responses({ children }: PropsWithChildren) {
 function Approved_Responses({ children }: PropsWithChildren) {
   const question = useQuestion();
   if (!question.accepted_answer) return null;
+  return <>{children}</>;
+}
+
+function NewAnswer({ children }: PropsWithChildren) {
+  const [new_outlet] = useNewOutletState();
+  if (new_outlet.state === "hidden") return null;
   return <>{children}</>;
 }
