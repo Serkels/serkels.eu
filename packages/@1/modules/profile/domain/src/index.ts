@@ -14,9 +14,9 @@ export type PROFILE_ROLES = z.TypeOf<typeof PROFILE_ROLES>;
 //
 
 export const Profile_Schema = Entity_Schema.extend({
-  bio: z.string().nullable().default(""),
-  image: z.string().default("/opengraph-image.png"),
-  name: z.string().default("Unkown Profile"),
+  bio: z.string().trim().nullable().default(""),
+  image: z.string().trim().default("/opengraph-image.png"),
+  name: z.string().trim().default("Unkown Profile"),
   role: PROFILE_ROLES,
 }).describe("Profile_PropsSchema");
 

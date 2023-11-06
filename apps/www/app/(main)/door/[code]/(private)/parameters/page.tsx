@@ -16,6 +16,7 @@ import { match } from "ts-pattern";
 //
 
 const AvatarEditor = dynamic(() => import("./_client/AvatarEditor"));
+const ProfileEditor = dynamic(() => import("./_client/ProfileEditor"));
 
 //
 
@@ -59,9 +60,12 @@ export default async function Page({ params }: { params: CodeParms }) {
 
         <hr className="my-10 py-5" />
 
-        <AvatarEditor profile={profile} />
+        <div className="space-y-10">
+          <ProfileEditor profile={profile} />
+          <AvatarEditor profile={profile} />
 
-        {form}
+          {form}
+        </div>
       </main>
     );
   } catch (error) {

@@ -7,11 +7,13 @@ import { Button } from "@1.ui/react/button";
 import { input, label } from "@1.ui/react/form/atom";
 import { Field, Form, Formik } from "formik";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 //
 
 export default function AvatarEditor({ profile }: { profile: Profile }) {
   const { update } = useSession();
+  const router = useRouter();
   const update_image_to_gravatar =
     TRPC_React.profile.me.update_image_to_gravatar.useMutation();
   const { mutateAsync: save } = TRPC_React.profile.me.update.useMutation();
@@ -21,7 +23,8 @@ export default function AvatarEditor({ profile }: { profile: Profile }) {
       initialValues={{ url: profile.image }}
       onSubmit={async ({ url }) => {
         await save({ ...profile, image: url });
-        return update();
+        await update();
+        router.refresh();
       }}
     >
       {({ dirty, values, setFieldValue }) => (
