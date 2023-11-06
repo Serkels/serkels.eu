@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 
 //
 
-export default function AvatarEditor({ profile }: { profile: Profile }) {
+export default function Avatar_Editor({ profile }: { profile: Profile }) {
   const { update } = useSession();
   const router = useRouter();
   const update_image_to_gravatar =

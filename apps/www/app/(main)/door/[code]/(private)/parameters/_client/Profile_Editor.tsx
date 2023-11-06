@@ -13,14 +13,14 @@ import { toFormikValidationSchema } from "zod-formik-adapter";
 
 //
 
-export default function ProfileEditor({
+export default function Profile_Editor({
   profile: { id: profile_id },
 }: {
   profile: Profile;
 }) {
   const { update, data: session } = useSession();
   const router = useRouter();
-  console.log({ session });
+
   const query_profile = TRPC_React.profile.by_id.useQuery(profile_id);
   const update_profile = TRPC_React.profile.me.update.useMutation();
 
@@ -45,7 +45,7 @@ export default function ProfileEditor({
       {({ isSubmitting, dirty, errors, touched }) => (
         <Form className="grid grid-cols-1 gap-5">
           <fieldset>
-            <label className={label()} htmlFor="avatar">
+            <label className={label()} htmlFor="name">
               Nom :
             </label>
 
@@ -77,7 +77,7 @@ export default function ProfileEditor({
           </fieldset>
 
           <fieldset>
-            <label className={label()} htmlFor="avatar">
+            <label className={label()} htmlFor="email">
               Email :
             </label>
 
@@ -110,7 +110,7 @@ export default function ProfileEditor({
           </fieldset>
 
           <fieldset>
-            <label className={label()} htmlFor="avatar">
+            <label className={label()} htmlFor="bio">
               À propos :
             </label>
 
@@ -152,7 +152,6 @@ export default function ProfileEditor({
               Sauvegarder
             </Button>
           </motion.div>
-          <div hidden={!dirty}></div>
         </Form>
       )}
     </Formik>

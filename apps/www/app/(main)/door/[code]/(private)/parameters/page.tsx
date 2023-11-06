@@ -6,7 +6,7 @@ import { AuthError } from "@1.modules/core/errors";
 import {
   PROFILE_ROLES,
   type Partner,
-  type Studient,
+  type Profile,
 } from "@1.modules/profile.domain";
 import type { Metadata, ResolvingMetadata } from "next";
 import dynamic from "next/dynamic";
@@ -15,8 +15,9 @@ import { match } from "ts-pattern";
 
 //
 
-const AvatarEditor = dynamic(() => import("./_client/AvatarEditor"));
-const ProfileEditor = dynamic(() => import("./_client/ProfileEditor"));
+const Avatar_Editor = dynamic(() => import("./_client/Avatar_Editor"));
+const Profile_Editor = dynamic(() => import("./_client/Profile_Editor"));
+const Studient_Editor = dynamic(() => import("./_client/Studient_Editor"));
 
 //
 
@@ -40,19 +41,6 @@ export default async function Page({ params }: { params: CodeParms }) {
     }
 
     const profile = await TRPC_SSR.profile.by_id.fetch(profile_id);
-    const form = await match(profile.role)
-      .with(PROFILE_ROLES.Enum.STUDIENT, async () => {
-        const studient =
-          await TRPC_SSR.profile.studient.by_profile_id.fetch(profile_id);
-
-        return <Studient_Edit studient={studient} />;
-      })
-      .with(PROFILE_ROLES.Enum.PARTNER, async () => {
-        const partner =
-          await TRPC_SSR.profile.partner.by_profile_id.fetch(profile_id);
-        return <Partner_Edit partner={partner} />;
-      })
-      .otherwise(() => null);
 
     return (
       <main className="mx-auto my-10 max-w-3xl px-4">
@@ -61,10 +49,10 @@ export default async function Page({ params }: { params: CodeParms }) {
         <hr className="my-10 py-5" />
 
         <div className="space-y-10">
-          <ProfileEditor profile={profile} />
-          <AvatarEditor profile={profile} />
+          <Profile_Editor profile={profile} />
+          <Avatar_Editor profile={profile} />
 
-          {form}
+          <Role_Editor {...profile} />
         </div>
       </main>
     );
@@ -74,9 +62,23 @@ export default async function Page({ params }: { params: CodeParms }) {
   }
 }
 
-function Studient_Edit({ studient }: { studient: Studient }) {
-  studient;
-  return <>...</>;
+async function Role_Editor({
+  id: profile_id,
+  role,
+}: Pick<Profile, "id" | "role">) {
+  return match(role)
+    .with(PROFILE_ROLES.Enum.STUDIENT, async () => {
+      const studient =
+        await TRPC_SSR.profile.studient.by_profile_id.fetch(profile_id);
+
+      return <Studient_Editor studient={studient} />;
+    })
+    .with(PROFILE_ROLES.Enum.PARTNER, async () => {
+      const partner =
+        await TRPC_SSR.profile.partner.by_profile_id.fetch(profile_id);
+      return <Partner_Edit partner={partner} />;
+    })
+    .otherwise(() => null);
 }
 
 function Partner_Edit({ partner }: { partner: Partner }) {

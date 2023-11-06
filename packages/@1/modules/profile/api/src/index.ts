@@ -5,7 +5,7 @@ import { next_auth_procedure, router } from "@1.modules/trpc";
 import { z } from "zod";
 import { me } from "./me";
 import { partner } from "./partner";
-import { studient } from "./studient";
+import { studient_api_router } from "./studient";
 
 const profile_api_router = router({
   by_email: next_auth_procedure
@@ -33,7 +33,7 @@ const profile_api_router = router({
 
   //
 
-  studient,
+  studient: studient_api_router,
 
   //
 
