@@ -35,7 +35,9 @@ export interface Answer extends z.TypeOf<typeof Answer_Schema> {}
 
 export const Forum_Filter = z.enum([
   "ALL",
+  "APPROVED",
   "AWNSERED",
   "LAST_QUESTIONS",
   "MINE",
+  "NOT_APPROVED",
 ]);

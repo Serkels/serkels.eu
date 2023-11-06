@@ -212,6 +212,7 @@ function Approve_Mutation() {
       utils.forum.question.by_id.invalidate(question_id),
       utils.forum.question.answers.by_id.invalidate(answer_id),
       utils.forum.question.answers.by_id.invalidate(accepted_answer?.id),
+      utils.forum.question.find.invalidate({}),
     ]);
   }, [question_id, do_approve, answer_id, accepted_answer?.id]);
   if (accepted_answer?.id === answer_id) return null;
@@ -245,6 +246,7 @@ function Mutate_CreateQuestion() {
       Promise.all([
         utils.forum.question.by_id.invalidate(question_id),
         utils.forum.question.answers.find.invalidate({ question_id }),
+        utils.forum.question.find.invalidate({}),
       ]),
     [question_id, utils],
   );

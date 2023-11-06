@@ -62,6 +62,12 @@ const question_api_router = router({
       const narrow = match(filter)
         .with(Forum_Filter.Enum.ALL, (): Prisma.QuestionWhereInput => ({}))
         .with(
+          Forum_Filter.Enum.APPROVED,
+          (): Prisma.QuestionWhereInput => ({
+            NOT: { accepted_answer_id: null },
+          }),
+        )
+        .with(
           Forum_Filter.Enum.AWNSERED,
           (): Prisma.QuestionWhereInput => ({
             NOT: [{ answers: { none: {} } }],
@@ -80,7 +86,13 @@ const question_api_router = router({
                 }
               : {},
         )
-        .otherwise(() => ({}));
+        .with(
+          Forum_Filter.Enum.NOT_APPROVED,
+          (): Prisma.QuestionWhereInput => ({
+            accepted_answer_id: null,
+          }),
+        )
+        .exhaustive();
 
       const items = await prisma.question.findMany({
         ...(cursor ? { cursor: { id: cursor } } : {}),
@@ -95,8 +107,8 @@ const question_api_router = router({
 
       let nextCursor: typeof cursor | undefined = undefined;
       if (items.length > limit) {
-        const nextItem = items.pop()!;
-        nextCursor = nextItem.id;
+        const next_item = items.pop()!;
+        nextCursor = next_item.id;
       }
 
       return { data: items, nextCursor };
