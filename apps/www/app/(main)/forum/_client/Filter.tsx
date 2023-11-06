@@ -16,7 +16,7 @@ export function Filter() {
     ...(status === "authenticated"
       ? [{ name: "Mes questions", slug: Forum_Filter.Enum.MINE }]
       : []),
-    { name: "Questions répondus", slug: Forum_Filter.Enum.AWNSERED },
+    { name: "Questions répondues", slug: Forum_Filter.Enum.AWNSERED },
     { name: "Questions approuvé", slug: Forum_Filter.Enum.APPROVED },
     // { name: "Tout", slug: Forum_Filter.Enum.ALL },
   ];
