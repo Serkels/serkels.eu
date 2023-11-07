@@ -25,6 +25,7 @@ export default async function Page({ params }: { params: CodeParms }) {
     notFound();
   }
 
+  const profile = await TRPC_SSR.profile.by_id.fetch(profile_id);
   const { data: exchanges } = await TRPC_SSR.exchanges.by_profile.fetch({
     profile_id,
   });
@@ -32,7 +33,11 @@ export default async function Page({ params }: { params: CodeParms }) {
   return (
     <main className="mx-auto mt-10 grid grid-cols-1 gap-y-5 px-4 md:max-w-4xl">
       {exchanges.map((exchange) => (
-        <Exchange_Card key={exchange.id} {...exchange} />
+        <Exchange_Card
+          key={exchange.id}
+          exchange={exchange}
+          profile={profile}
+        />
       ))}
     </main>
   );

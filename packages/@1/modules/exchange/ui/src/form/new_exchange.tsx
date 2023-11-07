@@ -4,7 +4,7 @@ import type { Category } from "@1.modules/category.domain";
 import { SelectCategoryField } from "@1.modules/category.ui/form/SelectCategoryField";
 import {
   Exchange_TypeSchema,
-  type Exchange_Type,
+  type Exchange_Create,
 } from "@1.modules/exchange.domain";
 import { Button } from "@1.ui/react/button";
 import { fieldset, input, select } from "@1.ui/react/form/atom";
@@ -13,12 +13,16 @@ import type { ChangeEvent } from "react";
 
 //
 
-export function Exchange_CreateForm({
+export function Exchange_CreateForm<
+  TValues extends Pick<Exchange_Create, "type" | "is_online"> & {
+    return: string;
+  },
+>({
   categories,
   isSubmitting,
   setFieldValue,
   values,
-}: FormikProps<Exchange_CreateProps> & {
+}: FormikProps<TValues> & {
   categories: Category[];
 }) {
   return (
@@ -90,7 +94,7 @@ export function Exchange_CreateForm({
           className={input()}
           disabled={isSubmitting}
           type="date"
-          name="when"
+          name="expiry_date"
           required
         />
       </label>
@@ -154,7 +158,6 @@ export function Exchange_CreateForm({
             className={select()}
             placeholder="Dans quelle categorie ?"
             onChange={(event: ChangeEvent<HTMLSelectElement>) => {
-              console.log(event.target.value);
               setFieldValue("return", event.target.value);
             }}
           />
@@ -166,12 +169,4 @@ export function Exchange_CreateForm({
       </Button>
     </Form>
   );
-}
-
-//
-
-export interface Exchange_CreateProps {
-  type: Exchange_Type;
-  is_online: boolean;
-  return?: string | undefined;
 }

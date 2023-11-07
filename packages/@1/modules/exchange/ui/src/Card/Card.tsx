@@ -24,7 +24,7 @@ export function Card({
   const { title, description } = exchange;
   return (
     <Provider exchange={exchange}>
-      <div className={base()}>
+      <div id={exchange.id} className={base()}>
         <div className={body()}>
           <header className={header()}>
             <Card.Header.Left.Renderer childs={children}>

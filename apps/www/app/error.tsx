@@ -31,7 +31,7 @@ export default function Error({
   reset: () => void;
 }) {
   useMountEffect(() => {
-    signOut();
+    signOut; //! FIXME(douglasduteil): only in dev mode ?
   });
   return (
     <main className="flex min-h-screen flex-col">

@@ -3,6 +3,7 @@
 import { StateError } from "@1.modules/core/errors";
 import {
   Deal_Status_Schema,
+  Exchange_Create_Schema,
   HANDSHAKE_ACCEPETED,
   HANDSHAKE_DENIED,
 } from "@1.modules/exchange.domain";
@@ -144,6 +145,9 @@ export const me = router({
 
     //
 
+    /**
+     * @deprecated Should be create exchange deal... or something...
+     */
     create: next_auth_procedure
       .input(z.object({ content: z.string(), exchange_id: z.string() }))
       .mutation(async ({ ctx: { payload, prisma }, input }) => {
@@ -331,4 +335,19 @@ export const me = router({
   }),
 
   //
+
+  update: next_auth_procedure
+    .input(Exchange_Create_Schema.extend({ exchange_id: z.string() }))
+    .mutation(({ input, ctx: { prisma, payload } }) => {
+      const { category, exchange_id, return: _retrun, ...input_data } = input;
+      const { id: profile_id } = payload.profile;
+      return prisma.exchange.update({
+        data: {
+          ...input_data,
+          category_id: category,
+          return_id: _retrun,
+        },
+        where: { id: exchange_id, owner: { profile_id } },
+      });
+    }),
 });

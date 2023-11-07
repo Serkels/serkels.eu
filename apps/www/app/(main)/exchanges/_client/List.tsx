@@ -6,12 +6,14 @@ import { Exchange_Filter, type Exchange } from "@1.modules/exchange.domain";
 import { Exchange_AsyncCard } from "@1.modules/exchange.ui/Card/AsyncCard";
 import { Exchange_InfiniteList } from "@1.modules/exchange.ui/InfiniteList";
 import { ErrorOccur } from "@1.ui/react/error";
+import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { useEffect, type ComponentProps, type ReactNode } from "react";
 
 //
 
 export default function List() {
+  const { data: session } = useSession();
   const search_params = useSearchParams();
   const category = search_params.get("category") ?? undefined;
   const search = search_params.get("q") ?? undefined;
@@ -38,11 +40,14 @@ export default function List() {
       },
     ) as ComponentProps<typeof Exchange_InfiniteList>["info"];
 
+    if (!session) return null;
     return (
       <Exchange_InfiniteList info={info}>
         {({ id }) => (
           <Exchange_byId key={id} id={id}>
-            {(exchange) => <Exchange_Card {...exchange} />}
+            {(exchange) => (
+              <Exchange_Card exchange={exchange} profile={session.profile} />
+            )}
           </Exchange_byId>
         )}
       </Exchange_InfiniteList>

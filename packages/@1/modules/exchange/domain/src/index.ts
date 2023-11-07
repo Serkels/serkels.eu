@@ -1,7 +1,11 @@
 //
 
 import { Category_Schema } from "@1.modules/category.domain";
-import { Entity_Schema, Entity_Timestamps } from "@1.modules/core/domain";
+import {
+  Entity_Schema,
+  Entity_Timestamps,
+  ID_Schema,
+} from "@1.modules/core/domain";
 import { Studient_Schema } from "@1.modules/profile.domain";
 import { z } from "zod";
 
@@ -21,7 +25,7 @@ export const Exchange_Schema = Entity_Schema.merge(Entity_Timestamps)
     is_online: z.boolean().default(true),
     location: z.string().nullable().default(""),
     owner: Studient_Schema.pick({ profile: true, university: true }),
-    places: z.coerce.number().default(Number.MIN_SAFE_INTEGER),
+    places: z.coerce.number().max(9).default(1),
     return: Category_Schema.nullable(),
     title: z.string().default(""),
     type: Exchange_TypeSchema.default(Exchange_TypeSchema.Enum.RESEARCH),
@@ -64,3 +68,41 @@ export type Deal = z.TypeOf<typeof Deal_Schema>;
 export const HANDSHAKE_ACCEPETED = "/exchange handshake accepeted";
 export const HANDSHAKE_DENIED = "/exchange handshake denied";
 export const HANDSHAKE_COMPLETED = "/exchange handshake completed";
+//
+
+/**
+ * @deprecated To rename or split
+ * Used as create and update schema
+ */
+export const Exchange_Create_Schema = Exchange_Schema.omit({
+  category: true,
+  deals: true,
+  return: true,
+  owner: true,
+})
+  .extend({
+    category: ID_Schema,
+    return: ID_Schema.nullable(),
+  })
+  .describe("Exchange_Create_Schema");
+
+export interface Exchange_Create
+  extends z.TypeOf<typeof Exchange_Create_Schema> {}
+
+/**
+ * @deprecated
+ */
+export interface Exchange_CreateProps
+  extends Omit<
+    Exchange,
+    | "id"
+    | "category"
+    | "deals"
+    | "created_at"
+    | "owner"
+    | "return"
+    | "updated_at"
+  > {
+  category: string;
+  return?: string;
+}
