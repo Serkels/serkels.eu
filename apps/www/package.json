@@ -65,7 +65,7 @@
     "@douglasduteil/datatypes...hours-to-seconds": "workspace:*",
     "@tanstack/react-query-devtools": "4.36.1",
     "@types/debug": "4.1.11",
-    "@types/gtag.js": "0.0.17",
+    "@types/gtag.js": "0.0.18",
     "@types/node": "20.8.10",
     "@types/nprogress": "0.2.2",
     "@types/react": "18.2.36",
