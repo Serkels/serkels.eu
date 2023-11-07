@@ -13,7 +13,6 @@ import {
   Envelope,
   Exchange,
   Gear,
-  Plus,
   PlusBox,
 } from "@1.ui/react/icons";
 import { tv } from "tailwind-variants";
@@ -36,7 +35,7 @@ export function Studient_NavBar({ studient }: { studient: Studient }) {
         <Li_Link icon={<Archive />} href="./exchanges/mine">
           Mes annonces
         </Li_Link>
-        <Li_Link icon={<Plus />} href="./exchanges/inbox">
+        <Li_Link icon={<Exchange />} href="./exchanges/inbox">
           Mes échanges
         </Li_Link>
         <Li_Link icon={<Bookmark />} href="./bookmarks">

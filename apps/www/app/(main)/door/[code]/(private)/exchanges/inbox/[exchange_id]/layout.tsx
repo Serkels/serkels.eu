@@ -8,11 +8,11 @@ import Navbar_Page from "./_@navbar/page";
 //
 
 export async function generateMetadata(
-  _: any,
+  params: Params,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
   return {
-    title: `<Echange Title> :: ${(await parent).title?.absolute}`,
+    title: `${params.exchange_id} :: ${(await parent).title?.absolute}`,
   };
 }
 

@@ -22,7 +22,7 @@ export function Expiry_Date() {
 }
 
 const expiry_date_variant = tv({
-  base: "mt-3 text-xs",
+  base: "text-xs",
   variants: {
     is_today: { true: "font-bold text-danger" },
     is_this_week: { true: "font-bold" },

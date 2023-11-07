@@ -25,15 +25,39 @@ export const button = tv({
   `,
   variants: {
     intent: {
-      primary: "bg-primary text-white data-[hovered]:bg-primary/70",
-      secondary: "bg-secondary text-white data-[hovered]:bg-secondary/70",
-      tertiary: "bg-tertiary text-white data-[hovered]:bg-tertiary/70",
-      quaternary: "bg-quaternary text-white data-[hovered]:bg-quaternary/70",
-      quinary: "bg-quinary text-white data-[hovered]:bg-quinary/70",
+      primary: `
+      bg-primary text-white
+      hover:bg-primary/70 data-[hovered]:bg-primary/70
+      `,
+      secondary: `
+      bg-secondary text-white
+      hover:bg-secondary/70 data-[hovered]:bg-secondary/70
+      `,
+      tertiary: `
+      bg-tertiary text-white
+      hover:bg-tertiary/70 data-[hovered]:bg-tertiary/70
+      `,
+      quaternary: `
+      bg-quaternary text-white
+      hover:bg-quaternary/70 data-[hovered]:bg-quaternary/70
+      `,
+      quinary: `
+      bg-quinary text-white
+      hover:bg-quinary/70 data-[hovered]:bg-quinary/70
+      `,
       //
-      warning: "bg-warning text-white data-[hovered]:bg-warning/70",
-      danger: "bg-danger text-white data-[hovered]:bg-danger/70",
-      light: "bg-transparent text-black data-[hovered]:bg-gray-100/70",
+      warning: `
+      bg-warning text-white
+      hover:bg-warning/70 data-[hovered]:bg-warning/70
+      `,
+      danger: `
+      bg-danger text-white
+      hover:bg-danger/70 data-[hovered]:bg-danger/70
+      `,
+      light: `
+      bg-transparent text-black
+      hover:bg-gray-100/70 data-[hovered]:bg-gray-100/70
+      `,
     },
     state: {
       filled: "",
@@ -99,6 +123,22 @@ export const button = tv({
         border-danger
         text-danger
         data-[hovered]:bg-danger
+      `,
+    },
+    //
+    {
+      intent: "light",
+      state: "ghost",
+      class: `
+        text-Dove_Gray
+      `,
+    },
+    {
+      intent: "light",
+      state: "outline",
+      class: `
+        border-Dove_Gray
+        text-Dove_Gray
       `,
     },
   ],

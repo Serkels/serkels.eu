@@ -1,21 +1,26 @@
 //
 
 import {
+  Approved,
+  ApprovedByTheOrganizer,
   Archive,
   Bell,
   Binoculars,
   Book,
   Bookmark,
   Circle,
+  Denied,
   Envelope,
   Exchange,
   Gear,
   HamburgerMenu,
+  Idle,
   Link,
   LocationRadius,
   Logo,
   MessageGroup,
   Messenger,
+  Montains,
   PaperPlane,
   Pen,
   PenSquare,
@@ -24,27 +29,33 @@ import {
   PlusBox,
   School,
   Share,
+  Trash,
   UserAvatarFilled,
 } from "@1.ui/react/icons";
 
 //
 
 const ICONS = [
+  Approved,
+  ApprovedByTheOrganizer,
   Archive,
   Bell,
   Binoculars,
   Book,
   Bookmark,
   Circle,
+  Denied,
   Envelope,
   Exchange,
   Gear,
   HamburgerMenu,
+  Idle,
   Link,
   LocationRadius,
   Logo,
   MessageGroup,
   Messenger,
+  Montains,
   PaperPlane,
   Pen,
   PenSquare,
@@ -53,6 +64,7 @@ const ICONS = [
   PlusBox,
   School,
   Share,
+  Trash,
   UserAvatarFilled,
 ];
 

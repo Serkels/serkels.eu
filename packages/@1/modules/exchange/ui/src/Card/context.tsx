@@ -8,10 +8,11 @@ import { createStateContext } from "react-use";
 //
 
 type Outlet_State =
+  | { state: "deleting" }
   | { state: "error"; error: Error }
-  | { state: "form" }
   | { state: "idle" }
-  | { state: "loading" };
+  | { state: "loading" }
+  | { state: "should_delete" };
 
 function useCardContext({ exchange }: { exchange: Exchange }) {
   const outlet = useState<Outlet_State>({ state: "idle" });

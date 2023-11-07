@@ -10,7 +10,7 @@ import { tv } from "tailwind-variants";
 import { P, match } from "ts-pattern";
 import { OnlineOrLocation } from "../OnlineOrLocation";
 import { Expiry_Date } from "./Expiry_Date";
-import { Provider, useExchange } from "./context";
+import { Provider, useExchange, useOutletState } from "./context";
 
 //
 
@@ -19,72 +19,11 @@ export function Card({
   exchange,
   children,
 }: PropsWithChildren<{ exchange: Exchange }>) {
-  const { base, body } = exchange_card();
-  const { footer, header } = exchange_card({ type: exchange.type });
-  const { title, description } = exchange;
+  // const [outlet] = useOutletState();
+  // const disabled = outlet.state === "deleting";
   return (
     <Provider exchange={exchange}>
-      <div id={exchange.id} className={base()}>
-        <div className={body()}>
-          <header className={header()}>
-            <Card.Header.Left.Renderer childs={children}>
-              <AvatarMedia name="Unknow user" image="/opengraph-image.png">
-                <AvatarMedia.SubTitle>
-                  <School className="mr-1.5 inline-block w-6" />
-                  <span>{exchange.owner.university}</span>
-                </AvatarMedia.SubTitle>
-              </AvatarMedia>
-            </Card.Header.Left.Renderer>
-            <Card.Header.Center.Renderer childs={children}>
-              <div>
-                <figure className="flex flex-col items-center">
-                  <div className="text-xl font-bold text-primary">
-                    {`${exchange.deals.length} / ${exchange.places}`}
-                  </div>
-                  <figcaption>places disponible</figcaption>
-                </figure>
-              </div>
-            </Card.Header.Center.Renderer>
-            <div className="flex items-start justify-end space-x-2">
-              <Card.Header.Right.Renderer childs={children}>
-                <Expiry_Date />
-              </Card.Header.Right.Renderer>
-            </div>
-          </header>
-
-          <hr className="my-2" />
-
-          <InfoBar />
-
-          <hr className="my-2" />
-
-          <article>
-            <h3 className="my-5 text-2xl font-bold">{title}</h3>
-            <p>{description}</p>
-          </article>
-        </div>
-        <footer className={footer()}>
-          <div className="flex justify-between">
-            <div>
-              <Card.Footer.Left.Renderer childs={children}>
-                ...
-              </Card.Footer.Left.Renderer>
-            </div>
-            <div>
-              <Card.Footer.Center.Renderer childs={children}>
-                ...
-              </Card.Footer.Center.Renderer>
-            </div>
-            <div>
-              <Card.Footer.Right.Renderer childs={children}>
-                <button className="block">
-                  <Share className="h-5 w-5" />
-                </button>
-              </Card.Footer.Right.Renderer>
-            </div>
-          </div>
-        </footer>
-      </div>
+      <Card_Outlet>{children}</Card_Outlet>
     </Provider>
   );
 }
@@ -103,6 +42,138 @@ Card.Header = {
 
 //
 
+function Card_Outlet({ children }: PropsWithChildren) {
+  const [outlet] = useOutletState();
+  console.log("Card_Outlet");
+  console.log({ outlet });
+  return match(outlet)
+    .with({ state: "deleting" }, () => (
+      <Card_Deleting>{children}</Card_Deleting>
+    ))
+    .otherwise(() => <Card_Idle>{children}</Card_Idle>);
+}
+
+function Card_Deleting({ children }: PropsWithChildren) {
+  const exchange = useExchange();
+  const { base, body } = exchange_card();
+  const { footer, header } = exchange_card({ type: exchange.type });
+  const { title, description } = exchange;
+
+  return (
+    <div id={exchange.id} className={base({ className: "opacity-40" })}>
+      <div className={body()}>
+        <header className={header()}>
+          <Card.Header.Left.Renderer childs={children}>
+            <AvatarMedia name="Unknow user" image="/opengraph-image.png">
+              <AvatarMedia.SubTitle>
+                <School className="mr-1.5 inline-block w-6" />
+                <span>{exchange.owner.university}</span>
+              </AvatarMedia.SubTitle>
+            </AvatarMedia>
+          </Card.Header.Left.Renderer>
+          <Card.Header.Center.Renderer childs={children}>
+            <div>
+              <figure className="flex flex-col items-center">
+                <div className="text-xl font-bold text-primary">
+                  {`${exchange.deals.length} / ${exchange.places}`}
+                </div>
+                <figcaption>places disponible</figcaption>
+              </figure>
+            </div>
+          </Card.Header.Center.Renderer>
+          <div className="flex items-start justify-end space-x-2">
+            <Expiry_Date />
+          </div>
+        </header>
+
+        <hr className="my-2" />
+
+        <InfoBar />
+
+        <hr className="my-2" />
+
+        <article>
+          <h3 className="my-5 text-2xl font-bold">{title}</h3>
+          <p>{description}</p>
+        </article>
+      </div>
+      <footer className={footer()}>
+        <div className="flex justify-center">
+          <div>Suppression en cours...</div>
+        </div>
+      </footer>
+    </div>
+  );
+}
+function Card_Idle({ children }: PropsWithChildren) {
+  const exchange = useExchange();
+  const { base, body } = exchange_card();
+  const { footer, header } = exchange_card({ type: exchange.type });
+  const { title, description } = exchange;
+  return (
+    <div id={exchange.id} className={base()}>
+      <div className={body()}>
+        <header className={header()}>
+          <Card.Header.Left.Renderer childs={children}>
+            <AvatarMedia name="Unknow user" image="/opengraph-image.png">
+              <AvatarMedia.SubTitle>
+                <School className="mr-1.5 inline-block w-6" />
+                <span>{exchange.owner.university}</span>
+              </AvatarMedia.SubTitle>
+            </AvatarMedia>
+          </Card.Header.Left.Renderer>
+          <Card.Header.Center.Renderer childs={children}>
+            <div>
+              <figure className="flex flex-col items-center">
+                <div className="text-xl font-bold text-primary">
+                  {`${exchange.deals.length} / ${exchange.places}`}
+                </div>
+                <figcaption>places disponible</figcaption>
+              </figure>
+            </div>
+          </Card.Header.Center.Renderer>
+          <div className="flex items-start justify-end space-x-2">
+            <Card.Header.Right.Renderer childs={children}>
+              <Expiry_Date />
+            </Card.Header.Right.Renderer>
+          </div>
+        </header>
+
+        <hr className="my-2" />
+
+        <InfoBar />
+
+        <hr className="my-2" />
+
+        <article>
+          <h3 className="my-5 text-2xl font-bold">{title}</h3>
+          <p>{description}</p>
+        </article>
+      </div>
+      <footer className={footer()}>
+        <div className="flex justify-between">
+          <div>
+            <Card.Footer.Left.Renderer childs={children}>
+              ...
+            </Card.Footer.Left.Renderer>
+          </div>
+          <div>
+            <Card.Footer.Center.Renderer childs={children}>
+              ...
+            </Card.Footer.Center.Renderer>
+          </div>
+          <div>
+            <Card.Footer.Right.Renderer childs={children}>
+              <button className="block">
+                <Share className="h-5 w-5" />
+              </button>
+            </Card.Footer.Right.Renderer>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
 function InfoBar() {
   const exchange = useExchange();
   const { category, info_bar, exchange_icon } = exchange_card({

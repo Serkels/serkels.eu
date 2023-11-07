@@ -42,6 +42,17 @@ export const me = router({
 
   //
 
+  delete: next_auth_procedure
+    .input(z.string())
+    .mutation(({ input: exchange_id, ctx: { prisma, payload } }) => {
+      const { id: profile_id } = payload.profile;
+      return prisma.exchange.delete({
+        where: { id: exchange_id, owner: { profile_id } },
+      });
+    }),
+
+  //
+
   find_active: next_auth_procedure
     .input(
       z.object({
