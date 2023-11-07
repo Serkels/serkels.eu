@@ -25,7 +25,7 @@ export async function generateMetadata(
 
 export default async function Page({ params }: { params: Params }) {
   const { exchange_id } = params;
-  console.log({ exchange_id });
+
   const exchange = await TRPC_SSR.exchanges.by_id.fetch(exchange_id);
   const categories = await TRPC_SSR.category.exchange.fetch();
   return (
