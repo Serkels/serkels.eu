@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
-    "@types/debug": "4.1.10",
+    "@types/debug": "4.1.11",
     "@types/nodemailer": "6.4.13",
     "@types/react": "18.2.36"
   }
