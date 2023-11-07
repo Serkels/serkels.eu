@@ -16,6 +16,7 @@ export function Exchange_Delete_Button() {
     if (!should_delete) return;
 
     if (!window.confirm("Êtes vous sur de vouloir supprimer cette echange ?")) {
+      set_outlet({ state: "idle" });
       return;
     }
 
