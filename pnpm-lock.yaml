@@ -1367,6 +1367,9 @@ importers:
       '@1.config/typescript':
         specifier: workspace:*
         version: link:../../../config/typescript
+      '@types/node':
+        specifier: 20.8.10
+        version: 20.8.10
       typescript:
         specifier: 5.2.2
         version: 5.2.2
