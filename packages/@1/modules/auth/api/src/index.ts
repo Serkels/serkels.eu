@@ -110,37 +110,38 @@ const auth_api_router = router({
 
         //
 
-        const studient_context = Studient_Schema.omit({
-          id: true,
-          interest: true,
-          profile: true,
-        }).parse(payload.context);
-
-        const partner_context = Partner_Schema.omit({
-          id: true,
-          profile: true,
-        }).parse(payload.context);
-
-        //
-
         const profile_role_data = match(payload.role)
           .with("ADMIN", () => ({}))
-          .with("PARTNER", () => ({
-            partner: {
-              create: partner_context as Omit<
-                Prisma.PartnerCreateInput,
-                "profile"
-              >,
-            },
-          }))
-          .with("STUDIENT", () => ({
-            studient: {
-              create: studient_context as Omit<
-                Prisma.StudientCreateInput,
-                "profile"
-              >,
-            },
-          }))
+          .with("PARTNER", function () {
+            const partner_context = Partner_Schema.omit({
+              id: true,
+              profile: true,
+            }).parse(payload.context, { path: ["payload.context"] });
+
+            return {
+              partner: {
+                create: partner_context as Omit<
+                  Prisma.PartnerCreateInput,
+                  "profile"
+                >,
+              },
+            };
+          })
+          .with("STUDIENT", function () {
+            const studient_context = Studient_Schema.omit({
+              id: true,
+              interest: true,
+              profile: true,
+            }).parse(payload.context, { path: ["payload.context"] });
+            return {
+              studient: {
+                create: studient_context as Omit<
+                  Prisma.StudientCreateInput,
+                  "profile"
+                >,
+              },
+            };
+          })
           .exhaustive();
 
         //
