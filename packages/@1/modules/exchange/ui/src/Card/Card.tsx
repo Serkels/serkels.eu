@@ -4,7 +4,7 @@ import { Exchange_TypeSchema, type Exchange } from "@1.modules/exchange.domain";
 import { AvatarMedia } from "@1.ui/react/avatar";
 import { card } from "@1.ui/react/card/atom";
 import { Exchange as ExchangeIcon, School, Share } from "@1.ui/react/icons";
-import { format } from "date-fns";
+import { format, isThisWeek, isToday } from "date-fns";
 import { fr } from "date-fns/locale";
 import { type PropsWithChildren } from "react";
 import { createSlot } from "react-slotify";
@@ -44,6 +44,34 @@ export function Card({
   );
 }
 
+Card.Expiry_Date = Expiry_Date;
+
+//
+
+function Expiry_Date() {
+  const exchange = useExchange();
+  return (
+    <time
+      className={expiry_date_variant({
+        is_today: isToday(exchange.expiry_date),
+        is_this_week: isThisWeek(exchange.expiry_date),
+      })}
+      dateTime={exchange.expiry_date.toUTCString()}
+      title={exchange.expiry_date.toUTCString()}
+    >
+      {format(exchange.expiry_date, "P", { locale: fr })}
+    </time>
+  );
+}
+
+const expiry_date_variant = tv({
+  base: "mt-3 text-xs",
+  variants: {
+    is_today: { true: "font-bold text-danger" },
+    is_this_week: { true: "font-bold" },
+  },
+});
+
 function Header({ children }: PropsWithChildren) {
   const exchange = useExchange();
   const { header } = exchange_card({ type: exchange.type });
@@ -67,17 +95,11 @@ function Header({ children }: PropsWithChildren) {
           </figure>
         </div>
       </Card.Header.Center.Renderer>
-      <Card.Header.Right.Renderer childs={children}>
-        <div className="flex items-start justify-end space-x-2">
-          <time
-            className="mt-3 text-xs"
-            dateTime={exchange.updated_at.toUTCString()}
-            title={exchange.updated_at.toUTCString()}
-          >
-            {format(exchange.updated_at, "P", { locale: fr })}
-          </time>
-        </div>
-      </Card.Header.Right.Renderer>
+      <div className="flex items-start justify-end space-x-2">
+        <Card.Header.Right.Renderer childs={children}>
+          <Expiry_Date />
+        </Card.Header.Right.Renderer>
+      </div>
     </header>
   );
 }

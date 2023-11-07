@@ -23,16 +23,14 @@ import { match } from "ts-pattern";
 
 //
 
-export function Ask_Action({
+export function Ask({
   children,
   exchange,
 }: PropsWithChildren<{ exchange: Exchange }>) {
   return (
     <Exchange_Ask_Modal>
       <Exchange_Ask_Modal.Trigger>
-        <Ask_Action.Trigger.Renderer childs={children}>
-          ...
-        </Ask_Action.Trigger.Renderer>
+        <Ask.Trigger.Renderer childs={children}>...</Ask.Trigger.Renderer>
       </Exchange_Ask_Modal.Trigger>
       <Exchange_Ask_Modal.Dialog>
         <Outlet_Provider exchange={exchange}>
@@ -43,7 +41,7 @@ export function Ask_Action({
   );
 }
 
-Ask_Action.Trigger = createSlot();
+Ask.Trigger = createSlot();
 
 //
 

@@ -1,8 +1,8 @@
 //
 
-import { Exchange_Card } from ":app/(main)/exchanges/_client/List";
 import { code_to_profile_id, type CodeParms } from ":pipes/code";
 import { TRPC_SSR } from ":trpc/server";
+import { Exchange_Card } from ":widgets/exchanges/card";
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 

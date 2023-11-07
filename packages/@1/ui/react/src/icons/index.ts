@@ -21,6 +21,7 @@ export * from "./MessageGroup";
 export * from "./Messenger";
 export * from "./Montains";
 export * from "./PaperPlane";
+export * from "./Pen";
 export * from "./PenSquare";
 export * from "./Person";
 export * from "./Plus";

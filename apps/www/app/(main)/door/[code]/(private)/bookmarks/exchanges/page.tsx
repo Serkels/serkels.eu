@@ -1,7 +1,7 @@
 //
 
-import { Exchange_Card } from ":app/(main)/exchanges/_client/List";
 import { TRPC_SSR } from ":trpc/server";
+import { Exchange_Card } from ":widgets/exchanges/card";
 import type { Metadata, ResolvingMetadata } from "next";
 
 //

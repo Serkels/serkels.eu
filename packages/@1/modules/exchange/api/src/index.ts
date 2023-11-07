@@ -138,7 +138,7 @@ const exchange_api_router = router({
 
       const items = await prisma.exchange.findMany({
         ...(cursor ? { cursor: { id: cursor } } : {}),
-        orderBy: { created_at: "asc" },
+        orderBy: { expiry_date: "asc" },
         take: limit + 1,
         where: {
           OR: [

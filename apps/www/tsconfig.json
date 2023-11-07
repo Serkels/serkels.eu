@@ -9,7 +9,8 @@
       ":app/*": ["./app/*"],
       ":components/*": ["./components/*"],
       ":pipes/*": ["./pipes/*"],
-      ":trpc/*": ["./trpc/*"]
+      ":trpc/*": ["./trpc/*"],
+      ":widgets/*": ["./widgets/*"]
     },
     "types": ["gtag.js"]
   },
