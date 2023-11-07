@@ -4,28 +4,53 @@ import { Exchange_TypeSchema, type Exchange } from "@1.modules/exchange.domain";
 import { AvatarMedia } from "@1.ui/react/avatar";
 import { card } from "@1.ui/react/card/atom";
 import { Exchange as ExchangeIcon, School, Share } from "@1.ui/react/icons";
-import { format, isThisWeek, isToday } from "date-fns";
-import { fr } from "date-fns/locale";
 import { type PropsWithChildren } from "react";
 import { createSlot } from "react-slotify";
 import { tv } from "tailwind-variants";
 import { P, match } from "ts-pattern";
 import { OnlineOrLocation } from "../OnlineOrLocation";
+import { Expiry_Date } from "./Expiry_Date";
 import { Provider, useExchange } from "./context";
 
 //
 
+//
 export function Card({
   exchange,
   children,
 }: PropsWithChildren<{ exchange: Exchange }>) {
   const { base, body } = exchange_card();
+  const { footer, header } = exchange_card({ type: exchange.type });
   const { title, description } = exchange;
   return (
     <Provider exchange={exchange}>
       <div className={base()}>
         <div className={body()}>
-          <Header> {children}</Header>
+          <header className={header()}>
+            <Card.Header.Left.Renderer childs={children}>
+              <AvatarMedia name="Unknow user" image="/opengraph-image.png">
+                <AvatarMedia.SubTitle>
+                  <School className="mr-1.5 inline-block w-6" />
+                  <span>{exchange.owner.university}</span>
+                </AvatarMedia.SubTitle>
+              </AvatarMedia>
+            </Card.Header.Left.Renderer>
+            <Card.Header.Center.Renderer childs={children}>
+              <div>
+                <figure className="flex flex-col items-center">
+                  <div className="text-xl font-bold text-primary">
+                    {`${exchange.deals.length} / ${exchange.places}`}
+                  </div>
+                  <figcaption>places disponible</figcaption>
+                </figure>
+              </div>
+            </Card.Header.Center.Renderer>
+            <div className="flex items-start justify-end space-x-2">
+              <Card.Header.Right.Renderer childs={children}>
+                <Expiry_Date />
+              </Card.Header.Right.Renderer>
+            </div>
+          </header>
 
           <hr className="my-2" />
 
@@ -38,71 +63,45 @@ export function Card({
             <p>{description}</p>
           </article>
         </div>
-        <Footer>{children}</Footer>
+        <footer className={footer()}>
+          <div className="flex justify-between">
+            <div>
+              <Card.Footer.Left.Renderer childs={children}>
+                ...
+              </Card.Footer.Left.Renderer>
+            </div>
+            <div>
+              <Card.Footer.Center.Renderer childs={children}>
+                ...
+              </Card.Footer.Center.Renderer>
+            </div>
+            <div>
+              <Card.Footer.Right.Renderer childs={children}>
+                <button className="block">
+                  <Share className="h-5 w-5" />
+                </button>
+              </Card.Footer.Right.Renderer>
+            </div>
+          </div>
+        </footer>
       </div>
     </Provider>
   );
 }
 
-Card.Expiry_Date = Expiry_Date;
+Card.Footer = {
+  Left: createSlot(),
+  Center: createSlot(),
+  Right: createSlot(),
+};
+
+Card.Header = {
+  Left: createSlot(),
+  Center: createSlot(),
+  Right: createSlot(),
+};
 
 //
-
-function Expiry_Date() {
-  const exchange = useExchange();
-  return (
-    <time
-      className={expiry_date_variant({
-        is_today: isToday(exchange.expiry_date),
-        is_this_week: isThisWeek(exchange.expiry_date),
-      })}
-      dateTime={exchange.expiry_date.toUTCString()}
-      title={exchange.expiry_date.toUTCString()}
-    >
-      {format(exchange.expiry_date, "P", { locale: fr })}
-    </time>
-  );
-}
-
-const expiry_date_variant = tv({
-  base: "mt-3 text-xs",
-  variants: {
-    is_today: { true: "font-bold text-danger" },
-    is_this_week: { true: "font-bold" },
-  },
-});
-
-function Header({ children }: PropsWithChildren) {
-  const exchange = useExchange();
-  const { header } = exchange_card({ type: exchange.type });
-  return (
-    <header className={header()}>
-      <Card.Header.Left.Renderer childs={children}>
-        <AvatarMedia name="Unknow user" image="/opengraph-image.png">
-          <AvatarMedia.SubTitle>
-            <School className="mr-1.5 inline-block w-6" />
-            <span>{exchange.owner.university}</span>
-          </AvatarMedia.SubTitle>
-        </AvatarMedia>
-      </Card.Header.Left.Renderer>
-      <Card.Header.Center.Renderer childs={children}>
-        <div>
-          <figure className="flex flex-col items-center">
-            <div className="text-xl font-bold text-primary">
-              {`${exchange.deals.length} / ${exchange.places}`}
-            </div>
-            <figcaption>places disponible</figcaption>
-          </figure>
-        </div>
-      </Card.Header.Center.Renderer>
-      <div className="flex items-start justify-end space-x-2">
-        <Card.Header.Right.Renderer childs={children}>
-          <Expiry_Date />
-        </Card.Header.Right.Renderer>
-      </div>
-    </header>
-  );
-}
 
 function InfoBar() {
   const exchange = useExchange();
@@ -151,46 +150,6 @@ function InfoBar() {
     </div>
   );
 }
-
-function Footer({ children }: PropsWithChildren) {
-  const exchange = useExchange();
-  const { footer } = exchange_card({ type: exchange.type });
-  return (
-    <footer className={footer()}>
-      <div className="flex justify-between">
-        <div>
-          <Card.Footer.Left.Renderer childs={children}>
-            ...
-          </Card.Footer.Left.Renderer>
-        </div>
-        <div>
-          <Card.Footer.Center.Renderer childs={children}>
-            ...
-          </Card.Footer.Center.Renderer>
-        </div>
-        <div>
-          <Card.Footer.Right.Renderer childs={children}>
-            <button className="block">
-              <Share className="h-5 w-5" />
-            </button>
-          </Card.Footer.Right.Renderer>
-        </div>
-      </div>
-    </footer>
-  );
-}
-
-Card.Footer = {
-  Left: createSlot(),
-  Center: createSlot(),
-  Right: createSlot(),
-};
-
-Card.Header = {
-  Left: createSlot(),
-  Center: createSlot(),
-  Right: createSlot(),
-};
 
 //
 

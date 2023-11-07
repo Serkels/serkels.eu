@@ -11,9 +11,6 @@ import { Exchange_Share } from "./share";
 //
 
 export function Exchange_Card(exchange: Exchange) {
-  console.log({ exchange });
-  //
-
   return (
     <Card exchange={exchange}>
       <Card.Header.Left>
