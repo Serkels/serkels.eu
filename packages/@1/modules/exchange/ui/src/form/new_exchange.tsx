@@ -165,7 +165,7 @@ export function Exchange_CreateForm<
       </fieldset>
 
       <Button isDisabled={isSubmitting} type="submit">
-        Terminer
+        Publier
       </Button>
     </Form>
   );
