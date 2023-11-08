@@ -13,7 +13,6 @@ export function Footer({
     <footer
       className="
         relative
-        -z-10
         flex
         min-h-[theme(spacing.8)]
         justify-center

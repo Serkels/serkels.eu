@@ -32,11 +32,7 @@ export default function Home_Page() {
       <HomeBanner />
 
       <div className="overflow-hidden bg-white">
-        <hr className="my-8 border-none"></hr>
-
         <Explore />
-
-        <hr className="my-8 border-none"></hr>
       </div>
     </main>
   );
@@ -50,7 +46,7 @@ async function HomeBanner() {
   const session = await getServerSession();
 
   return (
-    <Banner className="min-h-[45vh]">
+    <Banner className="py-4">
       <AuthSessionProvider session={session}>
         <HomeCarousel />
       </AuthSessionProvider>
@@ -113,7 +109,7 @@ async function Explore() {
 
 const explore_grid_style = tv(
   {
-    base: "my-10",
+    base: "",
     slots: {
       links: "col-span-full xl:col-start-4",
       link: "col-span-2 sm:col-span-3 md:col-span-2 ",
