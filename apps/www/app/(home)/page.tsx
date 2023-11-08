@@ -6,11 +6,16 @@ import { Banner } from ":components/shell/Banner";
 import { getServerSession } from "@1.modules/auth.next";
 import { Grid } from "@1.ui/react/grid";
 import { Binoculars, Book, Exchange, MessageGroup } from "@1.ui/react/icons";
+import { popover } from "@1.ui/react/popover/atom";
 import type { StylableElementType } from "@1.ui/react/types";
 import type { _1_HOUR_ } from "@douglasduteil/datatypes...hours-to-seconds";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import type { ComponentPropsWithoutRef, PropsWithChildren } from "react";
+import type {
+  ComponentPropsWithoutRef,
+  PropsWithChildren,
+  ReactNode,
+} from "react";
 import { tv } from "tailwind-variants";
 
 //
@@ -63,6 +68,12 @@ async function Explore() {
     <Grid className={base()}>
       <Grid fluid className={links()}>
         <ExploreLink
+          description={
+            <p className="text-center">
+              Échanges par étudiants.
+              <br /> Créer un compte pour voir les échanges
+            </p>
+          }
           href={session ? "/exchanges" : "#"}
           Icon={Exchange}
           className={link({
@@ -73,16 +84,17 @@ async function Explore() {
           Échanges
         </ExploreLink>
         <ExploreLink
+          description="Dernières opportunités pour les étudiants"
           href="/opportunities"
           Icon={Binoculars}
           className={link({
             className: "text-tertiary",
           })}
-          // className="col-span-2 text-Congress_Blue md:col-start-2 xl:col-start-4"
         >
           Opportunités
         </ExploreLink>
         <ExploreLink
+          description="Questions et réponses des étudiants"
           href="/forum"
           Icon={MessageGroup}
           className={link({
@@ -93,6 +105,7 @@ async function Explore() {
           Forum StudHelp
         </ExploreLink>
         <ExploreLink
+          description="Questions féquentes"
           href="/guide"
           Icon={Book}
           className={link({
@@ -111,7 +124,7 @@ const explore_grid_style = tv(
   {
     base: "",
     slots: {
-      links: "col-span-full xl:col-start-4",
+      links: "col-span-full mt-10 xl:col-start-4",
       link: "col-span-2 sm:col-span-3 md:col-span-2 ",
     },
     variants: {
@@ -121,7 +134,7 @@ const explore_grid_style = tv(
         xl: { link: "my-12" },
       },
       is_protected: {
-        true: { link: "pointer-events-none opacity-40" },
+        true: { link: " opacity-40" },
       },
     },
   },
@@ -154,16 +167,28 @@ function CarouselPlaceholder() {
 //
 
 function ExploreLink({
-  className,
   children,
+  className,
+  description,
   href,
   Icon,
 }: ComponentPropsWithoutRef<typeof Link> &
-  PropsWithChildren<{ Icon: StylableElementType }>) {
+  PropsWithChildren<{
+    Icon: StylableElementType;
+    description: string | ReactNode;
+  }>) {
   const { base, icon } = explore_link_style({ className });
+
   return (
     <Link className={base({ className })} href={href}>
-      <Icon className={icon({})} />
+      <div className="group relative ">
+        <Icon className={icon({})} />
+        <div
+          className={popover({ className: "invisible group-hover:visible" })}
+        >
+          {description}
+        </div>
+      </div>
       <button className="w-full rounded-full bg-current">
         <span className="text-xs font-semibold uppercase text-white">
           {children}
@@ -174,7 +199,12 @@ function ExploreLink({
 }
 
 const explore_link_style = tv({
-  base: "grid grid-rows-2 justify-items-center gap-6",
+  base: `
+    grid
+    grid-rows-2
+    justify-items-center
+    gap-6
+  `,
 
   variants: {
     icon: {
