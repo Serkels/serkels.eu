@@ -23,7 +23,7 @@
     "@1.modules/profile.domain": "workspace:*",
     "@1.modules/category.domain": "workspace:*",
     "@1.modules/core": "workspace:*",
-    "xstate": "4.38.2",
+    "xstate": "4.38.3",
     "zod": "3.22.4"
   },
   "devDependencies": {
