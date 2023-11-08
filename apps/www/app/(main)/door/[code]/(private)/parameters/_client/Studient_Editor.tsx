@@ -63,7 +63,7 @@ export default function Studient_Editor({
             <Field
               className={input({
                 className: "col-span-full ",
-                wrong_value: Boolean(errors.university && touched.university),
+                error: Boolean(errors.university && touched.university),
               })}
               id="university"
               name="university"
@@ -95,9 +95,7 @@ export default function Studient_Editor({
             <Field
               className={input({
                 className: "col-span-full ",
-                wrong_value: Boolean(
-                  errors.field_of_study && touched.field_of_study,
-                ),
+                error: Boolean(errors.field_of_study && touched.field_of_study),
               })}
               id="field_of_study"
               name="field_of_study"
@@ -128,7 +126,7 @@ export default function Studient_Editor({
             <Field
               className={input({
                 className: "col-span-full ",
-                wrong_value: Boolean(errors.city && touched.city),
+                error: Boolean(errors.city && touched.city),
               })}
               id="city"
               name="city"
@@ -159,7 +157,7 @@ export default function Studient_Editor({
             <Field
               className={input({
                 className: "col-span-full ",
-                wrong_value: Boolean(errors.citizenship && touched.citizenship),
+                error: Boolean(errors.citizenship && touched.citizenship),
               })}
               id="citizenship"
               name="citizenship"

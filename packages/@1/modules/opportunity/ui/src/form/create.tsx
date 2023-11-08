@@ -30,7 +30,7 @@ export function Opportunity_CreateForm({
         </label>
         <Field
           className={input({
-            wrong_value: Boolean(errors.title && touched.title),
+            error: Boolean(errors.title && touched.title),
           })}
           type="text"
           name="title"
@@ -48,7 +48,7 @@ export function Opportunity_CreateForm({
         </label>
         <Field
           className={input({
-            wrong_value: Boolean(errors.expiry_date && touched.expiry_date),
+            error: Boolean(errors.expiry_date && touched.expiry_date),
           })}
           min={format(new Date(), "yyyy-MM-dd")}
           name="expiry_date"
@@ -67,7 +67,7 @@ export function Opportunity_CreateForm({
         </label>
         <Field
           className={input({
-            wrong_value: Boolean(errors.cover && touched.cover),
+            error: Boolean(errors.cover && touched.cover),
           })}
           type="url"
           name="cover"
@@ -104,7 +104,7 @@ export function Opportunity_CreateForm({
           as="textarea"
           autoComplete="off"
           className={input({
-            wrong_value: Boolean(errors.description && touched.description),
+            error: Boolean(errors.description && touched.description),
           })}
           disabled={isSubmitting}
           name="description"
@@ -154,7 +154,7 @@ export function Opportunity_CreateForm({
         </label>
         <Field
           className={input({
-            wrong_value: Boolean(errors.location && touched.location),
+            error: Boolean(errors.location && touched.location),
           })}
           type="text"
           name="location"
@@ -188,7 +188,7 @@ export function Opportunity_CreateForm({
         </label>
         <Field
           className={input({
-            wrong_value: Boolean(errors.link && touched.link),
+            error: Boolean(errors.link && touched.link),
           })}
           type="url"
           name="link"

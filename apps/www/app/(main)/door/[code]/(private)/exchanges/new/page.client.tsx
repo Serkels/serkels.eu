@@ -3,12 +3,14 @@
 import { TRPC_React } from ":trpc/client";
 import type { Category } from "@1.modules/category.domain";
 import {
+  Exchange_Schema,
   Exchange_TypeSchema,
   type Exchange_Create,
 } from "@1.modules/exchange.domain";
 import { Exchange_CreateForm } from "@1.modules/exchange.ui/form/new_exchange";
 import { Formik } from "formik";
 import { useRouter } from "next/navigation";
+import { toFormikValidationSchema } from "zod-formik-adapter";
 
 //
 
@@ -35,6 +37,7 @@ export function Mutate_Exchange({ categories }: { categories: Category[] }) {
 
         router.push("/exchanges");
       }}
+      validationSchema={toFormikValidationSchema(Exchange_Schema)}
     >
       {(formik) => <Exchange_CreateForm categories={categories} {...formik} />}
     </Formik>

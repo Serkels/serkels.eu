@@ -7,20 +7,22 @@ import {
   type Exchange_Create,
 } from "@1.modules/exchange.domain";
 import { Button } from "@1.ui/react/button";
-import { fieldset, input, select } from "@1.ui/react/form/atom";
-import { Field, Form, type FormikProps } from "formik";
+import { fieldset, input, label, select } from "@1.ui/react/form/atom";
+import { ErrorMessage, Field, Form, type FormikProps } from "formik";
 import type { ChangeEvent } from "react";
 
 //
 
 export function Exchange_CreateForm<
-  TValues extends Pick<Exchange_Create, "type" | "is_online"> & {
+  TValues extends Pick<Exchange_Create, "places" | "type" | "is_online"> & {
     return: string;
   },
 >({
   categories,
+  errors,
   isSubmitting,
   setFieldValue,
+  touched,
   values,
 }: FormikProps<TValues> & {
   categories: Category[];
@@ -125,11 +127,14 @@ export function Exchange_CreateForm<
         <Field className={input()} disabled={isSubmitting} name="location" />
       </label>
 
-      <label>
-        <span className="text-Silver_Chalice">Nombre de places</span>
-
+      <fieldset>
+        <label className={label()} htmlFor="places">
+          <span className="text-Silver_Chalice">Nombre de places</span>
+        </label>
         <Field
-          className={input()}
+          className={input({
+            error: Boolean(errors.places && touched.places),
+          })}
           disabled={isSubmitting}
           maxLength={9}
           minLength={1}
@@ -137,7 +142,10 @@ export function Exchange_CreateForm<
           required
           type="number"
         />
-      </label>
+        <ErrorMessage name="places">
+          {(msg) => <div className="text-danger">{msg}</div>}
+        </ErrorMessage>
+      </fieldset>
 
       <fieldset className={fieldset()}>
         <label>

@@ -42,7 +42,7 @@ export const input = tv({
     disabled:opacity-50
   `,
   variants: {
-    wrong_value: {
+    error: {
       true: "border-danger",
     },
     tv$color: {

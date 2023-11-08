@@ -25,7 +25,11 @@ export const Exchange_Schema = Entity_Schema.merge(Entity_Timestamps)
     is_online: z.boolean().default(true),
     location: z.string().nullable().default(""),
     owner: Studient_Schema.pick({ profile: true, university: true }),
-    places: z.coerce.number().max(9).default(1),
+    places: z.coerce
+      .number()
+      .min(1, "Le nombre doit être supérieur ou égal à 1")
+      .max(9, "Le nombre doit être inférieur ou égal à 9")
+      .default(1),
     return: Category_Schema.nullable(),
     title: z.string().default(""),
     type: Exchange_TypeSchema.default(Exchange_TypeSchema.Enum.RESEARCH),
