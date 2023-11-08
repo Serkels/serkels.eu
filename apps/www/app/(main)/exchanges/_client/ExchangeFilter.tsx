@@ -14,6 +14,7 @@ export function ExchangeFilter() {
     { name: "Contre un échange", slug: Exchange_Filter.Enum.WITH_RETURN },
     { name: "En ligne", slug: Exchange_Filter.Enum.ONLINE },
     { name: "Sur place", slug: Exchange_Filter.Enum.ON_SITE },
+    { name: "Mes abonnements", slug: Exchange_Filter.Enum.MY_FOLLOWS },
     { name: "Tout", slug: Exchange_Filter.Enum.ALL },
   ];
 

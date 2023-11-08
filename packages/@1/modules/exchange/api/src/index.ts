@@ -133,7 +133,7 @@ const exchange_api_router = router({
 
   //
 
-  find: procedure
+  find: next_auth_procedure
     .input(
       z.object({
         category: z.string().optional(),
@@ -143,13 +143,22 @@ const exchange_api_router = router({
         search: z.string().optional(),
       }),
     )
-    .query(async ({ input, ctx: { prisma } }) => {
+    .query(async ({ input, ctx: { prisma, payload } }) => {
+      const {
+        profile: { id: profile_id },
+      } = payload;
       const { category, cursor, limit, search, filter } = input;
       type ExchangeWhere = NonNullable<
         Parameters<typeof prisma.exchange.findMany>[0]
       >["where"];
       const nerrow = match(filter)
         .with(Exchange_Filter.Enum.ALL, (): ExchangeWhere => ({}))
+        .with(
+          Exchange_Filter.Enum.MY_FOLLOWS,
+          (): ExchangeWhere => ({
+            owner: { profile: { followed_by: { some: { id: profile_id } } } },
+          }),
+        )
         .with(
           Exchange_Filter.Enum.ONLINE,
           (): ExchangeWhere => ({ is_online: true }),

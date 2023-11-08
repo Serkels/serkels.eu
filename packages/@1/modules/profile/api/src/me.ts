@@ -6,6 +6,74 @@ import { z } from "zod";
 
 //
 
+const follow = router({
+  find: next_auth_procedure
+    .input(z.string())
+    .query(async ({ input: profile_id, ctx: { prisma, payload } }) => {
+      const { id } = payload.profile;
+
+      return prisma.profile.findUnique({
+        where: { id, following: { some: { id: profile_id } } },
+      });
+    }),
+
+  //
+
+  toggle: next_auth_procedure
+    .input(z.string())
+    .mutation(async ({ input: profile_id, ctx: { prisma, payload } }) => {
+      const { id } = payload.profile;
+
+      const existing = await prisma.profile.findUnique({
+        include: { following: true },
+        where: { id, following: { some: { id: profile_id } } },
+      });
+
+      const data: Prisma.ProfileUpdateInput = existing
+        ? { following: { disconnect: { id: profile_id } } }
+        : { following: { connect: { id: profile_id } } };
+
+      return prisma.profile.update({
+        data,
+        where: { id },
+      });
+    }),
+});
+
+const contact = router({
+  find: next_auth_procedure
+    .input(z.string())
+    .query(async ({ input: profile_id, ctx: { prisma, payload } }) => {
+      const { id } = payload.profile;
+
+      return prisma.profile.findUnique({
+        where: { id, contacts: { some: { id: profile_id } } },
+      });
+    }),
+
+  //
+
+  toggle: next_auth_procedure
+    .input(z.string())
+    .mutation(async ({ input: profile_id, ctx: { prisma, payload } }) => {
+      const { id } = payload.profile;
+
+      const existing = await prisma.profile.findUnique({
+        include: { contacts: true },
+        where: { id, contacts: { some: { id: profile_id } } },
+      });
+
+      const data: Prisma.ProfileUpdateInput = existing
+        ? { contacts: { disconnect: { id: profile_id } } }
+        : { contacts: { connect: { id: profile_id } } };
+
+      return prisma.profile.update({
+        data,
+        where: { id },
+      });
+    }),
+});
+
 export const me = router({
   contacts: next_auth_procedure
     .input(
@@ -41,37 +109,21 @@ export const me = router({
 
   //
 
-  find_contact: next_auth_procedure
-    .input(z.string())
-    .query(async ({ input: profile_id, ctx: { prisma, payload } }) => {
-      const { id } = payload.profile;
-
-      return prisma.profile.findUnique({
-        where: { id, contacts: { some: { id: profile_id } } },
-      });
-    }),
+  /**
+   * @deprecated use profile.contacts.find directly
+   */
+  find_contact: contact.find,
 
   //
 
-  toggle_contact: next_auth_procedure
-    .input(z.string())
-    .mutation(async ({ input: profile_id, ctx: { prisma, payload } }) => {
-      const { id } = payload.profile;
+  /**
+   * @deprecated use profile.contacts.find directly
+   */
+  toggle_contact: contact.toggle,
 
-      const existing = await prisma.profile.findUnique({
-        include: { contacts: true },
-        where: { id, contacts: { some: { id: profile_id } } },
-      });
+  //
 
-      const data: Prisma.ProfileUpdateInput = existing
-        ? { contacts: { disconnect: { id: profile_id } } }
-        : { contacts: { connect: { id: profile_id } } };
-
-      return prisma.profile.update({
-        data,
-        where: { id },
-      });
-    }),
+  follow,
 
   //
 

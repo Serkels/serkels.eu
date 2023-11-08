@@ -2,12 +2,14 @@
 
 import { code_to_profile_id, type CodeParms } from ":pipes/code";
 import { TRPC_SSR } from ":trpc/server";
+import { getServerSession } from "@1.modules/auth.next";
 import { AuthError } from "@1.modules/core/errors";
 import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import {
   PartnerAvatarMedia,
   StudientAvatarMedia,
 } from "@1.modules/profile.ui/avatar";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { match } from "ts-pattern";
 
@@ -57,7 +59,15 @@ export default async function Page({ params }: { params: CodeParms }) {
 }
 
 async function ContactsCount({ profile_id }: { profile_id: string }) {
+  const session = await getServerSession();
   const profile = await TRPC_SSR.profile.by_id.fetch(profile_id);
+
+  if (session?.profile.id === profile_id)
+    return (
+      <Link href="/@~/contacts" className="flex flex-col items-center">
+        <div>{profile.in_contact_with.length}</div> Contacts
+      </Link>
+    );
   return (
     <div className="flex flex-col items-center">
       <div>{profile.in_contact_with.length}</div> Contacts

@@ -34,7 +34,7 @@ export function EmptyList() {
 
 export function Loading() {
   return (
-    <div className="mt-28 text-center">
+    <div className="p-4 text-center">
       <Spinner />
     </div>
   );

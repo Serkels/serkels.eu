@@ -5,6 +5,7 @@ import type { Profile } from "@1.modules/profile.domain";
 import { EmptyList, Loading, flatten_pages_are_empty } from "@1.ui/react/async";
 import { AvatarMedia } from "@1.ui/react/avatar";
 import { Button } from "@1.ui/react/button";
+import { Spinner } from "@1.ui/react/spinner";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { P, match } from "ts-pattern";
@@ -23,7 +24,11 @@ export default function Infinite_Contacts_List() {
     .with({ status: "error", error: P.select() }, (error) => {
       throw error;
     })
-    .with({ status: "loading" }, () => <Loading />)
+    .with({ status: "loading" }, () => (
+      <div className="mx-auto flex justify-center">
+        <Spinner />
+      </div>
+    ))
     .with({ status: "success", data: P.when(flatten_pages_are_empty) }, () => (
       <EmptyList />
     ))
@@ -42,7 +47,7 @@ export default function Infinite_Contacts_List() {
           <li className="col-span-full mx-auto">
             {isFetchingNextPage ? <Loading /> : null}
           </li>
-          <li className="col-span-full p-4">
+          <li className="col-span-full p-8">
             {hasNextPage ? (
               <Button
                 onPress={() => fetchNextPage()}
@@ -69,7 +74,7 @@ function Item(profile: Profile) {
   }, [profile.id]);
   return (
     <Button
-      className="block h-full w-full rounded-none py-4"
+      className="block h-full w-full rounded-none px-8 py-4"
       intent="light"
       onPress={onPress}
     >

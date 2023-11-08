@@ -9,6 +9,7 @@ import { notFound } from "next/navigation";
 import { tv } from "tailwind-variants";
 import { match } from "ts-pattern";
 import AddContact from "./_client/AddContact";
+import Follow from "./_client/Follow";
 import SendMessage from "./_client/SendMessage";
 
 //
@@ -55,8 +56,9 @@ function Studient_Page({ params }: { params: CodeParms }) {
       <div className="flex items-center space-x-2">
         {code === "~" ? null : (
           <>
-            <SendMessage profile_id={code} />
+            <Follow profile_id={code} />
             <AddContact profile_id={code} />
+            <SendMessage profile_id={code} />
           </>
         )}
       </div>
@@ -77,8 +79,12 @@ function Partner_Page({ params }: { params: CodeParms }) {
         </Link>
       </div>
 
-      <div className="flex items-center">
-        <button>...</button>
+      <div className="flex items-center space-x-2">
+        {code === "~" ? null : (
+          <>
+            <Follow profile_id={code} />
+          </>
+        )}
       </div>
     </nav>
   );
