@@ -28,21 +28,22 @@ export default function HomeCarousel() {
         <Carousel className="h-full w-full" autoplay={true}>
           <article>
             <h1 className="mb-12 text-2xl font-bold uppercase">
-              Avec toc toc échangez des expériences cours de langue activités
-              notes de cours et profitez d autres services
+              Avec toc-toc,
+              <br /> échangez des expériences, cours de langue, activités, notes
+              de cours et profitez d'autres services.
             </h1>
             <p>Inscrivez-vous pour échanger entre pairs !</p>
           </article>
           <article>
             <h1 className="mb-6 text-2xl font-bold uppercase">
-              Une question ? Posez la directement à la communauté sur la
-              rubrique “forum”...
+              Une question ? <br />
+              posez-la directement à la communauté sur la rubrique “forum”...
             </h1>
           </article>
           <article>
             <h1 className="mb-6 text-2xl font-bold uppercase">
               ... et ne ratez aucune opportunité proposée par nos partenaires
-              bourses activités etc..​
+              (bourses, activités etc...)​
             </h1>
           </article>
         </Carousel>
