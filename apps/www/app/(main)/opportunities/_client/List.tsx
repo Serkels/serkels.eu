@@ -123,6 +123,6 @@ const style = tv({
     },
   },
   slots: {
-    icon: "h-5 w-5",
+    icon: "h-5 w-5 text-Dove_Gray",
   },
 });

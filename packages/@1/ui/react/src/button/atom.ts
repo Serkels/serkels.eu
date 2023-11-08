@@ -55,7 +55,7 @@ export const button = tv({
       hover:bg-danger/70 data-[hovered]:bg-danger/70
       `,
       light: `
-      bg-transparent text-black
+      bg-transparent text-Dove_Gray
       hover:bg-gray-100/70 data-[hovered]:bg-gray-100/70
       `,
     },

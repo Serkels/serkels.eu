@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@1.ui/react/button";
+import { button } from "@1.ui/react/button/atom";
 import { popover } from "@1.ui/react/popover/atom";
 import { useTimeoutEffect, useToggle } from "@react-hookz/web";
 import { useCallback, type PropsWithChildren } from "react";
@@ -33,15 +33,12 @@ export function Share_Button({
           Copié dans le Presse-papiers
         </div>
       ) : null}
-      <Button
-        state="ghost"
-        intent="light"
-        size="md"
-        className={className}
-        onPress={copy_to_clipboard}
+      <button
+        className={button({ className, intent: "light" })}
+        onClick={copy_to_clipboard}
       >
         {children}
-      </Button>
+      </button>
     </div>
   );
 }
