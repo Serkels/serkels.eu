@@ -13,5 +13,5 @@ export function preventNProgressLoader(e: MouseEvent) {
   // As nextjs-toploader is "secretly" looking for a parent link,
   // this click event will still produce a NProgress.start();
   // \see https://github.com/TheSGJ/nextjs-toploader/blob/c1678c2/src/index.tsx#L136-L141
-  setTimeout(() => NProgress.done(), 2_222);
+  setTimeout(() => NProgress.done(), 333);
 }
