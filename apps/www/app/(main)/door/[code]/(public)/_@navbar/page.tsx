@@ -9,6 +9,7 @@ import { notFound } from "next/navigation";
 import { tv } from "tailwind-variants";
 import { match } from "ts-pattern";
 import AddContact from "./_client/AddContact";
+import SendMessage from "./_client/SendMessage";
 
 //
 
@@ -51,8 +52,13 @@ function Studient_Page({ params }: { params: CodeParms }) {
         </Link>
       </div>
 
-      <div className="flex items-center">
-        {code === "~" ? null : <AddContact profile_id={code} />}
+      <div className="flex items-center space-x-2">
+        {code === "~" ? null : (
+          <>
+            <SendMessage profile_id={code} />
+            <AddContact profile_id={code} />
+          </>
+        )}
       </div>
     </nav>
   );
