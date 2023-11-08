@@ -64,7 +64,7 @@ export function Exchange_CreateForm<
           />
         </label>
         <label>
-          <span> Sur place</span>{" "}
+          <span>Sur place</span>{" "}
           <Field
             checked={values.is_online === false}
             disabled={isSubmitting}
@@ -88,7 +88,7 @@ export function Exchange_CreateForm<
         />
       </label>
       <label>
-        <span className="text-Silver_Chalice">Quand ?</span>
+        <span className="text-Silver_Chalice">Date limite ?</span>
 
         <Field
           className={input()}
