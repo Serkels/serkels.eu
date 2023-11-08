@@ -55,7 +55,7 @@ export function MobileNavBar({ className }: ComponentPropsWithoutRef<"nav">) {
             href="/forum"
           >
             <NavItem Icon={MessageGroup} isActive={pathname.includes("/forum")}>
-              Forum StudHlep
+              Forum StudHelp
             </NavItem>
           </Link>
         </li>
