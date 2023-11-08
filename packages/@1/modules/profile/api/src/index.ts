@@ -26,6 +26,7 @@ const profile_api_router = router({
         include: {
           followed_by: { select: { id: true } },
           in_contact_with: { select: { id: true } },
+          contacts: { select: { id: true } },
         },
         where: { id },
       });

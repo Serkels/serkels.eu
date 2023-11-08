@@ -65,12 +65,12 @@ async function ContactsCount({ profile_id }: { profile_id: string }) {
   if (session?.profile.id === profile_id)
     return (
       <Link href="/@~/contacts" className="flex flex-col items-center">
-        <div>{profile.in_contact_with.length}</div> Contacts
+        <div>{profile.contacts.length}</div> Contacts
       </Link>
     );
   return (
     <div className="flex flex-col items-center">
-      <div>{profile.in_contact_with.length}</div> Contacts
+      <div>{profile.contacts.length}</div> Contacts
     </div>
   );
 }
