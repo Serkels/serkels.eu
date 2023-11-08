@@ -107,17 +107,13 @@ export function Footer() {
   return (
     <footer className="mt-4">
       <div className="flex justify-between">
-        {status === "authenticated" ? (
-          <Button
-            intent="light"
-            className="-ml-4"
-            onPress={() => set_awnser_outlet({ state: "idle" })}
-          >
-            <ResponseCount />
-          </Button>
-        ) : (
+        <Button
+          intent="light"
+          className="-ml-4"
+          onPress={() => set_awnser_outlet({ state: "idle" })}
+        >
           <ResponseCount />
-        )}
+        </Button>
         {status === "authenticated" ? <ToggleOutlet /> : <SignUpToAnswer />}
         <Share_Button
           className="-mr-4"
@@ -185,8 +181,10 @@ function AnswerItem(initial: Omit<Answer, "accepted_for">) {
   const { data: session } = useSession();
   const is_yours = question.owner.profile.id === session?.profile.id;
   const answer = (info.data ?? initial) as Answer;
-  const can_mutate =
-    is_yours || answer.accepted_for?.id !== question.accepted_answer?.id;
+
+  const can_mutate = is_yours; // || answer.accepted_for?.id !== question.accepted_answer?.id;
+
+  console.log({ is_yours, can_mutate });
   return (
     <Answer_Card answer={answer}>
       <Answer_Card.Footer>

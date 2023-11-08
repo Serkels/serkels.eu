@@ -1,18 +1,21 @@
 //
 
-import { next_auth_procedure, router } from "@1.modules/trpc";
+import { next_auth_procedure, procedure, router } from "@1.modules/trpc";
 import { z } from "zod";
 
 //
 
-const answers_procedure = next_auth_procedure.input(
+const answers_procedure = procedure.input(
+  z.object({ question_id: z.string() }),
+);
+const protected_answers_procedure = next_auth_procedure.input(
   z.object({ question_id: z.string() }),
 );
 
 export const answers_api_router = router({
   //
 
-  approve: answers_procedure
+  approve: protected_answers_procedure
     .input(z.object({ answer_id: z.string() }))
     .mutation(async ({ input, ctx: { prisma, payload } }) => {
       const { question_id, answer_id: id } = input;
@@ -32,7 +35,7 @@ export const answers_api_router = router({
 
   //
 
-  by_id: next_auth_procedure
+  by_id: procedure
     .input(z.string())
     .query(async ({ input: id, ctx: { prisma } }) => {
       return prisma.answer.findUniqueOrThrow({
@@ -52,7 +55,7 @@ export const answers_api_router = router({
 
   //
 
-  create: answers_procedure
+  create: protected_answers_procedure
     .input(z.object({ content: z.string() }))
     .mutation(async ({ input, ctx: { prisma, payload } }) => {
       const {
