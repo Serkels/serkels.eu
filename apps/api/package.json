@@ -28,6 +28,6 @@
     "@1.config/typescript": "workspace:*",
     "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
     "@types/node": "20.8.10",
-    "@types/ws": "8.5.8"
+    "@types/ws": "8.5.9"
   }
 }
