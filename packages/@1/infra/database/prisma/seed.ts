@@ -345,13 +345,15 @@ async function categories() {
 
   await create_categories(
     [
+      { name: "Cours de langues" },
+      { name: "Soutien académique" },
+      { name: "Logements" },
+      { name: "Job étudiant" },
+      { name: "Concours" },
       { name: "Activités" },
       { name: "Aides financières" },
-      { name: "Bourses" },
-      { name: "Concours" },
-      { name: "Cours de langues" },
-      { name: "Job étudiant" },
-      { name: "Logements" },
+      { name: "Activités socio-culturelles​" },
+      { name: "Vie associative" },
     ]
       .reverse()
       .map((draft) => ({ ...draft, context: CategoryContext.OPPORTUNITY })),
