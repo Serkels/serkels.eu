@@ -225,7 +225,7 @@ function Approve_Mutation() {
         }}
         onPress={submit}
       >
-        Approve
+        Approuver
       </Button>
     </div>
   );
