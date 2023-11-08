@@ -3,13 +3,15 @@
 import { MenuBurger } from ":components/burger";
 import { MobileNavBar } from ":components/shell/MobileNavBar";
 import { getServerSession } from "@1.modules/auth.next";
+import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import { Avatar } from "@1.modules/profile.ui";
 import { Grid } from "@1.ui/react/grid";
-import { Logo } from "@1.ui/react/icons";
+import { Bell, Exchange, Logo, Messenger, Plus } from "@1.ui/react/icons";
 import { VisuallyHidden } from "@1.ui/react/visually_hidden";
 import Link from "next/link";
 import type { ComponentPropsWithoutRef } from "react";
 import { tv } from "tailwind-variants";
+import { match } from "ts-pattern";
 
 //
 
@@ -58,7 +60,7 @@ export default function UserBar() {
 
 async function UserNavGroup({ className }: ComponentPropsWithoutRef<"nav">) {
   const session = await getServerSession();
-  const { base } = user_nav_group_variants({
+  const { base, icon } = user_nav_group_variants({
     size: {
       initial: "xsmall",
       md: "medium",
@@ -66,22 +68,68 @@ async function UserNavGroup({ className }: ComponentPropsWithoutRef<"nav">) {
     },
   });
   if (!session) return null;
-  return (
-    <nav className={base({ className })}>
-      <Link href={`/@~`} className="flex">
-        <VisuallyHidden>Moi</VisuallyHidden>
-        <Avatar
-          className="h-7 w-7 border-2 border-white"
-          profile={session.profile}
-        />
-      </Link>
-    </nav>
-  );
+
+  return match(session.profile.role)
+    .with(PROFILE_ROLES.Enum.ADMIN, () => (
+      <nav className={base({ className })}>
+        <Link href={`/@~`} className="flex">
+          <VisuallyHidden>Moi</VisuallyHidden>
+          <Avatar
+            className="h-7 w-7 border-2 border-white"
+            profile={session.profile}
+          />
+        </Link>
+      </nav>
+    ))
+    .with(PROFILE_ROLES.Enum.PARTNER, () => (
+      <nav className={base({ className })}>
+        <Link href={`/@~/opportunities/new`} className="flex">
+          <VisuallyHidden>Créer une opportunité</VisuallyHidden>
+          <Plus className={icon({ className: "bg-transparent p-0.5" })} />
+        </Link>
+
+        <Link href={`/@~`} className="flex">
+          <VisuallyHidden>Moi</VisuallyHidden>
+          <Avatar
+            className="h-7 w-7 border-2 border-white"
+            profile={session.profile}
+          />
+        </Link>
+      </nav>
+    ))
+    .with(PROFILE_ROLES.Enum.STUDIENT, () => (
+      <nav className={base({ className })}>
+        <Link href={`/@~/exchanges/new`} className="flex">
+          <VisuallyHidden>Créer un échange</VisuallyHidden>
+          <Plus className={icon({ className: "bg-transparent p-0.5" })} />
+        </Link>
+        {/* <Link href={`#`} className="flex"> */}
+        <VisuallyHidden>Notifications</VisuallyHidden>
+        <Bell className={icon()} />
+        {/* </Link> */}
+        <Link href={`/@~/inbox`} className="flex">
+          <VisuallyHidden>Messages</VisuallyHidden>
+          <Messenger className={icon()} />
+        </Link>
+        <Link href={`/@~/exchanges/inbox`} className="flex">
+          <VisuallyHidden>Mes échanges</VisuallyHidden>
+          <Exchange className={icon()} />
+        </Link>
+        <Link href={`/@~`} className="flex">
+          <VisuallyHidden>Moi</VisuallyHidden>
+          <Avatar
+            className="h-7 w-7 border-2 border-white"
+            profile={session.profile}
+          />
+        </Link>
+      </nav>
+    ))
+    .exhaustive();
 }
 
 const user_nav_group_variants = tv(
   {
-    base: ["flex items-center justify-end"], //["grid grid-cols-5 items-center justify-items-center"],
+    base: "flex items-center justify-end space-x-3",
     variants: {
       size: {
         xsmall: ["block"],
@@ -90,6 +138,7 @@ const user_nav_group_variants = tv(
     },
     slots: {
       list: "",
+      icon: "box-border h-7 w-7 rounded-full bg-white/20 p-1.5",
     },
   },
   {
