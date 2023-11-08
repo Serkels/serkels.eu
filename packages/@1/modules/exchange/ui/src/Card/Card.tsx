@@ -44,8 +44,7 @@ Card.Header = {
 
 function Card_Outlet({ children }: PropsWithChildren) {
   const [outlet] = useOutletState();
-  console.log("Card_Outlet");
-  console.log({ outlet });
+
   return match(outlet)
     .with({ state: "deleting" }, () => (
       <Card_Deleting>{children}</Card_Deleting>
