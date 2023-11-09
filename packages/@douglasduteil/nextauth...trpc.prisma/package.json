@@ -41,7 +41,7 @@
     "@trpc/server": "10.43.1",
     "next": "14.0.1",
     "next-auth": "4.24.4",
-    "superjson": "2.2.0",
+    "superjson": "2.2.1",
     "zod": "3.22.4"
   },
   "devDependencies": {

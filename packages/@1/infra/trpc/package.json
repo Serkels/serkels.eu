@@ -21,7 +21,7 @@
     "@1.modules/profile.api": "workspace:*",
     "@1.modules/trpc": "workspace:*",
     "@trpc/server": "10.43.1",
-    "superjson": "2.2.0",
+    "superjson": "2.2.1",
     "zod": "3.22.4"
   },
   "devDependencies": {
