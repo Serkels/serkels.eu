@@ -12,7 +12,7 @@
     "framer-motion": "10.16.4",
     "react": "18.2.0",
     "react-aria": "3.29.1",
-    "react-aria-components": "1.0.0-beta.2",
+    "react-aria-components": "1.0.0-rc.0",
     "react-dom": "18.2.0",
     "react-stately": "3.27.1",
     "tailwind-styled-components": "2.2.0",
