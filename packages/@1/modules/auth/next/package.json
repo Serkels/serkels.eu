@@ -28,7 +28,7 @@
     "await-to-js": "3.0.0",
     "next": "14.0.1",
     "next-auth": "4.24.4",
-    "superjson": "2.2.0",
+    "superjson": "2.2.1",
     "ts-pattern": "5.0.5",
     "zod": "3.22.4"
   },
