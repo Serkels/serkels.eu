@@ -44,8 +44,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/@1/modules/trpc
       '@hono/node-server':
-        specifier: 1.2.0
-        version: 1.2.0
+        specifier: 1.2.1
+        version: 1.2.1
       '@hono/sentry':
         specifier: 1.0.0
         version: 1.0.0(hono@3.9.2)
@@ -2467,9 +2467,9 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@hono/node-server@1.2.0:
-    resolution: {integrity: sha512-aHT8lDMLpd7ioXJ1/057+h+oE/k7rCOWmjklYDsE0jE4CoNB9XzG4f8dRHvw4s5HJFocaYDiGgYM/V0kYbQ0ww==}
-    engines: {node: '>=18.0.0'}
+  /@hono/node-server@1.2.1:
+    resolution: {integrity: sha512-XYznR3T9liFEnKMCQSLtRz0VGhvOCviZ5feNqpvw49cuHhewjCZNwOMaPLd/RQd/z6Dxq/Z+Lf2NzP7sig6Ilg==}
+    engines: {node: '>=18.14.1'}
     dev: false
 
   /@hono/sentry@1.0.0(hono@3.9.2):
