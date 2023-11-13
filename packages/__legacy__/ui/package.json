@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@types/react": "18.2.37",
-    "prettier": "3.0.3",
+    "prettier": "3.1.0",
     "prettier-plugin-tailwindcss": "0.5.7",
     "typescript": "5.2.2"
   }
