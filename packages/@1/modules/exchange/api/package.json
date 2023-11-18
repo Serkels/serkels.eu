@@ -23,7 +23,7 @@
     "@1.modules/core": "workspace:*",
     "@1.modules/exchange.domain": "workspace:*",
     "@1.modules/trpc": "workspace:*",
-    "@trpc/server": "10.43.4",
+    "@trpc/server": "10.43.6",
     "date-fns": "2.30.0",
     "ts-pattern": "5.0.5",
     "xstate": "4.38.3",
