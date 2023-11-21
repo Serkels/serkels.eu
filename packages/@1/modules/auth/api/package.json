@@ -25,7 +25,7 @@
     "@1.modules/profile.domain": "workspace:*",
     "@1.modules/trpc": "workspace:*",
     "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
-    "@trpc/server": "10.43.6",
+    "@trpc/server": "10.44.0",
     "await-to-js": "3.0.0",
     "date-fns": "2.30.0",
     "nanoid": "5.0.3",

@@ -22,7 +22,7 @@
   "dependencies": {
     "@1.modules/forum.domain": "workspace:*",
     "@1.modules/trpc": "workspace:*",
-    "@trpc/server": "10.43.6",
+    "@trpc/server": "10.44.0",
     "date-fns": "2.30.0",
     "ts-pattern": "5.0.5",
     "zod": "3.22.4"
