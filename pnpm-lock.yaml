@@ -78,8 +78,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/@douglasduteil/nextauth...trpc.prisma
       '@types/node':
-        specifier: 20.9.2
-        version: 20.9.2
+        specifier: 20.9.3
+        version: 20.9.3
       '@types/ws':
         specifier: 8.5.9
         version: 8.5.9
@@ -250,8 +250,8 @@ importers:
         specifier: 0.0.18
         version: 0.0.18
       '@types/node':
-        specifier: 20.9.2
-        version: 20.9.2
+        specifier: 20.9.3
+        version: 20.9.3
       '@types/nprogress':
         specifier: 0.2.3
         version: 0.2.3
@@ -315,8 +315,8 @@ importers:
         specifier: workspace:*
         version: link:../typescript
       '@types/node':
-        specifier: 20.9.2
-        version: 20.9.2
+        specifier: 20.9.3
+        version: 20.9.3
       typescript:
         specifier: 5.3.2
         version: 5.3.2
@@ -340,8 +340,8 @@ importers:
         specifier: 8.3.1
         version: 8.3.1
       '@types/node':
-        specifier: 20.9.2
-        version: 20.9.2
+        specifier: 20.9.3
+        version: 20.9.3
       dedent:
         specifier: 1.5.1
         version: 1.5.1
@@ -469,8 +469,8 @@ importers:
         specifier: 5.6.0
         version: 5.6.0(prisma@5.6.0)
       '@types/node':
-        specifier: 20.9.2
-        version: 20.9.2
+        specifier: 20.9.3
+        version: 20.9.3
       typescript:
         specifier: 5.3.2
         version: 5.3.2
@@ -515,8 +515,8 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       '@types/node':
-        specifier: 20.9.2
-        version: 20.9.2
+        specifier: 20.9.3
+        version: 20.9.3
       pkgroll:
         specifier: 2.0.1
         version: 2.0.1(typescript@5.3.2)
@@ -610,8 +610,8 @@ importers:
         specifier: 5.6.0
         version: 5.6.0(prisma@5.6.0)
       '@types/node':
-        specifier: 20.9.2
-        version: 20.9.2
+        specifier: 20.9.3
+        version: 20.9.3
       typescript:
         specifier: 5.3.2
         version: 5.3.2
@@ -709,8 +709,8 @@ importers:
         specifier: 5.6.0
         version: 5.6.0(prisma@5.6.0)
       '@types/node':
-        specifier: 20.9.2
-        version: 20.9.2
+        specifier: 20.9.3
+        version: 20.9.3
       typescript:
         specifier: 5.3.2
         version: 5.3.2
@@ -839,8 +839,8 @@ importers:
         specifier: 5.6.0
         version: 5.6.0(prisma@5.6.0)
       '@types/node':
-        specifier: 20.9.2
-        version: 20.9.2
+        specifier: 20.9.3
+        version: 20.9.3
       typescript:
         specifier: 5.3.2
         version: 5.3.2
@@ -977,8 +977,8 @@ importers:
         specifier: 5.6.0
         version: 5.6.0(prisma@5.6.0)
       '@types/node':
-        specifier: 20.9.2
-        version: 20.9.2
+        specifier: 20.9.3
+        version: 20.9.3
       typescript:
         specifier: 5.3.2
         version: 5.3.2
@@ -1109,8 +1109,8 @@ importers:
         specifier: 5.6.0
         version: 5.6.0(prisma@5.6.0)
       '@types/node':
-        specifier: 20.9.2
-        version: 20.9.2
+        specifier: 20.9.3
+        version: 20.9.3
       typescript:
         specifier: 5.3.2
         version: 5.3.2
@@ -1223,8 +1223,8 @@ importers:
         specifier: 5.6.0
         version: 5.6.0(prisma@5.6.0)
       '@types/node':
-        specifier: 20.9.2
-        version: 20.9.2
+        specifier: 20.9.3
+        version: 20.9.3
       typescript:
         specifier: 5.3.2
         version: 5.3.2
@@ -1346,8 +1346,8 @@ importers:
         specifier: 5.6.0
         version: 5.6.0(prisma@5.6.0)
       '@types/node':
-        specifier: 20.9.2
-        version: 20.9.2
+        specifier: 20.9.3
+        version: 20.9.3
       typescript:
         specifier: 5.3.2
         version: 5.3.2
@@ -1368,8 +1368,8 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       '@types/node':
-        specifier: 20.9.2
-        version: 20.9.2
+        specifier: 20.9.3
+        version: 20.9.3
       typescript:
         specifier: 5.3.2
         version: 5.3.2
@@ -1866,7 +1866,7 @@ importers:
         version: link:../../packages/@douglasduteil/config/typescript
       '@turbo/gen':
         specifier: 1.10.16
-        version: 1.10.16(@types/node@20.9.2)(typescript@5.3.2)
+        version: 1.10.16(@types/node@20.9.3)(typescript@5.3.2)
       prettier:
         specifier: '3'
         version: 3.1.0
@@ -4954,7 +4954,7 @@ packages:
     resolution: {integrity: sha512-jt4jIsWKvUvuY6adJnQJlb/UR7DdjC8CjHI/OaSQruj2yX9/K6+KOvDt/vD6udqos/FUk5Op66CvYT7TBLYO5Q==}
     dev: false
 
-  /@turbo/gen@1.10.16(@types/node@20.9.2)(typescript@5.3.2):
+  /@turbo/gen@1.10.16(@types/node@20.9.3)(typescript@5.3.2):
     resolution: {integrity: sha512-PzyluADjVuy5OcIi+/aRcD70OElQpRVRDdfZ9fH8G5Fv75lQcNrjd1bBGKmhjSw+g+eTEkXMGnY7s6gsCYjYTQ==}
     hasBin: true
     dependencies:
@@ -4966,7 +4966,7 @@ packages:
       minimatch: 9.0.3
       node-plop: 0.26.3
       proxy-agent: 6.3.1
-      ts-node: 10.9.1(@types/node@20.9.2)(typescript@5.3.2)
+      ts-node: 10.9.1(@types/node@20.9.3)(typescript@5.3.2)
       update-check: 1.5.4
       validate-npm-package-name: 5.0.0
     transitivePeerDependencies:
@@ -5000,14 +5000,14 @@ packages:
     dependencies:
       '@types/http-cache-semantics': 4.0.4
       '@types/keyv': 3.1.4
-      '@types/node': 20.9.2
+      '@types/node': 20.9.3
       '@types/responselike': 1.0.3
     dev: true
 
   /@types/cheerio@0.22.34:
     resolution: {integrity: sha512-uoi5gQGpH5vdNrGOexnNm+19YZLdIRMF/IW8V6w1kIeoXaO1m2mVUMV4dl76tvRRKoIp9d/Z97ZYeIE4lacEsA==}
     dependencies:
-      '@types/node': 20.9.2
+      '@types/node': 20.9.3
     dev: false
 
   /@types/debug@4.1.12:
@@ -5022,7 +5022,7 @@ packages:
     resolution: {integrity: sha512-ZUxbzKl0IfJILTS6t7ip5fQQM/J3TJYubDm3nMbgubNNYS62eXeUpoLUC8/7fJNiFYHTrGPQn7hspDUzIHX3UA==}
     dependencies:
       '@types/minimatch': 5.1.2
-      '@types/node': 20.9.2
+      '@types/node': 20.9.3
     dev: true
 
   /@types/gtag.js@0.0.18:
@@ -5064,7 +5064,7 @@ packages:
   /@types/keyv@3.1.4:
     resolution: {integrity: sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==}
     dependencies:
-      '@types/node': 20.9.2
+      '@types/node': 20.9.3
     dev: true
 
   /@types/mdast@4.0.3:
@@ -5080,15 +5080,15 @@ packages:
   /@types/ms@0.7.34:
     resolution: {integrity: sha512-nG96G3Wp6acyAgJqGasjODb+acrI7KltPiRxzHPXnP3NgI28bpQDRv53olbqGXbfcgF5aiiHmO3xpwEpS5Ld9g==}
 
-  /@types/node@20.9.2:
-    resolution: {integrity: sha512-WHZXKFCEyIUJzAwh3NyyTHYSR35SevJ6mZ1nWwJafKtiQbqRTIKSRcw3Ma3acqgsent3RRDqeVwpHntMk+9irg==}
+  /@types/node@20.9.3:
+    resolution: {integrity: sha512-nk5wXLAXGBKfrhLB0cyHGbSqopS+nz0BUgZkUQqSHSSgdee0kssp1IAqlQOu333bW+gMNs2QREx7iynm19Abxw==}
     dependencies:
       undici-types: 5.26.5
 
   /@types/nodemailer@6.4.14:
     resolution: {integrity: sha512-fUWthHO9k9DSdPCSPRqcu6TWhYyxTBg382vlNIttSe9M7XfsT06y0f24KHXtbnijPGGRIcVvdKHTNikOI6qiHA==}
     dependencies:
-      '@types/node': 20.9.2
+      '@types/node': 20.9.3
     dev: true
 
   /@types/normalize-package-data@2.4.4:
@@ -5121,7 +5121,7 @@ packages:
   /@types/responselike@1.0.3:
     resolution: {integrity: sha512-H/+L+UkTV33uf49PH5pCAUBVPNj2nDBXTN+qS1dOwyyg24l3CcicicCA7ca+HMvJBZcFgl5r8e+RR6elsb4Lyw==}
     dependencies:
-      '@types/node': 20.9.2
+      '@types/node': 20.9.3
     dev: true
 
   /@types/scheduler@0.16.6:
@@ -5130,14 +5130,14 @@ packages:
   /@types/tar@6.1.9:
     resolution: {integrity: sha512-T3+O+OQd9cdGmOXuKQY9+B0ceZHRlGVPQ7M5QZqkaPyP/vWnxPXM2aCegq8GP/n1n9dBfq2EBUqCSKKjQAVOPA==}
     dependencies:
-      '@types/node': 20.9.2
+      '@types/node': 20.9.3
       minipass: 4.2.8
     dev: false
 
   /@types/through@0.0.33:
     resolution: {integrity: sha512-HsJ+z3QuETzP3cswwtzt2vEIiHBk/dCcHGhbmG5X3ecnwFD/lPrMpliGXxSCg03L9AhrdwA4Oz/qfspkDW+xGQ==}
     dependencies:
-      '@types/node': 20.9.2
+      '@types/node': 20.9.3
     dev: true
 
   /@types/tinycolor2@1.4.6:
@@ -5151,14 +5151,14 @@ packages:
   /@types/ws@8.5.9:
     resolution: {integrity: sha512-jbdrY0a8lxfdTp/+r7Z4CkycbOFN8WX+IOchLJr3juT/xzbJ8URyTVSJ/hvNdadTgM1mnedb47n+Y31GsFnQlg==}
     dependencies:
-      '@types/node': 20.9.2
+      '@types/node': 20.9.3
     dev: true
 
   /@types/yauzl@2.10.3:
     resolution: {integrity: sha512-oJoftv0LSuaDZE3Le4DbKX+KS9G36NzOeSap90UIK0yMA/NhKJhqlSGtNDORNRaIbQfzjXDrQa0ytJ6mNRGz/Q==}
     requiresBuild: true
     dependencies:
-      '@types/node': 20.9.2
+      '@types/node': 20.9.3
     dev: false
     optional: true
 
@@ -11637,7 +11637,7 @@ packages:
   /ts-interface-checker@0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
 
-  /ts-node@10.9.1(@types/node@20.9.2)(typescript@5.3.2):
+  /ts-node@10.9.1(@types/node@20.9.3)(typescript@5.3.2):
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -11656,7 +11656,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 20.9.2
+      '@types/node': 20.9.3
       acorn: 8.11.2
       acorn-walk: 8.3.0
       arg: 4.1.3
