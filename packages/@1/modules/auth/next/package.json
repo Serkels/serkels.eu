@@ -24,7 +24,7 @@
     "@1.modules/core": "workspace:*",
     "@1.modules/profile.domain": "workspace:*",
     "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
-    "@trpc/client": "10.44.0",
+    "@trpc/client": "10.44.1",
     "await-to-js": "3.0.0",
     "next": "14.0.3",
     "next-auth": "4.24.5",
