@@ -915,8 +915,8 @@ importers:
         specifier: 0.2.2
         version: 0.2.2(react@18.2.0)
       react-use:
-        specifier: 17.4.0
-        version: 17.4.0(react-dom@18.2.0)(react@18.2.0)
+        specifier: 17.4.1
+        version: 17.4.1(react-dom@18.2.0)(react@18.2.0)
       tailwind-variants:
         specifier: 0.1.18
         version: 0.1.18(tailwindcss@3.3.5)
@@ -1395,8 +1395,8 @@ importers:
         specifier: 6.2.1
         version: 6.2.1(react@18.2.0)
       react-use:
-        specifier: 17.4.0
-        version: 17.4.0(react-dom@18.2.0)(react@18.2.0)
+        specifier: 17.4.1
+        version: 17.4.1(react-dom@18.2.0)(react@18.2.0)
       tailwind-variants:
         specifier: 0.1.18
         version: 0.1.18(tailwindcss@3.3.5)
@@ -10384,8 +10384,8 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /react-use@17.4.0(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-TgbNTCA33Wl7xzIJegn1HndB4qTS9u03QUwyNycUnXaweZkE4Kq2SB+Yoxx8qbshkZGYBDvUXbXWRUmQDcZZ/Q==}
+  /react-use@17.4.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-f3EdGM5ea+2EEIkfgggE+Jhza7uEek8aEMTpd1TQnyqGAD4wew3CMVshiXEP6kstjBE4XUGoKVxttqio76ijNw==}
     peerDependencies:
       react: ^16.8.0  || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0  || ^17.0.0 || ^18.0.0
