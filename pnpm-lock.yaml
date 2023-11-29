@@ -177,8 +177,8 @@ importers:
         specifier: 2.4.5
         version: 2.4.5(react@18.2.0)
       framer-motion:
-        specifier: 10.16.5
-        version: 10.16.5(react-dom@18.2.0)(react@18.2.0)
+        specifier: 10.16.7
+        version: 10.16.7(react-dom@18.2.0)(react@18.2.0)
       next:
         specifier: 14.0.3
         version: 14.0.3(react-dom@18.2.0)(react@18.2.0)
@@ -1478,8 +1478,8 @@ importers:
         specifier: 2.4.5
         version: 2.4.5(react@18.2.0)
       framer-motion:
-        specifier: 10.16.5
-        version: 10.16.5(react-dom@18.2.0)(react@18.2.0)
+        specifier: 10.16.7
+        version: 10.16.7(react-dom@18.2.0)(react@18.2.0)
       react-aria-components:
         specifier: 1.0.0-rc.0
         version: 1.0.0-rc.0(react-dom@18.2.0)(react@18.2.0)
@@ -1767,8 +1767,8 @@ importers:
         specifier: 2.4.5
         version: 2.4.5(react@18.2.0)
       framer-motion:
-        specifier: 10.16.5
-        version: 10.16.5(react-dom@18.2.0)(react@18.2.0)
+        specifier: 10.16.7
+        version: 10.16.7(react-dom@18.2.0)(react@18.2.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -7388,8 +7388,8 @@ packages:
       map-cache: 0.2.2
     dev: true
 
-  /framer-motion@10.16.5(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-GEzVjOYP2MIpV9bT/GbhcsBNoImG3/2X3O/xVNWmktkv9MdJ7P/44zELm/7Fjb+O3v39SmKFnoDQB32giThzpg==}
+  /framer-motion@10.16.7(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-iJrX0RXxbRI3qSvDjMIp0hj+Rq6eAx+GotpX8fnZhI88Texkhlj5QHifY4BdokCh4C0oYKPsyf0wL+kwM6/taw==}
     peerDependencies:
       react: ^18.0.0
       react-dom: ^18.0.0
