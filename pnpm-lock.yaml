@@ -487,8 +487,8 @@ importers:
         specifier: 0.0.7
         version: 0.0.7(react@18.2.0)
       '@react-email/heading':
-        specifier: 0.0.9
-        version: 0.0.9(@types/react@18.2.41)
+        specifier: 0.0.11
+        version: 0.0.11(@types/react@18.2.41)(react@18.2.0)
       '@react-email/html':
         specifier: 0.0.6
         version: 0.0.6(react@18.2.0)
@@ -3657,9 +3657,11 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@react-email/heading@0.0.9(@types/react@18.2.41):
-    resolution: {integrity: sha512-xzkcGlm+/aFrNlJZBKzxRKkRYJ2cRx92IqmSKAuGnwuKQ/uMKomXzPsHPu3Dclmnhn3wVKj4uprkgQOoxP6uXQ==}
-    engines: {node: '>=16.0.0'}
+  /@react-email/heading@0.0.11(@types/react@18.2.41)(react@18.2.0):
+    resolution: {integrity: sha512-EF5ZtRCxhHPw3m+8iibKKg0RAvAeHj1AP68sjU7s6+J+kvRgllr/E972Wi5Y8UvcIGossCvpX1WrSMDzeB4puA==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      react: 18.2.0
     dependencies:
       '@radix-ui/react-slot': 1.0.2(@types/react@18.2.41)(react@18.2.0)
       react: 18.2.0
