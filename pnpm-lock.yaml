@@ -502,8 +502,8 @@ importers:
         specifier: 0.0.8
         version: 0.0.8(react@18.2.0)
       '@react-email/text':
-        specifier: 0.0.6
-        version: 0.0.6(react@18.2.0)
+        specifier: 0.0.7
+        version: 0.0.7(react@18.2.0)
       '@types/react':
         specifier: 18.2.41
         version: 18.2.41
@@ -3725,8 +3725,8 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: true
 
-  /@react-email/text@0.0.6(react@18.2.0):
-    resolution: {integrity: sha512-PDUTAD1PjlzXFOIUrR1zuV2xxguL62yne5YLcn1k+u/dVUyzn6iU/5lFShxCfzuh3QDWCf4+JRNnXN9rmV6jzw==}
+  /@react-email/text@0.0.7(react@18.2.0):
+    resolution: {integrity: sha512-eHCx0mdllGcgK9X7wiLKjNZCBRfxRVNjD3NNYRmOc3Icbl8M9JHriJIfxBuGCmGg2UAORK5P3KmaLQ8b99/pbA==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       react: 18.2.0
