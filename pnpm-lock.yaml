@@ -493,8 +493,8 @@ importers:
         specifier: 0.0.7
         version: 0.0.7(react@18.2.0)
       '@react-email/img':
-        specifier: 0.0.6
-        version: 0.0.6(react@18.2.0)
+        specifier: 0.0.7
+        version: 0.0.7(react@18.2.0)
       '@react-email/link':
         specifier: 0.0.6
         version: 0.0.6(react@18.2.0)
@@ -3678,8 +3678,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@react-email/img@0.0.6(react@18.2.0):
-    resolution: {integrity: sha512-Wd7xKI3b1Jvb2ZEHyVpJ9D98u0GHrRl+578b8LV24PavM/65V61Q5LN5Fr9sAhj+4VGqnHDIVeXIYEzVbWaa3Q==}
+  /@react-email/img@0.0.7(react@18.2.0):
+    resolution: {integrity: sha512-up9tM2/dJ24u/CFjcvioKbyGuPw1yeJg605QA7VkrygEhd0CoQEjjgumfugpJ+VJgIt4ZjT9xMVCK5QWTIWoaA==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       react: 18.2.0
