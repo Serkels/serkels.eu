@@ -45,7 +45,7 @@
     "date-fns": "2.30.0",
     "formik": "2.4.5",
     "framer-motion": "10.16.12",
-    "ts-pattern": "5.0.5",
+    "ts-pattern": "5.0.6",
     "react-aria-components": "1.0.0-rc.0",
     "tailwind-variants": "0.1.18"
   },

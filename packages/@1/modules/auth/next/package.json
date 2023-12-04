@@ -29,7 +29,7 @@
     "next": "14.0.3",
     "next-auth": "4.24.5",
     "superjson": "2.2.1",
-    "ts-pattern": "5.0.5",
+    "ts-pattern": "5.0.6",
     "zod": "3.22.4"
   },
   "devDependencies": {
