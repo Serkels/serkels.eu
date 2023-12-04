@@ -202,7 +202,7 @@ importers:
         version: 18.2.0(react@18.2.0)
       react-markdown:
         specifier: 9.0.1
-        version: 9.0.1(@types/react@18.2.41)(react@18.2.0)
+        version: 9.0.1(@types/react@18.2.42)(react@18.2.0)
       react-nest:
         specifier: 0.1.10
         version: 0.1.10(patch_hash=oxxc2okcxsefs22szuakzwvvp4)(react-dom@18.2.0)(react@18.2.0)
@@ -256,8 +256,8 @@ importers:
         specifier: 0.2.3
         version: 0.2.3
       '@types/react':
-        specifier: 18.2.41
-        version: 18.2.41
+        specifier: 18.2.42
+        version: 18.2.42
       '@types/react-dom':
         specifier: 18.2.17
         version: 18.2.17
@@ -380,8 +380,8 @@ importers:
         specifier: 6.4.14
         version: 6.4.14
       '@types/react':
-        specifier: 18.2.41
-        version: 18.2.41
+        specifier: 18.2.42
+        version: 18.2.42
 
   packages/@1/infra/trpc:
     dependencies:
@@ -488,7 +488,7 @@ importers:
         version: 0.0.7(react@18.2.0)
       '@react-email/heading':
         specifier: 0.0.11
-        version: 0.0.11(@types/react@18.2.41)(react@18.2.0)
+        version: 0.0.11(@types/react@18.2.42)(react@18.2.0)
       '@react-email/html':
         specifier: 0.0.7
         version: 0.0.7(react@18.2.0)
@@ -505,8 +505,8 @@ importers:
         specifier: 0.0.7
         version: 0.0.7(react@18.2.0)
       '@types/react':
-        specifier: 18.2.41
-        version: 18.2.41
+        specifier: 18.2.42
+        version: 18.2.42
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -573,8 +573,8 @@ importers:
         specifier: workspace:*
         version: link:../../../../@douglasduteil/datatypes...hours-to-seconds
       '@types/react':
-        specifier: 18.2.41
-        version: 18.2.41
+        specifier: 18.2.42
+        version: 18.2.42
       '@types/react-dom':
         specifier: 18.2.17
         version: 18.2.17
@@ -672,8 +672,8 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       '@types/react':
-        specifier: 18.2.41
-        version: 18.2.41
+        specifier: 18.2.42
+        version: 18.2.42
       prettier:
         specifier: 3.1.0
         version: 3.1.0
@@ -774,8 +774,8 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       '@types/react':
-        specifier: 18.2.41
-        version: 18.2.41
+        specifier: 18.2.42
+        version: 18.2.42
       prettier:
         specifier: 3.1.0
         version: 3.1.0
@@ -937,8 +937,8 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       '@types/react':
-        specifier: 18.2.41
-        version: 18.2.41
+        specifier: 18.2.42
+        version: 18.2.42
       prettier:
         specifier: 3.1.0
         version: 3.1.0
@@ -1069,8 +1069,8 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       '@types/react':
-        specifier: 18.2.41
-        version: 18.2.41
+        specifier: 18.2.42
+        version: 18.2.42
       prettier:
         specifier: 3.1.0
         version: 3.1.0
@@ -1183,8 +1183,8 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       '@types/react':
-        specifier: 18.2.41
-        version: 18.2.41
+        specifier: 18.2.42
+        version: 18.2.42
       prettier:
         specifier: 3.1.0
         version: 3.1.0
@@ -1306,8 +1306,8 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       '@types/react':
-        specifier: 18.2.41
-        version: 18.2.41
+        specifier: 18.2.42
+        version: 18.2.42
       prettier:
         specifier: 3.1.0
         version: 3.1.0
@@ -1417,8 +1417,8 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       '@types/react':
-        specifier: 18.2.41
-        version: 18.2.41
+        specifier: 18.2.42
+        version: 18.2.42
       prettier:
         specifier: 3.1.0
         version: 3.1.0
@@ -1506,8 +1506,8 @@ importers:
         specifier: 4.36.1
         version: 4.36.1(react-dom@18.2.0)(react@18.2.0)
       '@types/react':
-        specifier: 18.2.41
-        version: 18.2.41
+        specifier: 18.2.42
+        version: 18.2.42
       '@types/react-dom':
         specifier: 18.2.17
         version: 18.2.17
@@ -1617,8 +1617,8 @@ importers:
         version: 23.1.0(react-dom@18.2.0)(react@18.2.0)
     devDependencies:
       '@types/react':
-        specifier: 18.2.41
-        version: 18.2.41
+        specifier: 18.2.42
+        version: 18.2.42
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -1801,8 +1801,8 @@ importers:
         version: 5.0.6
     devDependencies:
       '@types/react':
-        specifier: 18.2.41
-        version: 18.2.41
+        specifier: 18.2.42
+        version: 18.2.42
       prettier:
         specifier: 3.1.0
         version: 3.1.0
@@ -1850,8 +1850,8 @@ importers:
         specifier: workspace:@1.config/typescript@*
         version: link:../../@1/config/typescript
       '@types/react':
-        specifier: 18.2.41
-        version: 18.2.41
+        specifier: 18.2.42
+        version: 18.2.42
       '@types/react-dom':
         specifier: 18.2.17
         version: 18.2.17
@@ -2919,7 +2919,7 @@ packages:
     resolution: {integrity: sha512-Mt2q+GNJpU2vFn6kif24oRSBQv1KOkYaterQsi0k2/lA+dLvhRX6Lm26gon6PYHwUM8/h8KRgXIUMU0PCLB6bw==}
     requiresBuild: true
 
-  /@radix-ui/react-compose-refs@1.0.1(@types/react@18.2.41)(react@18.2.0):
+  /@radix-ui/react-compose-refs@1.0.1(@types/react@18.2.42)(react@18.2.0):
     resolution: {integrity: sha512-fDSBgd44FKHa1FRMU59qBMPFcl2PZE+2nmqunj+BWFyYYjnhIDWL2ItDs3rrbJDQOtzt5nIebLCQc4QRfz6LJw==}
     peerDependencies:
       '@types/react': '*'
@@ -2929,11 +2929,11 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.23.5
-      '@types/react': 18.2.41
+      '@types/react': 18.2.42
       react: 18.2.0
     dev: false
 
-  /@radix-ui/react-slot@1.0.2(@types/react@18.2.41)(react@18.2.0):
+  /@radix-ui/react-slot@1.0.2(@types/react@18.2.42)(react@18.2.0):
     resolution: {integrity: sha512-YeTpuq4deV+6DusvVUW4ivBgnkHwECUu0BiN43L5UCDFgdhsRUWAghhTF5MbvNTPzmiFOx90asDSUjWuCNapwg==}
     peerDependencies:
       '@types/react': '*'
@@ -2943,8 +2943,8 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.23.5
-      '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.41)(react@18.2.0)
-      '@types/react': 18.2.41
+      '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.42)(react@18.2.0)
+      '@types/react': 18.2.42
       react: 18.2.0
     dev: false
 
@@ -3657,13 +3657,13 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@react-email/heading@0.0.11(@types/react@18.2.41)(react@18.2.0):
+  /@react-email/heading@0.0.11(@types/react@18.2.42)(react@18.2.0):
     resolution: {integrity: sha512-EF5ZtRCxhHPw3m+8iibKKg0RAvAeHj1AP68sjU7s6+J+kvRgllr/E972Wi5Y8UvcIGossCvpX1WrSMDzeB4puA==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       react: 18.2.0
     dependencies:
-      '@radix-ui/react-slot': 1.0.2(@types/react@18.2.41)(react@18.2.0)
+      '@radix-ui/react-slot': 1.0.2(@types/react@18.2.42)(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
       - '@types/react'
@@ -5017,7 +5017,7 @@ packages:
   /@types/hoist-non-react-statics@3.3.5:
     resolution: {integrity: sha512-SbcrWzkKBw2cdwRTwQAswfpB9g9LJWfjtUeW/jvNwbhC8cpmmNYVePa+ncbUe0rGTQ7G3Ff6mYUN2VMfLVr+Sg==}
     dependencies:
-      '@types/react': 18.2.41
+      '@types/react': 18.2.42
       hoist-non-react-statics: 3.3.2
     dev: false
 
@@ -5087,11 +5087,11 @@ packages:
   /@types/react-dom@18.2.17:
     resolution: {integrity: sha512-rvrT/M7Df5eykWFxn6MYt5Pem/Dbyc1N8Y0S9Mrkw2WFCRiqUgw9P7ul2NpwsXCSM1DVdENzdG9J5SreqfAIWg==}
     dependencies:
-      '@types/react': 18.2.41
+      '@types/react': 18.2.42
     dev: true
 
-  /@types/react@18.2.41:
-    resolution: {integrity: sha512-CwOGr/PiLiNBxEBqpJ7fO3kocP/2SSuC9fpH5K7tusrg4xPSRT/193rzolYwQnTN02We/ATXKnb6GqA5w4fRxw==}
+  /@types/react@18.2.42:
+    resolution: {integrity: sha512-c1zEr96MjakLYus/wPnuWDo1/zErfdU9rNsIGmE+NV71nx88FG9Ttgo5dqorXTu/LImX2f63WBP986gJkMPNbA==}
     dependencies:
       '@types/prop-types': 15.7.11
       '@types/scheduler': 0.16.8
@@ -10467,14 +10467,14 @@ packages:
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
-  /react-markdown@9.0.1(@types/react@18.2.41)(react@18.2.0):
+  /react-markdown@9.0.1(@types/react@18.2.42)(react@18.2.0):
     resolution: {integrity: sha512-186Gw/vF1uRkydbsOIkcGXw7aHq0sZOCRFFjGrr7b9+nVZg4UfA4enXCaxm4fUzecU38sWfrNDitGhshuU7rdg==}
     peerDependencies:
       '@types/react': '>=18'
       react: '>=18'
     dependencies:
       '@types/hast': 3.0.3
-      '@types/react': 18.2.41
+      '@types/react': 18.2.42
       devlop: 1.1.0
       hast-util-to-jsx-runtime: 2.3.0
       html-url-attributes: 3.0.0
