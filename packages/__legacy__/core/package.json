@@ -19,6 +19,6 @@
   "devDependencies": {
     "@1/typescript-config": "workspace:@1.config/typescript@*",
     "prettier": "3.1.0",
-    "typescript": "5.3.2"
+    "typescript": "5.3.3"
   }
 }
