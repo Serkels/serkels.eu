@@ -1644,8 +1644,8 @@ importers:
         specifier: 18.2.0
         version: 18.2.0
       reflect-metadata:
-        specifier: 0.1.14
-        version: 0.1.14
+        specifier: 0.2.0
+        version: 0.2.0
       rich-domain:
         specifier: 1.19.0
         version: 1.19.0
@@ -1727,8 +1727,8 @@ importers:
         specifier: 18.2.0
         version: 18.2.0
       reflect-metadata:
-        specifier: 0.1.14
-        version: 0.1.14
+        specifier: 0.2.0
+        version: 0.2.0
       tsyringe:
         specifier: 4.8.0
         version: 4.8.0
@@ -10708,8 +10708,8 @@ packages:
       strip-indent: 3.0.0
     dev: true
 
-  /reflect-metadata@0.1.14:
-    resolution: {integrity: sha512-ZhYeb6nRaXCfhnndflDK8qI6ZQ/YcWZCISRAWICW9XYqMUwjZM9Z0DveWX/ABN01oxSHwVxKQmxeYZSsm0jh5A==}
+  /reflect-metadata@0.2.0:
+    resolution: {integrity: sha512-vUN0wuk3MuhSVMfU/ImnPQAK8QZcXJ339DtVsP3jDscxCe6dT+PsOe3J1BYS9Ec2Fd4oC6ry6bCBebzTya0IYw==}
     dev: false
 
   /reflect.getprototypeof@1.0.4:
