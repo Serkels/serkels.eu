@@ -7,7 +7,7 @@
   "dependencies": {
     "@iconify/tailwind": "0.1.4",
     "@iconify/tools": "3.0.7",
-    "@iconify/utils": "2.1.12",
+    "@iconify/utils": "2.1.13",
     "autoprefixer": "10.4.16",
     "prettier-plugin-tailwindcss": "0.5.9",
     "tailwind-variants": "0.1.18",
