@@ -10,7 +10,7 @@
     "modern-errors-serialize": "6.0.0",
     "react": "18.2.0",
     "reflect-metadata": "0.2.1",
-    "rich-domain": "1.19.0",
+    "rich-domain": "1.19.1",
     "superjson": "2.2.1",
     "tsyringe": "4.8.0",
     "uuid": "9.0.1",
