@@ -1647,8 +1647,8 @@ importers:
         specifier: 0.2.1
         version: 0.2.1
       rich-domain:
-        specifier: 1.19.0
-        version: 1.19.0
+        specifier: 1.19.1
+        version: 1.19.1
       superjson:
         specifier: 2.2.1
         version: 2.2.1
@@ -10869,8 +10869,8 @@ packages:
     resolution: {integrity: sha512-U9nH88a3fc/ekCF1l0/UP1IosiuIjyTh7hBvXVMHYgVcfGvt897Xguj2UOLDeI5BG2m7/uwyaLVT6fbtCwTyzw==}
     engines: {iojs: '>=1.0.0', node: '>=0.10.0'}
 
-  /rich-domain@1.19.0:
-    resolution: {integrity: sha512-cIzhLtuHA+DFBphj9RzkhtoYQosJmiDyf6qmRuKrGcCehQ2Dt7+J3UgA+AbB30ThQyuy+m5L+FBJbDF8YNjJyw==}
+  /rich-domain@1.19.1:
+    resolution: {integrity: sha512-llO9SxD12gLx9W+2/xBt2a7lP2owBMyVqNfxNAHs3bYfTAS03/+XqLFVTTHaLb20q7viz8ftIbe39n+ttBfQpA==}
     engines: {node: '>=16.x <19'}
     dev: false
 
