@@ -1706,8 +1706,8 @@ importers:
         specifier: 4.1.12
         version: 4.1.12
       fast-check:
-        specifier: 3.14.0
-        version: 3.14.0
+        specifier: 3.15.0
+        version: 3.15.0
       prettier:
         specifier: 3.1.1
         version: 3.1.1
@@ -1716,7 +1716,7 @@ importers:
         version: 5.3.3
       zod-fast-check:
         specifier: 0.10.1
-        version: 0.10.1(fast-check@3.14.0)(zod@3.22.4)
+        version: 0.10.1(fast-check@3.15.0)(zod@3.22.4)
 
   packages/__legacy__/next-tsyringe:
     dependencies:
@@ -7224,8 +7224,8 @@ packages:
       - supports-color
     dev: false
 
-  /fast-check@3.14.0:
-    resolution: {integrity: sha512-9Z0zqASzDNjXBox/ileV/fd+4P+V/f3o4shM6QawvcdLFh8yjPG4h5BrHUZ8yzY6amKGDTAmRMyb/JZqe+dCgw==}
+  /fast-check@3.15.0:
+    resolution: {integrity: sha512-iBz6c+EXL6+nI931x/sbZs1JYTZtLG6Cko0ouS8LRTikhDR7+wZk4TYzdRavlnByBs2G6+nuuJ7NYL9QplNt8Q==}
     engines: {node: '>=8.0.0'}
     dependencies:
       pure-rand: 6.0.4
@@ -12421,13 +12421,13 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
-  /zod-fast-check@0.10.1(fast-check@3.14.0)(zod@3.22.4):
+  /zod-fast-check@0.10.1(fast-check@3.15.0)(zod@3.22.4):
     resolution: {integrity: sha512-P+rqsg//CQZSFaG61QNRdnrDn8ARTxoMi4P0/GqRvyBjIiVXQCHB6R8yqkAwQNNSFxMD9cdDoPtOZRBe0rfwNg==}
     peerDependencies:
       fast-check: '>2.23.0 <4.0.0'
       zod: ^3.18.0
     dependencies:
-      fast-check: 3.14.0
+      fast-check: 3.15.0
       zod: 3.22.4
     dev: true
 
