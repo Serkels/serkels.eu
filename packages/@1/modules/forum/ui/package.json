@@ -31,7 +31,7 @@
     "@1.modules/profile.domain": "workspace:*",
     "@1.modules/profile.ui": "workspace:*",
     "@1.ui/react": "workspace:*",
-    "@react-hookz/web": "23.1.0",
+    "@react-hookz/web": "24.0.2",
     "@tanstack/react-query": "4.36.1",
     "constate": "3.3.2",
     "formik": "2.4.5",
