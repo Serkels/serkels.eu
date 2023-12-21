@@ -37,7 +37,7 @@
     "@vercel/analytics": "1.1.1",
     "await-to-js": "3.0.0",
     "constate": "3.3.2",
-    "date-fns": "3.0.4",
+    "date-fns": "3.0.5",
     "debug": "4.3.4",
     "formik": "2.4.5",
     "framer-motion": "10.16.16",
