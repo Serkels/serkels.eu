@@ -23,7 +23,7 @@
     "@1.modules/bookmark.domain": "workspace:*",
     "@1.modules/trpc": "workspace:*",
     "@trpc/server": "10.44.1",
-    "date-fns": "3.0.3",
+    "date-fns": "3.0.4",
     "ts-pattern": "5.0.6",
     "zod": "3.22.4"
   },
