@@ -23,7 +23,7 @@
     "@1.modules/inbox.domain": "workspace:*",
     "@1.modules/trpc": "workspace:*",
     "@trpc/server": "10.44.1",
-    "date-fns": "3.0.3",
+    "date-fns": "3.0.4",
     "typed-emitter": "2.1.0",
     "zod": "3.22.4"
   },
