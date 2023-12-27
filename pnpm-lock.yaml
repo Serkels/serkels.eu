@@ -51,10 +51,10 @@ importers:
         version: 1.0.0(hono@3.11.11)
       '@hono/trpc-server':
         specifier: 0.1.0
-        version: 0.1.0(@trpc/server@10.44.1)(hono@3.11.11)
+        version: 0.1.0(@trpc/server@10.45.0)(hono@3.11.11)
       '@trpc/server':
-        specifier: 10.44.1
-        version: 10.44.1
+        specifier: 10.45.0
+        version: 10.45.0
       dotenv:
         specifier: 16.3.1
         version: 16.3.1
@@ -153,11 +153,11 @@ importers:
         specifier: 4.36.1
         version: 4.36.1(react-dom@18.2.0)(react@18.2.0)
       '@trpc/client':
-        specifier: 10.44.1
-        version: 10.44.1(@trpc/server@10.44.1)
+        specifier: 10.45.0
+        version: 10.45.0(@trpc/server@10.45.0)
       '@trpc/react-query':
-        specifier: 10.44.1
-        version: 10.44.1(@tanstack/react-query@4.36.1)(@trpc/client@10.44.1)(@trpc/server@10.44.1)(react-dom@18.2.0)(react@18.2.0)
+        specifier: 10.45.0
+        version: 10.45.0(@tanstack/react-query@4.36.1)(@trpc/client@10.45.0)(@trpc/server@10.45.0)(react-dom@18.2.0)(react@18.2.0)
       '@vercel/analytics':
         specifier: 1.1.1
         version: 1.1.1
@@ -413,8 +413,8 @@ importers:
         specifier: workspace:*
         version: link:../../modules/trpc
       '@trpc/server':
-        specifier: 10.44.1
-        version: 10.44.1
+        specifier: 10.45.0
+        version: 10.45.0
       superjson:
         specifier: 2.2.1
         version: 2.2.1
@@ -444,8 +444,8 @@ importers:
         specifier: workspace:*
         version: link:../../../../@douglasduteil/nextauth...trpc.prisma
       '@trpc/server':
-        specifier: 10.44.1
-        version: 10.44.1
+        specifier: 10.45.0
+        version: 10.45.0
       await-to-js:
         specifier: 3.0.0
         version: 3.0.0
@@ -542,8 +542,8 @@ importers:
         specifier: workspace:*
         version: link:../../../../@douglasduteil/nextauth...trpc.prisma
       '@trpc/client':
-        specifier: 10.44.1
-        version: 10.44.1(@trpc/server@10.44.1)
+        specifier: 10.45.0
+        version: 10.45.0(@trpc/server@10.45.0)
       await-to-js:
         specifier: 3.0.0
         version: 3.0.0
@@ -591,8 +591,8 @@ importers:
         specifier: workspace:*
         version: link:../../trpc
       '@trpc/server':
-        specifier: 10.44.1
-        version: 10.44.1
+        specifier: 10.45.0
+        version: 10.45.0
       date-fns:
         specifier: 3.0.6
         version: 3.0.6
@@ -696,8 +696,8 @@ importers:
         specifier: 0.12.1
         version: 0.12.1(zod@3.22.4)
       '@trpc/server':
-        specifier: 10.44.1
-        version: 10.44.1
+        specifier: 10.45.0
+        version: 10.45.0
       zod:
         specifier: 3.22.4
         version: 3.22.4
@@ -817,8 +817,8 @@ importers:
         specifier: workspace:*
         version: link:../../trpc
       '@trpc/server':
-        specifier: 10.44.1
-        version: 10.44.1
+        specifier: 10.45.0
+        version: 10.45.0
       date-fns:
         specifier: 3.0.6
         version: 3.0.6
@@ -958,8 +958,8 @@ importers:
         specifier: workspace:*
         version: link:../../trpc
       '@trpc/server':
-        specifier: 10.44.1
-        version: 10.44.1
+        specifier: 10.45.0
+        version: 10.45.0
       date-fns:
         specifier: 3.0.6
         version: 3.0.6
@@ -1090,8 +1090,8 @@ importers:
         specifier: workspace:*
         version: link:../../trpc
       '@trpc/server':
-        specifier: 10.44.1
-        version: 10.44.1
+        specifier: 10.45.0
+        version: 10.45.0
       date-fns:
         specifier: 3.0.6
         version: 3.0.6
@@ -1204,8 +1204,8 @@ importers:
         specifier: workspace:*
         version: link:../../trpc
       '@trpc/server':
-        specifier: 10.44.1
-        version: 10.44.1
+        specifier: 10.45.0
+        version: 10.45.0
       date-fns:
         specifier: 3.0.6
         version: 3.0.6
@@ -1333,8 +1333,8 @@ importers:
         specifier: workspace:*
         version: link:../../../../@douglasduteil/nextauth...trpc.prisma
       '@trpc/server':
-        specifier: 10.44.1
-        version: 10.44.1
+        specifier: 10.45.0
+        version: 10.45.0
       zod:
         specifier: 3.22.4
         version: 3.22.4
@@ -1444,8 +1444,8 @@ importers:
         specifier: workspace:*
         version: link:../../../@douglasduteil/nextauth...trpc.prisma
       '@trpc/server':
-        specifier: 10.44.1
-        version: 10.44.1
+        specifier: 10.45.0
+        version: 10.45.0
       superjson:
         specifier: 2.2.1
         version: 2.2.1
@@ -1579,11 +1579,11 @@ importers:
         specifier: 5.7.1
         version: 5.7.1(prisma@5.7.1)
       '@trpc/client':
-        specifier: 10.44.1
-        version: 10.44.1(@trpc/server@10.44.1)
+        specifier: 10.45.0
+        version: 10.45.0(@trpc/server@10.45.0)
       '@trpc/server':
-        specifier: 10.44.1
-        version: 10.44.1
+        specifier: 10.45.0
+        version: 10.45.0
       next:
         specifier: 14.0.4
         version: 14.0.4(react-dom@18.2.0)(react@18.2.0)
@@ -2687,14 +2687,14 @@ packages:
       toucan-js: 3.3.1
     dev: false
 
-  /@hono/trpc-server@0.1.0(@trpc/server@10.44.1)(hono@3.11.11):
+  /@hono/trpc-server@0.1.0(@trpc/server@10.45.0)(hono@3.11.11):
     resolution: {integrity: sha512-tgXG/ndgHxLqC09o1bwq8SzLLgzwoCr6KBRDdz9l0k7p0yuW5h67oVSUxCbmFp94hP+ahdIyqnRL84Aw8GvZxQ==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       '@trpc/server': ^10.10.0
       hono: 3.*
     dependencies:
-      '@trpc/server': 10.44.1
+      '@trpc/server': 10.45.0
       hono: 3.11.11
     dev: false
 
@@ -5119,33 +5119,32 @@ packages:
     resolution: {integrity: sha512-C5Mc6rdnsaJDjO3UpGW/CQTHtCKaYlScZTly4JIu97Jxo/odCiH0ITnDXSJPTOrEKk/ycSZ0AOgTmkDtkOsvIA==}
     dev: true
 
-  /@trpc/client@10.44.1(@trpc/server@10.44.1):
-    resolution: {integrity: sha512-vTWsykNcgz1LnwePVl2fKZnhvzP9N3GaaLYPkfGINo314ZOS0OBqe9x0ytB2LLUnRVTAAZ2WoONzARd8nHiqrA==}
+  /@trpc/client@10.45.0(@trpc/server@10.45.0):
+    resolution: {integrity: sha512-m091R1qte9rvkvL8N1e/mzrbb8S4gb+Q4ZNJnEGDgd7kic/6a8DFgSciBTiCoSp0YwOTVhyQzSrrA/sZI6PhBg==}
     peerDependencies:
-      '@trpc/server': 10.44.1
+      '@trpc/server': 10.45.0
     dependencies:
-      '@trpc/server': 10.44.1
+      '@trpc/server': 10.45.0
     dev: false
 
-  /@trpc/react-query@10.44.1(@tanstack/react-query@4.36.1)(@trpc/client@10.44.1)(@trpc/server@10.44.1)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-Sgi/v0YtdunOXjBRi7om9gILGkOCFYXPzn5KqLuEHiZw5dr5w4qGHFwCeMAvndZxmwfblJrl1tk2AznmsVu8MA==}
+  /@trpc/react-query@10.45.0(@tanstack/react-query@4.36.1)(@trpc/client@10.45.0)(@trpc/server@10.45.0)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-MMc2pLwoaLZVwvLQyzJv3uEmdG3lORhifhVzR/drtavwDYwt+OEvH0w3s1zC7RaDdFpc6Nj2kkpHmdoU7BlAAw==}
     peerDependencies:
       '@tanstack/react-query': ^4.18.0
-      '@trpc/client': 10.44.1
-      '@trpc/server': 10.44.1
+      '@trpc/client': 10.45.0
+      '@trpc/server': 10.45.0
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
     dependencies:
       '@tanstack/react-query': 4.36.1(react-dom@18.2.0)(react@18.2.0)
-      '@trpc/client': 10.44.1(@trpc/server@10.44.1)
-      '@trpc/server': 10.44.1
+      '@trpc/client': 10.45.0(@trpc/server@10.45.0)
+      '@trpc/server': 10.45.0
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  /@trpc/server@10.44.1:
-    resolution: {integrity: sha512-mF7B+K6LjuboX8I1RZgKE5GA/fJhsJ8tKGK2UBt3Bwik7hepEPb4NJgNr7vO6BK5IYwPdBLRLTctRw6XZx0sRg==}
-    engines: {node: '>=18.0.0'}
+  /@trpc/server@10.45.0:
+    resolution: {integrity: sha512-2Fwzv6nqpE0Ie/G7PeS0EVR89zLm+c1Mw7T+RAGtU807j4oaUx0zGkBXTu5u9AI+j+BYNN2GZxJcuDTAecbr1A==}
     dev: false
 
   /@trysound/sax@0.2.0:

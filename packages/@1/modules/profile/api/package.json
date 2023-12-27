@@ -24,7 +24,7 @@
     "@1.modules/profile.domain": "workspace:*",
     "@1.modules/trpc": "workspace:*",
     "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
-    "@trpc/server": "10.44.1",
+    "@trpc/server": "10.45.0",
     "zod": "3.22.4"
   },
   "devDependencies": {
