@@ -9,7 +9,7 @@
     "@iconify/tools": "3.0.7",
     "@iconify/utils": "2.1.14",
     "autoprefixer": "10.4.16",
-    "prettier-plugin-tailwindcss": "0.5.9",
+    "prettier-plugin-tailwindcss": "0.5.10",
     "tailwind-variants": "0.1.19",
     "tailwindcss": "3.3.5",
     "tailwindcss-animate": "1.0.7"
