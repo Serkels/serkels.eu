@@ -8,7 +8,7 @@
     "@1/next-tsyringe": "workspace:@0.__legacy__/next-tsyringe@*",
     "@1/ui": "workspace:@0.__legacy__/ui@*",
     "@tanstack/react-query": "4.36.1",
-    "clsx": "2.0.0",
+    "clsx": "2.1.0",
     "formik": "2.4.5",
     "next": "14.0.4",
     "next-auth": "4.24.5",
