@@ -1,6 +1,7 @@
 //
 
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
+import { headers } from "next/headers";
 import Script from "next/script";
 import { Analytics_Client } from "./Analytics.client";
 
@@ -9,10 +10,13 @@ import { Analytics_Client } from "./Analytics.client";
 export const GA_TRACKING_ID = process.env["NEXT_PUBLIC_GA_MEASUREMENT_ID"];
 
 export default function Analytics() {
+  const nonce = headers().get("x-nonce")!;
+
   if (process.env.NODE_ENV === "development")
     return (
       <Script
         id="google-analytics-mock"
+        nonce={nonce}
         dangerouslySetInnerHTML={{
           __html: `
 window.dataLayer = [];
@@ -27,6 +31,7 @@ function gtag(){dataLayer.push(arguments);}
       <VercelAnalytics />
       <Script
         id="google-analytics"
+        nonce={nonce}
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `
