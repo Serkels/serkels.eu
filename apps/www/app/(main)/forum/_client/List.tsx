@@ -184,7 +184,7 @@ function AnswerItem(initial: Omit<Answer, "accepted_for">) {
 
   const can_mutate = is_yours; // || answer.accepted_for?.id !== question.accepted_answer?.id;
 
-  console.log({ is_yours, can_mutate });
+  // console.log({ is_yours, can_mutate });
   return (
     <Answer_Card answer={answer}>
       <Answer_Card.Footer>
