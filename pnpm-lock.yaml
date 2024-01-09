@@ -168,8 +168,8 @@ importers:
         specifier: 3.3.2
         version: 3.3.2(react@18.2.0)
       date-fns:
-        specifier: 3.1.0
-        version: 3.1.0
+        specifier: 3.2.0
+        version: 3.2.0
       debug:
         specifier: 4.3.4
         version: 4.3.4
@@ -450,8 +450,8 @@ importers:
         specifier: 3.0.0
         version: 3.0.0
       date-fns:
-        specifier: 3.1.0
-        version: 3.1.0
+        specifier: 3.2.0
+        version: 3.2.0
       nanoid:
         specifier: 5.0.4
         version: 5.0.4
@@ -594,8 +594,8 @@ importers:
         specifier: 10.45.0
         version: 10.45.0
       date-fns:
-        specifier: 3.1.0
-        version: 3.1.0
+        specifier: 3.2.0
+        version: 3.2.0
       ts-pattern:
         specifier: 5.0.6
         version: 5.0.6
@@ -820,8 +820,8 @@ importers:
         specifier: 10.45.0
         version: 10.45.0
       date-fns:
-        specifier: 3.1.0
-        version: 3.1.0
+        specifier: 3.2.0
+        version: 3.2.0
       ts-pattern:
         specifier: 5.0.6
         version: 5.0.6
@@ -897,8 +897,8 @@ importers:
         specifier: 3.3.2
         version: 3.3.2(react@18.2.0)
       date-fns:
-        specifier: 3.1.0
-        version: 3.1.0
+        specifier: 3.2.0
+        version: 3.2.0
       formik:
         specifier: 2.4.5
         version: 2.4.5(react@18.2.0)
@@ -961,8 +961,8 @@ importers:
         specifier: 10.45.0
         version: 10.45.0
       date-fns:
-        specifier: 3.1.0
-        version: 3.1.0
+        specifier: 3.2.0
+        version: 3.2.0
       ts-pattern:
         specifier: 5.0.6
         version: 5.0.6
@@ -1093,8 +1093,8 @@ importers:
         specifier: 10.45.0
         version: 10.45.0
       date-fns:
-        specifier: 3.1.0
-        version: 3.1.0
+        specifier: 3.2.0
+        version: 3.2.0
       typed-emitter:
         specifier: 2.1.0
         version: 2.1.0
@@ -1152,8 +1152,8 @@ importers:
         specifier: 4.36.1
         version: 4.36.1(react-dom@18.2.0)(react@18.2.0)
       date-fns:
-        specifier: 3.1.0
-        version: 3.1.0
+        specifier: 3.2.0
+        version: 3.2.0
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -1207,8 +1207,8 @@ importers:
         specifier: 10.45.0
         version: 10.45.0
       date-fns:
-        specifier: 3.1.0
-        version: 3.1.0
+        specifier: 3.2.0
+        version: 3.2.0
       slugify:
         specifier: 1.6.6
         version: 1.6.6
@@ -1272,8 +1272,8 @@ importers:
         specifier: 4.36.1
         version: 4.36.1(react-dom@18.2.0)(react@18.2.0)
       date-fns:
-        specifier: 3.1.0
-        version: 3.1.0
+        specifier: 3.2.0
+        version: 3.2.0
       formik:
         specifier: 2.4.5
         version: 2.4.5(react@18.2.0)
@@ -1472,8 +1472,8 @@ importers:
         specifier: 24.0.2
         version: 24.0.2(react-dom@18.2.0)(react@18.2.0)
       date-fns:
-        specifier: 3.1.0
-        version: 3.1.0
+        specifier: 3.2.0
+        version: 3.2.0
       formik:
         specifier: 2.4.5
         version: 2.4.5(react@18.2.0)
@@ -1681,8 +1681,8 @@ importers:
         specifier: 4.36.1
         version: 4.36.1(react-dom@18.2.0)(react@18.2.0)
       date-fns:
-        specifier: 3.1.0
-        version: 3.1.0
+        specifier: 3.2.0
+        version: 3.2.0
       debug:
         specifier: 4.3.4
         version: 4.3.4
@@ -1866,7 +1866,7 @@ importers:
         version: link:../../packages/@douglasduteil/config/typescript
       '@turbo/gen':
         specifier: 1.11.3
-        version: 1.11.3(@types/node@20.8.10)(typescript@5.3.3)
+        version: 1.11.3(@types/node@20.10.7)(typescript@5.3.3)
       prettier:
         specifier: '3'
         version: 3.1.1
@@ -5173,7 +5173,7 @@ packages:
     resolution: {integrity: sha512-jt4jIsWKvUvuY6adJnQJlb/UR7DdjC8CjHI/OaSQruj2yX9/K6+KOvDt/vD6udqos/FUk5Op66CvYT7TBLYO5Q==}
     dev: false
 
-  /@turbo/gen@1.11.3(@types/node@20.8.10)(typescript@5.3.3):
+  /@turbo/gen@1.11.3(@types/node@20.10.7)(typescript@5.3.3):
     resolution: {integrity: sha512-cHGRj7Jn7Hw1cA7NuwWYfYdhEliQX4LuSfEB9L1m8ifGkHalU3bbYXcehzLThmckpGpUQGnXYx0UtVudbQ42HA==}
     hasBin: true
     dependencies:
@@ -5185,7 +5185,7 @@ packages:
       minimatch: 9.0.3
       node-plop: 0.26.3
       proxy-agent: 6.3.1
-      ts-node: 10.9.2(@types/node@20.8.10)(typescript@5.3.3)
+      ts-node: 10.9.2(@types/node@20.10.7)(typescript@5.3.3)
       update-check: 1.5.4
       validate-npm-package-name: 5.0.0
     transitivePeerDependencies:
@@ -5307,12 +5307,6 @@ packages:
     resolution: {integrity: sha512-fRbIKb8C/Y2lXxB5eVMj4IU7xpdox0Lh8bUPEdtLysaylsml1hOOx1+STloRs/B9nf7C6kPRmmg/V7aQW7usNg==}
     dependencies:
       undici-types: 5.26.5
-
-  /@types/node@20.8.10:
-    resolution: {integrity: sha512-TlgT8JntpcbmKUFzjhsyhGfP2fsiz1Mv56im6enJ905xG1DAYesxJaeSbGqQmAw8OWPdhyJGhGSQGKRNJ45u9w==}
-    dependencies:
-      undici-types: 5.26.5
-    dev: true
 
   /@types/nodemailer@6.4.14:
     resolution: {integrity: sha512-fUWthHO9k9DSdPCSPRqcu6TWhYyxTBg382vlNIttSe9M7XfsT06y0f24KHXtbnijPGGRIcVvdKHTNikOI6qiHA==}
@@ -6514,8 +6508,8 @@ packages:
     engines: {node: '>= 14'}
     dev: true
 
-  /date-fns@3.1.0:
-    resolution: {integrity: sha512-ZO7yefXV/wCWzd3I9haCHmfzlfA3i1a2HHO7ZXjtJrRjXt8FULKJ2Vl8wji3XYF4dQ0ZJ/tokXDZeYlFvgms9Q==}
+  /date-fns@3.2.0:
+    resolution: {integrity: sha512-E4KWKavANzeuusPi0jUjpuI22SURAznGkx7eZV+4i6x2A+IZxAMcajgkvuDAU1bg40+xuhW1zRdVIIM/4khuIg==}
     dev: false
 
   /debug@2.6.9:
@@ -12142,7 +12136,7 @@ packages:
   /ts-interface-checker@0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
 
-  /ts-node@10.9.2(@types/node@20.8.10)(typescript@5.3.3):
+  /ts-node@10.9.2(@types/node@20.10.7)(typescript@5.3.3):
     resolution: {integrity: sha512-f0FFpIdcHgn8zcPSbf1dRevwt047YMnaiJM3u2w2RewrB+fob/zePZcrOyQoLMMO7aBIddLcQIEK5dYjkLnGrQ==}
     hasBin: true
     peerDependencies:
@@ -12161,7 +12155,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 20.8.10
+      '@types/node': 20.10.7
       acorn: 8.11.3
       acorn-walk: 8.3.1
       arg: 4.1.3

@@ -24,7 +24,7 @@
     "@1.modules/exchange.domain": "workspace:*",
     "@1.modules/trpc": "workspace:*",
     "@trpc/server": "10.45.0",
-    "date-fns": "3.1.0",
+    "date-fns": "3.2.0",
     "ts-pattern": "5.0.6",
     "xstate": "4.38.3",
     "zod": "3.22.4"
