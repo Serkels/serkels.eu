@@ -17,8 +17,8 @@ importers:
         specifier: 1.5.0
         version: 1.5.0
       prettier:
-        specifier: 3.1.1
-        version: 3.1.1
+        specifier: 3.2.1
+        version: 3.2.1
       turbo:
         specifier: 1.11.3
         version: 1.11.3
@@ -274,8 +274,8 @@ importers:
         specifier: 8.4.33
         version: 8.4.33
       prettier:
-        specifier: 3.1.1
-        version: 3.1.1
+        specifier: 3.2.1
+        version: 3.2.1
       tailwindcss:
         specifier: 3.3.5
         version: 3.3.5
@@ -293,8 +293,8 @@ importers:
         version: link:../../../@douglasduteil/config/tailwindcss
     devDependencies:
       prettier:
-        specifier: 3.1.1
-        version: 3.1.1
+        specifier: 3.2.1
+        version: 3.2.1
       typescript:
         specifier: 5.3.3
         version: 5.3.3
@@ -675,8 +675,8 @@ importers:
         specifier: 18.2.42
         version: 18.2.42
       prettier:
-        specifier: 3.1.1
-        version: 3.1.1
+        specifier: 3.2.1
+        version: 3.2.1
       tailwindcss:
         specifier: 3.3.5
         version: 3.3.5
@@ -777,8 +777,8 @@ importers:
         specifier: 18.2.42
         version: 18.2.42
       prettier:
-        specifier: 3.1.1
-        version: 3.1.1
+        specifier: 3.2.1
+        version: 3.2.1
       tailwindcss:
         specifier: 3.3.5
         version: 3.3.5
@@ -940,8 +940,8 @@ importers:
         specifier: 18.2.42
         version: 18.2.42
       prettier:
-        specifier: 3.1.1
-        version: 3.1.1
+        specifier: 3.2.1
+        version: 3.2.1
       tailwindcss:
         specifier: 3.3.5
         version: 3.3.5
@@ -1072,8 +1072,8 @@ importers:
         specifier: 18.2.42
         version: 18.2.42
       prettier:
-        specifier: 3.1.1
-        version: 3.1.1
+        specifier: 3.2.1
+        version: 3.2.1
       tailwindcss:
         specifier: 3.3.5
         version: 3.3.5
@@ -1186,8 +1186,8 @@ importers:
         specifier: 18.2.42
         version: 18.2.42
       prettier:
-        specifier: 3.1.1
-        version: 3.1.1
+        specifier: 3.2.1
+        version: 3.2.1
       tailwindcss:
         specifier: 3.3.5
         version: 3.3.5
@@ -1309,8 +1309,8 @@ importers:
         specifier: 18.2.42
         version: 18.2.42
       prettier:
-        specifier: 3.1.1
-        version: 3.1.1
+        specifier: 3.2.1
+        version: 3.2.1
       tailwindcss:
         specifier: 3.3.5
         version: 3.3.5
@@ -1420,8 +1420,8 @@ importers:
         specifier: 18.2.42
         version: 18.2.42
       prettier:
-        specifier: 3.1.1
-        version: 3.1.1
+        specifier: 3.2.1
+        version: 3.2.1
       tailwindcss:
         specifier: 3.3.5
         version: 3.3.5
@@ -1512,8 +1512,8 @@ importers:
         specifier: 18.2.17
         version: 18.2.17
       prettier:
-        specifier: 3.1.1
-        version: 3.1.1
+        specifier: 3.2.1
+        version: 3.2.1
       tailwindcss:
         specifier: 3.3.5
         version: 3.3.5
@@ -1537,7 +1537,7 @@ importers:
         version: 10.4.16(postcss@8.4.33)
       prettier-plugin-tailwindcss:
         specifier: 0.5.11
-        version: 0.5.11(prettier@3.1.1)
+        version: 0.5.11(prettier@3.2.1)
       tailwind-variants:
         specifier: 0.1.20
         version: 0.1.20(tailwindcss@3.3.5)
@@ -1552,8 +1552,8 @@ importers:
         specifier: 8.4.33
         version: 8.4.33
       prettier:
-        specifier: 3.1.1
-        version: 3.1.1
+        specifier: 3.2.1
+        version: 3.2.1
       typescript:
         specifier: 5.3.3
         version: 5.3.3
@@ -1565,8 +1565,8 @@ importers:
         version: 2.0.2
     devDependencies:
       prettier:
-        specifier: 3.1.1
-        version: 3.1.1
+        specifier: 3.2.1
+        version: 3.2.1
       typescript:
         specifier: 5.3.3
         version: 5.3.3
@@ -1666,8 +1666,8 @@ importers:
         specifier: workspace:@1.config/typescript@*
         version: link:../../@1/config/typescript
       prettier:
-        specifier: 3.1.1
-        version: 3.1.1
+        specifier: 3.2.1
+        version: 3.2.1
       typescript:
         specifier: 5.3.3
         version: 5.3.3
@@ -1709,8 +1709,8 @@ importers:
         specifier: 3.15.0
         version: 3.15.0
       prettier:
-        specifier: 3.1.1
-        version: 3.1.1
+        specifier: 3.2.1
+        version: 3.2.1
       typescript:
         specifier: 5.3.3
         version: 5.3.3
@@ -1749,8 +1749,8 @@ importers:
         specifier: 1.3.102
         version: 1.3.102
       prettier:
-        specifier: 3.1.1
-        version: 3.1.1
+        specifier: 3.2.1
+        version: 3.2.1
       typescript:
         specifier: 5.3.3
         version: 5.3.3
@@ -1804,11 +1804,11 @@ importers:
         specifier: 18.2.42
         version: 18.2.42
       prettier:
-        specifier: 3.1.1
-        version: 3.1.1
+        specifier: 3.2.1
+        version: 3.2.1
       prettier-plugin-tailwindcss:
         specifier: 0.5.11
-        version: 0.5.11(prettier@3.1.1)
+        version: 0.5.11(prettier@3.2.1)
       typescript:
         specifier: 5.3.3
         version: 5.3.3
@@ -10514,7 +10514,7 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /prettier-plugin-tailwindcss@0.5.11(prettier@3.1.1):
+  /prettier-plugin-tailwindcss@0.5.11(prettier@3.2.1):
     resolution: {integrity: sha512-AvI/DNyMctyyxGOjyePgi/gqj5hJYClZ1avtQvLlqMT3uDZkRbi4HhGUpok3DRzv9z7Lti85Kdj3s3/1CeNI0w==}
     engines: {node: '>=14.21.3'}
     peerDependencies:
@@ -10563,10 +10563,16 @@ packages:
       prettier-plugin-twig-melody:
         optional: true
     dependencies:
-      prettier: 3.1.1
+      prettier: 3.2.1
 
   /prettier@3.1.1:
     resolution: {integrity: sha512-22UbSzg8luF4UuZtzgiUOfcGM8s4tjBv6dJRT7j275NXsy2jb4aJa4NNveul5x4eqlF1wuhuR2RElK71RvmVaw==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dev: true
+
+  /prettier@3.2.1:
+    resolution: {integrity: sha512-qSUWshj1IobVbKc226Gw2pync27t0Kf0EdufZa9j7uBSJay1CC+B3K5lAAZoqgX3ASiKuWsk6OmzKRetXNObWg==}
     engines: {node: '>=14'}
     hasBin: true
 
