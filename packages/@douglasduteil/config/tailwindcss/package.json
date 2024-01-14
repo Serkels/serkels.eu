@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "postcss": "8.4.33",
-    "prettier": "3.2.1",
+    "prettier": "3.2.2",
     "typescript": "5.3.3"
   }
 }

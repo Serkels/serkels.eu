@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "cpx": "1.5.0",
-    "prettier": "3.2.1",
+    "prettier": "3.2.2",
     "turbo": "1.11.3",
     "typescript": "5.3.3"
   },
