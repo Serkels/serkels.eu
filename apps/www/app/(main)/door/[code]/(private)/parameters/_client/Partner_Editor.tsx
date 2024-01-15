@@ -57,7 +57,7 @@ export default function Partner_Editor({
             <Field
               className={input({
                 className: "col-span-full ",
-                error: Boolean(errors.city && touched.city),
+                wrong_value: Boolean(errors.city && touched.city),
               })}
               id="city"
               name="city"
@@ -89,7 +89,7 @@ export default function Partner_Editor({
             <Field
               className={input({
                 className: "col-span-full ",
-                error: Boolean(errors.link && touched.link),
+                wrong_value: Boolean(errors.link && touched.link),
               })}
               id="link"
               name="link"

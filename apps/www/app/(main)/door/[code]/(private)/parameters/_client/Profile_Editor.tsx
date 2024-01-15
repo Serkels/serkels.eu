@@ -69,7 +69,7 @@ export default function Profile_Editor({
             <Field
               className={input({
                 className: "col-span-full",
-                error: Boolean(errors.name && touched.name),
+                wrong_value: Boolean(errors.name && touched.name),
               })}
               id="name"
               name="name"
@@ -108,7 +108,7 @@ export default function Profile_Editor({
             <Field
               className={input({
                 className: "col-span-full ",
-                error: Boolean(errors.name && touched.name),
+                wrong_value: Boolean(errors.name && touched.name),
               })}
               id="email"
               name="email"
@@ -143,7 +143,7 @@ export default function Profile_Editor({
               autoComplete="off"
               className={input({
                 className: "col-span-full ",
-                error: Boolean(errors.name && touched.name),
+                wrong_value: Boolean(errors.name && touched.name),
               })}
               id="bio"
               name="bio"
