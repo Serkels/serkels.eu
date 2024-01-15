@@ -23,60 +23,6 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  async headers() {
-    return [
-      // NOTE(douglasduteil): Content-Security-Policy gets set in middleware.ts
-      {
-        source: "/:path*",
-        headers: [
-          {
-            key: "Cross-Origin-Opener-Policy",
-            value: "same-origin",
-          },
-          {
-            key: "Cross-Origin-Resource-Policy",
-            value: "cross-origin",
-          },
-          {
-            key: "Referrer-Policy",
-            value: "no-referrer, strict-origin-when-cross-origin",
-          },
-          {
-            key: "Origin-Agent-Cluster",
-            value: "?1",
-          },
-          {
-            key: "Strict-Transport-Security",
-            value: "max-age=15552000; includeSubDomains",
-          },
-          {
-            key: "X-Content-Type-Options",
-            value: "nosniff",
-          },
-          {
-            key: "X-DNS-Prefetch-Control",
-            value: "off",
-          },
-          {
-            key: "X-Download-Options",
-            value: "noopen",
-          },
-          {
-            key: "X-Frame-Options",
-            value: "SAMEORIGIN",
-          },
-          {
-            key: "X-Permitted-Cross-Domain-Policies",
-            value: "none",
-          },
-          {
-            key: "X-XSS-Protection",
-            value: "0",
-          },
-        ],
-      },
-    ];
-  },
   reactStrictMode: true,
   transpilePackages: [],
   async redirects() {
