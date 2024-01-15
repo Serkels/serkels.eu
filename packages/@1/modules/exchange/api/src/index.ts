@@ -73,6 +73,10 @@ const exchange_api_router = router({
     )
     .query(async ({ input, ctx: { prisma } }) => {
       const { profile_id, limit } = input;
+      const { id: studient_id } = await prisma.studient.findUniqueOrThrow({
+        select: { id: true },
+        where: { profile_id },
+      });
 
       const data = await prisma.exchange.findMany({
         include: {
@@ -86,7 +90,7 @@ const exchange_api_router = router({
         where: {
           deals: {
             some: {
-              participant_id: profile_id,
+              participant_id: studient_id,
               status: Deal_Status_Schema.Enum.APPROVED,
             },
           },
