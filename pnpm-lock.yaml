@@ -521,8 +521,8 @@ importers:
         specifier: 2.0.1
         version: 2.0.1(typescript@5.3.3)
       react-email:
-        specifier: 1.10.0
-        version: 1.10.0
+        specifier: 1.10.1
+        version: 1.10.1
       typescript:
         specifier: 5.3.3
         version: 5.3.3
@@ -3939,6 +3939,17 @@ packages:
       pretty: 2.0.0
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
+  /@react-email/render@0.0.11:
+    resolution: {integrity: sha512-Ec4vLkVbxoQhThBK1H++FdO4NgCeucg57qmwQ8A9xbozA2hWJiT2jJb5IA/bLE0YdixK8BeucXghJp84YZIG7A==}
+    engines: {node: '>=18.0.0'}
+    dependencies:
+      html-to-text: 9.0.5
+      js-beautify: 1.14.11
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: true
 
   /@react-email/text@0.0.7(react@18.2.0):
     resolution: {integrity: sha512-eHCx0mdllGcgK9X7wiLKjNZCBRfxRVNjD3NNYRmOc3Icbl8M9JHriJIfxBuGCmGg2UAORK5P3KmaLQ8b99/pbA==}
@@ -6335,6 +6346,7 @@ packages:
       extend-shallow: 2.0.1
       is-whitespace: 0.3.0
       kind-of: 3.2.2
+    dev: false
 
   /config-chain@1.1.13:
     resolution: {integrity: sha512-qj+f8APARXHrM0hraqXYb2/bOVSV4PvJQlNZ/DVj0QrmNM2q2euizkeuVckQ57J+W0mRH6Hvi+k50M4Jul2VRQ==}
@@ -8772,6 +8784,7 @@ packages:
   /is-whitespace@0.3.0:
     resolution: {integrity: sha512-RydPhl4S6JwAyj0JJjshWJEFG6hNye3pZFBRZaTUfZFwGHxzppNaNOVgQuS/E/SlhrApuMXrpnK1EEIXfdo3Dg==}
     engines: {node: '>=0.10.0'}
+    dev: false
 
   /is-windows@1.0.2:
     resolution: {integrity: sha512-eXK1UInq2bPmjyX6e3VHIzMLobc4J94i4AWn+Hpq3OU5KkrRC96OAcR3PRJ/pGu6m8TRnBHP9dkXQVsT/COVIA==}
@@ -10582,6 +10595,7 @@ packages:
       condense-newlines: 0.2.1
       extend-shallow: 2.0.1
       js-beautify: 1.14.11
+    dev: false
 
   /prisma@5.8.1:
     resolution: {integrity: sha512-N6CpjzECnUHZ5beeYpDzkt2rYpEdAeqXX2dweu6BoQaeYkNZrC/WJHM+5MO/uidFHTak8QhkPKBWck1o/4MD4A==}
@@ -10774,15 +10788,15 @@ packages:
       react: 18.2.0
       scheduler: 0.23.0
 
-  /react-email@1.10.0:
-    resolution: {integrity: sha512-IrLs28p3Iqyx9JASSrdEoTC+TQeb3jDcJ++2xzVS71yR6U8GYAqff7NKPGZJIA6z5oGtwRFv6GCViR4JiGdmXg==}
+  /react-email@1.10.1:
+    resolution: {integrity: sha512-nK92iY5TT2aD+YQNNQhnUbqy4dVd8jkRNmEAASbrkPU0/5btIP8o9YWlp1BNY1k26GU8qLiAAXm9TiWokYtbGA==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     dependencies:
       '@commander-js/extra-typings': 9.4.1(commander@9.4.1)
       '@manypkg/find-root': 2.2.1
       '@octokit/rest': 19.0.7
-      '@react-email/render': 0.0.10
+      '@react-email/render': 0.0.11
       chokidar: 3.5.3
       commander: 9.4.1
       detect-package-manager: 2.0.1
