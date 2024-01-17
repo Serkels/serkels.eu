@@ -17,7 +17,7 @@
     "@1/typescript-config": "workspace:@1.config/typescript@*",
     "@types/debug": "4.1.12",
     "fast-check": "3.15.0",
-    "prettier": "3.2.3",
+    "prettier": "3.2.4",
     "typescript": "5.3.3",
     "zod-fast-check": "0.10.1"
   }
