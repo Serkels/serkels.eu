@@ -23,7 +23,7 @@
     "@1.modules/forum.domain": "workspace:*",
     "@1.modules/trpc": "workspace:*",
     "@trpc/server": "10.45.0",
-    "date-fns": "3.3.0",
+    "date-fns": "3.3.1",
     "ts-pattern": "5.0.6",
     "zod": "3.22.4"
   },
