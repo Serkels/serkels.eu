@@ -27,7 +27,7 @@
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
     "@faker-js/faker": "8.4.0",
-    "@types/node": "20.11.7",
+    "@types/node": "20.11.8",
     "dedent": "1.5.1",
     "prisma": "5.8.1",
     "slugify": "1.6.6",
