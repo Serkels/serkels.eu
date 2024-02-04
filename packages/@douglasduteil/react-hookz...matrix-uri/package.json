@@ -11,7 +11,7 @@
   "author": "Douglas Duteil <douglasduteil@gmail.com> (https://douglasduteil.github.io/)",
   "license": "WTFPL",
   "dependencies": {
-    "@react-hookz/web": "24.0.3"
+    "@react-hookz/web": "24.0.4"
   },
   "devDependencies": {
     "@types/react": "18.2.42",
