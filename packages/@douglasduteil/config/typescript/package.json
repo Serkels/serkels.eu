@@ -6,7 +6,7 @@
   "sideEffects": false,
   "files": [],
   "dependencies": {
-    "@tsconfig/strictest": "2.0.2"
+    "@tsconfig/strictest": "2.0.3"
   },
   "devDependencies": {
     "prettier": "3.2.5",
