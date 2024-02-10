@@ -1527,8 +1527,8 @@ importers:
         specifier: 0.1.4
         version: 0.1.4
       '@iconify/tools':
-        specifier: 4.0.0
-        version: 4.0.0
+        specifier: 4.0.2
+        version: 4.0.2
       '@iconify/utils':
         specifier: 2.1.22
         version: 2.1.22
@@ -2751,8 +2751,8 @@ packages:
       '@iconify/types': 2.0.0
     dev: false
 
-  /@iconify/tools@4.0.0:
-    resolution: {integrity: sha512-/NMAuWm9njrEpTfxIgTapaHW2JdgcEAOQgpWMHPD4/gOgmK7qrVjPkGj9pPcoBjEDotISsffv51F6nj4QvaJ6Q==}
+  /@iconify/tools@4.0.2:
+    resolution: {integrity: sha512-vd/VruPQT1j6id1jpTH/+y0tgPPeoavdI2aSJB3KaplhgJXpl7IkeH/cCHMXM+x87HDtgMaGg2EzTDwe4FZuDg==}
     dependencies:
       '@iconify/types': 2.0.0
       '@iconify/utils': 2.1.22
