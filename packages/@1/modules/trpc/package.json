@@ -7,7 +7,7 @@
   "main": "src/index.ts",
   "module": "src/index.ts",
   "scripts": {
-    "dev": "tsc --build --watch",
+    "dev": "tsc --build --watch --preserveWatchOutput",
     "type-check": "tsc --build"
   },
   "keywords": [],

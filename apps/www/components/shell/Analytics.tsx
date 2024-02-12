@@ -2,6 +2,7 @@
 
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
 import Script from "next/script";
+import { Suspense } from "react";
 import { Analytics_Client } from "./Analytics.client";
 
 //
@@ -45,7 +46,9 @@ gtag('config', '${GA_TRACKING_ID}', {
       />
 
       <Script src={`/stalker.js?id=${GA_TRACKING_ID}`} />
-      <Analytics_Client />
+      <Suspense>
+        <Analytics_Client />
+      </Suspense>
     </>
   );
 }

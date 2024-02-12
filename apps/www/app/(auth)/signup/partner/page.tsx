@@ -6,6 +6,7 @@ import { UserAvatarFilled } from "@1.ui/react/icons";
 import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import { input } from "@1.ui/react/form/atom";
 import type { Metadata, ResolvingMetadata } from "next";
+import { Suspense } from "react";
 import { tv } from "tailwind-variants";
 import { EmailInput, SignInButton } from "./page.client";
 
@@ -73,14 +74,16 @@ export default function Page() {
           />
           <label className={label()}>
             <div className="flex-1">Email address</div>
-            <EmailInput
-              className={input({ className: "w-fit flex-grow opacity-50" })}
-              id="email"
-              name="email"
-              placeholder="Email"
-              required
-              type="email"
-            />
+            <Suspense>
+              <EmailInput
+                className={input({ className: "w-fit flex-grow opacity-50" })}
+                id="email"
+                name="email"
+                placeholder="Email"
+                required
+                type="email"
+              />
+            </Suspense>
           </label>
         </div>
         <SignInButton>Terminer</SignInButton>
