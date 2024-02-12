@@ -17,7 +17,7 @@
     }
   },
   "scripts": {
-    "dev": "tsc --build --watch",
+    "dev": "tsc --build --watch --preserveWatchOutput",
     "type-check": "tsc --build"
   },
   "dependencies": {
