@@ -257,9 +257,10 @@ export const me = router({
           },
         });
 
-        const actor = createActor(machine, {}).start();
-        console.log(actor);
-        console.log(actor.getPersistedSnapshot());
+        const active_state = machine.resolveState({ value: deal.status });
+
+        const actor = createActor(machine, { snapshot: active_state }).start();
+
         const deal_state = actor.getSnapshot();
 
         return {
@@ -304,9 +305,9 @@ export const me = router({
             is_participant: () => deal.participant_id === studient_id,
           },
         });
+        const active_state = machine.resolveState({ value: deal.status });
 
-        const actor = createActor(machine, {}).start();
-        // const interperter = interpret(machine).start(deal.status);
+        const actor = createActor(machine, { snapshot: active_state }).start();
 
         actor.send({ type: action });
 
