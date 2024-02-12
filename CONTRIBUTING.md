@@ -146,12 +146,16 @@ $ docker compose up -d
 
 # Local www
 $ pnpm exec turbo dev --filter "www..."
+$ pnpm exec turbo type-check --filter www^...
 # Local api
 $ pnpm exec turbo dev --filter "api..."
+$ pnpm exec turbo type-check --filter api^...
 
 # Other internal packages
-$ pnpm exec turbo run build --filter "www^..." --filter "api^..."
-$ pnpm exec turbo run dev --filter "www^..." --filter "api^..."
+$ pnpm exec turbo build --filter "www^..." --filter "api^..."
+
+$ pnpm exec turbo dev --filter "www^..." --filter "api^..."
+
 
 
 # Run all the dev scripts

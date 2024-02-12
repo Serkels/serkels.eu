@@ -1,11 +1,13 @@
 //
 
-import { createMachine } from "xstate";
+import { setup } from "xstate";
 import { Deal_Status_Schema } from ".";
 
 //
 
-export const deal_flow = createMachine({
+export const deal_flow = setup({
+  types: {} as { events: { type: "DENIE" } | { type: "APPROVE" } },
+}).createMachine({
   id: "deal",
   initial: Deal_Status_Schema.Enum.IDLE,
   states: {
@@ -16,7 +18,7 @@ export const deal_flow = createMachine({
         },
         APPROVE: {
           target: Deal_Status_Schema.Enum.APPROVED_BY_THE_ORGANIZER,
-          cond: "is_organizer",
+          guard: "is_organizer",
         },
       },
     },
@@ -30,7 +32,7 @@ export const deal_flow = createMachine({
         },
         APPROVE: {
           target: Deal_Status_Schema.Enum.APPROVED,
-          cond: "is_participant",
+          guard: "is_participant",
         },
       },
     },
@@ -38,7 +40,4 @@ export const deal_flow = createMachine({
       type: "final",
     },
   },
-  schema: { events: {} as { type: "DENIE" } | { type: "APPROVE" } },
-  predictableActionArguments: true,
-  preserveActionOrder: true,
 });
