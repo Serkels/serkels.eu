@@ -10,7 +10,7 @@ import {
 import { deal_flow } from "@1.modules/exchange.domain/deal.machine";
 import { next_auth_procedure, router } from "@1.modules/trpc";
 import { match } from "ts-pattern";
-import { interpret } from "xstate";
+import { createActor } from "xstate";
 import { z } from "zod";
 
 //
@@ -250,19 +250,22 @@ export const me = router({
           },
         });
 
-        const machine = deal_flow.withConfig({
+        const machine = deal_flow.provide({
           guards: {
             is_organizer: () => deal.parent.owner_id === studient_id,
             is_participant: () => deal.participant_id === studient_id,
           },
         });
 
-        const interperter = interpret(machine).start(deal.status);
+        const active_state = machine.resolveState({ value: deal.status });
+
+        const actor = createActor(machine, { snapshot: active_state }).start();
+
+        const deal_state = actor.getSnapshot();
 
         return {
-          can_approuve:
-            interperter.nextState({ type: "APPROVE" }).changed ?? false,
-          can_denie: interperter.nextState({ type: "DENIE" }).changed ?? false,
+          can_approuve: deal_state.can({ type: "APPROVE" }) ?? false,
+          can_denie: deal_state.can({ type: "DENIE" }) ?? false,
         };
       }),
 
@@ -296,20 +299,21 @@ export const me = router({
           },
         });
 
-        const machine = deal_flow.withConfig({
+        const machine = deal_flow.provide({
           guards: {
             is_organizer: () => deal.parent.owner_id === studient_id,
             is_participant: () => deal.participant_id === studient_id,
           },
         });
+        const active_state = machine.resolveState({ value: deal.status });
 
-        const interperter = interpret(machine).start(deal.status);
+        const actor = createActor(machine, { snapshot: active_state }).start();
 
-        interperter.send({ type: action });
+        actor.send({ type: action });
 
-        const state = interperter.getSnapshot();
+        const state = actor.getSnapshot();
 
-        if (!state.changed) {
+        if (state.value === deal.status) {
           throw new StateError("Illegal action");
         }
 
