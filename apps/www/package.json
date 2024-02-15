@@ -30,7 +30,7 @@
     "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
     "@douglasduteil/react-hookz...matrix-uri": "workspace:*",
     "@react-hookz/web": "24.0.4",
-    "@sentry/nextjs": "7.101.0",
+    "@sentry/nextjs": "7.101.1",
     "@tanstack/react-query": "4.36.1",
     "@trpc/client": "10.45.1",
     "@trpc/react-query": "10.45.1",
