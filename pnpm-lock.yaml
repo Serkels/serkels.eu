@@ -826,8 +826,8 @@ importers:
         specifier: 5.0.8
         version: 5.0.8
       xstate:
-        specifier: 5.6.2
-        version: 5.6.2
+        specifier: 5.7.0
+        version: 5.7.0
       zod:
         specifier: 3.22.4
         version: 3.22.4
@@ -857,8 +857,8 @@ importers:
         specifier: workspace:*
         version: link:../../profile/domain
       xstate:
-        specifier: 5.6.2
-        version: 5.6.2
+        specifier: 5.7.0
+        version: 5.7.0
       zod:
         specifier: 3.22.4
         version: 3.22.4
@@ -14256,8 +14256,8 @@ packages:
     engines: {node: '>=0.4.0'}
     dev: true
 
-  /xstate@5.6.2:
-    resolution: {integrity: sha512-cXYrnP5vrlY4PFkS1l8uP+LY9XAX/7rdVQlWfqfi/gQJEJgCX5AYk5UI/QQfewQ2mrPREBVTmy4QeMlSubepxw==}
+  /xstate@5.7.0:
+    resolution: {integrity: sha512-L74O7591ZwduOhhcUMAS6V5wQxH1NPzswWUAWTxsyPNFIgAd4Qiw6+TQbpvAOirKq9bL0QIROxx38EJg3XOgow==}
     dev: false
 
   /yallist@2.1.2:
