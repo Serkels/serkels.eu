@@ -216,8 +216,8 @@ importers:
         specifier: 0.2.0
         version: 0.2.0(tailwindcss@3.3.5)
       ts-pattern:
-        specifier: 5.0.6
-        version: 5.0.6
+        specifier: 5.0.8
+        version: 5.0.8
       zod:
         specifier: 3.22.4
         version: 3.22.4
@@ -456,8 +456,8 @@ importers:
         specifier: 5.0.5
         version: 5.0.5
       ts-pattern:
-        specifier: 5.0.6
-        version: 5.0.6
+        specifier: 5.0.8
+        version: 5.0.8
       zod:
         specifier: 3.22.4
         version: 3.22.4
@@ -557,8 +557,8 @@ importers:
         specifier: 2.2.1
         version: 2.2.1
       ts-pattern:
-        specifier: 5.0.6
-        version: 5.0.6
+        specifier: 5.0.8
+        version: 5.0.8
       zod:
         specifier: 3.22.4
         version: 3.22.4
@@ -597,8 +597,8 @@ importers:
         specifier: 3.3.1
         version: 3.3.1
       ts-pattern:
-        specifier: 5.0.6
-        version: 5.0.6
+        specifier: 5.0.8
+        version: 5.0.8
       zod:
         specifier: 3.22.4
         version: 3.22.4
@@ -656,8 +656,8 @@ importers:
         specifier: 0.2.0
         version: 0.2.0(tailwindcss@3.3.5)
       ts-pattern:
-        specifier: 5.0.6
-        version: 5.0.6
+        specifier: 5.0.8
+        version: 5.0.8
       zod:
         specifier: 3.22.4
         version: 3.22.4
@@ -758,8 +758,8 @@ importers:
         specifier: 0.2.0
         version: 0.2.0(tailwindcss@3.3.5)
       ts-pattern:
-        specifier: 5.0.6
-        version: 5.0.6
+        specifier: 5.0.8
+        version: 5.0.8
       zod:
         specifier: 3.22.4
         version: 3.22.4
@@ -823,8 +823,8 @@ importers:
         specifier: 3.3.1
         version: 3.3.1
       ts-pattern:
-        specifier: 5.0.6
-        version: 5.0.6
+        specifier: 5.0.8
+        version: 5.0.8
       xstate:
         specifier: 5.6.2
         version: 5.6.2
@@ -921,8 +921,8 @@ importers:
         specifier: 0.2.0
         version: 0.2.0(tailwindcss@3.3.5)
       ts-pattern:
-        specifier: 5.0.6
-        version: 5.0.6
+        specifier: 5.0.8
+        version: 5.0.8
       zod:
         specifier: 3.22.4
         version: 3.22.4
@@ -964,8 +964,8 @@ importers:
         specifier: 3.3.1
         version: 3.3.1
       ts-pattern:
-        specifier: 5.0.6
-        version: 5.0.6
+        specifier: 5.0.8
+        version: 5.0.8
       zod:
         specifier: 3.22.4
         version: 3.22.4
@@ -1053,8 +1053,8 @@ importers:
         specifier: 0.2.0
         version: 0.2.0(tailwindcss@3.3.5)
       ts-pattern:
-        specifier: 5.0.6
-        version: 5.0.6
+        specifier: 5.0.8
+        version: 5.0.8
       zod:
         specifier: 3.22.4
         version: 3.22.4
@@ -1167,8 +1167,8 @@ importers:
         specifier: 0.2.0
         version: 0.2.0(tailwindcss@3.3.5)
       ts-pattern:
-        specifier: 5.0.6
-        version: 5.0.6
+        specifier: 5.0.8
+        version: 5.0.8
       zod:
         specifier: 3.22.4
         version: 3.22.4
@@ -1290,8 +1290,8 @@ importers:
         specifier: 0.2.0
         version: 0.2.0(tailwindcss@3.3.5)
       ts-pattern:
-        specifier: 5.0.6
-        version: 5.0.6
+        specifier: 5.0.8
+        version: 5.0.8
       zod:
         specifier: 3.22.4
         version: 3.22.4
@@ -1401,8 +1401,8 @@ importers:
         specifier: 0.2.0
         version: 0.2.0(tailwindcss@3.3.5)
       ts-pattern:
-        specifier: 5.0.6
-        version: 5.0.6
+        specifier: 5.0.8
+        version: 5.0.8
       zod:
         specifier: 3.22.4
         version: 3.22.4
@@ -1490,8 +1490,8 @@ importers:
         specifier: 0.2.0
         version: 0.2.0(tailwindcss@3.3.5)
       ts-pattern:
-        specifier: 5.0.6
-        version: 5.0.6
+        specifier: 5.0.8
+        version: 5.0.8
     devDependencies:
       '@1.config/prettier':
         specifier: workspace:*
@@ -1797,8 +1797,8 @@ importers:
         specifier: 1.0.7
         version: 1.0.7(tailwindcss@3.3.5)
       ts-pattern:
-        specifier: 5.0.6
-        version: 5.0.6
+        specifier: 5.0.8
+        version: 5.0.8
     devDependencies:
       '@types/react':
         specifier: 18.2.55
@@ -13620,8 +13620,8 @@ packages:
       yn: 3.1.1
     dev: true
 
-  /ts-pattern@5.0.6:
-    resolution: {integrity: sha512-Y+jOjihlFriWzcBjncPCf2/am+Hgz7LtsWs77pWg5vQQKLQj07oNrJryo/wK2G0ndNaoVn2ownFMeoeAuReu3Q==}
+  /ts-pattern@5.0.8:
+    resolution: {integrity: sha512-aafbuAQOTEeWmA7wtcL94w6I89EgLD7F+IlWkr596wYxeb0oveWDO5dQpv85YP0CGbxXT/qXBIeV6IYLcoZ2uA==}
     dev: false
 
   /tsconfig-paths@3.15.0:
