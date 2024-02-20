@@ -330,8 +330,8 @@ importers:
   packages/@1/infra/database:
     dependencies:
       '@prisma/client':
-        specifier: 5.10.0
-        version: 5.10.0(prisma@5.10.0)
+        specifier: 5.10.1
+        version: 5.10.1(prisma@5.10.1)
     devDependencies:
       '@1.config/typescript':
         specifier: workspace:*
@@ -346,8 +346,8 @@ importers:
         specifier: 1.5.1
         version: 1.5.1
       prisma:
-        specifier: 5.10.0
-        version: 5.10.0
+        specifier: 5.10.1
+        version: 5.10.1
       slugify:
         specifier: 1.6.6
         version: 1.6.6
@@ -466,8 +466,8 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       '@prisma/client':
-        specifier: 5.10.0
-        version: 5.10.0(prisma@5.10.0)
+        specifier: 5.10.1
+        version: 5.10.1(prisma@5.10.1)
       '@types/node':
         specifier: 20.11.19
         version: 20.11.19
@@ -607,8 +607,8 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       '@prisma/client':
-        specifier: 5.10.0
-        version: 5.10.0(prisma@5.10.0)
+        specifier: 5.10.1
+        version: 5.10.1(prisma@5.10.1)
       '@types/node':
         specifier: 20.11.19
         version: 20.11.19
@@ -706,8 +706,8 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       '@prisma/client':
-        specifier: 5.10.0
-        version: 5.10.0(prisma@5.10.0)
+        specifier: 5.10.1
+        version: 5.10.1(prisma@5.10.1)
       '@types/node':
         specifier: 20.11.19
         version: 20.11.19
@@ -836,8 +836,8 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       '@prisma/client':
-        specifier: 5.10.0
-        version: 5.10.0(prisma@5.10.0)
+        specifier: 5.10.1
+        version: 5.10.1(prisma@5.10.1)
       '@types/node':
         specifier: 20.11.19
         version: 20.11.19
@@ -974,8 +974,8 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       '@prisma/client':
-        specifier: 5.10.0
-        version: 5.10.0(prisma@5.10.0)
+        specifier: 5.10.1
+        version: 5.10.1(prisma@5.10.1)
       '@types/node':
         specifier: 20.11.19
         version: 20.11.19
@@ -1106,8 +1106,8 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       '@prisma/client':
-        specifier: 5.10.0
-        version: 5.10.0(prisma@5.10.0)
+        specifier: 5.10.1
+        version: 5.10.1(prisma@5.10.1)
       '@types/node':
         specifier: 20.11.19
         version: 20.11.19
@@ -1220,8 +1220,8 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       '@prisma/client':
-        specifier: 5.10.0
-        version: 5.10.0(prisma@5.10.0)
+        specifier: 5.10.1
+        version: 5.10.1(prisma@5.10.1)
       '@types/node':
         specifier: 20.11.19
         version: 20.11.19
@@ -1343,8 +1343,8 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       '@prisma/client':
-        specifier: 5.10.0
-        version: 5.10.0(prisma@5.10.0)
+        specifier: 5.10.1
+        version: 5.10.1(prisma@5.10.1)
       '@types/node':
         specifier: 20.11.19
         version: 20.11.19
@@ -1576,8 +1576,8 @@ importers:
   packages/@douglasduteil/nextauth...trpc.prisma:
     dependencies:
       '@prisma/client':
-        specifier: 5.10.0
-        version: 5.10.0(prisma@5.10.0)
+        specifier: 5.10.1
+        version: 5.10.1(prisma@5.10.1)
       '@trpc/client':
         specifier: 10.45.1
         version: 10.45.1(@trpc/server@10.45.1)
@@ -1604,8 +1604,8 @@ importers:
         specifier: workspace:*
         version: link:../datatypes...hours-to-seconds
       prisma:
-        specifier: 5.10.0
-        version: 5.10.0
+        specifier: 5.10.1
+        version: 5.10.1
       typescript:
         specifier: 5.3.3
         version: 5.3.3
@@ -3083,8 +3083,8 @@ packages:
     requiresBuild: true
     optional: true
 
-  /@prisma/client@5.10.0(prisma@5.10.0):
-    resolution: {integrity: sha512-JQqKYpKplsAaPDk0RVKBsN4ly6AWJys6Hkjh9PJMgtdY0IME1C0aHckyGUhHpenmOO2J6liPDDm1svSrzce8BQ==}
+  /@prisma/client@5.10.1(prisma@5.10.1):
+    resolution: {integrity: sha512-4R8Vp6sSwVJSnOxw8WU1WSLqE/G3WJy1xA05XvW87cINoB1hEY7endw5Ppy6TrIBCCtHQim2lqfHkbPvv+i7bQ==}
     engines: {node: '>=16.13'}
     requiresBuild: true
     peerDependencies:
@@ -3093,34 +3093,34 @@ packages:
       prisma:
         optional: true
     dependencies:
-      prisma: 5.10.0
+      prisma: 5.10.1
 
-  /@prisma/debug@5.10.0:
-    resolution: {integrity: sha512-xBs8M4bGIBUqJ/9lZM+joEJkrNaGPKMUcK3a5JqUDQtwPDaWDTq24wOpkHfoJtvNbmGtlDl9Ky5HAbctN5+x7g==}
+  /@prisma/debug@5.10.1:
+    resolution: {integrity: sha512-Ipo9y/lCMzedXMtEBe4YCdvVVivSy6MdG7aYTM15t86g4CRzwdlEsw8Czxnw20w9Qgzdx0MX2iLsCCIG4JoHbA==}
 
   /@prisma/engines-version@5.10.0-34.5a9203d0590c951969e85a7d07215503f4672eb9:
     resolution: {integrity: sha512-uCy/++3Jx/O3ufM+qv2H1L4tOemTNqcP/gyEVOlZqTpBvYJUe0tWtW0y3o2Ueq04mll4aM5X3f6ugQftOSLdFQ==}
 
-  /@prisma/engines@5.10.0:
-    resolution: {integrity: sha512-9NVgMD3bjB5fsxVnrqbasZG3PwurfI2/XKhFfKuZulVRldm5Nz/SJ38t+o0DcOoOmuYMrY4R+UFO57QAB6hCeA==}
+  /@prisma/engines@5.10.1:
+    resolution: {integrity: sha512-75oJa900Pw+GAXjPJmKZqsD7bgSgQbpeGLxCwchrbgPIM70y3h0FbjIsiSAjuhwIGUCCNWzctUNv67rvSmoQAQ==}
     requiresBuild: true
     dependencies:
-      '@prisma/debug': 5.10.0
+      '@prisma/debug': 5.10.1
       '@prisma/engines-version': 5.10.0-34.5a9203d0590c951969e85a7d07215503f4672eb9
-      '@prisma/fetch-engine': 5.10.0
-      '@prisma/get-platform': 5.10.0
+      '@prisma/fetch-engine': 5.10.1
+      '@prisma/get-platform': 5.10.1
 
-  /@prisma/fetch-engine@5.10.0:
-    resolution: {integrity: sha512-6A7Rh7ItuenDo0itgJ8V90cTeLejN1+vUjUzgdonhcNN+7UhZczZfEGe16nI+steW6+ScB5O8+LZybRLNBb0HA==}
+  /@prisma/fetch-engine@5.10.1:
+    resolution: {integrity: sha512-xg3I3RM/qENykZNGBna+14gBkkZL2TVkyX3OX2GWI8MV23Meq5jYdqvlgBrZne25ZxiulctSEA2D6Y5fq1eLog==}
     dependencies:
-      '@prisma/debug': 5.10.0
+      '@prisma/debug': 5.10.1
       '@prisma/engines-version': 5.10.0-34.5a9203d0590c951969e85a7d07215503f4672eb9
-      '@prisma/get-platform': 5.10.0
+      '@prisma/get-platform': 5.10.1
 
-  /@prisma/get-platform@5.10.0:
-    resolution: {integrity: sha512-pSxK2RTVhnG6FVkTlSBdBPuvf8087VliR1MMF5ca8/loyY07FtvYF02SP9ZQZITvbZ+6XX1LTwo8WjIp/EHgIQ==}
+  /@prisma/get-platform@5.10.1:
+    resolution: {integrity: sha512-0rE8lSE3y+Ua3LaOcXlWADz21+kGkf9NWmGNuh8n9I6uaCq90LQxM002l4NSYg6ELtiJXyDgJ4nRhM0x0OXjDQ==}
     dependencies:
-      '@prisma/debug': 5.10.0
+      '@prisma/debug': 5.10.1
 
   /@radix-ui/colors@1.0.1:
     resolution: {integrity: sha512-xySw8f0ZVsAEP+e7iLl3EvcBXX7gsIlC1Zso/sPBW9gIWerBTgz6axrjU+MZ39wD+WFi5h5zdWpsg3+hwt2Qsg==}
@@ -11791,13 +11791,13 @@ packages:
       react: 18.2.0
     dev: true
 
-  /prisma@5.10.0:
-    resolution: {integrity: sha512-uN3jT1v1XP12tvatsBsMUDC/aK+3kA2VUXznl3UutgK4XHdVjM3SBW8bFb/bT9dHU40apwsEazUK9M/vG13YmA==}
+  /prisma@5.10.1:
+    resolution: {integrity: sha512-2VLQ8dMXZGd5qS6XIDyAzK2W4xdPJDt/E3IBcjByn64Fnp33llqq/HBxx0EroZO7ezKiw1gS3BOrkpyzPfeFhA==}
     engines: {node: '>=16.13'}
     hasBin: true
     requiresBuild: true
     dependencies:
-      '@prisma/engines': 5.10.0
+      '@prisma/engines': 5.10.1
 
   /prismjs@1.29.0:
     resolution: {integrity: sha512-Kx/1w86q/epKcmte75LNrEoT+lX8pBpavuAbvJWRXar7Hz8jrtF+e3vY751p0R8H9HdArwaCTNDDzHg/ScJK1Q==}
