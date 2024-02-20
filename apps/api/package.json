@@ -18,7 +18,7 @@
     "@hono/sentry": "1.0.1",
     "@hono/trpc-server": "0.1.1",
     "@trpc/server": "10.45.1",
-    "dotenv": "16.4.4",
+    "dotenv": "16.4.5",
     "hono": "4.0.4",
     "tsx": "4.7.1",
     "ws": "8.16.0",
