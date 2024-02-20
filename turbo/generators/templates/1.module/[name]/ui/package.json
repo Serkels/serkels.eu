@@ -38,7 +38,7 @@
     "@1.config/prettier": "workspace:*",
     "@1.config/tailwindcss": "workspace:*",
     "@1.config/typescript": "workspace:*",
-    "@types/react": "18.2.56",
+    "@types/react": "18.2.57",
     "prettier": "3.2.5",
     "tailwindcss": "3.3.3",
     "typescript": "5.3.3"
