@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "@1.config/typescript/lib.json",
+  "compilerOptions": {
+    "types": ["cypress", "node"],
+    "outDir": "./node_modules/.cache/tsc"
+  }
+}

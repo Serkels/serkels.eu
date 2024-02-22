@@ -18,7 +18,7 @@
     { "path": "packages/@1/modules/bookmark/api", "name": "🫙 bookmark.api" },
     {
       "path": "packages/@1/modules/bookmark/domain",
-      "name": "📜 bookmark.domain"
+      "name": "📜 bookmark.domain",
     },
     { "path": "packages/@1/modules/bookmark/ui", "name": "💄 bookmark.ui" },
     //
@@ -27,7 +27,7 @@
     { "path": "packages/@1/modules/category/api", "name": "🫙 category.api" },
     {
       "path": "packages/@1/modules/category/domain",
-      "name": "📜 category.domain"
+      "name": "📜 category.domain",
     },
     { "path": "packages/@1/modules/category/ui", "name": "💄 category.ui" },
     //
@@ -36,7 +36,7 @@
     { "path": "packages/@1/modules/exchange/api", "name": "🫙 exchange.api" },
     {
       "path": "packages/@1/modules/exchange/domain",
-      "name": "📜 exchange.domain"
+      "name": "📜 exchange.domain",
     },
     { "path": "packages/@1/modules/exchange/ui", "name": "💄 exchange.ui" },
     //
@@ -56,15 +56,15 @@
     //
     {
       "path": "packages/@1/modules/opportunity/api",
-      "name": "🫙 opportunity/api"
+      "name": "🫙 opportunity/api",
     },
     {
       "path": "packages/@1/modules/opportunity/domain",
-      "name": "📜 opportunity.domain"
+      "name": "📜 opportunity.domain",
     },
     {
       "path": "packages/@1/modules/opportunity/ui",
-      "name": "💄 opportunity.ui"
+      "name": "💄 opportunity.ui",
     },
     //
     //
@@ -72,7 +72,7 @@
     { "path": "packages/@1/modules/profile/api", "name": "🫙 profile.api" },
     {
       "path": "packages/@1/modules/profile/domain",
-      "name": "📜 profile.domain"
+      "name": "📜 profile.domain",
     },
     { "path": "packages/@1/modules/profile/ui", "name": "💄 profile.ui" },
     //
@@ -85,17 +85,19 @@
     { "path": "packages/@1/infra/trpc", "name": "🏗️/trpc" },
     // { "path": "packages/@1/config", "name": "⚙️ config" },
     //
+    { "path": "apps/www-e2e", "name": "🧪 www" },
+    //
     { "path": "packages/__legacy__", "name": "🧐 legacy" },
     // { "path": "packages/@douglasduteil", "name": "🎯 douglasduteil" },
     //
-    { "path": ".", "name": "root" }
+    { "path": ".", "name": "root" },
   ],
   "extensions": {
     "recommendations": [
       "bradlc.vscode-tailwindcss",
       "dbaeumer.vscode-eslint",
-      "esbenp.prettier-vscode"
-    ]
+      "esbenp.prettier-vscode",
+    ],
   },
   "settings": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -103,7 +105,7 @@
     "editor.rulers": [{ "column": 80 }],
     "editor.tabSize": 2,
     "files.associations": {
-      "*.css": "tailwindcss"
+      "*.css": "tailwindcss",
     },
     "files.exclude": {
       ".cache/": true,
@@ -117,7 +119,7 @@
       "node_modules/": true,
       "out/": true,
       "storybook-static/": true,
-      ".eslintcache": true
+      ".eslintcache": true,
     },
     "javascript.preferences.importModuleSpecifier": "shortest",
     "typescript.preferences.importModuleSpecifier": "shortest",
@@ -127,9 +129,9 @@
     "tailwindCSS.rootFontSize": 14,
     "editor.quickSuggestions": { "strings": "on" },
     "tailwindCSS.experimental.classRegex": [
-      ["tv\\(([^)]*)\\)", "(?:'|\"|`)([^\"'`]*)(?:'|\"|`)"] // tv(`...`)
+      ["tv\\(([^)]*)\\)", "(?:'|\"|`)([^\"'`]*)(?:'|\"|`)"], // tv(`...`)
     ],
-    "cSpell.words": ["bradlc", "dbaeumer", "esbenp", "tailwindcss", "trpc"]
+    "cSpell.words": ["bradlc", "dbaeumer", "esbenp", "tailwindcss", "trpc"],
   },
   "tasks": {
     "version": "2.0.0",
@@ -137,7 +139,7 @@
       {
         "label": "1. 🚀 Dev",
         "dependsOn": ["🚀 WWW Dev Server", "🚀 API Dev Server", "📦 Dev"],
-        "group": "build"
+        "group": "build",
       },
       {
         "label": "🚀 WWW Dev Server",
@@ -147,14 +149,14 @@
         "options": {
           "cwd": "${workspaceFolder:🚀 www}",
           "env": {
-            "NODE_ENV": "development"
-          }
+            "NODE_ENV": "development",
+          },
         },
         "problemMatcher": ["$tsc-watch"],
         "group": "build",
         "runOptions": {
-          "instanceLimit": 1
-        }
+          "instanceLimit": 1,
+        },
       },
       {
         "label": "🚀 API Dev Server",
@@ -164,14 +166,14 @@
         "options": {
           "cwd": "${workspaceFolder:🚀 api}",
           "env": {
-            "NODE_ENV": "development"
-          }
+            "NODE_ENV": "development",
+          },
         },
         "problemMatcher": ["$tsc-watch"],
         "group": "build",
         "runOptions": {
-          "instanceLimit": 1
-        }
+          "instanceLimit": 1,
+        },
       },
       {
         "args": ["x", "turbo", "type-check", "--filter='www'"],
@@ -181,11 +183,11 @@
         "label": "📦 Dev",
         "options": {
           "cwd": "${workspaceFolder:root}",
-          "env": { "NODE_ENV": "development" }
+          "env": { "NODE_ENV": "development" },
         },
         "problemMatcher": ["$tsc-watch"],
         "runOptions": { "instanceLimit": 1 },
-        "type": "shell"
+        "type": "shell",
       },
       {
         "label": "🏗️ Database Migrate Dev",
@@ -193,13 +195,13 @@
         "args": ["run", "migrate:dev"],
         "type": "shell",
         "options": {
-          "cwd": "${workspaceFolder:🏗️/database}"
+          "cwd": "${workspaceFolder:🏗️/database}",
         },
         "problemMatcher": ["$tsc-watch"],
         "group": "build",
         "runOptions": {
-          "instanceLimit": 1
-        }
+          "instanceLimit": 1,
+        },
       },
       {
         "label": "🏗️ Database Seed",
@@ -207,13 +209,13 @@
         "args": ["run", "seed"],
         "type": "shell",
         "options": {
-          "cwd": "${workspaceFolder:🏗️/database}"
+          "cwd": "${workspaceFolder:🏗️/database}",
         },
         "problemMatcher": ["$tsc-watch"],
         "group": "build",
         "runOptions": {
-          "instanceLimit": 1
-        }
+          "instanceLimit": 1,
+        },
       },
       {
         "label": "🏗️ Database Studio",
@@ -221,14 +223,14 @@
         "args": ["run", "studio"],
         "type": "shell",
         "options": {
-          "cwd": "${workspaceFolder:🏗️/database}"
+          "cwd": "${workspaceFolder:🏗️/database}",
         },
         "problemMatcher": ["$tsc-watch"],
         "group": "build",
         "runOptions": {
-          "instanceLimit": 1
-        }
-      }
-    ]
-  }
+          "instanceLimit": 1,
+        },
+      },
+    ],
+  },
 }

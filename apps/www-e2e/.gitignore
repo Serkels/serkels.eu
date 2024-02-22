@@ -1,0 +1,9 @@
+#
+
+node_modules
+tsconfig.tsbuildinfo
+
+#
+
+cypress/screenshots
+cypress/videos
