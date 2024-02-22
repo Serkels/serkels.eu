@@ -85,7 +85,7 @@
     { "path": "packages/@1/infra/trpc", "name": "🏗️/trpc" },
     // { "path": "packages/@1/config", "name": "⚙️ config" },
     //
-    { "path": "apps/www-e2e", "name": "🧪 www" },
+    { "path": "apps/e2e", "name": "🧪 e2e" },
     //
     { "path": "packages/__legacy__", "name": "🧐 legacy" },
     // { "path": "packages/@douglasduteil", "name": "🎯 douglasduteil" },
