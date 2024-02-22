@@ -286,7 +286,7 @@ importers:
         specifier: 5.3.3
         version: 5.3.3
 
-  apps/www-e2é:
+  apps/www-e2e:
     dependencies:
       '@badeball/cypress-cucumber-preprocessor':
         specifier: 20.0.1
