@@ -1,11 +1,7 @@
 //
 
-import type { Config } from "tailwindcss";
+import Config from "tailwindcss/defaultConfig";
 
 //
 
-export default {
-  content: [],
-  theme: {},
-  plugins: [],
-} satisfies Config;
+export default Config;
