@@ -174,6 +174,16 @@ $ pnpm --filter @1.infra/database exec prisma db seed
 $ pnpm --filter @1.infra/database exec prisma migrate dev
 ```
 
+```sh
+# :warning: ALL `pnpm --filter @1.infra/database exec` commands are following
+# the packages/@1/infra/database/.env `DATABASE_URL` variable !
+
+# Open Cypress
+$ pnpm run --filter e2e studio
+# Run headless Cypress test
+$ pnpm run --filter e2e test
+```
+
 ### Improving The Documentation
 
 <!-- TODO
