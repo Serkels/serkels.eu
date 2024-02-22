@@ -79,4 +79,4 @@ jobs:
           cache: pnpm
           node-version-file: package.json
 
-      - run: pnpm run heroku:prebuild
+      - run: pnpm run heroku-prebuild
