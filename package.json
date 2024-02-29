@@ -12,7 +12,7 @@
     "dev": "turbo run dev --parallel --continue",
     "heroku-prebuild": "npx npm-run-all heroku-prebuild:*",
     "heroku-prebuild:00": "NODE_ENV=O_0 pnpm i -w",
-    "heroku-prebuild:01": "pnpm exec turbo prune --scope=api",
+    "heroku-prebuild:01": "pnpm exec turbo prune api",
     "heroku-prebuild:02": "rm -rf apps packages",
     "heroku-prebuild:03": "pnpm exec cpx \"out/**/*\" .",
     "heroku-postbuild": "npx npm-run-all heroku-postbuild:*",
