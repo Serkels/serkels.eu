@@ -23,7 +23,7 @@
     "start": "pnpm -r start"
   },
   "devDependencies": {
-    "cpx2": "2.0.0",
+    "cpx2": "7.0.1",
     "prettier": "3.2.5",
     "turbo": "1.12.4",
     "typescript": "5.3.3"
