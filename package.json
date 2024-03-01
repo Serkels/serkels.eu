@@ -1,22 +1,16 @@
 {
   "private": true,
-  "engines": {
-    "node": "20.11.1",
-    "npm": ">=9",
-    "pnpm": ">=8"
-  },
-  "packageManager": "pnpm@8.15.3",
   "scripts": {
     "build": "turbo run build",
     "clean": "turbo run clean",
     "dev": "turbo run dev --parallel --continue",
+    "heroku-postbuild": "npx npm-run-all heroku-postbuild:*",
+    "heroku-postbuild:00": "pnpm exec turbo run build",
     "heroku-prebuild": "npx npm-run-all heroku-prebuild:*",
     "heroku-prebuild:00": "NODE_ENV=O_0 pnpm i -w",
     "heroku-prebuild:01": "pnpm exec turbo prune api",
     "heroku-prebuild:02": "del apps packages out/**/node_modules",
     "heroku-prebuild:03": "pnpm exec cpx \"out/**/*\" .",
-    "heroku-postbuild": "npx npm-run-all heroku-postbuild:*",
-    "heroku-postbuild:00": "pnpm exec turbo run build",
     "heroku-release": "npx npm-run-all heroku-release:*",
     "heroku-release:00": "pnpm --filter @1.infra/database exec prisma migrate deploy",
     "lint": "turbo run lint",
@@ -28,6 +22,12 @@
     "prettier": "3.2.5",
     "turbo": "1.12.4",
     "typescript": "5.3.3"
+  },
+  "packageManager": "pnpm@8.15.4",
+  "engines": {
+    "node": "20.11.1",
+    "npm": ">=9",
+    "pnpm": ">=8"
   },
   "pnpm": {
     "patchedDependencies": {
