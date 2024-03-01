@@ -727,8 +727,8 @@ importers:
         specifier: 10.45.1
         version: 10.45.1
       '@typeschema/zod':
-        specifier: 0.13.2
-        version: 0.13.2(zod@3.22.4)
+        specifier: 0.13.3
+        version: 0.13.3(zod@3.22.4)
       zod:
         specifier: 3.22.4
         version: 3.22.4
@@ -6423,8 +6423,8 @@ packages:
         optional: true
     dev: false
 
-  /@typeschema/zod@0.13.2(zod@3.22.4):
-    resolution: {integrity: sha512-PAgkP2uALMC7/v6OeXL2OTDPCM7EjkMTEiw6RJVaZ5PtFxWIS7OiTnBoeED6ih3HXKPiHZ8+8N6kyJ8ULNxaJg==}
+  /@typeschema/zod@0.13.3(zod@3.22.4):
+    resolution: {integrity: sha512-p5Hs22WIKkM/vZTAvw5QOLSA0EJ6QBUsQMGUrXlYnTAE2LSR/F5MLsDUb18O6S5VxGjrzU7x3VIznD5qOafJRw==}
     peerDependencies:
       zod: ^3.22.4
       zod-to-json-schema: ^3.22.4
