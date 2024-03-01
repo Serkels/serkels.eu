@@ -2,8 +2,8 @@
 
 import { Category_Schema, type Category } from "@1.modules/category.domain";
 import { next_auth_procedure, procedure, router } from "@1.modules/trpc";
-import { wrap } from "@decs/typeschema";
 import { CategoryContext } from "@prisma/client";
+import { wrap } from "@typeschema/zod";
 import { z } from "zod";
 
 //
