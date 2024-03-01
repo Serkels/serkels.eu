@@ -22,7 +22,7 @@
   "dependencies": {
     "@1.modules/category.domain": "workspace:*",
     "@1.modules/trpc": "workspace:*",
-    "@typeschema/zod": "0.13.2",
+    "@typeschema/zod": "0.13.3",
     "@trpc/server": "10.45.1",
     "zod": "3.22.4"
   },
