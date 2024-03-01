@@ -97,8 +97,8 @@ const opportunity_api_router = router({
           take: limit + 1,
           where: {
             OR: [
-              { title: { contains: search ?? "" } },
-              { description: { contains: search ?? "" } },
+              { title: { contains: search ?? "", mode: "insensitive" } },
+              { description: { contains: search ?? "", mode: "insensitive" } },
             ],
             expiry_date: { gte: startOfToday() },
             ...(category ? { category: { slug: category } } : {}),

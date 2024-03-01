@@ -99,7 +99,7 @@ const question_api_router = router({
         orderBy: { created_at: "desc" },
         take: limit + 1,
         where: {
-          title: { contains: search ?? "" },
+          title: { contains: search ?? "", mode: "insensitive" },
           ...(category ? { category: { slug: category } } : {}),
           ...narrow,
         },
