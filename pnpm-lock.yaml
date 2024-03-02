@@ -1246,6 +1246,9 @@ importers:
       slugify:
         specifier: 1.6.6
         version: 1.6.6
+      ts-pattern:
+        specifier: 5.0.8
+        version: 5.0.8
       zod:
         specifier: 3.22.4
         version: 3.22.4

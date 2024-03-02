@@ -35,3 +35,5 @@ export const Opportunity_Create_Schema = z.object({
 });
 export interface Opportunity_Create
   extends z.TypeOf<typeof Opportunity_Create_Schema> {}
+
+export const Partner_Filter = z.enum(["ALL", "MY_OPPORTUNITIES"]);

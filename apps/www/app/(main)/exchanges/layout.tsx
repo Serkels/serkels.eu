@@ -6,8 +6,8 @@ import { Grid } from "@1.ui/react/grid";
 import InputSearch from "@1.ui/react/input/InputSearch";
 import dynamic from "next/dynamic";
 import type { PropsWithChildren, ReactNode } from "react";
-import { CategoriesList } from "./_client/CategoriesList";
-import { ExchangeFilter } from "./_client/ExchangeFilter";
+import { Categories_List } from "./_client/Categories_Filter";
+import { Exchanges_Filter } from "./_client/ExchangeFilter";
 
 //
 
@@ -34,11 +34,11 @@ export default async function Layout({
           slot-title="Échanges"
         >
           <SearchForm />
-          <ExchangeFilter />
+          <Exchanges_Filter />
 
           <hr className="my-10" />
 
-          <CategoriesList />
+          <Categories_List />
         </AsideFilter>
         <div className="col-span-full my-10 md:col-span-6">{children}</div>
         <aside className="mt-10 hidden xl:col-span-3 xl:block xl:px-10">

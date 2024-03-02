@@ -6,7 +6,7 @@ import { FilterRadioList } from "@1.ui/react/form/FilterRadioList";
 
 //
 
-export function ExchangeFilter() {
+export function Exchanges_Filter() {
   const { query, setQuery } = useSyncSearchQuery("f");
 
   const filters = [

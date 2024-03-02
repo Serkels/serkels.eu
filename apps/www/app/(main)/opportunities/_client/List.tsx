@@ -4,7 +4,10 @@ import { Share_Button } from ":components/Share_Button";
 import { preventNProgressLoader } from ":components/helpers/preventNProgressLoader";
 import { TRPC_React } from ":trpc/client";
 import type { BookmarkButton_Props } from "@1.modules/bookmark.ui/BookmarkButton";
-import type { Opportunity } from "@1.modules/opportunity.domain";
+import {
+  Partner_Filter,
+  type Opportunity,
+} from "@1.modules/opportunity.domain";
 import { Opoortunity_Card } from "@1.modules/opportunity.ui/Card";
 import { Opportunity_InfiniteList } from "@1.modules/opportunity.ui/InfiniteList";
 import { PROFILE_ROLES } from "@1.modules/profile.domain";
@@ -23,24 +26,46 @@ import { P, match } from "ts-pattern";
 //
 
 export default function List() {
+  const { data: session } = useSession();
   const search_params = useSearchParams();
   const category = search_params.get("category") ?? undefined;
   const search = search_params.get("q") ?? undefined;
+  const filter = match(Partner_Filter.safeParse(search_params.get("f")))
+    .with({ success: true }, ({ data }) => data)
+    .otherwise(() => undefined);
 
   useEffect(() => {
-    gtag("event", "search", { search_term: search });
+    gtag("event", "search", { search, category, filter });
   }, [search]);
 
   try {
-    const info = TRPC_React.opportunity.find.useInfiniteQuery(
-      {
-        category,
-        search: search,
-      },
-      {
-        getNextPageParam: (lastPage) => lastPage.nextCursor,
-      },
-    ) as UseInfiniteQueryResult<{ data: Opportunity[] }>;
+    const info = match(session)
+      .with(
+        { profile: P._ },
+        () =>
+          TRPC_React.opportunity.find.private.useInfiniteQuery(
+            {
+              category,
+              search: search,
+              filter,
+            },
+            {
+              getNextPageParam: (lastPage) => lastPage.nextCursor,
+            },
+          ) as UseInfiniteQueryResult<{ data: Opportunity[] }>,
+      )
+      .otherwise(
+        () =>
+          TRPC_React.opportunity.find.public.useInfiniteQuery(
+            {
+              category,
+              search: search,
+            },
+            {
+              getNextPageParam: (lastPage) => lastPage.nextCursor,
+            },
+          ) as UseInfiniteQueryResult<{ data: Opportunity[] }>,
+      );
 
     return (
       <Opportunity_InfiniteList info={info}>

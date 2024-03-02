@@ -2,11 +2,15 @@
 
 import { AsideFilter } from ":components/shell/AsideFilter";
 import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
+import { getServerSession } from "@1.modules/auth.next";
+import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import { Grid } from "@1.ui/react/grid";
 import InputSearch from "@1.ui/react/input/InputSearch";
 import dynamic from "next/dynamic";
 import type { PropsWithChildren } from "react";
-import { Categoriy_Filter } from "./_client/Categoriy_Filter";
+import { match } from "ts-pattern";
+import { Categoriy_Filter } from "./_client/Categories_Filter";
+import { Partner_Opportunities_Filter } from "./_client/Partner_Opportunities_Filter";
 //
 
 const SearchForm = dynamic(() => import("./_client/SearchForm"), {
@@ -29,7 +33,7 @@ export default async function Layout({ children }: PropsWithChildren<{}>) {
           slot-title="Opportunités"
         >
           <SearchForm />
-
+          <User_Opportunities_Filter />
           <hr className="my-10" />
 
           <Categoriy_Filter />
@@ -40,4 +44,18 @@ export default async function Layout({ children }: PropsWithChildren<{}>) {
       </Grid>
     </TRPC_Hydrate>
   );
+}
+
+async function User_Opportunities_Filter() {
+  const session = await getServerSession();
+
+  if (!session) return null;
+
+  const role = session.profile.role;
+
+  return await match({ role })
+    .with({ role: PROFILE_ROLES.Enum.PARTNER }, async () => {
+      return <Partner_Opportunities_Filter />;
+    })
+    .otherwise(() => null);
 }

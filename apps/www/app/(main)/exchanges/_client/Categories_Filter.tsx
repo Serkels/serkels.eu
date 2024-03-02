@@ -8,7 +8,7 @@ import { useMemo } from "react";
 
 //
 
-export function CategoriesList() {
+export function Categories_List() {
   const { query, setQuery } = useSyncSearchQuery("category");
   const { data: categories_, status } = TRPC_React.category.exchange.useQuery();
 

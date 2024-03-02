@@ -1,6 +1,8 @@
 //
 
 import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
+import { getServerSession } from "@1.modules/auth.next";
+import { Partner_Filter } from "@1.modules/opportunity.domain";
 import { Spinner } from "@1.ui/react/spinner";
 import type { Metadata, ResolvingMetadata } from "next";
 import dynamic from "next/dynamic";
@@ -36,13 +38,26 @@ export default async function Page({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const category = String(searchParams["category"]) ?? undefined;
-  const search = String(searchParams["q"]) ?? undefined;
+  const session = await getServerSession();
+  const category = String(searchParams["category"]);
+  const search = String(searchParams["q"]);
+  const filter_parsed_return = Partner_Filter.safeParse(searchParams["f"]);
+  const filter = filter_parsed_return.success
+    ? filter_parsed_return.data
+    : undefined;
 
-  await TRPC_SSR.opportunity.find.prefetchInfinite({
-    category,
-    search,
-  });
+  if (session) {
+    await TRPC_SSR.opportunity.find.private.prefetchInfinite({
+      category,
+      filter,
+      search,
+    });
+  } else {
+    await TRPC_SSR.opportunity.find.public.prefetchInfinite({
+      category,
+      search,
+    });
+  }
 
   return (
     <TRPC_Hydrate>

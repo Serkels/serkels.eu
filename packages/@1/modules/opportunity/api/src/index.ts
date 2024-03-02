@@ -2,9 +2,9 @@
 
 import { Opportunity_Create_Schema } from "@1.modules/opportunity.domain";
 import { next_auth_procedure, procedure, router } from "@1.modules/trpc";
-import { startOfToday } from "date-fns";
 import slugify from "slugify";
 import { z } from "zod";
+import find_router from "./find";
 
 //
 
@@ -77,47 +77,7 @@ const opportunity_api_router = router({
 
   //
 
-  find: procedure
-    .input(
-      z.object({
-        category: z.string().optional(),
-        cursor: z.string().optional(),
-        limit: z.number().min(1).max(12).default(12),
-        search: z.string().optional(),
-      }),
-    )
-    .query(
-      async ({
-        input: { category, cursor, limit, search },
-        ctx: { prisma },
-      }) => {
-        const items = await prisma.opportunity.findMany({
-          ...(cursor ? { cursor: { id: cursor } } : {}),
-          orderBy: { expiry_date: "asc" },
-          take: limit + 1,
-          where: {
-            OR: [
-              { title: { contains: search ?? "", mode: "insensitive" } },
-              { description: { contains: search ?? "", mode: "insensitive" } },
-            ],
-            expiry_date: { gte: startOfToday() },
-            ...(category ? { category: { slug: category } } : {}),
-          },
-          include: {
-            category: true,
-            owner: { include: { profile: true } },
-          },
-        });
-
-        let nextCursor: typeof cursor | undefined = undefined;
-        if (items.length > limit) {
-          const nextItem = items.pop()!;
-          nextCursor = nextItem.id;
-        }
-
-        return { data: items, nextCursor };
-      },
-    ),
+  find: find_router,
 });
 
 export default opportunity_api_router;

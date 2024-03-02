@@ -10,7 +10,6 @@ import { ZodError, z } from "zod";
 import type { Context } from "./context";
 
 //
-
 export const { router, middleware, mergeRouters, procedure } = initTRPC
   .context<Context>()
   .create({
@@ -29,11 +28,16 @@ export const { router, middleware, mergeRouters, procedure } = initTRPC
     },
   });
 
+// export type Procedure = inferProcedureBuilderResolverOptions<typeof procedure>;
 export const next_auth_procedure = procedure.use(
   verify_next_auth_token<{ profile: Profile }>(
     NEXTAUTH_TRPCENV.NEXTAUTH_SECRET,
   ),
 );
+
+// export type Next_Auth_Procedure = inferProcedureBuilderResolverOptions<
+//   typeof next_auth_procedure
+// >;
 
 export const next_auth_input_token = procedure
   .input(z.object({ token: z.string() }))
