@@ -9,7 +9,7 @@ import { ErrorOccur } from "@1.ui/react/error";
 
 export default function Page_Client({ category }: { category: string }) {
   try {
-    const { data } = TRPC_React.opportunity.find.useQuery({
+    const { data } = TRPC_React.opportunity.find.public.useQuery({
       limit: 2,
       category,
     });

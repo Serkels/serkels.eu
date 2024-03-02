@@ -7,7 +7,7 @@ import InputSearch from "@1.ui/react/input/InputSearch";
 import dynamic from "next/dynamic";
 import type { PropsWithChildren, ReactNode } from "react";
 import { Categories_List } from "./_client/Categories_Filter";
-import { Exchanges_Filter } from "./_client/ExchangeFilter";
+import { Exchanges_Filter } from "./_client/Exchanges_Filter";
 
 //
 
