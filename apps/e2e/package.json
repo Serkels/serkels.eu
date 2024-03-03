@@ -10,7 +10,7 @@
     "test": "cypress run -e filterSpecs=true"
   },
   "dependencies": {
-    "@badeball/cypress-cucumber-preprocessor": "20.0.1",
+    "@badeball/cypress-cucumber-preprocessor": "20.0.2",
     "@bahmutov/cypress-esbuild-preprocessor": "2.2.0",
     "cypress": "13.6.6",
     "cypress-maildev": "1.3.2",
