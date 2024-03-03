@@ -65,7 +65,9 @@ async function find_resolver(
             Partner_Filter.Enum.MY_OPPORTUNITIES,
             (): OpportunityWhereInput => ({ owner: { profile_id } }),
           )
-          .with(Partner_Filter.Enum.ALL, () => ({}))
+          .with(Partner_Filter.Enum.ALL, () => ({
+            expiry_date: { gte: startOfToday() },
+          }))
           .otherwise(() => ({})),
     )
     .otherwise(() => ({}));
@@ -79,7 +81,6 @@ async function find_resolver(
         { title: { contains: search ?? "", mode: "insensitive" } },
         { description: { contains: search ?? "", mode: "insensitive" } },
       ],
-      expiry_date: { gte: startOfToday() },
       ...(category ? { category: { slug: category } } : {}),
       ...nerrow,
     },
