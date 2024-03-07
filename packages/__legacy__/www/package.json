@@ -18,6 +18,6 @@
     "@1/typescript-config": "workspace:@1.config/typescript@*",
     "@types/react": "18.2.64",
     "@types/react-dom": "18.2.21",
-    "typescript": "5.3.3"
+    "typescript": "5.4.2"
   }
 }
