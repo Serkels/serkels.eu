@@ -24,7 +24,7 @@
   "devDependencies": {
     "@1/typescript-config": "workspace:@1.config/typescript@*",
     "@swc/cli": "0.3.10",
-    "@swc/core": "1.4.5",
+    "@swc/core": "1.4.6",
     "prettier": "3.2.5",
     "typescript": "5.4.2"
   }
