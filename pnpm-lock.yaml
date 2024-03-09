@@ -681,8 +681,8 @@ importers:
         specifier: 18.2.0
         version: 18.2.0
       react-content-loader:
-        specifier: 6.2.1
-        version: 6.2.1(react@18.2.0)
+        specifier: 7.0.0
+        version: 7.0.0(react@18.2.0)
       tailwind-variants:
         specifier: 0.2.0
         version: 0.2.0(tailwindcss@3.4.1)
@@ -783,8 +783,8 @@ importers:
         specifier: 18.2.0
         version: 18.2.0
       react-content-loader:
-        specifier: 6.2.1
-        version: 6.2.1(react@18.2.0)
+        specifier: 7.0.0
+        version: 7.0.0(react@18.2.0)
       tailwind-variants:
         specifier: 0.2.0
         version: 0.2.0(tailwindcss@3.4.1)
@@ -940,8 +940,8 @@ importers:
         specifier: 1.1.1
         version: 1.1.1(react-dom@18.2.0)(react@18.2.0)
       react-content-loader:
-        specifier: 6.2.1
-        version: 6.2.1(react@18.2.0)
+        specifier: 7.0.0
+        version: 7.0.0(react@18.2.0)
       react-slotify:
         specifier: 0.2.2
         version: 0.2.2(react@18.2.0)
@@ -1078,8 +1078,8 @@ importers:
         specifier: 18.2.0
         version: 18.2.0
       react-content-loader:
-        specifier: 6.2.1
-        version: 6.2.1(react@18.2.0)
+        specifier: 7.0.0
+        version: 7.0.0(react@18.2.0)
       react-slotify:
         specifier: 0.2.2
         version: 0.2.2(react@18.2.0)
@@ -1192,8 +1192,8 @@ importers:
         specifier: 18.2.0
         version: 18.2.0
       react-content-loader:
-        specifier: 6.2.1
-        version: 6.2.1(react@18.2.0)
+        specifier: 7.0.0
+        version: 7.0.0(react@18.2.0)
       react-slotify:
         specifier: 0.2.2
         version: 0.2.2(react@18.2.0)
@@ -1318,8 +1318,8 @@ importers:
         specifier: 18.2.0
         version: 18.2.0
       react-content-loader:
-        specifier: 6.2.1
-        version: 6.2.1(react@18.2.0)
+        specifier: 7.0.0
+        version: 7.0.0(react@18.2.0)
       react-slotify:
         specifier: 0.2.2
         version: 0.2.2(react@18.2.0)
@@ -1429,8 +1429,8 @@ importers:
         specifier: 18.2.0
         version: 18.2.0
       react-content-loader:
-        specifier: 6.2.1
-        version: 6.2.1(react@18.2.0)
+        specifier: 7.0.0
+        version: 7.0.0(react@18.2.0)
       react-use:
         specifier: 17.5.0
         version: 17.5.0(react-dom@18.2.0)(react@18.2.0)
@@ -12409,8 +12409,8 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  /react-content-loader@6.2.1(react@18.2.0):
-    resolution: {integrity: sha512-6ONbFX+Hi3SHuP66JB8CPvJn372pj+qwltJV0J8z/8MFrq98I1cbFdZuhDWeQXu3CFxiiDTXJn7DFxx2ZvrO7g==}
+  /react-content-loader@7.0.0(react@18.2.0):
+    resolution: {integrity: sha512-xaBwpO7eiJyEc4ndym+g6wcruV9W2y3DKqbw4U48QFBsv0IeAVZO+aCUb8GptlDLWM8n5zi2HcFSGlj5r+53Tg==}
     engines: {node: '>=10'}
     peerDependencies:
       react: '>=16.0.0'
