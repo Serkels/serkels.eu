@@ -37,6 +37,11 @@ export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
     const count = slides.length;
     const [, reset] = useTimeoutEffect(handleNext, 6_666);
 
+    const next = useCallback(() => {
+      handleNext();
+      reset();
+    }, [handleNext, reset]);
+
     return (
       <LazyMotion features={domAnimation}>
         <div className={base({ className })} {...other_props}>
@@ -61,6 +66,7 @@ export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
               ) : null,
             )}
           </AnimatePresence>
+          <button onClick={next}></button>
         </div>
       </LazyMotion>
     );
@@ -72,6 +78,9 @@ export interface CarouselProps
     Omit<ComponentPropsWithoutRef<"div">, "children"> {
   autoplay?: boolean;
   transition?: Transition;
+  actions?: {
+    next: () => void;
+  };
 }
 export interface CarouselState extends ComponentPropsWithoutRef<"div"> {
   readonly index: number;
