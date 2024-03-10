@@ -33,11 +33,14 @@ export default async function Page({ params }: { params: CodeParms }) {
   return (
     <main
       className="
+        max-w-8xl
+        mx-10
+        my-10
         grid
         grid-flow-row
         grid-cols-2
         gap-8
-        lg:grid-cols-3
+        lg:grid-cols-5
       "
     >
       {opportunities.map((data) => (
