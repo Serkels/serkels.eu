@@ -67,6 +67,7 @@ const opportunity_api_router = router({
     .query(async ({ input: { profile_id }, ctx: { prisma } }) => {
       const data = await prisma.opportunity.findMany({
         where: { owner: { profile_id } },
+        orderBy: { expiry_date: "asc" },
         include: {
           category: true,
           owner: { include: { profile: true } },
