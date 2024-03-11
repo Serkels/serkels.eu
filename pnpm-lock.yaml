@@ -199,8 +199,8 @@ importers:
         specifier: 3.3.2
         version: 3.3.2(react@18.2.0)
       date-fns:
-        specifier: 3.3.1
-        version: 3.3.1
+        specifier: 3.4.0
+        version: 3.4.0
       debug:
         specifier: 4.3.4
         version: 4.3.4(supports-color@8.1.1)
@@ -481,8 +481,8 @@ importers:
         specifier: 3.0.0
         version: 3.0.0
       date-fns:
-        specifier: 3.3.1
-        version: 3.3.1
+        specifier: 3.4.0
+        version: 3.4.0
       nanoid:
         specifier: 5.0.6
         version: 5.0.6
@@ -625,8 +625,8 @@ importers:
         specifier: 10.45.2
         version: 10.45.2
       date-fns:
-        specifier: 3.3.1
-        version: 3.3.1
+        specifier: 3.4.0
+        version: 3.4.0
       ts-pattern:
         specifier: 5.0.8
         version: 5.0.8
@@ -851,8 +851,8 @@ importers:
         specifier: 10.45.2
         version: 10.45.2
       date-fns:
-        specifier: 3.3.1
-        version: 3.3.1
+        specifier: 3.4.0
+        version: 3.4.0
       ts-pattern:
         specifier: 5.0.8
         version: 5.0.8
@@ -928,8 +928,8 @@ importers:
         specifier: 3.3.2
         version: 3.3.2(react@18.2.0)
       date-fns:
-        specifier: 3.3.1
-        version: 3.3.1
+        specifier: 3.4.0
+        version: 3.4.0
       formik:
         specifier: 2.4.5
         version: 2.4.5(react@18.2.0)
@@ -995,8 +995,8 @@ importers:
         specifier: 10.45.2
         version: 10.45.2
       date-fns:
-        specifier: 3.3.1
-        version: 3.3.1
+        specifier: 3.4.0
+        version: 3.4.0
       ts-pattern:
         specifier: 5.0.8
         version: 5.0.8
@@ -1127,8 +1127,8 @@ importers:
         specifier: 10.45.2
         version: 10.45.2
       date-fns:
-        specifier: 3.3.1
-        version: 3.3.1
+        specifier: 3.4.0
+        version: 3.4.0
       typed-emitter:
         specifier: 2.1.0
         version: 2.1.0
@@ -1186,8 +1186,8 @@ importers:
         specifier: 4.36.1
         version: 4.36.1(react-dom@18.2.0)(react@18.2.0)
       date-fns:
-        specifier: 3.3.1
-        version: 3.3.1
+        specifier: 3.4.0
+        version: 3.4.0
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -1241,8 +1241,8 @@ importers:
         specifier: 10.45.2
         version: 10.45.2
       date-fns:
-        specifier: 3.3.1
-        version: 3.3.1
+        specifier: 3.4.0
+        version: 3.4.0
       slugify:
         specifier: 1.6.6
         version: 1.6.6
@@ -1309,8 +1309,8 @@ importers:
         specifier: 4.36.1
         version: 4.36.1(react-dom@18.2.0)(react@18.2.0)
       date-fns:
-        specifier: 3.3.1
-        version: 3.3.1
+        specifier: 3.4.0
+        version: 3.4.0
       formik:
         specifier: 2.4.5
         version: 2.4.5(react@18.2.0)
@@ -1509,8 +1509,8 @@ importers:
         specifier: 24.0.4
         version: 24.0.4(react-dom@18.2.0)(react@18.2.0)
       date-fns:
-        specifier: 3.3.1
-        version: 3.3.1
+        specifier: 3.4.0
+        version: 3.4.0
       formik:
         specifier: 2.4.5
         version: 2.4.5(react@18.2.0)
@@ -1718,8 +1718,8 @@ importers:
         specifier: 4.36.1
         version: 4.36.1(react-dom@18.2.0)(react@18.2.0)
       date-fns:
-        specifier: 3.3.1
-        version: 3.3.1
+        specifier: 3.4.0
+        version: 3.4.0
       debug:
         specifier: 4.3.4
         version: 4.3.4(supports-color@8.1.1)
@@ -8074,8 +8074,8 @@ packages:
     engines: {node: '>= 14'}
     dev: true
 
-  /date-fns@3.3.1:
-    resolution: {integrity: sha512-y8e109LYGgoQDveiEBD3DYXKba1jWf5BA8YU1FL5Tvm0BTdEfy54WLCwnuYWZNnzzvALy/QQ4Hov+Q9RVRv+Zw==}
+  /date-fns@3.4.0:
+    resolution: {integrity: sha512-Akz4R8J9MXBsOgF1QeWeCsbv6pntT5KCPjU0Q9prBxVmWJYPLhwAIsNg3b0QAdr0ttiozYLD3L/af7Ra0jqYXw==}
     dev: false
 
   /dayjs@1.11.10:
