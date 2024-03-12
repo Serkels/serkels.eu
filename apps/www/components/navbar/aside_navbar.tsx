@@ -29,9 +29,6 @@ export function Studient_NavBar({ studient }: { studient: Studient }) {
         studient={studient}
       />
       <ul>
-        <Li_Link icon={<PlusBox />} href="./exchanges/new">
-          Créer
-        </Li_Link>
         <Li_Link icon={<Archive />} href="./exchanges/mine">
           Mes annonces
         </Li_Link>
