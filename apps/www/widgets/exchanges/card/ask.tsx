@@ -83,12 +83,12 @@ function Sending() {
 
   //
 
-  const create = TRPC_React.exchanges.me.inbox.create.useMutation();
+  const create = TRPC_React.exchanges.me.inbox.create_deal.useMutation();
   const utils = TRPC_React.useUtils();
 
   useTimeoutEffect(async () => {
     const { exchange_threads } = await create.mutateAsync({
-      content: context.message,
+      content: context.message === "" ? "🚪 Toc Toc !" : context.message,
       exchange_id,
     });
 

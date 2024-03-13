@@ -9,11 +9,17 @@ import {
 } from "@1.modules/exchange.domain";
 import { deal_flow } from "@1.modules/exchange.domain/deal.machine";
 import { next_auth_procedure, router } from "@1.modules/trpc";
+import { next_auth_input_token } from "@1.modules/trpc/src/trpc";
+import { observable } from "@trpc/server/observable";
+import { EventEmitter } from "events";
 import { match } from "ts-pattern";
 import { createActor } from "xstate";
 import { z } from "zod";
 
 //
+
+class DealEventEmitter extends EventEmitter {}
+const deal_event_emitter = new DealEventEmitter();
 
 export const me = router({
   //
@@ -156,10 +162,7 @@ export const me = router({
 
     //
 
-    /**
-     * @deprecated Should be create exchange deal... or something...
-     */
-    create: next_auth_procedure
+    create_deal: next_auth_procedure
       .input(z.object({ content: z.string(), exchange_id: z.string() }))
       .mutation(async ({ ctx: { payload, prisma }, input }) => {
         const { profile } = payload;
@@ -216,6 +219,32 @@ export const me = router({
               where: { owner_id: studient_id },
             },
           },
+        });
+      }),
+
+    //
+
+    on_new_deal: next_auth_input_token
+      .input(z.object({ thread_id: z.string() }))
+      .subscription(async ({ ctx: { prisma, payload }, input }) => {
+        const { thread_id } = input;
+        const {
+          profile: { id: profile_id },
+        } = payload;
+
+        // guard : Only subscribe to participating threads
+        await prisma.thread.findUniqueOrThrow({
+          where: { id: thread_id, participants: { some: { id: profile_id } } },
+        });
+
+        return observable<void>((emit) => {
+          const new_message = () => {
+            emit.next();
+          };
+          deal_event_emitter.on(`${thread_id}>new_deal`, new_message);
+          return () => {
+            deal_event_emitter.off(`${thread_id}>new_deal`, new_message);
+          };
         });
       }),
 

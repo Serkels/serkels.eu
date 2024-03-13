@@ -6,8 +6,8 @@ import { z } from "zod";
 
 //
 
-class MyEventEmitter extends EventEmitter {}
-const ee = new MyEventEmitter();
+class MessageEventEmitter extends EventEmitter {}
+const message_event_emitter = new MessageEventEmitter();
 
 export const thread = router({
   by_id: next_auth_procedure
@@ -75,9 +75,9 @@ export const thread = router({
         const new_message = () => {
           emit.next();
         };
-        ee.on(`${thread_id}>new_message`, new_message);
+        message_event_emitter.on(`${thread_id}>new_message`, new_message);
         return () => {
-          ee.off(`${thread_id}>new_message`, new_message);
+          message_event_emitter.off(`${thread_id}>new_message`, new_message);
         };
       });
     }),
@@ -113,7 +113,7 @@ export const thread = router({
         where: { id: thread_id },
       });
 
-      ee.emit(`${thread_id}>new_message`);
+      message_event_emitter.emit(`${thread_id}>new_message`);
       return thread;
     }),
 });
