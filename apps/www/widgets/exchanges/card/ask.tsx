@@ -3,7 +3,7 @@
 import { SeeProfileAvatarMedia } from ":components/avatar";
 import { TRPC_React } from ":trpc/client";
 import { StateError } from "@1.modules/core/errors";
-import type { Exchange } from "@1.modules/exchange.domain";
+import { HANDSHAKE_TOCTOC, type Exchange } from "@1.modules/exchange.domain";
 import {
   Outlet_Provider,
   useOutlet_Context,
@@ -88,7 +88,7 @@ function Sending() {
 
   useTimeoutEffect(async () => {
     const { exchange_threads } = await create.mutateAsync({
-      content: context.message === "" ? "🚪 Toc Toc !" : context.message,
+      content: context.message === "" ? HANDSHAKE_TOCTOC : context.message,
       exchange_id,
     });
 

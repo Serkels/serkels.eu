@@ -5,7 +5,9 @@ import {
   Deal_Status_Schema,
   Exchange_Create_Schema,
   HANDSHAKE_ACCEPETED,
+  HANDSHAKE_COMPLETED,
   HANDSHAKE_DENIED,
+  HANDSHAKE_TOCTOC,
 } from "@1.modules/exchange.domain";
 import { deal_flow } from "@1.modules/exchange.domain/deal.machine";
 import { next_auth_procedure, router } from "@1.modules/trpc";
@@ -346,9 +348,11 @@ export const me = router({
           throw new StateError("Illegal action");
         }
 
-        const content = match(action)
-          .with("APPROVE", () => HANDSHAKE_ACCEPETED)
-          .with("DENIE", () => HANDSHAKE_DENIED)
+        const content = match(state.value)
+          .with("APPROVED_BY_THE_ORGANIZER", () => HANDSHAKE_ACCEPETED)
+          .with("APPROVED", () => HANDSHAKE_COMPLETED)
+          .with("DENIED", () => HANDSHAKE_DENIED)
+          .with("IDLE", () => HANDSHAKE_TOCTOC) // should not happen
           .exhaustive();
 
         const [updated_deal] = await prisma.$transaction([

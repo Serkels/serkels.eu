@@ -220,7 +220,7 @@ function Message_NotInterested(props: ComponentProps<typeof Message>) {
 
 function Congratulations() {
   return (
-    <div className="rounded-sm border text-center">
+    <div className="rounded-sm py-8 text-center">
       <h4 className="text-lg font-bold text-success">🎊 Félicitation !</h4>
     </div>
   );

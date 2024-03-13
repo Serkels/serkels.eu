@@ -5,8 +5,9 @@ import { Deal_Status_Schema, type Exchange } from "@1.modules/exchange.domain";
 import { Button } from "@1.ui/react/button";
 import { input } from "@1.ui/react/form/atom";
 import { PaperPlane } from "@1.ui/react/icons";
+import { useDocumentVisibility, useTimeoutEffect } from "@react-hookz/web";
 import { Field, Form, Formik } from "formik";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 
 //
 
@@ -34,6 +35,11 @@ export default function Conversation_Form({
       utils.exchanges.by_id.invalidate(exchange.id),
     ]);
   }, [utils, thread_id]);
+
+  const document_visibility = useDocumentVisibility();
+  const [, reset] = useTimeoutEffect(invalidate, 1_111);
+  useEffect(reset, [document_visibility]);
+
   const send_message = useCallback(
     async (content: string) => {
       await send.mutateAsync({ content, thread_id });
