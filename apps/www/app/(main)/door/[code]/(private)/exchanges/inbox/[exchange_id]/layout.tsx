@@ -2,8 +2,7 @@
 
 import type { Params } from ":pipes/exchange_by_id";
 import type { Metadata, ResolvingMetadata } from "next";
-import type { PropsWithChildren } from "react";
-import Navbar_Page from "./_@navbar/page";
+import type { PropsWithChildren, ReactNode } from "react";
 
 //
 
@@ -19,12 +18,13 @@ export async function generateMetadata(
 //
 export default function Layout({
   children,
+  navbar,
   params,
-}: PropsWithChildren<{ params: Params }>) {
+}: PropsWithChildren<{ params: Params; navbar: ReactNode }>) {
   //! HACK(douglasduteil): Investigate way the param is "undefined" on direct page access
   if (params.exchange_id === "undefined") return null;
 
-  const navbar = <Navbar_Page params={params} />;
+  // const navbar = <Navbar_Page params={params} />;
   return (
     <div className="grid h-full lg:grid-cols-[minmax(0,_300px),_1fr]">
       <aside className="hidden pt-10 md:block">{navbar}</aside>
