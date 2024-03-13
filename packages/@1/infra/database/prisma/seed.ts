@@ -152,7 +152,7 @@ async function studient() {
                 ExchangeType.PROPOSAL,
                 ExchangeType.RESEARCH,
               ]),
-              expiry_date: faker.date.future(),
+              expiry_date: faker.helpers.maybe(faker.date.future),
             }),
             { count: { min: 0, max: 5 } },
           ),
