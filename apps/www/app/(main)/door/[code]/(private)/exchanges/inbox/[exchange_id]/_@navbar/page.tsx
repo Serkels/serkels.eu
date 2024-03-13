@@ -31,7 +31,9 @@ export default async function Page({ params }: { params: Params }) {
             <h6 className="line-clamp-2 flex-1 text-xl font-bold">
               {exchange.title}
             </h6>
-            <Link href={`/exchanges?q=${exchange.title}`}>Voir l'échange</Link>
+            <Link href={`/exchanges?q=${exchange.title}`}>
+              Consulter l'échange
+            </Link>
           </div>
         </header>
 
