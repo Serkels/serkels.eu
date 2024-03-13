@@ -18,16 +18,15 @@ export async function generateMetadata(
 //
 export default function Layout({
   children,
-  navbar,
+  nav,
   params,
-}: PropsWithChildren<{ params: Params; navbar: ReactNode }>) {
+}: PropsWithChildren<{ params: Params; nav: ReactNode }>) {
   //! HACK(douglasduteil): Investigate way the param is "undefined" on direct page access
   if (params.exchange_id === "undefined") return null;
 
-  // const navbar = <Navbar_Page params={params} />;
   return (
     <div className="grid h-full lg:grid-cols-[minmax(0,_300px),_1fr]">
-      <aside className="hidden pt-10 md:block">{navbar}</aside>
+      <aside className="hidden pt-10 md:block">{nav}</aside>
       <div className="bg-white">{children}</div>
     </div>
   );
