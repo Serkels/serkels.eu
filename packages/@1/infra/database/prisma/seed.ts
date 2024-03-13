@@ -10,7 +10,10 @@ import {
   ExchangeType,
   Prisma,
   ProfileRole,
+  type Deal,
+  type Exchange,
 } from "@prisma/client";
+import { isPast } from "date-fns";
 import dedent from "dedent";
 import process from "node:process";
 import slugify from "slugify";
@@ -463,9 +466,32 @@ async function studients_participants_in_exchanges() {
           await prisma.exchangeThread.create({
             data: { deal_id, thread_id, owner_id: participant_id },
           });
+
+          const updated_exchange = await prisma.exchange.findFirstOrThrow({
+            include: {
+              deals: { where: { status: ExchangeThreadStatus.APPROVED } },
+            },
+            where: { id: exchange_id },
+          });
+
+          const is_active = is_active_exchange(updated_exchange);
+          await prisma.exchange.update({
+            data: { is_active },
+            where: { id: exchange_id },
+          });
         }),
     );
   }
+}
+
+export function is_active_exchange(
+  exchange: Pick<Exchange, "expiry_date" | "places"> & { deals: Deal[] },
+) {
+  return (
+    exchange.deals.length < exchange.places ||
+    exchange.expiry_date === null ||
+    isPast(exchange.expiry_date)
+  );
 }
 
 async function studients_awnsers() {

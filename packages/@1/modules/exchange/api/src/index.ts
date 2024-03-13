@@ -65,7 +65,7 @@ const exchange_api_router = router({
 
   //
 
-  by_particitpant: procedure
+  by_particitpant: next_auth_procedure
     .input(
       z.object({
         profile_id: z.string(),
@@ -74,10 +74,6 @@ const exchange_api_router = router({
     )
     .query(async ({ input, ctx: { prisma } }) => {
       const { profile_id, limit } = input;
-      const { id: studient_id } = await prisma.studient.findUniqueOrThrow({
-        select: { id: true },
-        where: { profile_id },
-      });
 
       const data = await prisma.exchange.findMany({
         include: {
@@ -86,12 +82,13 @@ const exchange_api_router = router({
           owner: { include: { profile: true } },
           deals: { where: { status: Deal_Status_Schema.Enum.APPROVED } },
         },
-        orderBy: { created_at: "asc" },
+        orderBy: { updated_at: "asc" },
         take: limit,
         where: {
+          is_active: false,
           deals: {
-            some: {
-              participant_id: studient_id,
+            every: {
+              participant: { profile_id },
               status: Deal_Status_Schema.Enum.APPROVED,
             },
           },

@@ -28,6 +28,7 @@
     "@1.config/typescript": "workspace:*",
     "@faker-js/faker": "8.4.1",
     "@types/node": "20.11.26",
+    "date-fns": "3.4.0",
     "dedent": "1.5.1",
     "prisma": "5.11.0",
     "slugify": "1.6.6",

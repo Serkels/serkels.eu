@@ -373,6 +373,9 @@ importers:
       '@types/node':
         specifier: 20.11.26
         version: 20.11.26
+      date-fns:
+        specifier: 3.4.0
+        version: 3.4.0
       dedent:
         specifier: 1.5.1
         version: 1.5.1
@@ -8108,7 +8111,6 @@ packages:
 
   /date-fns@3.4.0:
     resolution: {integrity: sha512-Akz4R8J9MXBsOgF1QeWeCsbv6pntT5KCPjU0Q9prBxVmWJYPLhwAIsNg3b0QAdr0ttiozYLD3L/af7Ra0jqYXw==}
-    dev: false
 
   /dayjs@1.11.10:
     resolution: {integrity: sha512-vjAczensTgRcqDERK0SR2XMwsF/tSvnvlv6VcF2GIhg6Sx4yOIt/irsr1RDJsKiIyBzJDpCoXiWWq28MqH2cnQ==}

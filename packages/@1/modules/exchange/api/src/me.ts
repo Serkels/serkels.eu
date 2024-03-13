@@ -61,7 +61,7 @@ export const me = router({
 
   //
 
-  find_active: next_auth_procedure
+  find: next_auth_procedure
     .input(
       z.object({
         cursor: z.string().optional(),
@@ -76,7 +76,6 @@ export const me = router({
         ...(cursor ? { cursor: { id: cursor } } : {}),
         take: limit,
         where: {
-          is_active: true,
           OR: [
             { owner: { profile_id: profile.id } },
             {
@@ -261,17 +260,20 @@ export const me = router({
       )
       .query(async ({ ctx: { payload, prisma }, input }) => {
         const { exchange_id, thread_id } = input;
-        const { profile } = payload;
+        const {
+          profile: { id: profile_id },
+        } = payload;
+
         const { id: studient_id } = await prisma.studient.findUniqueOrThrow({
           select: { id: true },
-          where: { profile_id: profile.id },
+          where: { profile_id },
         });
 
         const deal = await prisma.deal.findFirstOrThrow({
           include: {
             parent: true,
             exchange_threads: {
-              where: { owner_id: studient_id },
+              where: { owner: { profile_id } },
               include: { thread: true },
             },
           },

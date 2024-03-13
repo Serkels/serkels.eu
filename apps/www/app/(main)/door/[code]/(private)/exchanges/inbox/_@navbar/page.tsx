@@ -18,7 +18,7 @@ const SearchForm = dynamic(() => import("./_client/SearchForm"), {
 //
 
 export default async function Page() {
-  await TRPC_SSR.exchanges.me.find_active.prefetchInfinite({});
+  await TRPC_SSR.exchanges.me.find.prefetchInfinite({});
 
   return (
     <div className={column_screen()}>

@@ -94,7 +94,7 @@ function Sending() {
 
     await Promise.all([
       utils.exchanges.me.inbox.by_exchange_id.invalidate({ exchange_id }),
-      utils.exchanges.me.find_active.invalidate({}),
+      utils.exchanges.me.find.invalidate({}),
       utils.exchanges.me.deal_by_exchange_id.invalidate(exchange_id),
     ]);
 
