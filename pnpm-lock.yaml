@@ -887,6 +887,9 @@ importers:
       '@1.modules/profile.domain':
         specifier: workspace:*
         version: link:../../profile/domain
+      ts-pattern:
+        specifier: 5.0.8
+        version: 5.0.8
       xstate:
         specifier: 5.7.1
         version: 5.7.1
