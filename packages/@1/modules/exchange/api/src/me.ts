@@ -367,7 +367,6 @@ export const me = router({
             data: {
               updated_at: new Date(),
               messages: {
-                // TODO(douglasduteil): One should notify the use of a new message here
                 create: {
                   content,
                   author: { connect: { id: profile.id } },
