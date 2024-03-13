@@ -95,7 +95,6 @@ export function Exchange_CreateForm<
           disabled={isSubmitting}
           type="date"
           name="expiry_date"
-          required
         />
       </label>
       <label>

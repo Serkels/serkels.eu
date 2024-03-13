@@ -21,7 +21,7 @@ export const Exchange_Schema = Entity_Schema.merge(Entity_Timestamps)
     category: Category_Schema,
     deals: z.array(Entity_Schema),
     description: z.string().default(""),
-    expiry_date: z.coerce.date().default(new Date(0)),
+    expiry_date: z.coerce.date().nullable(),
     is_online: z.boolean().default(true),
     location: z.string().nullable().default(""),
     owner: Studient_Schema.pick({ profile: true, university: true }),

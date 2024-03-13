@@ -2,7 +2,7 @@
 
 import type { Exchange } from "@1.modules/exchange.domain";
 import { Card } from "@1.modules/exchange.ui/Card/Card";
-import { Expiry_Date } from "@1.modules/exchange.ui/Card/Expiry_Date";
+import { Exchange_Date } from "@1.modules/exchange.ui/Card/Date";
 import type { Profile } from "@1.modules/profile.domain";
 import { StudientAvatarMedia } from "@1.modules/profile.ui/avatar";
 import { button } from "@1.ui/react/button/atom";
@@ -56,7 +56,7 @@ export function Exchange_Card({
               <Exchange_Delete_Button />
             </>
           ) : null}
-          <Expiry_Date />
+          <Exchange_Date />
         </div>
       </Card.Header.Right>
       <Card.Footer.Left>
