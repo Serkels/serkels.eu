@@ -38,6 +38,8 @@ export interface Exchange extends z.TypeOf<typeof Exchange_Schema> {}
 
 export const Exchange_Filter = z.enum([
   "ALL",
+  "DATE_FLEXIBLE",
+  "DATE_LIMITED",
   "MY_FOLLOWS",
   "ON_SITE",
   "ONLINE",

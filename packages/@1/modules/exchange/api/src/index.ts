@@ -6,6 +6,7 @@ import {
   Exchange_Schema,
 } from "@1.modules/exchange.domain";
 import { next_auth_procedure, procedure, router } from "@1.modules/trpc";
+import { Prisma } from "@prisma/client";
 import { match } from "ts-pattern";
 import { z } from "zod";
 import { me } from "./me";
@@ -152,11 +153,17 @@ const exchange_api_router = router({
         profile: { id: profile_id },
       } = payload;
       const { category, cursor, limit, search, filter } = input;
-      type ExchangeWhere = NonNullable<
-        Parameters<typeof prisma.exchange.findMany>[0]
-      >["where"];
+      type ExchangeWhere = Prisma.ExchangeWhereInput;
       const nerrow = match(filter)
         .with(Exchange_Filter.Enum.ALL, (): ExchangeWhere => ({}))
+        .with(
+          Exchange_Filter.Enum.DATE_FLEXIBLE,
+          (): ExchangeWhere => ({ expiry_date: null }),
+        )
+        .with(
+          Exchange_Filter.Enum.DATE_LIMITED,
+          (): ExchangeWhere => ({ expiry_date: { not: null } }),
+        )
         .with(
           Exchange_Filter.Enum.MY_FOLLOWS,
           (): ExchangeWhere => ({
