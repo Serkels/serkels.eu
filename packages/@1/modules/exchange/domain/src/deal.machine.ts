@@ -6,7 +6,10 @@ import { Deal_Status_Schema } from "./index";
 //
 
 export const deal_flow = setup({
-  types: {} as { events: { type: "DENIE" } | { type: "APPROVE" } },
+  types: {} as {
+    events: { type: "DENIE" } | { type: "APPROVE" };
+  },
+  guards: { is_organizer: () => false, is_participant: () => false },
 }).createMachine({
   id: "deal",
   initial: Deal_Status_Schema.Enum.IDLE,
