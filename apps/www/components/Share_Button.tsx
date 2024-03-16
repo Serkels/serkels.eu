@@ -21,7 +21,9 @@ export function Share_Button({
     5000,
   );
   const copy_to_clipboard = useCallback(async () => {
-    await navigator.clipboard.writeText(href);
+    await navigator.clipboard.writeText(
+      href.startsWith("/") ? `${window.location.origin}${href}` : href,
+    );
     set_diplay_in_clipboard(true);
     reset();
   }, [href]);

@@ -26,10 +26,7 @@ export function Mutate_Exchange({ categories }: { categories: Category[] }) {
         type: Exchange_TypeSchema.Enum.PROPOSAL,
       }}
       onSubmit={async (values) => {
-        await create.mutate({
-          ...values,
-          expiry_date: new Date(values.expiry_date),
-        });
+        await create.mutate(values);
 
         await utils.exchanges.find.invalidate();
 

@@ -99,10 +99,6 @@ async function UserNavGroup({ className }: ComponentPropsWithoutRef<"nav">) {
     ))
     .with(PROFILE_ROLES.Enum.STUDIENT, () => (
       <nav className={base({ className })}>
-        <Link href={`/@~/exchanges/new`} className="flex">
-          <VisuallyHidden>Créer un échange</VisuallyHidden>
-          <Plus className={icon({ className: "bg-transparent p-0.5" })} />
-        </Link>
         {/* <Link href={`#`} className="flex"> */}
         <VisuallyHidden>Notifications</VisuallyHidden>
         <Bell className={icon()} />

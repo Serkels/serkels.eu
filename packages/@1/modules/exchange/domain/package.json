@@ -23,6 +23,7 @@
     "@1.modules/profile.domain": "workspace:*",
     "@1.modules/category.domain": "workspace:*",
     "@1.modules/core": "workspace:*",
+    "ts-pattern": "5.0.8",
     "xstate": "5.7.1",
     "zod": "3.22.4"
   },

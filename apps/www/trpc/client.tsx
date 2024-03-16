@@ -9,12 +9,16 @@ import {
   loggerLink,
   splitLink,
   wsLink,
+  type inferReactQueryProcedureOptions,
 } from "@trpc/react-query";
 import { useSession } from "next-auth/react";
 import { useEffect, useState, type PropsWithChildren } from "react";
 import SuperJSON from "superjson";
 
 //
+
+export type ReactQueryProcedureOptions =
+  inferReactQueryProcedureOptions<Router>;
 
 export const TRPC_React = createTRPCReact<Router>({
   abortOnUnmount: true,

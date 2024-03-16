@@ -4,6 +4,7 @@ import type { Params } from ":pipes/exchange_by_id";
 import { TRPC_SSR } from ":trpc/server";
 import { column_screen } from "@1.ui/react/grid/atom";
 import to from "await-to-js";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import Infinite_Thread_List from "./_client/Infinite_Thread_List";
 
@@ -26,9 +27,14 @@ export default async function Page({ params }: { params: Params }) {
     return (
       <div className={column_screen({ className: "[&>*]:px-8" })}>
         <header className="flex h-16 items-center justify-start space-x-7">
-          <h6 className="line-clamp-2 flex-1 text-xl font-bold">
-            {exchange.title}
-          </h6>
+          <div className="flex flex-col">
+            <h6 className="line-clamp-2 flex-1 text-xl font-bold">
+              {exchange.title}
+            </h6>
+            <Link href={`/exchanges?q=${exchange.title}`}>
+              Consulter l'échange
+            </Link>
+          </div>
         </header>
 
         <hr className="my-6 border-2 border-[#F0F0F0]" />

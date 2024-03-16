@@ -5,15 +5,23 @@ import {
   Deal_Status_Schema,
   Exchange_Create_Schema,
   HANDSHAKE_ACCEPETED,
+  HANDSHAKE_COMPLETED,
   HANDSHAKE_DENIED,
+  HANDSHAKE_TOCTOC,
 } from "@1.modules/exchange.domain";
 import { deal_flow } from "@1.modules/exchange.domain/deal.machine";
 import { next_auth_procedure, router } from "@1.modules/trpc";
+import { next_auth_input_token } from "@1.modules/trpc/src/trpc";
+import { observable } from "@trpc/server/observable";
+import { EventEmitter } from "events";
 import { match } from "ts-pattern";
 import { createActor } from "xstate";
 import { z } from "zod";
 
 //
+
+class DealEventEmitter extends EventEmitter {}
+const deal_event_emitter = new DealEventEmitter();
 
 export const me = router({
   //
@@ -53,7 +61,7 @@ export const me = router({
 
   //
 
-  find_active: next_auth_procedure
+  find: next_auth_procedure
     .input(
       z.object({
         cursor: z.string().optional(),
@@ -68,7 +76,6 @@ export const me = router({
         ...(cursor ? { cursor: { id: cursor } } : {}),
         take: limit,
         where: {
-          is_active: true,
           OR: [
             { owner: { profile_id: profile.id } },
             {
@@ -156,10 +163,7 @@ export const me = router({
 
     //
 
-    /**
-     * @deprecated Should be create exchange deal... or something...
-     */
-    create: next_auth_procedure
+    create_deal: next_auth_procedure
       .input(z.object({ content: z.string(), exchange_id: z.string() }))
       .mutation(async ({ ctx: { payload, prisma }, input }) => {
         const { profile } = payload;
@@ -221,6 +225,32 @@ export const me = router({
 
     //
 
+    on_new_deal: next_auth_input_token
+      .input(z.object({ thread_id: z.string() }))
+      .subscription(async ({ ctx: { prisma, payload }, input }) => {
+        const { thread_id } = input;
+        const {
+          profile: { id: profile_id },
+        } = payload;
+
+        // guard : Only subscribe to participating threads
+        await prisma.thread.findUniqueOrThrow({
+          where: { id: thread_id, participants: { some: { id: profile_id } } },
+        });
+
+        return observable<void>((emit) => {
+          const new_message = () => {
+            emit.next();
+          };
+          deal_event_emitter.on(`${thread_id}>new_deal`, new_message);
+          return () => {
+            deal_event_emitter.off(`${thread_id}>new_deal`, new_message);
+          };
+        });
+      }),
+
+    //
+
     next_actions: next_auth_procedure
       .input(
         z.object({
@@ -230,17 +260,20 @@ export const me = router({
       )
       .query(async ({ ctx: { payload, prisma }, input }) => {
         const { exchange_id, thread_id } = input;
-        const { profile } = payload;
+        const {
+          profile: { id: profile_id },
+        } = payload;
+
         const { id: studient_id } = await prisma.studient.findUniqueOrThrow({
           select: { id: true },
-          where: { profile_id: profile.id },
+          where: { profile_id },
         });
 
         const deal = await prisma.deal.findFirstOrThrow({
           include: {
             parent: true,
             exchange_threads: {
-              where: { owner_id: studient_id },
+              where: { owner: { profile_id } },
               include: { thread: true },
             },
           },
@@ -317,9 +350,11 @@ export const me = router({
           throw new StateError("Illegal action");
         }
 
-        const content = match(action)
-          .with("APPROVE", () => HANDSHAKE_ACCEPETED)
-          .with("DENIE", () => HANDSHAKE_DENIED)
+        const content = match(state.value)
+          .with("APPROVED_BY_THE_ORGANIZER", () => HANDSHAKE_ACCEPETED)
+          .with("APPROVED", () => HANDSHAKE_COMPLETED)
+          .with("DENIED", () => HANDSHAKE_DENIED)
+          .with("IDLE", () => HANDSHAKE_TOCTOC) // should not happen
           .exhaustive();
 
         const [updated_deal] = await prisma.$transaction([
@@ -334,7 +369,6 @@ export const me = router({
             data: {
               updated_at: new Date(),
               messages: {
-                // TODO(douglasduteil): One should notify the use of a new message here
                 create: {
                   content,
                   author: { connect: { id: profile.id } },

@@ -20,10 +20,9 @@ export function Categoriy_Filter() {
 
   const onChange =
     pathname === "/opportunities"
-      ? async (category: string) =>
-          setQuery(category === "" ? undefined : category)
-      : async (category: string) => {
-          await router.push(`/opportunities?category=${category}`);
+      ? (category: string) => setQuery(category === "" ? undefined : category)
+      : (category: string) => {
+          router.push(`/opportunities?category=${category}`);
         };
 
   //

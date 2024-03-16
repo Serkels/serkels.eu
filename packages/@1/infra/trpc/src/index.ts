@@ -11,6 +11,7 @@ import profile_api_router from "@1.modules/profile.api";
 import { partner_api_router } from "@1.modules/profile.api/partner";
 import { studient_api_router } from "@1.modules/profile.api/studient";
 import { procedure, router } from "@1.modules/trpc";
+import type { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
 import { observable } from "@trpc/server/observable";
 import { z } from "zod";
 
@@ -60,3 +61,5 @@ export const root_router = router({
 
 export { root_router as router };
 export type Router = typeof root_router;
+export type RouterInput = inferRouterInputs<Router>;
+export type RouterOutput = inferRouterOutputs<Router>;

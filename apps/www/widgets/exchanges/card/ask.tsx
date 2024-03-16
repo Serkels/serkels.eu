@@ -3,7 +3,7 @@
 import { SeeProfileAvatarMedia } from ":components/avatar";
 import { TRPC_React } from ":trpc/client";
 import { StateError } from "@1.modules/core/errors";
-import type { Exchange } from "@1.modules/exchange.domain";
+import { HANDSHAKE_TOCTOC, type Exchange } from "@1.modules/exchange.domain";
 import {
   Outlet_Provider,
   useOutlet_Context,
@@ -83,18 +83,18 @@ function Sending() {
 
   //
 
-  const create = TRPC_React.exchanges.me.inbox.create.useMutation();
+  const create = TRPC_React.exchanges.me.inbox.create_deal.useMutation();
   const utils = TRPC_React.useUtils();
 
   useTimeoutEffect(async () => {
     const { exchange_threads } = await create.mutateAsync({
-      content: context.message,
+      content: context.message === "" ? HANDSHAKE_TOCTOC : context.message,
       exchange_id,
     });
 
     await Promise.all([
       utils.exchanges.me.inbox.by_exchange_id.invalidate({ exchange_id }),
-      utils.exchanges.me.find_active.invalidate({}),
+      utils.exchanges.me.find.invalidate({}),
       utils.exchanges.me.deal_by_exchange_id.invalidate(exchange_id),
     ]);
 

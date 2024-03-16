@@ -6,6 +6,7 @@ import {
   Exchange_Schema,
 } from "@1.modules/exchange.domain";
 import { next_auth_procedure, procedure, router } from "@1.modules/trpc";
+import { Prisma } from "@prisma/client";
 import { match } from "ts-pattern";
 import { z } from "zod";
 import { me } from "./me";
@@ -64,7 +65,7 @@ const exchange_api_router = router({
 
   //
 
-  by_particitpant: procedure
+  by_particitpant: next_auth_procedure
     .input(
       z.object({
         profile_id: z.string(),
@@ -73,10 +74,6 @@ const exchange_api_router = router({
     )
     .query(async ({ input, ctx: { prisma } }) => {
       const { profile_id, limit } = input;
-      const { id: studient_id } = await prisma.studient.findUniqueOrThrow({
-        select: { id: true },
-        where: { profile_id },
-      });
 
       const data = await prisma.exchange.findMany({
         include: {
@@ -85,12 +82,13 @@ const exchange_api_router = router({
           owner: { include: { profile: true } },
           deals: { where: { status: Deal_Status_Schema.Enum.APPROVED } },
         },
-        orderBy: { created_at: "asc" },
+        orderBy: { updated_at: "asc" },
         take: limit,
         where: {
+          is_active: false,
           deals: {
-            some: {
-              participant_id: studient_id,
+            every: {
+              participant: { profile_id },
               status: Deal_Status_Schema.Enum.APPROVED,
             },
           },
@@ -152,11 +150,17 @@ const exchange_api_router = router({
         profile: { id: profile_id },
       } = payload;
       const { category, cursor, limit, search, filter } = input;
-      type ExchangeWhere = NonNullable<
-        Parameters<typeof prisma.exchange.findMany>[0]
-      >["where"];
+      type ExchangeWhere = Prisma.ExchangeWhereInput;
       const nerrow = match(filter)
         .with(Exchange_Filter.Enum.ALL, (): ExchangeWhere => ({}))
+        .with(
+          Exchange_Filter.Enum.DATE_FLEXIBLE,
+          (): ExchangeWhere => ({ expiry_date: null }),
+        )
+        .with(
+          Exchange_Filter.Enum.DATE_LIMITED,
+          (): ExchangeWhere => ({ expiry_date: { not: null } }),
+        )
         .with(
           Exchange_Filter.Enum.MY_FOLLOWS,
           (): ExchangeWhere => ({
@@ -183,7 +187,7 @@ const exchange_api_router = router({
 
       const items = await prisma.exchange.findMany({
         ...(cursor ? { cursor: { id: cursor } } : {}),
-        orderBy: { expiry_date: "asc" },
+        orderBy: [{ created_at: "desc" }, { expiry_date: "desc" }],
         take: limit + 1,
         where: {
           OR: [

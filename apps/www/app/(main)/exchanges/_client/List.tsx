@@ -9,6 +9,7 @@ import { ErrorOccur } from "@1.ui/react/error";
 import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { useEffect, type ComponentProps, type ReactNode } from "react";
+import { match } from "ts-pattern";
 
 //
 
@@ -17,13 +18,9 @@ export default function List() {
   const search_params = useSearchParams();
   const category = search_params.get("category") ?? undefined;
   const search = search_params.get("q") ?? undefined;
-  const filter_parsed_return = Exchange_Filter.safeParse(
-    search_params.get("f"),
-  );
-  const filter = filter_parsed_return.success
-    ? filter_parsed_return.data
-    : undefined;
-
+  const filter = match(Exchange_Filter.safeParse(search_params.get("f")))
+    .with({ success: true }, ({ data }) => data)
+    .otherwise(() => undefined);
   useEffect(() => {
     gtag("event", "search", { search_term: search });
   }, [search]);

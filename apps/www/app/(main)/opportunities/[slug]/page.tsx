@@ -44,6 +44,7 @@ export default async function Page({ params }: { params: Params }) {
     const opportunity = await slug_to_opportunity(params);
     const { owner: partner } = opportunity;
     const { profile } = partner;
+    const href = `/opportunities/${opportunity.slug}?category=${opportunity.category.slug}`;
 
     return (
       <Article opportunity={opportunity}>
@@ -65,9 +66,7 @@ export default async function Page({ params }: { params: Params }) {
           {({ description }) => <ReactMarkdown>{description}</ReactMarkdown>}
         </Article.Description>
         <Article.ShareFigure>
-          <Share_Button
-            href={`${process.env["APP_URL"]}/opportunities/${opportunity.slug}`}
-          >
+          <Share_Button href={href}>
             <figure className="flex items-center">
               <Share className={icon_link()} />
               <figcaption className="ml-4 flex-1">Partager</figcaption>
