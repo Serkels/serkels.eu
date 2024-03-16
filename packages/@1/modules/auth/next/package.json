@@ -36,8 +36,8 @@
     "@1.config/typescript": "workspace:*",
     "@1.infra/trpc": "workspace:*",
     "@douglasduteil/datatypes...hours-to-seconds": "workspace:*",
-    "@types/react": "18.2.65",
-    "@types/react-dom": "18.2.21",
+    "@types/react": "18.2.66",
+    "@types/react-dom": "18.2.22",
     "typescript": "5.4.2"
   }
 }
