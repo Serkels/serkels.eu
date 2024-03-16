@@ -1,7 +1,7 @@
 //
 
 import { setup } from "xstate";
-import { Deal_Status_Schema } from ".";
+import { Deal_Status_Schema } from "./index";
 
 //
 
