@@ -6,7 +6,7 @@
   "dependencies": {
     "@1/core": "workspace:@0.__legacy__/core@*",
     "@tanstack/react-query": "4.36.1",
-    "date-fns": "3.4.0",
+    "date-fns": "3.5.0",
     "debug": "4.3.4",
     "react": "18.2.0",
     "superjson": "2.2.1",
