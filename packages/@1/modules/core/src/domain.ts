@@ -5,6 +5,7 @@ import { z } from "zod";
 //
 
 export const ID_Schema = z.string({ description: "ID" });
+export interface ID_Schema extends z.TypeOf<typeof ID_Schema> {}
 
 export const Entity_Schema = z
   .object({

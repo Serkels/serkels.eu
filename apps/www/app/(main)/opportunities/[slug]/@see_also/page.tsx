@@ -2,21 +2,27 @@
 
 import { TRPC_SSR } from ":trpc/server";
 import { ErrorOccur } from "@1.ui/react/error";
+import { SeeAlso_Provider } from "./context";
 import Page_Client from "./page.client";
 
 //
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const { slug } = params;
-  //! HACK(douglasduteil): Investigate way the param is "undefined" on direct page access
-  if (slug === "undefined") return null;
 
   try {
     const opportunity = await TRPC_SSR.opportunity.by_slug.fetch(slug);
 
-    const { category } = opportunity;
+    const {
+      id,
+      category: { slug: category },
+    } = opportunity;
 
-    return <Page_Client category={category.slug} />;
+    return (
+      <SeeAlso_Provider category={category} exclude_ids={[id]}>
+        <Page_Client />
+      </SeeAlso_Provider>
+    );
   } catch (error) {
     return <ErrorOccur error={error as Error} />;
   }
