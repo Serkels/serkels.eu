@@ -24,7 +24,7 @@ const proxyClient = createTRPCProxyClient<Router>({
     }),
     httpBatchLink({
       url: `${process.env["API_URL"]}/trpc`,
-      headers: async ({}) => {
+      async headers() {
         const session = await getServerSession();
         const profile = session?.profile
           ? ({
