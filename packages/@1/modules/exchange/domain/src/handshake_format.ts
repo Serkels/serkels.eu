@@ -1,11 +1,11 @@
 //
 
+import { match } from "ts-pattern";
 import {
   HANDSHAKE_ACCEPETED,
   HANDSHAKE_COMPLETED,
   HANDSHAKE_DENIED,
-} from "@1.modules/exchange.domain";
-import { match } from "ts-pattern";
+} from "./index";
 
 //
 
