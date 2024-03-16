@@ -57,7 +57,7 @@ export function Opoortunity_Card({
 
         <footer className="flex cursor-default justify-between p-3">
           <aside
-            className="line-clamp-1 h-fit flex-1 text-xs font-bold uppercase leading-[inherit] text-Dove_Gray"
+            className={opoortunity_category({ className: "text-xs" })}
             title={category.name}
           >
             {category.name}
@@ -77,6 +77,9 @@ export function Opoortunity_Card({
 }
 
 Opoortunity_Card.Footer_Actions = createSlot();
+export const opoortunity_category = tv({
+  base: "line-clamp-1 h-fit flex-1 font-bold uppercase leading-[inherit] text-Dove_Gray",
+});
 export const opoortunity_card = tv({
   base: "h-full rounded border border-neutral-200 bg-white shadow-md",
   slots: {

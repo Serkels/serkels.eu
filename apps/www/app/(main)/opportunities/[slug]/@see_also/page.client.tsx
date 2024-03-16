@@ -24,7 +24,7 @@ export default function Page_Client() {
 
     return (
       <aside>
-        <h2 className="my-8 text-center  text-lg font-bold text-Congress_Blue">
+        <h2 className="my-8 text-center text-lg font-bold text-Congress_Blue">
           Voir aussi
         </h2>
 

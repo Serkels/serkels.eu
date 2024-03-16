@@ -7,6 +7,7 @@ import { fr } from "date-fns/locale";
 import { type PropsWithChildren } from "react";
 import { createSlot } from "react-slotify";
 import { tv } from "tailwind-variants";
+import { opoortunity_category } from "./Card";
 
 //
 
@@ -14,8 +15,16 @@ export function Article({
   opportunity,
   children,
 }: PropsWithChildren<{ opportunity: Opportunity }>) {
-  const { description, title, owner, expiry_date, cover, location, link } =
-    opportunity;
+  const {
+    description,
+    category,
+    title,
+    owner,
+    expiry_date,
+    cover,
+    location,
+    link,
+  } = opportunity;
   return (
     <article className="px-4 py-10 lg:px-16">
       <h1 className="text-4xl font-bold">{title}</h1>
@@ -33,12 +42,15 @@ export function Article({
             <figcaption className="text-lg">{owner.profile.name}</figcaption>
           </figure>
         </Article.Avatar.Renderer>
-        <small className="text-lg font-bold text-Chateau_Green">
-          Date limite :{" "}
-          <time dateTime={expiry_date.toUTCString()}>
-            {format(expiry_date, "P", { locale: fr })}
-          </time>
-        </small>
+        <div className="flex flex-col text-right">
+          <small className="text-lg font-bold text-Chateau_Green">
+            Date limite :{" "}
+            <time dateTime={expiry_date.toUTCString()}>
+              {format(expiry_date, "P", { locale: fr })}
+            </time>
+          </small>
+          <span className={opoortunity_category()}>{category.name}</span>
+        </div>
       </header>
 
       <div className="mb-10">
