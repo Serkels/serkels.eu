@@ -47,7 +47,7 @@
     "framer-motion": "11.0.8",
     "ts-pattern": "5.0.8",
     "react-aria-components": "1.1.1",
-    "tailwind-variants": "0.2.0"
+    "tailwind-variants": "0.2.1"
   },
   "devDependencies": {
     "@1.config/prettier": "workspace:*",

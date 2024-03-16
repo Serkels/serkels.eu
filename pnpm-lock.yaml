@@ -244,8 +244,8 @@ importers:
         specifier: 2.2.1
         version: 2.2.1
       tailwind-variants:
-        specifier: 0.2.0
-        version: 0.2.0(tailwindcss@3.4.1)
+        specifier: 0.2.1
+        version: 0.2.1(tailwindcss@3.4.1)
       ts-pattern:
         specifier: 5.0.8
         version: 5.0.8
@@ -687,8 +687,8 @@ importers:
         specifier: 7.0.0
         version: 7.0.0(react@18.2.0)
       tailwind-variants:
-        specifier: 0.2.0
-        version: 0.2.0(tailwindcss@3.4.1)
+        specifier: 0.2.1
+        version: 0.2.1(tailwindcss@3.4.1)
       ts-pattern:
         specifier: 5.0.8
         version: 5.0.8
@@ -789,8 +789,8 @@ importers:
         specifier: 7.0.0
         version: 7.0.0(react@18.2.0)
       tailwind-variants:
-        specifier: 0.2.0
-        version: 0.2.0(tailwindcss@3.4.1)
+        specifier: 0.2.1
+        version: 0.2.1(tailwindcss@3.4.1)
       ts-pattern:
         specifier: 5.0.8
         version: 5.0.8
@@ -955,8 +955,8 @@ importers:
         specifier: 17.5.0
         version: 17.5.0(react-dom@18.2.0)(react@18.2.0)
       tailwind-variants:
-        specifier: 0.2.0
-        version: 0.2.0(tailwindcss@3.4.1)
+        specifier: 0.2.1
+        version: 0.2.1(tailwindcss@3.4.1)
       ts-pattern:
         specifier: 5.0.8
         version: 5.0.8
@@ -1090,8 +1090,8 @@ importers:
         specifier: 0.2.2
         version: 0.2.2(react@18.2.0)
       tailwind-variants:
-        specifier: 0.2.0
-        version: 0.2.0(tailwindcss@3.4.1)
+        specifier: 0.2.1
+        version: 0.2.1(tailwindcss@3.4.1)
       ts-pattern:
         specifier: 5.0.8
         version: 5.0.8
@@ -1204,8 +1204,8 @@ importers:
         specifier: 0.2.2
         version: 0.2.2(react@18.2.0)
       tailwind-variants:
-        specifier: 0.2.0
-        version: 0.2.0(tailwindcss@3.4.1)
+        specifier: 0.2.1
+        version: 0.2.1(tailwindcss@3.4.1)
       ts-pattern:
         specifier: 5.0.8
         version: 5.0.8
@@ -1330,8 +1330,8 @@ importers:
         specifier: 0.2.2
         version: 0.2.2(react@18.2.0)
       tailwind-variants:
-        specifier: 0.2.0
-        version: 0.2.0(tailwindcss@3.4.1)
+        specifier: 0.2.1
+        version: 0.2.1(tailwindcss@3.4.1)
       ts-pattern:
         specifier: 5.0.8
         version: 5.0.8
@@ -1441,8 +1441,8 @@ importers:
         specifier: 17.5.0
         version: 17.5.0(react-dom@18.2.0)(react@18.2.0)
       tailwind-variants:
-        specifier: 0.2.0
-        version: 0.2.0(tailwindcss@3.4.1)
+        specifier: 0.2.1
+        version: 0.2.1(tailwindcss@3.4.1)
       ts-pattern:
         specifier: 5.0.8
         version: 5.0.8
@@ -1530,8 +1530,8 @@ importers:
         specifier: 0.2.2
         version: 0.2.2(react@18.2.0)
       tailwind-variants:
-        specifier: 0.2.0
-        version: 0.2.0(tailwindcss@3.4.1)
+        specifier: 0.2.1
+        version: 0.2.1(tailwindcss@3.4.1)
       ts-pattern:
         specifier: 5.0.8
         version: 5.0.8
@@ -1582,8 +1582,8 @@ importers:
         specifier: 0.5.12
         version: 0.5.12(prettier@3.2.5)
       tailwind-variants:
-        specifier: 0.2.0
-        version: 0.2.0(tailwindcss@3.4.1)
+        specifier: 0.2.1
+        version: 0.2.1(tailwindcss@3.4.1)
       tailwindcss:
         specifier: 3.4.1
         version: 3.4.1
@@ -1831,8 +1831,8 @@ importers:
         specifier: 2.2.0
         version: 2.2.0(react-dom@18.2.0)(react@18.2.0)
       tailwind-variants:
-        specifier: 0.2.0
-        version: 0.2.0(tailwindcss@3.4.1)
+        specifier: 0.2.1
+        version: 0.2.1(tailwindcss@3.4.1)
       tailwindcss:
         specifier: 3.4.1
         version: 3.4.1
@@ -13776,8 +13776,8 @@ packages:
       tailwind-merge: 1.14.0
     dev: false
 
-  /tailwind-variants@0.2.0(tailwindcss@3.4.1):
-    resolution: {integrity: sha512-EuW5Sic7c0tzp+p5rJwAgb7398Jb0hi4zkyCstOoZPW0DWwr+EWkNtnZYEo5CjgE1tazHUzyt4oIhss64UXRVA==}
+  /tailwind-variants@0.2.1(tailwindcss@3.4.1):
+    resolution: {integrity: sha512-2xmhAf4UIc3PijOUcJPA1LP4AbxhpcHuHM2C26xM0k81r0maAO6uoUSHl3APmvHZcY5cZCY/bYuJdfFa4eGoaw==}
     engines: {node: '>=16.x', pnpm: '>=7.x'}
     peerDependencies:
       tailwindcss: '*'
