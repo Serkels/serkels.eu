@@ -11,6 +11,7 @@ import type { Message as Message_Type } from "@1.modules/inbox.domain";
 import { Message } from "@1.modules/inbox.ui/conversation/Message";
 import { Timeline } from "@1.modules/inbox.ui/conversation/Timeline";
 import { Spinner } from "@1.ui/react/spinner";
+import { useDocumentVisibility, useTimeoutEffect } from "@react-hookz/web";
 import type { UseInfiniteQueryResult } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
@@ -18,6 +19,7 @@ import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
 import {
   useCallback,
+  useEffect,
   useLayoutEffect,
   useRef,
   type ComponentProps,
@@ -41,6 +43,7 @@ export default function Infinite_Thread_Timeline({
     .parse(useParams(), { path: ["useParams()"] });
   const { thread_id } = params;
 
+  const query_thread = TRPC_React.inbox.thread.by_id.useQuery(thread_id);
   const query_info = TRPC_React.inbox.thread.messages.useInfiniteQuery(
     {
       thread_id,
@@ -50,7 +53,7 @@ export default function Infinite_Thread_Timeline({
     },
   ) as UseInfiniteQueryResult<{ data: Message_Type }>;
 
-  useLayoutEffect(() => {
+  function do_scroll_to_bottom() {
     if (!scroll_target_ref.current) {
       return;
     }
@@ -58,7 +61,16 @@ export default function Infinite_Thread_Timeline({
       behavior: "smooth",
       block: "end",
     });
-  }, [query_info.isFetched, scroll_target_ref]);
+  }
+
+  const document_visibility = useDocumentVisibility();
+  const [, reset] = useTimeoutEffect(do_scroll_to_bottom, 1_111);
+  useEffect(reset, [document_visibility]);
+  useLayoutEffect(do_scroll_to_bottom, [
+    query_info.isFetched,
+    query_thread.data?.updated_at,
+    scroll_target_ref,
+  ]);
 
   const { data: session, status } = useSession();
   const invalidate = useCallback(async () => {
@@ -68,6 +80,7 @@ export default function Infinite_Thread_Timeline({
       utils.exchanges.me.inbox.next_actions.invalidate(),
       utils.exchanges.by_id.invalidate(exchange.id),
     ]);
+    reset();
   }, [utils, thread_id]);
 
   TRPC_React.inbox.thread.on_new_message.useSubscription(
@@ -220,10 +233,8 @@ function Message_NotInterested(props: ComponentProps<typeof Message>) {
 
 function Congratulations() {
   return (
-    <>
-      <div className="rounded-sm border text-center">
-        <h4 className="text-lg font-bold text-success">Félicitation !</h4>
-      </div>
-    </>
+    <div className="rounded-sm py-8 text-center">
+      <h4 className="text-lg font-bold text-success">🎊 Félicitation !</h4>
+    </div>
   );
 }

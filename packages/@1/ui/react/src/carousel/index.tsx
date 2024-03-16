@@ -20,6 +20,7 @@ import {
   type PropsWithChildren,
 } from "react";
 import { tv } from "tailwind-variants";
+import { VisuallyHidden } from "../visually_hidden";
 
 //
 
@@ -30,12 +31,21 @@ export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
       items: slides,
       theme,
       index,
-      handleNext,
+      handle_jump_to,
+      handle_next,
       ...other_props
     } = useCarousel(props, forwardedRef);
     const { base, slide } = theme;
     const count = slides.length;
-    const [, reset] = useTimeoutEffect(handleNext, 6_666);
+    const [, reset] = useTimeoutEffect(handle_next, 6_666);
+
+    const jump_to = useCallback(
+      (slide_index: number) => {
+        handle_jump_to(slide_index);
+        reset();
+      },
+      [handle_next, reset],
+    );
 
     return (
       <LazyMotion features={domAnimation}>
@@ -61,17 +71,55 @@ export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
               ) : null,
             )}
           </AnimatePresence>
+          <Jump_Button_Group values={{ count, index, jump_to }} />
         </div>
       </LazyMotion>
     );
   },
 );
+
+function Jump_Button_Group({
+  values: { count, index, jump_to },
+}: {
+  values: { count: number; index: number; jump_to: (index: number) => void };
+}) {
+  const { base, circle } = button_group();
+  return (
+    <div className={base()}>
+      {Array.from({ length: count }).map((_, slide_index) => (
+        <button
+          className={circle({ active: slide_index === index })}
+          key={slide_index}
+          onClick={() => jump_to(slide_index)}
+        >
+          <VisuallyHidden>Jump to slide {slide_index}</VisuallyHidden>
+        </button>
+      ))}
+    </div>
+  );
+}
+
+const button_group = tv({
+  base: `absolute bottom-0 mb-4 flex w-full items-center justify-center space-x-2`,
+  slots: {
+    circle: `h-2 w-2 rounded-full bg-white opacity-60`,
+  },
+  variants: {
+    active: {
+      true: { circle: `opacity-1` },
+    },
+  },
+});
+
 export default Carousel;
 export interface CarouselProps
   extends PropsWithChildren,
     Omit<ComponentPropsWithoutRef<"div">, "children"> {
   autoplay?: boolean;
   transition?: Transition;
+  actions?: {
+    next: () => void;
+  };
 }
 export interface CarouselState extends ComponentPropsWithoutRef<"div"> {
   readonly index: number;
@@ -98,7 +146,7 @@ function useCarousel(
   // const active_index = 0;
   const loop = true;
 
-  const handleNext = useCallback(() => {
+  const handle_next = useCallback(() => {
     const idx = loop ? 0 : index;
     setState((state) => ({
       ...state,
@@ -106,10 +154,15 @@ function useCarousel(
     }));
   }, [index, loop, count]);
 
+  const handle_jump_to = useCallback((index: number) => {
+    setState((state) => ({ ...state, index }));
+  }, []);
+
   return {
     "aria-label": "carousel",
     theme: style(),
-    handleNext,
+    handle_jump_to,
+    handle_next,
     index,
     items,
     count,
@@ -120,10 +173,8 @@ function useCarousel(
 //
 
 const style = tv({
-  base: ["relative"],
+  base: "relative",
   slots: {
-    slide: ["absolute", "inset-0", "flex", "items-center"],
+    slide: "absolute inset-0 flex items-center",
   },
-  variants: {},
-  defaultVariants: {},
 });
