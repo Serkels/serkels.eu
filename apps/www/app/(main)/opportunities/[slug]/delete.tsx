@@ -35,22 +35,6 @@ export function Opportunity_Delete_Button({
 }: {
   opportunity_id: string;
 }) {
-  // const opportunity = useOpportunity();
-  // const exchange = useExchange();
-  // const [outlet, set_outlet] = useOutletState();
-  // const should_delete = outlet.state === "should_delete";
-
-  // useEffect(() => {
-  //   if (!should_delete) return;
-
-  //   if (!window.confirm("Êtes vous sur de vouloir supprimer cette echange ?")) {
-  //     set_outlet({ state: "idle" });
-  //     return;
-  //   }
-
-  //   set_outlet({ state: "deleting" });
-  // }, [should_delete]);
-
   return (
     <Provider opportunity_id={opportunity_id}>
       <Outlet />
@@ -61,7 +45,7 @@ export function Opportunity_Delete_Button({
 function Outlet() {
   const [outlet] = useOutletState();
   return match(outlet)
-    .with({ state: "deleting" }, () => <Deleted />)
+    .with({ state: "deleting" }, () => <Deleting />)
     .otherwise(() => <Idle />);
 }
 
@@ -91,7 +75,7 @@ function Idle() {
   );
 }
 
-function Deleted() {
+function Deleting() {
   const { id: opportunity_id } = useOpportunity();
 
   const delete_opportunity = TRPC_React.opportunity.delete.useMutation();
