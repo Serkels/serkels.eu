@@ -27,7 +27,7 @@
     "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
     "@trpc/server": "10.45.2",
     "await-to-js": "3.0.0",
-    "date-fns": "3.5.0",
+    "date-fns": "3.6.0",
     "nanoid": "5.0.6",
     "ts-pattern": "5.0.8",
     "zod": "3.22.4"
