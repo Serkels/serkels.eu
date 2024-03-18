@@ -20,6 +20,7 @@
     "type-check": "tsc --build"
   },
   "dependencies": {
+    "@1.modules/core": "workspace:*",
     "@1.modules/opportunity.domain": "workspace:*",
     "@1.modules/trpc": "workspace:*",
     "@trpc/server": "10.45.2",

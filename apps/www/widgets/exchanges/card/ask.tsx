@@ -34,7 +34,7 @@ export function Ask({
       </Exchange_Ask_Modal.Trigger>
       <Exchange_Ask_Modal.Dialog>
         <Outlet_Provider exchange={exchange}>
-          <Ask_Body></Ask_Body>
+          <Ask_Body />
         </Outlet_Provider>
       </Exchange_Ask_Modal.Dialog>
     </Exchange_Ask_Modal>
