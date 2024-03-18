@@ -117,7 +117,7 @@ async function studient() {
 
   return prisma.studient.create({
     data: {
-      citizenship: faker.location.country(),
+      language: faker.company.name(),
       city: faker.location.city(),
       field_of_study: faker.word.noun(),
       interest: {

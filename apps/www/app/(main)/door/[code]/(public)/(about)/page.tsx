@@ -76,9 +76,8 @@ async function StudientMeta({ profile_id }: { profile_id: string }) {
         <span>{studient.interest.map(({ name }) => name).join(", ")}</span>
       </li>
       <li>
-        <b>Nationalité : </b> <span>{studient.citizenship}</span>
+        <b>Langues : </b> <span>{studient.language}</span>
       </li>
-      {/* <li><b>Langues : </b> <span>Français, Anglais</span></li> */}
     </ul>
   );
 }

@@ -63,7 +63,7 @@ model Profile {
 
 model Studient {
   id             String     @id @default(cuid())
-  citizenship    String?
+  language       String?
   city           String?
   field_of_study String?
   interest       Category[] @relation("CategorizedStudientInterest")

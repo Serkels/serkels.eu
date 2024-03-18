@@ -61,15 +61,14 @@ export const auth_options: NextAuthOptions = {
         return Boolean(userExists);
       }
 
-      const is_signin_provider_verification_request = !Boolean(
-        account?.providerAccountId,
-      );
+      const is_signin_provider_verification_request =
+        !account?.providerAccountId;
+
       if (is_signin_provider_verification_request) return "/signup/verifing";
 
       const adapter_user = user as AdapterUser;
-      const is_signin_provider_verifivation_response = !Boolean(
-        adapter_user.emailVerified,
-      );
+      const is_signin_provider_verifivation_response =
+        !adapter_user.emailVerified;
       if (is_signin_provider_verifivation_response)
         return Boolean(account?.providerAccountId === user.email);
 

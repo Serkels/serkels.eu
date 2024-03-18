@@ -14,7 +14,8 @@
     "heroku-release": "npx npm-run-all heroku-release:*",
     "heroku-release:00": "pnpm --filter @1.infra/database exec prisma migrate deploy",
     "lint": "turbo run lint",
-    "start": "pnpm -r start"
+    "start": "pnpm -r start",
+    "type-check": "turbo run type-check"
   },
   "devDependencies": {
     "cpx2": "7.0.1",
