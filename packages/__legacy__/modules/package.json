@@ -18,7 +18,7 @@
     "@types/debug": "4.1.12",
     "fast-check": "3.16.0",
     "prettier": "3.2.5",
-    "typescript": "5.4.2",
+    "typescript": "5.4.3",
     "zod-fast-check": "0.10.1"
   }
 }
