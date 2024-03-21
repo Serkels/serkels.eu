@@ -19,6 +19,6 @@
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
     "@types/node": "20.11.30",
-    "typescript": "5.4.2"
+    "typescript": "5.4.3"
   }
 }
