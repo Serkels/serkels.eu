@@ -9,7 +9,7 @@ import { createSlot } from "react-slotify";
 import { tv } from "tailwind-variants";
 import { P, match } from "ts-pattern";
 import { OnlineOrLocation } from "../OnlineOrLocation";
-import { Expiry_Date } from "./Expiry_Date";
+import { Exchange_Date } from "./Date";
 import { Provider, useExchange, useOutletState } from "./context";
 
 //
@@ -81,7 +81,7 @@ function Card_Deleting({ children }: PropsWithChildren) {
             </div>
           </Card.Header.Center.Renderer>
           <div className="flex items-start justify-end space-x-2">
-            <Expiry_Date />
+            <Exchange_Date />
           </div>
         </header>
 
@@ -133,7 +133,7 @@ function Card_Idle({ children }: PropsWithChildren) {
           </Card.Header.Center.Renderer>
           <div className="flex items-start justify-end space-x-2">
             <Card.Header.Right.Renderer childs={children}>
-              <Expiry_Date />
+              <Exchange_Date />
             </Card.Header.Right.Renderer>
           </div>
         </header>

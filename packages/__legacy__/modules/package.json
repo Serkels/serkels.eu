@@ -6,7 +6,7 @@
   "dependencies": {
     "@1/core": "workspace:@0.__legacy__/core@*",
     "@tanstack/react-query": "4.36.1",
-    "date-fns": "3.3.1",
+    "date-fns": "3.6.0",
     "debug": "4.3.4",
     "react": "18.2.0",
     "superjson": "2.2.1",
@@ -18,7 +18,7 @@
     "@types/debug": "4.1.12",
     "fast-check": "3.16.0",
     "prettier": "3.2.5",
-    "typescript": "5.4.2",
+    "typescript": "5.4.3",
     "zod-fast-check": "0.10.1"
   }
 }

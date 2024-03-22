@@ -34,7 +34,6 @@ export const SignIn = Credentials_Provider({
     role: { label: "Role", type: "text" },
   },
   async authorize(credentials, req) {
-    debugger;
     try {
       const headers = req.headers ?? {};
       const origin_url = parseUrl(String(headers["origin"] ?? ""));
@@ -111,7 +110,6 @@ async function create_payload({
   credentials: any;
   token: string;
 }) {
-  debugger;
   const token_id = hashToken(token, {
     provider: Email.options,
   });

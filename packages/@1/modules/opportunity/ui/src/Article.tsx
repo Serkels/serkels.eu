@@ -7,6 +7,7 @@ import { fr } from "date-fns/locale";
 import { type PropsWithChildren } from "react";
 import { createSlot } from "react-slotify";
 import { tv } from "tailwind-variants";
+import { opoortunity_category } from "./Card";
 
 //
 
@@ -14,11 +15,24 @@ export function Article({
   opportunity,
   children,
 }: PropsWithChildren<{ opportunity: Opportunity }>) {
-  const { description, title, owner, expiry_date, cover, location, link } =
-    opportunity;
+  const {
+    description,
+    category,
+    title,
+    owner,
+    expiry_date,
+    cover,
+    location,
+    link,
+  } = opportunity;
   return (
     <article className="px-4 py-10 lg:px-16">
-      <h1 className="text-4xl font-bold">{title}</h1>
+      <div className="flex justify-between">
+        <h1 className="text-4xl font-bold">{title}</h1>
+        <Article.ActionButton.Renderer
+          childs={children}
+        ></Article.ActionButton.Renderer>
+      </div>
 
       <header className="flex items-center justify-between py-6">
         <Article.Avatar.Renderer childs={children}>
@@ -29,16 +43,18 @@ export function Article({
               height="30"
               src={owner.profile.image}
             />
-
             <figcaption className="text-lg">{owner.profile.name}</figcaption>
           </figure>
         </Article.Avatar.Renderer>
-        <small className="text-lg font-bold text-Chateau_Green">
-          Date limite :{" "}
-          <time dateTime={expiry_date.toUTCString()}>
-            {format(expiry_date, "P", { locale: fr })}
-          </time>
-        </small>
+        <div className="flex flex-col text-right">
+          <small className="text-lg font-bold text-Chateau_Green">
+            Date limite :{" "}
+            <time dateTime={expiry_date.toUTCString()}>
+              {format(expiry_date, "P", { locale: fr })}
+            </time>
+          </small>
+          <span className={opoortunity_category()}>{category.name}</span>
+        </div>
       </header>
 
       <div className="mb-10">
@@ -99,6 +115,7 @@ export function Article({
 Article.Description = createSlot<{ description: string }>();
 Article.Avatar = createSlot();
 Article.ShareFigure = createSlot();
+Article.ActionButton = createSlot();
 
 const icon_with_circle = tv({ base: "rounded-full" });
 export const icon_link = tv({

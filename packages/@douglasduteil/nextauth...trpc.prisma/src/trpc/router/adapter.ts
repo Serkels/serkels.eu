@@ -84,15 +84,10 @@ export function create_NextAuth_router(secret: string) {
         }),
       )
       .mutation(async ({ ctx: { prisma }, input }) => {
-        console.log(input);
-        try {
-          const verificationToken = await prisma.verificationToken.delete({
-            where: { identifier_token: input },
-          });
-          return verificationToken as VerificationToken;
-        } catch (error) {
-          throw error;
-        }
+        const verificationToken = await prisma.verificationToken.delete({
+          where: { identifier_token: input },
+        });
+        return verificationToken as VerificationToken;
       }),
   });
 }

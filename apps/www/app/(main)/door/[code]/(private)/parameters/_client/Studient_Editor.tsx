@@ -1,7 +1,7 @@
 "use client";
 
 import { TRPC_React } from ":trpc/client";
-import { type Studient } from "@1.modules/profile.domain";
+import { Studient_Schema, type Studient } from "@1.modules/profile.domain";
 import { Button } from "@1.ui/react/button";
 import { input, label } from "@1.ui/react/form/atom";
 import { ErrorMessage, Field, Form, Formik } from "formik";
@@ -28,16 +28,17 @@ export default function Studient_Editor({
   const update_studient = TRPC_React.studient.me.update.useMutation();
 
   const studient = query_studient.data ?? initial;
+  const names = Studient_Schema.keyof().Enum;
 
   return (
     <Formik
       initialValues={{ ...studient }}
       onSubmit={async (values, formik) => {
         const data = await update_studient.mutateAsync({
-          citizenship: values.citizenship ?? studient.citizenship ?? undefined,
           city: values.city ?? studient.city ?? undefined,
           field_of_study:
             values.field_of_study ?? studient.field_of_study ?? undefined,
+          language: values.language ?? studient.language ?? undefined,
           university: values.university ?? studient.university ?? undefined,
         });
         await utils.studient.by_id.invalidate(studient_id);
@@ -56,7 +57,7 @@ export default function Studient_Editor({
       {({ isSubmitting, dirty, errors, touched }) => (
         <Form className="grid grid-cols-1 gap-5">
           <fieldset>
-            <label className={label()} htmlFor="university">
+            <label className={label()} htmlFor={names.university}>
               Université :
             </label>
 
@@ -65,8 +66,8 @@ export default function Studient_Editor({
                 className: "col-span-full ",
                 wrong_value: Boolean(errors.university && touched.university),
               })}
-              id="university"
-              name="university"
+              id={names.university}
+              name={names.university}
               placeholder="Université..."
               required
               type="text"
@@ -74,13 +75,13 @@ export default function Studient_Editor({
             />
             <AnimatePresence>
               <motion.div
-                key="name"
+                key={names.university}
                 className="overflow-hidden text-right"
                 initial={{ height: 0 }}
                 animate={{ height: "auto" }}
                 exit={{ height: 0 }}
               >
-                <ErrorMessage name="name">
+                <ErrorMessage name={names.university}>
                   {(msg) => <div className="text-danger">{msg}</div>}
                 </ErrorMessage>
               </motion.div>
@@ -88,7 +89,7 @@ export default function Studient_Editor({
           </fieldset>
 
           <fieldset>
-            <label className={label()} htmlFor="field_of_study">
+            <label className={label()} htmlFor={names.field_of_study}>
               Domain d'étude :
             </label>
 
@@ -99,21 +100,21 @@ export default function Studient_Editor({
                   errors.field_of_study && touched.field_of_study,
                 ),
               })}
-              id="field_of_study"
-              name="field_of_study"
+              id={names.field_of_study}
+              name={names.field_of_study}
               placeholder="Domain d'étude..."
               type="text"
               disabled={isSubmitting}
             />
             <AnimatePresence>
               <motion.div
-                key="name"
+                key={names.field_of_study}
                 className="overflow-hidden text-right"
                 initial={{ height: 0 }}
                 animate={{ height: "auto" }}
                 exit={{ height: 0 }}
               >
-                <ErrorMessage name="name">
+                <ErrorMessage name={names.field_of_study}>
                   {(msg) => <div className="text-danger">{msg}</div>}
                 </ErrorMessage>
               </motion.div>
@@ -121,7 +122,7 @@ export default function Studient_Editor({
           </fieldset>
 
           <fieldset>
-            <label className={label()} htmlFor="city">
+            <label className={label()} htmlFor={names.city}>
               Ville :
             </label>
 
@@ -130,21 +131,21 @@ export default function Studient_Editor({
                 className: "col-span-full ",
                 wrong_value: Boolean(errors.city && touched.city),
               })}
-              id="city"
-              name="city"
+              id={names.city}
+              name={names.city}
               placeholder="Ville..."
               type="text"
               disabled={isSubmitting}
             />
             <AnimatePresence>
               <motion.div
-                key="name"
+                key={names.city}
                 className="overflow-hidden text-right"
                 initial={{ height: 0 }}
                 animate={{ height: "auto" }}
                 exit={{ height: 0 }}
               >
-                <ErrorMessage name="name">
+                <ErrorMessage name={names.city}>
                   {(msg) => <div className="text-danger">{msg}</div>}
                 </ErrorMessage>
               </motion.div>
@@ -152,30 +153,30 @@ export default function Studient_Editor({
           </fieldset>
 
           <fieldset>
-            <label className={label()} htmlFor="citizenship">
-              Nationalité :
+            <label className={label()} htmlFor={names.language}>
+              Langue :
             </label>
 
             <Field
               className={input({
                 className: "col-span-full ",
-                wrong_value: Boolean(errors.citizenship && touched.citizenship),
+                wrong_value: Boolean(errors.language && touched.language),
               })}
-              id="citizenship"
-              name="citizenship"
+              id={names.language}
+              name={names.language}
               placeholder="Nationalité..."
               type="text"
               disabled={isSubmitting}
             />
             <AnimatePresence>
               <motion.div
-                key="name"
+                key={names.language}
                 className="overflow-hidden text-right"
                 initial={{ height: 0 }}
                 animate={{ height: "auto" }}
                 exit={{ height: 0 }}
               >
-                <ErrorMessage name="name">
+                <ErrorMessage name={names.language}>
                   {(msg) => <div className="text-danger">{msg}</div>}
                 </ErrorMessage>
               </motion.div>

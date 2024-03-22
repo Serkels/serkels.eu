@@ -21,7 +21,7 @@ export const Exchange_Schema = Entity_Schema.merge(Entity_Timestamps)
     category: Category_Schema,
     deals: z.array(Entity_Schema),
     description: z.string().default(""),
-    expiry_date: z.coerce.date().default(new Date(0)),
+    expiry_date: z.coerce.date().nullable(),
     is_online: z.boolean().default(true),
     location: z.string().nullable().default(""),
     owner: Studient_Schema.pick({ profile: true, university: true }),
@@ -34,10 +34,20 @@ export const Exchange_Schema = Entity_Schema.merge(Entity_Timestamps)
 
 export interface Exchange extends z.TypeOf<typeof Exchange_Schema> {}
 
+export function is_active_exchange(exchange: Exchange) {
+  return (
+    exchange.deals.length < exchange.places ||
+    exchange.expiry_date === null ||
+    exchange.expiry_date > new Date()
+  );
+}
+
 //
 
 export const Exchange_Filter = z.enum([
   "ALL",
+  "DATE_FLEXIBLE",
+  "DATE_LIMITED",
   "MY_FOLLOWS",
   "ON_SITE",
   "ONLINE",
@@ -67,8 +77,10 @@ export type Deal = z.TypeOf<typeof Deal_Schema>;
 //
 
 export const HANDSHAKE_ACCEPETED = "/exchange handshake accepeted";
-export const HANDSHAKE_DENIED = "/exchange handshake denied";
 export const HANDSHAKE_COMPLETED = "/exchange handshake completed";
+export const HANDSHAKE_DENIED = "/exchange handshake denied";
+export const HANDSHAKE_TOCTOC = "🚪 Toc Toc !";
+
 //
 
 /**

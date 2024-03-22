@@ -8,6 +8,7 @@ import { type CodeParms } from ":pipes/code";
 import { TRPC_SSR } from ":trpc/server";
 import { getServerSession } from "@1.modules/auth.next";
 import { PROFILE_ROLES } from "@1.modules/profile.domain";
+import { notFound } from "next/navigation";
 import { match } from "ts-pattern";
 
 export default async function Page({ params }: { params: CodeParms }) {
@@ -20,17 +21,20 @@ export default async function Page({ params }: { params: CodeParms }) {
   const role = session.profile.role;
   const profile_id = session.profile.id;
 
-  return await match({ is_yours, role })
-    .with({ role: PROFILE_ROLES.Enum.STUDIENT, is_yours: true }, async () => {
-      const studient =
-        await TRPC_SSR.profile.studient.by_profile_id.fetch(profile_id);
-      return <Studient_NavBar studient={studient} />;
-    })
-    .with({ role: PROFILE_ROLES.Enum.PARTNER, is_yours: true }, async () => {
-      const partner =
-        await TRPC_SSR.profile.partner.by_profile_id.fetch(profile_id);
-      partner;
-      return <Partner_NavBar partner={partner} />;
-    })
-    .otherwise(() => null);
+  try {
+    return await match({ is_yours, role })
+      .with({ role: PROFILE_ROLES.Enum.STUDIENT, is_yours: true }, async () => {
+        const studient =
+          await TRPC_SSR.profile.studient.by_profile_id.fetch(profile_id);
+        return <Studient_NavBar studient={studient} />;
+      })
+      .with({ role: PROFILE_ROLES.Enum.PARTNER, is_yours: true }, async () => {
+        const partner =
+          await TRPC_SSR.profile.partner.by_profile_id.fetch(profile_id);
+        return <Partner_NavBar partner={partner} />;
+      })
+      .otherwise(() => null);
+  } catch (error) {
+    return notFound();
+  }
 }

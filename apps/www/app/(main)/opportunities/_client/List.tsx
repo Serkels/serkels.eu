@@ -81,7 +81,7 @@ export function Item({ opportunity }: { opportunity: Opportunity }) {
   const { data: session } = useSession();
   const { slug, id } = opportunity;
   const is_studient = session?.profile.role === PROFILE_ROLES.Enum.STUDIENT;
-  const href = `/opportunities/${slug}`;
+  const href = `/opportunities/${slug}?category=${opportunity.category.slug}`;
   return (
     <Link href={href}>
       <Opoortunity_Card opportunity={opportunity}>

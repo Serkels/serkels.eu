@@ -63,7 +63,7 @@ model Profile {
 
 model Studient {
   id             String     @id @default(cuid())
-  citizenship    String?
+  language       String?
   city           String?
   field_of_study String?
   interest       Category[] @relation("CategorizedStudientInterest")
@@ -177,7 +177,7 @@ model Exchange {
   category_id String
   deals       Deal[]
   description String
-  expiry_date DateTime     @default(now())
+  expiry_date DateTime?
   is_active   Boolean
   is_online   Boolean
   location    String?

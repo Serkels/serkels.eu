@@ -4,22 +4,27 @@
 import { Item } from ":app/(main)/opportunities/_client/List";
 import { TRPC_React } from ":trpc/client";
 import { ErrorOccur } from "@1.ui/react/error";
+import { useSeeAlso } from "./context";
 
 //
 
-export default function Page_Client({ category }: { category: string }) {
+export default function Page_Client() {
+  const { exclude_ids, query_see_also } = useSeeAlso();
   try {
-    const { data } = TRPC_React.opportunity.find.public.useQuery({
-      limit: 2,
-      category,
-    });
+    const { data: opportunities } = TRPC_React.opportunity.find.public.useQuery(
+      query_see_also,
+      {
+        select({ data }) {
+          return data.filter(({ id }) => !exclude_ids.includes(id)).slice(0, 2);
+        },
+      },
+    );
 
-    if (!data) return null;
-    const { data: opportunities } = data;
+    if (!opportunities) return null;
 
     return (
       <aside>
-        <h2 className="my-8 text-center  text-lg font-bold text-Congress_Blue">
+        <h2 className="my-8 text-center text-lg font-bold text-Congress_Blue">
           Voir aussi
         </h2>
 

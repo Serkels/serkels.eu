@@ -27,7 +27,7 @@ export default function Infinite_Exchange_List() {
     .object({ exchange_id: z.string().optional() })
     .parse(useParams(), { path: ["useParams()"] });
   const { exchange_id } = params;
-  const info = TRPC_React.exchanges.me.find_active.useInfiniteQuery(
+  const info = TRPC_React.exchanges.me.find.useInfiniteQuery(
     {},
     { getNextPageParam: ({ next_cursor }) => next_cursor },
   );
@@ -125,7 +125,11 @@ function Item({
           </span>
         </span>
         <div>
-          <span className={badge({ color: "primary" })}>
+          <span
+            className={badge({
+              color: exchange.is_active ? "primary" : "disabled",
+            })}
+          >
             {exchange.deals.length} / {exchange.places}
           </span>{" "}
           <span className="text-sm font-bold ">dispo</span>
@@ -172,7 +176,8 @@ function Item({
 
 const badge = tv({
   base: "inline-block rounded-full bg-gray-500 px-2 text-white",
-  variants: { color: { primary: "bg-primary" } },
+  variants: { color: { primary: "bg-primary", disabled: "bg-gray-500" } },
+  defaultVariants: { color: "disabled" },
 });
 
 const item = tv({

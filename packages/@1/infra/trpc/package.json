@@ -20,12 +20,12 @@
     "@1.modules/opportunity.api": "workspace:*",
     "@1.modules/profile.api": "workspace:*",
     "@1.modules/trpc": "workspace:*",
-    "@trpc/server": "10.45.1",
+    "@trpc/server": "10.45.2",
     "superjson": "2.2.1",
     "zod": "3.22.4"
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
-    "typescript": "5.4.2"
+    "typescript": "5.4.3"
   }
 }
