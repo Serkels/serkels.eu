@@ -90,8 +90,8 @@ importers:
   apps/e2e:
     dependencies:
       '@badeball/cypress-cucumber-preprocessor':
-        specifier: 20.0.2
-        version: 20.0.2(cypress@13.7.1)(typescript@5.4.3)
+        specifier: 20.0.3
+        version: 20.0.3(cypress@13.7.1)(typescript@5.4.3)
       '@bahmutov/cypress-esbuild-preprocessor':
         specifier: 2.2.0
         version: 2.2.0(esbuild@0.20.2)
@@ -2011,8 +2011,8 @@ packages:
       - supports-color
     dev: false
 
-  /@badeball/cypress-cucumber-preprocessor@20.0.2(cypress@13.7.1)(typescript@5.4.3):
-    resolution: {integrity: sha512-Ty5CXJxtB/TVC4jbhYTfR3oUsX8QFcGCQbFhCtk+xlyfL1eI8cgF7BXEQdCa5Qa3lf44EUKeI++xsd3NI5tWTQ==}
+  /@badeball/cypress-cucumber-preprocessor@20.0.3(cypress@13.7.1)(typescript@5.4.3):
+    resolution: {integrity: sha512-cc7rYEFEVRAZ13LQ2WEnG84VJNO+ErpNsNBP/5eP2JC+2v8WvcVgm8fcqKLOiNgyEWaRuiT+MkU3DXKbBbFVSg==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     peerDependencies:
@@ -13868,7 +13868,7 @@ packages:
     dependencies:
       '@alloc/quick-lru': 5.2.0
       arg: 5.0.2
-      chokidar: 3.5.3
+      chokidar: 3.6.0
       didyoumean: 1.2.2
       dlv: 1.1.3
       fast-glob: 3.3.2
@@ -14900,7 +14900,6 @@ packages:
   /yargs-parser@20.2.9:
     resolution: {integrity: sha512-y11nGElTIV+CT3Zv9t7VKl+Q3hTQoT9a1Qzezhhl6Rp21gJ/IVTW7Z3y9EWXhuUBC2Shnf+DX0antecpAwSP8w==}
     engines: {node: '>=10'}
-    dev: true
 
   /yargs-unparser@2.0.0:
     resolution: {integrity: sha512-7pRTIA9Qc1caZ0bZ6RYRGbHJthJWuakf+WmHK0rVeLkNrrGhfoabBNdue6kdINI6r4if7ocq9aD/n7xwKOdzOA==}
@@ -14922,7 +14921,7 @@ packages:
       require-directory: 2.1.1
       string-width: 4.2.3
       y18n: 5.0.8
-      yargs-parser: 20.2.4
+      yargs-parser: 20.2.9
     dev: false
 
   /yauzl@2.10.0:
