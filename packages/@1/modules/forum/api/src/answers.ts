@@ -25,6 +25,7 @@ export const answers_api_router = router({
       return prisma.answer.update({
         data: {
           accepted_for: { connect: { id: question_id } },
+          updated_at: new Date(),
         },
         where: {
           id,
