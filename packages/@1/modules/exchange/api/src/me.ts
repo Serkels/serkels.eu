@@ -388,13 +388,12 @@ export const me = router({
   update: next_auth_procedure
     .input(Exchange_Create_Schema.extend({ exchange_id: z.string() }))
     .mutation(({ input, ctx: { prisma, payload } }) => {
-      const { category, exchange_id, return: _retrun, ...input_data } = input;
+      const { exchange_id, ...input_data } = input;
       const { id: profile_id } = payload.profile;
       return prisma.exchange.update({
         data: {
+          updated_at: new Date(),
           ...input_data,
-          category_id: category,
-          return_id: _retrun,
         },
         where: { id: exchange_id, owner: { profile_id } },
       });
