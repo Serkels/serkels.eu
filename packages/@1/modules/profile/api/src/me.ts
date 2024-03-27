@@ -159,4 +159,18 @@ export const me = router({
         where: { id },
       });
     }),
+
+  //
+
+  report: next_auth_procedure
+    .input(z.object({ email: z.string().email() }))
+    .mutation(({ ctx, input: { email } }) => {
+      return ctx.sender.send({
+        from: email,
+        to: "tyree.braun84@ethereal.email",
+        subject: "Report",
+        text: `Report from ${email}`,
+        html: `Report from ${email}`,
+      });
+    }),
 });
