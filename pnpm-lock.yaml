@@ -1752,8 +1752,8 @@ importers:
         specifier: 4.1.12
         version: 4.1.12
       fast-check:
-        specifier: 3.17.0
-        version: 3.17.0
+        specifier: 3.17.1
+        version: 3.17.1
       prettier:
         specifier: 3.2.5
         version: 3.2.5
@@ -1762,7 +1762,7 @@ importers:
         version: 5.4.3
       zod-fast-check:
         specifier: 0.10.1
-        version: 0.10.1(fast-check@3.17.0)(zod@3.22.4)
+        version: 0.10.1(fast-check@3.17.1)(zod@3.22.4)
 
   packages/__legacy__/next-tsyringe:
     dependencies:
@@ -9174,8 +9174,8 @@ packages:
     engines: {'0': node >=0.6.0}
     dev: false
 
-  /fast-check@3.17.0:
-    resolution: {integrity: sha512-9A7UiBENXxMBb40qY+xOcIcGdxF5CYbXJOU4b+omh773RIFcIQRejHEjjrzIHQFLIQXWgWQu3dl6FrWR9VpYRQ==}
+  /fast-check@3.17.1:
+    resolution: {integrity: sha512-jIKXJVe6ZO0SpwEgVtEVujTf8TwjI9wMXFJCjsDHUB3RroUbXBgF4kOSz3A7MW0UR26aqsoB8i9O2mjtjERAiA==}
     engines: {node: '>=8.0.0'}
     dependencies:
       pure-rand: 6.1.0
@@ -14945,13 +14945,13 @@ packages:
       type-fest: 2.19.0
     dev: false
 
-  /zod-fast-check@0.10.1(fast-check@3.17.0)(zod@3.22.4):
+  /zod-fast-check@0.10.1(fast-check@3.17.1)(zod@3.22.4):
     resolution: {integrity: sha512-P+rqsg//CQZSFaG61QNRdnrDn8ARTxoMi4P0/GqRvyBjIiVXQCHB6R8yqkAwQNNSFxMD9cdDoPtOZRBe0rfwNg==}
     peerDependencies:
       fast-check: '>2.23.0 <4.0.0'
       zod: ^3.18.0
     dependencies:
-      fast-check: 3.17.0
+      fast-check: 3.17.1
       zod: 3.22.4
     dev: true
 
