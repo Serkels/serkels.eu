@@ -6,7 +6,9 @@ import { card } from "@1.ui/react/card/atom";
 import { PlusBox } from "@1.ui/react/icons";
 import { link } from "@1.ui/react/link/atom";
 import { Spinner } from "@1.ui/react/spinner";
+import to from "await-to-js";
 import type { Metadata, ResolvingMetadata } from "next";
+import { getServerSession } from "next-auth";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 
@@ -42,6 +44,9 @@ export default async function Page({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
+  const [, session] = await to(getServerSession());
+  if (!session) return null;
+
   const category = String(searchParams["category"]);
   const search = String(searchParams["q"]);
   const filter_parsed_return = Exchange_Filter.safeParse(searchParams["f"]);
