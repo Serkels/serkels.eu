@@ -176,7 +176,7 @@
         },
       },
       {
-        "args": ["x", "turbo", "type-check", "--filter='www'"],
+        "args": ["x", "turbo", "type-check", "--filter='www'", "--", "--watch"],
         // "args": ["x", "turbo", "dev", "--filter='@1.modules/*'"],
         "command": "bun",
         "group": "build",
