@@ -34,6 +34,7 @@ export const studient_api_router = router({
         return prisma.studient.update({
           data: {
             ...input,
+            updated_at: new Date(),
           },
           where: { profile_id },
         });
