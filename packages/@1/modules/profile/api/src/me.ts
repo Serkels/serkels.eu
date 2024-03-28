@@ -1,5 +1,6 @@
 import { Profile_Schema } from "@1.modules/profile.domain";
 import { gravatarUrlFor } from "@1.modules/profile.domain/gravatarUrlFor";
+import { create_report } from "@1.modules/profile.domain/report";
 import { next_auth_procedure, router } from "@1.modules/trpc";
 import type { Prisma } from "@prisma/client";
 import { z } from "zod";
@@ -163,14 +164,23 @@ export const me = router({
   //
 
   report: next_auth_procedure
-    .input(z.object({ email: z.string().email() }))
-    .mutation(({ ctx, input: { email } }) => {
+    .input(create_report)
+    .mutation(({ ctx, input }) => {
+      const { email, link, comment } = input;
+      const text = `
+      Report from ${email}
+
+      - Link: ${link}
+
+      - Comment:
+      ${comment}
+      `;
       return ctx.sender.send({
         from: email,
+        replyTo: email,
         to: "tyree.braun84@ethereal.email",
         subject: "Report",
-        text: `Report from ${email}`,
-        html: `Report from ${email}`,
+        text: text,
       });
     }),
 });

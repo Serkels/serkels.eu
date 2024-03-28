@@ -35,7 +35,7 @@ function Exchange_Action_Ask(exchange: Exchange) {
       console.error(error);
       return null;
     })
-    .with({ status: "loading" }, () => <Spinner className="h-4 w-4" />)
+    .with({ status: "loading" }, () => <Spinner className="size-4" />)
     .with({ status: "success", data: P.nullish }, () => (
       <Ask exchange={exchange}>
         <Ask.Trigger>

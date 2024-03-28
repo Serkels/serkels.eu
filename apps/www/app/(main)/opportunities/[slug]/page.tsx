@@ -4,7 +4,7 @@ import { Share_Button } from ":components/Share_Button";
 import { slug_to_opportunity, type Params } from ":pipes/opportunity_slug";
 import { getServerSession } from "@1.modules/auth.next";
 import { Article, icon_link } from "@1.modules/opportunity.ui/Article";
-import { Share } from "@1.ui/react/icons";
+import { Share, Warning } from "@1.ui/react/icons";
 import type { Metadata, ResolvingMetadata } from "next";
 import dynamic from "next/dynamic";
 import Link from "next/link";
@@ -13,8 +13,7 @@ import { Opportunity_Delete_Button } from "./delete";
 
 //
 
-// import ReactMarkdown from "react-markdown";
-const ReactMarkdown = dynamic<any>(() => import("react-markdown"));
+const ReactMarkdown = dynamic(() => import("react-markdown"));
 
 //
 
@@ -40,7 +39,6 @@ export async function generateMetadata(
 
 export default async function Page({ params }: { params: Params }) {
   const session = await getServerSession();
-  if (!session) return null;
 
   try {
     const opportunity = await slug_to_opportunity(params);
@@ -51,8 +49,9 @@ export default async function Page({ params }: { params: Params }) {
       slug,
     } = opportunity;
 
-    const is_yours = profile.id === session.profile.id;
-    const href = `/opportunities/${slug}?category=${category.slug}`;
+    const is_yours = profile.id === session?.profile.id;
+    const href_searhparams = new URLSearchParams({ category: category.slug });
+    const href = `/opportunities/${slug}?${href_searhparams}`;
 
     return (
       <Article opportunity={opportunity}>
@@ -62,6 +61,18 @@ export default async function Page({ params }: { params: Params }) {
               <Opportunity_Delete_Button opportunity_id={opportunity_id} />
             </div>
           </Article.ActionButton>
+        ) : (
+          <></>
+        )}
+        {session ? (
+          <Article.Drawer>
+            <Link
+              className="flex items-center space-x-1"
+              href={`/@~/report?${new URLSearchParams({ url: href })}`}
+            >
+              <Warning className="h-4" /> <span>Signaler l'oppotunité</span>
+            </Link>
+          </Article.Drawer>
         ) : (
           <></>
         )}
@@ -93,6 +104,7 @@ export default async function Page({ params }: { params: Params }) {
       </Article>
     );
   } catch (error) {
+    console.error(error);
     return notFound();
   }
 }

@@ -108,7 +108,7 @@ function Item({
     >
       <header className="relative">
         <div className={indicator()}>
-          <Circle className="h-4 w-4 text-[#FF5F5F]" />
+          <Circle className="size-4 text-[#FF5F5F]" />
         </div>
         <h4 className={title_style()} title={title}>
           {title}
@@ -116,7 +116,7 @@ function Item({
       </header>
       <section className="flex items-center justify-between text-xs text-[#707070]">
         <span className="flex space-x-1 font-bold">
-          <LocationRadius className="h-4 w-4 text-primary" />
+          <LocationRadius className="size-4 text-primary" />
           <span>
             {match(exchange.is_online)
               .with(true, () => "En ligne")
@@ -157,7 +157,7 @@ function Item({
       </section>
       <footer className="flex items-center justify-between text-xs">
         <div className="flex items-center space-x-2">
-          <Avatar profile={owner.profile} className="inline-block h-5 w-5" />
+          <Avatar profile={owner.profile} className="inline-block size-5" />
           {match(owner.profile.id)
             .with(profile_id, () => "Vous")
             .otherwise(() => owner.profile.name)}

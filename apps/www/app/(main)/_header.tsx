@@ -224,7 +224,7 @@ export const UserNavGroup = forwardRef<
         {/* className="grid grid-cols-4 gap-8"> */}
         <li>
           <Link href={``}>
-            <Plus className="h-4 w-4" />
+            <Plus className="size-4" />
             <VisuallyHidden>Nouvelle échanges</VisuallyHidden>
           </Link>
         </li>
@@ -235,7 +235,7 @@ export const UserNavGroup = forwardRef<
         </li> */}
         <li className="hidden md:block">
           <Link href={``}>
-            <Messenger className="h-4 w-4" />
+            <Messenger className="size-4" />
             <VisuallyHidden>Messages</VisuallyHidden>
           </Link>
         </li>

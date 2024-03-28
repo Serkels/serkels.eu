@@ -23,7 +23,7 @@ export default function AddContact({ profile_id }: { profile_id: string }) {
 
   return match([toggle_contact, find_contact])
     .with([{ status: "loading" }, P._], [P._, { status: "loading" }], () => (
-      <Spinner className="h-5 w-5" />
+      <Spinner className="size-5" />
     ))
     .otherwise(() => (
       <Button

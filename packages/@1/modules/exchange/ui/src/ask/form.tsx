@@ -66,7 +66,7 @@ export function Ask_Form({ children }: PropsWithChildren) {
               isDisabled={isSubmitting}
               className="mx-auto flex space-x-3"
             >
-              <span>Envoyer</span> <PaperPlane className="h-4 w-4" />
+              <span>Envoyer</span> <PaperPlane className="size-4" />
             </Button>
           </Form>
         )}

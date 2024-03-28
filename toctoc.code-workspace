@@ -87,7 +87,7 @@
     //
     { "path": "apps/e2e", "name": "🧪 e2e" },
     //
-    { "path": "packages/__legacy__", "name": "🧐 legacy" },
+    // { "path": "packages/__legacy__", "name": "🧐 legacy" },
     // { "path": "packages/@douglasduteil", "name": "🎯 douglasduteil" },
     //
     { "path": ".", "name": "root" },
@@ -119,6 +119,7 @@
       "node_modules/": true,
       "out/": true,
       "storybook-static/": true,
+      "packages/__legacy__": true,
       ".eslintcache": true,
     },
     "javascript.preferences.importModuleSpecifier": "shortest",

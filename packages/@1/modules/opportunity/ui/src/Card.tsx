@@ -39,7 +39,7 @@ export function Opoortunity_Card({
 
           <figure className="flex items-center">
             <img
-              className="mr-2 h-4 w-4 rounded-full"
+              className="mr-2 size-4 rounded-full"
               src={owner.profile.image}
             />
             <figcaption className="line-clamp-1" title={owner.profile.name}>
@@ -48,7 +48,7 @@ export function Opoortunity_Card({
           </figure>
 
           <p className="line-clamp-1" title={location ?? "En ligne"}>
-            <LocationRadius className="inline-block h-4 w-4 text-primary" />{" "}
+            <LocationRadius className="inline-block size-4 text-primary" />{" "}
             {location ?? "En ligne"}
           </p>
         </figcaption>
@@ -64,9 +64,9 @@ export function Opoortunity_Card({
           </aside>
           <aside className="flex items-center space-x-3">
             <Opoortunity_Card.Footer_Actions.Renderer childs={children}>
-              <Bookmark className="inline-block h-4 w-4 text-Dove_Gray" />
+              <Bookmark className="inline-block size-4 text-Dove_Gray" />
               <button>
-                <Share className="inline-block h-4 w-4 text-Dove_Gray" />
+                <Share className="inline-block size-4 text-Dove_Gray" />
               </button>
             </Opoortunity_Card.Footer_Actions.Renderer>
           </aside>

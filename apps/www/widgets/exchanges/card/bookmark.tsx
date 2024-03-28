@@ -31,7 +31,7 @@ export function Exchange_Bookmark() {
       console.error(error);
       return null;
     })
-    .with({ status: "loading" }, () => <Spinner className="h-4 w-4" />)
+    .with({ status: "loading" }, () => <Spinner className="size-4" />)
     .with({ status: "success", data: P.select() }, (is_in_bookmarks) => (
       <BookmarkItem_Toggle_Mutation
         className="px-0"
@@ -63,13 +63,13 @@ function BookmarkItem_Toggle_Mutation(props: BookmarkButton_Props) {
 }
 const style = tv({
   extend: button,
-  base: "h-5 w-5",
+  base: "size-5",
   variants: {
     is_in_bookmarks: {
       true: { icon: "text-success" },
     },
   },
   slots: {
-    icon: "h-5 w-5 text-white",
+    icon: "size-5 text-white",
   },
 });
