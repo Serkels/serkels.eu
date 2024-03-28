@@ -22,7 +22,7 @@
     "ts-pattern": "5.0.8"
   },
   "devDependencies": {
-    "@types/react": "18.2.72",
+    "@types/react": "18.2.73",
     "prettier": "3.2.5",
     "prettier-plugin-tailwindcss": "0.5.12",
     "typescript": "5.4.3"
