@@ -2,8 +2,8 @@
 
 import {
   Deal_Status_Schema,
+  Exchange_Create_Schema,
   Exchange_Filter,
-  Exchange_Schema,
 } from "@1.modules/exchange.domain";
 import { next_auth_procedure, procedure, router } from "@1.modules/trpc";
 import { Prisma } from "@prisma/client";
@@ -16,30 +16,22 @@ const exchange_api_router = router({
 
   create: next_auth_procedure
     .input(
-      Exchange_Schema.extend({
-        category: z.string(),
-      }).omit({
-        id: true,
-        deals: true,
-        owner: true,
-        created_at: true,
-        updated_at: true,
-        return: true, //! LOL(douglasduteil): return as a variable won't work
-      }),
+      Exchange_Create_Schema
     )
     .mutation(async ({ input, ctx: { prisma, payload } }) => {
       const {
         profile: { id: profile_id },
       } = payload;
 
-      const { category, ...input_data } = input;
+      const { category_id, return_id, ...input_data } = input;
 
       return prisma.exchange.create({
         data: {
           ...input_data,
+          category: { connect: { id: category_id } },
           is_active: true,
           owner: { connect: { profile_id } },
-          category: { connect: { id: category } },
+          return: return_id ? { connect: { id: return_id } } : {},
         },
       });
     }),
