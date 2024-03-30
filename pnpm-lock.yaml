@@ -47,8 +47,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/@1/modules/trpc
       '@hono/node-server':
-        specifier: 1.9.0
-        version: 1.9.0
+        specifier: 1.9.1
+        version: 1.9.1
       '@hono/sentry':
         specifier: 1.0.1
         version: 1.0.1(hono@4.1.5)
@@ -2977,8 +2977,8 @@ packages:
       '@hapi/hoek': 9.3.0
     dev: false
 
-  /@hono/node-server@1.9.0:
-    resolution: {integrity: sha512-oJjk7WXBlENeHhWiMqSyxPIZ3Kmf5ZYxqdlcSIXyN8Rn50bNJsPl99G4POBS03Jxh56FdfRJ0SEnC8mAVIiavQ==}
+  /@hono/node-server@1.9.1:
+    resolution: {integrity: sha512-XBru0xbtRlTZJyAiFJLn7XDKbCVXBaRhVQAQhB9TwND2gwj8jf9SDWIj/7VxVtNAjURJf7Ofcz58DRA6DPYiWA==}
     engines: {node: '>=18.14.1'}
     dev: false
 
