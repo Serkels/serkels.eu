@@ -1789,8 +1789,8 @@ importers:
         specifier: workspace:@1.config/typescript@*
         version: link:../../@1/config/typescript
       '@swc/cli':
-        specifier: 0.3.10
-        version: 0.3.10(@swc/core@1.4.11)
+        specifier: 0.3.12
+        version: 0.3.12(@swc/core@1.4.11)
       '@swc/core':
         specifier: 1.4.11
         version: 1.4.11
@@ -6015,8 +6015,8 @@ packages:
     resolution: {integrity: sha512-+9jVqKhRSpsc591z5vX+X5Yyw+he/HCB4iQ/RYxw35CEPaY1gnsNE43nf9n9AaYjAQrTiI/mOwKUKdUs9vf7Xg==}
     dev: true
 
-  /@swc/cli@0.3.10(@swc/core@1.4.11):
-    resolution: {integrity: sha512-YWfYo9kXdbmIuGwIPth9geKgb0KssCMTdZa44zAN5KoqcuCP2rTW9s60heQDSRNpbtCmUr7BKF1VivsoHXrvrQ==}
+  /@swc/cli@0.3.12(@swc/core@1.4.11):
+    resolution: {integrity: sha512-h7bvxT+4+UDrLWJLFHt6V+vNAcUNii2G4aGSSotKz1ECEk4MyEh5CWxmeSscwuz5K3i+4DWTgm4+4EyMCQKn+g==}
     engines: {node: '>= 16.14.0'}
     hasBin: true
     peerDependencies:
