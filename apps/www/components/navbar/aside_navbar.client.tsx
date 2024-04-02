@@ -63,7 +63,7 @@ const li = tv({
   slots: {
     base: "",
     link: "grid grid-cols-[50px_1fr] items-center p-4",
-    icon: "h-5 w-5 justify-self-center",
+    icon: "size-5 justify-self-center",
   },
   variants: {
     $active: {

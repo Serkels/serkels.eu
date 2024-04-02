@@ -95,7 +95,7 @@ export function Item({ opportunity }: { opportunity: Opportunity }) {
               />
             ) : null}
             <Share_Button className="-mr-4" href={href}>
-              <Share className="h-5 w-5" />
+              <Share className="size-5" />
             </Share_Button>
           </div>
         </Opoortunity_Card.Footer_Actions>
@@ -113,7 +113,7 @@ function BookmarkItem_Query(props: BookmarkButton_Props) {
       console.error(error);
       return null;
     })
-    .with({ status: "loading" }, () => <Spinner className="h-4 w-4" />)
+    .with({ status: "loading" }, () => <Spinner className="size-4" />)
     .with({ status: "success", data: P.select() }, (is_in_bookmarks) => (
       <BookmarkItem_Toggle_Mutation {...props} variants={{ is_in_bookmarks }} />
     ))
@@ -141,13 +141,13 @@ function BookmarkItem_Toggle_Mutation(props: BookmarkButton_Props) {
 
 const style = tv({
   extend: button,
-  base: "h-5 w-5",
+  base: "size-5",
   variants: {
     is_in_bookmarks: {
       true: { icon: "text-success" },
     },
   },
   slots: {
-    icon: "h-5 w-5 text-Dove_Gray",
+    icon: "size-5 text-Dove_Gray",
   },
 });

@@ -43,13 +43,13 @@ export function Studient_NavBar({ studient }: { studient: Studient }) {
         </Li_Link>
         <SubNav_Bookmarks href="./bookmarks">
           <Li_Link
-            icon={<Exchange className="h-5 w-5" />}
+            icon={<Exchange className="size-5" />}
             href="./bookmarks/exchanges"
           >
             Échanges
           </Li_Link>
           <Li_Link
-            icon={<Binoculars className="h-5 w-5" />}
+            icon={<Binoculars className="size-5" />}
             href="./bookmarks/opportunities"
           >
             Opportunités

@@ -22,10 +22,11 @@
     "type-check": "tsc --build"
   },
   "dependencies": {
-    "@1.modules/core": "workspace:*",
     "@1.modules/category.domain": "workspace:*",
     "@1.modules/category.ui": "workspace:*",
+    "@1.modules/core": "workspace:*",
     "@1.modules/exchange.domain": "workspace:*",
+    "@1.modules/opportunity.domain": "workspace:*",
     "@1.ui/react": "workspace:*",
     "@react-hookz/web": "24.0.4",
     "@tanstack/react-query": "4.36.1",

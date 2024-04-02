@@ -20,7 +20,7 @@ export default function SendMessage({ profile_id }: { profile_id: string }) {
   }, [talk_to, utils, profile_id]);
 
   return match(talk_to)
-    .with({ status: "loading" }, () => <Spinner className="h-5 w-5" />)
+    .with({ status: "loading" }, () => <Spinner className="size-5" />)
     .otherwise(() => (
       <Button onPress={send_message} isDisabled={talk_to.status !== "idle"}>
         Contacter

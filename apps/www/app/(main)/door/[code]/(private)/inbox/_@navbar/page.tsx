@@ -32,7 +32,7 @@ export default async function Page() {
           href={"/@~/inbox/write_to"}
         >
           Écrire
-          <PenSquare className="ml-2 h-4 w-4" />
+          <PenSquare className="ml-2 size-4" />
         </Link>
       </div>
       <SearchForm />

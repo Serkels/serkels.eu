@@ -31,7 +31,7 @@ export default function Follow({ profile_id }: { profile_id: string }) {
 
   return match([toggle_follow, find_follow])
     .with([{ status: "loading" }, P._], [P._, { status: "loading" }], () => (
-      <Spinner className="h-5 w-5" />
+      <Spinner className="size-5" />
     ))
     .otherwise(() => (
       <Button

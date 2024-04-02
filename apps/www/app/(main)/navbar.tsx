@@ -75,7 +75,7 @@ async function UserNavGroup({ className }: ComponentPropsWithoutRef<"nav">) {
         <Link href={`/@~`} className="flex">
           <VisuallyHidden>Moi</VisuallyHidden>
           <Avatar
-            className="h-7 w-7 border-2 border-white"
+            className="size-7 border-2 border-white"
             profile={session.profile}
           />
         </Link>
@@ -91,7 +91,7 @@ async function UserNavGroup({ className }: ComponentPropsWithoutRef<"nav">) {
         <Link href={`/@~`} className="flex">
           <VisuallyHidden>Moi</VisuallyHidden>
           <Avatar
-            className="h-7 w-7 border-2 border-white"
+            className="size-7 border-2 border-white"
             profile={session.profile}
           />
         </Link>
@@ -114,7 +114,7 @@ async function UserNavGroup({ className }: ComponentPropsWithoutRef<"nav">) {
         <Link href={`/@~`} className="flex">
           <VisuallyHidden>Moi</VisuallyHidden>
           <Avatar
-            className="h-7 w-7 border-2 border-white"
+            className="size-7 border-2 border-white"
             profile={session.profile}
           />
         </Link>
@@ -134,7 +134,7 @@ const user_nav_group_variants = tv(
     },
     slots: {
       list: "",
-      icon: "box-border h-7 w-7 rounded-full bg-white/20 p-1.5",
+      icon: "box-border size-7 rounded-full bg-white/20 p-1.5",
     },
   },
   {

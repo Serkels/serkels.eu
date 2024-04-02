@@ -120,7 +120,7 @@ export function Footer() {
           popover_variant={{ position: "left" }}
           href={href}
         >
-          <Share className="h-5 w-5" />
+          <Share className="size-5" />
         </Share_Button>
       </div>
     </footer>

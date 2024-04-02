@@ -95,7 +95,7 @@ function Deleting() {
 
   return (
     <section className="text-center">
-      <Spinner className="h-5 w-5" />
+      <Spinner className="size-5" />
     </section>
   );
 }

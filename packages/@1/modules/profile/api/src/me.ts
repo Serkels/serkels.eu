@@ -1,5 +1,6 @@
 import { Profile_Schema } from "@1.modules/profile.domain";
 import { gravatarUrlFor } from "@1.modules/profile.domain/gravatarUrlFor";
+import { create_report } from "@1.modules/profile.domain/report";
 import { next_auth_procedure, router } from "@1.modules/trpc";
 import type { Prisma } from "@prisma/client";
 import { z } from "zod";
@@ -157,6 +158,30 @@ export const me = router({
           user: { update: { image: input.image, name: input.name } },
         },
         where: { id },
+      });
+    }),
+
+  //
+
+  report: next_auth_procedure
+    .input(create_report)
+    .mutation(({ ctx, input }) => {
+      console.log({ input });
+      const { attachments, email, link, comment, category } = input;
+      const text = `
+      # ${email} signal ${category}
+
+      - Lien: ${link}
+
+      - Commentaire :
+      ${comment}
+      `;
+      return ctx.sender.send_report({
+        from: email,
+        replyTo: email,
+        subject: `[Signalement] ${category} (${link})`,
+        text: text,
+        attachments: attachments ? [{ path: attachments }] : undefined,
       });
     }),
 });

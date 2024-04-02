@@ -29,9 +29,7 @@ export function Article({
     <article className="px-4 py-10 lg:px-16">
       <div className="flex justify-between">
         <h1 className="text-4xl font-bold">{title}</h1>
-        <Article.ActionButton.Renderer
-          childs={children}
-        ></Article.ActionButton.Renderer>
+        <Article.ActionButton.Renderer childs={children} />
       </div>
 
       <header className="flex items-center justify-between py-6">
@@ -47,6 +45,7 @@ export function Article({
           </figure>
         </Article.Avatar.Renderer>
         <div className="flex flex-col text-right">
+          <Article.Drawer.Renderer childs={children} />
           <small className="text-lg font-bold text-Chateau_Green">
             Date limite :{" "}
             <time dateTime={expiry_date.toUTCString()}>
@@ -114,11 +113,12 @@ export function Article({
 
 Article.Description = createSlot<{ description: string }>();
 Article.Avatar = createSlot();
+Article.Drawer = createSlot();
 Article.ShareFigure = createSlot();
 Article.ActionButton = createSlot();
 
 const icon_with_circle = tv({ base: "rounded-full" });
 export const icon_link = tv({
   extend: icon_with_circle,
-  base: "box-content h-5 w-5 bg-Cerulean p-2 text-white",
+  base: "box-content size-5 bg-Cerulean p-2 text-white",
 });

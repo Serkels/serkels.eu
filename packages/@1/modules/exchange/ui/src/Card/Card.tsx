@@ -164,7 +164,7 @@ function Card_Idle({ children }: PropsWithChildren) {
           <div>
             <Card.Footer.Right.Renderer childs={children}>
               <button className="block">
-                <Share className="h-5 w-5" />
+                <Share className="size-5" />
               </button>
             </Card.Footer.Right.Renderer>
           </div>

@@ -30,3 +30,4 @@ export * from "./School";
 export * from "./Share";
 export * from "./Trash";
 export * from "./UserAvatarFilled";
+export * from "./Warning";

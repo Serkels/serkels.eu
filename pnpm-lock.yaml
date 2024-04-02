@@ -921,6 +921,9 @@ importers:
       '@1.modules/exchange.domain':
         specifier: workspace:*
         version: link:../domain
+      '@1.modules/opportunity.domain':
+        specifier: workspace:*
+        version: link:../../opportunity/domain
       '@1.ui/react':
         specifier: workspace:*
         version: link:../../../ui/react

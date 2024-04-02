@@ -21,7 +21,7 @@ export interface BookmarkButton_Props {
 }
 
 const style = tv({
-  base: "h-5 w-5",
+  base: "size-5",
   variants: {
     is_in_bookmarks: {
       true: "",
