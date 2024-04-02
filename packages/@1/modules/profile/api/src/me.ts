@@ -166,21 +166,23 @@ export const me = router({
   report: next_auth_procedure
     .input(create_report)
     .mutation(({ ctx, input }) => {
-      const { email, link, comment } = input;
+      console.log({ input });
+      const { attachments, email, link, comment, category } = input;
       const text = `
-      Report from ${email}
+      # ${email} signal ${category}
 
-      - Link: ${link}
+      - Lien: ${link}
 
-      - Comment:
+      - Commentaire :
       ${comment}
       `;
       return ctx.sender.send({
         from: email,
         replyTo: email,
         to: "tyree.braun84@ethereal.email",
-        subject: "Report",
+        subject: `[Signalement] ${category} (${link})`,
         text: text,
+        attachments: attachments ? [{ path: attachments }] : undefined,
       });
     }),
 });

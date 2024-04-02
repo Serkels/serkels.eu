@@ -3,19 +3,30 @@
 import { trpc } from "@1.modules/auth.next/trpc";
 import { create_report } from "@1.modules/profile.domain/report";
 import to from "await-to-js";
-import type { z } from "zod";
+import { z } from "zod";
 
 //
 
+const create_report_form = create_report.extend({
+  attachments: z
+    .custom<File>()
+    .transform(async (file) => {
+      const bytes = await file.arrayBuffer();
+      const base64String = Buffer.from(bytes).toString("base64");
+      return `data:${file.type};base64,${base64String}`;
+    })
+    .optional(),
+});
 export async function report(
-  state: z.TypeOf<typeof create_report>,
+  state: z.TypeOf<typeof create_report_form>,
   formData: FormData,
 ) {
-  const validatedFields = create_report.safeParse({
-    email: formData.get(create_report.keyof().Enum.email),
-    link: formData.get(create_report.keyof().Enum.link),
-    comment: formData.get(create_report.keyof().Enum.comment),
-  });
+  const validatedFields = await create_report_form.safeParseAsync(
+    Object.values(create_report_form.keyof().Enum).reduce(
+      (acc, key) => ({ ...acc, [key]: formData.get(key) }),
+      {},
+    ),
+  );
 
   if (!validatedFields.success) {
     return {

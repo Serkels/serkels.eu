@@ -24,6 +24,7 @@ export function ReportForm() {
   const { email } = ReportForm.useContext();
   const { form, input } = style();
   const [state, formAction] = useFormState(report, {
+    category: "Arnaques ou fraude",
     email,
     link: `${window.location.origin}${url}`,
     sucess: false,
@@ -45,6 +46,38 @@ export function ReportForm() {
   return (
     <form action={formAction} className={form()}>
       <Fieldset>
+        <div className="grid grid-cols-5 items-center">
+          <div
+            className="col-span-1"
+            title="Cliquez sur l’option qui décrit le mieux en quoi ce contenu enfreint
+            nos règles de la communauté :"
+          >
+            Catégorie
+          </div>
+          <div className="col-span-4">
+            {Object.values(create_report.shape.category.Enum).map(
+              (category) => (
+                <label className="flex space-x-2" key={category}>
+                  <input
+                    type="radio"
+                    key={category}
+                    className={input({ className: "w-fit" })}
+                    name={create_report.keyof().Enum.category}
+                    value={category}
+                  />
+                  <span>{category}</span>
+                </label>
+              ),
+            )}
+
+            {state.errors?.category ? (
+              <div className="text-danger">
+                {state.errors.category.join("\n")}
+              </div>
+            ) : null}
+          </div>
+        </div>
+
         <label className="grid grid-cols-5 items-center">
           <div className="col-span-1">Lien</div>
           <div className="col-span-4">
@@ -94,6 +127,22 @@ export function ReportForm() {
           </div>
         </label>
 
+        <label className="grid grid-cols-5 items-center">
+          <div className="col-span-1">Capture d'écran</div>
+          <div className="col-span-4">
+            <input
+              className={input()}
+              type="file"
+              name={create_report.keyof().Enum.attachments}
+            />
+            {state.errors?.attachments ? (
+              <div className="text-danger">
+                {state.errors.attachments.join("\n")}
+              </div>
+            ) : null}
+          </div>
+        </label>
+
         {state.report_error ? (
           <div className="text-danger">{state.report_error}</div>
         ) : null}
@@ -118,7 +167,7 @@ export function ReportForm_Provider({
 //
 
 function Fieldset({ children }: PropsWithChildren) {
-  const { pending, data, method, action } = useFormStatus();
+  const { pending } = useFormStatus();
   return <fieldset disabled={pending}>{children}</fieldset>;
 }
 
