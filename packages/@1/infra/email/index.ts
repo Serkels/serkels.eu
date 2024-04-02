@@ -13,14 +13,18 @@ const log = Debug("packages/@1/infra/email/index.ts");
 
 const ENV = z
   .object({
+    EMAIL_FROM: z.string().email().default("tyree.braun84@ethereal.email"),
+    NODE_ENV: z
+      .enum(["development", "test", "production"])
+      .default("development"),
+    REPORT_EMAIL_FROM: z
+      .string()
+      .email()
+      .default("tyree.braun84@ethereal.email"),
     SMTP_HOST: z.string(),
     SMTP_PASSWORD: z.string(),
     SMTP_PORT: z.coerce.number().optional(),
     SMTP_USERNAME: z.string(),
-    EMAIL_FROM: z.string().email().default("no-reply@toc-toc.org"),
-    NODE_ENV: z
-      .enum(["development", "test", "production"])
-      .default("development"),
   })
   .parse(process.env);
 
@@ -47,6 +51,15 @@ export class Email_Sender {
       ...options,
     });
   }
+
+  async send_report(options: Mail.Options) {
+    log("send_report", options);
+    return this.transporter.sendMail({
+      to: ENV.REPORT_EMAIL_FROM,
+      ...options,
+    });
+  }
+
   async send_react_email(
     component: ReactElement,
     options: Omit<Mail.Options, "html" | "text">,

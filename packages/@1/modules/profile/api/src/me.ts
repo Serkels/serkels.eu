@@ -176,10 +176,9 @@ export const me = router({
       - Commentaire :
       ${comment}
       `;
-      return ctx.sender.send({
+      return ctx.sender.send_report({
         from: email,
         replyTo: email,
-        to: "tyree.braun84@ethereal.email",
         subject: `[Signalement] ${category} (${link})`,
         text: text,
         attachments: attachments ? [{ path: attachments }] : undefined,
