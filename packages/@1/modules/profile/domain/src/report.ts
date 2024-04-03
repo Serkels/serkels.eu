@@ -46,8 +46,8 @@ export const create_report = z.object({
       required_error: "Obligatoire",
       invalid_type_error: "Invalide",
     })
-    .max(11_111, {
-      message: "La description ne doit pas dépasser 11 111 caractères",
+    .max(500, {
+      message: "La description ne doit pas dépasser 500 caractères",
     })
     .optional(),
 });

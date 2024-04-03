@@ -14,6 +14,7 @@ export const label = tv({
   `,
   variants: {
     tv$color: {
+      danger: "border-danger",
       success: "border-success",
     },
     tv$size: {
@@ -43,7 +44,7 @@ export const input = tv({
   `,
   variants: {
     wrong_value: {
-      true: "border-danger",
+      true: "border-2 border-danger",
     },
     tv$color: {
       success: "border-success",

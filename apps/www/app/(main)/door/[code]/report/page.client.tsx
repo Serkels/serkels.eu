@@ -3,9 +3,13 @@
 import { create_report } from "@1.modules/profile.domain/report";
 import { button } from "@1.ui/react/button/atom";
 import { input } from "@1.ui/react/form/atom";
-import Link from "next/link";
 import { redirect, useSearchParams } from "next/navigation";
-import { createContext, useContext, type PropsWithChildren } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  type PropsWithChildren,
+} from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { tv } from "tailwind-variants";
 import { report } from "./action";
@@ -46,15 +50,21 @@ export function ReportForm() {
   return (
     <form action={formAction} className={form()}>
       <Fieldset>
-        <div className="grid grid-cols-5 items-center">
-          <div
-            className="col-span-1"
+        <input
+          type="hidden"
+          name={create_report.keyof().Enum.email}
+          readOnly
+          value={state.email}
+        />
+
+        <div className="space-y-2">
+          <b
             title="Cliquez sur l’option qui décrit le mieux en quoi ce contenu enfreint
             nos règles de la communauté :"
           >
-            Catégorie
-          </div>
-          <div className="col-span-4">
+            En quoi ce contenu enfreint nos règles de la communauté :
+          </b>
+          <div className="ml-4">
             {Object.values(create_report.shape.category.Enum).map(
               (category) => (
                 <label className="flex space-x-2" key={category}>
@@ -79,17 +89,15 @@ export function ReportForm() {
         </div>
 
         <label className="grid grid-cols-5 items-center">
-          <div className="col-span-1">Lien</div>
+          <b className="col-span-1">Context</b>
           <div className="col-span-4">
-            <Link href={state.link}>
-              <input
-                className={input()}
-                type="text"
-                name={create_report.keyof().Enum.link}
-                readOnly
-                value={state.link}
-              />
-            </Link>
+            <input
+              className={input({ className: "opacity-50" })}
+              type="text"
+              name={create_report.keyof().Enum.link}
+              readOnly
+              value={state.link}
+            />
             {state.errors?.link ? (
               <div className="text-danger">{state.errors.link.join("\n")}</div>
             ) : null}
@@ -97,28 +105,9 @@ export function ReportForm() {
         </label>
 
         <label className="grid grid-cols-5 items-center">
-          <div className="col-span-1">Email</div>
+          <b className="col-span-1">Commentaire</b>
           <div className="col-span-4">
-            <input
-              className={input()}
-              type="text"
-              name={create_report.keyof().Enum.email}
-              readOnly
-              value={state.email}
-            />
-            {state.errors?.email ? (
-              <div className="text-danger">{state.errors.email.join("\n")}</div>
-            ) : null}
-          </div>
-        </label>
-
-        <label className="grid grid-cols-5 items-center">
-          <div className="col-span-1">Commentaire</div>
-          <div className="col-span-4">
-            <textarea
-              className={input()}
-              name={create_report.keyof().Enum.comment}
-            />
+            <Comment />
             {state.errors?.comment ? (
               <div className="text-danger">
                 {state.errors.comment.join("\n")}
@@ -128,7 +117,7 @@ export function ReportForm() {
         </label>
 
         <label className="grid grid-cols-5 items-center">
-          <div className="col-span-1">Capture d'écran</div>
+          <b className="col-span-1">Capture d'écran</b>
           <div className="col-span-4">
             <input
               className={input()}
@@ -166,9 +155,35 @@ export function ReportForm_Provider({
 
 //
 
+function Comment() {
+  const [char_count, set_char_count] = useState(0);
+  return (
+    <>
+      <textarea
+        className={input({ wrong_value: char_count > 500 })}
+        name={create_report.keyof().Enum.comment}
+        onChange={(e) => set_char_count(e.target.value.length)}
+      />
+      <p className="float-right text-xs">
+        {char_count === 0 ? (
+          <>(e.g. 500 caractères)</>
+        ) : (
+          <span className={char_count > 500 ? "font-bold text-danger" : ""}>
+            {char_count} / 500
+          </span>
+        )}
+      </p>
+    </>
+  );
+}
+
 function Fieldset({ children }: PropsWithChildren) {
   const { pending } = useFormStatus();
-  return <fieldset disabled={pending}>{children}</fieldset>;
+  return (
+    <fieldset className="space-y-4" disabled={pending}>
+      {children}
+    </fieldset>
+  );
 }
 
 const style = tv({
