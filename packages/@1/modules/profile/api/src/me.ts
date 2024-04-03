@@ -177,7 +177,6 @@ export const me = router({
       ${comment}
       `;
       return ctx.sender.send_report({
-        from: email,
         replyTo: email,
         subject: `[Signalement] ${category} (${link})`,
         text: text,
