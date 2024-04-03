@@ -13,7 +13,7 @@ const log = Debug("packages/@1/infra/email/index.ts");
 
 const ENV = z
   .object({
-    EMAIL_FROM: z.string().email().default("tyree.braun84@ethereal.email"),
+    EMAIL_FROM: z.string().email().default("no-reply@toc-toc.org"),
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
@@ -55,6 +55,7 @@ export class Email_Sender {
   async send_report(options: Mail.Options) {
     log("send_report", options);
     return this.transporter.sendMail({
+      from: ENV.EMAIL_FROM,
       to: ENV.REPORT_EMAIL_FROM,
       ...options,
     });
