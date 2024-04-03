@@ -116,6 +116,15 @@ app.get("/sentry-example-api/:name", async (c) => {
   return c.json({ data: "Testing Sentry Error..." });
 });
 
+app.onError(function on_error(err, c) {
+  console.error(err);
+  c.status(500);
+  return c.json({
+    error: err.message,
+    stack: ENV.NODE_ENV === "development" ? err.stack : undefined,
+  });
+});
+
 //
 
 const server = serve({

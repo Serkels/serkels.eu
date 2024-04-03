@@ -18,6 +18,7 @@ export const create_report = z.object({
       "Troubles de l’alimentation",
       "Vente de biens illégaux ou réglementés",
       "Violence ou organisations dangereuses",
+      "Autre",
     ],
     {
       required_error: "Obligatoire",
