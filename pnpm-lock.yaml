@@ -26,8 +26,8 @@ importers:
         specifier: 1.13.2
         version: 1.13.2
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   apps/api:
     dependencies:
@@ -91,7 +91,7 @@ importers:
     dependencies:
       '@badeball/cypress-cucumber-preprocessor':
         specifier: 20.0.3
-        version: 20.0.3(cypress@13.7.2)(typescript@5.4.3)
+        version: 20.0.3(cypress@13.7.2)(typescript@5.4.4)
       '@bahmutov/cypress-esbuild-preprocessor':
         specifier: 2.2.0
         version: 2.2.0(esbuild@0.20.2)
@@ -112,8 +112,8 @@ importers:
         specifier: 20.12.4
         version: 20.12.4
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   apps/www:
     dependencies:
@@ -300,7 +300,7 @@ importers:
         version: 8.57.0
       eslint-config-next:
         specifier: 14.1.4
-        version: 14.1.4(eslint@8.57.0)(typescript@5.4.3)
+        version: 14.1.4(eslint@8.57.0)(typescript@5.4.4)
       postcss:
         specifier: 8.4.38
         version: 8.4.38
@@ -314,8 +314,8 @@ importers:
         specifier: 4.7.2
         version: 4.7.2
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   packages/@1/config/prettier:
     dependencies:
@@ -327,8 +327,8 @@ importers:
         specifier: 3.2.5
         version: 3.2.5
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   packages/@1/config/tailwindcss:
     dependencies:
@@ -349,8 +349,8 @@ importers:
         specifier: 20.12.4
         version: 20.12.4
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   packages/@1/config/typescript:
     dependencies:
@@ -460,8 +460,8 @@ importers:
         specifier: workspace:*
         version: link:../../config/typescript
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   packages/@1/modules/auth/api:
     dependencies:
@@ -506,8 +506,8 @@ importers:
         specifier: 20.12.4
         version: 20.12.4
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   packages/@1/modules/auth/emails:
     dependencies:
@@ -553,13 +553,13 @@ importers:
         version: 20.12.4
       pkgroll:
         specifier: 2.0.2
-        version: 2.0.2(typescript@5.4.3)
+        version: 2.0.2(typescript@5.4.4)
       react-email:
         specifier: 2.1.1
         version: 2.1.1(eslint@8.57.0)
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   packages/@1/modules/auth/next:
     dependencies:
@@ -613,8 +613,8 @@ importers:
         specifier: 18.2.24
         version: 18.2.24
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   packages/@1/modules/bookmark/api:
     dependencies:
@@ -647,8 +647,8 @@ importers:
         specifier: 20.12.4
         version: 20.12.4
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   packages/@1/modules/bookmark/domain:
     dependencies:
@@ -663,8 +663,8 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   packages/@1/modules/bookmark/ui:
     dependencies:
@@ -715,8 +715,8 @@ importers:
         specifier: 3.4.3
         version: 3.4.3
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   packages/@1/modules/category/api:
     dependencies:
@@ -746,8 +746,8 @@ importers:
         specifier: 20.12.4
         version: 20.12.4
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   packages/@1/modules/category/domain:
     dependencies:
@@ -762,8 +762,8 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   packages/@1/modules/category/ui:
     dependencies:
@@ -817,8 +817,8 @@ importers:
         specifier: 3.4.3
         version: 3.4.3
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   packages/@1/modules/core:
     dependencies:
@@ -836,8 +836,8 @@ importers:
         specifier: workspace:*
         version: link:../../config/typescript
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   packages/@1/modules/exchange/api:
     dependencies:
@@ -876,8 +876,8 @@ importers:
         specifier: 20.12.4
         version: 20.12.4
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   packages/@1/modules/exchange/domain:
     dependencies:
@@ -904,8 +904,8 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   packages/@1/modules/exchange/ui:
     dependencies:
@@ -989,8 +989,8 @@ importers:
         specifier: 3.4.3
         version: 3.4.3
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   packages/@1/modules/forum/api:
     dependencies:
@@ -1023,8 +1023,8 @@ importers:
         specifier: 20.12.4
         version: 20.12.4
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   packages/@1/modules/forum/domain:
     dependencies:
@@ -1045,8 +1045,8 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   packages/@1/modules/forum/ui:
     dependencies:
@@ -1121,8 +1121,8 @@ importers:
         specifier: 3.4.3
         version: 3.4.3
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   packages/@1/modules/inbox/api:
     dependencies:
@@ -1155,8 +1155,8 @@ importers:
         specifier: 20.12.4
         version: 20.12.4
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   packages/@1/modules/inbox/domain:
     dependencies:
@@ -1174,8 +1174,8 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   packages/@1/modules/inbox/ui:
     dependencies:
@@ -1235,8 +1235,8 @@ importers:
         specifier: 3.4.3
         version: 3.4.3
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   packages/@1/modules/opportunity/api:
     dependencies:
@@ -1275,8 +1275,8 @@ importers:
         specifier: 20.12.4
         version: 20.12.4
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   packages/@1/modules/opportunity/domain:
     dependencies:
@@ -1297,8 +1297,8 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   packages/@1/modules/opportunity/ui:
     dependencies:
@@ -1364,8 +1364,8 @@ importers:
         specifier: 3.4.3
         version: 3.4.3
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   packages/@1/modules/profile/api:
     dependencies:
@@ -1398,8 +1398,8 @@ importers:
         specifier: 20.12.4
         version: 20.12.4
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   packages/@1/modules/profile/domain:
     dependencies:
@@ -1420,8 +1420,8 @@ importers:
         specifier: 20.12.4
         version: 20.12.4
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   packages/@1/modules/profile/ui:
     dependencies:
@@ -1475,8 +1475,8 @@ importers:
         specifier: 3.4.3
         version: 3.4.3
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   packages/@1/modules/trpc:
     dependencies:
@@ -1506,8 +1506,8 @@ importers:
         specifier: workspace:*
         version: link:../../config/typescript
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   packages/@1/ui/react:
     dependencies:
@@ -1567,8 +1567,8 @@ importers:
         specifier: 3.4.3
         version: 3.4.3
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   packages/@douglasduteil/config/tailwindcss:
     dependencies:
@@ -1604,8 +1604,8 @@ importers:
         specifier: 3.2.5
         version: 3.2.5
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   packages/@douglasduteil/config/typescript:
     dependencies:
@@ -1617,8 +1617,8 @@ importers:
         specifier: 3.2.5
         version: 3.2.5
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   packages/@douglasduteil/datatypes...hours-to-seconds: {}
 
@@ -1656,8 +1656,8 @@ importers:
         specifier: 5.12.1
         version: 5.12.1
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   packages/@douglasduteil/react-hookz...matrix-uri:
     dependencies:
@@ -1718,8 +1718,8 @@ importers:
         specifier: 3.2.5
         version: 3.2.5
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   packages/__legacy__/modules:
     dependencies:
@@ -1761,8 +1761,8 @@ importers:
         specifier: 3.2.5
         version: 3.2.5
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
       zod-fast-check:
         specifier: 0.10.1
         version: 0.10.1(fast-check@3.17.1)(zod@3.22.4)
@@ -1801,8 +1801,8 @@ importers:
         specifier: 3.2.5
         version: 3.2.5
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   packages/__legacy__/ui:
     dependencies:
@@ -1859,8 +1859,8 @@ importers:
         specifier: 0.5.13
         version: 0.5.13(prettier@3.2.5)
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   packages/__legacy__/www:
     dependencies:
@@ -1905,8 +1905,8 @@ importers:
         specifier: 18.2.24
         version: 18.2.24
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
   turbo/generators:
     devDependencies:
@@ -1915,13 +1915,13 @@ importers:
         version: link:../../packages/@douglasduteil/config/typescript
       '@turbo/gen':
         specifier: 1.13.2
-        version: 1.13.2(@types/node@20.12.4)(typescript@5.4.3)
+        version: 1.13.2(@types/node@20.12.4)(typescript@5.4.4)
       prettier:
         specifier: '3'
         version: 3.2.5
       typescript:
-        specifier: 5.4.3
-        version: 5.4.3
+        specifier: 5.4.4
+        version: 5.4.4
 
 packages:
 
@@ -2011,7 +2011,7 @@ packages:
       - supports-color
     dev: false
 
-  /@badeball/cypress-cucumber-preprocessor@20.0.3(cypress@13.7.2)(typescript@5.4.3):
+  /@badeball/cypress-cucumber-preprocessor@20.0.3(cypress@13.7.2)(typescript@5.4.4):
     resolution: {integrity: sha512-cc7rYEFEVRAZ13LQ2WEnG84VJNO+ErpNsNBP/5eP2JC+2v8WvcVgm8fcqKLOiNgyEWaRuiT+MkU3DXKbBbFVSg==}
     engines: {node: '>=18.0.0'}
     hasBin: true
@@ -2036,7 +2036,7 @@ packages:
       chalk: 4.1.2
       cli-table: 0.3.11
       common-ancestor-path: 1.0.1
-      cosmiconfig: 8.3.6(typescript@5.4.3)
+      cosmiconfig: 8.3.6(typescript@5.4.4)
       cypress: 13.7.2
       debug: 4.3.4(supports-color@8.1.1)
       error-stack-parser: 2.1.4
@@ -6432,7 +6432,7 @@ packages:
     resolution: {integrity: sha512-ec4tjL2Rr0pkZ5hww65c+EEPYwxOi4Ryv+0MtjeaSQRJyq322Q27eOQiFbuNgw2hpL4hB1/W/HBGk3VKS43osg==}
     dev: false
 
-  /@turbo/gen@1.13.2(@types/node@20.12.4)(typescript@5.4.3):
+  /@turbo/gen@1.13.2(@types/node@20.12.4)(typescript@5.4.4):
     resolution: {integrity: sha512-6/Z90XAMbfQCFX3QUyVEy5Te1u8Bm/K2ob7FaD7OrFYLtnKnzTghH1pOglFqfmdHqLusCrGEF00J9lKz176BNQ==}
     hasBin: true
     dependencies:
@@ -6444,7 +6444,7 @@ packages:
       minimatch: 9.0.4
       node-plop: 0.26.3
       proxy-agent: 6.4.0
-      ts-node: 10.9.2(@types/node@20.12.4)(typescript@5.4.3)
+      ts-node: 10.9.2(@types/node@20.12.4)(typescript@5.4.4)
       update-check: 1.5.4
       validate-npm-package-name: 5.0.0
     transitivePeerDependencies:
@@ -6730,7 +6730,7 @@ packages:
       - '@types/json-schema'
     dev: false
 
-  /@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.3):
+  /@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.4):
     resolution: {integrity: sha512-tbsV1jPne5CkFQCgPBcDOt30ItF7aJoZL997JSF7MhGQqOeT3svWRYxiqlfA5RUdlHN6Fi+EI9bxqbdyAUZjYQ==}
     engines: {node: ^16.0.0 || >=18.0.0}
     peerDependencies:
@@ -6742,11 +6742,11 @@ packages:
     dependencies:
       '@typescript-eslint/scope-manager': 6.21.0
       '@typescript-eslint/types': 6.21.0
-      '@typescript-eslint/typescript-estree': 6.21.0(typescript@5.4.3)
+      '@typescript-eslint/typescript-estree': 6.21.0(typescript@5.4.4)
       '@typescript-eslint/visitor-keys': 6.21.0
       debug: 4.3.4(supports-color@8.1.1)
       eslint: 8.57.0
-      typescript: 5.4.3
+      typescript: 5.4.4
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -6764,7 +6764,7 @@ packages:
     engines: {node: ^16.0.0 || >=18.0.0}
     dev: true
 
-  /@typescript-eslint/typescript-estree@6.21.0(typescript@5.4.3):
+  /@typescript-eslint/typescript-estree@6.21.0(typescript@5.4.4):
     resolution: {integrity: sha512-6npJTkZcO+y2/kr+z0hc4HwNfrrP4kNYh57ek7yCNlrBjWQ1Y0OS7jiZTkgumrvkX5HkEKXFZkkdFNkaW2wmUQ==}
     engines: {node: ^16.0.0 || >=18.0.0}
     peerDependencies:
@@ -6780,8 +6780,8 @@ packages:
       is-glob: 4.0.3
       minimatch: 9.0.3
       semver: 7.6.0
-      ts-api-utils: 1.3.0(typescript@5.4.3)
-      typescript: 5.4.3
+      ts-api-utils: 1.3.0(typescript@5.4.4)
+      typescript: 5.4.4
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -7944,7 +7944,7 @@ packages:
       vary: 1.1.2
     dev: true
 
-  /cosmiconfig@8.3.6(typescript@5.4.3):
+  /cosmiconfig@8.3.6(typescript@5.4.4):
     resolution: {integrity: sha512-kcZ6+W5QzcJ3P1Mt+83OUv/oHFqZHIx8DuxG6eZ5RGMERoLqp4BuGjhHLYGK+Kf5XVkQvqBSmAy/nGWN3qDgEA==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -7957,7 +7957,7 @@ packages:
       js-yaml: 4.1.0
       parse-json: 5.2.0
       path-type: 4.0.0
-      typescript: 5.4.3
+      typescript: 5.4.4
     dev: false
 
   /cpx2@7.0.1:
@@ -8797,7 +8797,7 @@ packages:
       source-map: 0.6.1
     dev: true
 
-  /eslint-config-next@14.1.4(eslint@8.57.0)(typescript@5.4.3):
+  /eslint-config-next@14.1.4(eslint@8.57.0)(typescript@5.4.4):
     resolution: {integrity: sha512-cihIahbhYAWwXJwZkAaRPpUi5t9aOi/HdfWXOjZeUOqNWXHD8X22kd1KG58Dc3MVaRx3HoR/oMGk2ltcrqDn8g==}
     peerDependencies:
       eslint: ^7.23.0 || ^8.0.0
@@ -8808,7 +8808,7 @@ packages:
     dependencies:
       '@next/eslint-plugin-next': 14.1.4
       '@rushstack/eslint-patch': 1.10.1
-      '@typescript-eslint/parser': 6.21.0(eslint@8.57.0)(typescript@5.4.3)
+      '@typescript-eslint/parser': 6.21.0(eslint@8.57.0)(typescript@5.4.4)
       eslint: 8.57.0
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@6.21.0)(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1)(eslint@8.57.0)
@@ -8816,7 +8816,7 @@ packages:
       eslint-plugin-jsx-a11y: 6.8.0(eslint@8.57.0)
       eslint-plugin-react: 7.34.1(eslint@8.57.0)
       eslint-plugin-react-hooks: 4.6.0(eslint@8.57.0)
-      typescript: 5.4.3
+      typescript: 5.4.4
     transitivePeerDependencies:
       - eslint-import-resolver-webpack
       - supports-color
@@ -8894,7 +8894,7 @@ packages:
       eslint-import-resolver-webpack:
         optional: true
     dependencies:
-      '@typescript-eslint/parser': 6.21.0(eslint@8.57.0)(typescript@5.4.3)
+      '@typescript-eslint/parser': 6.21.0(eslint@8.57.0)(typescript@5.4.4)
       debug: 3.2.7(supports-color@8.1.1)
       eslint: 8.57.0
       eslint-import-resolver-node: 0.3.9
@@ -8913,7 +8913,7 @@ packages:
       '@typescript-eslint/parser':
         optional: true
     dependencies:
-      '@typescript-eslint/parser': 6.21.0(eslint@8.57.0)(typescript@5.4.3)
+      '@typescript-eslint/parser': 6.21.0(eslint@8.57.0)(typescript@5.4.4)
       array-includes: 3.1.8
       array.prototype.findlastindex: 1.2.5
       array.prototype.flat: 1.3.2
@@ -12132,7 +12132,7 @@ packages:
       pathe: 1.1.2
     dev: false
 
-  /pkgroll@2.0.2(typescript@5.4.3):
+  /pkgroll@2.0.2(typescript@5.4.4):
     resolution: {integrity: sha512-gRQ293zs67H2nN/CKwdLnlxCKpE5qi5rJwVvDUqep8qOLs57PlTl3MAXmLlFztwI2Iv6mP9k5BSlhBjzFJmerg==}
     engines: {node: '>=18'}
     hasBin: true
@@ -12152,7 +12152,7 @@ packages:
       esbuild: 0.20.2
       magic-string: 0.30.8
       rollup: 4.13.2
-      typescript: 5.4.3
+      typescript: 5.4.4
     dev: true
 
   /possible-typed-array-names@1.0.0:
@@ -14138,13 +14138,13 @@ packages:
     resolution: {integrity: sha512-tmMpK00BjZiUyVyvrBK7knerNgmgvcV/KLVyuma/SC+TQN167GrMRciANTz09+k3zW8L8t60jWO1GpfkZdjTaw==}
     dev: false
 
-  /ts-api-utils@1.3.0(typescript@5.4.3):
+  /ts-api-utils@1.3.0(typescript@5.4.4):
     resolution: {integrity: sha512-UQMIo7pb8WRomKR1/+MFVLTroIvDVtMX3K6OUir8ynLyzB8Jeriont2bTAtmNPa1ekAgN7YPDyf6V+ygrdU+eQ==}
     engines: {node: '>=16'}
     peerDependencies:
       typescript: '>=4.2.0'
     dependencies:
-      typescript: 5.4.3
+      typescript: 5.4.4
     dev: true
 
   /ts-dedent@2.2.0:
@@ -14159,7 +14159,7 @@ packages:
   /ts-interface-checker@0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
 
-  /ts-node@10.9.2(@types/node@20.12.4)(typescript@5.4.3):
+  /ts-node@10.9.2(@types/node@20.12.4)(typescript@5.4.4):
     resolution: {integrity: sha512-f0FFpIdcHgn8zcPSbf1dRevwt047YMnaiJM3u2w2RewrB+fob/zePZcrOyQoLMMO7aBIddLcQIEK5dYjkLnGrQ==}
     hasBin: true
     peerDependencies:
@@ -14185,7 +14185,7 @@ packages:
       create-require: 1.1.1
       diff: 4.0.2
       make-error: 1.3.6
-      typescript: 5.4.3
+      typescript: 5.4.4
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
     dev: true
@@ -14397,8 +14397,8 @@ packages:
     hasBin: true
     dev: true
 
-  /typescript@5.4.3:
-    resolution: {integrity: sha512-KrPd3PKaCLr78MalgiwJnA25Nm8HAmdwN3mYUYZgG/wizIo9EainNVQI9/yDavtVFRN2h3k8uf3GLHuhDMgEHg==}
+  /typescript@5.4.4:
+    resolution: {integrity: sha512-dGE2Vv8cpVvw28v8HCPqyb08EzbBURxDpuhJvTrusShUfGnhHBafDsLdS1EhhxyL6BJQE+2cT3dDPAv+MQ6oLw==}
     engines: {node: '>=14.17'}
     hasBin: true
 
