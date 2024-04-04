@@ -65,8 +65,8 @@ importers:
         specifier: 4.2.1
         version: 4.2.1
       tsx:
-        specifier: 4.7.1
-        version: 4.7.1
+        specifier: 4.7.2
+        version: 4.7.2
       ws:
         specifier: 8.16.0
         version: 8.16.0
@@ -311,8 +311,8 @@ importers:
         specifier: 3.4.3
         version: 3.4.3
       tsx:
-        specifier: 4.7.1
-        version: 4.7.1
+        specifier: 4.7.2
+        version: 4.7.2
       typescript:
         specifier: 5.4.3
         version: 5.4.3
@@ -386,8 +386,8 @@ importers:
         specifier: 1.6.6
         version: 1.6.6
       tsx:
-        specifier: 4.7.1
-        version: 4.7.1
+        specifier: 4.7.2
+        version: 4.7.2
 
   packages/@1/infra/email:
     dependencies:
@@ -14209,8 +14209,8 @@ packages:
   /tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
 
-  /tsx@4.7.1:
-    resolution: {integrity: sha512-8d6VuibXHtlN5E3zFkgY8u4DX7Y3Z27zvvPKVmLon/D4AjuKzarkUBTLDBgj9iTQ0hg5xM7c/mYiRVM+HETf0g==}
+  /tsx@4.7.2:
+    resolution: {integrity: sha512-BCNd4kz6fz12fyrgCTEdZHGJ9fWTGeUzXmQysh0RVocDY3h4frk05ZNCXSy4kIenF7y/QnrdiVpTsyNRn6vlAw==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     dependencies:
