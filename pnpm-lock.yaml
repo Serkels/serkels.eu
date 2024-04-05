@@ -208,8 +208,8 @@ importers:
         specifier: 2.4.5
         version: 2.4.5(react@18.2.0)
       framer-motion:
-        specifier: 11.0.24
-        version: 11.0.24(react-dom@18.2.0)(react@18.2.0)
+        specifier: 11.0.25
+        version: 11.0.25(react-dom@18.2.0)(react@18.2.0)
       next:
         specifier: 14.1.4
         version: 14.1.4(react-dom@18.2.0)(react@18.2.0)
@@ -1527,8 +1527,8 @@ importers:
         specifier: 2.4.5
         version: 2.4.5(react@18.2.0)
       framer-motion:
-        specifier: 11.0.24
-        version: 11.0.24(react-dom@18.2.0)(react@18.2.0)
+        specifier: 11.0.25
+        version: 11.0.25(react-dom@18.2.0)(react@18.2.0)
       react-aria-components:
         specifier: 1.1.1
         version: 1.1.1(react-dom@18.2.0)(react@18.2.0)
@@ -1816,8 +1816,8 @@ importers:
         specifier: 2.4.5
         version: 2.4.5(react@18.2.0)
       framer-motion:
-        specifier: 11.0.24
-        version: 11.0.24(react-dom@18.2.0)(react@18.2.0)
+        specifier: 11.0.25
+        version: 11.0.25(react-dom@18.2.0)(react@18.2.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -9455,8 +9455,8 @@ packages:
       '@emotion/is-prop-valid': 0.8.8
     dev: true
 
-  /framer-motion@11.0.24(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-l2iM8NR53qtcujgAqYvGPJJGModPNWEVUaATRDLfnaLvUoFpImovBm0AHalSSsY8tW6knP8mfJTW4WYGbnAe4w==}
+  /framer-motion@11.0.25(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-mRt7vQGzA7++wTgb+PW1TrlXXgndqR6hCiJ48fXr2X9alte2hPQiAq556HRwDCt0Q5X98MNvcSe4KUa27Gm5Lg==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: ^18.0.0

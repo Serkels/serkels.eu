@@ -40,7 +40,7 @@
     "date-fns": "3.6.0",
     "debug": "4.3.4",
     "formik": "2.4.5",
-    "framer-motion": "11.0.24",
+    "framer-motion": "11.0.25",
     "next": "14.1.4",
     "next-auth": "4.24.7",
     "nextjs-google-analytics": "2.3.3",
