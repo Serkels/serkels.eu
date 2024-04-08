@@ -6,7 +6,7 @@
   "dependencies": {
     "@1/next-tsyringe": "workspace:@0.__legacy__/next-tsyringe@*",
     "debug": "4.3.4",
-    "modern-errors": "7.0.0",
+    "modern-errors": "7.0.1",
     "modern-errors-serialize": "6.0.0",
     "react": "18.2.0",
     "reflect-metadata": "0.2.2",

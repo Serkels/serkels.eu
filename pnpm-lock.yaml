@@ -1684,11 +1684,11 @@ importers:
         specifier: 4.3.4
         version: 4.3.4(supports-color@8.1.1)
       modern-errors:
-        specifier: 7.0.0
-        version: 7.0.0
+        specifier: 7.0.1
+        version: 7.0.1
       modern-errors-serialize:
         specifier: 6.0.0
-        version: 6.0.0(modern-errors@7.0.0)
+        version: 6.0.0(modern-errors@7.0.1)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -11350,7 +11350,7 @@ packages:
       yargs-unparser: 2.0.0
     dev: false
 
-  /modern-errors-serialize@6.0.0(modern-errors@7.0.0):
+  /modern-errors-serialize@6.0.0(modern-errors@7.0.1):
     resolution: {integrity: sha512-oqfY6NeiZtFcZW4VIoL8fu3xoP/YMswEsUe6cMKZmj6s8M1f8pTVqC5uhQN9sKmTRxDcA6E00V2Cb3NY8b72SQ==}
     engines: {node: '>=18.18.0'}
     peerDependencies:
@@ -11358,11 +11358,11 @@ packages:
     dependencies:
       error-serializer: 7.0.0
       is-plain-obj: 4.1.0
-      modern-errors: 7.0.0
+      modern-errors: 7.0.1
     dev: false
 
-  /modern-errors@7.0.0:
-    resolution: {integrity: sha512-4H55sVGQe0JxbBIH9ea9QUkY3BDSpxauyWYXB5W4LCeYEvjEScYxnoHp9cFHxeCvUuf1a1lqJILo/H2kRV37og==}
+  /modern-errors@7.0.1:
+    resolution: {integrity: sha512-UaWtjvt1LWLTmQq9vBcjVzVyaBS8PyN3YYF9Vzdf7dgaB9ySFBWbIH5nglEfLr1VVF7XrBrHrdp+Tnw7oITfTA==}
     engines: {node: '>=18.18.0'}
     dependencies:
       error-class-utils: 4.0.0
@@ -11373,7 +11373,7 @@ packages:
       normalize-exception: 3.0.0
       set-error-message: 3.0.0
       set-error-props: 6.0.0
-      set-error-stack: 2.0.0
+      set-error-stack: 3.0.0
     dev: false
 
   /ms@2.1.2:
@@ -13267,9 +13267,9 @@ packages:
       redefine-property: 3.0.0
     dev: false
 
-  /set-error-stack@2.0.0:
-    resolution: {integrity: sha512-mABWr7mmaY1EVBMXWo32t6byRkKclJ3gipglE2+XGBZxDEk0+zVumRfWyAK3s/EB/TbbUm1Gp0H8VvqlFkMa+g==}
-    engines: {node: '>=16.17.0'}
+  /set-error-stack@3.0.0:
+    resolution: {integrity: sha512-jCcA0qrIqYWOct9WlC3xcEE9QaTWKEM9eztxr+fV2pa7ZGfFGiNh4RzqfJI8ps+oDDGtU8uvGPYxARyhI9t17Q==}
+    engines: {node: '>=18.18.0'}
     dependencies:
       normalize-exception: 3.0.0
     dev: false
