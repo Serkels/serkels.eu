@@ -27,7 +27,7 @@
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
     "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
-    "@types/node": "20.12.6",
+    "@types/node": "20.12.7",
     "@types/ws": "8.5.10"
   }
 }

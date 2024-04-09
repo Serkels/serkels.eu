@@ -10,7 +10,7 @@
     "tailwindcss": "3.4.3"
   },
   "devDependencies": {
-    "@types/node": "20.12.6",
+    "@types/node": "20.12.7",
     "@1.config/typescript": "workspace:*",
     "typescript": "5.4.4"
   }
