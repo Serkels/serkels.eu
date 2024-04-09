@@ -34,7 +34,7 @@
     "@react-email/link": "0.0.7",
     "@react-email/preview": "0.0.8",
     "@react-email/text": "0.0.7",
-    "@types/react": "18.2.74",
+    "@types/react": "18.2.75",
     "react": "18.2.0"
   },
   "devDependencies": {
