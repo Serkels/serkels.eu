@@ -33,6 +33,6 @@
     "@1.config/typescript": "workspace:*",
     "@prisma/client": "5.12.1",
     "@types/node": "20.12.7",
-    "typescript": "5.4.4"
+    "typescript": "5.4.5"
   }
 }
