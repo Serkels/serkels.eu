@@ -9,7 +9,7 @@
     "@react-types/button": "3.9.2",
     "clsx": "2.1.0",
     "formik": "2.4.5",
-    "framer-motion": "11.0.25",
+    "framer-motion": "11.0.27",
     "react": "18.2.0",
     "react-aria": "3.32.1",
     "react-aria-components": "1.1.1",
