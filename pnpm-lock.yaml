@@ -51,10 +51,10 @@ importers:
         version: 1.10.0
       '@hono/sentry':
         specifier: 1.0.1
-        version: 1.0.1(hono@4.2.3)
+        version: 1.0.1(hono@4.2.4)
       '@hono/trpc-server':
         specifier: 0.1.1
-        version: 0.1.1(@trpc/server@10.45.2)(hono@4.2.3)
+        version: 0.1.1(@trpc/server@10.45.2)(hono@4.2.4)
       '@trpc/server':
         specifier: 10.45.2
         version: 10.45.2
@@ -62,8 +62,8 @@ importers:
         specifier: 16.4.5
         version: 16.4.5
       hono:
-        specifier: 4.2.3
-        version: 4.2.3
+        specifier: 4.2.4
+        version: 4.2.4
       tsx:
         specifier: 4.7.2
         version: 4.7.2
@@ -2984,16 +2984,16 @@ packages:
     engines: {node: '>=18.14.1'}
     dev: false
 
-  /@hono/sentry@1.0.1(hono@4.2.3):
+  /@hono/sentry@1.0.1(hono@4.2.4):
     resolution: {integrity: sha512-4JgwdyasCQIoH3lhl4yLNxrP4/SElfK01ZV3JUaMvexVJnyAOPuXDhtJasl9Gssg7qDNt8ZIDDjqmVrOwS+AIw==}
     peerDependencies:
       hono: '>=3.*'
     dependencies:
-      hono: 4.2.3
+      hono: 4.2.4
       toucan-js: 3.3.1
     dev: false
 
-  /@hono/trpc-server@0.1.1(@trpc/server@10.45.2)(hono@4.2.3):
+  /@hono/trpc-server@0.1.1(@trpc/server@10.45.2)(hono@4.2.4):
     resolution: {integrity: sha512-JHfd5s2MKIu+ZT/gTi7ITZtGPhWbGogCxf0FcgQt+6ENnfameKZNXU1BCMJXzDWm5+AzyCvRMXAjYE+JgAktlw==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
@@ -3001,7 +3001,7 @@ packages:
       hono: '>=3.*'
     dependencies:
       '@trpc/server': 10.45.2
-      hono: 4.2.3
+      hono: 4.2.4
     dev: false
 
   /@humanwhocodes/config-array@0.12.3:
@@ -9894,8 +9894,8 @@ packages:
       react-is: 16.13.1
     dev: false
 
-  /hono@4.2.3:
-    resolution: {integrity: sha512-yZDnPOp/XzjIB7KUWaOxwLSywnhxMvAKth8hfKhWQiWXeZhBfC6GlFnEst/FOOgn7rSWjShhQPS89PLEuHxq3Q==}
+  /hono@4.2.4:
+    resolution: {integrity: sha512-2T5Ahxh8tT0ISKCrNeA+OIwfD5W4EZ00iIMYBBCuiIivr+sOrZYOphinARSG7wL3nFsY6zkFHMMZbcR9CzEzug==}
     engines: {node: '>=16.0.0'}
     dev: false
 
