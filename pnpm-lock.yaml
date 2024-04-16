@@ -860,8 +860,8 @@ importers:
         specifier: 5.1.1
         version: 5.1.1
       xstate:
-        specifier: 5.10.0
-        version: 5.10.0
+        specifier: 5.11.0
+        version: 5.11.0
       zod:
         specifier: 3.22.4
         version: 3.22.4
@@ -894,8 +894,8 @@ importers:
         specifier: 5.1.1
         version: 5.1.1
       xstate:
-        specifier: 5.10.0
-        version: 5.10.0
+        specifier: 5.11.0
+        version: 5.11.0
       zod:
         specifier: 3.22.4
         version: 3.22.4
@@ -14870,8 +14870,8 @@ packages:
     engines: {node: '>=0.4.0'}
     dev: true
 
-  /xstate@5.10.0:
-    resolution: {integrity: sha512-rn3AbPFHngLqtfFTe9KDXJ1wQX4ACDKnQyQ2ShjuKor3iVnxDSKyDL9llFLiOpaBQu+cFMKcZYlpXo5nb/q5rw==}
+  /xstate@5.11.0:
+    resolution: {integrity: sha512-0MqTLpc7dr/hXFHY25oN4sdnO3Ey6MYy9WkWxOgiwjPV0S6rWwLb5nZlRlPDSku2GEV4/y6AR8bX+GNCOxnEwA==}
     dev: false
 
   /y18n@5.0.8:
