@@ -19,6 +19,6 @@
     "@1.config/typescript": "workspace:*",
     "@types/debug": "4.1.12",
     "@types/nodemailer": "6.4.14",
-    "@types/react": "18.2.78"
+    "@types/react": "18.2.79"
   }
 }
