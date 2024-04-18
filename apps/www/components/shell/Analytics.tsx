@@ -1,6 +1,6 @@
 //
 
-import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
 import { Suspense } from "react";
 import { Analytics_Client } from "./Analytics.client";
@@ -25,7 +25,7 @@ function gtag(){dataLayer.push(arguments);}
 
   return (
     <>
-      <VercelAnalytics />
+      <SpeedInsights />
       <Script
         id="google-analytics"
         strategy="afterInteractive"

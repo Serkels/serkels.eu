@@ -189,9 +189,9 @@ importers:
       '@trpc/react-query':
         specifier: 10.45.2
         version: 10.45.2(@tanstack/react-query@4.36.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@trpc/client@10.45.2(@trpc/server@10.45.2))(@trpc/server@10.45.2)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@vercel/analytics':
-        specifier: 1.2.2
-        version: 1.2.2(next@14.2.2(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)
+      '@vercel/speed-insights':
+        specifier: 1.0.10
+        version: 1.0.10(next@14.2.2(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)
       await-to-js:
         specifier: 3.0.0
         version: 3.0.0
@@ -4464,15 +4464,27 @@ packages:
   '@ungap/structured-clone@1.2.0':
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
 
-  '@vercel/analytics@1.2.2':
-    resolution: {integrity: sha512-X0rctVWkQV1e5Y300ehVNqpOfSOufo7ieA5PIdna8yX/U7Vjz0GFsGf4qvAhxV02uQ2CVt7GYcrFfddXXK2Y4A==}
+  '@vercel/speed-insights@1.0.10':
+    resolution: {integrity: sha512-4uzdKB0RW6Ff2FkzshzjZ+RlJfLPxgm/00i0XXgxfMPhwnnsk92YgtqsxT9OcPLdJUyVU1DqFlSWWjIQMPkh0g==}
     peerDependencies:
+      '@sveltejs/kit': ^1 || ^2
       next: '>= 13'
       react: ^18 || ^19
+      svelte: ^4
+      vue: ^3
+      vue-router: ^4
     peerDependenciesMeta:
+      '@sveltejs/kit':
+        optional: true
       next:
         optional: true
       react:
+        optional: true
+      svelte:
+        optional: true
+      vue:
+        optional: true
+      vue-router:
         optional: true
 
   '@webassemblyjs/ast@1.12.1':
@@ -7878,9 +7890,6 @@ packages:
 
   serialize-javascript@6.0.2:
     resolution: {integrity: sha512-Saa1xPByTTq2gdeFZYLLo+RFE35NHZkAbqZeWNd3BpzppeVisAqpDjcp8dyf6uIvEqJRd46jemmyA4iFIeVk8g==}
-
-  server-only@0.0.1:
-    resolution: {integrity: sha512-qepMx2JxAa5jjfzxG79yPPq+8BuFToHd1hm7kI+Z4zAq1ftQiP7HcxMhDDItrbtwVeLg/cY2JnKnrcFkmiswNA==}
 
   set-error-class@3.0.0:
     resolution: {integrity: sha512-a2Ham0lVgvzp14cm2Z2LM2Ae1HzxI8G+LX6Rv+eTVzM5+pfPU7UtJBSOXktxoBlqlmaPsZmZRR84qY+CoHt6bg==}
@@ -11656,9 +11665,7 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@vercel/analytics@1.2.2(next@14.2.2(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)':
-    dependencies:
-      server-only: 0.0.1
+  '@vercel/speed-insights@1.0.10(next@14.2.2(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)':
     optionalDependencies:
       next: 14.2.2(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react: 18.2.0
@@ -15792,8 +15799,6 @@ snapshots:
   serialize-javascript@6.0.2:
     dependencies:
       randombytes: 2.1.0
-
-  server-only@0.0.1: {}
 
   set-error-class@3.0.0:
     dependencies:
