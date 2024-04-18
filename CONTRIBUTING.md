@@ -141,7 +141,7 @@ $ corepack enable && corepack prepare pnpm@latest
 
 $ pnpm i
 # Generate missing database types for `@prisma/client`
-$ pnpm --filter @1.infra/database exec prisma generate --quiet
+$ pnpm --filter @1.infra/database exec prisma generate
 $ docker compose up -d
 
 # Local www
