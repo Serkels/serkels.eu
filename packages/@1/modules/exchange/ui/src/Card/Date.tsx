@@ -24,9 +24,7 @@ export function Exchange_Date() {
           Modifié il y a{" "}
           {formatDistanceToNow(exchange.updated_at, { locale: fr })}
         </Time>
-      ) : (
-        <></>
-      )}
+      ) : null}
       {exchange.expiry_date ? (
         <Time
           date={exchange.expiry_date}

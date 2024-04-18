@@ -54,7 +54,7 @@ export default function List() {
   }
 }
 
-export function Exchange_byId({
+function Exchange_byId({
   children,
   id,
 }: {
