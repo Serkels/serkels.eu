@@ -17,8 +17,10 @@ export const AsideFilter = forwardRef<HTMLDivElement, Props>(
         ref={forwardedRef}
       >
         <div className={sticky()}>
-          <h3 className={title()}>{Title}</h3>
-          <article className={article()}>{children}</article>
+          <div className="max-h-screen overflow-y-auto pb-28 pr-8">
+            <h3 className={title()}>{Title}</h3>
+            <article className={article()}>{children}</article>
+          </div>
         </div>
       </aside>
     );
