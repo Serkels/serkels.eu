@@ -36,7 +36,7 @@ export function Exchange_Date() {
           Date limite : {format(exchange.expiry_date, "P", { locale: fr })}
         </Time>
       ) : (
-        <></>
+        <time className={expiry_date_variant()}>Date limite : flexible</time>
       )}
     </div>
   );
