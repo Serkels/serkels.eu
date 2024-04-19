@@ -24,7 +24,7 @@
     "@1.modules/trpc": "workspace:*",
     "@typeschema/zod": "0.13.3",
     "@trpc/server": "10.45.2",
-    "zod": "3.22.4"
+    "zod": "3.22.5"
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
