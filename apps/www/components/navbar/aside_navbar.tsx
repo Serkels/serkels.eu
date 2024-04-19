@@ -12,6 +12,7 @@ import {
   Bookmark,
   Envelope,
   Exchange,
+  Exit,
   Gear,
   PlusBox,
 } from "@1.ui/react/icons";
@@ -68,7 +69,7 @@ export function Studient_NavBar({ studient }: { studient: Studient }) {
         <Li_Link icon={<Gear />} href="./parameters">
           Paramètres
         </Li_Link>
-        <Li_Link icon={<Gear />} href="/logout">
+        <Li_Link icon={<Exit />} href="/logout">
           Me déconnecter
         </Li_Link>
       </ul>
@@ -104,7 +105,7 @@ export function Partner_NavBar({ partner }: { partner: Partner }) {
         <Li_Link icon={<Gear />} href="./parameters">
           Paramètres
         </Li_Link>
-        <Li_Link icon={<Gear />} href="/logout">
+        <Li_Link icon={<Exit />} href="/logout">
           Me déconnecter
         </Li_Link>
       </ul>
