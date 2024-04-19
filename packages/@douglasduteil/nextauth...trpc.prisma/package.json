@@ -42,7 +42,7 @@
     "next": "14.2.2",
     "next-auth": "4.24.7",
     "superjson": "2.2.1",
-    "zod": "3.22.4"
+    "zod": "3.22.5"
   },
   "devDependencies": {
     "@douglasduteil/config...typescript": "workspace:*",
