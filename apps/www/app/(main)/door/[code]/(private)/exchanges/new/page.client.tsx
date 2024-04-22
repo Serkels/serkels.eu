@@ -20,15 +20,25 @@ export function Mutate_Exchange({ categories }: { categories: Category[] }) {
   return (
     <Formik
       initialValues={{
-        ...({} as Exchange_Create),
-        return: "",
+        ...({
+          category_id: "",
+          description: "",
+          expiry_date: null,
+          is_online: false,
+          type: Exchange_TypeSchema.Enum.PROPOSAL,
+          places: 1,
+          title: "",
+        } as Exchange_Create),
         category: "",
-        is_online: false,
-        type: Exchange_TypeSchema.Enum.PROPOSAL,
+        return: "",
       }}
       onSubmit={async (values) => {
         await create.mutate({
           ...values,
+          expiry_date:
+            typeof values.expiry_date === "string"
+              ? new Date(values.expiry_date)
+              : null,
           category_id: values.category,
           return_id: values.return,
         });

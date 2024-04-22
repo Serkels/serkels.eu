@@ -88,8 +88,8 @@ export const select = tv({
   w-full
   border
   border-Silver_Chalice
+  bg-white
+  p-2.5
   `,
-  variants: {
-    // px-5 py-2
-  },
+  variants: {},
 });
