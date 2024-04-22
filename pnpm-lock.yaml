@@ -90,8 +90,8 @@ importers:
   apps/e2e:
     dependencies:
       '@badeball/cypress-cucumber-preprocessor':
-        specifier: 20.0.3
-        version: 20.0.3(cypress@13.8.0)(typescript@5.4.5)
+        specifier: 20.0.4
+        version: 20.0.4(cypress@13.8.0)(typescript@5.4.5)
       '@bahmutov/cypress-esbuild-preprocessor':
         specifier: 2.2.0
         version: 2.2.0(esbuild@0.20.2)
@@ -1980,8 +1980,8 @@ packages:
   '@badeball/cypress-configuration@6.1.1':
     resolution: {integrity: sha512-0IcJFMiCRo33Ofrvxxojt5QRJWyxApymHuuy981FeXnOGz4UsWKgr/hRupeXkw2cKXvah+j+880kXliygxPOSQ==}
 
-  '@badeball/cypress-cucumber-preprocessor@20.0.3':
-    resolution: {integrity: sha512-cc7rYEFEVRAZ13LQ2WEnG84VJNO+ErpNsNBP/5eP2JC+2v8WvcVgm8fcqKLOiNgyEWaRuiT+MkU3DXKbBbFVSg==}
+  '@badeball/cypress-cucumber-preprocessor@20.0.4':
+    resolution: {integrity: sha512-1izlopsaJLPVjPN4XV3WhviZOgwXleVMsiTuDYHbJq3QiTUdHUzbticy8cMxtUTKa2dKZZSJTzZIGcXP5wEuag==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     peerDependencies:
@@ -8902,7 +8902,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@badeball/cypress-cucumber-preprocessor@20.0.3(cypress@13.8.0)(typescript@5.4.5)':
+  '@badeball/cypress-cucumber-preprocessor@20.0.4(cypress@13.8.0)(typescript@5.4.5)':
     dependencies:
       '@badeball/cypress-configuration': 6.1.1
       '@cucumber/ci-environment': 10.0.1
@@ -16829,7 +16829,7 @@ snapshots:
       require-directory: 2.1.1
       string-width: 4.2.3
       y18n: 5.0.8
-      yargs-parser: 20.2.4
+      yargs-parser: 20.2.9
 
   yauzl@2.10.0:
     dependencies:
