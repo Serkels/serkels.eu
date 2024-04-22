@@ -55,7 +55,7 @@ export function Opoortunity_Card({
 
         <hr />
 
-        <footer className="flex cursor-default justify-between p-3">
+        <footer className="flex cursor-default items-center justify-between p-3">
           <aside
             className={opoortunity_category({ className: "text-xs" })}
             title={category.name}

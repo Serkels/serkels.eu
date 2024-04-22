@@ -89,6 +89,7 @@ export function Item({ opportunity }: { opportunity: Opportunity }) {
           <div className="flex" onClick={preventNProgressLoader}>
             {is_studient ? (
               <BookmarkItem_Query
+                className="px-0"
                 target_id={id}
                 type="opportunity"
                 // className="text-Dove_Gray"
