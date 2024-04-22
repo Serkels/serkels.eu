@@ -5,7 +5,7 @@ import { card } from "@1.ui/react/card/atom";
 import type { UseQueryResult } from "@tanstack/react-query";
 import ContentLoader from "react-content-loader";
 import { P, match } from "ts-pattern";
-import { Exchange_ValueProvider } from "./context";
+import { Provider as Exchange_ValueProvider } from "./context";
 
 //
 
@@ -22,7 +22,7 @@ export function Exchange_AsyncCard({
     })
     .with({ status: "loading" }, () => <Loader />)
     .with({ status: "success", data: P.select() }, (exchange) => (
-      <Exchange_ValueProvider initialValue={exchange}>
+      <Exchange_ValueProvider exchange={exchange}>
         {children({ exchange })}
       </Exchange_ValueProvider>
     ))

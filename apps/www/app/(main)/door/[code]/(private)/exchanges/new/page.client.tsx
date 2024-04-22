@@ -22,11 +22,16 @@ export function Mutate_Exchange({ categories }: { categories: Category[] }) {
       initialValues={{
         ...({} as Exchange_Create),
         return: "",
+        category: "",
         is_online: false,
         type: Exchange_TypeSchema.Enum.PROPOSAL,
       }}
       onSubmit={async (values) => {
-        await create.mutate(values);
+        await create.mutate({
+          ...values,
+          category_id: values.category,
+          return_id: values.return,
+        });
 
         await utils.exchanges.find.invalidate();
 

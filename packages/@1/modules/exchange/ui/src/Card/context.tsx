@@ -3,7 +3,6 @@
 import type { Exchange } from "@1.modules/exchange.domain";
 import constate from "constate";
 import { useState } from "react";
-import { createStateContext } from "react-use";
 
 //
 
@@ -14,17 +13,21 @@ type Outlet_State =
   | { state: "loading" }
   | { state: "should_delete" };
 
-function useCardContext({ exchange }: { exchange: Exchange }) {
+function useCardContext({
+  exchange,
+  is_yours,
+}: {
+  exchange: Exchange;
+  is_yours?: boolean | undefined;
+}) {
   const outlet = useState<Outlet_State>({ state: "idle" });
-  return { outlet, exchange };
+  return { outlet, exchange, is_yours: is_yours ?? false };
 }
 
-export const [Provider, useExchange, useOutletState] = constate(
-  useCardContext,
-  ({ exchange }) => exchange,
-  ({ outlet }) => outlet,
-);
-
-export const [useExchange_Value, Exchange_ValueProvider] = createStateContext(
-  {} as Exchange,
-);
+export const [Provider, useExchange, useOutletState, useExchangeMeta] =
+  constate(
+    useCardContext,
+    ({ exchange }) => exchange,
+    ({ outlet }) => outlet,
+    ({ is_yours }) => ({ is_yours }),
+  );
