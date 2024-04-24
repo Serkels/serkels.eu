@@ -34,7 +34,7 @@
     "@react-hookz/web": "24.0.4",
     "@tanstack/react-query": "4.36.1",
     "constate": "3.3.2",
-    "formik": "2.4.5",
+    "formik": "2.4.6",
     "react": "18.2.0",
     "react-content-loader": "7.0.0",
     "react-slotify": "0.2.2",

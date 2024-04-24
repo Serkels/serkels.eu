@@ -9,7 +9,7 @@
     "@1/ui": "workspace:@0.__legacy__/ui@*",
     "@tanstack/react-query": "4.36.1",
     "clsx": "2.1.1",
-    "formik": "2.4.5",
+    "formik": "2.4.6",
     "next": "14.2.3",
     "next-auth": "4.24.7",
     "react": "18.2.0"

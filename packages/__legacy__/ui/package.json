@@ -8,7 +8,7 @@
   "dependencies": {
     "@react-types/button": "3.9.2",
     "clsx": "2.1.1",
-    "formik": "2.4.5",
+    "formik": "2.4.6",
     "framer-motion": "11.1.7",
     "react": "18.2.0",
     "react-aria": "3.32.1",
