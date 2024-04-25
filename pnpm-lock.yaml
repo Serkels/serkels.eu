@@ -860,8 +860,8 @@ importers:
         specifier: 5.1.1
         version: 5.1.1
       xstate:
-        specifier: 5.11.0
-        version: 5.11.0
+        specifier: 5.12.0
+        version: 5.12.0
       zod:
         specifier: 3.22.5
         version: 3.22.5
@@ -894,8 +894,8 @@ importers:
         specifier: 5.1.1
         version: 5.1.1
       xstate:
-        specifier: 5.11.0
-        version: 5.11.0
+        specifier: 5.12.0
+        version: 5.12.0
       zod:
         specifier: 3.22.5
         version: 3.22.5
@@ -8777,8 +8777,8 @@ packages:
     resolution: {integrity: sha512-QKxVRxiRACQcVuQEYFsI1hhkrMlrXHPegbbd1yn9UHOmRxY+si12nQYzri3vbzt8VdTTRviqcKxcyllFas5z2A==}
     engines: {node: '>=0.4.0'}
 
-  xstate@5.11.0:
-    resolution: {integrity: sha512-0MqTLpc7dr/hXFHY25oN4sdnO3Ey6MYy9WkWxOgiwjPV0S6rWwLb5nZlRlPDSku2GEV4/y6AR8bX+GNCOxnEwA==}
+  xstate@5.12.0:
+    resolution: {integrity: sha512-4W/Hj553mwVnTLQ1itc3rni/cGtM5OkjyavTjaxCelc0ZZKE/ks6tYllc98KbekIoUrEPm4CJH/wTB5p5pPGEw==}
 
   y18n@5.0.8:
     resolution: {integrity: sha512-0pfFzegeDWJHJIAmTLRP2DwHjdF5s7jo9tuztdQxAhINCdvS+3nGINqPd00AphqJR/0LhANUS6/+7SCb98YOfA==}
@@ -16808,7 +16808,7 @@ snapshots:
 
   xmlhttprequest-ssl@2.0.0: {}
 
-  xstate@5.11.0: {}
+  xstate@5.12.0: {}
 
   y18n@5.0.8: {}
 
