@@ -24,7 +24,7 @@
     "@1.modules/category.domain": "workspace:*",
     "@1.ui/react": "workspace:*",
     "@tanstack/react-query": "4.36.1",
-    "formik": "2.4.5",
+    "formik": "2.4.6",
     "react": "18.2.0",
     "react-content-loader": "7.0.0",
     "tailwind-variants": "0.2.1",
