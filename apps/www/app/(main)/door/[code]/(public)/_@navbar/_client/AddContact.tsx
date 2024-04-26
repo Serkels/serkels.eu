@@ -8,14 +8,14 @@ import { P, match } from "ts-pattern";
 
 //
 export default function AddContact({ profile_id }: { profile_id: string }) {
-  const find_contact = TRPC_React.profile.me.find_contact.useQuery(profile_id);
-  const toggle_contact = TRPC_React.profile.me.toggle_contact.useMutation();
+  const find_contact = TRPC_React.profile.me.contact.find.useQuery(profile_id);
+  const toggle_contact = TRPC_React.profile.me.contact.toggle.useMutation();
   const utils = TRPC_React.useUtils();
 
   const toggle_add_contact = useCallback(async () => {
     await toggle_contact.mutateAsync(profile_id);
     await Promise.all([
-      utils.profile.me.find_contact.invalidate(profile_id),
+      utils.profile.me.contact.find.invalidate(profile_id),
       utils.profile.me.contacts.invalidate({}),
     ]);
     toggle_contact.reset();

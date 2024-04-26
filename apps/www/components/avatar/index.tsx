@@ -32,8 +32,9 @@ export function ProfileAvatarMedia(
 
   return (
     <AvatarMedia
-      image={profile.image}
+      className="items-center"
       id={profile.id}
+      image={profile.image}
       name={profile.name}
       {...other_props}
     />

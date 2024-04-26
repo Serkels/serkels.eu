@@ -42,10 +42,7 @@ export default async function Page({ params }: { params: CodeParms }) {
         {avatar}
 
         <div className="flex flex-row space-x-5">
-          <div className="flex flex-col items-center">
-            <div>{profile.followed_by.length}</div> Abonnés
-          </div>
-
+          <FollowerCount profile_id={profile_id} />
           {profile.role === PROFILE_ROLES.Enum.STUDIENT ? (
             <ContactsCount profile_id={profile_id} />
           ) : null}
@@ -56,6 +53,23 @@ export default async function Page({ params }: { params: CodeParms }) {
     console.error(error);
     notFound();
   }
+}
+
+async function FollowerCount({ profile_id }: { profile_id: string }) {
+  const session = await getServerSession();
+  const profile = await TRPC_SSR.profile.by_id.fetch(profile_id);
+
+  if (session?.profile.id === profile_id)
+    return (
+      <Link href="/@~/following" className="flex flex-col items-center">
+        <div>{profile.contacts.length}</div> Abonnés
+      </Link>
+    );
+  return (
+    <div className="flex flex-col items-center">
+      <div>{profile.followed_by.length}</div> Abonnés
+    </div>
+  );
 }
 
 async function ContactsCount({ profile_id }: { profile_id: string }) {
