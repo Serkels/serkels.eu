@@ -1,6 +1,6 @@
 "use client";
 
-import { SeeProfileAvatarMedia } from ":components/avatar";
+import { ProfileAvatarMedia } from ":components/avatar";
 import { TRPC_React } from ":trpc/client";
 import type { Inbox, Message } from "@1.modules/inbox.domain";
 import { thread_recipient } from "@1.modules/inbox.domain/select";
@@ -57,16 +57,14 @@ function UserThread_Item({ thread_id }: { thread_id: string }) {
         });
 
         return (
-          <Thread_Item last_update={last_message.updated_at}>
-            <Thread_Item.Avatar>
-              <SeeProfileAvatarMedia profile={participant} />
-            </Thread_Item.Avatar>
-            <Thread_Item.Body>
-              <Link href={`/@~/inbox/${thread.id}`}>
-                {last_message.content}
-              </Link>
-            </Thread_Item.Body>
-          </Thread_Item>
+          <Link href={`/@~/inbox/${thread.id}`}>
+            <Thread_Item last_update={last_message.updated_at}>
+              <Thread_Item.Avatar>
+                <ProfileAvatarMedia profile={participant} />
+              </Thread_Item.Avatar>
+              <Thread_Item.Body>{last_message.content}</Thread_Item.Body>
+            </Thread_Item>
+          </Link>
         );
       }}
     </Thread_AsyncItem>

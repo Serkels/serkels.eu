@@ -24,3 +24,18 @@ export function SeeProfileAvatarMedia(
     </AvatarMedia>
   );
 }
+
+export function ProfileAvatarMedia(
+  props: AvatarMediaProps & { profile: Pick<Profile, "image" | "id" | "name"> },
+) {
+  const { profile, ...other_props } = props;
+
+  return (
+    <AvatarMedia
+      image={profile.image}
+      id={profile.id}
+      name={profile.name}
+      {...other_props}
+    />
+  );
+}
