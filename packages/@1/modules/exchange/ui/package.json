@@ -37,7 +37,7 @@
     "react-content-loader": "7.0.0",
     "react-slotify": "0.2.2",
     "react-use": "17.5.0",
-    "react": "18.3.0",
+    "react": "18.3.1",
     "tailwind-variants": "0.2.1",
     "ts-pattern": "5.1.1",
     "zod": "3.22.5"
@@ -47,7 +47,7 @@
     "@1.config/tailwindcss": "workspace:*",
     "@1.config/typescript": "workspace:*",
     "@types/react": "18.3.0",
-    "react-dom": "18.3.0",
+    "react-dom": "18.3.1",
     "prettier": "3.2.5",
     "tailwindcss": "3.4.3",
     "typescript": "5.4.5"
