@@ -15,15 +15,15 @@ export default function Conversation_Form({
   thread_id: string;
 }) {
   const { mutateAsync } = TRPC_React.inbox.thread.send.useMutation();
-  const utils = TRPC_React.useUtils();
+  // const utils = TRPC_React.useUtils();
   const send_message = useCallback(
     async (content: string) => {
       await mutateAsync({ content, thread_id });
 
       await Promise.all([
-        utils.inbox.by_thread_id.invalidate(thread_id),
-        utils.inbox.find.invalidate(),
-        utils.inbox.thread.messages.invalidate({ thread_id }),
+        // utils.inbox.by_thread_id.invalidate(thread_id),
+        // utils.inbox.find.invalidate(),
+        // utils.inbox.thread.messages.invalidate({ thread_id }),
       ]);
     },
     [mutateAsync, thread_id],

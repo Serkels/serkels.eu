@@ -22,7 +22,8 @@
     "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
-    "@prisma/client": "5.13.0"
+    "@prisma/client": "5.13.0",
+    "@1.modules/notification.domain": "workspace:*"
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",

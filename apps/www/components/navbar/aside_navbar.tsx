@@ -17,7 +17,9 @@ import {
   PlusBox,
 } from "@1.ui/react/icons";
 import { tv } from "tailwind-variants";
-import { Li_Link, SubNav_Bookmarks } from "./aside_navbar.client";
+import { SubNav_Bookmarks } from "./SubNav_Bookmarks";
+import { Li_Link } from "./aside_navbar.client";
+import { NewMessage_Indicator } from "./notification_indicator.client";
 
 //
 
@@ -57,7 +59,7 @@ export function Studient_NavBar({ studient }: { studient: Studient }) {
           </Li_Link>
         </SubNav_Bookmarks>
         <Li_Link icon={<Envelope />} href="./inbox">
-          Messagerie
+          Messagerie <NewMessage_Indicator />
         </Li_Link>
         <Li_Link
           icon={<Avatar className="h-6" profile={studient.profile} />}

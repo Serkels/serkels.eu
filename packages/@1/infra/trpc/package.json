@@ -2,6 +2,7 @@
   "name": "@1.infra/trpc",
   "version": "0.1.0",
   "private": true,
+  "keywords": [],
   "sideEffects": false,
   "type": "module",
   "main": "src/index.ts",
@@ -9,7 +10,6 @@
   "scripts": {
     "type-check": "tsc --build"
   },
-  "keywords": [],
   "dependencies": {
     "@1.modules/auth.api": "workspace:*",
     "@1.modules/bookmark.api": "workspace:*",
@@ -17,6 +17,7 @@
     "@1.modules/exchange.api": "workspace:*",
     "@1.modules/forum.api": "workspace:*",
     "@1.modules/inbox.api": "workspace:*",
+    "@1.modules/notification.api": "workspace:*",
     "@1.modules/opportunity.api": "workspace:*",
     "@1.modules/profile.api": "workspace:*",
     "@1.modules/trpc": "workspace:*",

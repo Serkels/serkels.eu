@@ -23,7 +23,7 @@ export function Timeline({
   profile_id: string;
   query_info: UseInfiniteQueryResult<{ data: Message_Type }, unknown>;
 }>) {
-  const { data, isFetchingNextPage, hasPreviousPage, fetchPreviousPage } =
+  const { data, isFetchingPreviousPage, hasPreviousPage, fetchPreviousPage } =
     query_info;
 
   if (!data) return null;
@@ -61,8 +61,8 @@ export function Timeline({
 
   return (
     <>
-      {match({ isFetchingNextPage, hasPreviousPage })
-        .with({ isFetchingNextPage: true }, () => <Spinner />)
+      {match({ isFetchingPreviousPage, hasPreviousPage })
+        .with({ isFetchingPreviousPage: true }, () => <Spinner />)
         .with({ hasPreviousPage: true }, () => (
           <LoadMore onClick={fetchPreviousPage} />
         ))

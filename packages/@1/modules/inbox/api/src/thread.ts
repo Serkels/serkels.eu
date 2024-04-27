@@ -1,5 +1,7 @@
+import { thread_recipient } from "@1.modules/inbox.domain/select";
 import { next_auth_procedure, router } from "@1.modules/trpc";
 import { next_auth_input_token } from "@1.modules/trpc/src/trpc";
+import { NotificationType } from "@prisma/client";
 import { observable } from "@trpc/server/observable";
 import { EventEmitter } from "events";
 import { z } from "zod";
@@ -92,21 +94,35 @@ export const thread = router({
       }),
     )
     .mutation(async ({ ctx: { payload, prisma }, input }) => {
-      const { profile } = payload;
+      const {
+        profile: { id: profile_id },
+      } = payload;
       const { content, thread_id } = input;
 
       // guard : Only write on participating threads
-      await prisma.thread.findUniqueOrThrow({
-        where: { id: thread_id, participants: { some: { id: profile.id } } },
+      const { participants } = await prisma.thread.findUniqueOrThrow({
+        select: { participants: { select: { id: true } } },
+        where: { id: thread_id, participants: { some: { id: profile_id } } },
       });
+      const recipient = thread_recipient({ participants, profile_id });
 
-      const thread = await prisma.thread.update({
+      const updated_thread = await prisma.thread.update({
         data: {
           updated_at: new Date(),
           messages: {
             create: {
+              author: { connect: { id: profile_id } },
               content,
-              author: { connect: { id: profile.id } },
+              notifications: {
+                create: {
+                  notification: {
+                    create: {
+                      owner_id: recipient.id,
+                      type: NotificationType.INBOX_NEW_MESSAGE,
+                    },
+                  },
+                },
+              },
             },
           },
         },
@@ -114,6 +130,6 @@ export const thread = router({
       });
 
       message_event_emitter.emit(`${thread_id}>new_message`);
-      return thread;
+      return updated_thread;
     }),
 });

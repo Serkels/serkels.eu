@@ -15,7 +15,7 @@ export interface Params {
 /**
  *
  * @param param0
- * @deprecated
+ * @deprecated use import { thread_recipient } from "@1.modules/inbox.domain/select";
  */
 export function thread_recipient({
   participants,

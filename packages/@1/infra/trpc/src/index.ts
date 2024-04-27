@@ -6,6 +6,7 @@ import category_api_router from "@1.modules/category.api";
 import exchange_api_router from "@1.modules/exchange.api";
 import forum_api_router from "@1.modules/forum.api";
 import inbox_api_router from "@1.modules/inbox.api";
+import notification_api_router from "@1.modules/notification.api";
 import opportunity_api_router from "@1.modules/opportunity.api";
 import profile_api_router from "@1.modules/profile.api";
 import { partner_api_router } from "@1.modules/profile.api/partner";
@@ -28,6 +29,7 @@ export const root_router = router({
   partner: partner_api_router,
   profile: profile_api_router,
   studient: studient_api_router,
+  notification: notification_api_router,
 
   //
   //

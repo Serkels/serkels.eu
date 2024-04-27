@@ -7,6 +7,7 @@ import { item as styles } from "@1.modules/exchange.ui/aside/Item";
 import { PROFILE_UNKNOWN } from "@1.modules/profile.domain";
 import { Avatar } from "@1.modules/profile.ui";
 import { EmptyList, flatten_pages_are_empty } from "@1.ui/react/async";
+import { badge } from "@1.ui/react/badge/atom";
 import { Button } from "@1.ui/react/button";
 import {
   Circle,
@@ -18,7 +19,6 @@ import { fr } from "date-fns/locale";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useParams, useSearchParams } from "next/navigation";
-import { tv } from "tailwind-variants";
 import { P, match } from "ts-pattern";
 import { z } from "zod";
 
@@ -183,9 +183,3 @@ function Item({
     </Link>
   );
 }
-
-const badge = tv({
-  base: "inline-block rounded-full bg-gray-500 px-2 text-white",
-  variants: { color: { primary: "bg-primary", disabled: "bg-gray-500" } },
-  defaultVariants: { color: "disabled" },
-});

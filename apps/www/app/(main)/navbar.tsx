@@ -1,6 +1,7 @@
 //
 
 import { MenuBurger } from ":components/burger";
+import { Notification_DotIndicator } from ":components/navbar/notification_indicator.client";
 import { MobileNavBar } from ":components/shell/MobileNavBar";
 import { getServerSession } from "@1.modules/auth.next";
 import { PROFILE_ROLES } from "@1.modules/profile.domain";
@@ -99,10 +100,11 @@ async function UserNavGroup({ className }: ComponentPropsWithoutRef<"nav">) {
     ))
     .with(PROFILE_ROLES.Enum.STUDIENT, () => (
       <nav className={base({ className })}>
-        {/* <Link href={`#`} className="flex"> */}
-        <VisuallyHidden>Notifications</VisuallyHidden>
-        <Bell className={icon()} />
-        {/* </Link> */}
+        <Link href={`/@~/notifications`} className="relative flex">
+          <VisuallyHidden>Notifications</VisuallyHidden>
+          <Bell className={icon()} />
+          <Notification_DotIndicator />
+        </Link>
         <Link href={`/@~/inbox`} className="flex">
           <VisuallyHidden>Messages</VisuallyHidden>
           <Messenger className={icon()} />

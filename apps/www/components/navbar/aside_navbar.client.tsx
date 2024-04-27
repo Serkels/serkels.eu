@@ -1,28 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import {
-  useCallback,
-  type ComponentPropsWithoutRef,
-  type PropsWithChildren,
-  type ReactNode,
-} from "react";
+import { type ComponentPropsWithoutRef, type ReactNode } from "react";
 import { tv } from "tailwind-variants";
-
-//
-
-export function useIsActive({ root } = { root: "" }) {
-  const pathname = usePathname();
-  return useCallback(
-    function is_active_test(href: string) {
-      const target_href = String(href).replace("./", root);
-      const rest_pathname = pathname.replace(target_href, "");
-      return rest_pathname !== pathname;
-    },
-    [pathname, root],
-  );
-}
+import { useIsActive } from "./useIsActive";
 
 export function Li_Link(
   props: ComponentPropsWithoutRef<"a"> & {
@@ -76,19 +57,3 @@ const li = tv({
     },
   },
 });
-
-//
-
-export function SubNav_Bookmarks({
-  href,
-  children,
-}: PropsWithChildren<{ href: string }>) {
-  const profile_id = "~";
-  const is_activee = useIsActive({ root: `/@${profile_id}/` });
-
-  if (!is_activee(href)) {
-    return null;
-  }
-
-  return <ul className=" text-base [&>li]:px-9 [&>li]:py-0">{children}</ul>;
-}

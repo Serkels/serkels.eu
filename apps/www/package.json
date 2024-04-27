@@ -6,8 +6,8 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
-    "type-check": "tsc --build",
-    "start": "next start"
+    "start": "next start",
+    "type-check": "tsc --build"
   },
   "dependencies": {
     "@1.modules/auth.next": "workspace:*",
@@ -21,6 +21,8 @@
     "@1.modules/forum.ui": "workspace:*",
     "@1.modules/inbox.domain": "workspace:*",
     "@1.modules/inbox.ui": "workspace:*",
+    "@1.modules/notification.domain": "workspace:*",
+    "@1.modules/notification.ui": "workspace:*",
     "@1.modules/opportunity.domain": "workspace:*",
     "@1.modules/opportunity.ui": "workspace:*",
     "@1.modules/profile.domain": "workspace:*",

@@ -18,9 +18,9 @@ export function get_csrf_token(authOptions = {} as AuthOptions) {
       authOptions.useSecureCookies ?? url.protocol.startsWith("https:"),
     ),
     // Allow user cookie options to override any cookie settings above
-    ...(authOptions.cookies ?? {}),
+    ...authOptions.cookies,
   };
-  console.log({ csrfToken: next_auth_cookies.csrfToken, url });
+  // console.log({ csrfToken: next_auth_cookies.csrfToken, url });
   const token = cookieStore.get(next_auth_cookies.csrfToken.name);
   const csrfToken = token?.value.split("|")[0];
 

@@ -39,7 +39,7 @@ export default async function Page() {
       <nav
         className="
           my-8
-          min-h-0
+          max-h-[calc(100vh_-_theme(spacing.16)-_theme(spacing.8))]
           flex-1
           overflow-y-auto
         "

@@ -9,7 +9,7 @@ export function thread_recipient({
   profile_id,
 }: {
   participants: Pick<Profile, "id">[];
-  profile_id: String;
+  profile_id: string;
 }) {
   const participant =
     participants.filter(({ id }) => id !== profile_id).pop() ?? PROFILE_UNKNOWN;

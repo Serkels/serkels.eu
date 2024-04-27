@@ -1,13 +1,13 @@
 "use client";
 
+import { Loading_Placeholder } from ":components/placeholder/Loading_Placeholder";
 import { TRPC_React } from ":trpc/client";
 import type { Message } from "@1.modules/inbox.domain";
 import { Timeline } from "@1.modules/inbox.ui/conversation/Timeline";
-import { Spinner } from "@1.ui/react/spinner";
 import type { UseInfiniteQueryResult } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
-import { useLayoutEffect, useRef } from "react";
+import { useCallback, useLayoutEffect, useRef } from "react";
 import { P, match } from "ts-pattern";
 import { z } from "zod";
 
@@ -18,7 +18,9 @@ export default function Infinite_Thread_Timeline({
 }: {
   profile_id: string;
 }) {
+  const utils = TRPC_React.useUtils();
   const scroll_target_ref = useRef<HTMLDivElement>(null);
+
   const params = z
     .object({ thread_id: z.string() })
     .parse(useParams(), { path: ["useParams()"] });
@@ -34,18 +36,30 @@ export default function Infinite_Thread_Timeline({
     },
   ) as UseInfiniteQueryResult<{ data: Message }>;
 
+  const thread_seen = useCallback(async () => {
+    // await thread_update.mutateAsync({ thread_id });
+    await utils.inbox.find.refetch();
+    await utils.inbox.by_thread_id.invalidate(thread_id);
+    await utils.inbox.thread.by_id.invalidate(thread_id);
+    await utils.notification.invalidate();
+  }, [thread_update, utils]);
+
+  useLayoutEffect(() => {
+    thread_update.mutate({ thread_id });
+  }, [scroll_target_ref]);
+
   useLayoutEffect(() => {
     if (!scroll_target_ref.current) {
       return;
     }
-    thread_update.mutate({ thread_id });
+
+    thread_seen();
     scroll_target_ref.current.scrollIntoView({
       behavior: "smooth",
       block: "end",
     });
   }, [query_info.isFetching, scroll_target_ref]);
 
-  const utils = TRPC_React.useUtils();
   const { data: session, status } = useSession();
 
   TRPC_React.inbox.thread.on_new_message.useSubscription(
@@ -71,7 +85,7 @@ export default function Infinite_Thread_Timeline({
       throw error;
     })
     .with({ status: "loading" }, () => {
-      return <Spinner />;
+      return <Loading_Placeholder />;
     })
     .with({ status: "success" }, () => (
       <>

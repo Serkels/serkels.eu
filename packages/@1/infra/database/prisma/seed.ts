@@ -13,7 +13,7 @@ import {
   type Deal,
   type Exchange,
 } from "@prisma/client";
-import { isPast } from "date-fns";
+import { isAfter, isPast } from "date-fns";
 import dedent from "dedent";
 import process from "node:process";
 import slugify from "slugify";
@@ -22,14 +22,17 @@ import prisma from "../index";
 async function main() {
   await prisma.$transaction([
     prisma.user.deleteMany(),
+    //
     prisma.account.deleteMany(),
     prisma.bookmark.deleteMany(),
     prisma.category.deleteMany(),
     prisma.deal.deleteMany(),
     prisma.exchange.deleteMany(),
     prisma.exchangeThread.deleteMany(),
+    prisma.inboxMessageNotification.deleteMany(),
     prisma.inboxThread.deleteMany(),
     prisma.message.deleteMany(),
+    prisma.notification.deleteMany(),
     prisma.opportunity.deleteMany(),
     prisma.partner.deleteMany(),
     prisma.profile.deleteMany(),
@@ -37,6 +40,7 @@ async function main() {
     prisma.signupPayload.deleteMany(),
     prisma.studient.deleteMany(),
     prisma.thread.deleteMany(),
+    prisma.user.deleteMany(),
   ]);
   console.log("🗑️");
 
@@ -573,12 +577,19 @@ async function studients_messages() {
       where: { id: studient.profile_id },
     });
 
+    const last_seen_date = faker.date.recent();
+    const created_at = faker.date.past({
+      refDate: last_seen_date,
+    });
     await Promise.all(
       contacts.map(async (recipient_studient) => {
-        await prisma.thread.create({
+        const thread = await prisma.thread.create({
           data: {
-            created_at: faker.date.past(),
-            updated_at: faker.date.recent({ days: 66 }),
+            created_at: created_at,
+            updated_at: faker.date.recent({
+              days: 30,
+              refDate: created_at,
+            }),
             participants: {
               connect: [
                 { id: studient.profile_id },
@@ -588,34 +599,154 @@ async function studients_messages() {
             inbox_threads: {
               createMany: {
                 data: [
-                  { owner_id: studient.id },
-                  { owner_id: recipient_studient.id },
+                  {
+                    owner_id: studient.id,
+                    last_seen_date: faker.date.between({
+                      from: created_at,
+                      to: last_seen_date,
+                    }),
+                  },
+                  {
+                    owner_id: recipient_studient.id,
+                    last_seen_date: faker.date.between({
+                      from: created_at,
+                      to: last_seen_date,
+                    }),
+                  },
                 ],
               },
             },
             messages: {
               createMany: {
                 data: faker.helpers.multiple(
-                  () => ({
-                    author_id: faker.helpers.arrayElement([
-                      { id: studient.profile_id },
-                      { id: recipient_studient.profile_id },
-                    ]).id,
-                    content: faker.lorem.sentences(),
-                    created_at: faker.helpers.weightedArrayElement([
-                      { value: faker.date.past(), weight: 1 },
-                      {
-                        value: faker.date.recent({ days: 66 }),
-                        weight: 5,
-                      },
-                    ]),
-                  }),
+                  () => {
+                    const message_created_at = faker.date.between({
+                      from: created_at,
+                      to: last_seen_date,
+                    });
+                    return {
+                      author_id: faker.helpers.arrayElement([
+                        { id: studient.profile_id },
+                        { id: recipient_studient.profile_id },
+                      ]).id,
+                      content: faker.lorem.sentences(),
+                      created_at: message_created_at,
+                      updated_at: faker.date.between({
+                        from: message_created_at,
+                        to: last_seen_date,
+                      }),
+                    };
+                  },
                   { count: { min: 1, max: 11 } },
                 ),
               },
             },
           },
+          select: {
+            id: true,
+            messages: {
+              select: {
+                id: true,
+                author: { select: { id: true } },
+                created_at: true,
+                thread: {
+                  select: {
+                    inbox_threads: {
+                      select: { last_seen_date: true },
+                      where: { owner_id: studient.id },
+                      take: 1,
+                    },
+                  },
+                },
+              },
+            },
+          },
         });
+
+        const message = thread.messages.at(0);
+        if (!message) {
+          return;
+        }
+        {
+          const {
+            author,
+            created_at,
+            id: message_id,
+            thread: { inbox_threads },
+          } = message;
+          const last_seen_date = inbox_threads.at(0)?.last_seen_date;
+          await prisma.inboxMessageNotification.create({
+            data: {
+              message: { connect: { id: message_id } },
+              notification: {
+                create: {
+                  type: "INBOX_NEW_MESSAGE",
+                  created_at,
+                  read_at: last_seen_date
+                    ? isAfter(last_seen_date, created_at)
+                      ? last_seen_date
+                      : null
+                    : null,
+                  owner_id:
+                    author.id === studient.profile_id
+                      ? recipient_studient.profile_id
+                      : studient.profile_id,
+                },
+                // create: { type: "INBOX_NEW_MESSAGE", context: {}, created_at },
+              },
+            },
+          });
+        }
+        // await prisma.inboxMessageNotification.createMany({
+        //   data: thread.messages.flatMap(
+        //     ({
+        //       author,
+        //       created_at,
+        //       id: message_id,
+        //       thread: { inbox_threads },
+        //     }) =>
+        //       author.id === studient.id
+        //         ? [
+        //             {
+        //               //message_id,
+
+        //               notification: {create: {}}
+        //               // context: {
+        //               //   sender_id: recipient_studient.profile_id,
+        //               //   thread_id: thread.id,
+        //               // } satisfies Inbox_New_Message,
+        //               // created_at,
+        //               // read_at:
+        //               //   faker.helpers.maybe(() =>
+        //               //     faker.date.recent({
+        //               //       refDate: inbox_threads.at(0)!.last_seen_date,
+        //               //     }),
+        //               //   ) ?? null,
+        //               // owner_id: recipient_studient.profile_id,
+        //               // type: NotificationType.INBOX_NEW_MESSAGE,
+        //             } satisfies Prisma.InboxMessageNotificationCreateInput,
+        //           ]
+        //         : [
+        //             {
+        //               message_id,
+        //               // context: {
+        //               //   sender_id: studient.profile_id,
+        //               //   thread_id: thread.id,
+        //               // } satisfies Inbox_New_Message,
+        //               // created_at,
+        //               // read_at:
+        //               //   faker.helpers.maybe(() =>
+        //               //     faker.date.recent({
+        //               //       refDate: inbox_threads.at(0)!.last_seen_date,
+        //               //     }),
+        //               //   ) ?? null,
+
+        //               // owner_id: studient.profile_id,
+        //               // type: NotificationType.INBOX_NEW_MESSAGE,
+        //             } satisfies Prisma.InboxMessageNotificationCreateInput,
+        //           ],
+        //   ),
+        // });
       }),
     );
   }

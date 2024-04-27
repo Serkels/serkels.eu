@@ -175,7 +175,6 @@ const update = next_auth_procedure
 const report = next_auth_procedure
   .input(create_report)
   .mutation(({ ctx, input }) => {
-    console.log({ input });
     const { attachments, email, link, comment, category } = input;
     const text = `
   # ${email} signal ${category}

@@ -9,12 +9,14 @@ import { tv, type VariantProps } from "tailwind-variants";
 //
 
 interface Thread_Item_Props extends PropsWithChildren {
+  last_seen_date?: Date | undefined;
   last_update: Date;
   variants?: VariantProps<typeof thread_item>;
 }
 
 export function Thread_Item({
   children,
+  last_seen_date,
   last_update,
   variants,
 }: Thread_Item_Props) {
@@ -30,7 +32,10 @@ export function Thread_Item({
           <time
             className={time()}
             dateTime={last_update.toUTCString()}
-            title={last_update.toUTCString()}
+            title={`
+            last update ~ ${last_update.toUTCString()}
+            ${last_seen_date ? `last seen ~  ${last_seen_date.toUTCString()}` : ""}
+            `}
           >
             {format(last_update, "E p", { locale: fr })}
           </time>

@@ -9,32 +9,65 @@ import { Thread_AsyncItem } from "@1.modules/inbox.ui/thread/Thread_AsyncItem";
 import { Thread_Item } from "@1.modules/inbox.ui/thread/Thread_Item";
 import { PROFILE_UNKNOWN } from "@1.modules/profile.domain";
 import { Circle } from "@1.ui/react/icons";
+import { Frame } from "@1.ui/react/motion/Frame";
 import type { UseQueryResult } from "@tanstack/react-query";
 import { isAfter } from "date-fns";
+import { m, type Transition, type Variants } from "framer-motion";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
+import type { PropsWithChildren } from "react";
 import { tv } from "tailwind-variants";
 
 //
 
-export default function Infinite_Thread_List() {
+export default function List_Outlet() {
+  return (
+    <Frame>
+      <Infinite_Thread_List />
+    </Frame>
+  );
+}
+function Infinite_Thread_List() {
   const search_params = useSearchParams();
   const search = search_params.get("q") ?? undefined;
   const query_info = TRPC_React.inbox.find.useInfiniteQuery(
     { search },
     { getNextPageParam: ({ next_cursor }) => next_cursor },
   );
+
   return (
     <Thread_InfiniteList info={query_info}>
-      {({ id, thread }) => {
-        return (
-          <li key={id}>
-            <UserThread_Item thread_id={thread.id} />
-          </li>
-        );
-      }}
+      {({ id, thread }) => (
+        <MotionOutlet key={id}>
+          <UserThread_Item thread_id={thread.id} />
+        </MotionOutlet>
+      )}
     </Thread_InfiniteList>
+  );
+}
+const spring: Transition = {
+  type: "spring",
+};
+const variants: Variants = {
+  enter: { y: -33, opacity: 0 },
+  center: { zIndex: 1, y: 0, opacity: 1 },
+  exit: { zIndex: 0, y: -33, opacity: 0 },
+};
+
+function MotionOutlet({ children, key }: PropsWithChildren<{ key: string }>) {
+  return (
+    <m.li
+      animate="center"
+      exit="exit"
+      initial="enter"
+      key={key}
+      layout
+      transition={spring}
+      variants={variants}
+    >
+      {children}
+    </m.li>
   );
 }
 
@@ -65,13 +98,16 @@ function UserThread_Item({ thread_id }: { thread_id: string }) {
         });
 
         const href = `/@~/inbox/${thread.id}`;
-        const unread = isAfter(last_message.updated_at, last_seen_date);
+        const unread = last_seen_date
+          ? isAfter(last_message.created_at, last_seen_date)
+          : false;
         const { indicator } = item({ unread });
 
         return (
-          <Link href={`${href}?${search_params.toString()}`}>
+          <Link href={`${href}?${search_params.toString()}`} key={thread.id}>
             <Thread_Item
-              last_update={last_message.updated_at}
+              last_update={last_message.created_at}
+              last_seen_date={last_seen_date}
               variants={{
                 active: pathname === href,
                 unread,

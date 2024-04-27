@@ -55,10 +55,11 @@ model Profile {
 
   partner                Partner?
   studient               Studient?
-  written_messages       Message[] @relation("WrittenMessages")
-  followed_by            Profile[] @relation("ProfileFollows")
-  participants_in_thread Thread[]  @relation("ParticipantsInThread")
-  in_contact_with        Profile[] @relation("Contacts")
+  written_messages       Message[]      @relation("WrittenMessages")
+  followed_by            Profile[]      @relation("ProfileFollows")
+  participants_in_thread Thread[]       @relation("ParticipantsInThread")
+  in_contact_with        Profile[]      @relation("Contacts")
+  notifications          Notification[]
 }
 
 model Studient {
@@ -353,12 +354,48 @@ model Message {
   content   String
   thread    Thread  @relation(fields: [thread_id], references: [id])
   thread_id String
+
+  notifications InboxMessageNotification[]
+
   //
 
   created_at DateTime @default(now())
   updated_at DateTime @default(now())
 
   @@unique(name: "unique_date_in_thread", fields: [thread_id, created_at])
+}
+
+//
+//
+//
+
+//
+//
+//
+
+model Notification {
+  id       String           @id @default(cuid())
+  owner    Profile          @relation(fields: [owner_id], references: [id], onDelete: Cascade)
+  owner_id String
+  read_at  DateTime?
+  type     NotificationType
+
+  inbox_message InboxMessageNotification?
+
+  //
+
+  created_at DateTime @default(now())
+}
+
+enum NotificationType {
+  INBOX_NEW_MESSAGE
+}
+
+model InboxMessageNotification {
+  notification    Notification @relation(fields: [notification_id], references: [id], onDelete: Cascade)
+  notification_id String       @unique
+  message         Message      @relation(fields: [message_id], references: [id])
+  message_id      String
 }
 
 //

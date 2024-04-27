@@ -63,7 +63,7 @@ const inbox_api_router = router({
     .input(
       z.object({
         cursor: z.string().optional(),
-        limit: z.number().min(1).max(10).default(10),
+        limit: z.number().min(1).max(10).default(5),
         search: z.string().optional(),
       }),
     )
@@ -74,6 +74,7 @@ const inbox_api_router = router({
         select: { id: true },
         where: { profile_id: profile.id },
       });
+
       const search_where: Prisma.InboxThreadWhereInput = search
         ? {
             OR: [
@@ -84,13 +85,22 @@ const inbox_api_router = router({
                   },
                 },
               },
+              {
+                thread: {
+                  messages: {
+                    some: {
+                      content: { contains: search, mode: "insensitive" },
+                    },
+                  },
+                },
+              },
             ],
           }
         : {};
       const data = await prisma.inboxThread.findMany({
         ...(cursor ? { cursor: { id: cursor } } : {}),
-        orderBy: { thread: { updated_at: "desc" } },
-        include: { thread: { select: { id: true } } },
+        orderBy: [{ thread: { updated_at: "desc" } }],
+        include: { thread: { select: { id: true, updated_at: true } } },
         take: limit + 1,
         where: { owner_id: studient_id, ...search_where },
       });
@@ -123,11 +133,13 @@ const inbox_api_router = router({
           thread: {
             include: {
               participants: { select: { id: true, name: true, image: true } },
-              messages: { take: 1, orderBy: { created_at: "desc" } },
+              messages: { take: 1, orderBy: [{ created_at: "desc" }] },
             },
           },
         },
-        where: { owner_id_thread_id },
+        where: {
+          owner_id_thread_id,
+        },
       });
     }),
 
