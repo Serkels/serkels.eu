@@ -1,9 +1,9 @@
 "use client";
 //
 
-import { Item } from ":app/(main)/opportunities/_client/List";
 import { TRPC_React } from ":trpc/client";
 import { ErrorOccur } from "@1.ui/react/error";
+import { Item } from "../../_client/Item";
 import { useSeeAlso } from "./context";
 
 //

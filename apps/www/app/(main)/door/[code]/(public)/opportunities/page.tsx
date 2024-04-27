@@ -1,6 +1,6 @@
 //
 
-import { Item } from ":app/(main)/opportunities/_client/List";
+import { Item } from ":app/(main)/opportunities/_client/Item";
 import { code_to_profile_id, type CodeParms } from ":pipes/code";
 import { TRPC_SSR } from ":trpc/server";
 import { PROFILE_ROLES } from "@1.modules/profile.domain";

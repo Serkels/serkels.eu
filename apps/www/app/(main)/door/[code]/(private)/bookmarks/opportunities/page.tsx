@@ -1,6 +1,6 @@
 //
 
-import { Item } from ":app/(main)/opportunities/_client/List";
+import { Item } from ":app/(main)/opportunities/_client/Item";
 import { TRPC_SSR } from ":trpc/server";
 import type { Metadata, ResolvingMetadata } from "next";
 
