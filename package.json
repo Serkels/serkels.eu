@@ -7,7 +7,7 @@
     "heroku-postbuild": "npx npm-run-all heroku-postbuild:*",
     "heroku-postbuild:00": "pnpm exec turbo run build",
     "heroku-prebuild": "npx npm-run-all heroku-prebuild:*",
-    "heroku-prebuild:00": "NODE_ENV=O_0 pnpm i -w",
+    "heroku-prebuild:00": "NODE_ENV=O_0 pnpm install --filter=!e2e --frozen-lockfile --workspace-root",
     "heroku-prebuild:01": "pnpm exec turbo prune api",
     "heroku-prebuild:02": "del apps packages out/**/node_modules",
     "heroku-prebuild:03": "pnpm exec cpx \"out/**/*\" .",
