@@ -1,9 +1,0 @@
-{
-  "extends": ["@1/typescript-config/base.json"],
-  "compilerOptions": {
-    "composite": true,
-    "lib": ["ESNext"]
-  },
-  "include": ["**/*.ts"],
-  "references": []
-}
