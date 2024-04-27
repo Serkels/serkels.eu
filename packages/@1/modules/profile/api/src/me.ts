@@ -107,100 +107,98 @@ const follows = next_auth_procedure
     return { data, next_cursor };
   });
 
-export const me = router({
-  contacts: next_auth_procedure
-    .input(
-      z.object({
-        cursor: z.string().optional(),
-        limit: z.number().min(1).max(10).default(10),
-      }),
-    )
-    .query(async ({ input, ctx: { prisma, payload } }) => {
-      const {
-        profile: { id },
-      } = payload;
-      const { cursor, limit } = input;
-      const { contacts: data } = await prisma.profile.findUniqueOrThrow({
-        select: {
-          contacts: {
-            ...(cursor ? { cursor: { id: cursor } } : {}),
-            take: limit + 1,
-            orderBy: { name: "asc" },
-          },
-        },
-        where: { id },
-      });
-
-      let next_cursor: typeof cursor | undefined = undefined;
-      if (data.length > limit) {
-        const next_item = data.pop()!;
-        next_cursor = next_item.id;
-      }
-
-      return { data, next_cursor };
+const contacts = next_auth_procedure
+  .input(
+    z.object({
+      cursor: z.string().optional(),
+      limit: z.number().min(1).max(10).default(10),
     }),
+  )
+  .query(async ({ input, ctx: { prisma, payload } }) => {
+    const {
+      profile: { id },
+    } = payload;
+    const { cursor, limit } = input;
+    const { contacts: data } = await prisma.profile.findUniqueOrThrow({
+      select: {
+        contacts: {
+          ...(cursor ? { cursor: { id: cursor } } : {}),
+          take: limit + 1,
+          orderBy: { name: "asc" },
+        },
+      },
+      where: { id },
+    });
 
-  //
+    let next_cursor: typeof cursor | undefined = undefined;
+    if (data.length > limit) {
+      const next_item = data.pop()!;
+      next_cursor = next_item.id;
+    }
 
+    return { data, next_cursor };
+  });
+
+const update_image_to_gravatar = next_auth_procedure.mutation(
+  async ({ ctx: { prisma, payload } }) => {
+    const { id } = payload.profile;
+    const { email } = await prisma.user.findFirstOrThrow({
+      where: { profile: { id } },
+    });
+    const image = gravatarUrlFor(email ?? "");
+
+    return prisma.profile.update({
+      data: {
+        image,
+        user: { update: { image: image } },
+      },
+      where: { id },
+    });
+  },
+);
+
+const update = next_auth_procedure
+  .input(Profile_Schema.omit({ id: true, role: true }))
+  .mutation(({ input, ctx: { prisma, payload } }) => {
+    const { id } = payload.profile;
+    return prisma.profile.update({
+      data: {
+        ...input,
+        user: { update: { image: input.image, name: input.name } },
+      },
+      where: { id },
+    });
+  });
+
+//
+
+const report = next_auth_procedure
+  .input(create_report)
+  .mutation(({ ctx, input }) => {
+    console.log({ input });
+    const { attachments, email, link, comment, category } = input;
+    const text = `
+  # ${email} signal ${category}
+
+  - Lien: ${link}
+
+  - Commentaire :
+  ${comment}
+  `;
+    return ctx.sender.send_report({
+      replyTo: email,
+      subject: `[Signalement] ${category} (${link})`,
+      text: text,
+      attachments: attachments ? [{ path: attachments }] : undefined,
+    });
+  });
+
+export const me = router({
   contact,
+  contacts,
   follow,
   follows,
-
-  //
-
-  update_image_to_gravatar: next_auth_procedure.mutation(
-    async ({ ctx: { prisma, payload } }) => {
-      const { id } = payload.profile;
-      const { email } = await prisma.user.findFirstOrThrow({
-        where: { profile: { id } },
-      });
-      const image = gravatarUrlFor(email ?? "");
-
-      return prisma.profile.update({
-        data: {
-          image,
-          user: { update: { image: image } },
-        },
-        where: { id },
-      });
-    },
-  ),
-
-  //
-
-  update: next_auth_procedure
-    .input(Profile_Schema.omit({ id: true, role: true }))
-    .mutation(({ input, ctx: { prisma, payload } }) => {
-      const { id } = payload.profile;
-      return prisma.profile.update({
-        data: {
-          ...input,
-          user: { update: { image: input.image, name: input.name } },
-        },
-        where: { id },
-      });
-    }),
-
-  //
-
-  report: next_auth_procedure
-    .input(create_report)
-    .mutation(({ ctx, input }) => {
-      console.log({ input });
-      const { attachments, email, link, comment, category } = input;
-      const text = `
-      # ${email} signal ${category}
-
-      - Lien: ${link}
-
-      - Commentaire :
-      ${comment}
-      `;
-      return ctx.sender.send_report({
-        replyTo: email,
-        subject: `[Signalement] ${category} (${link})`,
-        text: text,
-        attachments: attachments ? [{ path: attachments }] : undefined,
-      });
-    }),
+  report,
+  update_image_to_gravatar,
+  update,
 });
