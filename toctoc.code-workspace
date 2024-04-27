@@ -48,6 +48,21 @@
     //
     //
     //
+    {
+      "path": "packages/@1/modules/notification/api",
+      "name": "🫙 notification.api",
+    },
+    {
+      "path": "packages/@1/modules/notification/domain",
+      "name": "📜 notification.domain",
+    },
+    {
+      "path": "packages/@1/modules/notification/ui",
+      "name": "💄 notification.ui",
+    },
+    //
+    //
+    //
     { "path": "packages/@1/modules/inbox/api", "name": "🫙 inbox.api" },
     { "path": "packages/@1/modules/inbox/domain", "name": "📜 inbox.domain" },
     { "path": "packages/@1/modules/inbox/ui", "name": "💄 inbox.ui" },
