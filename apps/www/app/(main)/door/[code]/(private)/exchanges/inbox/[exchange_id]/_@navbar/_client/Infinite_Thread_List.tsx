@@ -1,5 +1,6 @@
 "use client";
 
+import { ProfileAvatarMedia } from ":components/avatar";
 import type { Params } from ":pipes/exchange_by_id";
 import { TRPC_React } from ":trpc/client";
 import { Deal_Status_Schema, type Deal } from "@1.modules/exchange.domain";
@@ -10,7 +11,6 @@ import { Thread_InfiniteList } from "@1.modules/inbox.ui/thread/InfiniteList";
 import { Thread_AsyncItem } from "@1.modules/inbox.ui/thread/Thread_AsyncItem";
 import { Thread_Item } from "@1.modules/inbox.ui/thread/Thread_Item";
 import { PROFILE_UNKNOWN } from "@1.modules/profile.domain";
-import { AvatarMedia } from "@1.ui/react/avatar";
 import {
   Approved,
   ApprovedByTheOrganizer,
@@ -77,10 +77,7 @@ function UserThread_Item({ thread_id }: { thread_id: string }) {
           <Link href={`/@~/exchanges/inbox/${deal.parent_id}/${thread.id}`}>
             <Thread_Item last_update={last_message.updated_at}>
               <Thread_Item.Avatar>
-                <AvatarMedia
-                  name={participant.name}
-                  image={participant.image}
-                ></AvatarMedia>
+                <ProfileAvatarMedia profile={participant} />
               </Thread_Item.Avatar>
               <Thread_Item.Body>
                 <Indicator className="float-right" status={deal.status} />
