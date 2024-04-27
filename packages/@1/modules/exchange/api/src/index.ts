@@ -15,9 +15,7 @@ const exchange_api_router = router({
   //
 
   create: next_auth_procedure
-    .input(
-      Exchange_Create_Schema
-    )
+    .input(Exchange_Create_Schema)
     .mutation(async ({ input, ctx: { prisma, payload } }) => {
       const {
         profile: { id: profile_id },

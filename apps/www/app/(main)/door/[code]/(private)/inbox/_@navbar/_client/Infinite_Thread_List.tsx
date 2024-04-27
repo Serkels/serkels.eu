@@ -11,12 +11,15 @@ import { PROFILE_UNKNOWN } from "@1.modules/profile.domain";
 import type { UseQueryResult } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 //
 
 export default function Infinite_Thread_List() {
+  const search_params = useSearchParams();
+  const search = search_params.get("q") ?? undefined;
   const query_info = TRPC_React.inbox.find.useInfiniteQuery(
-    {},
+    { search },
     { getNextPageParam: ({ next_cursor }) => next_cursor },
   );
   return (
@@ -34,6 +37,7 @@ export default function Infinite_Thread_List() {
 
 function UserThread_Item({ thread_id }: { thread_id: string }) {
   const { data: session } = useSession();
+  const search_params = useSearchParams();
   const profile_id = session?.profile.id ?? PROFILE_UNKNOWN.id;
   const info = TRPC_React.inbox.by_thread_id.useQuery(
     thread_id,
@@ -57,7 +61,7 @@ function UserThread_Item({ thread_id }: { thread_id: string }) {
         });
 
         return (
-          <Link href={`/@~/inbox/${thread.id}`}>
+          <Link href={`/@~/inbox/${thread.id}?${search_params.toString()}`}>
             <Thread_Item last_update={last_message.updated_at}>
               <Thread_Item.Avatar>
                 <ProfileAvatarMedia profile={participant} />

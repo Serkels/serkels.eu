@@ -19,8 +19,12 @@ export default function Conversation_Form({
   const send_message = useCallback(
     async (content: string) => {
       await mutateAsync({ content, thread_id });
-      await utils.inbox.thread.messages.invalidate({ thread_id });
-      await utils.inbox.by_thread_id.invalidate(thread_id);
+
+      await Promise.all([
+        utils.inbox.by_thread_id.invalidate(thread_id),
+        utils.inbox.find.invalidate(),
+        utils.inbox.thread.messages.invalidate({ thread_id }),
+      ]);
     },
     [mutateAsync, thread_id],
   );

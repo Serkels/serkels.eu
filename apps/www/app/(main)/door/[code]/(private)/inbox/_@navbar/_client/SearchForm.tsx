@@ -11,7 +11,7 @@ export default function SearchForm() {
   const { query, setQuery } = useSyncSearchQuery("q");
   const onChange = useDebouncedCallback<
     NonNullable<ComponentProps<"input">["onChange"]>
-  >((ev) => setQuery(ev.target.value), [setQuery], 1_666, 500);
+  >((ev) => setQuery(ev.target.value), [setQuery], 666, 500);
   return (
     <div>
       <InputSearch

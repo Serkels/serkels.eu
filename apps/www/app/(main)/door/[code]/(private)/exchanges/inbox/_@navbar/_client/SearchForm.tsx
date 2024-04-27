@@ -12,6 +12,7 @@ export default function SearchForm(props: ComponentPropsWithoutRef<"div">) {
   const onChange = useDebouncedCallback<
     NonNullable<ComponentProps<"input">["onChange"]>
   >((ev) => setQuery(ev.target.value), [setQuery], 666, 500);
+
   return (
     <div {...props}>
       <InputSearch

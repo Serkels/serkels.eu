@@ -1,6 +1,7 @@
 //
 
 import { next_auth_procedure, router } from "@1.modules/trpc";
+import type { Prisma } from "@prisma/client";
 import { z } from "zod";
 import { thread } from "./thread";
 
@@ -62,22 +63,35 @@ const inbox_api_router = router({
       z.object({
         cursor: z.string().optional(),
         limit: z.number().min(1).max(10).default(10),
+        search: z.string().optional(),
       }),
     )
     .query(async ({ ctx: { payload, prisma }, input }) => {
       const { profile } = payload;
-      const { cursor, limit } = input;
+      const { cursor, limit, search } = input;
       const { id: studient_id } = await prisma.studient.findUniqueOrThrow({
         select: { id: true },
         where: { profile_id: profile.id },
       });
-
+      const search_where: Prisma.InboxThreadWhereInput = search
+        ? {
+            OR: [
+              {
+                thread: {
+                  participants: {
+                    some: { name: { contains: search, mode: "insensitive" } },
+                  },
+                },
+              },
+            ],
+          }
+        : {};
       const data = await prisma.inboxThread.findMany({
         ...(cursor ? { cursor: { id: cursor } } : {}),
         orderBy: { thread: { updated_at: "desc" } },
         include: { thread: { select: { id: true } } },
         take: limit + 1,
-        where: { owner_id: studient_id },
+        where: { owner_id: studient_id, ...search_where },
       });
 
       let next_cursor: typeof cursor | undefined = undefined;

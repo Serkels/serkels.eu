@@ -189,33 +189,3 @@ const badge = tv({
   variants: { color: { primary: "bg-primary", disabled: "bg-gray-500" } },
   defaultVariants: { color: "disabled" },
 });
-
-const item = tv({
-  base: "overflow-hidden border-l-4 border-transparent p-4",
-  slots: {
-    title: "line-clamp-1 text-lg font-bold",
-    exchange_icon: "mx-1 w-5",
-    indicator: "float-right",
-  },
-  variants: {
-    unread: {
-      false: {
-        indicator: "hidden",
-      },
-    },
-    with_return: {
-      true: {
-        exchange_icon: "text-warning",
-      },
-      false: {
-        exchange_icon: "text-success",
-      },
-    },
-    active: {
-      true: {
-        base: "border-l-primary bg-white",
-        badge: "bg-primary",
-      },
-    },
-  },
-});

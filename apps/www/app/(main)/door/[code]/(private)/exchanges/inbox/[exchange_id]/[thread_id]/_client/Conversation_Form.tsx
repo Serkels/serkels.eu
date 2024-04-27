@@ -20,6 +20,7 @@ export default function Conversation_Form({
 }) {
   const exchange_id = exchange.id;
   const send = TRPC_React.inbox.thread.send.useMutation();
+  const send_deal_update = TRPC_React.exchanges.me.deal_update.useMutation();
   const action = TRPC_React.exchanges.me.inbox.action.useMutation();
   const inbox = TRPC_React.exchanges.me.inbox.by_thread_id.useQuery(thread_id);
   const next_actions = TRPC_React.exchanges.me.inbox.next_actions.useQuery({
@@ -29,10 +30,11 @@ export default function Conversation_Form({
   const utils = TRPC_React.useUtils();
   const invalidate = useCallback(async () => {
     await Promise.all([
-      utils.inbox.thread.messages.invalidate({ thread_id }),
+      utils.exchanges.by_id.invalidate(exchange.id),
+      utils.exchanges.me.find.invalidate(),
       utils.exchanges.me.inbox.by_thread_id.invalidate(thread_id),
       utils.exchanges.me.inbox.next_actions.invalidate(),
-      utils.exchanges.by_id.invalidate(exchange.id),
+      utils.inbox.thread.messages.invalidate({ thread_id }),
     ]);
   }, [utils, thread_id]);
 
@@ -43,6 +45,7 @@ export default function Conversation_Form({
   const send_message = useCallback(
     async (content: string) => {
       await send.mutateAsync({ content, thread_id });
+      await send_deal_update.mutateAsync({ exchange_id, thread_id });
       await invalidate();
     },
     [send.mutateAsync, thread_id],
