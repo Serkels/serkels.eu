@@ -4,6 +4,7 @@ import { next_auth_procedure, router } from "@1.modules/trpc";
 import type { Prisma } from "@prisma/client";
 import { z } from "zod";
 import { thread } from "./thread";
+import { thread_update } from "./thread_update";
 
 const inbox_api_router = router({
   //
@@ -107,14 +108,17 @@ const inbox_api_router = router({
 
   by_thread_id: next_auth_procedure
     .input(z.string())
-    .query(async ({ ctx: { payload, prisma }, input: id }) => {
+    .query(async ({ ctx: { payload, prisma }, input: thread_id }) => {
       const { profile } = payload;
       const { id: studient_id } = await prisma.studient.findUniqueOrThrow({
         select: { id: true },
         where: { profile_id: profile.id },
       });
 
-      return prisma.inboxThread.findFirstOrThrow({
+      const owner_id_thread_id: Prisma.InboxThreadOwner_idThread_idCompoundUniqueInput =
+        { owner_id: studient_id, thread_id };
+
+      return prisma.inboxThread.findUniqueOrThrow({
         include: {
           thread: {
             include: {
@@ -123,13 +127,14 @@ const inbox_api_router = router({
             },
           },
         },
-        where: { owner_id: studient_id, thread: { id } },
+        where: { owner_id_thread_id },
       });
     }),
 
   //
 
   thread,
+  thread_update,
 });
 
 export default inbox_api_router;

@@ -43,6 +43,7 @@ export default function Infinite_Thread_Timeline({
     .parse(useParams(), { path: ["useParams()"] });
   const { thread_id } = params;
 
+  const thread_update = TRPC_React.exchanges.me.thread_update.useMutation();
   const query_thread = TRPC_React.inbox.thread.by_id.useQuery(thread_id);
   const query_info = TRPC_React.inbox.thread.messages.useInfiniteQuery(
     {
@@ -57,6 +58,7 @@ export default function Infinite_Thread_Timeline({
     if (!scroll_target_ref.current) {
       return;
     }
+    thread_update.mutate({ thread_id });
     scroll_target_ref.current.scrollIntoView({
       behavior: "smooth",
       block: "end",

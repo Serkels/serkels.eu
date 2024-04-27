@@ -4,14 +4,21 @@ import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import type { PropsWithChildren } from "react";
 import { createSlot } from "react-slotify";
-import { tv } from "tailwind-variants";
+import { tv, type VariantProps } from "tailwind-variants";
 
 //
+
+interface Thread_Item_Props extends PropsWithChildren {
+  last_update: Date;
+  variants?: VariantProps<typeof thread_item>;
+}
+
 export function Thread_Item({
   children,
   last_update,
-}: PropsWithChildren<{ last_update: Date }>) {
-  const { base, header, time, excerpt } = thread_item({});
+  variants,
+}: Thread_Item_Props) {
+  const { base, header, time, excerpt } = thread_item(variants);
 
   return (
     <div className={base()}>
@@ -49,7 +56,6 @@ export const thread_item = tv({
     rounded-xl
     border
     border-[#ECEDF4]
-    bg-white
     p-4
     text-black
     shadow-[10px_10px_10px_#00000014]
@@ -58,5 +64,13 @@ export const thread_item = tv({
     header: "flex justify-between",
     time: "whitespace-nowrap text-xs font-bold",
     excerpt: "mb-1 line-clamp-1",
+  },
+  variants: {
+    active: {
+      true: { base: `bg-white` },
+    },
+    unread: {
+      true: { excerpt: `font-bold` },
+    },
   },
 });

@@ -18,8 +18,10 @@ import {
   Idle,
 } from "@1.ui/react/icons";
 import type { UseQueryResult } from "@tanstack/react-query";
+import { isAfter } from "date-fns";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import type { ComponentPropsWithoutRef } from "react";
 import { match } from "ts-pattern";
 
@@ -49,6 +51,7 @@ export default function Infinite_Thread_List(params: Params) {
 
 function UserThread_Item({ thread_id }: { thread_id: string }) {
   const { data: session } = useSession();
+  const pathname = usePathname();
   const profile_id = session?.profile.id ?? PROFILE_UNKNOWN.id;
   const info = TRPC_React.exchanges.me.inbox.by_thread_id.useQuery(
     thread_id,
@@ -57,7 +60,7 @@ function UserThread_Item({ thread_id }: { thread_id: string }) {
   return (
     <Thread_AsyncItem info={info}>
       {({ inbox }) => {
-        const { thread, deal } = inbox as Inbox & {
+        const { thread, deal, last_seen_date } = inbox as Inbox & {
           deal: Deal;
         };
         const last_message =
@@ -72,10 +75,16 @@ function UserThread_Item({ thread_id }: { thread_id: string }) {
           participants: thread.participants,
           profile_id,
         });
-
+        const href = `/@~/exchanges/inbox/${deal.parent_id}/${thread.id}`;
         return (
-          <Link href={`/@~/exchanges/inbox/${deal.parent_id}/${thread.id}`}>
-            <Thread_Item last_update={last_message.updated_at}>
+          <Link href={href}>
+            <Thread_Item
+              last_update={last_message.updated_at}
+              variants={{
+                active: pathname === href,
+                unread: isAfter(last_message.updated_at, last_seen_date),
+              }}
+            >
               <Thread_Item.Avatar>
                 <ProfileAvatarMedia profile={participant} />
               </Thread_Item.Avatar>

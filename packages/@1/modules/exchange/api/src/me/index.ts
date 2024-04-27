@@ -6,6 +6,7 @@ import { z } from "zod";
 import { deal_update } from "./deal_update";
 import { find } from "./find";
 import { inbox } from "./inbox";
+import { thread_update } from "./thread_update";
 
 export const me = router({
   //
@@ -67,4 +68,5 @@ export const me = router({
     }),
 
   deal_update,
+  thread_update,
 });

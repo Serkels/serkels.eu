@@ -30,9 +30,10 @@ export default function Conversation_Form({
   const utils = TRPC_React.useUtils();
   const invalidate = useCallback(async () => {
     await Promise.all([
-      utils.exchanges.by_id.invalidate(exchange.id),
+      utils.exchanges.by_id.invalidate(exchange_id),
       utils.exchanges.me.find.invalidate(),
       utils.exchanges.me.inbox.by_thread_id.invalidate(thread_id),
+      utils.exchanges.me.inbox.by_exchange_id.invalidate({exchange_id}),
       utils.exchanges.me.inbox.next_actions.invalidate(),
       utils.inbox.thread.messages.invalidate({ thread_id }),
     ]);

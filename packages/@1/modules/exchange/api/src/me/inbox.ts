@@ -3,6 +3,7 @@
 import { deal_flow } from "@1.modules/exchange.domain/deal.machine";
 import { next_auth_procedure, router } from "@1.modules/trpc";
 import { next_auth_input_token } from "@1.modules/trpc/src/trpc";
+import type { Prisma } from "@prisma/client";
 import { observable } from "@trpc/server/observable";
 import { EventEmitter } from "events";
 import { createActor } from "xstate";
@@ -60,6 +61,15 @@ export const inbox = router({
         select: { id: true },
         where: { profile_id: profile.id },
       });
+
+      const owner_id_thread_id: Prisma.ExchangeThreadOwner_idThread_idCompoundUniqueInput =
+        { owner_id: studient_id, thread_id };
+
+      await prisma.exchangeThread.update({
+        data: { last_seen_date: new Date() },
+        where: { owner_id_thread_id },
+      });
+
       return prisma.exchangeThread.findUniqueOrThrow({
         include: {
           deal: true,
@@ -72,7 +82,7 @@ export const inbox = router({
             },
           },
         },
-        where: { owner_id_thread_id: { owner_id: studient_id, thread_id } },
+        where: { owner_id_thread_id },
       });
     }),
 
