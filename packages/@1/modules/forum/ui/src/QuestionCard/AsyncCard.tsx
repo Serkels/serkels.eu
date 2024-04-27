@@ -37,7 +37,7 @@ export function Loader() {
             width={400}
             height={44}
             viewBox="0 0 400 44"
-            backgroundColor="#f3f3f3"
+            backgroundColor="#f5f8fa"
             foregroundColor="#ecebeb"
           >
             <rect x="48" y="8" rx="3" ry="3" width="88" height="6" />
@@ -51,7 +51,7 @@ export function Loader() {
             width={400}
             height={60}
             viewBox="0 0 400 60"
-            backgroundColor="#f3f3f3"
+            backgroundColor="#f5f8fa"
             foregroundColor="#ecebeb"
           >
             <rect x="0" y="0" rx="3" ry="3" width="410" height="6" />

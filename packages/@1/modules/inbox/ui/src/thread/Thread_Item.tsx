@@ -19,13 +19,15 @@ export function Thread_Item({
         <Thread_Item.Avatar.Renderer
           childs={children}
         ></Thread_Item.Avatar.Renderer>
-        <time
-          className={time()}
-          dateTime={last_update.toUTCString()}
-          title={last_update.toUTCString()}
-        >
-          {format(last_update, "E p", { locale: fr })}
-        </time>
+        <Thread_Item.Time.Renderer childs={children}>
+          <time
+            className={time()}
+            dateTime={last_update.toUTCString()}
+            title={last_update.toUTCString()}
+          >
+            {format(last_update, "E p", { locale: fr })}
+          </time>
+        </Thread_Item.Time.Renderer>
       </header>
       <div className={excerpt()}>
         <Thread_Item.Body.Renderer childs={children}>
@@ -38,6 +40,7 @@ export function Thread_Item({
 
 Thread_Item.Avatar = createSlot();
 Thread_Item.Body = createSlot();
+Thread_Item.Time = createSlot();
 
 export const thread_item = tv({
   base: `

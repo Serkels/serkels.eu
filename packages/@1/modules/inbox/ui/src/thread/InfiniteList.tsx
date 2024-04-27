@@ -1,9 +1,10 @@
 //
 
 import { Button } from "@1.ui/react/button";
-import { Spinner } from "@1.ui/react/spinner";
 import type { UseInfiniteQueryResult } from "@tanstack/react-query";
+import ContentLoader from "react-content-loader";
 import { match, P } from "ts-pattern";
+import { Thread_Item } from "./Thread_Item";
 
 //
 
@@ -18,7 +19,13 @@ export function Thread_InfiniteList<T>({
     .with({ status: "error", error: P.select() }, (error) => {
       throw error;
     })
-    .with({ status: "loading" }, () => <Loading />)
+    .with({ status: "loading" }, () => (
+      <>
+        <Loading />
+        <Loading />
+        <Loading />
+      </>
+    ))
     .with(
       {
         status: "success",
@@ -76,8 +83,39 @@ function EmptyList() {
 
 function Loading() {
   return (
-    <div className="mt-28 text-center">
-      <Spinner />
-    </div>
+    <Thread_Item last_update={new Date()}>
+      <Thread_Item.Avatar>
+        <ContentLoader
+          speed={2}
+          viewBox="0 0 222 44"
+          backgroundColor="#f5f8fa"
+          foregroundColor="#ecebeb"
+        >
+          <rect x="50" y="10" rx="3" ry="3" width="111" height="20" />
+          <circle cx="20" cy="20" r="20" />
+        </ContentLoader>
+      </Thread_Item.Avatar>
+      <Thread_Item.Time>
+        <ContentLoader
+          backgroundColor="#f5f8fa"
+          foregroundColor="#ecebeb"
+          speed={2}
+          viewBox="0 0 50 25"
+          width={66}
+        >
+          <rect x="0" y="0" rx="3" ry="3" width="50" height="10" />
+        </ContentLoader>
+      </Thread_Item.Time>
+      <Thread_Item.Body>
+        <ContentLoader
+          speed={2}
+          viewBox="0 0 200 6"
+          backgroundColor="#f5f8fa"
+          foregroundColor="#ecebeb"
+        >
+          <rect x="0" y="0" rx="3" ry="3" width="200" height="6" />
+        </ContentLoader>
+      </Thread_Item.Body>
+    </Thread_Item>
   );
 }

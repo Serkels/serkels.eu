@@ -12,6 +12,7 @@ import {
 import { deal_flow } from "@1.modules/exchange.domain/deal.machine";
 import { next_auth_procedure, router } from "@1.modules/trpc";
 import { next_auth_input_token } from "@1.modules/trpc/src/trpc";
+import type { Prisma } from "@prisma/client";
 import { observable } from "@trpc/server/observable";
 import { EventEmitter } from "events";
 import { match } from "ts-pattern";
@@ -66,22 +67,32 @@ export const me = router({
       z.object({
         cursor: z.string().optional(),
         limit: z.number().min(1).max(10).default(10),
+        search: z.string().optional(),
       }),
     )
     .query(async ({ input, ctx: { payload, prisma } }) => {
       const { profile } = payload;
-      const { cursor, limit } = input;
-
+      const { cursor, limit, search } = input;
+      const search_where: Prisma.ExchangeWhereInput = search
+        ? {
+            OR: [
+              { title: { contains: search } },
+              { description: { contains: search } },
+              { owner: { profile: { name: { contains: search } } } },
+            ],
+          }
+        : {};
       const data = await prisma.exchange.findMany({
         ...(cursor ? { cursor: { id: cursor } } : {}),
         take: limit,
         where: {
           OR: [
-            { owner: { profile_id: profile.id } },
+            { owner: { profile_id: profile.id }, ...search_where },
             {
               deals: {
                 some: { participant: { profile: { id: profile.id } } },
               },
+              ...search_where,
             },
           ],
         },

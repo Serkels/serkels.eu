@@ -2,9 +2,11 @@
 
 import { TRPC_React } from ":trpc/client";
 import { Exchange_TypeSchema } from "@1.modules/exchange.domain";
+import { Loading } from "@1.modules/exchange.ui/aside/InfiniteList";
+import { item as styles } from "@1.modules/exchange.ui/aside/Item";
 import { PROFILE_UNKNOWN } from "@1.modules/profile.domain";
 import { Avatar } from "@1.modules/profile.ui";
-import { EmptyList, Loading, flatten_pages_are_empty } from "@1.ui/react/async";
+import { EmptyList, flatten_pages_are_empty } from "@1.ui/react/async";
 import { Button } from "@1.ui/react/button";
 import {
   Circle,
@@ -15,7 +17,7 @@ import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import { tv } from "tailwind-variants";
 import { P, match } from "ts-pattern";
 import { z } from "zod";
@@ -23,12 +25,14 @@ import { z } from "zod";
 //
 
 export default function Infinite_Exchange_List() {
+  const search_params = useSearchParams();
+  const search = search_params.get("q") ?? undefined;
   const params = z
     .object({ exchange_id: z.string().optional() })
     .parse(useParams(), { path: ["useParams()"] });
   const { exchange_id } = params;
   const info = TRPC_React.exchanges.me.find.useInfiniteQuery(
-    {},
+    { search },
     { getNextPageParam: ({ next_cursor }) => next_cursor },
   );
 
@@ -36,7 +40,13 @@ export default function Infinite_Exchange_List() {
     .with({ status: "error", error: P.select() }, (error) => {
       throw error;
     })
-    .with({ status: "loading" }, () => <Loading />)
+    .with({ status: "loading" }, () => (
+      <>
+        <Loading />
+        <Loading />
+        <Loading />
+      </>
+    ))
     .with({ status: "success", data: P.when(flatten_pages_are_empty) }, () => (
       <EmptyList />
     ))
@@ -95,7 +105,7 @@ function Item({
     exchange_icon,
     indicator,
     title: title_style,
-  } = item({
+  } = styles({
     active,
     unread: false,
     with_return: Boolean(exchange.return),
