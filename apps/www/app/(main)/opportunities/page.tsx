@@ -3,17 +3,8 @@
 import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
 import { getServerSession } from "@1.modules/auth.next";
 import { Partner_Filter } from "@1.modules/opportunity.domain";
-import { Spinner } from "@1.ui/react/spinner";
 import type { Metadata, ResolvingMetadata } from "next";
-import dynamic from "next/dynamic";
-
-//
-
-const List = dynamic(() => import("./_client/List"), {
-  loading() {
-    return <Spinner />;
-  },
-});
+import List from "./_client/List";
 
 //
 
