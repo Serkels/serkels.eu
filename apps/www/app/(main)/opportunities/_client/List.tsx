@@ -36,7 +36,7 @@ export default function List() {
 
   useEffect(() => {
     gtag("event", "search", { search, category, filter });
-  }, [search]);
+  }, [search, category, filter]);
 
   try {
     const info = match(session)

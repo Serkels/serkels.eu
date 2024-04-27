@@ -5,20 +5,12 @@ import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
 import { getServerSession } from "@1.modules/auth.next";
 import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import { Grid } from "@1.ui/react/grid";
-import InputSearch from "@1.ui/react/input/InputSearch";
-import dynamic from "next/dynamic";
-import type { PropsWithChildren } from "react";
+import { Suspense, type PropsWithChildren } from "react";
 import { match } from "ts-pattern";
 import { Categoriy_Filter } from "./_client/Categories_Filter";
 import { Partner_Opportunities_Filter } from "./_client/Partner_Opportunities_Filter";
-//
-
-const SearchForm = dynamic(() => import("./_client/SearchForm"), {
-  ssr: false,
-  loading() {
-    return <InputSearch />;
-  },
-});
+import SearchForm from "./_client/SearchForm";
+import Loading from "./loading";
 
 //
 
@@ -32,7 +24,9 @@ export default async function Layout({ children }: PropsWithChildren<{}>) {
           className="hidden md:col-span-2 md:block xl:col-span-3"
           slot-title="Opportunités"
         >
-          <SearchForm />
+          <Suspense fallback={<Loading />}>
+            <SearchForm />
+          </Suspense>
           <User_Opportunities_Filter />
           <hr className="my-10" />
 
