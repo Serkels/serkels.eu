@@ -1,8 +1,8 @@
 //
 
-import type { VerificationToken } from "@prisma/client";
 import type { inferRouterProxyClient } from "@trpc/client";
 import type { Adapter, AdapterUser } from "next-auth/adapters";
+import type { VerificationToken } from "../../prisma/.client";
 import type { NextAuth_Router } from "../trpc/router/adapter";
 
 //

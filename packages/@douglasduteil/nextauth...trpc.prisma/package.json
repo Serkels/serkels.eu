@@ -36,7 +36,6 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@prisma/client": "5.13.0",
     "@trpc/client": "10.45.2",
     "@trpc/server": "10.45.2",
     "next": "14.2.3",

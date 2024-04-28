@@ -15,7 +15,9 @@
       "dependsOn": ["^type-check", "^build", "type-check"],
       "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },
-    "generate": { "outputs": ["node_modules/@prisma/client/**"] },
+    "generate": {
+      "outputs": ["node_modules/@prisma/client/**", "./prisma/.client/**"]
+    },
     "clean": { "cache": false },
     "dev": { "cache": false, "dependsOn": ["^build"] },
     "lint": { "cache": false, "dependsOn": ["^build"] },
