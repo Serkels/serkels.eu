@@ -4,6 +4,7 @@
   "globalEnv": ["CI", "NODE_ENV"],
   "pipeline": {
     "@1.infra/database#build": { "cache": false },
+    "@1.modules/auth.api#type-check": { "dependsOn": ["^build"] },
     "build": {
       "dependsOn": ["^build", "^type-check", "type-check"],
       "outputs": [".next/**", "!.next/cache/**", "dist/**"]
