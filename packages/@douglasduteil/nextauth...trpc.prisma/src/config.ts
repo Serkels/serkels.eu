@@ -1,8 +1,8 @@
 //
 
-import { PrismaClient } from "@prisma/client";
 import process from "node:process";
 import { z } from "zod";
+import { PrismaClient } from "../prisma/.client";
 
 //
 
