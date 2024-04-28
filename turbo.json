@@ -5,7 +5,7 @@
   "pipeline": {
     "@1.infra/database#build": { "cache": false },
     "build": {
-      "dependsOn": ["^build", "^type-check"],
+      "dependsOn": ["^build"],
       "outputs": [".next/**", "dist/**"]
     },
     "clean": { "cache": false },
