@@ -3,6 +3,10 @@
   "globalDependencies": ["**/.env.*local"],
   "globalEnv": ["CI", "NODE_ENV"],
   "pipeline": {
+    "@1.infra/database#type-check": {
+      "dependsOn": ["@1.infra/database#build"],
+      "outputs": ["node_modules/@prisma/client/**"]
+    },
     "@1.infra/database#build": {
       "outputs": ["node_modules/@prisma/client/**"]
     },
