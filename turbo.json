@@ -5,8 +5,11 @@
   "pipeline": {
     "@1.infra/database#build": { "cache": false },
     "build": {
-      "dependsOn": ["^build"],
-      "outputs": [".next/**", "dist/**"]
+      "dependsOn": ["^build", "^type-check"],
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+    },
+    "@1.modules/auth.emails#type-check": {
+      "dependsOn": ["build"]
     },
     "clean": { "cache": false },
     "dev": { "cache": false, "dependsOn": ["^build"] },
