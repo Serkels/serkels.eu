@@ -3,18 +3,19 @@
   "globalDependencies": ["**/.env.*local"],
   "globalEnv": ["CI", "NODE_ENV"],
   "pipeline": {
-    "@1.infra/database#type-check": {
-      "dependsOn": ["@1.infra/database#build"],
-      "outputs": ["node_modules/@prisma/client/**"]
-    },
     "@1.infra/database#build": {
       "outputs": ["node_modules/@prisma/client/**"]
     },
+    "@1.infra/database#type-check": { "dependsOn": ["generate"] },
     "@1.modules/auth.api#type-check": { "dependsOn": ["^build"] },
+    "@douglasduteil/nextauth...trpc.prisma#type-check": {
+      "dependsOn": ["generate"]
+    },
     "build": {
       "dependsOn": ["^type-check", "^build", "type-check"],
       "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },
+    "generate": { "outputs": ["node_modules/@prisma/client/**"] },
     "clean": { "cache": false },
     "dev": { "cache": false, "dependsOn": ["^build"] },
     "lint": { "cache": false, "dependsOn": ["^build"] },
