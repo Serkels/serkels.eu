@@ -21,6 +21,9 @@
     "clean": { "cache": false },
     "dev": { "cache": false, "dependsOn": ["^build"] },
     "lint": { "cache": false, "dependsOn": ["^build"] },
-    "type-check": { "outputs": ["node_modules/.cache/tsc/**"] }
+    "type-check": {
+      "dependsOn": ["^generate"],
+      "outputs": ["node_modules/.cache/tsc/**"]
+    }
   }
 }
