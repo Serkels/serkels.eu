@@ -3,7 +3,9 @@
   "globalDependencies": ["**/.env.*local"],
   "globalEnv": ["CI", "NODE_ENV"],
   "pipeline": {
-    "@1.infra/database#build": { "cache": false },
+    "@1.infra/database#build": {
+      "outputs": ["node_modules/@prisma/client/**"]
+    },
     "@1.modules/auth.api#type-check": { "dependsOn": ["^build"] },
     "build": {
       "dependsOn": ["^type-check", "^build", "type-check"],
