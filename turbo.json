@@ -6,7 +6,7 @@
     "@1.infra/database#build": { "cache": false },
     "@1.modules/auth.api#type-check": { "dependsOn": ["^build"] },
     "build": {
-      "dependsOn": ["^build", "^type-check", "type-check"],
+      "dependsOn": ["^type-check", "^build", "type-check"],
       "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },
     "clean": { "cache": false },
