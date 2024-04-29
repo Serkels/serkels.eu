@@ -1,7 +1,7 @@
 "use client";
 
 import { DomLazyMotion } from ":components/shell/DomLazyMotion";
-import { HTTPError } from "@1.modules/core/errors";
+import { AuthError, HTTPError } from "@1.modules/core/errors";
 import { PROFILE_ROLES, PROFILE_UNKNOWN } from "@1.modules/profile.domain";
 import { Avatar } from "@1.modules/profile.ui";
 import { Button } from "@1.ui/react/button";
@@ -12,7 +12,7 @@ import constate from "constate";
 import { AnimatePresence, m } from "framer-motion";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   useCallback,
   useEffect,
@@ -35,17 +35,27 @@ type Outlet_State =
   | { state: "loading" };
 
 function useOutlet() {
-  const [context, setContext] = useState<Outlet_State>({ state: "idle" });
+  const search_params = useSearchParams();
+  const error = search_params.get("error");
+  const [context, setContext] = useState<Outlet_State>(
+    typeof error === "string" && error.length > 0
+      ? { state: "error", error: new AuthError(error) }
+      : { state: "idle" },
+  );
   // const [context, setContext] = useMatrixHash<Outlet_State>({ state: "idle" });
   return { context, set_context: setContext };
 }
 
-const [Outlet_Provider, useOutlet_State, useOutlet_Send] = constate(
-  useOutlet,
-  ({ context }) => context.state,
-
-  (value) => value.set_context,
-);
+const [Outlet_Provider, useOutlet_Error, useOutlet_Send, useOutlet_State] =
+  constate(
+    useOutlet,
+    ({ context }) => {
+      if (context.state !== "error") return new Error("Invalid state");
+      return context.error;
+    },
+    (value) => value.set_context,
+    ({ context }) => context.state,
+  );
 
 //
 
@@ -183,6 +193,7 @@ function WhiteCard({ children }: PropsWithChildren) {
 
 function ErrorOccur() {
   const send = useOutlet_Send();
+  const error = useOutlet_Error();
   const on_back = useCallback(() => send({ state: "form" }), []);
 
   useTimeoutEffect(() => {
@@ -195,6 +206,10 @@ function ErrorOccur() {
         <h1 className="text-4xl">❌</h1>
         Une erreur est survenu...
       </center>
+
+      <hr />
+
+      <pre>{error.message}</pre>
 
       <hr />
 

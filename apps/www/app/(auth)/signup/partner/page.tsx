@@ -3,7 +3,12 @@
 import { get_csrf_token } from "@1.modules/auth.next/csrf_token";
 import { UserAvatarFilled } from "@1.ui/react/icons";
 // import { UserAvatarFilled } from "@1.ui/react/icons";
-import { PROFILE_ROLES } from "@1.modules/profile.domain";
+import { FrenchLocationField } from ":components/FrenchLocationField";
+import {
+  PROFILE_ROLES,
+  Partner_Schema,
+  Profile_Schema,
+} from "@1.modules/profile.domain";
 import { input } from "@1.ui/react/form/atom";
 import type { Metadata, ResolvingMetadata } from "next";
 import { Suspense } from "react";
