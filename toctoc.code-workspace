@@ -8,6 +8,7 @@
     { "path": "packages/@www/widgets/exchange", "name": "🎭 api/exchange" },
     //
     // { "path": "packages/@1/modules", "name": "📦 modules" },
+    { "path": "packages/@1/modules/core", "name": "📦 modules/core" },
     //
     { "path": "packages/@1/modules/auth/api", "name": "🫙 auth.api" },
     { "path": "packages/@1/modules/auth/emails", "name": "📦 auth/emails" },

@@ -26,7 +26,7 @@ export function Answer_Card<T extends Answer>(
         <header className=" flex justify-between">
           <StudientAvatarMedia studient={studient} />
         </header>
-        <article className="my-3 ml-12">{content}</article>
+        <article className="my-3 ml-12 break-words">{content}</article>
         <Answer_Card.Footer.Renderer childs={children} />
       </div>
     </Provider>

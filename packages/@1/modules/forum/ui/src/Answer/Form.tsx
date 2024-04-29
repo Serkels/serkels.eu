@@ -1,7 +1,9 @@
 "use client";
 
 import { Button } from "@1.ui/react/button";
-import { Field, Form, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import { z } from "zod";
+import { toFormikValidationSchema } from "zod-formik-adapter";
 
 //
 
@@ -19,13 +21,18 @@ export function CreateAnswerForm({
       }}
       enableReinitialize
       onSubmit={onSubmit}
+      validationSchema={toFormikValidationSchema(
+        z.object({
+          content: z.string().trim().min(10).max(705),
+        }),
+      )}
     >
       {({ isSubmitting }) => (
         <Form className="flex-1">
-          <Field
-            as="textarea"
-            className="
-              mb-7
+          <fieldset className="mb-7">
+            <Field
+              as="textarea"
+              className="
               w-full
               rounded-sm border border-solid border-[#dddddd]
               px-4 py-3
@@ -34,11 +41,15 @@ export function CreateAnswerForm({
 
               md:col-span-6
             "
-            disabled={isSubmitting}
-            name="content"
-            placeholder="Pose une questions aux étudiants ..."
-            required
-          />
+              disabled={isSubmitting}
+              name="content"
+              placeholder="Pose une questions aux étudiants ..."
+              required
+            />
+            <ErrorMessage name="content">
+              {(msg) => <div className="text-danger">{msg}</div>}
+            </ErrorMessage>
+          </fieldset>
           <Button
             type="submit"
             intent="primary"
