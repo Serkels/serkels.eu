@@ -49,5 +49,10 @@
     "@douglasduteil/datatypes...hours-to-seconds": "workspace:*",
     "prisma": "5.13.0",
     "typescript": "5.4.5"
+  },
+  "dependenciesMeta": {
+    "@prisma/client": {
+      "injected": true
+    }
   }
 }
