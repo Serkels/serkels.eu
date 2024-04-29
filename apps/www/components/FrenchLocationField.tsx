@@ -128,17 +128,21 @@ FrenchLocationField.SuccessFlat = function Loading(
     ref,
     ...other_props
   } = props;
-  const { className, name, id } = other_props;
+  const { className, name, id, disabled } = other_props;
   if (data.length === 0)
     return (
-      <select className={select({ className })} disabled={true}>
+      <select
+        className={select({ className })}
+        disabled={true}
+        {...{ name, id }}
+      >
         <option hidden value={""}>
           Pas trouvé...
         </option>
       </select>
     );
   return (
-    <select className={select({ className })} {...{ name, id }}>
+    <select className={select({ className })} {...{ name, disabled, id }}>
       {data.map(({ nom }) => (
         <option key={nom} value={nom}>
           {nom}
