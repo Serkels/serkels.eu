@@ -209,7 +209,7 @@ function ErrorOccur() {
 
       <hr />
 
-      <pre>{error.message}</pre>
+      <p className="relative w-full break-words font-mono">{error.message}</p>
 
       <hr />
 
