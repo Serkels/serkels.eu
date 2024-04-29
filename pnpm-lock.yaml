@@ -1778,9 +1778,6 @@ importers:
       typescript:
         specifier: 5.4.5
         version: 5.4.5
-    dependenciesMeta:
-      '@prisma/client':
-        injected: true
 
   packages/@douglasduteil/react-hookz...matrix-uri:
     dependencies:
