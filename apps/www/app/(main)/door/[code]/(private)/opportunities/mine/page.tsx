@@ -30,6 +30,15 @@ export default async function Page({ params }: { params: CodeParms }) {
       profile_id,
     });
 
+  if (!opportunities.length) {
+    return (
+      <main>
+        <figure className="mt-28  text-center">
+          <h3 className="text-xl">Aucune opportunité publiée.</h3>
+        </figure>
+      </main>
+    );
+  }
   return (
     <main
       className="
