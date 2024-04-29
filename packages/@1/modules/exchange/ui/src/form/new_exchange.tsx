@@ -8,7 +8,7 @@ import {
 } from "@1.modules/exchange.domain";
 import { Button } from "@1.ui/react/button";
 import { fieldset, input, select } from "@1.ui/react/form/atom";
-import { Field, Form, type FormikProps } from "formik";
+import { ErrorMessage, Field, Form, type FormikProps } from "formik";
 import type { ChangeEvent } from "react";
 
 //
@@ -106,6 +106,9 @@ export function Exchange_CreateForm<
           name="title"
           required
         />
+        <ErrorMessage name="title">
+          {(msg) => <div className="text-danger">{msg}</div>}
+        </ErrorMessage>
       </label>
       <label>
         <span className="text-Silver_Chalice">Description</span>
@@ -117,6 +120,10 @@ export function Exchange_CreateForm<
           name="description"
           required
         />
+
+        <ErrorMessage name="description">
+          {(msg) => <div className="text-danger">{msg}</div>}
+        </ErrorMessage>
       </label>
       <label>
         <span className="text-Silver_Chalice">Lieu</span>

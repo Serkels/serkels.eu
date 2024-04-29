@@ -9,6 +9,8 @@ import {
 import { Exchange_CreateForm } from "@1.modules/exchange.ui/form/new_exchange";
 import { Formik } from "formik";
 import { useRouter } from "next/navigation";
+import { z } from "zod";
+import { toFormikValidationSchema } from "zod-formik-adapter";
 
 //
 
@@ -47,6 +49,12 @@ export function Mutate_Exchange({ categories }: { categories: Category[] }) {
 
         router.push("/exchanges");
       }}
+      validationSchema={toFormikValidationSchema(
+        z.object({
+          title: z.string().trim().min(10).max(205),
+          description: z.string().trim().min(10).max(705),
+        }),
+      )}
     >
       {(formik) => <Exchange_CreateForm categories={categories} {...formik} />}
     </Formik>

@@ -58,8 +58,8 @@ export default async function Page({
 }) {
   const session = await getServerSession();
 
-  const category = String(searchParams["category"]) ?? undefined;
-  const search = String(searchParams["q"]) ?? undefined;
+  const category = String(searchParams["category"]);
+  const search = String(searchParams["q"]);
   const categories = await TRPC_SSR.category.forum.fetch();
   const filter_parsed_return = Forum_Filter.safeParse(searchParams["f"]);
   const filter = filter_parsed_return.success
