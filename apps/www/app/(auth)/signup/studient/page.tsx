@@ -12,6 +12,7 @@ import {
 } from "@1.modules/profile.domain";
 import { input, select } from "@1.ui/react/form/atom";
 import type { Metadata, ResolvingMetadata } from "next";
+import { Suspense } from "react";
 import { tv } from "tailwind-variants";
 import { EmailInput, SignInButton } from "./page.client";
 
@@ -85,11 +86,13 @@ export default async function Page() {
             className={label({ className: "flex-col items-start space-x-0" })}
           >
             <span>Ville</span>
-            <FrenchLocationField
-              name={studient_names.city}
-              id={studient_names.city}
-              placeholder="Ville"
-            />
+            <Suspense>
+              <FrenchLocationField
+                name={studient_names.city}
+                id={studient_names.city}
+                placeholder="Ville"
+              />
+            </Suspense>
           </label>
           <input
             className={input({ className: "col-span-full" })}
@@ -113,14 +116,16 @@ export default async function Page() {
           </select>
           <label className={label()}>
             <div className="flex-1">Email address</div>
-            <EmailInput
-              className={input({ className: "w-fit flex-grow opacity-50" })}
-              id="email"
-              name="email"
-              placeholder="Email"
-              required
-              type="email"
-            />
+            <Suspense>
+              <EmailInput
+                className={input({ className: "w-fit flex-grow opacity-50" })}
+                id="email"
+                name="email"
+                placeholder="Email"
+                required
+                type="email"
+              />
+            </Suspense>
           </label>
         </div>
         <SignInButton>Terminer</SignInButton>
