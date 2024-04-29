@@ -1,5 +1,6 @@
 "use client";
 
+import { FrenchLocationField } from ":components/FrenchLocationField";
 import { TRPC_React } from ":trpc/client";
 import type { Category } from "@1.modules/category.domain";
 import type { Exchange_Flat_Schema } from "@1.modules/exchange.domain";
@@ -25,7 +26,7 @@ export function Mutate_Exchange({
     <Formik
       initialValues={{
         ...exchange,
-        category: exchange.category_id  ,
+        category: exchange.category_id,
         expiry_date: exchange.expiry_date
           ? format(exchange.expiry_date, "yyyy-MM-dd")
           : undefined,
@@ -34,23 +35,33 @@ export function Mutate_Exchange({
         type: exchange.type,
       }}
       onSubmit={async (values) => {
-        console.log(values)
         await do_update.mutateAsync({
-          category_id: values.category,
-          description: values.description,
+          ...values,
           exchange_id: exchange.id,
-          expiry_date: typeof values.expiry_date === "string" ? new Date(values.expiry_date) : null,
-          return_id: values.return_id,
-          title: values.title,
+          expiry_date:
+            typeof values.expiry_date === "string"
+              ? new Date(values.expiry_date)
+              : null,
         });
 
-        await utils.exchanges.by_id.invalidate(exchange.id);
+        await utils.exchanges.by_id.refetch(exchange.id);
         await utils.exchanges.invalidate();
 
         router.push(`/exchanges?q=${values.title}`);
       }}
     >
-      {(formik) => <Exchange_CreateForm categories={categories} {...formik} />}
+      {(formik) => (
+        <Exchange_CreateForm categories={categories} {...formik}>
+          <Exchange_CreateForm.LocationField>
+            {(input_props) => (
+              <FrenchLocationField
+                defaultValue={exchange.location ?? "Paris"}
+                {...input_props}
+              />
+            )}
+          </Exchange_CreateForm.LocationField>
+        </Exchange_CreateForm>
+      )}
     </Formik>
   );
 }

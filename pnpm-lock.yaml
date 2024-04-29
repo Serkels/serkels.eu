@@ -437,6 +437,9 @@ importers:
       '@1.modules/category.api':
         specifier: workspace:*
         version: link:../../modules/category/api
+      '@1.modules/core':
+        specifier: workspace:*
+        version: link:../../modules/core
       '@1.modules/exchange.api':
         specifier: workspace:*
         version: link:../../modules/exchange/api

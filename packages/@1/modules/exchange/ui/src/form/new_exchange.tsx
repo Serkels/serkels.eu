@@ -8,10 +8,22 @@ import {
 } from "@1.modules/exchange.domain";
 import { Button } from "@1.ui/react/button";
 import { fieldset, input, select } from "@1.ui/react/form/atom";
-import { ErrorMessage, Field, Form, type FormikProps } from "formik";
-import type { ChangeEvent } from "react";
+import {
+  ErrorMessage,
+  Field,
+  Form,
+  type FieldAttributes,
+  type FormikProps,
+} from "formik";
+import type { ChangeEvent, PropsWithChildren } from "react";
+import { createSlot } from "react-slotify";
 
 //
+
+interface Exchange_CreateForm_Props<TValues>
+  extends PropsWithChildren<FormikProps<TValues>> {
+  categories: Category[];
+}
 
 export function Exchange_CreateForm<
   TValues extends Pick<Exchange_Create, "type" | "is_online"> & {
@@ -19,12 +31,11 @@ export function Exchange_CreateForm<
   },
 >({
   categories,
+  children,
   isSubmitting,
   setFieldValue,
   values,
-}: FormikProps<TValues> & {
-  categories: Category[];
-}) {
+}: Exchange_CreateForm_Props<TValues>) {
   return (
     <Form className="flex flex-col justify-center space-y-5">
       <fieldset className={fieldset()} disabled={isSubmitting}>
@@ -126,9 +137,13 @@ export function Exchange_CreateForm<
         </ErrorMessage>
       </label>
       <label>
-        <span className="text-Silver_Chalice">Lieu</span>
+        <span className="text-Silver_Chalice">Ville</span>
 
-        <Field className={input()} disabled={isSubmitting} name="location" />
+        <Exchange_CreateForm.LocationField.Renderer
+          childs={children}
+          name="location"
+          disabled={isSubmitting}
+        ></Exchange_CreateForm.LocationField.Renderer>
       </label>
 
       <label>
@@ -176,3 +191,5 @@ export function Exchange_CreateForm<
     </Form>
   );
 }
+
+Exchange_CreateForm.LocationField = createSlot<FieldAttributes<{}>>();

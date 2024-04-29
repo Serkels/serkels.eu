@@ -3,6 +3,7 @@
 import auth_api_router from "@1.modules/auth.api";
 import bookmarks_api_router from "@1.modules/bookmark.api";
 import category_api_router from "@1.modules/category.api";
+import type { Location } from "@1.modules/core/Location";
 import exchange_api_router from "@1.modules/exchange.api";
 import forum_api_router from "@1.modules/forum.api";
 import inbox_api_router from "@1.modules/inbox.api";
@@ -30,6 +31,19 @@ export const root_router = router({
   profile: profile_api_router,
   studient: studient_api_router,
   notification: notification_api_router,
+  locations: procedure
+    .input(z.object({ location: z.string().trim().default("Paris") }))
+    .query(async ({ input: { location: nom } }) => {
+      const search_params = new URLSearchParams({
+        boost: "population",
+        limit: "5",
+        nom,
+      });
+      const response = await fetch(
+        `https://geo.api.gouv.fr/communes?${search_params}`,
+      );
+      return response.json() as Promise<Location[]>;
+    }),
 
   //
   //
