@@ -16,7 +16,7 @@
     "@1.modules/trpc": "workspace:*",
     "@hono/node-server": "1.11.1",
     "@hono/sentry": "1.0.1",
-    "@hono/trpc-server": "0.2.0",
+    "@hono/trpc-server": "0.3.0",
     "@trpc/server": "10.45.2",
     "dotenv": "16.4.5",
     "hono": "4.2.9",
