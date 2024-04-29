@@ -3,6 +3,7 @@
 import type { Category } from "@1.modules/category.domain";
 import { SelectCategoryField } from "@1.modules/category.ui/form/SelectCategoryField";
 import { Button } from "@1.ui/react/button";
+import { select } from "@1.ui/react/form/atom";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { z } from "zod";
 import { toFormikValidationSchema } from "zod-formik-adapter";
@@ -59,9 +60,10 @@ export function CreateQuestionForm({
             <SelectCategoryField
               categories={categories}
               type="question"
-              className="min-w-[25%] border border-[#dddddd]"
               disabled={isSubmitting}
-              // placeholder=""
+              className={select({
+                className: "w-auto min-w-[25%] border border-[#dddddd]",
+              })}
               name="category"
               required
             />
