@@ -41,7 +41,7 @@
     "@1.config/typescript": "workspace:*",
     "@types/node": "20.12.7",
     "pkgroll": "2.0.2",
-    "react-email": "2.1.1",
+    "react-email": "2.1.2",
     "typescript": "5.4.5"
   }
 }
