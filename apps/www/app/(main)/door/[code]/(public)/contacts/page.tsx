@@ -2,22 +2,8 @@
 
 import { TRPC_SSR } from ":trpc/server";
 import { column_screen } from "@1.ui/react/grid/atom";
-import { Spinner } from "@1.ui/react/spinner";
 import type { Metadata, ResolvingMetadata } from "next";
-import dynamic from "next/dynamic";
-
-//
-
-const Infinite_Contacts_List = dynamic(
-  () => import("./_client/Infinite_Contacts_List"),
-  {
-    ssr: false,
-    loading() {
-      return <Spinner />;
-      // return <InputSearch />;
-    },
-  },
-);
+import Infinite_Contacts_List from "./_client/Infinite_Contacts_List";
 
 //
 

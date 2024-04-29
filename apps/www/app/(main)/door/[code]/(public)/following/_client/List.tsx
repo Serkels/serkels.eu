@@ -5,6 +5,7 @@ import { TRPC_React } from ":trpc/client";
 import type { Profile } from "@1.modules/profile.domain";
 import { EmptyList, Loading, flatten_pages_are_empty } from "@1.ui/react/async";
 import { Button } from "@1.ui/react/button";
+import { button } from "@1.ui/react/button/atom";
 import { Spinner } from "@1.ui/react/spinner";
 import Link from "next/link";
 import { P, match } from "ts-pattern";
@@ -65,7 +66,10 @@ export default function List() {
 function Item(profile: Profile) {
   return (
     <Link
-      className="block h-full w-full rounded-none px-8 py-4"
+      className={button({
+        className: "block h-full w-full rounded-none px-8 py-4",
+        intent: "light",
+      })}
       href={`/@${profile.id}`}
     >
       <ProfileAvatarMedia profile={profile} />
