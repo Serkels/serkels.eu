@@ -27,7 +27,7 @@
   "dependencies": {
     "@react-email/body": "0.0.8",
     "@react-email/container": "0.0.12",
-    "@react-email/head": "0.0.7",
+    "@react-email/head": "0.0.8",
     "@react-email/heading": "0.0.11",
     "@react-email/html": "0.0.7",
     "@react-email/img": "0.0.7",
