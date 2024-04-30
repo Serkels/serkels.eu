@@ -542,8 +542,8 @@ importers:
         specifier: 0.0.8
         version: 0.0.8(react@18.3.1)
       '@react-email/img':
-        specifier: 0.0.7
-        version: 0.0.7(react@18.3.1)
+        specifier: 0.0.8
+        version: 0.0.8(react@18.3.1)
       '@react-email/link':
         specifier: 0.0.7
         version: 0.0.7(react@18.3.1)
@@ -3313,12 +3313,6 @@ packages:
     engines: {node: '>=18.0.0'}
     peerDependencies:
       react: ^18.2.0
-
-  '@react-email/img@0.0.7':
-    resolution: {integrity: sha512-up9tM2/dJ24u/CFjcvioKbyGuPw1yeJg605QA7VkrygEhd0CoQEjjgumfugpJ+VJgIt4ZjT9xMVCK5QWTIWoaA==}
-    engines: {node: '>=18.0.0'}
-    peerDependencies:
-      react: 18.2.0
 
   '@react-email/img@0.0.8':
     resolution: {integrity: sha512-jx/rPuKo31tV18fu7P5rRqelaH5wkhg83Dq7uLwJpfqhbi4KFBGeBfD0Y3PiLPPoh+WvYf+Adv9W2ghNW8nOMQ==}
@@ -10004,10 +9998,6 @@ snapshots:
       react: 18.3.1
 
   '@react-email/html@0.0.8(react@18.3.1)':
-    dependencies:
-      react: 18.3.1
-
-  '@react-email/img@0.0.7(react@18.3.1)':
     dependencies:
       react: 18.3.1
 
