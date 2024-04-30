@@ -527,8 +527,8 @@ importers:
   packages/@1/modules/auth/emails:
     dependencies:
       '@react-email/body':
-        specifier: 0.0.7
-        version: 0.0.7(react@18.3.1)
+        specifier: 0.0.8
+        version: 0.0.8(react@18.3.1)
       '@react-email/container':
         specifier: 0.0.11
         version: 0.0.11(react@18.3.1)
@@ -3243,11 +3243,6 @@ packages:
     resolution: {integrity: sha512-np8c4wxdbE7ZrMv/bnjwEfpX0/nkWy9sELEb0sK8n4+HJ+WycoXXrVxBUb9tXgL/GCx5ReeDQChjQWwajm/z3A==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-
-  '@react-email/body@0.0.7':
-    resolution: {integrity: sha512-vjJ5P1MUNWV0KNivaEWA6MGj/I3c764qQJMsKjCHlW6mkFJ4SXbm2OlQFtKAb++Bj8LDqBlnE6oW77bWcMc0NA==}
-    peerDependencies:
-      react: 18.2.0
 
   '@react-email/body@0.0.8':
     resolution: {integrity: sha512-gqdkNYlIaIw0OdpWu8KjIcQSIFvx7t2bZpXVxMMvBS859Ia1+1X3b5RNbjI3S1ZqLddUf7owOHkO4MiXGE+nxg==}
@@ -9960,10 +9955,6 @@ snapshots:
       '@react-aria/utils': 3.23.2(react@18.3.1)
       '@react-types/shared': 3.22.1(react@18.3.1)
       '@swc/helpers': 0.5.11
-      react: 18.3.1
-
-  '@react-email/body@0.0.7(react@18.3.1)':
-    dependencies:
       react: 18.3.1
 
   '@react-email/body@0.0.8(react@18.3.1)':
