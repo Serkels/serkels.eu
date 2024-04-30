@@ -536,8 +536,8 @@ importers:
         specifier: 0.0.8
         version: 0.0.8(react@18.3.1)
       '@react-email/heading':
-        specifier: 0.0.11
-        version: 0.0.11(@types/react@18.3.1)(react@18.3.1)
+        specifier: 0.0.12
+        version: 0.0.12(@types/react@18.3.1)(react@18.3.1)
       '@react-email/html':
         specifier: 0.0.7
         version: 0.0.7(react@18.3.1)
@@ -3295,12 +3295,6 @@ packages:
     engines: {node: '>=18.0.0'}
     peerDependencies:
       react: ^18.2.0
-
-  '@react-email/heading@0.0.11':
-    resolution: {integrity: sha512-EF5ZtRCxhHPw3m+8iibKKg0RAvAeHj1AP68sjU7s6+J+kvRgllr/E972Wi5Y8UvcIGossCvpX1WrSMDzeB4puA==}
-    engines: {node: '>=18.0.0'}
-    peerDependencies:
-      react: 18.2.0
 
   '@react-email/heading@0.0.12':
     resolution: {integrity: sha512-eB7mpnAvDmwvQLoPuwEiPRH4fPXWe6ltz6Ptbry2BlI88F0a2k11Ghb4+sZHBqg7vVw/MKbqEgtLqr3QJ/KfCQ==}
@@ -10003,13 +9997,6 @@ snapshots:
   '@react-email/head@0.0.8(react@18.3.1)':
     dependencies:
       react: 18.3.1
-
-  '@react-email/heading@0.0.11(@types/react@18.3.1)(react@18.3.1)':
-    dependencies:
-      '@radix-ui/react-slot': 1.0.2(@types/react@18.3.1)(react@18.3.1)
-      react: 18.3.1
-    transitivePeerDependencies:
-      - '@types/react'
 
   '@react-email/heading@0.0.12(@types/react@18.3.1)(react@18.3.1)':
     dependencies:
