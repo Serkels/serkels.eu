@@ -146,7 +146,7 @@ $ docker compose up -d
 
 # Local www
 $ pnpm exec turbo dev --filter "www..."
-$ pnpm exec turbo type-check --filter www^...
+$ pnpm exec turbo type-check --filter "www^..."
 # Local api
 $ pnpm exec turbo dev --filter "api..."
 $ pnpm exec turbo type-check --filter api^...

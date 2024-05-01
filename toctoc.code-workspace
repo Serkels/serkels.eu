@@ -8,7 +8,6 @@
     { "path": "packages/@www/widgets/exchange", "name": "🎭 api/exchange" },
     //
     // { "path": "packages/@1/modules", "name": "📦 modules" },
-    { "path": "packages/@1/modules/core", "name": "📦 modules/core" },
     //
     { "path": "packages/@1/modules/auth/api", "name": "🫙 auth.api" },
     { "path": "packages/@1/modules/auth/emails", "name": "📦 auth/emails" },
@@ -31,6 +30,10 @@
       "name": "📜 category.domain",
     },
     { "path": "packages/@1/modules/category/ui", "name": "💄 category.ui" },
+    //
+    //
+    //
+    { "path": "packages/@1/modules/core", "name": "📦 modules/core" },
     //
     //
     //
@@ -91,6 +94,10 @@
       "name": "📜 profile.domain",
     },
     { "path": "packages/@1/modules/profile/ui", "name": "💄 profile.ui" },
+    //
+    //
+    //
+    { "path": "packages/@1/modules/trpc", "name": "📦 modules/trpc" },
     //
     //
     //
