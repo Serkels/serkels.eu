@@ -548,8 +548,8 @@ importers:
         specifier: 0.0.8
         version: 0.0.8(react@18.3.1)
       '@react-email/preview':
-        specifier: 0.0.8
-        version: 0.0.8(react@18.3.1)
+        specifier: 0.0.9
+        version: 0.0.9(react@18.3.1)
       '@react-email/text':
         specifier: 0.0.7
         version: 0.0.7(react@18.3.1)
@@ -3331,12 +3331,6 @@ packages:
     engines: {node: '>=18.0.0'}
     peerDependencies:
       react: ^18.2.0
-
-  '@react-email/preview@0.0.8':
-    resolution: {integrity: sha512-Jm0KUYBZQd2w0s2QRMQy0zfHdo3Ns+9bYSE1OybjknlvhANirjuZw9E5KfWgdzO7PyrRtB1OBOQD8//Obc4uIQ==}
-    engines: {node: '>=18.0.0'}
-    peerDependencies:
-      react: 18.2.0
 
   '@react-email/preview@0.0.9':
     resolution: {integrity: sha512-2fyAA/zzZYfYmxfyn3p2YOIU30klyA6Dq4ytyWq4nfzQWWglt5hNDE0cMhObvRtfjM9ghMSVtoELAb0MWiF/kw==}
@@ -10006,10 +10000,6 @@ snapshots:
   '@react-email/markdown@0.0.10(react@18.3.1)':
     dependencies:
       md-to-react-email: 5.0.2(react@18.3.1)
-      react: 18.3.1
-
-  '@react-email/preview@0.0.8(react@18.3.1)':
-    dependencies:
       react: 18.3.1
 
   '@react-email/preview@0.0.9(react@18.3.1)':
