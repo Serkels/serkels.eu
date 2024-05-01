@@ -137,7 +137,7 @@ $ code toctoc.code-workspace
 
 ```sh
 # with node@>=20
-$ corepack enable && corepack prepare pnpm@latest
+$ corepack enable && corepack prepare pnpm@latest --activate
 
 $ pnpm i
 # Generate missing database types for `@prisma/client`
