@@ -1699,8 +1699,8 @@ importers:
   packages/@douglasduteil/config/tailwindcss:
     dependencies:
       '@iconify/tailwind':
-        specifier: 0.1.4
-        version: 0.1.4
+        specifier: 1.0.1
+        version: 1.0.1
       '@iconify/tools':
         specifier: 4.0.4
         version: 4.0.4
@@ -2457,8 +2457,8 @@ packages:
     resolution: {integrity: sha512-X38nUbachlb01YMlvPFojKoiXq+LzZvuSce70KPMPdeM1Rj03k4dR7lDslhbqXn3Ang4EU3+EAmwEAsbrjHW3g==}
     engines: {node: '>=18.18'}
 
-  '@iconify/tailwind@0.1.4':
-    resolution: {integrity: sha512-U7RzcU2fkwOfMDsGQ3mtpLIaApSnqb+vgcJJknPPbg8/NF5s7tI1o5otEMfcpnLGk4PbYB8bxmKTz7IJVUlU2Q==}
+  '@iconify/tailwind@1.0.1':
+    resolution: {integrity: sha512-Y0AbOvabPJ4qjhQGWvCfhWoYC7aETqYAg9V++xkHFqy9gcUteKnEEmgOEsoOf6T7V9Xz34qKNLnaIAVkt1gLtQ==}
 
   '@iconify/tools@4.0.4':
     resolution: {integrity: sha512-hX1Z3i1Tm6JxyrDv45jNEijPpepZZfal/4leFGtUC04H9LsgRo597BOBFB9PUZsQdFGLOxVUUfv6lqU/dC+xXw==}
@@ -8839,7 +8839,7 @@ snapshots:
 
   '@humanwhocodes/retry@0.2.3': {}
 
-  '@iconify/tailwind@0.1.4':
+  '@iconify/tailwind@1.0.1':
     dependencies:
       '@iconify/types': 2.0.0
 
