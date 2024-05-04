@@ -50,8 +50,8 @@ importers:
         specifier: 1.11.1
         version: 1.11.1
       '@hono/sentry':
-        specifier: 1.0.1
-        version: 1.0.1(hono@4.3.0)
+        specifier: 1.1.0
+        version: 1.1.0(hono@4.3.0)
       '@hono/trpc-server':
         specifier: 0.3.0
         version: 0.3.0(@trpc/server@10.45.2)(hono@4.3.0)
@@ -2430,8 +2430,8 @@ packages:
     resolution: {integrity: sha512-GW1Iomhmm1o4Z+X57xGby8A35Cu9UZLL7pSMdqDBkD99U5cywff8F+8hLk5aBTzNubnsFAvWQ/fZjNwPsEn9lA==}
     engines: {node: '>=18.14.1'}
 
-  '@hono/sentry@1.0.1':
-    resolution: {integrity: sha512-4JgwdyasCQIoH3lhl4yLNxrP4/SElfK01ZV3JUaMvexVJnyAOPuXDhtJasl9Gssg7qDNt8ZIDDjqmVrOwS+AIw==}
+  '@hono/sentry@1.1.0':
+    resolution: {integrity: sha512-sg0hyn3VhQi2IQtHQgHxdyUWgvy+LMdjne0iVkFf0gW2KM3/uZyvMxdTZBlzOPeMq50q6CIEZrxtZJ8TZt8Vcw==}
     peerDependencies:
       hono: '>=3.*'
 
@@ -8853,7 +8853,7 @@ snapshots:
 
   '@hono/node-server@1.11.1': {}
 
-  '@hono/sentry@1.0.1(hono@4.3.0)':
+  '@hono/sentry@1.1.0(hono@4.3.0)':
     dependencies:
       hono: 4.3.0
       toucan-js: 3.4.0
