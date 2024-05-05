@@ -51,10 +51,10 @@ importers:
         version: 1.11.1
       '@hono/sentry':
         specifier: 1.1.0
-        version: 1.1.0(hono@4.3.1)
+        version: 1.1.0(hono@4.3.2)
       '@hono/trpc-server':
         specifier: 0.3.0
-        version: 0.3.0(@trpc/server@10.45.2)(hono@4.3.1)
+        version: 0.3.0(@trpc/server@10.45.2)(hono@4.3.2)
       '@trpc/server':
         specifier: 10.45.2
         version: 10.45.2
@@ -62,8 +62,8 @@ importers:
         specifier: 16.4.5
         version: 16.4.5
       hono:
-        specifier: 4.3.1
-        version: 4.3.1
+        specifier: 4.3.2
+        version: 4.3.2
       tsx:
         specifier: 4.9.1
         version: 4.9.1
@@ -5795,8 +5795,8 @@ packages:
   hoist-non-react-statics@3.3.2:
     resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
 
-  hono@4.3.1:
-    resolution: {integrity: sha512-yw/m4lZCuPpVJUQXyoeCy4uHXmq/osMxfEM8jMKGMr2V1OuL3vYybLrtoGj3GxC2wKIcMZO20i9nDMuZGkExNw==}
+  hono@4.3.2:
+    resolution: {integrity: sha512-wiZcF5N06tc232U11DnqW6hP8DNoypjsrxslKXfvOqOAkTdh7K1HLZJH/92Mf+urxUTGi96f1w4xx/1Qozoqiw==}
     engines: {node: '>=16.0.0'}
 
   hosted-git-info@2.8.9:
@@ -8853,15 +8853,15 @@ snapshots:
 
   '@hono/node-server@1.11.1': {}
 
-  '@hono/sentry@1.1.0(hono@4.3.1)':
+  '@hono/sentry@1.1.0(hono@4.3.2)':
     dependencies:
-      hono: 4.3.1
+      hono: 4.3.2
       toucan-js: 3.4.0
 
-  '@hono/trpc-server@0.3.0(@trpc/server@10.45.2)(hono@4.3.1)':
+  '@hono/trpc-server@0.3.0(@trpc/server@10.45.2)(hono@4.3.2)':
     dependencies:
       '@trpc/server': 10.45.2
-      hono: 4.3.1
+      hono: 4.3.2
 
   '@humanwhocodes/config-array@0.13.0':
     dependencies:
@@ -12999,7 +12999,7 @@ snapshots:
     dependencies:
       react-is: 16.13.1
 
-  hono@4.3.1: {}
+  hono@4.3.2: {}
 
   hosted-git-info@2.8.9: {}
 
