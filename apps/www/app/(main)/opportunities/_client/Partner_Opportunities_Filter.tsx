@@ -3,8 +3,7 @@
 import { useSyncSearchQuery } from ":components/hooks/useSyncSearchQuery";
 import { Partner_Filter } from "@1.modules/opportunity.domain";
 import { FilterRadioList } from "@1.ui/react/form/FilterRadioList";
-import { usePathname } from "next/navigation";
-import { useRouter } from "next/router";
+import { usePathname, useRouter } from "next/navigation";
 
 //
 

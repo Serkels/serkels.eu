@@ -3,14 +3,16 @@
 import { get_csrf_token } from "@1.modules/auth.next/csrf_token";
 import { UserAvatarFilled } from "@1.ui/react/icons";
 // import { UserAvatarFilled } from "@1.ui/react/icons";
+import { FrenchLocationField } from ":components/FrenchLocationField";
 import { TRPC_SSR } from ":trpc/server";
 import {
   PROFILE_ROLES,
   Profile_Schema,
   Studient_Schema,
 } from "@1.modules/profile.domain";
-import { input } from "@1.ui/react/form/atom";
+import { input, select } from "@1.ui/react/form/atom";
 import type { Metadata, ResolvingMetadata } from "next";
+import { Suspense } from "react";
 import { tv } from "tailwind-variants";
 import { EmailInput, SignInButton } from "./page.client";
 
@@ -80,13 +82,18 @@ export default async function Page() {
             name={profile_names.bio}
             placeholder="À propos"
           />
-          <input
-            className={input({ className: "col-span-full " })}
-            id={studient_names.city}
-            name={studient_names.city}
-            placeholder="Ville"
-            type="text"
-          />
+          <label
+            className={label({ className: "flex-col items-start space-x-0" })}
+          >
+            <span>Ville</span>
+            <Suspense>
+              <FrenchLocationField
+                name={studient_names.city}
+                id={studient_names.city}
+                placeholder="Ville"
+              />
+            </Suspense>
+          </label>
           <input
             className={input({ className: "col-span-full" })}
             id={studient_names.language}
@@ -95,7 +102,7 @@ export default async function Page() {
             type="text"
           />
           <select
-            className={input({ className: "col-span-full" })}
+            className={select({ className: "col-span-full" })}
             name={studient_names.interest}
           >
             <option hidden value={""}>
@@ -109,14 +116,16 @@ export default async function Page() {
           </select>
           <label className={label()}>
             <div className="flex-1">Email address</div>
-            <EmailInput
-              className={input({ className: "w-fit flex-grow opacity-50" })}
-              id="email"
-              name="email"
-              placeholder="Email"
-              required
-              type="email"
-            />
+            <Suspense>
+              <EmailInput
+                className={input({ className: "w-fit flex-grow opacity-50" })}
+                id="email"
+                name="email"
+                placeholder="Email"
+                required
+                type="email"
+              />
+            </Suspense>
           </label>
         </div>
         <SignInButton>Terminer</SignInButton>

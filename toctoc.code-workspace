@@ -33,6 +33,10 @@
     //
     //
     //
+    { "path": "packages/@1/modules/core", "name": "📦 modules/core" },
+    //
+    //
+    //
     { "path": "packages/@1/modules/exchange/api", "name": "🫙 exchange.api" },
     {
       "path": "packages/@1/modules/exchange/domain",
@@ -93,6 +97,10 @@
     //
     //
     //
+    { "path": "packages/@1/modules/trpc", "name": "📦 modules/trpc" },
+    //
+    //
+    //
     { "path": "packages/@1/ui/react", "name": "💄 react.ui" },
     // { "path": "packages/@1/infra", "name": "🏗️ infra" },
     { "path": "packages/@1/infra/database", "name": "🏗️/database" },
@@ -112,6 +120,7 @@
       "bradlc.vscode-tailwindcss",
       "dbaeumer.vscode-eslint",
       "esbenp.prettier-vscode",
+      "Prisma.prisma",
     ],
   },
   "settings": {

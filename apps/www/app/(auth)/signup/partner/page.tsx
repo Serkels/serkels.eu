@@ -3,7 +3,12 @@
 import { get_csrf_token } from "@1.modules/auth.next/csrf_token";
 import { UserAvatarFilled } from "@1.ui/react/icons";
 // import { UserAvatarFilled } from "@1.ui/react/icons";
-import { PROFILE_ROLES } from "@1.modules/profile.domain";
+import { FrenchLocationField } from ":components/FrenchLocationField";
+import {
+  PROFILE_ROLES,
+  Partner_Schema,
+  Profile_Schema,
+} from "@1.modules/profile.domain";
 import { input } from "@1.ui/react/form/atom";
 import type { Metadata, ResolvingMetadata } from "next";
 import { Suspense } from "react";
@@ -26,6 +31,8 @@ export async function generateMetadata(
 export default function Page() {
   const csrfToken = get_csrf_token();
   const { base, form, label } = style();
+  const profile_names = Profile_Schema.keyof().Enum;
+  const partner_names = Partner_Schema.keyof().Enum;
 
   return (
     <main className={base()}>
@@ -44,16 +51,16 @@ export default function Page() {
         <div className="container mx-auto grid grid-cols-12 gap-5 xl:max-w-4xl">
           <input
             className={input({ className: "col-span-full " })}
-            id="name"
-            name="name"
+            id={profile_names.name}
+            name={profile_names.name}
             placeholder="Nom de l'établissement"
             required
             type="text"
           />
           <textarea
             className={input({ className: "col-span-full " })}
-            id="bio"
-            name="bio"
+            id={profile_names.bio}
+            name={profile_names.bio}
             placeholder="À propos"
           />
           <input
@@ -64,10 +71,23 @@ export default function Page() {
             required
             type="text"
           />
+
+          <label
+            className={label({ className: "flex-col items-start space-x-0" })}
+          >
+            <span>Ville</span>
+            <Suspense>
+              <FrenchLocationField
+                name={partner_names.city}
+                id={partner_names.city}
+                placeholder="Ville"
+              />
+            </Suspense>
+          </label>
           <input
             className={input({ className: "col-span-full " })}
-            id="link"
-            name="link"
+            name={partner_names.link}
+            id={partner_names.link}
             placeholder="Site web"
             required
             type="text"

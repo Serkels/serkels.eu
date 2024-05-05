@@ -9,7 +9,7 @@ export default next_auth_procedure
   .input(
     z.object({
       cursor: z.string().optional(),
-      limit: z.number().min(1).max(10).default(2),
+      limit: z.number().min(1).max(10).default(10),
     }),
   )
   .query(async ({ input, ctx: { prisma, payload } }) => {

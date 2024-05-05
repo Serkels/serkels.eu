@@ -137,7 +137,7 @@ $ code toctoc.code-workspace
 
 ```sh
 # with node@>=20
-$ corepack enable && corepack prepare pnpm@latest
+$ corepack enable && corepack prepare pnpm@latest --activate
 
 $ pnpm i
 # Generate missing database types for `@prisma/client`
@@ -146,7 +146,7 @@ $ docker compose up -d
 
 # Local www
 $ pnpm exec turbo dev --filter "www..."
-$ pnpm exec turbo type-check --filter www^...
+$ pnpm exec turbo type-check --filter "www^..."
 # Local api
 $ pnpm exec turbo dev --filter "api..."
 $ pnpm exec turbo type-check --filter api^...

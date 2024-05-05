@@ -24,7 +24,7 @@
     "turbo": "1.13.3",
     "typescript": "5.4.5"
   },
-  "packageManager": "pnpm@9.0.6+sha256.0624e30eff866cdeb363b15061bdb7fd9425b17bc1bb42c22f5f4efdea21f6b3",
+  "packageManager": "pnpm@9.1.0-0+sha256.c557b24d2298d9b5e3be7086ebf55a28253b008324d545f72645a6de89844102",
   "engines": {
     "node": "20.12.2",
     "npm": ">=9",

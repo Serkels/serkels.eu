@@ -15,19 +15,19 @@
     "@1.modules/core": "workspace:*",
     "@1.modules/trpc": "workspace:*",
     "@hono/node-server": "1.11.1",
-    "@hono/sentry": "1.0.1",
-    "@hono/trpc-server": "0.2.0",
+    "@hono/sentry": "1.1.0",
+    "@hono/trpc-server": "0.3.0",
     "@trpc/server": "10.45.2",
     "dotenv": "16.4.5",
-    "hono": "4.2.8",
-    "tsx": "4.7.3",
+    "hono": "4.3.2",
+    "tsx": "4.9.1",
     "ws": "8.17.0",
     "zod": "3.22.5"
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
     "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
-    "@types/node": "20.12.7",
+    "@types/node": "20.12.8",
     "@types/ws": "8.5.10"
   }
 }

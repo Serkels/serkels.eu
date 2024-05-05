@@ -56,6 +56,12 @@ export const input = tv({
         text-gray-900
         focus:border-gray-500
       `,
+      xs: `
+        p-2
+        text-xs
+        text-gray-900
+        focus:border-gray-500
+      `,
     },
   },
   defaultVariants: {

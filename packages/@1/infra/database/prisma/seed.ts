@@ -692,61 +692,10 @@ async function studients_messages() {
                       ? recipient_studient.profile_id
                       : studient.profile_id,
                 },
-                // create: { type: "INBOX_NEW_MESSAGE", context: {}, created_at },
               },
             },
           });
         }
-        // await prisma.inboxMessageNotification.createMany({
-        //   data: thread.messages.flatMap(
-        //     ({
-        //       author,
-        //       created_at,
-        //       id: message_id,
-        //       thread: { inbox_threads },
-        //     }) =>
-        //       author.id === studient.id
-        //         ? [
-        //             {
-        //               //message_id,
-
-        //               notification: {create: {}}
-        //               // context: {
-        //               //   sender_id: recipient_studient.profile_id,
-        //               //   thread_id: thread.id,
-        //               // } satisfies Inbox_New_Message,
-        //               // created_at,
-        //               // read_at:
-        //               //   faker.helpers.maybe(() =>
-        //               //     faker.date.recent({
-        //               //       refDate: inbox_threads.at(0)!.last_seen_date,
-        //               //     }),
-        //               //   ) ?? null,
-        //               // owner_id: recipient_studient.profile_id,
-        //               // type: NotificationType.INBOX_NEW_MESSAGE,
-        //             } satisfies Prisma.InboxMessageNotificationCreateInput,
-        //           ]
-        //         : [
-        //             {
-        //               message_id,
-        //               // context: {
-        //               //   sender_id: studient.profile_id,
-        //               //   thread_id: thread.id,
-        //               // } satisfies Inbox_New_Message,
-        //               // created_at,
-        //               // read_at:
-        //               //   faker.helpers.maybe(() =>
-        //               //     faker.date.recent({
-        //               //       refDate: inbox_threads.at(0)!.last_seen_date,
-        //               //     }),
-        //               //   ) ?? null,
-
-        //               // owner_id: studient.profile_id,
-        //               // type: NotificationType.INBOX_NEW_MESSAGE,
-        //             } satisfies Prisma.InboxMessageNotificationCreateInput,
-        //           ],
-        //   ),
-        // });
       }),
     );
   }

@@ -1,21 +1,17 @@
 "use client";
 
-import { DomLazyMotion } from ":components/shell/DomLazyMotion";
-import { AnimatePresence, m } from "framer-motion";
+import { Frame } from "@1.ui/react/motion/Frame";
+import { m } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { type PropsWithChildren } from "react";
-import Nest from "react-nest";
 
 //
 
 export default function Motion_Layout({ children }: PropsWithChildren) {
   return (
-    <Nest>
-      <DomLazyMotion />
-      <AnimatePresence mode="wait" />
-      <MotionOutlet />
-      {children}
-    </Nest>
+    <Frame>
+      <MotionOutlet>{children}</MotionOutlet>
+    </Frame>
   );
 }
 //

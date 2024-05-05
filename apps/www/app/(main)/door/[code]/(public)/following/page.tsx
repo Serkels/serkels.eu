@@ -2,18 +2,8 @@
 
 import { TRPC_SSR } from ":trpc/server";
 import { column_screen } from "@1.ui/react/grid/atom";
-import { Spinner } from "@1.ui/react/spinner";
 import type { Metadata, ResolvingMetadata } from "next";
-import dynamic from "next/dynamic";
-
-//
-
-const List = dynamic(() => import("./_client/List"), {
-  ssr: false,
-  loading() {
-    return <Spinner />;
-  },
-});
+import List from "./_client/List";
 
 //
 
