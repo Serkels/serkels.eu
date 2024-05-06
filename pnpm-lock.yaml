@@ -1615,6 +1615,9 @@ importers:
       '@douglasduteil/nextauth...trpc.prisma':
         specifier: workspace:*
         version: link:../../../@douglasduteil/nextauth...trpc.prisma
+      '@prisma/client':
+        specifier: 5.13.0
+        version: 5.13.0(prisma@5.13.0)
       '@trpc/server':
         specifier: 10.45.2
         version: 10.45.2
