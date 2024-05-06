@@ -1,17 +1,19 @@
 //
 
+import { PrismaClient } from "@prisma/client";
 import process from "node:process";
 import { z } from "zod";
-import { PrismaClient } from "../prisma/.client";
 
 //
 
 export const NEXT_AUTH_HEADER = z.object({ NEXTAUTH_TOKEN: z.string() });
 export type NEXT_AUTH_HEADER = z.TypeOf<typeof NEXT_AUTH_HEADER>;
 
-export interface NextAuth_TRPCContext {
+export interface NextAuth_TRPCContext<
+  TPrismaClient extends PrismaClient = PrismaClient,
+> {
   headers: NEXT_AUTH_HEADER;
-  prisma: PrismaClient;
+  prisma: TPrismaClient;
 }
 export const SEND_VERIFICATION_REQUEST_INPUT_SCHEMA = z.object({
   identifier: z.string().email(),
