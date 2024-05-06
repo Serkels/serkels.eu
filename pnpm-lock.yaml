@@ -64,9 +64,6 @@ importers:
       hono:
         specifier: 4.3.2
         version: 4.3.2
-      tsx:
-        specifier: 4.9.1
-        version: 4.9.1
       ws:
         specifier: 8.17.0
         version: 8.17.0
@@ -77,12 +74,6 @@ importers:
       '@1.config/typescript':
         specifier: workspace:*
         version: link:../../packages/@1/config/typescript
-      '@douglasduteil/nextauth...trpc.prisma':
-        specifier: workspace:*
-        version: link:../../packages/@douglasduteil/nextauth...trpc.prisma
-      '@types/node':
-        specifier: 20.12.8
-        version: 20.12.8
       '@types/ws':
         specifier: 8.5.10
         version: 8.5.10
@@ -1615,6 +1606,9 @@ importers:
       '@douglasduteil/nextauth...trpc.prisma':
         specifier: workspace:*
         version: link:../../../@douglasduteil/nextauth...trpc.prisma
+      '@prisma/client':
+        specifier: 5.13.0
+        version: 5.13.0(prisma@5.13.0)
       '@trpc/server':
         specifier: 10.45.2
         version: 10.45.2

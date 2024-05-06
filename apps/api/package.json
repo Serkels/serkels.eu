@@ -20,14 +20,11 @@
     "@trpc/server": "10.45.2",
     "dotenv": "16.4.5",
     "hono": "4.3.2",
-    "tsx": "4.9.1",
     "ws": "8.17.0",
     "zod": "3.22.5"
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
-    "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
-    "@types/node": "20.12.8",
     "@types/ws": "8.5.10"
   }
 }

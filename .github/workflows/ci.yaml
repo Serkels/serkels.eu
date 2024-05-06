@@ -3,6 +3,11 @@ name: CI
 on:
   push:
   workflow_dispatch:
+
+env:
+  DO_NOT_TRACK: 1
+  CYPRESS_INSTALL_BINARY: 0
+
 jobs:
   www:
     name: Build www
@@ -60,6 +65,7 @@ jobs:
 
       - run: pnpm exec turbo type-check --filter api
       - run: pnpm exec turbo build --filter api
+
   heroku:
     name: Build heroku
     runs-on: ubuntu-latest
