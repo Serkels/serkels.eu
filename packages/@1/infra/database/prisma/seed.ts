@@ -21,6 +21,7 @@ import prisma from "../index";
 
 async function main() {
   await prisma.$transaction([
+    prisma.inboxMessageNotification.deleteMany(),
     prisma.user.deleteMany(),
     //
     prisma.account.deleteMany(),
@@ -29,7 +30,6 @@ async function main() {
     prisma.deal.deleteMany(),
     prisma.exchange.deleteMany(),
     prisma.exchangeThread.deleteMany(),
-    prisma.inboxMessageNotification.deleteMany(),
     prisma.inboxThread.deleteMany(),
     prisma.message.deleteMany(),
     prisma.notification.deleteMany(),
@@ -40,7 +40,6 @@ async function main() {
     prisma.signupPayload.deleteMany(),
     prisma.studient.deleteMany(),
     prisma.thread.deleteMany(),
-    prisma.user.deleteMany(),
   ]);
   console.log("🗑️");
 
