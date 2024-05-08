@@ -116,9 +116,9 @@ enum ProfileRole {
 
 model Bookmark {
   id             String       @id @default(cuid())
-  exchange       Exchange?    @relation("BookmarkedExchanges", fields: [exchange_id], references: [id])
+  exchange       Exchange?    @relation("BookmarkedExchanges", fields: [exchange_id], references: [id], onDelete: SetNull)
   exchange_id    String?
-  opportunity    Opportunity? @relation("BookmarkedOpportunities", fields: [opportunity_id], references: [id])
+  opportunity    Opportunity? @relation("BookmarkedOpportunities", fields: [opportunity_id], references: [id], onDelete: SetNull)
   opportunity_id String?
   owner          Profile      @relation(fields: [owner_id], references: [id], onDelete: Cascade)
   owner_id       String
@@ -174,7 +174,7 @@ enum CategoryContext {
 
 model Exchange {
   id          String       @id @default(cuid())
-  category    Category     @relation("CategorizedExchanges", fields: [category_id], references: [id])
+  category    Category     @relation("CategorizedExchanges", fields: [category_id], references: [id], onDelete: Cascade)
   category_id String
   deals       Deal[]
   description String
@@ -185,7 +185,7 @@ model Exchange {
   owner       Studient     @relation("ProposedExchanges", fields: [owner_id], references: [id], onDelete: Cascade)
   owner_id    String
   places      Int
-  return      Category?    @relation("CategorizedReturnExchanges", fields: [return_id], references: [id])
+  return      Category?    @relation("CategorizedReturnExchanges", fields: [return_id], references: [id], onDelete: SetNull)
   return_id   String?
   title       String
   type        ExchangeType
@@ -253,7 +253,7 @@ enum ExchangeThreadStatus {
 
 model Opportunity {
   id          String   @id @default(cuid())
-  category    Category @relation("CategorizedOpportunities", fields: [category_id], references: [id])
+  category    Category @relation("CategorizedOpportunities", fields: [category_id], references: [id], onDelete: Cascade)
   category_id String
   cover       String
   description String
@@ -283,10 +283,10 @@ model Opportunity {
 
 model Question {
   id                 String   @id @default(cuid())
-  accepted_answer    Answer?  @relation("AcceptedAnswer", fields: [accepted_answer_id], references: [id])
+  accepted_answer    Answer?  @relation("AcceptedAnswer", fields: [accepted_answer_id], references: [id], onDelete: SetNull)
   accepted_answer_id String?  @unique
   answers            Answer[] @relation("ParentQuestion")
-  category           Category @relation("CategorizedQuestions", fields: [category_id], references: [id])
+  category           Category @relation("CategorizedQuestions", fields: [category_id], references: [id], onDelete: Cascade)
   category_id        String
   owner              Studient @relation("AskedQuestions", fields: [owner_id], references: [id], onDelete: Cascade)
   owner_id           String
@@ -352,7 +352,7 @@ model Message {
   author    Profile @relation("WrittenMessages", fields: [author_id], references: [id], onDelete: Cascade)
   author_id String
   content   String
-  thread    Thread  @relation(fields: [thread_id], references: [id])
+  thread    Thread  @relation(fields: [thread_id], references: [id], onDelete: Cascade)
   thread_id String
 
   notifications InboxMessageNotification[]
