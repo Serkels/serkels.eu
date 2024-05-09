@@ -16,7 +16,7 @@ export function ErrorOccur({
       </h1>
 
       <h5 className="text-black-500 py-3 text-center text-lg font-bold">
-        Une erreur est survenu...
+        Une erreur est survenue...
         <br />
         {debug ? (
           <code className="text-primary invert">{error?.message}</code>
@@ -26,7 +26,7 @@ export function ErrorOccur({
       <br />
 
       <p className="text-xs">
-        Si cette erreur semble irésolvable, fermer cette fenêtre et réessayez de
+        Si cette erreur semble irésolvable, fermez cette fenêtre et réessayez de
         vous authentifier.
       </p>
 

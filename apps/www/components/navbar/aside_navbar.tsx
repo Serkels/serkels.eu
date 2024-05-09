@@ -42,7 +42,7 @@ export function Studient_NavBar({ studient }: { studient: Studient }) {
           Mes échanges
         </Li_Link>
         <Li_Link icon={<Bookmark />} href="./bookmarks">
-          Sauvgardes
+          Sauvegardes
         </Li_Link>
         <SubNav_Bookmarks href="./bookmarks">
           <Li_Link
