@@ -121,6 +121,7 @@
       "dbaeumer.vscode-eslint",
       "esbenp.prettier-vscode",
       "Prisma.prisma",
+      "yoavbls.pretty-ts-errors",
     ],
   },
   "settings": {
