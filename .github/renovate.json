@@ -6,14 +6,5 @@
     ":timezone(Europe/Paris)"
   ],
   "dependencyDashboardAutoclose": true,
-  "labels": ["dependencies"],
-  "packageRules": [
-    {
-      "description": "strapi monorepo",
-      "sourceUrlPrefixes": ["https://github.com/strapi/strapi"],
-      "groupName": "strapi monorepo",
-      "matchPackagePatterns": ["strapi", "^@strapi/", "^strapi-"]
-    }
-  ],
-  "postUpdateOptions": ["yarnDedupeHighest"]
+  "labels": ["dependencies"]
 }
