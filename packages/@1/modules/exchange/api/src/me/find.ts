@@ -10,7 +10,7 @@ export const find = next_auth_procedure
   .input(
     z.object({
       cursor: z.string().optional(),
-      limit: z.number().min(1).max(10).default(10),
+      limit: z.number().min(1).max(10).default(1),
       search: z.string().optional(),
     }),
   )
@@ -59,18 +59,24 @@ export const find = next_auth_procedure
       ...find_cursor,
       orderBy: { updated_at: "desc" },
       select: { parent: true },
-      take: limit,
+      take: limit + 1,
       where: { ...deal_releated_to_me_where, parent: { ...search_where } },
       distinct: ["parent_id"],
     });
 
     const data = deals.map(({ parent }) => parent);
 
+    const first_exchanges = await prisma.exchange.findMany({
+      where: { owner_id: studient_id, id: { notIn: data.map(({ id }) => id) } },
+    });
+
     let next_cursor: typeof cursor | undefined = undefined;
     if (data.length > limit) {
       const next_item = data.pop()!;
       next_cursor = next_item.id;
     }
+
+    data.push(...first_exchanges);
 
     return { data, next_cursor };
   });
