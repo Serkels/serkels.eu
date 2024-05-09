@@ -204,7 +204,7 @@ function ErrorOccur() {
     <WhiteCard>
       <center className="grid min-h-[200px] grid-cols-1 items-center ">
         <h1 className="text-4xl">❌</h1>
-        Une erreur est survenu...
+        Une erreur est survenue...
       </center>
 
       <hr />
@@ -228,7 +228,7 @@ function CheckYourMail() {
     <WhiteCard>
       <center className="grid min-h-[200px] grid-cols-1 items-center ">
         <h1 className="text-4xl">✅</h1>
-        Consulté votre boite mail pour confirmer votre identité
+        Consultez votre boite mail pour confirmer votre identité
       </center>
 
       <hr />

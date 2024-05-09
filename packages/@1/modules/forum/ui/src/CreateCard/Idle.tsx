@@ -35,7 +35,7 @@ export function Idle({
         "
         onClick={onClick}
       >
-        Posez une questions aux étudiants...
+        Posez une question aux étudiants...
       </button>
     </div>
   );
