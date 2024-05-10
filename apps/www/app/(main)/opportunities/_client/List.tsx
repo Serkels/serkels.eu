@@ -35,7 +35,7 @@ export default function List() {
         TRPC_React.opportunity.find.private.useInfiniteQuery(
           {
             category,
-            search: search,
+            search,
             filter,
           },
           {
@@ -48,7 +48,7 @@ export default function List() {
         TRPC_React.opportunity.find.public.useInfiniteQuery(
           {
             category,
-            search: search,
+            search,
           },
           {
             getNextPageParam: (lastPage) => lastPage.nextCursor,

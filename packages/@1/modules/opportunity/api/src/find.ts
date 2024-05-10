@@ -7,6 +7,7 @@ import {
   router,
   type inferProcedureInput,
 } from "@1.modules/trpc";
+import { Prisma } from "@prisma/client";
 import { startOfToday } from "date-fns/startOfToday";
 import { P, match } from "ts-pattern";
 import { z } from "zod";
@@ -45,9 +46,7 @@ async function find_resolver(
     input: { limit, category, cursor, search },
   } = options;
 
-  type OpportunityWhereInput = NonNullable<
-    Parameters<typeof prisma.opportunity.findMany>[0]
-  >["where"];
+  type OpportunityWhereInput = Prisma.OpportunityWhereInput;
 
   const nerrow = match(options)
     .with(
@@ -72,15 +71,20 @@ async function find_resolver(
     )
     .otherwise(() => ({}));
 
+  const searchWhere: OpportunityWhereInput = {
+    OR: [
+      { title: { contains: search ?? "", mode: "insensitive" } },
+      { description: { contains: search ?? "", mode: "insensitive" } },
+      { location: { contains: search ?? "", mode: "insensitive" } },
+    ],
+  };
+
   const items = await prisma.opportunity.findMany({
     ...(cursor ? { cursor: { id: cursor } } : {}),
     orderBy: { expiry_date: "asc" },
     take: limit + 1,
     where: {
-      OR: [
-        { title: { contains: search ?? "", mode: "insensitive" } },
-        { description: { contains: search ?? "", mode: "insensitive" } },
-      ],
+      ...searchWhere,
       ...(category ? { category: { slug: category } } : {}),
       ...nerrow,
     },
