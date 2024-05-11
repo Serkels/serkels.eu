@@ -1,3 +1,13 @@
 //
 
-export { TocToc_Placeholder as default } from ":components/placeholder/TocToc_Placeholder";
+import { TocToc_Placeholder } from ":components/placeholder/TocToc_Placeholder";
+
+//
+
+export default function Page() {
+  return (
+    <div className="hidden h-full md:block">
+      <TocToc_Placeholder />
+    </div>
+  );
+}

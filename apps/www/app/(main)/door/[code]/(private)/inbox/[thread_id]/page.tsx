@@ -1,10 +1,11 @@
 //
 
 import { SeeProfileAvatarMedia } from ":components/avatar";
+import { Loading_Placeholder } from ":components/placeholder/Loading_Placeholder";
 import { session_profile_id } from ":pipes/session_profile_id";
-import { thread_recipient, type Params } from ":pipes/thread_by_id";
+import { type Params } from ":pipes/thread_by_id";
 import { TRPC_SSR } from ":trpc/server";
-import { Spinner } from "@1.ui/react/spinner";
+import { thread_recipient } from "@1.modules/inbox.domain/select";
 import to from "await-to-js";
 import type { Metadata, ResolvingMetadata } from "next";
 import dynamic from "next/dynamic";
@@ -19,8 +20,7 @@ const Thread_Timeline = dynamic(
   {
     ssr: false,
     loading() {
-      return <Spinner />;
-      // return <InputSearch />;
+      return <Loading_Placeholder />;
     },
   },
 );
@@ -45,9 +45,6 @@ export async function generateMetadata(
 
 export default async function Page({ params }: { params: Params }) {
   const { thread_id } = params;
-
-  //! HACK(douglasduteil): Investigate way the param is "undefined" on direct page access
-  if (thread_id === "undefined") return null;
 
   const [thread_err, thread] = await to(
     TRPC_SSR.inbox.thread.by_id.fetch(thread_id),

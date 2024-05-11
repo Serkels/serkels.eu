@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 
+//
+
 export function TocToc_Placeholder() {
   return (
     <figure className="flex h-full items-center justify-center">

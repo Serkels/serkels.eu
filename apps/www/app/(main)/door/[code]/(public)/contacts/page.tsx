@@ -1,8 +1,10 @@
 //
 
+import { type CodeParms } from ":pipes/code";
 import { TRPC_SSR } from ":trpc/server";
 import { column_screen } from "@1.ui/react/grid/atom";
 import type { Metadata, ResolvingMetadata } from "next";
+import { redirect } from "next/navigation";
 import Infinite_Contacts_List from "./_client/Infinite_Contacts_List";
 
 //
@@ -23,7 +25,11 @@ export async function generateMetadata(
 
 //
 
-export default async function Page() {
+export default async function Page({ params }: { params: CodeParms }) {
+  if (params.code !== "~") {
+    redirect(`/@${params.code}`);
+  }
+
   await TRPC_SSR.profile.me.contacts.prefetchInfinite({});
 
   return (
