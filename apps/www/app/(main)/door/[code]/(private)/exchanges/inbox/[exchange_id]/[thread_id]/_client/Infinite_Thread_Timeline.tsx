@@ -1,5 +1,6 @@
 "use client";
 
+import { Loading_Placeholder } from ":components/placeholder/Loading_Placeholder";
 import { TRPC_React } from ":trpc/client";
 import {
   HANDSHAKE_ACCEPETED,
@@ -10,7 +11,6 @@ import {
 import type { Message as Message_Type } from "@1.modules/inbox.domain";
 import { Message } from "@1.modules/inbox.ui/conversation/Message";
 import { Timeline } from "@1.modules/inbox.ui/conversation/Timeline";
-import { Spinner } from "@1.ui/react/spinner";
 import { useDocumentVisibility, useTimeoutEffect } from "@react-hookz/web";
 import type { UseInfiniteQueryResult } from "@tanstack/react-query";
 import { format } from "date-fns";
@@ -108,7 +108,7 @@ export default function Infinite_Thread_Timeline({
       throw error;
     })
     .with({ status: "loading" }, () => {
-      return <Spinner />;
+      return <Loading_Placeholder />;
     })
     .with({ status: "success" }, () => (
       <>

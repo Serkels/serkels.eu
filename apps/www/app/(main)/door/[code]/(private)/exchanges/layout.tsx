@@ -27,7 +27,7 @@ export default async function Layout({
   const profile_id = await code_to_profile_id(params);
 
   if (!profile_id) {
-    return notFound();
+    notFound();
   }
 
   const profile = await TRPC_SSR.profile.by_id.fetch(profile_id);
@@ -35,5 +35,5 @@ export default async function Layout({
     redirect(`/@${params.code}`);
   }
 
-  return <>{children}</>;
+  return children;
 }

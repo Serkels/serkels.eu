@@ -90,6 +90,7 @@ function Item({
 }) {
   const info = TRPC_React.exchanges.by_id.useQuery(exchange_id);
   const { data: session } = useSession();
+  const searchParams = useSearchParams();
   const profile_id = session?.profile.id ?? PROFILE_UNKNOWN.id;
 
   //
@@ -114,7 +115,10 @@ function Item({
   return (
     <Link
       className={base({ className: "block space-y-1" })}
-      href={`/@~/exchanges/inbox/${id}`}
+      href={{
+        pathname: `/@~/exchanges/inbox/${id}`,
+        query: searchParams.toString(),
+      }}
     >
       <header className="relative">
         <div className={indicator()}>

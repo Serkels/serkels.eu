@@ -10,8 +10,9 @@ import Infinite_Thread_List from "./_client/Infinite_Thread_List";
 
 //
 
-export default async function Page({ params }: { params: Params }) {
+export default async function DealNavbarPage({ params }: { params: Params }) {
   const { exchange_id } = params;
+
   try {
     const [exchange_err, exchange] = await to(
       TRPC_SSR.exchanges.by_id.fetch(exchange_id),
@@ -25,19 +26,24 @@ export default async function Page({ params }: { params: Params }) {
     });
 
     return (
-      <div className={column_screen({ className: "[&>*]:px-8" })}>
+      <div className={column_screen({ className: "pt-10 [&>*]:px-8" })}>
         <header className="flex h-16 items-center justify-start space-x-7">
           <div className="flex flex-col">
             <h6 className="line-clamp-2 flex-1 text-xl font-bold">
               {exchange.title}
             </h6>
-            <Link href={`/exchanges?q=${exchange.title}`}>
+            <Link
+              href={{
+                pathname: "/exchanges",
+                query: { q: exchange.title },
+              }}
+            >
               Consulter l'échange
             </Link>
           </div>
         </header>
 
-        <hr className="my-6 border-2 border-[#F0F0F0]" />
+        <hr className="my-6 border border-[#F0F0F0]" />
 
         <nav
           className="

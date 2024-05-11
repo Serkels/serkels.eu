@@ -8,7 +8,7 @@ export const column_screen = tv({
   base: `
     flex
     h-full
-    max-h-[calc(100vh_-_theme(spacing.36))]
+    max-h-[calc(100vh_-_theme(spacing.24))]
     flex-col
     space-y-6
   `,

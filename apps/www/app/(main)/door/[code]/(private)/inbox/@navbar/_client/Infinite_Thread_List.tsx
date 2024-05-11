@@ -104,7 +104,13 @@ function UserThread_Item({ thread_id }: { thread_id: string }) {
         const { indicator } = item({ unread });
 
         return (
-          <Link href={`${href}?${search_params.toString()}`} key={thread.id}>
+          <Link
+            href={{
+              pathname: href,
+              query: search_params.toString(),
+            }}
+            key={thread.id}
+          >
             <Thread_Item
               last_update={last_message.created_at}
               last_seen_date={last_seen_date}

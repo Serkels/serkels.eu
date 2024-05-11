@@ -1,8 +1,8 @@
 //
 
 import type { Metadata, ResolvingMetadata } from "next";
-import type { PropsWithChildren } from "react";
-import Navbar_Page from "./_@navbar/page";
+import type { PropsWithChildren, ReactNode } from "react";
+import { Aside } from "./layout.client";
 
 //
 
@@ -16,12 +16,17 @@ export async function generateMetadata(
 }
 
 //
-export default function Layout({ children }: PropsWithChildren) {
-  const navbar = <Navbar_Page />;
+
+export default function Layout({
+  children,
+  navbar,
+}: PropsWithChildren<{ navbar: ReactNode }>) {
   return (
     <div className="grid h-full md:grid-cols-6 xl:grid-cols-10">
-      <aside className="col-span-3 hidden pt-10 md:block">{navbar}</aside>
-      <div className="col-span-3 bg-white xl:col-span-7">{children}</div>
+      <Aside className="col-span-3">{navbar}</Aside>
+      <div className="col-span-3 bg-white max-md:has-[>_.hidden]:hidden xl:col-span-7">
+        {children}
+      </div>
     </div>
   );
 }

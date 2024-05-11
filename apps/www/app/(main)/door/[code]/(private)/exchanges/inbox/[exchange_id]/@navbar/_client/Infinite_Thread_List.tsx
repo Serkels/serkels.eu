@@ -21,7 +21,7 @@ import type { UseQueryResult } from "@tanstack/react-query";
 import { isAfter } from "date-fns";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import type { ComponentPropsWithoutRef } from "react";
 import { match } from "ts-pattern";
 
@@ -52,6 +52,7 @@ export default function Infinite_Thread_List(params: Params) {
 function UserThread_Item({ thread_id }: { thread_id: string }) {
   const { data: session } = useSession();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const profile_id = session?.profile.id ?? PROFILE_UNKNOWN.id;
   const info = TRPC_React.exchanges.me.inbox.by_thread_id.useQuery(
     thread_id,
@@ -77,7 +78,12 @@ function UserThread_Item({ thread_id }: { thread_id: string }) {
         });
         const href = `/@~/exchanges/inbox/${deal.parent_id}/${thread.id}`;
         return (
-          <Link href={href}>
+          <Link
+            href={{
+              pathname: href,
+              query: searchParams.toString(),
+            }}
+          >
             <Thread_Item
               last_update={last_message.updated_at}
               variants={{
