@@ -115,11 +115,11 @@ export function Partner_NavBar({ partner }: { partner: Partner }) {
   );
 }
 export const aside_navbar = tv({
-  base: "py-5 pt-10 ",
+  base: "py-5 pt-10",
   variants: {},
 });
 const navbar = tv({
-  base: "sticky top-16 py-5 pt-10",
+  base: "sticky top-0 py-5",
   variants: {
     $alone: {
       // true: "block max-h-[calc(100vh_-_theme(spacing.16)-_theme(spacing.8))] ",

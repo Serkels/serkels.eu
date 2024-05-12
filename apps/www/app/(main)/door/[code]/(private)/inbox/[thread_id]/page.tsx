@@ -85,6 +85,7 @@ const layout = tv({
     h-full
     max-h-[calc(100vh_-_theme(spacing.16)-_theme(spacing.8))]
     grid-rows-[auto_1fr_auto]
+    overflow-hidden
     bg-white
     text-black
     [&>*]:px-7

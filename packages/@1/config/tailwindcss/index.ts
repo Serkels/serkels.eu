@@ -80,6 +80,11 @@ export default {
   theme: {
     backgroundImage,
     colors,
+    height: ({ theme }) => ({
+      navbar: theme("spacing.16"),
+      footer: theme("spacing.8"),
+      main: `calc(100vh - ${theme("spacing.16")} - ${theme("spacing.8")})`,
+    }),
   },
   plugins: [typography()],
   // plugins: [custom_icon_set(resolve(__dirname, "icons"))],

@@ -14,7 +14,7 @@ export default async function Page() {
   await TRPC_SSR.inbox.find.prefetchInfinite({});
 
   return (
-    <div className={column_screen({ className: "[&>*]:px-8 pt-10" })}>
+    <div className={column_screen({ className: "pt-10 [&>*]:px-8" })}>
       <div className="flex justify-between">
         <h6 className="px-8 text-2xl font-bold">Messages</h6>
         <Link
@@ -28,10 +28,9 @@ export default async function Page() {
       <SearchForm />
       <nav
         className="
-          my-8
-          max-h-[calc(100vh_-_theme(spacing.16)-_theme(spacing.8))]
           flex-1
           overflow-y-auto
+          py-8
         "
       >
         <Infinite_Thread_List />

@@ -7,6 +7,7 @@ import type { Config } from "tailwindcss";
 //
 
 export const root = __dirname;
+
 const config = {
   content: ["./src/**/*.{ts,tsx}"],
   theme: {
