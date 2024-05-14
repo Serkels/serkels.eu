@@ -36,7 +36,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@prisma/client": "5.13.0",
+    "@prisma/client": "5.14.0",
     "@trpc/client": "10.45.2",
     "@trpc/server": "10.45.2",
     "next": "14.2.3",
@@ -47,7 +47,7 @@
   "devDependencies": {
     "@douglasduteil/config...typescript": "workspace:*",
     "@douglasduteil/datatypes...hours-to-seconds": "workspace:*",
-    "prisma": "5.13.0",
+    "prisma": "5.14.0",
     "typescript": "5.4.5"
   }
 }
