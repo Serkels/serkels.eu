@@ -21,8 +21,8 @@ export default function SearchForm() {
         ? setQuery(ev.target.value)
         : router.push(`/opportunities?q=${ev.target.value}`),
     [setQuery, pathname],
+    200,
     1_666,
-    1_111,
   );
 
   return <InputSearch onChange={onChange} defaultValue={query} />;
