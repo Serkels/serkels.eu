@@ -1,5 +1,6 @@
 "use client";
 
+import { DEBOUNCE_DELAY, MAX_WAIT } from ":app/constants";
 import { useSyncSearchQuery } from ":components/hooks/useSyncSearchQuery";
 import InputSearch from "@1.ui/react/input/InputSearch";
 import { useDebouncedCallback } from "@react-hookz/web";
@@ -21,8 +22,8 @@ export default function SearchForm() {
         ? setQuery(ev.target.value)
         : router.push(`/opportunities?q=${ev.target.value}`),
     [setQuery, pathname],
-    200,
-    1_666,
+    DEBOUNCE_DELAY,
+    MAX_WAIT,
   );
 
   return <InputSearch onChange={onChange} defaultValue={query} />;
