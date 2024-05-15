@@ -30,7 +30,7 @@ export const InputSearch = forwardRef<ElementRef<"input">, InputSearch_Props>(
             ref={forwardedRef}
             type="search"
             id="default-search"
-            className="search-cancel:text-black text-base block w-full rounded-full border border-[#B7B7B7] p-2 pl-12 outline-none"
+            className="search-cancel:text-black block w-full rounded-full border border-[#B7B7B7] p-2 pl-12 outline-none"
             placeholder="Recherche"
             {...other_props}
           />
