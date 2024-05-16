@@ -28,6 +28,7 @@ export * from "./Person";
 export * from "./Plus";
 export * from "./PlusBox";
 export * from "./School";
+export * from "./Search";
 export * from "./Share";
 export * from "./Trash";
 export * from "./UserAvatarFilled";
