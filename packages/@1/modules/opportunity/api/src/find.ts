@@ -76,6 +76,13 @@ async function find_resolver(
       { title: { contains: search ?? "", mode: "insensitive" } },
       { description: { contains: search ?? "", mode: "insensitive" } },
       { location: { contains: search ?? "", mode: "insensitive" } },
+      {
+        owner: {
+          profile: {
+            name: { contains: search ?? "", mode: "insensitive" },
+          },
+        },
+      },
     ],
   };
 
