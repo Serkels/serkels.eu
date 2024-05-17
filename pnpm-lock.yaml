@@ -51,10 +51,10 @@ importers:
         version: 1.11.1
       '@hono/sentry':
         specifier: 1.1.0
-        version: 1.1.0(hono@4.3.6)
+        version: 1.1.0(hono@4.3.7)
       '@hono/trpc-server':
         specifier: 0.3.1
-        version: 0.3.1(@trpc/server@10.45.2)(hono@4.3.6)
+        version: 0.3.1(@trpc/server@10.45.2)(hono@4.3.7)
       '@trpc/server':
         specifier: 10.45.2
         version: 10.45.2
@@ -62,11 +62,11 @@ importers:
         specifier: 16.4.5
         version: 16.4.5
       hono:
-        specifier: 4.3.6
-        version: 4.3.6
+        specifier: 4.3.7
+        version: 4.3.7
       tsx:
-        specifier: 4.10.2
-        version: 4.10.2
+        specifier: 4.10.3
+        version: 4.10.3
       ws:
         specifier: 8.17.0
         version: 8.17.0
@@ -386,8 +386,8 @@ importers:
         specifier: 1.6.6
         version: 1.6.6
       tsx:
-        specifier: 4.10.2
-        version: 4.10.2
+        specifier: 4.10.3
+        version: 4.10.3
 
   packages/@1/infra/email:
     dependencies:
@@ -5789,8 +5789,8 @@ packages:
   hoist-non-react-statics@3.3.2:
     resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
 
-  hono@4.3.6:
-    resolution: {integrity: sha512-2IqXwrxWF4tG2AR7b5tMYn+KEnWK8UvdC/NUSbOKWj/Kj11OJqel58FxyiXLK5CcKLiL8aGtTe4lkBKXyaHMBQ==}
+  hono@4.3.7:
+    resolution: {integrity: sha512-GXlsGnCAwGosu+COwYyYC8MwOY2L6Ihg9V1znYdMD8DHCJl+13Nk4o8dsBYJpae4oujjw24jBaITuYWVq2+V8Q==}
     engines: {node: '>=16.0.0'}
 
   hosted-git-info@2.8.9:
@@ -7921,8 +7921,8 @@ packages:
   tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
 
-  tsx@4.10.2:
-    resolution: {integrity: sha512-gOfACgv1ElsIjvt7Fp0rMJKGnMGjox0JfGOfX3kmZCV/yZumaNqtHGKBXt1KgaYS9KjDOmqGeI8gHk/W7kWVZg==}
+  tsx@4.10.3:
+    resolution: {integrity: sha512-f0g60aFSVRVkzcQkEflh8fPLRfmt+HJHgWi/plG5UgvVaV+9TcpOwJ0sZJSACXmwmjMPg9yQR0BhTLbhkfV2uA==}
     engines: {node: '>=18.0.0'}
     hasBin: true
 
@@ -8847,15 +8847,15 @@ snapshots:
 
   '@hono/node-server@1.11.1': {}
 
-  '@hono/sentry@1.1.0(hono@4.3.6)':
+  '@hono/sentry@1.1.0(hono@4.3.7)':
     dependencies:
-      hono: 4.3.6
+      hono: 4.3.7
       toucan-js: 3.4.0
 
-  '@hono/trpc-server@0.3.1(@trpc/server@10.45.2)(hono@4.3.6)':
+  '@hono/trpc-server@0.3.1(@trpc/server@10.45.2)(hono@4.3.7)':
     dependencies:
       '@trpc/server': 10.45.2
-      hono: 4.3.6
+      hono: 4.3.7
 
   '@humanwhocodes/config-array@0.13.0':
     dependencies:
@@ -12994,7 +12994,7 @@ snapshots:
     dependencies:
       react-is: 16.13.1
 
-  hono@4.3.6: {}
+  hono@4.3.7: {}
 
   hosted-git-info@2.8.9: {}
 
@@ -15559,7 +15559,7 @@ snapshots:
 
   tslib@2.6.2: {}
 
-  tsx@4.10.2:
+  tsx@4.10.3:
     dependencies:
       esbuild: 0.20.2
       get-tsconfig: 4.7.5

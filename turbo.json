@@ -18,10 +18,11 @@
       ]
     },
     "generate": {
+      "cache": false,
       "outputs": ["node_modules/@prisma/client/**"]
     },
     "clean": { "cache": false },
-    "dev": { "cache": false, "dependsOn": ["^build"] },
+    "dev": { "persistent": true, "dependsOn": ["^build"] },
     "lint": { "cache": false, "dependsOn": ["^build"] },
     "type-check": {
       "dependsOn": ["^type-check"],
