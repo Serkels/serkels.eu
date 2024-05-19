@@ -47,7 +47,7 @@
     "@react-hookz/web": "24.0.4",
     "date-fns": "3.6.0",
     "formik": "2.4.6",
-    "framer-motion": "11.1.7",
+    "framer-motion": "11.2.4",
     "react-aria-components": "1.2.0",
     "react-nest": "0.1.10",
     "react-slotify": "0.2.2",
