@@ -6,6 +6,7 @@ import type { Params as ExchangeParams } from ":pipes/exchange_by_id";
 import { session_profile_id } from ":pipes/session_profile_id";
 import { type Params as ThreadParams } from ":pipes/thread_by_id";
 import { TRPC_SSR } from ":trpc/server";
+import { ExchangeProvider } from "@1.modules/exchange.ui/context";
 import { thread_recipient } from "@1.modules/inbox.domain/select";
 import to from "await-to-js";
 import type { Metadata, ResolvingMetadata } from "next";
@@ -77,10 +78,14 @@ export default async function Page({
         <SeeProfileAvatarMedia profile={participant} />
       </header>
       <div className="overflow-y-auto py-4 pr-5">
-        <Thread_Timeline exchange={exchange} profile_id={profile_id} />
+        <ExchangeProvider exchange={exchange}>
+          <Thread_Timeline profile_id={profile_id} />
+        </ExchangeProvider>
       </div>
       <footer className={footer()}>
-        <Conversation_Form exchange={exchange} thread_id={thread_id} />
+        <ExchangeProvider exchange={exchange}>
+          <Conversation_Form thread_id={thread_id} />
+        </ExchangeProvider>
       </footer>
     </main>
   );
