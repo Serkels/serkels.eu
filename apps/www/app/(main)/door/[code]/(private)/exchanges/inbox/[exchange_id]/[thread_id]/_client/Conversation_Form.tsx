@@ -1,7 +1,8 @@
 "use client";
 
 import { TRPC_React } from ":trpc/client";
-import { Deal_Status_Schema, type Exchange } from "@1.modules/exchange.domain";
+import { Deal_Status_Schema } from "@1.modules/exchange.domain";
+import { useExchange } from "@1.modules/exchange.ui/context";
 import { Button } from "@1.ui/react/button";
 import { input } from "@1.ui/react/form/atom";
 import { PaperPlane } from "@1.ui/react/icons";
@@ -12,12 +13,11 @@ import { useCallback, useEffect } from "react";
 //
 
 export default function Conversation_Form({
-  exchange,
   thread_id,
 }: {
-  exchange: Exchange;
   thread_id: string;
 }) {
+  const exchange = useExchange();
   const exchange_id = exchange.id;
   const send = TRPC_React.inbox.thread.send.useMutation();
   const send_deal_update = TRPC_React.exchanges.me.deal_update.useMutation();
@@ -33,7 +33,7 @@ export default function Conversation_Form({
       utils.exchanges.by_id.invalidate(exchange_id),
       utils.exchanges.me.find.invalidate(),
       utils.exchanges.me.inbox.by_thread_id.invalidate(thread_id),
-      utils.exchanges.me.inbox.by_exchange_id.invalidate({exchange_id}),
+      utils.exchanges.me.inbox.by_exchange_id.invalidate({ exchange_id }),
       utils.exchanges.me.inbox.next_actions.invalidate(),
       utils.inbox.thread.messages.invalidate({ thread_id }),
     ]);

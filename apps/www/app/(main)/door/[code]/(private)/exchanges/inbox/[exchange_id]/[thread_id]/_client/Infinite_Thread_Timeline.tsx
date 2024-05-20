@@ -2,12 +2,13 @@
 
 import { Loading_Placeholder } from ":components/placeholder/Loading_Placeholder";
 import { TRPC_React } from ":trpc/client";
+import type { ID_Schema } from "@1.modules/core/domain";
 import {
   HANDSHAKE_ACCEPETED,
   HANDSHAKE_COMPLETED,
   HANDSHAKE_DENIED,
-  type Exchange,
 } from "@1.modules/exchange.domain";
+import { useExchange } from "@1.modules/exchange.ui/context";
 import type { Message as Message_Type } from "@1.modules/inbox.domain";
 import { Message } from "@1.modules/inbox.ui/conversation/Message";
 import { Timeline } from "@1.modules/inbox.ui/conversation/Timeline";
@@ -30,12 +31,11 @@ import { z } from "zod";
 //
 
 export default function Infinite_Thread_Timeline({
-  exchange,
   profile_id,
 }: {
   profile_id: string;
-  exchange: Exchange;
 }) {
+  const exchange = useExchange();
   const utils = TRPC_React.useUtils();
   const scroll_target_ref = useRef<HTMLDivElement>(null);
   const params = z
@@ -115,99 +115,12 @@ export default function Infinite_Thread_Timeline({
         <Timeline query_info={query_info} profile_id={profile_id}>
           <Timeline.Message>
             {function ({ messages, profile }) {
-              const last_index = messages.length - 1;
-              const is_you = profile.id === profile_id;
-
-              return messages.map((message, index) =>
-                match(message)
-                  .with(
-                    {
-                      content: HANDSHAKE_COMPLETED,
-                    },
-                    () => <Congratulations key={message.id} />,
-                  )
-                  .with(
-                    {
-                      author: { id: exchange.owner.profile.id },
-                      content: HANDSHAKE_ACCEPETED,
-                    },
-                    () => (
-                      <Message_OKay
-                        key={message.id}
-                        variant={{
-                          is_first: index === 0,
-                          is_last: index === last_index,
-                          is_you: is_you,
-                        }}
-                      />
-                    ),
-                  )
-                  .with(
-                    {
-                      author: { id: exchange.owner.profile.id },
-                      content: HANDSHAKE_DENIED,
-                    },
-                    () => (
-                      <Message_Denied
-                        key={message.id}
-                        variant={{
-                          is_first: index === 0,
-                          is_last: index === last_index,
-                          is_you: is_you,
-                        }}
-                      />
-                    ),
-                  )
-                  .with(
-                    {
-                      content: HANDSHAKE_ACCEPETED,
-                    },
-                    () => (
-                      <Message_MeToo
-                        key={message.id}
-                        variant={{
-                          is_first: index === 0,
-                          is_last: index === last_index,
-                          is_you: is_you,
-                        }}
-                      />
-                    ),
-                  )
-                  .with(
-                    {
-                      content: HANDSHAKE_DENIED,
-                    },
-                    () => (
-                      <Message_NotInterested
-                        key={message.id}
-                        variant={{
-                          is_first: index === 0,
-                          is_last: index === last_index,
-                          is_you: is_you,
-                        }}
-                      />
-                    ),
-                  )
-                  .otherwise(() => (
-                    <Message
-                      key={message.id}
-                      variant={{
-                        is_first: index === 0,
-                        is_last: index === last_index,
-                        is_you: is_you,
-                      }}
-                    >
-                      <time
-                        className="mt-3 text-xs opacity-30"
-                        dateTime={message.created_at.toUTCString()}
-                        title={message.created_at.toUTCString()}
-                      >
-                        {format(message.created_at, "Pp", { locale: fr })}
-                        <br />
-                      </time>
-                      {message.content}
-                    </Message>
-                  )),
+              return (
+                <Timeline_Message
+                  messages={messages}
+                  profile={profile}
+                  user_profile_id={profile_id}
+                />
               );
             }}
           </Timeline.Message>
@@ -216,6 +129,111 @@ export default function Infinite_Thread_Timeline({
       </>
     ))
     .exhaustive();
+}
+
+interface Timeline_MessageProps {
+  messages: Message_Type[];
+  profile: { id: ID_Schema };
+  user_profile_id: ID_Schema;
+}
+
+function Timeline_Message(props: Timeline_MessageProps) {
+  const { messages, profile, user_profile_id } = props;
+  const exchange = useExchange();
+  const last_index = messages.length - 1;
+  const is_you = profile.id === user_profile_id;
+
+  return messages.map((message, index) =>
+    match(message)
+      .with(
+        {
+          content: HANDSHAKE_COMPLETED,
+        },
+        () => <Congratulations key={message.id} />,
+      )
+      .with(
+        {
+          author: { id: exchange.owner.profile.id },
+          content: HANDSHAKE_ACCEPETED,
+        },
+        () => (
+          <Message_OKay
+            key={message.id}
+            variant={{
+              is_first: index === 0,
+              is_last: index === last_index,
+              is_you: is_you,
+            }}
+          />
+        ),
+      )
+      .with(
+        {
+          author: { id: exchange.owner.profile.id },
+          content: HANDSHAKE_DENIED,
+        },
+        () => (
+          <Message_Denied
+            key={message.id}
+            variant={{
+              is_first: index === 0,
+              is_last: index === last_index,
+              is_you: is_you,
+            }}
+          />
+        ),
+      )
+      .with(
+        {
+          content: HANDSHAKE_ACCEPETED,
+        },
+        () => (
+          <Message_MeToo
+            key={message.id}
+            variant={{
+              is_first: index === 0,
+              is_last: index === last_index,
+              is_you: is_you,
+            }}
+          />
+        ),
+      )
+      .with(
+        {
+          content: HANDSHAKE_DENIED,
+        },
+        () => (
+          <Message_NotInterested
+            key={message.id}
+            variant={{
+              is_first: index === 0,
+              is_last: index === last_index,
+              is_you: is_you,
+            }}
+          />
+        ),
+      )
+      .otherwise(() => (
+        <Message
+          key={message.id}
+          variant={{
+            is_first: index === 0,
+            is_last: index === last_index,
+            is_you: is_you,
+          }}
+        >
+          <time
+            className="mt-3 text-xs opacity-30"
+            dateTime={message.created_at.toUTCString()}
+            title={message.created_at.toUTCString()}
+          >
+            {format(message.created_at, "Pp", { locale: fr })}
+            <br />
+          </time>
+          {message.content}
+        </Message>
+      )),
+  );
 }
 
 function Message_OKay(props: ComponentProps<typeof Message>) {
