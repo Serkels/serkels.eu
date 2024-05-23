@@ -48,7 +48,7 @@
     "date-fns": "3.6.0",
     "formik": "2.4.6",
     "framer-motion": "11.2.6",
-    "react-aria-components": "1.2.0",
+    "react-aria-components": "1.2.1",
     "react-nest": "0.1.10",
     "react-slotify": "0.2.2",
     "tailwind-variants": "0.2.1",
