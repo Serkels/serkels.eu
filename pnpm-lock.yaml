@@ -247,8 +247,8 @@ importers:
         specifier: 0.2.1
         version: 0.2.1(tailwindcss@3.4.3(ts-node@10.9.2(typescript@5.4.5)))
       ts-pattern:
-        specifier: 5.1.1
-        version: 5.1.1
+        specifier: 5.1.2
+        version: 5.1.2
       zod:
         specifier: 3.22.5
         version: 3.22.5
@@ -496,8 +496,8 @@ importers:
         specifier: 5.0.7
         version: 5.0.7
       ts-pattern:
-        specifier: 5.1.1
-        version: 5.1.1
+        specifier: 5.1.2
+        version: 5.1.2
       zod:
         specifier: 3.22.5
         version: 3.22.5
@@ -597,8 +597,8 @@ importers:
         specifier: 2.2.1
         version: 2.2.1
       ts-pattern:
-        specifier: 5.1.1
-        version: 5.1.1
+        specifier: 5.1.2
+        version: 5.1.2
       zod:
         specifier: 3.22.5
         version: 3.22.5
@@ -637,8 +637,8 @@ importers:
         specifier: 3.6.0
         version: 3.6.0
       ts-pattern:
-        specifier: 5.1.1
-        version: 5.1.1
+        specifier: 5.1.2
+        version: 5.1.2
       zod:
         specifier: 3.22.5
         version: 3.22.5
@@ -696,8 +696,8 @@ importers:
         specifier: 0.2.1
         version: 0.2.1(tailwindcss@3.4.3(ts-node@10.9.2(typescript@5.4.5)))
       ts-pattern:
-        specifier: 5.1.1
-        version: 5.1.1
+        specifier: 5.1.2
+        version: 5.1.2
       zod:
         specifier: 3.22.5
         version: 3.22.5
@@ -798,8 +798,8 @@ importers:
         specifier: 0.2.1
         version: 0.2.1(tailwindcss@3.4.3(ts-node@10.9.2(typescript@5.4.5)))
       ts-pattern:
-        specifier: 5.1.1
-        version: 5.1.1
+        specifier: 5.1.2
+        version: 5.1.2
       zod:
         specifier: 3.22.5
         version: 3.22.5
@@ -863,8 +863,8 @@ importers:
         specifier: 3.6.0
         version: 3.6.0
       ts-pattern:
-        specifier: 5.1.1
-        version: 5.1.1
+        specifier: 5.1.2
+        version: 5.1.2
       xstate:
         specifier: 5.13.0
         version: 5.13.0
@@ -897,8 +897,8 @@ importers:
         specifier: workspace:*
         version: link:../../profile/domain
       ts-pattern:
-        specifier: 5.1.1
-        version: 5.1.1
+        specifier: 5.1.2
+        version: 5.1.2
       xstate:
         specifier: 5.13.0
         version: 5.13.0
@@ -967,8 +967,8 @@ importers:
         specifier: 0.2.1
         version: 0.2.1(tailwindcss@3.4.3(ts-node@10.9.2(typescript@5.4.5)))
       ts-pattern:
-        specifier: 5.1.1
-        version: 5.1.1
+        specifier: 5.1.2
+        version: 5.1.2
       zod:
         specifier: 3.22.5
         version: 3.22.5
@@ -1013,8 +1013,8 @@ importers:
         specifier: 3.6.0
         version: 3.6.0
       ts-pattern:
-        specifier: 5.1.1
-        version: 5.1.1
+        specifier: 5.1.2
+        version: 5.1.2
       zod:
         specifier: 3.22.5
         version: 3.22.5
@@ -1102,8 +1102,8 @@ importers:
         specifier: 0.2.1
         version: 0.2.1(tailwindcss@3.4.3(ts-node@10.9.2(typescript@5.4.5)))
       ts-pattern:
-        specifier: 5.1.1
-        version: 5.1.1
+        specifier: 5.1.2
+        version: 5.1.2
       zod:
         specifier: 3.22.5
         version: 3.22.5
@@ -1222,8 +1222,8 @@ importers:
         specifier: 0.2.1
         version: 0.2.1(tailwindcss@3.4.3(ts-node@10.9.2(typescript@5.4.5)))
       ts-pattern:
-        specifier: 5.1.1
-        version: 5.1.1
+        specifier: 5.1.2
+        version: 5.1.2
       zod:
         specifier: 3.22.5
         version: 3.22.5
@@ -1265,8 +1265,8 @@ importers:
         specifier: 3.6.0
         version: 3.6.0
       ts-pattern:
-        specifier: 5.1.1
-        version: 5.1.1
+        specifier: 5.1.2
+        version: 5.1.2
       zod:
         specifier: 3.22.5
         version: 3.22.5
@@ -1324,8 +1324,8 @@ importers:
         specifier: 0.2.1
         version: 0.2.1(tailwindcss@3.4.3(ts-node@10.9.2(typescript@5.4.5)))
       ts-pattern:
-        specifier: 5.1.1
-        version: 5.1.1
+        specifier: 5.1.2
+        version: 5.1.2
       zod:
         specifier: 3.22.5
         version: 3.22.5
@@ -1373,8 +1373,8 @@ importers:
         specifier: 1.6.6
         version: 1.6.6
       ts-pattern:
-        specifier: 5.1.1
-        version: 5.1.1
+        specifier: 5.1.2
+        version: 5.1.2
       zod:
         specifier: 3.22.5
         version: 3.22.5
@@ -1453,8 +1453,8 @@ importers:
         specifier: 0.2.1
         version: 0.2.1(tailwindcss@3.4.3(ts-node@10.9.2(typescript@5.4.5)))
       ts-pattern:
-        specifier: 5.1.1
-        version: 5.1.1
+        specifier: 5.1.2
+        version: 5.1.2
       zod:
         specifier: 3.22.5
         version: 3.22.5
@@ -1564,8 +1564,8 @@ importers:
         specifier: 0.2.1
         version: 0.2.1(tailwindcss@3.4.3(ts-node@10.9.2(typescript@5.4.5)))
       ts-pattern:
-        specifier: 5.1.1
-        version: 5.1.1
+        specifier: 5.1.2
+        version: 5.1.2
       zod:
         specifier: 3.22.5
         version: 3.22.5
@@ -1659,8 +1659,8 @@ importers:
         specifier: 0.2.1
         version: 0.2.1(tailwindcss@3.4.3(ts-node@10.9.2(typescript@5.4.5)))
       ts-pattern:
-        specifier: 5.1.1
-        version: 5.1.1
+        specifier: 5.1.2
+        version: 5.1.2
     devDependencies:
       '@1.config/prettier':
         specifier: workspace:*
@@ -7785,8 +7785,8 @@ packages:
       '@swc/wasm':
         optional: true
 
-  ts-pattern@5.1.1:
-    resolution: {integrity: sha512-i+owkHr5RYdQxj8olUgRrqpiWH9x27PuWVfXwDmJ/n/CoF/SAa7WW1i2oUpPDMQpJ4U+bGRUcZkVq7i1m3zFCg==}
+  ts-pattern@5.1.2:
+    resolution: {integrity: sha512-u+ElKUIWnqisjpRBhv6Y89yNq7Pmz6xL0v7pTSckrVZ0+5Vf32oh/3jmxWl80rAOGcnbBa7fCyeqNdP4yXzWWg==}
 
   tsconfig-paths@3.15.0:
     resolution: {integrity: sha512-2Ac2RgzDe/cn48GvOe3M+o82pEFewD3UPbyoUHHdKasHwJKjds4fLXWf/Ux5kATBKN20oaFGu+jbElp1pos0mg==}
@@ -15288,7 +15288,7 @@ snapshots:
     optionalDependencies:
       '@swc/core': 1.3.101(@swc/helpers@0.5.11)
 
-  ts-pattern@5.1.1: {}
+  ts-pattern@5.1.2: {}
 
   tsconfig-paths@3.15.0:
     dependencies:
