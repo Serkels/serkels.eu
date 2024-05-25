@@ -145,12 +145,9 @@ function Timeline_Message(props: Timeline_MessageProps) {
 
   return messages.map((message, index) =>
     match(message)
-      .with(
-        {
-          content: HANDSHAKE_COMPLETED,
-        },
-        () => <Congratulations key={message.id} />,
-      )
+      .with({ content: HANDSHAKE_COMPLETED }, () => (
+        <Congratulations key={message.id} />
+      ))
       .with(
         {
           author: { id: exchange.owner.profile.id },
@@ -184,9 +181,7 @@ function Timeline_Message(props: Timeline_MessageProps) {
         ),
       )
       .with(
-        {
-          content: HANDSHAKE_ACCEPETED,
-        },
+        { author: { id: user_profile_id }, content: HANDSHAKE_ACCEPETED },
         () => (
           <Message_MeToo
             key={message.id}
@@ -198,21 +193,16 @@ function Timeline_Message(props: Timeline_MessageProps) {
           />
         ),
       )
-      .with(
-        {
-          content: HANDSHAKE_DENIED,
-        },
-        () => (
-          <Message_NotInterested
-            key={message.id}
-            variant={{
-              is_first: index === 0,
-              is_last: index === last_index,
-              is_you: is_you,
-            }}
-          />
-        ),
-      )
+      .with({ content: HANDSHAKE_DENIED }, () => (
+        <Message_NotInterested
+          key={message.id}
+          variant={{
+            is_first: index === 0,
+            is_last: index === last_index,
+            is_you: is_you,
+          }}
+        />
+      ))
       .otherwise(() => (
         <Message
           key={message.id}
