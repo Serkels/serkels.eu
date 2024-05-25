@@ -601,10 +601,7 @@ async function studients_messages() {
                 data: [
                   {
                     owner_id: studient.id,
-                    last_seen_date: faker.date.between({
-                      from: created_at,
-                      to: last_seen_date,
-                    }),
+                    last_seen_date: last_seen_date,
                   },
                   {
                     owner_id: recipient_studient.id,

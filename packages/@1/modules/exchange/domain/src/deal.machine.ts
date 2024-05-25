@@ -9,7 +9,11 @@ export const deal_flow = setup({
   types: {} as {
     events: { type: "DENIE" } | { type: "APPROVE" };
   },
-  guards: { is_organizer: () => false, is_participant: () => false },
+  guards: {
+    is_the_exchange_not_completed: () => true,
+    is_organizer: () => false,
+    is_participant: () => false,
+  },
 }).createMachine({
   id: "deal",
   initial: Deal_Status_Schema.Enum.IDLE,
@@ -40,7 +44,12 @@ export const deal_flow = setup({
       },
     },
     [Deal_Status_Schema.Enum.APPROVED]: {
-      type: "final",
+      on: {
+        DENIE: {
+          target: Deal_Status_Schema.Enum.DENIED,
+          guard: "is_the_exchange_not_completed",
+        },
+      },
     },
   },
 });
