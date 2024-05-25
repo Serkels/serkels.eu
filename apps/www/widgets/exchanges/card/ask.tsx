@@ -67,8 +67,16 @@ function Ask_Body() {
 function Sent() {
   const { href } = useOutlet_RequireContext({ state: "sent" });
   const router = useRouter();
+  const { id: exchange_id } = useOutlet_Exchange();
+  const utils = TRPC_React.useUtils();
 
-  useTimeoutEffect(() => {
+  useTimeoutEffect(async () => {
+    await Promise.all([
+      utils.exchanges.me.inbox.by_exchange_id.invalidate({ exchange_id }),
+      utils.exchanges.me.find.invalidate({}),
+      utils.exchanges.me.deal_by_exchange_id.invalidate(exchange_id),
+    ]);
+
     router.push(href);
   }, 3_333);
 
@@ -84,19 +92,11 @@ function Sending() {
   //
 
   const create = TRPC_React.exchanges.me.inbox.create_deal.useMutation();
-  const utils = TRPC_React.useUtils();
-
   useTimeoutEffect(async () => {
     const { exchange_threads } = await create.mutateAsync({
       content: context.message === "" ? HANDSHAKE_TOCTOC : context.message,
       exchange_id,
     });
-
-    await Promise.all([
-      utils.exchanges.me.inbox.by_exchange_id.invalidate({ exchange_id }),
-      utils.exchanges.me.find.invalidate({}),
-      utils.exchanges.me.deal_by_exchange_id.invalidate(exchange_id),
-    ]);
 
     const inbox = exchange_threads.at(0);
 
