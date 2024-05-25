@@ -392,8 +392,8 @@ importers:
   packages/@1/infra/email:
     dependencies:
       '@react-email/render':
-        specifier: 0.0.14
-        version: 0.0.14
+        specifier: 0.0.15
+        version: 0.0.15
       debug:
         specifier: 4.3.4
         version: 4.3.4(supports-color@8.1.1)
@@ -3344,8 +3344,8 @@ packages:
     peerDependencies:
       react: ^18.2.0
 
-  '@react-email/render@0.0.14':
-    resolution: {integrity: sha512-vZD59BHp1HOatJAWydTOdgN8QbNgsjCOfmPcT9ShwisBIu3Rw8pvUVoWsrAqfHfzc4vcNTGnbt6/8mMa8LcsvQ==}
+  '@react-email/render@0.0.15':
+    resolution: {integrity: sha512-/pT5dBu0y1mogrfEpc002rgRcXpbShK6PFtxTVU6LZZ+bccvZPgk67HKc01lxpa1eYGQgZ6I+VQ02GRnMDclTg==}
     engines: {node: '>=18.0.0'}
 
   '@react-email/text@0.0.8':
@@ -10062,7 +10062,7 @@ snapshots:
     dependencies:
       react: 18.3.1
 
-  '@react-email/render@0.0.14':
+  '@react-email/render@0.0.15':
     dependencies:
       html-to-text: 9.0.5
       js-beautify: 1.15.1
