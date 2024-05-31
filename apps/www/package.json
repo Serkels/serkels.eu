@@ -39,7 +39,7 @@
     "await-to-js": "3.0.0",
     "constate": "3.3.2",
     "date-fns": "3.6.0",
-    "debug": "4.3.4",
+    "debug": "4.3.5",
     "formik": "2.4.6",
     "framer-motion": "11.2.10",
     "next": "14.2.3",
