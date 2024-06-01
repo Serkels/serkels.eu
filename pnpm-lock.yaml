@@ -87,8 +87,8 @@ importers:
         specifier: 20.0.5
         version: 20.0.5(cypress@13.10.0)(typescript@5.4.5)
       '@bahmutov/cypress-esbuild-preprocessor':
-        specifier: 2.2.0
-        version: 2.2.0(esbuild@0.20.2)
+        specifier: 2.2.1
+        version: 2.2.1(esbuild@0.20.2)
       cypress:
         specifier: 13.10.0
         version: 13.10.0
@@ -1940,8 +1940,8 @@ packages:
       '@cypress/browserify-preprocessor':
         optional: true
 
-  '@bahmutov/cypress-esbuild-preprocessor@2.2.0':
-    resolution: {integrity: sha512-pTvxRi6+OFsXy6uCn/HlO5zi0fUZWbiCtTiLTDf/+kgEfZ/Y8WIxZ2pjuir9MEM8prQenBw60TLcM0wcazh7+Q==}
+  '@bahmutov/cypress-esbuild-preprocessor@2.2.1':
+    resolution: {integrity: sha512-mXbo78bly2VrEro/YeRMM0Q6JHcBSEtbNfuT2nYL2GsTsb2O5fUC6L+kVK/tbenzcXvtpxshHzZ9xFXE41ewWA==}
     peerDependencies:
       esbuild: '>=0.17.0'
 
@@ -8511,9 +8511,9 @@ snapshots:
       - supports-color
       - typescript
 
-  '@bahmutov/cypress-esbuild-preprocessor@2.2.0(esbuild@0.20.2)':
+  '@bahmutov/cypress-esbuild-preprocessor@2.2.1(esbuild@0.20.2)':
     dependencies:
-      debug: 4.3.4(supports-color@8.1.1)
+      debug: 4.3.5(supports-color@8.1.1)
       esbuild: 0.20.2
     transitivePeerDependencies:
       - supports-color
