@@ -1805,7 +1805,7 @@ importers:
         version: 1.13.3(@swc/core@1.3.101)(@types/node@20.13.0)(typescript@5.4.5)
       prettier:
         specifier: '3'
-        version: 3.2.5
+        version: 3.3.0
       typescript:
         specifier: 5.4.5
         version: 5.4.5
@@ -7041,11 +7041,6 @@ packages:
         optional: true
       prettier-plugin-svelte:
         optional: true
-
-  prettier@3.2.5:
-    resolution: {integrity: sha512-3/GWa9aOC0YeD7LUfvOG2NiDyhOWRvt1k+rcKhOuYnMY24iiCphgneUfJDyFXd6rZCAnuLBv6UeAULtrhT/F4A==}
-    engines: {node: '>=14'}
-    hasBin: true
 
   prettier@3.3.0:
     resolution: {integrity: sha512-J9odKxERhCQ10OC2yb93583f6UnYutOeiV5i0zEDS7UGTdUt0u+y8erxl3lBKvwo/JHyyoEdXjwp4dke9oyZ/g==}
@@ -14399,8 +14394,6 @@ snapshots:
   prettier-plugin-tailwindcss@0.6.1(prettier@3.3.0):
     dependencies:
       prettier: 3.3.0
-
-  prettier@3.2.5: {}
 
   prettier@3.3.0: {}
 
