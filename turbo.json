@@ -22,6 +22,7 @@
       "outputs": ["node_modules/@prisma/client/**"]
     },
     "clean": { "cache": false },
+    "studio": { "cache": false },
     "dev": { "persistent": true, "dependsOn": ["^build"] },
     "lint": { "cache": false, "dependsOn": ["^build"] },
     "type-check": {
