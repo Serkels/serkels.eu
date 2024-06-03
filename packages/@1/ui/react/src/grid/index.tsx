@@ -31,7 +31,8 @@ export interface GridProps
 const style = tv({
   base: `
     grid
-    grid-cols-4
+    grid-cols-2
+    grid-rows-1
     gap-4
     sm:grid-cols-6
     md:grid-cols-8

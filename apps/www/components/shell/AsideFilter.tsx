@@ -2,6 +2,7 @@
 
 import { forwardRef, type ComponentPropsWithoutRef } from "react";
 import { tv, type VariantProps } from "tailwind-variants";
+import { Provider } from "./AsideFilter.client";
 
 //
 
@@ -11,18 +12,20 @@ export const AsideFilter = forwardRef<HTMLDivElement, Props>(
     const { article, title, base, sticky } = style();
 
     return (
-      <aside
+      <section
         className={base({ className })}
         {...other_props}
         ref={forwardedRef}
       >
         <div className={sticky()}>
-          <div className="max-h-screen overflow-y-auto pb-28 pr-8">
+          <div className="overflow-y-auto pb-28 pr-8">
             <h3 className={title()}>{Title}</h3>
-            <article className={article()}>{children}</article>
+            <Provider>
+              <article className={article()}>{children}</article>
+            </Provider>
           </div>
         </div>
-      </aside>
+      </section>
     );
   },
 );

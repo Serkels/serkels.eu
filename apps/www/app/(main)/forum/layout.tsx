@@ -19,7 +19,7 @@ export default async function Layout({
     <TRPC_Hydrate>
       <Grid>
         <AsideFilter
-          className="hidden md:col-span-2 md:block xl:col-span-3"
+          className="col-span-2 sm:col-span-6 md:col-span-2 md:block lg:col-span-2 xl:col-span-3"
           slot-title="Forum StudHelp"
         >
           <Filter />

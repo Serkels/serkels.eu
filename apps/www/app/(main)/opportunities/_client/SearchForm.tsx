@@ -2,17 +2,19 @@
 
 import { DEBOUNCE_DELAY, MAX_WAIT } from ":app/constants";
 import { useSyncSearchQuery } from ":components/hooks/useSyncSearchQuery";
-import InputSearch from "@1.ui/react/input/InputSearch";
+import { context } from ":components/shell/AsideFilter.client";
+import InputSearch, {
+  InputSearch_RightBtn,
+} from "@1.ui/react/input/InputSearch";
 import { useDebouncedCallback } from "@react-hookz/web";
 import { usePathname, useRouter } from "next/navigation";
-import { type ComponentProps } from "react";
-
-//
+import { useContext, type ComponentProps } from "react";
 
 export default function SearchForm() {
   const { query, setQuery } = useSyncSearchQuery("q");
   const pathname = usePathname() ?? "";
   const router = useRouter();
+  const { toggle } = useContext(context);
 
   const onChange = useDebouncedCallback<
     NonNullable<ComponentProps<"input">["onChange"]>
@@ -26,5 +28,15 @@ export default function SearchForm() {
     MAX_WAIT,
   );
 
-  return <InputSearch onChange={onChange} defaultValue={query} />;
+  return (
+    <InputSearch onChange={onChange} defaultValue={query}>
+      <InputSearch_RightBtn>
+        <button className="sm:pr-2 md:hidden" onClick={toggle}>
+          🪃
+        </button>
+      </InputSearch_RightBtn>
+    </InputSearch>
+  );
+
+  // @todo Johan: Boomerang à changer
 }

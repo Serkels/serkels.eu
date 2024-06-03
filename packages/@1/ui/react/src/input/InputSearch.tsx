@@ -5,10 +5,11 @@ import {
   type ComponentPropsWithoutRef,
   type ElementRef,
 } from "react";
+import { createSlot } from "react-slotify";
 import { Search } from "../icons";
 
 export const InputSearch = forwardRef<ElementRef<"input">, InputSearch_Props>(
-  function InputSearch({ className, ...other_props }, forwardedRef) {
+  function InputSearch({ className, children, ...other_props }, forwardedRef) {
     return (
       <
         // className={button({ className, size, intent, state })}
@@ -34,11 +35,16 @@ export const InputSearch = forwardRef<ElementRef<"input">, InputSearch_Props>(
             placeholder="Recherche"
             {...other_props}
           />
+          <div className="absolute inset-y-0 right-3 top-2">
+            <InputSearch_RightBtn.Renderer childs={children} />
+          </div>
         </div>
       </>
     );
   },
 );
+
+export const InputSearch_RightBtn = createSlot();
 
 export default InputSearch;
 

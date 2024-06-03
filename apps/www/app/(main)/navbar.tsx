@@ -24,7 +24,7 @@ export default function UserBar() {
       <Grid className="items-center bg-primary-gradient-74 text-white sm:grid-cols-[repeat(3,_auto)]">
         <figure
           className="
-            col-span-3
+            col-span-1
             flex
             h-16
             items-center
