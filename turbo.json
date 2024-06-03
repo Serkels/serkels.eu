@@ -8,6 +8,7 @@
     },
     "@1.infra/database#type-check": { "dependsOn": ["generate"] },
     "@1.modules/auth.api#type-check": { "dependsOn": ["^build"] },
+    "api#dev": { "cache": false },
     "build": {
       "dependsOn": ["^type-check", "^build", "type-check"],
       "outputs": [
@@ -27,6 +28,7 @@
     "type-check": {
       "dependsOn": ["^type-check"],
       "outputs": ["node_modules/.cache/tsc/**"]
-    }
+    },
+    "www#dev": { "cache": false }
   }
 }
