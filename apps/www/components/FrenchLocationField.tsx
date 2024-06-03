@@ -5,13 +5,87 @@ import type { Location } from "@1.modules/core/Location";
 import { input, select } from "@1.ui/react/form/atom";
 import { useDebouncedCallback, useToggle } from "@react-hookz/web";
 import type { QueryObserverSuccessResult } from "@tanstack/react-query";
-import { Field, type FieldAttributes } from "formik";
+import { type FieldAttributes } from "formik";
 import { useState, type ComponentProps } from "react";
+import {
+  Button,
+  ComboBox,
+  Group,
+  Input,
+  ListBox,
+  ListBoxItem,
+  Popover,
+} from "react-aria-components";
 import { match } from "ts-pattern";
 
 //
 
 export function FrenchLocationField(
+  props: FieldAttributes<{ use_formik?: boolean }>,
+) {
+  const [location, set_location] = useState(
+    String(props.defaultValue ?? "Paris"),
+  );
+  const [searching, toggle_searching] = useToggle(false);
+  const query_info = TRPC_React.locations.useQuery(
+    { location },
+    { staleTime: Infinity },
+  );
+  const onChange = useDebouncedCallback<any>(
+    (value: string) => set_location(value),
+    [set_location],
+    200,
+    600,
+  );
+
+  return (
+    <fieldset className="w-full" disabled={props.disabled}>
+      <ComboBox onInputChange={onChange}>
+        <Group className="flex bg-white bg-opacity-90 shadow-md ring-1 ring-black/10 transition focus-within:bg-opacity-100 focus-visible:ring-2 focus-visible:ring-black">
+          <Input className="w-full flex-1 border-none bg-transparent px-3 py-2 text-base leading-5 text-gray-900 outline-none" />
+          <Button className="pressed:bg-sky-100 flex items-center border-0 border-l border-solid border-l-sky-200 bg-transparent px-3 text-gray-700 transition">
+            {">"}
+          </Button>
+        </Group>
+        <Popover className="w-[--trigger-width] bg-white">
+          <ListBox>
+            {match(query_info)
+              .with({ status: "error" }, () => <FrenchLocationField.Error />)
+              .with({ status: "loading" }, (query_info) =>
+                props.use_formik ? (
+                  <FrenchLocationField.Success
+                    {...props}
+                    query_info={query_info}
+                  />
+                ) : (
+                  <FrenchLocationField.SuccessFlat
+                    {...props}
+                    query_info={query_info}
+                  />
+                ),
+              )
+              .with({ status: "success" }, (query_info) =>
+                props.use_formik ? (
+                  <FrenchLocationField.Success
+                    {...props}
+                    query_info={query_info}
+                  />
+                ) : (
+                  <FrenchLocationField.SuccessFlat
+                    {...props}
+                    query_info={query_info}
+                  />
+                ),
+              )
+              .exhaustive()}
+          </ListBox>
+        </Popover>
+      </ComboBox>
+    </fieldset>
+  );
+}
+
+export function FrenchLocationFieldOld(
   props: FieldAttributes<{ use_formik?: boolean }>,
 ) {
   const [location, set_location] = useState(
@@ -66,59 +140,38 @@ export function FrenchLocationField(
     </fieldset>
   );
 }
-
-FrenchLocationField.Error = function Loading() {
+FrenchLocationField.Error = function Error() {
   return (
-    <select
+    <ListBoxItem
       className={select({ className: "bg-transparent text-danger" })}
-      disabled={true}
     >
-      <option hidden value={""}>
-        Une erreur est survenue. Veuillez réessayer.
-      </option>
-    </select>
+      Une erreur est survenue. Veuillez réessayer.
+    </ListBoxItem>
   );
 };
 
 FrenchLocationField.Loading = function Loading() {
-  return (
-    <select className={select()} disabled={true}>
-      <option hidden value={""}>
-        Loading...
-      </option>
-    </select>
-  );
+  return <ListBoxItem>Loading...</ListBoxItem>;
 };
 
-FrenchLocationField.Success = function Loading(
+FrenchLocationField.Success = function Success(
   props: FieldAttributes<{}> & {
     query_info: QueryObserverSuccessResult<Location[]>;
   },
 ) {
   const {
     query_info: { data },
-    ...other_props
+    name,
+    disabled,
   } = props;
 
-  if (data.length === 0)
-    return (
-      <select className={select()} disabled={true}>
-        <option hidden value={""}>
-          Pas trouvé...
-        </option>
-      </select>
-    );
-  return (
-    <Field component="select" className={select()} {...other_props}>
-      {data.map(({ nom }) => (
-        <option key={nom} value={nom}>
-          {nom}
-        </option>
-      ))}
-    </Field>
-  );
+  return data?.map(({ nom }) => (
+    <ListBoxItem key={nom} id={nom} {...{ name, disabled }}>
+      {nom}
+    </ListBoxItem>
+  ));
 };
-FrenchLocationField.SuccessFlat = function Loading(
+FrenchLocationField.SuccessFlat = function SuccessFlat(
   props: FieldAttributes<{}> & {
     query_info: QueryObserverSuccessResult<Location[]>;
   },
@@ -128,26 +181,16 @@ FrenchLocationField.SuccessFlat = function Loading(
     ref,
     ...other_props
   } = props;
-  const { className, name, id, disabled } = other_props;
-  if (data.length === 0)
-    return (
-      <select
-        className={select({ className })}
-        disabled={true}
-        {...{ name, id }}
-      >
-        <option hidden value={""}>
-          Pas trouvé...
-        </option>
-      </select>
-    );
-  return (
-    <select className={select({ className })} {...{ name, disabled, id }}>
-      {data.map(({ nom }) => (
-        <option key={nom} value={nom}>
-          {nom}
-        </option>
-      ))}
-    </select>
-  );
+  const { className, name, disabled } = other_props;
+
+  return data?.map(({ nom }) => (
+    <ListBoxItem
+      key={nom}
+      id={nom}
+      className={className}
+      {...{ name, disabled }}
+    >
+      {nom}
+    </ListBoxItem>
+  ));
 };
