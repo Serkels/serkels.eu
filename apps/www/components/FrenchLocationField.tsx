@@ -2,12 +2,12 @@
 
 import { TRPC_React } from ":trpc/client";
 import type { Location } from "@1.modules/core/Location";
-import { input, select } from "@1.ui/react/form/atom";
+import { select } from "@1.ui/react/form/atom";
 import { Spinner } from "@1.ui/react/spinner";
-import { useDebouncedCallback, useToggle } from "@react-hookz/web";
+import { useDebouncedCallback } from "@react-hookz/web";
 import type { QueryObserverSuccessResult } from "@tanstack/react-query";
 import { type FieldAttributes } from "formik";
-import { useState, type ComponentProps } from "react";
+import { useState } from "react";
 import {
   Button,
   ComboBox,
@@ -19,7 +19,7 @@ import {
   Popover,
   Text,
 } from "react-aria-components";
-import { match } from "ts-pattern";
+import { tv } from "tailwind-variants";
 
 //
 
@@ -37,25 +37,28 @@ export function FrenchLocationField(
   const onChange = useDebouncedCallback<any>(
     (value: string) => set_location(value),
     [set_location],
-    200,
+    400,
     600,
   );
 
   return (
     <fieldset className="w-full" disabled={props.disabled}>
-      <ComboBox onInputChange={onChange}>
-        {query_info.isFetching && (
+      <ComboBox onInputChange={onChange} items={query_info.data}>
+        {query_info.isFetching && !query_info.isLoading && (
           <Text slot="description">
             <Spinner className="size-4" />
           </Text>
         )}
         <Group className="flex bg-white bg-opacity-90 shadow-md ring-1 ring-black/10 transition focus-within:bg-opacity-100 focus-visible:ring-2 focus-visible:ring-black">
-          <Input className="w-full flex-1 border-none bg-transparent px-3 py-2 text-base leading-5 text-gray-900 outline-none" />
+          <Input
+            className="w-full flex-1 border-none bg-transparent px-3 py-2 text-base leading-5 text-gray-900 outline-none"
+            defaultValue={location}
+          />
           <Button className="pressed:bg-sky-100 flex items-center border-0 border-l border-solid border-l-sky-200 bg-transparent px-3 text-gray-700 transition">
             {">"}
           </Button>
         </Group>
-        <FieldError>Coucou</FieldError>
+        <FieldError>Erreur</FieldError>
         <Popover className="w-[--trigger-width] bg-white p-1 outline-none">
           <ListBox>
             <FrenchLocationField.SuccessFlat
@@ -70,61 +73,6 @@ export function FrenchLocationField(
   );
 }
 
-export function FrenchLocationFieldOld(
-  props: FieldAttributes<{ use_formik?: boolean }>,
-) {
-  const [location, set_location] = useState(
-    String(props.defaultValue ?? "Paris"),
-  );
-  const [searching, toggle_searching] = useToggle(false);
-  const query_info = TRPC_React.locations.useQuery(
-    { location },
-    { staleTime: Infinity },
-  );
-
-  const onChange = useDebouncedCallback<
-    NonNullable<ComponentProps<"input">["onChange"]>
-  >((ev) => set_location(ev.target.value), [set_location], 1666, 500);
-
-  return (
-    <fieldset className="w-full" disabled={props.disabled}>
-      <button
-        type="button"
-        className="float-right text-sm text-Silver_Chalice"
-        onClick={toggle_searching}
-      >
-        Rechercher par nom
-      </button>
-      {searching ? (
-        <label className="my-1 block">
-          <span className="float-left text-sm text-Silver_Chalice">
-            Ça commance par
-          </span>
-          <input
-            className={input({ className: "opacity-85", tv$size: "xs" })}
-            defaultValue={location}
-            onChange={onChange}
-            type="search"
-          />
-        </label>
-      ) : null}
-      {match(query_info)
-        .with({ status: "error" }, () => <FrenchLocationField.Error />)
-        .with({ status: "loading" }, () => <FrenchLocationField.Loading />)
-        .with({ status: "success" }, (query_info) =>
-          props.use_formik ? (
-            <FrenchLocationField.Success {...props} query_info={query_info} />
-          ) : (
-            <FrenchLocationField.SuccessFlat
-              {...props}
-              query_info={query_info}
-            />
-          ),
-        )
-        .exhaustive()}
-    </fieldset>
-  );
-}
 FrenchLocationField.Error = function Error() {
   return (
     <ListBoxItem
@@ -133,28 +81,6 @@ FrenchLocationField.Error = function Error() {
       Une erreur est survenue. Veuillez réessayer.
     </ListBoxItem>
   );
-};
-
-FrenchLocationField.Loading = function Loading() {
-  return <ListBoxItem>Loading...</ListBoxItem>;
-};
-
-FrenchLocationField.Success = function Success(
-  props: FieldAttributes<{}> & {
-    query_info: QueryObserverSuccessResult<Location[]>;
-  },
-) {
-  const {
-    query_info: { data },
-    name,
-    disabled,
-  } = props;
-
-  return data?.map(({ nom }) => (
-    <ListBoxItem key={nom} id={nom} {...{ name, disabled }}>
-      {nom}
-    </ListBoxItem>
-  ));
 };
 FrenchLocationField.SuccessFlat = function SuccessFlat(
   props: FieldAttributes<{}> & {
@@ -168,14 +94,20 @@ FrenchLocationField.SuccessFlat = function SuccessFlat(
   } = props;
   const { className, name, disabled } = other_props;
 
-  return data?.map(({ nom }) => (
+  return data?.map(({ nom, departement }) => (
     <ListBoxItem
-      key={nom}
+      key={nom + departement.code}
       id={nom}
-      className={className}
+      textValue={nom}
+      className={item({ className })}
       {...{ name, disabled }}
     >
       {nom}
+      <span>
+        {departement.nom}-{departement.code}
+      </span>
     </ListBoxItem>
   ));
 };
+
+const item = tv({ base: `flex justify-between` });
