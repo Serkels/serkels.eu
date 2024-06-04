@@ -15,6 +15,7 @@
     "heroku-release:00": "pnpm --filter @1.infra/database exec prisma migrate deploy",
     "lint": "turbo run lint",
     "start": "pnpm -r start",
+    "studio": "turbo run studio --parallel --continue",
     "type-check": "turbo run type-check"
   },
   "devDependencies": {
