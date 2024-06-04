@@ -3,6 +3,7 @@
 import { TRPC_React } from ":trpc/client";
 import type { Location } from "@1.modules/core/Location";
 import { input, select } from "@1.ui/react/form/atom";
+import { Spinner } from "@1.ui/react/spinner";
 import { useDebouncedCallback, useToggle } from "@react-hookz/web";
 import type { QueryObserverSuccessResult } from "@tanstack/react-query";
 import { type FieldAttributes } from "formik";
@@ -10,11 +11,13 @@ import { useState, type ComponentProps } from "react";
 import {
   Button,
   ComboBox,
+  FieldError,
   Group,
   Input,
   ListBox,
   ListBoxItem,
   Popover,
+  Text,
 } from "react-aria-components";
 import { match } from "ts-pattern";
 
@@ -26,10 +29,10 @@ export function FrenchLocationField(
   const [location, set_location] = useState(
     String(props.defaultValue ?? "Paris"),
   );
-  const [searching, toggle_searching] = useToggle(false);
+
   const query_info = TRPC_React.locations.useQuery(
     { location },
-    { staleTime: Infinity },
+    { keepPreviousData: true, staleTime: Infinity },
   );
   const onChange = useDebouncedCallback<any>(
     (value: string) => set_location(value),
@@ -41,43 +44,25 @@ export function FrenchLocationField(
   return (
     <fieldset className="w-full" disabled={props.disabled}>
       <ComboBox onInputChange={onChange}>
+        {query_info.isFetching && (
+          <Text slot="description">
+            <Spinner className="size-4" />
+          </Text>
+        )}
         <Group className="flex bg-white bg-opacity-90 shadow-md ring-1 ring-black/10 transition focus-within:bg-opacity-100 focus-visible:ring-2 focus-visible:ring-black">
           <Input className="w-full flex-1 border-none bg-transparent px-3 py-2 text-base leading-5 text-gray-900 outline-none" />
           <Button className="pressed:bg-sky-100 flex items-center border-0 border-l border-solid border-l-sky-200 bg-transparent px-3 text-gray-700 transition">
             {">"}
           </Button>
         </Group>
-        <Popover className="w-[--trigger-width] bg-white">
+        <FieldError>Coucou</FieldError>
+        <Popover className="w-[--trigger-width] bg-white p-1 outline-none">
           <ListBox>
-            {match(query_info)
-              .with({ status: "error" }, () => <FrenchLocationField.Error />)
-              .with({ status: "loading" }, (query_info) =>
-                props.use_formik ? (
-                  <FrenchLocationField.Success
-                    {...props}
-                    query_info={query_info}
-                  />
-                ) : (
-                  <FrenchLocationField.SuccessFlat
-                    {...props}
-                    query_info={query_info}
-                  />
-                ),
-              )
-              .with({ status: "success" }, (query_info) =>
-                props.use_formik ? (
-                  <FrenchLocationField.Success
-                    {...props}
-                    query_info={query_info}
-                  />
-                ) : (
-                  <FrenchLocationField.SuccessFlat
-                    {...props}
-                    query_info={query_info}
-                  />
-                ),
-              )
-              .exhaustive()}
+            <FrenchLocationField.SuccessFlat
+              {...props}
+              className="py-2 pl-2 pr-4 outline-none"
+              query_info={query_info as QueryObserverSuccessResult<Location[]>}
+            />
           </ListBox>
         </Popover>
       </ComboBox>
