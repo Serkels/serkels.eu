@@ -1,17 +1,8 @@
 //
 
-const {
-  encodeSvgForCss,
-} = require("@iconify/utils/lib/svg/encode-svg-for-css");
 const plugin = require("tailwindcss/plugin");
 
-const defaultTheme = require("tailwindcss/defaultTheme");
 const { withTV } = require("tailwind-variants/transformer");
-
-const path = require("path");
-const fs = require("fs");
-const svgPath = path.resolve(__dirname, "./icons/binoculars.svg");
-const svg = fs.readFileSync(svgPath, "utf8");
 
 //
 
@@ -92,9 +83,6 @@ module.exports = withTV({
         "holy-grail": "auto 1fr auto",
       },
       backgroundImage: {
-        "i-binoculars": `url("data:image/svg+xml;utf8,${encodeSvgForCss(
-          svg,
-        )}")`,
         "primary-gradient-74": `
           linear-gradient(
             74deg,
