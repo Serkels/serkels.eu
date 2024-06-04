@@ -22,11 +22,11 @@ const roboto = Roboto({ weight: ["400", "500", "700"], subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://toc-toc.org"),
-  title: "Toc-Toc",
+  title: "Serkels",
   description: "Réseau d'échanges étudiant",
   icons: { icon: "/favicon.ico" },
   openGraph: {
-    title: "Toc-Toc",
+    title: "Serkels",
     description: "Réseau d'échanges étudiant",
     url: new URL("https://toc-toc.org"),
   },

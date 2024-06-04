@@ -11,7 +11,7 @@ import type { PropsWithChildren } from "react";
 const TocTocLogo = dynamic(() => import(":components/shell/TocTocLogo"), {
   ssr: false,
   loading() {
-    return <VisuallyHidden>Toc-Toc</VisuallyHidden>;
+    return <VisuallyHidden>Serkels</VisuallyHidden>;
   },
 });
 

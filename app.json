@@ -1,5 +1,5 @@
 {
-  "name": "Toc-Toc API",
+  "name": "Serkels API",
   "description": "The toc-toc api.",
   "env": {
     "NEXTAUTH_SECRET": {
