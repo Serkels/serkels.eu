@@ -5,15 +5,15 @@ import { forwardRef, type ComponentProps, type ElementRef } from "react";
 
 //
 
-export const TocTocLogo = forwardRef<
+export const SerkelsLogo = forwardRef<
   ElementRef<typeof Image>,
   Omit<ComponentProps<typeof Image>, "alt" | "src">
->(function TocTocLogo(props, forwardedRef) {
+>(function SerkelsLogo(props, forwardedRef) {
   const { ...other_props } = props;
 
   return (
     <Image
-      src="/toc-toc.svg"
+      src="/serkels-noir.svg"
       alt="Serkels Logo"
       width={175}
       height={53}
@@ -24,4 +24,4 @@ export const TocTocLogo = forwardRef<
   );
 });
 
-export default TocTocLogo;
+export default SerkelsLogo;
