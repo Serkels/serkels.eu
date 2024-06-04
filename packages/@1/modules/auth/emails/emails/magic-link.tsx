@@ -64,7 +64,7 @@ export const TocTocMagicLinkEmail = ({
           src={`${base_url}/opengraph-image.png`}
           width="32"
           height="32"
-          alt="TocToc's Logo"
+          alt="Serkels' Logo"
         />
         <Text style={footer}>
           <Link

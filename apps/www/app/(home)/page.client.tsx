@@ -28,7 +28,7 @@ export default function HomeCarousel() {
         <Carousel className="h-[25em] w-full" autoplay={true}>
           <article>
             <h1 className="mb-12 text-2xl font-bold uppercase">
-              Avec toc-toc,
+              Avec Serkels,
               <br /> échangez des expériences, cours de langue, activités, notes
               de cours et profitez d'autres services.
             </h1>

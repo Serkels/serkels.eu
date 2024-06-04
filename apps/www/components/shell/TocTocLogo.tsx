@@ -14,7 +14,7 @@ export const TocTocLogo = forwardRef<
   return (
     <Image
       src="/toc-toc.svg"
-      alt="Toc Toc Logo"
+      alt="Serkels Logo"
       width={175}
       height={53}
       priority
