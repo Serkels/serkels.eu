@@ -245,7 +245,7 @@ importers:
         version: 2.2.1
       tailwind-variants:
         specifier: 0.2.1
-        version: 0.2.1(tailwindcss@3.4.3(ts-node@10.9.2(typescript@5.4.5)))
+        version: 0.2.1(tailwindcss@3.4.4(ts-node@10.9.2(typescript@5.4.5)))
       ts-pattern:
         specifier: 5.1.2
         version: 5.1.2
@@ -308,8 +308,8 @@ importers:
         specifier: 3.3.1
         version: 3.3.1
       tailwindcss:
-        specifier: 3.4.3
-        version: 3.4.3(ts-node@10.9.2(typescript@5.4.5))
+        specifier: 3.4.4
+        version: 3.4.4(ts-node@10.9.2(typescript@5.4.5))
       typescript:
         specifier: 5.4.5
         version: 5.4.5
@@ -334,10 +334,10 @@ importers:
         version: link:../../../@douglasduteil/config/tailwindcss
       '@tailwindcss/typography':
         specifier: 0.5.13
-        version: 0.5.13(tailwindcss@3.4.3(ts-node@10.9.2(@types/node@20.14.2)(typescript@5.4.5)))
+        version: 0.5.13(tailwindcss@3.4.4(ts-node@10.9.2(@types/node@20.14.2)(typescript@5.4.5)))
       tailwindcss:
-        specifier: 3.4.3
-        version: 3.4.3(ts-node@10.9.2(typescript@5.4.5))
+        specifier: 3.4.4
+        version: 3.4.4(ts-node@10.9.2(typescript@5.4.5))
     devDependencies:
       '@1.config/typescript':
         specifier: workspace:*
@@ -694,7 +694,7 @@ importers:
         version: 7.0.0(react@18.3.1)
       tailwind-variants:
         specifier: 0.2.1
-        version: 0.2.1(tailwindcss@3.4.3(ts-node@10.9.2(typescript@5.4.5)))
+        version: 0.2.1(tailwindcss@3.4.4(ts-node@10.9.2(typescript@5.4.5)))
       ts-pattern:
         specifier: 5.1.2
         version: 5.1.2
@@ -718,8 +718,8 @@ importers:
         specifier: 3.3.1
         version: 3.3.1
       tailwindcss:
-        specifier: 3.4.3
-        version: 3.4.3(ts-node@10.9.2(typescript@5.4.5))
+        specifier: 3.4.4
+        version: 3.4.4(ts-node@10.9.2(typescript@5.4.5))
       typescript:
         specifier: 5.4.5
         version: 5.4.5
@@ -796,7 +796,7 @@ importers:
         version: 7.0.0(react@18.3.1)
       tailwind-variants:
         specifier: 0.2.1
-        version: 0.2.1(tailwindcss@3.4.3(ts-node@10.9.2(typescript@5.4.5)))
+        version: 0.2.1(tailwindcss@3.4.4(ts-node@10.9.2(typescript@5.4.5)))
       ts-pattern:
         specifier: 5.1.2
         version: 5.1.2
@@ -820,8 +820,8 @@ importers:
         specifier: 3.3.1
         version: 3.3.1
       tailwindcss:
-        specifier: 3.4.3
-        version: 3.4.3(ts-node@10.9.2(typescript@5.4.5))
+        specifier: 3.4.4
+        version: 3.4.4(ts-node@10.9.2(typescript@5.4.5))
       typescript:
         specifier: 5.4.5
         version: 5.4.5
@@ -965,7 +965,7 @@ importers:
         version: 17.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       tailwind-variants:
         specifier: 0.2.1
-        version: 0.2.1(tailwindcss@3.4.3(ts-node@10.9.2(typescript@5.4.5)))
+        version: 0.2.1(tailwindcss@3.4.4(ts-node@10.9.2(typescript@5.4.5)))
       ts-pattern:
         specifier: 5.1.2
         version: 5.1.2
@@ -992,8 +992,8 @@ importers:
         specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
       tailwindcss:
-        specifier: 3.4.3
-        version: 3.4.3(ts-node@10.9.2(typescript@5.4.5))
+        specifier: 3.4.4
+        version: 3.4.4(ts-node@10.9.2(typescript@5.4.5))
       typescript:
         specifier: 5.4.5
         version: 5.4.5
@@ -1100,7 +1100,7 @@ importers:
         version: 0.2.2(react@18.3.1)
       tailwind-variants:
         specifier: 0.2.1
-        version: 0.2.1(tailwindcss@3.4.3(ts-node@10.9.2(typescript@5.4.5)))
+        version: 0.2.1(tailwindcss@3.4.4(ts-node@10.9.2(typescript@5.4.5)))
       ts-pattern:
         specifier: 5.1.2
         version: 5.1.2
@@ -1127,8 +1127,8 @@ importers:
         specifier: 3.3.1
         version: 3.3.1
       tailwindcss:
-        specifier: 3.4.3
-        version: 3.4.3(ts-node@10.9.2(typescript@5.4.5))
+        specifier: 3.4.4
+        version: 3.4.4(ts-node@10.9.2(typescript@5.4.5))
       typescript:
         specifier: 5.4.5
         version: 5.4.5
@@ -1220,7 +1220,7 @@ importers:
         version: 0.2.2(react@18.3.1)
       tailwind-variants:
         specifier: 0.2.1
-        version: 0.2.1(tailwindcss@3.4.3(ts-node@10.9.2(typescript@5.4.5)))
+        version: 0.2.1(tailwindcss@3.4.4(ts-node@10.9.2(typescript@5.4.5)))
       ts-pattern:
         specifier: 5.1.2
         version: 5.1.2
@@ -1244,8 +1244,8 @@ importers:
         specifier: 3.3.1
         version: 3.3.1
       tailwindcss:
-        specifier: 3.4.3
-        version: 3.4.3(ts-node@10.9.2(typescript@5.4.5))
+        specifier: 3.4.4
+        version: 3.4.4(ts-node@10.9.2(typescript@5.4.5))
       typescript:
         specifier: 5.4.5
         version: 5.4.5
@@ -1322,7 +1322,7 @@ importers:
         version: 7.0.0(react@18.3.1)
       tailwind-variants:
         specifier: 0.2.1
-        version: 0.2.1(tailwindcss@3.4.3(ts-node@10.9.2(typescript@5.4.5)))
+        version: 0.2.1(tailwindcss@3.4.4(ts-node@10.9.2(typescript@5.4.5)))
       ts-pattern:
         specifier: 5.1.2
         version: 5.1.2
@@ -1346,8 +1346,8 @@ importers:
         specifier: 3.3.1
         version: 3.3.1
       tailwindcss:
-        specifier: 3.4.3
-        version: 3.4.3(ts-node@10.9.2(typescript@5.4.5))
+        specifier: 3.4.4
+        version: 3.4.4(ts-node@10.9.2(typescript@5.4.5))
       typescript:
         specifier: 5.4.5
         version: 5.4.5
@@ -1451,7 +1451,7 @@ importers:
         version: 0.2.2(react@18.3.1)
       tailwind-variants:
         specifier: 0.2.1
-        version: 0.2.1(tailwindcss@3.4.3(ts-node@10.9.2(typescript@5.4.5)))
+        version: 0.2.1(tailwindcss@3.4.4(ts-node@10.9.2(typescript@5.4.5)))
       ts-pattern:
         specifier: 5.1.2
         version: 5.1.2
@@ -1475,8 +1475,8 @@ importers:
         specifier: 3.3.1
         version: 3.3.1
       tailwindcss:
-        specifier: 3.4.3
-        version: 3.4.3(ts-node@10.9.2(typescript@5.4.5))
+        specifier: 3.4.4
+        version: 3.4.4(ts-node@10.9.2(typescript@5.4.5))
       typescript:
         specifier: 5.4.5
         version: 5.4.5
@@ -1562,7 +1562,7 @@ importers:
         version: 17.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       tailwind-variants:
         specifier: 0.2.1
-        version: 0.2.1(tailwindcss@3.4.3(ts-node@10.9.2(typescript@5.4.5)))
+        version: 0.2.1(tailwindcss@3.4.4(ts-node@10.9.2(typescript@5.4.5)))
       ts-pattern:
         specifier: 5.1.2
         version: 5.1.2
@@ -1586,8 +1586,8 @@ importers:
         specifier: 3.3.1
         version: 3.3.1
       tailwindcss:
-        specifier: 3.4.3
-        version: 3.4.3(ts-node@10.9.2(typescript@5.4.5))
+        specifier: 3.4.4
+        version: 3.4.4(ts-node@10.9.2(typescript@5.4.5))
       typescript:
         specifier: 5.4.5
         version: 5.4.5
@@ -1657,7 +1657,7 @@ importers:
         version: 0.2.2(react@18.3.1)
       tailwind-variants:
         specifier: 0.2.1
-        version: 0.2.1(tailwindcss@3.4.3(ts-node@10.9.2(typescript@5.4.5)))
+        version: 0.2.1(tailwindcss@3.4.4(ts-node@10.9.2(typescript@5.4.5)))
       ts-pattern:
         specifier: 5.1.2
         version: 5.1.2
@@ -1684,8 +1684,8 @@ importers:
         specifier: 3.3.1
         version: 3.3.1
       tailwindcss:
-        specifier: 3.4.3
-        version: 3.4.3(ts-node@10.9.2(typescript@5.4.5))
+        specifier: 3.4.4
+        version: 3.4.4(ts-node@10.9.2(typescript@5.4.5))
       typescript:
         specifier: 5.4.5
         version: 5.4.5
@@ -1709,13 +1709,13 @@ importers:
         version: 0.6.1(prettier@3.3.1)
       tailwind-variants:
         specifier: 0.2.1
-        version: 0.2.1(tailwindcss@3.4.3(ts-node@10.9.2(typescript@5.4.5)))
+        version: 0.2.1(tailwindcss@3.4.4(ts-node@10.9.2(typescript@5.4.5)))
       tailwindcss:
-        specifier: 3.4.3
-        version: 3.4.3(ts-node@10.9.2(typescript@5.4.5))
+        specifier: 3.4.4
+        version: 3.4.4(ts-node@10.9.2(typescript@5.4.5))
       tailwindcss-animate:
         specifier: 1.0.7
-        version: 1.0.7(tailwindcss@3.4.3(ts-node@10.9.2(typescript@5.4.5)))
+        version: 1.0.7(tailwindcss@3.4.4(ts-node@10.9.2(typescript@5.4.5)))
     devDependencies:
       postcss:
         specifier: 8.4.38
@@ -7754,8 +7754,8 @@ packages:
     engines: {node: '>=14.0.0'}
     hasBin: true
 
-  tailwindcss@3.4.3:
-    resolution: {integrity: sha512-U7sxQk/n397Bmx4JHbJx/iSOOv5G+II3f1kpLpY2QeUv5DcPdcTsYLlusZfq1NthHS1c1cZoyFmmkex1rzke0A==}
+  tailwindcss@3.4.4:
+    resolution: {integrity: sha512-ZoyXOdJjISB7/BcLTR6SEsLgKtDStYyYZVLsUtWChO4Ps20CBad7lfJKVDiejocV4ME1hLmyY0WJE3hSDcmQ2A==}
     engines: {node: '>=14.0.0'}
     hasBin: true
 
@@ -10789,13 +10789,13 @@ snapshots:
     dependencies:
       '@swc/counter': 0.1.3
 
-  '@tailwindcss/typography@0.5.13(tailwindcss@3.4.3(ts-node@10.9.2(@types/node@20.14.2)(typescript@5.4.5)))':
+  '@tailwindcss/typography@0.5.13(tailwindcss@3.4.4(ts-node@10.9.2(@types/node@20.14.2)(typescript@5.4.5)))':
     dependencies:
       lodash.castarray: 4.4.0
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
-      tailwindcss: 3.4.3(ts-node@10.9.2(typescript@5.4.5))
+      tailwindcss: 3.4.4(ts-node@10.9.2(typescript@5.4.5))
 
   '@tanstack/match-sorter-utils@8.15.1':
     dependencies:
@@ -15329,20 +15329,20 @@ snapshots:
     dependencies:
       '@babel/runtime': 7.24.6
 
-  tailwind-variants@0.2.1(tailwindcss@3.4.3(ts-node@10.9.2(typescript@5.4.5))):
+  tailwind-variants@0.2.1(tailwindcss@3.4.4(ts-node@10.9.2(typescript@5.4.5))):
     dependencies:
       tailwind-merge: 2.3.0
-      tailwindcss: 3.4.3(ts-node@10.9.2(typescript@5.4.5))
+      tailwindcss: 3.4.4(ts-node@10.9.2(typescript@5.4.5))
 
-  tailwindcss-animate@1.0.7(tailwindcss@3.4.3(ts-node@10.9.2(typescript@5.4.5))):
+  tailwindcss-animate@1.0.7(tailwindcss@3.4.4(ts-node@10.9.2(typescript@5.4.5))):
     dependencies:
-      tailwindcss: 3.4.3(ts-node@10.9.2(typescript@5.4.5))
+      tailwindcss: 3.4.4(ts-node@10.9.2(typescript@5.4.5))
 
   tailwindcss@3.4.0(ts-node@10.9.2(@types/node@20.14.2)(typescript@5.4.5)):
     dependencies:
       '@alloc/quick-lru': 5.2.0
       arg: 5.0.2
-      chokidar: 3.5.3
+      chokidar: 3.6.0
       didyoumean: 1.2.2
       dlv: 1.1.3
       fast-glob: 3.3.2
@@ -15365,7 +15365,7 @@ snapshots:
     transitivePeerDependencies:
       - ts-node
 
-  tailwindcss@3.4.3(ts-node@10.9.2(typescript@5.4.5)):
+  tailwindcss@3.4.4(ts-node@10.9.2(typescript@5.4.5)):
     dependencies:
       '@alloc/quick-lru': 5.2.0
       arg: 5.0.2
