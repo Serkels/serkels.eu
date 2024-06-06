@@ -29,11 +29,11 @@ export default async function Layout({ children }: PropsWithChildren<{}>) {
             <SearchForm />
           </Suspense>
           <User_Opportunities_Filter />
-          <hr className="my-10" />
+          <hr className="my-5 md:my-10" />
           <Categories_Filter />
         </AsideFilter>
 
-        <div className="col-span-full  md:col-span-6 xl:col-span-9">
+        <div className="col-span-full md:col-span-6 xl:col-span-9">
           {children}
         </div>
       </Grid>

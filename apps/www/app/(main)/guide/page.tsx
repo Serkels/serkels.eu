@@ -2,19 +2,12 @@
 
 export default function Page() {
   return (
-    <main className="mx-auto my-10 max-w-3xl">
-      <h1 className="my-10 text-4xl font-bold">Questions fréquemment posées</h1>
+    <main className="mx-auto max-h-fit p-6 md:my-10 md:max-w-3xl">
+      <h1 className="my-5 text-center text-2xl font-bold md:my-10 md:text-4xl">
+        Questions fréquemment posées
+      </h1>
 
-      <article
-        className="
-         [&>details>a]:text-secondary
-         [&>details>summary]:cursor-pointer
-         [&>details[open]>summary]:mb-1
-         [&>details[open]]:mb-8
-         [&_a]:text-secondary
-         [&_a]:underline
-         "
-      >
+      <article className="flex flex-col gap-5 [&>details>a]:text-secondary [&>details>summary]:cursor-pointer [&>details[open]>summary]:mb-4 [&_a]:text-secondary [&_a]:underline">
         <details>
           <summary className="text-lg font-bold">
             1. Quel niveau de français faut-il pour accéder à l'université ?
@@ -236,7 +229,7 @@ export default function Page() {
           décision de la CNDA (Cour Nationale du Droit d'Asile)
         </details>
 
-        <p className="mt-10">
+        <p className="mt-5">
           Source :{" "}
           <a
             rel="noopener noreferrer"

@@ -30,7 +30,10 @@ export function Card_Idle({ children }: PropsWithChildren) {
                 <div className="text-xl font-bold text-primary">
                   {`${exchange.deals.length} / ${exchange.places}`}
                 </div>
-                <figcaption>places disponible</figcaption>
+                <figcaption className="text-center text-sm">
+                  place{exchange.places > 1 ? "s" : ""} disponible
+                  {exchange.places > 1 ? "s" : ""}
+                </figcaption>
               </figure>
             </div>
           </Card.Header.Center.Renderer>
@@ -48,12 +51,12 @@ export function Card_Idle({ children }: PropsWithChildren) {
         <hr className="my-2" />
 
         <article>
-          <h3 className="my-5 text-2xl font-bold">{title}</h3>
+          <h3 className="my-4 text-2xl font-bold">{title}</h3>
           <p>{description}</p>
         </article>
       </div>
       <footer className={footer()}>
-        <div className="flex justify-between">
+        <div className="flex items-center justify-between">
           <div>
             <Card.Footer.Left.Renderer childs={children}>
               ...

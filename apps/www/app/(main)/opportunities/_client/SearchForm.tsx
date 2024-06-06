@@ -7,6 +7,7 @@ import InputSearch, {
   InputSearch_RightBtn,
 } from "@1.ui/react/input/InputSearch";
 import { useDebouncedCallback } from "@react-hookz/web";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useContext, type ComponentProps } from "react";
 
@@ -31,8 +32,14 @@ export default function SearchForm() {
   return (
     <InputSearch onChange={onChange} defaultValue={query}>
       <InputSearch_RightBtn>
-        <button className="sm:pr-2 md:hidden" onClick={toggle}>
-          🪃
+        <button className="pr-2 md:hidden" onClick={toggle}>
+          <Image
+            src="/filter.svg"
+            alt="filter"
+            width={20}
+            height={20}
+            priority
+          />
         </button>
       </InputSearch_RightBtn>
     </InputSearch>

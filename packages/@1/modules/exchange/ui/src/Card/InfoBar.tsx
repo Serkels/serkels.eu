@@ -33,7 +33,7 @@ export function InfoBar() {
 
       {/*  */}
 
-      <div className=" flex items-center justify-between">
+      <div className="flex items-center justify-between">
         <span className="whitespace-nowrap font-bold uppercase">
           {exchange.category.name}
         </span>

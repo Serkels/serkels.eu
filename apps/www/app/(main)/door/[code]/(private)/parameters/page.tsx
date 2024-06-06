@@ -43,7 +43,7 @@ export default async function Page({ params }: { params: CodeParms }) {
       <main className="mx-auto my-10 max-w-3xl px-4">
         <h1 className="my-10 text-3xl font-bold">Paramètres</h1>
 
-        <hr className="my-10 py-5" />
+        <hr className="py-5 md:my-10" />
 
         <div className="space-y-10">
           <Profile_Editor profile={profile} />

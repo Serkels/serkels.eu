@@ -7,7 +7,7 @@ import { createContext, type PropsWithChildren } from "react";
 export function Provider({ children }: PropsWithChildren) {
   const [isToggled, toggle] = useToggle(false);
   return (
-    <context.Provider value={{ close: isToggled, toggle }}>
+    <context.Provider value={{ close: !isToggled, toggle }}>
       {children}
     </context.Provider>
   );

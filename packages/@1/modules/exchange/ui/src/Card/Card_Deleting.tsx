@@ -31,7 +31,10 @@ export function Card_Deleting({ children }: PropsWithChildren) {
                 <div className="text-xl font-bold text-primary">
                   {`${exchange.deals.length} / ${exchange.places}`}
                 </div>
-                <figcaption>places disponible</figcaption>
+                <figcaption>
+                  place{exchange.places > 1 ? "s" : ""} disponible
+                  {exchange.places > 1 ? "s" : ""}
+                </figcaption>
               </figure>
             </div>
           </Card.Header.Center.Renderer>

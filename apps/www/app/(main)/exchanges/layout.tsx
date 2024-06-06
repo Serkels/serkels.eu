@@ -32,13 +32,7 @@ export default async function Layout({
     return (
       <Banner className="flex-col justify-center">
         <h2
-          className={`
-          mx-auto
-          my-0
-          text-center text-6xl
-          font-extrabold
-          text-red-100
-        `}
+          className={`mx-auto my-0 text-center text-6xl font-extrabold text-red-100`}
         >
           Vous n'êtes pas autorisé à accéder à cette page.
         </h2>
@@ -57,11 +51,11 @@ export default async function Layout({
           <SearchForm />
           <Exchanges_Filter />
 
-          <hr className="my-10" />
+          <hr className="my-5 md:my-10" />
 
           <Categories_List />
         </AsideFilter>
-        <div className="col-span-full my-10 md:col-span-6">{children}</div>
+        <div className="col-span-full md:col-span-6 md:my-10">{children}</div>
         <aside className="mt-10 hidden xl:col-span-3 xl:block xl:px-10">
           {see_also}
         </aside>

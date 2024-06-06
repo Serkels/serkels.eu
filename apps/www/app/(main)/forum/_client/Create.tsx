@@ -55,7 +55,7 @@ function Mutate_CreateQuestion({
   );
 
   return (
-    <Card className=" p-6">
+    <Card className="p-6">
       {match(create_info)
         .with({ status: "error", error: P.select() }, (error) => (
           <ErrorOccur error={new Error(error.message)} />

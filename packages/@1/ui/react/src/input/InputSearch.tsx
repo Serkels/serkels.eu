@@ -17,7 +17,7 @@ export const InputSearch = forwardRef<ElementRef<"input">, InputSearch_Props>(
       >
         <label
           htmlFor="default-search"
-          className="sr-only mb-2 text-sm font-medium "
+          className="sr-only mb-2 text-sm font-medium"
         >
           Recherche
         </label>

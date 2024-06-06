@@ -1,5 +1,5 @@
 //
-
+"use client";
 import { forwardRef, type ComponentPropsWithoutRef } from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import { Provider } from "./AsideFilter.client";
@@ -18,7 +18,7 @@ export const AsideFilter = forwardRef<HTMLDivElement, Props>(
         ref={forwardedRef}
       >
         <div className={sticky()}>
-          <div className="overflow-y-auto pb-28 pr-8">
+          <div className="overflow-y-auto md:pb-28">
             <h3 className={title()}>{Title}</h3>
             <Provider>
               <article className={article()}>{children}</article>
@@ -42,7 +42,7 @@ const style = tv({
   base: "",
   slots: {
     sticky: "sticky top-16 pt-10",
-    title: "mb-7 text-2xl font-bold uppercase text-Congress_Blue",
-    article: "pt-10",
+    title: "mb-7 pl-3 text-2xl font-bold uppercase text-Congress_Blue md:pl-0",
+    article: "w-full",
   },
 });

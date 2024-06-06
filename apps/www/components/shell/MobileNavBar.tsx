@@ -83,12 +83,7 @@ function NavItem({
 }: PropsWithChildren<{ Icon: ElementType; isActive: boolean }>) {
   const { item } = navbar();
   return (
-    <div
-      className="
-        flex h-full min-w-[55px] flex-col items-center justify-end py-2
-        [&>svg]:w-6
-      "
-    >
+    <div className="flex h-full min-w-[55px] flex-col items-center justify-end py-2 [&>svg]:w-6">
       <Icon className="mx-auto block flex-1" />
       <span className={item({ is_active: isActive })}>{children}</span>
     </div>
