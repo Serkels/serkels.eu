@@ -24,7 +24,10 @@ import { tv } from "tailwind-variants";
 //
 
 export function FrenchLocationField(
-  props: FieldAttributes<{ use_formik?: boolean }>,
+  props: FieldAttributes<{ use_formik?: boolean }> & {
+    value: string;
+    onChange: (value: string) => void;
+  },
 ) {
   const [location, set_location] = useState(
     String(props.defaultValue ?? "Paris"),
@@ -34,25 +37,35 @@ export function FrenchLocationField(
     { location },
     { keepPreviousData: true, staleTime: Infinity },
   );
-  const onChange = useDebouncedCallback<any>(
-    (value: string) => set_location(value),
+  const handleChange = useDebouncedCallback<any>(
+    (value: string) => {
+      set_location(value);
+      props.onChange(value);
+    },
     [set_location],
-    400,
+    100,
     600,
   );
 
   return (
     <fieldset className="w-full" disabled={props.disabled}>
-      <ComboBox onInputChange={onChange} items={query_info.data}>
+      <ComboBox
+        onInputChange={handleChange}
+        items={query_info.data}
+        formValue="text"
+        className="relative"
+      >
         {query_info.isFetching && !query_info.isLoading && (
           <Text slot="description">
-            <Spinner className="size-4" />
+            <Spinner className="absolute -left-6 top-2.5 size-4" />
           </Text>
         )}
         <Group className="flex bg-white bg-opacity-90 shadow-md ring-1 ring-black/10 transition focus-within:bg-opacity-100 focus-visible:ring-2 focus-visible:ring-black">
           <Input
             className="w-full flex-1 border-none bg-transparent px-3 py-2 text-base leading-5 text-gray-900 outline-none"
             defaultValue={location}
+            value={props.value}
+            onChange={(e) => handleChange(e.target.value)}
           />
           <Button className="pressed:bg-sky-100 flex items-center border-0 border-l border-solid border-l-sky-200 bg-transparent px-3 text-gray-700 transition">
             {">"}
