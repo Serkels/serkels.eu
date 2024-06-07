@@ -47,7 +47,7 @@ export function Opportunity_InfiniteList({
           <li className="col-span-full mx-auto">
             {isFetchingNextPage ? <Loading /> : null}
           </li>
-          <li className="col-span-full mx-auto">
+          <li className="col-span-full mx-auto pb-8">
             {hasNextPage ? (
               <Button
                 onPress={() => fetchNextPage()}
@@ -67,7 +67,7 @@ export function Opportunity_InfiniteList({
 
 function EmptyList() {
   return (
-    <figure className="mt-28  text-center">
+    <figure className="mt-28 text-center">
       <h3 className="text-xl">Aucune opportunité disponible pour le moment</h3>
     </figure>
   );
@@ -84,18 +84,7 @@ function Loading() {
 //
 
 const opportunity_grid = tv({
-  base: `
-    grid
-    grid-flow-row
-    grid-cols-1
-    gap-8
-    px-4
-    sm:grid-cols-2
-    sm:px-0
-    md:grid-cols-2
-    lg:grid-cols-3
-    xl:grid-cols-4
-  `,
+  base: `grid grid-flow-row grid-cols-1 gap-8 px-4 sm:grid-cols-2 sm:px-0 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4`,
   slots: {
     item: "",
   },

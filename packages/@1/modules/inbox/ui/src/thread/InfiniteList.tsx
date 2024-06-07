@@ -73,7 +73,7 @@ function List<T>({
       <li className="col-span-full mx-auto">
         {isFetchingNextPage ? <Loading /> : null}
       </li>
-      <li className="col-span-full mx-auto">
+      <li className="col-span-full mx-auto pb-8">
         {hasNextPage ? (
           <Button
             onPress={() => fetchNextPage()}
@@ -89,18 +89,7 @@ function List<T>({
 
 function EmptyList() {
   return (
-    <p
-      className="
-        flex
-        h-1/3
-        flex-col
-        items-center
-        justify-center
-        text-center
-        font-bold
-        opacity-50
-      "
-    >
+    <p className="flex h-1/3 flex-col items-center justify-center text-center font-bold opacity-50">
       Aucune discussion disponible pour le moment
     </p>
   );

@@ -28,7 +28,7 @@ export default async function Page() {
 
   return (
     <main className={column_screen({ className: "bg-white text-black" })}>
-      <h6 className="my-10 px-8 text-2xl font-bold">Écrire à</h6>
+      <h6 className="my-10 pl-2 text-2xl font-bold">Écrire à</h6>
       <Infinite_Contacts_List />
     </main>
   );

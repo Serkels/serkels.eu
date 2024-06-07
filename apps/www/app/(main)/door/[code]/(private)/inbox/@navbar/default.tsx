@@ -15,8 +15,8 @@ export default async function Page() {
 
   return (
     <div className={column_screen({ className: "pt-10 [&>*]:px-8" })}>
-      <div className="flex justify-between">
-        <h6 className="px-8 text-2xl font-bold">Messages</h6>
+      <div className="flex items-center justify-between">
+        <h6 className="pl-2 text-2xl font-bold">Messages</h6>
         <Link
           className={button({ intent: "danger" })}
           href={"/@~/inbox/write_to"}
@@ -26,13 +26,7 @@ export default async function Page() {
         </Link>
       </div>
       <SearchForm />
-      <nav
-        className="
-          flex-1
-          overflow-y-auto
-          py-8
-        "
-      >
+      <nav className="flex-1 overflow-y-auto py-8">
         <Infinite_Thread_List />
       </nav>
     </div>

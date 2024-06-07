@@ -20,7 +20,7 @@ const message = tv({
     is_first: { true: "rounded-t-3xl" },
     is_last: { true: "rounded-b-3xl" },
     is_you: {
-      true: "ml-auto rounded-l-3xl bg-[#39B15417]",
+      true: "ml-auto rounded-r-3xl bg-[#39B15417]",
       false: "rounded-r-3xl bg-[#F4F7F9]",
     },
   },

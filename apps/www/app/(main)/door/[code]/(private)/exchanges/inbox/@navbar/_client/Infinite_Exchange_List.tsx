@@ -65,7 +65,7 @@ export default function Infinite_Exchange_List() {
           <li className="col-span-full mx-auto">
             {isFetchingNextPage ? <Loading /> : null}
           </li>
-          <li className="col-span-full mx-auto">
+          <li className="col-span-full mx-auto pb-8">
             {hasNextPage ? (
               <Button
                 onPress={() => fetchNextPage()}
@@ -146,11 +146,11 @@ function Item({
           >
             {exchange.deals.length} / {exchange.places}
           </span>{" "}
-          <span className="text-sm font-bold ">dispo</span>
+          <span className="text-sm font-bold">dispo</span>
         </div>
       </section>
       <section className="flex items-center justify-between space-x-1 text-xs text-[#707070]">
-        <span className=" font-bold">
+        <span className="font-bold">
           {match(type)
             .with(Exchange_TypeSchema.Enum.PROPOSAL, () => "Proposition")
             .with(Exchange_TypeSchema.Enum.RESEARCH, () => "Recherche")

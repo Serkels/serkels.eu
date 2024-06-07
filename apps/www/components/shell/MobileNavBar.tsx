@@ -91,7 +91,7 @@ function NavItem({
 }
 
 const navbar = tv({
-  base: "text-white max-sm:bg-primary-gradient",
+  base: "mobileNavbar min-h-16 text-white max-md:bg-primary-gradient",
   slots: {
     link: "block h-full border-b-2",
     item: "hidden text-sm lg:block",
