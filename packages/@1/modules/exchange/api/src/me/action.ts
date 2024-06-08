@@ -123,12 +123,19 @@ export const action = next_auth_procedure
         },
         where: { id: exchange_id },
       });
-      const exchange_deal_ids = exchange.deals.map((deal) => deal.id);
+
       if (is_exchange_completed(exchange)) {
         const threads = await prisma.thread.findMany({
           select: { id: true },
           where: {
-            exchange_threads: { some: { deal_id: { in: exchange_deal_ids } } },
+            exchange_threads: {
+              some: {
+                deal: {
+                  status: Deal_Status_Schema.Enum.APPROVED,
+                  parent: { id: exchange_id },
+                },
+              },
+            },
           },
         });
         await prisma.$transaction([
@@ -136,6 +143,15 @@ export const action = next_auth_procedure
             data: {
               is_active: false,
               updated_at: new Date(),
+              deals: {
+                updateMany: {
+                  data: { updated_at: new Date() },
+                  where: {
+                    parent_id: exchange_id,
+                    status: Deal_Status_Schema.Enum.APPROVED,
+                  },
+                },
+              },
             },
             where: { id: exchange_id },
           }),
@@ -150,7 +166,12 @@ export const action = next_auth_procedure
             data: { updated_at: new Date() },
             where: {
               exchange_threads: {
-                some: { deal_id: { in: exchange_deal_ids } },
+                some: {
+                  deal: {
+                    status: Deal_Status_Schema.Enum.APPROVED,
+                    parent: { id: exchange_id },
+                  },
+                },
               },
             },
           }),
