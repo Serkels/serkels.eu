@@ -24,7 +24,7 @@ generator client {
 //
 
 //
-//
+//#region 👥 User
 //
 
 model SignupPayload {
@@ -107,11 +107,11 @@ enum ProfileRole {
 }
 
 //
-//
+//#endregion
 //
 
 //
-//
+//#region 🔖 Bookmark
 //
 
 model Bookmark {
@@ -133,11 +133,11 @@ model Bookmark {
 }
 
 //
-//
+//#endregion
 //
 
 //
-//
+//#region 📚 Category
 //
 
 model Category {
@@ -165,11 +165,11 @@ enum CategoryContext {
 }
 
 //
-//
+//#endregion
 //
 
 //
-//
+//#region 🔄 Exchange
 //
 
 model Exchange {
@@ -244,11 +244,11 @@ enum ExchangeThreadStatus {
 }
 
 //
-//
+//#endregion
 //
 
 //
-//
+//#region 📦 Opportunity
 //
 
 model Opportunity {
@@ -274,11 +274,11 @@ model Opportunity {
 }
 
 //
-//
+//#endregion
 //
 
 //
-//
+//#region 📝 Forum
 //
 
 model Question {
@@ -314,11 +314,11 @@ model Answer {
 }
 
 //
-//
+//#endregion
 //
 
 //
-//
+//#region 📬 Inbox
 //
 
 model InboxThread {
@@ -366,11 +366,11 @@ model Message {
 }
 
 //
-//
+//#endregion
 //
 
 //
-//
+//#region ☝️ Notification
 //
 
 model Notification {
@@ -399,11 +399,11 @@ model InboxMessageNotification {
 }
 
 //
-//
+//#endregion
 //
 
 //
-//
+//#region 🗝️ Auth
 //
 
 model PasswordlessToken {
@@ -471,3 +471,7 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
+//
+//#endregion
+//
