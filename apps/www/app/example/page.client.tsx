@@ -1,17 +1,18 @@
 "use client";
 
-import { type get_categotires_dto } from "@1.modules/category.api/get_categories";
+import get_categories from "@1.modules/category.api/get_categories";
+import { useQuery } from "@tanstack/react-query";
 
 //
 
-// const query_category = () => {
-//   return useQuery({
-//     queryKey: ["use_category"],
-//     queryFn: async () => {
-//       return get_categories();
-//     },
-//   });
-// };
+const query_category = () => {
+  return useQuery({
+    queryKey: ["use_category"],
+    queryFn: async () => {
+      return get_categories();
+    },
+  });
+};
 // export const getStaticProps: GetStaticProps = async () => {
 //   // 👇 Fetch the posts from the database
 
@@ -28,11 +29,7 @@ import { type get_categotires_dto } from "@1.modules/category.api/get_categories
 //     revalidate: 1,
 //   };
 // };
-export default function PageClient({
-  posts: data,
-}: {
-  posts: get_categotires_dto;
-}) {
-  // const { data, isError, isLoading } = query_category();
-  return <pre>{JSON.stringify({ data }, null, 2)}</pre>;
+export default function PageClient() {
+  const { data, isError, isLoading } = query_category();
+  return <pre>{JSON.stringify({ isError, isLoading, data }, null, 2)}</pre>;
 }
