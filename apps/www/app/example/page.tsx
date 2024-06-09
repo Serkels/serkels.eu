@@ -1,39 +1,27 @@
 //
 
-import { Suspense } from "react";
+import get_categories from "@1.modules/category.api/get_categories";
+import { Hydrate, QueryClient, dehydrate } from "@tanstack/react-query";
 import PageClient from "./page.client";
 
 //
 
 export const dynamic = "force-dynamic";
 
-// export async function getStaticProps() {
-//   // 👇 Fetch the posts from the database
-
-//   const posts = await get_categories();
-
-//   return {
-//     props: {
-//       posts,
-//     },
-
-//     // Next.js will attempt to re-generate the page:
-//     // - When a request comes in
-//     // - At most once every second
-//     revalidate: 1,
-//   };
-// }
-
 export default async function Page() {
-  // const sdf = await get_categories();
-  // sdf;
-  // console.log({ sdf });
+  const query_client = new QueryClient();
+
+  await query_client.prefetchQuery({
+    queryKey: ["use_category"],
+    queryFn: get_categories,
+  });
+
   return (
     <div>
       Page
-      <Suspense fallback="loading...">
+      <Hydrate state={dehydrate(query_client)}>
         <PageClient />
-      </Suspense>
+      </Hydrate>
     </div>
   );
 }
