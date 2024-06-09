@@ -10,10 +10,10 @@ import type { PropsWithChildren } from "react";
 
 //
 
-const TocTocLogo = dynamic(() => import(":components/shell/TocTocLogo"), {
+const SerkelsLogo = dynamic(() => import(":components/shell/SerkelsLogo"), {
   ssr: false,
   loading() {
-    return <VisuallyHidden>Toc-Toc</VisuallyHidden>;
+    return <VisuallyHidden>Serkels</VisuallyHidden>;
   },
 });
 
@@ -40,7 +40,7 @@ function AppLargeTopBar() {
     <BigBar>
       <MenuBurger />
       <Link href="/">
-        <TocTocLogo />
+        <SerkelsLogo />
       </Link>
     </BigBar>
   );

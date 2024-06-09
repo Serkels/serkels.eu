@@ -24,7 +24,7 @@ export default async function Page() {
       <BigBar>
         <Link href="/">
           <Image
-            src="/toc-toc.svg"
+            src="/serkels-noir.svg"
             alt="Serkels Logo"
             width={175}
             height={53}

@@ -1,13 +1,13 @@
 //
 
-import TocTocLogo from ":components/shell/TocTocLogo";
+import SerkelsLogo from ":components/shell/SerkelsLogo";
 import { tv } from "tailwind-variants";
 
 export default function Page() {
   const { base, logo, title } = style();
   return (
     <main className={base()}>
-      <TocTocLogo className={logo()} />
+      <SerkelsLogo className={logo()} />
       <h1 className={title()}>Comming soon.</h1>
     </main>
   );

@@ -8,7 +8,7 @@ import type { Metadata } from "next";
 //
 
 export const metadata: Metadata = {
-  title: "401 _ Toc-Toc",
+  title: "401 _ Serkels",
   description: "Looks like you knocked at the wrong door 👀.",
   icons: { icon: "/favicon.svg" },
 };

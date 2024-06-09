@@ -1,13 +1,13 @@
 //
 
-import { TocToc_Placeholder } from ":components/placeholder/TocToc_Placeholder";
+import { Serkels_Placeholder } from ":components/placeholder/Serkels_Placeholder";
 
 //
 
 export default function Page() {
   return (
     <div className="hidden h-full md:block">
-      <TocToc_Placeholder />
+      <Serkels_Placeholder />
     </div>
   );
 }

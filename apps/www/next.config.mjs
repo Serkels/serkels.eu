@@ -1,7 +1,7 @@
 //
 
-import process from "node:process";
 import { withSentryConfig } from "@sentry/nextjs";
+import process from "node:process";
 import { z } from "zod";
 
 //
@@ -38,7 +38,7 @@ const nextConfig = {
             "stalker.js$",
             "api",
             "maintenance$",
-            "toc-toc.svg$",
+            "serkels-noir.svg$",
           ].join("|")}).*)`,
           destination: "/maintenance",
           permanent: false,

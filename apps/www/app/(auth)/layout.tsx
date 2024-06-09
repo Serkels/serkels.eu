@@ -8,7 +8,7 @@ import type { PropsWithChildren } from "react";
 
 //
 
-const TocTocLogo = dynamic(() => import(":components/shell/TocTocLogo"), {
+const SerkelsLogo = dynamic(() => import(":components/shell/SerkelsLogo"), {
   ssr: false,
   loading() {
     return <VisuallyHidden>Serkels</VisuallyHidden>;
@@ -21,7 +21,7 @@ export default function Layout({ children }: PropsWithChildren) {
   return (
     <div className="grid min-h-screen grid-rows-[max-content_1fr_max-content]">
       <BigBar>
-        <TocTocLogo />
+        <SerkelsLogo />
       </BigBar>
       {children}
       <AppFooter />
