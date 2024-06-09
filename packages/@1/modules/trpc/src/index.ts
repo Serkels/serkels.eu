@@ -6,6 +6,7 @@ export type { Context } from "./context";
 export {
   mergeRouters,
   middleware,
+  next_auth_input_token,
   next_auth_procedure,
   procedure,
   router,

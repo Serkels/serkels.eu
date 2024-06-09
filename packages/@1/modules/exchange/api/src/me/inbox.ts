@@ -1,8 +1,11 @@
 //
 
 import { deal_flow } from "@1.modules/exchange.domain/deal.machine";
-import { next_auth_procedure, router } from "@1.modules/trpc";
-import { next_auth_input_token } from "@1.modules/trpc/src/trpc";
+import {
+  next_auth_input_token,
+  next_auth_procedure,
+  router,
+} from "@1.modules/trpc";
 import type { Prisma } from "@prisma/client";
 import { observable } from "@trpc/server/observable";
 import { EventEmitter } from "events";
