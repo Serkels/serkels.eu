@@ -14,7 +14,7 @@ export default async function Page() {
     <div>
       Page
       <Suspense fallback="loading...">
-        <PageClient />
+        <PageClient posts={sdf} />
       </Suspense>
     </div>
   );

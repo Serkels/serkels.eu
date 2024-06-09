@@ -11,3 +11,5 @@ export default async function get_categories() {
     orderBy: { rank: "desc" },
   });
 }
+
+export type get_categotires_dto = Awaited<ReturnType<typeof get_categories>>;
