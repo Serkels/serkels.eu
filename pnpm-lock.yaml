@@ -111,12 +111,21 @@ importers:
 
   apps/www:
     dependencies:
+      '@1.infra/database':
+        specifier: workspace:*
+        version: link:../../packages/@1/infra/database
+      '@1.infra/email':
+        specifier: workspace:*
+        version: link:../../packages/@1/infra/email
       '@1.modules/auth.next':
         specifier: workspace:*
         version: link:../../packages/@1/modules/auth/next
       '@1.modules/bookmark.ui':
         specifier: workspace:*
         version: link:../../packages/@1/modules/bookmark/ui
+      '@1.modules/category.api':
+        specifier: workspace:*
+        version: link:../../packages/@1/modules/category/api
       '@1.modules/category.domain':
         specifier: workspace:*
         version: link:../../packages/@1/modules/category/domain
@@ -162,6 +171,9 @@ importers:
       '@1.modules/profile.ui':
         specifier: workspace:*
         version: link:../../packages/@1/modules/profile/ui
+      '@1.modules/trpc':
+        specifier: workspace:*
+        version: link:../../packages/@1/modules/trpc
       '@1.ui/react':
         specifier: workspace:*
         version: link:../../packages/@1/ui/react
@@ -171,6 +183,9 @@ importers:
       '@douglasduteil/react-hookz...matrix-uri':
         specifier: workspace:*
         version: link:../../packages/@douglasduteil/react-hookz...matrix-uri
+      '@prisma/client':
+        specifier: 5.15.0
+        version: 5.15.0(prisma@5.15.0)
       '@react-hookz/web':
         specifier: 24.0.4
         version: 24.0.4(js-cookie@3.0.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -186,6 +201,9 @@ importers:
       '@trpc/react-query':
         specifier: 10.45.2
         version: 10.45.2(@tanstack/react-query@4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/client@10.45.2(@trpc/server@10.45.2))(@trpc/server@10.45.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@trpc/server':
+        specifier: 10.45.2
+        version: 10.45.2
       '@vercel/speed-insights':
         specifier: 1.0.11
         version: 1.0.11(next@14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
@@ -419,6 +437,12 @@ importers:
 
   packages/@1/infra/trpc:
     dependencies:
+      '@1.infra/database':
+        specifier: workspace:*
+        version: link:../database
+      '@1.infra/email':
+        specifier: workspace:*
+        version: link:../email
       '@1.modules/auth.api':
         specifier: workspace:*
         version: link:../../modules/auth/api
@@ -726,6 +750,9 @@ importers:
 
   packages/@1/modules/category/api:
     dependencies:
+      '@1.infra/database':
+        specifier: workspace:*
+        version: link:../../../infra/database
       '@1.modules/category.domain':
         specifier: workspace:*
         version: link:../domain
@@ -12569,7 +12596,7 @@ snapshots:
       eslint: 9.4.0
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@7.2.0(eslint@9.4.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@9.4.0))(eslint@9.4.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@9.4.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1)(eslint@9.4.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@9.4.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@9.4.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@9.4.0))(eslint@9.4.0))(eslint@9.4.0)
       eslint-plugin-jsx-a11y: 6.8.0(eslint@9.4.0)
       eslint-plugin-react: 7.34.1(eslint@9.4.0)
       eslint-plugin-react-hooks: 4.6.2(eslint@9.4.0)
@@ -12602,7 +12629,7 @@ snapshots:
       enhanced-resolve: 5.16.1
       eslint: 9.4.0
       eslint-module-utils: 2.8.1(@typescript-eslint/parser@7.2.0(eslint@9.4.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@9.4.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@9.4.0))(eslint@9.4.0))(eslint@9.4.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@9.4.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1)(eslint@9.4.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@9.4.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@9.4.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@9.4.0))(eslint@9.4.0))(eslint@9.4.0)
       fast-glob: 3.3.2
       get-tsconfig: 4.7.5
       is-core-module: 2.13.1
@@ -12624,7 +12651,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-import@2.29.1(@typescript-eslint/parser@7.2.0(eslint@9.4.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1)(eslint@9.4.0):
+  eslint-plugin-import@2.29.1(@typescript-eslint/parser@7.2.0(eslint@9.4.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@9.4.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@9.4.0))(eslint@9.4.0))(eslint@9.4.0):
     dependencies:
       array-includes: 3.1.8
       array.prototype.findlastindex: 1.2.5

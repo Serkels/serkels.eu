@@ -7,10 +7,22 @@
   "type": "module",
   "main": "src/index.ts",
   "module": "src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "types": "./src/*.ts",
+      "default": "./src/*.ts"
+    }
+  },
   "scripts": {
     "type-check": "tsc --build"
   },
   "dependencies": {
+    "@1.infra/database": "workspace:*",
+    "@1.infra/email": "workspace:*",
     "@1.modules/auth.api": "workspace:*",
     "@1.modules/bookmark.api": "workspace:*",
     "@1.modules/category.api": "workspace:*",
