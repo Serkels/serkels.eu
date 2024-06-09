@@ -1,5 +1,6 @@
 //
 
+import { Suspense } from "react";
 import get_categories from "./get_categories";
 import PageClient from "./page.client";
 
@@ -11,7 +12,10 @@ export default async function Page() {
   // console.log({ sdf });
   return (
     <div>
-      Page <PageClient />
+      Page
+      <Suspense fallback="loading...">
+        <PageClient />
+      </Suspense>
     </div>
   );
 }
