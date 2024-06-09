@@ -65,8 +65,8 @@ importers:
         specifier: 4.4.4
         version: 4.4.4
       tsx:
-        specifier: 4.15.0
-        version: 4.15.0
+        specifier: 4.15.1
+        version: 4.15.1
       ws:
         specifier: 8.17.0
         version: 8.17.0
@@ -386,8 +386,8 @@ importers:
         specifier: 1.6.6
         version: 1.6.6
       tsx:
-        specifier: 4.15.0
-        version: 4.15.0
+        specifier: 4.15.1
+        version: 4.15.1
 
   packages/@1/infra/email:
     dependencies:
@@ -8050,8 +8050,8 @@ packages:
   tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
 
-  tsx@4.15.0:
-    resolution: {integrity: sha512-yPThHvkUdsyi3pUb+2a6JM0y0shxxLlIEfms2ZztL/rHqK+4dFYdVxh2X/0bcieo16Kvjq77VU/ML/nVICK/0g==}
+  tsx@4.15.1:
+    resolution: {integrity: sha512-k/6h17jA1KfUR7SpcteOa880zGmF56s8gMIcSqUR5avyNFi9nlCEKpMiHLrzrqyARGr52A/JablmGey1DEWbCA==}
     engines: {node: '>=18.0.0'}
     hasBin: true
 
@@ -15783,7 +15783,7 @@ snapshots:
 
   tslib@2.6.2: {}
 
-  tsx@4.15.0:
+  tsx@4.15.1:
     dependencies:
       esbuild: 0.21.4
       get-tsconfig: 4.7.5
