@@ -394,8 +394,10 @@ enum NotificationType {
 model InboxMessageNotification {
   notification    Notification @relation(fields: [notification_id], references: [id], onDelete: Cascade)
   notification_id String       @unique
-  message         Message      @relation(fields: [message_id], references: [id], onDelete: Cascade)
+  message         Message?     @relation(fields: [message_id], references: [id], onDelete: Cascade)
   message_id      String
+
+  @@unique(name: "unique_message_notification", fields: [message_id, notification_id])
 }
 
 //
