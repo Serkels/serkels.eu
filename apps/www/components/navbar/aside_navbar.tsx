@@ -36,10 +36,10 @@ export function Studient_NavBar({ studient }: { studient: Studient }) {
           Créer
         </Li_Link>
         <Li_Link icon={<Archive />} href="./exchanges/mine">
-          Mes annonces
+          Mes publications
         </Li_Link>
         <Li_Link icon={<Exchange />} href="./exchanges/inbox">
-          Mes échanges
+          Les échanges
         </Li_Link>
         <Li_Link icon={<Bookmark />} href="./bookmarks">
           Sauvegardes
