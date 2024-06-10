@@ -180,6 +180,7 @@ const exchange_api_router = router({
         orderBy: [{ created_at: "desc" }, { expiry_date: "desc" }],
         take: limit + 1,
         where: {
+          is_active: true,
           OR: [
             { title: { contains: search ?? "", mode: "insensitive" } },
             { description: { contains: search ?? "", mode: "insensitive" } },
