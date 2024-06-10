@@ -61,7 +61,10 @@ export const find = next_auth_procedure
       orderBy: { updated_at: "desc" },
       select: { parent: true },
       take: limit + 1,
-      where: { ...deal_releated_to_me_where, parent: { ...search_where } },
+      where: {
+        ...deal_releated_to_me_where,
+        parent: { is_active: true, ...search_where },
+      },
       distinct: ["parent_id"],
     });
 
