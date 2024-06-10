@@ -1,5 +1,6 @@
 "use client";
 
+import { TRPC_React } from ":trpc/client";
 import type { Profile } from "@1.modules/profile.domain";
 import { Avatar } from "@1.modules/profile.ui";
 import { Button } from "@1.ui/react/button";
@@ -22,25 +23,37 @@ export default function Avatar_Editor({ profile }: { profile: Profile }) {
   } = useForm({
     defaultValues: { profile_id: profile.id, image_file: new File([], "") },
   });
+  const update_image_to_gravatar =
+    TRPC_React.profile.me.update_image_to_gravatar.useMutation();
   const [preview, set_preview] = useState(profile.image);
   const { update } = useSession();
   const router = useRouter();
-  const [{ status }, { execute }] = useAsync(async (data: FormData) => {
-    const file = data.get("image_file") as File;
-    const tool = await fromImage(file);
-    const thumbnail = await tool
-      .thumbnail(258, true)
-      .type("image/jpeg")
-      .toFile(`@${profile.id}.jpg`);
-    data.set("image_file", thumbnail);
-    await uploadImage(data);
+
+  const [{ status: upload_status }, { execute: upload_image }] = useAsync(
+    async (data: FormData) => {
+      const file = data.get("image_file") as File;
+      const tool = await fromImage(file);
+      const thumbnail = await tool
+        .thumbnail(258, true)
+        .type("image/jpeg")
+        .toFile(`@${profile.id}.jpg`);
+      data.set("image_file", thumbnail);
+      await uploadImage(data);
+      await update();
+      reset();
+      router.refresh();
+    },
+  );
+
+  const [, { execute: use_gravatar }] = useAsync(async () => {
+    const new_profile = await update_image_to_gravatar.mutateAsync();
+    await set_preview(new_profile.image);
     await update();
-    reset();
     router.refresh();
   });
 
   return (
-    <form action={execute}>
+    <form action={upload_image}>
       <fieldset
         className="md:col-span-1"
         disabled={isSubmitting || status === "loading"}
@@ -59,11 +72,6 @@ export default function Avatar_Editor({ profile }: { profile: Profile }) {
             async onChange(event: React.ChangeEvent<HTMLInputElement>) {
               const file = event.target.files?.[0];
               if (!file) return;
-
-              // if (file.size > 1e7) {
-              //   window.alert("Please upload a file smaller than 10 MB");
-              //   return false;
-              // }
               set_preview(URL.createObjectURL(file));
             },
           })}
@@ -76,10 +84,30 @@ export default function Avatar_Editor({ profile }: { profile: Profile }) {
             URL.revokeObjectURL(preview);
           }}
         />
+        <details className="my-3">
+          <summary>
+            <Button intent="secondary" onPress={use_gravatar} type="button">
+              Revenir à l'image Gravatar
+            </Button>
+          </summary>
+          <br />
+          Par défaut, votre avatar est généré par{" "}
+          <a
+            className="underline"
+            target="_blank"
+            rel="noreferrer"
+            href="https://gravatar.com/"
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+          >
+            Gravatar
+          </a>
+        </details>
         <Button
           intent="primary"
           type="submit"
-          isDisabled={!isDirty || isSubmitting || status === "loading"}
+          isDisabled={!isDirty || isSubmitting || upload_status === "loading"}
         >
           Sauvegarder
         </Button>
