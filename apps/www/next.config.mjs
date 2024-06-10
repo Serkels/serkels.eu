@@ -23,6 +23,15 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "xliajqivstyuw7e1.public.blob.vercel-storage.com",
+        port: "",
+      },
+    ],
+  },
   reactStrictMode: true,
   transpilePackages: [],
   async redirects() {

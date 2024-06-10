@@ -14,7 +14,7 @@ import SuperJSON from "superjson";
 
 //
 
-const proxyClient = createTRPCProxyClient<Router>({
+export const proxyClient = createTRPCProxyClient<Router>({
   links: [
     loggerLink({
       enabled: (opts) =>
