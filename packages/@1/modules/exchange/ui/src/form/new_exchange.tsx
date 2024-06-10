@@ -23,7 +23,7 @@ import { createSlot } from "react-slotify";
 interface Exchange_CreateForm_Props<TValues>
   extends PropsWithChildren<FormikProps<TValues>> {
   categories: Category[];
-  alreadyPopulated: boolean;
+  alreadyPopulated?: boolean;
 }
 
 export function Exchange_CreateForm<
