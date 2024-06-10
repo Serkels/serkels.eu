@@ -65,6 +65,21 @@ const exchange_api_router = router({
     .query(async ({ input, ctx: { prisma } }) => {
       const { profile_id, limit } = input;
 
+      const unactive_owned_exchanges_where: Prisma.ExchangeWhereInput = {
+        is_active: false,
+        owner: { profile_id },
+      };
+      const unactive_participating_exchanges_where: Prisma.ExchangeWhereInput =
+        {
+          is_active: false,
+          deals: {
+            some: {
+              participant: { profile_id },
+              status: Deal_Status_Schema.Enum.APPROVED,
+            },
+          },
+        };
+
       const data = await prisma.exchange.findMany({
         include: {
           category: true,
@@ -72,16 +87,13 @@ const exchange_api_router = router({
           owner: { include: { profile: true } },
           deals: { where: { status: Deal_Status_Schema.Enum.APPROVED } },
         },
-        orderBy: { updated_at: "asc" },
+        orderBy: [{ updated_at: "asc" }, { created_at: "asc" }],
         take: limit,
         where: {
-          is_active: false,
-          deals: {
-            every: {
-              participant: { profile_id },
-              status: Deal_Status_Schema.Enum.APPROVED,
-            },
-          },
+          OR: [
+            unactive_owned_exchanges_where,
+            unactive_participating_exchanges_where,
+          ],
         },
       });
 
@@ -110,8 +122,12 @@ const exchange_api_router = router({
           deals: { where: { status: Deal_Status_Schema.Enum.APPROVED } },
         },
         take: limit,
-        where: { owner: { profile_id: profile_id } },
-        orderBy: { created_at: "asc" },
+        where: {
+          expiry_date: { gte: new Date() },
+          is_active: true,
+          owner: { profile_id: profile_id },
+        },
+        orderBy: [{ created_at: "asc" }],
       });
 
       let next_cursor: typeof cursor | undefined = undefined;
@@ -180,8 +196,8 @@ const exchange_api_router = router({
         orderBy: [{ created_at: "desc" }, { expiry_date: "desc" }],
         take: limit + 1,
         where: {
-          is_active: true,
           expiry_date: { gte: new Date() },
+          is_active: true,
           OR: [
             { title: { contains: search ?? "", mode: "insensitive" } },
             { description: { contains: search ?? "", mode: "insensitive" } },
