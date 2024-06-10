@@ -52,7 +52,7 @@ function useTRPCClient() {
           client,
         }),
         false: httpBatchLink({
-          url: `${process.env["APP_URL"]}/trpc`,
+          url: "/api/trpc",
           headers: () => {
             return { ...session?.header };
           },
