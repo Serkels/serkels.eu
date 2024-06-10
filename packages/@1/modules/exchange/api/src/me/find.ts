@@ -67,17 +67,11 @@ export const find = next_auth_procedure
 
     const data = deals.map(({ parent }) => parent);
 
-    const first_exchanges = await prisma.exchange.findMany({
-      where: { owner_id: studient_id, id: { notIn: data.map(({ id }) => id) } },
-    });
-
     let next_cursor: typeof cursor | undefined = undefined;
     if (data.length > limit) {
       const next_item = data.pop()!;
       next_cursor = next_item.id;
     }
-
-    data.push(...first_exchanges);
 
     return { data, next_cursor };
   });
