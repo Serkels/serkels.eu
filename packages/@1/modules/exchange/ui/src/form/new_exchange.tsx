@@ -23,6 +23,7 @@ import { createSlot } from "react-slotify";
 interface Exchange_CreateForm_Props<TValues>
   extends PropsWithChildren<FormikProps<TValues>> {
   categories: Category[];
+  alreadyPopulated?: boolean;
 }
 
 export function Exchange_CreateForm<
@@ -35,15 +36,18 @@ export function Exchange_CreateForm<
   isSubmitting,
   setFieldValue,
   values,
+  alreadyPopulated,
 }: Exchange_CreateForm_Props<TValues>) {
+  const isDisabled = isSubmitting || alreadyPopulated;
+
   return (
     <Form className="flex flex-col justify-center space-y-5">
-      <fieldset className={fieldset()} disabled={isSubmitting}>
+      <fieldset className={fieldset()} disabled={isDisabled}>
         <label>
           <span>Je cherche</span>
           <Field
             checked={values.type === Exchange_TypeSchema.Enum.RESEARCH}
-            disabled={isSubmitting}
+            disabled={isDisabled}
             name="type"
             required
             type="radio"
@@ -54,7 +58,7 @@ export function Exchange_CreateForm<
           <span>Je propose</span>
           <Field
             checked={values.type === Exchange_TypeSchema.Enum.PROPOSAL}
-            disabled={isSubmitting}
+            disabled={isDisabled}
             name="type"
             required
             type="radio"
@@ -62,12 +66,12 @@ export function Exchange_CreateForm<
           />
         </label>
       </fieldset>
-      <fieldset className={fieldset()} disabled={isSubmitting}>
+      <fieldset className={fieldset()} disabled={isDisabled}>
         <label>
           <span>En ligne</span>{" "}
           <Field
             checked={values.is_online === true}
-            disabled={isSubmitting}
+            disabled={isDisabled}
             name="is_online"
             onChange={() => setFieldValue("is_online", true)}
             required
@@ -78,7 +82,7 @@ export function Exchange_CreateForm<
           <span>Sur place</span>{" "}
           <Field
             checked={values.is_online === false}
-            disabled={isSubmitting}
+            disabled={isDisabled}
             name="is_online"
             onChange={() => setFieldValue("is_online", false)}
             required
@@ -91,7 +95,7 @@ export function Exchange_CreateForm<
 
         <SelectCategoryField
           categories={categories}
-          disabled={isSubmitting}
+          disabled={isDisabled}
           name="category"
           className={select()}
           placeholder="Dans quelle categorie ?"
@@ -103,7 +107,7 @@ export function Exchange_CreateForm<
 
         <Field
           className={input()}
-          disabled={isSubmitting}
+          disabled={isDisabled}
           type="date"
           name="expiry_date"
         />
@@ -113,7 +117,7 @@ export function Exchange_CreateForm<
 
         <Field
           className={input()}
-          disabled={isSubmitting}
+          disabled={isDisabled}
           name="title"
           required
         />
@@ -126,7 +130,7 @@ export function Exchange_CreateForm<
 
         <Field
           className={input()}
-          disabled={isSubmitting}
+          disabled={isDisabled}
           component="textarea"
           name="description"
           required
@@ -142,7 +146,7 @@ export function Exchange_CreateForm<
         <Exchange_CreateForm.LocationField.Renderer
           childs={children}
           name="location"
-          disabled={isSubmitting}
+          disabled={isDisabled}
         ></Exchange_CreateForm.LocationField.Renderer>
       </label>
 
@@ -151,7 +155,7 @@ export function Exchange_CreateForm<
 
         <Field
           className={input()}
-          disabled={isSubmitting}
+          disabled={isDisabled}
           maxLength={9}
           minLength={1}
           name="places"
@@ -163,7 +167,7 @@ export function Exchange_CreateForm<
       <fieldset className={fieldset()}>
         <label>
           <span>Sans échange</span>{" "}
-          <Field disabled={isSubmitting} value="" name="return" type="radio" />
+          <Field disabled={isDisabled} value="" name="return" type="radio" />
         </label>
         <label>
           <span className="w-full"> Contre un échange</span>
@@ -174,7 +178,7 @@ export function Exchange_CreateForm<
           />
           <SelectCategoryField
             categories={categories}
-            disabled={isSubmitting}
+            disabled={isDisabled}
             name="return"
             className={select()}
             placeholder="Dans quelle categorie ?"
@@ -185,7 +189,7 @@ export function Exchange_CreateForm<
         </label>
       </fieldset>
 
-      <Button isDisabled={isSubmitting} type="submit">
+      <Button isDisabled={isDisabled} type="submit">
         Publier
       </Button>
     </Form>

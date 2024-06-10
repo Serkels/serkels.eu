@@ -1,5 +1,6 @@
 "use client";
 
+import InfoBox from ":components/InfoBox";
 import { TRPC_React } from ":trpc/client";
 import type { Exchange } from "@1.modules/exchange.domain";
 import { Card } from "@1.modules/exchange.ui/Card/Card";
@@ -18,7 +19,7 @@ import { button } from "@1.ui/react/button/atom";
 import { Pen } from "@1.ui/react/icons";
 import { useTimeoutEffect } from "@react-hookz/web";
 import Link from "next/link";
-import type { PropsWithChildren } from "react";
+import { useState, type MouseEvent, type PropsWithChildren } from "react";
 import { match } from "ts-pattern";
 import { Exchange_Actions } from "./actions";
 import { Exchange_Bookmark } from "./bookmark";
@@ -78,6 +79,20 @@ function Idle() {
   const exchange = useExchange();
   const { is_yours } = useExchangeMeta();
 
+  const [showInfoBox, setShowInfoBox] = useState(false);
+
+  const alreadyPopulated = exchange.deals.length > 0;
+
+  const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
+    if (alreadyPopulated) {
+      e.preventDefault();
+      setShowInfoBox(true);
+      setTimeout(() => {
+        setShowInfoBox(false);
+      }, 5000);
+    }
+  };
+
   return (
     <Card_Idle>
       <Card.Header.Left>
@@ -86,7 +101,7 @@ function Idle() {
         </Link>
       </Card.Header.Left>
       <Card.Header.Right>
-        <div className=" flex flex-row items-center space-x-2">
+        <div className="flex flex-row items-center gap-4">
           {is_yours ? (
             <>
               <Link
@@ -97,10 +112,16 @@ function Idle() {
                   className: "box-content h-4 py-2",
                 })}
                 // className="h-4 text-Dove_Gray hover:text-Dove_Gray/50"
-                href={`/@~/exchanges/${exchange.id}/edit`}
+                href={
+                  alreadyPopulated ? "" : `/@~/exchanges/${exchange.id}/edit`
+                }
+                onClick={alreadyPopulated ? handleClick : undefined}
               >
                 <Pen className="h-4" />
               </Link>
+              {showInfoBox && (
+                <InfoBox message="Les échanges comprenant déjà des participants ne peuvent pas être édités" />
+              )}
               <Exchange_Delete_Button />
             </>
           ) : null}
