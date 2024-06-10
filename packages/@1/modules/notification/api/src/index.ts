@@ -23,7 +23,7 @@ const notification_api_router = router({
             select: { message: { select: { thread_id: true } } },
             where: { notification: { owner_id, read_at: null } },
           });
-          return new Set(data.map(({ message: { thread_id } }) => thread_id));
+          return new Set(data.map(({ message }) => message?.thread_id));
         })
         .otherwise(() => Promise.resolve(null));
 

@@ -84,6 +84,7 @@ function InboxNewMessage({ notification }: { notification: Notification }) {
   const { id, created_at, read_at, inbox_message } = notification;
 
   if (!inbox_message) return null;
+  if (!inbox_message.message) return null;
 
   const {
     message: {
