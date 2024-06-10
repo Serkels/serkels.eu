@@ -22,6 +22,8 @@ export function Mutate_Exchange({
   const utils = TRPC_React.useUtils();
   const router = useRouter();
 
+  const alreadyPopulated = exchange.deals.length > 0;
+
   return (
     <Formik
       initialValues={{
@@ -51,7 +53,11 @@ export function Mutate_Exchange({
       }}
     >
       {(formik) => (
-        <Exchange_CreateForm categories={categories} {...formik}>
+        <Exchange_CreateForm
+          categories={categories}
+          alreadyPopulated={alreadyPopulated}
+          {...formik}
+        >
           <Exchange_CreateForm.LocationField>
             {(input_props) => (
               <FrenchLocationField
