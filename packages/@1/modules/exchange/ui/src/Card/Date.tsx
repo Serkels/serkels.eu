@@ -16,7 +16,7 @@ export function Exchange_Date() {
   const exchange = useExchange();
   return (
     <div className="flex flex-col text-right">
-      <Time date={exchange.created_at}>
+      <Time className="font-bold" date={exchange.created_at}>
         {format(exchange.created_at, "P", { locale: fr })}
       </Time>
       {!isEqual(exchange.updated_at, exchange.created_at) ? (
@@ -36,7 +36,9 @@ export function Exchange_Date() {
           Date limite : {format(exchange.expiry_date, "P", { locale: fr })}
         </Time>
       ) : (
-        <time className={expiry_date_variant()}>Date limite : flexible</time>
+        <time className={expiry_date_variant({ is_flexible: true })}>
+          Date limite : flexible
+        </time>
       )}
     </div>
   );
@@ -44,15 +46,17 @@ export function Exchange_Date() {
 
 function Time({
   children,
+  className,
   date,
   variants = {},
 }: PropsWithChildren<{
+  className?: string;
   date: Date;
   variants?: VariantProps<typeof expiry_date_variant>;
 }>) {
   return (
     <time
-      className={expiry_date_variant(variants)}
+      className={expiry_date_variant({ className, ...variants })}
       dateTime={date.toUTCString()}
       title={date.toUTCString()}
     >
@@ -64,7 +68,8 @@ function Time({
 const expiry_date_variant = tv({
   base: "text-xs opacity-90",
   variants: {
-    is_future: { true: "font-bold text-success" },
-    is_this_week: { true: "font-bold text-warning" },
+    is_flexible: { true: "font-semibold text-success" },
+    is_future: { true: "font-semibold text-lime-800" },
+    is_this_week: { true: "font-semibold text-warning" },
   },
 });

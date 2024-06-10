@@ -181,6 +181,7 @@ const exchange_api_router = router({
         take: limit + 1,
         where: {
           is_active: true,
+          expiry_date: { gte: new Date() },
           OR: [
             { title: { contains: search ?? "", mode: "insensitive" } },
             { description: { contains: search ?? "", mode: "insensitive" } },
