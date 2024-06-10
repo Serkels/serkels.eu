@@ -56,6 +56,11 @@ const nextConfig = {
         destination: "/@~/bookmarks/opportunities",
         permanent: true,
       },
+      {
+        source: "/signup/partner",
+        destination: "/not-found",
+        permanent: false,
+      },
     ];
   },
   async rewrites() {

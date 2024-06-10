@@ -12,20 +12,7 @@ export function LoginForm({
   onSignUp: SignUpProps["onSubmit"];
 }) {
   return (
-    <div
-      className="
-        grid
-        grid-cols-1
-        gap-5
-        rounded-md
-        border
-        bg-white
-        px-4
-        py-5
-        text-Dove_Gray
-        shadow-[10px_10px_10px_#00000029]
-      "
-    >
+    <div className="grid grid-cols-1 gap-5 rounded-md border bg-white px-4 py-5 text-Dove_Gray shadow-[10px_10px_10px_#00000029]">
       <SignUp onSubmit={onSignUp} />
       <hr />
       <Login onSubmit={onLogin} />
@@ -37,7 +24,7 @@ export function SignUp({ onSubmit }: SignUpProps) {
   return (
     <Formik initialValues={{ email: "", as: "" }} onSubmit={onSubmit}>
       {({ isSubmitting, setFieldValue }) => (
-        <Form className="flex  flex-col items-center space-y-5 text-black">
+        <Form className="flex flex-col items-center space-y-5 text-black">
           <h1 className="text-center text-sm font-bold uppercase">
             Créer un compte
           </h1>
@@ -62,7 +49,8 @@ export function SignUp({ onSubmit }: SignUpProps) {
           <Button
             intent="quinary"
             type="submit"
-            isDisabled={isSubmitting}
+            // isDisabled={isSubmitting}
+            isDisabled={true}
             onPress={() => setFieldValue("as", PROFILE_ROLES.enum.PARTNER)}
           >
             Partenaire
