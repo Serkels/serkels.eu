@@ -19,7 +19,7 @@ import { button } from "@1.ui/react/button/atom";
 import { Pen } from "@1.ui/react/icons";
 import { useTimeoutEffect } from "@react-hookz/web";
 import Link from "next/link";
-import React, { useState, type PropsWithChildren } from "react";
+import { useState, type MouseEvent, type PropsWithChildren } from "react";
 import { match } from "ts-pattern";
 import { Exchange_Actions } from "./actions";
 import { Exchange_Bookmark } from "./bookmark";
@@ -79,13 +79,11 @@ function Idle() {
   const exchange = useExchange();
   const { is_yours } = useExchangeMeta();
 
-  console.log(exchange);
-
   const [showInfoBox, setShowInfoBox] = useState(false);
 
   const alreadyPopulated = exchange.deals.length > 0;
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+  const handleClick = (e: MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     if (alreadyPopulated) {
       e.preventDefault();
       setShowInfoBox(true);
