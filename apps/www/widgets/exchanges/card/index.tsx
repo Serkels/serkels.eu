@@ -83,7 +83,7 @@ function Idle() {
 
   const alreadyPopulated = exchange.deals.length > 0;
 
-  const handleClick = (e: MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+  const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
     if (alreadyPopulated) {
       e.preventDefault();
       setShowInfoBox(true);
