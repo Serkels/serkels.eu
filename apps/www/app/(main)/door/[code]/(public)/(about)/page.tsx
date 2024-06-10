@@ -63,9 +63,6 @@ async function StudientMeta({ profile_id }: { profile_id: string }) {
   return (
     <ul>
       <li>
-        <b>Université : </b> <span>{studient.university}</span>
-      </li>
-      <li>
         <b>Domain : </b> <span>{studient.field_of_study}</span>
       </li>
       <li>
