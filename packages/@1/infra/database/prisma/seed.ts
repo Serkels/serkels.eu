@@ -159,8 +159,11 @@ async function studient() {
                 ExchangeType.PROPOSAL,
                 ExchangeType.RESEARCH,
               ]),
-              expiry_date:
-                faker.helpers.maybe(() => faker.date.future()) ?? null,
+              expiry_date: faker.helpers.weightedArrayElement([
+                { value: null, weight: 1 },
+                { value: faker.date.future({ years: 0.1 }), weight: 1 },
+                { value: faker.date.recent({ days: 1 }), weight: 2 },
+              ]),
             }),
             { count: { min: 0, max: 5 } },
           ),
@@ -418,7 +421,9 @@ async function studients_participants_in_exchanges() {
               created_at: faker.date.past(),
               updated_at: faker.date.recent({ days: 66 }),
             },
-            update: {},
+            update: {
+              updated_at: faker.date.recent({ days: 33 }),
+            },
             where: {
               participant_per_exchange: {
                 parent_id: exchange_id,
