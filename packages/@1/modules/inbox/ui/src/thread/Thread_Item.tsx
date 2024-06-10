@@ -37,7 +37,7 @@ export function Thread_Item({
             ${last_seen_date ? `last seen ~  ${last_seen_date.toUTCString()}` : ""}
             `}
           >
-            {format(last_update, "E p", { locale: fr })}
+            {format(last_update, "PPp", { locale: fr })}
           </time>
         </Thread_Item.Time.Renderer>
       </header>
@@ -55,16 +55,7 @@ Thread_Item.Body = createSlot();
 Thread_Item.Time = createSlot();
 
 export const thread_item = tv({
-  base: `
-    block
-    space-y-5
-    rounded-xl
-    border
-    border-[#ECEDF4]
-    p-4
-    text-black
-    shadow-[10px_10px_10px_#00000014]
-  `,
+  base: `block space-y-5 rounded-xl border border-[#ECEDF4] p-4 text-black shadow-[10px_10px_10px_#00000014]`,
   slots: {
     header: "flex justify-between",
     time: "whitespace-nowrap text-xs font-bold",
