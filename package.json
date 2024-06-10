@@ -1,5 +1,4 @@
 {
-  "name": "toctoc",
   "private": true,
   "scripts": {
     "build": "turbo run build",
@@ -23,7 +22,7 @@
     "cpx2": "7.0.1",
     "del-cli": "5.1.0",
     "prettier": "3.3.1",
-    "turbo": "2.0.3",
+    "turbo": "1.13.4",
     "typescript": "5.4.5"
   },
   "packageManager": "pnpm@9.2.0",
