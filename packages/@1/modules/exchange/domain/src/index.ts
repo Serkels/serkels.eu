@@ -46,11 +46,10 @@ export const Exchange_Schema = Exchange_Flat_Schema.extend({
 export interface Exchange extends z.TypeOf<typeof Exchange_Schema> {}
 
 export function is_active_exchange(exchange: Exchange) {
-  return (
-    exchange.deals.length < exchange.places ||
-    exchange.expiry_date === null ||
-    exchange.expiry_date > new Date()
-  );
+  const all_seat_taken = exchange.deals.length >= exchange.places;
+  const expired_exchange =
+    exchange.expiry_date && exchange.expiry_date < new Date();
+  return !(all_seat_taken || expired_exchange);
 }
 
 //
@@ -94,38 +93,17 @@ export const HANDSHAKE_TOCTOC = "🚪 Toc Toc !";
 
 //
 
-/**
- * @deprecated To rename or split
- * Used as create and update schema
- */
-export const Exchange_Create_Schema = Exchange_Flat_Schema.omit({
-  id: true,
-  created_at: true,
-  updated_at: true,
-  category: true,
-  deals: true,
-  return: true,
-  owner: true,
-  owner_id: true,
-}).describe("Exchange_Create_Schema");
+export const Exchange_Create_Schema = z.object({
+  category_id: ID_Schema,
+  description: z.string(),
+  expiry_date: z.date().nullable(),
+  is_online: z.boolean(),
+  location: z.string().nullable(),
+  places: z.number().max(9),
+  return_id: ID_Schema.nullable(),
+  title: z.string(),
+  type: Exchange_TypeSchema,
+});
 
 export interface Exchange_Create
   extends z.TypeOf<typeof Exchange_Create_Schema> {}
-
-/**
- * @deprecated
- */
-export interface Exchange_CreateProps
-  extends Omit<
-    Exchange,
-    | "id"
-    | "category"
-    | "deals"
-    | "created_at"
-    | "owner"
-    | "return"
-    | "updated_at"
-  > {
-  category: string;
-  return?: string;
-}
