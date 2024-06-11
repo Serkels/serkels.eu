@@ -32,8 +32,7 @@ export function Card_Deleting({ children }: PropsWithChildren) {
                   {`${exchange.deals.length} / ${exchange.places}`}
                 </div>
                 <figcaption>
-                  place{exchange.places > 1 ? "s" : ""} disponible
-                  {exchange.places > 1 ? "s" : ""}
+                  participant{exchange.places > 1 ? "s" : ""}
                 </figcaption>
               </figure>
             </div>

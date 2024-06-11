@@ -31,8 +31,7 @@ export function Card_Idle({ children }: PropsWithChildren) {
                   {`${exchange.deals.length} / ${exchange.places}`}
                 </div>
                 <figcaption className="text-center text-sm">
-                  place{exchange.places > 1 ? "s" : ""} disponible
-                  {exchange.places > 1 ? "s" : ""}
+                  participant{exchange.places > 1 ? "s" : ""}
                 </figcaption>
               </figure>
             </div>
