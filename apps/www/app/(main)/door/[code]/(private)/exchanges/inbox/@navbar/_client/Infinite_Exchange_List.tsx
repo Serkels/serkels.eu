@@ -145,7 +145,6 @@ function Item({
           >
             {exchange.deals.length} / {exchange.places}
           </span>{" "}
-          <span className="text-sm font-bold">dispo</span>
         </div>
       </section>
       <section className="flex items-center justify-between space-x-1 text-xs text-[#707070]">
