@@ -45,5 +45,4 @@ export default function SearchForm() {
     </InputSearch>
   );
 
-  // @todo Johan: Boomerang à changer
 }
