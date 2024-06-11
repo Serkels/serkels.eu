@@ -8,6 +8,7 @@ import {
 import { fr } from "date-fns/locale";
 import type { PropsWithChildren } from "react";
 import { tv, type VariantProps } from "tailwind-variants";
+import { P, match } from "ts-pattern";
 import { useExchange } from "./context";
 
 //
@@ -35,25 +36,24 @@ export function ExpiryDate({
 }: {
   expiry_date?: Date | null | undefined;
 }) {
-  if (expiry_date) {
-    return (
+  return match(expiry_date)
+    .with(P.instanceOf(Date), (date) => (
       <time
         className={expiry_date_variant({
-          is_future: isFuture(expiry_date),
-          is_this_week: isThisWeek(expiry_date),
+          is_future: isFuture(date),
+          is_this_week: isThisWeek(date),
         })}
-        dateTime={expiry_date.toUTCString()}
-        title={expiry_date.toUTCString()}
+        dateTime={date.toUTCString()}
+        title={date.toUTCString()}
       >
-        {format(expiry_date, "P", { locale: fr })}
+        {format(date, "P", { locale: fr })}
       </time>
-    );
-  }
-  return (
-    <time className={expiry_date_variant({ is_flexible: true })}>
-      Date limite : flexible
-    </time>
-  );
+    ))
+    .otherwise(() => (
+      <time className={expiry_date_variant({ is_flexible: true })}>
+        Date limite : flexible
+      </time>
+    ));
 }
 
 function Time({
