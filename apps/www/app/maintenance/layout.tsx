@@ -8,6 +8,7 @@ import { tv } from "tailwind-variants";
 
 export default function Main_Layout({ children }: PropsWithChildren) {
   // const { base, header } = style();
+
   return (
     <div className={style()}>
       {children}
