@@ -25,22 +25,34 @@ export function Exchange_Date() {
           {formatDistanceToNow(exchange.updated_at, { locale: fr })}
         </Time>
       ) : null}
-      {exchange.expiry_date ? (
-        <Time
-          date={exchange.expiry_date}
-          variants={{
-            is_future: isFuture(exchange.expiry_date),
-            is_this_week: isThisWeek(exchange.expiry_date),
-          }}
-        >
-          Date limite : {format(exchange.expiry_date, "P", { locale: fr })}
-        </Time>
-      ) : (
-        <time className={expiry_date_variant({ is_flexible: true })}>
-          Date limite : flexible
-        </time>
-      )}
+      <ExpiryDate expiry_date={exchange.expiry_date} />
     </div>
+  );
+}
+
+export function ExpiryDate({
+  expiry_date,
+}: {
+  expiry_date?: Date | null | undefined;
+}) {
+  if (expiry_date) {
+    return (
+      <time
+        className={expiry_date_variant({
+          is_future: isFuture(expiry_date),
+          is_this_week: isThisWeek(expiry_date),
+        })}
+        dateTime={expiry_date.toUTCString()}
+        title={expiry_date.toUTCString()}
+      >
+        {format(expiry_date, "P", { locale: fr })}
+      </time>
+    );
+  }
+  return (
+    <time className={expiry_date_variant({ is_flexible: true })}>
+      Date limite : flexible
+    </time>
   );
 }
 
