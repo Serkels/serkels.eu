@@ -14,10 +14,10 @@ import { useEffect } from "react";
 
 //
 
-const TocTocLogo = dynamic(() => import(":components/shell/TocTocLogo"), {
+const SerkelsLogo = dynamic(() => import(":components/shell/SerkelsLogo"), {
   ssr: false,
   loading() {
-    return <VisuallyHidden>Toc-Toc</VisuallyHidden>;
+    return <VisuallyHidden>Serkels</VisuallyHidden>;
   },
 });
 
@@ -34,7 +34,7 @@ export default function GlobalError({ error }: { error: Error }) {
           <BigBar>
             <MenuBurger />
             <Link href="/">
-              <TocTocLogo />
+              <SerkelsLogo />
             </Link>
           </BigBar>
 
