@@ -2,6 +2,7 @@
 
 import { TRPC_React } from ":trpc/client";
 import { Exchange_TypeSchema } from "@1.modules/exchange.domain";
+import { ExpiryDate } from "@1.modules/exchange.ui/Card/Date";
 import { Loading } from "@1.modules/exchange.ui/aside/InfiniteList";
 import { item as styles } from "@1.modules/exchange.ui/aside/Item";
 import { PROFILE_UNKNOWN } from "@1.modules/profile.domain";
@@ -14,8 +15,6 @@ import {
   Exchange as Icon_Exchange,
   LocationRadius,
 } from "@1.ui/react/icons";
-import { format } from "date-fns";
-import { fr } from "date-fns/locale";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useParams, useSearchParams } from "next/navigation";
@@ -146,11 +145,11 @@ function Item({
           >
             {exchange.deals.length} / {exchange.places}
           </span>{" "}
-          <span className="text-sm font-bold ">dispo</span>
+          <span className="text-sm font-bold">dispo</span>
         </div>
       </section>
       <section className="flex items-center justify-between space-x-1 text-xs text-[#707070]">
-        <span className=" font-bold">
+        <span className="font-bold">
           {match(type)
             .with(Exchange_TypeSchema.Enum.PROPOSAL, () => "Proposition")
             .with(Exchange_TypeSchema.Enum.RESEARCH, () => "Recherche")
@@ -176,13 +175,7 @@ function Item({
             .with(profile_id, () => "Vous")
             .otherwise(() => owner.profile.name)}
         </div>
-        <time
-          className="text-xs"
-          dateTime={exchange.updated_at.toUTCString()}
-          title={exchange.updated_at.toUTCString()}
-        >
-          {format(exchange.updated_at, "P", { locale: fr })}
-        </time>
+        <ExpiryDate expiry_date={exchange.expiry_date} />
       </footer>
     </Link>
   );

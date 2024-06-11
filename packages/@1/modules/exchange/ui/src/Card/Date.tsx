@@ -8,6 +8,7 @@ import {
 import { fr } from "date-fns/locale";
 import type { PropsWithChildren } from "react";
 import { tv, type VariantProps } from "tailwind-variants";
+import { P, match } from "ts-pattern";
 import { useExchange } from "./context";
 
 //
@@ -25,23 +26,34 @@ export function Exchange_Date() {
           {formatDistanceToNow(exchange.updated_at, { locale: fr })}
         </Time>
       ) : null}
-      {exchange.expiry_date ? (
-        <Time
-          date={exchange.expiry_date}
-          variants={{
-            is_future: isFuture(exchange.expiry_date),
-            is_this_week: isThisWeek(exchange.expiry_date),
-          }}
-        >
-          Date limite : {format(exchange.expiry_date, "P", { locale: fr })}
-        </Time>
-      ) : (
-        <time className={expiry_date_variant({ is_flexible: true })}>
-          Date limite : flexible
-        </time>
-      )}
+      <ExpiryDate expiry_date={exchange.expiry_date} />
     </div>
   );
+}
+
+export function ExpiryDate({
+  expiry_date,
+}: {
+  expiry_date?: Date | null | undefined;
+}) {
+  return match(expiry_date)
+    .with(P.instanceOf(Date), (date) => (
+      <time
+        className={expiry_date_variant({
+          is_future: isFuture(date),
+          is_this_week: isThisWeek(date),
+        })}
+        dateTime={date.toUTCString()}
+        title={date.toUTCString()}
+      >
+        {format(date, "P", { locale: fr })}
+      </time>
+    ))
+    .otherwise(() => (
+      <time className={expiry_date_variant({ is_flexible: true })}>
+        Date limite : flexible
+      </time>
+    ));
 }
 
 function Time({
