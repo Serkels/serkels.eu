@@ -60,8 +60,11 @@ export const me = router({
       const { id: profile_id } = payload.profile;
       return prisma.exchange.update({
         data: {
-          updated_at: new Date(),
           ...input_data,
+          return_id: input_data.return_id ?? null,
+          location: input_data.location ?? null,
+          expiry_date: input_data.expiry_date ?? null,
+          updated_at: new Date(),
         },
         where: { id: exchange_id, owner: { profile_id } },
       });
