@@ -1,8 +1,5 @@
 "use client";
 
-
-"use client";
-
 import { DEBOUNCE_DELAY, MAX_WAIT } from ":app/constants";
 import { useSyncSearchQuery } from ":components/hooks/useSyncSearchQuery";
 import { context } from ":components/shell/AsideFilter.client";
