@@ -26,6 +26,8 @@ const exchange_api_router = router({
       return prisma.exchange.create({
         data: {
           ...input_data,
+          location: input_data.location ?? null,
+          expiry_date: input_data.expiry_date ?? null,
           category: { connect: { id: category_id } },
           is_active: true,
           owner: { connect: { profile_id } },

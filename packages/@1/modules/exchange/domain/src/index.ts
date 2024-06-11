@@ -96,11 +96,11 @@ export const HANDSHAKE_TOCTOC = "🚪 Toc Toc !";
 export const Exchange_Create_Schema = z.object({
   category_id: ID_Schema,
   description: z.string(),
-  expiry_date: z.date().nullable(),
+  expiry_date: z.date().nullish(),
   is_online: z.boolean(),
-  location: z.string().nullable(),
+  location: z.string().nullish(),
   places: z.number().max(9),
-  return_id: ID_Schema.nullable(),
+  return_id: ID_Schema.nullish(),
   title: z.string(),
   type: Exchange_TypeSchema,
 });
