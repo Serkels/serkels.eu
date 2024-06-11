@@ -12,7 +12,7 @@ export function FilterRadioList({
   onChange: (value: string) => void;
 }) {
   return (
-    <ul className="mt-7 text-Dove_Gray">
+    <ul className="mt-7 pl-4 text-Dove_Gray md:pl-0">
       {data.map(({ name, slug }) => (
         <li className="mb-3" key={slug}>
           <label>

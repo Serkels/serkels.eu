@@ -94,7 +94,9 @@ export default function Conversation_Form({
           <div className="relative">
             <Field
               as="textarea"
-              className={input({ className: "peer w-full rounded-2xl pr-10" })}
+              className={input({
+                className: "peer w-full rounded-2xl pr-10",
+              })}
               placeholder="Envoie un Message…"
               autoComplete="off"
               disabled={isSubmitting || isLoading}

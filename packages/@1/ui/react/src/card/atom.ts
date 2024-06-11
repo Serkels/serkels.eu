@@ -5,16 +5,11 @@ import { tv } from "tailwind-variants";
 //
 
 export const card = tv({
-  base: `
-    rounded-xl
-    bg-white
-    text-black
-    shadow-[5px_5px_10px_#7E7E7E33]
-  `,
+  base: `rounded-xl bg-white text-black shadow-[5px_5px_10px_#7E7E7E33]`,
   slots: {
-    body: "p-6",
+    body: "px-5 py-3",
     header: "mb-4",
     footer: "mt-4 bg-black px-5 py-3 text-white",
-    category: "text-xs text-[#707070] ",
+    category: "text-xs text-[#707070]",
   },
 });

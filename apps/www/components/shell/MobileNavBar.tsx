@@ -83,12 +83,7 @@ function NavItem({
 }: PropsWithChildren<{ Icon: ElementType; isActive: boolean }>) {
   const { item } = navbar();
   return (
-    <div
-      className="
-        flex h-full min-w-[55px] flex-col items-center justify-end py-2
-        [&>svg]:w-6
-      "
-    >
+    <div className="flex h-full min-w-[55px] flex-col items-center justify-end py-2 [&>svg]:w-6">
       <Icon className="mx-auto block flex-1" />
       <span className={item({ is_active: isActive })}>{children}</span>
     </div>
@@ -96,7 +91,7 @@ function NavItem({
 }
 
 const navbar = tv({
-  base: "text-white max-sm:bg-primary-gradient",
+  base: "mobileNavbar min-h-16 text-white max-md:bg-primary-gradient",
   slots: {
     link: "block h-full border-b-2",
     item: "hidden text-sm lg:block",

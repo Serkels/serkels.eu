@@ -4,7 +4,6 @@ import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
 import { getServerSession } from "@1.modules/auth.next";
 import { Forum_Filter } from "@1.modules/forum.domain";
 import { Idle as CreateCard_Idle } from "@1.modules/forum.ui/CreateCard/Idle";
-import InputSearch from "@1.ui/react/input/InputSearch";
 import { Spinner } from "@1.ui/react/spinner";
 import type { Metadata, ResolvingMetadata } from "next";
 import dynamic from "next/dynamic";
@@ -16,13 +15,6 @@ const List = dynamic(() => import("./_client/List"), {
   ssr: false,
   loading() {
     return <Spinner />;
-  },
-});
-
-const SearchForm = dynamic(() => import("./_client/SearchForm"), {
-  ssr: false,
-  loading() {
-    return <InputSearch />;
   },
 });
 
@@ -76,11 +68,9 @@ export default async function Page({
   return (
     <TRPC_Hydrate>
       <main>
-        <SearchForm />
         {match(session)
           .with({ profile: { role: "STUDIENT" } }, () => (
             <>
-              <hr className="my-5 border-none" />
               <Create categories={categories} />
             </>
           ))

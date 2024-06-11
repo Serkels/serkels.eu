@@ -47,7 +47,7 @@ export function Question_InfiniteList<T extends Entity_Schema>({
           <li className="col-span-full mx-auto">
             {isFetchingNextPage ? <Loading /> : null}
           </li>
-          <li className="col-span-full mx-auto">
+          <li className="col-span-full mx-auto pb-8">
             {hasNextPage ? (
               <Button
                 onPress={() => fetchNextPage()}
@@ -90,7 +90,7 @@ export function Answer_InfiniteList<T extends Entity_Schema>({
     .with(
       { status: "success" },
       ({ data: { pages }, isFetchingNextPage, hasNextPage, fetchNextPage }) => (
-        <ul className=" grid grid-cols-1 gap-4">
+        <ul className="grid grid-cols-1 gap-4">
           {pages
             .map((page) => page.data)
             .flat()
@@ -142,11 +142,7 @@ function Loading() {
 //
 
 const forum_list = tv({
-  base: `
-    grid
-    grid-cols-1
-    gap-9
-  `,
+  base: `grid grid-cols-1 gap-9`,
   slots: {
     item: "",
   },

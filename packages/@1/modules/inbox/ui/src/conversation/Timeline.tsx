@@ -133,7 +133,7 @@ function MessageTime({ date }: { date: Date }) {
 function LoadMore({ onClick }: { onClick: () => void }) {
   return (
     <Button
-      className="mx-auto block"
+      className="mx-auto block pb-8"
       state="ghost"
       intent="light"
       onPress={onClick}

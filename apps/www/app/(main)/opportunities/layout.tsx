@@ -7,7 +7,8 @@ import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import { Grid } from "@1.ui/react/grid";
 import { Suspense, type PropsWithChildren } from "react";
 import { match } from "ts-pattern";
-import { Categoriy_Filter } from "./_client/Categories_Filter";
+
+import { Categories_Filter } from "./_client/Categories_Filter";
 import { Partner_Opportunities_Filter } from "./_client/Partner_Opportunities_Filter";
 import SearchForm from "./_client/SearchForm";
 import Loading from "./loading";
@@ -21,18 +22,18 @@ export default async function Layout({ children }: PropsWithChildren<{}>) {
     <TRPC_Hydrate>
       <Grid>
         <AsideFilter
-          className="hidden md:col-span-2 md:block xl:col-span-3"
+          className="col-span-2 sm:col-span-6 md:col-span-2 md:block lg:col-span-2 xl:col-span-3"
           slot-title="Opportunités"
         >
           <Suspense fallback={<Loading />}>
             <SearchForm />
           </Suspense>
           <User_Opportunities_Filter />
-          <hr className="my-10" />
-
-          <Categoriy_Filter />
+          <hr className="my-5 md:my-10" />
+          <Categories_Filter />
         </AsideFilter>
-        <div className="col-span-full  md:col-span-6 xl:col-span-9">
+
+        <div className="col-span-full md:col-span-6 xl:col-span-9">
           {children}
         </div>
       </Grid>

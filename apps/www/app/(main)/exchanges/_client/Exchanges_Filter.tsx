@@ -1,13 +1,16 @@
 "use client";
 
 import { useSyncSearchQuery } from ":components/hooks/useSyncSearchQuery";
+import { context } from ":components/shell/AsideFilter.client";
 import { Exchange_Filter } from "@1.modules/exchange.domain";
 import { FilterRadioList } from "@1.ui/react/form/FilterRadioList";
+import { useContext } from "react";
 
 //
 
 export function Exchanges_Filter() {
   const { query, setQuery } = useSyncSearchQuery("f");
+  const { close } = useContext(context);
 
   const filters = [
     { name: "Sans échange", slug: Exchange_Filter.Enum.WITHOUT_RETURN },
@@ -21,11 +24,13 @@ export function Exchanges_Filter() {
   ];
 
   return (
-    <FilterRadioList
-      active={query ?? ""}
-      data={filters}
-      name="filter"
-      onChange={setQuery}
-    />
+    <div className="md:block" hidden={close}>
+      <FilterRadioList
+        active={query ?? ""}
+        data={filters}
+        name="filter"
+        onChange={setQuery}
+      />
+    </div>
   );
 }

@@ -4,9 +4,6 @@
     { "path": "apps/www", "name": "🚀 www" },
     { "path": "apps/api", "name": "🚀 api" },
     //
-    // TODO(douglasduteil): ui elements with linked api endoints
-    { "path": "packages/@www/widgets/exchange", "name": "🎭 api/exchange" },
-    //
     // { "path": "packages/@1/modules", "name": "📦 modules" },
     //
     { "path": "packages/@1/modules/auth/api", "name": "🫙 auth.api" },

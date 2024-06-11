@@ -12,13 +12,13 @@ export function ResponseCount() {
       {match(question)
         .with({ answers: [] }, () => (
           <>
-            <span className="text-danger">0</span> <span>réponses</span>
+            <span className="text-danger">0</span> <span>réponse</span>
           </>
         ))
         .otherwise(({ answers }) => (
           <>
             <span className="text-success">{answers.length}</span>
-            <span>réponse{answers.length > 0 ? "s" : ""}</span>
+            <span>réponse{answers.length > 1 ? "s" : ""}</span>
           </>
         ))}
     </p>

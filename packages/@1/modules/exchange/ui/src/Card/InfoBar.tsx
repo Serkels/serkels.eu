@@ -33,7 +33,7 @@ export function InfoBar() {
 
       {/*  */}
 
-      <div className=" flex items-center justify-between">
+      <div className="flex items-center justify-between">
         <span className="whitespace-nowrap font-bold uppercase">
           {exchange.category.name}
         </span>
@@ -42,7 +42,7 @@ export function InfoBar() {
             with_return: Boolean(exchange.return),
           })}
         />
-        <span className="whitespace-nowrap font-bold">
+        <span className="whitespace-nowrap font-bold uppercase">
           {match(exchange.return)
             .with(null, () => "Sans échange")
             .with(P._, (category) => category.name)

@@ -34,7 +34,7 @@ export default async function Page({ params }: { params: CodeParms }) {
 
   return (
     <main className={column_screen({ className: "bg-white text-black" })}>
-      <h6 className="mt-10 px-8 text-2xl font-bold">Liste de contacts : </h6>
+      <h6 className="mt-10 pl-2 text-2xl font-bold">Liste de contacts : </h6>
       <Infinite_Contacts_List />
     </main>
   );
