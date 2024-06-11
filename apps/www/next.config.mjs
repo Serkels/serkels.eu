@@ -143,6 +143,7 @@ export default withSentryConfig(config, {
 
   org: "toc-toc-rj",
   project: "www",
+  telemetry: false,
 
   // Only print logs for uploading source maps in CI
   silent: !process.env.CI,
