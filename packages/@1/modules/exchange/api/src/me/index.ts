@@ -11,6 +11,25 @@ import { thread_update } from "./thread_update";
 export const me = router({
   //
 
+  publications: next_auth_procedure
+    .input(z.object({}))
+    .query(async ({ ctx: { payload, prisma } }) => {
+      const {
+        profile: { id: profile_id },
+      } = payload;
+
+      return prisma.exchange.findMany({
+        include: {
+          category: true,
+          return: true,
+          owner: { include: { profile: true } },
+          deals: { where: { status: "APPROVED" } },
+        },
+        orderBy: { created_at: "desc" },
+        where: { owner: { profile_id } },
+      });
+    }),
+
   deal_by_exchange_id: next_auth_procedure
     .input(z.string())
     .query(async ({ ctx: { payload, prisma }, input: parent_id }) => {

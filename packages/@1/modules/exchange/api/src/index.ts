@@ -127,7 +127,7 @@ const exchange_api_router = router({
         where: {
           expiry_date: { gte: new Date() },
           is_active: true,
-          owner: { profile_id: profile_id },
+          owner: { profile_id },
         },
         orderBy: [{ created_at: "asc" }],
       });
