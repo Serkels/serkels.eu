@@ -50,7 +50,7 @@ export function Card_Idle({ children }: PropsWithChildren) {
         <hr className="my-2" />
 
         <article>
-          <h3 className="my-4 text-2xl font-bold">{title}</h3>
+          <h3 className="my-4 break-words text-2xl font-bold">{title}</h3>
           <p>{description}</p>
         </article>
       </div>

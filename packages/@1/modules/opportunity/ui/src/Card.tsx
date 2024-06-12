@@ -33,7 +33,10 @@ export function Opoortunity_Card({
             </time>
           </small>
 
-          <h3 className="my-4 line-clamp-3 flex-1 font-bold" title={title}>
+          <h3
+            className="my-4 line-clamp-3 flex-1 break-words font-bold"
+            title={title}
+          >
             {title}
           </h3>
 

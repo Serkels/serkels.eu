@@ -49,7 +49,7 @@ export function Card_Deleting({ children }: PropsWithChildren) {
         <hr className="my-2" />
 
         <article>
-          <h3 className="my-5 text-2xl font-bold">{title}</h3>
+          <h3 className="my-5 break-words text-2xl font-bold">{title}</h3>
           <p>{description}</p>
         </article>
       </div>
