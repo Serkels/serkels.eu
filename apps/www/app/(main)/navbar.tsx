@@ -1,18 +1,21 @@
 //
 
 import { MenuBurger } from ":components/burger";
+import { Student_NavBar } from ":components/navbar/aside_navbar";
 import { Notification_DotIndicator } from ":components/navbar/notification_indicator.client";
 import { MobileNavBar } from ":components/shell/MobileNavBar";
+import { TRPC_SSR } from ":trpc/server";
 import { getServerSession } from "@1.modules/auth.next";
-import { PROFILE_ROLES } from "@1.modules/profile.domain";
+import { PROFILE_ROLES, type Profile } from "@1.modules/profile.domain";
 import { Avatar } from "@1.modules/profile.ui";
 import { Grid } from "@1.ui/react/grid";
 import { Bell, Exchange, Logo, Messenger, Plus } from "@1.ui/react/icons";
 import { VisuallyHidden } from "@1.ui/react/visually_hidden";
 import Link from "next/link";
-import type { ComponentPropsWithoutRef } from "react";
+import { type ComponentPropsWithoutRef } from "react";
 import { tv } from "tailwind-variants";
 import { match } from "ts-pattern";
+import { UserMenuToggle } from "./navbar.client";
 
 //
 
@@ -30,10 +33,7 @@ export default function UserBar() {
 
         <MobileNavBar className="left-0 right-0 z-50 hidden h-16 sm:z-auto sm:col-auto sm:h-full md:col-span-4 md:block xl:col-span-6 sm:[&>ul]:w-full lg:[&>ul]:w-auto" />
 
-        <UserNavGroup
-          className="h-full md:col-span-2 xl:col-span-3"
-          // title="ml-auto hidden max-w-[177px] sm:col-auto md:col-span-2 md:block xl:col-span-3"
-        />
+        <UserNavGroup className="h-full md:col-span-2 xl:col-span-3" />
       </Grid>
     </header>
   );
@@ -93,13 +93,7 @@ async function UserNavGroup({ className }: ComponentPropsWithoutRef<"nav">) {
           <VisuallyHidden>Mes échanges</VisuallyHidden>
           <Exchange className={icon()} />
         </Link>
-        <Link href={`/@~`} className="flex">
-          <VisuallyHidden>Moi</VisuallyHidden>
-          <Avatar
-            className="size-7 border-2 border-white"
-            profile={session.profile}
-          />
-        </Link>
+        <MyStudentProfile profile={session.profile} />
       </nav>
     ))
     .exhaustive();
@@ -123,3 +117,34 @@ const user_nav_group_variants = tv(
     responsiveVariants: ["sm", "md"],
   },
 );
+async function MyStudentProfile({ profile }: { profile: Profile }) {
+  const student = await TRPC_SSR.profile.student.by_profile_id.fetch(
+    profile.id,
+  );
+
+  return (
+    <>
+      <UserMenuToggle
+        button={
+          <>
+            <VisuallyHidden>Moi</VisuallyHidden>
+            <Avatar
+              className="size-7 border-2 border-white"
+              profile={profile}
+            />
+          </>
+        }
+      >
+        <Student_NavBar
+          className="fixed inset-0 bottom-16 top-16 z-10 w-full bg-[#f5f8fa] text-black md:hidden"
+          student={student}
+        />
+      </UserMenuToggle>
+
+      <Link href={`/@~`} className="hidden md:flex">
+        <VisuallyHidden>Moi</VisuallyHidden>
+        <Avatar className="size-7 border-2 border-white" profile={profile} />
+      </Link>
+    </>
+  );
+}

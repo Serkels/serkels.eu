@@ -1,6 +1,5 @@
 //
 
-// import { MobileNavBar } from ":components/MobileNavBar";
 import { AuthSessionProvider } from ":components/shell/AuthSessionProvider";
 import { Banner } from ":components/shell/Banner";
 import { getServerSession } from "@1.modules/auth.next";
@@ -77,7 +76,7 @@ async function Explore() {
           href={session ? "/exchanges" : "#"}
           Icon={Exchange}
           className={link({
-            className: "text-secondary ",
+            className: "text-secondary",
             is_protected: !session,
           })}
         >
@@ -100,7 +99,6 @@ async function Explore() {
           className={link({
             className: "text-quaternary",
           })}
-          // className="col-span-2 text-Eminence"
         >
           Forum StudHelp
         </ExploreLink>
@@ -125,7 +123,7 @@ const explore_grid_style = tv(
     base: "",
     slots: {
       links: "col-span-full mt-10 xl:col-start-4",
-      link: "col-span-2 sm:col-span-3 md:col-span-2 ",
+      link: "col-span-2 sm:col-span-3 md:col-span-2",
     },
     variants: {
       size: {
@@ -134,7 +132,7 @@ const explore_grid_style = tv(
         xl: { link: "my-12" },
       },
       is_protected: {
-        true: { link: " opacity-40" },
+        true: { link: "opacity-40" },
       },
     },
   },
@@ -155,9 +153,7 @@ function CarouselPlaceholder() {
         </h1>
         <p>Inscrivez-vous pour échanger entre pairs !</p>
       </aside>
-      <aside className="col-span-2 sm:col-span-2">
-        {/* <ConnectionPanel /> */}
-      </aside>
+      <aside className="col-span-2 sm:col-span-2"></aside>
     </Grid>
   );
 }
@@ -181,7 +177,7 @@ function ExploreLink({
 
   return (
     <Link className={base({ className })} href={href}>
-      <div className="group relative ">
+      <div className="group relative">
         <Icon className={icon({})} />
         <div
           className={popover({ className: "invisible group-hover:visible" })}
@@ -199,12 +195,7 @@ function ExploreLink({
 }
 
 const explore_link_style = tv({
-  base: `
-    grid
-    grid-rows-2
-    justify-items-center
-    gap-6
-  `,
+  base: `grid grid-rows-2 justify-items-center gap-6`,
 
   variants: {
     icon: {

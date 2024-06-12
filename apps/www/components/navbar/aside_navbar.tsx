@@ -23,15 +23,22 @@ import { NewMessage_Indicator } from "./notification_indicator.client";
 
 //
 
-export function Student_NavBar({ student }: { student: Student }) {
+export function Student_NavBar({
+  student,
+  className,
+}: {
+  student: Student;
+  className?: string;
+}) {
+  const { list, base } = navbar();
   return (
-    <nav className={navbar()}>
+    <nav className={base({ className })}>
       <StudentAvatarMedia
         tv$direction="column"
         className="py-5"
         student={student}
       />
-      <ul>
+      <ul className={list()}>
         <Li_Link icon={<PlusBox />} href="./exchanges/new">
           Créer
         </Li_Link>
@@ -83,14 +90,15 @@ export function Student_NavBar({ student }: { student: Student }) {
 
 export function Partner_NavBar({ partner }: { partner: Partner }) {
   const { profile } = partner;
+  const { list, base } = navbar();
   return (
-    <nav className={navbar()}>
+    <nav className={base()}>
       <PartnerAvatarMedia
         tv$direction="column"
         className="py-5"
         partner={partner}
       />
-      <ul>
+      <ul className={list()}>
         <Li_Link icon={<PlusBox />} href="./opportunities/new">
           Créer une opportunité
         </Li_Link>
@@ -120,10 +128,14 @@ export const aside_navbar = tv({
 });
 const navbar = tv({
   base: "sticky top-0 py-5",
+  slots: {
+    list: "mx-auto flex w-max flex-col justify-center gap-4",
+  },
   variants: {
     $alone: {
       // true: "block max-h-[calc(100vh_-_theme(spacing.16)-_theme(spacing.8))] ",
       false: "",
     },
+    $mobile: {},
   },
 });
