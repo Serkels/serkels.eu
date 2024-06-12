@@ -46,7 +46,7 @@ export function ExpiryDate({
         dateTime={date.toUTCString()}
         title={date.toUTCString()}
       >
-        {format(date, "P", { locale: fr })}
+        Date limite : {format(date, "P", { locale: fr })}
       </time>
     ))
     .otherwise(() => (
