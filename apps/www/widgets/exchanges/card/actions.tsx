@@ -1,13 +1,13 @@
 //
 
 import { TRPC_React } from ":trpc/client";
-import type { Exchange } from "@1.modules/exchange.domain";
+import { Exchange_TypeSchema, type Exchange } from "@1.modules/exchange.domain";
 import { useExchange } from "@1.modules/exchange.ui/Card/context";
 import { Button } from "@1.ui/react/button";
 import { Spinner } from "@1.ui/react/spinner";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { match, P } from "ts-pattern";
+import { P, match } from "ts-pattern";
 import { Ask } from "./ask";
 
 //
@@ -39,11 +39,7 @@ function Exchange_Action_Ask(exchange: Exchange) {
     .with({ status: "success", data: P.nullish }, () => (
       <Ask exchange={exchange}>
         <Ask.Trigger>
-          {exchange.return ? (
-            <Button intent="warning">Échanger</Button>
-          ) : (
-            <Button>Demander</Button>
-          )}
+          <Button_FirstExchange exchange={exchange} />
         </Ask.Trigger>
       </Ask>
     ))
@@ -58,4 +54,19 @@ function Exchange_Action_Ask(exchange: Exchange) {
       );
     })
     .exhaustive();
+}
+
+//
+
+function Button_FirstExchange({ exchange }: { exchange: Exchange }) {
+  return match(exchange)
+    .with(
+      { return_id: P.nullish, type: Exchange_TypeSchema.Enum.PROPOSAL },
+      () => <Button>Demander</Button>,
+    )
+    .with(
+      { return_id: P.nullish, type: Exchange_TypeSchema.Enum.RESEARCH },
+      () => <Button>Répondre</Button>,
+    )
+    .otherwise(() => <Button intent="warning">Échanger</Button>);
 }
