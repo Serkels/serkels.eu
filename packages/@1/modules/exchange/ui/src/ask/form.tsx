@@ -91,7 +91,7 @@ function use_ask_form() {
     )
     .with(
       { return_id: P.nullish, type: Exchange_TypeSchema.Enum.RESEARCH },
-      () => "Bonjour, je veux bien répondre a votre recherche.",
+      () => "Bonjour, je veux bien répondre à votre recherche.",
     )
     .otherwise(() => "Bonjour, je veux bien échanger avec toi.");
 
