@@ -198,7 +198,6 @@ const exchange_api_router = router({
         orderBy: [{ created_at: "desc" }, { expiry_date: "desc" }],
         take: limit + 1,
         where: {
-          expiry_date: { gte: new Date() },
           is_active: true,
           OR: [
             { title: { contains: search ?? "", mode: "insensitive" } },
@@ -211,6 +210,8 @@ const exchange_api_router = router({
                 },
               },
             },
+            { expiry_date: { gte: new Date() } },
+            { expiry_date: null },
           ],
           ...(category ? { category: { slug: category } } : {}),
           ...nerrow,
