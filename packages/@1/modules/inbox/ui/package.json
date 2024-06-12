@@ -34,7 +34,7 @@
     "react-slotify": "0.2.2",
     "react-content-loader": "7.0.2",
     "tailwind-variants": "0.2.1",
-    "ts-pattern": "5.1.2",
+    "ts-pattern": "5.2.0",
     "zod": "3.23.8"
   },
   "devDependencies": {

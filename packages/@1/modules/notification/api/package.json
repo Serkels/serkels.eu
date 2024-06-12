@@ -24,7 +24,7 @@
     "@1.modules/trpc": "workspace:*",
     "@trpc/server": "10.45.2",
     "date-fns": "3.6.0",
-    "ts-pattern": "5.1.2",
+    "ts-pattern": "5.2.0",
     "zod": "3.23.8"
   },
   "devDependencies": {
