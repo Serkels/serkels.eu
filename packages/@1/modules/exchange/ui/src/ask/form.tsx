@@ -25,13 +25,13 @@ export function Ask_Form({ children }: PropsWithChildren) {
         </Ask_Form.AvatarFigure.Renderer>
       </div>
       <h3
-        className="my-5 line-clamp-2 text-2xl font-bold"
+        className="my-5 line-clamp-2 break-words text-2xl font-bold"
         title={exchange.title}
       >
         {exchange.title}
       </h3>
 
-      <div className="my-2  flex flex-row justify-between">
+      <div className="my-2 flex flex-row justify-between">
         <OnlineOrLocation
           is_online={exchange.is_online}
           location={exchange.location ?? ""}

@@ -28,10 +28,10 @@ export const Opportunity_Create_Schema = z.object({
   category: z.string(),
   cover: z.string().url(),
   link: z.string().url(),
-  title: z.string().trim().min(11),
+  title: z.string().trim().min(11).max(100),
   expiry_date: z.coerce.date(),
   location: z.string().trim().min(1).optional(),
-  description: z.string().trim().min(11),
+  description: z.string().trim().min(11).max(1400),
 });
 export interface Opportunity_Create
   extends z.TypeOf<typeof Opportunity_Create_Schema> {}

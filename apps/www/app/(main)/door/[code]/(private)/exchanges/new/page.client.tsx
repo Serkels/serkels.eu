@@ -52,7 +52,7 @@ export function Mutate_Exchange({ categories }: { categories: Category[] }) {
       }}
       validationSchema={toFormikValidationSchema(
         z.object({
-          title: z.string().trim().min(10).max(205),
+          title: z.string().trim().min(10).max(100),
           description: z.string().trim().min(10).max(705),
         }),
       )}
