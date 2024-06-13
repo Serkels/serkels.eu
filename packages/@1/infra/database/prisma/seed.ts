@@ -601,19 +601,35 @@ async function students_messages() {
       where: { id: student.profile_id },
     });
 
-    const last_seen_date = faker.date.recent();
-    const created_at = faker.date.past({
-      refDate: last_seen_date,
-    });
     await Promise.all(
       contacts.map(async (recipient_student) => {
+        const last_seen_date = faker.date.recent();
+        const thread_created_at = faker.date.past({
+          refDate: last_seen_date,
+        });
+        const thread_updated_at = faker.date.between({
+          from: thread_created_at,
+          to: last_seen_date,
+        });
+
+        if (
+          await prisma.inboxThread.findFirst({
+            where: {
+              owner_id: recipient_student.id,
+              thread: {
+                participants: {
+                  some: { id: student.profile_id },
+                },
+              },
+            },
+          })
+        )
+          return;
+
         const thread = await prisma.thread.create({
           data: {
-            created_at: created_at,
-            updated_at: faker.date.recent({
-              days: 30,
-              refDate: created_at,
-            }),
+            created_at: thread_created_at,
+            updated_at: thread_updated_at,
             participants: {
               connect: [
                 { id: student.profile_id },
@@ -630,7 +646,7 @@ async function students_messages() {
                   {
                     owner_id: recipient_student.id,
                     last_seen_date: faker.date.between({
-                      from: created_at,
+                      from: thread_created_at,
                       to: last_seen_date,
                     }),
                   },
@@ -642,8 +658,8 @@ async function students_messages() {
                 data: faker.helpers.multiple(
                   () => {
                     const message_created_at = faker.date.between({
-                      from: created_at,
-                      to: last_seen_date,
+                      from: thread_created_at,
+                      to: thread_updated_at,
                     });
                     return {
                       author_id: faker.helpers.arrayElement([
@@ -652,10 +668,7 @@ async function students_messages() {
                       ]).id,
                       content: faker.lorem.sentences(),
                       created_at: message_created_at,
-                      updated_at: faker.date.between({
-                        from: message_created_at,
-                        to: last_seen_date,
-                      }),
+                      updated_at: message_created_at,
                     };
                   },
                   { count: { min: 1, max: 11 } },
@@ -665,53 +678,45 @@ async function students_messages() {
           },
           select: {
             id: true,
+            updated_at: true,
+            inbox_threads: {
+              select: { last_seen_date: true },
+              where: { owner_id: recipient_student.id },
+            },
             messages: {
               select: {
                 id: true,
-                author: { select: { id: true } },
                 created_at: true,
-                thread: {
-                  select: {
-                    inbox_threads: {
-                      select: { last_seen_date: true },
-                      where: { owner_id: student.id },
-                      take: 1,
-                    },
-                  },
-                },
               },
+              orderBy: { created_at: "desc" },
+              take: 1,
+              where: { author: { id: student.profile_id } },
             },
           },
         });
 
+        const recipient_inbox = thread.inbox_threads.at(0);
         const message = thread.messages.at(0);
+        if (!recipient_inbox) {
+          return;
+        }
         if (!message) {
           return;
         }
         {
-          const {
-            author,
-            created_at,
-            id: message_id,
-            thread: { inbox_threads },
-          } = message;
-          const last_seen_date = inbox_threads.at(0)?.last_seen_date;
+          const { last_seen_date } = recipient_inbox;
+          const { created_at } = message;
           await prisma.inboxMessageNotification.create({
             data: {
-              message: { connect: { id: message_id } },
+              message: { connect: { id: message.id } },
               notification: {
                 create: {
                   type: "INBOX_NEW_MESSAGE",
                   created_at,
-                  read_at: last_seen_date
-                    ? isAfter(last_seen_date, created_at)
-                      ? last_seen_date
-                      : null
+                  read_at: isAfter(last_seen_date, created_at)
+                    ? last_seen_date
                     : null,
-                  owner_id:
-                    author.id === student.profile_id
-                      ? recipient_student.profile_id
-                      : student.profile_id,
+                  owner_id: recipient_student.profile_id,
                 },
               },
             },
