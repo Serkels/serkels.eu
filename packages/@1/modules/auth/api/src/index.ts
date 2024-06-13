@@ -5,7 +5,7 @@ import {
   PROFILE_ROLES,
   Partner_Schema,
   Profile_Schema,
-  Studient_Schema,
+  Student_Schema,
   type Profile,
 } from "@1.modules/profile.domain";
 import { gravatarUrlFor } from "@1.modules/profile.domain/gravatarUrlFor";
@@ -127,8 +127,8 @@ const auth_api_router = router({
               },
             };
           })
-          .with("STUDIENT", function () {
-            const student_context = Studient_Schema.omit({
+          .with("STUDENT", function () {
+            const student_context = Student_Schema.omit({
               id: true,
               interest: true,
               profile: true,

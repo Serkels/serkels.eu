@@ -8,7 +8,7 @@ import { TRPC_SSR } from ":trpc/server";
 import {
   PROFILE_ROLES,
   Profile_Schema,
-  Studient_Schema,
+  Student_Schema,
 } from "@1.modules/profile.domain";
 import { input, select } from "@1.ui/react/form/atom";
 import type { Metadata, ResolvingMetadata } from "next";
@@ -23,7 +23,7 @@ export async function generateMetadata(
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
   return {
-    title: `Studient :: ${(await parent).title?.absolute}`,
+    title: `Student :: ${(await parent).title?.absolute}`,
   };
 }
 
@@ -36,7 +36,7 @@ export default async function Page() {
 
   const { base, form, label } = style();
   const profile_names = Profile_Schema.keyof().Enum;
-  const student_names = Studient_Schema.keyof().Enum;
+  const student_names = Student_Schema.keyof().Enum;
 
   return (
     <main className={base()}>
@@ -45,7 +45,7 @@ export default async function Page() {
         <input
           name="role"
           type="hidden"
-          defaultValue={PROFILE_ROLES.enum.STUDIENT}
+          defaultValue={PROFILE_ROLES.enum.STUDENT}
         />
 
         <div className="mx-auto">

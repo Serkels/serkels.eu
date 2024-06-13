@@ -69,7 +69,7 @@ export default async function Page({
     <TRPC_Hydrate>
       <main>
         {match(session)
-          .with({ profile: { role: "STUDIENT" } }, () => (
+          .with({ profile: { role: "STUDENT" } }, () => (
             <>
               <Create categories={categories} />
             </>

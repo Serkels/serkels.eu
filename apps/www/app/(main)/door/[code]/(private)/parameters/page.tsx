@@ -14,7 +14,7 @@ import { match } from "ts-pattern";
 const Avatar_Editor = dynamic(() => import("./_client/Avatar_Editor"));
 const Partner_Editor = dynamic(() => import("./_client/Partner_Editor"));
 const Profile_Editor = dynamic(() => import("./_client/Profile_Editor"));
-const Studient_Editor = dynamic(() => import("./_client/Studient_Editor"));
+const Student_Editor = dynamic(() => import("./_client/Student_Editor"));
 
 //
 
@@ -64,11 +64,11 @@ async function Role_Editor({
   role,
 }: Pick<Profile, "id" | "role">) {
   return match(role)
-    .with(PROFILE_ROLES.Enum.STUDIENT, async () => {
+    .with(PROFILE_ROLES.Enum.STUDENT, async () => {
       const student =
         await TRPC_SSR.profile.student.by_profile_id.fetch(profile_id);
 
-      return <Studient_Editor student={student} />;
+      return <Student_Editor student={student} />;
     })
     .with(PROFILE_ROLES.Enum.PARTNER, async () => {
       const partner =

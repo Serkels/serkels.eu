@@ -1,7 +1,7 @@
 "use client";
 
 import { TRPC_React } from ":trpc/client";
-import { Studient_Schema, type Studient } from "@1.modules/profile.domain";
+import { Student_Schema, type Student } from "@1.modules/profile.domain";
 import { Button } from "@1.ui/react/button";
 import { input, label } from "@1.ui/react/form/atom";
 import { ErrorMessage, Field, Form, Formik } from "formik";
@@ -12,10 +12,10 @@ import { toFormikValidationSchema } from "zod-formik-adapter";
 
 //
 
-export default function Studient_Editor({
+export default function Student_Editor({
   student: initial,
 }: {
-  student: Studient;
+  student: Student;
 }) {
   const student_id = initial.id;
   const utils = TRPC_React.useUtils();
@@ -27,7 +27,7 @@ export default function Studient_Editor({
   const update_student = TRPC_React.student.me.update.useMutation();
 
   const student = query_student.data ?? initial;
-  const names = Studient_Schema.keyof().Enum;
+  const names = Student_Schema.keyof().Enum;
 
   return (
     <Formik

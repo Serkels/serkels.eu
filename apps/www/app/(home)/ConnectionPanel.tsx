@@ -138,7 +138,7 @@ function LoginFormPanel() {
   const on_sign_up_form_submit: ComponentProps<typeof LoginForm>["onSignUp"] =
     useCallback(async ({ email, as }) => {
       match(as as PROFILE_ROLES)
-        .with(PROFILE_ROLES.enum.STUDIENT, () =>
+        .with(PROFILE_ROLES.enum.STUDENT, () =>
           router.push(`/signup/student?email=${email}`),
         )
         .with(PROFILE_ROLES.enum.PARTNER, () =>
@@ -248,7 +248,7 @@ function ConnectedAs() {
     const on_logout = useCallback(() => signOut(), [profile.id]);
 
     const href = match(profile.role)
-      .with("STUDIENT", () => `/exchanges`)
+      .with("STUDENT", () => `/exchanges`)
       .with("PARTNER", () => `/opportunities`)
       .with("ADMIN", () => `/`)
       .exhaustive();

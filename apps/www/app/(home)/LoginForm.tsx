@@ -41,7 +41,7 @@ export function SignUp({ onSubmit }: SignUpProps) {
             intent="secondary"
             type="submit"
             isDisabled={isSubmitting}
-            onPress={() => setFieldValue("as", PROFILE_ROLES.enum.STUDIENT)}
+            onPress={() => setFieldValue("as", PROFILE_ROLES.enum.STUDENT)}
           >
             Étudiant
           </Button>

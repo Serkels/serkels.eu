@@ -27,7 +27,7 @@ export default async function Page({ params }: { params: CodeParms }) {
 
     return match(profile.role)
       .with(PROFILE_ROLES.Enum.PARTNER, () => <Partner_Page params={param} />)
-      .with(PROFILE_ROLES.Enum.STUDIENT, () => <Studient_Page params={param} />)
+      .with(PROFILE_ROLES.Enum.STUDENT, () => <Student_Page params={param} />)
       .otherwise(() => null);
   } catch (error) {
     console.error(error);
@@ -35,7 +35,7 @@ export default async function Page({ params }: { params: CodeParms }) {
   }
 }
 
-function Studient_Page({ params }: { params: CodeParmsAsProfileId }) {
+function Student_Page({ params }: { params: CodeParmsAsProfileId }) {
   const { code, profile_id } = params;
   const { base, link } = style();
 

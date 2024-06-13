@@ -1,10 +1,10 @@
 //
 
-import type { Partner, Studient } from "@1.modules/profile.domain";
+import type { Partner, Student } from "@1.modules/profile.domain";
 import { Avatar } from "@1.modules/profile.ui";
 import {
   PartnerAvatarMedia,
-  StudientAvatarMedia,
+  StudentAvatarMedia,
 } from "@1.modules/profile.ui/avatar";
 import {
   Archive,
@@ -23,10 +23,10 @@ import { NewMessage_Indicator } from "./notification_indicator.client";
 
 //
 
-export function Studient_NavBar({ student }: { student: Studient }) {
+export function Student_NavBar({ student }: { student: Student }) {
   return (
     <nav className={navbar()}>
-      <StudientAvatarMedia
+      <StudentAvatarMedia
         tv$direction="column"
         className="py-5"
         student={student}

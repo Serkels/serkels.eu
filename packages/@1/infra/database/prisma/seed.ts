@@ -194,7 +194,7 @@ async function student() {
           `,
           image,
           name,
-          role: ProfileRole.STUDIENT,
+          role: ProfileRole.STUDENT,
           user: {
             create: {
               email: faker.internet.email().toLowerCase(),

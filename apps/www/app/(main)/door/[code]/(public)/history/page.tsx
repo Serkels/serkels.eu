@@ -26,7 +26,7 @@ export default async function Page({ params }: { params: CodeParms }) {
   }
 
   const profile = await TRPC_SSR.profile.by_id.fetch(profile_id);
-  if (profile.role !== PROFILE_ROLES.Enum.STUDIENT) {
+  if (profile.role !== PROFILE_ROLES.Enum.STUDENT) {
     redirect(`/@${params.code}`);
   }
 
