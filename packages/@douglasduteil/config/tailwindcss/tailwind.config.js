@@ -68,9 +68,7 @@ module.exports = withTV({
         danger: Bittersweet,
       },
       width: {
-        "cols-6": `/home/x/zzz/github/toctocorg/toctoc/@1/config/typescript-config${
-          COLUMNS_SIZE * 6 + GAP_SIZE * 5
-        }px`,
+        "cols-6": `${COLUMNS_SIZE * 6 + GAP_SIZE * 5}px`,
         "cols-3": `${COLUMNS_SIZE * 3 + GAP_SIZE * 2}px`,
       },
       maxWidth: {
