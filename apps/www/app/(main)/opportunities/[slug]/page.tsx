@@ -95,9 +95,9 @@ export default async function Page({ params }: { params: Params }) {
         </Article.Description>
         <Article.ShareFigure>
           <Share_Button href={href}>
-            <figure className="flex items-center">
+            <figure className="flex flex-col items-center gap-2 md:flex-row md:gap-0">
               <Share className={icon_link()} />
-              <figcaption className="ml-4 flex-1">Partager</figcaption>
+              <figcaption className="flex-1 md:ml-4">Partager</figcaption>
             </figure>
           </Share_Button>
         </Article.ShareFigure>
