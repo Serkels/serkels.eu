@@ -1,9 +1,12 @@
 import {
+  constructNow,
   format,
   formatDistanceToNow,
   isEqual,
   isFuture,
-  isThisWeek,
+  isPast,
+  isSameDay,
+  subDays,
 } from "date-fns";
 import { fr } from "date-fns/locale";
 import type { PropsWithChildren } from "react";
@@ -41,7 +44,8 @@ export function ExpiryDate({
       <time
         className={expiry_date_variant({
           is_future: isFuture(date),
-          is_this_week: isThisWeek(date),
+          is_this_week: isSameDay(date, subDays(constructNow(date), 6)),
+          has_expired: isPast(date),
         })}
         dateTime={date.toUTCString()}
         title={date.toUTCString()}
@@ -83,5 +87,6 @@ const expiry_date_variant = tv({
     is_flexible: { true: "font-semibold text-success" },
     is_future: { true: "font-semibold text-lime-800" },
     is_this_week: { true: "font-semibold text-warning" },
+    has_expired: { true: "font-semibold text-danger" },
   },
 });
