@@ -13,35 +13,34 @@ import { toFormikValidationSchema } from "zod-formik-adapter";
 //
 
 export default function Studient_Editor({
-  studient: initial,
+  student: initial,
 }: {
-  studient: Studient;
+  student: Studient;
 }) {
-  const studient_id = initial.id;
+  const student_id = initial.id;
   const utils = TRPC_React.useUtils();
   const router = useRouter();
 
-  const query_studient = TRPC_React.studient.by_id.useQuery(studient_id, {
-    select: ({ created_at, updated_at, id, profile_id, ...studient }) =>
-      studient,
+  const query_student = TRPC_React.student.by_id.useQuery(student_id, {
+    select: ({ created_at, updated_at, id, profile_id, ...student }) => student,
   });
-  const update_studient = TRPC_React.studient.me.update.useMutation();
+  const update_student = TRPC_React.student.me.update.useMutation();
 
-  const studient = query_studient.data ?? initial;
+  const student = query_student.data ?? initial;
   const names = Studient_Schema.keyof().Enum;
 
   return (
     <Formik
-      initialValues={{ ...studient }}
+      initialValues={{ ...student }}
       onSubmit={async (values, formik) => {
-        const data = await update_studient.mutateAsync({
-          city: values.city ?? studient.city ?? undefined,
+        const data = await update_student.mutateAsync({
+          city: values.city ?? student.city ?? undefined,
           field_of_study:
-            values.field_of_study ?? studient.field_of_study ?? undefined,
-          language: values.language ?? studient.language ?? undefined,
-          university: values.university ?? studient.university ?? undefined,
+            values.field_of_study ?? student.field_of_study ?? undefined,
+          language: values.language ?? student.language ?? undefined,
+          university: values.university ?? student.university ?? undefined,
         });
-        await utils.studient.by_id.invalidate(studient_id);
+        await utils.student.by_id.invalidate(student_id);
         formik.resetForm({ values: data });
         router.refresh();
       }}
@@ -63,7 +62,7 @@ export default function Studient_Editor({
 
             <Field
               className={input({
-                className: "col-span-full ",
+                className: "col-span-full",
                 wrong_value: Boolean(errors.university && touched.university),
               })}
               id={names.university}
@@ -95,7 +94,7 @@ export default function Studient_Editor({
 
             <Field
               className={input({
-                className: "col-span-full ",
+                className: "col-span-full",
                 wrong_value: Boolean(
                   errors.field_of_study && touched.field_of_study,
                 ),
@@ -128,7 +127,7 @@ export default function Studient_Editor({
 
             <Field
               className={input({
-                className: "col-span-full ",
+                className: "col-span-full",
                 wrong_value: Boolean(errors.city && touched.city),
               })}
               id={names.city}
@@ -159,7 +158,7 @@ export default function Studient_Editor({
 
             <Field
               className={input({
-                className: "col-span-full ",
+                className: "col-span-full",
                 wrong_value: Boolean(errors.language && touched.language),
               })}
               id={names.language}

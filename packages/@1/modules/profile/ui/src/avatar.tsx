@@ -19,13 +19,13 @@ export function Avatar(
 
 export function StudientAvatarMedia(
   props: AvatarMediaProps & {
-    studient: Pick<Studient, "university"> & {
+    student: Pick<Studient, "university"> & {
       profile: Pick<Profile, "image" | "name" | "id">;
     };
   },
 ) {
-  const { studient, ...other_props } = props;
-  const { profile, university } = studient;
+  const { student, ...other_props } = props;
+  const { profile, university } = student;
   return (
     <UI_AvatarMedia
       image={profile.image}

@@ -11,7 +11,7 @@ import notification_api_router from "@1.modules/notification.api";
 import opportunity_api_router from "@1.modules/opportunity.api";
 import profile_api_router from "@1.modules/profile.api";
 import { partner_api_router } from "@1.modules/profile.api/partner";
-import { studient_api_router } from "@1.modules/profile.api/studient";
+import { student_api_router } from "@1.modules/profile.api/student";
 import { procedure, router } from "@1.modules/trpc";
 import type { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
 import { z } from "zod";
@@ -28,7 +28,7 @@ export const root_router = router({
   opportunity: opportunity_api_router,
   partner: partner_api_router,
   profile: profile_api_router,
-  studient: studient_api_router,
+  student: student_api_router,
   notification: notification_api_router,
   locations: procedure
     .input(z.object({ location: z.string().trim().default("Paris") }))

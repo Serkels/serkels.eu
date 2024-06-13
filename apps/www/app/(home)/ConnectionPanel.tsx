@@ -139,7 +139,7 @@ function LoginFormPanel() {
     useCallback(async ({ email, as }) => {
       match(as as PROFILE_ROLES)
         .with(PROFILE_ROLES.enum.STUDIENT, () =>
-          router.push(`/signup/studient?email=${email}`),
+          router.push(`/signup/student?email=${email}`),
         )
         .with(PROFILE_ROLES.enum.PARTNER, () =>
           router.push(`/signup/partner?email=${email}`),
@@ -182,10 +182,7 @@ function Loading() {
 
 function WhiteCard({ children }: PropsWithChildren) {
   return (
-    <article
-      className="grid grid-cols-1 gap-5 rounded-md border bg-white p-6 text-black
-    shadow-[10px_10px_10px_#00000029]"
-    >
+    <article className="grid grid-cols-1 gap-5 rounded-md border bg-white p-6 text-black shadow-[10px_10px_10px_#00000029]">
       {children}
     </article>
   );
@@ -202,7 +199,7 @@ function ErrorOccur() {
 
   return (
     <WhiteCard>
-      <center className="grid min-h-[200px] grid-cols-1 items-center ">
+      <center className="grid min-h-[200px] grid-cols-1 items-center">
         <h1 className="text-4xl">❌</h1>
         Une erreur est survenue...
       </center>
@@ -226,7 +223,7 @@ function CheckYourMail() {
 
   return (
     <WhiteCard>
-      <center className="grid min-h-[200px] grid-cols-1 items-center ">
+      <center className="grid min-h-[200px] grid-cols-1 items-center">
         <h1 className="text-4xl">✅</h1>
         Consultez votre boite mail pour confirmer votre identité
       </center>

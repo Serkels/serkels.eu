@@ -54,7 +54,7 @@ model Profile {
   //
 
   partner                Partner?
-  studient               Studient?
+  student                Student?
   written_messages       Message[]      @relation("WrittenMessages")
   followed_by            Profile[]      @relation("ProfileFollows")
   participants_in_thread Thread[]       @relation("ParticipantsInThread")
@@ -62,12 +62,12 @@ model Profile {
   notifications          Notification[]
 }
 
-model Studient {
+model Student {
   id             String     @id @default(cuid())
   language       String?
   city           String?
   field_of_study String?
-  interest       Category[] @relation("CategorizedStudientInterest")
+  interest       Category[] @relation("CategorizedStudentInterest")
   profile        Profile    @relation(fields: [profile_id], references: [id], onDelete: Cascade)
   profile_id     String     @unique
   university     String
@@ -148,11 +148,11 @@ model Category {
   slug    String
   //
 
-  categorized_exchanges         Exchange[]    @relation("CategorizedExchanges")
-  categorized_opportunities     Opportunity[] @relation("CategorizedOpportunities")
-  categorized_questions         Question[]    @relation("CategorizedQuestions")
-  categorized_return_exchanges  Exchange[]    @relation("CategorizedReturnExchanges")
-  categorized_studient_interest Studient[]    @relation("CategorizedStudientInterest")
+  categorized_exchanges        Exchange[]    @relation("CategorizedExchanges")
+  categorized_opportunities    Opportunity[] @relation("CategorizedOpportunities")
+  categorized_questions        Question[]    @relation("CategorizedQuestions")
+  categorized_return_exchanges Exchange[]    @relation("CategorizedReturnExchanges")
+  categorized_student_interest Student[]     @relation("CategorizedStudentInterest")
   //
 
   @@unique(fields: [slug, context], name: "slug_in_context")
@@ -182,7 +182,7 @@ model Exchange {
   is_active   Boolean
   is_online   Boolean
   location    String?
-  owner       Studient     @relation("ProposedExchanges", fields: [owner_id], references: [id], onDelete: Cascade)
+  owner       Student      @relation("ProposedExchanges", fields: [owner_id], references: [id], onDelete: Cascade)
   owner_id    String
   places      Int
   return      Category?    @relation("CategorizedReturnExchanges", fields: [return_id], references: [id], onDelete: SetNull)
@@ -208,7 +208,7 @@ model Deal {
   status         ExchangeThreadStatus @default(IDLE)
   parent         Exchange             @relation(fields: [parent_id], references: [id], onDelete: Cascade)
   parent_id      String
-  participant    Studient             @relation(fields: [participant_id], references: [id], onDelete: Cascade)
+  participant    Student              @relation(fields: [participant_id], references: [id], onDelete: Cascade)
   participant_id String
   //
 
@@ -225,7 +225,7 @@ model Deal {
 model ExchangeThread {
   id             String   @id @default(cuid())
   last_seen_date DateTime @default(now())
-  owner          Studient @relation(fields: [owner_id], references: [id], onDelete: Cascade)
+  owner          Student  @relation(fields: [owner_id], references: [id], onDelete: Cascade)
   owner_id       String
   deal           Deal     @relation(fields: [deal_id], references: [id], onDelete: Cascade)
   deal_id        String
@@ -288,7 +288,7 @@ model Question {
   answers            Answer[] @relation("ParentQuestion")
   category           Category @relation("CategorizedQuestions", fields: [category_id], references: [id], onDelete: Cascade)
   category_id        String
-  owner              Studient @relation("AskedQuestions", fields: [owner_id], references: [id], onDelete: Cascade)
+  owner              Student  @relation("AskedQuestions", fields: [owner_id], references: [id], onDelete: Cascade)
   owner_id           String
   title              String
   //
@@ -300,7 +300,7 @@ model Question {
 model Answer {
   id        String   @id @default(cuid())
   content   String
-  owner     Studient @relation("GivenAnswers", fields: [owner_id], references: [id], onDelete: Cascade)
+  owner     Student  @relation("GivenAnswers", fields: [owner_id], references: [id], onDelete: Cascade)
   owner_id  String
   parent    Question @relation("ParentQuestion", fields: [parent_id], references: [id], onDelete: Cascade)
   parent_id String
@@ -325,7 +325,7 @@ model InboxThread {
   id             String   @id @default(cuid())
   is_archived    Boolean  @default(false)
   last_seen_date DateTime @default(now())
-  owner          Studient @relation(fields: [owner_id], references: [id], onDelete: Cascade)
+  owner          Student  @relation(fields: [owner_id], references: [id], onDelete: Cascade)
   owner_id       String
   thread         Thread   @relation(fields: [thread_id], references: [id], onDelete: Cascade)
   thread_id      String

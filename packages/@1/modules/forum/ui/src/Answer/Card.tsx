@@ -14,7 +14,7 @@ export function Answer_Card<T extends Answer>(
   props: PropsWithChildren<{ answer: T }>,
 ) {
   const { children, answer } = props;
-  const { content, owner: studient } = answer;
+  const { content, owner: student } = answer;
   return (
     <Provider answer={answer}>
       <div
@@ -23,8 +23,8 @@ export function Answer_Card<T extends Answer>(
         }
         id={answer.id}
       >
-        <header className=" flex justify-between">
-          <StudientAvatarMedia studient={studient} />
+        <header className="flex justify-between">
+          <StudientAvatarMedia student={student} />
         </header>
         <article className="my-3 ml-12 break-words">{content}</article>
         <Answer_Card.Footer.Renderer childs={children} />

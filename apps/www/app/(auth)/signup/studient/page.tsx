@@ -36,7 +36,7 @@ export default async function Page() {
 
   const { base, form, label } = style();
   const profile_names = Profile_Schema.keyof().Enum;
-  const studient_names = Studient_Schema.keyof().Enum;
+  const student_names = Studient_Schema.keyof().Enum;
 
   return (
     <main className={base()}>
@@ -54,7 +54,7 @@ export default async function Page() {
 
         <div className="container mx-auto grid grid-cols-12 gap-5 xl:max-w-4xl">
           <input
-            className={input({ className: "col-span-full " })}
+            className={input({ className: "col-span-full" })}
             id={profile_names.name}
             name={profile_names.name}
             placeholder="Prenom et Nom"
@@ -62,22 +62,22 @@ export default async function Page() {
             type="text"
           />
           <input
-            className={input({ className: "col-span-full " })}
-            id={studient_names.university}
-            name={studient_names.university}
+            className={input({ className: "col-span-full" })}
+            id={student_names.university}
+            name={student_names.university}
             placeholder="Université"
             required
             type="text"
           />
           <input
-            className={input({ className: "col-span-full " })}
-            id={studient_names.field_of_study}
-            name={studient_names.field_of_study}
+            className={input({ className: "col-span-full" })}
+            id={student_names.field_of_study}
+            name={student_names.field_of_study}
             placeholder="Domain d'étude"
             type="text"
           />
           <textarea
-            className={input({ className: "col-span-full " })}
+            className={input({ className: "col-span-full" })}
             id={profile_names.bio}
             name={profile_names.bio}
             placeholder="À propos"
@@ -88,22 +88,22 @@ export default async function Page() {
             <span>Ville</span>
             <Suspense>
               <FrenchLocationField
-                name={studient_names.city}
-                id={studient_names.city}
+                name={student_names.city}
+                id={student_names.city}
                 placeholder="Ville"
               />
             </Suspense>
           </label>
           <input
             className={input({ className: "col-span-full" })}
-            id={studient_names.language}
-            name={studient_names.language}
+            id={student_names.language}
+            name={student_names.language}
             placeholder="Langue"
             type="text"
           />
           <select
             className={select({ className: "col-span-full" })}
-            name={studient_names.interest}
+            name={student_names.interest}
           >
             <option hidden value={""}>
               Intéressé par

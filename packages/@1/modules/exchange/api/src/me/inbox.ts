@@ -31,7 +31,7 @@ export const inbox = router({
     .query(async ({ ctx: { payload, prisma }, input }) => {
       const { profile } = payload;
       const { cursor, exchange_id, limit } = input;
-      const { id: studient_id } = await prisma.studient.findUniqueOrThrow({
+      const { id: student_id } = await prisma.student.findUniqueOrThrow({
         select: { id: true },
         where: { profile_id: profile.id },
       });
@@ -43,7 +43,7 @@ export const inbox = router({
           thread: { updated_at: "desc" },
         },
         take: limit + 1,
-        where: { owner_id: studient_id, deal: { parent_id: exchange_id } },
+        where: { owner_id: student_id, deal: { parent_id: exchange_id } },
       });
 
       let next_cursor: typeof cursor | undefined = undefined;
@@ -60,13 +60,13 @@ export const inbox = router({
     .input(z.string())
     .query(async ({ ctx: { payload, prisma }, input: thread_id }) => {
       const { profile } = payload;
-      const { id: studient_id } = await prisma.studient.findUniqueOrThrow({
+      const { id: student_id } = await prisma.student.findUniqueOrThrow({
         select: { id: true },
         where: { profile_id: profile.id },
       });
 
       const owner_id_thread_id: Prisma.ExchangeThreadOwner_idThread_idCompoundUniqueInput =
-        { owner_id: studient_id, thread_id };
+        { owner_id: student_id, thread_id };
 
       await prisma.exchangeThread.update({
         data: { last_seen_date: new Date() },
@@ -108,7 +108,7 @@ export const inbox = router({
         where: { id: exchange_id },
       });
 
-      const { id: studient_id } = await prisma.studient.findUniqueOrThrow({
+      const { id: student_id } = await prisma.student.findUniqueOrThrow({
         select: { id: true },
         where: { profile_id: profile.id },
       });
@@ -125,7 +125,7 @@ export const inbox = router({
       return prisma.deal.create({
         data: {
           parent: { connect: { id: exchange_id } },
-          participant: { connect: { id: studient_id } },
+          participant: { connect: { id: student_id } },
           exchange_threads: {
             createMany: {
               data: [
@@ -134,7 +134,7 @@ export const inbox = router({
                   thread_id,
                 },
                 {
-                  owner_id: studient_id,
+                  owner_id: student_id,
                   thread_id,
                 },
               ],
@@ -144,7 +144,7 @@ export const inbox = router({
         include: {
           exchange_threads: {
             take: 1,
-            where: { owner_id: studient_id },
+            where: { owner_id: student_id },
           },
         },
       });
@@ -189,7 +189,7 @@ export const inbox = router({
         profile: { id: profile_id },
       } = payload;
 
-      const { id: studient_id } = await prisma.studient.findUniqueOrThrow({
+      const { id: student_id } = await prisma.student.findUniqueOrThrow({
         select: { id: true },
         where: { profile_id },
       });
@@ -210,8 +210,8 @@ export const inbox = router({
 
       const machine = deal_flow.provide({
         guards: {
-          is_organizer: () => deal.parent.owner_id === studient_id,
-          is_participant: () => deal.participant_id === studient_id,
+          is_organizer: () => deal.parent.owner_id === student_id,
+          is_participant: () => deal.participant_id === student_id,
         },
       });
 

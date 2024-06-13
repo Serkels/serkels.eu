@@ -128,15 +128,15 @@ const auth_api_router = router({
             };
           })
           .with("STUDIENT", function () {
-            const studient_context = Studient_Schema.omit({
+            const student_context = Studient_Schema.omit({
               id: true,
               interest: true,
               profile: true,
             }).parse(payload.context, { path: ["payload.context"] });
             return {
-              studient: {
-                create: studient_context as Omit<
-                  Prisma.StudientCreateInput,
+              student: {
+                create: student_context as Omit<
+                  Prisma.StudentCreateInput,
                   "profile"
                 >,
               },

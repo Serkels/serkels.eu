@@ -38,7 +38,7 @@ async function main() {
     prisma.profile.deleteMany(),
     prisma.question.deleteMany(),
     prisma.signupPayload.deleteMany(),
-    prisma.studient.deleteMany(),
+    prisma.student.deleteMany(),
     prisma.thread.deleteMany(),
     //
   ]);
@@ -49,21 +49,21 @@ async function main() {
   await categories();
   console.log("🌱 . Categories.");
 
-  await studients();
-  console.log("🌱 . Studients.");
+  await students();
+  console.log("🌱 . Students.");
   await partners();
   console.log("🌱 . Partners.");
 
-  await studients_bookmarks();
-  console.log("🌱 . Studients bookmarks.");
-  await studients_participants_in_exchanges();
-  console.log("🌱 . Studients participe to exchanges.");
+  await students_bookmarks();
+  console.log("🌱 . Students bookmarks.");
+  await students_participants_in_exchanges();
+  console.log("🌱 . Students participe to exchanges.");
 
-  await studients_messages();
-  console.log("🌱 . Studients sent some messages.");
+  await students_messages();
+  console.log("🌱 . Students sent some messages.");
 
-  await studients_awnsers();
-  console.log("🌱 . Studients awnser to questions.");
+  await students_awnsers();
+  console.log("🌱 . Students awnser to questions.");
 }
 
 main()
@@ -79,7 +79,7 @@ main()
 //
 //
 
-async function studient() {
+async function student() {
   const { image, name } = {
     image: faker.image.avatar(),
     name: faker.person.fullName(),
@@ -119,7 +119,7 @@ async function studient() {
     },
   };
 
-  return prisma.studient.create({
+  return prisma.student.create({
     data: {
       language: faker.company.name(),
       city: faker.location.city(),
@@ -208,8 +208,8 @@ async function studient() {
   });
 }
 
-async function studients() {
-  await Promise.all(Array.from({ length: 22 }).map(studient));
+async function students() {
+  await Promise.all(Array.from({ length: 22 }).map(student));
 }
 
 //
@@ -371,8 +371,8 @@ async function categories() {
   );
 }
 
-async function studients_bookmarks() {
-  const studients = await prisma.studient.findMany({
+async function students_bookmarks() {
+  const students = await prisma.student.findMany({
     include: { profile: true },
   });
   const opportunities = await prisma.opportunity.findMany();
@@ -381,11 +381,11 @@ async function studients_bookmarks() {
   await prisma.bookmark.createMany({
     data: [
       ...Array.from({ length: 20 }).map(() => ({
-        owner_id: faker.helpers.arrayElement(studients).profile_id,
+        owner_id: faker.helpers.arrayElement(students).profile_id,
         opportunity_id: faker.helpers.arrayElement(opportunities).id,
       })),
       ...Array.from({ length: 20 }).map(() => ({
-        owner_id: faker.helpers.arrayElement(studients).profile_id,
+        owner_id: faker.helpers.arrayElement(students).profile_id,
         exchange_id: faker.helpers.arrayElement(exchanges).id,
       })),
     ],
@@ -393,21 +393,21 @@ async function studients_bookmarks() {
   });
 }
 
-async function studients_participants_in_exchanges() {
-  const studients = await prisma.studient.findMany();
+async function students_participants_in_exchanges() {
+  const students = await prisma.student.findMany();
   const exchanges = await prisma.exchange.findMany({
     include: { owner: true },
   });
 
   for (const exchange of exchanges) {
-    const other_studients = studients.filter(
+    const other_students = students.filter(
       ({ id }) => id !== exchange.owner_id,
     );
     const exchange_id = exchange.id;
 
     await Promise.all(
       faker.helpers
-        .arrayElements(other_studients, { min: 0, max: exchange.places })
+        .arrayElements(other_students, { min: 0, max: exchange.places })
         .map(async (participant) => {
           const participant_id = participant.id;
 
@@ -501,16 +501,16 @@ export function is_active_exchange(
   return !(all_seat_taken || expired_exchange);
 }
 
-async function studients_awnsers() {
-  const studients = await prisma.studient.findMany();
+async function students_awnsers() {
+  const students = await prisma.student.findMany();
   const questions = await prisma.question.findMany({
     include: { owner: { select: { id: true } } },
   });
 
   for (const question of questions) {
     const { owner } = question;
-    const other_studients = faker.helpers.arrayElements(
-      studients.filter(({ id }) => id !== owner.id),
+    const other_students = faker.helpers.arrayElements(
+      students.filter(({ id }) => id !== owner.id),
     );
 
     const { answers } = await prisma.question.update({
@@ -518,9 +518,9 @@ async function studients_awnsers() {
         answers: {
           createMany: {
             data: faker.helpers
-              .arrayElements(other_studients, {
+              .arrayElements(other_students, {
                 min: 0,
-                max: other_studients.length,
+                max: other_students.length,
               })
               .map<Prisma.AnswerCreateManyParentInput>(({ id: owner_id }) => ({
                 content: faker.company.catchPhrase(),
@@ -553,15 +553,15 @@ async function studients_awnsers() {
     // );
   }
 }
-async function studients_messages() {
-  const studients = await prisma.studient.findMany();
+async function students_messages() {
+  const students = await prisma.student.findMany();
 
-  for (const studient of studients) {
-    const other_studients = faker.helpers.arrayElements(
-      studients.filter(({ id }) => id !== studient.id),
+  for (const student of students) {
+    const other_students = faker.helpers.arrayElements(
+      students.filter(({ id }) => id !== student.id),
     );
 
-    const contacts = faker.helpers.arrayElements(other_studients, {
+    const contacts = faker.helpers.arrayElements(other_students, {
       min: 0,
       max: 10,
     });
@@ -577,7 +577,7 @@ async function studients_messages() {
             .map(({ profile_id }) => ({ id: profile_id })),
         },
       },
-      where: { id: studient.profile_id },
+      where: { id: student.profile_id },
     });
 
     const last_seen_date = faker.date.recent();
@@ -585,7 +585,7 @@ async function studients_messages() {
       refDate: last_seen_date,
     });
     await Promise.all(
-      contacts.map(async (recipient_studient) => {
+      contacts.map(async (recipient_student) => {
         const thread = await prisma.thread.create({
           data: {
             created_at: created_at,
@@ -595,19 +595,19 @@ async function studients_messages() {
             }),
             participants: {
               connect: [
-                { id: studient.profile_id },
-                { id: recipient_studient.profile_id },
+                { id: student.profile_id },
+                { id: recipient_student.profile_id },
               ],
             },
             inbox_threads: {
               createMany: {
                 data: [
                   {
-                    owner_id: studient.id,
+                    owner_id: student.id,
                     last_seen_date: last_seen_date,
                   },
                   {
-                    owner_id: recipient_studient.id,
+                    owner_id: recipient_student.id,
                     last_seen_date: faker.date.between({
                       from: created_at,
                       to: last_seen_date,
@@ -626,8 +626,8 @@ async function studients_messages() {
                     });
                     return {
                       author_id: faker.helpers.arrayElement([
-                        { id: studient.profile_id },
-                        { id: recipient_studient.profile_id },
+                        { id: student.profile_id },
+                        { id: recipient_student.profile_id },
                       ]).id,
                       content: faker.lorem.sentences(),
                       created_at: message_created_at,
@@ -653,7 +653,7 @@ async function studients_messages() {
                   select: {
                     inbox_threads: {
                       select: { last_seen_date: true },
-                      where: { owner_id: studient.id },
+                      where: { owner_id: student.id },
                       take: 1,
                     },
                   },
@@ -688,9 +688,9 @@ async function studients_messages() {
                       : null
                     : null,
                   owner_id:
-                    author.id === studient.profile_id
-                      ? recipient_studient.profile_id
-                      : studient.profile_id,
+                    author.id === student.profile_id
+                      ? recipient_student.profile_id
+                      : student.profile_id,
                 },
               },
             },

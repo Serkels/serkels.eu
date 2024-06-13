@@ -2,11 +2,11 @@ import { Studient_Schema, type Studient } from "@1.modules/profile.domain";
 import { next_auth_procedure, router } from "@1.modules/trpc";
 import { z } from "zod";
 
-export const studient_api_router = router({
+export const student_api_router = router({
   by_id: next_auth_procedure
     .input(z.string())
     .query(async ({ input: id, ctx: { prisma } }) => {
-      return prisma.studient.findUniqueOrThrow({
+      return prisma.student.findUniqueOrThrow({
         where: { id },
       });
     }),
@@ -15,12 +15,12 @@ export const studient_api_router = router({
     .input(z.string())
     .query(async ({ input: profile_id, ctx: { prisma } }) => {
       return Studient_Schema.parse(
-        await prisma.studient.findFirstOrThrow({
+        await prisma.student.findFirstOrThrow({
           where: { profile_id },
           include: { interest: true, profile: true },
         }),
         {
-          path: ["<studient.by_profile_id>.prisma.studient.findFirstOrThrow"],
+          path: ["<student.by_profile_id>.prisma.student.findFirstOrThrow"],
         },
       ) as Studient;
     }),
@@ -31,7 +31,7 @@ export const studient_api_router = router({
       .input(Studient_Schema.omit({ id: true, profile: true, interest: true }))
       .mutation(({ input, ctx: { prisma, payload } }) => {
         const { id: profile_id } = payload.profile;
-        return prisma.studient.update({
+        return prisma.student.update({
           data: {
             ...input,
             updated_at: new Date(),

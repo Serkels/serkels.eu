@@ -65,10 +65,10 @@ async function Role_Editor({
 }: Pick<Profile, "id" | "role">) {
   return match(role)
     .with(PROFILE_ROLES.Enum.STUDIENT, async () => {
-      const studient =
-        await TRPC_SSR.profile.studient.by_profile_id.fetch(profile_id);
+      const student =
+        await TRPC_SSR.profile.student.by_profile_id.fetch(profile_id);
 
-      return <Studient_Editor studient={studient} />;
+      return <Studient_Editor student={student} />;
     })
     .with(PROFILE_ROLES.Enum.PARTNER, async () => {
       const partner =

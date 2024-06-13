@@ -57,23 +57,23 @@ export default async function Page({ params }: { params: CodeParms }) {
 }
 
 async function StudientMeta({ profile_id }: { profile_id: string }) {
-  const studient =
-    await TRPC_SSR.profile.studient.by_profile_id.fetch(profile_id);
+  const student =
+    await TRPC_SSR.profile.student.by_profile_id.fetch(profile_id);
 
   return (
     <ul>
       <li>
-        <b>Domain : </b> <span>{studient.field_of_study}</span>
+        <b>Domain : </b> <span>{student.field_of_study}</span>
       </li>
       <li>
-        <b>Ville : </b> <span>{studient.city}</span>
+        <b>Ville : </b> <span>{student.city}</span>
       </li>
       <li>
         <b>Intéressé par : </b>{" "}
-        <span>{studient.interest.map(({ name }) => name).join(", ")}</span>
+        <span>{student.interest.map(({ name }) => name).join(", ")}</span>
       </li>
       <li>
-        <b>Langues : </b> <span>{studient.language}</span>
+        <b>Langues : </b> <span>{student.language}</span>
       </li>
     </ul>
   );
