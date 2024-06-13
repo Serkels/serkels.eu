@@ -63,7 +63,11 @@ export const find = next_auth_procedure
       take: limit + 1,
       where: {
         ...deal_releated_to_me_where,
-        parent: { is_active: true, ...search_where },
+        parent: {
+          is_active: true,
+          OR: [{ expiry_date: { gte: new Date() } }, { expiry_date: null }],
+          ...search_where,
+        },
       },
       distinct: ["parent_id"],
     });
