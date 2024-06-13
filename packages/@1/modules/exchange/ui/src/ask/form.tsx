@@ -1,5 +1,6 @@
 //
 
+import { Exchange_TypeSchema } from "@1.modules/exchange.domain";
 import { Button } from "@1.ui/react/button";
 import { input } from "@1.ui/react/form/atom";
 import { PaperPlane } from "@1.ui/react/icons";
@@ -8,14 +9,14 @@ import { fr } from "date-fns/locale";
 import { Field, Form, Formik } from "formik";
 import type { PropsWithChildren } from "react";
 import { createSlot } from "react-slotify";
+import { P, match } from "ts-pattern";
 import { OnlineOrLocation } from "../OnlineOrLocation";
 import { useOutlet_Exchange, useOutlet_Send } from "./context";
 
 //
 
 export function Ask_Form({ children }: PropsWithChildren) {
-  const exchange = useOutlet_Exchange();
-  const send = useOutlet_Send();
+  const { exchange, send, placeholder } = use_ask_form();
 
   return (
     <>
@@ -59,7 +60,7 @@ export function Ask_Form({ children }: PropsWithChildren) {
               name="message"
               rows={9}
               disabled={isSubmitting}
-              placeholder="Bonjour ! Je veux bien apprendre le français avec toi !"
+              placeholder={placeholder}
             />
             <Button
               type="submit"
@@ -76,3 +77,27 @@ export function Ask_Form({ children }: PropsWithChildren) {
 }
 
 Ask_Form.AvatarFigure = createSlot();
+
+//
+
+function use_ask_form() {
+  const exchange = useOutlet_Exchange();
+  const send = useOutlet_Send();
+
+  const placeholder = match(exchange)
+    .with(
+      { return_id: P.nullish, type: Exchange_TypeSchema.Enum.PROPOSAL },
+      () => "Bonjour, je veux bien une place.",
+    )
+    .with(
+      { return_id: P.nullish, type: Exchange_TypeSchema.Enum.RESEARCH },
+      () => "Bonjour, je veux bien répondre à votre recherche.",
+    )
+    .otherwise(() => "Bonjour, je veux bien échanger avec vous.");
+
+  return {
+    exchange,
+    send,
+    placeholder,
+  };
+}
