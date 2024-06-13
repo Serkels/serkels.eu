@@ -4,7 +4,7 @@ import { SeeProfileAvatarMedia } from ":components/avatar";
 import { Loading_Placeholder } from ":components/placeholder/Loading_Placeholder";
 import { session_profile_id } from ":pipes/session_profile_id";
 import { type Params } from ":pipes/thread_by_id";
-import { TRPC_SSR } from ":trpc/server";
+import { TRPC_SSR, proxyClient } from ":trpc/server";
 import { thread_recipient } from "@1.modules/inbox.domain/select";
 import to from "await-to-js";
 import type { Metadata, ResolvingMetadata } from "next";
@@ -59,6 +59,7 @@ export default async function Page({ params }: { params: Params }) {
     profile_id,
   });
 
+  await proxyClient.inbox.last_seen_by_thread_id.mutate(thread_id);
   await TRPC_SSR.inbox.thread.messages.prefetchInfinite({
     thread_id,
   });

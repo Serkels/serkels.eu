@@ -147,6 +147,24 @@ const inbox_api_router = router({
 
   thread,
   thread_update,
+
+  //
+
+  last_seen_by_thread_id: next_auth_procedure
+    .input(z.string())
+    .mutation(async ({ ctx: { payload, prisma }, input: thread_id }) => {
+      const {
+        profile: { id: profile_id },
+      } = payload;
+      const { id: student_id } = await prisma.student.findFirstOrThrow({
+        select: { id: true },
+        where: { profile_id },
+      });
+      return prisma.inboxThread.update({
+        data: { last_seen_date: new Date() },
+        where: { owner_id_thread_id: { owner_id: student_id, thread_id } },
+      });
+    }),
 });
 
 export default inbox_api_router;
