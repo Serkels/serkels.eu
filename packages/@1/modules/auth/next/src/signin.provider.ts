@@ -4,7 +4,7 @@ import {
   PROFILE_ROLES,
   Partner_Schema,
   Profile_Schema,
-  Studient_Schema,
+  Student_Schema,
 } from "@1.modules/profile.domain";
 import { hashToken } from "@douglasduteil/nextauth...trpc.prisma/jwt";
 import Credentials_Provider from "next-auth/providers/credentials";
@@ -126,8 +126,8 @@ async function create_payload({
         .omit({ id: true, profile: true })
         .parse(credentials),
     )
-    .with(PROFILE_ROLES.Enum.STUDIENT, () =>
-      Studient_Schema.extend({ bio: z.string() })
+    .with(PROFILE_ROLES.Enum.STUDENT, () =>
+      Student_Schema.extend({ bio: z.string() })
         .omit({ id: true, profile: true, interest: true })
         .parse(credentials),
     )

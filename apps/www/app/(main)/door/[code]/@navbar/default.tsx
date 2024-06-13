@@ -2,7 +2,7 @@
 
 import {
   Partner_NavBar,
-  Studient_NavBar,
+  Student_NavBar,
 } from ":components/navbar/aside_navbar";
 import { type CodeParms } from ":pipes/code";
 import { TRPC_SSR } from ":trpc/server";
@@ -23,10 +23,10 @@ export default async function Page({ params }: { params: CodeParms }) {
 
   try {
     return await match({ is_yours, role })
-      .with({ role: PROFILE_ROLES.Enum.STUDIENT, is_yours: true }, async () => {
+      .with({ role: PROFILE_ROLES.Enum.STUDENT, is_yours: true }, async () => {
         const student =
           await TRPC_SSR.profile.student.by_profile_id.fetch(profile_id);
-        return <Studient_NavBar student={student} />;
+        return <Student_NavBar student={student} />;
       })
       .with({ role: PROFILE_ROLES.Enum.PARTNER, is_yours: true }, async () => {
         const partner =

@@ -44,8 +44,8 @@ export default async function Page({ params }: { params: CodeParms }) {
           .with(PROFILE_ROLES.Enum.PARTNER, () => (
             <PartnerMeta profile_id={profile.id} />
           ))
-          .with(PROFILE_ROLES.Enum.STUDIENT, () => (
-            <StudientMeta profile_id={profile.id} />
+          .with(PROFILE_ROLES.Enum.STUDENT, () => (
+            <StudentMeta profile_id={profile.id} />
           ))
           .exhaustive()}
       </main>
@@ -56,7 +56,7 @@ export default async function Page({ params }: { params: CodeParms }) {
   }
 }
 
-async function StudientMeta({ profile_id }: { profile_id: string }) {
+async function StudentMeta({ profile_id }: { profile_id: string }) {
   const student =
     await TRPC_SSR.profile.student.by_profile_id.fetch(profile_id);
 

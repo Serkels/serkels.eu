@@ -4,7 +4,7 @@ import type { ComponentPropsWithoutRef } from "react";
 
 //
 
-export function StudientGuide(props: ComponentPropsWithoutRef<"svg">) {
+export function StudentGuide(props: ComponentPropsWithoutRef<"svg">) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

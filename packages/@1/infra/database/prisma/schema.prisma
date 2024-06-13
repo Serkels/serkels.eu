@@ -103,7 +103,7 @@ model Partner {
 enum ProfileRole {
   ADMIN
   PARTNER
-  STUDIENT
+  STUDENT
 }
 
 //

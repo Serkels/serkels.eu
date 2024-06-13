@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "ProfileRole" AS ENUM ('ADMIN', 'PARTNER', 'STUDIENT');
+CREATE TYPE "ProfileRole" AS ENUM ('ADMIN', 'PARTNER', 'STUDENT');
 
 -- CreateEnum
 CREATE TYPE "CategoryContext" AS ENUM ('EXCHANGE', 'OPPORTUNITY', 'FORUM');

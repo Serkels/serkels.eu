@@ -1,4 +1,4 @@
-import { Studient_Schema, type Studient } from "@1.modules/profile.domain";
+import { Student_Schema, type Student } from "@1.modules/profile.domain";
 import { next_auth_procedure, router } from "@1.modules/trpc";
 import { z } from "zod";
 
@@ -14,7 +14,7 @@ export const student_api_router = router({
   by_profile_id: next_auth_procedure
     .input(z.string())
     .query(async ({ input: profile_id, ctx: { prisma } }) => {
-      return Studient_Schema.parse(
+      return Student_Schema.parse(
         await prisma.student.findFirstOrThrow({
           where: { profile_id },
           include: { interest: true, profile: true },
@@ -22,13 +22,13 @@ export const student_api_router = router({
         {
           path: ["<student.by_profile_id>.prisma.student.findFirstOrThrow"],
         },
-      ) as Studient;
+      ) as Student;
     }),
   //
 
   me: router({
     update: next_auth_procedure
-      .input(Studient_Schema.omit({ id: true, profile: true, interest: true }))
+      .input(Student_Schema.omit({ id: true, profile: true, interest: true }))
       .mutation(({ input, ctx: { prisma, payload } }) => {
         const { id: profile_id } = payload.profile;
         return prisma.student.update({

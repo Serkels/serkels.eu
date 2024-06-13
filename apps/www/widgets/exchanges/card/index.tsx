@@ -14,7 +14,7 @@ import {
   useOutletState,
 } from "@1.modules/exchange.ui/Card/context";
 import type { Profile } from "@1.modules/profile.domain";
-import { StudientAvatarMedia } from "@1.modules/profile.ui/avatar";
+import { StudentAvatarMedia } from "@1.modules/profile.ui/avatar";
 import { button } from "@1.ui/react/button/atom";
 import { Pen } from "@1.ui/react/icons";
 import { useTimeoutEffect } from "@react-hookz/web";
@@ -97,7 +97,7 @@ function Idle() {
     <Card_Idle>
       <Card.Header.Left>
         <Link href={`/@${exchange.owner.profile.id}`}>
-          <StudientAvatarMedia student={exchange.owner} />
+          <StudentAvatarMedia student={exchange.owner} />
         </Link>
       </Card.Header.Left>
       <Card.Header.Right>

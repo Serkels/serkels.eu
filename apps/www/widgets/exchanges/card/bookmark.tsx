@@ -16,7 +16,7 @@ import { P, match } from "ts-pattern";
 export function Exchange_Bookmark() {
   const exchange = useExchange();
   const { data: session } = useSession();
-  const is_student = session?.profile.role === PROFILE_ROLES.Enum.STUDIENT;
+  const is_student = session?.profile.role === PROFILE_ROLES.Enum.STUDENT;
   const query = TRPC_React.bookmarks.check.useQuery({
     target_id: exchange.id,
     type: "exchange",

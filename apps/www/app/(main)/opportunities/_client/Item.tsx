@@ -18,7 +18,7 @@ import { P, match } from "ts-pattern";
 export function Item({ opportunity }: { opportunity: Opportunity }) {
   const { data: session } = useSession();
   const { slug, id } = opportunity;
-  const is_student = session?.profile.role === PROFILE_ROLES.Enum.STUDIENT;
+  const is_student = session?.profile.role === PROFILE_ROLES.Enum.STUDENT;
   const href = `/opportunities/${slug}?category=${opportunity.category.slug}`;
   return (
     <Link href={href}>

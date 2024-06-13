@@ -61,7 +61,7 @@ export default function Profile_Editor({
                   PROFILE_ROLES.Enum.PARTNER,
                   () => "Nom de l'établissement",
                 )
-                .with(PROFILE_ROLES.Enum.STUDIENT, () => "Nom")
+                .with(PROFILE_ROLES.Enum.STUDENT, () => "Nom")
                 .exhaustive()}{" "}
               :
             </label>
@@ -79,7 +79,7 @@ export default function Profile_Editor({
                   PROFILE_ROLES.Enum.PARTNER,
                   () => "Nom de l'établissement",
                 )
-                .with(PROFILE_ROLES.Enum.STUDIENT, () => "Prenom et Nom")
+                .with(PROFILE_ROLES.Enum.STUDENT, () => "Prenom et Nom")
                 .exhaustive()}
               required
               type="text"
@@ -107,7 +107,7 @@ export default function Profile_Editor({
 
             <Field
               className={input({
-                className: "col-span-full ",
+                className: "col-span-full",
                 wrong_value: Boolean(errors.name && touched.name),
               })}
               id="email"
@@ -142,7 +142,7 @@ export default function Profile_Editor({
               as="textarea"
               autoComplete="off"
               className={input({
-                className: "col-span-full ",
+                className: "col-span-full",
                 wrong_value: Boolean(errors.name && touched.name),
               })}
               id="bio"

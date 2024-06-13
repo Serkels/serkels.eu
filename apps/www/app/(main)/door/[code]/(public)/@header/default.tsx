@@ -7,7 +7,7 @@ import { AuthError } from "@1.modules/core/errors";
 import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import {
   PartnerAvatarMedia,
-  StudientAvatarMedia,
+  StudentAvatarMedia,
 } from "@1.modules/profile.ui/avatar";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -25,10 +25,10 @@ export default async function Page({ params }: { params: CodeParms }) {
     const profile = await TRPC_SSR.profile.by_id.fetch(profile_id);
 
     const avatar = await match(profile.role)
-      .with(PROFILE_ROLES.Enum.STUDIENT, async () => {
+      .with(PROFILE_ROLES.Enum.STUDENT, async () => {
         const student =
           await TRPC_SSR.profile.student.by_profile_id.fetch(profile_id);
-        return <StudientAvatarMedia tv$size="medium" student={student} />;
+        return <StudentAvatarMedia tv$size="medium" student={student} />;
       })
       .with(PROFILE_ROLES.Enum.PARTNER, async () => {
         const partner =
@@ -43,7 +43,7 @@ export default async function Page({ params }: { params: CodeParms }) {
 
         <div className="flex flex-row space-x-5">
           <FollowerCount profile_id={profile_id} />
-          {profile.role === PROFILE_ROLES.Enum.STUDIENT ? (
+          {profile.role === PROFILE_ROLES.Enum.STUDENT ? (
             <ContactsCount profile_id={profile_id} />
           ) : null}
         </div>

@@ -7,7 +7,7 @@ import { z } from "zod";
 //
 
 // TODO(douglasduteil): consider using uppercases here...
-export const PROFILE_ROLES = z.enum(["ADMIN", "PARTNER", "STUDIENT"] as const);
+export const PROFILE_ROLES = z.enum(["ADMIN", "PARTNER", "STUDENT"] as const);
 
 export type PROFILE_ROLES = z.TypeOf<typeof PROFILE_ROLES>;
 
@@ -23,7 +23,7 @@ export const Profile_Schema = Entity_Schema.extend({
 export interface Profile extends z.TypeOf<typeof Profile_Schema> {}
 
 export const PROFILE_UNKNOWN: Profile = Profile_Schema.parse(
-  { id: "PROFILE_UNKNOWN", role: "STUDIENT" },
+  { id: "PROFILE_UNKNOWN", role: "STUDENT" },
   { path: ["PROFILE_UNKNOWN"] },
 );
 
@@ -39,13 +39,13 @@ export interface Partner extends z.TypeOf<typeof Partner_Schema> {}
 
 //
 
-export const Studient_Schema = Entity_Schema.extend({
+export const Student_Schema = Entity_Schema.extend({
   city: z.string().default("Unkown city"),
   field_of_study: z.string().default("Unkown field_of_study"),
   interest: z.array(Category_Schema).default([]),
   language: z.string().default("Unkown language"),
   profile: Profile_Schema.default(PROFILE_UNKNOWN),
   university: z.string().default("Unkown university"),
-}).describe("Studient_Schema");
+}).describe("Student_Schema");
 
-export interface Studient extends z.TypeOf<typeof Studient_Schema> {}
+export interface Student extends z.TypeOf<typeof Student_Schema> {}

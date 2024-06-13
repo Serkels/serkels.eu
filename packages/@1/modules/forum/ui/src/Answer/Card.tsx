@@ -1,7 +1,7 @@
 //
 
 import type { Answer } from "@1.modules/forum.domain";
-import { StudientAvatarMedia } from "@1.modules/profile.ui/avatar";
+import { StudentAvatarMedia } from "@1.modules/profile.ui/avatar";
 import { Approved } from "@1.ui/react/icons";
 import { type PropsWithChildren } from "react";
 import { createSlot } from "react-slotify";
@@ -24,7 +24,7 @@ export function Answer_Card<T extends Answer>(
         id={answer.id}
       >
         <header className="flex justify-between">
-          <StudientAvatarMedia student={student} />
+          <StudentAvatarMedia student={student} />
         </header>
         <article className="my-3 ml-12 break-words">{content}</article>
         <Answer_Card.Footer.Renderer childs={children} />
