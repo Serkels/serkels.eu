@@ -10,6 +10,9 @@ CREATE TYPE "ExchangeType" AS ENUM ('PROPOSAL', 'RESEARCH');
 -- CreateEnum
 CREATE TYPE "ExchangeThreadStatus" AS ENUM ('IDLE', 'DENIED', 'APPROVED_BY_THE_ORGANIZER', 'APPROVED');
 
+-- CreateEnum
+CREATE TYPE "NotificationType" AS ENUM ('INBOX_NEW_MESSAGE');
+
 -- CreateTable
 CREATE TABLE "SignupPayload" (
     "role" "ProfileRole" NOT NULL,
@@ -20,9 +23,10 @@ CREATE TABLE "SignupPayload" (
 
 -- CreateTable
 CREATE TABLE "Profile" (
-    "id" TEXT NOT NULL,
     "bio" TEXT,
+    "id" TEXT NOT NULL,
     "image" TEXT NOT NULL,
+    "is_online" BOOLEAN NOT NULL DEFAULT false,
     "name" TEXT NOT NULL,
     "role" "ProfileRole" NOT NULL,
     "userId" TEXT NOT NULL,
@@ -33,9 +37,9 @@ CREATE TABLE "Profile" (
 );
 
 -- CreateTable
-CREATE TABLE "Studient" (
+CREATE TABLE "Student" (
     "id" TEXT NOT NULL,
-    "citizenship" TEXT,
+    "language" TEXT,
     "city" TEXT,
     "field_of_study" TEXT,
     "profile_id" TEXT NOT NULL,
@@ -43,7 +47,7 @@ CREATE TABLE "Studient" (
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT "Studient_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Student_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -84,17 +88,17 @@ CREATE TABLE "Category" (
 -- CreateTable
 CREATE TABLE "Exchange" (
     "id" TEXT NOT NULL,
-    "active" BOOLEAN NOT NULL,
     "category_id" TEXT NOT NULL,
     "description" TEXT NOT NULL,
-    "return_id" TEXT,
+    "expiry_date" TIMESTAMP(3),
+    "is_active" BOOLEAN NOT NULL,
     "is_online" BOOLEAN NOT NULL,
     "location" TEXT,
     "owner_id" TEXT NOT NULL,
     "places" INTEGER NOT NULL,
+    "return_id" TEXT,
     "title" TEXT NOT NULL,
     "type" "ExchangeType" NOT NULL,
-    "when" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -130,12 +134,12 @@ CREATE TABLE "Opportunity" (
     "category_id" TEXT NOT NULL,
     "cover" TEXT NOT NULL,
     "description" TEXT NOT NULL,
+    "expiry_date" TIMESTAMP(3) NOT NULL,
     "link" TEXT NOT NULL,
     "location" TEXT,
     "owner_id" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
     "title" TEXT NOT NULL,
-    "when" TIMESTAMP(3) NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -145,6 +149,7 @@ CREATE TABLE "Opportunity" (
 -- CreateTable
 CREATE TABLE "Question" (
     "id" TEXT NOT NULL,
+    "accepted_answer_id" TEXT,
     "category_id" TEXT NOT NULL,
     "owner_id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
@@ -152,6 +157,18 @@ CREATE TABLE "Question" (
     "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Question_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Answer" (
+    "id" TEXT NOT NULL,
+    "content" TEXT NOT NULL,
+    "owner_id" TEXT NOT NULL,
+    "parent_id" TEXT NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Answer_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -184,6 +201,23 @@ CREATE TABLE "Message" (
     "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Message_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Notification" (
+    "id" TEXT NOT NULL,
+    "owner_id" TEXT NOT NULL,
+    "read_at" TIMESTAMP(3),
+    "type" "NotificationType" NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Notification_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "InboxMessageNotification" (
+    "notification_id" TEXT NOT NULL,
+    "message_id" TEXT NOT NULL
 );
 
 -- CreateTable
@@ -265,7 +299,7 @@ CREATE TABLE "_ParticipantsInThread" (
 );
 
 -- CreateTable
-CREATE TABLE "_CategorizedStudientInterest" (
+CREATE TABLE "_CategorizedStudentInterest" (
     "A" TEXT NOT NULL,
     "B" TEXT NOT NULL
 );
@@ -277,7 +311,7 @@ CREATE UNIQUE INDEX "SignupPayload_email_key" ON "SignupPayload"("email");
 CREATE UNIQUE INDEX "Profile_userId_key" ON "Profile"("userId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Studient_profile_id_key" ON "Studient"("profile_id");
+CREATE UNIQUE INDEX "Student_profile_id_key" ON "Student"("profile_id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Partner_profile_id_key" ON "Partner"("profile_id");
@@ -298,13 +332,25 @@ CREATE UNIQUE INDEX "Deal_parent_id_participant_id_key" ON "Deal"("parent_id", "
 CREATE UNIQUE INDEX "ExchangeThread_owner_id_deal_id_key" ON "ExchangeThread"("owner_id", "deal_id");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "ExchangeThread_owner_id_thread_id_key" ON "ExchangeThread"("owner_id", "thread_id");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Opportunity_slug_key" ON "Opportunity"("slug");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Question_accepted_answer_id_key" ON "Question"("accepted_answer_id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "InboxThread_owner_id_thread_id_key" ON "InboxThread"("owner_id", "thread_id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Message_thread_id_created_at_key" ON "Message"("thread_id", "created_at");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "InboxMessageNotification_notification_id_key" ON "InboxMessageNotification"("notification_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "InboxMessageNotification_message_id_notification_id_key" ON "InboxMessageNotification"("message_id", "notification_id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "PasswordlessToken_body_key" ON "PasswordlessToken"("body");
@@ -343,16 +389,16 @@ CREATE UNIQUE INDEX "_ParticipantsInThread_AB_unique" ON "_ParticipantsInThread"
 CREATE INDEX "_ParticipantsInThread_B_index" ON "_ParticipantsInThread"("B");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "_CategorizedStudientInterest_AB_unique" ON "_CategorizedStudientInterest"("A", "B");
+CREATE UNIQUE INDEX "_CategorizedStudentInterest_AB_unique" ON "_CategorizedStudentInterest"("A", "B");
 
 -- CreateIndex
-CREATE INDEX "_CategorizedStudientInterest_B_index" ON "_CategorizedStudientInterest"("B");
+CREATE INDEX "_CategorizedStudentInterest_B_index" ON "_CategorizedStudentInterest"("B");
 
 -- AddForeignKey
 ALTER TABLE "Profile" ADD CONSTRAINT "Profile_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Studient" ADD CONSTRAINT "Studient_profile_id_fkey" FOREIGN KEY ("profile_id") REFERENCES "Profile"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "Student" ADD CONSTRAINT "Student_profile_id_fkey" FOREIGN KEY ("profile_id") REFERENCES "Profile"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Partner" ADD CONSTRAINT "Partner_profile_id_fkey" FOREIGN KEY ("profile_id") REFERENCES "Profile"("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -367,22 +413,22 @@ ALTER TABLE "Bookmark" ADD CONSTRAINT "Bookmark_opportunity_id_fkey" FOREIGN KEY
 ALTER TABLE "Bookmark" ADD CONSTRAINT "Bookmark_owner_id_fkey" FOREIGN KEY ("owner_id") REFERENCES "Profile"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Exchange" ADD CONSTRAINT "Exchange_category_id_fkey" FOREIGN KEY ("category_id") REFERENCES "Category"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Exchange" ADD CONSTRAINT "Exchange_category_id_fkey" FOREIGN KEY ("category_id") REFERENCES "Category"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Exchange" ADD CONSTRAINT "Exchange_owner_id_fkey" FOREIGN KEY ("owner_id") REFERENCES "Student"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Exchange" ADD CONSTRAINT "Exchange_return_id_fkey" FOREIGN KEY ("return_id") REFERENCES "Category"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Exchange" ADD CONSTRAINT "Exchange_owner_id_fkey" FOREIGN KEY ("owner_id") REFERENCES "Studient"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE "Deal" ADD CONSTRAINT "Deal_parent_id_fkey" FOREIGN KEY ("parent_id") REFERENCES "Exchange"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Deal" ADD CONSTRAINT "Deal_participant_id_fkey" FOREIGN KEY ("participant_id") REFERENCES "Studient"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "Deal" ADD CONSTRAINT "Deal_participant_id_fkey" FOREIGN KEY ("participant_id") REFERENCES "Student"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "ExchangeThread" ADD CONSTRAINT "ExchangeThread_owner_id_fkey" FOREIGN KEY ("owner_id") REFERENCES "Studient"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "ExchangeThread" ADD CONSTRAINT "ExchangeThread_owner_id_fkey" FOREIGN KEY ("owner_id") REFERENCES "Student"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "ExchangeThread" ADD CONSTRAINT "ExchangeThread_deal_id_fkey" FOREIGN KEY ("deal_id") REFERENCES "Deal"("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -391,19 +437,28 @@ ALTER TABLE "ExchangeThread" ADD CONSTRAINT "ExchangeThread_deal_id_fkey" FOREIG
 ALTER TABLE "ExchangeThread" ADD CONSTRAINT "ExchangeThread_thread_id_fkey" FOREIGN KEY ("thread_id") REFERENCES "Thread"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Opportunity" ADD CONSTRAINT "Opportunity_category_id_fkey" FOREIGN KEY ("category_id") REFERENCES "Category"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Opportunity" ADD CONSTRAINT "Opportunity_category_id_fkey" FOREIGN KEY ("category_id") REFERENCES "Category"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Opportunity" ADD CONSTRAINT "Opportunity_owner_id_fkey" FOREIGN KEY ("owner_id") REFERENCES "Partner"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Question" ADD CONSTRAINT "Question_category_id_fkey" FOREIGN KEY ("category_id") REFERENCES "Category"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Question" ADD CONSTRAINT "Question_accepted_answer_id_fkey" FOREIGN KEY ("accepted_answer_id") REFERENCES "Answer"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Question" ADD CONSTRAINT "Question_owner_id_fkey" FOREIGN KEY ("owner_id") REFERENCES "Studient"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "Question" ADD CONSTRAINT "Question_category_id_fkey" FOREIGN KEY ("category_id") REFERENCES "Category"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "InboxThread" ADD CONSTRAINT "InboxThread_owner_id_fkey" FOREIGN KEY ("owner_id") REFERENCES "Studient"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "Question" ADD CONSTRAINT "Question_owner_id_fkey" FOREIGN KEY ("owner_id") REFERENCES "Student"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Answer" ADD CONSTRAINT "Answer_owner_id_fkey" FOREIGN KEY ("owner_id") REFERENCES "Student"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Answer" ADD CONSTRAINT "Answer_parent_id_fkey" FOREIGN KEY ("parent_id") REFERENCES "Question"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "InboxThread" ADD CONSTRAINT "InboxThread_owner_id_fkey" FOREIGN KEY ("owner_id") REFERENCES "Student"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "InboxThread" ADD CONSTRAINT "InboxThread_thread_id_fkey" FOREIGN KEY ("thread_id") REFERENCES "Thread"("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -412,7 +467,16 @@ ALTER TABLE "InboxThread" ADD CONSTRAINT "InboxThread_thread_id_fkey" FOREIGN KE
 ALTER TABLE "Message" ADD CONSTRAINT "Message_author_id_fkey" FOREIGN KEY ("author_id") REFERENCES "Profile"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Message" ADD CONSTRAINT "Message_thread_id_fkey" FOREIGN KEY ("thread_id") REFERENCES "Thread"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Message" ADD CONSTRAINT "Message_thread_id_fkey" FOREIGN KEY ("thread_id") REFERENCES "Thread"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Notification" ADD CONSTRAINT "Notification_owner_id_fkey" FOREIGN KEY ("owner_id") REFERENCES "Profile"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "InboxMessageNotification" ADD CONSTRAINT "InboxMessageNotification_notification_id_fkey" FOREIGN KEY ("notification_id") REFERENCES "Notification"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "InboxMessageNotification" ADD CONSTRAINT "InboxMessageNotification_message_id_fkey" FOREIGN KEY ("message_id") REFERENCES "Message"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Account" ADD CONSTRAINT "Account_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -442,8 +506,7 @@ ALTER TABLE "_ParticipantsInThread" ADD CONSTRAINT "_ParticipantsInThread_A_fkey
 ALTER TABLE "_ParticipantsInThread" ADD CONSTRAINT "_ParticipantsInThread_B_fkey" FOREIGN KEY ("B") REFERENCES "Thread"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "_CategorizedStudientInterest" ADD CONSTRAINT "_CategorizedStudientInterest_A_fkey" FOREIGN KEY ("A") REFERENCES "Category"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "_CategorizedStudentInterest" ADD CONSTRAINT "_CategorizedStudentInterest_A_fkey" FOREIGN KEY ("A") REFERENCES "Category"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "_CategorizedStudientInterest" ADD CONSTRAINT "_CategorizedStudientInterest_B_fkey" FOREIGN KEY ("B") REFERENCES "Studient"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
+ALTER TABLE "_CategorizedStudentInterest" ADD CONSTRAINT "_CategorizedStudentInterest_B_fkey" FOREIGN KEY ("B") REFERENCES "Student"("id") ON DELETE CASCADE ON UPDATE CASCADE;
