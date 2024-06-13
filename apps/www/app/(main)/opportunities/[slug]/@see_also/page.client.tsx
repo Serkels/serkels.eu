@@ -21,6 +21,7 @@ export default function Page_Client() {
     );
 
     if (!opportunities) return null;
+    if (!opportunities.length) return null;
 
     return (
       <aside>
