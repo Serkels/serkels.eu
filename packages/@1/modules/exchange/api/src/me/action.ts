@@ -28,7 +28,7 @@ export const action = next_auth_procedure
   .mutation(async ({ ctx: { payload, prisma }, input }) => {
     const { action, exchange_id, thread_id } = input;
     const { profile } = payload;
-    const { id: studient_id } = await prisma.studient.findUniqueOrThrow({
+    const { id: student_id } = await prisma.student.findUniqueOrThrow({
       select: { id: true },
       where: { profile_id: profile.id },
     });
@@ -46,7 +46,7 @@ export const action = next_auth_procedure
           },
         },
         exchange_threads: {
-          where: { owner_id: studient_id },
+          where: { owner_id: student_id },
           include: { thread: true },
         },
       },
@@ -58,8 +58,8 @@ export const action = next_auth_procedure
 
     const machine = deal_flow.provide({
       guards: {
-        is_organizer: () => deal.parent.owner_id === studient_id,
-        is_participant: () => deal.participant_id === studient_id,
+        is_organizer: () => deal.parent.owner_id === student_id,
+        is_participant: () => deal.participant_id === student_id,
         is_the_exchange_not_completed: () =>
           !is_exchange_completed(deal.parent),
       },

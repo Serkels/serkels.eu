@@ -22,7 +22,7 @@ export const partner_api_router = router({
           include: { profile: true },
         }),
         {
-          path: ["<partner.by_profile_id>.prisma.studient.findFirstOrThrow"],
+          path: ["<partner.by_profile_id>.prisma.student.findFirstOrThrow"],
         },
       ) as Partner;
     }),

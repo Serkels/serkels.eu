@@ -24,9 +24,9 @@ export default async function Page({ params }: { params: CodeParms }) {
   try {
     return await match({ is_yours, role })
       .with({ role: PROFILE_ROLES.Enum.STUDIENT, is_yours: true }, async () => {
-        const studient =
-          await TRPC_SSR.profile.studient.by_profile_id.fetch(profile_id);
-        return <Studient_NavBar studient={studient} />;
+        const student =
+          await TRPC_SSR.profile.student.by_profile_id.fetch(profile_id);
+        return <Studient_NavBar student={student} />;
       })
       .with({ role: PROFILE_ROLES.Enum.PARTNER, is_yours: true }, async () => {
         const partner =

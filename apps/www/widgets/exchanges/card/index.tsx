@@ -97,7 +97,7 @@ function Idle() {
     <Card_Idle>
       <Card.Header.Left>
         <Link href={`/@${exchange.owner.profile.id}`}>
-          <StudientAvatarMedia studient={exchange.owner} />
+          <StudientAvatarMedia student={exchange.owner} />
         </Link>
       </Card.Header.Left>
       <Card.Header.Right>

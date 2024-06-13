@@ -34,7 +34,7 @@ export const me = router({
     .input(z.string())
     .query(async ({ ctx: { payload, prisma }, input: parent_id }) => {
       const { profile } = payload;
-      const { id: studient_id } = await prisma.studient.findUniqueOrThrow({
+      const { id: student_id } = await prisma.student.findUniqueOrThrow({
         select: { id: true },
         where: { profile_id: profile.id },
       });
@@ -42,12 +42,12 @@ export const me = router({
       return prisma.deal.findUnique({
         include: {
           exchange_threads: {
-            where: { owner_id: studient_id },
+            where: { owner_id: student_id },
             include: { thread: true },
           },
         },
         where: {
-          participant_per_exchange: { parent_id, participant_id: studient_id },
+          participant_per_exchange: { parent_id, participant_id: student_id },
         },
       });
     }),

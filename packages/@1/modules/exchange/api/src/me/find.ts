@@ -18,7 +18,7 @@ export const find = next_auth_procedure
     const { profile } = payload;
     const { cursor, limit, search } = input;
 
-    const { id: studient_id } = await prisma.studient.findUniqueOrThrow({
+    const { id: student_id } = await prisma.student.findUniqueOrThrow({
       select: { id: true },
       where: { profile_id: profile.id },
     });
@@ -40,9 +40,9 @@ export const find = next_auth_procedure
 
     const deal_releated_to_me_where: Prisma.DealWhereInput = {
       OR: [
-        { participant_id: studient_id },
+        { participant_id: student_id },
         {
-          parent: { owner_id: studient_id },
+          parent: { owner_id: student_id },
         },
       ],
     };

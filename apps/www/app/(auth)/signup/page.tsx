@@ -21,13 +21,13 @@ export default async function Page() {
     <main className="col-span-full mx-auto flex h-full flex-col items-center justify-center space-y-5 text-2xl">
       <span className="">Vous êtes un :</span>
       <Link
-        className="color-white bg-Cerulean rounded-full border-none px-5 py-2 font-bold text-white"
-        href="/signup/studient"
+        className="color-white rounded-full border-none bg-Cerulean px-5 py-2 font-bold text-white"
+        href="/signup/student"
       >
         Étudiant
       </Link>
       <Link
-        className="color-white bg-RedViolet rounded-full border-none px-5 py-2 font-bold text-white"
+        className="color-white rounded-full border-none bg-RedViolet px-5 py-2 font-bold text-white"
         href="/signup/partner"
       >
         Partenaire

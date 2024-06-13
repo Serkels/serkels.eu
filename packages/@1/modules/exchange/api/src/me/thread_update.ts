@@ -13,13 +13,13 @@ export const thread_update = next_auth_procedure
     const {
       profile: { id: profile_id },
     } = payload;
-    const { id: studient_id } = await prisma.studient.findUniqueOrThrow({
+    const { id: student_id } = await prisma.student.findUniqueOrThrow({
       select: { id: true },
       where: { profile_id },
     });
 
     const owner_id_thread_id: Prisma.ExchangeThreadOwner_idThread_idCompoundUniqueInput =
-      { owner_id: studient_id, thread_id };
+      { owner_id: student_id, thread_id };
 
     return prisma.exchangeThread.update({
       data: { last_seen_date: new Date() },

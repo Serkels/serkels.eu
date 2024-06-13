@@ -23,13 +23,13 @@ import { NewMessage_Indicator } from "./notification_indicator.client";
 
 //
 
-export function Studient_NavBar({ studient }: { studient: Studient }) {
+export function Studient_NavBar({ student }: { student: Studient }) {
   return (
     <nav className={navbar()}>
       <StudientAvatarMedia
         tv$direction="column"
         className="py-5"
-        studient={studient}
+        student={student}
       />
       <ul>
         <Li_Link icon={<PlusBox />} href="./exchanges/new">
@@ -62,7 +62,7 @@ export function Studient_NavBar({ studient }: { studient: Studient }) {
           Messagerie <NewMessage_Indicator />
         </Li_Link>
         <Li_Link
-          icon={<Avatar className="h-6" profile={studient.profile} />}
+          icon={<Avatar className="h-6" profile={student.profile} />}
           href="./"
           is_active_includes={["./history", "./exchanges"]}
         >

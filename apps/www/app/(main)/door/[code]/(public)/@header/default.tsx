@@ -26,9 +26,9 @@ export default async function Page({ params }: { params: CodeParms }) {
 
     const avatar = await match(profile.role)
       .with(PROFILE_ROLES.Enum.STUDIENT, async () => {
-        const studient =
-          await TRPC_SSR.profile.studient.by_profile_id.fetch(profile_id);
-        return <StudientAvatarMedia tv$size="medium" studient={studient} />;
+        const student =
+          await TRPC_SSR.profile.student.by_profile_id.fetch(profile_id);
+        return <StudientAvatarMedia tv$size="medium" student={student} />;
       })
       .with(PROFILE_ROLES.Enum.PARTNER, async () => {
         const partner =

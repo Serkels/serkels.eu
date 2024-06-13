@@ -17,7 +17,7 @@ export const deal_update = next_auth_procedure
     const {
       profile: { id: profile_id },
     } = payload;
-    const { id: studient_id } = await prisma.studient.findUniqueOrThrow({
+    const { id: student_id } = await prisma.student.findUniqueOrThrow({
       select: { id: true },
       where: { profile_id },
     });
@@ -26,7 +26,7 @@ export const deal_update = next_auth_procedure
       select: { id: true },
       where: {
         parent_id: exchange_id,
-        exchange_threads: { some: { thread_id, owner_id: studient_id } },
+        exchange_threads: { some: { thread_id, owner_id: student_id } },
       },
     });
 

@@ -10,8 +10,8 @@ import { useQuestion } from "./context";
 
 export function Header() {
   const question = useQuestion();
-  const { owner: studient } = question;
-  const { profile, university } = studient;
+  const { owner: student } = question;
+  const { profile, university } = student;
   return (
     <header className="mb-4 flex justify-between">
       <AvatarMedia name={profile.name} image={profile.image}>

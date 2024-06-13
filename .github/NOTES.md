@@ -1,4 +1,3 @@
-
 # Grid of 10 (gap 35px) 1085px 1366px
 
 Colum 77px
@@ -53,7 +52,7 @@ col de gauche sa ns shadom 5px 5px
   - button response keep displaying reponses
   - question owner can "unpin" useful reponses
   - line on the bottom of the card same as default footer line but align left with the text
-- studient user "university mandatory
+- student user "university mandatory
 - add sentry browser secret on vercel !
 
 # FUTUR

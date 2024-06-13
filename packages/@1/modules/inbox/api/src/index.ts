@@ -14,21 +14,21 @@ const inbox_api_router = router({
     .mutation(
       async ({ ctx: { payload, prisma }, input: recipient_profile_id }) => {
         const { profile } = payload;
-        const { id: studient_id } = await prisma.studient.findUniqueOrThrow({
+        const { id: student_id } = await prisma.student.findUniqueOrThrow({
           select: { id: true },
           where: { profile_id: profile.id },
         });
         const existing_inbox_thread = await prisma.inboxThread.findFirst({
           where: {
-            owner_id: studient_id,
+            owner_id: student_id,
             thread: { participants: { some: { id: recipient_profile_id } } },
           },
         });
 
         if (existing_inbox_thread) return existing_inbox_thread;
 
-        const { id: recipient_studient_id } =
-          await prisma.studient.findUniqueOrThrow({
+        const { id: recipient_student_id } =
+          await prisma.student.findUniqueOrThrow({
             select: { id: true },
             where: { profile_id: recipient_profile_id },
           });
@@ -41,8 +41,8 @@ const inbox_api_router = router({
             inbox_threads: {
               createMany: {
                 data: [
-                  { owner_id: studient_id },
-                  { owner_id: recipient_studient_id },
+                  { owner_id: student_id },
+                  { owner_id: recipient_student_id },
                 ],
               },
             },
@@ -50,7 +50,7 @@ const inbox_api_router = router({
         });
         return prisma.inboxThread.findFirstOrThrow({
           where: {
-            owner_id: studient_id,
+            owner_id: student_id,
             thread: { participants: { some: { id: recipient_profile_id } } },
           },
         });
@@ -70,7 +70,7 @@ const inbox_api_router = router({
     .query(async ({ ctx: { payload, prisma }, input }) => {
       const { profile } = payload;
       const { cursor, limit, search } = input;
-      const { id: studient_id } = await prisma.studient.findUniqueOrThrow({
+      const { id: student_id } = await prisma.student.findUniqueOrThrow({
         select: { id: true },
         where: { profile_id: profile.id },
       });
@@ -102,7 +102,7 @@ const inbox_api_router = router({
         orderBy: [{ thread: { updated_at: "desc" } }],
         include: { thread: { select: { id: true, updated_at: true } } },
         take: limit + 1,
-        where: { owner_id: studient_id, ...search_where },
+        where: { owner_id: student_id, ...search_where },
       });
 
       let next_cursor: typeof cursor | undefined = undefined;
@@ -120,13 +120,13 @@ const inbox_api_router = router({
     .input(z.string())
     .query(async ({ ctx: { payload, prisma }, input: thread_id }) => {
       const { profile } = payload;
-      const { id: studient_id } = await prisma.studient.findUniqueOrThrow({
+      const { id: student_id } = await prisma.student.findUniqueOrThrow({
         select: { id: true },
         where: { profile_id: profile.id },
       });
 
       const owner_id_thread_id: Prisma.InboxThreadOwner_idThread_idCompoundUniqueInput =
-        { owner_id: studient_id, thread_id };
+        { owner_id: student_id, thread_id };
 
       return prisma.inboxThread.findUniqueOrThrow({
         include: {
