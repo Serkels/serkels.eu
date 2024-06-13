@@ -104,18 +104,25 @@ export const thread = router({
       } = payload;
       const { content, thread_id } = input;
 
+      const { id: student_id } = await prisma.student.findFirstOrThrow({
+        select: { id: true },
+        where: { profile_id },
+      });
+
       // guard : Only write on participating threads
       const { participants } = await prisma.thread.findUniqueOrThrow({
         select: { participants: { select: { id: true } } },
         where: { id: thread_id, participants: { some: { id: profile_id } } },
       });
       const recipient = thread_recipient({ participants, profile_id });
-
+      const updated_at = new Date();
       const updated_thread = await prisma.thread.update({
         data: {
-          updated_at: new Date(),
+          updated_at: updated_at,
           messages: {
             create: {
+              created_at: updated_at,
+              updated_at,
               author: { connect: { id: profile_id } },
               content,
               notifications: {
@@ -127,6 +134,14 @@ export const thread = router({
                     },
                   },
                 },
+              },
+            },
+          },
+          inbox_threads: {
+            update: {
+              data: { last_seen_date: updated_at },
+              where: {
+                owner_id_thread_id: { owner_id: student_id, thread_id },
               },
             },
           },
