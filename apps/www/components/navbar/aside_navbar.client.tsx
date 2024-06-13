@@ -20,7 +20,7 @@ export function Li_Link(
     icon: IconNode,
     children,
     is_active_includes,
-    // ...other_props
+    ...other_props
   } = props;
 
   const target_href = String(href).replace("./", `/@${profile_id}/`);
@@ -32,9 +32,9 @@ export function Li_Link(
 
   return (
     <li className={base()}>
-      <Link href={target_href} className={link()}>
+      <Link {...other_props} href={target_href} className={link()}>
         <div className={icon()}>{IconNode}</div>
-        <span className="">{children}</span>
+        <span className="flex h-auto items-center gap-4">{children}</span>
       </Link>
     </li>
   );
@@ -42,18 +42,18 @@ export function Li_Link(
 
 const li = tv({
   slots: {
-    base: "",
-    link: "grid grid-cols-[50px_1fr] items-center p-4",
-    icon: "size-5 justify-self-center",
+    base: "flex items-center",
+    link: "flex w-full items-center gap-4 bg-neutral-50 p-4",
+    icon: "ml-4 h-auto w-5 justify-self-center",
   },
   variants: {
     $active: {
       true: {
-        base: "bg-white font-bold",
-        link: "pointer-events-auto cursor-default",
+        base: "font-bold",
+        link: "pointer-events-auto cursor-default bg-white",
         icon: "text-Cerulean",
       },
-      false: { link: "hover:opacity-70 ", icon: "opacity-40" },
+      false: { link: "hover:opacity-70", icon: "opacity-40" },
     },
   },
 });

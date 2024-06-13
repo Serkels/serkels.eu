@@ -1,7 +1,6 @@
 //
 
 import { MenuBurger } from ":components/burger";
-import { Student_NavBar } from ":components/navbar/aside_navbar";
 import { Notification_DotIndicator } from ":components/navbar/notification_indicator.client";
 import { MobileNavBar } from ":components/shell/MobileNavBar";
 import { TRPC_SSR } from ":trpc/server";
@@ -15,7 +14,7 @@ import Link from "next/link";
 import { type ComponentPropsWithoutRef } from "react";
 import { tv } from "tailwind-variants";
 import { match } from "ts-pattern";
-import { UserMenuToggle } from "./navbar.client";
+import { UserMenuTogglePartner, UserMenuToggleStudent } from "./navbar.client";
 
 //
 
@@ -68,14 +67,7 @@ async function UserNavGroup({ className }: ComponentPropsWithoutRef<"nav">) {
           <VisuallyHidden>Créer une opportunité</VisuallyHidden>
           <Plus className={icon({ className: "bg-transparent p-0.5" })} />
         </Link>
-
-        <Link href={`/@~`} className="flex">
-          <VisuallyHidden>Moi</VisuallyHidden>
-          <Avatar
-            className="size-7 border-2 border-white"
-            profile={session.profile}
-          />
-        </Link>
+        <MyPartnerProfile profile={session.profile} />
       </nav>
     ))
     .with(PROFILE_ROLES.Enum.STUDENT, () => (
@@ -118,13 +110,14 @@ const user_nav_group_variants = tv(
   },
 );
 async function MyStudentProfile({ profile }: { profile: Profile }) {
-  const student = await TRPC_SSR.profile.student.by_profile_id.fetch(
+  const student = await TRPC_SSR.profile.student?.by_profile_id.fetch(
     profile.id,
   );
 
   return (
     <>
-      <UserMenuToggle
+      <UserMenuToggleStudent
+        student={student}
         button={
           <>
             <VisuallyHidden>Moi</VisuallyHidden>
@@ -134,12 +127,35 @@ async function MyStudentProfile({ profile }: { profile: Profile }) {
             />
           </>
         }
-      >
-        <Student_NavBar
-          className="fixed inset-0 bottom-16 top-16 z-10 w-full bg-[#f5f8fa] text-black md:hidden"
-          student={student}
-        />
-      </UserMenuToggle>
+      ></UserMenuToggleStudent>
+
+      <Link href={`/@~`} className="hidden md:flex">
+        <VisuallyHidden>Moi</VisuallyHidden>
+        <Avatar className="size-7 border-2 border-white" profile={profile} />
+      </Link>
+    </>
+  );
+}
+
+async function MyPartnerProfile({ profile }: { profile: Profile }) {
+  const partner = await TRPC_SSR.profile.partner?.by_profile_id.fetch(
+    profile.id,
+  );
+
+  return (
+    <>
+      <UserMenuTogglePartner
+        partner={partner}
+        button={
+          <>
+            <VisuallyHidden>Moi</VisuallyHidden>
+            <Avatar
+              className="size-7 border-2 border-white"
+              profile={profile}
+            />
+          </>
+        }
+      ></UserMenuTogglePartner>
 
       <Link href={`/@~`} className="hidden md:flex">
         <VisuallyHidden>Moi</VisuallyHidden>

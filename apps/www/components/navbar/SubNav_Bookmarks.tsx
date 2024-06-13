@@ -16,5 +16,5 @@ export function SubNav_Bookmarks({
     return null;
   }
 
-  return <ul className=" text-base [&>li]:px-9 [&>li]:py-0">{children}</ul>;
+  return <ul className="text-base [&>li]:pl-[10%]">{children}</ul>;
 }

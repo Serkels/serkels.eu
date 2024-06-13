@@ -26,9 +26,11 @@ import { NewMessage_Indicator } from "./notification_indicator.client";
 export function Student_NavBar({
   student,
   className,
+  onClickLink,
 }: {
   student: Student;
   className?: string;
+  onClickLink?: () => void;
 }) {
   const { list, base } = navbar();
   return (
@@ -39,13 +41,25 @@ export function Student_NavBar({
         student={student}
       />
       <ul className={list()}>
-        <Li_Link icon={<PlusBox />} href="./exchanges/new">
+        <Li_Link
+          onClick={onClickLink}
+          icon={<PlusBox />}
+          href="./exchanges/new"
+        >
           Créer
         </Li_Link>
-        <Li_Link icon={<Archive />} href="./exchanges/mine">
+        <Li_Link
+          onClick={onClickLink}
+          icon={<Archive />}
+          href="./exchanges/mine"
+        >
           Mes publications
         </Li_Link>
-        <Li_Link icon={<Exchange />} href="./exchanges/inbox">
+        <Li_Link
+          onClick={onClickLink}
+          icon={<Exchange />}
+          href="./exchanges/inbox"
+        >
           Les échanges
         </Li_Link>
         <Li_Link icon={<Bookmark />} href="./bookmarks">
@@ -53,32 +67,35 @@ export function Student_NavBar({
         </Li_Link>
         <SubNav_Bookmarks href="./bookmarks">
           <Li_Link
-            icon={<Exchange className="size-5" />}
+            onClick={onClickLink}
+            icon={<Exchange className="h-auto w-6" />}
             href="./bookmarks/exchanges"
           >
             Échanges
           </Li_Link>
           <Li_Link
-            icon={<Binoculars className="size-5" />}
+            onClick={onClickLink}
+            icon={<Binoculars className="h-auto w-6" />}
             href="./bookmarks/opportunities"
           >
             Opportunités
           </Li_Link>
         </SubNav_Bookmarks>
-        <Li_Link icon={<Envelope />} href="./inbox">
+        <Li_Link onClick={onClickLink} icon={<Envelope />} href="./inbox">
           Messagerie <NewMessage_Indicator />
         </Li_Link>
         <Li_Link
-          icon={<Avatar className="h-6" profile={student.profile} />}
+          onClick={onClickLink}
+          icon={<Avatar className="h-full" profile={student.profile} />}
           href="./"
-          is_active_includes={["./history", "./exchanges"]}
+          is_active_includes={["./", "./history", "./proposals"]}
         >
           Profil
         </Li_Link>
-        <Li_Link icon={<Gear />} href="./parameters">
+        <Li_Link onClick={onClickLink} icon={<Gear />} href="./parameters">
           Paramètres
         </Li_Link>
-        <Li_Link icon={<Exit />} href="/logout">
+        <Li_Link onClick={onClickLink} icon={<Exit />} href="/logout">
           Me déconnecter
         </Li_Link>
       </ul>
@@ -88,48 +105,66 @@ export function Student_NavBar({
 
 //
 
-export function Partner_NavBar({ partner }: { partner: Partner }) {
+export function Partner_NavBar({
+  partner,
+  className,
+  onClickLink,
+}: {
+  partner: Partner;
+  className?: string;
+  onClickLink?: () => void;
+}) {
   const { profile } = partner;
   const { list, base } = navbar();
   return (
-    <nav className={base()}>
+    <nav className={base({ className })}>
       <PartnerAvatarMedia
         tv$direction="column"
         className="py-5"
         partner={partner}
       />
       <ul className={list()}>
-        <Li_Link icon={<PlusBox />} href="./opportunities/new">
+        <Li_Link
+          onClick={onClickLink}
+          icon={<PlusBox />}
+          href="./opportunities/new"
+        >
           Créer une opportunité
         </Li_Link>
-        <Li_Link icon={<Archive />} href="./opportunities/mine">
+        <Li_Link
+          onClick={onClickLink}
+          icon={<Archive />}
+          href="./opportunities/mine"
+        >
           Mes publications
         </Li_Link>
         <Li_Link
-          icon={<Avatar className="h-6" profile={profile} />}
+          onClick={onClickLink}
+          icon={<Avatar className="h-full" profile={profile} />}
           href="./"
           is_active_includes={["./history", "./exchanges"]}
         >
           Profil
         </Li_Link>
-        <Li_Link icon={<Gear />} href="./parameters">
+        <Li_Link onClick={onClickLink} icon={<Gear />} href="./parameters">
           Paramètres
         </Li_Link>
-        <Li_Link icon={<Exit />} href="/logout">
+        <Li_Link onClick={onClickLink} icon={<Exit />} href="/logout">
           Me déconnecter
         </Li_Link>
       </ul>
     </nav>
   );
 }
+
 export const aside_navbar = tv({
-  base: "py-5 pt-10",
+  base: "bg-[#f5f8fa] py-5 pt-10",
   variants: {},
 });
 const navbar = tv({
   base: "sticky top-0 py-5",
   slots: {
-    list: "mx-auto flex w-max flex-col justify-center gap-4",
+    list: "mx-auto flex flex-col justify-center",
   },
   variants: {
     $alone: {
