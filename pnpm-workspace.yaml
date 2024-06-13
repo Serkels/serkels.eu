@@ -5,7 +5,6 @@ packages:
   - "packages/@1/modules/*/*/.react-email"
   - "packages/@1/modules/*/*"
   - "packages/@1/*/*"
-  - "packages/@toctocorg/*"
   - "packages/@douglasduteil/*"
   - "packages/@douglasduteil/config/*"
   #
