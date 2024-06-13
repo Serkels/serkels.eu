@@ -25,7 +25,7 @@ Arguo theca cena umbra veritatis. Solitudo triduana crebro virga calamitas cruci
 
 export default function Page() {
   return (
-    <main className="container prose mx-auto my-32 lg:prose-xl">
+    <main className="container prose mx-auto my-10 p-6 lg:prose-xl">
       <ReactMarkdown>{content}</ReactMarkdown>
     </main>
   );
