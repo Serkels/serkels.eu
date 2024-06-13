@@ -49,6 +49,8 @@ async function main() {
   await categories();
   console.log("🌱 . Categories.");
 
+  console.log("🌱 . Yopmail Students.");
+  await student_yopmail();
   await students();
   console.log("🌱 . Students.");
   await partners();
@@ -79,10 +81,22 @@ main()
 //
 //
 
-async function student() {
+async function student_yopmail() {
+  await student({ email: "douglas@yopmail.com", name: "Douglas" });
+  await student({ email: "johan@yopmail.com", name: "Johan" });
+  await student({ email: "dino@yopmail.com", name: "Dino" });
+}
+
+async function student({
+  email: studient_email,
+  name: studient_name,
+}: {
+  email: string;
+  name: string;
+}) {
   const { image, name } = {
     image: faker.image.avatar(),
-    name: faker.person.fullName(),
+    name: studient_name,
   };
 
   const [category_autres] = await Promise.all([
@@ -197,7 +211,7 @@ async function student() {
           role: ProfileRole.STUDENT,
           user: {
             create: {
-              email: faker.internet.email().toLowerCase(),
+              email: studient_email,
               image,
               name,
             },
@@ -209,7 +223,14 @@ async function student() {
 }
 
 async function students() {
-  await Promise.all(Array.from({ length: 22 }).map(student));
+  await Promise.all(
+    Array.from({ length: 22 }).map(() =>
+      student({
+        email: faker.internet.email().toLowerCase(),
+        name: faker.person.fullName(),
+      }),
+    ),
+  );
 }
 
 //
