@@ -2,28 +2,17 @@
   "name": "Serkels API",
   "description": "The Serkels api.",
   "env": {
-    "DO_NOT_TRACK": {
-      "value": "1"
-    },
-    "CYPRESS_INSTALL_BINARY": {
-      "value": "0"
-    },
+    "CYPRESS_INSTALL_BINARY": { "value": "0" },
+    "DO_NOT_TRACK": { "value": "1" },
     "NEXTAUTH_SECRET": {
       "description": "A secret key to talk with next-auth.",
       "generator": "secret"
     },
-    "SENTRY_DSN": {
-      "value": "https://user@verysecret.ingest.sentry.io/token"
-    },
-    "SMTP_HOST": {
-      "value": "smtp.ethereal.email"
-    },
-    "SMTP_USERNAME": {
-      "value": "ethereal.user@ethereal.email"
-    },
-    "SMTP_PASSWORD": {
-      "value": "verysecret"
-    }
+    "SENTRY_DSN": { "value": "https://user@verysecret.ingest.sentry.io/token" },
+    "SMTP_HOST": { "value": "smtp.ethereal.email" },
+    "SMTP_PASSWORD": { "value": "verysecret" },
+    "SMTP_USERNAME": { "value": "ethereal.user@ethereal.email" },
+    "TZ": { "value": "Europe/Paris" }
   },
   "formation": {
     "web": {

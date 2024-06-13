@@ -131,6 +131,7 @@
     },
     "files.exclude": {
       ".cache/": true,
+      ".eslintcache": true,
       ".next/": true,
       ".swc/": true,
       ".turbo/": true,
@@ -140,9 +141,8 @@
       "e2e-results/": true,
       "node_modules/": true,
       "out/": true,
-      "storybook-static/": true,
       "packages/__legacy__": true,
-      ".eslintcache": true,
+      "storybook-static/": true,
     },
     "javascript.preferences.importModuleSpecifier": "shortest",
     "typescript.preferences.importModuleSpecifier": "shortest",
@@ -150,6 +150,17 @@
     "workbench.editor.labelFormat": "short",
     "autoHide.autoHidePanel": false,
     "tailwindCSS.rootFontSize": 14,
+    "search.exclude": {
+      "**/.cache": true,
+      "**/.next": true,
+      "**/.turbo": true,
+      "**/*.code-search": true,
+      "**/bower_components": true,
+      "**/coverage": true,
+      "**/dist": true,
+      "**/node_modules": true,
+      "pnpm-lock.yaml": true,
+    },
     "editor.quickSuggestions": { "strings": "on" },
     "tailwindCSS.experimental.classRegex": [
       ["tv\\(([^)]*)\\)", "(?:'|\"|`)([^\"'`]*)(?:'|\"|`)"], // tv(`...`)
