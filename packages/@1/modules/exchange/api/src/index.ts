@@ -7,6 +7,7 @@ import {
 } from "@1.modules/exchange.domain";
 import { next_auth_procedure, procedure, router } from "@1.modules/trpc";
 import { Prisma } from "@prisma/client";
+import { endOfYesterday } from "date-fns";
 import { match } from "ts-pattern";
 import { z } from "zod";
 import { me } from "./me";
@@ -121,11 +122,14 @@ const exchange_api_router = router({
           category: true,
           return: true,
           owner: { include: { profile: true } },
-          deals: { where: { status: Deal_Status_Schema.Enum.APPROVED } },
+          deals: {
+            select: { id: true },
+            where: { status: Deal_Status_Schema.Enum.APPROVED },
+          },
         },
         take: limit,
         where: {
-          expiry_date: { gte: new Date() },
+          OR: [{ expiry_date: { gte: new Date() } }, { expiry_date: null }],
           is_active: true,
           owner: { profile_id },
         },
@@ -198,23 +202,35 @@ const exchange_api_router = router({
         orderBy: [{ created_at: "desc" }, { expiry_date: "desc" }],
         take: limit + 1,
         where: {
-          is_active: true,
-          OR: [
-            { title: { contains: search ?? "", mode: "insensitive" } },
-            { description: { contains: search ?? "", mode: "insensitive" } },
-            { location: { contains: search ?? "", mode: "insensitive" } },
+          AND: [
             {
-              owner: {
-                profile: {
-                  name: { contains: search ?? "", mode: "insensitive" },
+              OR: [
+                { title: { contains: search ?? "", mode: "insensitive" } },
+                {
+                  description: { contains: search ?? "", mode: "insensitive" },
                 },
-              },
+                { location: { contains: search ?? "", mode: "insensitive" } },
+                {
+                  owner: {
+                    profile: {
+                      name: { contains: search ?? "", mode: "insensitive" },
+                    },
+                  },
+                },
+              ],
             },
-            { expiry_date: { gte: new Date() } },
-            { expiry_date: null },
+            {
+              OR: [
+                { expiry_date: null },
+                { expiry_date: { gte: endOfYesterday() } },
+              ],
+            },
+            {
+              ...(category ? { category: { slug: category } } : {}),
+              ...nerrow,
+              is_active: true,
+            },
           ],
-          ...(category ? { category: { slug: category } } : {}),
-          ...nerrow,
         },
       });
 
