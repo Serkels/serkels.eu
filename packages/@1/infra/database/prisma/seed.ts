@@ -19,6 +19,10 @@ import process from "node:process";
 import slugify from "slugify";
 import prisma from "../index";
 
+//
+//#region 🌱 Seed
+//
+
 async function main() {
   await prisma.$transaction([
     prisma.user.deleteMany(),
@@ -56,6 +60,9 @@ async function main() {
   await partners();
   console.log("🌱 . Partners.");
 
+  await partners_vip();
+  console.log("🌱 . Partners VIP.");
+
   await students_bookmarks();
   console.log("🌱 . Students bookmarks.");
   await students_participants_in_exchanges();
@@ -78,7 +85,11 @@ main()
   });
 
 //
+//#endregion
 //
+
+//
+//#region 🎓 Students
 //
 
 async function student_yopmail() {
@@ -234,14 +245,15 @@ async function students() {
 }
 
 //
-//
+//#endregion
 //
 
-async function partner() {
-  const { image, name } = {
-    image: faker.image.avatar(),
-    name: faker.person.fullName(),
-  };
+//
+//#region 🤝 Partners
+//
+
+async function partner({ email, name }: { email: string; name: string }) {
+  const image = faker.image.avatar();
 
   const opportunity_categories_id = (
     await prisma.category.findMany({
@@ -267,7 +279,7 @@ async function partner() {
           role: ProfileRole.PARTNER,
           user: {
             create: {
-              email: faker.internet.email().toLowerCase(),
+              email,
               image,
               name,
             },
@@ -298,14 +310,33 @@ async function partner() {
     },
   });
 }
+
 async function partners() {
   return await Promise.all(
-    faker.helpers.multiple(partner, { count: { max: 15, min: 10 } }),
+    faker.helpers.multiple(
+      () =>
+        partner({
+          email: faker.internet.email().toLowerCase(),
+          name: faker.person.fullName(),
+        }),
+      { count: { max: 15, min: 10 } },
+    ),
   );
 }
 
+async function partners_vip() {
+  await partner({
+    email: "ahmadali.fr@gmail.com",
+    name: "Ahmad Ali University",
+  });
+}
+
 //
+//#endregion
 //
+
+//
+//#region 📦 Categories
 //
 
 interface Category {
@@ -392,6 +423,14 @@ async function categories() {
   );
 }
 
+//
+//#endregion
+//
+
+//
+//#region 🔖 Bookmarks
+//
+
 async function students_bookmarks() {
   const students = await prisma.student.findMany({
     include: { profile: true },
@@ -413,6 +452,14 @@ async function students_bookmarks() {
     skipDuplicates: true,
   });
 }
+
+//
+//#endregion
+//
+
+//
+//#region 🔄 Exchanges
+//
 
 async function students_participants_in_exchanges() {
   const students = await prisma.student.findMany();
@@ -522,6 +569,14 @@ export function is_active_exchange(
   return !(all_seat_taken || expired_exchange);
 }
 
+//
+//#endregion
+//
+
+//
+//#region 📝 Questions/Awnsers
+//
+
 async function students_awnsers() {
   const students = await prisma.student.findMany();
   const questions = await prisma.question.findMany({
@@ -574,6 +629,15 @@ async function students_awnsers() {
     // );
   }
 }
+
+//
+//#endregion
+//
+
+//
+//#region 📬 Messages
+//
+
 async function students_messages() {
   const students = await prisma.student.findMany();
 
@@ -726,3 +790,7 @@ async function students_messages() {
     );
   }
 }
+
+//
+//#endregion
+//
