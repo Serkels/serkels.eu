@@ -85,9 +85,31 @@ export default async function Page({ params }: { params: Params }) {
 }
 
 const layout = tv({
-  base: `fixed bottom-16 top-16 grid h-full max-h-[calc(100vh_-_theme(spacing.16)-_theme(spacing.8))] grid-rows-[auto_1fr_auto] overflow-hidden bg-white text-black [&>*]:px-7`,
+  base: `
+  fixed
+  bottom-16
+  top-16
+  grid
+  h-full
+  max-h-[calc(100vh_-_theme(spacing.16)-_theme(spacing.8))]
+  grid-rows-[auto_1fr_auto]
+  overflow-hidden
+  bg-white
+  text-black
+  [&>*]:px-7`,
   slots: {
     header: "sticky top-0 flex flex-row justify-between space-x-3 py-7",
-    footer: `sticky bottom-16 flex min-h-[theme(spacing.24)] flex-col items-center justify-center space-y-4 bg-white py-5 text-black`,
+    footer: `
+    sticky
+    bottom-16
+    flex
+    min-h-[theme(spacing.24)]
+    flex-col
+    items-center
+    justify-center
+    space-y-4
+    bg-white
+    py-5
+    text-black`,
   },
 });

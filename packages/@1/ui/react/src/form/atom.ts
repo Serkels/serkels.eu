@@ -23,7 +23,18 @@ export const label = tv({
 //
 
 export const input = tv({
-  base: `block w-full resize-none rounded-sm border border-solid border-Silver_Chalice placeholder-black focus:ring-gray-900 disabled:pointer-events-none disabled:opacity-50`,
+  base: `
+  block
+  w-full
+  resize-none
+  rounded-sm
+  border
+  border-solid
+  border-Silver_Chalice
+  placeholder-black
+  focus:ring-gray-900
+  disabled:pointer-events-none
+  disabled:opacity-50`,
   variants: {
     wrong_value: {
       true: "border-2 border-danger",
