@@ -26,9 +26,9 @@ export function Article({
     link,
   } = opportunity;
   return (
-    <article className="px-4 py-10 lg:px-16">
+    <article className="px-6 py-10 lg:px-16">
       <div className="flex justify-between">
-        <h1 className="text-4xl font-bold">{title}</h1>
+        <h1 className="text-3xl font-bold">{title}</h1>
         <Article.ActionButton.Renderer childs={children} />
       </div>
 
@@ -44,11 +44,11 @@ export function Article({
             <figcaption className="text-lg">{owner.profile.name}</figcaption>
           </figure>
         </Article.Avatar.Renderer>
-        <div className="flex flex-col text-right">
+        <div className="flex flex-col gap-2 text-right">
           <Article.Drawer.Renderer childs={children} />
-          <small className="text-lg font-bold text-Chateau_Green">
+          <small className="text-base font-bold text-Chateau_Green">
             Date limite :{" "}
-            <time dateTime={expiry_date.toUTCString()}>
+            <time className="text-base" dateTime={expiry_date.toUTCString()}>
               {format(expiry_date, "P", { locale: fr })}
             </time>
           </small>
@@ -58,7 +58,7 @@ export function Article({
 
       <div className="mb-10">
         <img
-          className="h-auto w-full max-w-full "
+          className="h-auto w-full max-w-full"
           width="700"
           height="368"
           src={cover}
@@ -81,28 +81,28 @@ export function Article({
               target="_blank"
               rel="noopener noreferrer"
             >
-              <figure className="flex items-center">
+              <figure className="flex flex-col items-center gap-2 md:flex-row">
                 <LocationRadius className={icon_link()} />
-                <figcaption className="ml-4 flex-1">{location}</figcaption>
+                <figcaption className="flex-1 md:ml-4">{location}</figcaption>
               </figure>
             </a>
           ) : (
-            <figure className="flex items-center">
+            <figure className="flex flex-col items-center gap-2 md:flex-row">
               <LocationRadius className={icon_link()} />
-              <figcaption className="ml-4 flex-1">En ligne</figcaption>
+              <figcaption className="flex-1 md:ml-4">En ligne</figcaption>
             </figure>
           )}
 
           <a href={link} target="_blank" rel="noopener noreferrer">
-            <figure className="flex items-center">
+            <figure className="flex flex-col items-center gap-2 md:flex-row">
               <IconLink className={icon_link()} />
-              <figcaption className="ml-4 flex-1">Lien web</figcaption>
+              <figcaption className="flex-1 md:ml-4">Lien web</figcaption>
             </figure>
           </a>
           <Article.ShareFigure.Renderer childs={children}>
-            <figure className="flex items-center">
+            <figure className="flex flex-col items-center gap-2 md:flex-row">
               <Share className={icon_link()} />
-              <figcaption className="ml-4 flex-1">Partager</figcaption>
+              <figcaption className="flex-1 md:ml-4">Partager</figcaption>
             </figure>
           </Article.ShareFigure.Renderer>
         </footer>
@@ -120,5 +120,5 @@ Article.ActionButton = createSlot();
 const icon_with_circle = tv({ base: "rounded-full" });
 export const icon_link = tv({
   extend: icon_with_circle,
-  base: "box-content size-5 bg-Cerulean p-2 text-white",
+  base: "box-content size-4 bg-Cerulean p-2 text-white",
 });

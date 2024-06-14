@@ -26,37 +26,54 @@ export const button = tv({
   variants: {
     intent: {
       primary: `
-      bg-primary text-white
-      hover:bg-primary/70 data-[hovered]:bg-primary/70
+        bg-primary
+        text-white
+        hover:bg-primary/70
+        data-[hovered]:bg-primary/70
       `,
+
       secondary: `
-      bg-secondary text-white
-      hover:bg-secondary/70 data-[hovered]:bg-secondary/70
+        bg-secondary
+        text-white
+        hover:bg-secondary/70
+        data-[hovered]:bg-secondary/70
       `,
       tertiary: `
-      bg-tertiary text-white
-      hover:bg-tertiary/70 data-[hovered]:bg-tertiary/70
+        bg-tertiary
+        text-white
+        hover:bg-tertiary/70
+        data-[hovered]:bg-tertiary/70
       `,
       quaternary: `
-      bg-quaternary text-white
-      hover:bg-quaternary/70 data-[hovered]:bg-quaternary/70
+        bg-quaternary
+        text-white
+        hover:bg-quaternary/70
+        data-[hovered]:bg-quaternary/70
       `,
       quinary: `
-      bg-quinary text-white
-      hover:bg-quinary/70 data-[hovered]:bg-quinary/70
+        bg-quinary
+        text-white
+        hover:bg-quinary/70
+        data-[hovered]:bg-quinary/70
       `,
       //
       warning: `
-      bg-warning text-white
-      hover:bg-warning/70 data-[hovered]:bg-warning/70
+        bg-warning
+        text-white
+        hover:bg-warning/70
+        data-[hovered]:bg-warning/70
       `,
       danger: `
-      bg-danger text-white
-      hover:bg-danger/70 data-[hovered]:bg-danger/70
+        bg-danger
+        text-white
+        hover:bg-danger/70
+        data-[hovered]:bg-danger/70
       `,
       light: `
-      bg-transparent text-Dove_Gray
-      hover:bg-gray-100/70 data-[hovered]:bg-gray-100/70
+        bg-transparent
+        text-Dove_Gray
+        hover:bg-gray-100/70
+        data-[hovered]:bg-gray-100/70
       `,
     },
     state: {
@@ -75,71 +92,45 @@ export const button = tv({
     {
       intent: "primary",
       state: "ghost",
-      class: `
-        text-primary
-        data-[hovered]:bg-primary/30
-      `,
+      class: `text-primary data-[hovered]:bg-primary/30`,
     },
     {
       intent: "primary",
       state: "outline",
-      class: `
-        border-primary
-        text-primary
-        data-[hovered]:bg-primary/10
-      `,
+      class: `border-primary text-primary data-[hovered]:bg-primary/10`,
     },
     //
     {
       intent: "warning",
       state: "ghost",
-      class: `
-        text-warning
-        data-[hovered]:bg-warning/30
-      `,
+      class: `text-warning data-[hovered]:bg-warning/30`,
     },
     {
       intent: "warning",
       state: "outline",
-      class: `
-        border-warning
-        text-warning
-        data-[hovered]:bg-warning
-      `,
+      class: `border-warning text-warning data-[hovered]:bg-warning`,
     },
     //
     {
       intent: "danger",
       state: "ghost",
-      class: `
-        text-danger
-        data-[hovered]:bg-danger/30
-      `,
+      class: `text-danger data-[hovered]:bg-danger/30`,
     },
     {
       intent: "danger",
       state: "outline",
-      class: `
-        border-danger
-        text-danger
-        data-[hovered]:bg-danger
-      `,
+      class: `border-danger text-danger data-[hovered]:bg-danger`,
     },
     //
     {
       intent: "light",
       state: "ghost",
-      class: `
-        text-Dove_Gray
-      `,
+      class: `text-Dove_Gray`,
     },
     {
       intent: "light",
       state: "outline",
-      class: `
-        border-Dove_Gray
-        text-Dove_Gray
-      `,
+      class: `border-Dove_Gray text-Dove_Gray`,
     },
   ],
   defaultVariants: {
