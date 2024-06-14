@@ -78,17 +78,7 @@ export async function _Layout({
 async function Public_Layout({ children }: PropsWithChildren) {
   return (
     <Grid className="my-10">
-      <div
-        className="
-          col-span-full
-          md:col-span-6
-          md:col-start-2
-          lg:col-span-5
-          lg:col-start-3
-          xl:col-span-6
-          xl:col-start-4
-        "
-      >
+      <div className="col-span-full md:col-span-6 md:col-start-2 lg:col-span-5 lg:col-start-3 xl:col-span-6 xl:col-start-4">
         {children}
       </div>
     </Grid>
@@ -111,20 +101,8 @@ async function Private_Layout({
 Private_Layout.Navbar = createSlot();
 
 const style = tv({
-  base: `
-    grid
-    md:grid-cols-[minmax(0,_200px),_1fr]
-    xl:grid-cols-[minmax(0,_300px),_1fr]
-  `,
+  base: `grid md:grid-cols-[minmax(0,_200px),_1fr] xl:grid-cols-[minmax(0,_300px),_1fr]`,
   slots: {
-    aside: `
-      grid
-      hidden
-      min-h-[calc(100vh_-_theme(spacing.16)-_theme(spacing.16))]
-      overflow-hidden
-      bg-white
-      shadow-[20px_0px_40px_#00000014]
-      md:block
-    `,
+    aside: `grid hidden min-h-[calc(100vh_-_theme(spacing.16)-_theme(spacing.16))] overflow-hidden bg-[#f5f8fa] shadow-[20px_0px_40px_#00000014] md:block`,
   },
 });
