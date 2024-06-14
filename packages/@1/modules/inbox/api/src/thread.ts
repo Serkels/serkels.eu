@@ -159,6 +159,29 @@ export const thread = router({
         )
         .otherwise<Prisma.ThreadUpdateInput>(() => ({}));
 
+      const notifications = match({
+        exchange_thread,
+        inbox_thread,
+      })
+        .with(
+          { exchange_thread: P.nonNullable },
+          (): Prisma.InboxMessageNotificationCreateNestedManyWithoutMessageInput => ({}),
+        )
+        .with(
+          { inbox_thread: P.nonNullable },
+          (): Prisma.InboxMessageNotificationCreateNestedManyWithoutMessageInput => ({
+            create: {
+              notification: {
+                create: {
+                  owner_id: recipient.id,
+                  type: NotificationType.INBOX_NEW_MESSAGE,
+                },
+              },
+            },
+          }),
+        )
+        .otherwise(() => ({}));
+
       const updated_thread = await prisma.thread.update({
         data: {
           updated_at: updated_at,
@@ -168,16 +191,7 @@ export const thread = router({
               updated_at,
               author: { connect: { id: profile_id } },
               content,
-              notifications: {
-                create: {
-                  notification: {
-                    create: {
-                      owner_id: recipient.id,
-                      type: NotificationType.INBOX_NEW_MESSAGE,
-                    },
-                  },
-                },
-              },
+              notifications,
             },
           },
           ...linked_thread_update,
