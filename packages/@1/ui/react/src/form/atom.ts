@@ -74,19 +74,25 @@ export const input = tv({
 export const fieldset = tv({
   base: `
   flex
-  items-center
   justify-around
   rounded-md
   border
   border-Silver_Chalice
   bg-white
-  py-2
+  p-4
   disabled:pointer-events-none
   disabled:opacity-50
+  md:flex-row
+  md:items-center
   [&>label]:flex
   [&>label]:items-center
   [&>label]:space-x-3
   `,
+  variants: {
+    mobileFlex: {
+      true: "flex-col items-start gap-4 p-4",
+    },
+  },
 });
 
 export const select = tv({
