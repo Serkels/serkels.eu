@@ -1,6 +1,7 @@
 //
 
 import { SeeProfileAvatarMedia } from ":components/avatar";
+import BackButton from ":components/button/BackButton";
 import { Loading_Placeholder } from ":components/placeholder/Loading_Placeholder";
 import type { Params as ExchangeParams } from ":pipes/exchange_by_id";
 import { session_profile_id } from ":pipes/session_profile_id";
@@ -81,6 +82,7 @@ export default async function Page({
     <TRPC_Hydrate>
       <main className={base()}>
         <header className={header()}>
+          <BackButton href={`/@~/exchanges/inbox/${exchange_id}`} />
           <SeeProfileAvatarMedia profile={participant} />
         </header>
         <div className="overflow-y-auto py-4 pr-5">

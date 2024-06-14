@@ -1,5 +1,6 @@
 //
 
+import BackButton from ":components/button/BackButton";
 import type { Params } from ":pipes/exchange_by_id";
 import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
 import { column_screen } from "@1.ui/react/grid/atom";
@@ -27,20 +28,24 @@ export default async function DealNavbarPage({ params }: { params: Params }) {
 
     return (
       <TRPC_Hydrate>
-        <div className={column_screen({ className: "pt-10 [&>*]:px-8" })}>
-          <header className="flex h-16 items-center justify-start space-x-7">
-            <div className="flex flex-col">
-              <h6 className="line-clamp-2 flex-1 text-xl font-bold">
-                {exchange.title}
-              </h6>
-              <Link
-                href={{
-                  pathname: "/exchanges",
-                  query: { q: exchange.title },
-                }}
-              >
-                Consulter l'échange
-              </Link>
+        <div className={column_screen({ className: "pt-10 " })}>
+          <header className="flex h-16 items-center justify-start px-5">
+            <div className="flex gap-4">
+              <BackButton href={"/@~/exchanges/inbox"} />
+
+              <div className="flex flex-col">
+                <h6 className="line-clamp-2 flex-1 text-xl font-bold">
+                  {exchange.title}
+                </h6>
+                <Link
+                  href={{
+                    pathname: "/exchanges",
+                    query: { q: exchange.title },
+                  }}
+                >
+                  Consulter l'échange
+                </Link>
+              </div>
             </div>
           </header>
 

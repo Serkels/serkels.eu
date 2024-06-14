@@ -30,7 +30,7 @@ export default function Infinite_Contacts_List() {
     .with(
       { status: "success" },
       ({ data: { pages }, isFetchingNextPage, hasNextPage, fetchNextPage }) => (
-        <ul className="h-full overflow-y-auto">
+        <ul className="h-full overflow-y-auto px-4 md:px-0">
           {pages
             .map((page) => page.data)
             .flat()

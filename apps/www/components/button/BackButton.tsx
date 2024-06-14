@@ -1,15 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
-function BackButton() {
-  const router = useRouter();
-
+function BackButton({ href }: { href: string }) {
   return (
-    <button type="button" onClick={() => router.back()}>
-      <Image src="/back.svg" alt="back" width={20} height={20} priority></Image>
-    </button>
+    <Link href={href}>
+      <Image src="/back.svg" alt="back" width={20} height={20} priority />
+    </Link>
   );
 }
 

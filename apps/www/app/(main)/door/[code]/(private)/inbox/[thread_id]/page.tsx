@@ -73,7 +73,7 @@ export default async function Page({ params }: { params: Params }) {
   return (
     <main className={base()}>
       <header className={header()}>
-        <BackButton />
+        <BackButton href={"/@~/inbox"} />
         <SeeProfileAvatarMedia profile={participant} />
       </header>
       <div className="overflow-y-auto py-4 pr-5">
