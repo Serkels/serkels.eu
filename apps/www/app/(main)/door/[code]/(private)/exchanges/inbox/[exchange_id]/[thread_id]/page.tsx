@@ -111,7 +111,7 @@ const layout = tv({
     [&>*]:px-7
   `,
   slots: {
-    header: "flex flex-row gap-2 space-x-3 py-7 md:justify-between",
+    header: "flex flex-row gap-2 space-x-3 py-7 ",
     footer: `
       flex
       min-h-[theme(spacing.24)]
