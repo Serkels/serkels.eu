@@ -6,9 +6,10 @@ import {
   next_auth_procedure,
   router,
 } from "@1.modules/trpc";
-import { NotificationType } from "@prisma/client";
+import { NotificationType, Prisma } from "@prisma/client";
 import { observable } from "@trpc/server/observable";
 import { EventEmitter } from "events";
+import { P, match } from "ts-pattern";
 import { z } from "zod";
 
 //
@@ -116,6 +117,48 @@ export const thread = router({
       });
       const recipient = thread_recipient({ participants, profile_id });
       const updated_at = new Date();
+
+      const [exchange_thread, inbox_thread] = await Promise.all([
+        prisma.exchangeThread.findUnique({
+          where: { owner_id_thread_id: { owner_id: student_id, thread_id } },
+        }),
+        prisma.inboxThread.findUnique({
+          where: { owner_id_thread_id: { owner_id: student_id, thread_id } },
+        }),
+      ]);
+
+      const linked_thread_update = match({
+        exchange_thread,
+        inbox_thread,
+      })
+        .with(
+          { exchange_thread: P.nonNullable },
+          (): Prisma.ThreadUpdateInput => ({
+            exchange_threads: {
+              update: {
+                data: { last_seen_date: updated_at },
+                where: {
+                  owner_id_thread_id: { owner_id: student_id, thread_id },
+                },
+              },
+            },
+          }),
+        )
+        .with(
+          { inbox_thread: P.nonNullable },
+          (): Prisma.ThreadUpdateInput => ({
+            inbox_threads: {
+              update: {
+                data: { last_seen_date: updated_at },
+                where: {
+                  owner_id_thread_id: { owner_id: student_id, thread_id },
+                },
+              },
+            },
+          }),
+        )
+        .otherwise<Prisma.ThreadUpdateInput>(() => ({}));
+
       const updated_thread = await prisma.thread.update({
         data: {
           updated_at: updated_at,
@@ -137,14 +180,7 @@ export const thread = router({
               },
             },
           },
-          inbox_threads: {
-            update: {
-              data: { last_seen_date: updated_at },
-              where: {
-                owner_id_thread_id: { owner_id: student_id, thread_id },
-              },
-            },
-          },
+          ...linked_thread_update,
         },
         where: { id: thread_id },
       });
