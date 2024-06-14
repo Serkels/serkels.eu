@@ -89,7 +89,7 @@ export const fieldset = tv({
   [&>label]:space-x-3
   `,
   variants: {
-    mobileFlex: {
+    horizontal: {
       true: "flex-col items-start gap-4 p-4",
     },
   },
