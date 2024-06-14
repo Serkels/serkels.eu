@@ -164,7 +164,7 @@ export function Exchange_CreateForm<
         />
       </label>
 
-      <fieldset className={fieldset({ mobileFlex: true })}>
+      <fieldset className={fieldset({ horizontal: true })}>
         <label className="flex  gap-2">
           <span>Sans échange</span>
           <Field disabled={isDisabled} value="" name="return" type="radio" />
