@@ -142,7 +142,7 @@ export default function Profile_Editor({
               as="textarea"
               autoComplete="off"
               className={input({
-                className: "col-span-full",
+                className: "col-span-full resize-none",
                 wrong_value: Boolean(errors.name && touched.name),
               })}
               id="bio"

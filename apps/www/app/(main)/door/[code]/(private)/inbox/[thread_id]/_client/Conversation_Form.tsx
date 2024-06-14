@@ -54,10 +54,10 @@ export default function Conversation_Form({ thread_id }: Params) {
         {...register("message")}
         autoComplete="off"
         className={input({
-          className: "peer w-full rounded-2xl pr-10",
+          className: "peer h-32 w-full  resize-none rounded-2xl pr-10",
         })}
         readOnly={formState.isSubmitting}
-        placeholder="Envoi un Message…"
+        placeholder="Envoie un Message…"
       ></textarea>
       <span className="absolute inset-y-0 right-5 flex items-center pl-2">
         <AnimatePresence>
