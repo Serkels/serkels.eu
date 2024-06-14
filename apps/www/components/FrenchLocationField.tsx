@@ -11,7 +11,15 @@ import { match } from "ts-pattern";
 
 //
 
-export function FrenchLocationField(
+export function FrenchLocationField(props: ComponentProps<"input">) {
+  return <input className={input()} {...props} />;
+}
+
+/**
+ *
+ * @deprecated see https://github.com/toctocorg/toctoc/pull/1315
+ */
+export function _FrenchLocationField(
   props: FieldAttributes<{ use_formik?: boolean }>,
 ) {
   const [location, set_location] = useState(

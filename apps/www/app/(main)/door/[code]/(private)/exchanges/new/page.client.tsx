@@ -1,6 +1,5 @@
 "use client";
 
-import { FrenchLocationField } from ":components/FrenchLocationField";
 import { TRPC_React } from ":trpc/client";
 import type { Category } from "@1.modules/category.domain";
 import {
@@ -58,11 +57,10 @@ export function Mutate_Exchange({ categories }: { categories: Category[] }) {
       )}
     >
       {(formik) => (
-        <Exchange_CreateForm categories={categories} {...formik}>
-          <Exchange_CreateForm.LocationField>
-            {(input_props) => <FrenchLocationField {...input_props} />}
-          </Exchange_CreateForm.LocationField>
-        </Exchange_CreateForm>
+        <Exchange_CreateForm
+          categories={categories}
+          {...formik}
+        ></Exchange_CreateForm>
       )}
     </Formik>
   );

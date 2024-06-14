@@ -1,6 +1,5 @@
 "use client";
 
-import { FrenchLocationField } from ":components/FrenchLocationField";
 import { TRPC_React } from ":trpc/client";
 import type { Category } from "@1.modules/category.domain";
 import type { Exchange_Flat_Schema } from "@1.modules/exchange.domain";
@@ -47,6 +46,8 @@ export function Mutate_Exchange({
         });
 
         await utils.exchanges.by_id.refetch(exchange.id);
+        await utils.exchanges.find.invalidate({ search: values.title });
+        await utils.exchanges.find.invalidate();
         await utils.exchanges.invalidate();
 
         router.push(`/exchanges?q=${values.title}`);
@@ -57,16 +58,7 @@ export function Mutate_Exchange({
           categories={categories}
           alreadyPopulated={alreadyPopulated}
           {...formik}
-        >
-          <Exchange_CreateForm.LocationField>
-            {(input_props) => (
-              <FrenchLocationField
-                defaultValue={exchange.location ?? "Paris"}
-                {...input_props}
-              />
-            )}
-          </Exchange_CreateForm.LocationField>
-        </Exchange_CreateForm>
+        ></Exchange_CreateForm>
       )}
     </Formik>
   );

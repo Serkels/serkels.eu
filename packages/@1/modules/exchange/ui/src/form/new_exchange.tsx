@@ -8,14 +8,8 @@ import {
 } from "@1.modules/exchange.domain";
 import { Button } from "@1.ui/react/button";
 import { fieldset, input, select } from "@1.ui/react/form/atom";
-import {
-  ErrorMessage,
-  Field,
-  Form,
-  type FieldAttributes,
-  type FormikProps,
-} from "formik";
-import type { ChangeEvent, PropsWithChildren } from "react";
+import { ErrorMessage, Field, Form, type FormikProps } from "formik";
+import type { ChangeEvent, ComponentProps, PropsWithChildren } from "react";
 import { createSlot } from "react-slotify";
 
 //
@@ -147,7 +141,14 @@ export function Exchange_CreateForm<
           childs={children}
           name="location"
           disabled={isDisabled}
-        ></Exchange_CreateForm.LocationField.Renderer>
+        >
+          <Field
+            className={input()}
+            disabled={isDisabled}
+            name="location"
+            required
+          />
+        </Exchange_CreateForm.LocationField.Renderer>
       </label>
 
       <label>
@@ -196,4 +197,4 @@ export function Exchange_CreateForm<
   );
 }
 
-Exchange_CreateForm.LocationField = createSlot<FieldAttributes<{}>>();
+Exchange_CreateForm.LocationField = createSlot<ComponentProps<"input">>();
