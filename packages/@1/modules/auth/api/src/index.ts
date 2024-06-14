@@ -1,6 +1,6 @@
 //
 
-import { TocTocMagicLinkEmail } from "@1.modules/auth.emails";
+import { SerkelsMagicLinkEmail } from "@1.modules/auth.emails";
 import {
   PROFILE_ROLES,
   Partner_Schema,
@@ -39,9 +39,9 @@ const send_email_resolver: SendEmailResolverFn<Context> = async ({
   const { identifier, url } = input;
 
   await ctx.sender.send_react_email(
-    TocTocMagicLinkEmail({ base_url: ctx.headers.origin, url }),
+    SerkelsMagicLinkEmail({ base_url: ctx.headers.origin, url }),
     {
-      subject: "[Toc Toc] Connexion",
+      subject: "[Serkels] Connexion",
       to: identifier,
     },
   );

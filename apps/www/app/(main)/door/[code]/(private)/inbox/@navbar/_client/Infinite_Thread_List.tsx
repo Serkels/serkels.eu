@@ -16,7 +16,7 @@ import { m, type Transition, type Variants } from "framer-motion";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import type { PropsWithChildren } from "react";
+import { type PropsWithChildren } from "react";
 import { tv } from "tailwind-variants";
 
 //
@@ -98,7 +98,8 @@ function UserThread_Item({ thread_id }: { thread_id: string }) {
         });
 
         const href = `/@~/inbox/${thread.id}`;
-        const unread = last_seen_date
+        const is_active = pathname === href;
+        const unread = !is_active
           ? isAfter(last_message.created_at, last_seen_date)
           : false;
         const { indicator } = item({ unread });
@@ -115,7 +116,7 @@ function UserThread_Item({ thread_id }: { thread_id: string }) {
               last_update={last_message.created_at}
               last_seen_date={last_seen_date}
               variants={{
-                active: pathname === href,
+                active: is_active,
                 unread,
               }}
             >

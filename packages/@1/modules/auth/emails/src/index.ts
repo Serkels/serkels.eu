@@ -1,3 +1,3 @@
 //
 
-export { TocTocMagicLinkEmail } from "../emails/magic-link";
+export { SerkelsMagicLinkEmail } from "../emails/magic-link";

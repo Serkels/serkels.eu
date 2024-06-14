@@ -12,9 +12,12 @@ import { Text } from "@react-email/text";
 
 //
 
-export const TocTocMagicLinkEmail = ({
-  base_url = "https://toc-toc.org",
-  url = "https://toc-toc.org",
+export const SerkelsMagicLinkEmail = ({
+  base_url,
+  url,
+}: {
+  base_url: string;
+  url: string;
 }) => (
   <Html>
     <Head />
@@ -33,33 +36,7 @@ export const TocTocMagicLinkEmail = ({
           }}
         >
           Veuillez cliquer ce lien pour vous connecter.
-          {/* Click here to log in with this magic link */}
         </Link>
-        {/*<Text style={{ ...text, marginBottom: "14px" }}>
-          Or, copy and paste this temporary login code:
-        </Text>
-        <code style={code}>{loginCode}</code>
-        <Text
-          style={{
-            ...text,
-            color: "#ababab",
-            marginTop: "14px",
-            marginBottom: "16px",
-          }}
-        >
-          If you didn&apos;t try to login, you can safely ignore this email.
-        </Text>
-         <Text
-          style={{
-            ...text,
-            color: "#ababab",
-            marginTop: "12px",
-            marginBottom: "38px",
-          }}
-        >
-          Hint: You can set a permanent password in Settings & members → My
-          account.
-        </Text> */}
         <Img
           src={`${base_url}/opengraph-image.png`}
           width="32"
@@ -68,7 +45,7 @@ export const TocTocMagicLinkEmail = ({
         />
         <Text style={footer}>
           <Link
-            href="https://toc-toc.org/"
+            href={base_url}
             target="_blank"
             style={{ ...link, color: "#898989" }}
           >
@@ -83,7 +60,7 @@ export const TocTocMagicLinkEmail = ({
   </Html>
 );
 
-export default TocTocMagicLinkEmail;
+export default SerkelsMagicLinkEmail;
 
 const main = {
   backgroundColor: "#ffffff",
