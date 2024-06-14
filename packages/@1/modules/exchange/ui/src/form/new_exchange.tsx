@@ -84,6 +84,24 @@ export function Exchange_CreateForm<
           />
         </label>
       </fieldset>
+      {values.is_online ? null : (
+        <label>
+          <span className="text-Silver_Chalice">Ville</span>
+
+          <Exchange_CreateForm.LocationField.Renderer
+            childs={children}
+            name="location"
+            disabled={isDisabled}
+          >
+            <Field
+              className={input()}
+              disabled={isDisabled}
+              name="location"
+              required
+            />
+          </Exchange_CreateForm.LocationField.Renderer>
+        </label>
+      )}
       <label>
         <span className="text-Silver_Chalice">Dans quelle categorie ?</span>
 
@@ -133,22 +151,6 @@ export function Exchange_CreateForm<
         <ErrorMessage name="description">
           {(msg) => <div className="text-danger">{msg}</div>}
         </ErrorMessage>
-      </label>
-      <label>
-        <span className="text-Silver_Chalice">Ville</span>
-
-        <Exchange_CreateForm.LocationField.Renderer
-          childs={children}
-          name="location"
-          disabled={isDisabled}
-        >
-          <Field
-            className={input()}
-            disabled={isDisabled}
-            name="location"
-            required
-          />
-        </Exchange_CreateForm.LocationField.Renderer>
       </label>
 
       <label>
