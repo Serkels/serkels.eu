@@ -39,7 +39,7 @@ function Infinite_Thread_List() {
   return (
     <Thread_InfiniteList info={query_info}>
       {({ id, thread }) => (
-        <MotionOutlet key={id}>
+        <MotionOutlet key={id} id={id}>
           <UserThread_Item thread_id={thread.id} />
         </MotionOutlet>
       )}
@@ -55,7 +55,10 @@ const variants: Variants = {
   exit: { zIndex: 0, y: -33, opacity: 0 },
 };
 
-function MotionOutlet({ children, key }: PropsWithChildren<{ key: string }>) {
+function MotionOutlet({
+  children,
+  id: key,
+}: PropsWithChildren<{ id: string }>) {
   return (
     <m.li
       animate="center"
