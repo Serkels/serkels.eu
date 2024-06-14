@@ -47,10 +47,12 @@ export function Mutate_Exchange({
               : null,
         });
 
-        await utils.exchanges.by_id.refetch(exchange.id);
-        await utils.exchanges.find.invalidate({ search: values.title });
-        await utils.exchanges.find.invalidate();
-        await utils.exchanges.invalidate();
+        await Promise.all([
+          utils.exchanges.by_id.refetch(exchange.id),
+          utils.exchanges.find.invalidate({ search: values.title }),
+          utils.exchanges.find.invalidate(),
+          utils.exchanges.invalidate(),
+        ]);
 
         router.push(`/exchanges?q=${values.title}`);
       }}
