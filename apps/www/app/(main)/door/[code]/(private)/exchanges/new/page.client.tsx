@@ -53,6 +53,7 @@ export function Mutate_Exchange({ categories }: { categories: Category[] }) {
         z.object({
           title: z.string().trim().min(10).max(100),
           description: z.string().trim().min(10).max(705),
+          places: z.number().int().min(1).max(9),
         }),
       )}
     >

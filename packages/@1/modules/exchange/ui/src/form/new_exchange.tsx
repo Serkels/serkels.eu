@@ -163,6 +163,9 @@ export function Exchange_CreateForm<
           required
           type="number"
         />
+        <ErrorMessage name="places">
+          {(msg) => <div className="text-danger">{msg}</div>}
+        </ErrorMessage>
       </label>
 
       <fieldset className={fieldset()}>

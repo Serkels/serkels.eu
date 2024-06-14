@@ -99,7 +99,7 @@ export const Exchange_Create_Schema = z.object({
   expiry_date: z.date().nullish(),
   is_online: z.boolean(),
   location: z.string().nullish(),
-  places: z.number().max(9),
+  places: z.number().int().min(1).max(9),
   return_id: ID_Schema.nullish(),
   title: z.string(),
   type: Exchange_TypeSchema,
