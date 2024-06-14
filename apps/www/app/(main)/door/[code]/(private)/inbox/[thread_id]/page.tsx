@@ -1,6 +1,7 @@
 //
 
 import { SeeProfileAvatarMedia } from ":components/avatar";
+import BackButton from ":components/button/BackButton";
 import { Loading_Placeholder } from ":components/placeholder/Loading_Placeholder";
 import { session_profile_id } from ":pipes/session_profile_id";
 import { type Params } from ":pipes/thread_by_id";
@@ -72,6 +73,7 @@ export default async function Page({ params }: { params: Params }) {
   return (
     <main className={base()}>
       <header className={header()}>
+        <BackButton />
         <SeeProfileAvatarMedia profile={participant} />
       </header>
       <div className="overflow-y-auto py-4 pr-5">
@@ -96,7 +98,8 @@ const layout = tv({
     [&>*]:px-7
   `,
   slots: {
-    header: "flex flex-row justify-between space-x-3 py-7",
+    header:
+      "flex flex-row items-center gap-2 space-x-3 py-7 md:justify-between",
     footer: `
       flex
       min-h-[theme(spacing.24)]
