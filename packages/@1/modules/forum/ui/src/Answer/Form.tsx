@@ -33,16 +33,17 @@ export function CreateAnswerForm({
             <Field
               as="textarea"
               className="
-              w-full
-              resize-none
-              rounded-sm
-              border
-              border-solid
-              border-[#dddddd]
-              px-4
-              py-3
-              placeholder-black
-              md:col-span-6"
+               w-full
+               resize-none
+               rounded-sm
+               border
+               border-solid
+               border-[#dddddd]
+               px-4
+               py-3
+               placeholder-black
+               md:col-span-6
+               "
               disabled={isSubmitting}
               name="content"
               placeholder="Pose une question aux étudiant.e.s ..."

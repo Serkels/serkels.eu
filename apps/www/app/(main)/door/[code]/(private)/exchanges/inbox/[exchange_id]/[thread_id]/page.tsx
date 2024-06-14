@@ -100,29 +100,31 @@ export default async function Page({
 
 const layout = tv({
   base: `
-  fixed
-  bottom-16
-  top-16 grid 
-  h-full 
-  max-h-[calc(100vh_-_theme(spacing.16)-_theme(spacing.8))]
-  grid-rows-[auto_1fr_auto]
-  bg-white text-black
-  [&>*]:px-7`,
+   fixed
+   bottom-16
+   top-16 grid 
+   h-full 
+   max-h-[calc(100vh_-_theme(spacing.16)-_theme(spacing.8))]
+   grid-rows-[auto_1fr_auto]
+   bg-white text-black
+   [&>*]:px-7
+   `,
 
   slots: {
     header: "sticky top-0 flex flex-row justify-between space-x-3 py-7",
     footer: `
-    fixed 
-    bottom-16 
-    flex 
-    min-h-[theme(spacing.24)] 
-    w-full 
-    flex-col 
-    items-center 
-    justify-center 
-    space-y-4 bg-white 
-    py-5 
-    text-black 
-    md:sticky`,
+     fixed 
+     bottom-16 
+     flex 
+     min-h-[theme(spacing.24)] 
+     w-full 
+     flex-col 
+     items-center 
+     justify-center 
+     space-y-4 bg-white 
+     py-5 
+     text-black 
+     md:sticky
+     `,
   },
 });
