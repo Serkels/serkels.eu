@@ -5,7 +5,7 @@ import { Loading_Placeholder } from ":components/placeholder/Loading_Placeholder
 import type { Params as ExchangeParams } from ":pipes/exchange_by_id";
 import { session_profile_id } from ":pipes/session_profile_id";
 import { type Params as ThreadParams } from ":pipes/thread_by_id";
-import { TRPC_SSR } from ":trpc/server";
+import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
 import { ExchangeProvider } from "@1.modules/exchange.ui/context";
 import { thread_recipient } from "@1.modules/inbox.domain/select";
 import to from "await-to-js";
@@ -73,21 +73,23 @@ export default async function Page({
 
   const { base, footer, header } = layout();
   return (
-    <main className={base()}>
-      <header className={header()}>
-        <SeeProfileAvatarMedia profile={participant} />
-      </header>
-      <div className="overflow-y-auto py-4 pr-5">
-        <ExchangeProvider exchange={exchange}>
-          <Thread_Timeline profile_id={profile_id} />
-        </ExchangeProvider>
-      </div>
-      <footer className={footer()}>
-        <ExchangeProvider exchange={exchange}>
-          <Conversation_Form thread_id={thread_id} />
-        </ExchangeProvider>
-      </footer>
-    </main>
+    <TRPC_Hydrate>
+      <main className={base()}>
+        <header className={header()}>
+          <SeeProfileAvatarMedia profile={participant} />
+        </header>
+        <div className="overflow-y-auto py-4 pr-5">
+          <ExchangeProvider exchange={exchange}>
+            <Thread_Timeline profile_id={profile_id} />
+          </ExchangeProvider>
+        </div>
+        <footer className={footer()}>
+          <ExchangeProvider exchange={exchange}>
+            <Conversation_Form thread_id={thread_id} />
+          </ExchangeProvider>
+        </footer>
+      </main>
+    </TRPC_Hydrate>
   );
 }
 

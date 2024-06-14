@@ -1,7 +1,7 @@
 //
 
 import type { Params } from ":pipes/exchange_by_id";
-import { TRPC_SSR } from ":trpc/server";
+import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
 import { column_screen } from "@1.ui/react/grid/atom";
 import to from "await-to-js";
 import Link from "next/link";
@@ -26,37 +26,39 @@ export default async function DealNavbarPage({ params }: { params: Params }) {
     });
 
     return (
-      <div className={column_screen({ className: "pt-10 [&>*]:px-8" })}>
-        <header className="flex h-16 items-center justify-start space-x-7">
-          <div className="flex flex-col">
-            <h6 className="line-clamp-2 flex-1 text-xl font-bold">
-              {exchange.title}
-            </h6>
-            <Link
-              href={{
-                pathname: "/exchanges",
-                query: { q: exchange.title },
-              }}
-            >
-              Consulter l'échange
-            </Link>
-          </div>
-        </header>
+      <TRPC_Hydrate>
+        <div className={column_screen({ className: "pt-10 [&>*]:px-8" })}>
+          <header className="flex h-16 items-center justify-start space-x-7">
+            <div className="flex flex-col">
+              <h6 className="line-clamp-2 flex-1 text-xl font-bold">
+                {exchange.title}
+              </h6>
+              <Link
+                href={{
+                  pathname: "/exchanges",
+                  query: { q: exchange.title },
+                }}
+              >
+                Consulter l'échange
+              </Link>
+            </div>
+          </header>
 
-        <hr className="my-6 border border-[#F0F0F0]" />
+          <hr className="my-6 border border-[#F0F0F0]" />
 
-        <nav
-          className="
+          <nav
+            className="
             my-8
             min-h-0
             flex-1
             overflow-y-auto
             px-8
           "
-        >
-          <Infinite_Thread_List exchange_id={exchange_id} />
-        </nav>
-      </div>
+          >
+            <Infinite_Thread_List exchange_id={exchange_id} />
+          </nav>
+        </div>
+      </TRPC_Hydrate>
     );
   } catch (error) {
     console.error(error);

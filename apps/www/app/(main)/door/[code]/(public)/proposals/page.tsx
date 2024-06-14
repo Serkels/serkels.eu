@@ -1,7 +1,7 @@
 //
 
 import { code_to_profile_id, type CodeParms } from ":pipes/code";
-import { TRPC_SSR } from ":trpc/server";
+import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
 import { Exchange_Card } from ":widgets/exchanges/card";
 import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import type { Metadata, ResolvingMetadata } from "next";
@@ -34,14 +34,16 @@ export default async function Page({ params }: { params: CodeParms }) {
   });
 
   return (
-    <main className="grid grid-cols-1 gap-y-5">
-      {exchanges.map((exchange) => (
-        <Exchange_Card
-          key={exchange.id}
-          exchange={exchange}
-          profile={profile}
-        />
-      ))}
-    </main>
+    <TRPC_Hydrate>
+      <main className="grid grid-cols-1 gap-y-5">
+        {exchanges.map((exchange) => (
+          <Exchange_Card
+            key={exchange.id}
+            exchange={exchange}
+            profile={profile}
+          />
+        ))}
+      </main>
+    </TRPC_Hydrate>
   );
 }

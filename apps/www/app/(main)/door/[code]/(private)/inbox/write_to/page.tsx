@@ -1,6 +1,6 @@
 //
 
-import { TRPC_SSR } from ":trpc/server";
+import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
 import { column_screen } from "@1.ui/react/grid/atom";
 import type { Metadata, ResolvingMetadata } from "next";
 import Infinite_Contacts_List from "./_client/Infinite_Contacts_List";
@@ -27,9 +27,11 @@ export default async function Page() {
   await TRPC_SSR.profile.me.contacts.prefetchInfinite({});
 
   return (
-    <main className={column_screen({ className: "bg-white text-black" })}>
-      <h6 className="my-10 pl-2 text-2xl font-bold">Écrire à</h6>
-      <Infinite_Contacts_List />
-    </main>
+    <TRPC_Hydrate>
+      <main className={column_screen({ className: "bg-white text-black" })}>
+        <h6 className="my-10 pl-2 text-2xl font-bold">Écrire à</h6>
+        <Infinite_Contacts_List />
+      </main>
+    </TRPC_Hydrate>
   );
 }
