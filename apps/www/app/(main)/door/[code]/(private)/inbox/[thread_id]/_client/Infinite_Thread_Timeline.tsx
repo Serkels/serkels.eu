@@ -38,15 +38,17 @@ export default function Infinite_Thread_Timeline({
   ) as UseInfiniteQueryResult<{ data: Message }>;
 
   const thread_seen = useCallback(async () => {
-    await utils.inbox.find.refetch();
-    await utils.inbox.by_thread_id.invalidate(thread_id);
-    await utils.inbox.thread.by_id.invalidate(thread_id);
-    await utils.notification.invalidate();
-  }, [last_seen_thread_update, utils]);
-
-  useLayoutEffect(() => {
-    last_seen_thread_update.mutate({ thread_id, type: "INBOX_NEW_MESSAGE" });
-  }, [scroll_target_ref]);
+    await last_seen_thread_update.mutateAsync({
+      thread_id,
+      type: "INBOX_NEW_MESSAGE",
+    });
+    await Promise.all([
+      utils.inbox.find.refetch(),
+      utils.inbox.by_thread_id.invalidate(thread_id),
+      utils.inbox.thread.by_id.invalidate(thread_id),
+      utils.notification.invalidate(),
+    ]);
+  }, [last_seen_thread_update, utils, query_info.dataUpdatedAt]);
 
   useLayoutEffect(() => {
     if (!scroll_target_ref.current) {

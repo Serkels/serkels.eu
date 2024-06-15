@@ -6,8 +6,9 @@ import {
   next_auth_procedure,
   router,
 } from "@1.modules/trpc";
-import type { Prisma } from "@prisma/client";
+import { NotificationType, type Prisma } from "@prisma/client";
 import { observable } from "@trpc/server/observable";
+import { subDays } from "date-fns";
 import { EventEmitter } from "events";
 import { createActor } from "xstate";
 import { z } from "zod";
@@ -42,6 +43,10 @@ export const inbox = router({
           // deal: { status: "asc" },
           thread: { updated_at: "desc" },
         },
+        select: {
+          id: true,
+          thread: { select: { id: true, updated_at: true } },
+        },
         take: limit + 1,
         where: { owner_id: student_id, deal: { parent_id: exchange_id } },
       });
@@ -67,11 +72,6 @@ export const inbox = router({
 
       const owner_id_thread_id: Prisma.ExchangeThreadOwner_idThread_idCompoundUniqueInput =
         { owner_id: student_id, thread_id };
-
-      await prisma.exchangeThread.update({
-        data: { last_seen_date: new Date() },
-        where: { owner_id_thread_id },
-      });
 
       return prisma.exchangeThread.findUniqueOrThrow({
         include: {
@@ -102,8 +102,8 @@ export const inbox = router({
           profile: { id: owner_profile_id },
         },
       } = await prisma.exchange.findUniqueOrThrow({
-        include: {
-          owner: { include: { profile: { select: { id: true } } } },
+        select: {
+          owner: { select: { id: true, profile: { select: { id: true } } } },
         },
         where: { id: exchange_id },
       });
@@ -113,40 +113,65 @@ export const inbox = router({
         where: { profile_id: profile.id },
       });
 
-      const { id: thread_id } = await prisma.thread.create({
-        data: {
-          participants: {
-            connect: [{ id: profile.id }, { id: owner_profile_id }],
+      return prisma.$transaction(async (prisma_tx) => {
+        const { id: thread_id, messages } = await prisma_tx.thread.create({
+          data: {
+            participants: {
+              connect: [{ id: profile.id }, { id: owner_profile_id }],
+            },
+            messages: { create: { content, author_id: profile.id } },
           },
-          messages: { create: { content, author_id: profile.id } },
-        },
-      });
+          select: {
+            id: true,
+            messages: { take: 1, orderBy: { created_at: "desc" } },
+          },
+        });
 
-      return prisma.deal.create({
-        data: {
-          parent: { connect: { id: exchange_id } },
-          participant: { connect: { id: student_id } },
-          exchange_threads: {
-            createMany: {
-              data: [
-                {
-                  owner_id,
-                  thread_id,
-                },
-                {
-                  owner_id: student_id,
-                  thread_id,
-                },
-              ],
+        const [last_message] = messages;
+        console.log({ thread_id, messages, last_message });
+        if (!last_message) throw new Error("No message created");
+
+        await prisma_tx.exchangeMessageNotification.create({
+          data: {
+            exchange: { connect: { id: exchange_id } },
+            message: { connect: { id: last_message.id } },
+            notification: {
+              create: {
+                owner: { connect: { id: owner_profile_id } },
+                type: NotificationType.EXCHANGE_NEW_PARTICIPANT,
+              },
             },
           },
-        },
-        include: {
-          exchange_threads: {
-            take: 1,
-            where: { owner_id: student_id },
+          select: { notification_id: true },
+        });
+
+        return prisma_tx.deal.create({
+          data: {
+            parent: { connect: { id: exchange_id } },
+            participant: { connect: { id: student_id } },
+            exchange_threads: {
+              createMany: {
+                data: [
+                  {
+                    owner_id,
+                    thread_id,
+                    last_seen_date: subDays(new Date(), 1),
+                  },
+                  {
+                    owner_id: student_id,
+                    thread_id,
+                  },
+                ],
+              },
+            },
           },
-        },
+          include: {
+            exchange_threads: {
+              take: 1,
+              where: { owner_id: student_id },
+            },
+          },
+        });
       });
     }),
 

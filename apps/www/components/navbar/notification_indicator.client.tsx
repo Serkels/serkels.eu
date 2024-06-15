@@ -16,9 +16,7 @@ export function Notification_DotIndicator() {
 
   const [, { execute }] = useAsync(() =>
     Promise.all([
-      utils.notification.count_unread.invalidate({
-        type: "EXCHANGE_NEW_MESSAGE",
-      }),
+      utils.notification.count_unread.invalidate({ type: "EXCHANGE" }),
       utils.notification.count_unread.invalidate({ type: "INBOX_NEW_MESSAGE" }),
     ]),
   );
@@ -34,9 +32,14 @@ export function Notification_DotIndicator() {
 }
 
 export function MessageNews_DotIndicator() {
+  const utils = TRPC_React.useUtils();
   const { data: count_unread } = TRPC_React.notification.count_unread.useQuery({
     type: "INBOX_NEW_MESSAGE",
   });
+
+  useUpdateEffect(() => {
+    utils.inbox.find.invalidate();
+  }, [count_unread]);
 
   if (!count_unread) return null;
   if (count_unread <= 0) return null;
@@ -45,9 +48,14 @@ export function MessageNews_DotIndicator() {
 }
 
 export function ExchangeNews_DotIndicator() {
+  const utils = TRPC_React.useUtils();
   const { data: count_unread } = TRPC_React.notification.count_unread.useQuery({
-    type: "EXCHANGE_NEW_MESSAGE",
+    type: "EXCHANGE",
   });
+
+  useUpdateEffect(() => {
+    utils.exchanges.me.find.invalidate();
+  }, [count_unread]);
 
   if (!count_unread) return null;
   if (count_unread <= 0) return null;
@@ -64,7 +72,7 @@ export function NewsInMessage_Indicator() {
 
 export function NewsInExchange_Indicator() {
   const { data: count_unread } = TRPC_React.notification.count_unread.useQuery({
-    type: "EXCHANGE_NEW_MESSAGE",
+    type: "EXCHANGE",
   });
   return <Notification_CountIndicator count={count_unread} />;
 }

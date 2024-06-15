@@ -96,8 +96,15 @@ const inbox_api_router = router({
             ],
           }
         : {};
+
       const data = await prisma.inboxThread.findMany({
-        ...(cursor ? { cursor: { id: cursor } } : {}),
+        ...(cursor
+          ? {
+              cursor: {
+                owner_id_thread_id: { owner_id: student_id, thread_id: cursor },
+              },
+            }
+          : {}),
         orderBy: [{ thread: { updated_at: "desc" } }],
         include: { thread: { select: { id: true, updated_at: true } } },
         take: limit + 1,
@@ -107,7 +114,7 @@ const inbox_api_router = router({
       let next_cursor: typeof cursor | undefined = undefined;
       if (data.length > limit) {
         const next_item = data.pop()!;
-        next_cursor = next_item.id;
+        next_cursor = next_item.thread_id;
       }
 
       return { data, next_cursor };
