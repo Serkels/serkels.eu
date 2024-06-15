@@ -23,6 +23,9 @@ const ENV = z
     _01_NEXT_AUTH_JWT_MAX_AGE: z.coerce
       .number()
       .default((86_400 satisfies _24_HOURS_) * 30), // 30 days
+    NODE_ENV: z
+      .enum(["development", "test", "production"])
+      .default("development"),
   })
   .parse(process.env);
 
@@ -30,7 +33,7 @@ const ENV = z
 
 export const auth_options: NextAuthOptions = {
   adapter: PrismaTRPCAdapter(trpc.auth.next_auth_adapter),
-  debug: true,
+  debug: ENV.NODE_ENV !== "production",
   jwt: {
     maxAge: ENV._01_NEXT_AUTH_JWT_MAX_AGE,
   },
