@@ -170,18 +170,20 @@ export function Exchange_CreateForm<
         </ErrorMessage>
       </label>
 
-      <fieldset className={fieldset()}>
-        <label>
-          <span>Sans échange</span>{" "}
+      <fieldset className={fieldset({ horizontal: true })}>
+        <label className="flex  gap-2">
+          <span>Sans échange</span>
           <Field disabled={isDisabled} value="" name="return" type="radio" />
         </label>
-        <label>
-          <span className="w-full"> Contre un échange</span>
-          <Field
-            checked={Boolean(values.return)}
-            disabled={true}
-            type="radio"
-          />
+        <label className="flex gap-2">
+          <div className="flex  gap-2">
+            <span className="w-max">Contre un échange</span>
+            <Field
+              checked={Boolean(values.return)}
+              disabled={true}
+              type="radio"
+            />
+          </div>
           <SelectCategoryField
             categories={categories}
             disabled={isDisabled}
