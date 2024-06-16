@@ -71,8 +71,8 @@ importers:
         specifier: 4.15.5
         version: 4.15.5
       ws:
-        specifier: 8.17.0
-        version: 8.17.0
+        specifier: 8.17.1
+        version: 8.17.1
       zod:
         specifier: 3.23.8
         version: 3.23.8
@@ -8754,8 +8754,8 @@ packages:
       utf-8-validate:
         optional: true
 
-  ws@8.17.0:
-    resolution: {integrity: sha512-uJq6108EgZMAl20KagGkzCKfMEjxmKvZHG7Tlq0Z6nOky7YF7aq4mOx6xK8TJ/i1LeK4Qus7INktacctDgY8Ow==}
+  ws@8.17.1:
+    resolution: {integrity: sha512-6XQFvXTkbfUOZOKKILFG1PDK2NDQs4azKQl26T0YS5CxqWLgXajbPZ+h4gZekJyRqFU8pvnbAbbs/3TgRPy+GQ==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
       bufferutil: ^4.0.1
@@ -17077,7 +17077,7 @@ snapshots:
 
   ws@8.11.0: {}
 
-  ws@8.17.0: {}
+  ws@8.17.1: {}
 
   xmlbuilder@15.1.1: {}
 
