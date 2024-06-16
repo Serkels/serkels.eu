@@ -69,6 +69,7 @@ export const find = next_auth_procedure
           },
           take: 1,
           where: { owner_id: student_id },
+          orderBy: { thread: { updated_at: "desc" } },
         },
       },
       take: limit + 1,
@@ -90,6 +91,7 @@ export const find = next_auth_procedure
       } = exchange_threads[0]!;
       return {
         exchange: parent,
+        last_thread_update: updated_at,
         is_unread: isAfter(updated_at, last_seen_date),
       };
     });

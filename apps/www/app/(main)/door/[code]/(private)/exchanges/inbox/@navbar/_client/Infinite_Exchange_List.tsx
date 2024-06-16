@@ -15,6 +15,7 @@ import {
   Exchange as Icon_Exchange,
   LocationRadius,
 } from "@1.ui/react/icons";
+import { useUpdateEffect } from "@react-hookz/web";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useParams, useSearchParams } from "next/navigation";
@@ -29,7 +30,7 @@ export default function Infinite_Exchange_List() {
   const params = z
     .object({ exchange_id: z.string().optional() })
     .parse(useParams(), { path: ["useParams()"] });
-  const { exchange_id } = params;
+  const { exchange_id: location_exchange_id } = params;
   const info = TRPC_React.exchanges.me.find.useInfiniteQuery(
     { search },
     { getNextPageParam: ({ next_cursor }) => next_cursor },
@@ -56,15 +57,23 @@ export default function Infinite_Exchange_List() {
           {pages
             .map((page) => page.data)
             .flat()
-            .map(({ exchange, is_unread }) => (
-              <li key={exchange.id}>
-                <Item
-                  exchange_id={exchange.id}
-                  active={exchange.id === exchange_id}
-                  unread={is_unread}
-                />
-              </li>
-            ))}
+            .map(
+              ({
+                exchange: { id: exchange_id, updated_at },
+                last_thread_update,
+                is_unread,
+              }) => (
+                <li key={exchange_id}>
+                  <Item
+                    active={exchange_id === location_exchange_id}
+                    exchange_id={exchange_id}
+                    last_thread_update={last_thread_update}
+                    unread={is_unread}
+                    updated_at={updated_at}
+                  />
+                </li>
+              ),
+            )}
           <li className="col-span-full mx-auto">
             {isFetchingNextPage ? <Loading /> : null}
           </li>
@@ -87,16 +96,26 @@ export default function Infinite_Exchange_List() {
 function Item({
   active,
   exchange_id,
+  last_thread_update,
   unread,
+  updated_at,
 }: {
   active: boolean;
   exchange_id: string;
+  last_thread_update: Date;
   unread: boolean;
+  updated_at: Date;
 }) {
+  const utils = TRPC_React.useUtils();
   const info = TRPC_React.exchanges.by_id.useQuery(exchange_id);
   const { data: session } = useSession();
   const searchParams = useSearchParams();
   const profile_id = session?.profile.id ?? PROFILE_UNKNOWN.id;
+
+  useUpdateEffect(() => {
+    info.refetch();
+    utils.exchanges.me.inbox.by_exchange_id.invalidate({ exchange_id });
+  }, [exchange_id, Number(updated_at), Number(last_thread_update)]);
 
   //
 
