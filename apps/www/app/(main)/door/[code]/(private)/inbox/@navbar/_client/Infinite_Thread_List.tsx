@@ -2,7 +2,7 @@
 
 import { ProfileAvatarMedia } from ":components/avatar";
 import { TRPC_React } from ":trpc/client";
-import type { Inbox, Message } from "@1.modules/inbox.domain";
+import type { Inbox } from "@1.modules/inbox.domain";
 import { thread_recipient } from "@1.modules/inbox.domain/select";
 import { Thread_InfiniteList } from "@1.modules/inbox.ui/thread/InfiniteList";
 import { Thread_AsyncItem } from "@1.modules/inbox.ui/thread/Thread_AsyncItem";
@@ -10,6 +10,7 @@ import { Thread_Item } from "@1.modules/inbox.ui/thread/Thread_Item";
 import { PROFILE_UNKNOWN } from "@1.modules/profile.domain";
 import { Circle } from "@1.ui/react/icons";
 import { Frame } from "@1.ui/react/motion/Frame";
+import { useUpdateEffect } from "@react-hookz/web";
 import type { UseQueryResult } from "@tanstack/react-query";
 import { isAfter } from "date-fns";
 import { m, type Transition, type Variants } from "framer-motion";
@@ -49,9 +50,9 @@ function Infinite_Thread_List() {
 
   return (
     <Thread_InfiniteList info={query_info}>
-      {({ id, thread }) => (
+      {({ id, thread: { id: thread_id, updated_at } }) => (
         <MotionOutlet key={id} id={id}>
-          <UserThread_Item thread_id={thread.id} />
+          <UserThread_Item thread_id={thread_id} updated_at={updated_at} />
         </MotionOutlet>
       )}
     </Thread_InfiniteList>
@@ -85,7 +86,13 @@ function MotionOutlet({
   );
 }
 
-function UserThread_Item({ thread_id }: { thread_id: string }) {
+function UserThread_Item({
+  thread_id,
+  updated_at,
+}: {
+  thread_id: string;
+  updated_at: Date;
+}) {
   const { data: session } = useSession();
   const search_params = useSearchParams();
   const pathname = usePathname();
@@ -94,17 +101,15 @@ function UserThread_Item({ thread_id }: { thread_id: string }) {
     thread_id,
   ) as UseQueryResult<Inbox>;
 
+  useUpdateEffect(() => {
+    info.refetch();
+  }, [thread_id, Number(updated_at)]);
+
   return (
     <Thread_AsyncItem info={info}>
       {({ inbox }) => {
         const { thread, last_seen_date } = inbox;
-        const last_message =
-          thread.messages.at(0) ??
-          ({
-            content: "...",
-            created_at: new Date(),
-            updated_at: new Date(),
-          } satisfies Omit<Message, "author" | "id">);
+        const last_message = thread.messages.at(0)?.content ?? "...";
 
         const participant = thread_recipient({
           participants: thread.participants,
@@ -114,7 +119,7 @@ function UserThread_Item({ thread_id }: { thread_id: string }) {
         const href = `/@~/inbox/${thread.id}`;
         const is_active = pathname === href;
         const unread = !is_active
-          ? isAfter(last_message.created_at, last_seen_date)
+          ? isAfter(thread.updated_at, last_seen_date)
           : false;
         const { indicator } = item({ unread });
 
@@ -127,7 +132,7 @@ function UserThread_Item({ thread_id }: { thread_id: string }) {
             key={thread.id}
           >
             <Thread_Item
-              last_update={last_message.created_at}
+              last_update={thread.updated_at}
               last_seen_date={last_seen_date}
               variants={{
                 active: is_active,
@@ -141,7 +146,7 @@ function UserThread_Item({ thread_id }: { thread_id: string }) {
                 <div className={indicator()}>
                   <Circle className="size-4 text-[#FF5F5F]" />
                 </div>
-                {last_message.content}
+                {last_message}
               </Thread_Item.Body>
             </Thread_Item>
           </Link>

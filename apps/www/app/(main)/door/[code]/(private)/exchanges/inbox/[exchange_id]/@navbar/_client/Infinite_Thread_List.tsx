@@ -5,7 +5,7 @@ import type { Params } from ":pipes/exchange_by_id";
 import { TRPC_React } from ":trpc/client";
 import { Deal_Status_Schema, type Deal } from "@1.modules/exchange.domain";
 import { handshake_format } from "@1.modules/exchange.domain/handshake_format";
-import type { Inbox, Message } from "@1.modules/inbox.domain";
+import type { Inbox } from "@1.modules/inbox.domain";
 import { thread_recipient } from "@1.modules/inbox.domain/select";
 import { Thread_InfiniteList } from "@1.modules/inbox.ui/thread/InfiniteList";
 import { Thread_AsyncItem } from "@1.modules/inbox.ui/thread/Thread_AsyncItem";
@@ -67,7 +67,7 @@ function UserThread_Item({
 
   useUpdateEffect(() => {
     info.refetch();
-  }, [thread_id, updated_at]);
+  }, [thread_id, Number(updated_at)]);
 
   return (
     <Thread_AsyncItem info={info}>
@@ -75,13 +75,10 @@ function UserThread_Item({
         const { thread, deal, last_seen_date } = inbox as Inbox & {
           deal: Deal;
         };
-        const last_message =
-          thread.messages.at(0) ??
-          ({
-            content: "...",
-            created_at: new Date(),
-            updated_at: new Date(),
-          } satisfies Omit<Message, "author" | "id">);
+        const last_message = thread.messages.at(0);
+        const last_message_content = last_message?.content
+          ? handshake_format(last_message.content)
+          : "...";
 
         const participant = thread_recipient({
           participants: thread.participants,
@@ -101,7 +98,7 @@ function UserThread_Item({
             }}
           >
             <Thread_Item
-              last_update={last_message.updated_at}
+              last_update={thread.updated_at}
               variants={{
                 active: is_active,
                 unread,
@@ -112,7 +109,7 @@ function UserThread_Item({
               </Thread_Item.Avatar>
               <Thread_Item.Body>
                 <Indicator className="float-right" status={deal.status} />
-                {handshake_format(last_message.content)}
+                {last_message_content}
               </Thread_Item.Body>
             </Thread_Item>
           </Link>

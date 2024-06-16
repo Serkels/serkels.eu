@@ -33,13 +33,14 @@ export function Notification_DotIndicator() {
 
 export function MessageNews_DotIndicator() {
   const utils = TRPC_React.useUtils();
-  const { data: count_unread } = TRPC_React.notification.count_unread.useQuery({
-    type: "INBOX_NEW_MESSAGE",
-  });
+  const { data: count_unread, dataUpdatedAt } =
+    TRPC_React.notification.count_unread.useQuery({
+      type: "INBOX_NEW_MESSAGE",
+    });
 
   useUpdateEffect(() => {
     utils.inbox.find.invalidate();
-  }, [count_unread]);
+  }, [dataUpdatedAt]);
 
   if (!count_unread) return null;
   if (count_unread <= 0) return null;
@@ -49,13 +50,14 @@ export function MessageNews_DotIndicator() {
 
 export function ExchangeNews_DotIndicator() {
   const utils = TRPC_React.useUtils();
-  const { data: count_unread } = TRPC_React.notification.count_unread.useQuery({
-    type: "EXCHANGE",
-  });
+  const { data: count_unread, dataUpdatedAt } =
+    TRPC_React.notification.count_unread.useQuery({
+      type: "EXCHANGE",
+    });
 
   useUpdateEffect(() => {
     utils.exchanges.me.find.invalidate();
-  }, [count_unread]);
+  }, [dataUpdatedAt]);
 
   if (!count_unread) return null;
   if (count_unread <= 0) return null;
