@@ -25,7 +25,7 @@ export default function HomeCarousel() {
   return (
     <Grid className="min-h-[45vh] flex-1 items-center">
       <aside className="col-span-2 flex min-h-full items-center sm:col-span-4 md:col-start-2 xl:col-start-4">
-        <Carousel className="h-[25em] w-full" autoplay={true}>
+        <Carousel className="h-[18em] w-full" autoplay={true}>
           <article>
             <h1 className="mb-12 text-2xl font-bold uppercase">
               Avec Serkels,
