@@ -33,7 +33,18 @@ function Infinite_Thread_List() {
   const search = search_params.get("q") ?? undefined;
   const query_info = TRPC_React.inbox.find.useInfiniteQuery(
     { search },
-    { getNextPageParam: ({ next_cursor }) => next_cursor },
+    {
+      getNextPageParam: ({ next_cursor }) => next_cursor,
+      // TODO(douglasduteil): allow loading from the selected thread
+      // ```
+      // import type { Params } from ":pipes/thread_by_id";
+      // const params = useParams<Partial<Params>>();
+      // ```
+      // Will required adding a previous cursor on the thread query
+      // Pretty difficult with the current implementation
+      // see https://github.com/prisma/prisma/discussions/12173
+      // initialCursor: params.thread_id,
+    },
   );
 
   return (
@@ -142,12 +153,12 @@ function UserThread_Item({ thread_id }: { thread_id: string }) {
 
 export const item = tv({
   slots: {
-    indicator: "float-right",
+    indicator: "float-right opacity-100 transition-opacity",
   },
   variants: {
     unread: {
       false: {
-        indicator: "hidden",
+        indicator: "opacity-0",
       },
     },
   },

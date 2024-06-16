@@ -2,6 +2,7 @@
 
 import { next_auth_procedure } from "@1.modules/trpc";
 import type { Prisma } from "@prisma/client";
+import { isAfter } from "date-fns";
 import { z } from "zod";
 
 //
@@ -59,7 +60,17 @@ export const find = next_auth_procedure
     const deals = await prisma.deal.findMany({
       ...find_cursor,
       orderBy: { updated_at: "desc" },
-      select: { parent: true },
+      select: {
+        parent: true,
+        exchange_threads: {
+          select: {
+            last_seen_date: true,
+            thread: { select: { updated_at: true } },
+          },
+          take: 1,
+          where: { owner_id: student_id },
+        },
+      },
       take: limit + 1,
       where: {
         ...deal_releated_to_me_where,
@@ -72,12 +83,21 @@ export const find = next_auth_procedure
       distinct: ["parent_id"],
     });
 
-    const data = deals.map(({ parent }) => parent);
+    const data = deals.map(({ parent, exchange_threads }) => {
+      const {
+        last_seen_date,
+        thread: { updated_at },
+      } = exchange_threads[0]!;
+      return {
+        exchange: parent,
+        is_unread: isAfter(updated_at, last_seen_date),
+      };
+    });
 
     let next_cursor: typeof cursor | undefined = undefined;
     if (data.length > limit) {
       const next_item = data.pop()!;
-      next_cursor = next_item.id;
+      next_cursor = next_item.exchange.id;
     }
 
     return { data, next_cursor };

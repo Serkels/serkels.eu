@@ -56,9 +56,13 @@ export default function Infinite_Exchange_List() {
           {pages
             .map((page) => page.data)
             .flat()
-            .map((item) => (
-              <li key={item.id}>
-                <Item exchange_id={item.id} active={item.id === exchange_id} />
+            .map(({ exchange, is_unread }) => (
+              <li key={exchange.id}>
+                <Item
+                  exchange_id={exchange.id}
+                  active={exchange.id === exchange_id}
+                  unread={is_unread}
+                />
               </li>
             ))}
           <li className="col-span-full mx-auto">
@@ -83,9 +87,11 @@ export default function Infinite_Exchange_List() {
 function Item({
   active,
   exchange_id,
+  unread,
 }: {
   active: boolean;
   exchange_id: string;
+  unread: boolean;
 }) {
   const info = TRPC_React.exchanges.by_id.useQuery(exchange_id);
   const { data: session } = useSession();
@@ -107,7 +113,7 @@ function Item({
     title: title_style,
   } = styles({
     active,
-    unread: false,
+    unread,
     with_return: Boolean(exchange.return),
   });
 

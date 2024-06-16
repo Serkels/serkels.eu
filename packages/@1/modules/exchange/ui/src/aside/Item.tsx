@@ -45,12 +45,12 @@ export const item = tv({
   slots: {
     title: "line-clamp-1 text-lg font-bold",
     exchange_icon: "mx-1 w-5",
-    indicator: "float-right",
+    indicator: "float-right my-1 opacity-100 transition-opacity",
   },
   variants: {
     unread: {
       false: {
-        indicator: "hidden",
+        indicator: "opacity-0",
       },
     },
     with_return: {

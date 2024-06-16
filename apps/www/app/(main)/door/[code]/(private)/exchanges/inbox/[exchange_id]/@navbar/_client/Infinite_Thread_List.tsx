@@ -17,12 +17,13 @@ import {
   Denied,
   Idle,
 } from "@1.ui/react/icons";
+import { useUpdateEffect } from "@react-hookz/web";
 import type { UseQueryResult } from "@tanstack/react-query";
 import { isAfter } from "date-fns";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import type { ComponentPropsWithoutRef } from "react";
+import { type ComponentPropsWithoutRef } from "react";
 import { match } from "ts-pattern";
 
 //
@@ -38,10 +39,10 @@ export default function Infinite_Thread_List(params: Params) {
 
   return (
     <Thread_InfiniteList info={query_info}>
-      {({ id, thread_id }) => {
+      {({ id, thread: { id: thread_id, updated_at } }) => {
         return (
           <li key={id}>
-            <UserThread_Item thread_id={thread_id} />
+            <UserThread_Item thread_id={thread_id} updated_at={updated_at} />
           </li>
         );
       }}
@@ -49,7 +50,13 @@ export default function Infinite_Thread_List(params: Params) {
   );
 }
 
-function UserThread_Item({ thread_id }: { thread_id: string }) {
+function UserThread_Item({
+  thread_id,
+  updated_at,
+}: {
+  thread_id: string;
+  updated_at: Date;
+}) {
   const { data: session } = useSession();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -57,6 +64,10 @@ function UserThread_Item({ thread_id }: { thread_id: string }) {
   const info = TRPC_React.exchanges.me.inbox.by_thread_id.useQuery(
     thread_id,
   ) as UseQueryResult<Inbox & { deal: { parent_id: string } }>;
+
+  useUpdateEffect(() => {
+    info.refetch();
+  }, [thread_id, updated_at]);
 
   return (
     <Thread_AsyncItem info={info}>
@@ -77,6 +88,11 @@ function UserThread_Item({ thread_id }: { thread_id: string }) {
           profile_id,
         });
         const href = `/@~/exchanges/inbox/${deal.parent_id}/${thread.id}`;
+        const is_active = pathname === href;
+        const unread = !is_active
+          ? isAfter(thread.updated_at, last_seen_date)
+          : false;
+
         return (
           <Link
             href={{
@@ -87,8 +103,8 @@ function UserThread_Item({ thread_id }: { thread_id: string }) {
             <Thread_Item
               last_update={last_message.updated_at}
               variants={{
-                active: pathname === href,
-                unread: isAfter(last_message.updated_at, last_seen_date),
+                active: is_active,
+                unread,
               }}
             >
               <Thread_Item.Avatar>

@@ -59,7 +59,7 @@ export const thread_item = tv({
   slots: {
     header: "flex justify-between",
     time: "whitespace-nowrap text-xs font-bold",
-    excerpt: "mb-1 line-clamp-1",
+    excerpt: "mb-1 line-clamp-1 transition",
   },
   variants: {
     active: {

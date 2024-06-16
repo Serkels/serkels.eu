@@ -5,7 +5,6 @@ import { Exchange_Card } from ":widgets/exchanges/card";
 import { Exchange_Filter, type Exchange } from "@1.modules/exchange.domain";
 import { Exchange_AsyncCard } from "@1.modules/exchange.ui/Card/AsyncCard";
 import { Exchange_InfiniteList } from "@1.modules/exchange.ui/InfiniteList";
-import { ErrorOccur } from "@1.ui/react/error";
 import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { useEffect, type ComponentProps, type ReactNode } from "react";
@@ -25,33 +24,32 @@ export default function List() {
     gtag("event", "search", { search_term: search });
   }, [search]);
 
-  try {
-    const info = TRPC_React.exchanges.find.useInfiniteQuery(
-      {
-        category,
-        filter,
-        search,
-      },
-      {
-        getNextPageParam: (lastPage) => lastPage.nextCursor,
-      },
-    ) as ComponentProps<typeof Exchange_InfiniteList>["info"];
+  const info = TRPC_React.exchanges.find.useInfiniteQuery(
+    {
+      category,
+      filter,
+      search,
+    },
+    {
+      getNextPageParam: (lastPage) => lastPage.nextCursor,
+    },
+  ) as ComponentProps<typeof Exchange_InfiniteList>["info"];
 
-    if (!session) return null;
-    return (
-      <Exchange_InfiniteList info={info}>
-        {({ id }) => (
-          <Exchange_byId key={id} id={id}>
-            {(exchange) => (
-              <Exchange_Card exchange={exchange} profile={session.profile} />
-            )}
-          </Exchange_byId>
-        )}
-      </Exchange_InfiniteList>
-    );
-  } catch (error) {
-    return <ErrorOccur error={error as Error} />;
-  }
+  //
+
+  if (!session) return null;
+
+  return (
+    <Exchange_InfiniteList info={info}>
+      {({ id }) => (
+        <Exchange_byId key={id} id={id}>
+          {(exchange) => (
+            <Exchange_Card exchange={exchange} profile={session.profile} />
+          )}
+        </Exchange_byId>
+      )}
+    </Exchange_InfiniteList>
+  );
 }
 
 function Exchange_byId({

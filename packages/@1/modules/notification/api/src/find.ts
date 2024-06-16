@@ -1,6 +1,7 @@
 //
 
 import { next_auth_procedure } from "@1.modules/trpc";
+import type { Prisma } from "@prisma/client";
 import { z } from "zod";
 
 //
@@ -15,6 +16,11 @@ export default next_auth_procedure
   .query(async ({ input, ctx: { prisma, payload } }) => {
     const { cursor, limit } = input;
     const { id: owner_id } = payload.profile;
+    const message_select: Prisma.MessageSelect = {
+      author: { select: { name: true } },
+      thread_id: true,
+    };
+
     const items = await prisma.notification.findMany({
       ...(cursor ? { cursor: { id: cursor } } : {}),
       orderBy: { created_at: "desc" },
@@ -24,10 +30,7 @@ export default next_auth_procedure
         inbox_message: {
           select: {
             message: {
-              select: {
-                author: { select: { name: true } },
-                thread_id: true,
-              },
+              select: message_select,
             },
           },
         },
@@ -38,10 +41,7 @@ export default next_auth_procedure
               select: { owner: { select: { profile_id: true } }, title: true },
             },
             message: {
-              select: {
-                author: { select: { name: true } },
-                thread_id: true,
-              },
+              select: message_select,
             },
           },
         },

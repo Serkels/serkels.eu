@@ -19,7 +19,12 @@ import { button } from "@1.ui/react/button/atom";
 import { Pen } from "@1.ui/react/icons";
 import { useTimeoutEffect } from "@react-hookz/web";
 import Link from "next/link";
-import { useState, type MouseEvent, type PropsWithChildren } from "react";
+import {
+  useCallback,
+  useState,
+  type MouseEventHandler,
+  type PropsWithChildren,
+} from "react";
 import { match } from "ts-pattern";
 import { Exchange_Actions } from "./actions";
 import { Exchange_Bookmark } from "./bookmark";
@@ -77,21 +82,25 @@ function Deleting({ children }: PropsWithChildren) {
 
 function Idle() {
   const exchange = useExchange();
+  const alreadyPopulated = exchange.deals.length > 0;
+
   const { is_yours } = useExchangeMeta();
 
   const [showInfoBox, setShowInfoBox] = useState(false);
 
-  const alreadyPopulated = exchange.deals.length > 0;
+  const [, reset] = useTimeoutEffect(() => {
+    setShowInfoBox(false);
+  }, 1_000 * 5);
 
-  const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
-    if (alreadyPopulated) {
-      e.preventDefault();
+  const on_edit_click = useCallback<MouseEventHandler<HTMLAnchorElement>>(
+    (event) => {
+      if (alreadyPopulated) return;
+      event.preventDefault();
+      reset();
       setShowInfoBox(true);
-      setTimeout(() => {
-        setShowInfoBox(false);
-      }, 5000);
-    }
-  };
+    },
+    [],
+  );
 
   return (
     <Card_Idle>
@@ -115,7 +124,8 @@ function Idle() {
                 href={
                   alreadyPopulated ? "" : `/@~/exchanges/${exchange.id}/edit`
                 }
-                onClick={alreadyPopulated ? handleClick : undefined}
+                onClick={on_edit_click}
+                // onClick={alreadyPopulated ? handleClick : undefined}
               >
                 <Pen className="h-4" />
               </Link>

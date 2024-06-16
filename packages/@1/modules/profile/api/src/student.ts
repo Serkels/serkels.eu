@@ -72,9 +72,15 @@ export const student_api_router = router({
                 prisma.notification.updateMany({
                   data: { read_at: last_seen_date },
                   where: {
+                    read_at: null,
                     owner: { id: profile_id },
                     exchange_message: { message: { thread_id } },
-                    type: NotificationType.EXCHANGE_NEW_MESSAGE,
+                    type: {
+                      in: [
+                        NotificationType.EXCHANGE_NEW_MESSAGE,
+                        NotificationType.EXCHANGE_NEW_PARTICIPANT,
+                      ],
+                    },
                   },
                 }),
                 prisma.exchangeThread.update({
@@ -90,8 +96,9 @@ export const student_api_router = router({
                 prisma.notification.updateMany({
                   data: { read_at: last_seen_date },
                   where: {
+                    read_at: null,
                     owner: { id: profile_id },
-                    exchange_message: { message: { thread_id } },
+                    inbox_message: { message: { thread_id } },
                     type: NotificationType.INBOX_NEW_MESSAGE,
                   },
                 }),

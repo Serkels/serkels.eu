@@ -48,7 +48,7 @@ function ReactQueryClientProvider({ children }: PropsWithChildren) {
           ...options,
           queries: {
             ...options.queries,
-            staleTime: Infinity, //5_000,
+            staleTime: 1_000 * 30, // 30 seconds
           },
         },
       }),

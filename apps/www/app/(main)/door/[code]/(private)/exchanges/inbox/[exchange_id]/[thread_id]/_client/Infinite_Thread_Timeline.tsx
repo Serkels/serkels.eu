@@ -61,6 +61,8 @@ export default function Infinite_Thread_Timeline({
     }
 
     utils.notification.count_unread.invalidate();
+    last_seen_thread_update.mutate({ thread_id, type: "EXCHANGE_NEW_MESSAGE" });
+
     scroll_target_ref.current.scrollIntoView({
       behavior: "smooth",
       block: "end",
@@ -76,20 +78,22 @@ export default function Infinite_Thread_Timeline({
     scroll_target_ref,
   ]);
 
-  useLayoutEffect(() => {
-    last_seen_thread_update.mutate({ thread_id, type: "INBOX_NEW_MESSAGE" });
-  }, [scroll_target_ref]);
-
   const { data: session, status } = useSession();
   const invalidate = useCallback(async () => {
+    await last_seen_thread_update.mutateAsync({
+      thread_id,
+      type: "EXCHANGE_NEW_MESSAGE",
+    });
+
     await Promise.all([
-      utils.inbox.thread.messages.invalidate({ thread_id }),
+      utils.exchanges.by_id.invalidate(exchange.id),
       utils.exchanges.me.inbox.by_thread_id.invalidate(thread_id),
       utils.exchanges.me.inbox.next_actions.invalidate(),
-      utils.exchanges.by_id.invalidate(exchange.id),
+      utils.inbox.thread.messages.invalidate({ thread_id }),
+      utils.notification.count_unread.invalidate(),
     ]);
     reset();
-  }, [utils, thread_id]);
+  }, [utils, thread_id, query_info.dataUpdatedAt]);
 
   TRPC_React.inbox.thread.on_new_message.useSubscription(
     { token: session?.header.NEXTAUTH_TOKEN!, thread_id },
