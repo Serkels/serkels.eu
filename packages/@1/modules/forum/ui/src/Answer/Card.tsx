@@ -46,7 +46,7 @@ function Answer_Indicator() {
   return (
     <div className="ml-12 flex justify-between">
       <p className="text-bold text-xs text-success">
-        Validé par {question.owner.profile.name}
+        Approuvé par {question.owner.profile.name}
       </p>
       <Approved />
     </div>

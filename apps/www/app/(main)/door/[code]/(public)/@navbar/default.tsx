@@ -43,13 +43,13 @@ function Student_Page({ params }: { params: CodeParmsAsProfileId }) {
     <nav className={base()}>
       <div className="flex items-center">
         <Link className={link()} href={`/@${code}`}>
-          À propos
+          Biographie
         </Link>
         <Link className={link()} href={`/@${code}/proposals`}>
-          Propositions
+          Publications
         </Link>
         <Link className={link()} href={`/@${code}/history`}>
-          Échanges
+          Échanges Réussis
         </Link>
       </div>
 
@@ -73,7 +73,7 @@ function Partner_Page({ params }: { params: CodeParmsAsProfileId }) {
     <nav className={base()}>
       <div className="flex items-center">
         <Link className={link()} href={`/@${code}`}>
-          À propos
+          Biographie
         </Link>
         <Link className={link()} href={`/@${code}/opportunities`}>
           Opportunité

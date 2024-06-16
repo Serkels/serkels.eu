@@ -167,7 +167,7 @@ export function Query_Approved_Response() {
       <div className="relative my-6">
         <hr className="absolute top-0 my-3 w-full" />
         <h5 className="relative inline-block bg-white pr-3 text-sm font-bold uppercase text-Dove_Gray">
-          Réponse approuvé
+          Réponse approuvée
         </h5>
       </div>
       <AnswerItem {...info.data} />
@@ -182,9 +182,8 @@ function AnswerItem(initial: Omit<Answer, "accepted_for">) {
   const is_yours = question.owner.profile.id === session?.profile.id;
   const answer = (info.data ?? initial) as Answer;
 
-  const can_mutate = is_yours; // || answer.accepted_for?.id !== question.accepted_answer?.id;
+  const can_mutate = is_yours;
 
-  // console.log({ is_yours, can_mutate });
   return (
     <Answer_Card answer={answer}>
       <Answer_Card.Footer>

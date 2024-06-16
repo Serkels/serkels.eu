@@ -89,7 +89,7 @@ export default function Student_Editor({
 
           <fieldset>
             <label className={label()} htmlFor={names.field_of_study}>
-              Domain d'étude :
+              Domaine d'étude :
             </label>
 
             <Field
@@ -101,7 +101,7 @@ export default function Student_Editor({
               })}
               id={names.field_of_study}
               name={names.field_of_study}
-              placeholder="Domain d'étude..."
+              placeholder="Domaine d'étude..."
               type="text"
               disabled={isSubmitting}
             />
@@ -153,7 +153,7 @@ export default function Student_Editor({
 
           <fieldset>
             <label className={label()} htmlFor={names.language}>
-              Langue :
+              Langues parlées :
             </label>
 
             <Field

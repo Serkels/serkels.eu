@@ -18,7 +18,7 @@ export function Idle({
         className="w-full rounded-sm border border-solid border-[#dddddd] px-4 py-2 text-left hover:bg-gray-200"
         onClick={onClick}
       >
-        Posez une question aux étudiants...
+        Pose une question aux étudiant.e.s ...
       </button>
     </div>
   );

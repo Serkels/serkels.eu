@@ -16,7 +16,7 @@ export function SendingInProgress() {
         font-extrabold
       `}
       >
-        Envoie en cours...
+        Envoi en cours...
       </h1>
       <div className="mx-auto mt-5 text-center">
         <Spinner />

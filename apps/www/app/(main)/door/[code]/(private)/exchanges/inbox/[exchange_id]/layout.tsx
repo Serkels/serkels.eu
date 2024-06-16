@@ -1,6 +1,7 @@
 //
 
 import type { Params } from ":pipes/exchange_by_id";
+import { proxyClient } from ":trpc/server";
 import type { Metadata, ResolvingMetadata } from "next";
 import type { PropsWithChildren, ReactNode } from "react";
 import { Aside } from "./layout.client";
@@ -8,11 +9,12 @@ import { Aside } from "./layout.client";
 //
 
 export async function generateMetadata(
-  params: Params,
+  { params: { exchange_id } }: { params: Params },
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
+  const { title } = await proxyClient.exchanges.by_id.query(exchange_id);
   return {
-    title: `${params.exchange_id} :: ${(await parent).title?.absolute}`,
+    title: `${title} :: ${(await parent).title?.absolute}`,
   };
 }
 

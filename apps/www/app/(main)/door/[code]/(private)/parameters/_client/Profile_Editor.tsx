@@ -135,7 +135,7 @@ export default function Profile_Editor({
 
           <fieldset>
             <label className={label()} htmlFor="bio">
-              À propos :
+              Biographie :
             </label>
 
             <Field
@@ -147,7 +147,7 @@ export default function Profile_Editor({
               })}
               id="bio"
               name="bio"
-              placeholder="À propos..."
+              placeholder="Biographie..."
               type="text"
               rows={10}
               disabled={isSubmitting}

@@ -73,14 +73,14 @@ export default async function Page() {
             className={input({ className: "col-span-full" })}
             id={student_names.field_of_study}
             name={student_names.field_of_study}
-            placeholder="Domain d'étude"
+            placeholder="Domaine d'étude"
             type="text"
           />
           <textarea
             className={input({ className: "col-span-full" })}
             id={profile_names.bio}
             name={profile_names.bio}
-            placeholder="À propos"
+            placeholder="Biographie"
           />
           <label
             className={label({ className: "flex-col items-start space-x-0" })}
@@ -98,7 +98,7 @@ export default async function Page() {
             className={input({ className: "col-span-full" })}
             id={student_names.language}
             name={student_names.language}
-            placeholder="Langue"
+            placeholder="Langues parlées"
             type="text"
           />
           <select
@@ -106,7 +106,7 @@ export default async function Page() {
             name={student_names.interest}
           >
             <option hidden value={""}>
-              Intéressé par
+              Intéressé.e par
             </option>
             {categories.map(({ name, id }) => (
               <option value={String(id)} key={id}>
@@ -115,7 +115,7 @@ export default async function Page() {
             ))}
           </select>
           <label className={label()}>
-            <div className="flex-1">Email address</div>
+            <div className="flex-1">Adresse email</div>
             <Suspense>
               <EmailInput
                 className={input({ className: "w-fit flex-grow opacity-50" })}

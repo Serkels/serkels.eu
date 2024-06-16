@@ -97,7 +97,7 @@ export default function Conversation_Form({
               className={input({
                 className: "peer w-full rounded-2xl pr-10",
               })}
-              placeholder="Envoie un Message…"
+              placeholder="Envoi un Message…"
               autoComplete="off"
               disabled={isSubmitting || isLoading}
               name="message"

@@ -19,7 +19,7 @@ export function Exchanges_Filter() {
     { name: "Sur place", slug: Exchange_Filter.Enum.ON_SITE },
     { name: "Mes abonnements", slug: Exchange_Filter.Enum.MY_FOLLOWS },
     { name: "Date flexible", slug: Exchange_Filter.Enum.DATE_FLEXIBLE },
-    { name: "Date limité ", slug: Exchange_Filter.Enum.DATE_LIMITED },
+    { name: "Date limite ", slug: Exchange_Filter.Enum.DATE_LIMITED },
     { name: "Tout", slug: Exchange_Filter.Enum.ALL },
   ];
 

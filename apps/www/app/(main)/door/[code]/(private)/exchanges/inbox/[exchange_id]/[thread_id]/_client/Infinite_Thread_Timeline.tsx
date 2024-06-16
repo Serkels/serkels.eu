@@ -240,7 +240,15 @@ function Message_OKay(props: ComponentProps<typeof Message>) {
   return <Message {...props}>C'est OK pour moi, et pour toi ? ✅</Message>;
 }
 function Message_MeToo(props: ComponentProps<typeof Message>) {
-  return <Message {...props}>✅ C'est OK pour moi aussi.</Message>;
+  return (
+    <>
+      <Message {...props}>✅ C'est OK pour moi aussi.</Message>
+      <p className="mx-auto max-w-[85%] text-center text-sm opacity-50">
+        Vous allez recevoir une notification une fois que toutes les places de
+        l'échange sont prises.
+      </p>
+    </>
+  );
 }
 
 function Message_Denied(props: ComponentProps<typeof Message>) {
