@@ -32,7 +32,7 @@
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
     "@prisma/client": "5.15.0",
-    "@types/node": "20.14.2",
+    "@types/node": "20.14.3",
     "typescript": "5.4.5"
   }
 }
