@@ -94,12 +94,12 @@ function Idle() {
 
   const on_edit_click = useCallback<MouseEventHandler<HTMLAnchorElement>>(
     (event) => {
-      if (alreadyPopulated) return;
+      if (!alreadyPopulated) return;
       event.preventDefault();
       reset();
       setShowInfoBox(true);
     },
-    [],
+    [alreadyPopulated],
   );
 
   return (
@@ -120,12 +120,10 @@ function Idle() {
                   state: "ghost",
                   className: "box-content h-4 py-2",
                 })}
-                // className="h-4 text-Dove_Gray hover:text-Dove_Gray/50"
                 href={
                   alreadyPopulated ? "" : `/@~/exchanges/${exchange.id}/edit`
                 }
                 onClick={on_edit_click}
-                // onClick={alreadyPopulated ? handleClick : undefined}
               >
                 <Pen className="h-4" />
               </Link>
