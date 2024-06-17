@@ -12,11 +12,13 @@ import { useExchange } from "@1.modules/exchange.ui/context";
 import type { Message as Message_Type } from "@1.modules/inbox.domain";
 import { Message } from "@1.modules/inbox.ui/conversation/Message";
 import { Timeline } from "@1.modules/inbox.ui/conversation/Timeline";
+import { Exchange } from "@1.ui/react/icons";
 import { useDocumentVisibility, useTimeoutEffect } from "@react-hookz/web";
 import type { UseInfiniteQueryResult } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 import { useParams } from "next/navigation";
 import {
   useCallback,
@@ -25,6 +27,7 @@ import {
   useRef,
   type ComponentProps,
 } from "react";
+import { tv } from "tailwind-variants";
 import { P, match } from "ts-pattern";
 import { z } from "zod";
 
@@ -237,16 +240,35 @@ function Timeline_Message(props: Timeline_MessageProps) {
 }
 
 function Message_OKay(props: ComponentProps<typeof Message>) {
-  return <Message {...props}>C'est OK pour moi, et pour toi ? ✅</Message>;
+  return (
+    <>
+      <Message {...props}>C'est OK pour moi, et pour toi ? ✅</Message>
+      <div className={commun_message(props.variant)}>
+        <p className="text-xs">
+          <Image
+            alt="hourglass"
+            className="mr-2 inline-block"
+            height={12}
+            src="/hourglass.svg"
+            width={8}
+          />
+          En attente de confirmation du participant
+        </p>
+      </div>
+    </>
+  );
 }
 function Message_MeToo(props: ComponentProps<typeof Message>) {
   return (
     <>
       <Message {...props}>✅ C'est OK pour moi aussi.</Message>
-      <p className="mx-auto max-w-[85%] text-center text-sm opacity-50">
-        Vous allez recevoir une notification une fois que toutes les places de
-        l'échange sont prises.
-      </p>
+      <div className={commun_message(props.variant)}>
+        <Exchange className="mx-auto size-11" primary_gradient />
+        <p className="mx-auto max-w-72 text-base">
+          Vous allez recevoir une notification une fois que les places sont
+          completes
+        </p>
+      </div>
     </>
   );
 }
@@ -266,3 +288,13 @@ function Congratulations() {
     </div>
   );
 }
+
+const commun_message = tv({
+  base: "my-6 text-center align-middle",
+  variants: {
+    is_you: {
+      true: "-mr-8",
+      false: "-ml-8",
+    },
+  },
+});
