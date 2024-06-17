@@ -63,17 +63,17 @@ async function StudentMeta({ profile_id }: { profile_id: string }) {
   return (
     <ul>
       <li>
-        <b>Domain : </b> <span>{student.field_of_study}</span>
+        <b>Domaine d'étude : </b> <span>{student.field_of_study}</span>
       </li>
       <li>
         <b>Ville : </b> <span>{student.city}</span>
       </li>
       <li>
-        <b>Intéressé par : </b>{" "}
+        <b>Intéressé.e par : </b>{" "}
         <span>{student.interest.map(({ name }) => name).join(", ")}</span>
       </li>
       <li>
-        <b>Langues : </b> <span>{student.language}</span>
+        <b>Langues parléess : </b> <span>{student.language}</span>
       </li>
     </ul>
   );

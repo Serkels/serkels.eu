@@ -31,9 +31,7 @@ export function Share_Button({
   return (
     <div className="relative">
       {diplay_in_clipboard ? (
-        <div className={popover(popover_variant)}>
-          Copié dans le Presse-papiers
-        </div>
+        <div className={popover(popover_variant)}>Le lien est copié</div>
       ) : null}
       <button
         className={button({ className, intent: "light" })}

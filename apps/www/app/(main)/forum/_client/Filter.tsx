@@ -20,7 +20,7 @@ export function Filter() {
       ? [{ name: "Mes questions", slug: Forum_Filter.Enum.MINE }]
       : []),
     { name: "Questions répondues", slug: Forum_Filter.Enum.AWNSERED },
-    { name: "Questions approuvé", slug: Forum_Filter.Enum.APPROVED },
+    { name: "Questions approuvées", slug: Forum_Filter.Enum.APPROVED },
     // { name: "Tout", slug: Forum_Filter.Enum.ALL },
   ];
 

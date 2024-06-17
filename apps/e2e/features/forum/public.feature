@@ -11,7 +11,7 @@ Fonctionnalité: Voir le forum
     * je vois "Recherche"
     * je vois "Les dernières questions"
     * je vois "Questions répondues"
-    * je vois "Questions approuvé"
+    * je vois "Questions approuvées"
     * je vois "Cours et Matières"
     * je vois "Autres"
     * je vois "Tout"

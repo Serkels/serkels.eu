@@ -380,7 +380,7 @@ async function categories() {
     [
       { name: "Activités socio-culturelles​" },
       { name: "Cours de langues" },
-      { name: "Notes des cours" },
+      { name: "Notes de cours" },
       { name: "Soutien académique​" },
     ]
       .reverse()
@@ -394,7 +394,7 @@ async function categories() {
       { name: "Logement" },
       { name: "Stages et Alternance" },
       { name: "Santé et Bien-être" },
-      { name: "Vie estudiantine" },
+      { name: "Vie étudiante" },
       { name: "Transport et Mobilité" },
       { name: "Technologie et Informatique" },
       { name: "International et Échanges" },

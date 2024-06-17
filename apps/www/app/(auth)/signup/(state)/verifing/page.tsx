@@ -3,16 +3,8 @@
 import { AuthError } from "@1.modules/core/errors";
 import { Spinner } from "@1.ui/react/spinner";
 import type { Metadata, ResolvingMetadata } from "next";
-import dynamic from "next/dynamic";
-
-//
-
-const Verifying_Flow = dynamic(() => import("./page.client"), {
-  ssr: false,
-  loading() {
-    return <Placeholder />;
-  },
-});
+import { Suspense } from "react";
+import Verifying_Flow from "./page.client";
 
 //
 
@@ -41,12 +33,16 @@ export default function Page({
     throw new AuthError(searchParams.error);
   }
 
-  return <Verifying_Flow />;
+  return (
+    <Suspense fallback={<Placeholder />}>
+      <Verifying_Flow />
+    </Suspense>
+  );
 }
 
 //
 
-function Placeholder({}) {
+function Placeholder() {
   return (
     <main className="mx-auto text-center ">
       <h1

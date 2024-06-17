@@ -19,7 +19,7 @@ export function SeeProfileAvatarMedia(
       {...other_props}
     >
       <AvatarMedia.SubTitle>
-        <Link href={`/@${profile.id}`}>Voir profile</Link>
+        <Link href={`/@${profile.id}`}>Voir profil</Link>
       </AvatarMedia.SubTitle>
     </AvatarMedia>
   );

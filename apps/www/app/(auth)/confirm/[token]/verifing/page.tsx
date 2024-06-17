@@ -2,16 +2,8 @@
 
 import { Spinner } from "@1.ui/react/spinner";
 import type { Metadata, ResolvingMetadata } from "next";
-import dynamic from "next/dynamic";
-
-//
-
-const Verifying_Flow = dynamic(() => import("./page.client"), {
-  ssr: false,
-  loading() {
-    return <Spinner />;
-  },
-});
+import { Suspense } from "react";
+import Verifying_Flow from "./page.client";
 
 //
 
@@ -49,7 +41,9 @@ export default async function Page({ params }: { params: { token: string } }) {
         Vérification
       </h1>
       <div className="mx-auto mt-5 text-center">
-        <Verifying_Flow token={token} />
+        <Suspense fallback={<Spinner />}>
+          <Verifying_Flow token={token} />
+        </Suspense>
       </div>
     </>
   );

@@ -43,7 +43,7 @@ export function CreateAnswerForm({
             "
               disabled={isSubmitting}
               name="content"
-              placeholder="Pose une questions aux étudiants ..."
+              placeholder="Pose une question aux étudiant.e.s ..."
               required
             />
             <ErrorMessage name="content">
