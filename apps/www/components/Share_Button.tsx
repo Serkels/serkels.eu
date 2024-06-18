@@ -29,7 +29,7 @@ export function Share_Button({
   }, [href]);
 
   return (
-    <div className="relative">
+    <div>
       {diplay_in_clipboard ? (
         <div className={popover(popover_variant)}>Le lien est copié</div>
       ) : null}

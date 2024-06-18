@@ -2,6 +2,7 @@ import { Exchange_TypeSchema } from "@1.modules/exchange.domain";
 import { Exchange as ExchangeIcon } from "@1.ui/react/icons";
 import { P, match } from "ts-pattern";
 import { OnlineOrLocation } from "../OnlineOrLocation";
+import { Exchange_Date } from "./Date";
 import { useExchange } from "./context";
 import { exchange_card } from "./exchange_card";
 
@@ -13,7 +14,7 @@ export function InfoBar() {
 
   return (
     <div className={info_bar()}>
-      <div className="inline-flex">
+      <div className="flex flex-col gap-2 md:inline-flex md:flex-row">
         <span
           className={category({
             className: "min-w-[100px] font-bold uppercase",
@@ -30,24 +31,25 @@ export function InfoBar() {
           location={exchange.location ?? ""}
         />
       </div>
+      <div className="flex flex-col-reverse gap-2">
+        <Exchange_Date />
 
-      {/*  */}
-
-      <div className="flex items-center justify-between">
-        <span className="whitespace-nowrap font-bold uppercase">
-          {exchange.category.name}
-        </span>
-        <ExchangeIcon
-          className={exchange_icon({
-            with_return: Boolean(exchange.return),
-          })}
-        />
-        <span className="whitespace-nowrap font-bold uppercase">
-          {match(exchange.return)
-            .with(null, () => "Sans échange")
-            .with(P._, (category) => category.name)
-            .exhaustive()}
-        </span>
+        <div className="flex items-center justify-between md:hidden">
+          <span className="whitespace-nowrap font-bold uppercase">
+            {exchange.category.name}
+          </span>
+          <ExchangeIcon
+            className={exchange_icon({
+              with_return: Boolean(exchange.return),
+            })}
+          />
+          <span className="whitespace-nowrap font-bold uppercase">
+            {match(exchange.return)
+              .with(null, () => "Sans échange")
+              .with(P._, (category) => category.name)
+              .exhaustive()}
+          </span>
+        </div>
       </div>
     </div>
   );

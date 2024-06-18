@@ -20,6 +20,14 @@ export function Exchange_Date() {
   const exchange = useExchange();
   return (
     <div className="flex flex-col text-right">
+      <ExpiryDate expiry_date={exchange.expiry_date} />
+    </div>
+  );
+}
+export function Publish_Date() {
+  const exchange = useExchange();
+  return (
+    <div className="flex flex-col text-right">
       <Time className="font-bold" date={exchange.created_at}>
         {format(exchange.created_at, "P", { locale: fr })}
       </Time>
@@ -29,7 +37,6 @@ export function Exchange_Date() {
           {formatDistanceToNow(exchange.updated_at, { locale: fr })}
         </Time>
       ) : null}
-      <ExpiryDate expiry_date={exchange.expiry_date} />
     </div>
   );
 }

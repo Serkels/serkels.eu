@@ -12,11 +12,11 @@ export function OnlineOrLocation(props: {
     <a
       className="cursor-pointer font-bold"
       href={match(props.is_online)
-        .with(true, () =>`/exchanges?f=ONLINE`)
-        .with(false, () =>`/exchanges?q=${props.location}`)
+        .with(true, () => `/exchanges?f=ONLINE`)
+        .with(false, () => `/exchanges?q=${props.location}`)
         .exhaustive()}
     >
-      <LocationRadius className="inline-block h-4 w-4" />{" "}
+      <LocationRadius className="inline-block h-4 w-4 text-primary" />{" "}
       {match(props.is_online)
         .with(true, () => "En ligne")
         .with(false, () => props.location)
