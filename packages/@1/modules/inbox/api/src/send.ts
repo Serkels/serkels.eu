@@ -54,7 +54,10 @@ export const send = next_auth_procedure
         (): Prisma.ThreadUpdateInput => ({
           exchange_threads: {
             update: {
-              data: { last_seen_date: updated_at },
+              data: {
+                deal: { update: { updated_at } },
+                last_seen_date: updated_at,
+              },
               where: {
                 owner_id_thread_id: { owner_id: student_id, thread_id },
               },

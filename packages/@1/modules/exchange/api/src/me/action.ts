@@ -27,6 +27,7 @@ export const action = next_auth_procedure
   )
   .mutation(async ({ ctx: { payload, prisma }, input }) => {
     const { action, exchange_id, thread_id } = input;
+    const updated_at = new Date();
     const { profile } = payload;
     const { id: student_id } = await prisma.student.findUniqueOrThrow({
       select: { id: true },
@@ -86,27 +87,36 @@ export const action = next_auth_procedure
       .with(Deal_Status_Schema.Enum.IDLE, () => HANDSHAKE_TOCTOC) // should not happen
       .exhaustive();
 
-    const [updated_deal] = await prisma.$transaction([
-      prisma.deal.update({
-        data: {
-          status: Deal_Status_Schema.parse(state.value),
-          updated_at: new Date(),
-        },
-        where: { id: deal.id },
-      }),
-      prisma.thread.update({
-        data: {
-          updated_at: new Date(),
-          messages: {
-            create: {
-              content,
-              author: { connect: { id: profile.id } },
+    await prisma.thread.update({
+      data: {
+        updated_at,
+        exchange_threads: {
+          update: {
+            data: {
+              deal: {
+                update: {
+                  updated_at,
+                  status: Deal_Status_Schema.parse(state.value),
+                },
+              },
+            },
+            where: {
+              owner_id_thread_id: { owner_id: student_id, thread_id },
             },
           },
         },
-        where: { id: thread_id },
-      }),
-    ]);
+        messages: {
+          create: {
+            content,
+            author: { connect: { id: profile.id } },
+          },
+        },
+      },
+      select: {
+        id: true,
+      },
+      where: { id: thread_id },
+    });
 
     {
       const exchange = await prisma.exchange.findUniqueOrThrow({
@@ -178,6 +188,4 @@ export const action = next_auth_procedure
         ]);
       }
     }
-
-    return updated_deal;
   });
