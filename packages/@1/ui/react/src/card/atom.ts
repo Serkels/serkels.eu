@@ -9,7 +9,7 @@ export const card = tv({
   slots: {
     body: "px-5 py-3",
     header: "mb-4",
-    footer: "mt-4 bg-black px-5 py-3 text-white",
+    footer: "bg-black px-5 py-3 text-white",
     category: "text-xs text-[#707070]",
   },
 });

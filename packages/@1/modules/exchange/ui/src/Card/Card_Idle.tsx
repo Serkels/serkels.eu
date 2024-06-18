@@ -2,6 +2,7 @@ import { AvatarMedia } from "@1.ui/react/avatar";
 import { School, Share } from "@1.ui/react/icons";
 import { type PropsWithChildren } from "react";
 import { Card } from "./Card";
+import { Publish_Date } from "./Date";
 import { InfoBar } from "./InfoBar";
 import { useExchange } from "./context";
 import { exchange_card } from "./exchange_card";
@@ -54,6 +55,7 @@ export function Card_Idle({ children }: PropsWithChildren) {
           <h3 className="my-4 break-words text-2xl font-bold">{title}</h3>
           <p>{description}</p>
         </article>
+        <Publish_Date />
       </div>
       <footer className={footer()}>
         <div className="flex items-center justify-between">

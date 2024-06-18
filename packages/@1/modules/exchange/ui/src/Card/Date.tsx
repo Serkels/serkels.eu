@@ -19,7 +19,7 @@ import { useExchange } from "./context";
 export function Exchange_Date() {
   const exchange = useExchange();
   return (
-    <div className="flex flex-col text-right">
+    <div className="flex w-max flex-col self-end text-right">
       <ExpiryDate expiry_date={exchange.expiry_date} />
     </div>
   );
@@ -27,9 +27,9 @@ export function Exchange_Date() {
 export function Publish_Date() {
   const exchange = useExchange();
   return (
-    <div className="flex flex-col text-right">
-      <Time className="font-bold" date={exchange.created_at}>
-        {format(exchange.created_at, "P", { locale: fr })}
+    <div className="mt-8 flex gap-2 text-[#707070]">
+      <Time className="" date={exchange.created_at}>
+        Publié le : {format(exchange.created_at, "P", { locale: fr })}
       </Time>
       {!isEqual(exchange.updated_at, exchange.created_at) ? (
         <Time date={exchange.updated_at}>
