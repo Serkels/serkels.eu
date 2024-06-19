@@ -5,21 +5,14 @@ import { tv } from "tailwind-variants";
 //
 
 export const label = tv({
-  base: `
-    mb-2
-    block
-    text-base
-    font-medium
-    text-gray-900
-  `,
+  base: `mb-2 block text-base font-medium text-gray-900`,
   variants: {
     tv$color: {
       danger: "border-danger",
       success: "border-success",
     },
     tv$size: {
-      base: `
-      `,
+      base: ` `,
     },
   },
   defaultVariants: {
@@ -32,16 +25,17 @@ export const label = tv({
 export const input = tv({
   base: `
     block
-    w-full
+   w-full
+    resize-none
     rounded-sm
     border
     border-solid
     border-Silver_Chalice
-    placeholder-black
-    focus:ring-gray-900
-    disabled:pointer-events-none
-    disabled:opacity-50
-  `,
+   placeholder-black
+   focus:ring-gray-900
+   disabled:pointer-events-none
+   disabled:opacity-50
+   `,
   variants: {
     wrong_value: {
       true: "border-2 border-danger",
@@ -50,18 +44,8 @@ export const input = tv({
       success: "border-success",
     },
     tv$size: {
-      base: `
-        p-2.5
-        text-sm
-        text-gray-900
-        focus:border-gray-500
-      `,
-      xs: `
-        p-2
-        text-xs
-        text-gray-900
-        focus:border-gray-500
-      `,
+      base: `p-2.5 text-sm text-gray-900 focus:border-gray-500`,
+      xs: `p-2 text-xs text-gray-900 focus:border-gray-500`,
     },
   },
   defaultVariants: {
@@ -96,12 +80,6 @@ export const fieldset = tv({
 });
 
 export const select = tv({
-  base: `
-  w-full
-  border
-  border-Silver_Chalice
-  bg-white
-  p-2.5
-  `,
+  base: `w-full border border-Silver_Chalice bg-white p-2.5`,
   variants: {},
 });

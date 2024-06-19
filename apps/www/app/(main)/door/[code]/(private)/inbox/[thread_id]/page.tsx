@@ -76,7 +76,7 @@ export default async function Page({ params }: { params: Params }) {
         <BackButton href={"/@~/inbox"} />
         <SeeProfileAvatarMedia profile={participant} />
       </header>
-      <div className="overflow-y-auto py-4 pr-5">
+      <div className="max-h-[calc(100%_-_theme(spacing.12))] overflow-y-auto py-4 pr-5">
         <Thread_Timeline profile_id={profile_id} />
       </div>
       <footer className={footer()}>
@@ -88,27 +88,32 @@ export default async function Page({ params }: { params: Params }) {
 
 const layout = tv({
   base: `
-    grid
-    h-full
-    max-h-[calc(100vh_-_theme(spacing.16)-_theme(spacing.8))]
-    grid-rows-[auto_1fr_auto]
-    overflow-hidden
-    bg-white
-    text-black
-    [&>*]:px-7
-  `,
+   fixed
+   bottom-16
+   top-16
+   grid
+   h-full
+   max-h-[calc(100vh_-_theme(spacing.16)-_theme(spacing.8))]
+   grid-rows-[auto_1fr_auto]
+   overflow-hidden
+   bg-white
+   text-black
+   [&>*]:px-7
+   `,
   slots: {
-    header: "flex flex-row items-center gap-2 space-x-3 py-7 ",
+    header: "sticky top-0 flex flex-row justify-between gap-2 space-x-3 py-7",
     footer: `
-      flex
-      min-h-[theme(spacing.24)]
-      flex-col
-      items-center
-      justify-center
-      space-y-4
-      bg-white
-      py-5
-      text-black
-    `,
+     sticky
+     bottom-16
+     flex
+     min-h-[theme(spacing.24)]
+     flex-col
+     items-center
+     justify-center
+     space-y-4
+     bg-white
+     py-5
+     text-black
+     `,
   },
 });
