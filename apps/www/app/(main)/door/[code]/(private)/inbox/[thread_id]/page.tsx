@@ -99,11 +99,10 @@ const layout = tv({
    `,
   slots: {
     body: `
-      max-h-[calc(100%_-_theme(spacing.64))]
+      max-h-full
       overflow-y-auto
       py-4
       pr-5
-      md:max-h-full
     `,
     header: `
       flex
