@@ -12,7 +12,7 @@ export function Exchange_Share() {
     .split(" ")
     .join("+")}`;
   return (
-    <Share_Button className="-mr-4" href={href}>
+    <Share_Button className="px-0" href={href}>
       <Share className="size-5 text-white" />
     </Share_Button>
   );
