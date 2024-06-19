@@ -60,7 +60,7 @@ export default function Infinite_Thread_Timeline({
       behavior: "smooth",
       block: "end",
     });
-  }, [query_info.isFetching, scroll_target_ref]);
+  }, [query_info.dataUpdatedAt, scroll_target_ref]);
 
   const { data: session, status } = useSession();
 

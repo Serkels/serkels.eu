@@ -8,9 +8,9 @@ export function Message(
 ) {
   const { children, variant, ...other_props } = props;
   return (
-    <p className={message(variant)} {...other_props}>
+    <article className={message(variant)} {...other_props}>
       {children}
-    </p>
+    </article>
   );
 }
 

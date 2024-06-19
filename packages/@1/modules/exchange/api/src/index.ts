@@ -38,7 +38,7 @@ const exchange_api_router = router({
     }),
   //
 
-  me,
+  me: me,
 
   //
 

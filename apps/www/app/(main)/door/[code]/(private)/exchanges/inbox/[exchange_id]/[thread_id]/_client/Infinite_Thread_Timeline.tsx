@@ -13,7 +13,11 @@ import type { Message as Message_Type } from "@1.modules/inbox.domain";
 import { Message } from "@1.modules/inbox.ui/conversation/Message";
 import { Timeline } from "@1.modules/inbox.ui/conversation/Timeline";
 import { Exchange } from "@1.ui/react/icons";
-import { useDocumentVisibility, useTimeoutEffect } from "@react-hookz/web";
+import {
+  useDocumentVisibility,
+  useTimeoutEffect,
+  useUpdateEffect,
+} from "@react-hookz/web";
 import type { UseInfiniteQueryResult } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
@@ -49,6 +53,13 @@ export default function Infinite_Thread_Timeline({
   const last_seen_thread_update =
     TRPC_React.student.me.last_seen_by_thread_id.useMutation();
   const query_thread = TRPC_React.inbox.thread.by_id.useQuery(thread_id);
+  const inbox_query =
+    TRPC_React.exchanges.me.inbox.by_thread_id.useQuery(thread_id);
+
+  useUpdateEffect(() => {
+    utils.inbox.thread.messages.invalidate({ thread_id });
+  }, [inbox_query.dataUpdatedAt]);
+
   const query_info = TRPC_React.inbox.thread.messages.useInfiniteQuery(
     {
       thread_id,
@@ -76,8 +87,8 @@ export default function Infinite_Thread_Timeline({
   const [, reset] = useTimeoutEffect(do_scroll_to_bottom, 1_111);
   useEffect(reset, [document_visibility]);
   useLayoutEffect(do_scroll_to_bottom, [
-    query_info.isFetched,
-    query_thread.data?.updated_at,
+    query_info.dataUpdatedAt,
+    Number(query_thread.data?.updated_at),
     scroll_target_ref,
   ]);
 
@@ -233,7 +244,7 @@ function Timeline_Message(props: Timeline_MessageProps) {
             {format(message.created_at, "Pp", { locale: fr })}
             <br />
           </time>
-          {message.content}
+          <p className="whitespace-pre-line">{message.content}</p>
         </Message>
       )),
   );
