@@ -103,7 +103,7 @@ const layout = tv({
       overflow-y-auto
       py-4
       pr-5
-      `,
+    `,
     header: "flex flex-row items-center gap-2 space-x-3 py-7",
     footer: `
       flex
