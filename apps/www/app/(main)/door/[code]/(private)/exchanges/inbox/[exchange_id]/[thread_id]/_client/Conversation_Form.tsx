@@ -31,7 +31,15 @@ export default function Conversation_Form({ thread_id }: Params) {
           {...register("message")}
           autoComplete="off"
           className={input({
-            className: "peer w-full rounded-2xl pr-10",
+            className: `
+              peer
+              max-h-32
+              min-h-16
+              w-full
+              resize-none
+              rounded-2xl
+              pr-14
+            `,
           })}
           readOnly={isSubmitting}
           placeholder="Envoie un Message…"

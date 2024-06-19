@@ -105,7 +105,15 @@ const layout = tv({
       pr-5
       md:max-h-full
     `,
-    header: "flex flex-row items-center gap-2 space-x-3 py-7",
+    header: `
+      flex
+      flex-row
+      items-center
+      gap-2
+      space-x-3
+      py-4
+      md:py-7
+    `,
     footer: `
       flex
       min-h-[theme(spacing.24)]
