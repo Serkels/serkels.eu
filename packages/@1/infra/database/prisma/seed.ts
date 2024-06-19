@@ -329,6 +329,10 @@ async function partners_vip() {
     email: "ahmadali.fr@gmail.com",
     name: "Ahmad Ali University",
   });
+  await partner({
+    email: "juliet.meere.uee@gmail.com",
+    name: "Juliet Meere University",
+  });
 }
 
 //
