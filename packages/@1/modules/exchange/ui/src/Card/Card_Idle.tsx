@@ -2,7 +2,7 @@ import { AvatarMedia } from "@1.ui/react/avatar";
 import { School, Share } from "@1.ui/react/icons";
 import { type PropsWithChildren } from "react";
 import { Card } from "./Card";
-import { Exchange_Date } from "./Date";
+import { Publish_Date } from "./Date";
 import { InfoBar } from "./InfoBar";
 import { useExchange } from "./context";
 import { exchange_card } from "./exchange_card";
@@ -10,7 +10,9 @@ import { exchange_card } from "./exchange_card";
 export function Card_Idle({ children }: PropsWithChildren) {
   const exchange = useExchange();
   const { base, body } = exchange_card();
-  const { footer, header } = exchange_card({ type: exchange.type });
+  const { footer, header } = exchange_card({
+    type: exchange.type,
+  });
   const { title, description } = exchange;
   return (
     <div id={exchange.id} className={base()}>
@@ -26,7 +28,7 @@ export function Card_Idle({ children }: PropsWithChildren) {
           </Card.Header.Left.Renderer>
           <Card.Header.Center.Renderer childs={children}>
             <div>
-              <figure className="flex flex-col items-center">
+              <figure className="flex flex-col items-end md:items-center ">
                 <div className="text-xl font-bold text-primary">
                   {`${exchange.deals.length} / ${exchange.places}`}
                 </div>
@@ -36,10 +38,10 @@ export function Card_Idle({ children }: PropsWithChildren) {
               </figure>
             </div>
           </Card.Header.Center.Renderer>
-          <div className="flex items-start justify-end space-x-2">
-            <Card.Header.Right.Renderer childs={children}>
-              <Exchange_Date />
-            </Card.Header.Right.Renderer>
+          <div className="hidden items-start justify-end space-x-2 text-xs md:flex">
+            <Card.Header.Right.Renderer
+              childs={children}
+            ></Card.Header.Right.Renderer>
           </div>
         </header>
 
@@ -53,6 +55,7 @@ export function Card_Idle({ children }: PropsWithChildren) {
           <h3 className="my-4 break-words text-2xl font-bold">{title}</h3>
           <p>{description}</p>
         </article>
+        <Publish_Date />
       </div>
       <footer className={footer()}>
         <div className="flex items-center justify-between">
@@ -68,9 +71,7 @@ export function Card_Idle({ children }: PropsWithChildren) {
           </div>
           <div>
             <Card.Footer.Right.Renderer childs={children}>
-              <button className="block">
-                <Share className="size-5" />
-              </button>
+              <Share className="size-5" />
             </Card.Footer.Right.Renderer>
           </div>
         </div>

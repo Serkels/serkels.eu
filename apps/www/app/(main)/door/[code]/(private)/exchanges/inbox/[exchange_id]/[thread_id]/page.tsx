@@ -1,6 +1,7 @@
 //
 
 import { SeeProfileAvatarMedia } from ":components/avatar";
+import BackButton from ":components/button/BackButton";
 import { Loading_Placeholder } from ":components/placeholder/Loading_Placeholder";
 import type { Params as ExchangeParams } from ":pipes/exchange_by_id";
 import { session_profile_id } from ":pipes/session_profile_id";
@@ -81,6 +82,7 @@ export default async function Page({
     <TRPC_Hydrate>
       <main className={base()}>
         <header className={header()}>
+          <BackButton href={`/@~/exchanges/inbox/${exchange_id}`} />
           <SeeProfileAvatarMedia profile={participant} />
         </header>
         <div className="max-h-[calc(100%_-_theme(spacing.64))] overflow-y-auto py-4 pr-5 md:max-h-full">
@@ -111,7 +113,7 @@ const layout = tv({
    `,
 
   slots: {
-    header: "sticky top-0 flex flex-row justify-between space-x-3 py-7",
+    header: "sticky top-0 flex flex-row gap-2 justify-between space-x-3 py-7",
     footer: `
      fixed 
      bottom-16 

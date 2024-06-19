@@ -1,5 +1,6 @@
 //
 
+import BackButton from ":components/button/BackButton";
 import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
 import { column_screen } from "@1.ui/react/grid/atom";
 import type { Metadata, ResolvingMetadata } from "next";
@@ -29,7 +30,10 @@ export default async function Page() {
   return (
     <TRPC_Hydrate>
       <main className={column_screen({ className: "bg-white text-black" })}>
-        <h6 className="my-10 pl-2 text-2xl font-bold">Écrire à</h6>
+        <div className="flex flex-row items-center gap-2 px-6">
+          <BackButton href={"/@~/inbox"} />
+          <h6 className="my-10 pl-2 text-2xl font-bold">Écrire à</h6>
+        </div>
         <Infinite_Contacts_List />
       </main>
     </TRPC_Hydrate>
