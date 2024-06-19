@@ -48,17 +48,17 @@ export const find = next_auth_procedure
       ],
     };
 
-    const find_cursor = cursor
-      ? ({
-          participant_per_exchange: {
-            parent_id: cursor,
-            participant_id: profile.id,
-          },
-        } as Prisma.DealWhereUniqueInput)
-      : {};
-
     const deals = await prisma.deal.findMany({
-      ...find_cursor,
+      ...(cursor
+        ? {
+            cursor: {
+              participant_per_exchange: {
+                parent_id: cursor,
+                participant_id: profile.id,
+              },
+            },
+          }
+        : {}),
       orderBy: { updated_at: "desc" },
       select: {
         parent: true,

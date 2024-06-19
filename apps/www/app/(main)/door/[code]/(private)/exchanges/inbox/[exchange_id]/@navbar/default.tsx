@@ -29,23 +29,21 @@ export default async function DealNavbarPage({ params }: { params: Params }) {
     return (
       <TRPC_Hydrate>
         <div className={column_screen({ className: "pt-10 " })}>
-          <header className="flex h-16 items-center justify-start px-5">
-            <div className="flex gap-4">
-              <BackButton href={"/@~/exchanges/inbox"} />
+          <header className="flex h-16 items-center justify-start gap-4 px-5">
+            <BackButton href={"/@~/exchanges/inbox"} />
 
-              <div className="flex flex-col">
-                <h6 className="line-clamp-2 flex-1 text-xl font-bold">
-                  {exchange.title}
-                </h6>
-                <Link
-                  href={{
-                    pathname: "/exchanges",
-                    query: { q: exchange.title },
-                  }}
-                >
-                  Consulter l'échange
-                </Link>
-              </div>
+            <div className="flex flex-col">
+              <h6 className="line-clamp-2 flex-1 text-xl font-bold">
+                {exchange.title}
+              </h6>
+              <Link
+                href={{
+                  pathname: "/exchanges",
+                  query: { q: exchange.title },
+                }}
+              >
+                Consulter l'échange
+              </Link>
             </div>
           </header>
 
@@ -53,12 +51,12 @@ export default async function DealNavbarPage({ params }: { params: Params }) {
 
           <nav
             className="
-            my-8
-            min-h-0
-            flex-1
-            overflow-y-auto
-            px-8
-          "
+              my-8
+              min-h-0
+              flex-1
+              overflow-y-auto
+              px-8
+            "
           >
             <Infinite_Thread_List exchange_id={exchange_id} />
           </nav>

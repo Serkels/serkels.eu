@@ -9,6 +9,8 @@ export function Loading() {
       <Item.Footer>
         <ContentLoader
           speed={2}
+          height="100px"
+          preserveAspectRatio="none"
           viewBox="0 0 100 100"
           backgroundColor="#f3f3f3"
           foregroundColor="#ecebeb"
