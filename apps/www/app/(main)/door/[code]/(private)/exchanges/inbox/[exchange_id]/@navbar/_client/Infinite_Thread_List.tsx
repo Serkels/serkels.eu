@@ -60,13 +60,14 @@ function UserThread_Item({
   const { data: session } = useSession();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const utils = TRPC_React.useUtils();
   const profile_id = session?.profile.id ?? PROFILE_UNKNOWN.id;
   const info = TRPC_React.exchanges.me.inbox.by_thread_id.useQuery(
     thread_id,
   ) as UseQueryResult<Inbox & { deal: { parent_id: string } }>;
 
   useUpdateEffect(() => {
-    info.refetch();
+    utils.exchanges.me.inbox.by_thread_id.invalidate(thread_id);
   }, [thread_id, Number(updated_at)]);
 
   return (

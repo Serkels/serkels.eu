@@ -28,7 +28,7 @@ export const profile_messages = tv({
   base: "mb-4 flex flex-row justify-start",
   slots: {
     avatar: "relative flex h-8 w-8 flex-shrink-0",
-    group: "grid flex-1 grid-flow-row gap-2 pr-3 text-sm",
+    group: "grid flex-1 grid-flow-row gap-2 px-3 text-sm",
   },
   variants: {
     is_you: {

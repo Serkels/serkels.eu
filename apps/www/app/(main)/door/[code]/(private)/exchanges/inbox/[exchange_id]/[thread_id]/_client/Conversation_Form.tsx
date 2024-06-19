@@ -1,56 +1,135 @@
 "use client";
 
+import type { Params } from ":pipes/thread_by_id";
 import { TRPC_React } from ":trpc/client";
-import { Deal_Status_Schema } from "@1.modules/exchange.domain";
 import { useExchange } from "@1.modules/exchange.ui/context";
 import { Button } from "@1.ui/react/button";
+import { useEnterToSubmit } from "@1.ui/react/form";
+import { SendButton } from "@1.ui/react/form/SendButton";
 import { input } from "@1.ui/react/form/atom";
-import { PaperPlane } from "@1.ui/react/icons";
-import { useDocumentVisibility, useTimeoutEffect } from "@react-hookz/web";
-import { Field, Form, Formik } from "formik";
-import { useCallback, useEffect } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useUpdateEffect } from "@react-hookz/web";
+import { useCallback, useLayoutEffect } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { StateMessageOutlet } from "./StateMessageOutlet";
 
 //
 
-export default function Conversation_Form({
-  thread_id,
-}: {
-  thread_id: string;
-}) {
-  const exchange = useExchange();
-  const exchange_id = exchange.id;
-  const send = TRPC_React.inbox.thread.send.useMutation();
-  const send_deal_update = TRPC_React.exchanges.me.deal_update.useMutation();
-  const action = TRPC_React.exchanges.me.inbox.action.useMutation();
-  const inbox = TRPC_React.exchanges.me.inbox.by_thread_id.useQuery(thread_id);
-  const next_actions = TRPC_React.exchanges.me.inbox.next_actions.useQuery({
-    exchange_id,
-    thread_id,
+export default function Conversation_Form({ thread_id }: Params) {
+  const {
+    form: {
+      formState: { isSubmitting, isLoading },
+      register,
+    },
+    on_submit,
+  } = use_form({ thread_id });
+  return (
+    <section className="w-full">
+      <form className="relative" onSubmit={on_submit}>
+        <textarea
+          {...register("message")}
+          autoComplete="off"
+          className={input({
+            className: `
+              peer
+              max-h-32
+              min-h-16
+              w-full
+              resize-none
+              rounded-2xl
+              pr-14
+            `,
+          })}
+          readOnly={isSubmitting}
+          placeholder="Envoie un Message…"
+        ></textarea>
+        <SendButton isSubmitting={isSubmitting} />
+      </form>
+      <ActionButtonGroup
+        isDisabled={isSubmitting || isLoading}
+        thread_id={thread_id}
+      />
+      <StateMessageOutlet thread_id={thread_id} />
+    </section>
+  );
+}
+
+//
+
+const form_zod_schema = z.object({
+  message: z.string().trim().min(1),
+});
+type FormValues = z.infer<typeof form_zod_schema>;
+
+function use_form({ thread_id }: Params) {
+  const form = useForm<FormValues>({
+    resolver: zodResolver(form_zod_schema),
   });
+  const send_message = TRPC_React.inbox.thread.send.useMutation();
   const utils = TRPC_React.useUtils();
-  const invalidate = useCallback(async () => {
-    await Promise.all([
-      utils.exchanges.by_id.invalidate(exchange_id),
-      utils.exchanges.me.find.invalidate(),
+
+  const invalidate = () =>
+    Promise.all([
       utils.exchanges.me.inbox.by_thread_id.invalidate(thread_id),
-      utils.exchanges.me.inbox.by_exchange_id.invalidate({ exchange_id }),
-      utils.exchanges.me.inbox.next_actions.invalidate(),
       utils.inbox.thread.messages.invalidate({ thread_id }),
     ]);
-  }, [utils, thread_id]);
 
-  const document_visibility = useDocumentVisibility();
-  const [, reset] = useTimeoutEffect(invalidate, 1_111);
-  useEffect(reset, [document_visibility]);
+  const on_submit = form.handleSubmit(async ({ message: content }) => {
+    await send_message.mutateAsync({ content, thread_id });
+    form.setValue("message", "");
+    form.setFocus("message");
+    await invalidate();
+  });
 
-  const send_message = useCallback(
-    async (content: string) => {
-      await send.mutateAsync({ content, thread_id });
-      await send_deal_update.mutateAsync({ exchange_id, thread_id });
-      await invalidate();
-    },
-    [send.mutateAsync, thread_id],
-  );
+  useEnterToSubmit({
+    is_submitting: form.formState.isSubmitting,
+    on_submit,
+  });
+
+  useLayoutEffect(() => {
+    form.setFocus("message");
+  }, [form.setFocus]);
+
+  return { form, on_submit };
+}
+
+//
+
+function ActionButtonGroup({
+  isDisabled,
+  thread_id,
+}: Params & { isDisabled: boolean }) {
+  const { id: exchange_id } = useExchange();
+  const utils = TRPC_React.useUtils();
+  const action = TRPC_React.exchanges.me.inbox.action.useMutation();
+  const next_actions_query =
+    TRPC_React.exchanges.me.inbox.next_actions.useQuery({
+      exchange_id,
+      thread_id,
+    });
+  const next_actions = next_actions_query.data ?? {
+    can_approuve: false,
+    can_denie: false,
+  };
+
+  const inbox_query =
+    TRPC_React.exchanges.me.inbox.by_thread_id.useQuery(thread_id);
+  useUpdateEffect(() => {
+    utils.exchanges.me.inbox.next_actions.invalidate({ thread_id });
+  }, [inbox_query.dataUpdatedAt]);
+
+  const invalidate = () =>
+    Promise.all([
+      utils.exchanges.by_id.invalidate(exchange_id),
+      utils.exchanges.me.inbox.by_thread_id.invalidate(thread_id),
+      utils.inbox.thread.messages.invalidate({ thread_id }),
+      utils.exchanges.me.inbox.next_actions.invalidate({
+        exchange_id,
+        thread_id,
+      }),
+    ]);
+
   const send_okay = useCallback(async () => {
     await action.mutateAsync({
       action: "APPROVE",
@@ -58,7 +137,8 @@ export default function Conversation_Form({
       thread_id,
     });
     await invalidate();
-  }, [thread_id]);
+  }, [exchange_id, thread_id]);
+
   const send_nope = useCallback(async () => {
     await action.mutateAsync({
       action: "DENIE",
@@ -66,70 +146,23 @@ export default function Conversation_Form({
       thread_id,
     });
     await invalidate();
-  }, [thread_id]);
-
-  const isLoading =
-    send.isLoading ||
-    action.isLoading ||
-    exchange.deals.length >= exchange.places;
-  const next = next_actions.data ?? { can_approuve: false, can_denie: false };
-  if (!next_actions.data) {
-    return null;
-  }
-
-  if (inbox.data?.deal.status == Deal_Status_Schema.Enum.APPROVED) {
-    // TODO(douglasduteil): display congrats.
-  }
+  }, [exchange_id, thread_id]);
 
   return (
-    <Formik
-      initialValues={{ message: "" }}
-      onSubmit={async (value, formik) => {
-        await send_message(value.message);
-        formik.resetForm();
-      }}
-    >
-      {({ isSubmitting }) => (
-        <Form className="w-full">
-          <div className="relative">
-            <Field
-              as="textarea"
-              className={input({
-                className: "peer h-32 w-full resize-none rounded-2xl pr-10",
-              })}
-              placeholder="Envoie un Message…"
-              autoComplete="off"
-              disabled={isSubmitting || isLoading}
-              name="message"
-            />
-            <span className="absolute inset-y-0 right-5 flex items-center pl-2">
-              <Button
-                intent="light"
-                type="submit"
-                isDisabled={isSubmitting || isLoading}
-                className="focus:shadow-outline p-1 focus:outline-none"
-              >
-                <PaperPlane className="h-6 w-6 text-success" />
-              </Button>
-            </span>
-          </div>
-          <div className="mt-5 flex justify-center space-x-5">
-            <Button
-              intent="warning"
-              isDisabled={isSubmitting || isLoading || !next.can_denie}
-              onPress={send_nope}
-            >
-              Indisponible
-            </Button>
-            <Button
-              isDisabled={isSubmitting || isLoading || !next.can_approuve}
-              onPress={send_okay}
-            >
-              Accepter
-            </Button>
-          </div>
-        </Form>
-      )}
-    </Formik>
+    <div className="mb-2 mt-5 flex justify-center space-x-5">
+      <Button
+        intent="warning"
+        isDisabled={isDisabled || !next_actions.can_denie}
+        onPress={send_nope}
+      >
+        Indisponible
+      </Button>
+      <Button
+        isDisabled={isDisabled || !next_actions.can_approuve}
+        onPress={send_okay}
+      >
+        Accepter
+      </Button>
+    </div>
   );
 }
