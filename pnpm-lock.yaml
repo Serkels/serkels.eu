@@ -54,10 +54,10 @@ importers:
         version: 1.11.3
       '@hono/sentry':
         specifier: 1.1.0
-        version: 1.1.0(hono@4.4.6)
+        version: 1.1.0(hono@4.4.7)
       '@hono/trpc-server':
         specifier: 0.3.1
-        version: 0.3.1(@trpc/server@10.45.2)(hono@4.4.6)
+        version: 0.3.1(@trpc/server@10.45.2)(hono@4.4.7)
       '@trpc/server':
         specifier: 10.45.2
         version: 10.45.2
@@ -65,8 +65,8 @@ importers:
         specifier: 16.4.5
         version: 16.4.5
       hono:
-        specifier: 4.4.6
-        version: 4.4.6
+        specifier: 4.4.7
+        version: 4.4.7
       tsx:
         specifier: 4.15.6
         version: 4.15.6
@@ -6211,8 +6211,8 @@ packages:
   hoist-non-react-statics@3.3.2:
     resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
 
-  hono@4.4.6:
-    resolution: {integrity: sha512-XGRnoH8WONv60+PPvP9Sn067A9r/8JdHDJ5bgon0DVEHeR1cJPkWjv2aT+DBfMH9/mEkYa1+VEVFp1DT1lIwjw==}
+  hono@4.4.7:
+    resolution: {integrity: sha512-WoQWFQyVFEVRtIzP5sHPv7nvIw+RYL/HRnvnOCDxj6A+BtrwuC9S0vryZbV4IyFcNgOJ87r/phDiC1x2eEo4Gg==}
     engines: {node: '>=16.0.0'}
 
   hosted-git-info@2.8.9:
@@ -9601,15 +9601,15 @@ snapshots:
 
   '@hono/node-server@1.11.3': {}
 
-  '@hono/sentry@1.1.0(hono@4.4.6)':
+  '@hono/sentry@1.1.0(hono@4.4.7)':
     dependencies:
-      hono: 4.4.6
+      hono: 4.4.7
       toucan-js: 3.4.0
 
-  '@hono/trpc-server@0.3.1(@trpc/server@10.45.2)(hono@4.4.6)':
+  '@hono/trpc-server@0.3.1(@trpc/server@10.45.2)(hono@4.4.7)':
     dependencies:
       '@trpc/server': 10.45.2
-      hono: 4.4.6
+      hono: 4.4.7
 
   '@hookform/resolvers@3.6.0(react-hook-form@7.52.0(react@18.3.1))':
     dependencies:
@@ -14064,7 +14064,7 @@ snapshots:
     dependencies:
       react-is: 16.13.1
 
-  hono@4.4.6: {}
+  hono@4.4.7: {}
 
   hosted-git-info@2.8.9: {}
 
