@@ -25,16 +25,15 @@ export const label = tv({
 export const input = tv({
   base: `
     block
-   w-full
-    resize-none
+    w-full
     rounded-sm
     border
     border-solid
     border-Silver_Chalice
-   placeholder-black
-   focus:ring-gray-900
-   disabled:pointer-events-none
-   disabled:opacity-50
+    placeholder-black
+    focus:ring-gray-900
+    disabled:pointer-events-none
+    disabled:opacity-50
    `,
   variants: {
     wrong_value: {
@@ -57,20 +56,20 @@ export const input = tv({
 
 export const fieldset = tv({
   base: `
-  flex
-  justify-around
-  rounded-md
-  border
-  border-Silver_Chalice
-  bg-white
-  p-4
-  disabled:pointer-events-none
-  disabled:opacity-50
-  md:flex-row
-  md:items-center
-  [&>label]:flex
-  [&>label]:items-center
-  [&>label]:space-x-3
+    flex
+    justify-around
+    rounded-md
+    border
+    border-Silver_Chalice
+    bg-white
+    p-4
+    disabled:pointer-events-none
+    disabled:opacity-50
+    md:flex-row
+    md:items-center
+    [&>label]:flex
+    [&>label]:items-center
+    [&>label]:space-x-3
   `,
   variants: {
     horizontal: {
