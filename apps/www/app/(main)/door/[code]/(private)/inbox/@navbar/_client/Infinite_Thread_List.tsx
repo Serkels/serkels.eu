@@ -77,7 +77,7 @@ function MotionOutlet({
       exit="exit"
       initial="enter"
       key={key}
-      layout
+      // layout
       transition={spring}
       variants={variants}
     >

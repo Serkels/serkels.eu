@@ -77,7 +77,7 @@ export default function Infinite_Exchange_List() {
           <li className="col-span-full mx-auto">
             {isFetchingNextPage ? <Loading /> : null}
           </li>
-          <li className="col-span-full mx-auto pb-8">
+          <li className="col-span-full mx-auto max-w-fit pb-8">
             {hasNextPage ? (
               <Button
                 onPress={() => fetchNextPage()}

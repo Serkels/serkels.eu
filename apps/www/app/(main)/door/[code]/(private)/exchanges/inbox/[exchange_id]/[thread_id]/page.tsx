@@ -77,7 +77,7 @@ export default async function Page({
 
   const exchange = await TRPC_SSR.exchanges.by_id.fetch(exchange_id);
 
-  const { base, footer, header } = layout();
+  const { base, body, footer, header } = layout();
   return (
     <TRPC_Hydrate>
       <main className={base()}>
@@ -85,7 +85,7 @@ export default async function Page({
           <BackButton href={`/@~/exchanges/inbox/${exchange_id}`} />
           <SeeProfileAvatarMedia profile={participant} />
         </header>
-        <div className="max-h-[calc(100%_-_theme(spacing.64))] overflow-y-auto py-4 pr-5 md:max-h-full">
+        <div className={body()}>
           <ExchangeProvider exchange={exchange}>
             <Thread_Timeline profile_id={profile_id} />
           </ExchangeProvider>
@@ -102,31 +102,32 @@ export default async function Page({
 
 const layout = tv({
   base: `
-   fixed
-   bottom-16
-   top-16 grid 
-   h-full 
-   max-h-[calc(100vh_-_theme(spacing.16)-_theme(spacing.8))]
-   grid-rows-[auto_1fr_auto]
-   bg-white text-black
-   [&>*]:px-7
-   `,
+    grid
+    h-full
+    max-h-[calc(100vh_-_theme(spacing.16)-_theme(spacing.16))]
+    grid-rows-[auto_1fr_auto]
+    bg-white
+    text-black md:max-h-[calc(100vh_-_theme(spacing.16)_-_theme(spacing.8))]
+    [&>*]:px-7
+  `,
 
   slots: {
-    header: "sticky top-0 flex flex-row gap-2 justify-between space-x-3 py-7",
+    body: `
+      overflow-y-auto
+      py-4
+      pr-5
+    `,
+    header: "flex flex-row items-center  gap-2 space-x-3 py-7",
     footer: `
-     fixed 
-     bottom-16 
-     flex 
-     min-h-[theme(spacing.24)] 
-     w-full 
-     flex-col 
-     items-center 
-     justify-center 
-     space-y-4 bg-white 
-     py-5 
-     text-black 
-     md:sticky
-     `,
+      flex
+      min-h-[theme(spacing.24)]
+      flex-col
+      items-center
+      justify-center
+      space-y-4
+      bg-white
+      py-5
+      text-black
+    `,
   },
 });
