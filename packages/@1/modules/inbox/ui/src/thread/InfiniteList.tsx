@@ -68,7 +68,7 @@ function List<T>({
   const flatten_pages = pages.map((page) => page.data).flat();
 
   return (
-    <ul className="grid grid-cols-1 gap-5 sm:sticky">
+    <ul className="y grid grid-cols-1 gap-5">
       {flatten_pages.map((item) => children(item))}
       <li className="col-span-full mx-auto">
         {isFetchingNextPage ? <Loading /> : null}
