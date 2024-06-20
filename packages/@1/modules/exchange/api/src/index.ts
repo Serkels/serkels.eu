@@ -90,7 +90,7 @@ const exchange_api_router = router({
           owner: { include: { profile: true } },
           deals: { where: { status: Deal_Status_Schema.Enum.APPROVED } },
         },
-        orderBy: [{ updated_at: "asc" }, { created_at: "asc" }],
+        orderBy: [{ updated_at: "desc" }, { created_at: "desc" }],
         take: limit,
         where: {
           OR: [
