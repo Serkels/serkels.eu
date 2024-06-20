@@ -78,8 +78,8 @@ const backgroundImage = {
 const height: ResolvableTo<KeyValuePair<string, string>> = ({ theme }) => ({
   "@footer": theme("spacing.24"),
   "@footer/desktop": theme("spacing.8"),
-  "@main": `calc(100vh - ${theme("spacing.16")} - ${theme("spacing.16")})`,
-  "@main/desktop": `calc(100vh - ${theme("spacing.16")} - ${theme("spacing.8")})`,
+  "@main": `calc(100dvh - ${theme("spacing.16")} - ${theme("spacing.16")})`,
+  "@main/desktop": `calc(100dvh - ${theme("spacing.16")} - ${theme("spacing.8")})`,
   "@navbar": theme("spacing.16"),
 });
 
