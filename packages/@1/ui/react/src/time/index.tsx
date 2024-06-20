@@ -39,7 +39,7 @@ export function TimeInfo({ timestamps }: { timestamps: Entity_Timestamps }) {
 
   return (
     <time
-      className="mt-3 text-xs"
+      className="text-xs"
       dateTime={created_at.toUTCString()}
       title={created_at.toUTCString()}
     >
