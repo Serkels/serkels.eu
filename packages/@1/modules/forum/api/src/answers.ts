@@ -1,6 +1,7 @@
 //
 
 import { next_auth_procedure, procedure, router } from "@1.modules/trpc";
+import { NotificationType } from "@prisma/client";
 import { z } from "zod";
 
 //
@@ -22,6 +23,7 @@ export const answers_api_router = router({
       const {
         profile: { id: profile_id },
       } = payload;
+
       return prisma.answer.update({
         data: {
           accepted_for: { connect: { id: question_id } },
@@ -63,12 +65,26 @@ export const answers_api_router = router({
         profile: { id: profile_id },
       } = payload;
       const { content, question_id } = input;
+      const { id: student_id } = await prisma.student.findUniqueOrThrow({
+        select: { id: true },
+        where: { profile_id },
+      });
 
       return prisma.answer.create({
         data: {
           content,
           owner: { connect: { profile_id } },
           parent: { connect: { id: question_id } },
+          forum_notifications: {
+            create: {
+              notification: {
+                create: {
+                  type: NotificationType.FORUM_NEW_AWNSER,
+                  owner: { connect: { id: student_id } },
+                },
+              },
+            },
+          },
         },
       });
     }),
