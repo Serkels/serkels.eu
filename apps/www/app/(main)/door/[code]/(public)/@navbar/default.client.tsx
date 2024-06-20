@@ -1,6 +1,6 @@
 "use client";
 
-import { Share } from "@1.ui/react/icons";
+import { Menu } from "@1.ui/react/menu";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { tv } from "tailwind-variants";
@@ -8,6 +8,7 @@ import AddContact from "./_client/AddContact";
 import Follow from "./_client/Follow";
 import SendMessage from "./_client/SendMessage";
 import { type CodeParmsAsProfileId } from "./default";
+import { ReportTheProfile, ShareTheProfile } from "./menu";
 
 //
 
@@ -15,78 +16,117 @@ export function Student_Page({ params }: { params: CodeParmsAsProfileId }) {
   const { code, profile_id } = params;
   const { base, link } = page_classes();
   const pathname = usePathname();
+  const is_me = code === "~";
 
   return (
-    <nav className={base()}>
-      <div className="flex items-center">
-        <Link
-          className={link({ active: pathname === `/@${code}` })}
-          href={`/@${code}`}
-        >
-          Biographie
-        </Link>
-        <Link
-          className={link({ active: pathname === `/@${code}/proposals` })}
-          href={`/@${code}/proposals`}
-        >
-          Publications
-        </Link>
-        <Link
-          className={link({ active: pathname === `/@${code}/history` })}
-          href={`/@${code}/history`}
-        >
-          Échanges Réussis
-        </Link>
-      </div>
-
-      <div className="flex items-center space-x-2">
-        {code === "~" ? null : (
+    <>
+      <div className="my-4 flex justify-end space-x-2 md:hidden">
+        {is_me ? null : (
           <>
             <Follow profile_id={code} />
-            <AddContact profile_id={code} />
             <SendMessage profile_id={code} />
           </>
         )}
-        <ShareProfile profile_id={profile_id} />
       </div>
-    </nav>
+      <nav className={base()}>
+        <div className="flex items-center">
+          <Link
+            className={link({ active: pathname === `/@${code}` })}
+            href={`/@${code}`}
+          >
+            Biographie
+          </Link>
+          <Link
+            className={link({ active: pathname === `/@${code}/proposals` })}
+            href={`/@${code}/proposals`}
+          >
+            Publications
+          </Link>
+          <Link
+            className={link({ active: pathname === `/@${code}/history` })}
+            href={`/@${code}/history`}
+          >
+            Échanges Réussis
+          </Link>
+        </div>
+
+        <div className="flex items-center space-x-2 ">
+          {is_me ? null : (
+            <div className="hidden md:block">
+              <Follow profile_id={code} />
+              <SendMessage profile_id={code} />
+            </div>
+          )}
+          <Menu>
+            {is_me ? (
+              <ShareTheProfile profile_id={profile_id} />
+            ) : (
+              <>
+                <AddContact profile_id={profile_id} />
+                <ShareTheProfile profile_id={profile_id} />
+                <ReportTheProfile profile_id={profile_id} />
+              </>
+            )}
+          </Menu>
+        </div>
+      </nav>
+    </>
   );
 }
 export function Partner_Page({ params }: { params: CodeParmsAsProfileId }) {
   const { code, profile_id } = params;
   const { base, link } = page_classes();
   const pathname = usePathname();
+  const is_me = code === "~";
 
   return (
-    <nav className={base()}>
-      <div className="flex items-center">
-        <Link
-          className={link({ active: pathname === `/@${code}` })}
-          href={`/@${code}`}
-        >
-          Biographie
-        </Link>
-        <Link
-          className={link({ active: pathname === `/@${code}/opportunities` })}
-          href={`/@${code}/opportunities`}
-        >
-          Opportunité
-        </Link>
-      </div>
+    <>
+      <div className="my-4 flex justify-end space-x-2 md:hidden">
+        {is_me ? null : <Follow profile_id={code} />}
 
-      <div className="flex items-center space-x-2">
-        {code === "~" ? null : <Follow profile_id={code} />}
-        <ShareProfile profile_id={profile_id} />
+        <Menu>
+          {is_me ? (
+            <ShareTheProfile profile_id={profile_id} />
+          ) : (
+            <>
+              <ShareTheProfile profile_id={profile_id} />
+              <ReportTheProfile profile_id={profile_id} />
+            </>
+          )}
+        </Menu>
       </div>
-    </nav>
-  );
-}
+      <nav className={base()}>
+        <div className="flex items-center">
+          <Link
+            className={link({ active: pathname === `/@${code}` })}
+            href={`/@${code}`}
+          >
+            Biographie
+          </Link>
+          <Link
+            className={link({ active: pathname === `/@${code}/opportunities` })}
+            href={`/@${code}/opportunities`}
+          >
+            Opportunité
+          </Link>
+        </div>
 
-function ShareProfile({ profile_id }: { profile_id: string }) {
-  return (
-    <Link className="px-1 opacity-50" href={`/@${profile_id}`}>
-      <Share />
-    </Link>
+        <div className="hidden items-center space-x-2 md:flex">
+          {is_me ? null : <Follow profile_id={code} />}
+
+          <Menu>
+            {is_me ? (
+              <ShareTheProfile profile_id={profile_id} />
+            ) : (
+              <div className="hidden md:block">
+                <ShareTheProfile profile_id={profile_id} />
+                <ReportTheProfile profile_id={profile_id} />
+              </div>
+            )}
+          </Menu>
+        </div>
+      </nav>
+    </>
   );
 }
 
@@ -95,6 +135,7 @@ function ShareProfile({ profile_id }: { profile_id: string }) {
 const page_classes = tv({
   base: `
     flex
+    flex-wrap
     justify-between
     rounded-xl
     border

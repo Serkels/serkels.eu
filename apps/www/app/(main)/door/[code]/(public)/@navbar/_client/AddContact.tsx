@@ -1,12 +1,14 @@
 "use client";
 
 import { TRPC_React } from ":trpc/client";
-import { Button } from "@1.ui/react/button";
+import { Plus, Trash } from "@1.ui/react/icons";
+import { ActionItem } from "@1.ui/react/menu";
 import { Spinner } from "@1.ui/react/spinner";
 import { useCallback } from "react";
 import { P, match } from "ts-pattern";
 
 //
+
 export default function AddContact({ profile_id }: { profile_id: string }) {
   const find_contact = TRPC_React.profile.me.contact.find.useQuery(profile_id);
   const toggle_contact = TRPC_React.profile.me.contact.toggle.useMutation();
@@ -23,14 +25,26 @@ export default function AddContact({ profile_id }: { profile_id: string }) {
 
   return match([toggle_contact, find_contact])
     .with([{ status: "loading" }, P._], [P._, { status: "loading" }], () => (
-      <Spinner className="size-5" />
+      <ActionItem>
+        <Spinner className="size-5" />
+      </ActionItem>
     ))
     .otherwise(() => (
-      <Button
-        onPress={toggle_add_contact}
+      <ActionItem
+        className="text-left"
+        onAction={toggle_add_contact}
         isDisabled={toggle_contact.status !== "idle"}
       >
-        {find_contact.data ? "Supprimer" : "Ajouter "}
-      </Button>
+        {find_contact.data ? (
+          <>
+            <Trash className="h-4" />{" "}
+            <span>Supprimer de ma liste de contact</span>
+          </>
+        ) : (
+          <>
+            <Plus className="h-4" /> <span>Ajouter à ma liste de contact</span>
+          </>
+        )}
+      </ActionItem>
     ));
 }

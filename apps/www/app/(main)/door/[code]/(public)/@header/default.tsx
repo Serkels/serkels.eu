@@ -62,12 +62,14 @@ async function FollowerCount({ profile_id }: { profile_id: string }) {
   if (session?.profile.id === profile_id)
     return (
       <Link href="/@~/following" className="flex flex-col items-center">
-        <div>{profile.contacts.length}</div> Abonnés
+        <div className="text-lg font-bold">{profile.contacts.length}</div>{" "}
+        Abonnés
       </Link>
     );
   return (
     <div className="flex flex-col items-center">
-      <div>{profile.followed_by.length}</div> Abonnés
+      <div className="text-lg font-bold">{profile.followed_by.length}</div>{" "}
+      Abonnés
     </div>
   );
 }
@@ -79,12 +81,14 @@ async function ContactsCount({ profile_id }: { profile_id: string }) {
   if (session?.profile.id === profile_id)
     return (
       <Link href="/@~/contacts" className="flex flex-col items-center">
-        <div>{profile.contacts.length}</div> Contacts
+        <div className="text-lg font-bold">{profile.contacts.length}</div>{" "}
+        Contacts
       </Link>
     );
   return (
     <div className="flex flex-col items-center">
-      <div>{profile.contacts.length}</div> Contacts
+      <div className="text-lg font-bold">{profile.contacts.length}</div>{" "}
+      Contacts
     </div>
   );
 }
