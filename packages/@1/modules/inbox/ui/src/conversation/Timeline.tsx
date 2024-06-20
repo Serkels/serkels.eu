@@ -99,7 +99,7 @@ export function Timeline({
                         {format(message.created_at, "Pp", { locale: fr })}
                         <br />
                       </time>
-                      {message.content}
+                      <p className="whitespace-pre-line">{message.content}</p>
                     </Message>
                   ))}
                 </Timeline.Message.Renderer>
