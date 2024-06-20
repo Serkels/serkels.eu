@@ -5,6 +5,7 @@ import { slug_to_opportunity, type Params } from ":pipes/opportunity_slug";
 import { getServerSession } from "@1.modules/auth.next";
 import { Article, icon_link } from "@1.modules/opportunity.ui/Article";
 import { Share, Warning } from "@1.ui/react/icons";
+import { ActionItem, Menu } from "@1.ui/react/menu";
 import type { Metadata, ResolvingMetadata } from "next";
 import dynamic from "next/dynamic";
 import Link from "next/link";
@@ -66,12 +67,9 @@ export default async function Page({ params }: { params: Params }) {
         )}
         {session ? (
           <Article.Drawer>
-            <Link
-              className="flex items-center space-x-1"
-              href={`/@~/report?${new URLSearchParams({ url: href })}`}
-            >
-              <Warning className="h-4" /> <span>Signaler l'oppotunité</span>
-            </Link>
+            <div className="self-end">
+              <OpportunityMenu category_slug={category.slug} slug={slug} />
+            </div>
           </Article.Drawer>
         ) : (
           <></>
@@ -107,4 +105,28 @@ export default async function Page({ params }: { params: Params }) {
     console.error(error);
     return notFound();
   }
+}
+
+//
+
+function OpportunityMenu({
+  slug,
+  category_slug,
+}: {
+  slug: string;
+  category_slug: string;
+}) {
+  const href_searhparams = new URLSearchParams({ category: category_slug });
+  const href = `/opportunities/${slug}?${href_searhparams}`;
+
+  return (
+    <Menu>
+      <ActionItem
+        className="flex items-center space-x-1 whitespace-nowrap"
+        href={`/@~/report?${new URLSearchParams({ url: href })}`}
+      >
+        <Warning className="h-4" /> <span>Signaler l'oppotunité</span>
+      </ActionItem>
+    </Menu>
+  );
 }
