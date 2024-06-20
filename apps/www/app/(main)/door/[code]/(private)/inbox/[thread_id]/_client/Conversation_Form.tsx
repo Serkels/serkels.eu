@@ -1,6 +1,6 @@
 "use client";
 
-import { useUserAgent } from ":components/hooks/useUserAgent";
+import { PLATFORMS_MAP, useUserAgent } from ":components/hooks/useUserAgent";
 import type { Params } from ":pipes/thread_by_id";
 import { TRPC_React } from ":trpc/client";
 import { useEnterToSubmit } from "@1.ui/react/form";
@@ -34,7 +34,7 @@ export default function Conversation_Form({ thread_id }: Params) {
     setFocus("message");
   };
 
-  if (browser.getPlatformType() === "desktop")
+  if (browser.getPlatformType() === PLATFORMS_MAP.desktop)
     useEnterToSubmit({
       is_submitting: formState.isSubmitting,
       on_submit: handleSubmit(on_submit),

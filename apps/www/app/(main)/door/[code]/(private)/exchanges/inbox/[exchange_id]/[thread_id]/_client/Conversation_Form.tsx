@@ -1,5 +1,6 @@
 "use client";
 
+import { PLATFORMS_MAP, useUserAgent } from ":components/hooks/useUserAgent";
 import type { Params } from ":pipes/thread_by_id";
 import { TRPC_React } from ":trpc/client";
 import { useExchange } from "@1.modules/exchange.ui/context";
@@ -63,6 +64,7 @@ const form_zod_schema = z.object({
 type FormValues = z.infer<typeof form_zod_schema>;
 
 function use_form({ thread_id }: Params) {
+  const browser = useUserAgent();
   const form = useForm<FormValues>({
     resolver: zodResolver(form_zod_schema),
   });
@@ -82,10 +84,11 @@ function use_form({ thread_id }: Params) {
     await invalidate();
   });
 
-  useEnterToSubmit({
-    is_submitting: form.formState.isSubmitting,
-    on_submit,
-  });
+  if (browser.getPlatformType() === PLATFORMS_MAP.desktop)
+    useEnterToSubmit({
+      is_submitting: form.formState.isSubmitting,
+      on_submit,
+    });
 
   useLayoutEffect(() => {
     form.setFocus("message");
