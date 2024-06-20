@@ -1,5 +1,6 @@
 import { AvatarMedia } from "@1.ui/react/avatar";
-import { School, Share } from "@1.ui/react/icons";
+import { School, Share, Warning } from "@1.ui/react/icons";
+import { ActionItem, Menu } from "@1.ui/react/menu";
 import { type PropsWithChildren } from "react";
 import { Card } from "./Card";
 import { Publish_Date } from "./Date";
@@ -52,7 +53,13 @@ export function Card_Idle({ children }: PropsWithChildren) {
         <hr className="my-2" />
 
         <article>
-          <h3 className="my-4 break-words text-2xl font-bold">{title}</h3>
+          <h3 className="my-4 break-words text-2xl font-bold">
+            <div className="float-right">
+              <ExchangeMenu exchange_id={exchange.id} exchange_title={title} />
+            </div>
+
+            {title}
+          </h3>
           <p>{description}</p>
         </article>
         <Publish_Date />
@@ -77,5 +84,26 @@ export function Card_Idle({ children }: PropsWithChildren) {
         </div>
       </footer>
     </div>
+  );
+}
+
+export function ExchangeMenu({
+  exchange_id,
+  exchange_title,
+}: {
+  exchange_id: string;
+  exchange_title: string;
+}) {
+  const href = `/exchanges?${new URLSearchParams({ q: exchange_title })}${exchange_id}`;
+
+  return (
+    <Menu>
+      <ActionItem
+        className="flex items-center space-x-1 whitespace-nowrap"
+        href={`/@~/report?${new URLSearchParams({ url: href })}`}
+      >
+        <Warning className="h-4" /> <span>Signaler l'échange</span>
+      </ActionItem>
+    </Menu>
   );
 }
