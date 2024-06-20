@@ -978,9 +978,6 @@ importers:
       react-content-loader:
         specifier: 7.0.2
         version: 7.0.2(react@18.3.1)
-      react-markdown:
-        specifier: 9.0.1
-        version: 9.0.1(@types/react@18.3.3)(react@18.3.1)
       react-slotify:
         specifier: 0.2.2
         version: 0.2.2(react@18.3.1)
