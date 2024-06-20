@@ -41,7 +41,14 @@ Item.Where = createSlot();
 //
 
 export const item = tv({
-  base: "overflow-hidden border-l-4 border-transparent p-4",
+  base: `
+    overflow-hidden
+    border-b-2
+    border-l-4
+    border-transparent
+    border-b-[#F0F0F0]
+    p-4
+  `,
   slots: {
     title: "line-clamp-1 text-lg font-bold",
     exchange_icon: "mx-1 w-5",

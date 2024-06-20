@@ -7,8 +7,8 @@ import { ExpiryDate } from "@1.modules/exchange.ui/Card/Date";
 import { Loading } from "@1.modules/exchange.ui/aside/InfiniteList";
 import { item as styles } from "@1.modules/exchange.ui/aside/Item";
 import { PROFILE_UNKNOWN } from "@1.modules/profile.domain";
-import { Avatar } from "@1.modules/profile.ui";
 import { EmptyList, flatten_pages_are_empty } from "@1.ui/react/async";
+import { AvatarMedia } from "@1.ui/react/avatar";
 import { badge } from "@1.ui/react/badge/atom";
 import { Button } from "@1.ui/react/button";
 import {
@@ -159,15 +159,15 @@ function Item({
         </h4>
       </header>
       <section className="flex items-center justify-between text-xs text-[#707070]">
-        <span className="flex space-x-1 font-bold">
-          <LocationRadius className="size-4 text-primary" />
-          <span>
-            {match(exchange.is_online)
-              .with(true, () => "En ligne")
-              .with(false, () => exchange.location)
-              .exhaustive()}
-          </span>
-        </span>
+        <AvatarMedia
+          image={owner.profile.image}
+          id={owner.profile.id}
+          name={match(owner.profile.id)
+            .with(profile_id, () => "Vous")
+            .otherwise(() => owner.profile.name)}
+          tv$size="small"
+        />
+
         <div>
           <span
             className={badge({
@@ -181,8 +181,12 @@ function Item({
       <section className="flex items-center justify-between space-x-1 text-xs text-[#707070]">
         <span className="font-bold">
           {match(type)
-            .with(Exchange_TypeSchema.Enum.PROPOSAL, () => "Proposition")
-            .with(Exchange_TypeSchema.Enum.RESEARCH, () => "Recherche")
+            .with(Exchange_TypeSchema.Enum.PROPOSAL, () => (
+              <span className="font-bold text-quaternary">Proposition</span>
+            ))
+            .with(Exchange_TypeSchema.Enum.RESEARCH, () => (
+              <span className="font-bold text-tertiary">Recherche</span>
+            ))
             .exhaustive()}
         </span>
         <div className="flex items-center justify-between">
@@ -199,12 +203,15 @@ function Item({
         </div>
       </section>
       <footer className="flex items-center justify-between text-xs">
-        <div className="flex items-center space-x-2">
-          <Avatar profile={owner.profile} className="inline-block size-5" />
-          {match(owner.profile.id)
-            .with(profile_id, () => "Vous")
-            .otherwise(() => owner.profile.name)}
-        </div>
+        <span className="flex space-x-1 font-bold">
+          <LocationRadius className="size-4 text-primary" />
+          <span className="text-Dove_Gray">
+            {match(exchange.is_online)
+              .with(true, () => "En ligne")
+              .with(false, () => exchange.location)
+              .exhaustive()}
+          </span>
+        </span>
         <ExpiryDate expiry_date={exchange.expiry_date} />
       </footer>
     </Link>
