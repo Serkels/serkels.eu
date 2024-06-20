@@ -60,7 +60,9 @@ export function Card_Idle({ children }: PropsWithChildren) {
 
             {title}
           </h3>
-          <p>{description}</p>
+          <Card.Body.Renderer childs={children}>
+            <p>{description}</p>
+          </Card.Body.Renderer>
         </article>
         <Publish_Date />
       </div>

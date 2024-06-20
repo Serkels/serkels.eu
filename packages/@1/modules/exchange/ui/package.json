@@ -33,11 +33,11 @@
     "constate": "3.3.2",
     "date-fns": "3.6.0",
     "formik": "2.4.6",
+    "react": "18.3.1",
     "react-aria-components": "1.2.1",
     "react-content-loader": "7.0.2",
     "react-slotify": "0.2.2",
     "react-use": "17.5.0",
-    "react": "18.3.1",
     "tailwind-variants": "0.2.1",
     "ts-pattern": "5.2.0",
     "zod": "3.23.8"
@@ -47,8 +47,8 @@
     "@1.config/tailwindcss": "workspace:*",
     "@1.config/typescript": "workspace:*",
     "@types/react": "18.3.3",
-    "react-dom": "18.3.1",
     "prettier": "3.3.2",
+    "react-dom": "18.3.1",
     "tailwindcss": "3.4.4",
     "typescript": "5.4.5"
   }
