@@ -32,7 +32,7 @@ export function useSyncSearchQuery<TQuery extends string = string>(
   useEffect(() => {
     if (searchQuery === query) return;
 
-    setQuery((searchQuery as TQuery) ?? "");
+    setQuery((searchQuery as TQuery) ?? undefined);
   }, [searchQuery]);
 
   return { query, setQuery };

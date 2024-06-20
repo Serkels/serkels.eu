@@ -1,21 +1,24 @@
 //
 
+import { TRPC_React } from ":trpc/client";
 import { card } from "@1.ui/react/card/atom";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { useCallback } from "react";
 import { select_exchange_message } from "./select_exchange_message";
 import type { Notification } from "./type";
 
 //
 
-export function ExchangeNewMessage({
+export function ExchangeCompletedMessage({
   notification,
 }: {
   notification: Notification;
 }) {
   const session = useSession();
+  const utils = TRPC_React.useUtils();
   if (!session.data) return null;
   const {
     data: {
@@ -25,7 +28,6 @@ export function ExchangeNewMessage({
   const { base, body } = card();
   const { id, created_at, read_at } = notification;
   const exchange_message = select_exchange_message(notification);
-
   if (!exchange_message) return null;
 
   const {
@@ -34,14 +36,23 @@ export function ExchangeNewMessage({
       owner: { profile_id },
       title,
     },
-    message: {
-      author: { name },
-      thread_id,
-    },
   } = exchange_message;
   const is_my_exchange = my_profile_id === profile_id;
+
+  const mark_as_read_mut = TRPC_React.notification.mark_as_read.useMutation();
+  const mark_as_read = useCallback(async () => {
+    await mark_as_read_mut.mutate({ notification_id: id });
+    await utils.notification.count_unread.invalidate();
+  }, [id, mark_as_read_mut]);
+
+  //
+
   return (
-    <Link id={id} href={`/@~/exchanges/inbox/${exchange_id}/${thread_id}`}>
+    <Link
+      id={id}
+      href={`/@~/history/?since=${exchange_id}`}
+      onClick={mark_as_read}
+    >
       <div
         className={base({ className: read_at ? "bg-transparent" : "bg-white" })}
       >
@@ -53,8 +64,16 @@ export function ExchangeNewMessage({
           >
             {format(created_at, "Pp", { locale: fr })}
           </time>
-          <b>{name}</b> vous a envoyé un nouveau message sur{" "}
-          {is_my_exchange ? "votre " : "l'"}échange <i>“{title}”</i>
+          <b>Félicitation !</b>{" "}
+          {is_my_exchange ? (
+            <>
+              Votre annonce d'échange <i>“{title}”</i> est complète.
+            </>
+          ) : (
+            <>
+              L'échange <i>“{title}”</i> auquel vous participer est complète.
+            </>
+          )}
         </div>
       </div>
     </Link>

@@ -22,6 +22,7 @@
   "dependencies": {
     "@1.modules/core": "workspace:*",
     "@1.modules/exchange.domain": "workspace:*",
+    "@1.modules/inbox.domain": "workspace:*",
     "@1.modules/trpc": "workspace:*",
     "@trpc/server": "10.45.2",
     "date-fns": "3.6.0",

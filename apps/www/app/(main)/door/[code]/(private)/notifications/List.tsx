@@ -6,6 +6,7 @@ import type { RouterOutput } from "@1.infra/trpc";
 import { Button } from "@1.ui/react/button";
 import type { InfiniteQueryObserverSuccessResult } from "@tanstack/react-query";
 import { P, match } from "ts-pattern";
+import { ExchangeCompletedMessage } from "./ExchangeCompletedMessage";
 import { ExchangeNewMessage } from "./ExchangeNewMessage";
 import { ExchangeNewParticipant } from "./ExchangeNewParticipant";
 import { InboxNewMessage } from "./InboxNewMessage";
@@ -71,6 +72,9 @@ function Card({ notification }: { notification: Notification }) {
   return match(notification)
     .with({ type: "INBOX_NEW_MESSAGE" }, (inbox_notif) => (
       <InboxNewMessage notification={inbox_notif} />
+    ))
+    .with({ type: "EXCHANGE_COMPLETED" }, (inbox_notif) => (
+      <ExchangeCompletedMessage notification={inbox_notif} />
     ))
     .with({ type: "EXCHANGE_NEW_PARTICIPANT" }, (inbox_notif) => (
       <ExchangeNewParticipant notification={inbox_notif} />

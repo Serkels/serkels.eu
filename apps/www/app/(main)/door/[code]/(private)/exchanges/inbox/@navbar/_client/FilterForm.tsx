@@ -5,7 +5,7 @@ import { filter_params_schema } from "@1.modules/exchange.domain/filter_params_s
 import { button as ui_button } from "@1.ui/react/button/atom";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useEffect, type ComponentPropsWithoutRef } from "react";
+import { type ComponentPropsWithoutRef } from "react";
 import { tv } from "tailwind-variants";
 
 //
@@ -52,18 +52,14 @@ function use_form_form() {
   const successful_params = new URLSearchParams(search_params);
   successful_params.set("f", "success");
 
-  const { query, setQuery } = useSyncSearchQuery("f");
-  const filter_query = filter_params_schema.safeParse(query);
+  const { query } = useSyncSearchQuery("f");
 
-  useEffect(() => {
-    if (filter_query.success) return;
-    setQuery(filter_params_schema.enum.IN_PROGRESS);
-  }, [filter_query.success]);
+  const filter_query = filter_params_schema.safeParse(query);
 
   return {
     in_progress_params,
     successful_params,
-    filter_query: filter_query.data,
+    filter_query: filter_query.data ?? filter_params_schema.enum.IN_PROGRESS,
   };
 }
 

@@ -393,6 +393,7 @@ model Notification {
 }
 
 enum NotificationType {
+  EXCHANGE_COMPLETED
   EXCHANGE_NEW_MESSAGE
   EXCHANGE_NEW_PARTICIPANT
   INBOX_NEW_MESSAGE

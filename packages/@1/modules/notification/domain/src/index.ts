@@ -10,15 +10,7 @@ export const Notification_Base = Entity_Schema.extend({
   created_at: z.coerce.date(),
 }).describe("Notification_Base");
 
-export const Notification_InboxNewMessage = Notification_Base.extend({
-  type: z.literal("INBOX_NEW_MESSAGE"),
-  inbox_message: z.object({ message: z.object({ thread_id: ID_Schema }) }),
-}).describe("Notification_PropsSchema");
-
-export interface Notification_InboxNewMessage
-  extends z.TypeOf<typeof Notification_InboxNewMessage> {}
-
-export type Notification = Notification_InboxNewMessage;
+export const NotificationGroup = z.enum(["EXCHANGE", "INBOX"]);
 
 //
 
