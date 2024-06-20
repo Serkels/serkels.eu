@@ -118,10 +118,10 @@ export function Partner_Page({ params }: { params: CodeParmsAsProfileId }) {
             {is_me ? (
               <ShareTheProfile profile_id={profile_id} />
             ) : (
-              <div className="hidden md:block">
+              <>
                 <ShareTheProfile profile_id={profile_id} />
                 <ReportTheProfile profile_id={profile_id} />
-              </div>
+              </>
             )}
           </Menu>
         </div>
