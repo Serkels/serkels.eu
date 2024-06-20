@@ -163,7 +163,7 @@
     },
     "editor.quickSuggestions": { "strings": "on" },
     "tailwindCSS.experimental.classRegex": [
-      ["tv\\(([^)]*)\\)", "(?:'|\"|`)([^\"'`]*)(?:'|\"|`)"], // tv(`...`)
+      ["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"], // tv(`...`)
     ],
     "cSpell.words": ["bradlc", "dbaeumer", "esbenp", "tailwindcss", "trpc"],
   },

@@ -6,7 +6,7 @@ import { useEnterToSubmit } from "@1.ui/react/form";
 import { SendButton } from "@1.ui/react/form/SendButton";
 import { input } from "@1.ui/react/form/atom";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as Bowser from "bowser";
+import Bowser from "bowser";
 import { useLayoutEffect, useMemo } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { z } from "zod";

@@ -104,10 +104,11 @@ const layout = tv({
   base: `
     grid
     h-full
-    max-h-[calc(100vh_-_theme(spacing.16)-_theme(spacing.16))]
+    max-h-@main
     grid-rows-[auto_1fr_auto]
     bg-white
-    text-black md:max-h-[calc(100vh_-_theme(spacing.16)_-_theme(spacing.8))]
+    text-black
+    md:max-h-@main/desktop
     [&>*]:px-7
   `,
 
@@ -128,7 +129,7 @@ const layout = tv({
     `,
     footer: `
       flex
-      min-h-[theme(spacing.24)]
+      min-h-@footer
       flex-col
       items-center
       justify-center

@@ -90,7 +90,7 @@ const layout = tv({
   base: `
     grid
     h-full
-    max-h-[calc(100vh_-_theme(spacing.16)-_theme(spacing.16))]
+    max-h-@main
     grid-rows-[auto_1fr_auto]
     overflow-hidden
     bg-white

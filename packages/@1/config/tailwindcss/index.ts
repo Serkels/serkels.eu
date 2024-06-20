@@ -3,6 +3,7 @@
 import TailwindcssConfig from "@douglasduteil/config...tailwindcss";
 import typography from "@tailwindcss/typography";
 import type { Config } from "tailwindcss";
+import type { KeyValuePair, ResolvableTo } from "tailwindcss/types/config";
 
 //
 
@@ -74,17 +75,23 @@ const backgroundImage = {
 
 //
 
+const height: ResolvableTo<KeyValuePair<string, string>> = ({ theme }) => ({
+  "@footer": theme("spacing.24"),
+  "@footer/desktop": theme("spacing.8"),
+  "@main": `calc(100vh - ${theme("spacing.16")} - ${theme("spacing.16")})`,
+  "@main/desktop": `calc(100vh - ${theme("spacing.16")} - ${theme("spacing.8")})`,
+  "@navbar": theme("spacing.16"),
+});
+
 export default {
   presets: [TailwindcssConfig],
   content: [],
   theme: {
     backgroundImage,
     colors,
-    height: ({ theme }) => ({
-      navbar: theme("spacing.16"),
-      footer: theme("spacing.8"),
-      main: `calc(100vh - ${theme("spacing.16")} - ${theme("spacing.8")})`,
-    }),
+    height,
+    maxHeight: height,
+    minHeight: height,
   },
   plugins: [typography()],
   // plugins: [custom_icon_set(resolve(__dirname, "icons"))],

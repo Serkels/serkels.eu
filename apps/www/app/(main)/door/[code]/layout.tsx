@@ -61,7 +61,8 @@ const public_layout_classes = tv({
       md:col-start-2
       lg:col-span-5
       lg:col-start-3
-      xl:col-span-6 xl:col-start-4
+      xl:col-span-6
+      xl:col-start-4
     `,
   },
 });
@@ -89,9 +90,8 @@ const private_layout_classes = tv({
   `,
   slots: {
     aside: `
-      grid
       hidden
-      min-h-[calc(100vh_-_theme(spacing.16)-_theme(spacing.16))]
+      min-h-@main
       overflow-hidden
       bg-[#f5f8fa]
       shadow-[20px_0px_40px_#00000014]
