@@ -1,6 +1,6 @@
 //
 
-import Bowser, { PLATFORMS_MAP as BOWSER_PLATFORMS_MAP } from "bowser";
+import Bowser from "bowser";
 import { useMemo } from "react";
 
 //
@@ -12,10 +12,10 @@ export function useUserAgent() {
   );
 }
 
-export const PLATFORMS_MAP = BOWSER_PLATFORMS_MAP as Readonly<{
-  tablet: "tablet";
-  mobile: "mobile";
-  desktop: "desktop";
-  tv: "tv";
-  bot: "bot";
-}>;
+export const PLATFORMS_MAP = {
+  tablet: "tablet",
+  mobile: "mobile",
+  desktop: "desktop",
+  tv: "tv",
+  bot: "bot",
+} as const;
