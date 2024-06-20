@@ -1,13 +1,13 @@
 "use client";
 
+import { useUserAgent } from ":components/hooks/useUserAgent";
 import type { Params } from ":pipes/thread_by_id";
 import { TRPC_React } from ":trpc/client";
 import { useEnterToSubmit } from "@1.ui/react/form";
 import { SendButton } from "@1.ui/react/form/SendButton";
 import { input } from "@1.ui/react/form/atom";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Bowser from "bowser";
-import { useLayoutEffect, useMemo } from "react";
+import { useLayoutEffect } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 
@@ -18,17 +18,8 @@ const form_zod_schema = z.object({
 });
 type FormValues = z.infer<typeof form_zod_schema>;
 
-//
-
-function use_user_agent() {
-  return useMemo(
-    () => Bowser.getParser(window.navigator.userAgent),
-    [window.navigator.userAgent],
-  );
-}
-
 export default function Conversation_Form({ thread_id }: Params) {
-  const browser = use_user_agent();
+  const browser = useUserAgent();
 
   const { register, handleSubmit, formState, setValue, setFocus } =
     useForm<FormValues>({
