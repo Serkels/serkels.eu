@@ -13,7 +13,7 @@ import {
   type Deal,
   type Exchange,
 } from "@prisma/client";
-import { isAfter, isPast } from "date-fns";
+import { isAfter } from "date-fns";
 import dedent from "dedent";
 import process from "node:process";
 import slugify from "slugify";
@@ -568,9 +568,7 @@ async function students_participants_in_exchanges() {
 export function is_active_exchange(
   exchange: Pick<Exchange, "expiry_date" | "places"> & { deals: Deal[] },
 ) {
-  const all_seat_taken = exchange.deals.length >= exchange.places;
-  const expired_exchange = exchange.expiry_date && isPast(exchange.expiry_date);
-  return !(all_seat_taken || expired_exchange);
+  return exchange.deals.length >= exchange.places;
 }
 
 //

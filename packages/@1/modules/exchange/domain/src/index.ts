@@ -46,10 +46,7 @@ export const Exchange_Schema = Exchange_Flat_Schema.extend({
 export interface Exchange extends z.TypeOf<typeof Exchange_Schema> {}
 
 export function is_active_exchange(exchange: Exchange) {
-  const all_seat_taken = exchange.deals.length >= exchange.places;
-  const expired_exchange =
-    exchange.expiry_date && exchange.expiry_date < new Date();
-  return !(all_seat_taken || expired_exchange);
+  return exchange.deals.length >= exchange.places;
 }
 
 //
