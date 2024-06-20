@@ -24,6 +24,7 @@ export function Card({
   );
 }
 
+Card.Body = createSlot();
 Card.Footer = {
   Left: createSlot(),
   Center: createSlot(),

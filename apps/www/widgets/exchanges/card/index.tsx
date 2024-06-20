@@ -16,8 +16,9 @@ import { exchange_card } from "@1.modules/exchange.ui/Card/exchange_card";
 import type { Profile } from "@1.modules/profile.domain";
 import { StudentAvatarMedia } from "@1.modules/profile.ui/avatar";
 import { button } from "@1.ui/react/button/atom";
-import { Pen } from "@1.ui/react/icons";
+import { Exchange as ExchangeIcon, Pen } from "@1.ui/react/icons";
 import { useTimeoutEffect } from "@react-hookz/web";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import {
   useCallback,
@@ -31,7 +32,13 @@ import { Exchange_Bookmark } from "./bookmark";
 import { Exchange_Delete_Button } from "./delete.button";
 import { Exchange_Share } from "./share";
 
-import { Exchange as ExchangeIcon } from "@1.ui/react/icons";
+//
+
+const ReactMarkdown = dynamic<any>(() => import("react-markdown"), {
+  loading: () => (
+    <p className="bg-gray-200 text-center opacity-50">Chargement...</p>
+  ),
+});
 
 //
 
@@ -158,6 +165,15 @@ function Idle() {
           </div>
         </div>
       </Card.Header.Right>
+
+      <Card.Body>
+        <div className="prose">
+          <ReactMarkdown components={{ h1: "h3", h2: "h3", h3: "h4" }}>
+            {exchange.description}
+          </ReactMarkdown>
+        </div>
+      </Card.Body>
+
       <Card.Footer.Left>
         <Exchange_Bookmark />
       </Card.Footer.Left>
