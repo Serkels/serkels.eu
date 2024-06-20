@@ -64,7 +64,7 @@ export const me = router({
 
   //
 
-  find,
+  find: find,
 
   //
   inbox,
