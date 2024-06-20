@@ -2,6 +2,7 @@
 
 import { TRPC_React } from ":trpc/client";
 import { Exchange_TypeSchema } from "@1.modules/exchange.domain";
+import { filter_params_schema } from "@1.modules/exchange.domain/filter_params_schema";
 import { ExpiryDate } from "@1.modules/exchange.ui/Card/Date";
 import { Loading } from "@1.modules/exchange.ui/aside/InfiniteList";
 import { item as styles } from "@1.modules/exchange.ui/aside/Item";
@@ -27,12 +28,17 @@ import { z } from "zod";
 export default function Infinite_Exchange_List() {
   const search_params = useSearchParams();
   const search = search_params.get("q") ?? undefined;
+  const filter_param = filter_params_schema.safeParse(search_params.get("f"));
+  const filter = match(filter_param)
+    .with({ success: true }, ({ data }) => data)
+    .otherwise(() => filter_params_schema.enum.IN_PROGRESS);
   const params = z
     .object({ exchange_id: z.string().optional() })
     .parse(useParams(), { path: ["useParams()"] });
   const { exchange_id: location_exchange_id } = params;
+
   const info = TRPC_React.exchanges.me.find.useInfiniteQuery(
-    { search },
+    { search, filter },
     { getNextPageParam: ({ next_cursor }) => next_cursor },
   );
 

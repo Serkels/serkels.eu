@@ -1,8 +1,10 @@
 //
 
+import { filter_params_schema } from "@1.modules/exchange.domain/filter_params_schema";
 import { next_auth_procedure } from "@1.modules/trpc";
 import type { Prisma } from "@prisma/client";
 import { isAfter } from "date-fns";
+import { match } from "ts-pattern";
 import { z } from "zod";
 
 //
@@ -13,11 +15,12 @@ export const find = next_auth_procedure
       cursor: z.string().optional(),
       limit: z.number().min(1).max(10).default(10),
       search: z.string().optional(),
+      filter: filter_params_schema.optional(),
     }),
   )
   .query(async ({ input, ctx: { payload, prisma } }) => {
     const { profile } = payload;
-    const { cursor, limit, search } = input;
+    const { cursor, filter, limit, search } = input;
 
     const { id: student_id } = await prisma.student.findUniqueOrThrow({
       select: { id: true },
@@ -48,6 +51,17 @@ export const find = next_auth_procedure
       ],
     };
 
+    const exchange_filter_where = match(filter)
+      .with(
+        filter_params_schema.enum.IN_PROGRESS,
+        (): Prisma.ExchangeWhereInput => ({ is_active: true }),
+      )
+      .with(
+        filter_params_schema.enum.SUCCESS,
+        (): Prisma.ExchangeWhereInput => ({ is_active: false }),
+      )
+      .otherwise((): Prisma.ExchangeWhereInput => ({}));
+
     const deals = await prisma.deal.findMany({
       ...(cursor
         ? {
@@ -76,9 +90,8 @@ export const find = next_auth_procedure
       where: {
         ...deal_releated_to_me_where,
         parent: {
-          is_active: true,
-          OR: [{ expiry_date: { gte: new Date() } }, { expiry_date: null }],
           ...search_where,
+          ...exchange_filter_where,
         },
       },
       distinct: ["parent_id"],

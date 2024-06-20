@@ -75,6 +75,12 @@ export const button = tv({
         hover:bg-gray-100/70
         data-[hovered]:bg-gray-100/70
       `,
+      whity: `
+        bg-white
+        text-Dove_Gray
+        hover:bg-gray-100/70
+        data-[hovered]:bg-gray-100/70
+      `,
     },
     state: {
       filled: "",

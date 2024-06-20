@@ -5,12 +5,16 @@ import { useEffect, useState } from "react";
 
 //
 
-export function useSyncSearchQuery(name: string) {
+export function useSyncSearchQuery<TQuery extends string = string>(
+  name: string,
+) {
   const router = useRouter();
   const pathname = usePathname() ?? "";
   const searchParams = useSearchParams() ?? new URLSearchParams();
   const searchQuery = searchParams.get(name);
-  const [query, setQuery] = useState(searchQuery ?? undefined);
+  const [query, setQuery] = useState<TQuery | undefined>(
+    (searchQuery as TQuery) ?? undefined,
+  );
 
   useEffect(() => {
     if (searchQuery === query) return;
@@ -28,7 +32,7 @@ export function useSyncSearchQuery(name: string) {
   useEffect(() => {
     if (searchQuery === query) return;
 
-    setQuery(searchQuery ?? "");
+    setQuery((searchQuery as TQuery) ?? "");
   }, [searchQuery]);
 
   return { query, setQuery };
