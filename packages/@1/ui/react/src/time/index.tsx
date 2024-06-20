@@ -19,7 +19,7 @@ export function TimeInfo({ timestamps }: { timestamps: Entity_Timestamps }) {
 
   if (has_been_edited) {
     return (
-      <div className="mt-3 text-xs">
+      <div className="text-xs">
         <time
           dateTime={updated_at.toUTCString()}
           title={updated_at.toUTCString()}
