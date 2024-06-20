@@ -10,7 +10,9 @@ import {
 } from "@1.modules/exchange.domain";
 import { deal_flow } from "@1.modules/exchange.domain/deal.machine";
 import { is_exchange_completed } from "@1.modules/exchange.domain/is_exchange_completed";
-import { next_auth_procedure } from "@1.modules/trpc";
+import { thread_recipient } from "@1.modules/inbox.domain/select";
+import { next_auth_procedure, type Context } from "@1.modules/trpc";
+import { NotificationType } from "@prisma/client";
 import { match } from "ts-pattern";
 import { createActor } from "xstate";
 import { z } from "zod";
@@ -28,16 +30,19 @@ export const action = next_auth_procedure
   .mutation(async ({ ctx: { payload, prisma }, input }) => {
     const { action, exchange_id, thread_id } = input;
     const updated_at = new Date();
-    const { profile } = payload;
+    const {
+      profile: { id: profile_id },
+    } = payload;
     const { id: student_id } = await prisma.student.findUniqueOrThrow({
       select: { id: true },
-      where: { profile_id: profile.id },
+      where: { profile_id },
     });
 
     const deal = await prisma.deal.findFirstOrThrow({
       include: {
         parent: {
           select: {
+            id: true,
             deals: {
               select: { id: true },
               where: { status: Deal_Status_Schema.Enum.APPROVED },
@@ -50,6 +55,7 @@ export const action = next_auth_procedure
           where: { owner_id: student_id },
           include: { thread: true },
         },
+        participant: { select: { profile_id: true } },
       },
       where: {
         parent_id: exchange_id,
@@ -87,6 +93,12 @@ export const action = next_auth_procedure
       .with(Deal_Status_Schema.Enum.IDLE, () => HANDSHAKE_TOCTOC) // should not happen
       .exhaustive();
 
+    const { participants } = await prisma.thread.findUniqueOrThrow({
+      select: { participants: { select: { id: true } } },
+      where: { id: thread_id, participants: { some: { id: profile_id } } },
+    });
+    const recipient = thread_recipient({ participants, profile_id });
+
     await prisma.thread.update({
       data: {
         updated_at,
@@ -107,8 +119,19 @@ export const action = next_auth_procedure
         },
         messages: {
           create: {
+            author: { connect: { id: profile_id } },
             content,
-            author: { connect: { id: profile.id } },
+            exchange_notifications: {
+              create: {
+                exchange: { connect: { id: deal.parent.id } },
+                notification: {
+                  create: {
+                    owner_id: recipient.id,
+                    type: NotificationType.EXCHANGE_NEW_MESSAGE,
+                  },
+                },
+              },
+            },
           },
         },
       },
@@ -118,74 +141,123 @@ export const action = next_auth_procedure
       where: { id: thread_id },
     });
 
-    {
-      const exchange = await prisma.exchange.findUniqueOrThrow({
+    return exchange_completed({ ctx: { prisma }, input: { exchange_id } });
+  });
+
+async function exchange_completed({
+  ctx: { prisma },
+  input: { exchange_id },
+}: {
+  ctx: Pick<Context, "prisma">;
+  input: { exchange_id: string };
+}) {
+  const updated_at = new Date();
+  const exchange = await prisma.exchange.findUniqueOrThrow({
+    select: {
+      places: true,
+      owner: { select: { profile_id: true } },
+      deals: {
         select: {
-          places: true,
-          owner: { select: { profile_id: true } },
-          deals: {
-            select: {
-              id: true,
-              exchange_threads: { select: { thread_id: true } },
-            },
-            where: { status: Deal_Status_Schema.Enum.APPROVED },
-          },
+          id: true,
+          exchange_threads: { select: { thread_id: true } },
         },
-        where: { id: exchange_id },
+        where: { status: Deal_Status_Schema.Enum.APPROVED },
+      },
+    },
+    where: { id: exchange_id },
+  });
+
+  if (!is_exchange_completed(exchange)) {
+    return exchange;
+  }
+
+  const exchange_threads = await prisma.exchangeThread.findMany({
+    distinct: ["thread_id"],
+    select: {
+      id: true,
+      deal: { select: { participant: { select: { profile_id: true } } } },
+      thread: { select: { id: true } },
+    },
+    where: {
+      deal: {
+        status: Deal_Status_Schema.Enum.APPROVED,
+        parent: { id: exchange_id },
+      },
+    },
+  });
+
+  await prisma.$transaction(async (prisma_tx) => {
+    for (const { thread, deal } of exchange_threads) {
+      const message = await prisma_tx.message.create({
+        data: {
+          author: { connect: { id: exchange.owner.profile_id } },
+          content: HANDSHAKE_COMPLETED,
+          thread: { connect: { id: thread.id } },
+        },
+        select: { id: true },
       });
 
-      if (is_exchange_completed(exchange)) {
-        const threads = await prisma.thread.findMany({
-          select: { id: true },
-          where: {
-            exchange_threads: {
-              some: {
-                deal: {
-                  status: Deal_Status_Schema.Enum.APPROVED,
-                  parent: { id: exchange_id },
-                },
-              },
+      await prisma_tx.exchangeMessageNotification.create({
+        data: {
+          exchange: { connect: { id: exchange_id } },
+          notification: {
+            create: {
+              type: NotificationType.EXCHANGE_COMPLETED,
+              owner: { connect: { id: deal.participant.profile_id } },
             },
           },
-        });
-        await prisma.$transaction([
-          prisma.exchange.update({
-            data: {
-              is_active: false,
-              updated_at: new Date(),
-              deals: {
-                updateMany: {
-                  data: { updated_at: new Date() },
-                  where: {
-                    parent_id: exchange_id,
-                    status: Deal_Status_Schema.Enum.APPROVED,
-                  },
-                },
-              },
-            },
-            where: { id: exchange_id },
-          }),
-          prisma.message.createMany({
-            data: threads.map(({ id: thread_id }) => ({
-              author_id: exchange.owner.profile_id,
-              content: HANDSHAKE_COMPLETED,
-              thread_id,
-            })),
-          }),
-          prisma.thread.updateMany({
-            data: { updated_at: new Date() },
-            where: {
-              exchange_threads: {
-                some: {
-                  deal: {
-                    status: Deal_Status_Schema.Enum.APPROVED,
-                    parent: { id: exchange_id },
-                  },
-                },
-              },
-            },
-          }),
-        ]);
-      }
+          message: { connect: { id: message.id } },
+        },
+      });
     }
+    const message = await prisma_tx.message.findFirstOrThrow({
+      select: { id: true },
+      where: { content: HANDSHAKE_COMPLETED },
+    });
+    await prisma_tx.exchangeMessageNotification.create({
+      data: {
+        exchange: { connect: { id: exchange_id } },
+        message: { connect: { id: message.id } },
+        notification: {
+          create: {
+            type: NotificationType.EXCHANGE_COMPLETED,
+            owner: { connect: { id: exchange.owner.profile_id } },
+          },
+        },
+      },
+    });
   });
+
+  return prisma.$transaction([
+    prisma.exchange.update({
+      data: {
+        is_active: false,
+        updated_at,
+        deals: {
+          updateMany: {
+            data: { updated_at },
+            where: {
+              parent_id: exchange_id,
+              status: Deal_Status_Schema.Enum.APPROVED,
+            },
+          },
+        },
+      },
+      where: { id: exchange_id },
+    }),
+
+    prisma.thread.updateMany({
+      data: { updated_at },
+      where: {
+        exchange_threads: {
+          some: {
+            deal: {
+              status: Deal_Status_Schema.Enum.APPROVED,
+              parent: { id: exchange_id },
+            },
+          },
+        },
+      },
+    }),
+  ]);
+}

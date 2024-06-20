@@ -568,7 +568,7 @@ async function students_participants_in_exchanges() {
 export function is_active_exchange(
   exchange: Pick<Exchange, "expiry_date" | "places"> & { deals: Deal[] },
 ) {
-  return exchange.deals.length >= exchange.places;
+  return exchange.deals.length < exchange.places;
 }
 
 //

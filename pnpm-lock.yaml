@@ -874,6 +874,9 @@ importers:
       '@1.modules/exchange.domain':
         specifier: workspace:*
         version: link:../domain
+      '@1.modules/inbox.domain':
+        specifier: workspace:*
+        version: link:../../inbox/domain
       '@1.modules/trpc':
         specifier: workspace:*
         version: link:../../trpc

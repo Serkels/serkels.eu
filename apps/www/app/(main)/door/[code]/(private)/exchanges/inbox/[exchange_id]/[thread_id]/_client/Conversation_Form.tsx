@@ -155,13 +155,15 @@ function ActionButtonGroup({
     <div className="mb-2 mt-5 flex justify-center space-x-5">
       <Button
         intent="warning"
-        isDisabled={isDisabled || !next_actions.can_denie}
+        isDisabled={isDisabled || action.isLoading || !next_actions.can_denie}
         onPress={send_nope}
       >
         Indisponible
       </Button>
       <Button
-        isDisabled={isDisabled || !next_actions.can_approuve}
+        isDisabled={
+          isDisabled || action.isLoading || !next_actions.can_approuve
+        }
         onPress={send_okay}
       >
         Accepter

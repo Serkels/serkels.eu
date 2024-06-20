@@ -6,6 +6,7 @@
   "scripts": {
     "type-check": "tsc --build",
     "dev": "tsx watch --clear-screen=false src/index.ts",
+    "dev:inspect": "node --import tsx --inspect-brk src/index.ts",
     "start": "node --import tsx src/index.ts"
   },
   "dependencies": {

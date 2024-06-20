@@ -46,7 +46,7 @@ export const Exchange_Schema = Exchange_Flat_Schema.extend({
 export interface Exchange extends z.TypeOf<typeof Exchange_Schema> {}
 
 export function is_active_exchange(exchange: Exchange) {
-  return exchange.deals.length >= exchange.places;
+  return exchange.deals.length < exchange.places;
 }
 
 //
