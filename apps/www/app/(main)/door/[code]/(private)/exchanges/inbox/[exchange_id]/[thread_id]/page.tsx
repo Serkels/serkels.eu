@@ -34,7 +34,26 @@ export async function generateMetadata(
   { params }: { params: ThreadParams },
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const title = `${params.thread_id} :: ${(await parent).title?.absolute}`;
+  let title = `${params.thread_id} :: ${(await parent).title?.absolute}`;
+  const [, profile_id] = await to(session_profile_id());
+  const [, thread] = await to(
+    TRPC_SSR.inbox.thread.by_id.fetch(params.thread_id),
+  );
+
+  if (!(profile_id && thread))
+    return {
+      title,
+      openGraph: {
+        title,
+      },
+    };
+
+  const participant = thread_recipient({
+    participants: thread.participants,
+    profile_id,
+  });
+
+  title = `${participant.name} :: ${(await parent).title?.absolute}`;
 
   return {
     title,
