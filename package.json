@@ -2,6 +2,7 @@
   "private": true,
   "scripts": {
     "build": "turbo run build",
+    "build:modules": "turbo build --filter www^... --filter api^...",
     "clean": "turbo run clean",
     "dev": "turbo run dev --parallel --continue",
     "heroku-postbuild": "pnpm dlx npm-run-all heroku-postbuild:*",
