@@ -128,6 +128,7 @@ async function student({
     })
   ).map(({ id }) => id);
 
+  const updated_at = faker.date.past();
   const asked_questions: Prisma.QuestionCreateNestedManyWithoutOwnerInput = {
     createMany: {
       data: faker.helpers.multiple<Prisma.QuestionUncheckedCreateWithoutOwnerInput>(
@@ -137,7 +138,11 @@ async function student({
             ...forum_categories_id,
           ]),
           title: faker.company.catchPhrase(),
-          created_at: faker.date.past(),
+          created_at: faker.helpers.arrayElement([
+            updated_at,
+            faker.date.recent({ refDate: updated_at }),
+          ]),
+          updated_at,
         }),
         { count: { min: 0, max: 5 } },
       ),
