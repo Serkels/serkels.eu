@@ -1,7 +1,7 @@
 //
 
 import { next_auth_procedure, procedure, router } from "@1.modules/trpc";
-import { NotificationType } from "@prisma/client";
+import { NotificationType, Prisma } from "@prisma/client";
 import { z } from "zod";
 
 //
@@ -65,26 +65,39 @@ export const answers_api_router = router({
         profile: { id: profile_id },
       } = payload;
       const { content, question_id } = input;
-      const { id: student_id } = await prisma.student.findUniqueOrThrow({
-        select: { id: true },
-        where: { profile_id },
+
+      const {
+        owner: { profile_id: owner_profile_id },
+      } = await prisma.question.findUniqueOrThrow({
+        select: { owner_id: true, owner: { select: { profile_id: true } } },
+        where: { id: question_id },
       });
+      const is_self_answer = profile_id === owner_profile_id;
+
+      const create_forum_notifications: Pick<
+        Prisma.AnswerCreateInput,
+        "forum_notifications"
+      > = is_self_answer
+        ? {}
+        : {
+            forum_notifications: {
+              create: {
+                notification: {
+                  create: {
+                    type: NotificationType.FORUM_NEW_AWNSER,
+                    owner: { connect: { id: owner_profile_id } },
+                  },
+                },
+              },
+            },
+          };
 
       return prisma.answer.create({
         data: {
           content,
           owner: { connect: { profile_id } },
           parent: { connect: { id: question_id } },
-          forum_notifications: {
-            create: {
-              notification: {
-                create: {
-                  type: NotificationType.FORUM_NEW_AWNSER,
-                  owner: { connect: { id: student_id } },
-                },
-              },
-            },
-          },
+          ...create_forum_notifications,
         },
       });
     }),

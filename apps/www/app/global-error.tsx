@@ -4,7 +4,6 @@ import * as Sentry from "@sentry/nextjs";
 // import Error from "next/error";
 import { Error_Layout } from ":components/Error_Layout";
 import { MenuBurger } from ":components/burger";
-import { AppFooter } from ":components/shell/AppFooter.server";
 import { BigBar } from ":components/shell/BigBar";
 import { ErrorOccur } from "@1.ui/react/error";
 import { VisuallyHidden } from "@1.ui/react/visually_hidden";
@@ -46,8 +45,6 @@ export default function GlobalError({ error }: { error: Error }) {
               />
             </Error_Layout>
           </div>
-
-          <AppFooter />
         </main>
       </body>
     </html>

@@ -9,6 +9,7 @@ import { P, match } from "ts-pattern";
 import { ExchangeCompletedMessage } from "./ExchangeCompletedMessage";
 import { ExchangeNewMessage } from "./ExchangeNewMessage";
 import { ExchangeNewParticipant } from "./ExchangeNewParticipant";
+import { ForumNewAnswer } from "./ForumNewAnswer";
 import { InboxNewMessage } from "./InboxNewMessage";
 import type { Notification } from "./type";
 
@@ -70,17 +71,20 @@ function List({
 
 function Card({ notification }: { notification: Notification }) {
   return match(notification)
-    .with({ type: "INBOX_NEW_MESSAGE" }, (inbox_notif) => (
-      <InboxNewMessage notification={inbox_notif} />
+    .with({ type: "INBOX_NEW_MESSAGE" }, (notification) => (
+      <InboxNewMessage notification={notification} />
     ))
-    .with({ type: "EXCHANGE_COMPLETED" }, (inbox_notif) => (
-      <ExchangeCompletedMessage notification={inbox_notif} />
+    .with({ type: "EXCHANGE_COMPLETED" }, (notification) => (
+      <ExchangeCompletedMessage notification={notification} />
     ))
-    .with({ type: "EXCHANGE_NEW_PARTICIPANT" }, (inbox_notif) => (
-      <ExchangeNewParticipant notification={inbox_notif} />
+    .with({ type: "EXCHANGE_NEW_PARTICIPANT" }, (notification) => (
+      <ExchangeNewParticipant notification={notification} />
     ))
-    .with({ type: "EXCHANGE_NEW_MESSAGE" }, (inbox_notif) => (
-      <ExchangeNewMessage notification={inbox_notif} />
+    .with({ type: "EXCHANGE_NEW_MESSAGE" }, (notification) => (
+      <ExchangeNewMessage notification={notification} />
+    ))
+    .with({ type: "FORUM_NEW_AWNSER" }, (notification) => (
+      <ForumNewAnswer notification={notification} />
     ))
     .otherwise(() => {
       console.error(`Unknown notification type ${notification.type}`);

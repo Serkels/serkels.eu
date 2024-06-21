@@ -2,7 +2,6 @@
 
 import { Error_Layout } from ":components/Error_Layout";
 import { MenuBurger } from ":components/burger";
-import { AppFooter } from ":components/shell/AppFooter.server";
 import { BigBar } from ":components/shell/BigBar";
 import { Button } from "@1.ui/react/button";
 import { ErrorOccur } from "@1.ui/react/error";
@@ -31,7 +30,8 @@ export default function Error({
   reset: () => void;
 }) {
   useMountEffect(() => {
-    signOut; //! FIXME(douglasduteil): only in dev mode ?
+    if (process.env.NODE_ENV !== "development") return;
+    signOut();
   });
   return (
     <main className="flex min-h-screen flex-col">
@@ -51,8 +51,6 @@ export default function Error({
           <Button onPress={() => reset()}>Toquer de nouveau</Button>
         </Error_Layout>
       </div>
-
-      <AppFooter />
     </main>
   );
 }
