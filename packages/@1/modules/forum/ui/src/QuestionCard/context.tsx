@@ -33,6 +33,7 @@ function useCardContext({ question }: { question: Question }) {
   });
   return { new_outlet, answers_outlet, outlet, question };
 }
+
 export const [
   Provider,
   useQuestion,

@@ -114,11 +114,7 @@ export function Footer() {
           <ResponseCount />
         </Button>
         {status === "authenticated" ? <ToggleOutlet /> : <SignUpToAnswer />}
-        <Share_Button
-          className="-mr-4"
-          popover_variant={{ position: "left" }}
-          href={href}
-        >
+        <Share_Button className="-mr-4" href={href}>
           <Share className="size-5" />
         </Share_Button>
       </div>
