@@ -45,6 +45,23 @@ export default next_auth_procedure
             },
           },
         },
+        forum_message: {
+          select: {
+            answer: {
+              select: {
+                owner: {
+                  select: {
+                    profile_id: true,
+                    profile: { select: { name: true } },
+                  },
+                },
+                parent_id: true,
+                parent: { select: { id: true, title: true } },
+              },
+            },
+            answer_id: true,
+          },
+        },
       },
     });
 

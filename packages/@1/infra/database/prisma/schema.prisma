@@ -314,6 +314,8 @@ model Answer {
   //
 
   accepted_for Question? @relation("AcceptedAnswer")
+
+  forum_notifications ForumNotification[]
 }
 
 //
@@ -384,8 +386,9 @@ model Notification {
   read_at  DateTime?
   type     NotificationType
 
-  inbox_message    InboxMessageNotification?
   exchange_message ExchangeMessageNotification?
+  forum_message    ForumNotification?
+  inbox_message    InboxMessageNotification?
 
   //
 
@@ -396,25 +399,35 @@ enum NotificationType {
   EXCHANGE_COMPLETED
   EXCHANGE_NEW_MESSAGE
   EXCHANGE_NEW_PARTICIPANT
+  FORUM_NEW_AWNSER
   INBOX_NEW_MESSAGE
 }
 
 model ExchangeMessageNotification {
-  notification    Notification @relation(fields: [notification_id], references: [id], onDelete: Cascade)
-  notification_id String       @unique
-  message         Message?     @relation(fields: [message_id], references: [id], onDelete: Cascade)
-  message_id      String?
   exchange        Exchange?    @relation(fields: [exchange_id], references: [id], onDelete: Cascade)
   exchange_id     String?
+  message         Message?     @relation(fields: [message_id], references: [id], onDelete: Cascade)
+  message_id      String?
+  notification    Notification @relation(fields: [notification_id], references: [id], onDelete: Cascade)
+  notification_id String       @unique
 
   @@unique(name: "unique_message_notification", fields: [message_id, notification_id])
 }
 
-model InboxMessageNotification {
+model ForumNotification {
+  answer          Answer?      @relation(fields: [answer_id], references: [id], onDelete: Cascade)
+  answer_id       String?
   notification    Notification @relation(fields: [notification_id], references: [id], onDelete: Cascade)
   notification_id String       @unique
+
+  @@unique(name: "unique_answer_notification", fields: [answer_id, notification_id])
+}
+
+model InboxMessageNotification {
   message         Message?     @relation(fields: [message_id], references: [id], onDelete: Cascade)
   message_id      String?
+  notification    Notification @relation(fields: [notification_id], references: [id], onDelete: Cascade)
+  notification_id String       @unique
 
   @@unique(name: "unique_message_notification", fields: [message_id, notification_id])
 }

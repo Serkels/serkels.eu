@@ -100,8 +100,8 @@ export function Footer() {
   const question = useQuestion();
   const [, set_awnser_outlet] = useAwnsersOutletState();
   const { status } = useSession();
-  const href_searhparams = new URLSearchParams({ q: question.id });
-  const href = `${window.location.origin}/forum?q=${href_searhparams}#${question.id}`;
+  const href_searhparams = new URLSearchParams({ q: question.title });
+  const href = `${window.location.origin}/forum?${href_searhparams}#${question.id}`;
 
   return (
     <footer className="mt-4">
