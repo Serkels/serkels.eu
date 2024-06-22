@@ -1,24 +1,26 @@
 "use client";
+
+import { DialogTrigger } from "@1.ui/react/aria";
 import { button } from "@1.ui/react/button/atom";
-import { popover } from "@1.ui/react/popover/atom";
+import { PopoverMessage } from "@1.ui/react/popover";
 import { useTimeoutEffect, useToggle } from "@react-hookz/web";
-import { useCallback, type PropsWithChildren } from "react";
-import type { VariantProps } from "tailwind-variants";
+import { useCallback, useRef, type PropsWithChildren } from "react";
+
+//
 
 export function Share_Button({
   href,
   children,
-  className,
-  popover_variant,
 }: PropsWithChildren<{
   className?: string;
   href: string;
-  popover_variant?: VariantProps<typeof popover>;
 }>) {
   const [diplay_in_clipboard, set_diplay_in_clipboard] = useToggle(false);
+  const trigger_ref = useRef(null);
+
   const [, reset] = useTimeoutEffect(
     () => set_diplay_in_clipboard(false),
-    5000,
+    5_000,
   );
   const copy_to_clipboard = useCallback(async () => {
     await navigator.clipboard.writeText(
@@ -29,16 +31,22 @@ export function Share_Button({
   }, [href]);
 
   return (
-    <div>
-      {diplay_in_clipboard ? (
-        <div className={popover(popover_variant)}>Le lien est copié</div>
-      ) : null}
+    <DialogTrigger>
       <button
-        className={button({ className, intent: "light" })}
+        ref={trigger_ref}
+        className={button({ intent: "light" })}
         onClick={copy_to_clipboard}
       >
         {children}
       </button>
-    </div>
+      <PopoverMessage
+        triggerRef={trigger_ref}
+        placement="top"
+        isOpen={diplay_in_clipboard}
+        onOpenChange={set_diplay_in_clipboard}
+      >
+        Le lien est copié
+      </PopoverMessage>
+    </DialogTrigger>
   );
 }
