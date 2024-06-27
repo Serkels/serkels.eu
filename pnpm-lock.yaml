@@ -382,8 +382,8 @@ importers:
         specifier: workspace:*
         version: link:../../modules/notification/domain
       '@prisma/client':
-        specifier: 5.16.0
-        version: 5.16.0(prisma@5.16.0)
+        specifier: 5.16.1
+        version: 5.16.1(prisma@5.16.1)
     devDependencies:
       '@1.config/typescript':
         specifier: workspace:*
@@ -401,8 +401,8 @@ importers:
         specifier: 1.5.3
         version: 1.5.3
       prisma:
-        specifier: 5.16.0
-        version: 5.16.0
+        specifier: 5.16.1
+        version: 5.16.1
       slugify:
         specifier: 1.6.6
         version: 1.6.6
@@ -527,8 +527,8 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       '@prisma/client':
-        specifier: 5.16.0
-        version: 5.16.0(prisma@5.16.0)
+        specifier: 5.16.1
+        version: 5.16.1(prisma@5.16.1)
       '@types/node':
         specifier: 20.14.9
         version: 20.14.9
@@ -668,8 +668,8 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       '@prisma/client':
-        specifier: 5.16.0
-        version: 5.16.0(prisma@5.16.0)
+        specifier: 5.16.1
+        version: 5.16.1(prisma@5.16.1)
       '@types/node':
         specifier: 20.14.9
         version: 20.14.9
@@ -767,8 +767,8 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       '@prisma/client':
-        specifier: 5.16.0
-        version: 5.16.0(prisma@5.16.0)
+        specifier: 5.16.1
+        version: 5.16.1(prisma@5.16.1)
       '@types/node':
         specifier: 20.14.9
         version: 20.14.9
@@ -900,8 +900,8 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       '@prisma/client':
-        specifier: 5.16.0
-        version: 5.16.0(prisma@5.16.0)
+        specifier: 5.16.1
+        version: 5.16.1(prisma@5.16.1)
       '@types/node':
         specifier: 20.14.9
         version: 20.14.9
@@ -1047,8 +1047,8 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       '@prisma/client':
-        specifier: 5.16.0
-        version: 5.16.0(prisma@5.16.0)
+        specifier: 5.16.1
+        version: 5.16.1(prisma@5.16.1)
       '@types/node':
         specifier: 20.14.9
         version: 20.14.9
@@ -1188,8 +1188,8 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       '@prisma/client':
-        specifier: 5.16.0
-        version: 5.16.0(prisma@5.16.0)
+        specifier: 5.16.1
+        version: 5.16.1(prisma@5.16.1)
       '@types/node':
         specifier: 20.14.9
         version: 20.14.9
@@ -1302,8 +1302,8 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       '@prisma/client':
-        specifier: 5.16.0
-        version: 5.16.0(prisma@5.16.0)
+        specifier: 5.16.1
+        version: 5.16.1(prisma@5.16.1)
       '@types/node':
         specifier: 20.14.9
         version: 20.14.9
@@ -1410,8 +1410,8 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       '@prisma/client':
-        specifier: 5.16.0
-        version: 5.16.0(prisma@5.16.0)
+        specifier: 5.16.1
+        version: 5.16.1(prisma@5.16.1)
       '@types/node':
         specifier: 20.14.9
         version: 20.14.9
@@ -1536,8 +1536,8 @@ importers:
         specifier: workspace:*
         version: link:../../../config/typescript
       '@prisma/client':
-        specifier: 5.16.0
-        version: 5.16.0(prisma@5.16.0)
+        specifier: 5.16.1
+        version: 5.16.1(prisma@5.16.1)
       '@types/node':
         specifier: 20.14.9
         version: 20.14.9
@@ -1637,8 +1637,8 @@ importers:
         specifier: workspace:*
         version: link:../../../@douglasduteil/nextauth...trpc.prisma
       '@prisma/client':
-        specifier: 5.16.0
-        version: 5.16.0(prisma@5.16.0)
+        specifier: 5.16.1
+        version: 5.16.1(prisma@5.16.1)
       '@trpc/server':
         specifier: 10.45.2
         version: 10.45.2
@@ -1766,8 +1766,8 @@ importers:
   packages/@douglasduteil/nextauth...trpc.prisma:
     dependencies:
       '@prisma/client':
-        specifier: 5.16.0
-        version: 5.16.0(prisma@5.16.0)
+        specifier: 5.16.1
+        version: 5.16.1(prisma@5.16.1)
       '@trpc/client':
         specifier: 10.45.2
         version: 10.45.2(@trpc/server@10.45.2)
@@ -1794,8 +1794,8 @@ importers:
         specifier: workspace:*
         version: link:../datatypes...hours-to-seconds
       prisma:
-        specifier: 5.16.0
-        version: 5.16.0
+        specifier: 5.16.1
+        version: 5.16.1
       typescript:
         specifier: 5.5.2
         version: 5.5.2
@@ -2998,8 +2998,8 @@ packages:
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
 
-  '@prisma/client@5.16.0':
-    resolution: {integrity: sha512-8NOQSzgrSgpU2YcNm4MsPR4/vNvZdUBPuyX89PwWlClSKZeDjPSZ8+eds/ffu1Ttrjnm8V8D0hjgqpyc6wyqDg==}
+  '@prisma/client@5.16.1':
+    resolution: {integrity: sha512-wM9SKQjF0qLxdnOZIVAIMKiz6Hu7vDt4FFAih85K1dk/Rr2mdahy6d3QP41K62N9O0DJJA//gUDA3Mp49xsKIg==}
     engines: {node: '>=16.13'}
     peerDependencies:
       prisma: '*'
@@ -3007,20 +3007,20 @@ packages:
       prisma:
         optional: true
 
-  '@prisma/debug@5.16.0':
-    resolution: {integrity: sha512-pfdOGxMShqZKkNNskYB0yXICsqL6rOkQUKNktouUZ9Y9ASd5736+ae2fpzif7onwJiIyEpu/yvOO3rFUbliKTA==}
+  '@prisma/debug@5.16.1':
+    resolution: {integrity: sha512-JsNgZAg6BD9RInLSrg7ZYzo11N7cVvYArq3fHGSD89HSgtN0VDdjV6bib7YddbcO6snzjchTiLfjeTqBjtArVQ==}
 
   '@prisma/engines-version@5.16.0-24.34ace0eb2704183d2c05b60b52fba5c43c13f303':
     resolution: {integrity: sha512-HkT2WbfmFZ9WUPyuJHhkiADxazHg8Y4gByrTSVeb3OikP6tjQ7txtSUGu9OBOBH0C13dPKN2qqH12xKtHu/Hiw==}
 
-  '@prisma/engines@5.16.0':
-    resolution: {integrity: sha512-OGvi/GvLX3XwTWQ+k/57kLyHGidQ8rC8zB+Zq9nEE7gegjazyzgLYN9qzfdcCfyI8ilc6IMxOyX4sspwkv98hg==}
+  '@prisma/engines@5.16.1':
+    resolution: {integrity: sha512-KkyF3eIUtBIyp5A/rJHCtwQO18OjpGgx18PzjyGcJDY/+vNgaVyuVd+TgwBgeq6NLdd1XMwRCI+58vinHsAdfA==}
 
-  '@prisma/fetch-engine@5.16.0':
-    resolution: {integrity: sha512-8C8y6J9eWRl+R/aO3vQ2HlmM9IbjAmrZaaEAdC0OJfG3CHvbTOcL7VRY6CEUKo8RwZ8bdATOePaSMS634fHWgw==}
+  '@prisma/fetch-engine@5.16.1':
+    resolution: {integrity: sha512-oOkjaPU1lhcA/Rvr4GVfd1NLJBwExgNBE36Ueq7dr71kTMwy++a3U3oLd2ZwrV9dj9xoP6LjCcky799D9nEt4w==}
 
-  '@prisma/get-platform@5.16.0':
-    resolution: {integrity: sha512-ynp2jAYfYdd7OObX+uWaFRpvhPVmpF0nsRMhbrWdVVUj39q3Zr8dGz5WDj2g+BTUE++u1T1Am3RyM3PBQdDZXA==}
+  '@prisma/get-platform@5.16.1':
+    resolution: {integrity: sha512-R4IKnWnMkR2nUAbU5gjrPehdQYUUd7RENFD2/D+xXTNhcqczp0N+WEGQ3ViyI3+6mtVcjjNIMdnUTNyu3GxIgA==}
 
   '@prisma/instrumentation@5.15.0':
     resolution: {integrity: sha512-fCWOOOajTKOUEp43gRmBqwt6oN9bPJcLiloi2OG/2ED0N5z62Cuza6FDrlm3SJHQAXYlXqLE0HLdEE5WcUkOzg==}
@@ -7469,8 +7469,8 @@ packages:
     peerDependencies:
       react: '>=16.0.0'
 
-  prisma@5.16.0:
-    resolution: {integrity: sha512-T1ZWJT/vgzp3rtRmd1iCSnPPsgOItXnnny+/cfpHraowiBEvUMD2pEI6yEOL6CP2EelTmq4wKDbXbYucy4Fd+A==}
+  prisma@5.16.1:
+    resolution: {integrity: sha512-Z1Uqodk44diztImxALgJJfNl2Uisl9xDRvqybMKEBYJLNKNhDfAHf+ZIJbZyYiBhLMbKU9cYGdDVG5IIXEnL2Q==}
     engines: {node: '>=16.13'}
     hasBin: true
 
@@ -9872,30 +9872,30 @@ snapshots:
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
-  '@prisma/client@5.16.0(prisma@5.16.0)':
+  '@prisma/client@5.16.1(prisma@5.16.1)':
     optionalDependencies:
-      prisma: 5.16.0
+      prisma: 5.16.1
 
-  '@prisma/debug@5.16.0': {}
+  '@prisma/debug@5.16.1': {}
 
   '@prisma/engines-version@5.16.0-24.34ace0eb2704183d2c05b60b52fba5c43c13f303': {}
 
-  '@prisma/engines@5.16.0':
+  '@prisma/engines@5.16.1':
     dependencies:
-      '@prisma/debug': 5.16.0
+      '@prisma/debug': 5.16.1
       '@prisma/engines-version': 5.16.0-24.34ace0eb2704183d2c05b60b52fba5c43c13f303
-      '@prisma/fetch-engine': 5.16.0
-      '@prisma/get-platform': 5.16.0
+      '@prisma/fetch-engine': 5.16.1
+      '@prisma/get-platform': 5.16.1
 
-  '@prisma/fetch-engine@5.16.0':
+  '@prisma/fetch-engine@5.16.1':
     dependencies:
-      '@prisma/debug': 5.16.0
+      '@prisma/debug': 5.16.1
       '@prisma/engines-version': 5.16.0-24.34ace0eb2704183d2c05b60b52fba5c43c13f303
-      '@prisma/get-platform': 5.16.0
+      '@prisma/get-platform': 5.16.1
 
-  '@prisma/get-platform@5.16.0':
+  '@prisma/get-platform@5.16.1':
     dependencies:
-      '@prisma/debug': 5.16.0
+      '@prisma/debug': 5.16.1
 
   '@prisma/instrumentation@5.15.0':
     dependencies:
@@ -15408,9 +15408,9 @@ snapshots:
       clsx: 1.2.1
       react: 18.3.1
 
-  prisma@5.16.0:
+  prisma@5.16.1:
     dependencies:
-      '@prisma/engines': 5.16.0
+      '@prisma/engines': 5.16.1
 
   process@0.11.10: {}
 
