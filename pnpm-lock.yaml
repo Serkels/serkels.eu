@@ -56,8 +56,8 @@ importers:
         specifier: 1.1.0
         version: 1.1.0(hono@4.4.12)
       '@hono/trpc-server':
-        specifier: 0.3.1
-        version: 0.3.1(@trpc/server@10.45.2)(hono@4.4.12)
+        specifier: 0.3.2
+        version: 0.3.2(@trpc/server@10.45.2)(hono@4.4.12)
       '@trpc/server':
         specifier: 10.45.2
         version: 10.45.2
@@ -2672,11 +2672,11 @@ packages:
     peerDependencies:
       hono: '>=3.*'
 
-  '@hono/trpc-server@0.3.1':
-    resolution: {integrity: sha512-2FgDUv6ngrDA8pu/hb8hTqUyEgsT7PbYriTVKJoYxlqW8nnCqubruZ/14IQ/MCkBPXKVefnqUCJNAytW1Su++A==}
+  '@hono/trpc-server@0.3.2':
+    resolution: {integrity: sha512-dTKDrSldjBn0hi9FjHOGdiHgMCWPoW5NaBUTQRNLyVL9JcJJu9oiwTFoIscPFxc9CF2rAeA8aRGHoFJK+A8cLw==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
-      '@trpc/server': ^10.10.0
+      '@trpc/server': ^10.10.0 || >11.0.0-rc
       hono: '>=4.*'
 
   '@hookform/resolvers@3.9.0':
@@ -9491,7 +9491,7 @@ snapshots:
       hono: 4.4.12
       toucan-js: 3.4.0
 
-  '@hono/trpc-server@0.3.1(@trpc/server@10.45.2)(hono@4.4.12)':
+  '@hono/trpc-server@0.3.2(@trpc/server@10.45.2)(hono@4.4.12)':
     dependencies:
       '@trpc/server': 10.45.2
       hono: 4.4.12
