@@ -23,6 +23,6 @@
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
-    "typescript": "5.5.2"
+    "typescript": "5.5.3"
   }
 }
