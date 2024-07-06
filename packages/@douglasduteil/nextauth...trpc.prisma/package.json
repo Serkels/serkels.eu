@@ -48,6 +48,6 @@
     "@douglasduteil/config...typescript": "workspace:*",
     "@douglasduteil/datatypes...hours-to-seconds": "workspace:*",
     "prisma": "5.16.1",
-    "typescript": "5.5.2"
+    "typescript": "5.5.3"
   }
 }
