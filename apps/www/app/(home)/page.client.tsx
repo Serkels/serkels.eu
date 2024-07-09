@@ -24,10 +24,10 @@ const ConnectionPanel = dynamic(() => import("./ConnectionPanel"), {
 export default function HomeCarousel() {
   return (
     <Grid className="min-h-[45vh] flex-1 items-center">
-      <aside className="col-span-2 flex min-h-full items-center sm:col-span-4 md:col-start-2 xl:col-start-4">
+      <aside className="col-span-2 flex items-center sm:col-span-4 md:col-start-2 md:min-h-full xl:col-start-4">
         <Carousel className="h-[18em] w-full" autoplay={true}>
           <article>
-            <h1 className="mb-12 text-2xl font-bold uppercase">
+            <h1 className="mb-12 text-xl font-bold uppercase md:text-2xl">
               Avec Serkels,
               <br /> échangez des expériences, cours de langue, activités, notes
               de cours et profitez d'autres services.
@@ -35,20 +35,20 @@ export default function HomeCarousel() {
             <p>Inscrivez-vous pour échanger entre pairs !</p>
           </article>
           <article>
-            <h1 className="mb-6 text-2xl font-bold uppercase">
+            <h1 className="mb-6 text-xl font-bold uppercase md:text-2xl">
               Une question ? <br />
               posez-la directement à la communauté sur la rubrique “forum”...
             </h1>
           </article>
           <article>
-            <h1 className="mb-6 text-2xl font-bold uppercase">
+            <h1 className="mb-6 text-xl font-bold uppercase md:text-2xl">
               ... et ne ratez aucune opportunité proposée par nos partenaires
               (bourses, activités etc...)​
             </h1>
           </article>
         </Carousel>
       </aside>
-      <aside className="col-span-2 sm:col-span-2">
+      <aside className="col-span-2 px-[25%] sm:col-span-2 sm:px-0">
         <ConnectionPanel />
       </aside>
     </Grid>
