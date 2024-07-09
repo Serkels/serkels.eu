@@ -21,7 +21,7 @@
     "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
-    "@prisma/client": "5.16.1",
+    "@prisma/client": "5.16.2",
     "@1.modules/notification.domain": "workspace:*"
   },
   "devDependencies": {
@@ -30,7 +30,7 @@
     "@types/node": "20.14.10",
     "date-fns": "3.6.0",
     "dedent": "1.5.3",
-    "prisma": "5.16.1",
+    "prisma": "5.16.2",
     "slugify": "1.6.6",
     "tsx": "4.16.2"
   }
