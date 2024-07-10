@@ -3,7 +3,7 @@
 import { tv, type VariantProps } from "tailwind-variants";
 
 export const avatar = tv({
-  base: "inline-block overflow-hidden rounded-full",
+  base: "overflow-hidden rounded-full max-w-max ",
   slots: {
     image: "aspect-square h-full object-cover",
   },
