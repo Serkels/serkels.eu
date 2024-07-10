@@ -122,7 +122,8 @@ const explore_grid_style = tv(
   {
     base: "",
     slots: {
-      links: "col-span-full mt-10 xl:col-start-4",
+      links:
+        "col-span-2 grid-cols-4 grid-rows-2 py-10 sm:col-span-full sm:grid-rows-1 md:py-5 xl:col-start-4",
       link: "col-span-2 sm:col-span-3 md:col-span-2",
     },
     variants: {
