@@ -27,7 +27,7 @@
     "@trpc/server": "10.45.2",
     "date-fns": "3.6.0",
     "ts-pattern": "5.2.0",
-    "xstate": "5.14.0",
+    "xstate": "5.15.0",
     "zod": "3.23.8"
   },
   "devDependencies": {
