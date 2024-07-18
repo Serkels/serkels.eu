@@ -1,87 +1,84 @@
 "use client";
 
 import type { Category } from "@1.modules/category.domain";
-import { SelectCategoryField } from "@1.modules/category.ui/form/SelectCategoryField";
+import { OptionCategories } from "@1.modules/category.ui/form/SelectCategoryField";
 import { Button } from "@1.ui/react/button";
-import { select } from "@1.ui/react/form/atom";
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { input, select } from "@1.ui/react/form/atom";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { toFormikValidationSchema } from "zod-formik-adapter";
 
 //
 
 export function CreateQuestionForm({
   categories,
-  initialValues = {},
+  initialValues,
   onSubmit,
 }: {
   categories: Category[];
   initialValues?: { title?: string; category?: string };
   onSubmit: (values: { title: string; category: string }) => void;
 }) {
-  return (
-    <Formik
-      initialValues={{
-        title: initialValues.title ?? "",
-        category: initialValues.category ?? "",
-      }}
-      enableReinitialize
-      onSubmit={onSubmit}
-      validationSchema={toFormikValidationSchema(
-        z.object({
-          title: z.string().trim().min(10).max(205),
-        }),
-      )}
-    >
-      {({ isSubmitting }) => (
-        <Form className="flex-1">
-          <div className="mb-7">
-            <Field
-              as="textarea"
-              className="
-                w-full
-               resize-none
-               rounded-sm
-               border
-               border-solid
-               border-[#dddddd]
-               px-4
-               py-3
-               placeholder-black
-               md:col-span-6
-              "
-              disabled={isSubmitting}
-              name="title"
-              placeholder="Pose une question aux étudiant.e.s ..."
-              required
-            />
-            <ErrorMessage name="title">
-              {(msg) => <div className="text-danger">{msg}</div>}
-            </ErrorMessage>
-          </div>
-          <div className="flex justify-between">
-            <SelectCategoryField
-              categories={categories}
-              type="question"
-              disabled={isSubmitting}
-              className={select({
-                className: "w-auto min-w-[25%] border border-[#dddddd]",
-              })}
-              name="category"
-              required
-            />
+  const {
+    formState: { isSubmitting, isLoading, errors },
+    handleSubmit,
+    register,
+  } = useForm<FormValues>({
+    defaultValues: initialValues,
+    resolver: zodResolver(form_zod_schema),
+  });
 
-            <Button
-              type="submit"
-              intent="primary"
-              isDisabled={isSubmitting}
-              className="max-w-fit"
-            >
-              Envoyer
-            </Button>
-          </div>
-        </Form>
-      )}
-    </Formik>
+  return (
+    <form className="flex-1" onSubmit={handleSubmit(onSubmit)}>
+      <div className="mb-7">
+        <textarea
+          {...register("title")}
+          autoComplete="off"
+          className={input({
+            className: `
+            peer
+            max-h-32
+            min-h-16
+            w-full
+            resize-none
+            rounded-2xl
+            pr-14
+          `,
+          })}
+          disabled={isSubmitting || isLoading}
+          placeholder="Pose une question aux étudiant.e.s ..."
+        ></textarea>
+
+        {errors.title ? (
+          <div className="text-danger">{errors.title.message}</div>
+        ) : null}
+      </div>
+      <div className="flex justify-between">
+        <select
+          {...register("category")}
+          disabled={isSubmitting || isLoading}
+          className={select({
+            className: "w-auto min-w-[25%] border border-[#dddddd]",
+          })}
+          required
+        >
+          <OptionCategories categories={categories} />
+        </select>
+        <Button
+          type="submit"
+          intent="primary"
+          isDisabled={isSubmitting || isLoading}
+          className="max-w-fit"
+        >
+          Envoyer
+        </Button>
+      </div>
+    </form>
   );
 }
+
+const form_zod_schema = z.object({
+  title: z.string().trim().max(705).min(1, "Obligatoire"),
+  category: z.string().trim().min(1, "Obligatoire"),
+});
+type FormValues = z.infer<typeof form_zod_schema>;

@@ -30,7 +30,7 @@ export const input = tv({
     border
     border-solid
     border-Silver_Chalice
-    placeholder-black
+    placeholder-Silver_Chalice
     focus:ring-gray-900
     disabled:pointer-events-none
     disabled:opacity-50
