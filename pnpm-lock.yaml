@@ -957,6 +957,9 @@ importers:
       '@1.ui/react':
         specifier: workspace:*
         version: link:../../../ui/react
+      '@hookform/resolvers':
+        specifier: 3.9.0
+        version: 3.9.0(react-hook-form@7.52.1(react@18.3.1))
       '@react-hookz/web':
         specifier: 24.0.4
         version: 24.0.4(js-cookie@3.0.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -981,6 +984,9 @@ importers:
       react-content-loader:
         specifier: 7.0.2
         version: 7.0.2(react@18.3.1)
+      react-hook-form:
+        specifier: 7.52.1
+        version: 7.52.1(react@18.3.1)
       react-slotify:
         specifier: 0.2.2
         version: 0.2.2(react@18.3.1)
