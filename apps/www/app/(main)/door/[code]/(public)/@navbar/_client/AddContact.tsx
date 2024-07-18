@@ -37,12 +37,13 @@ export default function AddContact({ profile_id }: { profile_id: string }) {
       >
         {find_contact.data ? (
           <>
-            <Trash className="h-4" />{" "}
-            <span>Supprimer de ma liste de contact</span>
+            <Trash className="w-4" />
+            <span className="w-full">Supprimer de ma liste de contact</span>
           </>
         ) : (
           <>
-            <Plus className="h-4" /> <span>Ajouter à ma liste de contact</span>
+            <Plus className="w-4" />
+            <span className="w-full">Ajouter à ma liste de contact</span>
           </>
         )}
       </ActionItem>

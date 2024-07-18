@@ -26,11 +26,17 @@ export interface MenuProps extends PropsWithChildren<AriaMenuProps<{}>> {
 export function Menu({ className, children, variant, ...props }: MenuProps) {
   return (
     <MenuTrigger {...props}>
-      <Button aria-label="Menu" variant={{ intent: "light", state: "ghost" }}>
+      <Button
+        className="m-0 px-0"
+        aria-label="Menu"
+        variant={{ intent: "light", state: "ghost" }}
+      >
         •••
       </Button>
       <Popover className={menu({ className })}>
-        <AriaMenu className="outline-none">{children}</AriaMenu>
+        <AriaMenu className="flex flex-col gap-4 outline-none">
+          {children}
+        </AriaMenu>
       </Popover>
     </MenuTrigger>
   );
