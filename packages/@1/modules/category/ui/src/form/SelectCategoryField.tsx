@@ -20,11 +20,7 @@ export function SelectCategoryField(
       <option hidden value={""}>
         {props.placeholder}
       </option>
-      {categories.map(({ name, id }) => (
-        <option value={String(id)} key={id}>
-          {name}
-        </option>
-      ))}
+      <OptionCategories categories={categories} />
     </Field>
   );
 }

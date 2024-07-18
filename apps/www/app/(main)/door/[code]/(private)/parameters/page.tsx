@@ -67,8 +67,8 @@ async function Role_Editor({
     .with(PROFILE_ROLES.Enum.STUDENT, async () => {
       const student =
         await TRPC_SSR.profile.student.by_profile_id.fetch(profile_id);
-
-      return <Student_Editor student={student} />;
+      const categories = await TRPC_SSR.category.exchange.fetch();
+      return <Student_Editor categories={categories} student={student} />;
     })
     .with(PROFILE_ROLES.Enum.PARTNER, async () => {
       const partner =

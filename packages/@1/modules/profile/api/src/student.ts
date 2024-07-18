@@ -1,3 +1,4 @@
+import { ID_Schema } from "@1.modules/core/domain";
 import { Student_Schema, type Student } from "@1.modules/profile.domain";
 import { next_auth_procedure, router } from "@1.modules/trpc";
 import { NotificationType } from "@prisma/client";
@@ -31,12 +32,19 @@ export const student_api_router = router({
 
   me: router({
     update: next_auth_procedure
-      .input(Student_Schema.omit({ id: true, profile: true, interest: true }))
+      .input(
+        Student_Schema.omit({ id: true, profile: true, interest: true }).merge(
+          z.object({ interest: z.array(ID_Schema).optional() }),
+        ),
+      )
       .mutation(({ input, ctx: { prisma, payload } }) => {
         const { id: profile_id } = payload.profile;
         return prisma.student.update({
           data: {
             ...input,
+            interest: input.interest
+              ? { set: input.interest.map((id) => ({ id })) }
+              : {},
             updated_at: new Date(),
           },
           where: { profile_id },
