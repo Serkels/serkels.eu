@@ -24,6 +24,7 @@ export default async function Layout({ children }: PropsWithChildren<{}>) {
         <AsideFilter
           className="col-span-2 sm:col-span-6 md:col-span-2 md:block lg:col-span-2 xl:col-span-3"
           slot-title="Opportunités"
+          subtitle="Trouvez les opportunités professionnelles dédiées aux étudiant.e.s"
         >
           <Suspense fallback={<Loading />}>
             <SearchForm />

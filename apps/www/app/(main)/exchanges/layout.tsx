@@ -47,6 +47,7 @@ export default async function Layout({
         <AsideFilter
           className="col-span-2 sm:col-span-6 md:col-span-2 md:block lg:col-span-2 xl:col-span-3"
           slot-title="Échanges"
+          subtitle="Trouvez les échanges proposés par les étudiant.e.s"
         >
           <SearchForm />
           <Exchanges_Filter />

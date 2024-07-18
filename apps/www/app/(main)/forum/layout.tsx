@@ -30,10 +30,10 @@ export default async function Layout({
         <AsideFilter
           className="col-span-2 sm:col-span-6 md:col-span-2 md:block lg:col-span-2 xl:col-span-3"
           slot-title="Forum StudHelp"
+          subtitle="Trouvez les questions et les réponses posés par les étudiant.e.s"
         >
           <SearchForm />
           <Filter />
-
           <hr className="my-5 md:my-10" />
 
           <CategoriesList />
