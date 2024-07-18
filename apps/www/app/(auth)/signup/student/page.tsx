@@ -5,6 +5,7 @@ import { UserAvatarFilled } from "@1.ui/react/icons";
 // import { UserAvatarFilled } from "@1.ui/react/icons";
 import { FrenchLocationField } from ":components/FrenchLocationField";
 import { TRPC_SSR } from ":trpc/server";
+import { OptionCategories } from "@1.modules/category.ui/form/SelectCategoryField";
 import {
   PROFILE_ROLES,
   Profile_Schema,
@@ -108,11 +109,7 @@ export default async function Page() {
             <option hidden value={""}>
               Intéressé.e par
             </option>
-            {categories.map(({ name, id }) => (
-              <option value={String(id)} key={id}>
-                {name}
-              </option>
-            ))}
+            <OptionCategories categories={categories} />
           </select>
           <label className={label()}>
             <div className="flex-1">Adresse email</div>
