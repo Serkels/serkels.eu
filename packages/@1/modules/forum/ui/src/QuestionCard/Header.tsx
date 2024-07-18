@@ -4,23 +4,27 @@ import { AvatarMedia } from "@1.ui/react/avatar";
 import { Approved, Circle, School, Warning } from "@1.ui/react/icons";
 import { ActionItem, Menu } from "@1.ui/react/menu";
 import { TimeInfo } from "@1.ui/react/time";
+import type { PropsWithChildren } from "react";
+import { createSlot } from "react-slotify";
 import { tv } from "tailwind-variants";
 import { useQuestion } from "./context";
 
 //
 
-export function Header() {
+export function Header({ children }: PropsWithChildren) {
   const question = useQuestion();
   const { owner: student } = question;
   const { profile, university } = student;
   return (
     <header className="mb-4 flex justify-between">
-      <AvatarMedia name={profile.name} image={profile.image}>
-        <AvatarMedia.SubTitle>
-          <School className="mr-1.5 inline-block w-6" />
-          <span>{university}</span>
-        </AvatarMedia.SubTitle>
-      </AvatarMedia>
+      <Header.Avatar.Renderer childs={children}>
+        <AvatarMedia name={profile.name} image={profile.image}>
+          <AvatarMedia.SubTitle>
+            <School className="mr-1.5 inline-block w-6" />
+            <span>{university}</span>
+          </AvatarMedia.SubTitle>
+        </AvatarMedia>
+      </Header.Avatar.Renderer>
       <div className="flex flex-col">
         <div className="-mr-4 self-end">
           <ActionGroup />
@@ -33,6 +37,7 @@ export function Header() {
     </header>
   );
 }
+Header.Avatar = createSlot();
 
 function ActionGroup() {
   const { id, title } = useQuestion();
