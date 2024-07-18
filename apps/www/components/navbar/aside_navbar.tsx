@@ -85,7 +85,8 @@ export function Student_NavBar({
           </Li_Link>
         </SubNav_Bookmarks>
         <Li_Link onClick={onClickLink} icon={<Envelope />} href="./inbox">
-          Messagerie <NewsInMessage_Indicator />
+          Messages privés
+          <NewsInMessage_Indicator />
         </Li_Link>
         <Li_Link
           onClick={onClickLink}
