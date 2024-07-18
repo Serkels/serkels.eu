@@ -387,7 +387,7 @@ async function categories() {
 
   await create_categories(
     [
-      { name: "Activités socio-culturelles​" },
+      { name: "Activités​" },
       { name: "Cours de langues" },
       { name: "Notes de cours" },
       { name: "Soutien académique​" },
