@@ -24,7 +24,9 @@ export function Answer_Card<T extends Answer>(
         id={answer.id}
       >
         <header className="flex justify-between">
-          <StudentAvatarMedia student={student} />
+          <Answer_Card.Avatar.Renderer childs={children}>
+            <StudentAvatarMedia student={student} />
+          </Answer_Card.Avatar.Renderer>
         </header>
         <article className="my-3 ml-12 break-words">{content}</article>
         <Answer_Card.Footer.Renderer childs={children} />
@@ -33,9 +35,10 @@ export function Answer_Card<T extends Answer>(
   );
 }
 
-Answer_Card.Provider = Provider;
 Answer_Card.Footer = createSlot();
+Answer_Card.Avatar = createSlot();
 Answer_Card.Indicator = Answer_Indicator;
+Answer_Card.Provider = Provider;
 
 //
 

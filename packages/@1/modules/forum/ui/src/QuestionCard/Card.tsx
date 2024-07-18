@@ -33,7 +33,7 @@ export function Question_Card<T extends Question>(
         `}
         id={question.id}
       >
-        <Header />
+        <Header>{children}</Header>
         <Body />
         <Approved_Responses>
           <Question_Card.Approved_Response.Renderer childs={children} />
@@ -52,6 +52,7 @@ export function Question_Card<T extends Question>(
 }
 
 Question_Card.Approved_Response = createSlot();
+Question_Card.Header = Header;
 Question_Card.Footer = createSlot();
 Question_Card.NewAnswer = createSlot();
 Question_Card.Responses = createSlot();

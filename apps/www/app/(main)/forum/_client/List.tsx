@@ -24,11 +24,13 @@ import {
   useQuestion,
 } from "@1.modules/forum.ui/QuestionCard/context";
 import { Avatar } from "@1.modules/profile.ui";
+import { StudentAvatarMedia } from "@1.modules/profile.ui/avatar";
 import { Button } from "@1.ui/react/button";
 import { ErrorOccur } from "@1.ui/react/error";
 import { Share } from "@1.ui/react/icons";
 import { Spinner } from "@1.ui/react/spinner";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect } from "react";
 import { P, match } from "ts-pattern";
@@ -75,6 +77,14 @@ function Item(props: Entity_Schema) {
     <Question_AsyncCard info={info}>
       {(question) => (
         <Question_Card question={question}>
+          <Question_Card.Header.Avatar>
+            <Link href={`/@${question.owner.profile.id}`}>
+              <StudentAvatarMedia
+                className="h-full items-center"
+                student={question.owner}
+              />
+            </Link>
+          </Question_Card.Header.Avatar>
           <Question_Card.Approved_Response>
             <Query_Approved_Response />
           </Question_Card.Approved_Response>
@@ -181,6 +191,14 @@ function AnswerItem(initial: Omit<Answer, "accepted_for">) {
 
   return (
     <Answer_Card answer={answer}>
+      <Answer_Card.Avatar>
+        <Link href={`/@${answer.owner.profile.id}`}>
+          <StudentAvatarMedia
+            className="h-full items-center"
+            student={answer.owner}
+          />
+        </Link>
+      </Answer_Card.Avatar>
       <Answer_Card.Footer>
         <Answer_Card.Indicator />
         {can_mutate ? <Approve_Mutation /> : null}
