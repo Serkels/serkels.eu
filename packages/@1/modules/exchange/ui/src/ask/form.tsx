@@ -4,19 +4,29 @@ import { Exchange_TypeSchema } from "@1.modules/exchange.domain";
 import { Button } from "@1.ui/react/button";
 import { input } from "@1.ui/react/form/atom";
 import { PaperPlane } from "@1.ui/react/icons";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
-import { Field, Form, Formik } from "formik";
 import type { PropsWithChildren } from "react";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import { createSlot } from "react-slotify";
 import { P, match } from "ts-pattern";
+import { z } from "zod";
 import { OnlineOrLocation } from "../OnlineOrLocation";
 import { useOutlet_Exchange, useOutlet_Send } from "./context";
 
 //
 
 export function Ask_Form({ children }: PropsWithChildren) {
-  const { exchange, send, placeholder } = use_ask_form();
+  const {
+    exchange,
+    form: {
+      formState: { isSubmitting },
+      handleSubmit,
+      register,
+    },
+    on_submit,
+  } = use_ask_form();
 
   return (
     <>
@@ -46,32 +56,21 @@ export function Ask_Form({ children }: PropsWithChildren) {
         </time>
       </div>
 
-      <Formik
-        initialValues={{ message: "" }}
-        onSubmit={(value) =>
-          send({ state: "creating deal", message: value.message })
-        }
-      >
-        {({ isSubmitting }) => (
-          <Form className="space-y-7">
-            <Field
-              as="textarea"
-              className={input()}
-              name="message"
-              rows={9}
-              disabled={isSubmitting}
-              placeholder={placeholder}
-            />
-            <Button
-              type="submit"
-              isDisabled={isSubmitting}
-              className="mx-auto flex space-x-3"
-            >
-              <span>Envoyer</span> <PaperPlane className="size-4" />
-            </Button>
-          </Form>
-        )}
-      </Formik>
+      <form onSubmit={handleSubmit(on_submit)}>
+        <textarea
+          {...register("message")}
+          className={input()}
+          disabled={isSubmitting}
+          rows={9}
+        ></textarea>
+        <Button
+          type="submit"
+          isDisabled={isSubmitting}
+          className="mx-auto flex space-x-3"
+        >
+          <span>Envoyer</span> <PaperPlane className="size-4" />
+        </Button>
+      </form>
     </>
   );
 }
@@ -80,6 +79,10 @@ Ask_Form.AvatarFigure = createSlot();
 
 //
 
+const form_zod_schema = z.object({
+  message: z.string().trim().min(1, "Obligatoire"),
+});
+type FormValues = z.infer<typeof form_zod_schema>;
 function use_ask_form() {
   const exchange = useOutlet_Exchange();
   const send = useOutlet_Send();
@@ -95,9 +98,19 @@ function use_ask_form() {
     )
     .otherwise(() => "Bonjour, je veux bien échanger avec vous.");
 
+  const form = useForm({
+    defaultValues: { message: placeholder },
+    resolver: zodResolver(form_zod_schema),
+  });
+
+  const on_submit: SubmitHandler<FormValues> = ({ message }) => {
+    send({ state: "creating deal", message });
+  };
+
   return {
     exchange,
+    form,
+    on_submit,
     send,
-    placeholder,
   };
 }
