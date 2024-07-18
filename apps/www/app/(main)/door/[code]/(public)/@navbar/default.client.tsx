@@ -50,9 +50,9 @@ export function Student_Page({ params }: { params: CodeParmsAsProfileId }) {
           </Link>
         </div>
 
-        <div className="flex items-center space-x-2 ">
+        <div className="flex items-center gap-4">
           {is_me ? null : (
-            <div className="hidden md:block">
+            <div className="hidden md:flex md:gap-2 ">
               <Follow profile_id={code} />
               <SendMessage profile_id={code} />
             </div>
@@ -135,8 +135,9 @@ export function Partner_Page({ params }: { params: CodeParmsAsProfileId }) {
 const page_classes = tv({
   base: `
     flex
-    flex-wrap
+    min-w-max
     justify-between
+    gap-2
     rounded-xl
     border
     border-gray-200
@@ -144,7 +145,7 @@ const page_classes = tv({
     px-3
   `,
   slots: {
-    link: "border-r px-4 py-3 text-sm",
+    link: "min-w-max border-r px-2 py-3 text-sm sm:px-4",
   },
   variants: {
     active: {

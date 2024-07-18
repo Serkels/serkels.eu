@@ -13,8 +13,8 @@ export const menu = tv({
     exiting:fade-out
     exiting:zoom-out-95
     fill-mode-forwards
-    max-w-72
     origin-top-left
+    gap-2
     overflow-auto
     rounded-md
     bg-white
@@ -29,8 +29,9 @@ export const menu = tv({
 export const item = tv({
   base: `
    flex
+   cursor-pointer
    items-center
-   gap-1
+   gap-2
    text-Dove_Gray
   `,
 });

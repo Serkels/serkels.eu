@@ -24,7 +24,8 @@ export function ShareTheProfile({ profile_id }: { profile_id: string }) {
 
   return (
     <ActionItem className="cursor-pointer" onAction={copy_to_clipboard}>
-      <Share className="h-4" /> <span>Partager le profie</span>
+      <Share className="w-4" />{" "}
+      <span className="w-full">Partager le profil</span>
     </ActionItem>
   );
 }
@@ -37,7 +38,8 @@ export function ReportTheProfile({ profile_id }: { profile_id: string }) {
       className="flex items-center space-x-1 whitespace-nowrap"
       href={`/@~/report?${new URLSearchParams({ url: href })}`}
     >
-      <Warning className="h-4" /> <span>Signaler l'oppotunité</span>
+      <Warning className="w-4" />{" "}
+      <span className="w-full">Signaler l'oppotunité</span>
     </ActionItem>
   );
 }
