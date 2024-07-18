@@ -15,20 +15,27 @@ export function flatten_pages_are_empty<TData extends { data: any[] }>(
 
 export function EmptyList() {
   return (
-    <p
+    <section
       className="
         flex
         h-1/3
+        min-h-80   
         flex-col
         items-center
         justify-center
+        gap-4
+        p-8
         text-center
         font-bold
         opacity-50
       "
     >
-      Pas de résultats
-    </p>
+      <p>Pas de résultats</p>
+      <p>
+        Ajoutez des profils à votre liste de contact afin de pouvoir leur
+        envoyer des messages
+      </p>
+    </section>
   );
 }
 
