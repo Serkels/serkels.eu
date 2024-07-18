@@ -8,8 +8,13 @@ import { Provider } from "./AsideFilter.client";
 
 export const AsideFilter = forwardRef<HTMLDivElement, Props>(
   function AsideFilter({ children, ...props }, forwardedRef) {
-    const { className, "slot-title": Title, ...other_props } = props;
-    const { article, title, base, sticky } = style();
+    const {
+      className,
+      "slot-title": Title,
+      subtitle: Subtitle,
+      ...other_props
+    } = props;
+    const { article, title, base, sticky, subtitle } = style();
 
     return (
       <section
@@ -20,6 +25,7 @@ export const AsideFilter = forwardRef<HTMLDivElement, Props>(
         <div className={sticky()}>
           <div className="overflow-y-auto md:pb-28">
             <h3 className={title()}>{Title}</h3>
+            <p className={subtitle()}>{Subtitle}</p>
             <Provider>
               <article className={article()}>{children}</article>
             </Provider>
@@ -34,6 +40,7 @@ export interface Props
   extends ComponentPropsWithoutRef<"div">,
     VariantProps<typeof style> {
   "slot-title": React.ReactNode;
+  subtitle?: React.ReactNode;
 }
 
 //
@@ -42,7 +49,8 @@ const style = tv({
   base: "",
   slots: {
     sticky: "sticky top-16 pt-10",
-    title: "mb-7 pl-3 text-2xl font-bold uppercase text-Congress_Blue md:pl-0",
+    title: "pl-3 text-2xl font-bold uppercase text-Congress_Blue md:pl-0",
+    subtitle: "w-full px-4 pb-6 pt-4 text-base md:px-0",
     article: "w-full",
   },
 });
