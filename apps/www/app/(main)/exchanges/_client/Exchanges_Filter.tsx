@@ -4,11 +4,15 @@ import { useSyncSearchQuery } from ":components/hooks/useSyncSearchQuery";
 import { context } from ":components/shell/AsideFilter.client";
 import { Exchange_Filter } from "@1.modules/exchange.domain";
 import { FilterRadioList } from "@1.ui/react/form/FilterRadioList";
+import { useSession } from "next-auth/react";
 import { useContext } from "react";
 
 //
 
 export function Exchanges_Filter() {
+  const { data: session } = useSession();
+  if (!session) return null;
+
   const { query, setQuery } = useSyncSearchQuery("f");
   const { close } = useContext(context);
 

@@ -35,7 +35,7 @@ export default function Home_Page() {
     <main>
       <HomeBanner />
 
-      <div className="overflow-hidden bg-white">
+      <div className=" bg-white">
         <Explore />
       </div>
     </main>
@@ -59,7 +59,6 @@ async function HomeBanner() {
 }
 
 async function Explore() {
-  const session = await getServerSession();
   const { base, link, links } = explore_grid_style({
     size: { initial: "xs", md: "md", xl: "xl" },
   });
@@ -73,11 +72,10 @@ async function Explore() {
               <br /> Créer un compte pour voir les échanges
             </p>
           }
-          href={session ? "/exchanges" : "#"}
+          href="/exchanges"
           Icon={Exchange}
           className={link({
             className: "text-secondary",
-            is_protected: !session,
           })}
         >
           Échanges

@@ -13,7 +13,7 @@ import {
   useOutletState,
 } from "@1.modules/exchange.ui/Card/context";
 import { exchange_card } from "@1.modules/exchange.ui/Card/exchange_card";
-import type { Profile } from "@1.modules/profile.domain";
+import { PROFILE_ROLES, type Profile } from "@1.modules/profile.domain";
 import { StudentAvatarMedia } from "@1.modules/profile.ui/avatar";
 import { button } from "@1.ui/react/button/atom";
 import { Exchange as ExchangeIcon, Pen } from "@1.ui/react/icons";
@@ -51,11 +51,15 @@ export function Exchange_Card({
   exchange,
   profile,
   children,
-}: PropsWithChildren<{ exchange: Exchange; profile: Pick<Profile, "id"> }>) {
+}: PropsWithChildren<{
+  exchange: Exchange;
+  profile: Pick<Profile, "id" | "role"> | undefined;
+}>) {
   return (
     <Provider
       exchange={exchange}
-      is_yours={exchange.owner.profile.id === profile.id}
+      is_yours={exchange.owner.profile.id === profile?.id}
+      is_studient={profile && profile.role === PROFILE_ROLES.Enum.STUDENT}
     >
       <Card_Outlet>{children}</Card_Outlet>
     </Provider>

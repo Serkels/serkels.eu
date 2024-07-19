@@ -3,13 +3,11 @@
 import {
   Deal_Status_Schema,
   Exchange_Create_Schema,
-  Exchange_Filter,
 } from "@1.modules/exchange.domain";
 import { next_auth_procedure, procedure, router } from "@1.modules/trpc";
 import { Prisma } from "@prisma/client";
-import { endOfYesterday } from "date-fns";
-import { match } from "ts-pattern";
 import { z } from "zod";
+import find_router from "./find";
 import { me } from "./me";
 
 const exchange_api_router = router({
@@ -147,101 +145,7 @@ const exchange_api_router = router({
 
   //
 
-  find: next_auth_procedure
-    .input(
-      z.object({
-        category: z.string().optional(),
-        cursor: z.string().optional(),
-        filter: Exchange_Filter.default(Exchange_Filter.Enum.ALL),
-        limit: z.number().min(1).max(10).default(10),
-        search: z.string().optional(),
-      }),
-    )
-    .query(async ({ input, ctx: { prisma, payload } }) => {
-      const {
-        profile: { id: profile_id },
-      } = payload;
-      const { category, cursor, limit, search, filter } = input;
-      type ExchangeWhere = Prisma.ExchangeWhereInput;
-      const nerrow = match(filter)
-        .with(Exchange_Filter.Enum.ALL, (): ExchangeWhere => ({}))
-        .with(
-          Exchange_Filter.Enum.DATE_FLEXIBLE,
-          (): ExchangeWhere => ({ expiry_date: null }),
-        )
-        .with(
-          Exchange_Filter.Enum.DATE_LIMITED,
-          (): ExchangeWhere => ({ expiry_date: { not: null } }),
-        )
-        .with(
-          Exchange_Filter.Enum.MY_FOLLOWS,
-          (): ExchangeWhere => ({
-            owner: { profile: { followed_by: { some: { id: profile_id } } } },
-          }),
-        )
-        .with(
-          Exchange_Filter.Enum.ONLINE,
-          (): ExchangeWhere => ({ is_online: true }),
-        )
-        .with(
-          Exchange_Filter.Enum.ON_SITE,
-          (): ExchangeWhere => ({ is_online: false }),
-        )
-        .with(
-          Exchange_Filter.Enum.WITH_RETURN,
-          (): ExchangeWhere => ({ return: { isNot: null } }),
-        )
-        .with(
-          Exchange_Filter.Enum.WITHOUT_RETURN,
-          (): ExchangeWhere => ({ return: null }),
-        )
-        .exhaustive();
-
-      const items = await prisma.exchange.findMany({
-        ...(cursor ? { cursor: { id: cursor } } : {}),
-        orderBy: [{ created_at: "desc" }, { expiry_date: "desc" }],
-        take: limit + 1,
-        where: {
-          AND: [
-            {
-              OR: [
-                { title: { contains: search ?? "", mode: "insensitive" } },
-                {
-                  description: { contains: search ?? "", mode: "insensitive" },
-                },
-                { location: { contains: search ?? "", mode: "insensitive" } },
-                {
-                  owner: {
-                    profile: {
-                      name: { contains: search ?? "", mode: "insensitive" },
-                    },
-                  },
-                },
-              ],
-            },
-            {
-              OR: [
-                { expiry_date: null },
-                { expiry_date: { gte: endOfYesterday() } },
-              ],
-            },
-            {
-              ...(category ? { category: { slug: category } } : {}),
-              ...nerrow,
-              is_active: true,
-            },
-          ],
-        },
-      });
-
-      let nextCursor: typeof cursor | undefined = undefined;
-      if (items.length > limit) {
-        const nextItem = items.pop()!;
-        nextCursor = nextItem.id;
-      }
-
-      return { data: items, nextCursor };
-    }),
+  find: find_router,
 
   //
 });

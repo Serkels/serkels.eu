@@ -1,7 +1,6 @@
 "use client";
 
 import { Binoculars, Book, Exchange, MessageGroup } from "@1.ui/react/icons";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -15,8 +14,6 @@ import { tv } from "tailwind-variants";
 
 export function MobileNavBar({ className }: ComponentPropsWithoutRef<"nav">) {
   const pathname = usePathname() ?? "";
-  const { data: session } = useSession();
-  const isLogin = Boolean(session);
   const { base, link } = navbar();
 
   return (
@@ -26,9 +23,7 @@ export function MobileNavBar({ className }: ComponentPropsWithoutRef<"nav">) {
           <Link
             className={link({
               is_active: pathname.includes("/exchanges"),
-              is_protected: !isLogin,
             })}
-            aria-disabled={!isLogin}
             href="/exchanges"
           >
             <NavItem Icon={Exchange} isActive={pathname.includes("/exchanges")}>
