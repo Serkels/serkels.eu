@@ -16,14 +16,20 @@ import { P, match } from "ts-pattern";
 export function Exchange_Bookmark() {
   const exchange = useExchange();
   const { data: session } = useSession();
+
   const is_student = session?.profile.role === PROFILE_ROLES.Enum.STUDENT;
-  const query = TRPC_React.bookmarks.check.useQuery({
-    target_id: exchange.id,
-    type: "exchange",
-  });
+  const query = TRPC_React.bookmarks.check.useQuery(
+    {
+      target_id: exchange.id,
+      type: "exchange",
+    },
+    {
+      enabled: is_student,
+    },
+  );
 
   if (!is_student) {
-    return null;
+    return <Bookmark className="size-5 opacity-50" />;
   }
 
   return match(query)

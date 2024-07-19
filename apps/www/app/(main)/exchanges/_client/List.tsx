@@ -8,7 +8,7 @@ import { Exchange_InfiniteList } from "@1.modules/exchange.ui/InfiniteList";
 import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { useEffect, type ComponentProps, type ReactNode } from "react";
-import { match } from "ts-pattern";
+import { match, P } from "ts-pattern";
 
 //
 
@@ -24,27 +24,42 @@ export default function List() {
     gtag("event", "search", { search_term: search });
   }, [search]);
 
-  const info = TRPC_React.exchanges.find.useInfiniteQuery(
-    {
-      category,
-      filter,
-      search,
-    },
-    {
-      getNextPageParam: (lastPage) => lastPage.nextCursor,
-    },
-  ) as ComponentProps<typeof Exchange_InfiniteList>["info"];
+  const info = match(session)
+    .with(
+      { profile: P._ },
+      () =>
+        TRPC_React.exchanges.find.private.useInfiniteQuery(
+          {
+            category,
+            filter,
+            search,
+          },
+          {
+            getNextPageParam: (lastPage) => lastPage.nextCursor,
+          },
+        ) as ComponentProps<typeof Exchange_InfiniteList>["info"],
+    )
+    .otherwise(
+      () =>
+        TRPC_React.exchanges.find.public.useInfiniteQuery(
+          {
+            category,
+            search,
+          },
+          {
+            getNextPageParam: (lastPage) => lastPage.nextCursor,
+          },
+        ) as ComponentProps<typeof Exchange_InfiniteList>["info"],
+    );
 
   //
-
-  if (!session) return null;
 
   return (
     <Exchange_InfiniteList info={info}>
       {({ id }) => (
         <Exchange_byId key={id} id={id}>
           {(exchange) => (
-            <Exchange_Card exchange={exchange} profile={session.profile} />
+            <Exchange_Card exchange={exchange} profile={session?.profile} />
           )}
         </Exchange_byId>
       )}

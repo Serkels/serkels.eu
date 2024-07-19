@@ -2,13 +2,18 @@
 
 import { TRPC_React } from ":trpc/client";
 import { Exchange_TypeSchema, type Exchange } from "@1.modules/exchange.domain";
-import { useExchange } from "@1.modules/exchange.ui/Card/context";
+import { Exchange_Ask_Modal } from "@1.modules/exchange.ui/ask/modal";
+import {
+  useExchange,
+  useExchangeMeta,
+} from "@1.modules/exchange.ui/Card/context";
 import { Button } from "@1.ui/react/button";
 import { Spinner } from "@1.ui/react/spinner";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { P, match } from "ts-pattern";
 import { Ask } from "./ask";
+import { LoginDialog } from "./login";
 
 //
 
@@ -16,7 +21,6 @@ export function Exchange_Actions() {
   const exchange = useExchange();
   const { data: session } = useSession();
   const my_profile_id = session?.profile.id ?? "";
-
   return match(exchange.owner.profile.id)
     .with(my_profile_id, () => (
       <Link href={`/@~/exchanges/inbox/${exchange.id}`}>
@@ -27,9 +31,19 @@ export function Exchange_Actions() {
 }
 
 function Exchange_Action_Ask(exchange: Exchange) {
+  const { is_studient } = useExchangeMeta();
   const query = TRPC_React.exchanges.me.deal_by_exchange_id.useQuery(
     exchange.id,
+    { enabled: is_studient },
   );
+  if (!is_studient)
+    return (
+      <LoginDialog>
+        <Exchange_Ask_Modal.Trigger>
+          <Button_FirstExchange exchange={exchange} />
+        </Exchange_Ask_Modal.Trigger>
+      </LoginDialog>
+    );
   return match(query)
     .with({ status: "error", error: P.select() }, (error) => {
       console.error(error);

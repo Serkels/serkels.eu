@@ -49,7 +49,6 @@ export function Mutate_Exchange({
 
         await Promise.all([
           utils.exchanges.by_id.refetch(exchange.id),
-          utils.exchanges.find.invalidate({ search: values.title }),
           utils.exchanges.find.invalidate(),
           utils.exchanges.invalidate(),
         ]);

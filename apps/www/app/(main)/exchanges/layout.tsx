@@ -1,12 +1,9 @@
 ///
 
 import { AsideFilter } from ":components/shell/AsideFilter";
-import { Banner } from ":components/shell/Banner";
 import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
 import { Grid } from "@1.ui/react/grid";
 import InputSearch from "@1.ui/react/input/InputSearch";
-import to from "await-to-js";
-import { getServerSession } from "next-auth";
 import dynamic from "next/dynamic";
 import type { PropsWithChildren, ReactNode } from "react";
 import { Categories_List } from "./_client/Categories_Filter";
@@ -27,18 +24,6 @@ export default async function Layout({
   children,
   see_also,
 }: PropsWithChildren<{ see_also: ReactNode }>) {
-  const [, session] = await to(getServerSession());
-  if (!session)
-    return (
-      <Banner className="flex-col justify-center">
-        <h2
-          className={`mx-auto my-0 text-center text-6xl font-extrabold text-red-100`}
-        >
-          Vous n'êtes pas autorisé à accéder à cette page.
-        </h2>
-      </Banner>
-    );
-
   await TRPC_SSR.category.exchange.prefetch();
 
   return (

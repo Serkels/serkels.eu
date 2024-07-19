@@ -16,12 +16,19 @@ type Outlet_State =
 function useCardContext({
   exchange,
   is_yours,
+  is_studient,
 }: {
   exchange: Exchange;
   is_yours?: boolean | undefined;
+  is_studient?: boolean | undefined;
 }) {
   const outlet = useState<Outlet_State>({ state: "idle" });
-  return { outlet, exchange, is_yours: is_yours ?? false };
+  return {
+    outlet,
+    exchange,
+    is_yours: is_yours ?? false,
+    is_studient: is_studient ?? false,
+  };
 }
 
 export const [Provider, useExchange, useOutletState, useExchangeMeta] =
@@ -29,5 +36,5 @@ export const [Provider, useExchange, useOutletState, useExchangeMeta] =
     useCardContext,
     ({ exchange }) => exchange,
     ({ outlet }) => outlet,
-    ({ is_yours }) => ({ is_yours }),
+    ({ is_yours, is_studient }) => ({ is_yours, is_studient }),
   );
