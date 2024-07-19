@@ -10,7 +10,8 @@ export const exchange_card = tv({
   slots: {
     header: "flex items-center justify-between md:grid md:grid-cols-3",
     exchange_icon: "mx-1 w-5",
-    footer: "rounded-b-xl bg-gray-500 px-5 py-3 text-white",
+    footer:
+      "grid grid-cols-6 justify-items-center rounded-b-xl bg-gray-500 px-4 py-3 text-white",
     info_bar:
       "flex items-center justify-between gap-1 gap-y-2 text-xs text-[#707070] ",
   },
