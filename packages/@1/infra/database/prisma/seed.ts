@@ -422,7 +422,6 @@ async function categories() {
       { name: "Logements" },
       { name: "Job étudiant" },
       { name: "Concours" },
-      { name: "Activités" },
       { name: "Aides financières" },
       { name: "Activités socio-culturelles​" },
       { name: "Vie associative" },
