@@ -26,7 +26,7 @@ export function Header({ children }: PropsWithChildren) {
         </AvatarMedia>
       </Header.Avatar.Renderer>
       <div className="flex flex-col">
-        <div className="-mr-4 self-end">
+        <div className="self-end">
           <ActionGroup />
         </div>
         <div className="flex items-start space-x-2">
