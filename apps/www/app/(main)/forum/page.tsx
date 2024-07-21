@@ -72,12 +72,12 @@ export default async function Page({
           .with({ profile: { role: "STUDENT" } }, () => (
             <>
               <Create categories={categories} />
+              <div className="w-full pt-10 text-center sm:text-lg">
+                Ou réponds aux questions des étudiant.e.s
+              </div>
             </>
           ))
           .otherwise(() => null)}
-        <div className="w-full pt-10 text-center sm:text-lg">
-          Ou réponds aux questions des étudiant.e.s
-        </div>
         <hr className="my-10" />
         <List />
       </main>
