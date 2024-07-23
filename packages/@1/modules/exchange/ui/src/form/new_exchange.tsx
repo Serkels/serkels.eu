@@ -1,5 +1,6 @@
 //
 
+import { FrenchLocationField } from ":components/FrenchLocationField";
 import type { Category } from "@1.modules/category.domain";
 import { SelectCategoryField } from "@1.modules/category.ui/form/SelectCategoryField";
 import {
@@ -11,7 +12,6 @@ import { fieldset, input, select } from "@1.ui/react/form/atom";
 import { ErrorMessage, Field, Form, type FormikProps } from "formik";
 import type { ChangeEvent, ComponentProps, PropsWithChildren } from "react";
 import { createSlot } from "react-slotify";
-
 //
 
 interface Exchange_CreateForm_Props<TValues>
@@ -87,7 +87,8 @@ export function Exchange_CreateForm<
       {values.is_online ? null : (
         <label>
           <span className="text-Silver_Chalice">Ville</span>
-
+          <FrenchLocationField name="location" />
+          {/* 
           <Exchange_CreateForm.LocationField.Renderer
             childs={children}
             name="location"
@@ -99,7 +100,7 @@ export function Exchange_CreateForm<
               name="location"
               required
             />
-          </Exchange_CreateForm.LocationField.Renderer>
+          </Exchange_CreateForm.LocationField.Renderer> */}
         </label>
       )}
       <label>
