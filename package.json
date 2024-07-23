@@ -24,7 +24,7 @@
     "del-cli": "5.1.0",
     "prettier": "3.3.3",
     "turbo": "1.13.4",
-    "typescript": "5.5.3"
+    "typescript": "5.5.4"
   },
   "packageManager": "pnpm@9.6.0",
   "engines": {
