@@ -582,8 +582,8 @@ importers:
         specifier: 2.4.1
         version: 2.4.1(typescript@5.5.4)
       react-email:
-        specifier: 2.1.5
-        version: 2.1.5(@opentelemetry/api@1.9.0)(@swc/helpers@0.5.12)(eslint@9.7.0)(ts-node@10.9.2(@types/node@20.14.12)(typescript@5.5.4))
+        specifier: 2.1.6
+        version: 2.1.6(@opentelemetry/api@1.9.0)(@swc/helpers@0.5.12)(eslint@9.7.0)(ts-node@10.9.2(@types/node@20.14.12)(typescript@5.5.4))
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -7478,8 +7478,8 @@ packages:
     peerDependencies:
       react: ^18.3.1
 
-  react-email@2.1.5:
-    resolution: {integrity: sha512-SjGt5XiqNwrC6FT0rAxERj0MC9binUOVZDzspAxcRHpxjZavvePAHvV29uROWNQ1Ha7ssg1sfy4dTQi7bjCXrg==}
+  react-email@2.1.6:
+    resolution: {integrity: sha512-BtR9VI1CMq4953wfiBmzupKlWcRThaWG2dDgl1vWAllK3tNNmJNerwY4VlmASRDQZE3LpLXU3+lf8N/VAKdbZQ==}
     engines: {node: '>=18.0.0'}
     hasBin: true
 
@@ -8695,7 +8695,7 @@ snapshots:
       '@babel/helper-compilation-targets': 7.24.8
       '@babel/helper-module-transforms': 7.24.9(@babel/core@7.24.5)
       '@babel/helpers': 7.24.8
-      '@babel/parser': 7.24.5
+      '@babel/parser': 7.24.8
       '@babel/template': 7.24.7
       '@babel/traverse': 7.24.8
       '@babel/types': 7.24.9
@@ -15341,7 +15341,7 @@ snapshots:
       react: 18.3.1
       scheduler: 0.23.2
 
-  react-email@2.1.5(@opentelemetry/api@1.9.0)(@swc/helpers@0.5.12)(eslint@9.7.0)(ts-node@10.9.2(@types/node@20.14.12)(typescript@5.5.4)):
+  react-email@2.1.6(@opentelemetry/api@1.9.0)(@swc/helpers@0.5.12)(eslint@9.7.0)(ts-node@10.9.2(@types/node@20.14.12)(typescript@5.5.4)):
     dependencies:
       '@babel/core': 7.24.5
       '@babel/parser': 7.24.5
@@ -16147,7 +16147,7 @@ snapshots:
     dependencies:
       '@alloc/quick-lru': 5.2.0
       arg: 5.0.2
-      chokidar: 3.5.3
+      chokidar: 3.6.0
       didyoumean: 1.2.2
       dlv: 1.1.3
       fast-glob: 3.3.2
