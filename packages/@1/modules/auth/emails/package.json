@@ -30,7 +30,7 @@
     "@react-email/head": "0.0.10",
     "@react-email/heading": "0.0.13",
     "@react-email/html": "0.0.9",
-    "@react-email/img": "0.0.8",
+    "@react-email/img": "0.0.9",
     "@react-email/link": "0.0.8",
     "@react-email/preview": "0.0.9",
     "@react-email/text": "0.0.8",
