@@ -542,8 +542,8 @@ importers:
         specifier: 0.0.9
         version: 0.0.9(react@18.3.1)
       '@react-email/container':
-        specifier: 0.0.12
-        version: 0.0.12(react@18.3.1)
+        specifier: 0.0.13
+        version: 0.0.13(react@18.3.1)
       '@react-email/head':
         specifier: 0.0.9
         version: 0.0.9(react@18.3.1)
@@ -3584,8 +3584,8 @@ packages:
     peerDependencies:
       react: ^18.2.0
 
-  '@react-email/container@0.0.12':
-    resolution: {integrity: sha512-HFu8Pu5COPFfeZxSL+wKv/TV5uO/sp4zQ0XkRCdnGkj/xoq0lqOHVDL4yC2Pu6fxXF/9C3PHDA++5uEYV5WVJw==}
+  '@react-email/container@0.0.13':
+    resolution: {integrity: sha512-ftke0N1FZl8MX3XXxXiiOaiJOnrQz7ZXUyqNj81K+BK+DePWIVaSmgK6Bu8fFnsgwdKuBdqjZTEtF4sIkU3FuQ==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       react: ^18.2.0
@@ -10650,7 +10650,7 @@ snapshots:
     dependencies:
       react: 18.3.1
 
-  '@react-email/container@0.0.12(react@18.3.1)':
+  '@react-email/container@0.0.13(react@18.3.1)':
     dependencies:
       react: 18.3.1
 
