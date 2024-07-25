@@ -10,7 +10,7 @@
     "type-check": "tsc --build"
   },
   "dependencies": {
-    "@react-email/render": "0.0.16",
+    "@react-email/render": "0.0.17",
     "debug": "4.3.5",
     "nodemailer": "6.9.14",
     "zod": "3.23.8"
