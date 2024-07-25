@@ -6,6 +6,8 @@ import { Button } from "@1.ui/react/button";
 import { Spinner } from "@1.ui/react/spinner";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
+import { Slide, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { P, match } from "ts-pattern";
 
 //
@@ -27,6 +29,33 @@ export default function Follow({ profile_id }: { profile_id: string }) {
     ]);
     toggle_follow.reset();
     router.refresh();
+    {
+      if (find_follow.data)
+        toast.info("Tu ne suis plus cette personne !", {
+          position: "bottom-center",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Slide,
+        });
+      else {
+        toast.info("Tu suis désormais cette personne !", {
+          position: "bottom-center",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Slide,
+        });
+      }
+    }
   }, [toggle_follow, utils, profile_id]);
 
   return match([toggle_follow, find_follow])

@@ -31,12 +31,14 @@ const options: DefaultOptions = {
 
 export function RootProviders({ children }: PropsWithChildren) {
   return (
-    <Nest>
-      <AuthSessionProvider />
-      <ReactQueryClientProvider />
-      <TrpcProvider />
-      {children}
-    </Nest>
+    <>
+      <Nest>
+        <AuthSessionProvider />
+        <ReactQueryClientProvider />
+        <TrpcProvider />
+        {children}
+      </Nest>
+    </>
   );
 }
 
@@ -57,7 +59,6 @@ function ReactQueryClientProvider({ children }: PropsWithChildren) {
   return (
     <QueryClientProvider client={query_client}>
       {children}
-
       <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
     </QueryClientProvider>
   );
