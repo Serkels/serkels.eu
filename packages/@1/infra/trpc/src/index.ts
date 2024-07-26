@@ -41,6 +41,7 @@ export const root_router = router({
       const response = await fetch(
         `https://geo.api.gouv.fr/communes?${search_params}`,
       );
+      console.log(response);
       return response.json() as Promise<Location[]>;
     }),
 });

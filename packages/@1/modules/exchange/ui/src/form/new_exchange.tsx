@@ -26,7 +26,6 @@ export function Exchange_CreateForm<
   },
 >({
   categories,
-  children,
   isSubmitting,
   setFieldValue,
   values,

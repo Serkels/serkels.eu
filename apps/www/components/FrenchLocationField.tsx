@@ -2,15 +2,17 @@
 
 import { TRPC_React } from ":trpc/client";
 import { input } from "@1.ui/react/form/atom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
+  Button,
   ComboBox,
   Input,
   ListBox,
   ListBoxItem,
   Popover,
+  type Key,
 } from "react-aria-components";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { tv } from "tailwind-variants";
 
 //
@@ -24,43 +26,73 @@ interface FormValues {
 }
 
 export function FrenchLocationField() {
-  const { control } = useForm<FormValues>({
-    defaultValues: { location: "Paris" },
+  const { watch, setValue } = useForm<FormValues>({
+    defaultValues: { location: "" },
   });
   const [location, set_location] = useState(String);
+
   const query_info = TRPC_React.locations.useQuery(
     { location },
     { staleTime: Infinity },
   );
+  const watchedLocation = watch("location", "Paris");
 
-  const onChange = (ev: any) => set_location(ev.target.value);
+  useEffect(() => {
+    set_location(watchedLocation);
+  }, [watchedLocation]);
+
+  // const onChange = (watchedLocation: string) => {
+  //   set_location(watchedLocation);
+  //   setValue("location", watchedLocation); // Met à jour la valeur du formulaire
+  // };
+  const onChange = (value: string) => {
+    set_location(value);
+    setValue("location", value); // Met à jour la valeur du formulaire
+  };
+
+  const handleSelectionChange = (key: Key | null) => {
+    const selectedItem = query_info.data?.find((item) => item.code === key);
+
+    console.log(selectedItem);
+    console.log("Selected key:", key);
+    console.log("Query data:", query_info.data);
+
+    if (selectedItem) {
+      onChange(selectedItem.nom); // Met à jour avec le nom de la ville
+    }
+  };
 
   console.log(query_info);
 
   return (
-    <Controller
+    <ComboBox
+      inputValue=""
       name="location"
-      control={control}
-      defaultValue=""
-      render={(props) => (
-        <ComboBox
-          {...props}
-          name="location"
-          onSelectionChange={(value) => props.field.onChange(value)}
-        >
-          <Input className={input()} onChange={onChange} name="location" />
-          <Popover className={popover()}>
-            <ListBox>
-              {query_info.data?.map(({ nom }) => (
-                <ListBoxItem key={nom}>{nom}</ListBoxItem>
-              ))}
-            </ListBox>
-          </Popover>
-        </ComboBox>
-      )}
-    ></Controller>
+      selectedKey={location}
+      onSelectionChange={handleSelectionChange}
+    >
+      <Input
+        defaultValue=""
+        className={input()}
+        onChange={(e) => onChange(e.target.value)}
+        value={location}
+      />
+      <Button>{">"}</Button>
+      <Popover className={popover()}>
+        <ListBox>
+          {query_info.data?.map(({ nom, code }) => (
+            <ListBoxItem className="flex justify-between" key={code}>
+              <div>{nom}</div>
+              <div>{code}</div>
+            </ListBoxItem>
+          ))}
+        </ListBox>
+      </Popover>
+    </ComboBox>
   );
 }
+
+export default FrenchLocationField;
 
 const popover = tv({
   base: `
