@@ -30,9 +30,11 @@ export default function Follow({ profile_id }: { profile_id: string }) {
     toggle_follow.reset();
     router.refresh();
     {
-      if (find_follow.data)
-        toast.info("Tu ne suis plus cette personne !", {
-          position: "bottom-center",
+      toast.info(
+        find_follow.data
+          ? "Tu ne suis plus cette personne !"
+          : "Tu suis désormais cette personne !",
+        {
           autoClose: 5000,
           hideProgressBar: true,
           closeOnClick: true,
@@ -41,20 +43,8 @@ export default function Follow({ profile_id }: { profile_id: string }) {
           progress: undefined,
           theme: "light",
           transition: Slide,
-        });
-      else {
-        toast.info("Tu suis désormais cette personne !", {
-          position: "bottom-center",
-          autoClose: 5000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Slide,
-        });
-      }
+        },
+      );
     }
   }, [toggle_follow, utils, profile_id]);
 

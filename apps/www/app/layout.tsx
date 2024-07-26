@@ -5,7 +5,6 @@ import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { Roboto } from "next/font/google";
 import { type PropsWithChildren } from "react";
-import { ToastContainer } from "react-toastify";
 import "./globals.css";
 import { RootProviders } from "./layout.client";
 
@@ -41,7 +40,6 @@ export default function RootLayout({ children }: PropsWithChildren) {
       <body
         className={`${roboto.className} bg-[#F5F8FA] text-base text-black antialiased`}
       >
-        <ToastContainer className="min-w-fit text-center" />
         <NextTopLoader color="#fff" showSpinner={false} />
         <RootProviders>{children}</RootProviders>
         <Analytics />

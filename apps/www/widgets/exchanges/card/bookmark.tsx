@@ -64,9 +64,11 @@ function BookmarkItem_Toggle_Mutation(props: BookmarkButton_Props) {
         await utils.bookmarks.check.invalidate({ target_id, type });
         await utils.bookmarks.exchanges.find.invalidate();
         {
-          if (!variants?.is_in_bookmarks)
-            toast.info("Cet échange est désormais dans tes favoris", {
-              position: "bottom-center",
+          toast.info(
+            !variants?.is_in_bookmarks
+              ? "Cet échange est désormais dans tes favoris"
+              : "Retrait des favoris",
+            {
               autoClose: 5000,
               hideProgressBar: true,
               closeOnClick: true,
@@ -75,20 +77,8 @@ function BookmarkItem_Toggle_Mutation(props: BookmarkButton_Props) {
               progress: undefined,
               theme: "light",
               transition: Slide,
-            });
-          else {
-            toast.info("Retrait des favoris", {
-              position: "bottom-center",
-              autoClose: 5000,
-              hideProgressBar: true,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-              transition: Slide,
-            });
-          }
+            },
+          );
         }
       }}
     >
