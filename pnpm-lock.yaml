@@ -890,8 +890,8 @@ importers:
         specifier: 5.2.0
         version: 5.2.0
       xstate:
-        specifier: 5.15.0
-        version: 5.15.0
+        specifier: 5.16.0
+        version: 5.16.0
       zod:
         specifier: 3.23.8
         version: 3.23.8
@@ -924,8 +924,8 @@ importers:
         specifier: 5.2.0
         version: 5.2.0
       xstate:
-        specifier: 5.15.0
-        version: 5.15.0
+        specifier: 5.16.0
+        version: 5.16.0
       zod:
         specifier: 3.23.8
         version: 3.23.8
@@ -8596,8 +8596,8 @@ packages:
     resolution: {integrity: sha512-QKxVRxiRACQcVuQEYFsI1hhkrMlrXHPegbbd1yn9UHOmRxY+si12nQYzri3vbzt8VdTTRviqcKxcyllFas5z2A==}
     engines: {node: '>=0.4.0'}
 
-  xstate@5.15.0:
-    resolution: {integrity: sha512-0DGArbj+ych7PcCqHzhEvXH1qVG41lhenwdbEPBRJyxQP9TLooUsR7oiR4YWYHblLOVWvz/esiw8HUtHXp/kZA==}
+  xstate@5.16.0:
+    resolution: {integrity: sha512-qws7r2nsCsQ/Qgpn75+FYM84M88/nopGsxij/qYNSOyKJKO4n7x8B5isQKv6DMruyF4gGg7y4gsFDTzJUlKcWw==}
 
   xtend@4.0.2:
     resolution: {integrity: sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==}
@@ -16750,7 +16750,7 @@ snapshots:
 
   xmlhttprequest-ssl@2.0.0: {}
 
-  xstate@5.15.0: {}
+  xstate@5.16.0: {}
 
   xtend@4.0.2: {}
 
