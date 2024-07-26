@@ -6,8 +6,8 @@ Fonctionnalité: Voir les opportunités
 
   Scénario:
     Etant donné que je navigue sur la page
-    Quand je clique sur le bouton "Opportunités"
-    Alors je vois "Opportunités"
+    Quand je clique sur le bouton "Opportunités pros"
+    Alors je vois "Opportunités pros"
     * je vois "Recherche"
     * je vois "Cours de langues"
     * je vois "Autres"
