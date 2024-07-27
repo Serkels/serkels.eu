@@ -42,7 +42,7 @@
     "bowser": "2.11.0",
     "constate": "3.3.2",
     "date-fns": "3.6.0",
-    "debug": "4.3.5",
+    "debug": "4.3.6",
     "formik": "2.4.6",
     "framer-motion": "11.3.18",
     "imtool": "1.2.1",
