@@ -2,74 +2,78 @@
 
 import { TRPC_React } from ":trpc/client";
 import type { Category } from "@1.modules/category.domain";
-import type { Exchange_Flat_Schema } from "@1.modules/exchange.domain";
-import { Exchange_CreateForm } from "@1.modules/exchange.ui/form/new_exchange";
+import { type Exchange_Flat_Schema } from "@1.modules/exchange.domain";
+import {
+  Exchange_EditForm,
+  form_to_dto,
+  form_zod_schema,
+  type FormValues,
+} from "@1.modules/exchange.ui/form/new_exchange";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
-import { Formik } from "formik";
 import { useRouter } from "next/navigation";
-import { z } from "zod";
-import { toFormikValidationSchema } from "zod-formik-adapter";
+import { FormProvider, useForm, type SubmitHandler } from "react-hook-form";
 
 //
 
-export function Mutate_Exchange({
+export function Mutate_Exchange_Island({
+  exchange_id,
+}: {
+  exchange_id: string;
+}) {
+  const { data: exchange } = TRPC_React.exchanges.by_id.useQuery(exchange_id);
+  const { data: categories } = TRPC_React.category.exchange.useQuery();
+  if (!exchange) return null;
+  if (!categories) return null;
+  return <Mutate_Exchange exchange={exchange} categories={categories} />;
+}
+
+function Mutate_Exchange({
   categories,
   exchange,
 }: {
   categories: Category[];
   exchange: Exchange_Flat_Schema;
 }) {
+  const alreadyPopulated = exchange.deals.length > 0;
+  const form = useForm<FormValues>({
+    defaultValues: {
+      ...exchange,
+      is_online: exchange.is_online ? "true" : "false",
+      expiry_date: exchange.expiry_date
+        ? format(exchange.expiry_date, "yyyy-MM-dd")
+        : undefined,
+      return_id: exchange.return_id ?? "",
+    },
+
+    resolver: zodResolver(form_zod_schema),
+  });
+
   const do_update = TRPC_React.exchanges.me.update.useMutation();
   const utils = TRPC_React.useUtils();
   const router = useRouter();
 
-  const alreadyPopulated = exchange.deals.length > 0;
+  const on_submit: SubmitHandler<FormValues> = async (values) => {
+    if (alreadyPopulated) return;
 
+    await do_update.mutateAsync({
+      ...form_to_dto(values),
+      exchange_id: exchange.id,
+    });
+
+    await Promise.all([
+      utils.exchanges.by_id.invalidate(exchange.id),
+      utils.exchanges.find.invalidate(),
+      utils.exchanges.invalidate(),
+    ]);
+
+    router.push(`/exchanges?q=${values.title}`);
+  };
   return (
-    <Formik
-      initialValues={{
-        ...exchange,
-        category: exchange.category_id,
-        expiry_date: exchange.expiry_date
-          ? format(exchange.expiry_date, "yyyy-MM-dd")
-          : undefined,
-        return: exchange.return_id ?? "",
-        is_online: exchange.is_online,
-        type: exchange.type,
-      }}
-      onSubmit={async (values) => {
-        await do_update.mutateAsync({
-          ...values,
-          exchange_id: exchange.id,
-          expiry_date:
-            typeof values.expiry_date === "string"
-              ? new Date(values.expiry_date)
-              : null,
-        });
-
-        await Promise.all([
-          utils.exchanges.by_id.refetch(exchange.id),
-          utils.exchanges.find.invalidate(),
-          utils.exchanges.invalidate(),
-        ]);
-
-        router.push(`/exchanges?q=${values.title}`);
-      }}
-      validationSchema={toFormikValidationSchema(
-        z.object({
-          title: z.string().trim().min(10).max(100),
-          description: z.string().trim().min(10).max(705),
-          places: z.number().int().min(1).max(9),
-        }),
-      )}
-    >
-      {(formik) => (
-        <Exchange_CreateForm
-          categories={categories}
-          alreadyPopulated={alreadyPopulated}
-          {...formik}
-        ></Exchange_CreateForm>
-      )}
-    </Formik>
+    <FormProvider {...form}>
+      <form onSubmit={form.handleSubmit(on_submit)}>
+        <Exchange_EditForm categories={categories} />
+      </form>
+    </FormProvider>
   );
 }

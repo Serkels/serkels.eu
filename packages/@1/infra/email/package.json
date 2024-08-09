@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@react-email/render": "0.0.17",
-    "debug": "4.3.5",
+    "debug": "4.3.6",
     "nodemailer": "6.9.14",
     "zod": "3.23.8"
   },

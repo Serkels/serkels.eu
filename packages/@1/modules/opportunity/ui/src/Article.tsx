@@ -74,7 +74,7 @@ export function Article({
           </Article.Description.Renderer>
         </section>
 
-        <footer className="grid grid-cols-3 items-center justify-items-center">
+        <footer className="flex items-center justify-between px-4">
           {location ? (
             <a
               href={`https://www.openstreetmap.org/search?query=${location}`}
@@ -93,7 +93,12 @@ export function Article({
             </figure>
           )}
 
-          <a href={link} target="_blank" rel="noopener noreferrer">
+          <a
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="col-start-2"
+          >
             <figure className="flex flex-col items-center gap-2 md:flex-row">
               <IconLink className={icon_link()} />
               <figcaption className="flex-1 md:ml-4">Lien web</figcaption>
