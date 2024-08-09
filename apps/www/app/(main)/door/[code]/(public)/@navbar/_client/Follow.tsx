@@ -1,17 +1,18 @@
 "use client";
 
+import { AppToastOptions } from ":components/toast";
 import { TRPC_React } from ":trpc/client";
 import { Exchange_Filter } from "@1.modules/exchange.domain";
 import { Button } from "@1.ui/react/button";
 import { Spinner } from "@1.ui/react/spinner";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
-import { Slide, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import { P, match } from "ts-pattern";
 
 //
 export default function Follow({ profile_id }: { profile_id: string }) {
+  const { data } = TRPC_React.profile.by_id.useQuery(profile_id);
   const find_follow = TRPC_React.profile.me.follow.find.useQuery(profile_id);
   const toggle_follow = TRPC_React.profile.me.follow.toggle.useMutation();
   const utils = TRPC_React.useUtils();
@@ -29,23 +30,19 @@ export default function Follow({ profile_id }: { profile_id: string }) {
     ]);
     toggle_follow.reset();
     router.refresh();
-    {
-      toast.info(
-        find_follow.data
-          ? "Tu ne suis plus cette personne !"
-          : "Tu suis désormais cette personne !",
-        {
-          autoClose: 5000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Slide,
-        },
-      );
-    }
+
+    toast.info(
+      find_follow.data ? (
+        <>
+          Tu ne suis plus <b>{data?.name}</b> !
+        </>
+      ) : (
+        <>
+          Tu suis désormais <b>{data?.name}</b> !
+        </>
+      ),
+      AppToastOptions,
+    );
   }, [toggle_follow, utils, profile_id]);
 
   return match([toggle_follow, find_follow])

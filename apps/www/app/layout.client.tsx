@@ -13,6 +13,7 @@ import { SessionProvider } from "next-auth/react";
 import { useState, type PropsWithChildren } from "react";
 import Nest from "react-nest";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 //
 
