@@ -2,9 +2,9 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "@1.config/typescript/next.json",
   "compilerOptions": {
-    "rootDir": ".",
-    "incremental": true,
     "exactOptionalPropertyTypes": false,
+    "incremental": true,
+    "jsx": "preserve",
     "outDir": "./node_modules/.cache/tsc",
     "paths": {
       ":app/*": ["./app/*"],
@@ -13,6 +13,7 @@
       ":trpc/*": ["./trpc/*"],
       ":widgets/*": ["./widgets/*"]
     },
+    "rootDir": ".",
     "types": ["gtag.js"]
   },
   "include": [

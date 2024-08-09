@@ -1,7 +1,7 @@
 "use client";
 
 import type { Category } from "@1.modules/category.domain";
-import { SelectCategoryField } from "@1.modules/category.ui/form/SelectCategoryField";
+import { OptionCategories } from "@1.modules/category.ui/form/select";
 import type { Opportunity_Create } from "@1.modules/opportunity.domain";
 import { Button } from "@1.ui/react/button";
 import { fieldset, input, label, select } from "@1.ui/react/form/atom";
@@ -169,14 +169,18 @@ export function Opportunity_CreateForm({
 
       {/* <div className="grid grid-cols-2 gap-5"> */}
       <div>
-        <SelectCategoryField
-          categories={categories}
+        <Field
+          className={select({ className: "px-5 py-2" })}
+          component="select"
           disabled={isSubmitting}
           name="category"
-          className={select({ className: "px-5 py-2" })}
-          placeholder="Dans quelle categorie ?"
           required={true}
-        />
+        >
+          <option hidden value={""}>
+            Dans quelle categorie ?
+          </option>
+          <OptionCategories categories={categories} />
+        </Field>
         <ErrorMessage name="category">
           {(msg) => <div className="text-danger">{msg}</div>}
         </ErrorMessage>
