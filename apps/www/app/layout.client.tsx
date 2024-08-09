@@ -1,6 +1,7 @@
 "use client";
 
 import { TrpcProvider } from ":trpc/client";
+import { useMediaQuery } from "@react-hookz/web";
 import {
   QueryClient,
   QueryClientProvider,
@@ -11,6 +12,8 @@ import debug from "debug";
 import { SessionProvider } from "next-auth/react";
 import { useState, type PropsWithChildren } from "react";
 import Nest from "react-nest";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 //
 
@@ -30,13 +33,20 @@ const options: DefaultOptions = {
 };
 
 export function RootProviders({ children }: PropsWithChildren) {
+  const isMd = useMediaQuery("(min-width: 768px)");
   return (
-    <Nest>
-      <AuthSessionProvider />
-      <ReactQueryClientProvider />
-      <TrpcProvider />
-      {children}
-    </Nest>
+    <>
+      <ToastContainer
+        className="min-w-[25%] text-center"
+        position={isMd ? "bottom-left" : "top-center"}
+      />
+      <Nest>
+        <AuthSessionProvider />
+        <ReactQueryClientProvider />
+        <TrpcProvider />
+        {children}
+      </Nest>
+    </>
   );
 }
 
@@ -57,7 +67,6 @@ function ReactQueryClientProvider({ children }: PropsWithChildren) {
   return (
     <QueryClientProvider client={query_client}>
       {children}
-
       <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
     </QueryClientProvider>
   );

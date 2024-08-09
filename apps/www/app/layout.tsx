@@ -41,9 +41,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
         className={`${roboto.className} bg-[#F5F8FA] text-base text-black antialiased`}
       >
         <NextTopLoader color="#fff" showSpinner={false} />
-
         <RootProviders>{children}</RootProviders>
-
         <Analytics />
       </body>
     </html>

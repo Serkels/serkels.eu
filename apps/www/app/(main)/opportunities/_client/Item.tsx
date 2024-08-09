@@ -2,6 +2,7 @@
 
 import { Share_Button } from ":components/Share_Button";
 import { preventNProgressLoader } from ":components/helpers/preventNProgressLoader";
+import { AppToastOptions } from ":components/toast";
 import { TRPC_React } from ":trpc/client";
 import type { BookmarkButton_Props } from "@1.modules/bookmark.ui/BookmarkButton";
 import { type Opportunity } from "@1.modules/opportunity.domain";
@@ -12,6 +13,7 @@ import { Bookmark, Share } from "@1.ui/react/icons";
 import { Spinner } from "@1.ui/react/spinner";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { toast } from "react-toastify";
 import { tv } from "tailwind-variants";
 import { P, match } from "ts-pattern";
 
@@ -70,6 +72,15 @@ function BookmarkItem_Toggle_Mutation(props: BookmarkButton_Props) {
         await toggle.mutateAsync({ target_id, type });
         await utils.bookmarks.check.invalidate({ target_id, type });
         await utils.bookmarks.opportunities.find.invalidate();
+
+        toast.info(
+          !variants?.is_in_bookmarks ? (
+            <>Cet opportunité est désormais dans tes sauvegardes</>
+          ) : (
+            <>Retrait des sauvegardes</>
+          ),
+          AppToastOptions,
+        );
       }}
     >
       <Bookmark className={icon()} />
