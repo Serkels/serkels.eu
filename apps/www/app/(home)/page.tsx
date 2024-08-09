@@ -88,7 +88,7 @@ async function Explore() {
             className: "text-tertiary",
           })}
         >
-          Opportunités
+          Opportunités pros
         </ExploreLink>
         <ExploreLink
           description="Questions et réponses des étudiants"
