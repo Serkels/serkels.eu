@@ -1,4 +1,5 @@
 {
+  "name": "serkels",
   "private": true,
   "scripts": {
     "build": "turbo run build",
@@ -26,7 +27,7 @@
     "del-cli": "5.1.0",
     "prettier": "3.3.3",
     "tsx": "4.17.0",
-    "turbo": "1.13.4",
+    "turbo": "2.0.14",
     "typescript": "5.5.4"
   },
   "packageManager": "pnpm@9.7.0",
