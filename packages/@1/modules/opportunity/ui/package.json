@@ -4,8 +4,6 @@
   "private": true,
   "sideEffects": false,
   "type": "module",
-  "main": "./src/index.ts",
-  "types": "./src/index.ts",
   "exports": {
     ".": {
       "types": "./src/index.ts",
@@ -20,15 +18,18 @@
       "default": "./src/*.tsx"
     }
   },
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
   "scripts": {
     "type-check": "tsc --build"
   },
   "dependencies": {
-    "@1.modules/core": "workspace:*",
     "@1.modules/category.domain": "workspace:*",
     "@1.modules/category.ui": "workspace:*",
+    "@1.modules/core": "workspace:*",
     "@1.modules/opportunity.domain": "workspace:*",
     "@1.ui/react": "workspace:*",
+    "@hookform/resolvers": "3.9.0",
     "@tanstack/react-query": "4.36.1",
     "date-fns": "3.6.0",
     "formik": "2.4.6",

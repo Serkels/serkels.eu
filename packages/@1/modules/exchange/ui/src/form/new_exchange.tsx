@@ -1,7 +1,7 @@
 //
 
 import type { Category } from "@1.modules/category.domain";
-import { OptionCategories } from "@1.modules/category.ui/form/SelectCategoryField";
+import { OptionCategories } from "@1.modules/category.ui/form/select";
 import { ID_Schema } from "@1.modules/core/domain";
 import { Exchange_TypeSchema } from "@1.modules/exchange.domain";
 import { Button } from "@1.ui/react/button";

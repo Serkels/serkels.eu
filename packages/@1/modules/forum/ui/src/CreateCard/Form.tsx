@@ -1,7 +1,7 @@
 "use client";
 
 import type { Category } from "@1.modules/category.domain";
-import { OptionCategories } from "@1.modules/category.ui/form/SelectCategoryField";
+import { OptionCategories } from "@1.modules/category.ui/form/select";
 import { Button } from "@1.ui/react/button";
 import { input, select } from "@1.ui/react/form/atom";
 import { zodResolver } from "@hookform/resolvers/zod";

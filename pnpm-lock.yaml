@@ -809,9 +809,6 @@ importers:
       '@tanstack/react-query':
         specifier: 4.36.1
         version: 4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      formik:
-        specifier: 2.4.6
-        version: 2.4.6(react@18.3.1)
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -840,6 +837,9 @@ importers:
       '@types/react':
         specifier: 18.3.3
         version: 18.3.3
+      '@types/react-dom':
+        specifier: 18.3.0
+        version: 18.3.0
       prettier:
         specifier: 3.3.3
         version: 3.3.3
@@ -975,9 +975,6 @@ importers:
       date-fns:
         specifier: 3.6.0
         version: 3.6.0
-      formik:
-        specifier: 2.4.6
-        version: 2.4.6(react@18.3.1)
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -1467,6 +1464,9 @@ importers:
       '@1.ui/react':
         specifier: workspace:*
         version: link:../../../ui/react
+      '@hookform/resolvers':
+        specifier: 3.9.0
+        version: 3.9.0(react-hook-form@7.52.2(react@18.3.1))
       '@tanstack/react-query':
         specifier: 4.36.1
         version: 4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)

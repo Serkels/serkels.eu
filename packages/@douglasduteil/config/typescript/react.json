@@ -3,6 +3,6 @@
   "display": "React",
   "extends": "./base.json",
   "compilerOptions": {
-    "jsx": "preserve"
+    "jsx": "react-jsx"
   }
 }

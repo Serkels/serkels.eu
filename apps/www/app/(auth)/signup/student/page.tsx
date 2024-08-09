@@ -5,7 +5,7 @@ import { UserAvatarFilled } from "@1.ui/react/icons";
 // import { UserAvatarFilled } from "@1.ui/react/icons";
 import { FrenchLocationField } from ":components/FrenchLocationField";
 import { TRPC_SSR } from ":trpc/server";
-import { OptionCategories } from "@1.modules/category.ui/form/SelectCategoryField";
+import { OptionCategories } from "@1.modules/category.ui/form/select";
 import {
   PROFILE_ROLES,
   Profile_Schema,
