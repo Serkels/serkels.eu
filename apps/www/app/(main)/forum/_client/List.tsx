@@ -115,16 +115,16 @@ export function Footer() {
 
   return (
     <footer className="mt-4">
-      <div className="flex justify-between">
+      <div className="grid grid-cols-6 md:grid-cols-8">
         <Button
           intent="light"
-          className="-ml-4"
+          className="col-start-1"
           onPress={() => set_awnser_outlet({ state: "idle" })}
         >
           <ResponseCount />
         </Button>
         {status === "authenticated" ? <ToggleOutlet /> : <SignUpToAnswer />}
-        <Share_Button className="-mr-4" href={href}>
+        <Share_Button href={href}>
           <Share className="size-5" />
         </Share_Button>
       </div>
