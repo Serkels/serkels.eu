@@ -67,22 +67,20 @@ export function Card_Idle({ children }: PropsWithChildren) {
         <Publish_Date />
       </div>
       <footer className={footer()}>
-        <div className="flex items-center justify-between">
-          <div>
-            <Card.Footer.Left.Renderer childs={children}>
-              ...
-            </Card.Footer.Left.Renderer>
-          </div>
-          <div>
-            <Card.Footer.Center.Renderer childs={children}>
-              ...
-            </Card.Footer.Center.Renderer>
-          </div>
-          <div>
-            <Card.Footer.Right.Renderer childs={children}>
-              <Share className="size-5" />
-            </Card.Footer.Right.Renderer>
-          </div>
+        <div className="col-span-1 justify-self-start">
+          <Card.Footer.Left.Renderer childs={children}>
+            ...
+          </Card.Footer.Left.Renderer>
+        </div>
+        <div className=" col-span-4 col-start-2 justify-self-center md:col-span-2 md:col-start-3">
+          <Card.Footer.Center.Renderer childs={children}>
+            ...
+          </Card.Footer.Center.Renderer>
+        </div>
+        <div className="col-start-6 justify-self-end">
+          <Card.Footer.Right.Renderer childs={children}>
+            <Share className="size-5" />
+          </Card.Footer.Right.Renderer>
         </div>
       </footer>
     </div>
