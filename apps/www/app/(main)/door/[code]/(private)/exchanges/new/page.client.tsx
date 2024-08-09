@@ -2,67 +2,59 @@
 
 import { TRPC_React } from ":trpc/client";
 import type { Category } from "@1.modules/category.domain";
+import { Exchange_TypeSchema } from "@1.modules/exchange.domain";
 import {
-  Exchange_TypeSchema,
-  type Exchange_Create,
-} from "@1.modules/exchange.domain";
-import { Exchange_CreateForm } from "@1.modules/exchange.ui/form/new_exchange";
-import { Formik } from "formik";
+  Exchange_EditForm,
+  form_to_dto,
+  form_zod_schema,
+  type FormValues,
+} from "@1.modules/exchange.ui/form/new_exchange";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { z } from "zod";
-import { toFormikValidationSchema } from "zod-formik-adapter";
+import { FormProvider, useForm, type SubmitHandler } from "react-hook-form";
 
 //
 
-export function Mutate_Exchange({ categories }: { categories: Category[] }) {
+export function Create_Exchange_Island() {
+  const { data: categories } = TRPC_React.category.exchange.useQuery();
+  if (!categories) return null;
+  return <Create_Exchange categories={categories} />;
+}
+
+function Create_Exchange({ categories }: { categories: Category[] }) {
+  const form = useForm<FormValues>({
+    defaultValues: {
+      type: Exchange_TypeSchema.Enum.PROPOSAL,
+
+      description: "",
+      expiry_date: undefined,
+      is_online: "false",
+      places: 1,
+      return_id: "",
+      title: "",
+    },
+
+    resolver: zodResolver(form_zod_schema),
+  });
   const create = TRPC_React.exchanges.create.useMutation();
   const utils = TRPC_React.useUtils();
   const router = useRouter();
 
+  const on_submit: SubmitHandler<FormValues> = async (values) => {
+    await create.mutateAsync(form_to_dto(values));
+
+    await Promise.all([
+      utils.exchanges.find.invalidate(),
+      utils.exchanges.invalidate(),
+    ]);
+
+    router.push(`/exchanges?q=${values.title}`);
+  };
   return (
-    <Formik
-      initialValues={{
-        ...({
-          category_id: "",
-          description: "",
-          expiry_date: null,
-          is_online: false,
-          type: Exchange_TypeSchema.Enum.PROPOSAL,
-          places: 1,
-          title: "",
-        } as Exchange_Create),
-        category: "",
-        return: "",
-      }}
-      onSubmit={async (values) => {
-        await create.mutate({
-          ...values,
-          expiry_date:
-            typeof values.expiry_date === "string"
-              ? new Date(values.expiry_date)
-              : null,
-          category_id: values.category,
-          return_id: values.return,
-        });
-
-        await utils.exchanges.find.invalidate();
-
-        router.push("/exchanges");
-      }}
-      validationSchema={toFormikValidationSchema(
-        z.object({
-          title: z.string().trim().min(10).max(100),
-          description: z.string().trim().min(10).max(705),
-          places: z.number().int().min(1).max(9),
-        }),
-      )}
-    >
-      {(formik) => (
-        <Exchange_CreateForm
-          categories={categories}
-          {...formik}
-        ></Exchange_CreateForm>
-      )}
-    </Formik>
+    <FormProvider {...form}>
+      <form onSubmit={form.handleSubmit(on_submit)}>
+        <Exchange_EditForm categories={categories} />
+      </form>
+    </FormProvider>
   );
 }

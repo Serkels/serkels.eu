@@ -79,6 +79,14 @@ export const fieldset = tv({
 });
 
 export const select = tv({
-  base: `w-full border border-Silver_Chalice bg-white p-2.5`,
+  base: `
+    w-full
+    border
+    border-Silver_Chalice
+    bg-white
+    p-2.5
+    disabled:pointer-events-none
+    disabled:opacity-50
+  `,
   variants: {},
 });

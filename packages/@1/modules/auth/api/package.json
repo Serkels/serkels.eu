@@ -34,8 +34,8 @@
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
-    "@prisma/client": "5.17.0",
-    "@types/node": "20.14.11",
-    "typescript": "5.5.3"
+    "@prisma/client": "5.18.0",
+    "@types/node": "20.14.14",
+    "typescript": "5.5.4"
   }
 }

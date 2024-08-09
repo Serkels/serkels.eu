@@ -4,6 +4,6 @@
     "@douglasduteil/config...typescript": "workspace:*",
     "@turbo/gen": "1.13.4",
     "prettier": "3",
-    "typescript": "5.5.3"
+    "typescript": "5.5.4"
   }
 }
