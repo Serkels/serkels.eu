@@ -28,7 +28,9 @@ export function Article({
   return (
     <article className="px-6 py-10 lg:px-16">
       <div className="flex justify-between">
-        <h1 className="text-3xl font-bold">{title}</h1>
+        <h1 className="max-w-full hyphens-auto break-words text-3xl font-bold">
+          {title}
+        </h1>
         <Article.ActionButton.Renderer childs={children} />
       </div>
 
