@@ -8,6 +8,7 @@ export const button = tv({
   base: `
     ring-offset-surface
     ring-focus
+    col-start-8
     inline-flex
     appearance-none
     items-center

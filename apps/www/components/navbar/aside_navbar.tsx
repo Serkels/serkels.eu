@@ -81,7 +81,7 @@ export function Student_NavBar({
             icon={<Binoculars className="h-auto w-6" />}
             href="./bookmarks/opportunities"
           >
-            Opportunités
+            Opportunités pros
           </Li_Link>
         </SubNav_Bookmarks>
         <Li_Link onClick={onClickLink} icon={<Envelope />} href="./inbox">

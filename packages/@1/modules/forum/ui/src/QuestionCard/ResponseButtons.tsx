@@ -28,7 +28,12 @@ export function ToggleOutlet() {
 
 export function ResponseButtons(props: ComponentProps<typeof Button>) {
   return (
-    <Button state="ghost" size="md" {...props}>
+    <Button
+      state="ghost"
+      size="md"
+      className="col-span-3 col-start-3 px-0 md:col-span-2 md:col-start-4"
+      {...props}
+    >
       Répondre
     </Button>
   );

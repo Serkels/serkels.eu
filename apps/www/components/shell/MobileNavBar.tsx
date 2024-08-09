@@ -40,7 +40,7 @@ export function MobileNavBar({ className }: ComponentPropsWithoutRef<"nav">) {
               Icon={Binoculars}
               isActive={pathname.includes("/opportunities")}
             >
-              Opportunités
+              Opportunités pros
             </NavItem>
           </Link>
         </li>
