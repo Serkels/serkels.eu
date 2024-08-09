@@ -2,7 +2,7 @@
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local"],
   "globalEnv": ["CI", "NODE_ENV"],
-  "pipeline": {
+  "tasks": {
     "@douglasduteil/nextauth...trpc.prisma#type-check": {
       "dependsOn": ["@1.infra/database#type-check"]
     },
