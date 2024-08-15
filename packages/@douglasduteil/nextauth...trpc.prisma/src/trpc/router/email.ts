@@ -20,15 +20,12 @@ export type SendEmailResolverFn<Context> = (opts: {
 }) => Promise<void>;
 //
 
-export function create_EmailProvider_router<Context>(
-  secret: string,
-  {
-    resolver,
-  }: {
-    resolver: SendEmailResolverFn<Context>;
-  },
-) {
-  const next_auth_procedure = procedure.use(verify_next_auth_token(secret));
+export function create_EmailProvider_router<Context>({
+  resolver,
+}: {
+  resolver: SendEmailResolverFn<Context>;
+}) {
+  const next_auth_procedure = procedure.use(verify_next_auth_token());
 
   return router({
     sendVerificationRequest: next_auth_procedure

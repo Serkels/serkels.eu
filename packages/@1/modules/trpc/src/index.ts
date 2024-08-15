@@ -4,6 +4,7 @@ import type { ProcedureBuilder, ProcedureParams } from "@trpc/server";
 
 export type { Context } from "./context";
 export {
+  createCallerFactory,
   mergeRouters,
   middleware,
   next_auth_input_token,

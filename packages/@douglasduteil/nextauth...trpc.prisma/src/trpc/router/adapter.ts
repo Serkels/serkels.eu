@@ -19,8 +19,8 @@ import { procedure, router } from "../trpc";
 export type NextAuth_Router = ReturnType<typeof create_NextAuth_router>;
 export type NextAuth_AdapterProcedures = keyof Adapter;
 
-export function create_NextAuth_router(secret: string) {
-  const next_auth_procedure = procedure.use(verify_next_auth_token(secret));
+export function create_NextAuth_router() {
+  const next_auth_procedure = procedure.use(verify_next_auth_token());
 
   return router({
     //

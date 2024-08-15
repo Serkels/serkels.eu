@@ -27,6 +27,7 @@ const ENV = z
       .enum(["development", "test", "production"])
       .default("development"),
   })
+  .merge(NEXTAUTH_TRPCENV)
   .parse(process.env);
 
 //
@@ -82,7 +83,7 @@ export const auth_options: NextAuthOptions = {
       if (token.profile) {
         session.profile = token.profile;
         session.header = await create_nexauth_header({
-          secret: NEXTAUTH_TRPCENV.NEXTAUTH_SECRET,
+          secret: ENV.NEXTAUTH_SECRET,
           token: {
             profile: {
               id: session.profile.id,

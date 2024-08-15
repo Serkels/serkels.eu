@@ -7,8 +7,10 @@ import { trpc } from "./trpc";
 
 //
 
+const { NEXTAUTH_SECRET: secret } = NEXTAUTH_TRPCENV.parse(process.env);
+
 export const Email = Email_Provider({
-  secret: NEXTAUTH_TRPCENV.NEXTAUTH_SECRET,
+  secret,
   async sendVerificationRequest(params) {
     try {
       await trpc.auth.next_auth_provider.sendVerificationRequest.mutate(params);

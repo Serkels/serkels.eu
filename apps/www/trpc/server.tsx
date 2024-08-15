@@ -35,9 +35,9 @@ export const proxyClient = createTRPCProxyClient<Router>({
               bio: "",
             } satisfies Profile)
           : undefined;
-
+        const { NEXTAUTH_SECRET: secret } = NEXTAUTH_TRPCENV.parse(process.env);
         const nexaut_header = await create_nexauth_header({
-          secret: NEXTAUTH_TRPCENV.NEXTAUTH_SECRET,
+          secret,
           token: {
             from: "www",
             profile,
