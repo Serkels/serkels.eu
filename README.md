@@ -10,8 +10,8 @@
 
 ### Country specific deployments
 
-| Country     | Branch               | URL                        |
-| ----------- | -------------------- | -------------------------- |
-| :fr: France | :contruction: master | https://master.serkels.fr/ |
-| :fr: France | :test_tube: beta     | https://beta.serkels.fr/   |
-| :fr: France | :rocket: v2024.08.0  | https://serkels.fr/        |
+| Country     | Branch                | URL                        |
+| ----------- | --------------------- | -------------------------- |
+| :fr: France | :construction: master | https://master.serkels.fr/ |
+| :fr: France | :test_tube: beta      | https://beta.serkels.fr/   |
+| :fr: France | :rocket: v2024.08.0   | https://serkels.fr/        |
