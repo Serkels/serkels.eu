@@ -69,7 +69,7 @@ export function Login({ onSubmit }: LoginProps) {
           <Field
             className="h-8 rounded-sm border border-solid border-[#dddddd] px-3 py-2 text-xs placeholder-[#AAAAAA]"
             name="email"
-            placeholder="Adresse email"
+            placeholder="Adresse email de connexion"
             required
             type="email"
           />
