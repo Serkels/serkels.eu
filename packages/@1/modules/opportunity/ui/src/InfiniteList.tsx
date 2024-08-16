@@ -34,7 +34,7 @@ export function Opportunity_InfiniteList({
     .with(
       { status: "success" },
       ({ data: { pages }, isFetchingNextPage, hasNextPage, fetchNextPage }) => (
-        <ul className={base()}>
+        <ul aria-label="List of opportunities" className={base()}>
           {pages
             .map((page) => page.data)
             .flat()

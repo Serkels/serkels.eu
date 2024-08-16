@@ -135,7 +135,11 @@ async function MyStudentProfile({ profile }: { profile: Profile }) {
         }
       ></UserMenuToggleStudent>
 
-      <Link href={`/@~`} className="hidden md:flex">
+      <Link
+        aria-label="Link to my profile"
+        className="hidden md:flex"
+        href={`/@~`}
+      >
         <VisuallyHidden>Moi</VisuallyHidden>
         <Avatar className="size-7 border-2 border-white" profile={profile} />
       </Link>
@@ -163,7 +167,11 @@ async function MyPartnerProfile({ profile }: { profile: Profile }) {
         }
       ></UserMenuTogglePartner>
 
-      <Link href={`/@~`} className="hidden md:flex">
+      <Link
+        aria-label="Link to my profile"
+        className="hidden md:flex"
+        href={`/@~`}
+      >
         <VisuallyHidden>Moi</VisuallyHidden>
         <Avatar className="size-7 border-2 border-white" profile={profile} />
       </Link>
