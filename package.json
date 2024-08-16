@@ -15,14 +15,17 @@
     "heroku-release": "pnpm dlx npm-run-all heroku-release:*",
     "heroku-release:00": "pnpm --filter @1.infra/database exec prisma migrate deploy",
     "lint": "turbo run lint",
-    "start": "pnpm -r start",
+    "start": "turbo run start --parallel --continue",
     "studio": "turbo run studio --parallel --continue",
+    "test": "node --import=tsx --test **/*.test.ts",
+    "test:watch": "node --import=tsx --test --watch **/*.test.ts",
     "type-check": "turbo run type-check"
   },
   "devDependencies": {
     "cpx2": "7.0.1",
     "del-cli": "5.1.0",
     "prettier": "3.3.3",
+    "tsx": "4.17.0",
     "turbo": "1.13.4",
     "typescript": "5.5.4"
   },

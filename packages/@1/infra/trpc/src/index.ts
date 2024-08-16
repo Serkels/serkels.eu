@@ -19,7 +19,7 @@ import { z } from "zod";
 //
 
 export const root_router = router({
-  auth: auth_api_router,
+  auth: auth_api_router(process.env as any),
   bookmarks: bookmarks_api_router,
   category: category_api_router,
   exchanges: exchange_api_router,

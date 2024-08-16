@@ -3,11 +3,13 @@
 import { TRPCError } from "@trpc/server";
 import { decode } from "../jwt";
 import { middleware } from "./trpc";
+import { NEXTAUTH_TRPCENV } from "../config";
 
 //
 
-export function verify_next_auth_token<T>(secret: string) {
-  return middleware(async ({ ctx, next }) => {
+export function verify_next_auth_token<T>() {
+  return middleware(async function guard_middleware({ ctx, next }) {
+    const { NEXTAUTH_SECRET: secret } = NEXTAUTH_TRPCENV.parse(process.env);
     try {
       const payload = (await decode({
         token: ctx.headers.NEXTAUTH_TOKEN,

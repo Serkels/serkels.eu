@@ -6,8 +6,8 @@ import { router } from "./trpc";
 
 export const moked_auth_route = router({
   auth: router({
-    next_auth_adapter: create_NextAuth_router("MOCK"),
-    next_auth_provider: create_EmailProvider_router("MOCK", {
+    next_auth_adapter: create_NextAuth_router(),
+    next_auth_provider: create_EmailProvider_router({
       resolver: (() => {}) as any as SendEmailResolverFn<any>,
     }),
   }),

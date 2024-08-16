@@ -12,6 +12,7 @@ import { z } from "zod";
 
 const ENV = z
   .object({ _01_NEXT_AUTH_MODULES_TRPC_API_URL: z.string().url() })
+  .merge(NEXTAUTH_TRPCENV)
   .parse(process.env);
 
 //
@@ -27,7 +28,7 @@ export const trpc = createTRPCProxyClient<Router>({
       url: ENV._01_NEXT_AUTH_MODULES_TRPC_API_URL,
       headers: async ({}) => {
         const nexaut_header = await create_nexauth_header({
-          secret: NEXTAUTH_TRPCENV.NEXTAUTH_SECRET,
+          secret: ENV.NEXTAUTH_SECRET,
           token: {
             from: "@1.modules/auth.next",
             profile: { id: "SSR", image: "", name: "", role: "ADMIN", bio: "" },

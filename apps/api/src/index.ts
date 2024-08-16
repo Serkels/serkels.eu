@@ -5,7 +5,7 @@ import "./dotenv";
 //
 
 import prisma from "@1.infra/database";
-import { Email_Sender } from "@1.infra/email";
+import { Email_Sender, ENV as EmailEnv } from "@1.infra/email";
 import { router } from "@1.infra/trpc";
 import { HTTPError } from "@1.modules/core/errors";
 import type { Context } from "@1.modules/trpc";
@@ -35,11 +35,8 @@ export const ENV = z
     //
     EMAIL_FROM: z.string().email().default("no-reply@toc-toc.org"),
     SENTRY_DSN: z.string().url(),
-    SMTP_HOST: z.string(),
-    SMTP_PASSWORD: z.string(),
-    SMTP_PORT: z.coerce.number().optional(),
-    SMTP_USERNAME: z.string(),
   })
+  .merge(EmailEnv)
   .parse(process.env);
 
 //
@@ -56,7 +53,7 @@ function createContext(
       origin: headers.get("origin") ?? "https://toc-toc.org",
       NEXTAUTH_TOKEN: headers.get("NEXTAUTH_TOKEN") ?? "",
     },
-    sender: new Email_Sender(),
+    sender: new Email_Sender(ENV),
   } satisfies Context;
 }
 

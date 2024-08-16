@@ -10,29 +10,31 @@ import { ZodError, z } from "zod";
 import type { Context } from "./context";
 
 //
-export const { router, middleware, mergeRouters, procedure } = initTRPC
-  .context<Context>()
-  .create({
-    transformer: SuperJSON,
-    errorFormatter({ shape, error }) {
-      return {
-        ...shape,
-        data: {
-          ...shape.data,
-          zodError:
-            error.code === "BAD_REQUEST" && error.cause instanceof ZodError
-              ? error.cause.flatten()
-              : null,
-        },
-      };
-    },
-  });
+export const {
+  createCallerFactory,
+  mergeRouters,
+  middleware,
+  procedure,
+  router,
+} = initTRPC.context<Context>().create({
+  transformer: SuperJSON,
+  errorFormatter({ shape, error }) {
+    return {
+      ...shape,
+      data: {
+        ...shape.data,
+        zodError:
+          error.code === "BAD_REQUEST" && error.cause instanceof ZodError
+            ? error.cause.flatten()
+            : null,
+      },
+    };
+  },
+});
 
 // export type Procedure = inferProcedureBuilderResolverOptions<typeof procedure>;
 export const next_auth_procedure = procedure.use(
-  verify_next_auth_token<{ profile: Profile }>(
-    NEXTAUTH_TRPCENV.NEXTAUTH_SECRET,
-  ),
+  verify_next_auth_token<{ profile: Profile }>(),
 );
 
 // export type Next_Auth_Procedure = inferProcedureBuilderResolverOptions<
@@ -42,10 +44,11 @@ export const next_auth_procedure = procedure.use(
 export const next_auth_input_token = procedure
   .input(z.object({ token: z.string() }))
   .use(async ({ input, ctx, next }) => {
+    const { NEXTAUTH_SECRET: secret } = NEXTAUTH_TRPCENV.parse(process.env);
     try {
       const payload = (await decode({
         token: input.token,
-        secret: NEXTAUTH_TRPCENV.NEXTAUTH_SECRET,
+        secret,
       })) as { profile: Profile };
 
       if (payload) {

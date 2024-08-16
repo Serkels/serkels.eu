@@ -1,0 +1,68 @@
+#
+name: E2E
+on:
+  push:
+  workflow_dispatch:
+
+# Automatically cancel in-progress actions on the same branch
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request_target' && github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+env:
+  DO_NOT_TRACK: 1
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+
+jobs:
+  e2e:
+    name: End to end testing
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          cache: pnpm
+          node-version-file: package.json
+      - run: docker compose up --build --wait
+
+      # - name: Cypress run
+      #   uses: cypress-io/github-action@df7484c5ba85def7eef30db301afa688187bc378 # v6.7.2
+      #   env:
+      #     CONSOLA_LEVEL: "2"
+      #     DEPLOY_ENV: "production"
+      #     NODE_ENV: "development"
+      #   with:
+      #     build: pnpm run build
+      #     install-command: pnpm install --frozen-lockfile
+      #     start: pnpm start
+
+      - uses: actions/upload-artifact@834a144ee995460fba8ed112a2fc961b36a5ec5a # v4.3.6
+        if: failure()
+        with:
+          compression-level: 9
+          name: cypress-screenshots
+          path: apps/e2e/cypress/screenshots
+
+      - uses: actions/upload-artifact@834a144ee995460fba8ed112a2fc961b36a5ec5a # v4.3.6
+        if: failure()
+        with:
+          compression-level: 9
+          name: cypress-videos
+          path: apps/e2e/cypress/videos
+
+  system:
+    name: System testing
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          cache: pnpm
+          node-version: latest
+      - run: pnpm --filter=!e2e install
+      - run: pnpm exec turbo build --filter api...
+      - run: pnpm test

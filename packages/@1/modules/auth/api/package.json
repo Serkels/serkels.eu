@@ -33,6 +33,7 @@
     "zod": "3.23.8"
   },
   "devDependencies": {
+    "@1.infra/email": "workspace:*",
     "@1.config/typescript": "workspace:*",
     "@prisma/client": "5.18.0",
     "@types/node": "20.14.15",

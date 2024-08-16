@@ -49,7 +49,7 @@ export const SerkelsMagicLinkEmail = ({
             target="_blank"
             style={{ ...link, color: "#898989" }}
           >
-            toc-toc.org
+            {base_url}
           </Link>
           ,
           <br />
