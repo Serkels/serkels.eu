@@ -55,7 +55,7 @@
     "react-nest": "0.1.10",
     "react-slotify": "0.2.2",
     "tailwind-variants": "0.2.1",
-    "ts-pattern": "5.2.0"
+    "ts-pattern": "5.3.1"
   },
   "devDependencies": {
     "@1.config/prettier": "workspace:*",
