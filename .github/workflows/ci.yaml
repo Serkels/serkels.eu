@@ -18,14 +18,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: "🔺️  Cache"
-        uses: ./.github/actions/cache
-
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         id: pnpm-install
         with:
           run_install: false
+
+      - name: "🔺️  Cache"
+        uses: ./.github/actions/cache
 
       - name: Setup Node
         uses: actions/setup-node@v4
