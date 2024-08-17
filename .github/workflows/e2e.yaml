@@ -31,6 +31,8 @@ jobs:
         with:
           cache: pnpm
           node-version: latest
+      - name: "🔺️  Cache"
+        uses: ./.github/actions/cache
       - run: pnpm install
       - run: pnpm run build
       - run: docker compose up --wait
