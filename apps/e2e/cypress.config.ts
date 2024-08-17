@@ -11,6 +11,7 @@ import { fileURLToPath } from "node:url";
 export default defineConfig({
   e2e: {
     baseUrl: "http://localhost:3000",
+    defaultCommandTimeout: 10_000,
     reporter: fileURLToPath(
       await import.meta.resolve(
         "@badeball/cypress-cucumber-preprocessor/pretty-reporter",

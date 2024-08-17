@@ -6,10 +6,11 @@
   "sideEffects": false,
   "files": [],
   "dependencies": {
-    "@douglasduteil/config...tailwindcss": "workspace:*"
+    "@douglasduteil/config...tailwindcss": "workspace:*",
+    "prettier": "3.3.3",
+    "prettier-plugin-organize-imports": "^4.0.0"
   },
   "devDependencies": {
-    "prettier": "3.3.3",
     "typescript": "5.5.4"
   }
 }

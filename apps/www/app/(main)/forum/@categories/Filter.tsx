@@ -9,7 +9,7 @@ import { useContext, useMemo } from "react";
 
 //
 
-export function CategoriesList() {
+export function Filter() {
   const { query, setQuery } = useSyncSearchQuery("category");
   const { data: categories_, status } = TRPC_React.category.forum.useQuery();
   const { close } = useContext(context);
