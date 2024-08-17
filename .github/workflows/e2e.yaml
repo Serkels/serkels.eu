@@ -87,6 +87,8 @@ jobs:
         with:
           cache: pnpm
           node-version: latest
-      - run: pnpm --filter=!e2e install --frozen-lockfile
+      - name: "🔺️  Cache"
+        uses: ./.github/actions/cache
+      - run: pnpm --filter=!e2e install --frozen-lockfile --prefer-offline
       - run: pnpm exec turbo build --filter api...
       - run: pnpm test
