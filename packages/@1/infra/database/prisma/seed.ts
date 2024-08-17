@@ -60,6 +60,7 @@ async function main() {
   await partners();
   console.log("🌱 . Partners.");
 
+  await partners_yopmail();
   await partners_vip();
   console.log("🌱 . Partners VIP.");
 
@@ -327,6 +328,67 @@ async function partners() {
       { count: { max: 15, min: 10 } },
     ),
   );
+}
+
+async function partners_yopmail() {
+  return prisma.partner.create({
+    data: {
+      profile: {
+        create: {
+          bio: dedent`
+          # One Does University
+
+          > One does not simply implement, it teaches.
+          `,
+          image: "https://avatars.githubusercontent.com/u/9634140?s=200&v=4",
+          name: "One Does University",
+          role: ProfileRole.PARTNER,
+          user: {
+            create: {
+              email: "onedoesuniversity@yopmail.com",
+              image:
+                "https://avatars.githubusercontent.com/u/9634140?s=200&v=4",
+              name: "One Does University",
+            },
+          },
+        },
+      },
+      link: faker.internet.url(),
+      city: "Paris",
+      opportunities: {
+        createMany: {
+          data: {
+            category_id: await prisma.category
+              .findFirstOrThrow({
+                select: { id: true },
+                where: {
+                  name: "Cours de langues",
+                  context: CategoryContext.OPPORTUNITY,
+                },
+              })
+              .then(({ id }) => id),
+            cover: faker.image.url(),
+            description: dedent`
+            ## Cours de JavaScript
+
+            > JavaScript est un langage de programmation créé en 1995 par Brendan Eich.
+            > Il est le premier langage de programmation à être implémenté par le navigateur web.
+
+            Parce que JavaScript est sur utilisé dans le monde du web, il est toujours utilie pour créer des applications web.
+            `,
+            link: faker.internet.url(),
+            location: "Paris",
+            slug:
+              slugify("Cours de JavaScript").slice(0, 16).toLowerCase() +
+              "-" +
+              faker.string.uuid(),
+            title: "Cours de JavaScript",
+            expiry_date: faker.date.future(),
+          },
+        },
+      },
+    },
+  });
 }
 
 async function partners_vip() {

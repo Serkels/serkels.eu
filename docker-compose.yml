@@ -9,6 +9,19 @@ services:
       POSTGRES_PASSWORD: postgres
     ports:
       - "5432:5432"
+    healthcheck:
+      test: pg_isready -U postgres
+      interval: 10s
+      timeout: 1s
+      retries: 5
+
+  maildev:
+    image: maildev/maildev
+    ports:
+      - "1080:1080"
+      - "1025:1025"
+    environment:
+      MAILDEV_IP: "::"
 
 volumes:
   postgres:
