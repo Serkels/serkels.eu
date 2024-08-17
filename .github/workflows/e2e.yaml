@@ -62,11 +62,10 @@ jobs:
           name: ${{ matrix.e2e_test }}-cypress-videos-${{github.head_ref}}-
           path: apps/e2e/cypress/videos
 
-      - if: always()
-        run: docker compose down --volumes --remove-orphans
-
       - if: failure()
         run: docker compose logs
+      - if: always()
+        run: docker compose down --volumes --remove-orphans
 
     strategy:
       matrix:
