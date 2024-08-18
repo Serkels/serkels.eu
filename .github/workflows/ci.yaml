@@ -35,7 +35,7 @@ jobs:
           cache: pnpm
           node-version-file: package.json
 
-      - run: pnpm --filter www... install
+      - run: pnpm --filter www... install --frozen-lockfile --prefer-offline
 
       - run: pnpm exec turbo build --filter www^...
       - run: pnpm exec turbo type-check --filter www^...
@@ -69,7 +69,7 @@ jobs:
           cache: pnpm
           node-version-file: package.json
 
-      - run: pnpm --filter api...  install
+      - run: pnpm --filter api... install --frozen-lockfile --prefer-offline
 
       - run: pnpm exec turbo build --filter api^...
       - run: pnpm exec turbo type-check --filter api^...
