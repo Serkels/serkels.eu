@@ -1,5 +1,13 @@
 //
 
+import type { _1_HOUR_ } from "@douglasduteil/datatypes...hours-to-seconds";
+
+//
+
+export const revalidate: _1_HOUR_ = 3600;
+
+//
+
 export default function Page() {
   return (
     <main className="mx-auto max-h-fit p-6 md:my-10 md:max-w-3xl">

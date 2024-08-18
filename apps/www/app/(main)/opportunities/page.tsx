@@ -3,8 +3,13 @@
 import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
 import { getServerSession } from "@1.modules/auth.next";
 import { Partner_Filter } from "@1.modules/opportunity.domain";
+import type { _1_HOUR_ } from "@douglasduteil/datatypes...hours-to-seconds";
 import type { Metadata, ResolvingMetadata } from "next";
 import List from "./_client/List";
+
+//
+
+export const revalidate: _1_HOUR_ = 3600;
 
 //
 

@@ -5,6 +5,7 @@ import { getServerSession } from "@1.modules/auth.next";
 import { Forum_Filter } from "@1.modules/forum.domain";
 import { Idle as CreateCard_Idle } from "@1.modules/forum.ui/CreateCard/Idle";
 import { Spinner } from "@1.ui/react/spinner";
+import type { _1_HOUR_ } from "@douglasduteil/datatypes...hours-to-seconds";
 import type { Metadata, ResolvingMetadata } from "next";
 import dynamic from "next/dynamic";
 import { match } from "ts-pattern";
@@ -24,6 +25,10 @@ const Create = dynamic(() => import("./_client/Create"), {
     return <CreateCard_Idle />;
   },
 });
+
+//
+
+export const revalidate: _1_HOUR_ = 3600;
 
 //
 
