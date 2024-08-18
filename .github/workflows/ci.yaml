@@ -24,6 +24,9 @@ jobs:
         with:
           run_install: false
 
+      - name: "🔺️  Cache"
+        uses: ./.github/actions/cache
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -47,12 +50,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         id: pnpm-install
         with:
           run_install: false
+
+      - name: "🔺️  Cache"
+        uses: ./.github/actions/cache
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -80,6 +85,9 @@ jobs:
         id: pnpm-install
         with:
           run_install: false
+
+      - name: "🔺️  Cache"
+        uses: ./.github/actions/cache
 
       - name: Setup Node
         uses: actions/setup-node@v4

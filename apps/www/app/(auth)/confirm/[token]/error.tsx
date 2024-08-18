@@ -19,11 +19,11 @@ export default function Error({
     <>
       <h1
         className={`
-          text-red-100
           mx-auto
-          my-0 text-center
-          text-6xl
+          my-0
+          text-center text-6xl
           font-extrabold
+          text-red-100
           sm:text-7xl
           lg:text-8xl
         `}

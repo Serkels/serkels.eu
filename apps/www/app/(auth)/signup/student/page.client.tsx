@@ -7,7 +7,7 @@ import type { ComponentPropsWithoutRef, PropsWithChildren } from "react";
 
 export function SignInButton({ children }: PropsWithChildren) {
   return (
-    <Button size="lg" className="min-w-44 mx-auto" type="submit">
+    <Button size="lg" className="mx-auto min-w-44" type="submit">
       {children}
     </Button>
   );

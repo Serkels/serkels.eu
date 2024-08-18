@@ -1,6 +1,6 @@
 "use client";
 import { useToggle } from "@react-hookz/web";
-import { createContext, type PropsWithChildren } from "react";
+import { createContext, useContext, type PropsWithChildren } from "react";
 
 //
 
@@ -18,3 +18,7 @@ export const context = createContext(
     toggle: () => void;
   },
 );
+
+export function useAutoClose() {
+  return useContext(context);
+}
