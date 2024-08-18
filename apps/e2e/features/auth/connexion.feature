@@ -1,10 +1,10 @@
 #language: fr
 Fonctionnalité: Connexion d'un utilisateur
 
-
-Règle: par email
   Contexte:
     Soit une base de données nourrie au grain
+
+  Règle: par email
 
     Plan du scénario: Connexion de <email>
       Etant donné que je navigue sur la page
