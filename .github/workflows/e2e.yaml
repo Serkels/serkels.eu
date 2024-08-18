@@ -38,6 +38,8 @@ jobs:
           name: e2e
 
       - run: pnpm install
+      - run: pnpm exec cypress install
+        working-directory: apps/e2e
       - run: pnpm run build
       - run: docker compose up --wait
       - run: pnpm --filter @1.infra/database exec prisma migrate deploy
