@@ -34,6 +34,8 @@ jobs:
 
       - name: "🔺️  Cache"
         uses: ./.github/actions/cache
+        with:
+          name: e2e
 
       - run: pnpm install
       - run: pnpm run build
@@ -94,6 +96,8 @@ jobs:
 
       - name: "🔺️  Cache"
         uses: ./.github/actions/cache
+        with:
+          name: system
 
       - run: pnpm --filter=!e2e install --frozen-lockfile --prefer-offline
       - run: pnpm exec turbo build --filter api...

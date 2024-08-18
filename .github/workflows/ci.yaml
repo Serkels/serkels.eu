@@ -26,6 +26,8 @@ jobs:
 
       - name: "🔺️  Cache"
         uses: ./.github/actions/cache
+        with:
+          name: www
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -58,6 +60,8 @@ jobs:
 
       - name: "🔺️  Cache"
         uses: ./.github/actions/cache
+        with:
+          name: api
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -88,6 +92,8 @@ jobs:
 
       - name: "🔺️  Cache"
         uses: ./.github/actions/cache
+        with:
+          name: heroku
 
       - name: Setup Node
         uses: actions/setup-node@v4
