@@ -1,5 +1,11 @@
 name: "🔺️  "
 
+inputs:
+  name:
+    description: "Changes cache name. Default to nothing."
+    required: false
+    default: ""
+
 runs:
   using: "composite"
   steps:
@@ -12,6 +18,6 @@ runs:
       uses: actions/cache@v4
       with:
         path: ${{ env.STORE_PATH }}
-        key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+        key: ${{ runner.os }}-${{ inputs.name }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
         restore-keys: |
           ${{ runner.os }}-pnpm-store-
