@@ -250,7 +250,7 @@ function ConnectedAs() {
     const href = match(profile.role)
       .with("STUDENT", () => `/exchanges`)
       .with("PARTNER", () => `/opportunities`)
-      .with("ADMIN", () => `/`)
+      .with("ADMIN", () => `/admin`)
       .exhaustive();
 
     return (

@@ -47,6 +47,26 @@ const category_api_router = router({
       orderBy: { rank: "desc" },
     })) as Category[];
   }),
+
+  //
+
+  // update: next_auth_procedure.input(Category_Schema).mutation(async ({
+  //   input,
+  //   ctx: { prisma, payload },
+  // }) => {
+  //  if (payload.profile.role !== PROFILE_ROLES.Enum.ADMIN) {
+  //     return Error
+  //   }
+
+  //   return await prisma.category.update({
+  //     where: { id: input.id },
+  //     data: {
+  //       name: input.name,
+  //       context: input.context,
+  //       rank: input.rank,
+  //     },
+  //   });
+  // }),
 });
 
 export default category_api_router;

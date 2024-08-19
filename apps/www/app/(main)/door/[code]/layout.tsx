@@ -18,9 +18,7 @@ export default async function Layout({
   params,
   navbar,
 }: PropsWithChildren<{ params: CodeParms; navbar: ReactNode }>) {
-  let session;
-
-  [, session] = await to(getServerSession());
+  const [, session] = await to(getServerSession());
   if (!session) return notFound();
 
   if (params.code === session.profile.id) {

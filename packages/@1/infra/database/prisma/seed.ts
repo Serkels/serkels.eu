@@ -13,7 +13,7 @@ import {
   type Deal,
   type Exchange,
 } from "@prisma/client";
-import { isAfter } from "date-fns";
+import { addMinutes, isAfter } from "date-fns";
 import dedent from "dedent";
 import process from "node:process";
 import slugify from "slugify";
@@ -50,22 +50,30 @@ async function main() {
 
   //
 
+  await admin();
+  console.log("🌱 . Admin.");
+
   await categories();
   console.log("🌱 . Categories.");
 
-  console.log("🌱 . Yopmail Students.");
   await student_yopmail();
+  console.log("🌱 . Students Yopmail.");
+
   await students();
   console.log("🌱 . Students.");
-  await partners();
-  console.log("🌱 . Partners.");
 
-  await partners_yopmail();
   await partners_vip();
   console.log("🌱 . Partners VIP.");
 
+  await partners_yopmail();
+  console.log("🌱 . Partners Yopmail.");
+
+  await partners();
+  console.log("🌱 . Partners.");
+
   await students_bookmarks();
   console.log("🌱 . Students bookmarks.");
+
   await students_participants_in_exchanges();
   console.log("🌱 . Students participe to exchanges.");
 
@@ -84,6 +92,31 @@ main()
   .finally(async () => {
     await prisma.$disconnect();
   });
+
+//
+//#endregion
+//
+
+//
+//#region 👩‍💻 Admin
+//
+
+async function admin() {
+  await prisma.profile.create({
+    data: {
+      image: "https://avatars.githubusercontent.com/u/9634140?s=200&v=4",
+      name: "Admin",
+      role: ProfileRole.ADMIN,
+      user: {
+        create: {
+          email: "admin@yopmail.com",
+          image: "https://avatars.githubusercontent.com/u/9634140?s=200&v=4",
+          name: "Admin",
+        },
+      },
+    },
+  });
+}
 
 //
 //#endregion

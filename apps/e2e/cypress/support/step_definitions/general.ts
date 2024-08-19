@@ -4,8 +4,18 @@ import { Given, Then, When } from "@badeball/cypress-cucumber-preprocessor";
 
 //
 
-Given("je navigue sur la page", () => {
+Given("je navigue sur la page", function () {
   cy.visit("/");
+});
+
+Given("je navigue sur {string}", function (text: string) {
+  cy.visit(text);
+});
+
+Given("je m'attend a une erreur {string}", function (text: string) {
+  cy.on("uncaught:exception", () => {
+    return false;
+  });
 });
 
 //

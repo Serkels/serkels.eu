@@ -1,5 +1,3 @@
-// "use client";
-
 //
 
 import { AppFooter } from ":components/shell/AppFooter.server";
