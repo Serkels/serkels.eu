@@ -82,6 +82,7 @@ jobs:
           - forum
           - guide
           - opportunity
+          - status
           - studient
 
   system:

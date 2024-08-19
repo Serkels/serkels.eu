@@ -2,6 +2,7 @@
 
 import { AppSidebar } from ":components/shell/AppSidebar";
 import { HamburgerMenu } from "@1.ui/react/icons";
+import { VisuallyHidden } from "@1.ui/react/visually_hidden";
 import { useToggle } from "@react-hookz/web";
 import Link from "next/link";
 import { tv } from "tailwind-variants";
@@ -15,6 +16,7 @@ export function MenuBurger({ className }: { className?: string }) {
     <>
       <button className={base({ className })} onClick={toggle}>
         <HamburgerMenu />
+        <VisuallyHidden>Menu Burger</VisuallyHidden>
       </button>
       <AppSidebar hidden={hidden} onClose={toggle}>
         <ul className={list()}>
@@ -31,6 +33,11 @@ export function MenuBurger({ className }: { className?: string }) {
           <li>
             <Link className={link()} href="/faq" onClick={toggle}>
               FAQ
+            </Link>
+          </li>
+          <li>
+            <Link className={link()} href="/status" onClick={toggle}>
+              Status
             </Link>
           </li>
         </ul>
