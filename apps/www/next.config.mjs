@@ -76,6 +76,11 @@ const nextConfig = {
     if (ENV.MAINTENANCE) return [{ source: "/", destination: "/maintenance" }];
     return [
       {
+        source: "/api/health",
+        destination: `${ENV.API_URL}/health`,
+      },
+
+      {
         source: "/api/trpc/:path*",
         destination: `${ENV.API_URL}/trpc/:path*`,
       },
