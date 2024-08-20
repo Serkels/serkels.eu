@@ -80,7 +80,11 @@ async function ContactsCount({ profile_id }: { profile_id: string }) {
 
   if (session?.profile.id === profile_id)
     return (
-      <Link href="/@~/contacts" className="flex flex-col items-center">
+      <Link
+        href="/@~/contacts"
+        aria-label="Mes cercles"
+        className="flex flex-col items-center"
+      >
         <div className="text-lg font-bold">{profile.contacts.length}</div>{" "}
         Cercle{profile.contacts.length > 1 ? "s" : ""}
       </Link>

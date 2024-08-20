@@ -8,7 +8,7 @@ Fonctionnalité: Consulter les échanges proposés d'un étudiant
     * je me connecte en tant que "douglas@yopmail.com"
 
     Quand je clique sur la légende "Link to my profile"
-    * je clique sur "Cercles"
+    * je clique sur la légende "Mes cercles"
 
     Alors je vois dans le titre "Cercles :: Serkels"
     * je vois "Cercles"
