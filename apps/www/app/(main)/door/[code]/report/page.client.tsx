@@ -1,5 +1,6 @@
 "use client";
 
+import { AppToastOptions } from ":components/toast";
 import { create_report } from "@1.modules/profile.domain/report";
 import { button } from "@1.ui/react/button/atom";
 import { input } from "@1.ui/react/form/atom";
@@ -11,6 +12,7 @@ import {
   type PropsWithChildren,
 } from "react";
 import { useFormState, useFormStatus } from "react-dom";
+import { toast } from "react-toastify";
 import { tv } from "tailwind-variants";
 import { report } from "./action";
 
@@ -31,21 +33,10 @@ export function ReportForm() {
     category: "Arnaques ou fraude",
     email,
     link: `${window.location.origin}${url}`,
-    sucess: false,
+    success: false,
     errors: null,
     report_error: null,
   });
-
-  if (state.sucess)
-    return (
-      <div>
-        <p>
-          Signalement envoyé.
-          <br />
-          Merci de votre confiance.
-        </p>
-      </div>
-    );
 
   return (
     <form action={formAction} className={form()}>
@@ -71,7 +62,7 @@ export function ReportForm() {
                   <input
                     type="radio"
                     key={category}
-                    className={input({ className: "w-fit" })}
+                    className={input({ className: "max-w-fit" })}
                     name={create_report.keyof().Enum.category}
                     value={category}
                   />
@@ -132,9 +123,25 @@ export function ReportForm() {
           </div>
         </label>
 
-        {state.report_error ? (
-          <div className="text-danger">{state.report_error}</div>
-        ) : null}
+        {state.report_error
+          ? toast.error(
+              <>
+                Une erreur s'est produite lors du signalement, veuillez
+                réessayer : "
+                <div className="text-danger">{state.report_error}</div>"
+              </>,
+              AppToastOptions,
+            )
+          : null}
+
+        {state.success
+          ? toast.success(
+              <div className="text-success">
+                Le contenu à été signalé à l'équipe de modération
+              </div>,
+              AppToastOptions,
+            )
+          : null}
 
         <button className={button({ intent: "danger" })}>Signaler</button>
       </Fieldset>

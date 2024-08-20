@@ -66,7 +66,7 @@ function BookmarkItem_Toggle_Mutation(props: BookmarkButton_Props) {
 
         toast.info(
           !variants?.is_in_bookmarks ? (
-            <>Cet échange est désormais dans tes sauvegardes</>
+            <>Cet échange est désormais sauvegardé</>
           ) : (
             <>Retrait des sauvegardes</>
           ),

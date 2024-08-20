@@ -38,8 +38,8 @@ export function ReportTheProfile({ profile_id }: { profile_id: string }) {
       className="flex items-center space-x-1 whitespace-nowrap"
       href={`/@~/report?${new URLSearchParams({ url: href })}`}
     >
-      <Warning className="w-4" />{" "}
-      <span className="w-full">Signaler l'oppotunité</span>
+      <Warning className="w-4" />
+      <span className="w-full">Signaler le profil</span>
     </ActionItem>
   );
 }

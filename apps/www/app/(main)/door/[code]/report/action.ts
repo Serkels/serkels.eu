@@ -31,7 +31,7 @@ export async function report(
   if (!validatedFields.success) {
     return {
       ...state,
-      sucess: false,
+      success: false,
       errors: validatedFields.error.flatten().fieldErrors,
       report_error: null,
     };
@@ -44,14 +44,14 @@ export async function report(
     return {
       ...state,
       errors: null,
-      sucess: false,
+      success: false,
       report_error: report_error.message,
     };
   }
 
   return {
     ...state,
-    sucess: true,
+    success: true,
     errors: null,
     report_error: null,
   };
