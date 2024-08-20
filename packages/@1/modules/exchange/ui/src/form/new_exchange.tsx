@@ -12,11 +12,23 @@ import { z } from "zod";
 //
 
 export const form_zod_schema = z.object({
-  description: z.string().trim().min(10).max(705),
+  description: z
+    .string({ required_error: "Ce champs est requis" })
+    .trim()
+    .min(10, "La description doit contenir 10 caractères minimum")
+    .max(705, "La description doit contenir 705 caractères maximum"),
   is_online: z.enum(["true", "false"]),
-  location: z.string().nullish(),
-  places: z.coerce.number().int().min(1).max(9),
-  title: z.string().trim().min(10).max(100),
+  location: z.string({ required_error: "Ce champs est requis" }).nullish(),
+  places: z.coerce
+    .number()
+    .int()
+    .min(1, "Le nombre minimal de participant est de 1")
+    .max(9, "Le nombre maximal de participants est de 9"),
+  title: z
+    .string({ required_error: "Ce champs est requis" })
+    .trim()
+    .min(10, "Le titre doit contenir 10 caractères minimum")
+    .max(100, "La description doit contenir 100 caractères maximum"),
   type: Exchange_TypeSchema,
   category_id: ID_Schema,
   return_id: ID_Schema.nullable(),
