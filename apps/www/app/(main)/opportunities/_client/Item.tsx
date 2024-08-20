@@ -75,7 +75,7 @@ function BookmarkItem_Toggle_Mutation(props: BookmarkButton_Props) {
 
         toast.info(
           !variants?.is_in_bookmarks ? (
-            <>Cet opportunité est désormais dans tes sauvegardes</>
+            <>Cette opportunité est désormais sauvegardée</>
           ) : (
             <>Retrait des sauvegardes</>
           ),

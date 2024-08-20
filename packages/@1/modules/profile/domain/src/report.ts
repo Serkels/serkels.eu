@@ -31,7 +31,7 @@ export const create_report = z.object({
       invalid_type_error: "Invalide",
     })
     .email({
-      message: "Cette email n'est pas valide",
+      message: "Cet email n'est pas valide",
     }),
   link: z
     .string({
@@ -39,7 +39,7 @@ export const create_report = z.object({
       invalid_type_error: "Invalide",
     })
     .url({
-      message: "Ce link n'est pas valide",
+      message: "Ce lien n'est pas valide",
     }),
   comment: z
     .string({
