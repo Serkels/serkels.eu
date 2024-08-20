@@ -171,7 +171,7 @@ function Idle() {
       </Card.Header.Right>
 
       <Card.Body>
-        <div className="prose">
+        <div className="prose max-w-full">
           <ReactMarkdown components={{ h1: "h3", h2: "h3", h3: "h4" }}>
             {exchange.description}
           </ReactMarkdown>
