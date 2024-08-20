@@ -23,7 +23,7 @@ export default function SendMessage({ profile_id }: { profile_id: string }) {
     .with({ status: "loading" }, () => <Spinner className="size-5" />)
     .otherwise(() => (
       <Button onPress={send_message} isDisabled={talk_to.status !== "idle"}>
-        Contacter
+        Envoyer un message privé
       </Button>
     ));
 }

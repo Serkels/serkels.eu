@@ -11,4 +11,4 @@ Fonctionnalité: Consulter les échanges proposés d'un étudiant
     * je clique sur "Abonnés"
 
     Alors je vois dans le titre "Abonnés :: Serkels"
-    * je vois "Liste d'abonnés"
+    * je vois "Ajouté par"

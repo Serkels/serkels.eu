@@ -20,7 +20,7 @@ export default async function Page() {
           className={button({ intent: "danger" })}
           href={"/@~/inbox/write_to"}
         >
-          Écrire
+          Écrire à mes cercles
           <PenSquare className="ml-2 size-4" />
         </Link>
       </div>
