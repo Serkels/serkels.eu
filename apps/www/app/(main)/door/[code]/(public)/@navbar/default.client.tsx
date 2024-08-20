@@ -107,7 +107,7 @@ export function Partner_Page({ params }: { params: CodeParmsAsProfileId }) {
             className={link({ active: pathname === `/@${code}/opportunities` })}
             href={`/@${code}/opportunities`}
           >
-            Opportunité
+            Opportunités
           </Link>
         </div>
 

@@ -61,7 +61,7 @@ export default function Page() {
             className={input({ className: "col-span-full " })}
             id={profile_names.bio}
             name={profile_names.bio}
-            placeholder="Biographie"
+            placeholder="À propos"
           />
           <input
             className={input({ className: "col-span-full " })}
