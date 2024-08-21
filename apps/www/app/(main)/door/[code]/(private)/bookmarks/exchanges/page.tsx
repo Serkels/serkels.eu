@@ -22,7 +22,8 @@ export default async function Page() {
   const { data: exchanges } = await TRPC_SSR.bookmarks.exchanges.find.fetch();
 
   if (!session) return null;
-  if (exchanges.length === 0) return <>N/A exchanges</>;
+  if (exchanges.length === 0)
+    return <>Il n'y a aucun échange dans vos sauvegardes pour le moment</>;
 
   return (
     <main className="grid grid-cols-1 gap-y-5">

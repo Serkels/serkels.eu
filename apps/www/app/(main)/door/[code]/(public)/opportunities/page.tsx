@@ -35,7 +35,8 @@ export default async function Page({ params }: { params: CodeParms }) {
       profile_id,
     });
 
-  if (opportunities.length === 0) return <>N/A Opportunities</>;
+  if (opportunities.length === 0)
+    return <>Il n'y a aucune opportunité à afficher pour le moment</>;
 
   return (
     <main
