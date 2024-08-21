@@ -24,17 +24,17 @@ export default function FilterForm({
   return (
     <div className={base({ className })} {...props}>
       <Link
-        className={button({
+        className={`${button({
           active: filter_query === filter_params_schema.enum.IN_PROGRESS,
-        })}
+        })} bg-secondary hover:bg-secondary`}
         href={{ query: in_progress_params.toString() }}
       >
         En cours
       </Link>
       <Link
-        className={button({
+        className={`${button({
           active: filter_query === filter_params_schema.enum.SUCCESS,
-        })}
+        })} bg-primary hover:bg-primary`}
         href={{ query: successful_params.toString() }}
       >
         Réussis
@@ -67,15 +67,22 @@ const search_form_classes = tv({
   base: `grid grid-cols-2 gap-4`,
   slots: {
     button: ui_button({
-      className: "whitespace-nowrap",
-      intent: "whity",
+      className: "w-1/2 whitespace-nowrap",
       size: "lg",
     }),
   },
   variants: {
     active: {
       false: {
-        button: "font-normal opacity-75",
+        button: "font-normal opacity-50  hover:opacity-100",
+      },
+      true: {
+        button: "font-bold opacity-100",
+      },
+    },
+    hover: {
+      true: {
+        button: "hover:bg-secondary",
       },
     },
   },

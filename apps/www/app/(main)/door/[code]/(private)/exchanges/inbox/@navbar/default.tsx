@@ -14,7 +14,7 @@ export default async function Page() {
   return (
     <TRPC_Hydrate>
       <div className={column_screen({ className: "pt-10" })}>
-        <FilterForm className="px-8" />
+        <FilterForm className="flex w-full px-8" />
         <SearchForm className="px-8" />
         <nav className="my-8 min-h-0 flex-1 overflow-y-auto">
           <Infinite_Exchange_List />
