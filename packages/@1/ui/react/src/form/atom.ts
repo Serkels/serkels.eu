@@ -81,6 +81,7 @@ export const fieldset = tv({
 export const select = tv({
   base: `
     w-full
+    rounded-sm
     border
     border-Silver_Chalice
     bg-white

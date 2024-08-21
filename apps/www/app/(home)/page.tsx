@@ -98,7 +98,7 @@ async function Explore() {
             className: "text-quaternary",
           })}
         >
-          Forum StudHelp
+          Discussions
         </ExploreLink>
         <ExploreLink
           description="Questions féquentes"

@@ -6,8 +6,8 @@ Fonctionnalité: Voir le forum
 
   Scénario:
     Etant donné que je navigue sur la page
-    Quand je clique sur le bouton "Forum StudHelp"
-    Alors je vois "Forum StudHelp"
+    Quand je clique sur le bouton "Discussions"
+    Alors je vois "Discussions"
     * je vois "Recherche"
     * je vois "Les dernières questions"
     * je vois "Questions répondues"
