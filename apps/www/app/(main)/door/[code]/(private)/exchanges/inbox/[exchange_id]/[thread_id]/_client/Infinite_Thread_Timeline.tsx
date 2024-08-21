@@ -289,7 +289,7 @@ function Message_Denied(props: ComponentProps<typeof Message>) {
 }
 
 function Message_NotInterested(props: ComponentProps<typeof Message>) {
-  return <Message {...props}>✖️ Je ne suis plus interessé.</Message>;
+  return <Message {...props}>✖️ Je ne suis plus disponible.</Message>;
 }
 
 function Congratulations() {
