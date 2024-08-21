@@ -4,7 +4,7 @@ import { AuthSessionProvider } from ":components/shell/AuthSessionProvider";
 import { Banner } from ":components/shell/Banner";
 import { getServerSession } from "@1.modules/auth.next";
 import { Grid } from "@1.ui/react/grid";
-import { Binoculars, Book, Exchange, MessageGroup } from "@1.ui/react/icons";
+import { Binoculars, Exchange, MessageGroup } from "@1.ui/react/icons";
 import { popover } from "@1.ui/react/popover/atom";
 import type { StylableElementType } from "@1.ui/react/types";
 import type { _1_HOUR_ } from "@douglasduteil/datatypes...hours-to-seconds";
@@ -99,17 +99,6 @@ async function Explore() {
           })}
         >
           Forum StudHelp
-        </ExploreLink>
-        <ExploreLink
-          description="Questions féquentes"
-          href="/guide"
-          Icon={Book}
-          className={link({
-            className: "text-quinary",
-          })}
-          title="Guide pour continuer les études en France…"
-        >
-          Guide d'étudiant
         </ExploreLink>
       </Grid>
     </Grid>

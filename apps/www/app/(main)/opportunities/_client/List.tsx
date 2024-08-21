@@ -15,7 +15,7 @@ import { Item } from "./Item";
 
 //
 
-export default function List() {
+export default function List({ isAside = false }: { isAside?: boolean }) {
   const { data: session } = useSession();
   const search_params = useSearchParams();
   const category = search_params.get("category") ?? undefined;
@@ -57,7 +57,7 @@ export default function List() {
     );
 
   return (
-    <Opportunity_InfiniteList info={info}>
+    <Opportunity_InfiniteList info={info} isAside={isAside}>
       {(data) => <Item opportunity={data} />}
     </Opportunity_InfiniteList>
   );

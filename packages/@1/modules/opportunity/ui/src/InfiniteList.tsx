@@ -12,11 +12,13 @@ import { match, P } from "ts-pattern";
 export function Opportunity_InfiniteList({
   info,
   children,
+  isAside = false,
 }: {
   info: UseInfiniteQueryResult<{ data: Opportunity[] }>;
   children: (props: Opportunity) => React.ReactNode;
+  isAside?: boolean;
 }) {
-  const { base, item } = opportunity_grid();
+  const { base } = opportunity_grid(isAside);
   return match(info)
     .with({ status: "error", error: P.select() }, (error) => {
       throw error;
@@ -34,12 +36,12 @@ export function Opportunity_InfiniteList({
     .with(
       { status: "success" },
       ({ data: { pages }, isFetchingNextPage, hasNextPage, fetchNextPage }) => (
-        <ul aria-label="List of opportunities" className={base()}>
+        <ul aria-label="List of opportunities" className={base}>
           {pages
             .map((page) => page.data)
             .flat()
             .map((data) => (
-              <li key={data.id} className={item()}>
+              <li key={data.id} className="">
                 {children(data)}
               </li>
             ))}
@@ -83,9 +85,19 @@ function Loading() {
 
 //
 
-const opportunity_grid = tv({
-  base: `grid grid-flow-row grid-cols-1 gap-8 px-4 sm:grid-cols-2 sm:px-0 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4`,
-  slots: {
-    item: "",
-  },
-});
+const opportunity_grid = (isAside: boolean) =>
+  tv({
+    base: isAside
+      ? "flex flex-col gap-4"
+      : `grid grid-flow-row grid-cols-1 gap-8 px-4 sm:grid-cols-2 sm:px-0 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4`,
+
+    // variants: {
+    //   isAside: {
+    //     true: "flex flex-col",
+    //     false: "",
+    //   },
+    // },
+    // defaultVariants: {
+    //   isAside: false,
+    // },
+  });
