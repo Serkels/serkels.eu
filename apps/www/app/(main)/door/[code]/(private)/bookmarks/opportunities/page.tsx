@@ -20,7 +20,10 @@ export default async function Page() {
   const { data: opportunities } =
     await TRPC_SSR.bookmarks.opportunities.find.fetch();
 
-  if (opportunities.length === 0) return <>N/A Opportunities</>;
+  if (opportunities.length === 0)
+    return (
+      <>Il n'y a aucune opportunité pro dans vos sauvegardes pour le moment</>
+    );
 
   return (
     <main

@@ -33,7 +33,8 @@ export default async function Page({ params }: { params: CodeParms }) {
   const { data: exchanges } = await TRPC_SSR.exchanges.by_particitpant.fetch({
     profile_id,
   });
-  if (exchanges.length === 0) return <>N/A History</>;
+  if (exchanges.length === 0)
+    return <>Il n'y a aucun historique pour le moment</>;
   return (
     <TRPC_Hydrate>
       <main className="grid grid-cols-1 gap-y-5">
