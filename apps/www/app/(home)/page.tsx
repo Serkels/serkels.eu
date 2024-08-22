@@ -59,59 +59,60 @@ async function HomeBanner() {
 }
 
 async function Explore() {
-  const { base, link, links } = explore_grid_style({
+  const { base, link } = explore_grid_style({
     size: { initial: "xs", md: "md", xl: "xl" },
   });
   return (
     <Grid className={base()}>
-      <Grid fluid className={links()}>
-        <ExploreLink
-          description={
-            <p className="text-center">
-              Échanges par étudiants.
-              <br /> Créer un compte pour voir les échanges
-            </p>
-          }
-          href="/exchanges"
-          Icon={Exchange}
-          className={link({
-            className: "text-secondary",
-          })}
-        >
-          Échanges
-        </ExploreLink>
-        <ExploreLink
-          description="Dernières opportunités pour les étudiants"
-          href="/opportunities"
-          Icon={Binoculars}
-          className={link({
-            className: "text-tertiary",
-          })}
-        >
-          Opportunités pros
-        </ExploreLink>
-        <ExploreLink
-          description="Questions et réponses des étudiants"
-          href="/forum"
-          Icon={MessageGroup}
-          className={link({
-            className: "text-quaternary",
-          })}
-        >
-          Forum StudHelp
-        </ExploreLink>
-      </Grid>
+      <ExploreLink
+        description={
+          <p className="text-center">
+            Échanges par étudiants.
+            <br /> Créer un compte pour voir les échanges
+          </p>
+        }
+        href="/exchanges"
+        Icon={Exchange}
+        className={link({
+          className: "text-secondary",
+        })}
+        number="one"
+      >
+        Échanges
+      </ExploreLink>
+      <ExploreLink
+        description="Dernières opportunités pour les étudiants"
+        href="/opportunities"
+        Icon={Binoculars}
+        className={link({
+          className: "text-tertiary",
+        })}
+        number="two"
+      >
+        Opportunités pros
+      </ExploreLink>
+      <ExploreLink
+        description="Questions et réponses des étudiants"
+        href="/forum"
+        Icon={MessageGroup}
+        className={link({
+          className: "text-quaternary",
+        })}
+        number="three"
+      >
+        Forum StudHelp
+      </ExploreLink>
     </Grid>
   );
 }
 
 const explore_grid_style = tv(
   {
-    base: "",
+    base: "py-4",
     slots: {
       links:
         "col-span-2 grid-cols-4 grid-rows-2 py-10 sm:col-span-full sm:grid-rows-1 md:py-5 xl:col-start-4",
-      link: "col-span-2 sm:col-span-3 md:col-span-2",
+      link: "col-span-2 py-4 sm:col-span-full md:col-span-2",
     },
     variants: {
       size: {
@@ -156,12 +157,14 @@ function ExploreLink({
   description,
   href,
   Icon,
+  number,
 }: ComponentPropsWithoutRef<typeof Link> &
   PropsWithChildren<{
     Icon: StylableElementType;
     description: string | ReactNode;
+    number: "one" | "two" | "three" | undefined;
   }>) {
-  const { base, icon } = explore_link_style({ className });
+  const { base, icon } = explore_link_style({ className, number });
 
   return (
     <Link className={base({ className })} href={href}>
@@ -188,6 +191,11 @@ const explore_link_style = tv({
   variants: {
     icon: {
       book: "icon-[tt--book]",
+    },
+    number: {
+      one: "md:col-start-2 xl:col-start-4",
+      two: "xl:col-start-6",
+      three: "xl:col-start-8",
     },
   },
   slots: {
