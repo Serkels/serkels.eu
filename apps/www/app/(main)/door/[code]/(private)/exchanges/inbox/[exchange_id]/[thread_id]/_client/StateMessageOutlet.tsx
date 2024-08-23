@@ -87,7 +87,7 @@ function DeniedDeal() {
   return (
     <p className={base()}>
       <Denied className={icon()} />
-      Un accord n'a pas été trouvé.
+      <span className="text-danger">Aucun accord n'a été trouvé.</span>
     </p>
   );
 }
@@ -100,9 +100,11 @@ function WaitingForParticipantApproval({
   return (
     <WaitingForApproval>
       {is_organizer ? (
-        <span>En attente de la confirmation du participant.</span>
+        <span className="text-warning">
+          En attente de la confirmation du participant.
+        </span>
       ) : (
-        <span className="font-semibold">
+        <span className="text-warning">
           En attente d'une confirmation de votre part.
         </span>
       )}
@@ -118,8 +120,10 @@ function WaitingForOtherParticipantApproval({
   const plurial = participant_count > 1 ? "s" : "";
   return (
     <WaitingForApproval>
-      En attente de la confirmation de {participant_count} autre
-      {plurial} participant{plurial}.
+      <span className="text-warning">
+        En attente de la confirmation de {participant_count} autre
+        {plurial} participant{plurial}.
+      </span>
     </WaitingForApproval>
   );
 }
@@ -132,11 +136,13 @@ function WaitingForOrganizerApproval({
   return (
     <WaitingForApproval>
       {is_organizer ? (
-        <span className="font-semibold">
+        <span className="text-warning">
           En attente d'une confirmation de votre part.
         </span>
       ) : (
-        <span>En attente de confirmation de la part de l'organisation.</span>
+        <span className="text-warning">
+          En attente de confirmation de la part de l'organisation.
+        </span>
       )}
     </WaitingForApproval>
   );
@@ -158,8 +164,8 @@ function WaitingForApproval({ children }: PropsWithChildren) {
   );
 }
 const state_message_classes = tv({
-  base: "text-center text-xs text-Dove_Gray",
+  base: "text-md pt-2 text-center",
   slots: {
-    icon: "mr-2 inline-block size-3",
+    icon: "mr-2 inline-block size-5",
   },
 });
