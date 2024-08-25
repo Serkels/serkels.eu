@@ -63,7 +63,8 @@ export function Student_NavBar({
           icon={<Exchange />}
           href="./exchanges/inbox"
         >
-          Les échanges <NewsInExchange_Indicator />
+          Cercles d'échanges
+          <NewsInExchange_Indicator />
         </Li_Link>
         <Li_Link icon={<Bookmark />} href="./bookmarks">
           Sauvegardes

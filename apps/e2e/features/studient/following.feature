@@ -8,7 +8,7 @@ Fonctionnalité: Consulter les échanges proposés d'un étudiant
     * je me connecte en tant que "douglas@yopmail.com"
 
     Quand je clique sur la légende "Link to my profile"
-    * je clique sur "Abonnés"
+    * je clique sur "Ajouté par"
 
-    Alors je vois dans le titre "Abonnés :: Serkels"
-    * je vois "Liste d'abonnés"
+    Alors je vois dans le titre "Ajouté par :: Serkels"
+    * je vois "Ajouté par"
