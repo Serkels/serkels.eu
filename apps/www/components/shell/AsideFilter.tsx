@@ -14,7 +14,7 @@ export const AsideFilter = forwardRef<HTMLDivElement, Props>(
       subtitle: Subtitle,
       ...other_props
     } = props;
-    const { article, title, base, sticky, subtitle } = style();
+    const { article, title, base, body, sticky, subtitle } = style();
 
     return (
       <section
@@ -23,7 +23,7 @@ export const AsideFilter = forwardRef<HTMLDivElement, Props>(
         ref={forwardedRef}
       >
         <div className={sticky()}>
-          <div className="overflow-y-auto md:pb-28">
+          <div className={body()}>
             <h3 className={title()}>{Title}</h3>
             <p className={subtitle()}>{Subtitle}</p>
             <Provider>
@@ -49,6 +49,7 @@ const style = tv({
   base: "",
   slots: {
     sticky: "sticky top-16 pt-10",
+    body: "verflow-y-auto mx-auto max-w-[333px] md:pb-28",
     title: "pl-3 text-2xl font-bold uppercase text-Congress_Blue md:pl-0",
     subtitle: "w-full px-4 pb-6 pt-4 text-base md:px-0",
     article: "w-full",
