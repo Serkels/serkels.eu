@@ -21,12 +21,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - run: docker compose up --build --detach
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
           cache: pnpm
           node-version-file: package.json
-      - run: docker compose up --build --detach
       - uses: actions/setup-node@v4
         with:
           cache: pnpm
@@ -41,6 +41,7 @@ jobs:
       - run: pnpm exec cypress install
         working-directory: apps/e2e
 
+      - run: pnpm exec turbo build --filter www^...
       - run: pnpm exec turbo build --filter www
       - run: pnpm exec turbo build --filter api
       - run: docker compose up --wait
