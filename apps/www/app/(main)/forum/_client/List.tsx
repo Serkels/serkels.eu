@@ -115,18 +115,23 @@ export function Footer() {
 
   return (
     <footer className="mt-4">
-      <div className="grid grid-cols-6 md:grid-cols-8">
-        <Button
-          intent="light"
-          className="col-start-1"
-          onPress={() => set_awnser_outlet({ state: "idle" })}
-        >
-          <ResponseCount />
-        </Button>
-        {status === "authenticated" ? <ToggleOutlet /> : <SignUpToAnswer />}
-        <Share_Button href={href}>
-          <Share className="size-5" />
-        </Share_Button>
+      <div className="grid grid-cols-6 ">
+        <div className="col-span-2 text-left">
+          <Button
+            intent="light"
+            onPress={() => set_awnser_outlet({ state: "idle" })}
+          >
+            <ResponseCount />
+          </Button>
+        </div>
+        <div className="col-span-2 text-center">
+          {status === "authenticated" ? <ToggleOutlet /> : <SignUpToAnswer />}
+        </div>
+        <div className="col-span-2 text-right">
+          <Share_Button href={href}>
+            <Share className="size-5" />
+          </Share_Button>
+        </div>
       </div>
     </footer>
   );

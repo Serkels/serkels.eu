@@ -5,7 +5,7 @@ import { card } from "@1.ui/react/card/atom";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { useSession } from "next-auth/react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { select_exchange_message } from "./select_exchange_message";
 import type { Notification } from "./type";
@@ -17,6 +17,7 @@ export function ExchangeCompletedMessage({
 }: {
   notification: Notification;
 }) {
+  const route = useRouter();
   const session = useSession();
   const utils = TRPC_React.useUtils();
   if (!session.data) return null;
@@ -43,16 +44,13 @@ export function ExchangeCompletedMessage({
   const mark_as_read = useCallback(async () => {
     await mark_as_read_mut.mutate({ notification_id: id });
     await utils.notification.count_unread.invalidate();
+    await route.push(`/@~/history/?since=${exchange_id}`);
   }, [id, mark_as_read_mut]);
 
   //
 
   return (
-    <Link
-      id={id}
-      href={`/@~/history/?since=${exchange_id}`}
-      onClick={mark_as_read}
-    >
+    <div id={id} onClick={mark_as_read}>
       <div
         className={base({ className: read_at ? "bg-transparent" : "bg-white" })}
       >
@@ -76,6 +74,6 @@ export function ExchangeCompletedMessage({
           )}
         </div>
       </div>
-    </Link>
+    </div>
   );
 }

@@ -13,7 +13,7 @@ export async function generateMetadata(
   _: never,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const title = `Abonnés :: ${(await parent).title?.absolute}`;
+  const title = `Ajouté par :: ${(await parent).title?.absolute}`;
 
   return {
     title,
@@ -34,7 +34,7 @@ export default async function Page({ params }: { params: CodeParms }) {
 
   return (
     <main className={column_screen({ className: "bg-white text-black" })}>
-      <h6 className="mt-10 pl-2 text-2xl font-bold">Liste d'abonnés : </h6>
+      <h6 className="mt-10 pl-2 text-2xl font-bold">Ajouté par : </h6>
       <List />
     </main>
   );

@@ -30,10 +30,10 @@ export function EmptyList() {
         opacity-50
       "
     >
-      <p>Pas de résultats</p>
+      <p>Aucun utilisateur ne fait partie de vos cercles</p>
       <p>
-        Ajoutez des profils à votre liste de contact afin de pouvoir leur
-        envoyer des messages
+        Ajoutez des profils à vos cercles afin de pouvoir leur envoyer des
+        messages
       </p>
     </section>
   );
