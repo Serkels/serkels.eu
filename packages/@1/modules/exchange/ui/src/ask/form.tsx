@@ -29,7 +29,7 @@ export function Ask_Form({ children }: PropsWithChildren) {
   } = use_ask_form();
 
   return (
-    <>
+    <form className="space-y-6" onSubmit={handleSubmit(on_submit)}>
       <div className="flex flex-row">
         <Ask_Form.AvatarFigure.Renderer childs={children}>
           ...
@@ -56,22 +56,20 @@ export function Ask_Form({ children }: PropsWithChildren) {
         </time>
       </div>
 
-      <form onSubmit={handleSubmit(on_submit)}>
-        <textarea
-          {...register("message")}
-          className={input()}
-          disabled={isSubmitting}
-          rows={9}
-        ></textarea>
-        <Button
-          type="submit"
-          isDisabled={isSubmitting}
-          className="mx-auto flex space-x-3"
-        >
-          <span>Envoyer</span> <PaperPlane className="size-4" />
-        </Button>
-      </form>
-    </>
+      <textarea
+        {...register("message")}
+        className={input()}
+        disabled={isSubmitting}
+        rows={9}
+      ></textarea>
+      <Button
+        type="submit"
+        isDisabled={isSubmitting}
+        className="mx-auto flex space-x-3"
+      >
+        <span>Envoyer</span> <PaperPlane className="size-4" />
+      </Button>
+    </form>
   );
 }
 
