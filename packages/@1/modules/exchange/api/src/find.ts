@@ -115,7 +115,7 @@ function profile_filter(
       (): Prisma.ExchangeWhereInput => ({ expiry_date: { not: null } }),
     )
     .with(
-      Exchange_Filter.Enum.MY_FOLLOWS,
+      Exchange_Filter.Enum.MY_CIRCLES,
       (): Prisma.ExchangeWhereInput => ({
         owner: { profile: { followed_by: { some: { id: profile_id } } } },
       }),
