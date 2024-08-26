@@ -17,11 +17,14 @@ import { toast } from "react-toastify";
 import { tv } from "tailwind-variants";
 import { P, match } from "ts-pattern";
 
-export function Item({ opportunity }: { opportunity: Opportunity }) {
+//
+
+export function Card({ opportunity }: { opportunity: Opportunity }) {
   const { data: session } = useSession();
   const { slug, id } = opportunity;
   const is_student = session?.profile.role === PROFILE_ROLES.Enum.STUDENT;
   const href = `/opportunities/${slug}?category=${opportunity.category.slug}`;
+
   return (
     <Link href={href}>
       <Opoortunity_Card opportunity={opportunity}>
@@ -44,7 +47,7 @@ export function Item({ opportunity }: { opportunity: Opportunity }) {
   );
 }
 
-export function BookmarkItem_Query(props: BookmarkButton_Props) {
+function BookmarkItem_Query(props: BookmarkButton_Props) {
   const { target_id, type } = props;
   const query = TRPC_React.bookmarks.check.useQuery({ target_id, type });
 
@@ -65,6 +68,7 @@ function BookmarkItem_Toggle_Mutation(props: BookmarkButton_Props) {
   const toggle = TRPC_React.bookmarks.toggle.useMutation();
   const utils = TRPC_React.useUtils();
   const { base, icon } = style({ ...variants });
+
   return (
     <button
       className={base({ className, intent: "light" })}
@@ -87,6 +91,7 @@ function BookmarkItem_Toggle_Mutation(props: BookmarkButton_Props) {
     </button>
   );
 }
+
 const style = tv({
   extend: button,
   base: "size-5",

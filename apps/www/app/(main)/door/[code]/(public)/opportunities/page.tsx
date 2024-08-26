@@ -1,8 +1,8 @@
 //
 
-import { Item } from ":app/(main)/opportunities/_client/Item";
 import { code_to_profile_id, type CodeParms } from ":pipes/code";
 import { TRPC_SSR } from ":trpc/server";
+import { Card } from ":widgets/opportunities/card";
 import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound, redirect } from "next/navigation";
@@ -49,7 +49,7 @@ export default async function Page({ params }: { params: CodeParms }) {
       "
     >
       {opportunities.map((data) => (
-        <Item key={data.id} opportunity={data} />
+        <Card key={data.id} opportunity={data} />
       ))}
     </main>
   );

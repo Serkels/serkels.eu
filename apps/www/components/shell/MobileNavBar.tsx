@@ -1,6 +1,6 @@
 "use client";
 
-import { Binoculars, Book, Exchange, MessageGroup } from "@1.ui/react/icons";
+import { Binoculars, Exchange, MessageGroup } from "@1.ui/react/icons";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -18,7 +18,7 @@ export function MobileNavBar({ className }: ComponentPropsWithoutRef<"nav">) {
 
   return (
     <nav className={base({ className })}>
-      <ul className="grid h-full grid-cols-4 justify-between">
+      <ul className="grid h-full grid-cols-3 justify-between">
         <li>
           <Link
             className={link({
@@ -51,16 +51,6 @@ export function MobileNavBar({ className }: ComponentPropsWithoutRef<"nav">) {
           >
             <NavItem Icon={MessageGroup} isActive={pathname.includes("/forum")}>
               Discussions
-            </NavItem>
-          </Link>
-        </li>
-        <li>
-          <Link
-            className={link({ is_active: pathname.includes("/guide") })}
-            href="/guide"
-          >
-            <NavItem Icon={Book} isActive={pathname.includes("/guide")}>
-              Guide D'étudiant
             </NavItem>
           </Link>
         </li>

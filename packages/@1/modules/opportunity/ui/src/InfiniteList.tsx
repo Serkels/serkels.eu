@@ -1,6 +1,7 @@
 //
 
 import type { Opportunity } from "@1.modules/opportunity.domain";
+import { flatten_pages_are_empty } from "@1.ui/react/async";
 import { Button } from "@1.ui/react/button";
 import { Spinner } from "@1.ui/react/spinner";
 import type { UseInfiniteQueryResult } from "@tanstack/react-query";
@@ -25,9 +26,7 @@ export function Opportunity_InfiniteList({
     .with(
       {
         status: "success",
-        data: P.when(
-          (list) => list.pages.map((page) => page.data).flat().length === 0,
-        ),
+        data: P.when(flatten_pages_are_empty),
       },
       () => <EmptyList />,
     )
@@ -84,7 +83,18 @@ function Loading() {
 //
 
 const opportunity_grid = tv({
-  base: `grid grid-flow-row grid-cols-1 gap-8 px-4 sm:grid-cols-2 sm:px-0 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4`,
+  base: `
+    grid
+    grid-flow-row
+    grid-cols-1
+    gap-8
+    px-4
+    sm:grid-cols-2
+    sm:px-0
+    md:grid-cols-2
+    lg:grid-cols-3
+    xl:grid-cols-4
+  `,
   slots: {
     item: "",
   },
