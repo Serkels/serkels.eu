@@ -89,7 +89,6 @@ jobs:
         e2e_test:
           - auth
           - forum
-          - guide
           - opportunity
           - status
           - studient

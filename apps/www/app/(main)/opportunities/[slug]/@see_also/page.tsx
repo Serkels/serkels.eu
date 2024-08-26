@@ -1,7 +1,6 @@
 //
 
-import { TRPC_SSR } from ":trpc/server";
-import { ErrorOccur } from "@1.ui/react/error";
+import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
 import { SeeAlso_Provider } from "./context";
 import Page_Client from "./page.client";
 
@@ -10,20 +9,27 @@ import Page_Client from "./page.client";
 export default async function Page({ params }: { params: { slug: string } }) {
   const { slug } = params;
 
-  try {
-    const opportunity = await TRPC_SSR.opportunity.by_slug.fetch(slug);
+  const opportunity = await TRPC_SSR.opportunity.by_slug.fetch(slug);
+  const {
+    id,
+    category: { slug: category },
+  } = opportunity;
 
-    const {
-      id,
-      category: { slug: category },
-    } = opportunity;
+  await Promise.all([
+    TRPC_SSR.opportunity.find.public.prefetchInfinite({
+      category,
+      limit: 5,
+    }),
+    TRPC_SSR.opportunity.find.public.prefetchInfinite({
+      limit: 5,
+    }),
+  ]);
 
-    return (
+  return (
+    <TRPC_Hydrate>
       <SeeAlso_Provider category={category} exclude_ids={[id]}>
         <Page_Client />
       </SeeAlso_Provider>
-    );
-  } catch (error) {
-    return <ErrorOccur error={error as Error} />;
-  }
+    </TRPC_Hydrate>
+  );
 }

@@ -453,6 +453,7 @@ async function categories() {
       { name: "Cours de langues" },
       { name: "Notes de cours" },
       { name: "Soutien académique​" },
+      { name: "Objets" },
     ]
       .reverse()
       .map((draft) => ({ ...draft, context: CategoryContext.EXCHANGE })),

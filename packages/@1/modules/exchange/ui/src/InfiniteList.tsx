@@ -1,6 +1,7 @@
 //
 
 import type { Exchange } from "@1.modules/exchange.domain";
+import { flatten_pages_are_empty } from "@1.ui/react/async";
 import { Button } from "@1.ui/react/button";
 import { Spinner } from "@1.ui/react/spinner";
 import type { UseInfiniteQueryResult } from "@tanstack/react-query";
@@ -21,9 +22,7 @@ export function Exchange_InfiniteList({
     .with(
       {
         status: "success",
-        data: P.when(
-          (list) => list.pages.map((page) => page.data).flat().length === 0,
-        ),
+        data: P.when(flatten_pages_are_empty),
       },
       () => <EmptyList />,
     )

@@ -37,7 +37,7 @@ export function Thread_Item({
             ${last_seen_date ? `last seen ~  ${last_seen_date.toUTCString()}` : ""}
             `}
           >
-            {format(last_update, "Pp", { locale: fr })}
+            {format(last_update, "P", { locale: fr })}
           </time>
         </Thread_Item.Time.Renderer>
       </header>
