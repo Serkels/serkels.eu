@@ -17,11 +17,11 @@ export function Exchanges_Filter() {
   const { close } = useContext(context);
 
   const filters = [
+    { name: "Mes cercles", slug: Exchange_Filter.Enum.MY_CIRCLES },
     { name: "Sans échange", slug: Exchange_Filter.Enum.WITHOUT_RETURN },
     { name: "Contre un échange", slug: Exchange_Filter.Enum.WITH_RETURN },
     { name: "En ligne", slug: Exchange_Filter.Enum.ONLINE },
     { name: "Sur place", slug: Exchange_Filter.Enum.ON_SITE },
-    { name: "Mes abonnements", slug: Exchange_Filter.Enum.MY_FOLLOWS },
     { name: "Date flexible", slug: Exchange_Filter.Enum.DATE_FLEXIBLE },
     { name: "Date limite ", slug: Exchange_Filter.Enum.DATE_LIMITED },
     { name: "Tout", slug: Exchange_Filter.Enum.ALL },

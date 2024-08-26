@@ -25,7 +25,7 @@ export default function Follow({ profile_id }: { profile_id: string }) {
       utils.profile.me.follow.find.invalidate(profile_id),
       utils.profile.by_id.fetch(profile_id),
       utils.exchanges.find.private.invalidate({
-        filter: Exchange_Filter.Enum.MY_FOLLOWS,
+        filter: Exchange_Filter.Enum.MY_CIRCLES,
       }),
     ]);
     toggle_follow.reset();

@@ -55,7 +55,7 @@ export const Exchange_Filter = z.enum([
   "ALL",
   "DATE_FLEXIBLE",
   "DATE_LIMITED",
-  "MY_FOLLOWS",
+  "MY_CIRCLES",
   "ON_SITE",
   "ONLINE",
   "WITH_RETURN",
