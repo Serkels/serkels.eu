@@ -15,18 +15,32 @@ type FindOpportunity = RouterOutput["opportunity"]["find"]["public"];
 
 //
 
-export default function AsyncListInfinite() {
+export default function AsyncListInfinite(props: { category?: string }) {
   const search_params = useSearchParams();
-  const category = search_params.get("category") ?? undefined;
+  const category = props.category ?? search_params.get("category") ?? undefined;
 
   const query_info = TRPC_React.opportunity.find.public.useInfiniteQuery(
-    {
-      category,
-      limit: 5,
-    },
-    {
-      getNextPageParam: (lastPage) => lastPage.nextCursor,
-    },
+    { category, limit: 5 },
+    { getNextPageParam: (lastPage) => lastPage.nextCursor },
+  );
+
+  return match(query_info)
+    .with({ status: "error", error: P.select() }, (error) => {
+      throw error;
+    })
+    .with({ status: "loading" }, () => {
+      return <Loading_Placeholder />;
+    })
+    .with({ status: "success" }, (success_info) => (
+      <List query_info={success_info} />
+    ))
+    .exhaustive();
+}
+
+function UncategoriesList() {
+  const query_info = TRPC_React.opportunity.find.public.useInfiniteQuery(
+    { limit: 5 },
+    { getNextPageParam: (lastPage) => lastPage.nextCursor },
   );
 
   return match(query_info)
@@ -53,6 +67,10 @@ function List({
     .map((page) => page.data)
     .reverse()
     .flat();
+
+  if (flatten_pages.length === 0) {
+    return <UncategoriesList />;
+  }
 
   return (
     <>
