@@ -29,10 +29,6 @@ jobs:
           cache: pnpm
           node-version-file: package.json
       - run: docker compose up --build --detach
-      - uses: actions/setup-node@v4
-        with:
-          cache: pnpm
-          node-version: latest
 
       - name: "🔺️  Cache"
         uses: ./.github/actions/cache
