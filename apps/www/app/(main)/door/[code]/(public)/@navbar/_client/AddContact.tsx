@@ -38,12 +38,12 @@ export default function AddContact({ profile_id }: { profile_id: string }) {
         {find_contact.data ? (
           <>
             <Trash className="w-4" />
-            <span className="w-full">Supprimer de ma liste de contact</span>
+            <span className="w-full">Supprimer de mes cercles</span>
           </>
         ) : (
           <>
             <Plus className="w-4" />
-            <span className="w-full">Ajouter à ma liste de contact</span>
+            <span className="w-full">Ajouter à mes cercles</span>
           </>
         )}
       </ActionItem>

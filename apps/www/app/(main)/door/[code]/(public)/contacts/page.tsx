@@ -13,7 +13,7 @@ export async function generateMetadata(
   _: never,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const title = `Contacts :: ${(await parent).title?.absolute}`;
+  const title = `Cercles :: ${(await parent).title?.absolute}`;
 
   return {
     title,
@@ -34,9 +34,7 @@ export default async function Page({ params }: { params: CodeParms }) {
 
   return (
     <main className={column_screen({ className: "bg-white text-black" })}>
-      <h6 className="mt-10 pl-6 text-2xl font-bold md:pl-8">
-        Liste de contacts :{" "}
-      </h6>
+      <h6 className="mt-10 pl-6 text-2xl font-bold md:pl-8">Mes cercles : </h6>
       <Infinite_Contacts_List />
     </main>
   );

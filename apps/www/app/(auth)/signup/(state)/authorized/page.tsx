@@ -39,7 +39,7 @@ export default async function Page() {
       </h1>
       <p className="mx-auto mt-5 max-w-xl text-center">
         Votre adresse e-mail a été authentifiée avec succès. Vous allez être
-        rediriger vers <Link href="/exchange">les échanges</Link>.
+        rediriger vers les<Link href="/exchange">cercles d'échanges</Link>.
       </p>
     </main>
   );

@@ -12,8 +12,8 @@ Fonctionnalité: Consulter la biographie d'un étudiant
 
     Alors je vois dans le titre "About :: Serkels"
     * je vois "Biographie"
-    * je vois "Abonnés"
-    * je vois "Contacts"
+    * je vois "Ajouté par"
+    * je vois "Cercles"
     * je vois "👋"
     * je vois "Domaine d'étude"
     * je vois "Ville"
