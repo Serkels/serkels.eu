@@ -31,9 +31,7 @@ export function SeeAlso_Provider({
     </Page_Context.Provider>
   );
 }
+
 export function useSeeAlso() {
   return useContext(Page_Context);
 }
-export const _Page_Context = createContext({ query_see_also: {} } as {
-  query_see_also: RouterInput["opportunity"]["find"]["public"];
-});

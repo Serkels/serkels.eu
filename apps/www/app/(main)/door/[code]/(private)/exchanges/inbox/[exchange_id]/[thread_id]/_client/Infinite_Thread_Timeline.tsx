@@ -241,7 +241,7 @@ function Timeline_Message(props: Timeline_MessageProps) {
             dateTime={message.created_at.toUTCString()}
             title={message.created_at.toUTCString()}
           >
-            {format(message.created_at, "Pp", { locale: fr })}
+            {format(message.created_at, "P", { locale: fr })}
             <br />
           </time>
           <p className="whitespace-pre-line">{message.content}</p>

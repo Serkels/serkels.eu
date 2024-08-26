@@ -5,6 +5,7 @@ import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
 import { Exchange_Card } from ":widgets/exchanges/card";
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
+import { tv } from "tailwind-variants";
 
 //
 
@@ -28,9 +29,18 @@ export default async function Page({ params }: { params: CodeParms }) {
   const profile = await TRPC_SSR.profile.by_id.fetch(profile_id);
   const exchanges = await TRPC_SSR.exchanges.me.publications.fetch({});
 
+  const { base, empty } = main();
+  if (exchanges.length === 0) {
+    return (
+      <main className={base()}>
+        <div className={empty()}>Aucun échange trouvé</div>
+      </main>
+    );
+  }
+
   return (
     <TRPC_Hydrate>
-      <main className="mx-auto my-10 grid grid-cols-1 gap-y-5 px-4 md:max-w-4xl">
+      <main className={base()}>
         {exchanges.map((exchange) => (
           <Exchange_Card
             key={exchange.id}
@@ -42,3 +52,23 @@ export default async function Page({ params }: { params: CodeParms }) {
     </TRPC_Hydrate>
   );
 }
+
+const main = tv({
+  base: `
+    mx-auto
+    my-10
+    grid
+    grid-cols-1
+    gap-y-5
+    px-4
+    md:max-w-4xl
+  `,
+  slots: {
+    empty: `
+      my-20
+      text-center
+      text-2xl
+      font-bold
+    `,
+  },
+});

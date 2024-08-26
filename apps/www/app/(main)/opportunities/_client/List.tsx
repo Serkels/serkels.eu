@@ -1,6 +1,7 @@
 "use client";
 
 import { TRPC_React } from ":trpc/client";
+import { Card } from ":widgets/opportunities/card";
 import {
   Partner_Filter,
   type Opportunity,
@@ -11,7 +12,6 @@ import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { P, match } from "ts-pattern";
-import { Item } from "./Item";
 
 //
 
@@ -58,7 +58,7 @@ export default function List() {
 
   return (
     <Opportunity_InfiniteList info={info}>
-      {(data) => <Item opportunity={data} />}
+      {(data) => <Card opportunity={data} />}
     </Opportunity_InfiniteList>
   );
 }

@@ -1,5 +1,6 @@
 //
 
+import { flatten_pages_are_empty } from "@1.ui/react/async";
 import { Button } from "@1.ui/react/button";
 import type {
   InfiniteQueryObserverSuccessResult,
@@ -41,9 +42,7 @@ export function Thread_InfiniteList<T>({
     .with(
       {
         status: "success",
-        data: P.when(
-          (list) => list?.pages.map((page) => page.data).flat().length === 0,
-        ),
+        data: P.when(flatten_pages_are_empty),
       },
       () => <EmptyList />,
     )
