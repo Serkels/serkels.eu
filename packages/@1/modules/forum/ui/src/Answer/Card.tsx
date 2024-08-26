@@ -3,6 +3,7 @@
 import type { Answer } from "@1.modules/forum.domain";
 import { StudentAvatarMedia } from "@1.modules/profile.ui/avatar";
 import { Approved } from "@1.ui/react/icons";
+import { TimeInfo } from "@1.ui/react/time";
 import { type PropsWithChildren } from "react";
 import { createSlot } from "react-slotify";
 import { useQuestion } from "../QuestionCard/context";
@@ -27,6 +28,7 @@ export function Answer_Card<T extends Answer>(
           <Answer_Card.Avatar.Renderer childs={children}>
             <StudentAvatarMedia student={student} />
           </Answer_Card.Avatar.Renderer>
+          <TimeInfo timestamps={answer} />
         </header>
         <article className="my-3 ml-12 break-words">{content}</article>
         <Answer_Card.Footer.Renderer childs={children} />
