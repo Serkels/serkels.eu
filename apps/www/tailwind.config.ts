@@ -14,8 +14,9 @@ import { join, relative } from "node:path";
 
 const config = with_ui({
   content: [
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./widgets/**/*.{ts,tsx}",
     ...[
       bookmark_ui_root,
       exchange_ui_root,
