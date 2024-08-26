@@ -23,5 +23,8 @@ const message = tv({
       true: "ml-auto rounded-r-3xl bg-[#39B15417]",
       false: "rounded-r-3xl bg-[#F4F7F9]",
     },
+    is_confirmation: {
+      true: "relative px-10",
+    },
   },
 });

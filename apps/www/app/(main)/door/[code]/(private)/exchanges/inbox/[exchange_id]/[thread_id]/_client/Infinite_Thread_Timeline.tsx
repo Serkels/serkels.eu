@@ -184,6 +184,7 @@ function Timeline_Message(props: Timeline_MessageProps) {
                 is_first: index === 0,
                 is_last: index === last_index,
                 is_you: is_you,
+                is_confirmation: true,
               }}
             />
           </>
@@ -212,6 +213,7 @@ function Timeline_Message(props: Timeline_MessageProps) {
             is_first: index === 0,
             is_last: index === last_index,
             is_you: is_you,
+            is_confirmation: true,
           }}
         />
       ))
@@ -262,7 +264,23 @@ function Message_OKay(props: ComponentProps<typeof Message>) {
 
   return (
     <>
-      <Message {...props}>C'est OK pour moi, et pour toi ? ✅</Message>
+      <Message {...props}>
+        {is_organizer ? (
+          <img
+            className="absolute -left-4 top-0 pr-10"
+            alt="check"
+            src="/check.svg"
+          ></img>
+        ) : (
+          <img
+            className="absolute -right-4 top-0 pl-10"
+            alt="check"
+            src="/check.svg"
+          ></img>
+        )}
+        C'est OK pour moi, et pour toi ?
+      </Message>
+
       <div className={commun_message(props.variant)}>
         <p className="text-lg text-warning">
           <Image
@@ -292,7 +310,22 @@ function Message_MeToo(props: ComponentProps<typeof Message>) {
   const is_organizer = owner_profile_id === session?.profile.id;
   return (
     <>
-      <Message {...props}>✅ C'est OK pour moi aussi.</Message>
+      <Message {...props}>
+        C'est OK pour moi aussi.{" "}
+        {is_organizer ? (
+          <img
+            className="absolute -right-4 top-0 pl-10"
+            alt="check"
+            src="/check.svg"
+          ></img>
+        ) : (
+          <img
+            className="absolute -left-4 top-0 pr-10"
+            alt="check"
+            src="/check.svg"
+          ></img>
+        )}
+      </Message>
       <div className={commun_message(props.variant)}>
         <Congratulations />
         <p className="mx-auto max-w-72 text-base">
