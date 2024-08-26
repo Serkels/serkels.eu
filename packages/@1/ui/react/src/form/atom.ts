@@ -58,14 +58,13 @@ export const fieldset = tv({
   base: `
     flex
     justify-around
-    rounded-md
+    rounded-sm
     border
     border-Silver_Chalice
     bg-white
     p-4
     disabled:pointer-events-none
     disabled:opacity-50
-    md:flex-row
     md:items-center
     [&>label]:flex
     [&>label]:items-center
@@ -73,7 +72,7 @@ export const fieldset = tv({
   `,
   variants: {
     horizontal: {
-      true: "flex-col items-start gap-4 p-4",
+      true: "items-start gap-4 p-4",
     },
   },
 });
@@ -81,6 +80,7 @@ export const fieldset = tv({
 export const select = tv({
   base: `
     w-full
+    rounded-sm
     border
     border-Silver_Chalice
     bg-white

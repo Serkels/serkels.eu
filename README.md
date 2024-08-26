@@ -1,5 +1,11 @@
 # [Serkels](https://serkels.eu/)
 
+## Development
+
+- Maildev : http://localhost:1080/#/
+- WWW : http://localhost:3000
+- API : http://localhost:8080
+
 ## Deployments
 
 ### General deployments pattern

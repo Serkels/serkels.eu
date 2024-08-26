@@ -12,7 +12,7 @@ export function SignUpToAnswer() {
   const [shouldSignUp, setShouldSignUp] = useToggle(false);
   const [, reset] = useTimeoutEffect(() => setShouldSignUp(false), 6_666);
   return (
-    <div className="relative -ml-4">
+    <div className="relative">
       {shouldSignUp ? (
         <div className={popover()}>Connectez-vous pour répondre</div>
       ) : null}
@@ -28,12 +28,7 @@ export function ToggleOutlet() {
 
 export function ResponseButtons(props: ComponentProps<typeof Button>) {
   return (
-    <Button
-      state="ghost"
-      size="md"
-      className="col-span-3 col-start-3 px-0 md:col-span-2 md:col-start-4"
-      {...props}
-    >
+    <Button state="ghost" size="md" {...props}>
       Répondre
     </Button>
   );

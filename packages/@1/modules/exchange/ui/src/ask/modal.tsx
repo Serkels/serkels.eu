@@ -43,7 +43,7 @@ const modal = tv({
       min-w-[75vw]
       flex-col
       items-stretch
-      justify-between
+      justify-center
       rounded-2xl
       border
       bg-white

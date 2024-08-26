@@ -31,7 +31,7 @@ export function Exchange_Bookmark() {
   );
 
   if (!is_student) {
-    return <Bookmark className="size-5 opacity-50" />;
+    return <Bookmark className="size-6 opacity-50" />;
   }
 
   return match(query)
@@ -39,7 +39,7 @@ export function Exchange_Bookmark() {
       console.error(error);
       return null;
     })
-    .with({ status: "loading" }, () => <Spinner className="size-4" />)
+    .with({ status: "loading" }, () => <Spinner className="size-6" />)
     .with({ status: "success", data: P.select() }, (is_in_bookmarks) => (
       <BookmarkItem_Toggle_Mutation
         className="px-0"
@@ -78,15 +78,16 @@ function BookmarkItem_Toggle_Mutation(props: BookmarkButton_Props) {
     </button>
   );
 }
+
 const style = tv({
   extend: button,
-  base: "size-5",
+  base: "size-6",
   variants: {
     is_in_bookmarks: {
       true: { icon: "text-success" },
     },
   },
   slots: {
-    icon: "size-5 text-white",
+    icon: "size-6 text-white",
   },
 });
