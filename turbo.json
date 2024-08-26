@@ -16,10 +16,9 @@
     "NODE_ENV",
     "STALKER_TRANSPORT_URL",
     "STALKER_URL",
-    "TURBO_TEAM",
-    "TURBO_TOKEN"
+    "TURBO_*"
   ],
-  "tasks": {
+  "pipeline": {
     "@douglasduteil/nextauth...trpc.prisma#type-check": {
       "dependsOn": ["@1.infra/database#type-check"]
     },
