@@ -24,6 +24,7 @@ export const root_router = router({
   category: category_api_router,
   exchanges: exchange_api_router,
   forum: forum_api_router,
+  health: procedure.query(() => ({ status: "ok" })),
   inbox: inbox_api_router,
   opportunity: opportunity_api_router,
   partner: partner_api_router,
