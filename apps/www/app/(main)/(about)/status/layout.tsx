@@ -7,13 +7,15 @@ import { tv } from "tailwind-variants";
 
 export default function Layout({
   api,
+  bff,
   database,
   children,
   stream,
 }: {
   api: ReactNode;
-  database: ReactNode;
+  bff: ReactNode;
   children: ReactNode;
+  database: ReactNode;
   stream: ReactNode;
 }) {
   return (
@@ -23,6 +25,10 @@ export default function Layout({
         <li className={item()}>
           <span>Api Request</span>
           <span className="float-right">{api}</span>
+        </li>
+        <li className={item()}>
+          <span title="Backend for Frontend">BFF Request</span>
+          <span className="float-right">{bff}</span>
         </li>
         <li className={item()}>
           <span>Database</span>
