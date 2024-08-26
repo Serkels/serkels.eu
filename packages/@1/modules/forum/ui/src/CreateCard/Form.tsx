@@ -53,7 +53,7 @@ export function CreateQuestionForm({
           <div className="text-danger">{errors.title.message}</div>
         ) : null}
       </div>
-      <div className="flex justify-between">
+      <div className="flex items-center justify-between gap-4">
         <select
           {...register("category")}
           disabled={isSubmitting || isLoading}

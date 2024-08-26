@@ -36,7 +36,7 @@ export async function generateMetadata(
   _: never,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const title = `Forum StudHelp :: ${(await parent).title?.absolute}`;
+  const title = `Discussions :: ${(await parent).title?.absolute}`;
 
   return {
     title,
