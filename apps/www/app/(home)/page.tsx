@@ -76,7 +76,6 @@ async function Explore() {
         className={link({
           className: "text-secondary",
         })}
-        number="one"
       >
         Échanges
       </ExploreLink>
@@ -87,7 +86,6 @@ async function Explore() {
         className={link({
           className: "text-tertiary",
         })}
-        number="two"
       >
         Opportunités pros
       </ExploreLink>
@@ -98,7 +96,6 @@ async function Explore() {
         className={link({
           className: "text-quaternary",
         })}
-        number="three"
       >
         Forum StudHelp
       </ExploreLink>
@@ -110,18 +107,28 @@ const explore_grid_style = tv(
   {
     base: "py-4",
     slots: {
-      links:
-        "col-span-2 grid-cols-4 grid-rows-2 py-10 sm:col-span-full sm:grid-rows-1 md:py-5 xl:col-start-4",
-      link: "col-span-2 py-4 sm:col-span-full md:col-span-2",
+      links: `
+        col-span-2
+        grid-cols-4
+        py-10
+        sm:col-span-full
+        sm:grid-rows-1
+        md:py-5
+      `,
+      link: `
+        col-span-2
+        py-4
+        sm:col-span-full
+        md:col-span-2
+        md:first:col-start-2
+        xl:first:col-start-4
+      `,
     },
     variants: {
       size: {
         xs: { base: "gap-y-12" },
         md: { link: "my-12" },
         xl: { link: "my-12" },
-      },
-      is_protected: {
-        true: { link: "opacity-40" },
       },
     },
   },
@@ -157,14 +164,12 @@ function ExploreLink({
   description,
   href,
   Icon,
-  number,
 }: ComponentPropsWithoutRef<typeof Link> &
   PropsWithChildren<{
     Icon: StylableElementType;
     description: string | ReactNode;
-    number: "one" | "two" | "three" | undefined;
   }>) {
-  const { base, icon } = explore_link_style({ className, number });
+  const { base, icon } = explore_link_style({ className });
 
   return (
     <Link className={base({ className })} href={href}>
@@ -191,11 +196,6 @@ const explore_link_style = tv({
   variants: {
     icon: {
       book: "icon-[tt--book]",
-    },
-    number: {
-      one: "md:col-start-2 xl:col-start-4",
-      two: "xl:col-start-6",
-      three: "xl:col-start-8",
     },
   },
   slots: {
