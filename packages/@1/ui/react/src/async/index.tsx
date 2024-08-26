@@ -19,7 +19,7 @@ export function EmptyList() {
       className="
         flex
         h-1/3
-        min-h-80   
+        min-h-80
         flex-col
         items-center
         justify-center
@@ -30,11 +30,7 @@ export function EmptyList() {
         opacity-50
       "
     >
-      <p>Aucun utilisateur ne fait partie de vos cercles</p>
-      <p>
-        Ajoutez des profils à vos cercles afin de pouvoir leur envoyer des
-        messages
-      </p>
+      <p>Aucun échange</p>
     </section>
   );
 }
