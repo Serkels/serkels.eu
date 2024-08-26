@@ -278,38 +278,52 @@ function Return_Field({ categories }: { categories: Category[] }) {
   const has_return = Boolean(return_id);
 
   return (
-    <fieldset
-      className={fieldset({ horizontal: true })}
-      disabled={isSubmitting}
-    >
-      <label className="flex gap-2">
-        <input
-          className="peer"
-          checked={!has_return}
-          disabled={isSubmitting}
-          onChange={() => setValue("return_id", "")}
-          type="radio"
-        />
-        <span className="peer-checked:font-semibold">Sans échange</span>
-      </label>
-      <label className="flex gap-2">
-        <div className="flex gap-2">
-          <span
-            className={["w-max", has_return ? "font-semibold" : ""].join(" ")}
-          >
-            Contre un échange
-          </span>
-        </div>
-        <select {...register("return_id")} className={select()}>
-          <option hidden value="">
-            Dans quelle categorie ?
-          </option>
-          <OptionCategories categories={categories} />
-        </select>
-      </label>
-      {errors.return_id && (
-        <div className="text-danger">{errors.return_id.message}</div>
-      )}
-    </fieldset>
+    <>
+      <fieldset
+        className={fieldset({ horizontal: true })}
+        disabled={isSubmitting}
+      >
+        <label className="flex md:gap-2">
+          <input
+            className="peer"
+            checked={!has_return}
+            disabled={isSubmitting}
+            onChange={() => setValue("return_id", "")}
+            type="radio"
+          />
+          <span className="peer-checked:font-semibold">Sans échange</span>
+        </label>
+        <label className="flex md:gap-2">
+          <input
+            className="peer"
+            checked={has_return}
+            disabled={isSubmitting}
+            onChange={() => setValue("return_id", `${register("return_id")}`)}
+            type="radio"
+          />
+          <div className="flex gap-2">
+            <span
+              className={["w-max", has_return ? "font-semibold" : ""].join(" ")}
+            >
+              Contre un échange
+            </span>
+          </div>
+        </label>
+        {errors.return_id && (
+          <div className="text-danger">{errors.return_id.message}</div>
+        )}{" "}
+      </fieldset>
+      <select
+        {...register("return_id")}
+        disabled={!has_return}
+        className={select()}
+        required={has_return}
+      >
+        <option disabled selected value="">
+          Dans quelle categorie ?
+        </option>
+        <OptionCategories categories={categories} />
+      </select>
+    </>
   );
 }
