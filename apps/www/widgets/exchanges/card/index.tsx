@@ -129,28 +129,6 @@ function Idle() {
       </Card.Header.Left>
       <Card.Header.Right>
         <div className="flex flex-row items-center gap-4">
-          {is_yours ? (
-            <>
-              <Link
-                className={button({
-                  intent: "light",
-                  size: "sm",
-                  state: "ghost",
-                  className: "box-content h-4 py-2",
-                })}
-                href={
-                  alreadyPopulated ? "" : `/@~/exchanges/${exchange.id}/edit`
-                }
-                onClick={on_edit_click}
-              >
-                <Pen className="h-4" />
-              </Link>
-              {showInfoBox && (
-                <InfoBox message="Les échanges comprenant déjà des participants ne peuvent pas être édités" />
-              )}
-              <Exchange_Delete_Button />
-            </>
-          ) : null}
           <div className="hidden items-center justify-between text-[#707070] md:flex">
             <span className="whitespace-nowrap font-bold uppercase">
               {exchange.category.name}
@@ -185,6 +163,26 @@ function Idle() {
         <Exchange_Actions />
       </Card.Footer.Center>
       <Card.Footer.Right>
+        {is_yours ? (
+          <>
+            <Link
+              className={button({
+                intent: "light",
+                size: "sm",
+                state: "ghost",
+                className: "box-content h-4 py-2 text-white",
+              })}
+              href={alreadyPopulated ? "" : `/@~/exchanges/${exchange.id}/edit`}
+              onClick={on_edit_click}
+            >
+              <Pen className="h-4" />
+            </Link>
+            {showInfoBox && (
+              <InfoBox message="Les échanges comprenant déjà des participants ne peuvent pas être édités" />
+            )}
+            <Exchange_Delete_Button />
+          </>
+        ) : null}
         <Exchange_Share />
       </Card.Footer.Right>
     </Card_Idle>

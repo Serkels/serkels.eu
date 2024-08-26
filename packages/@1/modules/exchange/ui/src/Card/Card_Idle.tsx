@@ -5,7 +5,7 @@ import { type PropsWithChildren } from "react";
 import { Card } from "./Card";
 import { Publish_Date } from "./Date";
 import { InfoBar } from "./InfoBar";
-import { useExchange } from "./context";
+import { useExchange, useExchangeMeta } from "./context";
 import { exchange_card } from "./exchange_card";
 
 export function Card_Idle({ children }: PropsWithChildren) {
@@ -15,6 +15,7 @@ export function Card_Idle({ children }: PropsWithChildren) {
     type: exchange.type,
   });
   const { title, description } = exchange;
+  const { is_yours } = useExchangeMeta();
   return (
     <div id={exchange.id} className={base()}>
       <div className={body()}>
@@ -77,7 +78,13 @@ export function Card_Idle({ children }: PropsWithChildren) {
             ...
           </Card.Footer.Center.Renderer>
         </div>
-        <div className="col-start-6 justify-self-end">
+        <div
+          className={
+            is_yours
+              ? "col-start-6 columns-3 items-center gap-4 justify-self-end"
+              : "col-start-6 justify-self-end"
+          }
+        >
           <Card.Footer.Right.Renderer childs={children}>
             <Share className="size-5" />
           </Card.Footer.Right.Renderer>

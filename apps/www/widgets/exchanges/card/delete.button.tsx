@@ -29,7 +29,7 @@ export function Exchange_Delete_Button() {
       className="box-content h-4 py-2"
       onPress={() => set_outlet({ state: "should_delete" })}
     >
-      <Trash className="h-full" />
+      <Trash className="h-full text-white" />
     </Button>
   );
 }
