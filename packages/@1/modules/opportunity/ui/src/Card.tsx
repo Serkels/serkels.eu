@@ -14,7 +14,6 @@ export function Opoortunity_Card({
   opportunity,
   children,
 }: PropsWithChildren<{ opportunity: Opportunity }>) {
-  // return <>{JSON.stringify(props, null, 2)}</>;
   const { cover, expiry_date, title, owner, location, category } = opportunity;
   const { base, date } = opoortunity_card();
   return (

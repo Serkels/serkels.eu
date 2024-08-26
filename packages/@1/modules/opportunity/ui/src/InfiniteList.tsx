@@ -1,6 +1,7 @@
 //
 
 import type { Opportunity } from "@1.modules/opportunity.domain";
+import { flatten_pages_are_empty } from "@1.ui/react/async";
 import { Button } from "@1.ui/react/button";
 import { Spinner } from "@1.ui/react/spinner";
 import type { UseInfiniteQueryResult } from "@tanstack/react-query";
@@ -12,13 +13,11 @@ import { match, P } from "ts-pattern";
 export function Opportunity_InfiniteList({
   info,
   children,
-  isAside = false,
 }: {
   info: UseInfiniteQueryResult<{ data: Opportunity[] }>;
   children: (props: Opportunity) => React.ReactNode;
-  isAside?: boolean;
 }) {
-  const { base } = opportunity_grid(isAside);
+  const { base, item } = opportunity_grid();
   return match(info)
     .with({ status: "error", error: P.select() }, (error) => {
       throw error;
@@ -27,21 +26,19 @@ export function Opportunity_InfiniteList({
     .with(
       {
         status: "success",
-        data: P.when(
-          (list) => list.pages.map((page) => page.data).flat().length === 0,
-        ),
+        data: P.when(flatten_pages_are_empty),
       },
       () => <EmptyList />,
     )
     .with(
       { status: "success" },
       ({ data: { pages }, isFetchingNextPage, hasNextPage, fetchNextPage }) => (
-        <ul aria-label="List of opportunities" className={base}>
+        <ul aria-label="List of opportunities" className={base()}>
           {pages
             .map((page) => page.data)
             .flat()
             .map((data) => (
-              <li key={data.id} className="">
+              <li key={data.id} className={item()}>
                 {children(data)}
               </li>
             ))}
@@ -85,19 +82,20 @@ function Loading() {
 
 //
 
-const opportunity_grid = (isAside: boolean) =>
-  tv({
-    base: isAside
-      ? "flex flex-col gap-4"
-      : `grid grid-flow-row grid-cols-1 gap-8 px-4 sm:grid-cols-2 sm:px-0 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4`,
-
-    // variants: {
-    //   isAside: {
-    //     true: "flex flex-col",
-    //     false: "",
-    //   },
-    // },
-    // defaultVariants: {
-    //   isAside: false,
-    // },
-  });
+const opportunity_grid = tv({
+  base: `
+    grid
+    grid-flow-row
+    grid-cols-1
+    gap-8
+    px-4
+    sm:grid-cols-2
+    sm:px-0
+    md:grid-cols-2
+    lg:grid-cols-3
+    xl:grid-cols-4
+  `,
+  slots: {
+    item: "",
+  },
+});

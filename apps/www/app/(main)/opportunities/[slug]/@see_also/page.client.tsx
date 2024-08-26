@@ -1,9 +1,10 @@
 "use client";
+
 //
 
 import { TRPC_React } from ":trpc/client";
+import { Card } from ":widgets/opportunities/card";
 import { ErrorOccur } from "@1.ui/react/error";
-import { Item } from "../../_client/Item";
 import { useSeeAlso } from "./context";
 
 //
@@ -31,7 +32,7 @@ export default function Page_Client() {
 
         <div className="grid grid-cols-1 gap-8">
           {opportunities.map((data) => (
-            <Item key={data.id} opportunity={data} />
+            <Card key={data.id} opportunity={data} />
           ))}
         </div>
       </aside>
