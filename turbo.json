@@ -1,7 +1,14 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local"],
-  "globalEnv": ["CI", "NODE_ENV"],
+  "globalEnv": [
+    "API_URL",
+    "CI",
+    "MAINTENANCE",
+    "NODE_ENV",
+    "STALKER_TRANSPORT_URL",
+    "STALKER_URL"
+  ],
   "tasks": {
     "@douglasduteil/nextauth...trpc.prisma#type-check": {
       "dependsOn": ["@1.infra/database#type-check"]
