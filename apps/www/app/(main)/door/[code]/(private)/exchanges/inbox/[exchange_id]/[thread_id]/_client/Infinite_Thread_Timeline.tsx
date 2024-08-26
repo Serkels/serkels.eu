@@ -265,19 +265,15 @@ function Message_OKay(props: ComponentProps<typeof Message>) {
   return (
     <>
       <Message {...props}>
-        {is_organizer ? (
-          <img
-            className="absolute -left-4 top-0 pr-10"
-            alt="check"
-            src="/check.svg"
-          ></img>
-        ) : (
-          <img
-            className="absolute -right-4 top-0 pl-10"
-            alt="check"
-            src="/check.svg"
-          ></img>
-        )}
+        <img
+          className={
+            is_organizer
+              ? "absolute -left-4 top-0 pr-10"
+              : "absolute -right-4 top-0 pl-10"
+          }
+          alt="check"
+          src="/check.svg"
+        ></img>
         C'est OK pour moi, et pour toi ?
       </Message>
 
@@ -312,19 +308,15 @@ function Message_MeToo(props: ComponentProps<typeof Message>) {
     <>
       <Message {...props}>
         C'est OK pour moi aussi.{" "}
-        {is_organizer ? (
-          <img
-            className="absolute -right-4 top-0 pl-10"
-            alt="check"
-            src="/check.svg"
-          ></img>
-        ) : (
-          <img
-            className="absolute -left-4 top-0 pr-10"
-            alt="check"
-            src="/check.svg"
-          ></img>
-        )}
+        <img
+          className={
+            is_organizer
+              ? "absolute -right-4 top-0 pl-10"
+              : "absolute -left-4 top-0 pr-10"
+          }
+          alt="check"
+          src="/check.svg"
+        ></img>
       </Message>
       <div className={commun_message(props.variant)}>
         <Congratulations />
