@@ -26,6 +26,7 @@ export default function FilterForm({
       <Link
         className={button({
           active: filter_query === filter_params_schema.enum.IN_PROGRESS,
+          intent: "secondary",
         })}
         href={{ query: in_progress_params.toString() }}
       >
@@ -34,6 +35,7 @@ export default function FilterForm({
       <Link
         className={button({
           active: filter_query === filter_params_schema.enum.SUCCESS,
+          intent: "primary",
         })}
         href={{ query: successful_params.toString() }}
       >
@@ -64,18 +66,25 @@ function use_form_form() {
 }
 
 const search_form_classes = tv({
-  base: `grid grid-cols-2 gap-4`,
+  base: `flex gap-4`,
   slots: {
-    button: ui_button({
-      className: "whitespace-nowrap",
-      intent: "whity",
-      size: "lg",
-    }),
+    button: "flex-1 whitespace-nowrap",
   },
   variants: {
     active: {
       false: {
-        button: "font-normal opacity-75",
+        button: "font-normal opacity-50  hover:opacity-100",
+      },
+      true: {
+        button: "font-bold opacity-100 shadow-md",
+      },
+    },
+    intent: {
+      primary: {
+        button: ui_button({ intent: "primary", size: "lg" }),
+      },
+      secondary: {
+        button: ui_button({ intent: "secondary", size: "lg" }),
       },
     },
   },

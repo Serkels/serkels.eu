@@ -1,7 +1,7 @@
 //
 
-import { Item } from ":app/(main)/opportunities/_client/Item";
 import { TRPC_SSR } from ":trpc/server";
+import { Card } from ":widgets/opportunities/card";
 import type { Metadata, ResolvingMetadata } from "next";
 
 //
@@ -36,7 +36,7 @@ export default async function Page() {
       "
     >
       {opportunities.map((data) => (
-        <Item key={data.id} opportunity={data} />
+        <Card key={data.id} opportunity={data} />
       ))}
     </main>
   );

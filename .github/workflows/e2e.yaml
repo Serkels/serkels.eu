@@ -40,6 +40,15 @@ jobs:
       - run: pnpm install --frozen-lockfile --prefer-offline
       - run: pnpm exec cypress install
         working-directory: apps/e2e
+
+      - name: ⏳️ Wait for Build www
+        uses: lewagon/wait-on-check-action@v1.3.4
+        with:
+          ref: ${{ github.ref }}
+          check-name: Build www
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 10
+
       - run: pnpm run build
       - run: docker compose up --wait
       - run: pnpm --filter @1.infra/database exec prisma migrate deploy

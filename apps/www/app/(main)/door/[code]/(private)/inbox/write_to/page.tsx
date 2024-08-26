@@ -32,7 +32,9 @@ export default async function Page() {
       <main className={column_screen({ className: "bg-white text-black" })}>
         <div className="flex flex-row items-center gap-2 px-6">
           <BackButton href={"/@~/inbox"} />
-          <h6 className="my-10 pl-2 text-2xl font-bold">Écrire à</h6>
+          <h6 className="my-10 pl-2 text-2xl font-bold">
+            Écrire à mes cercles
+          </h6>
         </div>
         <Infinite_Contacts_List />
       </main>

@@ -25,7 +25,7 @@ export default async function Layout({
     <Grid>
       <AsideFilter
         className="col-span-2 sm:col-span-6 md:col-span-2 md:block lg:col-span-2 xl:col-span-3"
-        slot-title="Forum StudHelp"
+        slot-title="Discussions"
         subtitle="Trouvez les questions et les réponses posés par les étudiant.e.s"
       >
         <SearchForm />

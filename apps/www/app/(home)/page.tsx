@@ -97,7 +97,7 @@ async function Explore() {
           className: "text-quaternary",
         })}
       >
-        Forum StudHelp
+        Discussions
       </ExploreLink>
     </Grid>
   );
