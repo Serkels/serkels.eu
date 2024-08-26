@@ -36,7 +36,7 @@
     "@1.infra/email": "workspace:*",
     "@1.config/typescript": "workspace:*",
     "@prisma/client": "5.18.0",
-    "@types/node": "20.14.15",
+    "@types/node": "22.5.0",
     "typescript": "5.5.4"
   }
 }

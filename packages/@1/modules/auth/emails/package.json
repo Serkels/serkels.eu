@@ -25,23 +25,23 @@
     "type-check": "tsc --build"
   },
   "dependencies": {
-    "@react-email/body": "0.0.9",
-    "@react-email/container": "0.0.13",
-    "@react-email/head": "0.0.10",
-    "@react-email/heading": "0.0.13",
-    "@react-email/html": "0.0.9",
-    "@react-email/img": "0.0.9",
-    "@react-email/link": "0.0.9",
-    "@react-email/preview": "0.0.10",
-    "@react-email/text": "0.0.9",
-    "@types/react": "18.3.3",
+    "@react-email/body": "0.0.10",
+    "@react-email/container": "0.0.14",
+    "@react-email/head": "0.0.11",
+    "@react-email/heading": "0.0.14",
+    "@react-email/html": "0.0.10",
+    "@react-email/img": "0.0.10",
+    "@react-email/link": "0.0.10",
+    "@react-email/preview": "0.0.11",
+    "@react-email/text": "0.0.10",
+    "@types/react": "18.3.4",
     "react": "18.3.1"
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
-    "@types/node": "20.14.15",
+    "@types/node": "22.5.0",
     "pkgroll": "2.4.2",
-    "react-email": "2.1.6",
+    "react-email": "3.0.1",
     "typescript": "5.5.4"
   }
 }

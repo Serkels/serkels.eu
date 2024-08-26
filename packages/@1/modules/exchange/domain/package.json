@@ -24,7 +24,7 @@
     "@1.modules/category.domain": "workspace:*",
     "@1.modules/core": "workspace:*",
     "ts-pattern": "5.3.1",
-    "xstate": "5.17.1",
+    "xstate": "5.17.4",
     "zod": "3.23.8"
   },
   "devDependencies": {

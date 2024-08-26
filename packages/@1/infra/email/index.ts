@@ -56,8 +56,8 @@ export class Email_Sender {
     options: Omit<Mail.Options, "html" | "text">,
   ) {
     log("send_react_email", options);
-    const html = render(component);
-    const text = render(component, {
+    const html = await render(component);
+    const text = await render(component, {
       plainText: true,
     });
     return this.transporter.sendMail({
