@@ -41,14 +41,14 @@ function Create_Exchange({ categories }: { categories: Category[] }) {
   const router = useRouter();
 
   const on_submit: SubmitHandler<FormValues> = async (values) => {
-    await create.mutateAsync(form_to_dto(values));
+    const exchange = await create.mutateAsync(form_to_dto(values));
 
     await Promise.all([
       utils.exchanges.find.invalidate(),
       utils.exchanges.invalidate(),
     ]);
 
-    router.push(`/exchanges?q=${values.title}`);
+    router.push(`/exchanges/${exchange.id}`);
   };
   return (
     <FormProvider {...form}>

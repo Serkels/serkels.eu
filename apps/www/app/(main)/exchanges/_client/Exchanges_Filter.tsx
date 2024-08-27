@@ -5,16 +5,20 @@ import { context } from ":components/shell/AsideFilter.client";
 import { Exchange_Filter } from "@1.modules/exchange.domain";
 import { FilterRadioList } from "@1.ui/react/form/FilterRadioList";
 import { useSession } from "next-auth/react";
+import { usePathname, useRouter } from "next/navigation";
 import { useContext } from "react";
 
 //
 
 export function Exchanges_Filter() {
   const { data: session } = useSession();
-  if (!session) return null;
-
+  const pathname = usePathname() ?? "";
+  const router = useRouter();
+  const { query: category } = useSyncSearchQuery("category");
   const { query, setQuery } = useSyncSearchQuery("f");
   const { close } = useContext(context);
+
+  if (!session) return null;
 
   const filters = [
     { name: "Mes cercles", slug: Exchange_Filter.Enum.MY_CIRCLES },
@@ -27,13 +31,26 @@ export function Exchanges_Filter() {
     { name: "Tout", slug: Exchange_Filter.Enum.ALL },
   ];
 
+  //
+
+  const onChange =
+    pathname === "/exchanges"
+      ? (filter: string) => setQuery(filter === "" ? undefined : filter)
+      : (filter: string) => {
+          router.push(
+            `/exchanges?${new URLSearchParams({ f: filter, category: category ?? "" })}`,
+          );
+        };
+
+  //
+
   return (
     <div className="md:block" hidden={close}>
       <FilterRadioList
         active={query ?? ""}
         data={filters}
         name="filter"
-        onChange={setQuery}
+        onChange={onChange}
       />
     </div>
   );

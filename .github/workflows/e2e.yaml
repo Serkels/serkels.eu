@@ -78,6 +78,7 @@ jobs:
       matrix:
         e2e_test:
           - auth
+          - exchanges
           - forum
           - opportunity
           - status

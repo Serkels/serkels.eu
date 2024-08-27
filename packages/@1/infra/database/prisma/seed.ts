@@ -94,7 +94,38 @@ main()
 //
 
 async function student_yopmail() {
-  await student({ email: "douglas@yopmail.com", name: "Douglas" });
+  const { id } = await student({
+    email: "douglas@yopmail.com",
+    name: "Douglas",
+  });
+  await prisma.student.update({
+    data: {
+      proposed_exchanges: {
+        createMany: {
+          data: {
+            category_id: await prisma.category
+              .findFirstOrThrow({
+                where: {
+                  name: "Cours de langues",
+                  context: CategoryContext.EXCHANGE,
+                },
+              })
+              .then(({ id }) => id),
+            description: faker.lorem.paragraphs(),
+            is_active: true,
+            is_online: false,
+            location: "Paris",
+            places: 1,
+            return_id: null,
+            title: "Concert de jazz",
+            type: ExchangeType.PROPOSAL,
+          },
+        },
+      },
+    },
+    where: { id },
+  });
+
   await student({ email: "johan@yopmail.com", name: "Johan" });
   await student({ email: "dino@yopmail.com", name: "Dino" });
 }
