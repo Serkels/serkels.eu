@@ -1,13 +1,25 @@
 //
+"use client";
 
 import type { Category } from "@1.modules/category.domain";
 import { OptionCategories } from "@1.modules/category.ui/form/select";
 import { ID_Schema } from "@1.modules/core/domain";
+import type { Location } from "@1.modules/core/Location";
 import { Exchange_TypeSchema } from "@1.modules/exchange.domain";
 import { Button } from "@1.ui/react/button";
 import { fieldset, input, select } from "@1.ui/react/form/atom";
+import {
+  ComboBox,
+  Input,
+  Label,
+  ListBox,
+  ListBoxItem,
+  Popover,
+} from "react-aria-components";
 import { useFormContext } from "react-hook-form";
+import { tv } from "tailwind-variants";
 import { z } from "zod";
+import { TRPC_React } from "/home/ls/github/toctocorg/toctoc/apps/www/trpc/client";
 
 //
 
@@ -135,16 +147,54 @@ function Location_Field() {
     return null;
   }
 
+  const location = watch("location") || "";
+
+  const query_info = TRPC_React.locations.useQuery(
+    { location },
+    { staleTime: Infinity },
+  );
+
+  const data = query_info.data;
+
+  const item = tv({ base: `flex justify-between` });
+
   return (
     <label>
-      <span className="text-Silver_Chalice">Ville</span>
-
-      <input
+      {/* <span className="text-Silver_Chalice">Ville</span> */}
+      <ComboBox>
+        <Label className="text-Silver_Chalice">Ville</Label>
+        <div>
+          <Input
+            className={input()}
+            disabled={isSubmitting}
+            {...register("location")}
+            required
+          />
+        </div>
+        <Popover className="w-[--trigger-width] bg-white p-4 outline-none">
+          <ListBox>
+            {data?.map((location: Location) => (
+              <ListBoxItem
+                key={`${location.nom}-${location.departement.code}`}
+                id={location.nom}
+                textValue={location.nom}
+                className={item()}
+              >
+                {location.nom}
+                <span>
+                  {location.departement.nom}-{location.departement.code}
+                </span>
+              </ListBoxItem>
+            ))}
+          </ListBox>
+        </Popover>
+      </ComboBox>
+      {/* <input
         {...register("location")}
         className={input()}
         disabled={isSubmitting}
         required
-      />
+      /> */}
     </label>
   );
 }

@@ -38,6 +38,7 @@ export const root_router = router({
         boost: "population",
         limit: "5",
         nom,
+        fields: "departement",
       });
       const response = await fetch(
         `https://geo.api.gouv.fr/communes?${search_params}`,
