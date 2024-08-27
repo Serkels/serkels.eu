@@ -1,3 +1,5 @@
+//
+
 import { AvatarMedia } from "@1.ui/react/avatar";
 import { School, Share, Warning } from "@1.ui/react/icons";
 import { ActionItem, Menu } from "@1.ui/react/menu";
@@ -7,6 +9,8 @@ import { Publish_Date } from "./Date";
 import { InfoBar } from "./InfoBar";
 import { useExchange } from "./context";
 import { exchange_card } from "./exchange_card";
+
+//
 
 export function Card_Idle({ children }: PropsWithChildren) {
   const exchange = useExchange();
@@ -55,7 +59,7 @@ export function Card_Idle({ children }: PropsWithChildren) {
         <article>
           <h3 className="my-4 break-words text-2xl font-bold">
             <div className="float-right">
-              <ExchangeMenu exchange_id={exchange.id} exchange_title={title} />
+              <ExchangeMenu exchange_id={exchange.id} />
             </div>
 
             {title}
@@ -87,14 +91,8 @@ export function Card_Idle({ children }: PropsWithChildren) {
   );
 }
 
-export function ExchangeMenu({
-  exchange_id,
-  exchange_title,
-}: {
-  exchange_id: string;
-  exchange_title: string;
-}) {
-  const href = `/exchanges?${new URLSearchParams({ q: exchange_title })}${exchange_id}`;
+export function ExchangeMenu({ exchange_id }: { exchange_id: string }) {
+  const href = `/exchanges/${exchange_id}`;
 
   return (
     <Menu>

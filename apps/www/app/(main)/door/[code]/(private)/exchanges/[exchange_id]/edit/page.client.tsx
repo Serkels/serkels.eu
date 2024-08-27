@@ -67,7 +67,7 @@ function Mutate_Exchange({
       utils.exchanges.invalidate(),
     ]);
 
-    router.push(`/exchanges?q=${values.title}`);
+    router.push(`/exchanges/${exchange.id}`);
   };
   return (
     <FormProvider {...form}>
