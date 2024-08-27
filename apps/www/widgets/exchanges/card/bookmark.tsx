@@ -81,7 +81,7 @@ function BookmarkItem_Toggle_Mutation(props: BookmarkButton_Props) {
 
 const style = tv({
   extend: button,
-  base: "size-6",
+  base: "w-6",
   variants: {
     is_in_bookmarks: {
       true: { icon: "text-success" },
