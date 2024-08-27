@@ -285,21 +285,27 @@ function Return_Field({ categories }: { categories: Category[] }) {
       >
         <label className="flex md:gap-2">
           <input
+            {...register("return_id")}
             className="peer"
+            defaultChecked={!has_return}
             checked={!has_return}
             disabled={isSubmitting}
-            onChange={() => setValue("return_id", "")}
+            value=""
             type="radio"
+            name="return_id"
           />
           <span className="peer-checked:font-semibold">Sans échange</span>
         </label>
         <label className="flex md:gap-2">
           <input
+            {...register("return_id")}
             className="peer"
+            defaultChecked={has_return}
             checked={has_return}
             disabled={isSubmitting}
-            onChange={() => setValue("return_id", `${register("return_id")}`)}
+            onChange={() => setValue("return_id", "Dans quelle catégorie ?")}
             type="radio"
+            name="return_id"
           />
           <div className="flex gap-2">
             <span
@@ -315,11 +321,12 @@ function Return_Field({ categories }: { categories: Category[] }) {
       </fieldset>
       <select
         {...register("return_id")}
-        disabled={!has_return}
+        disabled={!has_return || isSubmitting}
+        hidden={!has_return}
         className={select()}
-        required={has_return}
+        required
       >
-        <option disabled selected value="">
+        <option value="" disabled selected>
           Dans quelle categorie ?
         </option>
         <OptionCategories categories={categories} />
