@@ -6,6 +6,7 @@ import { ID_Schema } from "@1.modules/core/domain";
 import { Exchange_TypeSchema } from "@1.modules/exchange.domain";
 import { Button } from "@1.ui/react/button";
 import { fieldset, input, select } from "@1.ui/react/form/atom";
+import { Warning } from "@1.ui/react/icons";
 import { useFormContext } from "react-hook-form";
 import { z } from "zod";
 
@@ -64,7 +65,11 @@ export function Exchange_EditForm({ categories }: { categories: Category[] }) {
       <Description_Field />
       <Places_Field />
       <Return_Field categories={categories} />
-
+      <div className="flex items-center justify-center gap-4 font-bold text-warning">
+        <Warning className="size-5" />
+        Attention: Les échanges ne peuvent plus être modifiés après
+        l'acceptation d'un.e participant.e
+      </div>
       <Button isDisabled={isSubmitting} type="submit">
         Publier
       </Button>
