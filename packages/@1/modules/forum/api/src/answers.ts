@@ -38,6 +38,28 @@ export const answers_api_router = router({
 
   //
 
+  disapprove: protected_answers_procedure
+    .input(z.object({ answer_id: z.string(), question_id: z.string() }))
+    .mutation(async ({ input, ctx: { prisma, payload } }) => {
+      const { question_id, answer_id: id } = input;
+      const {
+        profile: { id: profile_id },
+      } = payload;
+
+      return prisma.answer.update({
+        data: {
+          accepted_for: { disconnect: true }, // Déconnecte la réponse de la question
+          updated_at: new Date(),
+        },
+        where: {
+          id,
+          parent: { id: question_id, owner: { profile_id } }, // Vérifie que l'utilisateur est bien le propriétaire
+        },
+      });
+    }),
+
+  //
+
   by_id: procedure
     .input(z.string())
     .query(async ({ input: id, ctx: { prisma } }) => {
