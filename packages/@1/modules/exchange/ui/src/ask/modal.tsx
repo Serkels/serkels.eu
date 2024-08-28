@@ -50,6 +50,7 @@ const modal = tv({
       p-7
       text-black
       shadow-[10px_13px_24px_#00000033]
+      focus:outline-none
       sm:min-w-[50vw]
       sm:max-w-[75vw]
       md:min-w-[45vw]

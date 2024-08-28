@@ -12,7 +12,7 @@ export function LoginDialog({ children }: PropsWithChildren) {
     <Exchange_Ask_Modal>
       {children}
       <Exchange_Ask_Modal.Dialog>
-        <div className="flex flex-1 flex-col justify-center space-y-10">
+        <div className="flex flex-1 flex-col justify-center items-center space-y-10">
           <h1
             className={`
               mx-auto
@@ -25,7 +25,7 @@ export function LoginDialog({ children }: PropsWithChildren) {
             Connectez vous pour démarrer un échange
           </h1>
           <div className="mx-auto text-center text-2xl">🤝</div>
-          <Link className={button({ className: "w-full" })} href="/">
+          <Link className={button()} href="/">
             Se connecter
           </Link>
         </div>
