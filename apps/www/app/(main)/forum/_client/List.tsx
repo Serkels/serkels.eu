@@ -27,7 +27,8 @@ import { Avatar } from "@1.modules/profile.ui";
 import { StudentAvatarMedia } from "@1.modules/profile.ui/avatar";
 import { Button } from "@1.ui/react/button";
 import { ErrorOccur } from "@1.ui/react/error";
-import { Share } from "@1.ui/react/icons";
+import { Share, Trash } from "@1.ui/react/icons";
+import { ActionItem } from "@1.ui/react/menu";
 import { Spinner } from "@1.ui/react/spinner";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -85,6 +86,9 @@ function Item(props: Entity_Schema) {
               />
             </Link>
           </Question_Card.Header.Avatar>
+          <Question_Card.Header.ActionGroup.DeleteAction>
+            <Delete_Button />
+          </Question_Card.Header.ActionGroup.DeleteAction>
           <Question_Card.Approved_Response>
             <Query_Approved_Response />
           </Question_Card.Approved_Response>
@@ -106,6 +110,26 @@ function Item(props: Entity_Schema) {
   );
 }
 
+function Delete_Button() {
+  const utils = TRPC_React.useUtils();
+  const { mutateAsync } = TRPC_React.forum.question.delete.useMutation();
+  const session = useSession();
+  const question = useQuestion();
+  const is_owner = session.data?.profile.id === question.owner.profile.id;
+
+  async function deleteQuestion() {
+    await mutateAsync(question.id);
+    await utils.forum.question.find.invalidate();
+  }
+
+  if (is_owner) return null;
+  return (
+    <ActionItem onAction={deleteQuestion}>
+      <Trash />
+      <span>Supprimer la question</span>
+    </ActionItem>
+  );
+}
 export function Footer() {
   const question = useQuestion();
   const [, set_awnser_outlet] = useAwnsersOutletState();

@@ -1039,6 +1039,9 @@ importers:
 
   packages/@1/modules/forum/api:
     dependencies:
+      '@1.modules/core':
+        specifier: workspace:*
+        version: link:../../core
       '@1.modules/forum.domain':
         specifier: workspace:*
         version: link:../domain
