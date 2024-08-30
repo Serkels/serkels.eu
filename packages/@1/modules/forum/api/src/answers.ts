@@ -1,5 +1,6 @@
 //
 
+import { ID_Schema } from "@1.modules/core/domain";
 import { next_auth_procedure, procedure, router } from "@1.modules/trpc";
 import { NotificationType, Prisma } from "@prisma/client";
 import { z } from "zod";
@@ -36,6 +37,14 @@ export const answers_api_router = router({
       });
     }),
 
+  //
+  delete: next_auth_procedure
+    .input(ID_Schema)
+    .mutation(async ({ input: id, ctx: { prisma, payload } }) => {
+      return prisma.answer.delete({
+        where: { id, owner: { profile_id: payload.profile.id } },
+      });
+    }),
   //
 
   by_id: procedure
