@@ -12,7 +12,6 @@ import { useExchange } from "@1.modules/exchange.ui/context";
 import type { Message as Message_Type } from "@1.modules/inbox.domain";
 import { Message } from "@1.modules/inbox.ui/conversation/Message";
 import { Timeline } from "@1.modules/inbox.ui/conversation/Timeline";
-import { Exchange } from "@1.ui/react/icons";
 import {
   useDocumentVisibility,
   useTimeoutEffect,
@@ -170,7 +169,7 @@ function Timeline_Message(props: Timeline_MessageProps) {
   return messages.map((message, index) =>
     match(message)
       .with({ content: HANDSHAKE_COMPLETED }, () => (
-        <Congratulations key={message.id} />
+        <Exchange_Complete key={message.id} />
       ))
       .with(
         {
@@ -178,14 +177,17 @@ function Timeline_Message(props: Timeline_MessageProps) {
           content: HANDSHAKE_ACCEPETED,
         },
         () => (
-          <Message_OKay
-            key={message.id}
-            variant={{
-              is_first: index === 0,
-              is_last: index === last_index,
-              is_you: is_you,
-            }}
-          />
+          <>
+            <Message_OKay
+              key={message.id}
+              variant={{
+                is_first: index === 0,
+                is_last: index === last_index,
+                is_you: is_you,
+                is_confirmation: true,
+              }}
+            />
+          </>
         ),
       )
       .with(
@@ -204,19 +206,18 @@ function Timeline_Message(props: Timeline_MessageProps) {
           />
         ),
       )
-      .with(
-        { author: { id: user_profile_id }, content: HANDSHAKE_ACCEPETED },
-        () => (
-          <Message_MeToo
-            key={message.id}
-            variant={{
-              is_first: index === 0,
-              is_last: index === last_index,
-              is_you: is_you,
-            }}
-          />
-        ),
-      )
+      .with({ content: HANDSHAKE_ACCEPETED }, () => (
+        <Message_MeToo
+          key={message.id}
+          variant={{
+            is_first: index === 0,
+            is_last: index === last_index,
+            is_you: is_you,
+            is_confirmation: true,
+          }}
+        />
+      ))
+
       .with({ content: HANDSHAKE_DENIED }, () => (
         <Message_NotInterested
           key={message.id}
@@ -251,11 +252,33 @@ function Timeline_Message(props: Timeline_MessageProps) {
 }
 
 function Message_OKay(props: ComponentProps<typeof Message>) {
+  const { data: session } = useSession();
+
+  const {
+    owner: {
+      profile: { id: owner_profile_id },
+    },
+  } = useExchange();
+
+  const is_organizer = owner_profile_id === session?.profile.id;
+
   return (
     <>
-      <Message {...props}>C'est OK pour moi, et pour toi ? ✅</Message>
+      <Message {...props}>
+        <img
+          className={
+            is_organizer
+              ? "absolute -left-4 top-0 pr-10"
+              : "absolute -right-4 top-0 pl-10"
+          }
+          alt="check"
+          src="/check.svg"
+        ></img>
+        C'est OK pour moi, et pour toi ?
+      </Message>
+
       <div className={commun_message(props.variant)}>
-        <p className="text-xs">
+        <p className="text-lg text-warning">
           <Image
             alt="hourglass"
             className="mr-2 inline-block"
@@ -263,21 +286,46 @@ function Message_OKay(props: ComponentProps<typeof Message>) {
             src="/hourglass.svg"
             width={8}
           />
-          En attente de confirmation du participant
+          {is_organizer
+            ? "En attente de confirmation du participant"
+            : "En attente de votre confirmation"}
         </p>
       </div>
     </>
   );
 }
 function Message_MeToo(props: ComponentProps<typeof Message>) {
+  const { data: session } = useSession();
+
+  const {
+    owner: {
+      profile: { id: owner_profile_id },
+    },
+  } = useExchange();
+
+  const is_organizer = owner_profile_id === session?.profile.id;
   return (
     <>
-      <Message {...props}>✅ C'est OK pour moi aussi.</Message>
+      <Message {...props}>
+        C'est OK pour moi aussi.{" "}
+        <img
+          className={
+            is_organizer
+              ? "absolute -right-4 top-0 pl-10"
+              : "absolute -left-4 top-0 pr-10"
+          }
+          alt="check"
+          src="/check.svg"
+        ></img>
+      </Message>
       <div className={commun_message(props.variant)}>
-        <Exchange className="mx-auto size-11" primary_gradient />
+        <Congratulations />
         <p className="mx-auto max-w-72 text-base">
-          Vous allez recevoir une notification une fois que les places sont
-          completes
+          {is_organizer
+            ? `Ce participant à accepté l'échange ! Vous receverez une notification une fois que les places seront toutes
+          occupées`
+            : `L'échange avec l'organisateur à bien été accepté ! Vous receverez une notification une fois que les places seront toutes
+          occupées`}
         </p>
       </div>
     </>
@@ -294,8 +342,18 @@ function Message_NotInterested(props: ComponentProps<typeof Message>) {
 
 function Congratulations() {
   return (
-    <div className="rounded-sm py-8 text-center">
-      <h4 className="text-lg font-bold text-success">🎊 Félicitation !</h4>
+    <div className="rounded-sm py-4 text-center">
+      <h4 className="text-2xl font-semibold text-success">Félicitation !</h4>
+    </div>
+  );
+}
+
+function Exchange_Complete() {
+  return (
+    <div className="rounded-sm py-4 text-center">
+      <h4 className="text-2xl font-semibold text-success">
+        Cet échange est désormais complet !
+      </h4>
     </div>
   );
 }
