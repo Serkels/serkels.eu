@@ -217,7 +217,8 @@ function Approve_Mutation() {
   const { id: answer_id } = useAnswer();
   const utils = TRPC_React.useUtils();
   const do_approve = TRPC_React.forum.question.answers.approve.useMutation();
-  const submit = useCallback(async () => {
+  const disapprove = TRPC_React.forum.question.answers.disapprove.useMutation()
+  const submitApproval = useCallback(async () => {
     await do_approve.mutateAsync({
       answer_id,
       question_id,
@@ -230,17 +231,46 @@ function Approve_Mutation() {
       utils.forum.question.find.invalidate({}),
     ]);
   }, [question_id, do_approve, answer_id, accepted_answer?.id]);
-  if (accepted_answer?.id === answer_id) return null;
+
+  const submitDisapproval = useCallback(async () => {
+    await disapprove.mutateAsync({
+      answer_id,
+      question_id
+    });
+    
+    await Promise.all([
+      utils.forum.question.by_id.invalidate(question_id),
+      utils.forum.question.answers.by_id.invalidate(answer_id),
+      utils.forum.question.answers.by_id.invalidate(accepted_answer?.id),
+      utils.forum.question.find.invalidate({}),
+    ]);
+  }, [question_id, do_approve, answer_id, accepted_answer?.id]);
+
+
+  if (accepted_answer?.id === answer_id) return (
+    <div className="ml-10 mt-4 flex gap-4">
+      <Button
+        variant={{
+          intent: "danger",
+          state: "ghost",
+          size: "sm",
+        }}
+        onPress={submitDisapproval}
+      >
+        Désapprouver
+      </Button>
+    </div>
+  );
 
   return (
-    <div className="ml-12 flex justify-between">
+    <div className="ml-12 flex gap-4">
       <Button
         variant={{
           intent: accepted_answer?.id ? "light" : "primary",
           state: accepted_answer?.id ? "ghost" : "outline",
           size: "sm",
         }}
-        onPress={submit}
+        onPress={submitApproval}
       >
         Approuver
       </Button>
