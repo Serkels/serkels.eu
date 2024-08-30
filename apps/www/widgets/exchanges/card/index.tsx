@@ -95,25 +95,9 @@ function Deleting({ children }: PropsWithChildren) {
 
 function Idle() {
   const exchange = useExchange();
-  const alreadyPopulated = exchange.deals.length > 0;
 
   const { is_yours } = useExchangeMeta();
 
-  const [showInfoBox, setShowInfoBox] = useState(false);
-
-  const [, reset] = useTimeoutEffect(() => {
-    setShowInfoBox(false);
-  }, 1_000 * 5);
-
-  const on_edit_click = useCallback<MouseEventHandler<HTMLAnchorElement>>(
-    (event) => {
-      if (!alreadyPopulated) return;
-      event.preventDefault();
-      reset();
-      setShowInfoBox(true);
-    },
-    [alreadyPopulated],
-  );
   const { exchange_icon } = exchange_card({
     type: exchange.type,
   });
@@ -163,28 +147,56 @@ function Idle() {
         <Exchange_Actions />
       </Card.Footer.Center>
       <Card.Footer.Right>
-        {is_yours ? (
-          <>
-            <Link
-              className={button({
-                intent: "light",
-                size: "sm",
-                state: "ghost",
-                className: "box-content h-4 py-2 text-white",
-              })}
-              href={alreadyPopulated ? "" : `/@~/exchanges/${exchange.id}/edit`}
-              onClick={on_edit_click}
-            >
-              <Pen className="h-4" />
-            </Link>
-            {showInfoBox && (
-              <InfoBox message="Les échanges comprenant déjà des participants ne peuvent pas être édités" />
-            )}
-            <Exchange_Delete_Button />
-          </>
-        ) : null}
+        {is_yours ? <Edit_Buttons /> : null}
         <Exchange_Share />
       </Card.Footer.Right>
     </Card_Idle>
+  );
+}
+
+function Edit_Buttons() {
+  const exchange = useExchange();
+  const [showWarning, setShowWarning] = useState(false);
+
+  const alreadyPopulated = exchange.deals.length > 0;
+
+  const on_edit_click = useCallback<MouseEventHandler<HTMLAnchorElement>>(
+    (event) => {
+      if (!alreadyPopulated) return;
+      event.preventDefault();
+
+      setShowWarning(true);
+      setTimeout(() => {
+        setShowWarning(false);
+      }, 1_000 * 5);
+    },
+    [alreadyPopulated],
+  );
+
+  return (
+    <>
+      <Link
+        className={button({
+          intent: "light",
+          size: "sm",
+          state: "ghost",
+          className: "box-content h-4 py-2 text-white",
+        })}
+        href={alreadyPopulated ? "" : `/@~/exchanges/${exchange.id}/edit`}
+        onClick={on_edit_click}
+      >
+        <Pen className="h-4" />
+      </Link>
+      {showWarning && (
+        // FUTUR - JOHAN
+        // toast.warning(
+        //   "Les échanges comprenant déjà des participants ne peuvent pas être édités",
+        //   AppToastOptions,
+        // )
+
+        <InfoBox message="Les échanges comprenant déjà des participants ne peuvent pas être édités" />
+      )}
+      <Exchange_Delete_Button />
+    </>
   );
 }
