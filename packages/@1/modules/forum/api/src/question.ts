@@ -1,5 +1,6 @@
 //
 
+import { ID_Schema } from "@1.modules/core/domain";
 import { Forum_Filter } from "@1.modules/forum.domain";
 import { next_auth_procedure, procedure, router } from "@1.modules/trpc";
 import { Prisma } from "@prisma/client";
@@ -26,8 +27,16 @@ const question_api_router = router({
       });
     }),
 
+  delete: next_auth_procedure
+    .input(ID_Schema)
+    .mutation(async ({ input: id, ctx: { prisma, payload } }) => {
+      return prisma.question.delete({
+        where: { id, owner: { profile_id: payload.profile.id } },
+      });
+    }),
+
   by_id: procedure
-    .input(z.string())
+    .input(ID_Schema)
     .query(async ({ input: id, ctx: { prisma } }) => {
       return prisma.question.findUniqueOrThrow({
         where: { id },

@@ -27,7 +27,7 @@ export function Header({ children }: PropsWithChildren) {
       </Header.Avatar.Renderer>
       <div className="flex flex-col">
         <div className="self-end">
-          <ActionGroup />
+          <ActionGroup>{children}</ActionGroup>
         </div>
         <div className="flex items-start space-x-2">
           <StateIndicator />
@@ -38,8 +38,9 @@ export function Header({ children }: PropsWithChildren) {
   );
 }
 Header.Avatar = createSlot();
+Header.ActionGroup = ActionGroup;
 
-function ActionGroup() {
+function ActionGroup({ children }: PropsWithChildren) {
   const { id, title } = useQuestion();
   const href_searhparams = new URLSearchParams({ q: title });
   const href = `/forum?${href_searhparams}#${id}`;
@@ -52,9 +53,13 @@ function ActionGroup() {
       >
         <Warning className="h-4" /> <span>Signaler cette question</span>
       </ActionItem>
+      <ActionGroup.DeleteAction.Renderer
+        childs={children}
+      ></ActionGroup.DeleteAction.Renderer>
     </Menu>
   );
 }
+ActionGroup.DeleteAction = createSlot();
 
 const state_indicator = tv({
   base: "inline-block h-4",

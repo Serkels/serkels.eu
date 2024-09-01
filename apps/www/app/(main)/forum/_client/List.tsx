@@ -27,7 +27,8 @@ import { Avatar } from "@1.modules/profile.ui";
 import { StudentAvatarMedia } from "@1.modules/profile.ui/avatar";
 import { Button } from "@1.ui/react/button";
 import { ErrorOccur } from "@1.ui/react/error";
-import { Share } from "@1.ui/react/icons";
+import { Share, Trash } from "@1.ui/react/icons";
+import { ActionItem } from "@1.ui/react/menu";
 import { Spinner } from "@1.ui/react/spinner";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -85,6 +86,9 @@ function Item(props: Entity_Schema) {
               />
             </Link>
           </Question_Card.Header.Avatar>
+          <Question_Card.Header.ActionGroup.DeleteAction>
+            <Delete_Question_Button />
+          </Question_Card.Header.ActionGroup.DeleteAction>
           <Question_Card.Approved_Response>
             <Query_Approved_Response />
           </Question_Card.Approved_Response>
@@ -106,6 +110,48 @@ function Item(props: Entity_Schema) {
   );
 }
 
+function Delete_Question_Button() {
+  const utils = TRPC_React.useUtils();
+  const { mutateAsync } = TRPC_React.forum.question.delete.useMutation();
+  const session = useSession();
+  const question = useQuestion();
+  const is_owner = session.data?.profile.id === question.owner.profile.id;
+
+  async function deleteQuestion() {
+    await mutateAsync(question.id);
+    await utils.forum.question.find.invalidate();
+  }
+
+  if (!is_owner) return null;
+  return (
+    <ActionItem onAction={deleteQuestion}>
+      <Trash />
+      <span>Supprimer la question</span>
+    </ActionItem>
+  );
+}
+
+function Delete_Answer_Button() {
+  const utils = TRPC_React.useUtils();
+  const { mutateAsync } =
+    TRPC_React.forum.question.answers.delete.useMutation();
+  const session = useSession();
+  const answer = useAnswer();
+  const is_owner = session.data?.profile.id === answer.owner.profile.id;
+
+  async function deleteAnswer() {
+    await mutateAsync(answer.id);
+    await utils.forum.question.answers.find.invalidate();
+  }
+
+  if (!is_owner) return null;
+  return (
+    <ActionItem onAction={deleteAnswer}>
+      <Trash />
+      <span>Supprimer cette réponse</span>
+    </ActionItem>
+  );
+}
 export function Footer() {
   const question = useQuestion();
   const [, set_awnser_outlet] = useAwnsersOutletState();
@@ -204,6 +250,9 @@ function AnswerItem(initial: Omit<Answer, "accepted_for">) {
           />
         </Link>
       </Answer_Card.Avatar>
+      <Answer_Card.MenuAction.DeleteAction>
+        <Delete_Answer_Button />
+      </Answer_Card.MenuAction.DeleteAction>
       <Answer_Card.Footer>
         <Answer_Card.Indicator />
         {can_mutate ? <Approve_Mutation /> : null}
