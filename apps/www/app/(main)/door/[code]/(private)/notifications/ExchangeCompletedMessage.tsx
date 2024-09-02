@@ -69,9 +69,10 @@ export function ExchangeCompletedMessage({
             </>
           ) : (
             <>
-              L'échange <i>“{title}”</i> auquel vous participer est complète.
+              L'échange <i>“{title}”</i> auquel vous participez est désormais complet.
             </>
           )}
+          <>Bon échange et à bientôt !</>
         </div>
       </div>
     </div>
