@@ -8,6 +8,11 @@ export const exchange_card = tv({
   extend: card,
   base: "",
   slots: {
+    category: `
+    font-bold
+    uppercase
+    md:min-w-[100px]
+    `,
     header: "flex items-center justify-between md:grid md:grid-cols-3",
     exchange_icon: "mx-1 w-5",
     footer: `
@@ -27,7 +32,7 @@ export const exchange_card = tv({
       gap-1
       gap-y-2
       text-xs
-      text-[#707070]
+      md:text-base
       `,
   },
   variants: {

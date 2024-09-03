@@ -89,7 +89,7 @@ function Time({
 }
 
 const expiry_date_variant = tv({
-  base: "text-xs opacity-90",
+  base: "opacity-90",
   variants: {
     is_flexible: { true: "font-semibold text-success" },
     is_future: { true: "font-semibold text-lime-800" },

@@ -10,7 +10,7 @@ export function OnlineOrLocation(props: {
 }) {
   return (
     <a
-      className="cursor-pointer font-bold"
+      className="cursor-pointer font-bold text-[color:#707070]"
       href={match(props.is_online)
         .with(true, () => `/exchanges?f=ONLINE`)
         .with(false, () => `/exchanges?q=${props.location}`)

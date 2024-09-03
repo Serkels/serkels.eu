@@ -10,6 +10,6 @@ export const card = tv({
     body: "px-5 py-3",
     header: "mb-4",
     footer: "bg-black px-5 py-3 text-white",
-    category: "text-xs text-[#707070]",
+    category: "text-[#707070]",
   },
 });
