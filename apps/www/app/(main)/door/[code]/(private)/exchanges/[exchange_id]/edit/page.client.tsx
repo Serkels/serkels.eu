@@ -43,7 +43,6 @@ function Mutate_Exchange({
       expiry_date: exchange.expiry_date
         ? format(exchange.expiry_date, "yyyy-MM-dd")
         : undefined,
-      return_id: exchange.return_id ?? "",
     },
 
     resolver: zodResolver(form_zod_schema),

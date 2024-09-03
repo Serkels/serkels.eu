@@ -275,7 +275,7 @@ function Return_Field({ categories }: { categories: Category[] }) {
     watch,
   } = useFormContext<FormValues>();
   const return_id = watch("return_id");
-  const has_return = Boolean(return_id);
+  const has_return = return_id !== null;
 
   return (
     <>
@@ -285,27 +285,25 @@ function Return_Field({ categories }: { categories: Category[] }) {
       >
         <label className="flex md:gap-2">
           <input
-            {...register("return_id")}
             className="peer"
             defaultChecked={!has_return}
-            checked={!has_return}
             disabled={isSubmitting}
-            value=""
+            onChange={() => setValue("return_id", null)}
+            value="off"
             type="radio"
-            name="return_id"
+            name="has_return"
           />
           <span className="peer-checked:font-semibold">Sans échange</span>
         </label>
         <label className="flex md:gap-2">
           <input
-            {...register("return_id")}
             className="peer"
             defaultChecked={has_return}
-            checked={has_return}
             disabled={isSubmitting}
-            onChange={() => setValue("return_id", "Dans quelle catégorie ?")}
+            onChange={() => setValue("return_id", "")}
             type="radio"
-            name="return_id"
+            value="on"
+            name="has_return"
           />
           <div className="flex gap-2">
             <span
@@ -326,7 +324,7 @@ function Return_Field({ categories }: { categories: Category[] }) {
         className={select()}
         required
       >
-        <option value="" disabled selected>
+        <option value="" disabled>
           Dans quelle categorie ?
         </option>
         <OptionCategories categories={categories} />
