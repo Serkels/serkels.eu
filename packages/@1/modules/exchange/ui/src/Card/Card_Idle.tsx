@@ -4,10 +4,11 @@ import { AvatarMedia } from "@1.ui/react/avatar";
 import { School, Share, Warning } from "@1.ui/react/icons";
 import { ActionItem, Menu } from "@1.ui/react/menu";
 import { type PropsWithChildren } from "react";
+import { tv } from "tailwind-variants";
 import { Card } from "./Card";
 import { Publish_Date } from "./Date";
 import { InfoBar } from "./InfoBar";
-import { useExchange } from "./context";
+import { useExchange, useExchangeMeta } from "./context";
 import { exchange_card } from "./exchange_card";
 
 //
@@ -19,6 +20,9 @@ export function Card_Idle({ children }: PropsWithChildren) {
     type: exchange.type,
   });
   const { title, description } = exchange;
+  const { is_yours } = useExchangeMeta();
+  const { withEdit, classic } = style();
+
   return (
     <div id={exchange.id} className={base()}>
       <div className={body()}>
@@ -81,7 +85,7 @@ export function Card_Idle({ children }: PropsWithChildren) {
             ...
           </Card.Footer.Center.Renderer>
         </div>
-        <div className="col-start-6 justify-self-end">
+        <div className={is_yours ? withEdit() : classic()}>
           <Card.Footer.Right.Renderer childs={children}>
             <Share className="size-5" />
           </Card.Footer.Right.Renderer>
@@ -105,3 +109,11 @@ export function ExchangeMenu({ exchange_id }: { exchange_id: string }) {
     </Menu>
   );
 }
+
+const style = tv({
+  base: "",
+  slots: {
+    withEdit: "col-start-6 columns-3 items-center gap-4 justify-self-end",
+    classic: "col-start-6 justify-self-end",
+  },
+});
