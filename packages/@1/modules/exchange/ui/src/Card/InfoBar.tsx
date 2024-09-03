@@ -14,10 +14,9 @@ export function InfoBar() {
 
   return (
     <div className={info_bar()}>
-      <div className="flex w-fit flex-col gap-2 md:inline-flex md:flex-row">
+      <div className="flex w-fit flex-col gap-2 md:inline-flex md:flex-row md:items-center">
         <span
           className={category({
-            className: "font-bold uppercase md:min-w-[100px]",
             type: exchange.type,
           })}
         >
@@ -31,10 +30,10 @@ export function InfoBar() {
           location={exchange.location ?? ""}
         />
       </div>
-      <div className="flex  flex-col-reverse gap-2">
+      <div className="flex flex-col-reverse gap-2">
         <Exchange_Date />
 
-        <div className="flex w-full items-start justify-between md:hidden">
+        <div className="flex w-full items-center justify-between text-[color:#707070] md:hidden">
           <span className="whitespace-nowrap font-bold uppercase">
             {exchange.category.name}
           </span>
