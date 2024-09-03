@@ -24,7 +24,7 @@ const ConnectionPanel = dynamic(() => import("./ConnectionPanel"), {
 export default function HomeCarousel() {
   return (
     <Grid className="min-h-[45vh] flex-1 items-center">
-      <aside className="col-span-2 flex items-center sm:col-span-4 md:col-start-2 md:min-h-full xl:col-start-4">
+      <aside className="col-span-2 flex items-center px-16 sm:col-span-4 sm:px-0 md:col-start-2 md:min-h-full xl:col-start-4">
         <Carousel className="h-[18em] w-full" autoplay={true}>
           <article>
             <h1 className="mb-12 text-xl font-bold uppercase md:text-2xl">
@@ -48,7 +48,7 @@ export default function HomeCarousel() {
           </article>
         </Carousel>
       </aside>
-      <aside className="col-span-2 px-[25%] sm:col-span-2 sm:px-0">
+      <aside className="col-span-2 px-16 sm:col-span-2 sm:px-0">
         <ConnectionPanel />
       </aside>
     </Grid>
