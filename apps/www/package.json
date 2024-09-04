@@ -46,7 +46,7 @@
     "formik": "2.4.6",
     "framer-motion": "11.3.30",
     "imtool": "1.2.1",
-    "next": "14.2.6",
+    "next": "14.2.7",
     "next-auth": "4.24.7",
     "nextjs-google-analytics": "2.3.7",
     "nextjs-toploader": "1.6.12",
