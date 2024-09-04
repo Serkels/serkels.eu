@@ -1,8 +1,8 @@
 //
 
-import { TRPC_SSR } from ":trpc/server";
+import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
 import type { Metadata, ResolvingMetadata } from "next";
-import CreateOpportunityForm from "./_client/CreateOpportunityForm";
+import { Create_Opportunity_Island } from "./page.client";
 
 //
 
@@ -18,11 +18,13 @@ export async function generateMetadata(
 //
 
 export default async function Page() {
-  const categories = await TRPC_SSR.category.opportunity.fetch();
+  await TRPC_SSR.category.opportunity.prefetch();
 
   return (
-    <main className="mx-auto my-10 max-w-3xl px-4">
-      <CreateOpportunityForm categories={categories} />
-    </main>
+    <TRPC_Hydrate>
+      <main className="mx-auto my-10 max-w-3xl px-4">
+        <Create_Opportunity_Island />
+      </main>
+    </TRPC_Hydrate>
   );
 }

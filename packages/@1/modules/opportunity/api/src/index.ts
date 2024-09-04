@@ -9,7 +9,7 @@ import find_router from "./find";
 //
 
 const opportunity_api_router = router({
-  create,
+  create: create,
   delete: delete_router,
 
   by_id: next_auth_procedure
