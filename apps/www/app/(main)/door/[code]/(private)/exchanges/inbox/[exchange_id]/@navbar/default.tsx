@@ -36,12 +36,7 @@ export default async function DealNavbarPage({ params }: { params: Params }) {
               <h6 className="line-clamp-2 flex-1 text-xl font-bold">
                 {exchange.title}
               </h6>
-              <Link
-                href={{
-                  pathname: "/exchanges",
-                  query: { q: exchange.title },
-                }}
-              >
+              <Link href={`/exchanges/${exchange_id}`}>
                 Consulter l'échange
               </Link>
             </div>

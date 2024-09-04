@@ -1485,15 +1485,15 @@ importers:
       date-fns:
         specifier: 3.6.0
         version: 3.6.0
-      formik:
-        specifier: 2.4.6
-        version: 2.4.6(react@18.3.1)
       react:
         specifier: 18.3.1
         version: 18.3.1
       react-content-loader:
         specifier: 7.0.2
         version: 7.0.2(react@18.3.1)
+      react-hook-form:
+        specifier: 7.53.0
+        version: 7.53.0(react@18.3.1)
       react-slotify:
         specifier: 0.2.2
         version: 0.2.2(react@18.3.1)
