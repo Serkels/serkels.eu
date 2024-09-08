@@ -44,10 +44,11 @@ export const next_auth_procedure = procedure.use(
 export const next_auth_input_token = procedure
   .input(z.object({ token: z.string() }))
   .use(async ({ input, ctx, next }) => {
-    const { NEXTAUTH_SECRET: secret } = NEXTAUTH_TRPCENV.parse(process.env);
+    const { AUTH_SECRET: secret } = NEXTAUTH_TRPCENV.parse(process.env);
     try {
       const payload = (await decode({
         token: input.token,
+        salt: "",
         secret,
       })) as { profile: Profile };
 

@@ -1,8 +1,9 @@
 "use client";
 
 import { Grid } from "@1.ui/react/grid";
-import { Spinner } from "@1.ui/react/spinner";
+import { createHost, createSlot } from "create-slots";
 import dynamic from "next/dynamic";
+import type { PropsWithChildren } from "react";
 
 //
 
@@ -10,19 +11,11 @@ const Carousel = dynamic(() => import("@1.ui/react/carousel"), {
   ssr: false,
 });
 
-const ConnectionPanel = dynamic(() => import("./ConnectionPanel"), {
-  ssr: false,
-  loading: () => (
-    <section className="text-center">
-      <Spinner />
-    </section>
-  ),
-});
-
 //
+const Aside = createSlot("aside");
 
-export default function HomeCarousel() {
-  return (
+export default function HomeCarousel({ children }: PropsWithChildren) {
+  return createHost(children, (Slots) => (
     <Grid className="min-h-[45vh] flex-1 items-center">
       <aside className="col-span-2 flex items-center px-[5%] sm:col-span-4 sm:px-0 md:col-start-2 md:min-h-full xl:col-start-4">
         <Carousel className="h-[18em] w-full" autoplay={true}>
@@ -49,8 +42,10 @@ export default function HomeCarousel() {
         </Carousel>
       </aside>
       <aside className="col-span-2 px-[5%] sm:col-span-2 sm:px-0">
-        <ConnectionPanel />
+        {Slots.get(Aside)}
       </aside>
     </Grid>
-  );
+  ));
 }
+
+export const HomeCarousel__Aside = Aside;

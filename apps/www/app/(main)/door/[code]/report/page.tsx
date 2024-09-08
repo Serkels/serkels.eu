@@ -1,6 +1,6 @@
 //
 
-import { getServerSession } from "@1.modules/auth.next";
+import { auth } from "@1.modules/auth.next/auth";
 import type { Metadata, ResolvingMetadata } from "next";
 import { ReportForm, ReportForm_Provider } from "./page.client";
 
@@ -23,7 +23,7 @@ export async function generateMetadata(
 //
 
 export default async function Page() {
-  const session = await getServerSession();
+  const session = await auth();
   if (!session) return null;
   if (!session.user) return null;
 

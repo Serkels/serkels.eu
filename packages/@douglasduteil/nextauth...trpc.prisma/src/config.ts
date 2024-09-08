@@ -23,7 +23,7 @@ export type SEND_VERIFICATION_REQUEST_INPUT_SCHEMA = z.TypeOf<
 >;
 
 export const NEXTAUTH_TRPCENV = z.object({
-  NEXTAUTH_SECRET: z.string(),
+  AUTH_SECRET: z.string(),
 });
 export const NEXT_AUTH_STRATEGIES = z.union([
   z.literal("Everyone can login"),

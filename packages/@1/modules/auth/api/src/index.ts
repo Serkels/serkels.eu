@@ -21,7 +21,7 @@ import { z } from "zod";
 //
 
 export const ENV = z.object({
-  NEXTAUTH_SECRET: z.string(),
+  AUTH_SECRET: z.string(),
   JWT_EXPIRE_PERIOD: z.string().default("30d"),
   MAGIC_TOKEN_LENGHT: z.coerce.number().default(32),
   MAGIC_TOKEN_EXPIRE_PERIOD: z.coerce.number().default(1), // 1 day

@@ -21,12 +21,14 @@
     "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
+    "@1.modules/notification.domain": "workspace:*",
     "@prisma/client": "5.18.0",
-    "@1.modules/notification.domain": "workspace:*"
+    "bcryptjs": "2.4.3"
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
     "@faker-js/faker": "8.4.1",
+    "@types/bcryptjs": "2.4.6",
     "@types/node": "22.5.0",
     "date-fns": "3.6.0",
     "dedent": "1.5.3",

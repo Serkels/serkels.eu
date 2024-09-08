@@ -2,7 +2,7 @@
 
 import { Share_Button } from ":components/Share_Button";
 import { slug_to_opportunity, type Params } from ":pipes/opportunity_slug";
-import { getServerSession } from "@1.modules/auth.next";
+import { auth } from "@1.modules/auth.next/auth";
 import { Article, icon_link } from "@1.modules/opportunity.ui/Article";
 import { Share, Warning } from "@1.ui/react/icons";
 import { ActionItem, Menu } from "@1.ui/react/menu";
@@ -39,7 +39,7 @@ export async function generateMetadata(
 //
 
 export default async function Page({ params }: { params: Params }) {
-  const session = await getServerSession();
+  const session = await auth();
 
   try {
     const opportunity = await slug_to_opportunity(params);

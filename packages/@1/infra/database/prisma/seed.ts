@@ -13,6 +13,7 @@ import {
   type Deal,
   type Exchange,
 } from "@prisma/client";
+import bcrypt from "bcryptjs";
 import { isAfter } from "date-fns";
 import dedent from "dedent";
 import process from "node:process";
@@ -138,7 +139,7 @@ async function student({
   name: string;
 }) {
   const { image, name } = {
-    image: faker.image.avatar(),
+    image: faker.image.avatarGitHub(),
     name: studient_name,
   };
 
@@ -262,6 +263,7 @@ async function student({
               email: studient_email,
               image,
               name,
+              password: await bcrypt.hash(studient_email, 10),
             },
           },
         },
@@ -290,7 +292,7 @@ async function students() {
 //
 
 async function partner({ email, name }: { email: string; name: string }) {
-  const image = faker.image.avatar();
+  const image = faker.image.avatarGitHub();
 
   const opportunity_categories_id = (
     await prisma.category.findMany({
@@ -319,6 +321,7 @@ async function partner({ email, name }: { email: string; name: string }) {
               email,
               image,
               name,
+              password: await bcrypt.hash(email, 10),
             },
           },
         },
@@ -371,14 +374,15 @@ async function partners_yopmail() {
 
           > One does not simply implement, it teaches.
           `,
-          image: "https://avatars.githubusercontent.com/u/9634140?s=200&v=4",
+          image:
+            "https://avatarGitHubs.githubusercontent.com/u/9634140?s=200&v=4",
           name: "One Does University",
           role: ProfileRole.PARTNER,
           user: {
             create: {
               email: "onedoesuniversity@yopmail.com",
               image:
-                "https://avatars.githubusercontent.com/u/9634140?s=200&v=4",
+                "https://avatarGitHubs.githubusercontent.com/u/9634140?s=200&v=4",
               name: "One Does University",
             },
           },

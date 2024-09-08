@@ -4,7 +4,7 @@
   "env": {
     "CYPRESS_INSTALL_BINARY": { "value": "0" },
     "DO_NOT_TRACK": { "value": "1" },
-    "NEXTAUTH_SECRET": {
+    "AUTH_SECRET": {
       "description": "A secret key to talk with next-auth.",
       "generator": "secret"
     },

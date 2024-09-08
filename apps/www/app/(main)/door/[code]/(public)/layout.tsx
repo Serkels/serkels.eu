@@ -1,7 +1,7 @@
 //
 
 import { code_to_profile_id, type CodeParms } from ":pipes/code";
-import { getServerSession } from "@1.modules/auth.next";
+import { auth } from "@1.modules/auth.next/auth";
 import { AuthError } from "@1.modules/core/errors";
 import { notFound } from "next/navigation";
 import type { PropsWithChildren, ReactNode } from "react";
@@ -21,7 +21,7 @@ export default async function Layout({
   try {
     const profile_id = await code_to_profile_id(params);
 
-    const session = await getServerSession();
+    const session = await auth();
 
     if (!session || !profile_id) {
       throw new AuthError("No session");

@@ -11,6 +11,18 @@
       "types": "./src/index.ts",
       "default": "./src/index.ts"
     },
+    "./components/*": {
+      "types": "./src/components/*.tsx",
+      "default": "./src/components/*.tsx"
+    },
+    "./react": {
+      "types": "./src/react/index.ts",
+      "default": "./src/react/index.ts"
+    },
+    "./tailwind.config.ts": {
+      "types": "./tailwind.config.ts",
+      "default": "./tailwind.config.ts"
+    },
     "./*": {
       "types": "./src/*.ts",
       "default": "./src/*.ts"
@@ -21,23 +33,39 @@
   },
   "dependencies": {
     "@1.infra/database": "workspace:*",
+    "@1.infra/email": "workspace:*",
+    "@1.modules/auth.emails": "workspace:*",
     "@1.modules/core": "workspace:*",
     "@1.modules/profile.domain": "workspace:*",
+    "@1.ui/react": "workspace:*",
+    "@auth/prisma-adapter": "2.4.2",
     "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
+    "@hookform/resolvers": "3.9.0",
+    "@sentry/core": "8.28.0",
     "@trpc/client": "10.45.2",
     "await-to-js": "3.0.0",
+    "bcryptjs": "2.4.3",
     "next": "14.2.7",
-    "next-auth": "4.24.7",
+    "next-auth": "5.0.0-beta.20",
+    "nodemailer": "6.9.14",
+    "react-hook-form": "7.53.0",
     "superjson": "2.2.1",
+    "tailwind-variants": "0.2.1",
     "ts-pattern": "5.3.1",
-    "zod": "3.23.8"
+    "zod": "3.23.8",
+    "zsa": "0.6.0",
+    "zsa-react": "0.2.2"
   },
   "devDependencies": {
+    "@1.config/tailwindcss": "workspace:*",
     "@1.config/typescript": "workspace:*",
     "@1.infra/trpc": "workspace:*",
     "@douglasduteil/datatypes...hours-to-seconds": "workspace:*",
+    "@types/bcryptjs": "2.4.6",
+    "@types/nodemailer": "6.4.15",
     "@types/react": "18.3.4",
     "@types/react-dom": "18.3.0",
+    "tailwindcss": "3.4.10",
     "typescript": "5.5.4"
   }
 }

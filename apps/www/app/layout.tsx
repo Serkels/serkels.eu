@@ -1,7 +1,9 @@
 //
 
 import Analytics from ":components/shell/Analytics";
+import { auth } from "@1.modules/auth.next/auth";
 import type { Metadata } from "next";
+import { SessionProvider } from "next-auth/react";
 import dynamic from "next/dynamic";
 import { Roboto } from "next/font/google";
 import { type PropsWithChildren } from "react";
@@ -34,14 +36,18 @@ export const metadata: Metadata = {
 
 //
 
-export default function RootLayout({ children }: PropsWithChildren) {
+export default async function RootLayout({ children }: PropsWithChildren) {
+  const session = await auth();
+
   return (
     <html lang="en">
       <body
         className={`${roboto.className} bg-[#F5F8FA] text-base text-black antialiased`}
       >
         <NextTopLoader color="#fff" showSpinner={false} />
-        <RootProviders>{children}</RootProviders>
+        <SessionProvider session={session}>
+          <RootProviders>{children}</RootProviders>
+        </SessionProvider>
         <Analytics />
       </body>
     </html>

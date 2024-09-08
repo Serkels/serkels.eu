@@ -1,8 +1,5 @@
 //
 
-import { get_csrf_token } from "@1.modules/auth.next/csrf_token";
-import { UserAvatarFilled } from "@1.ui/react/icons";
-// import { UserAvatarFilled } from "@1.ui/react/icons";
 import { FrenchLocationField } from ":components/FrenchLocationField";
 import {
   PROFILE_ROLES,
@@ -10,7 +7,9 @@ import {
   Profile_Schema,
 } from "@1.modules/profile.domain";
 import { input } from "@1.ui/react/form/atom";
+import { UserAvatarFilled } from "@1.ui/react/icons";
 import type { Metadata, ResolvingMetadata } from "next";
+import { getCsrfToken } from "next-auth/react";
 import { Suspense } from "react";
 import { tv } from "tailwind-variants";
 import { EmailInput, SignInButton } from "./page.client";
@@ -28,8 +27,15 @@ export async function generateMetadata(
 
 //
 
-export default function Page() {
-  const csrfToken = get_csrf_token();
+export default async function Page() {
+  return null;
+}
+/**
+ *
+ * @deprecated TO REMOVE
+ */
+async function Page_() {
+  const csrfToken = await getCsrfToken();
   const { base, form, label } = style();
   const profile_names = Profile_Schema.keyof().Enum;
   const partner_names = Partner_Schema.keyof().Enum;
@@ -111,6 +117,7 @@ export default function Page() {
     </main>
   );
 }
+Page_;
 
 //
 

@@ -1,7 +1,7 @@
 //
 
 import { AuthSessionProvider } from ":components/shell/AuthSessionProvider";
-import { getServerSession } from "@1.modules/auth.next";
+import { auth } from "@1.modules/auth.next/auth";
 import { notFound, redirect } from "next/navigation";
 import type { PropsWithChildren } from "react";
 
@@ -11,7 +11,7 @@ export default async function Layout({
   children,
   params,
 }: PropsWithChildren<{ params: { code: string } }>) {
-  const session = await getServerSession();
+  const session = await auth();
 
   if (!session) {
     notFound();

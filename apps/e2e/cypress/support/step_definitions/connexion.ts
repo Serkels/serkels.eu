@@ -7,8 +7,12 @@ import "cypress-maildev";
 
 When("je me connecte en tant que {string}", (email: string) => {
   cy.get(`input[placeholder="Adresse email de connexion"]`).type(email);
+  cy.get(`input[placeholder="Mot de passe"]`).type(email);
   cy.contains("button", "Se connecter").click();
-  cy.contains("Consultez votre boite mail pour confirmer votre identité");
+  cy.contains("Vous êtes connecté en tant que : ").click();
+});
+
+When("je confirme mon adresse email", () => {
   cy.maildevGetLastMessage().then((message) => {
     expect(message.subject).to.equal("[Serkels] Connexion");
     cy.maildevVisitMessageById(message.id);
@@ -18,5 +22,4 @@ When("je me connecte en tant que {string}", (email: string) => {
 
     cy.maildevDeleteMessageById(message.id);
   });
-  cy.contains("Vous êtes connecté en tant que : ").click();
 });

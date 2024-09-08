@@ -9,8 +9,14 @@ import {
 } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import debug from "debug";
-import { SessionProvider } from "next-auth/react";
-import { useState, type PropsWithChildren } from "react";
+import type { Session } from "next-auth";
+import { getSession, SessionProvider, useSession } from "next-auth/react";
+import {
+  useCallback,
+  useEffect,
+  useState,
+  type PropsWithChildren,
+} from "react";
 import Nest from "react-nest";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -41,7 +47,7 @@ export function RootProviders({ children }: PropsWithChildren) {
         position={isMd ? "bottom-left" : "top-center"}
       />
       <Nest>
-        <AuthSessionProvider />
+        <AuthSessionFetcher />
         <ReactQueryClientProvider />
         <TrpcProvider />
         {children}
@@ -72,6 +78,17 @@ function ReactQueryClientProvider({ children }: PropsWithChildren) {
   );
 }
 
-function AuthSessionProvider({ children }: PropsWithChildren) {
-  return <SessionProvider> {children} </SessionProvider>;
+export function AuthSessionFetcher({ children }: PropsWithChildren) {
+  const { data } = useSession();
+  const [session, setSession] = useState<Session | null>(data);
+
+  const fetchSession = useCallback(async () => {
+    const session = await getSession();
+    setSession(session);
+  }, []);
+
+  useEffect(() => {
+    fetchSession();
+  }, [fetchSession]);
+  return <SessionProvider session={session}>{children}</SessionProvider>;
 }

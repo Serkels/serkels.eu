@@ -2,7 +2,7 @@
 
 import { code_to_profile_id, type CodeParms } from ":pipes/code";
 import { TRPC_SSR } from ":trpc/server";
-import { getServerSession } from "@1.modules/auth.next";
+import { auth } from "@1.modules/auth.next/auth";
 import { AuthError } from "@1.modules/core/errors";
 import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import {
@@ -56,7 +56,7 @@ export default async function Page({ params }: { params: CodeParms }) {
 }
 
 async function FollowerCount({ profile_id }: { profile_id: string }) {
-  const session = await getServerSession();
+  const session = await auth();
   const profile = await TRPC_SSR.profile.by_id.fetch(profile_id);
 
   if (session?.profile.id === profile_id)
@@ -75,7 +75,7 @@ async function FollowerCount({ profile_id }: { profile_id: string }) {
 }
 
 async function ContactsCount({ profile_id }: { profile_id: string }) {
-  const session = await getServerSession();
+  const session = await auth();
   const profile = await TRPC_SSR.profile.by_id.fetch(profile_id);
 
   if (session?.profile.id === profile_id)

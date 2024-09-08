@@ -1,7 +1,9 @@
 //
 
+import { PrismaPlugin } from "@prisma/nextjs-monorepo-workaround-plugin";
 import { withSentryConfig } from "@sentry/nextjs";
 import process from "node:process";
+
 import { z } from "zod";
 
 //
@@ -55,12 +57,6 @@ const nextConfig = {
       ];
     return [
       {
-        permanent: true,
-        source: "/api/auth/magic/email/:identifier/:token/:path*",
-        destination: "/api/auth/callback/email?email=:identifier&token=:token",
-      },
-
-      {
         source: "/@~/bookmarks",
         destination: "/@~/bookmarks/opportunities",
         permanent: true,
@@ -104,6 +100,13 @@ const nextConfig = {
       },
     ];
   },
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      config.plugins = [...config.plugins, new PrismaPlugin()];
+    }
+
+    return config;
+  },
 };
 
 config = nextConfig;
@@ -138,7 +141,7 @@ withSentryConfig(
     hideSourceMaps: true,
 
     // Automatically tree-shake Sentry logger statements to reduce bundle size
-    disableLogger: true,
+    disableLogger: process.env.NODE_ENV !== "development",
   },
 );
 
@@ -169,7 +172,7 @@ export default withSentryConfig(config, {
   hideSourceMaps: true,
 
   // Automatically tree-shake Sentry logger statements to reduce bundle size
-  disableLogger: true,
+  disableLogger: process.env.NODE_ENV !== "development",
 
   // Enables automatic instrumentation of Vercel Cron Monitors. (Does not yet work with App Router route handlers.)
   // See the following for more information:

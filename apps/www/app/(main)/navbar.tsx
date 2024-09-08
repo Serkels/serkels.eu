@@ -8,8 +8,9 @@ import {
 } from ":components/navbar/notification_indicator.client";
 import { MobileNavBar } from ":components/shell/MobileNavBar";
 import { TRPC_SSR } from ":trpc/server";
-import { getServerSession } from "@1.modules/auth.next";
-import { PROFILE_ROLES, type Profile } from "@1.modules/profile.domain";
+import { auth } from "@1.modules/auth.next/auth";
+import type { ID_Schema } from "@1.modules/core/domain";
+import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import { Avatar } from "@1.modules/profile.ui";
 import { Grid } from "@1.ui/react/grid";
 import { Bell, Exchange, Logo, Messenger, Plus } from "@1.ui/react/icons";
@@ -43,7 +44,7 @@ export default function UserBar() {
 }
 
 async function UserNavGroup({ className }: ComponentPropsWithoutRef<"nav">) {
-  const session = await getServerSession();
+  const session = await auth();
   const { base, icon } = user_nav_group_variants({
     size: {
       initial: "xsmall",
@@ -115,10 +116,13 @@ const user_nav_group_variants = tv(
     responsiveVariants: ["sm", "md"],
   },
 );
-async function MyStudentProfile({ profile }: { profile: Profile }) {
-  const student = await TRPC_SSR.profile.student?.by_profile_id.fetch(
-    profile.id,
-  );
+async function MyStudentProfile({
+  profile: { id: profile_id },
+}: {
+  profile: { id: ID_Schema };
+}) {
+  const student =
+    await TRPC_SSR.profile.student?.by_profile_id.fetch(profile_id);
 
   return (
     <>
@@ -129,7 +133,7 @@ async function MyStudentProfile({ profile }: { profile: Profile }) {
             <VisuallyHidden>Moi</VisuallyHidden>
             <Avatar
               className="size-7 border-2 border-white"
-              profile={profile}
+              profile={student.profile}
             />
           </>
         }
@@ -141,16 +145,22 @@ async function MyStudentProfile({ profile }: { profile: Profile }) {
         href={`/@~`}
       >
         <VisuallyHidden>Moi</VisuallyHidden>
-        <Avatar className="size-7 border-2 border-white" profile={profile} />
+        <Avatar
+          className="size-7 border-2 border-white"
+          profile={student.profile}
+        />
       </Link>
     </>
   );
 }
 
-async function MyPartnerProfile({ profile }: { profile: Profile }) {
-  const partner = await TRPC_SSR.profile.partner?.by_profile_id.fetch(
-    profile.id,
-  );
+async function MyPartnerProfile({
+  profile: { id: profile_id },
+}: {
+  profile: { id: ID_Schema };
+}) {
+  const partner =
+    await TRPC_SSR.profile.partner?.by_profile_id.fetch(profile_id);
 
   return (
     <>
@@ -161,7 +171,7 @@ async function MyPartnerProfile({ profile }: { profile: Profile }) {
             <VisuallyHidden>Moi</VisuallyHidden>
             <Avatar
               className="size-7 border-2 border-white"
-              profile={profile}
+              profile={partner.profile}
             />
           </>
         }
@@ -173,7 +183,10 @@ async function MyPartnerProfile({ profile }: { profile: Profile }) {
         href={`/@~`}
       >
         <VisuallyHidden>Moi</VisuallyHidden>
-        <Avatar className="size-7 border-2 border-white" profile={profile} />
+        <Avatar
+          className="size-7 border-2 border-white"
+          profile={partner.profile}
+        />
       </Link>
     </>
   );

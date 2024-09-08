@@ -1,7 +1,7 @@
 //
 
 import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
-import { getServerSession } from "@1.modules/auth.next";
+import { auth } from "@1.modules/auth.next/auth";
 import { Exchange_Filter } from "@1.modules/exchange.domain";
 import { card } from "@1.ui/react/card/atom";
 import { PlusBox } from "@1.ui/react/icons";
@@ -43,7 +43,7 @@ export default async function Page({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const session = await getServerSession();
+  const session = await auth();
   const category = String(searchParams["category"]);
   const search = String(searchParams["q"]);
   const filter_parsed_return = Exchange_Filter.safeParse(searchParams["f"]);

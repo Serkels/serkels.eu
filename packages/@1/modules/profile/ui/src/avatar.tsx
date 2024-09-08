@@ -1,6 +1,11 @@
 //
 
-import type { Partner, Profile, Student } from "@1.modules/profile.domain";
+import type {
+  AvatarProfile,
+  Partner,
+  Profile,
+  Student,
+} from "@1.modules/profile.domain";
 import type { AvatarMediaProps, AvatarProps } from "@1.ui/react/avatar";
 import {
   Avatar as UI_Avatar,
@@ -10,9 +15,7 @@ import { LocationRadius, School } from "@1.ui/react/icons";
 
 //
 
-export function Avatar(
-  props: AvatarProps & { profile: Pick<Profile, "image" | "id"> },
-) {
+export function Avatar(props: AvatarProps & { profile: AvatarProfile }) {
   const { profile, ...other_props } = props;
   return <UI_Avatar image={profile.image} id={profile.id} {...other_props} />;
 }

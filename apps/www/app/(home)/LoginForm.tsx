@@ -3,23 +3,20 @@
 import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import { Button } from "@1.ui/react/button";
 import { Field, Form, Formik, type FormikConfig } from "formik";
+import type { PropsWithChildren } from "react";
+import { createSlot } from "react-slotify";
 
-export function LoginForm({
-  onLogin,
-  onSignUp,
-}: {
-  onLogin: LoginProps["onSubmit"];
-  onSignUp: SignUpProps["onSubmit"];
-}) {
+export function LoginForm({ children }: PropsWithChildren) {
   return (
     <div className="grid grid-cols-1 gap-5 rounded-md border bg-white px-4 py-5 text-Dove_Gray shadow-[10px_10px_10px_#00000029]">
-      <SignUp onSubmit={onSignUp} />
+      <LoginForm.Login.Renderer childs={children}></LoginForm.Login.Renderer>
+      {/* <SignUp onSubmit={onSignUp} /> */}
       <hr />
-      <Login onSubmit={onLogin} />
+      {/* <__Login__ onSubmit={onLogin} /> */}
     </div>
   );
 }
-
+LoginForm.Login = createSlot();
 export function SignUp({ onSubmit }: SignUpProps) {
   return (
     <Formik initialValues={{ email: "", as: "" }} onSubmit={onSubmit}>
@@ -61,31 +58,8 @@ export function SignUp({ onSubmit }: SignUpProps) {
   );
 }
 
-export function Login({ onSubmit }: LoginProps) {
-  return (
-    <Formik initialValues={{ email: "" }} onSubmit={onSubmit}>
-      {({ isSubmitting }) => (
-        <Form className="flex flex-col items-center space-y-5">
-          <Field
-            className="h-8 max-w-[90%] rounded-sm border border-solid border-[#dddddd] px-3 py-2 placeholder-[#AAAAAA] md:text-xs"
-            name="email"
-            placeholder="Adresse email de connexion"
-            required
-            type="email"
-          />
-
-          <Button intent="primary" type="submit" isDisabled={isSubmitting}>
-            Se connecter
-          </Button>
-        </Form>
-      )}
-    </Formik>
-  );
-}
-
 //
 
-type LoginProps = { onSubmit: FormikConfig<{ email: string }>["onSubmit"] };
 type SignUpProps = {
   onSubmit: FormikConfig<{ email: string; as: string }>["onSubmit"];
 };

@@ -28,10 +28,11 @@ export const trpc = createTRPCProxyClient<Router>({
       url: `${ENV.API_URL}/trpc`,
       headers: async ({}) => {
         const nexaut_header = await create_nexauth_header({
-          secret: ENV.NEXTAUTH_SECRET,
+          salt: "",
+          secret: ENV.AUTH_SECRET,
           token: {
             from: "@1.modules/auth.next",
-            profile: { id: "SSR", image: "", name: "", role: "ADMIN", bio: "" },
+            profile: { id: "SSR", image: "", name: "", role: "ADMIN" },
           } satisfies JWT,
           maxAge: 60,
         });

@@ -14,6 +14,7 @@ env:
   DO_NOT_TRACK: 1
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  NODE_ENV: test
 
 jobs:
   e2e:

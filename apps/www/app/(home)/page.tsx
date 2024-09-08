@@ -1,14 +1,13 @@
 //
 
-import { AuthSessionProvider } from ":components/shell/AuthSessionProvider";
 import { Banner } from ":components/shell/Banner";
-import { getServerSession } from "@1.modules/auth.next";
+import { auth } from "@1.modules/auth.next/auth";
+import { AuthSessionProvider } from "@1.modules/auth.next/components/AuthSessionProvider";
 import { Grid } from "@1.ui/react/grid";
 import { Binoculars, Exchange, MessageGroup } from "@1.ui/react/icons";
 import { popover } from "@1.ui/react/popover/atom";
 import type { StylableElementType } from "@1.ui/react/types";
 import type { _1_HOUR_ } from "@douglasduteil/datatypes...hours-to-seconds";
-import dynamic from "next/dynamic";
 import Link from "next/link";
 import type {
   ComponentPropsWithoutRef,
@@ -16,13 +15,8 @@ import type {
   ReactNode,
 } from "react";
 import { tv } from "tailwind-variants";
-
-//
-
-const HomeCarousel = dynamic(() => import("./page.client"), {
-  ssr: false,
-  loading: () => <CarouselPlaceholder />,
-});
+import ConnectionPanel, { ConnectionPanel_Outlet } from "./ConnectionPanel";
+import HomeCarousel, { HomeCarousel__Aside } from "./page.client";
 
 //
 
@@ -47,12 +41,18 @@ export default function Home_Page() {
 //
 
 async function HomeBanner() {
-  const session = await getServerSession();
+  const session = await auth();
 
   return (
     <Banner className="py-4">
       <AuthSessionProvider session={session}>
-        <HomeCarousel />
+        <HomeCarousel>
+          <HomeCarousel__Aside>
+            <ConnectionPanel>
+              <ConnectionPanel_Outlet></ConnectionPanel_Outlet>
+            </ConnectionPanel>
+          </HomeCarousel__Aside>
+        </HomeCarousel>
       </AuthSessionProvider>
     </Banner>
   );
@@ -134,25 +134,6 @@ const explore_grid_style = tv(
   },
   { responsiveVariants: true },
 );
-
-//
-//
-//
-
-function CarouselPlaceholder() {
-  return (
-    <Grid className="min-h-[45vh] items-center">
-      <aside className="col-span-2 sm:col-span-4 md:col-start-2 xl:col-start-4">
-        <h1 className="mb-12 text-2xl font-bold uppercase">
-          Avec Serkels échangez des expériences cours de langue activités notes
-          de cours et profitez d'autres services
-        </h1>
-        <p>Inscrivez-vous pour échanger entre pairs !</p>
-      </aside>
-      <aside className="col-span-2 sm:col-span-2"></aside>
-    </Grid>
-  );
-}
 
 //
 //

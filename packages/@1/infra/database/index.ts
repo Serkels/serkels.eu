@@ -5,6 +5,10 @@ import process from "node:process";
 
 //
 
+export { Prisma } from "@prisma/client";
+
+//
+
 const prismaClientSingleton = () => {
   return new PrismaClient_Base({
     log:

@@ -1,7 +1,7 @@
 //
 
 import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
-import { getServerSession } from "@1.modules/auth.next";
+import { auth } from "@1.modules/auth.next/auth";
 import { Forum_Filter } from "@1.modules/forum.domain";
 import { Idle as CreateCard_Idle } from "@1.modules/forum.ui/CreateCard/Idle";
 import { Spinner } from "@1.ui/react/spinner";
@@ -53,7 +53,7 @@ export default async function Page({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const session = await getServerSession();
+  const session = await auth();
 
   const category = String(searchParams["category"]);
   const search = String(searchParams["q"]);

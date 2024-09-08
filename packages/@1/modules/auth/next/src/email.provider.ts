@@ -7,7 +7,7 @@ import { trpc } from "./trpc";
 
 //
 
-const { NEXTAUTH_SECRET: secret } = NEXTAUTH_TRPCENV.parse(process.env);
+const { AUTH_SECRET: secret } = NEXTAUTH_TRPCENV.parse(process.env);
 
 export const Email = Email_Provider({
   secret,

@@ -1,7 +1,7 @@
 //
 
 import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
-import { getServerSession } from "@1.modules/auth.next";
+import { auth } from "@1.modules/auth.next/auth";
 import { Partner_Filter } from "@1.modules/opportunity.domain";
 import type { _1_HOUR_ } from "@douglasduteil/datatypes...hours-to-seconds";
 import type { Metadata, ResolvingMetadata } from "next";
@@ -34,7 +34,7 @@ export default async function Page({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const session = await getServerSession();
+  const session = await auth();
   const category = String(searchParams["category"]);
   const search = String(searchParams["q"]);
   const filter_parsed_return = Partner_Filter.safeParse(searchParams["f"]);

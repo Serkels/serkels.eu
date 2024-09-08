@@ -6,7 +6,7 @@ import {
 } from ":components/navbar/aside_navbar";
 import { type CodeParms } from ":pipes/code";
 import { TRPC_SSR } from ":trpc/server";
-import { getServerSession } from "@1.modules/auth.next";
+import { auth } from "@1.modules/auth.next/auth";
 import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import { notFound } from "next/navigation";
 import { match } from "ts-pattern";
@@ -15,7 +15,7 @@ export default async function Page({ params }: { params: CodeParms }) {
   const is_yours = params.code === "~";
   if (!is_yours) return null;
 
-  const session = await getServerSession();
+  const session = await auth();
   if (!session) return null;
 
   const role = session.profile.role;
@@ -34,7 +34,7 @@ export default async function Page({ params }: { params: CodeParms }) {
         return <Partner_NavBar partner={partner} />;
       })
       .otherwise(() => null);
-  } catch (error) {
+  } catch {
     return notFound();
   }
 }
