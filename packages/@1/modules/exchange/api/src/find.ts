@@ -76,6 +76,7 @@ async function find_resolver(
   };
 
   const active_exchanges_where: ExchangeWhere = {
+    is_active: true,
     OR: [{ expiry_date: null }, { expiry_date: { gte: endOfYesterday() } }],
   };
   const category_where: ExchangeWhere = category

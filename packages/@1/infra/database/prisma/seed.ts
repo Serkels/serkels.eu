@@ -564,14 +564,20 @@ async function students_bookmarks() {
 //
 
 async function students_participants_in_exchanges() {
-  const students = await prisma.student.findMany();
+  const students = await prisma.student.findMany({
+    select: { id: true, profile_id: true },
+  });
   const exchanges = await prisma.exchange.findMany({
-    include: { owner: true },
+    select: {
+      id: true,
+      owner: { select: { id: true, profile_id: true } },
+      places: true,
+    },
   });
 
   for (const exchange of exchanges) {
     const other_students = students.filter(
-      ({ id }) => id !== exchange.owner_id,
+      ({ id }) => id !== exchange.owner.id,
     );
     const exchange_id = exchange.id;
 
@@ -591,6 +597,7 @@ async function students_participants_in_exchanges() {
               created_at: faker.date.past(),
               updated_at: faker.date.recent({ days: 66 }),
             },
+            select: { id: true },
             update: {
               updated_at: faker.date.recent({ days: 33 }),
             },
@@ -605,7 +612,7 @@ async function students_participants_in_exchanges() {
           const { thread_id } = await prisma.exchangeThread.create({
             data: {
               deal: { connect: { id: deal_id } },
-              owner: { connect: { id: exchange.owner_id } },
+              owner: { connect: { id: exchange.owner.id } },
               thread: {
                 create: {
                   created_at: faker.date.past(),
@@ -647,13 +654,16 @@ async function students_participants_in_exchanges() {
           });
 
           const updated_exchange = await prisma.exchange.findFirstOrThrow({
-            include: {
+            select: {
               deals: { where: { status: ExchangeThreadStatus.APPROVED } },
+              expiry_date: true,
+              places: true,
             },
             where: { id: exchange_id },
           });
 
           const is_active = is_active_exchange(updated_exchange);
+
           await prisma.exchange.update({
             data: { is_active },
             where: { id: exchange_id },
