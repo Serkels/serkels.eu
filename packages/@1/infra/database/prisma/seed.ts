@@ -18,6 +18,8 @@ import dedent from "dedent";
 import process from "node:process";
 import slugify from "slugify";
 import prisma from "../index";
+import { faker_image_avatar } from "./seed/helpers/faker_image_avatar";
+import { students as studient_fixtures } from "./seed/fixtures/students";
 
 //
 //#region 🌱 Seed
@@ -74,6 +76,9 @@ async function main() {
 
   await students_awnsers();
   console.log("🌱 . Students awnser to questions.");
+
+  await studient_fixtures();
+  console.log("🌱 . E2E Fixture.");
 }
 
 main()
@@ -138,7 +143,7 @@ async function student({
   name: string;
 }) {
   const { image, name } = {
-    image: faker.image.avatar(),
+    image: faker_image_avatar(),
     name: studient_name,
   };
 
@@ -290,7 +295,7 @@ async function students() {
 //
 
 async function partner({ email, name }: { email: string; name: string }) {
-  const image = faker.image.avatar();
+  const image = faker_image_avatar();
 
   const opportunity_categories_id = (
     await prisma.category.findMany({
@@ -900,7 +905,3 @@ async function students_messages() {
     );
   }
 }
-
-//
-//#endregion
-//

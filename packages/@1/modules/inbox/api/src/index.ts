@@ -4,6 +4,7 @@ import { next_auth_procedure, router } from "@1.modules/trpc";
 import type { Prisma } from "@prisma/client";
 import { z } from "zod";
 import { thread } from "./thread";
+import { ID_Schema } from "@1.modules/core/domain";
 
 const inbox_api_router = router({
   //
@@ -150,6 +151,27 @@ const inbox_api_router = router({
     }),
 
   //
+
+  by_profile_id: next_auth_procedure
+    .input(z.object({ profile_id: ID_Schema }))
+    .query(async ({ input, ctx: { payload, prisma } }) => {
+      const {
+        profile: { id: profile_id },
+      } = payload;
+      const { profile_id: participant_id } = input;
+
+      const { id: owner_id } = await prisma.student.findUniqueOrThrow({
+        select: { id: true },
+        where: { profile_id },
+      });
+      return prisma.inboxThread.findFirst({
+        where: {
+          owner_id,
+          thread: { participants: { some: { id: participant_id } } },
+        },
+        select: { thread: { select: { id: true } } },
+      });
+    }),
 
   thread,
 });

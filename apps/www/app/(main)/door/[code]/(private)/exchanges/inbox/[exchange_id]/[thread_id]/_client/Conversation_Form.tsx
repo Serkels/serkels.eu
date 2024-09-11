@@ -1,73 +1,21 @@
 "use client";
 
-import { PLATFORMS_MAP, useUserAgent } from ":components/hooks/useUserAgent";
 import type { Params } from ":pipes/thread_by_id";
 import { TRPC_React } from ":trpc/client";
 import { useExchange } from "@1.modules/exchange.ui/context";
+import {
+  message_form_resolver,
+  MessageForm,
+} from "@1.modules/inbox.ui/conversation/MessageForm";
 import { Button } from "@1.ui/react/button";
-import { useEnterToSubmit } from "@1.ui/react/form";
-import { SendButton } from "@1.ui/react/form/SendButton";
-import { input } from "@1.ui/react/form/atom";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useUpdateEffect } from "@react-hookz/web";
-import { useCallback, useLayoutEffect } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { useCallback } from "react";
+import { FormProvider, useForm } from "react-hook-form";
 import { StateMessageOutlet } from "./StateMessageOutlet";
 
 //
 
 export default function Conversation_Form({ thread_id }: Params) {
-  const {
-    form: {
-      formState: { isSubmitting, isLoading },
-      register,
-    },
-    on_submit,
-  } = use_form({ thread_id });
-  return (
-    <section className="w-full">
-      <form className="relative" onSubmit={on_submit}>
-        <textarea
-          {...register("message")}
-          autoComplete="off"
-          className={input({
-            className: `
-              peer
-              max-h-32
-              min-h-16
-              w-full
-              resize-none
-              rounded-2xl
-              pr-14
-            `,
-          })}
-          readOnly={isSubmitting}
-          placeholder="Envoie un Message…"
-        ></textarea>
-        <SendButton isSubmitting={isSubmitting} />
-      </form>
-      <ActionButtonGroup
-        isDisabled={isSubmitting || isLoading}
-        thread_id={thread_id}
-      />
-      <StateMessageOutlet thread_id={thread_id} />
-    </section>
-  );
-}
-
-//
-
-const form_zod_schema = z.object({
-  message: z.string().trim().min(1),
-});
-type FormValues = z.infer<typeof form_zod_schema>;
-
-function use_form({ thread_id }: Params) {
-  const browser = useUserAgent();
-  const form = useForm<FormValues>({
-    resolver: zodResolver(form_zod_schema),
-  });
   const send_message = TRPC_React.inbox.thread.send.useMutation();
   const utils = TRPC_React.useUtils();
 
@@ -77,24 +25,28 @@ function use_form({ thread_id }: Params) {
       utils.inbox.thread.messages.invalidate({ thread_id }),
     ]);
 
-  const on_submit = form.handleSubmit(async ({ message: content }) => {
+  const on_submit = async (content: string) => {
     await send_message.mutateAsync({ content, thread_id });
-    form.setValue("message", "");
-    form.setFocus("message");
     await invalidate();
+  };
+  const form = useForm({
+    resolver: message_form_resolver,
   });
-
-  if (browser.getPlatformType() === PLATFORMS_MAP.desktop)
-    useEnterToSubmit({
-      is_submitting: form.formState.isSubmitting,
-      on_submit,
-    });
-
-  useLayoutEffect(() => {
-    form.setFocus("message");
-  }, [form.setFocus]);
-
-  return { form, on_submit };
+  const {
+    formState: { isSubmitting, isLoading },
+  } = form;
+  return (
+    <FormProvider {...form}>
+      <section className="w-full">
+        <MessageForm onSubmit={on_submit} />;
+        <ActionButtonGroup
+          isDisabled={isSubmitting || isLoading}
+          thread_id={thread_id}
+        />
+        <StateMessageOutlet thread_id={thread_id} />
+      </section>
+    </FormProvider>
+  );
 }
 
 //

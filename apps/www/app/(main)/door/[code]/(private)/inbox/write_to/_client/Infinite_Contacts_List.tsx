@@ -5,8 +5,8 @@ import type { Profile } from "@1.modules/profile.domain";
 import { EmptyList, Loading, flatten_pages_are_empty } from "@1.ui/react/async";
 import { AvatarMedia } from "@1.ui/react/avatar";
 import { Button } from "@1.ui/react/button";
-import { useRouter } from "next/navigation";
-import { useCallback } from "react";
+import { button } from "@1.ui/react/button/atom";
+import Link from "next/link";
 import { P, match } from "ts-pattern";
 
 //
@@ -59,19 +59,13 @@ export default function Infinite_Contacts_List() {
 }
 
 function Item(profile: Profile) {
-  const router = useRouter();
-  const talk_to = TRPC_React.inbox.talk_to.useMutation();
-  const utils = TRPC_React.useUtils();
-  const onPress = useCallback(async () => {
-    const inbox = await talk_to.mutateAsync(profile.id);
-    await utils.inbox.find.invalidate();
-    router.push(`/@~/inbox/${inbox.thread_id}`);
-  }, [profile.id]);
   return (
-    <Button
-      className="block h-full w-full rounded-none py-4"
-      intent="light"
-      onPress={onPress}
+    <Link
+      className={button({
+        className: "block h-full w-full rounded-none py-4",
+        intent: "light",
+      })}
+      href={`/@~/inbox/write_to/${profile.id}`}
     >
       <AvatarMedia
         image={profile.image}
@@ -79,6 +73,6 @@ function Item(profile: Profile) {
         name={profile.name}
         className="items-center"
       ></AvatarMedia>
-    </Button>
+    </Link>
   );
 }
