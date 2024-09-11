@@ -84,7 +84,11 @@ async function find_resolver(
 
   const items = await prisma.exchange.findMany({
     ...(cursor ? { cursor: { id: cursor } } : {}),
-    orderBy: [{ expiry_date: "asc" }, { created_at: "desc" }],
+    orderBy: [
+      { expiry_date: { sort: "asc", nulls: "last" } },
+      { created_at: "desc" },
+      { id: "desc" },
+    ],
     take: limit + 1,
     where: {
       AND: [search_where, active_exchanges_where, category_where, nerrow],

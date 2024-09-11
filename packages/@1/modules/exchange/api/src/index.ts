@@ -131,7 +131,7 @@ const exchange_api_router = router({
           is_active: true,
           owner: { profile_id },
         },
-        orderBy: [{ created_at: "asc" }],
+        orderBy: [{ created_at: "desc" }],
       });
 
       let next_cursor: typeof cursor | undefined = undefined;
