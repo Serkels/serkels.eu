@@ -1,7 +1,7 @@
 //
 
 import type { Profile } from "@1.modules/profile.domain";
-import type { create_nexauth_header } from "@douglasduteil/nextauth...trpc.prisma/jwt";
+import type { create_nextauth_header } from "@douglasduteil/nextauth...trpc.prisma/jwt";
 import "next-auth";
 
 //
@@ -13,7 +13,7 @@ declare module "next-auth" {
    */
   interface Session extends DefaultSession {
     profile: Profile;
-    header: Awaited<ReturnType<typeof create_nexauth_header>>;
+    header: Awaited<ReturnType<typeof create_nextauth_header>>;
   }
 }
 

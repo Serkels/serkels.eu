@@ -1,13 +1,6 @@
-import {
-  constructNow,
-  format,
-  formatDistanceToNow,
-  isEqual,
-  isFuture,
-  isPast,
-  isSameDay,
-  subDays,
-} from "date-fns";
+import { format_ago } from "@1.modules/core/date";
+import { is_expired_exchange } from "@1.modules/exchange.domain";
+import { format, isEqual, isFuture, isSameWeek } from "date-fns";
 import { fr } from "date-fns/locale";
 import type { PropsWithChildren } from "react";
 import { tv, type VariantProps } from "tailwind-variants";
@@ -33,8 +26,7 @@ export function Publish_Date() {
       </Time>
       {!isEqual(exchange.updated_at, exchange.created_at) ? (
         <Time date={exchange.updated_at}>
-          Modifié il y a{" "}
-          {formatDistanceToNow(exchange.updated_at, { locale: fr })}
+          Modifié il y a {format_ago(exchange.updated_at)}
         </Time>
       ) : null}
     </div>
@@ -51,8 +43,8 @@ export function ExpiryDate({
       <time
         className={expiry_date_variant({
           is_future: isFuture(date),
-          is_this_week: isSameDay(date, subDays(constructNow(date), 6)),
-          has_expired: isPast(date),
+          is_this_week: isSameWeek(date, new Date()),
+          has_expired: is_expired_exchange({ expiry_date: date }),
         })}
         dateTime={date.toUTCString()}
         title={date.toUTCString()}

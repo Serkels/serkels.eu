@@ -23,6 +23,7 @@
   "scripts": {
     "type-check": "tsc --build"
   },
+  "prettier": "@1.config/prettier/tailwindcss.js",
   "dependencies": {
     "@1.modules/core": "workspace:*",
     "@1.modules/bookmark.domain": "workspace:*",

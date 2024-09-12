@@ -8,6 +8,7 @@ import {
 } from "@1.modules/core/domain";
 import { Student_Schema } from "@1.modules/profile.domain";
 import { z } from "zod";
+import { isPast } from "date-fns";
 
 //
 
@@ -49,6 +50,26 @@ export function is_active_exchange(
   exchange: Pick<Exchange, "deals" | "places">,
 ) {
   return exchange.deals.length < exchange.places;
+}
+
+/**
+ *
+ * @param exchange
+ * @returns `true` if all the places in the exchange are taken by
+ */
+export function is_completed_exchange(
+  exchange: Pick<Exchange, "deals" | "places">,
+) {
+  return exchange.deals.length >= exchange.places;
+}
+
+/**
+ *
+ * @param exchange
+ * @returns `true` if the exchange is expired
+ */
+export function is_expired_exchange(exchange: Pick<Exchange, "expiry_date">) {
+  return exchange.expiry_date ? isPast(exchange.expiry_date) : false;
 }
 
 //

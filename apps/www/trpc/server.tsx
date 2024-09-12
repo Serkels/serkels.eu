@@ -5,7 +5,7 @@ import { getServerSession } from "@1.modules/auth.next";
 import type { Profile } from "@1.modules/profile.domain";
 import { NEXTAUTH_TRPCENV } from "@douglasduteil/nextauth...trpc.prisma/config";
 import type { JWT } from "@douglasduteil/nextauth...trpc.prisma/jwt";
-import { create_nexauth_header } from "@douglasduteil/nextauth...trpc.prisma/jwt";
+import { create_nextauth_header } from "@douglasduteil/nextauth...trpc.prisma/jwt";
 import { Hydrate, dehydrate } from "@tanstack/react-query";
 import { createTRPCProxyClient, httpBatchLink, loggerLink } from "@trpc/client";
 import { createServerSideHelpers } from "@trpc/react-query/server";
@@ -36,7 +36,7 @@ export const proxyClient = createTRPCProxyClient<Router>({
             } satisfies Profile)
           : undefined;
         const { NEXTAUTH_SECRET: secret } = NEXTAUTH_TRPCENV.parse(process.env);
-        const nexaut_header = await create_nexauth_header({
+        const nexaut_header = await create_nextauth_header({
           secret,
           token: {
             from: "www",

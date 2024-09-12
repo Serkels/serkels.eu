@@ -1,16 +1,20 @@
 //
 
-import { test } from "bun:test";
+import { beforeAll, test } from "bun:test";
 import auth_api_router from "./index";
 import { createCallerFactory, type Context } from "@1.modules/trpc";
 import { Email_Sender } from "@1.infra/email";
-import { create_nexauth_header } from "@douglasduteil/nextauth...trpc.prisma/jwt";
+import { create_nextauth_header } from "@douglasduteil/nextauth...trpc.prisma/jwt";
 
 //
 
-test("auth_api_router", async () => {
-  const NEXTAUTH_SECRET = "NEXTAUTH_SECRET";
+const NEXTAUTH_SECRET = "🔑";
+
+beforeAll(() => {
   process.env["NEXTAUTH_SECRET"] = NEXTAUTH_SECRET;
+});
+
+test("auth_api_router", async () => {
   const route = auth_api_router({
     NEXTAUTH_SECRET,
     JWT_EXPIRE_PERIOD: "30d",
@@ -18,11 +22,11 @@ test("auth_api_router", async () => {
     MAGIC_TOKEN_LENGHT: 32,
   });
   const caller = createCallerFactory(route);
-  const nexauth_header = await create_nexauth_header({
+  const nextauth_header = await create_nextauth_header({
     secret: NEXTAUTH_SECRET,
   });
   const trpc = caller({
-    headers: { ...nexauth_header, origin: "https://serkels.fr" },
+    headers: { ...nextauth_header, origin: "https://serkels.fr" },
     prisma: {},
     sender: new Email_Sender({
       SMTP_URL:

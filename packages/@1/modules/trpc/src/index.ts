@@ -1,8 +1,16 @@
 //
 
 import type { ProcedureBuilder, ProcedureParams } from "@trpc/server";
+import { create_nextauth_header as any_create_nextauth_header } from "@douglasduteil/nextauth...trpc.prisma/jwt";
+import type { Profile } from "@1.modules/profile.domain";
+
+//
 
 export type { Context } from "./context";
+export const create_nextauth_header = any_create_nextauth_header<{
+  profile: Pick<Profile, "id" | "role">;
+}>;
+
 export {
   createCallerFactory,
   mergeRouters,

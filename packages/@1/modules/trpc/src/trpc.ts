@@ -36,6 +36,9 @@ export const {
 export const next_auth_procedure = procedure.use(
   verify_next_auth_token<{ profile: Profile }>(),
 );
+export const maybe_next_auth_procedure = procedure.use(
+  verify_next_auth_token<{ profile?: Profile }>(true),
+);
 
 // export type Next_Auth_Procedure = inferProcedureBuilderResolverOptions<
 //   typeof next_auth_procedure
