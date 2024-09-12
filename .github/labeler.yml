@@ -1,0 +1,71 @@
+"👷 CI":
+  - changed-files:
+      - any-glob-to-any-file: ".github/**"
+"💄 ui":
+  - changed-files:
+      - any-glob-to-any-file: "packages/@1/modules/**/ui/**/*"
+"📜 domain":
+  - changed-files:
+      - any-glob-to-any-file: "packages/@1/modules/**/domain/**/*"
+"📝 documentation":
+  - changed-files:
+      - any-glob-to-any-file: "**/*.md"
+"🧪 e2e":
+  - changed-files:
+      - any-glob-to-any-file: "apps/e2e/**/*"
+"🫙 api":
+  - changed-files:
+      - any-glob-to-any-file: "packages/@1/modules/**/api/**/*"
+"🚀 api":
+  - changed-files:
+      - any-glob-to-any-file: "apps/api/**/*"
+"🚀 www":
+  - changed-files:
+      - any-glob-to-any-file: "apps/www/**/*"
+"scope: admin":
+  - changed-files:
+      - any-glob-to-any-file: "packages/@1/modules/admin/**/*"
+"scope: auth":
+  - changed-files:
+      - any-glob-to-any-file: "packages/@1/modules/auth/**/*"
+"scope: bookmarks":
+  - changed-files:
+      - any-glob-to-any-file: "packages/@1/modules/bookmarks/**/*"
+"scope: category":
+  - changed-files:
+      - any-glob-to-any-file: "packages/@1/modules/category/**/*"
+"scope: config":
+  - changed-files:
+      - any-glob-to-any-file: "packages/@1/config/**/*"
+"scope: core":
+  - changed-files:
+      - any-glob-to-any-file: "packages/@1/modules/core/**/*"
+"scope: exchanges":
+  - changed-files:
+      - any-glob-to-any-file: "packages/@1/modules/exchanges/**/*"
+"scope: forum":
+  - changed-files:
+      - any-glob-to-any-file: "packages/@1/modules/forum/**/*"
+"scope: inbox":
+  - changed-files:
+      - any-glob-to-any-file: "packages/@1/modules/inbox/**/*"
+"scope: notifications":
+  - changed-files:
+      - any-glob-to-any-file: "packages/@1/modules/notifications/**/*"
+"scope: opportunities":
+  - changed-files:
+      - any-glob-to-any-file: "packages/@1/modules/opportunities/**/*"
+"scope: profile":
+  - changed-files:
+      - any-glob-to-any-file: "packages/@1/modules/profile/**/*"
+"scope: trpc":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "packages/@1/modules/trpc/**/*"
+          - "packages/@1/infra/trpc/**/*"
+"scope: partner":
+  - changed-files:
+      - any-glob-to-any-file: "packages/@1/modules/partner/**/*"
+"scope: studient":
+  - changed-files:
+      - any-glob-to-any-file: "packages/@1/modules/studient/**/*"
