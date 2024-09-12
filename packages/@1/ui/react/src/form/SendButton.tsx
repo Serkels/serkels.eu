@@ -5,6 +5,7 @@ import { match } from "ts-pattern";
 import { Button, type ButtonProps } from "../button";
 import { PaperPlane } from "../icons";
 import { Spinner } from "../spinner";
+import { VisuallyHidden } from "../visually_hidden";
 
 //
 
@@ -42,6 +43,7 @@ function SubmitButton(props: ButtonProps) {
       type="submit"
       {...props}
     >
+      <VisuallyHidden>Envoyer</VisuallyHidden>
       <PaperPlane className="h-6 w-6 text-success" />
     </Button>
   );

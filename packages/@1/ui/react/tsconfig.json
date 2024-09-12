@@ -5,7 +5,8 @@
     "exactOptionalPropertyTypes": false,
     "incremental": true,
     "noEmit": true,
-    "outDir": "./node_modules/.cache/tsc"
+    "outDir": "./node_modules/.cache/tsc",
+    "types": ["bun-types"]
   },
   "include": ["src"]
 }

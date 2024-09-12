@@ -18,11 +18,13 @@
     "lint": "turbo run lint",
     "start": "turbo run start --parallel --continue --filter www --filter api",
     "studio": "turbo run studio --parallel --continue",
-    "test": "node --import=tsx --test **/*.test.ts",
-    "test:watch": "node --import=tsx --test --watch **/*.test.ts",
+    "test": "bun test",
+    "test:watch": "bun test --watch",
     "type-check": "turbo run type-check"
   },
   "devDependencies": {
+    "@1.config/happydom": "workspace:*",
+    "bun-types": "1.1.27",
     "cpx2": "7.0.1",
     "del-cli": "5.1.0",
     "prettier": "3.3.3",

@@ -1,0 +1,2 @@
+[test]
+preload=["@1.config/happydom/register"]
