@@ -1,6 +1,6 @@
 //
 
-import { test } from "node:test";
+import { test } from "bun:test";
 import auth_api_router from "./index";
 import { createCallerFactory, type Context } from "@1.modules/trpc";
 import { Email_Sender } from "@1.infra/email";
