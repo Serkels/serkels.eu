@@ -1,7 +1,10 @@
-"scope: admin": ["packages/@1/modules/admin/**/*"]
-"scope: auth": ["packages/@1/modules/auth/**/*"]
-"scope: exchanges": ["packages/@1/modules/exchanges/**/*"]
-"scope: forum": ["packages/@1/modules/forum/**/*"]
-"scope: opportunities": ["packages/@1/modules/opportunities/**/*"]
-"scope: partner": ["packages/@1/modules/partner/**/*"]
-"scope: studient": ["packages/@1/modules/studient/**/*"]
+# "scope: admin": ["packages/@1/modules/admin/**/*"]
+# "scope: auth": ["packages/@1/modules/auth/**/*"]
+# "scope: exchanges": ["packages/@1/modules/exchanges/**/*"]
+# "scope: forum": ["packages/@1/modules/forum/**/*"]
+# "scope: opportunities": ["packages/@1/modules/opportunities/**/*"]
+# "scope: partner": ["packages/@1/modules/partner/**/*"]
+# "scope: studient": ["packages/@1/modules/studient/**/*"]
+"📝 documentation":
+  - changed-files:
+      - any-glob-to-any-file: "**/*.md"
