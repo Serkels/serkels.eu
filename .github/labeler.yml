@@ -28,9 +28,9 @@
 "scope: auth":
   - changed-files:
       - any-glob-to-any-file: "packages/@1/modules/auth/**/*"
-"scope: bookmarks":
+"scope: bookmark":
   - changed-files:
-      - any-glob-to-any-file: "packages/@1/modules/bookmarks/**/*"
+      - any-glob-to-any-file: "packages/@1/modules/bookmark/**/*"
 "scope: category":
   - changed-files:
       - any-glob-to-any-file: "packages/@1/modules/category/**/*"
