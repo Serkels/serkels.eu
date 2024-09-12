@@ -19,8 +19,10 @@ export const message_form_resolver = zodResolver(form_zod_schema);
 export type FormValues = z.infer<typeof form_zod_schema>;
 
 export function MessageForm({
+  isDisabled,
   onSubmit,
 }: {
+  isDisabled?: boolean;
   onSubmit: (content: string) => Promise<void>;
 }) {
   const browser = useUserAgent();
@@ -49,10 +51,14 @@ export function MessageForm({
         {...register("message")}
         autoComplete="off"
         className={textarea_style()}
+        disabled={isDisabled}
         readOnly={formState.isSubmitting}
         placeholder="Envoie un messge"
       ></textarea>
-      <SendButton isSubmitting={formState.isSubmitting} />
+      <SendButton
+        isDisabled={isDisabled}
+        isSubmitting={formState.isSubmitting}
+      />
     </form>
   );
 }

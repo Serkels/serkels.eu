@@ -13,6 +13,7 @@ import { EventEmitter } from "events";
 import { createActor } from "xstate";
 import { z } from "zod";
 import { action } from "./action";
+import { is_active_exchange } from "@1.modules/exchange.domain";
 
 //
 
@@ -220,8 +221,17 @@ export const inbox = router({
       });
 
       const deal = await prisma.deal.findFirstOrThrow({
-        include: {
-          parent: true,
+        select: {
+          parent: {
+            select: {
+              id: true,
+              deals: { select: { id: true }, where: { status: "APPROVED" } },
+              owner_id: true,
+              places: true,
+            },
+          },
+          participant_id: true,
+          status: true,
           exchange_threads: {
             where: { owner: { profile_id } },
             include: { thread: true },
@@ -237,6 +247,7 @@ export const inbox = router({
         guards: {
           is_organizer: () => deal.parent.owner_id === student_id,
           is_participant: () => deal.participant_id === student_id,
+          is_the_exchange_not_completed: () => is_active_exchange(deal.parent),
         },
       });
 

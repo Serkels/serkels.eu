@@ -9,11 +9,11 @@ import { type Params as ThreadParams } from ":pipes/thread_by_id";
 import { TRPC_Hydrate, TRPC_SSR, proxyClient } from ":trpc/server";
 import { ExchangeProvider } from "@1.modules/exchange.ui/context";
 import { thread_recipient } from "@1.modules/inbox.domain/select";
+import { Conversation } from "@1.modules/inbox.ui/conversation/Conversation";
 import to from "await-to-js";
 import type { Metadata, ResolvingMetadata } from "next";
 import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
-import { tv } from "tailwind-variants";
 import Conversation_Form from "./_client/Conversation_Form";
 
 //
@@ -96,66 +96,24 @@ export default async function Page({
 
   const exchange = await TRPC_SSR.exchanges.by_id.fetch(exchange_id);
 
-  const { base, body, footer, header } = layout();
   return (
     <TRPC_Hydrate>
-      <main className={base()}>
-        <header className={header()}>
+      <Conversation>
+        <Conversation.Header>
           <BackButton href={`/@~/exchanges/inbox/${exchange_id}`} />
           <SeeProfileAvatarMedia profile={participant} />
-        </header>
-        <div className={body()}>
+        </Conversation.Header>
+        <Conversation.Body>
           <ExchangeProvider exchange={exchange}>
             <Thread_Timeline profile_id={profile_id} />
           </ExchangeProvider>
-        </div>
-        <footer className={footer()}>
+        </Conversation.Body>
+        <Conversation.Footer>
           <ExchangeProvider exchange={exchange}>
             <Conversation_Form thread_id={thread_id} />
           </ExchangeProvider>
-        </footer>
-      </main>
+        </Conversation.Footer>
+      </Conversation>
     </TRPC_Hydrate>
   );
 }
-
-const layout = tv({
-  base: `
-    grid
-    h-full
-    max-h-@main
-    grid-rows-[auto_1fr_auto]
-    bg-white
-    text-black
-    md:max-h-@main/desktop
-    [&>*]:px-7
-  `,
-
-  slots: {
-    body: `
-      overflow-y-auto
-      py-4
-      pr-5
-    `,
-    header: `
-      flex
-      flex-row
-      items-center
-      gap-2
-      space-x-3
-      py-4
-      md:py-7
-    `,
-    footer: `
-      flex
-      min-h-@footer
-      flex-col
-      items-center
-      justify-center
-      space-y-4
-      bg-white
-      py-5
-      text-black
-    `,
-  },
-});

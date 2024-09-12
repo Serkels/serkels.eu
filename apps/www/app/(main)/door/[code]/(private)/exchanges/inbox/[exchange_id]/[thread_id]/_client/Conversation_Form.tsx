@@ -2,6 +2,7 @@
 
 import type { Params } from ":pipes/thread_by_id";
 import { TRPC_React } from ":trpc/client";
+import { is_active_exchange } from "@1.modules/exchange.domain";
 import { useExchange } from "@1.modules/exchange.ui/context";
 import {
   message_form_resolver,
@@ -16,6 +17,8 @@ import { StateMessageOutlet } from "./StateMessageOutlet";
 //
 
 export default function Conversation_Form({ thread_id }: Params) {
+  const exchange = useExchange();
+  const is_active = is_active_exchange(exchange);
   const send_message = TRPC_React.inbox.thread.send.useMutation();
   const utils = TRPC_React.useUtils();
 
@@ -35,10 +38,11 @@ export default function Conversation_Form({ thread_id }: Params) {
   const {
     formState: { isSubmitting, isLoading },
   } = form;
+
   return (
     <FormProvider {...form}>
       <section className="w-full">
-        <MessageForm onSubmit={on_submit} />;
+        <MessageForm onSubmit={on_submit} isDisabled={!is_active} />;
         <ActionButtonGroup
           isDisabled={isSubmitting || isLoading}
           thread_id={thread_id}

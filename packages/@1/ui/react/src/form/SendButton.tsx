@@ -9,7 +9,13 @@ import { VisuallyHidden } from "../visually_hidden";
 
 //
 
-export function SendButton({ isSubmitting }: { isSubmitting: boolean }) {
+export function SendButton({
+  isDisabled,
+  isSubmitting,
+}: {
+  isDisabled?: boolean;
+  isSubmitting?: boolean;
+}) {
   return (
     <span className="absolute inset-y-0 right-5 flex items-center pl-2">
       <AnimatePresence mode="wait">
@@ -24,7 +30,7 @@ export function SendButton({ isSubmitting }: { isSubmitting: boolean }) {
               <Spinner className="size-4 text-success" />
             ))
             .otherwise(() => (
-              <SubmitButton isDisabled={isSubmitting} />
+              <SubmitButton isDisabled={isDisabled} />
             ))}
         </motion.div>
       </AnimatePresence>
