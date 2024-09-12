@@ -1,6 +1,3 @@
-"👷 CI": [".github/**"]
-"💄 ui": ["packages/@1/modules/**/ui/**/*"]
-"📝 documentation": ["**/*.md"]
 "scope: admin": ["packages/@1/modules/admin/**/*"]
 "scope: auth": ["packages/@1/modules/auth/**/*"]
 "scope: exchanges": ["packages/@1/modules/exchanges/**/*"]
