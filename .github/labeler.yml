@@ -40,9 +40,9 @@
 "scope: core":
   - changed-files:
       - any-glob-to-any-file: "packages/@1/modules/core/**/*"
-"scope: exchanges":
+"scope: exchange":
   - changed-files:
-      - any-glob-to-any-file: "packages/@1/modules/exchanges/**/*"
+      - any-glob-to-any-file: "packages/@1/modules/exchange/**/*"
 "scope: forum":
   - changed-files:
       - any-glob-to-any-file: "packages/@1/modules/forum/**/*"
