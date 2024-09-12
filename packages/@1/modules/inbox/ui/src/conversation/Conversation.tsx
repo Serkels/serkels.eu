@@ -56,7 +56,7 @@ const layout = tv({
     `,
     footer: `
       flex
-      min-h-[theme(spacing.24)]
+      min-h-@footer
       flex-col
       items-center
       justify-center
