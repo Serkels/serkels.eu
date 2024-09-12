@@ -36,6 +36,7 @@ export function SendButton({ isSubmitting }: { isSubmitting: boolean }) {
 function SubmitButton(props: ButtonProps) {
   return (
     <Button
+      aria-label="Send"
       className="focus:shadow-outline p-1 focus:outline-none"
       intent="light"
       type="submit"

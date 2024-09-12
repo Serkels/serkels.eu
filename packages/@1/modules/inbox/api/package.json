@@ -20,6 +20,7 @@
     "type-check": "tsc --build"
   },
   "dependencies": {
+    "@1.modules/core": "workspace:*",
     "@1.modules/inbox.domain": "workspace:*",
     "@1.modules/notification.domain": "workspace:*",
     "@1.modules/trpc": "workspace:*",
