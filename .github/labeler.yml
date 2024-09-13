@@ -6,7 +6,9 @@
       - any-glob-to-any-file: "packages/@1/modules/**/api/**/*"
 ":lipstick: ui":
   - changed-files:
-      - any-glob-to-any-file: "packages/@1/modules/**/ui/**/*"
+      - any-glob-to-any-file: 
+          - "packages/@1/ui/react/**/*"
+          - "packages/@1/modules/**/ui/**/*"
 ":memo: documentation":
   - changed-files:
       - any-glob-to-any-file: "**/*.md"
@@ -40,9 +42,6 @@
 "scope: core":
   - changed-files:
       - any-glob-to-any-file: "packages/@1/modules/core/**/*"
-"scope: core/ui":
-  - changed-files:
-      - any-glob-to-any-file: "packages/@1/ui/react/**/*"
 "scope: exchange":
   - changed-files:
       - any-glob-to-any-file: "packages/@1/modules/exchange/**/*"
