@@ -4,12 +4,13 @@ import { MarkAsRead } from ":components/button/MarkAsRead";
 import { Loading_Placeholder } from ":components/placeholder/Loading_Placeholder";
 import { TRPC_React } from ":trpc/client";
 import type { RouterOutput } from "@1.infra/trpc";
+import { ExchangeCompletedMessage } from "@1.modules/notification.ui/card/ExchangeCompletedMessage";
+import { ExchangeNewMessage } from "@1.modules/notification.ui/card/ExchangeNewMessage";
 import { ProfileAdded } from "@1.modules/notification.ui/card/ProfileAdded";
 import { Button } from "@1.ui/react/button";
 import type { InfiniteQueryObserverSuccessResult } from "@tanstack/react-query";
+import { useSession } from "next-auth/react";
 import { P, match } from "ts-pattern";
-import { ExchangeCompletedMessage } from "./ExchangeCompletedMessage";
-import { ExchangeNewMessage } from "./ExchangeNewMessage";
 import { ExchangeNewParticipant } from "./ExchangeNewParticipant";
 import { ForumNewAnswer } from "./ForumNewAnswer";
 import { InboxNewMessage } from "./InboxNewMessage";
@@ -72,19 +73,58 @@ function List({
 }
 
 function Card({ notification }: { notification: Notification }) {
+  const session = useSession();
+  if (!session.data) return null;
+  const {
+    data: { profile },
+  } = session;
   return match(notification)
     .with({ type: "INBOX_NEW_MESSAGE" }, (notification) => (
       <InboxNewMessage notification={notification} />
     ))
-    .with({ type: "EXCHANGE_COMPLETED" }, (notification) => (
-      <ExchangeCompletedMessage notification={notification} />
-    ))
+    .with(
+      {
+        type: "EXCHANGE_COMPLETED",
+        exchange_message: {
+          exchange: P.nonNullable,
+          message: P.nonNullable,
+        },
+      },
+      (notification) => {
+        const {
+          id: notification_id,
+          exchange_message: {
+            exchange: { id: exchange_id },
+          },
+        } = notification;
+        return (
+          <MarkAsRead
+            notification_id={notification_id}
+            redirect_to={`/@~/history/?since=${exchange_id}`}
+          >
+            <ExchangeCompletedMessage
+              notification={notification}
+              profile={profile}
+            />
+          </MarkAsRead>
+        );
+      },
+    )
     .with({ type: "EXCHANGE_NEW_PARTICIPANT" }, (notification) => (
       <ExchangeNewParticipant notification={notification} />
     ))
-    .with({ type: "EXCHANGE_NEW_MESSAGE" }, (notification) => (
-      <ExchangeNewMessage notification={notification} />
-    ))
+    .with(
+      {
+        type: "EXCHANGE_NEW_MESSAGE",
+        exchange_message: {
+          exchange: P.nonNullable,
+          message: P.nonNullable,
+        },
+      },
+      (notification) => (
+        <ExchangeNewMessage notification={notification} profile={profile} />
+      ),
+    )
     .with({ type: "FORUM_NEW_AWNSER" }, (notification) => (
       <ForumNewAnswer notification={notification} />
     ))

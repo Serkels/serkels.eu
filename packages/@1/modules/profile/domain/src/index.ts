@@ -1,5 +1,9 @@
 //
 
+export * from "./AvatarProfile";
+
+//
+
 import { Category_Schema } from "@1.modules/category.domain";
 import { Entity_Schema } from "@1.modules/core/domain";
 import { z } from "zod";
