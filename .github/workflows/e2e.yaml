@@ -103,7 +103,6 @@ jobs:
 
       - run: pnpm --filter=!e2e install --frozen-lockfile --prefer-offline
       - run: pnpm exec turbo build --filter api...
-      - run: pnpm --filter=@1.infra/database run generate
       - name: Install bun
         uses: oven-sh/setup-bun@4bc047ad259df6fc24a6c9b0f9a0cb08cf17fbe5 # v2
       - run: pnpm test
