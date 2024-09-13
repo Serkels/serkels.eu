@@ -108,7 +108,16 @@ const question_api_router = router({
         orderBy: { created_at: "desc" },
         take: limit + 1,
         where: {
-          title: { contains: search ?? "", mode: "insensitive" },
+          OR: [
+            {
+              owner: {
+                profile: {
+                  name: { contains: search ?? "", mode: "insensitive" },
+                },
+              },
+            },
+            { title: { contains: search ?? "", mode: "insensitive" } },
+          ],
           ...(category ? { category: { slug: category } } : {}),
           ...narrow,
         },
