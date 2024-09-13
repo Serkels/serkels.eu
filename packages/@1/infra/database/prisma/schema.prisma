@@ -18,7 +18,7 @@ datasource db {
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["driverAdapters"]
-  binaryTargets = ["native", "debian-openssl-3.0.x"]
+  binaryTargets   = ["native", "debian-openssl-3.0.x"]
 }
 
 //
@@ -38,17 +38,18 @@ model SignupPayload {
 }
 
 model Profile {
-  bio       String?
-  bookmarks Bookmark[]
-  contacts  Profile[]   @relation("Contacts")
-  following Profile[]   @relation("ProfileFollows")
-  id        String      @id @default(cuid())
-  image     String
-  is_online Boolean     @default(false)
-  name      String
-  role      ProfileRole
-  user      User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  user_id   String      @unique @map("userId")
+  bio           String?
+  bookmarks     Bookmark[]
+  contacts      Profile[]      @relation("Contacts")
+  following     Profile[]      @relation("ProfileFollows")
+  id            String         @id @default(cuid())
+  image         String
+  is_online     Boolean        @default(false)
+  name          String
+  notifications Notification[]
+  role          ProfileRole
+  user          User           @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id       String         @unique @map("userId")
   //
 
   created_at DateTime @default(now())
@@ -57,11 +58,12 @@ model Profile {
 
   partner                Partner?
   student                Student?
-  written_messages       Message[]      @relation("WrittenMessages")
-  followed_by            Profile[]      @relation("ProfileFollows")
-  participants_in_thread Thread[]       @relation("ParticipantsInThread")
-  in_contact_with        Profile[]      @relation("Contacts")
-  notifications          Notification[]
+  written_messages       Message[] @relation("WrittenMessages")
+  followed_by            Profile[] @relation("ProfileFollows")
+  participants_in_thread Thread[]  @relation("ParticipantsInThread")
+  in_contact_with        Profile[] @relation("Contacts")
+
+  added_notifications ProfileAddedNotification[] @relation("AddedNotifications")
 }
 
 model Student {
@@ -391,6 +393,7 @@ model Notification {
   exchange_message ExchangeMessageNotification?
   forum_message    ForumNotification?
   inbox_message    InboxMessageNotification?
+  profile_added    ProfileAddedNotification?
 
   //
 
@@ -403,6 +406,7 @@ enum NotificationType {
   EXCHANGE_NEW_PARTICIPANT
   FORUM_NEW_AWNSER
   INBOX_NEW_MESSAGE
+  PROFILE_ADDED
 }
 
 model ExchangeMessageNotification {
@@ -432,6 +436,15 @@ model InboxMessageNotification {
   notification_id String       @unique
 
   @@unique(name: "unique_message_notification", fields: [message_id, notification_id])
+}
+
+model ProfileAddedNotification {
+  notification    Notification @relation(fields: [notification_id], references: [id], onDelete: Cascade)
+  notification_id String       @unique
+  profile         Profile?     @relation("AddedNotifications", fields: [profile_id], references: [id], onDelete: Cascade)
+  profile_id      String?
+
+  @@unique(name: "unique_profile_added_notification", fields: [profile_id, notification_id])
 }
 
 //

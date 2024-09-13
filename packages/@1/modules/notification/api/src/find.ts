@@ -62,6 +62,17 @@ export default next_auth_procedure
             answer_id: true,
           },
         },
+        profile_added: {
+          select: {
+            profile: {
+              select: {
+                name: true,
+                id: true,
+                image: true,
+              },
+            },
+          },
+        },
       },
     });
 

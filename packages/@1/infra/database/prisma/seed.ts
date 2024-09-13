@@ -8,6 +8,7 @@ import {
   CategoryContext,
   ExchangeThreadStatus,
   ExchangeType,
+  NotificationType,
   Prisma,
   ProfileRole,
   type Deal,
@@ -18,8 +19,8 @@ import dedent from "dedent";
 import process from "node:process";
 import slugify from "slugify";
 import prisma from "../index";
-import { faker_image_avatar } from "./seed/helpers/faker_image_avatar";
 import { students as studient_fixtures } from "./seed/fixtures/students";
+import { faker_image_avatar } from "./seed/helpers/faker_image_avatar";
 
 //
 //#region 🌱 Seed
@@ -42,6 +43,7 @@ async function main() {
     prisma.opportunity.deleteMany(),
     prisma.partner.deleteMany(),
     prisma.profile.deleteMany(),
+    prisma.profileAddedNotification.deleteMany(),
     prisma.question.deleteMany(),
     prisma.signupPayload.deleteMany(),
     prisma.student.deleteMany(),
@@ -766,15 +768,33 @@ async function students_messages() {
       max: 10,
     });
 
+    const notifications = await prisma.notification.createManyAndReturn({
+      data: contacts.map(({ profile_id }) => ({
+        owner_id: profile_id,
+        type: NotificationType.PROFILE_ADDED,
+        read_at: null,
+        created_at: faker.date.past(),
+      })),
+      select: { id: true },
+    });
     await prisma.profile.update({
       data: {
         contacts: {
-          connect: contacts.map(({ profile_id }) => ({ id: profile_id })),
+          connect: contacts.map(({ profile_id }) => ({
+            id: profile_id,
+          })),
         },
         following: {
           connect: faker.helpers
             .arrayElements(contacts)
             .map(({ profile_id }) => ({ id: profile_id })),
+        },
+        added_notifications: {
+          createMany: {
+            data: notifications.map(({ id: notification_id }) => ({
+              notification_id,
+            })),
+          },
         },
       },
       where: { id: student.profile_id },
