@@ -41,7 +41,6 @@
   },
   "pnpm": {
     "overrides": {
-      "@prisma/driver-adapter-utils": "5.19.1",
       "next": "14.2.7"
     },
     "patchedDependencies": {

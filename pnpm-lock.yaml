@@ -5,7 +5,6 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  '@prisma/driver-adapter-utils': 5.19.1
   next: 14.2.7
 
 patchedDependencies:
@@ -2817,11 +2816,14 @@ packages:
       prisma:
         optional: true
 
+  '@prisma/debug@5.14.0':
+    resolution: {integrity: sha512-iq56qBZuFfX3fCxoxT8gBX33lQzomBU0qIUaEj1RebsKVz1ob/BVH1XSBwwwvRVtZEV1b7Fxx2eVu34Ge/mg3w==}
+
   '@prisma/debug@5.19.1':
     resolution: {integrity: sha512-lAG6A6QnG2AskAukIEucYJZxxcSqKsMK74ZFVfCTOM/7UiyJQi48v6TQ47d6qKG3LbMslqOvnTX25dj/qvclGg==}
 
-  '@prisma/driver-adapter-utils@5.19.1':
-    resolution: {integrity: sha512-98PZ4MWYddRFRlEZXSXGIPeNxtY3ErRH13rir8j31YcqQDPuAWG0dWAjIp1h7NL3uewj+QF5UkDXRnTgoCE4Wg==}
+  '@prisma/driver-adapter-utils@5.14.0':
+    resolution: {integrity: sha512-EyAfdKjk0M7CaA7BfiwDTPLs7udOwt+RUnyWIPSg7uBEFp2GS/l9Ig7CCgMZFcBFc62v0c6Z/R3WFuQ+bNxfnA==}
 
   '@prisma/engines-version@5.19.1-2.69d742ee20b815d88e17e54db4a2a7a3b30324e3':
     resolution: {integrity: sha512-xR6rt+z5LnNqTP5BBc+8+ySgf4WNMimOKXRn6xfNRDSpHvbOEmd7+qAOmzCrddEc4Cp8nFC0txU14dstjH7FXA==}
@@ -9109,11 +9111,13 @@ snapshots:
     optionalDependencies:
       prisma: 5.19.1
 
+  '@prisma/debug@5.14.0': {}
+
   '@prisma/debug@5.19.1': {}
 
-  '@prisma/driver-adapter-utils@5.19.1':
+  '@prisma/driver-adapter-utils@5.14.0':
     dependencies:
-      '@prisma/debug': 5.19.1
+      '@prisma/debug': 5.14.0
 
   '@prisma/engines-version@5.19.1-2.69d742ee20b815d88e17e54db4a2a7a3b30324e3': {}
 
@@ -14111,7 +14115,7 @@ snapshots:
   pglite-prisma-adapter@0.2.0(@electric-sql/pglite@0.2.7):
     dependencies:
       '@electric-sql/pglite': 0.2.7
-      '@prisma/driver-adapter-utils': 5.19.1
+      '@prisma/driver-adapter-utils': 5.14.0
 
   picocolors@1.0.1: {}
 

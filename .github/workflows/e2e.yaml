@@ -12,7 +12,6 @@ concurrency:
 env:
   DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres?schema=public
   DO_NOT_TRACK: 1
-  PRISMA_CLI_BINARY_TARGETS: linux-arm64-openssl-1.0.x
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
 
