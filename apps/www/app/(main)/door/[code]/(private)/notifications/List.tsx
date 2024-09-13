@@ -1,5 +1,6 @@
 "use client";
 
+import { MarkAsRead } from ":components/button/MarkAsRead";
 import { Loading_Placeholder } from ":components/placeholder/Loading_Placeholder";
 import { TRPC_React } from ":trpc/client";
 import type { RouterOutput } from "@1.infra/trpc";
@@ -89,7 +90,22 @@ function Card({ notification }: { notification: Notification }) {
     ))
     .with(
       { type: "PROFILE_ADDED", profile_added: { profile: P.nonNullable } },
-      (notification) => <ProfileAdded notification={notification} />,
+      (notification) => {
+        const {
+          id: notification_id,
+          profile_added: {
+            profile: { id: profile_id },
+          },
+        } = notification;
+        return (
+          <MarkAsRead
+            notification_id={notification_id}
+            redirect_to={`/@${profile_id}`}
+          >
+            <ProfileAdded notification={notification} />
+          </MarkAsRead>
+        );
+      },
     )
     .otherwise(() => {
       console.error(`Unknown notification type ${notification.type}`);
