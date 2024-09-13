@@ -48,11 +48,10 @@ const layout = tv({
     `,
     header: `
       flex
-      flex-row
       items-center
-      gap-2
-      space-x-3
-      py-4
+      justify-between
+      py-4    
+      md:space-x-3
       md:py-7
     `,
     footer: `

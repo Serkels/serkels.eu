@@ -14,7 +14,7 @@ export type AvatarVariantProps = VariantProps<typeof avatar>;
 
 export const avatar_media = tv({
   slots: {
-    figure: "flex items-center",
+    figure: "flex items-center justify-center",
     avatar: "flex-shrink-0",
     figcaption: "flex-grow",
     title: `
