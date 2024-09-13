@@ -40,6 +40,9 @@
 "scope: core":
   - changed-files:
       - any-glob-to-any-file: "packages/@1/modules/core/**/*"
+"scope: core/ui":
+  - changed-files:
+      - any-glob-to-any-file: "packages/@1/ui/react/**/*"
 "scope: exchange":
   - changed-files:
       - any-glob-to-any-file: "packages/@1/modules/exchange/**/*"
