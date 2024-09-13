@@ -35,8 +35,8 @@
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
+    "@1.infra/database": "workspace:*",
     "@1.infra/email": "workspace:*",
-    "@prisma/client": "5.18.0",
     "@types/node": "22.5.0",
     "typescript": "5.5.4"
   }

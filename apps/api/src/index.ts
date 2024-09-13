@@ -48,7 +48,7 @@ function createContext(
 
   // TODO(douglasduteil): parse with the NEXT_AUTH_HEADER zod validator
   return {
-    prisma: prisma,
+    prisma,
     headers: {
       origin: headers.get("origin") ?? "https://toc-toc.org",
       NEXTAUTH_TOKEN: headers.get("NEXTAUTH_TOKEN") ?? "",

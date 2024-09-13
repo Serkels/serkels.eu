@@ -1,8 +1,8 @@
 //
 
+import type { Prisma } from "@1.infra/database";
 import { filter_params_schema } from "@1.modules/exchange.domain/filter_params_schema";
 import { next_auth_procedure } from "@1.modules/trpc";
-import type { Prisma } from "@prisma/client";
 import { isAfter } from "date-fns";
 import { match } from "ts-pattern";
 import { z } from "zod";

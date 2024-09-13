@@ -1,15 +1,15 @@
 //
 
+import type { Prisma } from "@1.infra/database";
 import {
   Deal_Status_Schema,
   Exchange_Create_Schema,
 } from "@1.modules/exchange.domain";
 import { next_auth_procedure, procedure, router } from "@1.modules/trpc";
-import { Prisma } from "@prisma/client";
 import { z } from "zod";
 import find_router from "./find";
-import by_id from "./public/by_id";
 import { me } from "./me";
+import by_id from "./public/by_id";
 
 const exchange_api_router = router({
   //

@@ -1,9 +1,9 @@
 //
 
+import type { Prisma } from "@1.infra/database";
 import { ID_Schema } from "@1.modules/core/domain";
 import { Forum_Filter } from "@1.modules/forum.domain";
 import { next_auth_procedure, procedure, router } from "@1.modules/trpc";
-import { Prisma } from "@prisma/client";
 import { match } from "ts-pattern";
 import { z } from "zod";
 import { answers_api_router } from "./answers";

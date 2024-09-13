@@ -1,9 +1,13 @@
+//
+
+import { NotificationType } from "@1.infra/database";
 import { ID_Schema } from "@1.modules/core/domain";
 import { Student_Schema, type Student } from "@1.modules/profile.domain";
 import { next_auth_procedure, router } from "@1.modules/trpc";
-import { NotificationType } from "@prisma/client";
 import { match } from "ts-pattern";
 import { z } from "zod";
+
+//
 
 export const student_api_router = router({
   by_id: next_auth_procedure

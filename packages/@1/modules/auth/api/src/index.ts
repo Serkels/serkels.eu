@@ -1,5 +1,6 @@
 //
 
+import type { Prisma } from "@1.infra/database";
 import { SerkelsMagicLinkEmail } from "@1.modules/auth.emails";
 import {
   PROFILE_ROLES,
@@ -14,7 +15,6 @@ import create_NextAuth_router from "@douglasduteil/nextauth...trpc.prisma/trpc/r
 import create_EmailProvider_router, {
   type SendEmailResolverFn,
 } from "@douglasduteil/nextauth...trpc.prisma/trpc/router/email";
-import { Prisma, ProfileRole } from "@prisma/client";
 import { match } from "ts-pattern";
 import { z } from "zod";
 
@@ -72,7 +72,7 @@ const link = next_auth_procedure
       data: {
         name: input.name,
         email: input.identifier,
-        role: ProfileRole[input.role],
+        role: input.role,
         tokens: { connect: { token: input.token } },
         context: input.context,
       },
@@ -145,7 +145,7 @@ const use_payload = next_auth_procedure
           create: {
             image,
             name: payload.name,
-            role: ProfileRole[payload.role],
+            role: payload.role,
             bio,
             ...profile_role_data,
           },

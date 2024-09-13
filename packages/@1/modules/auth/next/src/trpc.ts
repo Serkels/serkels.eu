@@ -26,7 +26,7 @@ export const trpc = createTRPCProxyClient<Router>({
     }),
     httpLink({
       url: `${ENV.API_URL}/trpc`,
-      headers: async ({}) => {
+      headers: async () => {
         const nexaut_header = await create_nextauth_header({
           secret: ENV.NEXTAUTH_SECRET,
           token: {

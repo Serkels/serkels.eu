@@ -1,10 +1,10 @@
 //
 
+import type { Prisma } from "@1.infra/database";
+import { ID_Schema } from "@1.modules/core/domain";
 import { next_auth_procedure, router } from "@1.modules/trpc";
-import type { Prisma } from "@prisma/client";
 import { z } from "zod";
 import { thread } from "./thread";
-import { ID_Schema } from "@1.modules/core/domain";
 
 const inbox_api_router = router({
   //

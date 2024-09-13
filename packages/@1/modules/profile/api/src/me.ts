@@ -1,8 +1,10 @@
+//
+
+import type { Prisma } from "@1.infra/database";
 import { Profile_Schema } from "@1.modules/profile.domain";
 import { gravatarUrlFor } from "@1.modules/profile.domain/gravatarUrlFor";
 import { create_report } from "@1.modules/profile.domain/report";
 import { next_auth_procedure, router } from "@1.modules/trpc";
-import type { Prisma } from "@prisma/client";
 import { z } from "zod";
 
 //

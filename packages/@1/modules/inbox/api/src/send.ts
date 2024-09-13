@@ -2,7 +2,8 @@
 
 import { thread_recipient } from "@1.modules/inbox.domain/select";
 import { next_auth_procedure } from "@1.modules/trpc";
-import { NotificationType, Prisma } from "@prisma/client";
+
+import { NotificationType, type Prisma } from "@1.infra/database";
 import { P, match } from "ts-pattern";
 import { z } from "zod";
 import { message_event_emitter } from "./MessageEventEmitter";

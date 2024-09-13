@@ -16,5 +16,7 @@ const prismaClientSingleton = () => {
 
 const prisma = prismaClientSingleton();
 export type PrismaClient = typeof prisma;
+export { CategoryContext, NotificationType } from "@prisma/client";
+export type { Prisma } from "@prisma/client";
 
 export default prisma;
