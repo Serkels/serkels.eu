@@ -8,6 +8,7 @@ import { next_auth_procedure, procedure, router } from "@1.modules/trpc";
 import { Prisma } from "@prisma/client";
 import { z } from "zod";
 import find_router from "./find";
+import by_id from "./public/by_id";
 import { me } from "./me";
 
 const exchange_api_router = router({
@@ -40,19 +41,7 @@ const exchange_api_router = router({
 
   //
 
-  by_id: procedure
-    .input(z.string())
-    .query(async ({ input: id, ctx: { prisma } }) => {
-      return prisma.exchange.findUniqueOrThrow({
-        include: {
-          category: true,
-          return: true,
-          owner: { include: { profile: true } },
-          deals: { where: { status: Deal_Status_Schema.Enum.APPROVED } },
-        },
-        where: { id },
-      });
-    }),
+  by_id,
 
   //
 

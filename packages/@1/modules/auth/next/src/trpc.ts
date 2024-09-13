@@ -2,7 +2,7 @@
 
 import type { Router } from "@1.infra/trpc";
 import { NEXTAUTH_TRPCENV } from "@douglasduteil/nextauth...trpc.prisma/config";
-import { create_nexauth_header } from "@douglasduteil/nextauth...trpc.prisma/jwt";
+import { create_nextauth_header } from "@douglasduteil/nextauth...trpc.prisma/jwt";
 import { createTRPCProxyClient, httpLink, loggerLink } from "@trpc/client";
 import type { JWT } from "next-auth/jwt";
 import SuperJSON from "superjson";
@@ -27,7 +27,7 @@ export const trpc = createTRPCProxyClient<Router>({
     httpLink({
       url: `${ENV.API_URL}/trpc`,
       headers: async ({}) => {
-        const nexaut_header = await create_nexauth_header({
+        const nexaut_header = await create_nextauth_header({
           secret: ENV.NEXTAUTH_SECRET,
           token: {
             from: "@1.modules/auth.next",

@@ -874,6 +874,9 @@ importers:
 
   packages/@1/modules/core:
     dependencies:
+      date-fns:
+        specifier: 3.6.0
+        version: 3.6.0
       debug:
         specifier: 4.3.6
         version: 4.3.6(supports-color@8.1.1)
@@ -921,6 +924,9 @@ importers:
         specifier: 3.23.8
         version: 3.23.8
     devDependencies:
+      '@1.config/prettier':
+        specifier: workspace:*
+        version: link:../../../config/prettier
       '@1.config/typescript':
         specifier: workspace:*
         version: link:../../../config/typescript
@@ -930,6 +936,9 @@ importers:
       '@types/node':
         specifier: 22.5.0
         version: 22.5.0
+      prettier:
+        specifier: 3.3.3
+        version: 3.3.3
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -945,6 +954,9 @@ importers:
       '@1.modules/profile.domain':
         specifier: workspace:*
         version: link:../../profile/domain
+      date-fns:
+        specifier: 3.6.0
+        version: 3.6.0
       ts-pattern:
         specifier: 5.3.1
         version: 5.3.1
@@ -997,6 +1009,9 @@ importers:
       date-fns:
         specifier: 3.6.0
         version: 3.6.0
+      next:
+        specifier: 14.2.7
+        version: 14.2.7(@babel/core@7.24.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -1034,6 +1049,9 @@ importers:
       '@1.config/typescript':
         specifier: workspace:*
         version: link:../../../config/typescript
+      '@testing-library/react':
+        specifier: 16.0.1
+        version: 16.0.1(@testing-library/dom@10.4.0)(@types/react-dom@18.3.0)(@types/react@18.3.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@types/react':
         specifier: 18.3.4
         version: 18.3.4

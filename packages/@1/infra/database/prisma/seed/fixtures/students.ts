@@ -51,7 +51,7 @@ export async function students() {
               location: "Paris",
               places: 1,
               return_id: null,
-              title: "Concert de jazz",
+              title: "P'tit pause café avec l'ami Jackie",
               type: "PROPOSAL",
             },
           ],

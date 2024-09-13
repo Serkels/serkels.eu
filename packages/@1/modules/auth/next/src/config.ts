@@ -5,7 +5,7 @@ import { type Profile } from "@1.modules/profile.domain";
 import type { _24_HOURS_ } from "@douglasduteil/datatypes...hours-to-seconds";
 import { NEXTAUTH_TRPCENV } from "@douglasduteil/nextauth...trpc.prisma/config";
 import {
-  create_nexauth_header,
+  create_nextauth_header,
   type JWT,
 } from "@douglasduteil/nextauth...trpc.prisma/jwt";
 import { PrismaTRPCAdapter } from "@douglasduteil/nextauth...trpc.prisma/next";
@@ -82,7 +82,7 @@ export const auth_options: NextAuthOptions = {
     async session({ session, token }) {
       if (token.profile) {
         session.profile = token.profile;
-        session.header = await create_nexauth_header({
+        session.header = await create_nextauth_header({
           secret: ENV.NEXTAUTH_SECRET,
           token: {
             profile: {

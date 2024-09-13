@@ -3,12 +3,11 @@
 import BackButton from ":components/button/BackButton";
 import type { Params } from ":pipes/exchange_by_id";
 import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
+import { TitleHeader } from "@1.modules/exchange.ui/aside/TitleHeader";
 import { column_screen } from "@1.ui/react/grid/atom";
 import to from "await-to-js";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import Infinite_Thread_List from "./_client/Infinite_Thread_List";
-
 //
 
 export default async function DealNavbarPage({ params }: { params: Params }) {
@@ -31,15 +30,7 @@ export default async function DealNavbarPage({ params }: { params: Params }) {
         <div className={column_screen({ className: "pt-10 " })}>
           <header className="flex h-16 items-center justify-start gap-4 px-5">
             <BackButton href={"/@~/exchanges/inbox"} />
-
-            <div className="flex flex-col">
-              <h6 className="line-clamp-2 flex-1 text-xl font-bold">
-                {exchange.title}
-              </h6>
-              <Link href={`/exchanges/${exchange_id}`}>
-                Consulter l'échange
-              </Link>
-            </div>
+            <TitleHeader exchange={exchange} />
           </header>
 
           <hr className="my-6 border border-[#F0F0F0]" />

@@ -7,7 +7,7 @@ import { NEXTAUTH_TRPCENV } from "../config";
 
 //
 
-export function verify_next_auth_token<T>() {
+export function verify_next_auth_token<T>(passthrough = false) {
   return middleware(async function guard_middleware({ ctx, next }) {
     const { NEXTAUTH_SECRET: secret } = NEXTAUTH_TRPCENV.parse(process.env);
     try {
@@ -25,6 +25,7 @@ export function verify_next_auth_token<T>() {
         cause: new Error("No payload"),
       });
     } catch (cause) {
+      if (passthrough) return next({ ctx: { ...ctx, payload: {} } });
       throw new TRPCError({ code: "PARSE_ERROR", cause });
     }
   });

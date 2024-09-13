@@ -4,6 +4,10 @@
     { "path": "apps/www", "name": "🚀 www" },
     { "path": "apps/api", "name": "🚀 api" },
     //
+    //
+    //
+    { "path": "packages/@1/modules/core", "name": "📦 modules/core" },
+    //
     // { "path": "packages/@1/modules", "name": "📦 modules" },
     //
     { "path": "packages/@1/modules/auth/api", "name": "🫙 auth.api" },
@@ -27,10 +31,6 @@
       "name": "📜 category.domain",
     },
     { "path": "packages/@1/modules/category/ui", "name": "💄 category.ui" },
-    //
-    //
-    //
-    { "path": "packages/@1/modules/core", "name": "📦 modules/core" },
     //
     //
     //

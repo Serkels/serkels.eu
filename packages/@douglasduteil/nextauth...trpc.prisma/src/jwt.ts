@@ -13,13 +13,15 @@ export interface JWT extends NextAuth_JWT {
   from?: string;
 }
 
-export interface JWTEncodeParams extends NextAuth_JWTEncodeParams {
-  token?: JWT;
+export interface JWTEncodeParams<TToken> extends NextAuth_JWTEncodeParams {
+  token?: JWT & TToken;
 }
 
 //
 
-export async function create_nexauth_header(params: JWTEncodeParams) {
+export async function create_nextauth_header<TToken extends object>(
+  params: JWTEncodeParams<TToken>,
+) {
   return { NEXTAUTH_TOKEN: await jwt_encode(params) };
 }
 
