@@ -6,6 +6,7 @@ import { gravatarUrlFor } from "@1.modules/profile.domain/gravatarUrlFor";
 import { create_report } from "@1.modules/profile.domain/report";
 import { next_auth_procedure, router } from "@1.modules/trpc";
 import { z } from "zod";
+import toggle_add_contact from "./me/toggle";
 
 //
 
@@ -56,25 +57,7 @@ const contact = router({
 
   //
 
-  toggle: next_auth_procedure
-    .input(z.string())
-    .mutation(async ({ input: profile_id, ctx: { prisma, payload } }) => {
-      const { id } = payload.profile;
-
-      const existing = await prisma.profile.findUnique({
-        include: { contacts: true },
-        where: { id, contacts: { some: { id: profile_id } } },
-      });
-
-      const data: Prisma.ProfileUpdateInput = existing
-        ? { contacts: { disconnect: { id: profile_id } } }
-        : { contacts: { connect: { id: profile_id } } };
-
-      return prisma.profile.update({
-        data,
-        where: { id },
-      });
-    }),
+  toggle: toggle_add_contact,
 });
 
 const follows = next_auth_procedure

@@ -3,6 +3,7 @@
 import { Loading_Placeholder } from ":components/placeholder/Loading_Placeholder";
 import { TRPC_React } from ":trpc/client";
 import type { RouterOutput } from "@1.infra/trpc";
+import { ProfileAdded } from "@1.modules/notification.ui/card/ProfileAdded";
 import { Button } from "@1.ui/react/button";
 import type { InfiniteQueryObserverSuccessResult } from "@tanstack/react-query";
 import { P, match } from "ts-pattern";
@@ -86,6 +87,10 @@ function Card({ notification }: { notification: Notification }) {
     .with({ type: "FORUM_NEW_AWNSER" }, (notification) => (
       <ForumNewAnswer notification={notification} />
     ))
+    .with(
+      { type: "PROFILE_ADDED", profile_added: { profile: P.nonNullable } },
+      (notification) => <ProfileAdded notification={notification} />,
+    )
     .otherwise(() => {
       console.error(`Unknown notification type ${notification.type}`);
       return null;
