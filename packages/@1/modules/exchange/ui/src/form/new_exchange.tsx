@@ -51,7 +51,7 @@ export function form_to_dto(form: FormValues) {
 
 export function Exchange_EditForm({ categories }: { categories: Category[] }) {
   const {
-    formState: { isSubmitting },
+    formState: { isSubmitting, isSubmitSuccessful },
   } = useFormContext<FormValues>();
 
   return (
@@ -70,7 +70,7 @@ export function Exchange_EditForm({ categories }: { categories: Category[] }) {
         Attention: Les échanges ne peuvent plus être modifiés après
         l'acceptation d'un.e participant.e
       </div>
-      <Button isDisabled={isSubmitting} type="submit">
+      <Button isDisabled={isSubmitting || isSubmitSuccessful} type="submit">
         Publier
       </Button>
     </div>
@@ -82,11 +82,14 @@ export function Exchange_EditForm({ categories }: { categories: Category[] }) {
 function Type_Field() {
   const {
     register,
-    formState: { isSubmitting },
+    formState: { isSubmitting, isSubmitSuccessful },
   } = useFormContext<FormValues>();
 
   return (
-    <fieldset className={fieldset()} disabled={isSubmitting}>
+    <fieldset
+      className={fieldset()}
+      disabled={isSubmitting || isSubmitSuccessful}
+    >
       <label>
         <span>Je cherche</span>
         <input
@@ -112,11 +115,14 @@ function Type_Field() {
 function IsOnline_Field() {
   const {
     register,
-    formState: { isSubmitting },
+    formState: { isSubmitting, isSubmitSuccessful },
   } = useFormContext<FormValues>();
 
   return (
-    <fieldset className={fieldset()} disabled={isSubmitting}>
+    <fieldset
+      className={fieldset()}
+      disabled={isSubmitting || isSubmitSuccessful}
+    >
       <label>
         <span>En ligne</span>{" "}
         <input {...register("is_online")} value="true" required type="radio" />
@@ -133,7 +139,7 @@ function Location_Field() {
   const {
     register,
     watch,
-    formState: { isSubmitting },
+    formState: { isSubmitting, isSubmitSuccessful },
   } = useFormContext<FormValues>();
 
   if (watch("is_online") === "true") {
@@ -147,7 +153,7 @@ function Location_Field() {
       <input
         {...register("location")}
         className={input()}
-        disabled={isSubmitting}
+        disabled={isSubmitting || isSubmitSuccessful}
         required
       />
     </label>
@@ -157,7 +163,7 @@ function Location_Field() {
 function Category_Field({ categories }: { categories: Category[] }) {
   const {
     register,
-    formState: { isSubmitting },
+    formState: { isSubmitting, isSubmitSuccessful },
   } = useFormContext<FormValues>();
 
   return (
@@ -167,7 +173,7 @@ function Category_Field({ categories }: { categories: Category[] }) {
       <select
         {...register("category_id")}
         className={select()}
-        disabled={isSubmitting}
+        disabled={isSubmitting || isSubmitSuccessful}
         required
       >
         <option hidden value="">
@@ -182,7 +188,7 @@ function Category_Field({ categories }: { categories: Category[] }) {
 function Expiry_Date_Field() {
   const {
     register,
-    formState: { isSubmitting },
+    formState: { isSubmitting, isSubmitSuccessful },
   } = useFormContext<FormValues>();
 
   return (
@@ -193,7 +199,7 @@ function Expiry_Date_Field() {
         {...register("expiry_date")}
         type="date"
         className={input()}
-        disabled={isSubmitting}
+        disabled={isSubmitting || isSubmitSuccessful}
         min={new Date().toISOString().split("T")[0]}
       />
     </label>
@@ -203,7 +209,7 @@ function Expiry_Date_Field() {
 function Title_Field() {
   const {
     register,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isSubmitSuccessful },
   } = useFormContext<FormValues>();
 
   return (
@@ -213,7 +219,7 @@ function Title_Field() {
       <input
         {...register("title")}
         className={input()}
-        disabled={isSubmitting}
+        disabled={isSubmitting || isSubmitSuccessful}
         required
       />
       {errors.title && (
@@ -226,7 +232,7 @@ function Title_Field() {
 function Description_Field() {
   const {
     register,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isSubmitSuccessful },
   } = useFormContext<FormValues>();
 
   return (
@@ -236,7 +242,7 @@ function Description_Field() {
       <textarea
         {...register("description")}
         className={input()}
-        disabled={isSubmitting}
+        disabled={isSubmitting || isSubmitSuccessful}
         required
       ></textarea>
       {errors.description && (
@@ -249,7 +255,7 @@ function Description_Field() {
 function Places_Field() {
   const {
     register,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isSubmitSuccessful },
   } = useFormContext<FormValues>();
 
   return (
@@ -259,7 +265,7 @@ function Places_Field() {
       <input
         {...register("places")}
         className={input()}
-        disabled={isSubmitting}
+        disabled={isSubmitting || isSubmitSuccessful}
         maxLength={9}
         minLength={1}
         required
@@ -275,7 +281,7 @@ function Places_Field() {
 function Return_Field({ categories }: { categories: Category[] }) {
   const {
     register,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isSubmitSuccessful },
     setValue,
     watch,
   } = useFormContext<FormValues>();
@@ -286,13 +292,12 @@ function Return_Field({ categories }: { categories: Category[] }) {
     <>
       <fieldset
         className={fieldset({ horizontal: true })}
-        disabled={isSubmitting}
+        disabled={isSubmitting || isSubmitSuccessful}
       >
         <label className="flex md:gap-2">
           <input
             className="peer"
             defaultChecked={!has_return}
-            disabled={isSubmitting}
             onChange={() => setValue("return_id", null)}
             value="off"
             type="radio"
@@ -304,7 +309,6 @@ function Return_Field({ categories }: { categories: Category[] }) {
           <input
             className="peer"
             defaultChecked={has_return}
-            disabled={isSubmitting}
             onChange={() => setValue("return_id", "")}
             type="radio"
             value="on"
@@ -324,7 +328,7 @@ function Return_Field({ categories }: { categories: Category[] }) {
       </fieldset>
       <select
         {...register("return_id")}
-        disabled={!has_return || isSubmitting}
+        disabled={!has_return || isSubmitting || isSubmitSuccessful}
         hidden={!has_return}
         className={select()}
         required
