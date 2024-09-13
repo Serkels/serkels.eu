@@ -182,6 +182,11 @@ $ pnpm --filter @1.infra/database exec prisma migrate dev
 $ pnpm run --filter e2e studio
 # Run headless Cypress test
 $ pnpm run --filter e2e test
+
+# Install Bun
+$ curl -fsSL https://bun.sh/install | bash
+# Run unit test
+$ bun test
 ```
 
 ### Improving The Documentation

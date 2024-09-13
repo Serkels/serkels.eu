@@ -42,7 +42,7 @@ export default function Conversation_Form({ thread_id }: Params) {
   return (
     <FormProvider {...form}>
       <section className="w-full">
-        <MessageForm onSubmit={on_submit} isDisabled={!is_active} />;
+        <MessageForm onSubmit={on_submit} isDisabled={!is_active} />
         <ActionButtonGroup
           isDisabled={isSubmitting || isLoading}
           thread_id={thread_id}
