@@ -4,6 +4,20 @@
   "private": true,
   "sideEffects": false,
   "type": "module",
+  "exports": {
+    "./seed": {
+      "types": "./seed/index.ts",
+      "default": "./seed/index.ts"
+    },
+    "./testing": {
+      "types": "./testing/index.ts",
+      "default": "./testing/index.ts"
+    },
+    ".": {
+      "types": "./index.ts",
+      "default": "./index.ts"
+    }
+  },
   "main": "./index.ts",
   "types": "./index.ts",
   "scripts": {
@@ -20,15 +34,17 @@
   "prettier": "@1.config/prettier",
   "dependencies": {
     "@1.modules/notification.domain": "workspace:*",
-    "@prisma/client": "5.18.0"
+    "@prisma/client": "5.19.1"
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
+    "@electric-sql/pglite": "0.2.7",
     "@faker-js/faker": "8.4.1",
     "@types/node": "22.5.0",
     "date-fns": "3.6.0",
     "dedent": "1.5.3",
-    "prisma": "5.18.0",
+    "pglite-prisma-adapter": "0.2.0",
+    "prisma": "5.19.1",
     "slugify": "1.6.6",
     "tsx": "4.18.0"
   },

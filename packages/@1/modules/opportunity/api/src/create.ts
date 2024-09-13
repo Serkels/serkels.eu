@@ -1,8 +1,8 @@
 //
 
+import type { PrismaClient } from "@1.infra/database";
 import { Opportunity_Create_Schema } from "@1.modules/opportunity.domain";
 import { next_auth_procedure } from "@1.modules/trpc";
-import type { PrismaClient } from "@prisma/client";
 import slugify from "slugify";
 
 //

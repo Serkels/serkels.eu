@@ -1,8 +1,8 @@
 //
 
+import { NotificationType } from "@1.infra/database";
 import { NotificationGroup } from "@1.modules/notification.domain";
 import { next_auth_procedure } from "@1.modules/trpc";
-import { NotificationType } from "@prisma/client";
 import { P, match } from "ts-pattern";
 import { z } from "zod";
 

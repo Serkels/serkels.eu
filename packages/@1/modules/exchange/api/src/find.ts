@@ -1,5 +1,6 @@
 //
 
+import type { Prisma } from "@1.infra/database";
 import { Exchange_Filter } from "@1.modules/exchange.domain";
 import {
   next_auth_procedure,
@@ -7,7 +8,6 @@ import {
   router,
   type inferProcedureInput,
 } from "@1.modules/trpc";
-import type { Prisma } from "@prisma/client";
 import { endOfYesterday } from "date-fns";
 import { match, P } from "ts-pattern";
 import { z } from "zod";

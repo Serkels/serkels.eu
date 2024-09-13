@@ -1,7 +1,7 @@
 //
 
+import type { Prisma } from "@1.infra/database";
 import { next_auth_procedure } from "@1.modules/trpc";
-import type { Prisma } from "@prisma/client";
 import { z } from "zod";
 
 //

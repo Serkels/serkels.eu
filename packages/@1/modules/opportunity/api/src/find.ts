@@ -1,5 +1,6 @@
 //
 
+import type { Prisma } from "@1.infra/database";
 import { Partner_Filter } from "@1.modules/opportunity.domain";
 import {
   next_auth_procedure,
@@ -7,7 +8,6 @@ import {
   router,
   type inferProcedureInput,
 } from "@1.modules/trpc";
-import { Prisma } from "@prisma/client";
 import { startOfToday } from "date-fns/startOfToday";
 import { P, match } from "ts-pattern";
 import { z } from "zod";

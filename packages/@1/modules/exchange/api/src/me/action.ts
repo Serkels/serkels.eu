@@ -1,5 +1,6 @@
 //
 
+import { NotificationType } from "@1.infra/database";
 import { StateError } from "@1.modules/core/errors";
 import {
   Deal_Status_Schema,
@@ -12,7 +13,6 @@ import { deal_flow } from "@1.modules/exchange.domain/deal.machine";
 import { is_exchange_completed } from "@1.modules/exchange.domain/is_exchange_completed";
 import { thread_recipient } from "@1.modules/inbox.domain/select";
 import { next_auth_procedure, type Context } from "@1.modules/trpc";
-import { NotificationType } from "@prisma/client";
 import { match } from "ts-pattern";
 import { createActor } from "xstate";
 import { z } from "zod";

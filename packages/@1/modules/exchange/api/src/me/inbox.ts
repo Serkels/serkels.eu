@@ -1,19 +1,20 @@
 //
 
+import type { Prisma } from "@1.infra/database";
+import { NotificationType } from "@1.infra/database";
+import { is_active_exchange } from "@1.modules/exchange.domain";
 import { deal_flow } from "@1.modules/exchange.domain/deal.machine";
 import {
   next_auth_input_token,
   next_auth_procedure,
   router,
 } from "@1.modules/trpc";
-import { NotificationType, type Prisma } from "@prisma/client";
 import { observable } from "@trpc/server/observable";
 import { subDays } from "date-fns";
 import { EventEmitter } from "events";
 import { createActor } from "xstate";
 import { z } from "zod";
 import { action } from "./action";
-import { is_active_exchange } from "@1.modules/exchange.domain";
 
 //
 

@@ -12,6 +12,7 @@ concurrency:
 env:
   DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres?schema=public
   DO_NOT_TRACK: 1
+  PRISMA_CLI_BINARY_TARGETS: "debian-openssl-3.0.x"
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
 
@@ -94,7 +95,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           cache: pnpm
-          node-version: latest
+          node-version-file: package.json
 
       - name: "🔺️  Cache"
         uses: ./.github/actions/cache
@@ -103,6 +104,7 @@ jobs:
 
       - run: pnpm --filter=!e2e install --frozen-lockfile --prefer-offline
       - run: pnpm exec turbo build --filter api...
+      - run: pnpm --filter=@1.infra/database run generate
       - name: Install bun
         uses: oven-sh/setup-bun@4bc047ad259df6fc24a6c9b0f9a0cb08cf17fbe5 # v2
       - run: pnpm test
