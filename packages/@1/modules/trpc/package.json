@@ -11,6 +11,7 @@
     "dev": "tsc --build --watch --preserveWatchOutput",
     "type-check": "tsc --build"
   },
+  "prettier": "@1.config/prettier",
   "dependencies": {
     "@1.infra/database": "workspace:*",
     "@1.infra/email": "workspace:*",

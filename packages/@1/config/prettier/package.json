@@ -2,8 +2,8 @@
   "name": "@1.config/prettier",
   "version": "0.0.0",
   "private": true,
-  "type": "module",
   "sideEffects": false,
+  "type": "module",
   "files": [],
   "dependencies": {
     "@douglasduteil/config...tailwindcss": "workspace:*",

@@ -10,6 +10,7 @@
   "scripts": {
     "type-check": "tsc --build"
   },
+  "prettier": "@1.config/prettier",
   "dependencies": {
     "@1.modules/auth.api": "workspace:*",
     "@1.modules/bookmark.api": "workspace:*",

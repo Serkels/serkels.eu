@@ -19,6 +19,7 @@
   "scripts": {
     "type-check": "tsc --build"
   },
+  "prettier": "@1.config/prettier",
   "dependencies": {
     "@1.modules/core": "workspace:*",
     "@1.modules/inbox.domain": "workspace:*",

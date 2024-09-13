@@ -4,8 +4,6 @@
   "private": true,
   "sideEffects": false,
   "type": "module",
-  "main": "./src/index.ts",
-  "types": "./src/index.ts",
   "exports": {
     ".": {
       "types": "./src/index.ts",
@@ -16,10 +14,13 @@
       "default": "./src/*.ts"
     }
   },
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
   "scripts": {
     "dev": "tsc --build --watch --preserveWatchOutput",
     "type-check": "tsc --build"
   },
+  "prettier": "@1.config/prettier",
   "dependencies": {
     "@1.modules/auth.emails": "workspace:*",
     "@1.modules/profile.domain": "workspace:*",
@@ -33,8 +34,8 @@
     "zod": "3.23.8"
   },
   "devDependencies": {
-    "@1.infra/email": "workspace:*",
     "@1.config/typescript": "workspace:*",
+    "@1.infra/email": "workspace:*",
     "@prisma/client": "5.18.0",
     "@types/node": "22.5.0",
     "typescript": "5.5.4"

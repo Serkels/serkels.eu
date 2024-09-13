@@ -1,7 +1,7 @@
 //
 
-import base from "./index.js";
 import tailwindcss from "@douglasduteil/config...tailwindcss/prettier.config.mjs";
+import base from "./index.js";
 
 //
 

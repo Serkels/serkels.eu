@@ -4,11 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "type-check": "tsc --build",
     "dev": "tsx watch --clear-screen=false src/index.ts",
     "dev:inspect": "node --import tsx --inspect-brk src/index.ts",
-    "start": "node --import tsx src/index.ts"
+    "start": "node --import tsx src/index.ts",
+    "type-check": "tsc --build"
   },
+  "prettier": "@1.config/prettier",
   "dependencies": {
     "@1.infra/database": "workspace:*",
     "@1.infra/email": "workspace:*",

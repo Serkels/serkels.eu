@@ -2,16 +2,17 @@
   "name": "@1.config/tailwindcss",
   "version": "0.0.0",
   "private": true,
-  "type": "module",
   "sideEffects": false,
+  "type": "module",
+  "prettier": "@1.config/prettier",
   "dependencies": {
     "@douglasduteil/config...tailwindcss": "workspace:*",
     "@tailwindcss/typography": "0.5.14",
     "tailwindcss": "3.4.10"
   },
   "devDependencies": {
-    "@types/node": "22.5.0",
     "@1.config/typescript": "workspace:*",
+    "@types/node": "22.5.0",
     "typescript": "5.5.4"
   }
 }

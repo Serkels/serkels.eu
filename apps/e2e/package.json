@@ -5,11 +5,12 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "type-check": "tsc --build",
+    "start": "cd ../.. && pnpm run start",
     "studio": "cypress open --browser electron --e2e ",
     "test": "cypress run -e filterSpecs=true",
-    "start": "cd ../.. && pnpm run start"
+    "type-check": "tsc --build"
   },
+  "prettier": "@1.config/prettier",
   "dependencies": {
     "@badeball/cypress-cucumber-preprocessor": "20.1.2",
     "@bahmutov/cypress-esbuild-preprocessor": "2.2.2",

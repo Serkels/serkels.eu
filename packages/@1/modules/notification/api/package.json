@@ -19,6 +19,7 @@
   "scripts": {
     "type-check": "tsc --build"
   },
+  "prettier": "@1.config/prettier",
   "dependencies": {
     "@1.modules/notification.domain": "workspace:*",
     "@1.modules/trpc": "workspace:*",

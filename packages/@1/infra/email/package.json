@@ -9,6 +9,7 @@
   "scripts": {
     "type-check": "tsc --build"
   },
+  "prettier": "@1.config/prettier",
   "dependencies": {
     "@react-email/render": "1.0.0",
     "debug": "4.3.6",

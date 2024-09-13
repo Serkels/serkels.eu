@@ -32,11 +32,9 @@
     "zod": "3.23.8"
   },
   "devDependencies": {
-    "@1.config/prettier": "workspace:*",
     "@1.config/typescript": "workspace:*",
     "@prisma/client": "5.18.0",
     "@types/node": "22.5.0",
-    "prettier": "3.3.3",
     "typescript": "5.5.4"
   }
 }

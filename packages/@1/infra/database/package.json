@@ -7,6 +7,7 @@
   "main": "./index.ts",
   "types": "./index.ts",
   "scripts": {
+    "dev:studio": "prisma studio",
     "format": "prisma format",
     "generate": "prisma generate",
     "migrate:deploy": "prisma migrate deploy",
@@ -14,15 +15,12 @@
     "push": "prisma db push --skip-generate",
     "seed": "prisma db seed",
     "studio": "prisma studio",
-    "dev:studio": "prisma studio",
     "type-check": "tsc --build"
   },
-  "prisma": {
-    "seed": "tsx prisma/seed.ts"
-  },
+  "prettier": "@1.config/prettier",
   "dependencies": {
-    "@prisma/client": "5.18.0",
-    "@1.modules/notification.domain": "workspace:*"
+    "@1.modules/notification.domain": "workspace:*",
+    "@prisma/client": "5.18.0"
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
@@ -33,5 +31,8 @@
     "prisma": "5.18.0",
     "slugify": "1.6.6",
     "tsx": "4.18.0"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
   }
 }

@@ -2,9 +2,10 @@
   "name": "@1.config/typescript",
   "version": "0.0.0",
   "private": true,
-  "type": "module",
   "sideEffects": false,
+  "type": "module",
   "files": [],
+  "prettier": "@1.config/prettier",
   "dependencies": {
     "@douglasduteil/config...typescript": "workspace:*"
   }

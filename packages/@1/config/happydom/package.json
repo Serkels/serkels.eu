@@ -7,6 +7,7 @@
   "main": "index.ts",
   "module": "index.ts",
   "files": [],
+  "prettier": "@1.config/prettier",
   "dependencies": {
     "@happy-dom/global-registrator": "15.7.4"
   },
