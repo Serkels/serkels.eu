@@ -1,27 +1,27 @@
-"👷 CI":
+":construction_worker: CI":
   - changed-files:
       - any-glob-to-any-file: ".github/**"
-"💄 ui":
-  - changed-files:
-      - any-glob-to-any-file: "packages/@1/modules/**/ui/**/*"
-"📜 domain":
-  - changed-files:
-      - any-glob-to-any-file: "packages/@1/modules/**/domain/**/*"
-"📝 documentation":
-  - changed-files:
-      - any-glob-to-any-file: "**/*.md"
-"🧪 e2e":
-  - changed-files:
-      - any-glob-to-any-file: "apps/e2e/**/*"
-"🫙 api":
+":jar: api":
   - changed-files:
       - any-glob-to-any-file: "packages/@1/modules/**/api/**/*"
-"🚀 api":
+":lipstick: ui":
+  - changed-files:
+      - any-glob-to-any-file: "packages/@1/modules/**/ui/**/*"
+":memo: documentation":
+  - changed-files:
+      - any-glob-to-any-file: "**/*.md"
+":rocket: api":
   - changed-files:
       - any-glob-to-any-file: "apps/api/**/*"
-"🚀 www":
+":rocket: www":
   - changed-files:
       - any-glob-to-any-file: "apps/www/**/*"
+":test_tube: e2e":
+  - changed-files:
+      - any-glob-to-any-file: "apps/e2e/**/*"
+":scroll: domain":
+  - changed-files:
+      - any-glob-to-any-file: "packages/@1/modules/**/domain/**/*"
 "scope: admin":
   - changed-files:
       - any-glob-to-any-file: "packages/@1/modules/admin/**/*"
