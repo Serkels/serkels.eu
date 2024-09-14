@@ -14,6 +14,7 @@ import { subDays } from "date-fns";
 import { EventEmitter } from "events";
 import { createActor } from "xstate";
 import { z } from "zod";
+import { on_deal_event } from "../channel/deal";
 import { action } from "./action";
 
 //
@@ -192,13 +193,9 @@ export const inbox = router({
       });
 
       return observable<void>((emit) => {
-        const new_message = () => {
+        return on_deal_event(`thread/${thread_id}/new_deal`, () => {
           emit.next();
-        };
-        deal_event_emitter.on(`${thread_id}>new_deal`, new_message);
-        return () => {
-          deal_event_emitter.off(`${thread_id}>new_deal`, new_message);
-        };
+        });
       });
     }),
 

@@ -1,12 +1,11 @@
 //
 
+import { emit_message_event } from "#src/channel/message";
+import { NotificationType, type Prisma } from "@1.infra/database";
 import { thread_recipient } from "@1.modules/inbox.domain/select";
 import { next_auth_procedure } from "@1.modules/trpc";
-
-import { NotificationType, type Prisma } from "@1.infra/database";
 import { P, match } from "ts-pattern";
 import { z } from "zod";
-import { message_event_emitter } from "./MessageEventEmitter";
 
 //
 
@@ -128,6 +127,6 @@ export const send = next_auth_procedure
       where: { id: thread_id },
     });
 
-    message_event_emitter.emit(`${thread_id}>new_message`);
+    emit_message_event(`thread/${thread_id}/new_message`, { thread_id });
     return updated_thread;
   });

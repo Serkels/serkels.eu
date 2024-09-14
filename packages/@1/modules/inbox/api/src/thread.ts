@@ -1,5 +1,6 @@
 //
 
+import { on_message_event } from "#src/channel/message";
 import {
   next_auth_input_token,
   next_auth_procedure,
@@ -7,7 +8,6 @@ import {
 } from "@1.modules/trpc";
 import { observable } from "@trpc/server/observable";
 import { z } from "zod";
-import { message_event_emitter } from "./MessageEventEmitter";
 import { send } from "./send";
 
 //
@@ -75,13 +75,9 @@ export const thread = router({
       });
 
       return observable<void>((emit) => {
-        const new_message = () => {
+        return on_message_event(`thread/${thread_id}/new_message`, () => {
           emit.next();
-        };
-        message_event_emitter.on(`${thread_id}>new_message`, new_message);
-        return () => {
-          message_event_emitter.off(`${thread_id}>new_message`, new_message);
-        };
+        });
       });
     }),
 
