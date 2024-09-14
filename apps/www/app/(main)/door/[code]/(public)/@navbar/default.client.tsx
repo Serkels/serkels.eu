@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { tv } from "tailwind-variants";
 import AddContact from "./_client/AddContact";
+import { BlockProfile } from "./_client/BlockProfile";
 import Follow from "./_client/Follow";
 import SendMessage from "./_client/SendMessage";
 import { type CodeParmsAsProfileId } from "./default";
@@ -65,6 +66,7 @@ export function Student_Page({ params }: { params: CodeParmsAsProfileId }) {
                 <AddContact profile_id={profile_id} />
                 <ShareTheProfile profile_id={profile_id} />
                 <ReportTheProfile profile_id={profile_id} />
+                <BlockProfile profile_id={profile_id} />
               </>
             )}
           </Menu>
@@ -73,6 +75,7 @@ export function Student_Page({ params }: { params: CodeParmsAsProfileId }) {
     </>
   );
 }
+
 export function Partner_Page({ params }: { params: CodeParmsAsProfileId }) {
   const { code, profile_id } = params;
   const { base, link } = page_classes();

@@ -39,6 +39,7 @@ model SignupPayload {
 
 model Profile {
   bio           String?
+  blacklist     Blacklist[]    @relation("BlacklistedProfiles")
   bookmarks     Bookmark[]
   contacts      Profile[]      @relation("Contacts")
   following     Profile[]      @relation("ProfileFollows")
@@ -50,18 +51,20 @@ model Profile {
   role          ProfileRole
   user          User           @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id       String         @unique @map("userId")
+
   //
 
   created_at DateTime @default(now())
   updated_at DateTime @default(now())
   //
 
+  blacklisted_by         Blacklist[] @relation("BlacklistedBy")
+  followed_by            Profile[]   @relation("ProfileFollows")
+  in_contact_with        Profile[]   @relation("Contacts")
+  participants_in_thread Thread[]    @relation("ParticipantsInThread")
   partner                Partner?
   student                Student?
-  written_messages       Message[] @relation("WrittenMessages")
-  followed_by            Profile[] @relation("ProfileFollows")
-  participants_in_thread Thread[]  @relation("ParticipantsInThread")
-  in_contact_with        Profile[] @relation("Contacts")
+  written_messages       Message[]   @relation("WrittenMessages")
 
   added_notifications ProfileAddedNotification[] @relation("AddedNotifications")
 }
@@ -100,6 +103,18 @@ model Partner {
 
   created_at DateTime @default(now())
   updated_at DateTime @default(now())
+}
+
+model Blacklist {
+  owner      Profile @relation("BlacklistedProfiles", fields: [owner_id], references: [id], onDelete: Cascade)
+  owner_id   String
+  profile    Profile @relation("BlacklistedBy", fields: [profile_id], references: [id], onDelete: Cascade)
+  profile_id String
+
+  //
+  created_at DateTime @default(now())
+
+  @@unique([profile_id, owner_id])
 }
 
 //
@@ -357,10 +372,11 @@ model Thread {
 }
 
 model Message {
-  id        String  @id @default(cuid())
   author    Profile @relation("WrittenMessages", fields: [author_id], references: [id], onDelete: Cascade)
   author_id String
   content   String
+  delivered Boolean @default(true)
+  id        String  @id @default(cuid())
   thread    Thread  @relation(fields: [thread_id], references: [id], onDelete: Cascade)
   thread_id String
 
