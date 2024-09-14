@@ -112,7 +112,10 @@ export default async function Page({
         <Conversation.Footer>
           <BlockedProfileWarning recipient_id={participant.id} />
           <ExchangeProvider exchange={exchange}>
-            <Conversation_Form thread_id={thread_id} />
+            <Conversation_Form
+              thread_id={thread_id}
+              recipient_id={participant.id}
+            />
           </ExchangeProvider>
         </Conversation.Footer>
       </Conversation>
