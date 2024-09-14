@@ -1335,6 +1335,12 @@ importers:
       '@1.modules/core':
         specifier: workspace:*
         version: link:../../core
+      '@1.modules/exchange.domain':
+        specifier: workspace:*
+        version: link:../../exchange/domain
+      '@1.modules/inbox.domain':
+        specifier: workspace:*
+        version: link:../../inbox/domain
       '@1.modules/profile.domain':
         specifier: workspace:*
         version: link:../../profile/domain

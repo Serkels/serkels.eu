@@ -10,7 +10,7 @@ export const card_notification = tv({
   base: ``,
   slots: {
     body: `flex items-center space-x-2`,
-    avatar: `size-14`,
+    avatar: `size-9`,
     time: `float-right text-xs text-gray-500`,
   },
   variants: {
