@@ -164,6 +164,9 @@
     "tailwindCSS.experimental.classRegex": [
       ["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"], // tv(`...`)
     ],
+    "[prisma]": {
+      "editor.defaultFormatter": "Prisma.prisma",
+    },
     "cSpell.words": ["bradlc", "dbaeumer", "esbenp", "tailwindcss", "trpc"],
   },
   "tasks": {
@@ -171,13 +174,17 @@
     "tasks": [
       {
         "label": "1. 🚀 Dev",
-        "dependsOn": ["🚀 WWW Dev Server", "🚀 API Dev Server", "📦 Dev"],
+        "dependsOn": [
+          "🚀 WWW Dev Server",
+          "🚀 API Dev Server",
+          "📦 Dev",
+          "🐋 Docker Up",
+        ],
         "group": "build",
       },
       {
         "label": "🚀 WWW Dev Server",
-        "command": "bun",
-        "args": ["run", "dev"],
+        "command": "pnpm run dev",
         "type": "shell",
         "options": {
           "cwd": "${workspaceFolder:🚀 www}",
@@ -193,8 +200,7 @@
       },
       {
         "label": "🚀 API Dev Server",
-        "command": "bun",
-        "args": ["run", "dev"],
+        "command": "pnpm run dev",
         "type": "shell",
         "options": {
           "cwd": "${workspaceFolder:🚀 api}",
@@ -209,23 +215,42 @@
         },
       },
       {
-        "args": ["x", "turbo", "type-check", "--filter='www'", "--", "--watch"],
-        // "args": ["x", "turbo", "dev", "--filter='@1.modules/*'"],
-        "command": "bun",
-        "group": "build",
-        "label": "📦 Dev",
+        "label": "🐋 Docker Up",
+        "command": "docker compose up --detach --wait",
+        "type": "shell",
         "options": {
           "cwd": "${workspaceFolder:root}",
-          "env": { "NODE_ENV": "development" },
+        },
+        "group": "build",
+        "runOptions": {
+          "instanceLimit": 1,
+        },
+      },
+      {
+        "label": "📦 Dev",
+        "command": "pnpm exec turbo run dev --filter=!api --filter=!e2e --filter=!www",
+        "type": "shell",
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:root}",
         },
         "problemMatcher": ["$tsc-watch"],
         "runOptions": { "instanceLimit": 1 },
+      },
+      {
+        "label": "🧪 Test",
+        "command": "bun test",
         "type": "shell",
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:root}",
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "runOptions": { "instanceLimit": 1 },
       },
       {
         "label": "🏗️ Database Migrate Dev",
-        "command": "bun",
-        "args": ["run", "migrate:dev"],
+        "command": "pnpm run migrate:dev",
         "type": "shell",
         "options": {
           "cwd": "${workspaceFolder:🏗️/database}",
@@ -238,8 +263,7 @@
       },
       {
         "label": "🏗️ Database Seed",
-        "command": "bun",
-        "args": ["run", "seed"],
+        "command": "pnpm run seed",
         "type": "shell",
         "options": {
           "cwd": "${workspaceFolder:🏗️/database}",
@@ -252,8 +276,7 @@
       },
       {
         "label": "🏗️ Database Studio",
-        "command": "bun",
-        "args": ["run", "studio"],
+        "command": "pnpm run studio",
         "type": "shell",
         "options": {
           "cwd": "${workspaceFolder:🏗️/database}",
