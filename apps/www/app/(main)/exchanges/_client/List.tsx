@@ -20,6 +20,7 @@ export default function List() {
   const filter = match(Exchange_Filter.safeParse(search_params.get("f")))
     .with({ success: true }, ({ data }) => data)
     .otherwise(() => undefined);
+
   useEffect(() => {
     gtag("event", "search", { search_term: search });
   }, [search]);

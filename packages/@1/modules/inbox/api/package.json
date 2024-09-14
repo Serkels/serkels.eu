@@ -5,9 +5,6 @@
   "sideEffects": false,
   "type": "module",
   "imports": {
-    "#src/*": {
-      "default": "./src/*.ts"
-    },
     "#internal/*": {
       "import": "./dist/internal/*.mjs",
       "require": "./dist/internal/*.cjs"

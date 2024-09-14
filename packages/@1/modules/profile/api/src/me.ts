@@ -6,6 +6,7 @@ import { gravatarUrlFor } from "@1.modules/profile.domain/gravatarUrlFor";
 import { create_report } from "@1.modules/profile.domain/report";
 import { next_auth_procedure, router } from "@1.modules/trpc";
 import { z } from "zod";
+import blacklist from "./me/blacklist";
 import toggle_add_contact from "./me/toggle";
 
 //
@@ -178,6 +179,7 @@ const report = next_auth_procedure
   });
 
 export const me = router({
+  blacklist,
   contact,
   contacts,
   follow,
