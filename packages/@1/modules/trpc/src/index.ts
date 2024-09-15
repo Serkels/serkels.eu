@@ -13,6 +13,7 @@ export const create_nextauth_header = any_create_nextauth_header<{
 
 export {
   createCallerFactory,
+  maybe_next_auth_procedure,
   mergeRouters,
   middleware,
   next_auth_input_token,

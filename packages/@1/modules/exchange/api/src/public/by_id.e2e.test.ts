@@ -55,7 +55,8 @@ describe("visitor", () => {
 
 describe("connected studient", () => {
   let nextauth_header: Awaited<ReturnType<typeof create_nextauth_header>>;
-  beforeEach(async () => {
+
+  beforeAll(async () => {
     nextauth_header = await create_nextauth_header({
       secret: "🔑",
       token: {

@@ -1,7 +1,7 @@
 //
 
 import { Deal_Status_Schema } from "@1.modules/exchange.domain";
-import { maybe_next_auth_procedure } from "@1.modules/trpc/src/trpc";
+import { maybe_next_auth_procedure } from "@1.modules/trpc";
 import { z } from "zod";
 
 //

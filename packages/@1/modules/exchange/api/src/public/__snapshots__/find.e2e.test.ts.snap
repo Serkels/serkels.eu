@@ -62,7 +62,7 @@ exports[`connected studient should return latest exchanges 1`] = `
 }
 `;
 
-exports[`connected studient should not list exchanges created by my blocked profile 1`] = `
+exports[`connected studient should not list exchanges created by profile I blocked 1`] = `
 {
   "data": [],
   "next_cursor": undefined,
