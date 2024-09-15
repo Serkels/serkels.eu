@@ -1,5 +1,9 @@
 //
 
+import {
+  create_douglas_student,
+  create_johan_student,
+} from "@1.infra/database/seeding";
 import prisma, { empty_database, migrate } from "@1.infra/database/testing";
 import { createCallerFactory, router } from "@1.modules/trpc";
 import { beforeAll, expect, setSystemTime, test } from "bun:test";
@@ -60,59 +64,13 @@ test("search for 'best actor' questions", async () => {
 //
 
 beforeAll(async function seed() {
-  const [cinema_category] = await prisma.category.createManyAndReturn({
-    data: [{ id: "cinema-category", name: "Cinéma", slug: "cinema" }],
+  const cinema_category = await prisma.category.create({
+    data: { id: "cinema-category", name: "Cinéma", slug: "cinema" },
     select: { id: true },
   });
-  if (!cinema_category) throw new Error("Cinema category not found");
+  const douglas_studient_id = await create_douglas_student(prisma);
 
-  const { id: douglas_studient_id } = await prisma.student.create({
-    data: {
-      city: "London",
-      field_of_study: "Film",
-      id: "douglas-student",
-      interest: { connect: { id: cinema_category.id } },
-      profile: {
-        create: {
-          image: "https://picsum.photos/200/300",
-          name: "Douglas",
-          role: "STUDENT",
-          user: {
-            create: {
-              email: "douglas@example.com",
-              name: "Douglas",
-            },
-          },
-        },
-      },
-      university: "University of London",
-    },
-    select: { id: true },
-  });
-
-  const { id: johan_studient_id } = await prisma.student.create({
-    data: {
-      city: "Stockholm",
-      field_of_study: "Film",
-      id: "johan-student",
-      interest: { connect: { id: cinema_category.id } },
-      profile: {
-        create: {
-          image: "https://picsum.photos/200/300",
-          name: "Johan",
-          role: "STUDENT",
-          user: {
-            create: {
-              email: "johan@example.com",
-              name: "Johan",
-            },
-          },
-        },
-      },
-      university: "Stockholm University",
-    },
-    select: { id: true },
-  });
+  const johan_studient_id = await create_johan_student(prisma);
 
   //
 

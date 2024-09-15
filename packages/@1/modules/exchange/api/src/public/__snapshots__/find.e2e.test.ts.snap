@@ -1,0 +1,63 @@
+// Bun Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`visitor should return latest exchanges 1`] = `
+{
+  "data": [
+    {
+      "category_id": "masterclass-category",
+      "created_at": 2011-11-11T00:00:00.000Z,
+      "description": "https://vulf.co/courses/dart/lectures/45940163",
+      "expiry_date": null,
+      "id": "slap-exchange",
+      "is_active": true,
+      "is_online": true,
+      "location": null,
+      "owner_id": "joedart-student",
+      "places": 1,
+      "return_id": null,
+      "title": "Slap",
+      "type": "PROPOSAL",
+      "updated_at": 2011-11-11T00:00:00.000Z,
+    },
+  ],
+  "nextCursor": undefined,
+}
+`;
+
+exports[`visitor should not list successful exchanges 1`] = `
+{
+  "data": [],
+  "nextCursor": undefined,
+}
+`;
+
+exports[`visitor should not list expired exchanges 1`] = `
+{
+  "data": [],
+  "nextCursor": undefined,
+}
+`;
+
+exports[`connected studient should return latest exchanges 1`] = `
+{
+  "data": [
+    {
+      "category_id": "masterclass-category",
+      "created_at": 2011-11-11T00:00:00.000Z,
+      "description": "https://vulf.co/courses/dart/lectures/45940163",
+      "expiry_date": null,
+      "id": "slap-exchange",
+      "is_active": true,
+      "is_online": true,
+      "location": null,
+      "owner_id": "joedart-student",
+      "places": 1,
+      "return_id": null,
+      "title": "Slap",
+      "type": "PROPOSAL",
+      "updated_at": 2011-11-11T00:00:00.000Z,
+    },
+  ],
+  "nextCursor": undefined,
+}
+`;
