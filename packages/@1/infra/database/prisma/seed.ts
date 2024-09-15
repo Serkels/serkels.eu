@@ -594,7 +594,7 @@ async function students_participants_in_exchanges() {
         .map(async (participant) => {
           const participant_id = participant.id;
 
-          const { id: deal_id } = await prisma.deal.upsert({
+          const { id: deal_id, status } = await prisma.deal.upsert({
             create: {
               parent_id: exchange_id,
               participant_id,
@@ -604,7 +604,7 @@ async function students_participants_in_exchanges() {
               created_at: faker.date.past(),
               updated_at: faker.date.recent({ days: 66 }),
             },
-            select: { id: true },
+            select: { id: true, status: true },
             update: {
               updated_at: faker.date.recent({ days: 33 }),
             },
@@ -615,10 +615,12 @@ async function students_participants_in_exchanges() {
               },
             },
           });
+          const is_archived = status === ExchangeThreadStatus.DENIED;
 
           const { thread_id } = await prisma.exchangeThread.create({
             data: {
               deal: { connect: { id: deal_id } },
+              is_archived,
               owner: { connect: { id: exchange.owner.id } },
               thread: {
                 create: {
@@ -657,7 +659,7 @@ async function students_participants_in_exchanges() {
           });
 
           await prisma.exchangeThread.create({
-            data: { deal_id, thread_id, owner_id: participant_id },
+            data: { deal_id, thread_id, owner_id: participant_id, is_archived },
           });
 
           const updated_exchange = await prisma.exchange.findFirstOrThrow({
