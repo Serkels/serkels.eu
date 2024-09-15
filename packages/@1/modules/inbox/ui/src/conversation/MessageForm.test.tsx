@@ -30,7 +30,7 @@ test("should send bonjour", async () => {
   }
 
   const { getByPlaceholderText, getByLabelText } = render(<Component />);
-  await user.type(getByPlaceholderText("Envoie un messge"), "Bonjour");
+  await user.type(getByPlaceholderText("Envoie un message"), "Bonjour");
   await user.click(getByLabelText("Send"));
 
   expect(fn).toHaveBeenCalledWith("Bonjour");
@@ -52,7 +52,7 @@ test("should not send empty content", async () => {
   }
 
   const { getByPlaceholderText, getByLabelText } = render(<Component />);
-  await user.type(getByPlaceholderText("Envoie un messge"), " ");
+  await user.type(getByPlaceholderText("Envoie un message"), " ");
   await user.click(getByLabelText("Send"));
 
   expect(fn).not.toHaveBeenCalled();
@@ -74,14 +74,14 @@ test.skip("should send content by pressing Enter", async () => {
   }
 
   const { getByPlaceholderText } = render(<Component />);
-  const textare = getByPlaceholderText("Envoie un messge");
-  await user.type(textare, "Super cool");
-  await user.type(textare, "{enter}");
+  const textarea = getByPlaceholderText("Envoie un message");
+  await user.type(textarea, "Super cool");
+  await user.type(textarea, "{enter}");
 
-  expect(fn).toHaveBeenCalledWith("Bonjour");
+  expect(fn).toHaveBeenCalledWith("Super cool");
 });
 
-test.skip("should not send empty content by pressing Enter on moblie", async () => {
+test.skip("should not send empty content by pressing Enter on mobile", async () => {
   GlobalRegistrator.unregister();
   GlobalRegistrator.register({
     settings: {
@@ -106,7 +106,7 @@ test.skip("should not send empty content by pressing Enter on moblie", async () 
   }
 
   const { getByPlaceholderText } = render(<Component />);
-  const textare = getByPlaceholderText("Envoie un messge");
+  const textare = getByPlaceholderText("Envoie un message");
   await user.type(textare, "Super cool");
   await user.type(textare, "{enter}");
 

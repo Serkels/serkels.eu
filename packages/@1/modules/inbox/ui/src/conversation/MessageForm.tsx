@@ -53,7 +53,7 @@ export function MessageForm({
         className={textarea_style()}
         disabled={isDisabled}
         readOnly={formState.isSubmitting}
-        placeholder="Envoie un messge"
+        placeholder="Envoie un message"
       ></textarea>
       <SendButton
         isDisabled={isDisabled}

@@ -36,6 +36,7 @@ const layout = tv({
     overflow-hidden
     bg-white
     text-black
+    md:max-h-@main/desktop
     [&>*]:px-7
    `,
   slots: {
