@@ -16,16 +16,20 @@ import { match } from "ts-pattern";
 
 //
 
-export function StateMessageOutlet({ thread_id }: Params) {
+export function StateMessageOutlet({
+  hidden,
+  thread_id,
+}: Params & { hidden?: boolean | undefined }) {
   const inbox_query =
     TRPC_React.exchanges.me.inbox.by_thread_id.useQuery(thread_id);
 
   return (
     <AnimatePresence mode="wait">
       <motion.div
-        className="my-2"
         animate={{ y: 0, opacity: 1 }}
+        className="my-2"
         exit={{ y: 10, opacity: 0 }}
+        hidden={hidden}
         initial={{ y: 10, opacity: 0 }}
         key={inbox_query.data?.deal.status ?? inbox_query.status}
       >
