@@ -9,6 +9,7 @@ import {
 } from "@1.modules/exchange.domain";
 import { Time } from "@1.ui/react/time";
 import Link from "next/link";
+import { tv } from "tailwind-variants";
 import { match, P } from "ts-pattern";
 
 //
@@ -17,9 +18,15 @@ type ContextExchange = Pick<
   Exchange,
   "deals" | "expiry_date" | "id" | "places" | "title" | "updated_at"
 >;
-export function TitleHeader({ exchange }: { exchange: ContextExchange }) {
+export function TitleHeader({
+  className,
+  exchange,
+}: {
+  className?: string;
+  exchange: ContextExchange;
+}) {
   return (
-    <div className="flex flex-col">
+    <div className={tv({ base: "flex flex-col" })({ className })}>
       <h6 className="line-clamp-2 flex-1 text-xl font-bold">
         {exchange.title}
       </h6>
