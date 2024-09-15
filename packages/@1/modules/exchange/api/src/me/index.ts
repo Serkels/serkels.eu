@@ -3,11 +3,16 @@
 import { Exchange_Create_Schema } from "@1.modules/exchange.domain";
 import { next_auth_procedure, router } from "@1.modules/trpc";
 import { z } from "zod";
+import archive_router from "./archive";
 import { find } from "./find";
 import { inbox } from "./inbox";
 import { thread_update } from "./thread_update";
 
 export const me = router({
+  //
+
+  archive: archive_router,
+
   //
 
   publications: next_auth_procedure

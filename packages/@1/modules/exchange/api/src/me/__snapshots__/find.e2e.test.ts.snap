@@ -1,0 +1,36 @@
+// Bun Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`return my latest exchanges 1`] = `
+{
+  "data": [
+    {
+      "exchange": {
+        "category_id": "masterclass_category_id",
+        "created_at": 2011-11-11T00:00:00.000Z,
+        "description": "https://vulf.co/courses/dart/lectures/45940163",
+        "expiry_date": null,
+        "id": "slap_exchange_id",
+        "is_active": true,
+        "is_online": true,
+        "location": null,
+        "owner_id": "joedart_student_id",
+        "places": 1,
+        "return_id": null,
+        "title": "Slap",
+        "type": "PROPOSAL",
+        "updated_at": 2011-11-11T00:00:00.000Z,
+      },
+      "is_unread": false,
+      "last_thread_update": 2011-11-11T00:00:00.000Z,
+    },
+  ],
+  "next_cursor": undefined,
+}
+`;
+
+exports[`should not return archived exchanges 1`] = `
+{
+  "data": [],
+  "next_cursor": undefined,
+}
+`;

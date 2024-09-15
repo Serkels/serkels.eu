@@ -29,7 +29,7 @@ export function Menu({ className, children, variant, ...props }: MenuProps) {
       <Button
         className="m-0 px-0"
         aria-label="Menu"
-        variant={{ intent: "light", state: "ghost" }}
+        variant={{ intent: "light", state: "ghost", ...variant }}
       >
         •••
       </Button>

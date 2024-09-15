@@ -2,7 +2,7 @@
 
 import type { Prisma } from "@1.infra/database";
 import { filter_params_schema } from "@1.modules/exchange.domain/filter_params_schema";
-import { next_auth_procedure } from "@1.modules/trpc";
+import { next_auth_procedure, with_next_cursor } from "@1.modules/trpc";
 import { isAfter } from "date-fns";
 import { match } from "ts-pattern";
 import { z } from "zod";
@@ -51,6 +51,16 @@ export const find = next_auth_procedure
       ],
     };
 
+    const where_not_achived: Prisma.DealWhereInput = {
+      NOT: {
+        exchange_threads: {
+          some: {
+            is_archived: true,
+            owner_id: student_id,
+          },
+        },
+      },
+    };
     const exchange_filter_where = match(filter)
       .with(
         filter_params_schema.enum.IN_PROGRESS,
@@ -88,7 +98,7 @@ export const find = next_auth_procedure
       },
       take: limit + 1,
       where: {
-        ...deal_releated_to_me_where,
+        AND: [where_not_achived, deal_releated_to_me_where],
         parent: {
           ...search_where,
           ...exchange_filter_where,
@@ -109,11 +119,5 @@ export const find = next_auth_procedure
       };
     });
 
-    let next_cursor: typeof cursor | undefined = undefined;
-    if (data.length > limit) {
-      const next_item = data.pop()!;
-      next_cursor = next_item.exchange.id;
-    }
-
-    return { data, next_cursor };
+    return with_next_cursor(limit, data)((item) => item.exchange.id);
   });

@@ -246,13 +246,15 @@ model Deal {
 
 model ExchangeThread {
   id             String   @id @default(cuid())
+  is_archived    Boolean  @default(false)
   last_seen_date DateTime @default(now())
-  owner          Student  @relation(fields: [owner_id], references: [id], onDelete: Cascade)
-  owner_id       String
-  deal           Deal     @relation(fields: [deal_id], references: [id], onDelete: Cascade)
-  deal_id        String
-  thread         Thread   @relation(fields: [thread_id], references: [id], onDelete: Cascade)
-  thread_id      String
+
+  deal      Deal    @relation(fields: [deal_id], references: [id], onDelete: Cascade)
+  deal_id   String
+  owner     Student @relation(fields: [owner_id], references: [id], onDelete: Cascade)
+  owner_id  String
+  thread    Thread  @relation(fields: [thread_id], references: [id], onDelete: Cascade)
+  thread_id String
 
   @@unique([owner_id, deal_id])
   @@unique([owner_id, thread_id])
