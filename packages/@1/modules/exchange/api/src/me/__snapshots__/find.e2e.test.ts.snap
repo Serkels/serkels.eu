@@ -5,6 +5,82 @@ exports[`return my latest exchanges 1`] = `
   "data": [
     {
       "exchange": {
+        "category_id": "film_category_id",
+        "created_at": 2011-11-10T00:00:00.000Z,
+        "description": "The Creator is a good film and you should watch it ;)",
+        "expiry_date": null,
+        "id": "the_creator_exchange_id",
+        "is_active": true,
+        "is_online": true,
+        "location": null,
+        "owner_id": "douglas_student_id",
+        "places": 1,
+        "return_id": null,
+        "title": "The Creator",
+        "type": "PROPOSAL",
+        "updated_at": 2011-11-10T00:00:00.000Z,
+      },
+      "is_unread": false,
+      "last_thread_update": 2011-11-10T00:00:00.000Z,
+    },
+    {
+      "exchange": {
+        "category_id": "masterclass_category_id",
+        "created_at": 2011-11-11T00:00:00.000Z,
+        "description": "https://vulf.co/courses/dart/lectures/45940163",
+        "expiry_date": null,
+        "id": "slap_exchange_id",
+        "is_active": true,
+        "is_online": true,
+        "location": null,
+        "owner_id": "joedart_student_id",
+        "places": 1,
+        "return_id": null,
+        "title": "Slap",
+        "type": "PROPOSAL",
+        "updated_at": 2011-11-11T00:00:00.000Z,
+      },
+      "is_unread": false,
+      "last_thread_update": 2011-11-11T00:00:00.000Z,
+    },
+  ],
+  "next_cursor": undefined,
+}
+`;
+
+exports[`return a valid cursor: first_response 1`] = `
+{
+  "data": [
+    {
+      "exchange": {
+        "category_id": "film_category_id",
+        "created_at": 2011-11-10T00:00:00.000Z,
+        "description": "The Creator is a good film and you should watch it ;)",
+        "expiry_date": null,
+        "id": "the_creator_exchange_id",
+        "is_active": true,
+        "is_online": true,
+        "location": null,
+        "owner_id": "douglas_student_id",
+        "places": 1,
+        "return_id": null,
+        "title": "The Creator",
+        "type": "PROPOSAL",
+        "updated_at": 2011-11-10T00:00:00.000Z,
+      },
+      "is_unread": false,
+      "last_thread_update": 2011-11-10T00:00:00.000Z,
+    },
+  ],
+  "next_cursor": "slap_exchange_id",
+}
+`;
+
+exports[`return a valid cursor: second_response 1`] = `
+{
+  "data": [
+    {
+      "exchange": {
         "category_id": "masterclass_category_id",
         "created_at": 2011-11-11T00:00:00.000Z,
         "description": "https://vulf.co/courses/dart/lectures/45940163",

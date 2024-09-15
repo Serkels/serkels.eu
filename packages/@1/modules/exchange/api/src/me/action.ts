@@ -98,6 +98,7 @@ export const action = next_auth_procedure
       where: { id: thread_id, participants: { some: { id: profile_id } } },
     });
     const recipient = thread_recipient({ participants, profile_id });
+    const is_archived = state.value === Deal_Status_Schema.Enum.DENIED;
 
     await prisma.thread.update({
       data: {
@@ -111,6 +112,7 @@ export const action = next_auth_procedure
                   status: Deal_Status_Schema.parse(state.value),
                 },
               },
+              is_archived,
             },
             where: {
               owner_id_thread_id: { owner_id: student_id, thread_id },

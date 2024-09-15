@@ -78,7 +78,7 @@ export const find = next_auth_procedure
             cursor: {
               participant_per_exchange: {
                 parent_id: cursor,
-                participant_id: profile.id,
+                participant_id: student_id,
               },
             },
           }
