@@ -58,7 +58,7 @@ export default function List() {
       filter,
     },
     {
-      getNextPageParam: (lastPage) => lastPage.nextCursor,
+      getNextPageParam: (lastPage) => lastPage.next_cursor,
     },
   );
 

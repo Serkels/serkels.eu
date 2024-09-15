@@ -2,7 +2,7 @@
 
 import type { Prisma } from "@1.infra/database";
 import { Forum_Filter } from "@1.modules/forum.domain";
-import { maybe_next_auth_procedure } from "@1.modules/trpc";
+import { maybe_next_auth_procedure, with_next_cursor } from "@1.modules/trpc";
 import { match, P } from "ts-pattern";
 import { z } from "zod";
 
@@ -132,11 +132,5 @@ export default maybe_next_auth_procedure
       },
     });
 
-    let nextCursor: typeof cursor | undefined = undefined;
-    if (items.length > limit) {
-      const next_item = items.pop()!;
-      nextCursor = next_item.id;
-    }
-
-    return { data: items, nextCursor };
+    return with_next_cursor(limit, items)((item) => item.id);
   });
