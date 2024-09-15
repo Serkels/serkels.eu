@@ -25,7 +25,8 @@
     "date-fns": "3.6.0",
     "debug": "4.3.6",
     "error-custom-class": "10.0.0",
-    "zod": "3.23.8"
+    "zod": "3.23.8",
+    "zohar": "1.0.1"
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",

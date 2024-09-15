@@ -4,6 +4,12 @@
   "private": true,
   "sideEffects": false,
   "type": "module",
+  "imports": {
+    "#internal/*": {
+      "import": "./dist/internal/*.mjs",
+      "require": "./dist/internal/*.cjs"
+    }
+  },
   "exports": {
     ".": {
       "types": "./src/index.ts",

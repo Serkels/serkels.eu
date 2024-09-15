@@ -83,6 +83,11 @@ async function find_resolver(
     ? { category: { slug: category } }
     : {};
 
+  // const { owner: { profile } } = options.ctx.payload;
+  // const where_not_in_profile_blacklist: Prisma.ExchangeWhereInput = category
+  //   ? { owner: { profile: {blocklisted_by: {none: {id: profile.id}}} } }
+  //   : {};
+
   const items = await prisma.exchange.findMany({
     ...(cursor ? { cursor: { id: cursor } } : {}),
     orderBy: [
@@ -103,6 +108,7 @@ async function find_resolver(
   }
 
   return { data: items, nextCursor };
+  // return with_next_cursor(limit, items)((item) => item.id);
 }
 
 function profile_filter(

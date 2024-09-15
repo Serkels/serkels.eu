@@ -51,9 +51,9 @@
 "scope: inbox":
   - changed-files:
       - any-glob-to-any-file: "packages/@1/modules/inbox/**/*"
-"scope: notifications":
+"scope: notification":
   - changed-files:
-      - any-glob-to-any-file: "packages/@1/modules/notifications/**/*"
+      - any-glob-to-any-file: "packages/@1/modules/notification/**/*"
 "scope: opportunities":
   - changed-files:
       - any-glob-to-any-file: "packages/@1/modules/opportunities/**/*"

@@ -10,8 +10,15 @@ import { FormProvider, useForm } from "react-hook-form";
 
 //
 
-export default function Conversation_Form({ thread_id }: Params) {
+export default function Conversation_Form({
+  thread_id,
+  recipient_id,
+}: Params & { recipient_id: string }) {
   const { mutateAsync } = TRPC_React.inbox.thread.send.useMutation();
+  const blacklist_item = TRPC_React.profile.me.blacklist.find.useQuery({
+    profile_id: recipient_id,
+  });
+  const is_blacklisted = blacklist_item.data?.profile.id === recipient_id;
   const utils = TRPC_React.useUtils();
 
   const on_submit = async (content: string) => {
@@ -25,7 +32,7 @@ export default function Conversation_Form({ thread_id }: Params) {
   });
   return (
     <FormProvider {...form}>
-      <MessageForm onSubmit={on_submit} />
+      <MessageForm onSubmit={on_submit} isDisabled={Boolean(is_blacklisted)} />
     </FormProvider>
   );
 }

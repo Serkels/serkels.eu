@@ -16,25 +16,31 @@ import { StateMessageOutlet } from "./StateMessageOutlet";
 
 //
 
-export default function Conversation_Form({ thread_id }: Params) {
+export default function Conversation_Form({
+  thread_id,
+  recipient_id,
+}: Params & { recipient_id: string }) {
   const exchange = useExchange();
   const is_active = is_active_exchange(exchange);
   const send_message = TRPC_React.inbox.thread.send.useMutation();
   const utils = TRPC_React.useUtils();
-
+  const blacklist_item = TRPC_React.profile.me.blacklist.find.useQuery({
+    profile_id: recipient_id,
+  });
+  const form = useForm({
+    resolver: message_form_resolver,
+  });
   const invalidate = () =>
     Promise.all([
       utils.exchanges.me.inbox.by_thread_id.invalidate(thread_id),
       utils.inbox.thread.messages.invalidate({ thread_id }),
     ]);
-
   const on_submit = async (content: string) => {
     await send_message.mutateAsync({ content, thread_id });
     await invalidate();
   };
-  const form = useForm({
-    resolver: message_form_resolver,
-  });
+  const is_blacklisted = blacklist_item.data?.profile.id === recipient_id;
+  const is_disabled = Boolean(is_blacklisted) || !is_active;
   const {
     formState: { isSubmitting, isLoading },
   } = form;
@@ -42,12 +48,12 @@ export default function Conversation_Form({ thread_id }: Params) {
   return (
     <FormProvider {...form}>
       <section className="w-full">
-        <MessageForm onSubmit={on_submit} isDisabled={!is_active} />
+        <MessageForm onSubmit={on_submit} isDisabled={is_disabled} />;
         <ActionButtonGroup
-          isDisabled={isSubmitting || isLoading}
+          isDisabled={is_disabled || isSubmitting || isLoading}
           thread_id={thread_id}
         />
-        <StateMessageOutlet thread_id={thread_id} />
+        <StateMessageOutlet thread_id={thread_id} hidden={is_disabled} />
       </section>
     </FormProvider>
   );

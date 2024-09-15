@@ -36,9 +36,16 @@ export default next_auth_procedure
         },
         exchange_message: {
           select: {
-            exchange_id: true,
             exchange: {
-              select: { owner: { select: { profile_id: true } }, title: true },
+              select: {
+                id: true,
+                owner: {
+                  select: {
+                    profile: { select: { id: true, name: true, image: true } },
+                  },
+                },
+                title: true,
+              },
             },
             message: {
               select: message_select,

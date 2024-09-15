@@ -4,6 +4,7 @@ import type { Prisma } from "@1.infra/database";
 import { ID_Schema } from "@1.modules/core/domain";
 import { next_auth_procedure, router } from "@1.modules/trpc";
 import { z } from "zod";
+import find_inboxes from "./find";
 import { thread } from "./thread";
 
 const inbox_api_router = router({
@@ -59,67 +60,7 @@ const inbox_api_router = router({
 
   //
 
-  find: next_auth_procedure
-    .input(
-      z.object({
-        cursor: z.string().optional(),
-        limit: z.number().min(1).max(10).default(5),
-        search: z.string().optional(),
-      }),
-    )
-    .query(async ({ ctx: { payload, prisma }, input }) => {
-      const { profile } = payload;
-      const { cursor, limit, search } = input;
-      const { id: student_id } = await prisma.student.findUniqueOrThrow({
-        select: { id: true },
-        where: { profile_id: profile.id },
-      });
-
-      const search_where: Prisma.InboxThreadWhereInput = search
-        ? {
-            OR: [
-              {
-                thread: {
-                  participants: {
-                    some: { name: { contains: search, mode: "insensitive" } },
-                  },
-                },
-              },
-              {
-                thread: {
-                  messages: {
-                    some: {
-                      content: { contains: search, mode: "insensitive" },
-                    },
-                  },
-                },
-              },
-            ],
-          }
-        : {};
-
-      const data = await prisma.inboxThread.findMany({
-        ...(cursor
-          ? {
-              cursor: {
-                owner_id_thread_id: { owner_id: student_id, thread_id: cursor },
-              },
-            }
-          : {}),
-        orderBy: [{ thread: { updated_at: "desc" } }],
-        include: { thread: { select: { id: true, updated_at: true } } },
-        take: limit + 1,
-        where: { owner_id: student_id, ...search_where },
-      });
-
-      let next_cursor: typeof cursor | undefined = undefined;
-      if (data.length > limit) {
-        const next_item = data.pop()!;
-        next_cursor = next_item.thread_id;
-      }
-
-      return { data, next_cursor };
-    }),
+  find: find_inboxes,
 
   //
 

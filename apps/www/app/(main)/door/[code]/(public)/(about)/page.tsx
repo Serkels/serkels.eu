@@ -1,5 +1,6 @@
 //
 
+import { BlockedProfile_Placeholder } from ":components/placeholder/BlockedProfile_Placeholder";
 import { code_to_profile_id, type CodeParms } from ":pipes/code";
 import { TRPC_SSR } from ":trpc/server";
 import { AuthError } from "@1.modules/core/errors";
@@ -34,20 +35,23 @@ export default async function Page({ params }: { params: CodeParms }) {
     const profile = await TRPC_SSR.profile.by_id.fetch(profile_id);
 
     return (
-      <main className="prose lg:prose-xl">
-        <ReactMarkdown>{profile.bio}</ReactMarkdown>
+      <main className="prose max-w-full lg:prose-xl">
+        <BlockedProfile_Placeholder recipient_id={profile.id} />
+        <div>
+          <ReactMarkdown>{profile.bio}</ReactMarkdown>
 
-        <hr />
+          <hr />
 
-        {match(profile.role)
-          .with(PROFILE_ROLES.Enum.ADMIN, () => null)
-          .with(PROFILE_ROLES.Enum.PARTNER, () => (
-            <PartnerMeta profile_id={profile.id} />
-          ))
-          .with(PROFILE_ROLES.Enum.STUDENT, () => (
-            <StudentMeta profile_id={profile.id} />
-          ))
-          .exhaustive()}
+          {match(profile.role)
+            .with(PROFILE_ROLES.Enum.ADMIN, () => null)
+            .with(PROFILE_ROLES.Enum.PARTNER, () => (
+              <PartnerMeta profile_id={profile.id} />
+            ))
+            .with(PROFILE_ROLES.Enum.STUDENT, () => (
+              <StudentMeta profile_id={profile.id} />
+            ))
+            .exhaustive()}
+        </div>
       </main>
     );
   } catch (error) {

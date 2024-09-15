@@ -1,5 +1,6 @@
 //
 
+export * from "./ExchangeNotification";
 export * from "./Notification";
 export * from "./ProfileNotification";
 
