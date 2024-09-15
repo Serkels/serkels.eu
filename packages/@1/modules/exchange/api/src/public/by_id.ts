@@ -14,7 +14,14 @@ export default maybe_next_auth_procedure
       include: {
         category: true,
         return: true,
-        owner: { include: { profile: true } },
+        owner: {
+          select: {
+            profile: {
+              select: { id: true, name: true, image: true },
+            },
+            university: true,
+          },
+        },
         deals: {
           select: {
             id: true,

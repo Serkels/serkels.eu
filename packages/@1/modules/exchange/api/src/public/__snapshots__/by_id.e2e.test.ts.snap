@@ -1,0 +1,99 @@
+// Bun Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`visitor should return a sanitize exchange 1`] = `
+{
+  "category": {
+    "context": "EXCHANGE",
+    "id": "masterclass_category_id",
+    "name": "Masterclass",
+    "rank": null,
+    "slug": "masterclass",
+  },
+  "category_id": "masterclass_category_id",
+  "created_at": 2011-11-11T00:00:00.000Z,
+  "deals": [
+    {
+      "id": "slap_exchange_id_douglas_student_id_deal_id",
+      "participant": undefined,
+      "status": "APPROVED",
+    },
+    {
+      "id": "slap_exchange_id_johan_student_id_deal_id",
+      "participant": undefined,
+      "status": "APPROVED",
+    },
+  ],
+  "description": "https://vulf.co/courses/dart/lectures/45940163",
+  "expiry_date": null,
+  "id": "slap_exchange_id",
+  "is_active": true,
+  "is_online": true,
+  "location": null,
+  "owner": {
+    "profile": {
+      "id": "joedart_profile_id",
+      "image": "https://picsum.photos/200/300",
+      "name": "Joe Dart",
+    },
+    "university": "Université du Michigan",
+  },
+  "owner_id": "joedart_student_id",
+  "places": 1,
+  "return": null,
+  "return_id": null,
+  "title": "Slap",
+  "type": "PROPOSAL",
+  "updated_at": 2011-11-11T00:00:00.000Z,
+}
+`;
+
+exports[`connected studient should return a sanitize exchange 1`] = `
+{
+  "category": {
+    "context": "EXCHANGE",
+    "id": "masterclass_category_id",
+    "name": "Masterclass",
+    "rank": null,
+    "slug": "masterclass",
+  },
+  "category_id": "masterclass_category_id",
+  "created_at": 2011-11-11T00:00:00.000Z,
+  "deals": [
+    {
+      "id": "slap_exchange_id_douglas_student_id_deal_id",
+      "participant": {
+        "profile": {
+          "id": "douglas_profile_id",
+        },
+      },
+      "status": "APPROVED",
+    },
+    {
+      "id": "slap_exchange_id_johan_student_id_deal_id",
+      "participant": undefined,
+      "status": "APPROVED",
+    },
+  ],
+  "description": "https://vulf.co/courses/dart/lectures/45940163",
+  "expiry_date": null,
+  "id": "slap_exchange_id",
+  "is_active": true,
+  "is_online": true,
+  "location": null,
+  "owner": {
+    "profile": {
+      "id": "joedart_profile_id",
+      "image": "https://picsum.photos/200/300",
+      "name": "Joe Dart",
+    },
+    "university": "Université du Michigan",
+  },
+  "owner_id": "joedart_student_id",
+  "places": 1,
+  "return": null,
+  "return_id": null,
+  "title": "Slap",
+  "type": "PROPOSAL",
+  "updated_at": 2011-11-11T00:00:00.000Z,
+}
+`;

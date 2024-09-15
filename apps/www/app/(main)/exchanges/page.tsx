@@ -1,24 +1,13 @@
 //
 
 import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
-import { getServerSession } from "@1.modules/auth.next";
 import { Exchange_Filter } from "@1.modules/exchange.domain";
 import { card } from "@1.ui/react/card/atom";
 import { PlusBox } from "@1.ui/react/icons";
 import { link } from "@1.ui/react/link/atom";
-import { Spinner } from "@1.ui/react/spinner";
 import type { Metadata, ResolvingMetadata } from "next";
-import dynamic from "next/dynamic";
 import Link from "next/link";
-
-//
-
-const List = dynamic(() => import("./_client/List"), {
-  ssr: false,
-  loading() {
-    return <Spinner />;
-  },
-});
+import List from "./_client/List";
 
 //
 
@@ -43,7 +32,6 @@ export default async function Page({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const session = await getServerSession();
   const category = String(searchParams["category"]);
   const search = String(searchParams["q"]);
   const filter_parsed_return = Exchange_Filter.safeParse(searchParams["f"]);
@@ -51,15 +39,11 @@ export default async function Page({
     ? filter_parsed_return.data
     : undefined;
 
-  if (session) {
-    await TRPC_SSR.exchanges.find.private.prefetchInfinite({
-      category,
-      filter,
-      search,
-    });
-  } else {
-    await TRPC_SSR.exchanges.find.public.prefetchInfinite({ category, search });
-  }
+  await TRPC_SSR.exchanges.find.prefetchInfinite({
+    category,
+    filter,
+    search,
+  });
 
   return (
     <TRPC_Hydrate>

@@ -7,9 +7,9 @@ import {
 } from "@1.modules/exchange.domain";
 import { next_auth_procedure, procedure, router } from "@1.modules/trpc";
 import { z } from "zod";
-import find_router from "./find";
 import { me } from "./me";
 import by_id from "./public/by_id";
+import find_router from "./public/find";
 
 const exchange_api_router = router({
   //
