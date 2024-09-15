@@ -31,7 +31,7 @@ exports[`visitor find all latest questions 1`] = `
       "updated_at": 2011-11-10T00:00:00.000Z,
     },
   ],
-  "nextCursor": undefined,
+  "next_cursor": undefined,
 }
 `;
 
@@ -57,14 +57,14 @@ exports[`visitor search for douglas' questions 1`] = `
       "updated_at": 2011-11-10T00:00:00.000Z,
     },
   ],
-  "nextCursor": undefined,
+  "next_cursor": undefined,
 }
 `;
 
 exports[`visitor search for 'best actor' questions 1`] = `
 {
   "data": [],
-  "nextCursor": undefined,
+  "next_cursor": undefined,
 }
 `;
 
@@ -99,7 +99,7 @@ exports[`connected studient find all latest questions 1`] = `
       "updated_at": 2011-11-10T00:00:00.000Z,
     },
   ],
-  "nextCursor": undefined,
+  "next_cursor": undefined,
 }
 `;
 
@@ -116,7 +116,7 @@ exports[`connected studient list my questions 1`] = `
       "updated_at": 2011-11-10T00:00:00.000Z,
     },
   ],
-  "nextCursor": undefined,
+  "next_cursor": undefined,
 }
 `;
 
@@ -133,7 +133,7 @@ exports[`connected studient should not list questions created by profile I block
       "updated_at": 2011-11-10T00:00:00.000Z,
     },
   ],
-  "nextCursor": undefined,
+  "next_cursor": undefined,
 }
 `;
 
@@ -150,6 +150,6 @@ exports[`connected studient should not list questions created by profiles who bl
       "updated_at": 2011-11-10T00:00:00.000Z,
     },
   ],
-  "nextCursor": undefined,
+  "next_cursor": undefined,
 }
 `;
