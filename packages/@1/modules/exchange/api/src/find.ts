@@ -28,6 +28,9 @@ const private_procedure = next_auth_procedure.input(
   }),
 );
 
+/**
+ * @deprecated use universal find with the maybe_next_auth_procedure
+ */
 export default router({
   public: public_procedure.query(find_resolver),
   private: private_procedure.query(find_resolver),

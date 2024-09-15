@@ -13,6 +13,10 @@
       "types": "./testing/index.ts",
       "default": "./testing/index.ts"
     },
+    "./seeding": {
+      "types": "./seeding/index.ts",
+      "default": "./seeding/index.ts"
+    },
     ".": {
       "types": "./index.ts",
       "default": "./index.ts"

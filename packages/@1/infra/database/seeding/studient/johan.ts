@@ -1,0 +1,32 @@
+//
+
+import { PrismaClient } from "@prisma/client";
+
+//
+
+export async function create_johan_student(prisma: PrismaClient) {
+  const { id } = await prisma.student.create({
+    data: {
+      city: "Stockholm",
+      field_of_study: "Film",
+      id: "johan-student",
+      profile: {
+        create: {
+          image: "https://picsum.photos/200/300",
+          name: "Johan",
+          role: "STUDENT",
+          user: {
+            create: {
+              email: "johan@example.com",
+              name: "Johan",
+            },
+          },
+        },
+      },
+      university: "Stockholm University",
+    },
+    select: { id: true },
+  });
+
+  return id;
+}

@@ -1,6 +1,5 @@
 // Bun Snapshot v1, https://goo.gl/fbAQLP
 
-
 exports[`should link to the exchange 1`] = `"<div><div class="flex flex-col"><h6 class="line-clamp-2 flex-1 text-xl font-bold">Joe Dart Masterclass</h6><a href="/exchanges/vulfpeck-joe-dart-masterclass">Consulter l'échange</a></div></div>"`;
 
 exports[`should say the exchange expired a day ago 1`] = `"<div><div class="flex flex-col"><h6 class="line-clamp-2 flex-1 text-xl font-bold">Joe Dart Masterclass</h6><time datetime="Thu, 10 Nov 2022 00:00:00 GMT" title="Thu, 10 Nov 2022 00:00:00 GMT" class="text-danger">Échange expiré depuis 1 jour</time></div></div>"`;
