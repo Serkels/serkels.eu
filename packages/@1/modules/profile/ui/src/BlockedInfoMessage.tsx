@@ -11,6 +11,8 @@ export function BlockedInfoMessage({ name }: { name: string }) {
       </li>
       <li>Les échanges que {name} a créés ne seront plus visibles</li>
       <li>{name} ne pourra plus voir vos échanges</li>
+      <li>Les questions que {name} a créés ne seront plus visibles</li>
+      <li>{name} ne pourra plus voir vos questions</li>
     </ul>
   );
 }

@@ -74,7 +74,8 @@ describe("visitor", () => {
 
 describe("connected studient", () => {
   let nextauth_header: Awaited<ReturnType<typeof create_nextauth_header>>;
-  beforeEach(async () => {
+
+  beforeAll(async () => {
     nextauth_header = await create_nextauth_header({
       secret: "🔑",
       token: {
@@ -83,6 +84,7 @@ describe("connected studient", () => {
       },
     });
   });
+
   test("should return latest exchanges", async () => {
     const caller = createCallerFactory(router({ find }));
     const trpc = caller({
@@ -93,7 +95,7 @@ describe("connected studient", () => {
     expect(exchange).toMatchSnapshot();
   });
 
-  test("should not list exchanges created by my blocked profile", async () => {
+  test("should not list exchanges created by profile I blocked", async () => {
     await prisma.profile.update({
       data: { blacklist: { create: { profile_id: "joedart_profile_id" } } },
       where: { id: "douglas_profile_id" },

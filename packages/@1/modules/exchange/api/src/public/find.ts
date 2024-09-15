@@ -2,8 +2,7 @@
 
 import type { Prisma } from "@1.infra/database";
 import { Exchange_Filter } from "@1.modules/exchange.domain";
-import { with_next_cursor } from "@1.modules/trpc";
-import { maybe_next_auth_procedure } from "@1.modules/trpc/src/trpc";
+import { maybe_next_auth_procedure, with_next_cursor } from "@1.modules/trpc";
 import { endOfYesterday } from "date-fns";
 import { match, P } from "ts-pattern";
 import { z } from "zod";

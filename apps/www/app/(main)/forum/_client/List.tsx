@@ -39,7 +39,6 @@ import { P, match } from "ts-pattern";
 //
 
 export default function List() {
-  const { data: session } = useSession();
   const search_params = useSearchParams();
   const category = search_params.get("category") ?? undefined;
   const search = search_params.get("q") ?? undefined;
@@ -54,7 +53,6 @@ export default function List() {
 
   const info = TRPC_React.forum.question.find.useInfiniteQuery(
     {
-      profile_id: session?.profile.id,
       category,
       search,
       filter,
@@ -266,7 +264,7 @@ function Approve_Mutation() {
   const { id: answer_id } = useAnswer();
   const utils = TRPC_React.useUtils();
   const do_approve = TRPC_React.forum.question.answers.approve.useMutation();
-  const disapprove = TRPC_React.forum.question.answers.disapprove.useMutation()
+  const disapprove = TRPC_React.forum.question.answers.disapprove.useMutation();
   const submitApproval = useCallback(async () => {
     await do_approve.mutateAsync({
       answer_id,
@@ -284,9 +282,9 @@ function Approve_Mutation() {
   const submitDisapproval = useCallback(async () => {
     await disapprove.mutateAsync({
       answer_id,
-      question_id
+      question_id,
     });
-    
+
     await Promise.all([
       utils.forum.question.by_id.invalidate(question_id),
       utils.forum.question.answers.by_id.invalidate(answer_id),
@@ -295,21 +293,21 @@ function Approve_Mutation() {
     ]);
   }, [question_id, do_approve, answer_id, accepted_answer?.id]);
 
-
-  if (accepted_answer?.id === answer_id) return (
-    <div className="ml-10 mt-4 flex gap-4">
-      <Button
-        variant={{
-          intent: "danger",
-          state: "ghost",
-          size: "sm",
-        }}
-        onPress={submitDisapproval}
-      >
-        Désapprouver
-      </Button>
-    </div>
-  );
+  if (accepted_answer?.id === answer_id)
+    return (
+      <div className="ml-10 mt-4 flex gap-4">
+        <Button
+          variant={{
+            intent: "danger",
+            state: "ghost",
+            size: "sm",
+          }}
+          onPress={submitDisapproval}
+        >
+          Désapprouver
+        </Button>
+      </div>
+    );
 
   return (
     <div className="ml-12 flex gap-4">

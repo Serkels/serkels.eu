@@ -1,5 +1,6 @@
 //
 
+export * from "./category/film";
 export * from "./category/masterclass";
 export * from "./exchange/slap";
 export * from "./studient/douglas";
