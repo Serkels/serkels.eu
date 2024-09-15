@@ -6,9 +6,12 @@ import {
   Entity_Timestamps,
   ID_Schema,
 } from "@1.modules/core/domain";
-import { Student_Schema } from "@1.modules/profile.domain";
-import { z } from "zod";
+import {
+  AvatarProfile_Entity,
+  Student_Schema,
+} from "@1.modules/profile.domain";
 import { isPast } from "date-fns";
+import { z } from "zod";
 
 //
 
@@ -39,7 +42,9 @@ export interface Exchange_Flat_Schema
 export const Exchange_Schema = Exchange_Flat_Schema.extend({
   category: Category_Schema,
   deals: z.array(Entity_Schema),
-  owner: Student_Schema.pick({ profile: true, university: true }),
+  owner: Student_Schema.pick({ university: true }).extend({
+    profile: AvatarProfile_Entity,
+  }),
   return: Category_Schema.nullable(),
   type: Exchange_TypeSchema.default(Exchange_TypeSchema.Enum.RESEARCH),
 }).describe("Exchange_Schema");

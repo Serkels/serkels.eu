@@ -8,7 +8,7 @@ import { Exchange_InfiniteList } from "@1.modules/exchange.ui/InfiniteList";
 import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { useEffect, type ComponentProps, type ReactNode } from "react";
-import { match, P } from "ts-pattern";
+import { match } from "ts-pattern";
 
 //
 
@@ -25,33 +25,16 @@ export default function List() {
     gtag("event", "search", { search_term: search });
   }, [search]);
 
-  const info = match(session)
-    .with(
-      { profile: P._ },
-      () =>
-        TRPC_React.exchanges.find.private.useInfiniteQuery(
-          {
-            category,
-            filter,
-            search,
-          },
-          {
-            getNextPageParam: (lastPage) => lastPage.nextCursor,
-          },
-        ) as ComponentProps<typeof Exchange_InfiniteList>["info"],
-    )
-    .otherwise(
-      () =>
-        TRPC_React.exchanges.find.public.useInfiniteQuery(
-          {
-            category,
-            search,
-          },
-          {
-            getNextPageParam: (lastPage) => lastPage.nextCursor,
-          },
-        ) as ComponentProps<typeof Exchange_InfiniteList>["info"],
-    );
+  const info = TRPC_React.exchanges.find.useInfiniteQuery(
+    {
+      category,
+      filter,
+      search,
+    },
+    {
+      getNextPageParam: (lastPage) => lastPage.next_cursor,
+    },
+  ) as ComponentProps<typeof Exchange_InfiniteList>["info"];
 
   //
 

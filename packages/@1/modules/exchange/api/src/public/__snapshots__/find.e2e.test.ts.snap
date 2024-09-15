@@ -4,15 +4,15 @@ exports[`visitor should return latest exchanges 1`] = `
 {
   "data": [
     {
-      "category_id": "masterclass-category",
+      "category_id": "masterclass_category_id",
       "created_at": 2011-11-11T00:00:00.000Z,
       "description": "https://vulf.co/courses/dart/lectures/45940163",
       "expiry_date": null,
-      "id": "slap-exchange",
+      "id": "slap_exchange_id",
       "is_active": true,
       "is_online": true,
       "location": null,
-      "owner_id": "joedart-student",
+      "owner_id": "joedart_student_id",
       "places": 1,
       "return_id": null,
       "title": "Slap",
@@ -20,21 +20,21 @@ exports[`visitor should return latest exchanges 1`] = `
       "updated_at": 2011-11-11T00:00:00.000Z,
     },
   ],
-  "nextCursor": undefined,
+  "next_cursor": undefined,
 }
 `;
 
 exports[`visitor should not list successful exchanges 1`] = `
 {
   "data": [],
-  "nextCursor": undefined,
+  "next_cursor": undefined,
 }
 `;
 
 exports[`visitor should not list expired exchanges 1`] = `
 {
   "data": [],
-  "nextCursor": undefined,
+  "next_cursor": undefined,
 }
 `;
 
@@ -42,15 +42,15 @@ exports[`connected studient should return latest exchanges 1`] = `
 {
   "data": [
     {
-      "category_id": "masterclass-category",
+      "category_id": "masterclass_category_id",
       "created_at": 2011-11-11T00:00:00.000Z,
       "description": "https://vulf.co/courses/dart/lectures/45940163",
       "expiry_date": null,
-      "id": "slap-exchange",
+      "id": "slap_exchange_id",
       "is_active": true,
       "is_online": true,
       "location": null,
-      "owner_id": "joedart-student",
+      "owner_id": "joedart_student_id",
       "places": 1,
       "return_id": null,
       "title": "Slap",
@@ -58,6 +58,20 @@ exports[`connected studient should return latest exchanges 1`] = `
       "updated_at": 2011-11-11T00:00:00.000Z,
     },
   ],
-  "nextCursor": undefined,
+  "next_cursor": undefined,
+}
+`;
+
+exports[`connected studient should not list exchanges created by my blocked profile 1`] = `
+{
+  "data": [],
+  "next_cursor": undefined,
+}
+`;
+
+exports[`connected studient should not list exchanges created by profiles who blocked me 1`] = `
+{
+  "data": [],
+  "next_cursor": undefined,
 }
 `;

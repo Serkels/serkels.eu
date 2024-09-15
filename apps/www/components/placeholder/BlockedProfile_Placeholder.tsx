@@ -2,6 +2,7 @@
 
 import { TRPC_React } from ":trpc/client";
 import type { ID_Schema } from "@1.modules/core/domain";
+import { BlockedInfoMessage } from "@1.modules/profile.ui/BlockedInfoMessage";
 
 //
 export function BlockedProfile_Placeholder({
@@ -23,18 +24,12 @@ export function BlockedProfile_Placeholder({
       <figure className="text-center">
         <h1 className="text-4xl">🚫</h1>
       </figure>
+
       <h4 className="mb-2 text-center text-lg">
         Vous avez blocké <i>{name}</i>
       </h4>
-      <p className="text-center"></p>
-      <ul className="list-disc">
-        <li>Vous ne pourrez plus envoyer de message à {name}</li>
-        <li>Vous ne recevrez plus de message de {name}</li>
-        <li>
-          Si vous débloquez {name}, vous ne recevrez rien de ce qui aurait pu
-          être envoyé pendant le blocage
-        </li>
-      </ul>
+
+      <BlockedInfoMessage name={name} />
 
       <hr />
     </div>

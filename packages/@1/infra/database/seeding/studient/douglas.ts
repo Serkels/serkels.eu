@@ -9,15 +9,17 @@ export async function create_douglas_student(prisma: PrismaClient) {
     data: {
       city: "London",
       field_of_study: "Film",
-      id: "douglas-student",
+      id: "douglas_student_id",
       profile: {
         create: {
+          id: "douglas_profile_id",
           image: "https://picsum.photos/200/300",
           name: "Douglas",
           role: "STUDENT",
           user: {
             create: {
               email: "douglas@example.com",
+              id: "douglas_user_id",
               name: "Douglas",
             },
           },

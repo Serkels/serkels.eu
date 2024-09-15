@@ -10,10 +10,10 @@ export function create_slap_exchange(
 ) {
   return prisma.exchange.create({
     data: {
-      category: { connect: { id: "masterclass-category" } },
+      category: { connect: { id: "masterclass_category_id" } },
       created_at: new Date("2011-11-11"),
       description: "https://vulf.co/courses/dart/lectures/45940163",
-      id: "slap-exchange",
+      id: "slap_exchange_id",
       is_active: true,
       is_online: true,
       owner: { connect: { id: studient_id } },
