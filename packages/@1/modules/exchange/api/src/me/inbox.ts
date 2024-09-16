@@ -131,7 +131,6 @@ export const inbox = router({
         });
 
         const [last_message] = messages;
-        console.log({ thread_id, messages, last_message });
         if (!last_message) throw new Error("No message created");
 
         await prisma_tx.exchangeMessageNotification.create({

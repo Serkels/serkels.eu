@@ -10,7 +10,6 @@ export default function Error({
   error: Error;
   reset: () => void;
 }) {
-  console.log("(main)/(about)/status/error");
   console.error(error);
   console.trace();
   return (

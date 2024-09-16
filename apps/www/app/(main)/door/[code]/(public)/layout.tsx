@@ -19,7 +19,6 @@ export default async function Layout({
   params: CodeParms;
 }>) {
   const [, profile_id] = await to(code_to_profile_id(params));
-  console.log({ profile_id });
 
   const [, session] = await to(getServerSession());
 

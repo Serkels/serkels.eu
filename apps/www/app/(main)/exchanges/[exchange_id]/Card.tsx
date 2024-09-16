@@ -14,7 +14,7 @@ export function Card({ exchange_id }: Params) {
   const { data: session } = useSession();
   const { data: exchange, status } =
     TRPC_React.exchanges.by_id.useQuery(exchange_id);
-  console.log({ session, exchange, status });
+
   return match({ exchange, status })
     .with({ status: "error" }, () => notFound())
     .with(
