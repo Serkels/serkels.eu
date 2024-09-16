@@ -18,7 +18,7 @@ export function MobileNavBar({ className }: ComponentPropsWithoutRef<"nav">) {
 
   return (
     <nav className={base({ className })}>
-      <ul className="grid h-full grid-cols-3 justify-between">
+      <ul className="grid h-full grid-cols-3 md:mx-auto md:max-w-2xl">
         <li>
           <Link
             className={link({

@@ -93,7 +93,7 @@ const opportunity_grid = tv({
     sm:px-0
     md:grid-cols-2
     lg:grid-cols-3
-    xl:grid-cols-4
+    xl:grid-cols-[repeat(auto-fill,_minmax(0,_260px))]
   `,
   slots: {
     item: "",

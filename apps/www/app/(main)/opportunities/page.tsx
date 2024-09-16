@@ -57,7 +57,7 @@ export default async function Page({
 
   return (
     <TRPC_Hydrate>
-      <main className="max-w-6xl md:my-10">
+      <main className="md:my-10">
         <List />
       </main>
     </TRPC_Hydrate>
