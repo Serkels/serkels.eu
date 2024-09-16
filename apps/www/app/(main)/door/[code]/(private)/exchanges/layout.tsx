@@ -1,10 +1,11 @@
 //
 
+import { NotConnected_Placeholder } from ":components/placeholder/NotConnected_Placeholder";
 import { code_to_profile_id, type CodeParms } from ":pipes/code";
 import { TRPC_SSR } from ":trpc/server";
 import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import type { Metadata, ResolvingMetadata } from "next";
-import { notFound, redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 import type { PropsWithChildren } from "react";
 
 //
@@ -27,7 +28,7 @@ export default async function Layout({
   const profile_id = await code_to_profile_id(params);
 
   if (!profile_id) {
-    notFound();
+    return <NotConnected_Placeholder />;
   }
 
   const profile = await TRPC_SSR.profile.by_id.fetch(profile_id);
