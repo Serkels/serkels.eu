@@ -27,7 +27,7 @@ export default async function Page() {
   //
   return (
     <TRPC_Hydrate>
-      <main className="container my-32 px-16">
+      <main className="container mx-auto my-32 px-4 sm:px-8 md:px-6 lg:px-8">
         <h1 className="mb-8 text-4xl font-bold">Notifications</h1>
         <AsyncListInfinite />
       </main>
