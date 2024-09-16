@@ -61,6 +61,7 @@ async function NewExchangeSection() {
   const session = await getServerSession();
 
   if (!session) return null;
+  if (session.profile.role !== "STUDENT") return null;
 
   const { base } = card();
   return (

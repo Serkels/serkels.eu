@@ -8,7 +8,6 @@ import { Spinner } from "@1.ui/react/spinner";
 import type { _1_HOUR_ } from "@douglasduteil/datatypes...hours-to-seconds";
 import type { Metadata, ResolvingMetadata } from "next";
 import dynamic from "next/dynamic";
-import { match } from "ts-pattern";
 
 //
 
@@ -71,19 +70,26 @@ export default async function Page({
   return (
     <TRPC_Hydrate>
       <main>
-        {match(session)
-          .with({ profile: { role: "STUDENT" } }, () => (
-            <>
-              <Create />
-              <div className="w-full pt-10 text-center sm:text-lg">
-                Ou réponds aux questions des étudiant.e.s
-              </div>
-            </>
-          ))
-          .otherwise(() => null)}
-        <hr className="my-10" />
+        <CreateQuestionSection />
         <List />
       </main>
     </TRPC_Hydrate>
+  );
+}
+
+async function CreateQuestionSection() {
+  const session = await getServerSession();
+
+  if (!session) return null;
+  if (session.profile.role !== "STUDENT") return null;
+
+  return (
+    <section>
+      <Create />
+      <div className="w-full pt-10 text-center sm:text-lg">
+        Ou réponds aux questions des étudiant.e.s
+      </div>
+      <hr className="my-10" />
+    </section>
   );
 }
