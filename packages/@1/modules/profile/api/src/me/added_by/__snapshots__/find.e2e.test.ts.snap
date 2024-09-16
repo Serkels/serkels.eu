@@ -1,0 +1,45 @@
+// Bun Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`return my latest followers 1`] = `
+{
+  "data": [
+    {
+      "id": "joedart_profile_id",
+      "image": "https://picsum.photos/200/300",
+      "name": "Joe Dart",
+    },
+    {
+      "id": "johan_profile_id",
+      "image": "https://picsum.photos/200/300",
+      "name": "Johan",
+    },
+  ],
+  "next_cursor": undefined,
+}
+`;
+
+exports[`return a valid cursor: first_response 1`] = `
+{
+  "data": [
+    {
+      "id": "joedart_profile_id",
+      "image": "https://picsum.photos/200/300",
+      "name": "Joe Dart",
+    },
+  ],
+  "next_cursor": "johan_profile_id",
+}
+`;
+
+exports[`return a valid cursor: second_response 1`] = `
+{
+  "data": [
+    {
+      "id": "joedart_profile_id",
+      "image": "https://picsum.photos/200/300",
+      "name": "Joe Dart",
+    },
+  ],
+  "next_cursor": "johan_profile_id",
+}
+`;

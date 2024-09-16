@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { tv } from "tailwind-variants";
 import AddContact from "./_client/AddContact";
 import { BlockProfile } from "./_client/BlockProfile";
-import Follow from "./_client/Follow";
 import SendMessage from "./_client/SendMessage";
 import { type CodeParmsAsProfileId } from "./default";
 import { ReportTheProfile, ShareTheProfile } from "./menu";
@@ -24,7 +23,6 @@ export function Student_Page({ params }: { params: CodeParmsAsProfileId }) {
       <div className="my-4 flex justify-end space-x-2 md:hidden">
         {is_me ? null : (
           <>
-            <Follow profile_id={code} />
             <SendMessage profile_id={code} />
           </>
         )}
@@ -54,7 +52,6 @@ export function Student_Page({ params }: { params: CodeParmsAsProfileId }) {
         <div className="flex items-center gap-4">
           {is_me ? null : (
             <div className="hidden md:flex md:gap-2 ">
-              <Follow profile_id={code} />
               <SendMessage profile_id={code} />
             </div>
           )}
@@ -85,8 +82,6 @@ export function Partner_Page({ params }: { params: CodeParmsAsProfileId }) {
   return (
     <>
       <div className="my-4 flex justify-end space-x-2 md:hidden">
-        {is_me ? null : <Follow profile_id={code} />}
-
         <Menu>
           {is_me ? (
             <ShareTheProfile profile_id={profile_id} />
@@ -115,8 +110,6 @@ export function Partner_Page({ params }: { params: CodeParmsAsProfileId }) {
         </div>
 
         <div className="hidden items-center space-x-2 md:flex">
-          {is_me ? null : <Follow profile_id={code} />}
-
           <Menu>
             {is_me ? (
               <ShareTheProfile profile_id={profile_id} />

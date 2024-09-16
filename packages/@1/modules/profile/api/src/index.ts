@@ -24,7 +24,6 @@ const profile_api_router = router({
     .query(async ({ input: id, ctx: { prisma } }) => {
       return prisma.profile.findUniqueOrThrow({
         include: {
-          followed_by: { select: { id: true } },
           in_contact_with: { select: { id: true } },
           contacts: { select: { id: true } },
         },
@@ -48,7 +47,7 @@ const profile_api_router = router({
 
   //
 
-  me,
+  me: me,
 });
 
 export default profile_api_router;

@@ -2,7 +2,7 @@
 
 import { ProfileAvatarMedia } from ":components/avatar";
 import { TRPC_React } from ":trpc/client";
-import type { Profile } from "@1.modules/profile.domain";
+import type { AvatarProfile } from "@1.modules/profile.domain";
 import { EmptyList, Loading, flatten_pages_are_empty } from "@1.ui/react/async";
 import { Button } from "@1.ui/react/button";
 import { button } from "@1.ui/react/button/atom";
@@ -13,7 +13,7 @@ import { P, match } from "ts-pattern";
 //
 
 export default function List() {
-  const info = TRPC_React.profile.me.follows.useInfiniteQuery(
+  const info = TRPC_React.profile.me.added_by.find.useInfiniteQuery(
     {},
     { getNextPageParam: ({ next_cursor }) => next_cursor },
   );
@@ -63,7 +63,7 @@ export default function List() {
     .exhaustive();
 }
 
-function Item(profile: Profile) {
+function Item(profile: AvatarProfile) {
   return (
     <Link
       className={button({

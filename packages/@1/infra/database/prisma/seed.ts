@@ -786,11 +786,6 @@ async function students_messages() {
             id: profile_id,
           })),
         },
-        following: {
-          connect: faker.helpers
-            .arrayElements(contacts)
-            .map(({ profile_id }) => ({ id: profile_id })),
-        },
         added_notifications: {
           createMany: {
             data: notifications.map(({ id: notification_id }) => ({
