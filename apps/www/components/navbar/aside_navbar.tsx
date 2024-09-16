@@ -46,10 +46,18 @@ export function Student_NavBar({
       <ul className={list()}>
         <Li_Link
           onClick={onClickLink}
+          icon={<Exchange />}
+          href="./exchanges/inbox"
+        >
+          Cercles d'échanges
+          <NewsInExchange_Indicator />
+        </Li_Link>
+        <Li_Link
+          onClick={onClickLink}
           icon={<PlusBox />}
           href="./exchanges/new"
         >
-          Créer
+          Créer un échange
         </Li_Link>
         <Li_Link
           onClick={onClickLink}
@@ -58,16 +66,8 @@ export function Student_NavBar({
         >
           Mes publications
         </Li_Link>
-        <Li_Link
-          onClick={onClickLink}
-          icon={<Exchange />}
-          href="./exchanges/inbox"
-        >
-          Cercles d'échanges
-          <NewsInExchange_Indicator />
-        </Li_Link>
         <Li_Link icon={<Bookmark />} href="./bookmarks">
-          Sauvegardes
+          Mes sauvegardes
         </Li_Link>
         <SubNav_Bookmarks href="./bookmarks">
           <Li_Link
@@ -162,10 +162,6 @@ export function Partner_NavBar({
   );
 }
 
-export const aside_navbar = tv({
-  base: "bg-[#f5f8fa] py-5 pt-10",
-  variants: {},
-});
 const navbar = tv({
   base: "sticky top-0 py-5",
   slots: {
