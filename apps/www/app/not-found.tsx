@@ -5,8 +5,8 @@
 import { AppFooter } from ":components/shell/AppFooter.server";
 import { Banner } from ":components/shell/Banner";
 import { BigBar } from ":components/shell/BigBar";
+import SerkelsLogo from ":components/shell/SerkelsLogo";
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import type { PropsWithChildren } from "react";
 
@@ -23,13 +23,7 @@ export default async function Page() {
     <div className="grid min-h-screen grid-rows-[max-content_1fr_max-content]">
       <BigBar>
         <Link href="/">
-          <Image
-            src="/serkels-noir.svg"
-            alt="Serkels Logo"
-            width={175}
-            height={53}
-            priority
-          />
+          <SerkelsLogo />
         </Link>
       </BigBar>
       <NotFoundMain>404</NotFoundMain>

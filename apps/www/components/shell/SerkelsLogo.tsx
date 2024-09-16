@@ -15,8 +15,8 @@ export const SerkelsLogo = forwardRef<
     <Image
       src="/serkels-noir.svg"
       alt="Serkels Logo"
-      width={175}
-      height={53}
+      width={247}
+      height={51}
       priority
       {...other_props}
       ref={forwardedRef}
