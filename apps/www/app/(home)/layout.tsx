@@ -38,10 +38,10 @@ export default function Site_Layout({ children }: PropsWithChildren) {
 function AppLargeTopBar() {
   return (
     <BigBar>
-      <MenuBurger />
       <Link href="/">
         <SerkelsLogo />
       </Link>
+      <MenuBurger className="right-9 top-6" />
     </BigBar>
   );
 }

@@ -61,7 +61,7 @@ const aside_bar = tv({
   slots: {
     container: `
       fixed
-      left-0
+      right-0
       top-0
       z-50
       h-screen
@@ -90,7 +90,7 @@ const aside_bar = tv({
   },
   variants: {
     hidden: {
-      true: { container: "-translate-x-full" },
+      true: { container: "translate-x-full" },
     },
   },
 });
