@@ -47,7 +47,7 @@ export function MenuBurger({ className }: { className?: string }) {
 }
 
 const menu_burger = tv({
-  base: "absolute left-0 top-0 p-6",
+  base: "absolute right-0 top-0 p-5",
   slots: {
     list: "",
     link: "block p-4 text-center text-lg hover:bg-gray-100 ",
