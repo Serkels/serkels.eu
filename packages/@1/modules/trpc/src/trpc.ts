@@ -33,9 +33,18 @@ export const {
 });
 
 // export type Procedure = inferProcedureBuilderResolverOptions<typeof procedure>;
-export const next_auth_procedure = procedure.use(
-  verify_next_auth_token<{ profile: Profile }>(),
-);
+export const next_auth_procedure = procedure
+  .use(verify_next_auth_token<{ profile: Profile }>())
+  .use(async ({ ctx: { payload }, next }) => {
+    if (!payload.profile) {
+      throw new TRPCError({
+        code: "UNAUTHORIZED",
+        cause: new Error("No profile"),
+      });
+    }
+    return next();
+  });
+
 export const maybe_next_auth_procedure = procedure.use(
   verify_next_auth_token<{ profile?: Profile }>(true),
 );

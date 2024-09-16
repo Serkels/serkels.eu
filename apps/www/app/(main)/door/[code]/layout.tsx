@@ -1,11 +1,12 @@
 //
 
+import { NotConnected_Placeholder } from ":components/placeholder/NotConnected_Placeholder";
 import { AuthSessionProvider } from ":components/shell/AuthSessionProvider";
 import type { CodeParms } from ":pipes/code";
 import { getServerSession } from "@1.modules/auth.next";
 import { Grid } from "@1.ui/react/grid";
 import { to } from "await-to-js";
-import { notFound, redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 import type { PropsWithChildren, ReactNode } from "react";
 import { createSlot } from "react-slotify";
 import { tv } from "tailwind-variants";
@@ -21,7 +22,8 @@ export default async function Layout({
   let session;
 
   [, session] = await to(getServerSession());
-  if (!session) return notFound();
+
+  if (!session) return <NotConnected_Placeholder />;
 
   if (params.code === session.profile.id) {
     redirect("/@~");
