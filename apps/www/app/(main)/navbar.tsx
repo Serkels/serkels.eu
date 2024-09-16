@@ -30,7 +30,7 @@ export default function UserBar() {
       <Grid className="items-center bg-primary-gradient-74 text-white sm:grid-cols-[repeat(2,_auto)]">
         <figure className="col-span-1 flex h-16 items-center sm:col-auto md:col-span-2 xl:col-span-3">
           <Link href="/">
-            <Logo className="ml-16 w-[110px]" />
+            <Logo className="ml-2 w-[110px] md:ml-16" />
           </Link>
         </figure>
 
