@@ -41,7 +41,7 @@ function AppLargeTopBar() {
       <Link href="/">
         <SerkelsLogo />
       </Link>
-      <MenuBurger className="right-9 top-6" />
+      <MenuBurger className="md:right-9 md:top-6" />
     </BigBar>
   );
 }
