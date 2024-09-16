@@ -42,9 +42,11 @@ export default async function Page({ params }: { params: CodeParms }) {
           <MaybeProfileLink href="/@~/following" profile_id={profile_id}>
             <AddedByCount profile_id={profile_id} />
           </MaybeProfileLink>
-          <MaybeProfileLink href="/@~/contacts" profile_id={profile_id}>
-            <CircleCount profile_id={profile_id} />
-          </MaybeProfileLink>
+          {profile.role === PROFILE_ROLES.Enum.STUDENT ? (
+            <MaybeProfileLink href="/@~/contacts" profile_id={profile_id}>
+              <CircleCount profile_id={profile_id} />
+            </MaybeProfileLink>
+          ) : null}
         </div>
       </header>
     </TRPC_Hydrate>

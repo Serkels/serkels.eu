@@ -99,7 +99,7 @@ export function Partner_Page({ params }: { params: CodeParmsAsProfileId }) {
             className={link({ active: pathname === `/@${code}` })}
             href={`/@${code}`}
           >
-            Biographie
+            À propos
           </Link>
           <Link
             className={link({ active: pathname === `/@${code}/opportunities` })}

@@ -271,6 +271,17 @@
         "runOptions": { "instanceLimit": 1 },
       },
       {
+        "label": "🧪 Cypress Studio",
+        "command": "pnpm run studio",
+        "type": "shell",
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:🧪 e2e}",
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "runOptions": { "instanceLimit": 1 },
+      },
+      {
         "label": "🏗️ Database Migrate Dev",
         "command": "pnpm run migrate:dev",
         "type": "shell",
