@@ -2,7 +2,7 @@
 
 import { TRPC_React } from ":trpc/client";
 import type { ID_Schema } from "@1.modules/core/domain";
-import { Plus, Trash } from "@1.ui/react/icons";
+import { Archive, Warning } from "@1.ui/react/icons";
 import { ActionItem } from "@1.ui/react/menu";
 import { Spinner } from "@1.ui/react/spinner";
 import { useCallback } from "react";
@@ -28,12 +28,12 @@ export function BlockProfile({ profile_id }: { profile_id: ID_Schema }) {
       >
         {find_profile.data ? (
           <>
-            <Trash className="w-4" />
+            <Archive className="w-4" />
             <span className="w-full">Débloquer le profile</span>
           </>
         ) : (
           <>
-            <Plus className="w-4" />
+            <Warning className="w-4" />
             <span className="w-full">Bloquer le profile</span>
           </>
         )}
