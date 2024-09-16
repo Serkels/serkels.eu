@@ -2,7 +2,7 @@
 
 import type { Answer } from "@1.modules/forum.domain";
 import { StudentAvatarMedia } from "@1.modules/profile.ui/avatar";
-import { Approved, Warning } from "@1.ui/react/icons";
+import { Approved, ExclamationMark } from "@1.ui/react/icons";
 import { ActionItem, Menu } from "@1.ui/react/menu";
 import { TimeInfo } from "@1.ui/react/time";
 import { type PropsWithChildren } from "react";
@@ -64,7 +64,7 @@ function MenuAction({ children }: PropsWithChildren) {
         className="flex items-center space-x-1 whitespace-nowrap"
         href={`/@~/report?${new URLSearchParams({ url: href })}`}
       >
-        <Warning className="h-4" /> <span>Signaler cette réponse</span>
+        <ExclamationMark className="h-4" /> <span>Signaler cette réponse</span>
       </ActionItem>
     </Menu>
   );

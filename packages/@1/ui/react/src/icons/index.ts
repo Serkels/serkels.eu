@@ -11,6 +11,7 @@ export * from "./Circle";
 export * from "./Denied";
 export * from "./Envelope";
 export * from "./Exchange";
+export * from "./ExclamationMark";
 export * from "./Exit";
 export * from "./Gear";
 export * from "./HamburgerMenu";

@@ -1,7 +1,7 @@
 //
 
 import { AvatarMedia } from "@1.ui/react/avatar";
-import { School, Share, Warning } from "@1.ui/react/icons";
+import { ExclamationMark, School, Share } from "@1.ui/react/icons";
 import { ActionItem, Menu } from "@1.ui/react/menu";
 import { type PropsWithChildren } from "react";
 import { tv } from "tailwind-variants";
@@ -104,7 +104,7 @@ export function ExchangeMenu({ exchange_id }: { exchange_id: string }) {
         className="flex items-center space-x-1 whitespace-nowrap"
         href={`/@~/report?${new URLSearchParams({ url: href })}`}
       >
-        <Warning className="h-4" /> <span>Signaler l'échange</span>
+        <ExclamationMark className="h-4" /> <span>Signaler l'échange</span>
       </ActionItem>
     </Menu>
   );

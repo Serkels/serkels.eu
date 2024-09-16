@@ -4,7 +4,7 @@ import { Share_Button } from ":components/Share_Button";
 import { slug_to_opportunity, type Params } from ":pipes/opportunity_slug";
 import { getServerSession } from "@1.modules/auth.next";
 import { Article, icon_link } from "@1.modules/opportunity.ui/Article";
-import { Share, Warning } from "@1.ui/react/icons";
+import { ExclamationMark, Share } from "@1.ui/react/icons";
 import { ActionItem, Menu } from "@1.ui/react/menu";
 import type { Metadata, ResolvingMetadata } from "next";
 import dynamic from "next/dynamic";
@@ -125,7 +125,7 @@ function OpportunityMenu({
         className="flex items-center space-x-1 whitespace-nowrap"
         href={`/@~/report?${new URLSearchParams({ url: href })}`}
       >
-        <Warning className="h-4" /> <span>Signaler l'oppotunité</span>
+        <ExclamationMark className="h-4" /> <span>Signaler l'oppotunité</span>
       </ActionItem>
     </Menu>
   );

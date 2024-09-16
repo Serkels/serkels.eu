@@ -1,6 +1,6 @@
 //
 
-import { Share, Warning } from "@1.ui/react/icons";
+import { ExclamationMark, Share } from "@1.ui/react/icons";
 import { ActionItem } from "@1.ui/react/menu";
 import { useCallback } from "react";
 import AddContact from "./_client/AddContact";
@@ -38,7 +38,7 @@ export function ReportTheProfile({ profile_id }: { profile_id: string }) {
       className="flex items-center space-x-1 whitespace-nowrap"
       href={`/@~/report?${new URLSearchParams({ url: href })}`}
     >
-      <Warning className="w-4" />
+      <ExclamationMark className="w-4" />
       <span className="w-full">Signaler le profil</span>
     </ActionItem>
   );

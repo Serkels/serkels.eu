@@ -1,7 +1,7 @@
 //
 
 import { AvatarMedia } from "@1.ui/react/avatar";
-import { Approved, Circle, School, Warning } from "@1.ui/react/icons";
+import { Approved, Circle, ExclamationMark, School } from "@1.ui/react/icons";
 import { ActionItem, Menu } from "@1.ui/react/menu";
 import { TimeInfo } from "@1.ui/react/time";
 import type { PropsWithChildren } from "react";
@@ -51,7 +51,8 @@ function ActionGroup({ children }: PropsWithChildren) {
         className="flex items-center space-x-1 whitespace-nowrap"
         href={`/@~/report?${new URLSearchParams({ url: href })}`}
       >
-        <Warning className="h-4" /> <span>Signaler cette question</span>
+        <ExclamationMark className="size-4" />
+        <span>Signaler cette question</span>
       </ActionItem>
       <ActionGroup.DeleteAction.Renderer
         childs={children}
