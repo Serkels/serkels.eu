@@ -42,7 +42,6 @@ model Profile {
   blacklist     Blacklist[]    @relation("BlacklistedProfiles")
   bookmarks     Bookmark[]
   contacts      Profile[]      @relation("Contacts")
-  following     Profile[]      @relation("ProfileFollows")
   id            String         @id @default(cuid())
   image         String
   is_online     Boolean        @default(false)
@@ -59,7 +58,6 @@ model Profile {
   //
 
   blacklisted_by         Blacklist[] @relation("BlacklistedBy")
-  followed_by            Profile[]   @relation("ProfileFollows")
   in_contact_with        Profile[]   @relation("Contacts")
   participants_in_thread Thread[]    @relation("ParticipantsInThread")
   partner                Partner?

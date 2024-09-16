@@ -115,7 +115,7 @@ function profile_filter(
     .with(
       Exchange_Filter.Enum.MY_CIRCLES,
       (): Prisma.ExchangeWhereInput => ({
-        owner: { profile: { followed_by: { some: { id: profile_id } } } },
+        owner: { profile: { in_contact_with: { some: { id: profile_id } } } },
       }),
     )
     .with(

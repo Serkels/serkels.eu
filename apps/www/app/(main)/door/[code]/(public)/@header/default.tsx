@@ -1,98 +1,79 @@
 //
 
 import { code_to_profile_id, type CodeParms } from ":pipes/code";
-import { TRPC_SSR } from ":trpc/server";
+import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
 import { getServerSession } from "@1.modules/auth.next";
 import { AuthError } from "@1.modules/core/errors";
-import { PROFILE_ROLES } from "@1.modules/profile.domain";
+import { PROFILE_ROLES, type Profile } from "@1.modules/profile.domain";
 import {
   PartnerAvatarMedia,
   StudentAvatarMedia,
 } from "@1.modules/profile.ui/avatar";
+import to from "await-to-js";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import type { ComponentProps } from "react";
 import { match } from "ts-pattern";
+import { AddedByCount } from "./AddedByCount";
+import { CircleCount } from "./CircleCount";
 
 //
 
 export default async function Page({ params }: { params: CodeParms }) {
-  try {
-    const profile_id = await code_to_profile_id(params);
-    if (!profile_id) {
-      throw new AuthError("No session");
-    }
+  const [code_to_profile_id_err, profile_id] = await to(
+    code_to_profile_id(params),
+  );
+  if (!profile_id) {
+    throw new AuthError("Unkwon code", { cause: code_to_profile_id_err });
+  }
+  const [profile_err, profile] = await to(
+    TRPC_SSR.profile.by_id.fetch(profile_id),
+  );
+  if (!profile) {
+    throw new AuthError("No profile", { cause: profile_err });
+  }
 
-    const profile = await TRPC_SSR.profile.by_id.fetch(profile_id);
+  await TRPC_SSR.profile.by_id.prefetch(profile_id);
 
-    const avatar = await match(profile.role)
-      .with(PROFILE_ROLES.Enum.STUDENT, async () => {
-        const student =
-          await TRPC_SSR.profile.student.by_profile_id.fetch(profile_id);
-        return <StudentAvatarMedia tv$size="medium" student={student} />;
-      })
-      .with(PROFILE_ROLES.Enum.PARTNER, async () => {
-        const partner =
-          await TRPC_SSR.profile.partner.by_profile_id.fetch(profile_id);
-        return <PartnerAvatarMedia tv$size="medium" partner={partner} />;
-      })
-      .otherwise(() => null);
-
-    return (
+  return (
+    <TRPC_Hydrate>
       <header className="flex justify-between space-x-5">
-        {avatar}
-
+        <ProfileAvatar profile={profile} />
         <div className="flex flex-row space-x-5">
-          <FollowerCount profile_id={profile_id} />
-          {profile.role === PROFILE_ROLES.Enum.STUDENT ? (
-            <ContactsCount profile_id={profile_id} />
-          ) : null}
+          <MaybeProfileLink href="/@~/following" profile_id={profile_id}>
+            <AddedByCount profile_id={profile_id} />
+          </MaybeProfileLink>
+          <MaybeProfileLink href="/@~/contacts" profile_id={profile_id}>
+            <CircleCount profile_id={profile_id} />
+          </MaybeProfileLink>
         </div>
       </header>
-    );
-  } catch (error) {
-    console.error(error);
-    notFound();
-  }
-}
-
-async function FollowerCount({ profile_id }: { profile_id: string }) {
-  const session = await getServerSession();
-  const profile = await TRPC_SSR.profile.by_id.fetch(profile_id);
-
-  if (session?.profile.id === profile_id)
-    return (
-      <Link href="/@~/following" className="flex flex-col items-center">
-        <div className="text-lg font-bold">{profile.contacts.length}</div>{" "}
-        Ajouté par
-      </Link>
-    );
-  return (
-    <div className="flex flex-col items-center">
-      <div className="text-lg font-bold">{profile.followed_by.length}</div>{" "}
-      Ajouté par
-    </div>
+    </TRPC_Hydrate>
   );
 }
 
-async function ContactsCount({ profile_id }: { profile_id: string }) {
+async function MaybeProfileLink(
+  props: ComponentProps<typeof Link> & { profile_id: string },
+) {
+  const { profile_id, children, ...link_props } = props;
   const session = await getServerSession();
-  const profile = await TRPC_SSR.profile.by_id.fetch(profile_id);
+  if (session?.profile.id !== profile_id)
+    return <div {...(link_props as ComponentProps<"div">)}>{children}</div>;
+  return <Link {...link_props}>{children}</Link>;
+}
 
-  if (session?.profile.id === profile_id)
-    return (
-      <Link
-        href="/@~/contacts"
-        aria-label="Mes cercles"
-        className="flex flex-col items-center"
-      >
-        <div className="text-lg font-bold">{profile.contacts.length}</div>{" "}
-        Cercle{profile.contacts.length > 1 ? "s" : ""}
-      </Link>
-    );
-  return (
-    <div className="flex flex-col items-center">
-      <div className="text-lg font-bold">{profile.contacts.length}</div>Cercle
-      {profile.contacts.length > 1 ? "s" : ""}
-    </div>
-  );
+function ProfileAvatar({ profile }: { profile: Profile }) {
+  return match(profile.role)
+    .with(PROFILE_ROLES.Enum.STUDENT, async () => {
+      const student = await TRPC_SSR.profile.student.by_profile_id.fetch(
+        profile.id,
+      );
+      return <StudentAvatarMedia tv$size="medium" student={student} />;
+    })
+    .with(PROFILE_ROLES.Enum.PARTNER, async () => {
+      const partner = await TRPC_SSR.profile.partner.by_profile_id.fetch(
+        profile.id,
+      );
+      return <PartnerAvatarMedia tv$size="medium" partner={partner} />;
+    })
+    .otherwise(() => null);
 }
