@@ -74,7 +74,7 @@ function List({
 
   return (
     <>
-      <ul className="space-y-6">
+      <ul className="space-y-6 md:mx-auto md:max-w-[333px]">
         {flatten_pages.map((opportunity) => (
           <li key={opportunity.id}>
             <Card opportunity={opportunity} />
