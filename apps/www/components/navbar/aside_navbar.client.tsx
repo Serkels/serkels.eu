@@ -43,7 +43,7 @@ export function Li_Link(
 const li = tv({
   slots: {
     base: "flex items-center",
-    link: "flex w-full items-center gap-4 bg-neutral-50 p-4",
+    link: "flex w-full items-center gap-4 bg-neutral-50 p-4 xl:pl-12",
     icon: "ml-4 h-auto w-5 justify-self-center",
   },
   variants: {
