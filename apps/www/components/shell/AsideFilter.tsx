@@ -49,7 +49,7 @@ const style = tv({
   base: "",
   slots: {
     sticky: "sticky top-16 pt-10",
-    body: "verflow-y-auto md:mx-auto md:max-w-[333px] md:pb-28",
+    body: "verflow-y-auto md:mx-16 md:max-w-[333px] md:pb-28",
     title: "pl-3 text-2xl font-bold uppercase text-Congress_Blue md:pl-0",
     subtitle: "w-full px-4 pb-6 pt-4 text-base md:px-0",
     article: "w-full",
