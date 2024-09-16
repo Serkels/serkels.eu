@@ -1,6 +1,7 @@
 //
 
 import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
+import { getServerSession } from "@1.modules/auth.next";
 import { Exchange_Filter } from "@1.modules/exchange.domain";
 import { card } from "@1.ui/react/card/atom";
 import { PlusBox } from "@1.ui/react/icons";
@@ -48,9 +49,7 @@ export default async function Page({
   return (
     <TRPC_Hydrate>
       <main>
-        <NewExchangeButton />
-
-        <hr className="my-8 border-none"></hr>
+        <NewExchangeSection />
 
         <List />
       </main>
@@ -58,18 +57,25 @@ export default async function Page({
   );
 }
 
-function NewExchangeButton() {
+async function NewExchangeSection() {
+  const session = await getServerSession();
+
+  if (!session) return null;
+
   const { base } = card();
   return (
-    <div className={base()}>
-      <Link
-        className={link({
-          className: "flex items-center justify-center space-x-3 p-3",
-        })}
-        href={"/@~/exchanges/new"}
-      >
-        <PlusBox className="h-5" /> <div>Créer un nouvel échange</div>
-      </Link>
-    </div>
+    <section>
+      <div className={base()}>
+        <Link
+          className={link({
+            className: "flex items-center justify-center space-x-3 p-3",
+          })}
+          href={"/@~/exchanges/new"}
+        >
+          <PlusBox className="h-5" /> <div>Créer un nouvel échange</div>
+        </Link>
+      </div>
+      <hr className="my-8 border-none"></hr>
+    </section>
   );
 }
