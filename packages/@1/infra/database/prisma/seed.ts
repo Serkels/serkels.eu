@@ -391,7 +391,7 @@ async function partners_yopmail() {
           },
         },
       },
-      link: faker.internet.url(),
+      link: "https://onedoes.github.io",
       city: "Paris",
       opportunities: {
         createMany: {
