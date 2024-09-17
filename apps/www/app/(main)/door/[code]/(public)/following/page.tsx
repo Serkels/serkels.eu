@@ -30,7 +30,7 @@ export default async function Page({ params }: { params: CodeParms }) {
     redirect(`/@${params.code}`);
   }
 
-  await TRPC_SSR.profile.me.follows.prefetchInfinite({});
+  await TRPC_SSR.profile.me.added_by.find.prefetchInfinite({});
 
   return (
     <main className={column_screen({ className: "bg-white text-black" })}>

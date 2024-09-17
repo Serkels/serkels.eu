@@ -1,14 +1,13 @@
 "use client";
 
 import { MarkAsRead } from ":components/button/MarkAsRead";
+import type { inferInfiniteQueryObserverSuccessResult } from ":components/inferQueryResult";
 import { Loading_Placeholder } from ":components/placeholder/Loading_Placeholder";
 import { TRPC_React } from ":trpc/client";
-import type { RouterOutput } from "@1.infra/trpc";
 import { ExchangeCompletedMessage } from "@1.modules/notification.ui/card/ExchangeCompletedMessage";
 import { ExchangeNewMessage } from "@1.modules/notification.ui/card/ExchangeNewMessage";
 import { ProfileAdded } from "@1.modules/notification.ui/card/ProfileAdded";
 import { Button } from "@1.ui/react/button";
-import type { InfiniteQueryObserverSuccessResult } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import { P, match } from "ts-pattern";
 import { ExchangeNewParticipant } from "./ExchangeNewParticipant";
@@ -18,17 +17,25 @@ import type { Notification } from "./type";
 
 //
 
-type FindNotification = RouterOutput["notification"]["find"];
-export function AsyncListInfinite() {
-  const query_info = TRPC_React.notification.find.useInfiniteQuery(
+function useQueryNotifications() {
+  return TRPC_React.notification.find.useInfiniteQuery(
     {},
     {
       getPreviousPageParam: (d) => d.prevCursor,
       refetchInterval: 10_000,
     },
   );
+}
+type QueryNotifications = ReturnType<typeof useQueryNotifications>;
+type QueryNotificationsSuccessResult =
+  inferInfiniteQueryObserverSuccessResult<QueryNotifications>;
 
-  return match(query_info)
+//
+
+export function AsyncListInfinite() {
+  const info = useQueryNotifications();
+
+  return match(info)
     .with({ status: "error", error: P.select() }, (error) => {
       throw error;
     })
@@ -41,11 +48,7 @@ export function AsyncListInfinite() {
     .exhaustive();
 }
 
-function List({
-  query_info,
-}: {
-  query_info: InfiniteQueryObserverSuccessResult<FindNotification, unknown>;
-}) {
+function List({ query_info }: { query_info: QueryNotificationsSuccessResult }) {
   const { data, isFetchingPreviousPage, hasPreviousPage, fetchPreviousPage } =
     query_info;
   const flatten_pages = data.pages

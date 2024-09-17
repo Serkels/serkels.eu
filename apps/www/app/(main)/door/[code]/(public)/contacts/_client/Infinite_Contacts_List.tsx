@@ -1,78 +1,77 @@
 "use client";
 
+import type { inferInfiniteQueryObserverSuccessResult } from ":components/inferQueryResult";
 import { TRPC_React } from ":trpc/client";
 import type { Profile } from "@1.modules/profile.domain";
-import { EmptyList, Loading, flatten_pages_are_empty } from "@1.ui/react/async";
+import { EmptyList, LoadMoreButton, Loading } from "@1.ui/react/async";
 import { AvatarMedia } from "@1.ui/react/avatar";
-import { Button } from "@1.ui/react/button";
-import { button } from "@1.ui/react/button/atom";
-import { Spinner } from "@1.ui/react/spinner";
+import { button_item } from "@1.ui/react/button/atom";
 import Link from "next/link";
 import { P, match } from "ts-pattern";
+import Loading_Placeholder from "../loading";
 
 //
 
-export default function Infinite_Contacts_List() {
-  const info = TRPC_React.profile.me.contacts.useInfiniteQuery(
+function useQueryContacts() {
+  return TRPC_React.profile.me.contacts.useInfiniteQuery(
     {},
     { getNextPageParam: ({ next_cursor }) => next_cursor },
   );
+}
+type QueryContacts = ReturnType<typeof useQueryContacts>;
+type QueryContactsSuccessResult =
+  inferInfiniteQueryObserverSuccessResult<QueryContacts>;
 
-  //
+//
 
-  return match(info)
+export default function AsyncInfiniteList() {
+  const query_info = useQueryContacts();
+
+  return match(query_info)
     .with({ status: "error", error: P.select() }, (error) => {
       throw error;
     })
     .with({ status: "loading" }, () => (
-      <div className="mx-auto flex justify-center">
-        <Spinner />
-      </div>
+      <Loading className="mx-auto flex justify-center" />
     ))
-    .with({ status: "success", data: P.when(flatten_pages_are_empty) }, () => (
-      <EmptyList />
-    ))
-    .with(
-      { status: "success" },
-      ({ data: { pages }, isFetchingNextPage, hasNextPage, fetchNextPage }) => (
-        <ul className="h-full overflow-y-auto">
-          {pages
-            .map((page) => page.data)
-            .flat()
-            .map((item) => (
-              <li key={item.id}>
-                <Item {...item} />
-              </li>
-            ))}
-          <li className="col-span-full mx-auto">
-            {isFetchingNextPage ? <Loading /> : null}
-          </li>
-          <li className="col-span-full p-8">
-            {hasNextPage ? (
-              <Button
-                onPress={() => fetchNextPage()}
-                isDisabled={!hasNextPage || isFetchingNextPage}
-              >
-                Charger plus
-              </Button>
-            ) : null}
-          </li>
-        </ul>
-      ),
-    )
+    .with({ status: "success" }, (success_info) => <List {...success_info} />)
     .exhaustive();
+}
+
+function List(query_info: QueryContactsSuccessResult) {
+  const { data, isFetchingNextPage, hasNextPage, fetchNextPage } = query_info;
+  const flatten_pages = data.pages
+    .map((page) => page.data)
+    .reverse()
+    .flat();
+
+  if (flatten_pages.length === 0)
+    return <EmptyList>Aucun contact dans votre cercle</EmptyList>;
+
+  return (
+    <ul className="list-none space-y-6">
+      {flatten_pages.map((item) => (
+        <li key={item.id}>
+          <Item {...item} />
+        </li>
+      ))}
+      {match({ isFetchingNextPage, hasNextPage })
+        .with({ isFetchingNextPage: true }, () => <Loading_Placeholder />)
+        .with({ hasNextPage: true }, () => (
+          <li className="col-span-full p-8 text-center">
+            <LoadMoreButton onPress={() => fetchNextPage()}>
+              Charger plus
+            </LoadMoreButton>
+          </li>
+        ))
+        .otherwise(() => null)}
+    </ul>
+  );
 }
 
 function Item(profile: Profile) {
   return (
-    <Link
-      className={button({
-        className: "block h-full w-full rounded-none px-8 py-4",
-        intent: "light",
-      })}
-
-      href={`/@${profile.id}`}
-    >
+    <Link className={button_item()} href={`/@${profile.id}`}>
       <AvatarMedia
         image={profile.image}
         id={profile.id}

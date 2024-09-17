@@ -4,20 +4,30 @@ import { TRPC_React } from ":trpc/client";
 import { Plus, Trash } from "@1.ui/react/icons";
 import { ActionItem } from "@1.ui/react/menu";
 import { Spinner } from "@1.ui/react/spinner";
+import { useSession } from "next-auth/react";
 import { useCallback } from "react";
 import { P, match } from "ts-pattern";
 
 //
 
 export default function AddContact({ profile_id }: { profile_id: string }) {
-  const find_contact = TRPC_React.profile.me.contact.find.useQuery(profile_id);
+  const { data: session } = useSession();
+  const find_contact =
+    TRPC_React.profile.me.contact.find_by_profile_id.useQuery(profile_id, {
+      staleTime: Infinity,
+    });
   const toggle_contact = TRPC_React.profile.me.contact.toggle.useMutation();
   const utils = TRPC_React.useUtils();
 
   const toggle_add_contact = useCallback(async () => {
     await toggle_contact.mutateAsync(profile_id);
     await Promise.all([
-      utils.profile.me.contact.find.invalidate(profile_id),
+      utils.profile.by_id.invalidate(profile_id),
+      utils.profile.by_id.invalidate(session?.profile.id),
+
+      utils.profile.me.added_by.find.invalidate(),
+      utils.profile.me.contact.find_by_profile_id.invalidate(profile_id),
+
       utils.profile.me.contacts.invalidate({}),
     ]);
     toggle_contact.reset();

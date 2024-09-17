@@ -54,7 +54,7 @@ export default function Infinite_Exchange_List() {
       </>
     ))
     .with({ status: "success", data: P.when(flatten_pages_are_empty) }, () => (
-      <EmptyList />
+      <EmptyList>Aucun échange</EmptyList>
     ))
     .with(
       { status: "success" },

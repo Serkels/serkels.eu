@@ -146,3 +146,19 @@ export const button = tv({
     size: "md",
   },
 });
+
+export const button_item = tv({
+  extend: button,
+  base: `
+    block
+    h-full
+    w-full
+    justify-start
+    rounded-none
+    px-8
+    py-4
+  `,
+  defaultVariants: {
+    intent: "light",
+  },
+});

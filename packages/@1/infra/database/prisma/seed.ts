@@ -391,7 +391,7 @@ async function partners_yopmail() {
           },
         },
       },
-      link: faker.internet.url(),
+      link: "https://onedoes.github.io",
       city: "Paris",
       opportunities: {
         createMany: {
@@ -785,11 +785,6 @@ async function students_messages() {
           connect: contacts.map(({ profile_id }) => ({
             id: profile_id,
           })),
-        },
-        following: {
-          connect: faker.helpers
-            .arrayElements(contacts)
-            .map(({ profile_id }) => ({ id: profile_id })),
         },
         added_notifications: {
           createMany: {

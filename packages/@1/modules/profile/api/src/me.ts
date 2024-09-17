@@ -1,52 +1,18 @@
 //
 
-import type { Prisma } from "@1.infra/database";
 import { Profile_Schema } from "@1.modules/profile.domain";
 import { gravatarUrlFor } from "@1.modules/profile.domain/gravatarUrlFor";
 import { create_report } from "@1.modules/profile.domain/report";
-import { next_auth_procedure, router } from "@1.modules/trpc";
+import { next_auth_procedure, router, with_next_cursor } from "@1.modules/trpc";
 import { z } from "zod";
+import added_by from "./me/added_by";
 import blacklist from "./me/blacklist";
 import toggle_add_contact from "./me/toggle";
 
 //
 
-const follow = router({
-  find: next_auth_procedure
-    .input(z.string())
-    .query(async ({ input: profile_id, ctx: { prisma, payload } }) => {
-      const { id } = payload.profile;
-
-      return prisma.profile.findUnique({
-        where: { id, following: { some: { id: profile_id } } },
-      });
-    }),
-
-  //
-
-  toggle: next_auth_procedure
-    .input(z.string())
-    .mutation(async ({ input: profile_id, ctx: { prisma, payload } }) => {
-      const { id } = payload.profile;
-
-      const existing = await prisma.profile.findUnique({
-        include: { following: true },
-        where: { id, following: { some: { id: profile_id } } },
-      });
-
-      const data: Prisma.ProfileUpdateInput = existing
-        ? { following: { disconnect: { id: profile_id } } }
-        : { following: { connect: { id: profile_id } } };
-
-      return prisma.profile.update({
-        data,
-        where: { id },
-      });
-    }),
-});
-
 const contact = router({
-  find: next_auth_procedure
+  find_by_profile_id: next_auth_procedure
     .input(z.string())
     .query(async ({ input: profile_id, ctx: { prisma, payload } }) => {
       const { id } = payload.profile;
@@ -60,38 +26,6 @@ const contact = router({
 
   toggle: toggle_add_contact,
 });
-
-const follows = next_auth_procedure
-  .input(
-    z.object({
-      cursor: z.string().optional(),
-      limit: z.number().min(1).max(10).default(10),
-    }),
-  )
-  .query(async ({ input, ctx: { prisma, payload } }) => {
-    const {
-      profile: { id },
-    } = payload;
-    const { cursor, limit } = input;
-    const { following: data } = await prisma.profile.findUniqueOrThrow({
-      select: {
-        following: {
-          ...(cursor ? { cursor: { id: cursor } } : {}),
-          take: limit + 1,
-          orderBy: { name: "asc" },
-        },
-      },
-      where: { id },
-    });
-
-    let next_cursor: typeof cursor | undefined = undefined;
-    if (data.length > limit) {
-      const next_item = data.pop()!;
-      next_cursor = next_item.id;
-    }
-
-    return { data, next_cursor };
-  });
 
 const contacts = next_auth_procedure
   .input(
@@ -116,13 +50,7 @@ const contacts = next_auth_procedure
       where: { id },
     });
 
-    let next_cursor: typeof cursor | undefined = undefined;
-    if (data.length > limit) {
-      const next_item = data.pop()!;
-      next_cursor = next_item.id;
-    }
-
-    return { data, next_cursor };
+    return with_next_cursor(limit, data)(({ id }) => id);
   });
 
 const update_image_to_gravatar = next_auth_procedure.mutation(
@@ -179,11 +107,10 @@ const report = next_auth_procedure
   });
 
 export const me = router({
+  added_by,
   blacklist,
   contact,
   contacts,
-  follow,
-  follows,
   report,
   update_image_to_gravatar,
   update,

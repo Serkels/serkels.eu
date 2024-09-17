@@ -13,6 +13,7 @@ export const Entity_Schema = z
     id: ID_Schema,
   })
   .describe("Entity");
+export type Entity = z.TypeOf<typeof Entity_Schema>;
 export interface Entity_Schema extends z.TypeOf<typeof Entity_Schema> {}
 
 export const Entity_Timestamps = z

@@ -9,3 +9,5 @@ export const AvatarProfile_Entity = Entity_Schema.extend({
   name: z.string(),
   image: z.string(),
 });
+
+export type AvatarProfile = z.infer<typeof AvatarProfile_Entity>;

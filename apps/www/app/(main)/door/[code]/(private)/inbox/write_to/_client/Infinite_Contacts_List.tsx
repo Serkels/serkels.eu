@@ -1,11 +1,11 @@
 "use client";
 
+import { ProfileAvatarMedia } from ":components/avatar";
 import { TRPC_React } from ":trpc/client";
 import type { Profile } from "@1.modules/profile.domain";
 import { EmptyList, Loading, flatten_pages_are_empty } from "@1.ui/react/async";
-import { AvatarMedia } from "@1.ui/react/avatar";
 import { Button } from "@1.ui/react/button";
-import { button } from "@1.ui/react/button/atom";
+import { button_item } from "@1.ui/react/button/atom";
 import Link from "next/link";
 import { P, match } from "ts-pattern";
 
@@ -25,7 +25,7 @@ export default function Infinite_Contacts_List() {
     })
     .with({ status: "loading" }, () => <Loading />)
     .with({ status: "success", data: P.when(flatten_pages_are_empty) }, () => (
-      <EmptyList />
+      <EmptyList>Aucun contact dans votre cercle</EmptyList>
     ))
     .with(
       { status: "success" },
@@ -60,19 +60,8 @@ export default function Infinite_Contacts_List() {
 
 function Item(profile: Profile) {
   return (
-    <Link
-      className={button({
-        className: "block h-full w-full rounded-none py-4",
-        intent: "light",
-      })}
-      href={`/@~/inbox/write_to/${profile.id}`}
-    >
-      <AvatarMedia
-        image={profile.image}
-        id={profile.id}
-        name={profile.name}
-        className="items-center"
-      ></AvatarMedia>
+    <Link className={button_item()} href={`/@~/inbox/write_to/${profile.id}`}>
+      <ProfileAvatarMedia profile={profile} />
     </Link>
   );
 }
