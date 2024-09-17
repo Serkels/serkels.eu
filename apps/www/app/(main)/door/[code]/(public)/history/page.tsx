@@ -1,8 +1,10 @@
 //
 
+import { NotConnected_Placeholder } from ":components/placeholder/NotConnected_Placeholder";
 import { code_to_profile_id, type CodeParms } from ":pipes/code";
 import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
 import { Exchange_Card } from ":widgets/exchanges/card";
+import { getServerSession } from "@1.modules/auth.next";
 import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound, redirect } from "next/navigation";
@@ -33,6 +35,10 @@ export default async function Page({ params }: { params: CodeParms }) {
   const { data: exchanges } = await TRPC_SSR.exchanges.by_particitpant.fetch({
     profile_id,
   });
+  const session = await getServerSession();
+  if (!session) {
+    return <NotConnected_Placeholder />;
+  }
   if (exchanges.length === 0)
     return <>Il n'y a aucun historique pour le moment</>;
   return (
@@ -42,7 +48,7 @@ export default async function Page({ params }: { params: CodeParms }) {
           <Exchange_Card
             key={exchange.id}
             exchange={exchange}
-            profile={profile}
+            profile={session.profile}
           />
         ))}
       </main>
