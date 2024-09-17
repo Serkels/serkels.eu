@@ -15,12 +15,14 @@ export default async function Page() {
   return (
     <div className={column_screen({ className: "pt-10 [&>*]:px-8" })}>
       <div className="flex items-center justify-between">
-        <h6 className="pl-2 text-2xl font-bold">Messages</h6>
+        <h6 className="text-2xl font-bold md:pl-2">Messages</h6>
         <Link
-          className={button({ intent: "danger" })}
+          className={button({
+            intent: "danger",
+          })}
           href={"/@~/inbox/write_to"}
         >
-          Écrire à mes cercles
+          Écrire
           <PenSquare className="ml-2 size-4" />
         </Link>
       </div>
