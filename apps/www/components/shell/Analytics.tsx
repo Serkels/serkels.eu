@@ -29,7 +29,10 @@ function gtag(){dataLayer.push(arguments);}
     <>
       <SpeedInsights />
 
-      <Script async src={`/stalker.js?id=${GA_TRACKING_ID}`} />
+      <Script
+        async
+        src={`/https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+      />
       <Script
         id="google-analytics"
         dangerouslySetInnerHTML={{
