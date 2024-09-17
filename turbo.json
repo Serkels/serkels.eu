@@ -5,18 +5,8 @@
     "API_URL",
     "APP_URL",
     "CI",
-    "CONSOLA_LEVEL",
-    "DATABASE_URL",
-    "DEPLOY_ENV",
     "DO_NOT_TRACK",
-    "MAINTENANCE",
-    "NEXT_PUBLIC_GA_MEASUREMENT_ID",
-    "NEXT_PUBLIC_WEBSOCKET_URL",
-    "NEXT_TELEMETRY_DISABLED",
-    "NEXTAUTH_*",
     "NODE_ENV",
-    "STALKER_TRANSPORT_URL",
-    "STALKER_URL",
     "TURBO_TEAM",
     "TURBO_TOKEN"
   ],
@@ -48,6 +38,20 @@
     "type-check": {
       "dependsOn": ["^type-check"],
       "outputs": ["node_modules/.cache/tsc/**"]
+    },
+    "www#build": {
+      "env": [
+        "NEXT_PUBLIC_GA_MEASUREMENT_ID",
+        "NEXT_PUBLIC_WEBSOCKET_URL",
+        "STALKER_TRANSPORT_URL",
+        "STALKER_URL",
+        "NEXTAUTH_*",
+        "NEXT_TELEMETRY_DISABLED",
+        "MAINTENANCE",
+        "DATABASE_URL",
+        "CONSOLA_LEVEL",
+        "DEPLOY_ENV"
+      ]
     },
     "www#dev": { "cache": false }
   }
