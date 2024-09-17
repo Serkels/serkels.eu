@@ -12,7 +12,7 @@ Fonctionnalité: Envoyer un message a Jackie Smith
     * je vois dans le titre "About :: Serkels"
     * je clique sur "Messages privés"
     * je vois dans le titre "Inbox :: Serkels"
-    * je clique sur "Écrire à mes cercles"
+    * je clique sur "Écrire"
     * je vois dans le titre "Write to :: Inbox :: Serkels"
 
     Quand je clique sur "Jackie Smith"
