@@ -1,6 +1,7 @@
 //
 
 import { SeeProfileAvatarMedia } from ":components/avatar";
+import { AddToMyCircles } from ":components/button/AddToMyCircles";
 import BackButton from ":components/button/BackButton";
 import { Loading_Placeholder } from ":components/placeholder/Loading_Placeholder";
 import { session_profile_id } from ":pipes/session_profile_id";
@@ -14,7 +15,6 @@ import type { Metadata, ResolvingMetadata } from "next";
 import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
 import Conversation_Form from "./_client/Conversation_Form";
-
 //
 
 const Thread_Timeline = dynamic(
@@ -96,8 +96,11 @@ export default async function Page({ params }: { params: Params }) {
     <TRPC_Hydrate>
       <Conversation>
         <Conversation.Header>
-          <BackButton href={"/@~/inbox"} />
-          <SeeProfileAvatarMedia profile={recipient} />
+          <div className="flex items-center gap-4">
+            <BackButton href={"/@~/inbox"} />
+            <SeeProfileAvatarMedia profile={recipient} />
+          </div>
+          <AddToMyCircles profile_id={recipient.id} />
         </Conversation.Header>
         <Conversation.Body>
           <Thread_Timeline profile_id={profile_id} />
