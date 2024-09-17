@@ -5,6 +5,7 @@ import {
   message_form_resolver,
   MessageForm,
 } from "@1.modules/inbox.ui/conversation/MessageForm";
+import { sendGAEvent } from "@next/third-parties/google";
 import { useRouter } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
 
@@ -24,6 +25,11 @@ export function Form({
     const { thread_id } = await talk_to.mutateAsync(recipient_profile_id);
 
     await send_message.mutateAsync({ content, thread_id });
+    sendGAEvent("event", "start_conversation", {
+      event_category: "inbox",
+      event_label: "write_to",
+      value: recipient_profile_id,
+    });
 
     await utils.inbox.find.invalidate();
     router.push(`/@~/inbox/${thread_id}`);

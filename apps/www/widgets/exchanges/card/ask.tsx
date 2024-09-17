@@ -15,6 +15,7 @@ import { Ask_Form } from "@1.modules/exchange.ui/ask/form";
 import { Exchange_Ask_Modal } from "@1.modules/exchange.ui/ask/modal";
 import { SendingInProgress } from "@1.modules/exchange.ui/ask/sending";
 import { MessageSent } from "@1.modules/exchange.ui/ask/sent";
+import { sendGAEvent } from "@next/third-parties/google";
 import { useTimeoutEffect } from "@react-hookz/web";
 import { useRouter } from "next/navigation";
 import { type PropsWithChildren } from "react";
@@ -96,6 +97,12 @@ function Sending() {
     const { exchange_threads } = await create.mutateAsync({
       content: context.message === "" ? HANDSHAKE_TOCTOC : context.message,
       exchange_id,
+    });
+
+    sendGAEvent("event", "start_exchange", {
+      event_category: "exchange",
+      event_label: exchange.type,
+      value: exchange.id,
     });
 
     const inbox = exchange_threads.at(0);

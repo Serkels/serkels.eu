@@ -9,6 +9,7 @@ import {
   MessageForm,
 } from "@1.modules/inbox.ui/conversation/MessageForm";
 import { Button } from "@1.ui/react/button";
+import { sendGAEvent } from "@next/third-parties/google";
 import { useUpdateEffect } from "@react-hookz/web";
 import { useCallback } from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -37,6 +38,12 @@ export default function Conversation_Form({
     ]);
   const on_submit = async (content: string) => {
     await send_message.mutateAsync({ content, thread_id });
+    sendGAEvent("event", "send_message", {
+      event_category: "exchange",
+      event_label: "conversation",
+      value: recipient_id,
+    });
+
     await invalidate();
   };
   const is_blacklisted = blacklist_item.data?.profile.id === recipient_id;
@@ -101,6 +108,13 @@ function ActionButtonGroup({
       exchange_id,
       thread_id,
     });
+
+    sendGAEvent("event", "awnser", {
+      event_category: "exchange",
+      event_label: "approve",
+      value: thread_id,
+    });
+
     await invalidate();
   }, [exchange_id, thread_id]);
 
@@ -109,6 +123,11 @@ function ActionButtonGroup({
       action: "DENIE",
       exchange_id,
       thread_id,
+    });
+    sendGAEvent("event", "awnser", {
+      event_category: "exchange",
+      event_label: "denie",
+      value: thread_id,
     });
     await invalidate();
   }, [exchange_id, thread_id]);
