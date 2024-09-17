@@ -6,6 +6,7 @@ import { getServerSession } from "@1.modules/auth.next";
 import { Article, icon_link } from "@1.modules/opportunity.ui/Article";
 import { ExclamationMark, Share } from "@1.ui/react/icons";
 import { ActionItem, Menu } from "@1.ui/react/menu";
+import to from "await-to-js";
 import type { Metadata, ResolvingMetadata } from "next";
 import dynamic from "next/dynamic";
 import Link from "next/link";
@@ -22,11 +23,9 @@ export async function generateMetadata(
   { params }: { params: Params },
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  //! HACK(douglasduteil): Investigate way the param is "undefined" on direct page access
-  if (params.slug === "undefined") return {};
+  const [, opportunity] = await to(slug_to_opportunity(params));
 
-  const opportunity = await slug_to_opportunity(params);
-  const title = `${opportunity.title} :: ${(await parent).title?.absolute}`;
+  const title = `${opportunity?.title ?? "O_0"} :: ${(await parent).title?.absolute}`;
 
   return {
     title,

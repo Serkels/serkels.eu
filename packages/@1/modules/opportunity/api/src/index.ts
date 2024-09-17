@@ -1,6 +1,6 @@
 //
 
-import { next_auth_procedure, procedure, router } from "@1.modules/trpc";
+import { procedure, router } from "@1.modules/trpc";
 import { z } from "zod";
 import create from "./create";
 import delete_router from "./delete";
@@ -12,26 +12,34 @@ const opportunity_api_router = router({
   create: create,
   delete: delete_router,
 
-  by_id: next_auth_procedure
+  by_id: procedure
     .input(z.string())
     .query(async ({ input: id, ctx: { prisma } }) => {
       return prisma.opportunity.findUniqueOrThrow({
         where: { id },
         include: {
           category: true,
-          owner: { include: { profile: true } },
+          owner: {
+            select: {
+              profile: { select: { id: true, image: true, name: true } },
+            },
+          },
         },
       });
     }),
 
-  by_slug: next_auth_procedure
+  by_slug: procedure
     .input(z.string())
     .query(async ({ input: slug, ctx: { prisma } }) => {
       return prisma.opportunity.findUniqueOrThrow({
         where: { slug },
         include: {
           category: true,
-          owner: { include: { profile: true } },
+          owner: {
+            select: {
+              profile: { select: { id: true, image: true, name: true } },
+            },
+          },
         },
       });
     }),

@@ -2,7 +2,7 @@
 
 import { Category_Schema } from "@1.modules/category.domain";
 import { Entity_Schema, ID_Schema } from "@1.modules/core/domain";
-import { Profile_Schema } from "@1.modules/profile.domain";
+import { AvatarProfile_Entity } from "@1.modules/profile.domain";
 import { z } from "zod";
 
 //
@@ -45,7 +45,7 @@ export const Opportunity_Schema = Entity_Schema.merge(
 )
   .extend({
     category: Category_Schema,
-    owner: z.object({ profile: Profile_Schema }),
+    owner: z.object({ profile: AvatarProfile_Entity }),
     slug: z.string(),
   })
   .describe("Opportunity Schema");
