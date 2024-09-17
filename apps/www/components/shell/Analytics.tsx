@@ -28,9 +28,10 @@ function gtag(){dataLayer.push(arguments);}
   return (
     <>
       <SpeedInsights />
+
+      <Script async src={`/stalker.js?id=${GA_TRACKING_ID}`} />
       <Script
         id="google-analytics"
-        strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `
 window.dataLayer = window.dataLayer || [];
@@ -48,7 +49,6 @@ gtag('config', '${GA_TRACKING_ID}', {
         }}
       />
 
-      <Script src={`/stalker.js?id=${GA_TRACKING_ID}`} />
       <Suspense>
         <Analytics_Client />
       </Suspense>
