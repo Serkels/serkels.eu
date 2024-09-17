@@ -28,10 +28,9 @@ export function Share_Button({
       href.startsWith("/") ? `${window.location.origin}${href}` : href,
     );
     set_diplay_in_clipboard(true);
-    sendGAEvent("event", "share", {
-      method: "Clipboard",
-      content_type: "link",
-      item_id: href,
+    sendGAEvent({
+      event: "share",
+      value: href,
     });
     reset();
   }, [href]);

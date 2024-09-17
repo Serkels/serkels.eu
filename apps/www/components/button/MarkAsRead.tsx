@@ -1,6 +1,7 @@
 //
 
 import { TRPC_React } from ":trpc/client";
+import { sendGAEvent } from "@next/third-parties/google";
 import { useRouter } from "next/navigation";
 import { useCallback, type PropsWithChildren } from "react";
 
@@ -19,6 +20,10 @@ export function useMarkAsRead({
 
   const mark_as_read = useCallback(async () => {
     await mutateAsync({ notification_id });
+    sendGAEvent({
+      event: "mark_as_read",
+      value: notification_id,
+    });
     await utils.notification.count_unread.invalidate();
     await route.push(redirect_to);
   }, [notification_id, mutateAsync]);

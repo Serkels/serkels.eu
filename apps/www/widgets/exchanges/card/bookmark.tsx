@@ -8,6 +8,7 @@ import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import { button } from "@1.ui/react/button/atom";
 import { Bookmark } from "@1.ui/react/icons";
 import { Spinner } from "@1.ui/react/spinner";
+import { sendGAEvent } from "@next/third-parties/google";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import { tv } from "tailwind-variants";
@@ -61,6 +62,13 @@ function BookmarkItem_Toggle_Mutation(props: BookmarkButton_Props) {
       className={base({ className, intent: "light" })}
       onClick={async () => {
         await toggle.mutateAsync({ target_id, type });
+
+        sendGAEvent("event", "toggle_bookmark", {
+          event_category: "bookmark",
+          event_label: type,
+          value: target_id,
+        });
+
         await utils.bookmarks.check.invalidate({ target_id, type });
         await utils.bookmarks.exchanges.find.invalidate();
 
