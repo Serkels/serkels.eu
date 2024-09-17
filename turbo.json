@@ -43,16 +43,19 @@
       "dependsOn": ["^type-check", "^build", "type-check"],
       "outputs": ["!.next/cache/**", ".next/**"],
       "env": [
+        "CONSOLA_LEVEL",
+        "DATABASE_URL",
+        "DEPLOY_ENV",
+        "MAINTENANCE",
         "NEXT_PUBLIC_GA_MEASUREMENT_ID",
         "NEXT_PUBLIC_WEBSOCKET_URL",
-        "STALKER_TRANSPORT_URL",
-        "STALKER_URL",
-        "NEXTAUTH_*",
         "NEXT_TELEMETRY_DISABLED",
-        "MAINTENANCE",
-        "DATABASE_URL",
-        "CONSOLA_LEVEL",
-        "DEPLOY_ENV"
+        "NEXTAUTH_*",
+        "SENTRY_AUTH_TOKEN",
+        "SENTRY_ORG",
+        "SENTRY_PROJECT",
+        "STALKER_TRANSPORT_URL",
+        "STALKER_URL"
       ]
     },
     "www#dev": { "cache": false }
