@@ -27,6 +27,11 @@ export function Share_Button({
       href.startsWith("/") ? `${window.location.origin}${href}` : href,
     );
     set_diplay_in_clipboard(true);
+    gtag("event", "share", {
+      method: "Clipboard",
+      content_type: "link",
+      item_id: href,
+    });
     reset();
   }, [href]);
 
