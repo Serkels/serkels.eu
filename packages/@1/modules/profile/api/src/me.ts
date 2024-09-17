@@ -3,7 +3,7 @@
 import { Profile_Schema } from "@1.modules/profile.domain";
 import { gravatarUrlFor } from "@1.modules/profile.domain/gravatarUrlFor";
 import { create_report } from "@1.modules/profile.domain/report";
-import { next_auth_procedure, router } from "@1.modules/trpc";
+import { next_auth_procedure, router, with_next_cursor } from "@1.modules/trpc";
 import { z } from "zod";
 import added_by from "./me/added_by";
 import blacklist from "./me/blacklist";
@@ -50,13 +50,7 @@ const contacts = next_auth_procedure
       where: { id },
     });
 
-    let next_cursor: typeof cursor | undefined = undefined;
-    if (data.length > limit) {
-      const next_item = data.pop()!;
-      next_cursor = next_item.id;
-    }
-
-    return { data, next_cursor };
+    return with_next_cursor(limit, data)(({ id }) => id);
   });
 
 const update_image_to_gravatar = next_auth_procedure.mutation(
