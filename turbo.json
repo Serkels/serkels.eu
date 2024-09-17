@@ -40,6 +40,8 @@
       "outputs": ["node_modules/.cache/tsc/**"]
     },
     "www#build": {
+      "dependsOn": ["^type-check", "^build", "type-check"],
+      "outputs": ["!.next/cache/**", ".next/**"],
       "env": [
         "NEXT_PUBLIC_GA_MEASUREMENT_ID",
         "NEXT_PUBLIC_WEBSOCKET_URL",
