@@ -3,6 +3,7 @@
 import { DialogTrigger } from "@1.ui/react/aria";
 import { button } from "@1.ui/react/button/atom";
 import { PopoverMessage } from "@1.ui/react/popover";
+import { sendGAEvent } from "@next/third-parties/google";
 import { useTimeoutEffect, useToggle } from "@react-hookz/web";
 import { useCallback, useRef, type PropsWithChildren } from "react";
 
@@ -27,7 +28,7 @@ export function Share_Button({
       href.startsWith("/") ? `${window.location.origin}${href}` : href,
     );
     set_diplay_in_clipboard(true);
-    gtag("event", "share", {
+    sendGAEvent("event", "share", {
       method: "Clipboard",
       content_type: "link",
       item_id: href,

@@ -1,6 +1,5 @@
 //
 
-import { getServerSession } from "@1.modules/auth.next";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
@@ -12,7 +11,7 @@ import { Analytics_Client } from "./Analytics.client";
 export const GA_TRACKING_ID = process.env["NEXT_PUBLIC_GA_MEASUREMENT_ID"]!;
 
 export default async function Analytics() {
-  const session = await getServerSession();
+  // const session = await getServerSession();
   if (process.env.NODE_ENV === "development")
     return (
       <Script
