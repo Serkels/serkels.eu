@@ -1,16 +1,23 @@
 //
 
 import { AvatarMedia } from "@1.ui/react/avatar";
-import { ExclamationMark, School, Share } from "@1.ui/react/icons";
+import { button } from "@1.ui/react/button/atom";
+import { ExclamationMark, Pen, School, Share } from "@1.ui/react/icons";
 import { ActionItem, Menu } from "@1.ui/react/menu";
-import { type PropsWithChildren } from "react";
+import Link from "next/link";
+import {
+  useCallback,
+  useEffect,
+  useState,
+  type MouseEventHandler,
+  type PropsWithChildren,
+} from "react";
 import { tv } from "tailwind-variants";
 import { Card } from "./Card";
 import { Publish_Date } from "./Date";
 import { InfoBar } from "./InfoBar";
 import { useExchange, useExchangeMeta } from "./context";
 import { exchange_card } from "./exchange_card";
-
 //
 
 export function Card_Idle({ children }: PropsWithChildren) {
@@ -72,7 +79,10 @@ export function Card_Idle({ children }: PropsWithChildren) {
             <p>{description}</p>
           </Card.Body.Renderer>
         </article>
-        <Publish_Date />
+        <div className="flex justify-between">
+          <Publish_Date />
+          {is_yours ? <Edit_Buttons /> : null}
+        </div>
       </div>
       <footer className={footer()}>
         <div className="col-span-1 justify-self-start">
@@ -95,6 +105,62 @@ export function Card_Idle({ children }: PropsWithChildren) {
   );
 }
 
+export function Edit_Buttons() {
+  const exchange = useExchange();
+  const [showWarning, setShowWarning] = useState(false);
+
+  const alreadyPopulated = exchange.deals.length > 0;
+
+  const on_edit_click = useCallback<MouseEventHandler<HTMLAnchorElement>>(
+    (event) => {
+      if (!alreadyPopulated) return;
+      event.preventDefault();
+
+      setShowWarning(true);
+      setTimeout(() => {
+        setShowWarning(false);
+      }, 1_000 * 5);
+    },
+    [alreadyPopulated],
+  );
+
+  useEffect(() => {
+    if (showWarning) {
+      <InfoBox message="Les échanges comprenant déjà des participants ne peuvent pas être édités" />;
+    }
+  }, [showWarning]);
+  return (
+    <>
+      <Link
+        className={button({
+          intent: "light",
+          size: "sm",
+          state: "ghost",
+          className: "mt-8 box-content h-4 py-2 text-black",
+        })}
+        href={alreadyPopulated ? "" : `/@~/exchanges/${exchange.id}/edit`}
+        onClick={on_edit_click}
+      >
+        <Pen className="h-4" />
+      </Link>
+    </>
+  );
+}
+
+interface InfoBoxProps {
+  message: string;
+}
+
+export function InfoBox({ message }: InfoBoxProps) {
+  return (
+    <div className="fixed left-0 top-0 z-[51] ml-0 flex w-full items-center justify-center bg-red-500 p-6 text-white md:bottom-2 md:top-auto md:w-[25%] md:rounded-e-2xl">
+      {message}
+    </div>
+  );
+}
+
+export default InfoBox;
+
 export function ExchangeMenu({ exchange_id }: { exchange_id: string }) {
   const href = `/exchanges/${exchange_id}`;
 
@@ -113,7 +179,7 @@ export function ExchangeMenu({ exchange_id }: { exchange_id: string }) {
 const style = tv({
   base: "",
   slots: {
-    withEdit: "col-start-6 columns-3 items-center gap-4 justify-self-end",
+    withEdit: "col-start-6 flex items-center gap-2 justify-self-end",
     classic: "col-start-6 justify-self-end",
   },
 });

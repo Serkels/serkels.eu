@@ -1,6 +1,5 @@
 "use client";
 
-import InfoBox from ":components/InfoBox";
 import { TRPC_React } from ":trpc/client";
 import type { Exchange } from "@1.modules/exchange.domain";
 import { Card } from "@1.modules/exchange.ui/Card/Card";
@@ -15,17 +14,11 @@ import {
 import { exchange_card } from "@1.modules/exchange.ui/Card/exchange_card";
 import { PROFILE_ROLES, type Profile } from "@1.modules/profile.domain";
 import { StudentAvatarMedia } from "@1.modules/profile.ui/avatar";
-import { button } from "@1.ui/react/button/atom";
-import { Exchange as ExchangeIcon, Pen } from "@1.ui/react/icons";
+import { Exchange as ExchangeIcon } from "@1.ui/react/icons";
 import { useTimeoutEffect } from "@react-hookz/web";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import {
-  useCallback,
-  useState,
-  type MouseEventHandler,
-  type PropsWithChildren,
-} from "react";
+import { type PropsWithChildren } from "react";
 import { P, match } from "ts-pattern";
 import { Exchange_Actions } from "./actions";
 import { Exchange_Bookmark } from "./bookmark";
@@ -154,48 +147,9 @@ function Idle() {
   );
 }
 
-function Edit_Buttons() {
-  const exchange = useExchange();
-  const [showWarning, setShowWarning] = useState(false);
-
-  const alreadyPopulated = exchange.deals.length > 0;
-
-  const on_edit_click = useCallback<MouseEventHandler<HTMLAnchorElement>>(
-    (event) => {
-      if (!alreadyPopulated) return;
-      event.preventDefault();
-
-      setShowWarning(true);
-      setTimeout(() => {
-        setShowWarning(false);
-      }, 1_000 * 5);
-    },
-    [alreadyPopulated],
-  );
-
+export function Edit_Buttons() {
   return (
     <>
-      <Link
-        className={button({
-          intent: "light",
-          size: "sm",
-          state: "ghost",
-          className: "box-content h-4 py-2 text-white",
-        })}
-        href={alreadyPopulated ? "" : `/@~/exchanges/${exchange.id}/edit`}
-        onClick={on_edit_click}
-      >
-        <Pen className="h-4" />
-      </Link>
-      {showWarning && (
-        // FUTUR - JOHAN
-        // toast.warning(
-        //   "Les échanges comprenant déjà des participants ne peuvent pas être édités",
-        //   AppToastOptions,
-        // )
-
-        <InfoBox message="Les échanges comprenant déjà des participants ne peuvent pas être édités" />
-      )}
       <Exchange_Delete_Button />
     </>
   );
