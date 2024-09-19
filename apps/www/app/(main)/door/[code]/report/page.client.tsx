@@ -8,6 +8,8 @@ import { redirect, useSearchParams } from "next/navigation";
 import {
   createContext,
   useContext,
+  useEffect,
+  useRef,
   useState,
   type PropsWithChildren,
 } from "react";
@@ -23,6 +25,7 @@ const context = createContext({ email: "" });
 //
 
 export function ReportForm() {
+  const ref = useRef<HTMLFormElement>(null);
   const searchParams = useSearchParams();
   const url = searchParams.get("url");
   if (!url) return redirect("/");
@@ -38,8 +41,32 @@ export function ReportForm() {
     report_error: null,
   });
 
+  useEffect(() => {
+    if (!state.report_error) return;
+    if (!ref.current) return;
+    toast.error(
+      <>
+        Une erreur s'est produite lors du signalement, veuillez réessayer : "
+        <div className="text-danger">{state.report_error}</div>"
+      </>,
+      AppToastOptions,
+    );
+    ref.current.reset();
+  }, [state.report_error, ref.current]);
+
+  useEffect(() => {
+    if (!state.success) return;
+
+    toast.success(
+      <div className="text-success">
+        Le contenu à été signalé à l'équipe de modération
+      </div>,
+      AppToastOptions,
+    );
+  }, [state.success]);
+
   return (
-    <form action={formAction} className={form()}>
+    <form action={formAction} className={form()} ref={ref}>
       <Fieldset>
         <input
           type="hidden"
@@ -123,27 +150,12 @@ export function ReportForm() {
           </div>
         </label>
 
-        {state.report_error
-          ? toast.error(
-              <>
-                Une erreur s'est produite lors du signalement, veuillez
-                réessayer : "
-                <div className="text-danger">{state.report_error}</div>"
-              </>,
-              AppToastOptions,
-            )
-          : null}
-
-        {state.success
-          ? toast.success(
-              <div className="text-success">
-                Le contenu à été signalé à l'équipe de modération
-              </div>,
-              AppToastOptions,
-            )
-          : null}
-
-        <button className={button({ intent: "danger" })}>Signaler</button>
+        <button
+          className={button({ intent: "danger" })}
+          disabled={state.success}
+        >
+          Signaler
+        </button>
       </Fieldset>
     </form>
   );
