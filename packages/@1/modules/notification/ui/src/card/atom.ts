@@ -9,13 +9,14 @@ export const card_notification = tv({
   extend: card,
   base: ``,
   slots: {
-    body: `flex items-center space-x-2`,
+    body: `flex items-center`,
     avatar: `size-9`,
     time: `float-right text-xs text-gray-500`,
   },
   variants: {
     is_read: {
       true: "bg-transparent",
+      false: "opacity-100",
     },
   },
 });

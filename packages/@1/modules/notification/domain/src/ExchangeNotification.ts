@@ -15,7 +15,7 @@ export const ExchangeNotificationEntity = NotificationEntity.extend({
       }),
     }),
     message: z.object({
-      author: z.object({ name: z.string() }),
+      author: z.object({ name: z.string(), image: z.string() }),
       thread_id: z.string(),
     }),
   }),

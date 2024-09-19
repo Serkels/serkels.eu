@@ -11,5 +11,6 @@ export const card = tv({
     header: "mb-4",
     footer: "bg-black px-5 py-3 text-white",
     category: "text-[#707070]",
+    avatar: "size-9",
   },
 });

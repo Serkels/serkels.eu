@@ -8,6 +8,7 @@ import { ExchangeCompletedMessage } from "@1.modules/notification.ui/card/Exchan
 import { ExchangeNewMessage } from "@1.modules/notification.ui/card/ExchangeNewMessage";
 import { ProfileAdded } from "@1.modules/notification.ui/card/ProfileAdded";
 import { Button } from "@1.ui/react/button";
+import { button } from "@1.ui/react/button/atom";
 import { useSession } from "next-auth/react";
 import { P, match } from "ts-pattern";
 import { ExchangeNewParticipant } from "./ExchangeNewParticipant";
@@ -131,6 +132,7 @@ function Card({ notification }: { notification: Notification }) {
     .with({ type: "FORUM_NEW_AWNSER" }, (notification) => (
       <ForumNewAnswer notification={notification} />
     ))
+
     .with(
       { type: "PROFILE_ADDED", profile_added: { profile: P.nonNullable } },
       (notification) => {
@@ -158,13 +160,16 @@ function Card({ notification }: { notification: Notification }) {
 
 function LoadMore({ onClick }: { onClick: () => void }) {
   return (
-    <Button
-      className="mx-auto my-6 block"
-      state="ghost"
-      intent="light"
-      onPress={onClick}
-    >
-      Charger plus de notifications.
-    </Button>
+    <div className="flex justify-center">
+      <Button
+        className={button({
+          intent: "primary",
+          className: "mx-auto my-6 block ",
+        })}
+        onPress={onClick}
+      >
+        Charger plus de notifications
+      </Button>
+    </div>
   );
 }
