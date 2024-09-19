@@ -1,6 +1,6 @@
 //
 
-import { ExclamationMark, Share } from "@1.ui/react/icons";
+import { ExclamationMark, Messenger, Share } from "@1.ui/react/icons";
 import { ActionItem } from "@1.ui/react/menu";
 import { useCallback } from "react";
 import AddContact from "./_client/AddContact";
@@ -40,6 +40,15 @@ export function ReportTheProfile({ profile_id }: { profile_id: string }) {
     >
       <ExclamationMark className="w-4" />
       <span className="w-full">Signaler le profil</span>
+    </ActionItem>
+  );
+}
+
+export function SendMessageMenu({ profile_id }: { profile_id: string }) {
+  return (
+    <ActionItem className="flex gap-2" href={`@~/inbox/write_to/${profile_id}`}>
+      <Messenger className="w-4" />
+      <span>Envoyer un message privé</span>
     </ActionItem>
   );
 }

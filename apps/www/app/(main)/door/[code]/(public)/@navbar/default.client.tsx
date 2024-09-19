@@ -8,7 +8,7 @@ import AddContact from "./_client/AddContact";
 import { BlockProfile } from "./_client/BlockProfile";
 import SendMessage from "./_client/SendMessage";
 import { type CodeParmsAsProfileId } from "./default";
-import { ReportTheProfile, ShareTheProfile } from "./menu";
+import { ReportTheProfile, SendMessageMenu, ShareTheProfile } from "./menu";
 
 //
 
@@ -20,10 +20,11 @@ export function Student_Page({ params }: { params: CodeParmsAsProfileId }) {
 
   return (
     <>
-      <div className="my-4 flex justify-end space-x-2 md:hidden">
+      <div className="my-4 flex justify-end gap-2 md:hidden">
         {is_me ? null : (
           <>
-            <SendMessage profile_id={code} />
+            <AddContact className="min-w-max px-3 sm:px-4" profile_id={code} />
+            <SendMessage profile_id={profile_id} />
           </>
         )}
       </div>
@@ -49,10 +50,10 @@ export function Student_Page({ params }: { params: CodeParmsAsProfileId }) {
           </Link>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex w-full items-center justify-center gap-4 md:w-auto">
           {is_me ? null : (
             <div className="hidden md:flex md:gap-2 ">
-              <SendMessage profile_id={code} />
+              <AddContact profile_id={profile_id} />
             </div>
           )}
           <Menu>
@@ -60,7 +61,7 @@ export function Student_Page({ params }: { params: CodeParmsAsProfileId }) {
               <ShareTheProfile profile_id={profile_id} />
             ) : (
               <>
-                <AddContact profile_id={profile_id} />
+                <SendMessageMenu profile_id={profile_id} />
                 <ShareTheProfile profile_id={profile_id} />
                 <ReportTheProfile profile_id={profile_id} />
                 <BlockProfile profile_id={profile_id} />
@@ -130,6 +131,7 @@ export function Partner_Page({ params }: { params: CodeParmsAsProfileId }) {
 
 const page_classes = tv({
   base: `
+    -ml-4
     flex
     min-w-max
     justify-between
@@ -139,6 +141,7 @@ const page_classes = tv({
     border-gray-200
     bg-white
     px-3
+    sm:-ml-2
   `,
   slots: {
     link: "min-w-max border-r px-2 py-3 text-sm sm:px-4",
