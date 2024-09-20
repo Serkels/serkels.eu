@@ -16,7 +16,6 @@ export const card_notification = tv({
   variants: {
     is_read: {
       true: "bg-transparent",
-      false: "opacity-100",
     },
   },
 });
