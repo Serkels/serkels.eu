@@ -49,7 +49,7 @@ export function InboxNewMessage({
                 </div>
               )}
               <time
-                className="float-right px-5 text-xs text-gray-500"
+                className="float-right pr-5 text-xs text-gray-500"
                 dateTime={created_at.toUTCString()}
                 title={created_at.toUTCString()}
               >
