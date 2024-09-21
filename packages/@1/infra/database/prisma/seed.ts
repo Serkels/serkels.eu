@@ -26,7 +26,22 @@ import { faker_image_avatar } from "./seed/helpers/faker_image_avatar";
 //#region 🌱 Seed
 //
 
-async function main() {
+Promise.resolve()
+  .then(delete_all)
+  .then(mandatory_seed)
+  .then(faker_seed)
+  .then(vip_seed)
+  .catch((e) => {
+    console.error(e);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });
+
+//
+
+async function delete_all() {
   await prisma.$transaction([
     prisma.user.deleteMany(),
     //
@@ -51,12 +66,17 @@ async function main() {
     //
   ]);
   console.log("🗑️");
+}
+//
 
-  //
-
+async function mandatory_seed() {
   await categories();
   console.log("🌱 . Categories.");
 
+  console.log("🌱 .. Mandatory Seed.");
+}
+
+async function faker_seed() {
   console.log("🌱 . Yopmail Students.");
   await student_yopmail();
   await students();
@@ -65,8 +85,7 @@ async function main() {
   console.log("🌱 . Partners.");
 
   await partners_yopmail();
-  await partners_vip();
-  console.log("🌱 . Partners VIP.");
+  console.log("🌱 . Partners Yopmail.");
 
   await students_bookmarks();
   console.log("🌱 . Students bookmarks.");
@@ -81,16 +100,16 @@ async function main() {
 
   await studient_fixtures();
   console.log("🌱 . E2E Fixture.");
+
+  console.log("🌱 .. Faker Seed.");
 }
 
-main()
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
+async function vip_seed() {
+  await partners_vip();
+  console.log("🌱 . Partners VIP.");
+
+  console.log("🌱 .. VIP Seed.");
+}
 
 //
 //#endregion
@@ -430,13 +449,25 @@ async function partners_yopmail() {
 }
 
 async function partners_vip() {
-  await partner({
-    email: "ahmadali.fr@gmail.com",
-    name: "Ahmad Ali University",
-  });
-  await partner({
-    email: "juliet.meere.uee@gmail.com",
-    name: "Juliet Meere University",
+  await prisma.partner.create({
+    data: {
+      profile: {
+        create: {
+          bio: "# The Illustionist",
+          name: "Ahmad Ali University",
+          image: "https://picsum.photos/300/300",
+          role: ProfileRole.PARTNER,
+          user: {
+            create: {
+              email: "ahmadali.fr@gmail.com",
+              name: "Ahmad Ali University",
+            },
+          },
+        },
+      },
+      link: "https://ahmadali.fr",
+      city: "Paris",
+    },
   });
 }
 
@@ -520,7 +551,7 @@ async function categories() {
     [
       { name: "Cours de langues" },
       { name: "Soutien académique" },
-      { name: "Logements" },
+      { name: "Logement" },
       { name: "Job étudiant" },
       { name: "Concours" },
       { name: "Aides financières" },

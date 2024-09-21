@@ -19,29 +19,28 @@ export default function AsyncListInfinite(props: { category?: string }) {
   const search_params = useSearchParams();
   const category = props.category ?? search_params.get("category") ?? undefined;
 
-  const query_info = TRPC_React.opportunity.find.useInfiniteQuery(
+  const query_with_category_info = TRPC_React.opportunity.find.useInfiniteQuery(
     { category, limit: 5 },
     { getNextPageParam: (lastPage) => lastPage.next_cursor },
   );
+  const nothing_found_with_category =
+    query_with_category_info.isFetched &&
+    query_with_category_info.data &&
+    query_with_category_info.data.pages.map(({ data }) => data).flat()
+      .length === 0;
 
-  return match(query_info)
-    .with({ status: "error", error: P.select() }, (error) => {
-      throw error;
-    })
-    .with({ status: "loading" }, () => {
-      return <Loading_Placeholder />;
-    })
-    .with({ status: "success" }, (success_info) => (
-      <List query_info={success_info} />
-    ))
-    .exhaustive();
-}
+  const query_without_category_info =
+    TRPC_React.opportunity.find.useInfiniteQuery(
+      { limit: 5 },
+      {
+        getNextPageParam: (lastPage) => lastPage.next_cursor,
+        enabled: nothing_found_with_category,
+      },
+    );
 
-function UncategoriesList() {
-  const query_info = TRPC_React.opportunity.find.useInfiniteQuery(
-    { limit: 5 },
-    { getNextPageParam: (lastPage) => lastPage.next_cursor },
-  );
+  const query_info = nothing_found_with_category
+    ? query_without_category_info
+    : query_with_category_info;
 
   return match(query_info)
     .with({ status: "error", error: P.select() }, (error) => {
@@ -69,7 +68,7 @@ function List({
     .flat();
 
   if (flatten_pages.length === 0) {
-    return <UncategoriesList />;
+    return <p className="my-8 text-center">Pas de résultats ...</p>;
   }
 
   return (
