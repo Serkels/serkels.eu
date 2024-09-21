@@ -2,21 +2,15 @@
 
 import { TRPC_React } from ":trpc/client";
 import { Card } from ":widgets/opportunities/card";
-import {
-  Partner_Filter,
-  type Opportunity,
-} from "@1.modules/opportunity.domain";
+import { Partner_Filter } from "@1.modules/opportunity.domain";
 import { Opportunity_InfiniteList } from "@1.modules/opportunity.ui/InfiniteList";
-import type { UseInfiniteQueryResult } from "@tanstack/react-query";
-import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
-import { P, match } from "ts-pattern";
+import { match } from "ts-pattern";
 
 //
 
 export default function List() {
-  const { data: session } = useSession();
   const search_params = useSearchParams();
   const category = search_params.get("category") ?? undefined;
   const search = search_params.get("q") ?? undefined;
@@ -28,33 +22,16 @@ export default function List() {
     gtag("event", "search", { search, category, filter });
   }, [search, category, filter]);
 
-  const info = match(session)
-    .with(
-      { profile: P._ },
-      () =>
-        TRPC_React.opportunity.find.private.useInfiniteQuery(
-          {
-            category,
-            search,
-            filter,
-          },
-          {
-            getNextPageParam: (lastPage) => lastPage.nextCursor,
-          },
-        ) as UseInfiniteQueryResult<{ data: Opportunity[] }>,
-    )
-    .otherwise(
-      () =>
-        TRPC_React.opportunity.find.public.useInfiniteQuery(
-          {
-            category,
-            search,
-          },
-          {
-            getNextPageParam: (lastPage) => lastPage.nextCursor,
-          },
-        ) as UseInfiniteQueryResult<{ data: Opportunity[] }>,
-    );
+  const info = TRPC_React.opportunity.find.useInfiniteQuery(
+    {
+      category,
+      search,
+      filter,
+    },
+    {
+      getNextPageParam: (lastPage) => lastPage.next_cursor,
+    },
+  );
 
   return (
     <Opportunity_InfiniteList info={info}>

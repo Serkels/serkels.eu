@@ -11,7 +11,7 @@ import { match, P } from "ts-pattern";
 
 //
 
-type FindOpportunity = RouterOutput["opportunity"]["find"]["public"];
+type FindOpportunity = RouterOutput["opportunity"]["find"];
 
 //
 
@@ -19,9 +19,9 @@ export default function AsyncListInfinite(props: { category?: string }) {
   const search_params = useSearchParams();
   const category = props.category ?? search_params.get("category") ?? undefined;
 
-  const query_info = TRPC_React.opportunity.find.public.useInfiniteQuery(
+  const query_info = TRPC_React.opportunity.find.useInfiniteQuery(
     { category, limit: 5 },
-    { getNextPageParam: (lastPage) => lastPage.nextCursor },
+    { getNextPageParam: (lastPage) => lastPage.next_cursor },
   );
 
   return match(query_info)
@@ -38,9 +38,9 @@ export default function AsyncListInfinite(props: { category?: string }) {
 }
 
 function UncategoriesList() {
-  const query_info = TRPC_React.opportunity.find.public.useInfiniteQuery(
+  const query_info = TRPC_React.opportunity.find.useInfiniteQuery(
     { limit: 5 },
-    { getNextPageParam: (lastPage) => lastPage.nextCursor },
+    { getNextPageParam: (lastPage) => lastPage.next_cursor },
   );
 
   return match(query_info)

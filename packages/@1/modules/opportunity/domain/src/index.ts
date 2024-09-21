@@ -55,3 +55,17 @@ export interface Opportunity extends z.TypeOf<typeof Opportunity_Schema> {}
 //
 
 export const Partner_Filter = z.enum(["ALL", "MY_OPPORTUNITIES"]);
+
+//
+
+export type CardOportunity = Pick<
+  Opportunity,
+  | "category"
+  | "cover"
+  | "slug"
+  | "expiry_date"
+  | "id"
+  | "location"
+  | "owner"
+  | "title"
+>;

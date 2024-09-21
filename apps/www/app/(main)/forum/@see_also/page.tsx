@@ -14,11 +14,11 @@ export default async function Page({
   const category = String(searchParams["category"] ?? "");
 
   await Promise.all([
-    TRPC_SSR.opportunity.find.public.prefetchInfinite({
+    TRPC_SSR.opportunity.find.prefetchInfinite({
       category,
       limit: 5,
     }),
-    TRPC_SSR.opportunity.find.public.prefetchInfinite({
+    TRPC_SSR.opportunity.find.prefetchInfinite({
       limit: 5,
     }),
   ]);

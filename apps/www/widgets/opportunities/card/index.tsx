@@ -5,7 +5,7 @@ import { preventNProgressLoader } from ":components/helpers/preventNProgressLoad
 import { AppToastOptions } from ":components/toast";
 import { TRPC_React } from ":trpc/client";
 import type { BookmarkButton_Props } from "@1.modules/bookmark.ui/BookmarkButton";
-import { type Opportunity } from "@1.modules/opportunity.domain";
+import { type CardOportunity } from "@1.modules/opportunity.domain";
 import { Opoortunity_Card } from "@1.modules/opportunity.ui/Card";
 import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import { button } from "@1.ui/react/button/atom";
@@ -19,7 +19,7 @@ import { P, match } from "ts-pattern";
 
 //
 
-export function Card({ opportunity }: { opportunity: Opportunity }) {
+export function Card({ opportunity }: { opportunity: CardOportunity }) {
   const { data: session } = useSession();
   const { slug, id } = opportunity;
   const is_student = session?.profile.role === PROFILE_ROLES.Enum.STUDENT;

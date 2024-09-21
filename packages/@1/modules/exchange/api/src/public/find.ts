@@ -25,7 +25,7 @@ export default maybe_next_auth_procedure
     const { limit, category, cursor, search } = input;
     const nerrow = match({ payload, input })
       .with(
-        { payload: { profile: P.nonNullable } },
+        { payload: { profile: { role: "STUDENT" } } },
         ({
           payload: {
             profile: { id: profile_id },
