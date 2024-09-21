@@ -11,7 +11,7 @@ import { useSeeAlso } from "./context";
 export default function Page_Client() {
   const { exclude_ids, query_see_also } = useSeeAlso();
 
-  const { data: opportunities } = TRPC_React.opportunity.find.public.useQuery(
+  const { data: opportunities } = TRPC_React.opportunity.find.useQuery(
     query_see_also,
     {
       select({ data }) {

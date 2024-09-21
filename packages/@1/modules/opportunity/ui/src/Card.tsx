@@ -1,6 +1,6 @@
 //
 
-import type { Opportunity } from "@1.modules/opportunity.domain";
+import type { CardOportunity } from "@1.modules/opportunity.domain";
 import { Bookmark, LocationRadius, Share } from "@1.ui/react/icons";
 import { format, formatISO, isPast } from "date-fns";
 import { fr } from "date-fns/locale";
@@ -13,7 +13,7 @@ import { tv } from "tailwind-variants";
 export function Opoortunity_Card({
   opportunity,
   children,
-}: PropsWithChildren<{ opportunity: Opportunity }>) {
+}: PropsWithChildren<{ opportunity: CardOportunity }>) {
   const { cover, expiry_date, title, owner, location, category } = opportunity;
   const { base, date } = opoortunity_card();
   return (

@@ -1,7 +1,6 @@
 //
 
 import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
-import { getServerSession } from "@1.modules/auth.next";
 import { Partner_Filter } from "@1.modules/opportunity.domain";
 import type { _1_HOUR_ } from "@douglasduteil/datatypes...hours-to-seconds";
 import type { Metadata, ResolvingMetadata } from "next";
@@ -34,7 +33,6 @@ export default async function Page({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const session = await getServerSession();
   const category = String(searchParams["category"]);
   const search = String(searchParams["q"]);
   const filter_parsed_return = Partner_Filter.safeParse(searchParams["f"]);
@@ -42,18 +40,11 @@ export default async function Page({
     ? filter_parsed_return.data
     : undefined;
 
-  if (session) {
-    await TRPC_SSR.opportunity.find.private.prefetchInfinite({
-      category,
-      filter,
-      search,
-    });
-  } else {
-    await TRPC_SSR.opportunity.find.public.prefetchInfinite({
-      category,
-      search,
-    });
-  }
+  await TRPC_SSR.opportunity.find.prefetchInfinite({
+    category,
+    filter,
+    search,
+  });
 
   return (
     <TRPC_Hydrate>

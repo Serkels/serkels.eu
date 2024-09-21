@@ -113,9 +113,9 @@ export default maybe_next_auth_procedure
     const { category, cursor, limit, search, filter } = input;
 
     const where_category = where_category_input(category);
+    const where_filter = where_filter_input(filter, profile_id);
     const where_not_in_profile_blacklist =
       where_not_in_profile_blacklist_input(profile_id);
-    const where_filter = where_filter_input(filter, profile_id);
     const where_search = where_search_input(search);
 
     const items = await prisma.question.findMany({
@@ -125,8 +125,8 @@ export default maybe_next_auth_procedure
       where: {
         AND: [
           where_category,
-          where_not_in_profile_blacklist,
           where_filter,
+          where_not_in_profile_blacklist,
           where_search,
         ],
       },

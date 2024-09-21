@@ -1,6 +1,6 @@
 //
 
-import type { Opportunity } from "@1.modules/opportunity.domain";
+import type { Entity_Schema } from "@1.modules/core/domain";
 import { flatten_pages_are_empty } from "@1.ui/react/async";
 import { Button } from "@1.ui/react/button";
 import { Spinner } from "@1.ui/react/spinner";
@@ -10,12 +10,12 @@ import { match, P } from "ts-pattern";
 
 //
 
-export function Opportunity_InfiniteList({
+export function Opportunity_InfiniteList<T extends Entity_Schema>({
   info,
   children,
 }: {
-  info: UseInfiniteQueryResult<{ data: Opportunity[] }>;
-  children: (props: Opportunity) => React.ReactNode;
+  info: UseInfiniteQueryResult<{ data: T[] }>;
+  children: (props: T) => React.ReactNode;
 }) {
   const { base, item } = opportunity_grid();
   return match(info)

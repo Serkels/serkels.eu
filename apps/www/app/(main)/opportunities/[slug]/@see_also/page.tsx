@@ -15,15 +15,10 @@ export default async function Page({ params }: { params: { slug: string } }) {
     category: { slug: category },
   } = opportunity;
 
-  await Promise.all([
-    TRPC_SSR.opportunity.find.public.prefetchInfinite({
-      category,
-      limit: 5,
-    }),
-    TRPC_SSR.opportunity.find.public.prefetchInfinite({
-      limit: 5,
-    }),
-  ]);
+  await TRPC_SSR.opportunity.find.prefetchInfinite({
+    category,
+    limit: 5,
+  });
 
   return (
     <TRPC_Hydrate>

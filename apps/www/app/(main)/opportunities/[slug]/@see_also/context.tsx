@@ -10,7 +10,7 @@ import { createContext, useContext, type PropsWithChildren } from "react";
 
 const Page_Context = createContext({
   exclude_ids: [] as ID_Schema[],
-  query_see_also: {} as RouterInput["opportunity"]["find"]["public"],
+  query_see_also: {} as RouterInput["opportunity"]["find"],
 });
 
 //
