@@ -1,6 +1,8 @@
 //
 
+import { Avatar } from "@1.ui/react/avatar";
 import { card } from "@1.ui/react/card/atom";
+import { Circle } from "@1.ui/react/icons";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import Link from "next/link";
@@ -13,7 +15,7 @@ export function InboxNewMessage({
 }: {
   notification: Notification;
 }) {
-  const { base, body } = card();
+  const { base, body, avatar } = card();
   const { id, created_at, read_at, inbox_message } = notification;
 
   if (!inbox_message) return null;
@@ -21,7 +23,7 @@ export function InboxNewMessage({
 
   const {
     message: {
-      author: { name },
+      author: { name, id: profile_id, image },
       thread_id,
     },
   } = inbox_message;
@@ -30,15 +32,31 @@ export function InboxNewMessage({
       <div
         className={base({ className: read_at ? "bg-transparent" : "bg-white" })}
       >
-        <div className={body()}>
-          <time
-            className="float-right text-xs text-gray-500"
-            dateTime={created_at.toUTCString()}
-            title={created_at.toUTCString()}
+        <div className="flex items-center justify-between ">
+          <div
+            className={body({
+              className: `flex items-center gap-1 space-x-2`,
+            })}
           >
-            {format(created_at, "Pp", { locale: fr })}
-          </time>
-          <b>{name}</b> vous a envoyé un nouveau message
+            <Avatar className={avatar()} image={image} id={profile_id} />
+            <b>{name}</b> vous a envoyé un nouveau message
+          </div>
+          <div>
+            <div className="flex gap-4">
+              {!read_at && (
+                <div>
+                  <Circle className="size-4 text-[#FF5F5F]" />
+                </div>
+              )}
+              <time
+                className="float-right pr-5 text-xs text-gray-500"
+                dateTime={created_at.toUTCString()}
+                title={created_at.toUTCString()}
+              >
+                {format(created_at, "Pp", { locale: fr })}
+              </time>
+            </div>
+          </div>
         </div>
       </div>
     </Link>

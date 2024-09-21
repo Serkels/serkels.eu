@@ -17,7 +17,7 @@ export default next_auth_procedure
     const { cursor, limit } = input;
     const { id: owner_id } = payload.profile;
     const message_select: Prisma.MessageSelect = {
-      author: { select: { name: true } },
+      author: { select: { name: true, id: true, image: true } },
       thread_id: true,
     };
 
@@ -59,7 +59,7 @@ export default next_auth_procedure
                 owner: {
                   select: {
                     profile_id: true,
-                    profile: { select: { name: true } },
+                    profile: { select: { name: true, image: true } },
                   },
                 },
                 parent_id: true,
