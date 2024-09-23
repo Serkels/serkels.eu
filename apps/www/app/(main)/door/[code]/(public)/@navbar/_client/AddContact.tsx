@@ -1,16 +1,22 @@
 "use client";
 
 import { TRPC_React } from ":trpc/client";
+import { Button } from "@1.ui/react/button";
 import { Plus, Trash } from "@1.ui/react/icons";
-import { ActionItem } from "@1.ui/react/menu";
 import { Spinner } from "@1.ui/react/spinner";
 import { useSession } from "next-auth/react";
 import { useCallback } from "react";
+import { tv } from "tailwind-variants";
 import { P, match } from "ts-pattern";
-
 //
 
-export default function AddContact({ profile_id }: { profile_id: string }) {
+export default function AddContact({
+  profile_id,
+  className,
+}: {
+  profile_id: string;
+  className?: string;
+}) {
   const { data: session } = useSession();
   const find_contact =
     TRPC_React.profile.me.contact.find_by_profile_id.useQuery(profile_id, {
@@ -35,14 +41,14 @@ export default function AddContact({ profile_id }: { profile_id: string }) {
 
   return match([toggle_contact, find_contact])
     .with([{ status: "loading" }, P._], [P._, { status: "loading" }], () => (
-      <ActionItem>
+      <div>
         <Spinner className="size-5" />
-      </ActionItem>
+      </div>
     ))
     .otherwise(() => (
-      <ActionItem
-        className="text-left"
-        onAction={toggle_add_contact}
+      <Button
+        className={style({ className })}
+        onPress={toggle_add_contact}
         isDisabled={toggle_contact.status !== "idle"}
       >
         {find_contact.data ? (
@@ -56,6 +62,10 @@ export default function AddContact({ profile_id }: { profile_id: string }) {
             <span className="w-full">Ajouter à mes cercles</span>
           </>
         )}
-      </ActionItem>
+      </Button>
     ));
 }
+
+const style = tv({
+  base: "flex gap-2 text-left",
+});
