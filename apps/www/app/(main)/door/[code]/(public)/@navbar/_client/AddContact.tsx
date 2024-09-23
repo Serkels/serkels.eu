@@ -6,8 +6,8 @@ import { Plus, Trash } from "@1.ui/react/icons";
 import { Spinner } from "@1.ui/react/spinner";
 import { useSession } from "next-auth/react";
 import { useCallback } from "react";
-import { P, match } from "ts-pattern";
 import { tv } from "tailwind-variants";
+import { P, match } from "ts-pattern";
 //
 
 export default function AddContact({
@@ -47,7 +47,7 @@ export default function AddContact({
     ))
     .otherwise(() => (
       <Button
-      className={tv("flex gap-2 text-left")({className})}
+        className={style({ className })}
         onPress={toggle_add_contact}
         isDisabled={toggle_contact.status !== "idle"}
       >
@@ -65,3 +65,7 @@ export default function AddContact({
       </Button>
     ));
 }
+
+const style = tv({
+  base: "flex gap-2 text-left",
+});
