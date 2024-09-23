@@ -47,7 +47,7 @@ export default function AddContact({
     ))
     .otherwise(() => (
       <Button
-        className={`${className} flex gap-2 text-left`}
+      className={tv("flex gap-2 text-left")({className})}
         onPress={toggle_add_contact}
         isDisabled={toggle_contact.status !== "idle"}
       >
