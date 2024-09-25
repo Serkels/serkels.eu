@@ -8,5 +8,22 @@
     "outDir": "./node_modules/.cache/tsc",
     "types": ["bun-types"]
   },
-  "include": ["src"]
+  "include": ["src"],
+  "references": [
+    {
+      "path": "../../../config/tailwindcss"
+    },
+    {
+      "path": "../../../ui/react"
+    },
+    {
+      "path": "../../core"
+    },
+    {
+      "path": "../../profile/domain"
+    },
+    {
+      "path": "../domain"
+    }
+  ]
 }

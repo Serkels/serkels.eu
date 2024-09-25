@@ -4,7 +4,7 @@
     ":maintainLockFilesWeekly",
     ":automergeAll",
     ":timezone(Europe/Paris)"
-  ], 
+  ],
   "automergeSchedule": ["every weekend"],
   "dependencyDashboardAutoclose": true,
   "labels": ["dependencies"]
