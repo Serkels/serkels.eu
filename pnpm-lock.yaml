@@ -278,7 +278,7 @@ importers:
         version: 2.2.1
       tailwind-variants:
         specifier: 0.2.1
-        version: 0.2.1(tailwindcss@3.4.11(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4)))
+        version: 0.2.1(tailwindcss@3.4.13(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4)))
       ts-pattern:
         specifier: 5.3.1
         version: 5.3.1
@@ -335,8 +335,8 @@ importers:
         specifier: 8.4.47
         version: 8.4.47
       tailwindcss:
-        specifier: 3.4.11
-        version: 3.4.11(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4))
+        specifier: 3.4.13
+        version: 3.4.13(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4))
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -374,10 +374,10 @@ importers:
         version: link:../../../@douglasduteil/config/tailwindcss
       '@tailwindcss/typography':
         specifier: 0.5.15
-        version: 0.5.15(tailwindcss@3.4.11(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4)))
+        version: 0.5.15(tailwindcss@3.4.13(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4)))
       tailwindcss:
-        specifier: 3.4.11
-        version: 3.4.11(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4))
+        specifier: 3.4.13
+        version: 3.4.13(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4))
     devDependencies:
       '@1.config/typescript':
         specifier: workspace:*
@@ -740,7 +740,7 @@ importers:
         version: 7.0.2(react@18.3.1)
       tailwind-variants:
         specifier: 0.2.1
-        version: 0.2.1(tailwindcss@3.4.11(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4)))
+        version: 0.2.1(tailwindcss@3.4.13(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4)))
       ts-pattern:
         specifier: 5.3.1
         version: 5.3.1
@@ -758,8 +758,8 @@ importers:
         specifier: 18.3.9
         version: 18.3.9
       tailwindcss:
-        specifier: 3.4.11
-        version: 3.4.11(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4))
+        specifier: 3.4.13
+        version: 3.4.13(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4))
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -830,7 +830,7 @@ importers:
         version: 7.0.2(react@18.3.1)
       tailwind-variants:
         specifier: 0.2.1
-        version: 0.2.1(tailwindcss@3.4.11(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4)))
+        version: 0.2.1(tailwindcss@3.4.13(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4)))
       ts-pattern:
         specifier: 5.3.1
         version: 5.3.1
@@ -851,8 +851,8 @@ importers:
         specifier: 18.3.0
         version: 18.3.0
       tailwindcss:
-        specifier: 3.4.11
-        version: 3.4.11(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4))
+        specifier: 3.4.13
+        version: 3.4.13(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4))
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -1014,7 +1014,7 @@ importers:
         version: 17.5.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       tailwind-variants:
         specifier: 0.2.1
-        version: 0.2.1(tailwindcss@3.4.11(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4)))
+        version: 0.2.1(tailwindcss@3.4.13(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4)))
       ts-pattern:
         specifier: 5.3.1
         version: 5.3.1
@@ -1038,8 +1038,8 @@ importers:
         specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
       tailwindcss:
-        specifier: 3.4.11
-        version: 3.4.11(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4))
+        specifier: 3.4.13
+        version: 3.4.13(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4))
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -1152,7 +1152,7 @@ importers:
         version: 0.2.2(react@18.3.1)
       tailwind-variants:
         specifier: 0.2.1
-        version: 0.2.1(tailwindcss@3.4.11(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4)))
+        version: 0.2.1(tailwindcss@3.4.13(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4)))
       ts-pattern:
         specifier: 5.3.1
         version: 5.3.1
@@ -1170,8 +1170,8 @@ importers:
         specifier: 18.3.9
         version: 18.3.9
       tailwindcss:
-        specifier: 3.4.11
-        version: 3.4.11(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4))
+        specifier: 3.4.13
+        version: 3.4.13(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4))
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -1272,7 +1272,7 @@ importers:
         version: 0.2.2(react@18.3.1)
       tailwind-variants:
         specifier: 0.2.1
-        version: 0.2.1(tailwindcss@3.4.11(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4)))
+        version: 0.2.1(tailwindcss@3.4.13(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4)))
       ts-pattern:
         specifier: 5.3.1
         version: 5.3.1
@@ -1299,8 +1299,8 @@ importers:
         specifier: 18.3.9
         version: 18.3.9
       tailwindcss:
-        specifier: 3.4.11
-        version: 3.4.11(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4))
+        specifier: 3.4.13
+        version: 3.4.13(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4))
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -1386,7 +1386,7 @@ importers:
         version: 7.0.2(react@18.3.1)
       tailwind-variants:
         specifier: 0.2.1
-        version: 0.2.1(tailwindcss@3.4.11(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4)))
+        version: 0.2.1(tailwindcss@3.4.13(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4)))
       ts-pattern:
         specifier: 5.3.1
         version: 5.3.1
@@ -1404,8 +1404,8 @@ importers:
         specifier: 18.3.9
         version: 18.3.9
       tailwindcss:
-        specifier: 3.4.11
-        version: 3.4.11(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4))
+        specifier: 3.4.13
+        version: 3.4.13(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4))
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -1509,7 +1509,7 @@ importers:
         version: 0.2.2(react@18.3.1)
       tailwind-variants:
         specifier: 0.2.1
-        version: 0.2.1(tailwindcss@3.4.11(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4)))
+        version: 0.2.1(tailwindcss@3.4.13(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4)))
       ts-pattern:
         specifier: 5.3.1
         version: 5.3.1
@@ -1527,8 +1527,8 @@ importers:
         specifier: 18.3.9
         version: 18.3.9
       tailwindcss:
-        specifier: 3.4.11
-        version: 3.4.11(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4))
+        specifier: 3.4.13
+        version: 3.4.13(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4))
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -1614,7 +1614,7 @@ importers:
         version: 17.5.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       tailwind-variants:
         specifier: 0.2.1
-        version: 0.2.1(tailwindcss@3.4.11(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4)))
+        version: 0.2.1(tailwindcss@3.4.13(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4)))
       ts-pattern:
         specifier: 5.3.1
         version: 5.3.1
@@ -1632,8 +1632,8 @@ importers:
         specifier: 18.3.9
         version: 18.3.9
       tailwindcss:
-        specifier: 3.4.11
-        version: 3.4.11(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4))
+        specifier: 3.4.13
+        version: 3.4.13(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4))
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -1703,7 +1703,7 @@ importers:
         version: 0.2.2(react@18.3.1)
       tailwind-variants:
         specifier: 0.2.1
-        version: 0.2.1(tailwindcss@3.4.11(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4)))
+        version: 0.2.1(tailwindcss@3.4.13(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4)))
       ts-pattern:
         specifier: 5.3.1
         version: 5.3.1
@@ -1727,8 +1727,8 @@ importers:
         specifier: 18.3.0
         version: 18.3.0
       tailwindcss:
-        specifier: 3.4.11
-        version: 3.4.11(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4))
+        specifier: 3.4.13
+        version: 3.4.13(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4))
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -1743,13 +1743,13 @@ importers:
         version: 0.6.6(prettier-plugin-organize-imports@4.0.0(prettier@3.3.3)(typescript@5.5.4))(prettier@3.3.3)
       tailwind-variants:
         specifier: 0.2.1
-        version: 0.2.1(tailwindcss@3.4.11(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4)))
+        version: 0.2.1(tailwindcss@3.4.13(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4)))
       tailwindcss:
-        specifier: 3.4.11
-        version: 3.4.11(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4))
+        specifier: 3.4.13
+        version: 3.4.13(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4))
       tailwindcss-animate:
         specifier: 1.0.7
-        version: 1.0.7(tailwindcss@3.4.11(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4)))
+        version: 1.0.7(tailwindcss@3.4.13(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4)))
     devDependencies:
       postcss:
         specifier: 8.4.47
@@ -7595,8 +7595,8 @@ packages:
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders'
 
-  tailwindcss@3.4.11:
-    resolution: {integrity: sha512-qhEuBcLemjSJk5ajccN9xJFtM/h0AVCPaA6C92jNP+M2J8kX+eMJHI7R2HFKUvvAsMpcfLILMCFYSeDwpMmlUg==}
+  tailwindcss@3.4.13:
+    resolution: {integrity: sha512-KqjHOJKogOUt5Bs752ykCeiwvi0fKVkr5oqsFNt/8px/tA8scFPIlkygsf6jXrfCqGHz7VflA6+yytWuM+XhFw==}
     engines: {node: '>=14.0.0'}
     hasBin: true
 
@@ -10603,13 +10603,13 @@ snapshots:
       '@swc/counter': 0.1.3
     optional: true
 
-  '@tailwindcss/typography@0.5.15(tailwindcss@3.4.11(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4)))':
+  '@tailwindcss/typography@0.5.15(tailwindcss@3.4.13(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4)))':
     dependencies:
       lodash.castarray: 4.4.0
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
-      tailwindcss: 3.4.11(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4))
+      tailwindcss: 3.4.13(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4))
 
   '@tanstack/match-sorter-utils@8.19.4':
     dependencies:
@@ -15150,16 +15150,16 @@ snapshots:
 
   tailwind-merge@2.5.0: {}
 
-  tailwind-variants@0.2.1(tailwindcss@3.4.11(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4))):
+  tailwind-variants@0.2.1(tailwindcss@3.4.13(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4))):
     dependencies:
       tailwind-merge: 2.5.0
-      tailwindcss: 3.4.11(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4))
+      tailwindcss: 3.4.13(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4))
 
-  tailwindcss-animate@1.0.7(tailwindcss@3.4.11(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4))):
+  tailwindcss-animate@1.0.7(tailwindcss@3.4.13(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4))):
     dependencies:
-      tailwindcss: 3.4.11(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4))
+      tailwindcss: 3.4.13(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4))
 
-  tailwindcss@3.4.11(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4)):
+  tailwindcss@3.4.13(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.5.0)(typescript@5.5.4)):
     dependencies:
       '@alloc/quick-lru': 5.2.0
       arg: 5.0.2
@@ -15174,7 +15174,7 @@ snapshots:
       micromatch: 4.0.7
       normalize-path: 3.0.0
       object-hash: 3.0.0
-      picocolors: 1.0.1
+      picocolors: 1.1.0
       postcss: 8.4.47
       postcss-import: 15.1.0(postcss@8.4.47)
       postcss-js: 4.0.1(postcss@8.4.47)
