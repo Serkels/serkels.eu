@@ -37,13 +37,14 @@ export default function HomeCarousel() {
           <article>
             <h1 className="mb-6 text-xl font-bold uppercase md:text-2xl">
               Une question ? <br />
-              posez-la directement à la communauté sur la rubrique “forum”...
+              posez-la directement à la communauté sur la rubrique
+              “discussions”...
             </h1>
           </article>
           <article>
             <h1 className="mb-6 text-xl font-bold uppercase md:text-2xl">
-              ... et ne ratez aucune opportunité proposée par nos partenaires
-              (bourses, activités etc...)​
+              ... et ne ratez aucune opportunité pro proposée par nos
+              partenaires (bourses, activités etc...)​
             </h1>
           </article>
         </Carousel>
