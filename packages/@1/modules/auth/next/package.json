@@ -27,7 +27,7 @@
     "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
     "@trpc/client": "10.45.2",
     "await-to-js": "3.0.0",
-    "next": "14.2.7",
+    "next": "14.2.13",
     "next-auth": "4.24.7",
     "superjson": "2.2.1",
     "ts-pattern": "5.3.1",
