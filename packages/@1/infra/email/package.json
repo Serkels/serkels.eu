@@ -13,13 +13,13 @@
   "dependencies": {
     "@react-email/render": "1.0.1",
     "debug": "4.3.7",
-    "nodemailer": "6.9.14",
+    "nodemailer": "6.9.15",
     "zod": "3.23.8"
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
     "@types/debug": "4.1.12",
-    "@types/nodemailer": "6.4.15",
+    "@types/nodemailer": "6.4.16",
     "@types/react": "18.3.9"
   }
 }
