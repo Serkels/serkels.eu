@@ -45,7 +45,7 @@
     "@electric-sql/pglite": "0.2.8",
     "@faker-js/faker": "8.4.1",
     "@types/node": "22.7.2",
-    "date-fns": "3.6.0",
+    "date-fns": "4.1.0",
     "dedent": "1.5.3",
     "pglite-prisma-adapter": "0.2.0",
     "prisma": "5.20.0",
