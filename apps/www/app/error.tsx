@@ -3,11 +3,11 @@
 import { Error_Layout } from ":components/Error_Layout";
 import { MenuBurger } from ":components/burger";
 import { BigBar } from ":components/shell/BigBar";
+import { signOut } from "@1.modules/auth.next/react";
 import { Button } from "@1.ui/react/button";
 import { ErrorOccur } from "@1.ui/react/error";
 import { VisuallyHidden } from "@1.ui/react/visually_hidden";
 import { useMountEffect } from "@react-hookz/web";
-import { signOut } from "next-auth/react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 

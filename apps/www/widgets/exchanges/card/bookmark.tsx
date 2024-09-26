@@ -2,6 +2,7 @@
 
 import { AppToastOptions } from ":components/toast";
 import { TRPC_React } from ":trpc/client";
+import { useSession } from "@1.modules/auth.next/react";
 import type { BookmarkButton_Props } from "@1.modules/bookmark.ui/BookmarkButton";
 import { useExchange } from "@1.modules/exchange.ui/Card/context";
 import { PROFILE_ROLES } from "@1.modules/profile.domain";
@@ -9,7 +10,6 @@ import { button } from "@1.ui/react/button/atom";
 import { Bookmark } from "@1.ui/react/icons";
 import { Spinner } from "@1.ui/react/spinner";
 import { sendGAEvent } from "@next/third-parties/google";
-import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import { tv } from "tailwind-variants";
 import { P, match } from "ts-pattern";

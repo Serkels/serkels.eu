@@ -1,6 +1,7 @@
 "use client";
 
 import { TrpcProvider } from ":trpc/client";
+import { SessionProvider } from "@1.modules/auth.next/react";
 import { useMediaQuery } from "@react-hookz/web";
 import {
   QueryClient,
@@ -9,7 +10,6 @@ import {
 } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import debug from "debug";
-import { SessionProvider } from "next-auth/react";
 import { useState, type PropsWithChildren } from "react";
 import Nest from "react-nest";
 import { ToastContainer } from "react-toastify";

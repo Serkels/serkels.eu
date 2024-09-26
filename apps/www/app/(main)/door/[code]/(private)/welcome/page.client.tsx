@@ -1,8 +1,8 @@
 "use client";
 
+import { signOut, useSession } from "@1.modules/auth.next/react";
 import { Avatar } from "@1.ui/react/avatar";
 import { Button } from "@1.ui/react/button";
-import { signOut, useSession } from "next-auth/react";
 
 //
 

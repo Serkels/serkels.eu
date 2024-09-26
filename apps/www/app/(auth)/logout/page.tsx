@@ -1,8 +1,8 @@
 "use client";
 
 import { Banner } from ":components/shell/Banner";
+import { signOut } from "@1.modules/auth.next/react";
 import { useAsync, useMountEffect } from "@react-hookz/web";
-import { signOut } from "next-auth/react";
 
 //
 

@@ -1,6 +1,7 @@
 //
 
 import { TRPC_React } from ":trpc/client";
+import { useSession } from "@1.modules/auth.next/react";
 import { Exchange_TypeSchema, type Exchange } from "@1.modules/exchange.domain";
 import { Exchange_Ask_Modal } from "@1.modules/exchange.ui/ask/modal";
 import {
@@ -9,7 +10,6 @@ import {
 } from "@1.modules/exchange.ui/Card/context";
 import { Button } from "@1.ui/react/button";
 import { Spinner } from "@1.ui/react/spinner";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { P, match } from "ts-pattern";
 import { Ask } from "./ask";

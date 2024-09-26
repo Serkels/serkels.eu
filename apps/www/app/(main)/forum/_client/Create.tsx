@@ -1,6 +1,7 @@
 "use client";
 
 import { TRPC_React } from ":trpc/client";
+import { useSession } from "@1.modules/auth.next/react";
 import type { Category } from "@1.modules/category.domain";
 import { CreateQuestionForm } from "@1.modules/forum.ui/CreateCard/Form";
 import { Idle } from "@1.modules/forum.ui/CreateCard/Idle";
@@ -10,7 +11,6 @@ import { Card } from "@1.ui/react/card";
 import { ErrorOccur } from "@1.ui/react/error";
 import { Spinner } from "@1.ui/react/spinner";
 import { useToggle } from "@react-hookz/web";
-import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 import { P, match } from "ts-pattern";

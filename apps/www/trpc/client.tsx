@@ -1,6 +1,7 @@
 "use client";
 
 import type { Router } from "@1.infra/trpc";
+import { useSession } from "@1.modules/auth.next/react";
 import { useQueryClient } from "@tanstack/react-query";
 import {
   createTRPCReact,
@@ -11,7 +12,6 @@ import {
   wsLink,
   type inferReactQueryProcedureOptions,
 } from "@trpc/react-query";
-import { useSession } from "next-auth/react";
 import { useEffect, useState, type PropsWithChildren } from "react";
 import SuperJSON from "superjson";
 
