@@ -59,8 +59,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/@1/modules/trpc
       '@hono/node-server':
-        specifier: 1.12.1
-        version: 1.12.1
+        specifier: 1.13.1
+        version: 1.13.1(hono@4.5.9)
       '@hono/sentry':
         specifier: 1.2.0
         version: 1.2.0(hono@4.5.9)
@@ -2514,9 +2514,11 @@ packages:
     resolution: {integrity: sha512-y8qtwB2eS4Iqy2frJP1b1zkIYQNcSMTU7FdInsVSV+mQ2JGgih8Pi+j+v+iVnYsnqC+SjZNO/4UUhe16ebvZeA==}
     engines: {node: '>=18.0.0'}
 
-  '@hono/node-server@1.12.1':
-    resolution: {integrity: sha512-C9l+08O8xtXB7Ppmy8DjBFH1hYji7JKzsU32Yt1poIIbdPp6S7aOI8IldDHD9YFJ55lv2c21ovNrmxatlHfhAg==}
+  '@hono/node-server@1.13.1':
+    resolution: {integrity: sha512-TSxE6cT5RHnawbjnveexVN7H2Dpn1YaLxQrCOLCUwD+hFbqbFsnJBgdWcYtASqtWVjA+Qgi8uqFug39GsHjo5A==}
     engines: {node: '>=18.14.1'}
+    peerDependencies:
+      hono: ^4
 
   '@hono/sentry@1.2.0':
     resolution: {integrity: sha512-9mS8GrkGtR4YxM1CViL4Ft8LFQ9YhCoXeqKnUA1AUmrvA5PhUU/V+xoo8Autw0nVriin3liX5/lPrwWz3muwiw==}
@@ -8865,7 +8867,9 @@ snapshots:
     dependencies:
       happy-dom: 15.7.4
 
-  '@hono/node-server@1.12.1': {}
+  '@hono/node-server@1.13.1(hono@4.5.9)':
+    dependencies:
+      hono: 4.5.9
 
   '@hono/sentry@1.2.0(hono@4.5.9)':
     dependencies:
