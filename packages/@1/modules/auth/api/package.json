@@ -30,7 +30,7 @@
     "await-to-js": "3.0.0",
     "date-fns": "4.1.0",
     "nanoid": "5.0.7",
-    "ts-pattern": "5.3.1",
+    "ts-pattern": "5.4.0",
     "zod": "3.23.8"
   },
   "devDependencies": {

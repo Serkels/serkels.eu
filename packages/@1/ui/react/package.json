@@ -62,7 +62,7 @@
     "react-nest": "0.1.10",
     "react-slotify": "0.2.2",
     "tailwind-variants": "0.2.1",
-    "ts-pattern": "5.3.1"
+    "ts-pattern": "5.4.0"
   },
   "devDependencies": {
     "@1.config/tailwindcss": "workspace:*",
