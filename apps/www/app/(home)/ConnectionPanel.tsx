@@ -1,6 +1,7 @@
 "use client";
 
 import { DomLazyMotion } from ":components/shell/DomLazyMotion";
+import { signIn, signOut, useSession } from "@1.modules/auth.next/react";
 import { AuthError, HTTPError } from "@1.modules/core/errors";
 import { PROFILE_ROLES, PROFILE_UNKNOWN } from "@1.modules/profile.domain";
 import { Avatar } from "@1.modules/profile.ui";
@@ -10,7 +11,6 @@ import { useTimeoutEffect } from "@react-hookz/web";
 import { useMutation } from "@tanstack/react-query";
 import constate from "constate";
 import { AnimatePresence, m } from "framer-motion";
-import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import {

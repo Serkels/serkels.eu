@@ -3,11 +3,11 @@
 import type { inferInfiniteQueryObserverSuccessResult } from ":components/inferQueryResult";
 import { TRPC_React } from ":trpc/client";
 import { Exchange_Card } from ":widgets/exchanges/card";
+import { useSession } from "@1.modules/auth.next/react";
 import type { Entity } from "@1.modules/core/domain";
 import { Exchange_Filter, type Exchange } from "@1.modules/exchange.domain";
 import { Exchange_AsyncCard } from "@1.modules/exchange.ui/Card/AsyncCard";
 import { EmptyList, Loading, LoadMoreButton } from "@1.ui/react/async";
-import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { useEffect, type ComponentProps, type ReactNode } from "react";
 import { match, P } from "ts-pattern";

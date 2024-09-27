@@ -2,6 +2,7 @@
 
 import { Loading_Placeholder } from ":components/placeholder/Loading_Placeholder";
 import { TRPC_React } from ":trpc/client";
+import { useSession } from "@1.modules/auth.next/react";
 import type { ID_Schema } from "@1.modules/core/domain";
 import {
   HANDSHAKE_ACCEPETED,
@@ -20,7 +21,6 @@ import {
 import type { UseInfiniteQueryResult } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import {

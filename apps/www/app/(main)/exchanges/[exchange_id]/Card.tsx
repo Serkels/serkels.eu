@@ -4,7 +4,7 @@ import { Loading_Placeholder } from ":components/placeholder/Loading_Placeholder
 import type { Params } from ":pipes/exchange_by_id";
 import { TRPC_React } from ":trpc/client";
 import { Exchange_Card } from ":widgets/exchanges/card";
-import { useSession } from "next-auth/react";
+import { useSession } from "@1.modules/auth.next/react";
 import { notFound } from "next/navigation";
 import { match, P } from "ts-pattern";
 

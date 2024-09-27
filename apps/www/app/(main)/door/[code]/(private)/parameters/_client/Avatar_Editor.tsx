@@ -1,13 +1,13 @@
 "use client";
 
 import { TRPC_React } from ":trpc/client";
+import { useSession } from "@1.modules/auth.next/react";
 import type { Profile } from "@1.modules/profile.domain";
 import { Avatar } from "@1.modules/profile.ui";
 import { Button } from "@1.ui/react/button";
 import { label } from "@1.ui/react/form/atom";
 import { useAsync } from "@react-hookz/web";
 import { fromImage } from "imtool";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";

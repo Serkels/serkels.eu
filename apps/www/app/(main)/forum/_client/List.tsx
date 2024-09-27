@@ -2,6 +2,7 @@
 
 import { Share_Button } from ":components/Share_Button";
 import { TRPC_React } from ":trpc/client";
+import { useSession } from "@1.modules/auth.next/react";
 import type { Entity_Schema } from "@1.modules/core/domain";
 import { Forum_Filter, type Answer } from "@1.modules/forum.domain";
 import { Answer_Card } from "@1.modules/forum.ui/Answer/Card";
@@ -30,7 +31,6 @@ import { ErrorOccur } from "@1.ui/react/error";
 import { Share, Trash } from "@1.ui/react/icons";
 import { ActionItem } from "@1.ui/react/menu";
 import { Spinner } from "@1.ui/react/spinner";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect } from "react";

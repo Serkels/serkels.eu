@@ -1,10 +1,10 @@
 "use client";
 
 import { TRPC_React } from ":trpc/client";
+import { useSession } from "@1.modules/auth.next/react";
 import { Button } from "@1.ui/react/button";
 import { Plus, Trash } from "@1.ui/react/icons";
 import { Spinner } from "@1.ui/react/spinner";
-import { useSession } from "next-auth/react";
 import { useCallback } from "react";
 import { tv } from "tailwind-variants";
 import { P, match } from "ts-pattern";

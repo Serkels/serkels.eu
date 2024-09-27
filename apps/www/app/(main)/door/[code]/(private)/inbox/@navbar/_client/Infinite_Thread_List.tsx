@@ -2,6 +2,7 @@
 
 import { ProfileAvatarMedia } from ":components/avatar";
 import { TRPC_React } from ":trpc/client";
+import { useSession } from "@1.modules/auth.next/react";
 import type { Inbox } from "@1.modules/inbox.domain";
 import { thread_recipient } from "@1.modules/inbox.domain/select";
 import { Thread_InfiniteList } from "@1.modules/inbox.ui/thread/InfiniteList";
@@ -14,7 +15,6 @@ import { useUpdateEffect } from "@react-hookz/web";
 import type { UseQueryResult } from "@tanstack/react-query";
 import { isAfter } from "date-fns";
 import { m, type Transition, type Variants } from "framer-motion";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { type PropsWithChildren } from "react";

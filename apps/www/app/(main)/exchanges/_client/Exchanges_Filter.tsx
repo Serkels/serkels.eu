@@ -2,9 +2,9 @@
 
 import { useSyncSearchQuery } from ":components/hooks/useSyncSearchQuery";
 import { context } from ":components/shell/AsideFilter.client";
+import { useSession } from "@1.modules/auth.next/react";
 import { Exchange_Filter } from "@1.modules/exchange.domain";
 import { FilterRadioList } from "@1.ui/react/form/FilterRadioList";
-import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 import { useContext } from "react";
 

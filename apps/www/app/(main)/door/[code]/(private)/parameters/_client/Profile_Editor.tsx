@@ -1,12 +1,12 @@
 "use client";
 
 import { TRPC_React } from ":trpc/client";
+import { useSession } from "@1.modules/auth.next/react";
 import { PROFILE_ROLES, type Profile } from "@1.modules/profile.domain";
 import { Button } from "@1.ui/react/button";
 import { input, label } from "@1.ui/react/form/atom";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { AnimatePresence, motion } from "framer-motion";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { match } from "ts-pattern";
 import { z } from "zod";

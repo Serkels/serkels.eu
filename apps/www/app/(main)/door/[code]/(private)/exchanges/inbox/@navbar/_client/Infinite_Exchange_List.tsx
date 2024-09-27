@@ -1,6 +1,7 @@
 "use client";
 
 import { TRPC_React } from ":trpc/client";
+import { useSession } from "@1.modules/auth.next/react";
 import { Exchange_TypeSchema } from "@1.modules/exchange.domain";
 import { filter_params_schema } from "@1.modules/exchange.domain/filter_params_schema";
 import { ExpiryDate } from "@1.modules/exchange.ui/Card/Date";
@@ -17,7 +18,6 @@ import {
   LocationRadius,
 } from "@1.ui/react/icons";
 import { useUpdateEffect } from "@react-hookz/web";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useParams, useSearchParams } from "next/navigation";
 import { P, match } from "ts-pattern";

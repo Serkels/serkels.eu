@@ -2,10 +2,10 @@
 
 import { Loading_Placeholder } from ":components/placeholder/Loading_Placeholder";
 import { TRPC_React } from ":trpc/client";
+import { useSession } from "@1.modules/auth.next/react";
 import type { Message } from "@1.modules/inbox.domain";
 import { Timeline } from "@1.modules/inbox.ui/conversation/Timeline";
 import type { UseInfiniteQueryResult } from "@tanstack/react-query";
-import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
 import { useCallback, useLayoutEffect, useRef } from "react";
 import { P, match } from "ts-pattern";

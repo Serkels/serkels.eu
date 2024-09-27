@@ -3,6 +3,7 @@
 import { ProfileAvatarMedia } from ":components/avatar";
 import type { Params } from ":pipes/exchange_by_id";
 import { TRPC_React } from ":trpc/client";
+import { useSession } from "@1.modules/auth.next/react";
 import { Deal_Status_Schema, type Deal } from "@1.modules/exchange.domain";
 import { handshake_format } from "@1.modules/exchange.domain/handshake_format";
 import type { Inbox } from "@1.modules/inbox.domain";
@@ -20,7 +21,6 @@ import {
 import { useUpdateEffect } from "@react-hookz/web";
 import type { UseQueryResult } from "@tanstack/react-query";
 import { isAfter } from "date-fns";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { type ComponentPropsWithoutRef } from "react";

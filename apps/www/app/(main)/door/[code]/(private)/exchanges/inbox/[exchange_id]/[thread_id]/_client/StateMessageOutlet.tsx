@@ -3,12 +3,12 @@
 import type { Params } from ":pipes/thread_by_id";
 import { TRPC_React } from ":trpc/client";
 import type { RouterOutput } from "@1.infra/trpc";
+import { useSession } from "@1.modules/auth.next/react";
 import { Deal_Status_Schema } from "@1.modules/exchange.domain";
 import { useExchange } from "@1.modules/exchange.ui/context";
 import { Denied } from "@1.ui/react/icons";
 import type { QueryObserverSuccessResult } from "@tanstack/react-query";
 import { AnimatePresence, motion } from "framer-motion";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { type PropsWithChildren } from "react";
 import { tv } from "tailwind-variants";

@@ -1,9 +1,9 @@
 "use client";
 
+import { signIn } from "@1.modules/auth.next/react";
 import { HTTPError } from "@1.modules/core/errors";
 import { Spinner } from "@1.ui/react/spinner";
 import { useQuery } from "@tanstack/react-query";
-import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { P, match } from "ts-pattern";
