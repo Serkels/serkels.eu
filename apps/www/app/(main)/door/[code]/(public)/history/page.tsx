@@ -4,7 +4,7 @@ import { NotConnected_Placeholder } from ":components/placeholder/NotConnected_P
 import { code_to_profile_id, type CodeParms } from ":pipes/code";
 import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
 import { Exchange_Card } from ":widgets/exchanges/card";
-import { getServerSession } from "@1.modules/auth.next";
+import { getServerSession } from "@1.modules/auth.next.legacy";
 import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound, redirect } from "next/navigation";

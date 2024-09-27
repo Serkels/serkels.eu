@@ -1,7 +1,7 @@
 //
 
 import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
-import { getServerSession } from "@1.modules/auth.next";
+import { getServerSession } from "@1.modules/auth.next.legacy";
 import { Forum_Filter } from "@1.modules/forum.domain";
 import { Idle as CreateCard_Idle } from "@1.modules/forum.ui/CreateCard/Idle";
 import { Spinner } from "@1.ui/react/spinner";

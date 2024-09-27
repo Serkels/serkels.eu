@@ -1,7 +1,7 @@
 //
 
 import type { Router } from "@1.infra/trpc";
-import { getServerSession } from "@1.modules/auth.next";
+import { getServerSession } from "@1.modules/auth.next.legacy";
 import type { Profile } from "@1.modules/profile.domain";
 import { NEXTAUTH_TRPCENV } from "@douglasduteil/nextauth...trpc.prisma/config";
 import type { JWT } from "@douglasduteil/nextauth...trpc.prisma/jwt";

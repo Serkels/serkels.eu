@@ -6,7 +6,7 @@ import {
 } from ":components/navbar/aside_navbar";
 import { type CodeParms } from ":pipes/code";
 import { TRPC_SSR } from ":trpc/server";
-import { getServerSession } from "@1.modules/auth.next";
+import { getServerSession } from "@1.modules/auth.next.legacy";
 import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import { notFound } from "next/navigation";
 import { match } from "ts-pattern";

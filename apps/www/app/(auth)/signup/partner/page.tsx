@@ -1,6 +1,6 @@
 //
 
-import { get_csrf_token } from "@1.modules/auth.next/csrf_token";
+import { get_csrf_token } from "@1.modules/auth.next.legacy/csrf_token";
 import { UserAvatarFilled } from "@1.ui/react/icons";
 // import { UserAvatarFilled } from "@1.ui/react/icons";
 import { FrenchLocationField } from ":components/FrenchLocationField";

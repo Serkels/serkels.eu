@@ -2,7 +2,7 @@
 
 import { TRPC_SSR } from ":trpc/server";
 import { Exchange_Card } from ":widgets/exchanges/card";
-import { getServerSession } from "@1.modules/auth.next";
+import { getServerSession } from "@1.modules/auth.next.legacy";
 import type { Metadata, ResolvingMetadata } from "next";
 
 //

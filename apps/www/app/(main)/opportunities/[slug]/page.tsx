@@ -2,7 +2,7 @@
 
 import { Share_Button } from ":components/Share_Button";
 import { slug_to_opportunity, type Params } from ":pipes/opportunity_slug";
-import { getServerSession } from "@1.modules/auth.next";
+import { getServerSession } from "@1.modules/auth.next.legacy";
 import { Article, icon_link } from "@1.modules/opportunity.ui/Article";
 import { ExclamationMark, Share } from "@1.ui/react/icons";
 import { ActionItem, Menu } from "@1.ui/react/menu";

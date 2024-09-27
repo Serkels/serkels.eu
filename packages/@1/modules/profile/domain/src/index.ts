@@ -33,6 +33,23 @@ export const PROFILE_UNKNOWN: Profile = Profile_Schema.parse(
 
 //
 
+export const AuthProfile_Schema = Profile_Schema.omit({
+  bio: true,
+}).describe("AuthProfile_PropsSchema");
+export interface AuthProfile extends z.TypeOf<typeof AuthProfile_Schema> {}
+
+//
+
+export const AvatarProfile_Schema = Profile_Schema.pick({
+  id: true,
+  image: true,
+}).describe("AvatarProfile_Schema");
+export interface AvatarProfile extends z.TypeOf<typeof AvatarProfile_Schema> {}
+
+//
+
+//
+
 export const Partner_Schema = Entity_Schema.extend({
   city: z.string().default("Unkown city"),
   link: z.string().url(),

@@ -1,7 +1,7 @@
 //
 
 import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
-import { getServerSession } from "@1.modules/auth.next";
+import { getServerSession } from "@1.modules/auth.next.legacy";
 import { Exchange_Filter } from "@1.modules/exchange.domain";
 import { card } from "@1.ui/react/card/atom";
 import { PlusBox } from "@1.ui/react/icons";

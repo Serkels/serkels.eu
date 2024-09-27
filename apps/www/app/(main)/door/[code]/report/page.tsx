@@ -1,6 +1,6 @@
 //
 
-import { getServerSession } from "@1.modules/auth.next";
+import { getServerSession } from "@1.modules/auth.next.legacy";
 import type { Metadata, ResolvingMetadata } from "next";
 import { ReportForm, ReportForm_Provider } from "./page.client";
 

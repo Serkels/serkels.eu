@@ -1,6 +1,6 @@
 "use server";
 
-import { trpc } from "@1.modules/auth.next/trpc";
+import { trpc } from "@1.modules/auth.next.legacy/trpc";
 import { create_report } from "@1.modules/profile.domain/report";
 import to from "await-to-js";
 import { z } from "zod";

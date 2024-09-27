@@ -1,5 +1,6 @@
 //
 
+import { root as auth_ui_root } from "@1.modules/auth.next/tailwind.config.ts";
 import { root as bookmark_ui_root } from "@1.modules/bookmark.ui/tailwind.config.ts";
 import { root as exchange_ui_root } from "@1.modules/exchange.ui/tailwind.config.ts";
 import { root as forum_ui_root } from "@1.modules/forum.ui/tailwind.config.ts";
@@ -18,6 +19,7 @@ const config = with_ui({
     "./app/**/*.{ts,tsx}",
     "./widgets/**/*.{ts,tsx}",
     ...[
+      auth_ui_root,
       bookmark_ui_root,
       exchange_ui_root,
       forum_ui_root,

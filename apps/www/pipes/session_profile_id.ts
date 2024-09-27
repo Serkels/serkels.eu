@@ -1,6 +1,6 @@
 //
 
-import { getServerSession } from "@1.modules/auth.next";
+import { getServerSession } from "@1.modules/auth.next.legacy";
 import { PROFILE_UNKNOWN } from "@1.modules/profile.domain";
 
 //

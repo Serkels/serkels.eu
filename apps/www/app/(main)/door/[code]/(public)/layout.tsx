@@ -1,7 +1,7 @@
 //
 
 import { code_to_profile_id, type CodeParms } from ":pipes/code";
-import { getServerSession } from "@1.modules/auth.next";
+import { getServerSession } from "@1.modules/auth.next.legacy";
 import { AuthError } from "@1.modules/core/errors";
 import to from "await-to-js";
 import type { PropsWithChildren, ReactNode } from "react";

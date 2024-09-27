@@ -8,7 +8,7 @@ import {
 } from ":components/navbar/notification_indicator.client";
 import { MobileNavBar } from ":components/shell/MobileNavBar";
 import { TRPC_SSR } from ":trpc/server";
-import { getServerSession } from "@1.modules/auth.next";
+import { getServerSession } from "@1.modules/auth.next.legacy";
 import { PROFILE_ROLES, type Profile } from "@1.modules/profile.domain";
 import { Avatar } from "@1.modules/profile.ui";
 import { Grid } from "@1.ui/react/grid";

@@ -2,8 +2,10 @@
 
 import { DomLazyMotion } from ":components/shell/DomLazyMotion";
 import { signIn, signOut, useSession } from "@1.modules/auth.next/react";
+import { LoginOrSubmit } from "@1.modules/auth.next/components/card/LoginOrSubmit";
+import { useLogin } from "@1.modules/auth.next/react";
 import { AuthError, HTTPError } from "@1.modules/core/errors";
-import { PROFILE_ROLES, PROFILE_UNKNOWN } from "@1.modules/profile.domain";
+import { PROFILE_UNKNOWN } from "@1.modules/profile.domain";
 import { Avatar } from "@1.modules/profile.ui";
 import { Button } from "@1.ui/react/button";
 import { Spinner } from "@1.ui/react/spinner";
@@ -17,12 +19,11 @@ import {
   useCallback,
   useEffect,
   useState,
-  type ComponentProps,
+  type FormEventHandler,
   type PropsWithChildren,
 } from "react";
 import Nest from "react-nest";
 import { P, match } from "ts-pattern";
-import { LoginForm } from "./LoginForm";
 
 //
 
@@ -126,25 +127,36 @@ function LookForExistingSession() {
 function LoginFormPanel() {
   const send = useOutlet_Send();
   const router = useRouter();
+  const { execute } = useLogin();
 
   const signin_mutation_info = useSignIn_Mutation();
+  const on_login_form_submit: FormEventHandler<HTMLFormElement> = useCallback(
+    async (event) => {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const formData = new FormData(form);
+      const email = formData.get("email");
+      if (!email) return;
+      await execute({ email: email.toString() });
+    },
+    [],
+  );
+  // const on_login_form_submit: ComponentProps<typeof LoginForm>["onLogin"] =
+  //   useCallback(
+  //     async ({ email }) => await signin_mutation_info.mutate(email),
+  //     [],
+  //   );
 
-  const on_login_form_submit: ComponentProps<typeof LoginForm>["onLogin"] =
-    useCallback(
-      async ({ email }) => await signin_mutation_info.mutate(email),
-      [],
-    );
-
-  const on_sign_up_form_submit: ComponentProps<typeof LoginForm>["onSignUp"] =
-    useCallback(async ({ email, as }) => {
-      match(as as PROFILE_ROLES)
-        .with(PROFILE_ROLES.enum.STUDENT, () =>
-          router.push(`/signup/student?email=${email}`),
-        )
-        .with(PROFILE_ROLES.enum.PARTNER, () =>
-          router.push(`/signup/partner?email=${email}`),
-        );
-    }, []);
+  // const on_sign_up_form_submit: ComponentProps<typeof LoginForm>["onSignUp"] =
+  //   useCallback(async ({ email, as }) => {
+  //     match(as as PROFILE_ROLES)
+  //       .with(PROFILE_ROLES.enum.STUDENT, () =>
+  //         router.push(`/signup/student?email=${email}`),
+  //       )
+  //       .with(PROFILE_ROLES.enum.PARTNER, () =>
+  //         router.push(`/signup/partner?email=${email}`),
+  //       );
+  //   }, []);
 
   useEffect(() => {
     return match(signin_mutation_info)
@@ -162,10 +174,7 @@ function LoginFormPanel() {
   return match(signin_mutation_info)
     .with({ status: "error" }, () => null)
     .with({ status: "idle" }, () => (
-      <LoginForm
-        onLogin={on_login_form_submit}
-        onSignUp={on_sign_up_form_submit}
-      />
+      <LoginOrSubmit onLogin={on_login_form_submit} onSignup={() => {}} />
     ))
     .with({ status: "loading" }, () => <Loading />)
     .with({ status: "success" }, () => null)

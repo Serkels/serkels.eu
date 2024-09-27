@@ -2,7 +2,7 @@
 
 import { code_to_profile_id, type CodeParms } from ":pipes/code";
 import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
-import { getServerSession } from "@1.modules/auth.next";
+import { getServerSession } from "@1.modules/auth.next.legacy";
 import { AuthError } from "@1.modules/core/errors";
 import { PROFILE_ROLES, type Profile } from "@1.modules/profile.domain";
 import {

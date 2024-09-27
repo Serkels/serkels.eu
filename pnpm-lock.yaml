@@ -126,6 +126,9 @@ importers:
       '@1.modules/auth.next':
         specifier: workspace:*
         version: link:../../packages/@1/modules/auth/next
+      '@1.modules/auth.next.legacy':
+        specifier: workspace:*
+        version: link:../../packages/@1/modules/auth/next.legacy
       '@1.modules/bookmark.ui':
         specifier: workspace:*
         version: link:../../packages/@1/modules/bookmark/ui
@@ -612,6 +615,100 @@ importers:
       '@1.infra/database':
         specifier: workspace:*
         version: link:../../../infra/database
+      '@1.infra/email':
+        specifier: workspace:*
+        version: link:../../../infra/email
+      '@1.modules/auth.emails':
+        specifier: workspace:*
+        version: link:../emails
+      '@1.modules/core':
+        specifier: workspace:*
+        version: link:../../core
+      '@1.modules/profile.domain':
+        specifier: workspace:*
+        version: link:../../profile/domain
+      '@1.ui/react':
+        specifier: workspace:*
+        version: link:../../../ui/react
+      '@auth/prisma-adapter':
+        specifier: 2.4.2
+        version: 2.4.2(@prisma/client@5.20.0(prisma@5.20.0))(nodemailer@6.9.15)
+      '@douglasduteil/nextauth...trpc.prisma':
+        specifier: workspace:*
+        version: link:../../../../@douglasduteil/nextauth...trpc.prisma
+      '@hookform/resolvers':
+        specifier: 3.9.0
+        version: 3.9.0(react-hook-form@7.53.0(react@18.3.1))
+      '@sentry/core':
+        specifier: 8.28.0
+        version: 8.28.0
+      '@trpc/client':
+        specifier: 10.45.2
+        version: 10.45.2(@trpc/server@10.45.2)
+      await-to-js:
+        specifier: 3.0.0
+        version: 3.0.0
+      next:
+        specifier: 14.2.13
+        version: 14.2.13(@babel/core@7.24.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      next-auth:
+        specifier: 5.0.0-beta.22
+        version: 5.0.0-beta.22(next@14.2.13(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(nodemailer@6.9.15)(react@18.3.1)
+      nodemailer:
+        specifier: 6.9.15
+        version: 6.9.15
+      react-hook-form:
+        specifier: 7.53.0
+        version: 7.53.0(react@18.3.1)
+      superjson:
+        specifier: 2.2.1
+        version: 2.2.1
+      tailwind-variants:
+        specifier: 0.2.1
+        version: 0.2.1(tailwindcss@3.4.13(ts-node@10.9.2(@swc/core@1.3.101(@swc/helpers@0.5.12))(@types/node@22.7.4)(typescript@5.6.2)))
+      ts-pattern:
+        specifier: 5.4.0
+        version: 5.4.0
+      zod:
+        specifier: 3.23.8
+        version: 3.23.8
+      zsa:
+        specifier: 0.6.0
+        version: 0.6.0(zod@3.23.8)
+      zsa-react:
+        specifier: 0.2.2
+        version: 0.2.2(react@18.3.1)(zod@3.23.8)
+    devDependencies:
+      '@1.config/tailwindcss':
+        specifier: workspace:*
+        version: link:../../../config/tailwindcss
+      '@1.config/typescript':
+        specifier: workspace:*
+        version: link:../../../config/typescript
+      '@1.infra/trpc':
+        specifier: workspace:*
+        version: link:../../../infra/trpc
+      '@douglasduteil/datatypes...hours-to-seconds':
+        specifier: workspace:*
+        version: link:../../../../@douglasduteil/datatypes...hours-to-seconds
+      '@types/nodemailer':
+        specifier: 6.4.16
+        version: 6.4.16
+      '@types/react':
+        specifier: 18.3.10
+        version: 18.3.10
+      '@types/react-dom':
+        specifier: 18.3.0
+        version: 18.3.0
+      typescript:
+        specifier: 5.6.2
+        version: 5.6.2
+
+  packages/@1/modules/auth/next.legacy:
+    dependencies:
+      '@1.infra/database':
+        specifier: workspace:*
+        version: link:../../../infra/database
       '@1.modules/core':
         specifier: workspace:*
         version: link:../../core
@@ -637,8 +734,8 @@ importers:
         specifier: 2.2.1
         version: 2.2.1
       ts-pattern:
-        specifier: 5.4.0
-        version: 5.4.0
+        specifier: 5.3.1
+        version: 5.3.1
       zod:
         specifier: 3.23.8
         version: 3.23.8
@@ -653,14 +750,14 @@ importers:
         specifier: workspace:*
         version: link:../../../../@douglasduteil/datatypes...hours-to-seconds
       '@types/react':
-        specifier: 18.3.10
-        version: 18.3.10
+        specifier: 18.3.9
+        version: 18.3.9
       '@types/react-dom':
         specifier: 18.3.0
         version: 18.3.0
       typescript:
-        specifier: 5.6.2
-        version: 5.6.2
+        specifier: 5.5.4
+        version: 5.5.4
 
   packages/@1/modules/bookmark/api:
     dependencies:
@@ -1838,6 +1935,39 @@ packages:
   '@ampproject/remapping@2.3.0':
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
+
+  '@auth/core@0.34.2':
+    resolution: {integrity: sha512-KywHKRgLiF3l7PLyL73fjLSIBe1YNcA6sMeew4yMP6cfCWGXZrkkXd32AjRi1hlJ9nvovUBGZHvbn+LijO6ZeQ==}
+    peerDependencies:
+      '@simplewebauthn/browser': ^9.0.1
+      '@simplewebauthn/server': ^9.0.2
+      nodemailer: ^6.8.0
+    peerDependenciesMeta:
+      '@simplewebauthn/browser':
+        optional: true
+      '@simplewebauthn/server':
+        optional: true
+      nodemailer:
+        optional: true
+
+  '@auth/core@0.35.3':
+    resolution: {integrity: sha512-g6qfiqU4OtyvIEZ8J7UoIwAxEnNnLJV0/f/DW41U+4G5nhBlaCrnKhawJIJpU0D3uavXLeDT3B0BkjtiimvMDA==}
+    peerDependencies:
+      '@simplewebauthn/browser': ^9.0.1
+      '@simplewebauthn/server': ^9.0.2
+      nodemailer: ^6.8.0
+    peerDependenciesMeta:
+      '@simplewebauthn/browser':
+        optional: true
+      '@simplewebauthn/server':
+        optional: true
+      nodemailer:
+        optional: true
+
+  '@auth/prisma-adapter@2.4.2':
+    resolution: {integrity: sha512-QQwnGYfDiyTcAxMVhTrim+lLFFA3TKq3nIrbPtGZXlkiuNQ5t0rUg//Km7Wv21pD5bxhy4aRPlfq7TdFKk3XIw==}
+    peerDependencies:
+      '@prisma/client': '>=2.26.0 || >=3 || >=4 || >=5'
 
   '@babel/code-frame@7.24.7':
     resolution: {integrity: sha512-BcYH1CVJBO9tvyIZ2jVeXgSIMvGZ2FDRvDdOIVQyuklNKSsx+eppDEBq/g47Ayw+RqNFE+URvOShmf+f/qwAlA==}
@@ -3691,6 +3821,10 @@ packages:
     engines: {node: '>= 10'}
     hasBin: true
 
+  '@sentry/core@8.28.0':
+    resolution: {integrity: sha512-+If9uubvpZpvaQQw4HLiKPhrSS9/KcoA/AcdQkNm+5CVwAoOmDPtyYfkPBgfo2hLZnZQqR1bwkz/PrNoOm+gqA==}
+    engines: {node: '>=14.18'}
+
   '@sentry/core@8.32.0':
     resolution: {integrity: sha512-+xidTr0lZ0c755tq4k75dXPEb8PA+qvIefW3U9+dQMORLokBrYoKYMf5zZTG2k/OfSJS6OSxatUj36NFuCs3aA==}
     engines: {node: '>=14.18'}
@@ -3729,12 +3863,20 @@ packages:
     peerDependencies:
       react: ^16.14.0 || 17.x || 18.x || 19.x
 
+  '@sentry/types@8.28.0':
+    resolution: {integrity: sha512-hOfqfd92/AzBrEdMgmmV1VfOXJbIfleFTnerRl0mg/+CcNgP/6+Fdonp354TD56ouWNF2WkOM6sEKSXMWp6SEQ==}
+    engines: {node: '>=14.18'}
+
   '@sentry/types@8.32.0':
     resolution: {integrity: sha512-hxckvN2MzS5SgGDgVQ0/QpZXk13Vrq4BtZLwXhPhyeTmZtUiUfWvcL5TFQqLinfKdTKPe9q2MxeAJ0D4LalhMg==}
     engines: {node: '>=14.18'}
 
   '@sentry/types@8.9.2':
     resolution: {integrity: sha512-+LFOyQGl+zk5SZRGZD2MEURf7i5RHgP/mt3s85Rza+vz8M211WJ0YsjkIGUJFSY842nged5QLx4JysLaBlLymg==}
+    engines: {node: '>=14.18'}
+
+  '@sentry/utils@8.28.0':
+    resolution: {integrity: sha512-smhk7PJpvDMQ2DB5p2qn9UeoUHdU41IgjMmS2xklZpa8tjzBTxDeWpGvrX2fuH67D9bAJuLC/XyZjJCHLoEW5g==}
     engines: {node: '>=14.18'}
 
   '@sentry/utils@8.32.0':
@@ -3960,6 +4102,9 @@ packages:
   '@types/cookie@0.4.1':
     resolution: {integrity: sha512-XW/Aa8APYr6jSVVA1y/DEIZX0/GMKLEVekNG727R8cs56ahETkRAy/3DR7+fJyh7oUgGwNQaRfXCun0+KbWY7Q==}
 
+  '@types/cookie@0.6.0':
+    resolution: {integrity: sha512-4Kh9a6B2bQciAhf7FSuMRRkUWecJgJu9nPnx3yzpsfXX/c50REIqpHY4C82bXP90qrLtXtkDxTZosYO3UpOwlA==}
+
   '@types/cors@2.8.17':
     resolution: {integrity: sha512-8CGDvrBj1zgo2qE+oS3pOCyYNqCPryMWY2bGfwA0dcfopWGgxs+78df0Rs3rc9THP4JkOhLsAa+15VdpAqkcUA==}
 
@@ -4049,6 +4194,9 @@ packages:
 
   '@types/react@18.3.10':
     resolution: {integrity: sha512-02sAAlBnP39JgXwkAq3PeU9DVaaGpZyF3MGcC0MKgQVkZor5IiiDAipVaxQHtDJAmO4GIy/rVBy/LzVj76Cyqg==}
+
+  '@types/react@18.3.9':
+    resolution: {integrity: sha512-+BpAVyTpJkNWWSSnaLBk6ePpHLOGJKnEQNbINNovPWzvEUyAe3e+/d494QdEh71RekM/qV7lw6jzf1HGrJyAtQ==}
 
   '@types/resolve@1.20.2':
     resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
@@ -4663,6 +4811,10 @@ packages:
 
   cookie@0.5.0:
     resolution: {integrity: sha512-YZ3GUyn/o8gfKJlnlX7g7xq4gyO6OSuhGPKaaGssGB2qgDUS0gPgtTvoyZLTt9Ab6dC4hfc9dV5arkvc/OCmrw==}
+    engines: {node: '>= 0.6'}
+
+  cookie@0.6.0:
+    resolution: {integrity: sha512-U71cyTamuh1CRNCfpGY6to28lxvNwPG4Guz/EVjgf3Jmzv0vlDp1atT9eS5dDjMYHucpHbWns6Lwf3BKz6svdw==}
     engines: {node: '>= 0.6'}
 
   copy-anything@3.0.5:
@@ -5604,6 +5756,9 @@ packages:
   jose@4.15.9:
     resolution: {integrity: sha512-1vUQX+IdDMVPj4k8kOxgUqlcK518yluMuGZwqlr44FS1ppZB/5GWh4rZG89erpOBOJjU/OBsnCVFfapsRz6nEA==}
 
+  jose@5.9.3:
+    resolution: {integrity: sha512-egLIoYSpcd+QUF+UHgobt5YzI2Pkw/H39ou9suW687MY6PmCwPmkNV/4TNjn1p2tX5xO3j0d0sq5hiYE24bSlg==}
+
   js-beautify@1.15.1:
     resolution: {integrity: sha512-ESjNzSlt/sWE8sciZH8kBF8BPlwXPwhR6pWKAw8bw4Bwj+iZcnKW6ONWUutJ7eObuBZQpiIb8S7OYspWrKt7rA==}
     engines: {node: '>=14'}
@@ -6026,6 +6181,22 @@ packages:
       nodemailer:
         optional: true
 
+  next-auth@5.0.0-beta.22:
+    resolution: {integrity: sha512-QGBo9HGOjmnJBHGXvtFztl0tM5tL0porDlk74HVoCCzXd986ApOlIW3EmiCuho7YzEopgkFiwwmcXpoCrHAtYw==}
+    peerDependencies:
+      '@simplewebauthn/browser': ^9.0.1
+      '@simplewebauthn/server': ^9.0.2
+      next: 14.2.13
+      nodemailer: ^6.6.5
+      react: ^18.2.0 || ^19.0.0-0
+    peerDependenciesMeta:
+      '@simplewebauthn/browser':
+        optional: true
+      '@simplewebauthn/server':
+        optional: true
+      nodemailer:
+        optional: true
+
   next@14.2.13:
     resolution: {integrity: sha512-BseY9YNw8QJSwLYD7hlZzl6QVDoSFHL/URN5K64kVEVpCsSOWeyjbIGK+dZUaRViHTaMQX8aqmnn0PHBbGZezg==}
     engines: {node: '>=18.17.0'}
@@ -6112,6 +6283,9 @@ packages:
 
   nprogress@0.2.0:
     resolution: {integrity: sha512-I19aIingLgR1fmhftnbWWO3dXc0hSxqHQHQb3H8m+K3TnEn/iSeTZZOyvKXWqQESMwuUVnatlCnZdLBZZt2VSA==}
+
+  oauth4webapi@2.17.0:
+    resolution: {integrity: sha512-lbC0Z7uzAFNFyzEYRIC+pkSVvDHJTbEW+dYlSBAlCYDe6RxUkJ26bClhk8ocBZip1wfI9uKTe0fm4Ib4RHn6uQ==}
 
   oauth@0.9.15:
     resolution: {integrity: sha512-a5ERWK1kh38ExDEfoO6qUHJb32rd7aYmPHuyCu3Fta/cnICvYmgd2uhuKXvPD+PXB+gCEYYEaQdIRAjCOwAKNA==}
@@ -6380,10 +6554,18 @@ packages:
     resolution: {integrity: sha512-9ZhXKM/rw350N1ovuWHbGxnGh/SNJ4cnxHiM0rxE4VN41wsg8P8zWn9hv/buK00RP4WvlOyr/RBDiptyxVbkZQ==}
     engines: {node: '>=0.10.0'}
 
+  preact-render-to-string@5.2.3:
+    resolution: {integrity: sha512-aPDxUn5o3GhWdtJtW0svRC2SS/l8D9MAgo2+AWml+BhDImb27ALf04Q2d+AHqUUOc6RdSXFIBVa2gxzgMKgtZA==}
+    peerDependencies:
+      preact: '>=10'
+
   preact-render-to-string@5.2.6:
     resolution: {integrity: sha512-JyhErpYOvBV1hEPwIxc/fHWXPfnEGdRKxc8gFdAZ7XV4tlzyzG847XAyEZqoDnynP88akM4eaHcSOzNcLWFguw==}
     peerDependencies:
       preact: '>=10'
+
+  preact@10.11.3:
+    resolution: {integrity: sha512-eY93IVpod/zG3uMF22Unl8h9KkrcKIRs2EGar8hwLZZDU1lkjph303V9HZBwufh2s736U6VXuhD109LYqPoffg==}
 
   preact@10.23.1:
     resolution: {integrity: sha512-O5UdRsNh4vdZaTieWe3XOgSpdMAmkIYBCT3VhQDlKrzyCm8lUYsk0fmVEvoQQifoOjFRTaHZO69ylrzTW2BH+A==}
@@ -7217,6 +7399,9 @@ packages:
       '@swc/wasm':
         optional: true
 
+  ts-pattern@5.3.1:
+    resolution: {integrity: sha512-1RUMKa8jYQdNfmnK4jyzBK3/PS/tnjcZ1CW0v1vWDeYe5RBklc/nquw03MEoB66hVBm4BnlCfmOqDVxHyT1DpA==}
+
   ts-pattern@5.4.0:
     resolution: {integrity: sha512-hgfOMfjlrARCnYtGD/xEAkFHDXuSyuqjzFSltyQCbN689uNvoQL20TVN2XFcLMjfNuwSsQGU+xtH6MrjIwhwUg==}
 
@@ -7301,6 +7486,11 @@ packages:
 
   typed-emitter@2.1.0:
     resolution: {integrity: sha512-g/KzbYKbH5C2vPkaXGu8DJlHrGKHLsM25Zg9WuC9pMGfuvT+X25tZQWo5fK1BjBm8+UrVE9LDCvaY0CQk+fXDA==}
+
+  typescript@5.5.4:
+    resolution: {integrity: sha512-Mtq29sKDAEYP7aljRgtPOpTvOfbwRWlS6dPRzwjdE+C0R4brX/GUyhHSecbHMFLNBLcJIPt9nl9yG5TZ1weH+Q==}
+    engines: {node: '>=14.17'}
+    hasBin: true
 
   typescript@5.6.2:
     resolution: {integrity: sha512-NW8ByodCSNCwZeghjN3o+JX5OFH0Ojg6sadjEKY4huZ52TqbJTJnDo5+Tw98lSy63NZvi4n+ez5m2u5d4PkZyw==}
@@ -7586,6 +7776,17 @@ packages:
   zohar@1.0.1:
     resolution: {integrity: sha512-6rdn6TwM1/PFmcZjW2ycj5WMQAHKxWiI3IPtNxNKVRimSIXAi829yXT1ZSYFSwAw9cdtWXHrioCghZSwbP/X4w==}
 
+  zsa-react@0.2.2:
+    resolution: {integrity: sha512-0jUGzIy4PRc8Ur3JS+YBdRyD3rnsErCzNeJOVLhTxPqaKDDQ+JEmIHGYAK354RNpchIlvGVDcuedZXEGL6Nl6Q==}
+    peerDependencies:
+      react: ^18.0.0 || ^19.0.0
+      zod: ^3.23.5
+
+  zsa@0.6.0:
+    resolution: {integrity: sha512-Pq3X4T0dna5s4dIevYOJiRdM3DUHRvEHS2q1AH/bvkPSh640u+9veVj5zmzmbL0A6cpXMYagwKsR4keGOc0jPQ==}
+    peerDependencies:
+      zod: ^3.23.5
+
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
 
@@ -7597,6 +7798,39 @@ snapshots:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
+
+  '@auth/core@0.34.2(nodemailer@6.9.15)':
+    dependencies:
+      '@panva/hkdf': 1.2.1
+      '@types/cookie': 0.6.0
+      cookie: 0.6.0
+      jose: 5.9.3
+      oauth4webapi: 2.17.0
+      preact: 10.11.3
+      preact-render-to-string: 5.2.3(preact@10.11.3)
+    optionalDependencies:
+      nodemailer: 6.9.15
+
+  '@auth/core@0.35.3(nodemailer@6.9.15)':
+    dependencies:
+      '@panva/hkdf': 1.2.1
+      '@types/cookie': 0.6.0
+      cookie: 0.6.0
+      jose: 5.9.3
+      oauth4webapi: 2.17.0
+      preact: 10.11.3
+      preact-render-to-string: 5.2.3(preact@10.11.3)
+    optionalDependencies:
+      nodemailer: 6.9.15
+
+  '@auth/prisma-adapter@2.4.2(@prisma/client@5.20.0(prisma@5.20.0))(nodemailer@6.9.15)':
+    dependencies:
+      '@auth/core': 0.34.2(nodemailer@6.9.15)
+      '@prisma/client': 5.20.0(prisma@5.20.0)
+    transitivePeerDependencies:
+      - '@simplewebauthn/browser'
+      - '@simplewebauthn/server'
+      - nodemailer
 
   '@babel/code-frame@7.24.7':
     dependencies:
@@ -7825,7 +8059,7 @@ snapshots:
       '@cucumber/ci-environment': 10.0.1
       '@cucumber/cucumber-expressions': 17.1.0
       '@cucumber/gherkin': 28.0.0
-      '@cucumber/gherkin-streams': 5.0.1(@cucumber/gherkin@28.0.0)(@cucumber/message-streams@4.0.1(@cucumber/messages@24.1.0))(@cucumber/messages@24.1.0)
+      '@cucumber/gherkin-streams': 5.0.1(@cucumber/gherkin@28.0.0)(@cucumber/message-streams@4.0.1(@cucumber/messages@25.0.1))(@cucumber/messages@24.1.0)
       '@cucumber/gherkin-utils': 9.0.0
       '@cucumber/html-formatter': 21.3.1(@cucumber/messages@24.1.0)
       '@cucumber/message-streams': 4.0.1(@cucumber/messages@24.1.0)
@@ -7864,7 +8098,7 @@ snapshots:
       yaml: 2.5.0
       yup: 1.2.0
 
-  '@cucumber/gherkin-streams@5.0.1(@cucumber/gherkin@28.0.0)(@cucumber/message-streams@4.0.1(@cucumber/messages@24.1.0))(@cucumber/messages@24.1.0)':
+  '@cucumber/gherkin-streams@5.0.1(@cucumber/gherkin@28.0.0)(@cucumber/message-streams@4.0.1(@cucumber/messages@25.0.1))(@cucumber/messages@24.1.0)':
     dependencies:
       '@cucumber/gherkin': 28.0.0
       '@cucumber/message-streams': 4.0.1(@cucumber/messages@24.1.0)
@@ -9862,6 +10096,11 @@ snapshots:
       - encoding
       - supports-color
 
+  '@sentry/core@8.28.0':
+    dependencies:
+      '@sentry/types': 8.28.0
+      '@sentry/utils': 8.28.0
+
   '@sentry/core@8.32.0':
     dependencies:
       '@sentry/types': 8.32.0
@@ -9961,9 +10200,15 @@ snapshots:
       hoist-non-react-statics: 3.3.2
       react: 18.3.1
 
+  '@sentry/types@8.28.0': {}
+
   '@sentry/types@8.32.0': {}
 
   '@sentry/types@8.9.2': {}
+
+  '@sentry/utils@8.28.0':
+    dependencies:
+      '@sentry/types': 8.28.0
 
   '@sentry/utils@8.32.0':
     dependencies:
@@ -10190,6 +10435,8 @@ snapshots:
 
   '@types/cookie@0.4.1': {}
 
+  '@types/cookie@0.6.0': {}
+
   '@types/cors@2.8.17':
     dependencies:
       '@types/node': 22.7.4
@@ -10292,6 +10539,11 @@ snapshots:
       '@types/react': 18.3.10
 
   '@types/react@18.3.10':
+    dependencies:
+      '@types/prop-types': 15.7.12
+      csstype: 3.1.3
+
+  '@types/react@18.3.9':
     dependencies:
       '@types/prop-types': 15.7.12
       csstype: 3.1.3
@@ -10883,6 +11135,8 @@ snapshots:
   cookie@0.4.2: {}
 
   cookie@0.5.0: {}
+
+  cookie@0.6.0: {}
 
   copy-anything@3.0.5:
     dependencies:
@@ -11990,6 +12244,8 @@ snapshots:
 
   jose@4.15.9: {}
 
+  jose@5.9.3: {}
+
   js-beautify@1.15.1:
     dependencies:
       config-chain: 1.1.13
@@ -12533,6 +12789,14 @@ snapshots:
     optionalDependencies:
       nodemailer: 6.9.15
 
+  next-auth@5.0.0-beta.22(next@14.2.13(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(nodemailer@6.9.15)(react@18.3.1):
+    dependencies:
+      '@auth/core': 0.35.3(nodemailer@6.9.15)
+      next: 14.2.13(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react: 18.3.1
+    optionalDependencies:
+      nodemailer: 6.9.15
+
   next@14.2.13(@babel/core@7.24.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@next/env': 14.2.13
@@ -12686,6 +12950,8 @@ snapshots:
       path-key: 3.1.1
 
   nprogress@0.2.0: {}
+
+  oauth4webapi@2.17.0: {}
 
   oauth@0.9.15: {}
 
@@ -12964,10 +13230,17 @@ snapshots:
     dependencies:
       xtend: 4.0.2
 
+  preact-render-to-string@5.2.3(preact@10.11.3):
+    dependencies:
+      preact: 10.11.3
+      pretty-format: 3.8.0
+
   preact-render-to-string@5.2.6(preact@10.23.1):
     dependencies:
       preact: 10.23.1
       pretty-format: 3.8.0
+
+  preact@10.11.3: {}
 
   preact@10.23.1: {}
 
@@ -13928,6 +14201,8 @@ snapshots:
     optionalDependencies:
       '@swc/core': 1.3.101(@swc/helpers@0.5.12)
 
+  ts-pattern@5.3.1: {}
+
   ts-pattern@5.4.0: {}
 
   tslib@1.14.1: {}
@@ -13991,6 +14266,8 @@ snapshots:
   typed-emitter@2.1.0:
     optionalDependencies:
       rxjs: 7.8.1
+
+  typescript@5.5.4: {}
 
   typescript@5.6.2: {}
 
@@ -14288,5 +14565,15 @@ snapshots:
   zod@3.23.8: {}
 
   zohar@1.0.1: {}
+
+  zsa-react@0.2.2(react@18.3.1)(zod@3.23.8):
+    dependencies:
+      react: 18.3.1
+      zod: 3.23.8
+      zsa: 0.6.0(zod@3.23.8)
+
+  zsa@0.6.0(zod@3.23.8):
+    dependencies:
+      zod: 3.23.8
 
   zwitch@2.0.4: {}

@@ -2,7 +2,7 @@
 
 import { AuthSessionProvider } from ":components/shell/AuthSessionProvider";
 import { Banner } from ":components/shell/Banner";
-import { getServerSession } from "@1.modules/auth.next";
+import { getServerSession } from "@1.modules/auth.next.legacy";
 import { Grid } from "@1.ui/react/grid";
 import { Binoculars, Exchange, MessageGroup } from "@1.ui/react/icons";
 import { popover } from "@1.ui/react/popover/atom";

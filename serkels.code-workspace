@@ -12,7 +12,15 @@
     //
     { "path": "packages/@1/modules/auth/api", "name": "🫙 auth.api" },
     { "path": "packages/@1/modules/auth/emails", "name": "📦 auth/emails" },
+    {
+      "path": "packages/@1/modules/auth/next.legacy",
+      "name": "💀 auth/next.legacy",
+    },
     { "path": "packages/@1/modules/auth/next", "name": "📦 auth/next" },
+    {
+      "path": "packages/@1/modules/auth/next.legacy",
+      "name": "💀 auth/next.legacy",
+    },
     //
     //
     //

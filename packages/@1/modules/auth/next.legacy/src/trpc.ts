@@ -30,7 +30,7 @@ export const trpc = createTRPCProxyClient<Router>({
         const nexaut_header = await create_nextauth_header({
           secret: ENV.NEXTAUTH_SECRET,
           token: {
-            from: "@1.modules/auth.next",
+            from: "@1.modules/auth.next.legacy",
             profile: { id: "SSR", image: "", name: "", role: "ADMIN", bio: "" },
           } satisfies JWT,
           maxAge: 60,

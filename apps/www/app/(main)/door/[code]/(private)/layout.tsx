@@ -1,7 +1,7 @@
 //
 
 import { AuthSessionProvider } from ":components/shell/AuthSessionProvider";
-import { getServerSession } from "@1.modules/auth.next";
+import { getServerSession } from "@1.modules/auth.next.legacy";
 import to from "await-to-js";
 import { redirect } from "next/navigation";
 import type { PropsWithChildren } from "react";
