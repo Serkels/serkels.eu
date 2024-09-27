@@ -45,7 +45,7 @@
     "date-fns": "4.1.0",
     "debug": "4.3.7",
     "formik": "2.4.6",
-    "framer-motion": "11.3.30",
+    "framer-motion": "11.8.0",
     "imtool": "1.2.1",
     "next": "14.2.13",
     "nextjs-google-analytics": "2.3.7",

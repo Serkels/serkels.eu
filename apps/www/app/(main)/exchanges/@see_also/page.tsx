@@ -26,7 +26,7 @@ export default async function Page({
         </h2>
       </Link>
       <TRPC_Hydrate>
-        <List />
+        <List category={category} />
       </TRPC_Hydrate>
     </article>
   );
