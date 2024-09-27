@@ -17,6 +17,10 @@
       "types": "./src/*/atom.ts",
       "default": "./src/*/atom.ts"
     },
+    "./*/types": {
+      "types": "./src/*/types.ts",
+      "default": "./src/*/types.ts"
+    },
     "./icons": {
       "types": "./src/icons/index.ts",
       "default": "./src/icons/index.ts"
@@ -36,6 +40,10 @@
     "./form/*": {
       "types": "./src/form/*.tsx",
       "default": "./src/form/*.tsx"
+    },
+    "./motion/types": {
+      "types": "./src/motion/types.ts",
+      "default": "./src/motion/types.ts"
     },
     "./motion/*": {
       "types": "./src/motion/*.tsx",
