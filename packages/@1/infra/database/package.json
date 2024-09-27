@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
-    "@electric-sql/pglite": "0.2.8",
+    "@electric-sql/pglite": "0.2.9",
     "@faker-js/faker": "9.0.3",
     "@types/node": "22.7.3",
     "date-fns": "4.1.0",
