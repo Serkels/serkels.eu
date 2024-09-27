@@ -23,9 +23,19 @@ runs:
           ${{ runner.os }}-pnpm-store-
 
     - name: "🔺️  Cache turbo build setup"
+      if: github.event.pull_request.user.login !== 'renovate[bot]'
       uses: actions/cache@v4
       with:
         path: .turbo
-        key: ${{ runner.os }}-turbo-${{ github.sha }}
+        key: ${{ runner.os }}-turbo-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-turbo-
+
+    - name: "🔺️  Cache turbo build setup"
+      if: github.event.pull_request.user.login == 'renovate[bot]'
+      uses: actions/cache@v4
+      with:
+        path: .turbo
+        key: ${{ runner.os }}-turbo-renovate
         restore-keys: |
           ${{ runner.os }}-turbo-
