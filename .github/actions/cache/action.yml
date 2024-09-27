@@ -23,7 +23,7 @@ runs:
           ${{ runner.os }}-pnpm-store-
 
     - name: "🔺️  Cache turbo build setup"
-      if: startsWith(github.head_ref, 'renovate/')
+      if: "!startsWith(github.head_ref, 'renovate/')"
       uses: actions/cache@v4
       with:
         path: .turbo
@@ -32,7 +32,7 @@ runs:
           ${{ runner.os }}-turbo-
 
     - name: "🔺️  Cache turbo build setup"
-      if: startsWith(github.head_ref, 'renovate/')
+      if: "startsWith(github.head_ref, 'renovate/')"
       uses: actions/cache@v4
       with:
         path: .turbo
