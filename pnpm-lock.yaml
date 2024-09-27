@@ -60,13 +60,13 @@ importers:
         version: link:../../packages/@1/modules/trpc
       '@hono/node-server':
         specifier: 1.13.1
-        version: 1.13.1(hono@4.5.9)
+        version: 1.13.1(hono@4.6.3)
       '@hono/sentry':
         specifier: 1.2.0
-        version: 1.2.0(hono@4.5.9)
+        version: 1.2.0(hono@4.6.3)
       '@hono/trpc-server':
         specifier: 0.3.2
-        version: 0.3.2(@trpc/server@10.45.2)(hono@4.5.9)
+        version: 0.3.2(@trpc/server@10.45.2)(hono@4.6.3)
       '@trpc/server':
         specifier: 10.45.2
         version: 10.45.2
@@ -74,8 +74,8 @@ importers:
         specifier: 16.4.5
         version: 16.4.5
       hono:
-        specifier: 4.5.9
-        version: 4.5.9
+        specifier: 4.6.3
+        version: 4.6.3
       tsx:
         specifier: 4.19.1
         version: 4.19.1
@@ -5684,9 +5684,9 @@ packages:
   hoist-non-react-statics@3.3.2:
     resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
 
-  hono@4.5.9:
-    resolution: {integrity: sha512-zz8ktqMDRrZETjxBrv8C5PQRFbrTRCLNVAjD1SNQyOzv4VjmX68Uxw83xQ6oxdAB60HiWnGEatiKA8V3SZLDkQ==}
-    engines: {node: '>=16.0.0'}
+  hono@4.6.3:
+    resolution: {integrity: sha512-0LeEuBNFeSHGqZ9sNVVgZjB1V5fmhkBSB0hZrpqStSMLOWgfLy0dHOvrjbJh0H2khsjet6rbHfWTHY0kpYThKQ==}
+    engines: {node: '>=16.9.0'}
 
   hosted-git-info@2.8.9:
     resolution: {integrity: sha512-mxIDAb9Lsm6DoOJ7xH+5+X4y1LU/4Hi50L9C5sIswK3JzULS4bwk1FvjdBgvYR4bzT4tuUQiC15FE2f5HbLvYw==}
@@ -8460,7 +8460,7 @@ snapshots:
       '@cucumber/ci-environment': 10.0.1
       '@cucumber/cucumber-expressions': 17.1.0
       '@cucumber/gherkin': 28.0.0
-      '@cucumber/gherkin-streams': 5.0.1(@cucumber/gherkin@28.0.0)(@cucumber/message-streams@4.0.1(@cucumber/messages@25.0.1))(@cucumber/messages@24.1.0)
+      '@cucumber/gherkin-streams': 5.0.1(@cucumber/gherkin@28.0.0)(@cucumber/message-streams@4.0.1(@cucumber/messages@24.1.0))(@cucumber/messages@24.1.0)
       '@cucumber/gherkin-utils': 9.0.0
       '@cucumber/html-formatter': 21.3.1(@cucumber/messages@24.1.0)
       '@cucumber/message-streams': 4.0.1(@cucumber/messages@24.1.0)
@@ -8499,7 +8499,7 @@ snapshots:
       yaml: 2.5.0
       yup: 1.2.0
 
-  '@cucumber/gherkin-streams@5.0.1(@cucumber/gherkin@28.0.0)(@cucumber/message-streams@4.0.1(@cucumber/messages@25.0.1))(@cucumber/messages@24.1.0)':
+  '@cucumber/gherkin-streams@5.0.1(@cucumber/gherkin@28.0.0)(@cucumber/message-streams@4.0.1(@cucumber/messages@24.1.0))(@cucumber/messages@24.1.0)':
     dependencies:
       '@cucumber/gherkin': 28.0.0
       '@cucumber/message-streams': 4.0.1(@cucumber/messages@24.1.0)
@@ -8879,19 +8879,19 @@ snapshots:
     dependencies:
       happy-dom: 15.7.4
 
-  '@hono/node-server@1.13.1(hono@4.5.9)':
+  '@hono/node-server@1.13.1(hono@4.6.3)':
     dependencies:
-      hono: 4.5.9
+      hono: 4.6.3
 
-  '@hono/sentry@1.2.0(hono@4.5.9)':
+  '@hono/sentry@1.2.0(hono@4.6.3)':
     dependencies:
-      hono: 4.5.9
+      hono: 4.6.3
       toucan-js: 4.0.0
 
-  '@hono/trpc-server@0.3.2(@trpc/server@10.45.2)(hono@4.5.9)':
+  '@hono/trpc-server@0.3.2(@trpc/server@10.45.2)(hono@4.6.3)':
     dependencies:
       '@trpc/server': 10.45.2
-      hono: 4.5.9
+      hono: 4.6.3
 
   '@hookform/resolvers@3.9.0(react-hook-form@7.53.0(react@18.3.1))':
     dependencies:
@@ -12936,7 +12936,7 @@ snapshots:
     dependencies:
       react-is: 16.13.1
 
-  hono@4.5.9: {}
+  hono@4.6.3: {}
 
   hosted-git-info@2.8.9: {}
 
