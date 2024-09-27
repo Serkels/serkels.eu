@@ -7,6 +7,7 @@
     "clean": "turbo run clean",
     "dev": "turbo run dev --parallel --continue",
     "format:pkg": "pnpx sort-package-json ./package.json ./packages/@1/*/*/package.json ./packages/@1/*/*/*/package.json ./apps/*/package.json",
+    "format:prettier": "prettier --write .",
     "heroku-postbuild": "pnpm dlx npm-run-all heroku-postbuild:*",
     "heroku-postbuild:00": "pnpm exec turbo run build",
     "heroku-prebuild": "pnpm dlx npm-run-all heroku-prebuild:*",
@@ -16,12 +17,15 @@
     "heroku-prebuild:03": "pnpm exec cpx \"out/**/*\" .",
     "heroku-release": "pnpm dlx npm-run-all heroku-release:*",
     "heroku-release:00": "pnpm --filter @1.infra/database exec prisma migrate deploy",
+    "postinstall": "pnpm dlx npm-run-all link:tsconfig format:*",
+    "link:tsconfig": "pnpx @bessonovs/set-project-references --save",
     "lint": "turbo run lint",
     "start": "turbo run start --parallel --continue --filter www --filter api",
     "studio": "turbo run studio --parallel --continue",
     "test": "bun test",
     "test:watch": "bun test --watch",
-    "type-check": "turbo run type-check"
+    "type-check": "turbo run type-check",
+    "postuninstall": "pnpm dlx npm-run-all link:tsconfig format:*"
   },
   "devDependencies": {
     "@1.config/happydom": "workspace:*",

@@ -4,5 +4,13 @@
   "compilerOptions": {
     "types": ["node"],
     "outDir": "./node_modules/.cache/tsc"
-  }
+  },
+  "references": [
+    {
+      "path": "../../category/domain"
+    },
+    {
+      "path": "../../core"
+    }
+  ]
 }

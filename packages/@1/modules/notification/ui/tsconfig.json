@@ -7,5 +7,19 @@
     "noEmit": true,
     "outDir": "./node_modules/.cache/tsc"
   },
-  "include": ["src"]
+  "include": ["src"],
+  "references": [
+    {
+      "path": "../../../config/tailwindcss"
+    },
+    {
+      "path": "../../../ui/react"
+    },
+    {
+      "path": "../../core"
+    },
+    {
+      "path": "../domain"
+    }
+  ]
 }

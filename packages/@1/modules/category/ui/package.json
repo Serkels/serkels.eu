@@ -14,8 +14,6 @@
       "default": "./src/*.tsx"
     }
   },
-  "main": "./src/index.ts",
-  "types": "./src/index.ts",
   "scripts": {
     "type-check": "tsc --build"
   },

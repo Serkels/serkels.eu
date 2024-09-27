@@ -3,5 +3,22 @@
   "extends": "@1.config/typescript/lib.json",
   "compilerOptions": {
     "outDir": "./node_modules/.cache/tsc"
-  }
+  },
+  "references": [
+    {
+      "path": "../../packages/@1/infra/database"
+    },
+    {
+      "path": "../../packages/@1/infra/email"
+    },
+    {
+      "path": "../../packages/@1/infra/trpc"
+    },
+    {
+      "path": "../../packages/@1/modules/core"
+    },
+    {
+      "path": "../../packages/@1/modules/trpc"
+    }
+  ]
 }

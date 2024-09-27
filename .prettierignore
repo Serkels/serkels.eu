@@ -1,0 +1,5 @@
+.gitignore
+.next
+*.svg
+*.hbs
+pnpm-lock.yaml
