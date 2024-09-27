@@ -5,10 +5,6 @@
   "sideEffects": false,
   "type": "module",
   "exports": {
-    "./tailwind.config.ts": {
-      "types": "./tailwind.config.ts",
-      "default": "./tailwind.config.ts"
-    },
     "./*": {
       "types": "./src/*/index.tsx",
       "default": "./src/*/index.tsx"
@@ -20,6 +16,10 @@
     "./*/types": {
       "types": "./src/*/types.ts",
       "default": "./src/*/types.ts"
+    },
+    "./tailwind.config.ts": {
+      "types": "./tailwind.config.ts",
+      "default": "./tailwind.config.ts"
     },
     "./icons": {
       "types": "./src/icons/index.ts",

@@ -6,7 +6,7 @@ import { getServerSession } from "@1.modules/auth.next";
 import { Grid } from "@1.ui/react/grid";
 import { Binoculars, Exchange, MessageGroup } from "@1.ui/react/icons";
 import { popover } from "@1.ui/react/popover/atom";
-import type { StylableElementType } from "@1.ui/react/types";
+import type { StylableElementType } from "@1.ui/react/tags/types";
 import type { _1_HOUR_ } from "@douglasduteil/datatypes...hours-to-seconds";
 import dynamic from "next/dynamic";
 import Link from "next/link";
