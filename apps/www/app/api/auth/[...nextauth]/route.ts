@@ -1,7 +1,7 @@
 //
 
-import { handler } from "@1.modules/auth.next/route";
+import { handlers } from "@1.modules/auth.next";
 
 //
 
-export { handler as GET, handler as POST };
+export const { GET, POST } = handlers;
