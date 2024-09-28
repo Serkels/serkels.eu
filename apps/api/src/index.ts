@@ -10,8 +10,21 @@ import { router } from "@1.infra/trpc";
 import { HTTPError } from "@1.modules/core/errors";
 import type { Context } from "@1.modules/trpc";
 import { serve } from "@hono/node-server";
-import { sentry } from "@hono/sentry";
 import { trpcServer } from "@hono/trpc-server";
+import {
+  addRequestDataToEvent,
+  continueTrace,
+  getCurrentScope,
+  httpIntegration,
+  init as init_sentry,
+  postgresIntegration,
+  SEMANTIC_ATTRIBUTE_SENTRY_ORIGIN,
+  SEMANTIC_ATTRIBUTE_SENTRY_SOURCE,
+  setHttpStatus,
+  startSpan,
+  withScope,
+} from "@sentry/node";
+import { nodeProfilingIntegration } from "@sentry/profiling-node";
 import type { FetchCreateContextFnOptions } from "@trpc/server/adapters/fetch";
 import {
   applyWSSHandler,
@@ -61,9 +74,93 @@ function createContext(
 
 const app = new Hono();
 
+init_sentry({
+  enabled: ENV.NODE_ENV === "production",
+  dsn: ENV.SENTRY_DSN,
+  tracesSampleRate: 0.1,
+  environment: ENV.NODE_ENV,
+  integrations: [
+    postgresIntegration(),
+    httpIntegration(),
+    nodeProfilingIntegration(),
+  ],
+  profilesSampleRate: 0.1,
+});
+
 app.all(
   "*",
-  sentry({ dsn: ENV.SENTRY_DSN, debug: ENV.NODE_ENV === "development" }),
+  async (c, next) => {
+    if (
+      c.req.method.toUpperCase() === "OPTIONS" ||
+      c.req.method.toUpperCase() === "HEAD"
+    ) {
+      return next();
+    }
+
+    return withScope(function with_scope_callback(scope) {
+      const sentryTrace = c.req.header("sentry-trace")
+        ? c.req.header("sentry-trace")
+        : undefined;
+      const baggage = c.req.header("baggage");
+      const { url, method, path } = c.req;
+      const headers: Record<string, string> = {};
+      c.res.headers.forEach((value, key) => {
+        headers[key] = value;
+      });
+      scope.setTransactionName(`${method} ${path}`);
+      scope.setSDKProcessingMetadata({
+        request: {
+          url,
+          method,
+          headers,
+        },
+      });
+
+      return continueTrace(
+        { sentryTrace, baggage },
+        function continue_trace_callback() {
+          return startSpan(
+            {
+              attributes: {
+                [SEMANTIC_ATTRIBUTE_SENTRY_ORIGIN]: "auto.http.node",
+                "http.request.method": c.req.method || "GET",
+                [SEMANTIC_ATTRIBUTE_SENTRY_SOURCE]: "url",
+              },
+              op: "http.server",
+              name: `${c.req.method} ${c.req.path || "/"}`,
+            },
+            async function start_span_callback(span) {
+              scope.addEventProcessor(function event_processor_callback(event) {
+                return addRequestDataToEvent(
+                  event,
+                  {
+                    method: c.req.method,
+                    url: c.req.url,
+                  },
+                  {
+                    include: {
+                      user: false,
+                    },
+                  },
+                );
+              });
+              await next();
+
+              if (!span) {
+                return;
+              }
+
+              setHttpStatus(span, c.res.status);
+              scope.setContext("response", {
+                headers,
+                status_code: c.res.status,
+              });
+            },
+          );
+        },
+      );
+    });
+  },
   logger(),
   cors(),
 );
@@ -73,6 +170,7 @@ app.get("/", (c) =>
     uptime: process.uptime(),
     message: "OK",
     timestamp: Date.now(),
+    sentry_scope: getCurrentScope().getScopeData(),
   }),
 );
 
