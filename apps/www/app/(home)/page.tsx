@@ -2,7 +2,7 @@
 
 import { AuthSessionProvider } from ":components/shell/AuthSessionProvider";
 import { Banner } from ":components/shell/Banner";
-import { getServerSession } from "@1.modules/auth.next";
+import { auth } from "@1.modules/auth.next";
 import { Grid } from "@1.ui/react/grid";
 import { Binoculars, Exchange, MessageGroup } from "@1.ui/react/icons";
 import { popover } from "@1.ui/react/popover/atom";
@@ -47,7 +47,7 @@ export default function Home_Page() {
 //
 
 async function HomeBanner() {
-  const session = await getServerSession();
+  const session = await auth();
 
   return (
     <Banner className="py-4">

@@ -24,7 +24,9 @@
     "@1.infra/database": "workspace:*",
     "@1.modules/core": "workspace:*",
     "@1.modules/profile.domain": "workspace:*",
+    "@auth/prisma-adapter": "2.5.3",
     "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
+    "@prisma/client": "5.20.0",
     "@trpc/client": "10.45.2",
     "await-to-js": "3.0.0",
     "next": "14.2.13",
@@ -37,8 +39,8 @@
     "@1.config/typescript": "workspace:*",
     "@1.infra/trpc": "workspace:*",
     "@douglasduteil/datatypes...hours-to-seconds": "workspace:*",
-    "@types/react-dom": "18.3.0",
     "@types/react": "18.3.10",
+    "@types/react-dom": "18.3.0",
     "typescript": "5.6.2"
   }
 }

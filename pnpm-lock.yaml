@@ -621,9 +621,15 @@ importers:
       '@1.modules/profile.domain':
         specifier: workspace:*
         version: link:../../profile/domain
+      '@auth/prisma-adapter':
+        specifier: 2.5.3
+        version: 2.5.3(@prisma/client@5.20.0(prisma@5.20.0))(nodemailer@6.9.15)
       '@douglasduteil/nextauth...trpc.prisma':
         specifier: workspace:*
         version: link:../../../../@douglasduteil/nextauth...trpc.prisma
+      '@prisma/client':
+        specifier: 5.20.0
+        version: 5.20.0(prisma@5.20.0)
       '@trpc/client':
         specifier: 10.45.2
         version: 10.45.2(@trpc/server@10.45.2)
@@ -632,7 +638,7 @@ importers:
         version: 3.0.0
       next:
         specifier: 14.2.13
-        version: 14.2.13(@babel/core@7.24.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 14.2.13(@babel/core@7.25.2)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       next-auth:
         specifier: 5.0.0-beta.22
         version: 5.0.0-beta.22(next@14.2.13(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(nodemailer@6.9.15)(react@18.3.1)
@@ -987,7 +993,7 @@ importers:
         version: 4.1.0
       next:
         specifier: 14.2.13
-        version: 14.2.13(@babel/core@7.24.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 14.2.13(@babel/core@7.25.2)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -1371,7 +1377,7 @@ importers:
         version: 4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       next:
         specifier: 14.2.13
-        version: 14.2.13(@babel/core@7.24.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 14.2.13(@babel/core@7.25.2)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -1777,7 +1783,7 @@ importers:
         version: 10.45.2
       next:
         specifier: 14.2.13
-        version: 14.2.13(@babel/core@7.24.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 14.2.13(@babel/core@7.25.2)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       next-auth:
         specifier: 4.24.7
         version: 4.24.7(next@14.2.13(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(nodemailer@6.9.15)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1855,6 +1861,11 @@ packages:
         optional: true
       nodemailer:
         optional: true
+
+  '@auth/prisma-adapter@2.5.3':
+    resolution: {integrity: sha512-hUQ7KT4Ufbg4RqmfvRUNwQjuNsTdxWXTIid8IbmAcT5b6DMWQEvDEJUZL14rgrBHk5xZQbagfM28VxF75NgnNw==}
+    peerDependencies:
+      '@prisma/client': '>=2.26.0 || >=3 || >=4 || >=5'
 
   '@babel/code-frame@7.24.7':
     resolution: {integrity: sha512-BcYH1CVJBO9tvyIZ2jVeXgSIMvGZ2FDRvDdOIVQyuklNKSsx+eppDEBq/g47Ayw+RqNFE+URvOShmf+f/qwAlA==}
@@ -7657,6 +7668,15 @@ snapshots:
     optionalDependencies:
       nodemailer: 6.9.15
 
+  '@auth/prisma-adapter@2.5.3(@prisma/client@5.20.0(prisma@5.20.0))(nodemailer@6.9.15)':
+    dependencies:
+      '@auth/core': 0.35.3(nodemailer@6.9.15)
+      '@prisma/client': 5.20.0(prisma@5.20.0)
+    transitivePeerDependencies:
+      - '@simplewebauthn/browser'
+      - '@simplewebauthn/server'
+      - nodemailer
+
   '@babel/code-frame@7.24.7':
     dependencies:
       '@babel/highlight': 7.24.7
@@ -7884,7 +7904,7 @@ snapshots:
       '@cucumber/ci-environment': 10.0.1
       '@cucumber/cucumber-expressions': 17.1.0
       '@cucumber/gherkin': 28.0.0
-      '@cucumber/gherkin-streams': 5.0.1(@cucumber/gherkin@28.0.0)(@cucumber/message-streams@4.0.1(@cucumber/messages@25.0.1))(@cucumber/messages@24.1.0)
+      '@cucumber/gherkin-streams': 5.0.1(@cucumber/gherkin@28.0.0)(@cucumber/message-streams@4.0.1(@cucumber/messages@24.1.0))(@cucumber/messages@24.1.0)
       '@cucumber/gherkin-utils': 9.0.0
       '@cucumber/html-formatter': 21.3.1(@cucumber/messages@24.1.0)
       '@cucumber/message-streams': 4.0.1(@cucumber/messages@24.1.0)
@@ -7923,7 +7943,7 @@ snapshots:
       yaml: 2.5.0
       yup: 1.2.0
 
-  '@cucumber/gherkin-streams@5.0.1(@cucumber/gherkin@28.0.0)(@cucumber/message-streams@4.0.1(@cucumber/messages@25.0.1))(@cucumber/messages@24.1.0)':
+  '@cucumber/gherkin-streams@5.0.1(@cucumber/gherkin@28.0.0)(@cucumber/message-streams@4.0.1(@cucumber/messages@24.1.0))(@cucumber/messages@24.1.0)':
     dependencies:
       '@cucumber/gherkin': 28.0.0
       '@cucumber/message-streams': 4.0.1(@cucumber/messages@24.1.0)
@@ -12665,7 +12685,7 @@ snapshots:
       postcss: 8.4.31
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-      styled-jsx: 5.1.1(@babel/core@7.24.5)(react@18.3.1)
+      styled-jsx: 5.1.1(@babel/core@7.25.2)(react@18.3.1)
     optionalDependencies:
       '@next/swc-darwin-arm64': 14.2.13
       '@next/swc-darwin-x64': 14.2.13

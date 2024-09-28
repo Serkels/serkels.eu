@@ -9,6 +9,9 @@ import { defaultCookies } from "./cookie";
 
 //
 
+/**
+ * @deprecated Use `auth` instead
+ */
 export function get_csrf_token(authOptions = {} as AuthOptions) {
   const headers = next_headers();
   const cookieStore = next_header_cookies();
