@@ -9,9 +9,7 @@ import type {
 
 //
 
-export interface Context
-  extends Omit<NextAuth_TRPCContext<PrismaClient>, "prisma"> {
-  prisma: PrismaClient;
+export interface Context extends NextAuth_TRPCContext<PrismaClient> {
   sender: Email_Sender;
   headers: { origin: string } & NEXT_AUTH_HEADER;
 }

@@ -26,6 +26,23 @@ export const Profile_Schema = Entity_Schema.extend({
 
 export interface Profile extends z.TypeOf<typeof Profile_Schema> {}
 
+//
+
+export const AuthProfile_Schema = Profile_Schema.omit({
+  bio: true,
+}).describe("AuthProfile_PropsSchema");
+export interface AuthProfile extends z.TypeOf<typeof AuthProfile_Schema> {}
+
+//
+
+export const AvatarProfile_Schema = Profile_Schema.pick({
+  id: true,
+  image: true,
+}).describe("AvatarProfile_Schema");
+export interface AvatarProfile extends z.TypeOf<typeof AvatarProfile_Schema> {}
+
+//
+
 export const PROFILE_UNKNOWN: Profile = Profile_Schema.parse(
   { id: "PROFILE_UNKNOWN", role: "STUDENT" },
   { path: ["PROFILE_UNKNOWN"] },

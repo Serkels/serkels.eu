@@ -1,19 +1,8 @@
 //
 
-import NextAuth from "next-auth";
-// import { auth_options } from "./config";
+import { auth } from "./auth.config";
 import "./next-auth.d.ts";
-// import { PrismaAdapter } from "@auth/prisma-adapter"
-// import { PrismaClient } from "@prisma/client"
-import authConfig from "./auth.config";
-
-// const prisma = new PrismaClient()
-
-export const { auth, handlers, signIn, signOut } = NextAuth({
-  // adapter: PrismaAdapter(prisma),
-  session: { strategy: "jwt" },
-  ...authConfig,
-});
+export * from "./auth.config";
 
 export { get_csrf_token } from "./csrf_token";
 

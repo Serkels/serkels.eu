@@ -1,6 +1,6 @@
 //
 
-import { PrismaClient } from "@prisma/client";
+import PrismaClient from "./PrismaClient";
 import { z } from "zod";
 
 //

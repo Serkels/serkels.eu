@@ -4,8 +4,6 @@
   "private": true,
   "sideEffects": false,
   "type": "module",
-  "main": "./src/index.ts",
-  "types": "./src/index.ts",
   "exports": {
     ".": {
       "types": "./src/index.ts",
@@ -24,17 +22,20 @@
       "default": "./src/*.ts"
     }
   },
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
   "scripts": {
-    "format": "prisma format",
     "_generate": "prisma generate",
+    "dev:studio": "prisma studio",
+    "format": "prisma format",
     "migrate:deploy": "prisma migrate deploy",
     "migrate:dev": "prisma migrate dev",
     "push": "prisma db push --skip-generate",
     "seed": "prisma db seed",
     "studio": "prisma studio",
-    "dev:studio": "prisma studio",
     "type-check": "tsc --noEmit"
   },
+  "prettier": "@1.config/prettier",
   "dependencies": {
     "@prisma/client": "5.20.0",
     "@trpc/client": "10.45.2",

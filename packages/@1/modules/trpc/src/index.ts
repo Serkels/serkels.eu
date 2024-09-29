@@ -13,14 +13,17 @@ export const create_nextauth_header = any_create_nextauth_header<{
 
 export {
   createCallerFactory,
-  maybe_next_auth_procedure,
   mergeRouters,
   middleware,
-  next_auth_input_token,
-  next_auth_procedure,
   procedure,
   router,
 } from "./trpc";
+
+export {
+  maybe_next_auth_procedure,
+  next_auth_input_token,
+  next_auth_procedure,
+} from "./guards";
 
 export type inferProcedureInput<TQuery extends ProcedureBuilder<any>> =
   TQuery extends ProcedureBuilder<infer TParams>
