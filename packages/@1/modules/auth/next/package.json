@@ -22,8 +22,10 @@
   "prettier": "@1.config/prettier",
   "dependencies": {
     "@1.infra/database": "workspace:*",
+    "@1.infra/email": "workspace:*",
     "@1.modules/core": "workspace:*",
     "@1.modules/profile.domain": "workspace:*",
+    "@1.modules/auth.emails": "workspace:*",
     "@auth/prisma-adapter": "2.5.3",
     "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
     "@prisma/client": "5.20.0",

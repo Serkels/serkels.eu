@@ -283,7 +283,7 @@ function ConnectedAs() {
 function useSignIn_Mutation() {
   return useMutation({
     mutationFn: async (email: string) => {
-      const response = await signIn("email", {
+      const response = await signIn("nodemailer", {
         email,
         redirect: false,
       });
