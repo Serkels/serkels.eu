@@ -1,11 +1,11 @@
 //
 
 import Analytics from ":components/shell/Analytics";
+import { env_app_url_schema } from "@1.modules/core/env.zod";
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { Roboto } from "next/font/google";
 import { type PropsWithChildren } from "react";
-import { z } from "zod";
 import "./globals.css";
 import { RootProviders } from "./layout.client";
 
@@ -18,9 +18,8 @@ const NextTopLoader = dynamic(() => import(":components/TopLoader"), {
 //
 
 const roboto = Roboto({ weight: ["400", "500", "700"], subsets: ["latin"] });
-const { APP_URL } = z
-  .object({ APP_URL: z.string().url().default("http://localhost:3000") })
-  .parse(process.env);
+const { APP_URL } = env_app_url_schema.parse(process.env);
+
 //
 
 export const metadata: Metadata = {

@@ -7,12 +7,11 @@ import { z } from "zod";
 
 //
 
-const { APP_URL, EMAIL_SERVER, VERCEL_URL } = z
+const { APP_URL } = env_app_url_schema.parse(process.env);
+const { EMAIL_SERVER } = z
   .object({
-    APP_URL: z.string().default("http://localhost:3000"),
     EMAIL_FROM: z.string().default("no-reply@serkels.eu"),
     EMAIL_SERVER: z.string().url().default("http://localhost:1025"),
-    VERCEL_URL: z.string().optional(),
   })
   .parse(process.env);
 
@@ -24,7 +23,7 @@ export default Nodemailer({
     const sender = new Email_Sender(process.env as any);
     await sender.send_react_email(
       SerkelsMagicLinkEmail({
-        base_url: params.request.headers.get("origin") ?? VERCEL_URL ?? APP_URL,
+        base_url: params.request.headers.get("origin") ?? APP_URL,
         url: params.url,
       }),
       {
