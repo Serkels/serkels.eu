@@ -1769,9 +1769,6 @@ importers:
       '@douglasduteil/datatypes...hours-to-seconds':
         specifier: workspace:*
         version: link:../datatypes...hours-to-seconds
-      prisma:
-        specifier: 5.20.0
-        version: 5.20.0
       typescript:
         specifier: 5.6.2
         version: 5.6.2
