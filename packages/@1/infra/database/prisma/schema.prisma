@@ -19,7 +19,7 @@ generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["driverAdapters"]
   binaryTargets   = ["native", "debian-openssl-3.0.x"]
-  output          = "../prisma-client"
+  output          = "../.prisma/client"
 }
 
 //

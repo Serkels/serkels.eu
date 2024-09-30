@@ -4,6 +4,18 @@
   "private": true,
   "sideEffects": false,
   "type": "module",
+  "imports": {
+    "#prisma": {
+      "types": "./index.ts",
+      "default": "./index.ts"
+    },
+    "#prisma/client": {
+      "types": "./.prisma/client/index.d.ts",
+      "require": "./.prisma/client/index.js",
+      "import": "./.prisma/client/index.js",
+      "default": "./.prisma/client/index.js"
+    }
+  },
   "exports": {
     "./seed": {
       "types": "./seed/index.ts",
