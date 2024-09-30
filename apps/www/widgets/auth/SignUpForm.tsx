@@ -57,7 +57,7 @@ export default function Form({ categories }: FormProps) {
         <input
           {...register("role")}
           type="hidden"
-          defaultValue={PROFILE_ROLES.enum.STUDENT}
+          value={PROFILE_ROLES.enum.STUDENT}
         />
         <Name_Field />
         <University_Field />
