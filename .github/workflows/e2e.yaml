@@ -10,6 +10,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
+  APP_URL: "http://localhost:3000"
   DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres?schema=public
   DO_NOT_TRACK: 1
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
