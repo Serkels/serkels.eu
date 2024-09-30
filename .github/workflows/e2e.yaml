@@ -13,6 +13,7 @@ env:
   APP_URL: "http://localhost:3000"
   DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres?schema=public
   DO_NOT_TRACK: 1
+  CYPRESS_INSTALL_BINARY: 0
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
 
@@ -20,6 +21,9 @@ jobs:
   e2e:
     name: End to end testing
     runs-on: ubuntu-latest
+    container:
+      image: cypress/included:13.15.0
+      options: --user 1001
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
