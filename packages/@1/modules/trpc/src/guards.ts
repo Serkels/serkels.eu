@@ -1,7 +1,7 @@
 //
 
 import type { AuthProfile } from "@1.modules/profile.domain";
-import { VerifyNextAuthTokenUseCase } from "@douglasduteil/nextauth...trpc.prisma/trpc";
+import { VerifyNextAuthTokenUseCase } from "@douglasduteil/nextauth...trpc.prisma/usecase/VerifyNextAuthTokenUseCase";
 import { TRPCError } from "@trpc/server";
 import { middleware, procedure } from "./trpc";
 
@@ -37,7 +37,3 @@ export const next_auth_procedure = procedure
 export const maybe_next_auth_procedure = procedure.use(
   verify_next_auth_token<{ profile?: AuthProfile }>(true),
 );
-
-export const next_auth_input_token = procedure
-  // .input(z.object({ token: z.string() }))
-  .use(verify_next_auth_token<{ profile: AuthProfile }>());

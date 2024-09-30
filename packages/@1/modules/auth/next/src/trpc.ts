@@ -17,6 +17,10 @@ const ENV = z
 
 //
 
+/**
+ * @deprecated Should be removed
+ */
+
 export const trpc = createTRPCProxyClient<Router>({
   links: [
     loggerLink({

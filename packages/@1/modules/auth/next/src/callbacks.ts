@@ -21,34 +21,26 @@ function start_auth_span_decorator<TReturn>(
 export default {
   async session(params) {
     const { token, session } = params;
-    return startSpan(
-      { name: "auth.config.ts#session", op: "@1.modules/auth.next" },
-      async () => {
-        const { NEXTAUTH_SECRET: secret } = NEXTAUTH_TRPCENV.parse(process.env);
-        if (token.sub && session.user) {
-          session.user.id = token.sub;
-        }
-        if (token.profile) {
-          session.profile = token.profile;
-          session.header = await create_nextauth_header({
-            secret,
-            salt: "",
-            token: {
-              profile: token.profile,
-            },
-          });
-        }
-        return session;
-      },
-    );
+    return start_auth_span_decorator("callback.session", async () => {
+      const { NEXTAUTH_SECRET: secret } = NEXTAUTH_TRPCENV.parse(process.env);
+      if (token.sub && session.user) {
+        session.user.id = token.sub;
+      }
+      if (token.profile) {
+        session.profile = token.profile;
+        session.header = await create_nextauth_header({
+          secret,
+          salt: "",
+          token: {
+            profile: token.profile,
+          },
+        });
+      }
+      return session;
+    });
   },
 
   async signIn(params) {
-    console.log();
-    console.log();
-    console.log("signIn", params);
-    console.log();
-    console.log();
     return start_auth_span_decorator("callback.signIn", async () => {
       return match(params)
         .with({ email: { verificationRequest: true } }, () => true)

@@ -26,6 +26,7 @@
     "@1.modules/auth.emails": "workspace:*",
     "@1.modules/core": "workspace:*",
     "@1.modules/profile.domain": "workspace:*",
+    "@1.ui/react": "workspace:*",
     "@auth/prisma-adapter": "2.5.3",
     "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
     "@prisma/client": "5.20.0",
@@ -38,9 +39,7 @@
     "prisma": "5.20.0",
     "superjson": "2.2.1",
     "ts-pattern": "5.4.0",
-    "zod": "3.23.8",
-    "zsa": "0.6.0",
-    "zsa-react": "0.2.3"
+    "zod": "3.23.8"
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",

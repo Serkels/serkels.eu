@@ -1,7 +1,7 @@
 //
 
-import PrismaClient from "./PrismaClient";
 import { z } from "zod";
+import PrismaClient from "./PrismaClient";
 
 //
 
@@ -14,19 +14,7 @@ export interface NextAuth_TRPCContext<
   headers: NEXT_AUTH_HEADER;
   prisma: TPrismaClient;
 }
-export const SEND_VERIFICATION_REQUEST_INPUT_SCHEMA = z.object({
-  identifier: z.string().email(),
-  url: z.string().url(),
-});
-export type SEND_VERIFICATION_REQUEST_INPUT_SCHEMA = z.TypeOf<
-  typeof SEND_VERIFICATION_REQUEST_INPUT_SCHEMA
->;
 
 export const NEXTAUTH_TRPCENV = z.object({
   NEXTAUTH_SECRET: z.string(),
 });
-export const NEXT_AUTH_STRATEGIES = z.union([
-  z.literal("Everyone can login"),
-  z.literal("Only existing users can login"),
-]);
-export type NEXT_AUTH_STRATEGIES = z.TypeOf<typeof NEXT_AUTH_STRATEGIES>;
