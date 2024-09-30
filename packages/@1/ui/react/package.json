@@ -52,6 +52,14 @@
     "./useragent": {
       "types": "./src/useragent/index.ts",
       "default": "./src/useragent/index.ts"
+    },
+    "./zsa/react": {
+      "types": "./src/zsa/react.ts",
+      "default": "./src/zsa/react.ts"
+    },
+    "./zsa/react-query": {
+      "types": "./src/zsa/react-query.ts",
+      "default": "./src/zsa/react-query.ts"
     }
   },
   "scripts": {
@@ -70,7 +78,10 @@
     "react-nest": "0.1.10",
     "react-slotify": "0.2.2",
     "tailwind-variants": "0.2.1",
-    "ts-pattern": "5.4.0"
+    "ts-pattern": "5.4.0",
+    "zsa": "0.6.0",
+    "zsa-react": "0.2.3",
+    "zsa-react-query": "0.2.1"
   },
   "devDependencies": {
     "@1.config/tailwindcss": "workspace:*",

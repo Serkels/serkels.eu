@@ -7,7 +7,7 @@
   "scripts": {
     "start": "cd ../.. && pnpm run start",
     "studio": "cypress open --browser electron --e2e ",
-    "test": "cypress run -e filterSpecs=true",
+    "test": "cypress run --env filterSpecs=true",
     "type-check": "tsc --build"
   },
   "prettier": "@1.config/prettier",

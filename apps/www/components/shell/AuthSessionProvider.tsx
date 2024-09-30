@@ -9,9 +9,9 @@ export function AuthSessionProvider({
   session,
 }: PropsWithChildren<{ session: Session | null }>) {
   useEffect(() => {
-    const user_id = session?.profile.id;
+    const user_id = session?.profile?.id;
     if (!user_id) return;
     sendGAEvent("set", { user_id });
-  }, [session?.profile.id]);
+  }, [session?.profile?.id]);
   return <SessionProvider session={session}> {children} </SessionProvider>;
 }

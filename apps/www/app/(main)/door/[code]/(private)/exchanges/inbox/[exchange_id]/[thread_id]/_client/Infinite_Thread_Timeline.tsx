@@ -91,7 +91,7 @@ export default function Infinite_Thread_Timeline({
     scroll_target_ref,
   ]);
 
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   const invalidate = useCallback(async () => {
     await last_seen_thread_update.mutateAsync({
       thread_id,
@@ -109,7 +109,7 @@ export default function Infinite_Thread_Timeline({
   }, [utils, thread_id, query_info.dataUpdatedAt]);
 
   TRPC_React.inbox.thread.on_new_message.useSubscription(
-    { token: session?.header.NEXTAUTH_TOKEN!, thread_id },
+    { thread_id },
     {
       enabled: status === "authenticated",
       onData() {

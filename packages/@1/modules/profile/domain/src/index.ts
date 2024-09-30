@@ -33,11 +33,15 @@ export const AuthProfile_Schema = Profile_Schema.omit({
 }).describe("AuthProfile_PropsSchema");
 export interface AuthProfile extends z.TypeOf<typeof AuthProfile_Schema> {}
 
+export const NewProfile_Schema = AuthProfile_Schema.omit({
+  id: true,
+}).describe("NewProfile_PropsSchema");
 //
 
 export const AvatarProfile_Schema = Profile_Schema.pick({
   id: true,
   image: true,
+  name: true,
 }).describe("AvatarProfile_Schema");
 export interface AvatarProfile extends z.TypeOf<typeof AvatarProfile_Schema> {}
 
@@ -56,6 +60,11 @@ export const Partner_Schema = Entity_Schema.extend({
   profile: Profile_Schema.default(PROFILE_UNKNOWN),
 }).describe("Partner_PropsSchema");
 
+export const NewPartner_Schema = Partner_Schema.omit({
+  id: true,
+  profile: true,
+});
+
 export interface Partner extends z.TypeOf<typeof Partner_Schema> {}
 
 //
@@ -68,5 +77,11 @@ export const Student_Schema = Entity_Schema.extend({
   profile: Profile_Schema.default(PROFILE_UNKNOWN),
   university: z.string().default("Unkown university"),
 }).describe("Student_Schema");
+
+export const NewStudent_Schema = Student_Schema.omit({
+  id: true,
+  interest: true,
+  profile: true,
+}).extend({ interest_id: z.string().default("") });
 
 export interface Student extends z.TypeOf<typeof Student_Schema> {}

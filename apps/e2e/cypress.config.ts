@@ -19,7 +19,6 @@ export default defineConfig({
     ),
     setupNodeEvents,
     specPattern: "**/*.feature",
-    supportFile: false,
   },
   env: {
     MAILDEV_PROTOCOL: "http",

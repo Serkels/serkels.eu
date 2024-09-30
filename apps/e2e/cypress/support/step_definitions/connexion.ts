@@ -20,3 +20,15 @@ When("je me connecte en tant que {string}", (email: string) => {
   });
   cy.contains("Vous êtes connecté en tant que : ").click();
 });
+
+When("je clique sur le lien de connexion", () => {
+  cy.maildevGetLastMessage().then((message) => {
+    expect(message.subject).to.equal("[Serkels] Connexion");
+    cy.maildevVisitMessageById(message.id);
+    cy.contains("Veuillez cliquer ce lien pour vous connecter.")
+      .invoke("removeAttr", "target")
+      .click();
+
+    cy.maildevDeleteMessageById(message.id);
+  });
+});

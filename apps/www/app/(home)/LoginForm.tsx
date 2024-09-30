@@ -32,7 +32,7 @@ export function SignUp({ onSubmit }: SignUpProps) {
           <Field
             className="h-8 max-w-[90%] rounded-sm border border-solid border-[#dddddd] px-3 py-2 placeholder-[#AAAAAA] md:text-xs"
             name="email"
-            placeholder="Adresse email"
+            placeholder="Adresse email d'inscription"
             required
             type="email"
           />

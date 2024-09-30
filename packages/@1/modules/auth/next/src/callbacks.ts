@@ -1,57 +1,26 @@
-import prisma from "@1.infra/database";
 import { NEXTAUTH_TRPCENV } from "@douglasduteil/nextauth...trpc.prisma/config";
 import { create_nextauth_header } from "@douglasduteil/nextauth...trpc.prisma/jwt";
 import { startSpan } from "@sentry/core";
-import { AuthError, type NextAuthConfig } from "next-auth";
-import { NextResponse } from "next/server";
+import type { Span } from "@sentry/types";
+import to from "await-to-js";
+import { type NextAuthConfig } from "next-auth";
+import { match, P } from "ts-pattern";
 import { get_auth_profile_by_email } from "./repository/get_auth_profile_by_email";
-import { CreateProfileFromSignupPayload } from "./usecase/create_profile_from_signup_payload";
 
 //
 
-type Callbacks = NonNullable<NextAuthConfig["callbacks"]>;
-
-//
-
-export const authorized: Callbacks["authorized"] = async ({
-  request,
-  auth,
-}) => {
-  const url = request.nextUrl;
-  console.log("authorized", url);
-  if (request.method === "POST") {
-    const { authToken } = (await request.json()) ?? {};
-    // If the request has a valid auth token, it is authorized
-    console.log(authToken);
-    // const valid = await validateAuthToken(authToken)
-    // if(valid) return true
-    return NextResponse.json("Invalid auth token", { status: 401 });
-  }
-
-  // Logged in users are authenticated, otherwise redirect to login page
-  return Boolean(auth?.user);
-};
+function start_auth_span_decorator<TReturn>(
+  name: string,
+  callback: (span: Span) => TReturn,
+) {
+  return startSpan({ name, op: "@1.modules/auth.next" }, callback);
+}
 
 //
 
 export default {
-  async authorized({ request, auth }) {
-    const url = request.nextUrl;
-    console.log("authorized", url);
-    if (request.method === "POST") {
-      const { authToken } = (await request.json()) ?? {};
-      // If the request has a valid auth token, it is authorized
-      console.log(authToken);
-      // const valid = await validateAuthToken(authToken)
-      // if(valid) return true
-      return NextResponse.json("Invalid auth token", { status: 401 });
-    }
-
-    // Logged in users are authenticated, otherwise redirect to login page
-    return Boolean(auth?.user);
-  },
-
-  async session({ token, session }) {
+  async session(params) {
+    const { token, session } = params;
     return startSpan(
       { name: "auth.config.ts#session", op: "@1.modules/auth.next" },
       async () => {
@@ -73,43 +42,59 @@ export default {
       },
     );
   },
-  async signIn({ account }) {
-    return startSpan(
-      { name: "auth.config.ts#signIn", op: "@1.modules/auth.next" },
+
+  async signIn(params) {
+    console.log();
+    console.log();
+    console.log("signIn", params);
+    console.log();
+    console.log();
+    return start_auth_span_decorator("callback.signIn", async () => {
+      return match(params)
+        .with({ email: { verificationRequest: true } }, () => true)
+        .with({ user: { emailVerified: null } }, () => true)
+        .with({ user: { emailVerified: P.instanceOf(Date) } }, () => true)
+        .otherwise(() => false);
+    });
+  },
+
+  async jwt(params) {
+    return start_auth_span_decorator(
+      "callback.jwt" + params.trigger ? `#${params.trigger}` : "",
       async () => {
-        if (!account) return false;
-        return true;
+        return match(params)
+          .with(
+            { trigger: "signUp", user: { email: P.select(P.string) } },
+            async () => {
+              return {
+                ...params.token,
+              };
+            },
+          )
+          .with(
+            { trigger: "signIn", user: { email: P.select(P.string) } },
+            async (email) => {
+              console.log();
+              console.log("jwt/signIn", params);
+              console.log();
+              const [profile_err, profile] = await to(
+                get_auth_profile_by_email(email),
+              );
+              if (profile_err) {
+                return params.token;
+              }
+              return { ...params.token, profile };
+            },
+          )
+          .with(
+            { trigger: "update", token: { email: P.select(P.string) } },
+            async (email) => {
+              const profile = await get_auth_profile_by_email(email);
+              return { ...params.token, profile };
+            },
+          )
+          .otherwise(() => params.token);
       },
     );
   },
-  async jwt({ token, user, trigger }) {
-    return startSpan(
-      { name: "auth.config.ts#jwt", op: "@1.modules/auth.next" },
-      async () => {
-        try {
-          if (trigger === "signUp" && user.email) {
-            const create_profile_from_signup_payload =
-              CreateProfileFromSignupPayload({
-                prisma,
-              });
-            token.profile = await create_profile_from_signup_payload(
-              user.email,
-            );
-          }
-
-          if (trigger === "signIn" && user.email) {
-            token.profile = await get_auth_profile_by_email(user.email);
-          }
-
-          if (trigger === "update" && token.email) {
-            token.profile = await get_auth_profile_by_email(token.email);
-          }
-        } catch (error) {
-          console.error(new AuthError("Profile not found", { cause: error }));
-        }
-
-        return token;
-      },
-    );
-  },
-} as Callbacks;
+} as NonNullable<NextAuthConfig["callbacks"]>;

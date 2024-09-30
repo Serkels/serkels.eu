@@ -1,13 +1,13 @@
 //
 
-import type { Profile } from "@1.modules/profile.domain";
+import type { AuthProfile } from "@1.modules/profile.domain";
 import { Avatar } from "@1.modules/profile.ui/avatar";
 
 export function Idle({
   profile,
   onClick,
 }: {
-  profile?: Profile;
+  profile?: AuthProfile;
   onClick?: () => void;
 }) {
   if (!profile) return null;

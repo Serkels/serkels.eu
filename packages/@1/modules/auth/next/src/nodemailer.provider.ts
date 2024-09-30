@@ -16,7 +16,7 @@ const { EMAIL_SERVER } = z
 
 //
 
-export const nodemailer = Nodemailer({
+export default Nodemailer({
   server: { url: EMAIL_SERVER },
   async sendVerificationRequest(params) {
     const sender = new Email_Sender(process.env as any);

@@ -84,6 +84,10 @@ export function create_NextAuth_router() {
         }),
       )
       .mutation(async ({ ctx: { prisma }, input }) => {
+        console.log();
+        console.log("useVerificationToken", input);
+        console.log();
+        console.log();
         const verificationToken = await prisma.verificationToken.delete({
           where: { identifier_token: input },
         });

@@ -282,6 +282,17 @@
         "runOptions": { "instanceLimit": 1 },
       },
       {
+        "label": "🧪 Cypress Run : Current file",
+        "command": "pnpm run test --spec ${fileDirname}/${fileBasename}",
+        "type": "shell",
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:🧪 e2e}",
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "runOptions": { "instanceLimit": 1 },
+      },
+      {
         "label": "🏗️ Database Migrate Dev",
         "command": "pnpm run migrate:dev",
         "type": "shell",
