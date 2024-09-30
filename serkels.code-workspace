@@ -10,7 +10,6 @@
     //
     // { "path": "packages/@1/modules", "name": "📦 modules" },
     //
-    { "path": "packages/@1/modules/auth/api", "name": "🫙 auth.api" },
     { "path": "packages/@1/modules/auth/emails", "name": "📦 auth/emails" },
     { "path": "packages/@1/modules/auth/next", "name": "📦 auth/next" },
     //

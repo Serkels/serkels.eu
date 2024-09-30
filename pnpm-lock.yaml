@@ -465,9 +465,6 @@ importers:
 
   packages/@1/infra/trpc:
     dependencies:
-      '@1.modules/auth.api':
-        specifier: workspace:*
-        version: link:../../modules/auth/api
       '@1.modules/bookmark.api':
         specifier: workspace:*
         version: link:../../modules/bookmark/api
@@ -511,55 +508,6 @@ importers:
       '@1.config/typescript':
         specifier: workspace:*
         version: link:../../config/typescript
-      typescript:
-        specifier: 5.6.2
-        version: 5.6.2
-
-  packages/@1/modules/auth/api:
-    dependencies:
-      '@1.modules/auth.emails':
-        specifier: workspace:*
-        version: link:../emails
-      '@1.modules/profile.domain':
-        specifier: workspace:*
-        version: link:../../profile/domain
-      '@1.modules/trpc':
-        specifier: workspace:*
-        version: link:../../trpc
-      '@douglasduteil/nextauth...trpc.prisma':
-        specifier: workspace:*
-        version: link:../../../../@douglasduteil/nextauth...trpc.prisma
-      '@trpc/server':
-        specifier: 10.45.2
-        version: 10.45.2
-      await-to-js:
-        specifier: 3.0.0
-        version: 3.0.0
-      date-fns:
-        specifier: 4.1.0
-        version: 4.1.0
-      nanoid:
-        specifier: 5.0.7
-        version: 5.0.7
-      ts-pattern:
-        specifier: 5.4.0
-        version: 5.4.0
-      zod:
-        specifier: 3.23.8
-        version: 3.23.8
-    devDependencies:
-      '@1.config/typescript':
-        specifier: workspace:*
-        version: link:../../../config/typescript
-      '@1.infra/database':
-        specifier: workspace:*
-        version: link:../../../infra/database
-      '@1.infra/email':
-        specifier: workspace:*
-        version: link:../../../infra/email
-      '@types/node':
-        specifier: 22.7.4
-        version: 22.7.4
       typescript:
         specifier: 5.6.2
         version: 5.6.2
@@ -656,7 +604,7 @@ importers:
         version: 3.0.0
       next:
         specifier: 14.2.13
-        version: 14.2.13(@babel/core@7.25.2)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 14.2.13(@babel/core@7.24.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       next-auth:
         specifier: 5.0.0-beta.22
         version: 5.0.0-beta.22(next@14.2.13(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(nodemailer@6.9.15)(react@18.3.1)
@@ -1020,7 +968,7 @@ importers:
         version: 4.1.0
       next:
         specifier: 14.2.13
-        version: 14.2.13(@babel/core@7.25.2)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 14.2.13(@babel/core@7.24.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -1404,7 +1352,7 @@ importers:
         version: 4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       next:
         specifier: 14.2.13
-        version: 14.2.13(@babel/core@7.25.2)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 14.2.13(@babel/core@7.24.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -1819,7 +1767,7 @@ importers:
         version: 10.45.2
       next:
         specifier: 14.2.13
-        version: 14.2.13(@babel/core@7.25.2)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 14.2.13(@babel/core@7.24.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       next-auth:
         specifier: 4.24.7
         version: 4.24.7(next@14.2.13(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(nodemailer@6.9.15)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -6063,11 +6011,6 @@ packages:
   nanoid@3.3.7:
     resolution: {integrity: sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
-    hasBin: true
-
-  nanoid@5.0.7:
-    resolution: {integrity: sha512-oLxFY2gd2IqnjcYyOXD8XGCftpGtZP2AbHbOkthDkvRywH5ayNtPVy9YlOPcHckXzbLTCHpkb7FB+yuxKV13pQ==}
-    engines: {node: ^18 || >=20}
     hasBin: true
 
   negotiator@0.6.3:
@@ -12644,8 +12587,6 @@ snapshots:
 
   nanoid@3.3.7: {}
 
-  nanoid@5.0.7: {}
-
   negotiator@0.6.3: {}
 
   neo-async@2.6.2: {}
@@ -12739,7 +12680,7 @@ snapshots:
       postcss: 8.4.31
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-      styled-jsx: 5.1.1(@babel/core@7.25.2)(react@18.3.1)
+      styled-jsx: 5.1.1(@babel/core@7.24.5)(react@18.3.1)
     optionalDependencies:
       '@next/swc-darwin-arm64': 14.2.13
       '@next/swc-darwin-x64': 14.2.13
