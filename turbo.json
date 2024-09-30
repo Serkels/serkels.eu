@@ -16,7 +16,7 @@
     "@1.infra/database#generate": {
       "outputs": ["prisma-client"]
     },
-    "@1.modules/auth.api#type-check": { "dependsOn": ["^build"] },
+    "@1.modules/auth.next#type-check": { "dependsOn": ["^build"] },
     "api#dev": { "persistent": true },
     "build": {
       "dependsOn": ["^build"],
