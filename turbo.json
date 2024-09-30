@@ -11,14 +11,15 @@
     "TURBO_TOKEN"
   ],
   "tasks": {
-    "@douglasduteil/nextauth...trpc.prisma#type-check": {
-      "dependsOn": ["@1.infra/database#type-check"]
-    },
     "@1.infra/database#type-check": { "dependsOn": ["generate"] },
-    "@1.modules/auth.api#type-check": { "dependsOn": ["^build"] },
-    "api#dev": { "cache": false },
+    "@1.infra/database#dev": { "dependsOn": ["generate"] },
+    "@1.infra/database#generate": {
+      "outputs": [".prisma/client"]
+    },
+    "@1.modules/auth.next#type-check": { "dependsOn": ["^build"] },
+    "api#dev": { "persistent": true },
     "build": {
-      "dependsOn": ["^type-check", "^build", "type-check"],
+      "dependsOn": ["^build"],
       "outputs": [
         "!.next/cache/**",
         ".next/**",
@@ -26,38 +27,39 @@
         "node_modules/.cache/tsc/**"
       ]
     },
-    "generate": {
-      "cache": false,
-      "outputs": ["node_modules/@prisma/client/**"]
-    },
     "clean": { "cache": false },
     "studio": { "cache": false },
-    "dev": { "persistent": true, "dependsOn": ["^build"] },
-    "lint": { "cache": false, "dependsOn": ["^build"] },
-    "start": { "cache": false, "dependsOn": ["^build"] },
+    "dev": { "persistent": true },
+    "lint": { "dependsOn": ["build"] },
+    "start": { "persistent": true },
     "type-check": {
       "dependsOn": ["^type-check"],
-      "outputs": ["node_modules/.cache/tsc/**"]
+      "outputs": ["node_modules/.cache/tsc/**", "dist/**"]
     },
     "www#build": {
-      "dependsOn": ["^type-check", "^build", "type-check"],
+      "dependsOn": ["type-check"],
       "outputs": ["!.next/cache/**", ".next/**"],
       "env": [
+        "AUTH_SECRET",
         "CONSOLA_LEVEL",
         "DATABASE_URL",
         "DEPLOY_ENV",
         "MAINTENANCE",
         "NEXT_PUBLIC_GA_MEASUREMENT_ID",
+        "NEXT_PUBLIC_VERCEL_ENV",
+        "NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL",
+        "NEXT_PUBLIC_VERCEL_URL",
         "NEXT_PUBLIC_WEBSOCKET_URL",
         "NEXT_TELEMETRY_DISABLED",
         "NEXTAUTH_*",
         "SENTRY_AUTH_TOKEN",
         "SENTRY_ORG",
         "SENTRY_PROJECT",
+        "SMTP_URL",
         "STALKER_TRANSPORT_URL",
         "STALKER_URL"
       ]
     },
-    "www#dev": { "cache": false }
+    "www#dev": { "persistent": true }
   }
 }

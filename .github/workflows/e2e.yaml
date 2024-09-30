@@ -10,6 +10,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
+  APP_URL: "http://localhost:3000"
   DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres?schema=public
   DO_NOT_TRACK: 1
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
@@ -36,13 +37,17 @@ jobs:
           name: e2e
 
       - run: pnpm install --frozen-lockfile --prefer-offline
-      - run: pnpm exec cypress install
-        working-directory: apps/e2e
+
+      - name: Install dependencies
+        uses: cypress-io/github-action@0da3c06ed8217b912deea9d8ee69630baed1737e # v6.7.6
+        with:
+          runTests: false
 
       - run: pnpm run build
       - run: docker compose up --wait
       - run: pnpm --filter @1.infra/database exec prisma migrate deploy
-
+      - run: pnpm exec turbo run build
+      - run: env
       - name: Cypress run
         uses: cypress-io/github-action@0da3c06ed8217b912deea9d8ee69630baed1737e # v6.7.6
         env:

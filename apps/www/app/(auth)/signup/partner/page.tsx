@@ -1,6 +1,5 @@
 //
 
-import { get_csrf_token } from "@1.modules/auth.next/csrf_token";
 import { UserAvatarFilled } from "@1.ui/react/icons";
 // import { UserAvatarFilled } from "@1.ui/react/icons";
 import { FrenchLocationField } from ":components/FrenchLocationField";
@@ -29,7 +28,6 @@ export async function generateMetadata(
 //
 
 export default function Page() {
-  const csrfToken = get_csrf_token();
   const { base, form, label } = style();
   const profile_names = Profile_Schema.keyof().Enum;
   const partner_names = Partner_Schema.keyof().Enum;
@@ -37,7 +35,6 @@ export default function Page() {
   return (
     <main className={base()}>
       <form className={form()} method="post" action="/api/auth/callback/signin">
-        <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
         <input
           name="role"
           type="hidden"

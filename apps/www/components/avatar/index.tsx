@@ -1,13 +1,13 @@
 "use client";
 
-import type { Profile } from "@1.modules/profile.domain";
+import type { AvatarProfile } from "@1.modules/profile.domain";
 import { AvatarMedia, type AvatarMediaProps } from "@1.ui/react/avatar";
 import Link from "next/link";
 
 //
 
 export function SeeProfileAvatarMedia(
-  props: AvatarMediaProps & { profile: Pick<Profile, "image" | "id" | "name"> },
+  props: AvatarMediaProps & { profile: AvatarProfile },
 ) {
   const { profile, ...other_props } = props;
 
@@ -26,7 +26,7 @@ export function SeeProfileAvatarMedia(
 }
 
 export function ProfileAvatarMedia(
-  props: AvatarMediaProps & { profile: Pick<Profile, "image" | "id" | "name"> },
+  props: AvatarMediaProps & { profile: AvatarProfile },
 ) {
   const { profile, ...other_props } = props;
 

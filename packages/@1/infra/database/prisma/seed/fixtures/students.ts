@@ -1,7 +1,7 @@
 //
 
-import { ProfileRole } from "@prisma/client";
-import prisma from "../../../index";
+import prisma from "#prisma";
+import { ProfileRole } from "#prisma/client";
 import { faker_image_avatar } from "../helpers/faker_image_avatar";
 
 //

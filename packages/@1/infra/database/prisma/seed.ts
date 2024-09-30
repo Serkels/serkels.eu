@@ -3,7 +3,7 @@
  *
  * @link https://www.prisma.io/docs/guides/database/seed-database
  */
-import { faker } from "@faker-js/faker";
+import prisma from "#prisma";
 import {
   CategoryContext,
   ExchangeThreadStatus,
@@ -13,12 +13,12 @@ import {
   ProfileRole,
   type Deal,
   type Exchange,
-} from "@prisma/client";
+} from "#prisma/client";
+import { faker } from "@faker-js/faker";
 import { isAfter } from "date-fns";
 import dedent from "dedent";
 import process from "node:process";
 import slugify from "slugify";
-import prisma from "../index";
 import { students as studient_fixtures } from "./seed/fixtures/students";
 import { faker_image_avatar } from "./seed/helpers/faker_image_avatar";
 

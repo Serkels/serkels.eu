@@ -5,10 +5,11 @@ on:
   workflow_dispatch:
 
 env:
-  DO_NOT_TRACK: 1
+  APP_URL: "http://localhost:3000"
   CYPRESS_INSTALL_BINARY: 0
-  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  DO_NOT_TRACK: 1
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
 
 jobs:
   www:

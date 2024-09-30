@@ -17,6 +17,10 @@ const ENV = z
 
 //
 
+/**
+ * @deprecated Should be removed
+ */
+
 export const trpc = createTRPCProxyClient<Router>({
   links: [
     loggerLink({
@@ -31,7 +35,7 @@ export const trpc = createTRPCProxyClient<Router>({
           secret: ENV.NEXTAUTH_SECRET,
           token: {
             from: "@1.modules/auth.next",
-            profile: { id: "SSR", image: "", name: "", role: "ADMIN", bio: "" },
+            profile: { id: "SSR", image: "", name: "", role: "ADMIN" },
           } satisfies JWT,
           maxAge: 60,
         });

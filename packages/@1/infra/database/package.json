@@ -4,6 +4,18 @@
   "private": true,
   "sideEffects": false,
   "type": "module",
+  "imports": {
+    "#prisma": {
+      "types": "./index.ts",
+      "default": "./index.ts"
+    },
+    "#prisma/client": {
+      "types": "./.prisma/client/index.d.ts",
+      "require": "./.prisma/client/index.js",
+      "import": "./.prisma/client/index.js",
+      "default": "./.prisma/client/index.js"
+    }
+  },
   "exports": {
     "./seed": {
       "types": "./seed/index.ts",
@@ -30,6 +42,7 @@
     "generate": "prisma generate",
     "migrate:deploy": "prisma migrate deploy",
     "migrate:dev": "prisma migrate dev",
+    "postinstall": "prisma generate",
     "push": "prisma db push --skip-generate",
     "seed": "prisma db seed",
     "studio": "prisma studio",

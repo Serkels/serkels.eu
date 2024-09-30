@@ -4,11 +4,7 @@ import type { Prisma } from "@1.infra/database";
 import { NotificationType } from "@1.infra/database";
 import { is_active_exchange } from "@1.modules/exchange.domain";
 import { deal_flow } from "@1.modules/exchange.domain/deal.machine";
-import {
-  next_auth_input_token,
-  next_auth_procedure,
-  router,
-} from "@1.modules/trpc";
+import { next_auth_procedure, router } from "@1.modules/trpc";
 import { observable } from "@trpc/server/observable";
 import { subDays } from "date-fns";
 import { EventEmitter } from "events";
@@ -178,7 +174,7 @@ export const inbox = router({
     }),
 
   //
-  on_new_deal: next_auth_input_token
+  on_new_deal: next_auth_procedure
     .input(z.object({ thread_id: z.string() }))
     .subscription(async ({ ctx: { prisma, payload }, input }) => {
       const { thread_id } = input;

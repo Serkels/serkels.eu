@@ -1,4 +1,4 @@
-import { getServerSession } from "@1.modules/auth.next";
+import { auth } from "@1.modules/auth.next";
 
 //
 
@@ -7,5 +7,5 @@ export interface CodeParms {
 }
 
 export async function code_to_profile_id({ code }: CodeParms) {
-  return code === "~" ? (await getServerSession())?.profile.id : code;
+  return code === "~" ? ((await auth())?.profile.id ?? code) : code;
 }

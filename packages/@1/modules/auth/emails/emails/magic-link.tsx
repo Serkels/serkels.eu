@@ -60,8 +60,6 @@ export const SerkelsMagicLinkEmail = ({
   </Html>
 );
 
-export default SerkelsMagicLinkEmail;
-
 const main = {
   backgroundColor: "#ffffff",
 };

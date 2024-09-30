@@ -1,10 +1,6 @@
 //
 
-import {
-  next_auth_input_token,
-  next_auth_procedure,
-  router,
-} from "@1.modules/trpc";
+import { next_auth_procedure, router } from "@1.modules/trpc";
 import { observable } from "@trpc/server/observable";
 import { z } from "zod";
 import { on_message_event } from "./channel/message";
@@ -30,7 +26,7 @@ export const thread = router({
 
   //
 
-  on_new_message: next_auth_input_token
+  on_new_message: next_auth_procedure
     .input(z.object({ thread_id: z.string() }))
     .subscription(async ({ ctx: { prisma, payload }, input }) => {
       const { thread_id } = input;

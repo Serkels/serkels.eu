@@ -62,10 +62,10 @@ export default function Infinite_Thread_Timeline({
     });
   }, [query_info.dataUpdatedAt, scroll_target_ref]);
 
-  const { data: session, status } = useSession();
+  const { status } = useSession();
 
   TRPC_React.inbox.thread.on_new_message.useSubscription(
-    { token: session?.header.NEXTAUTH_TOKEN!, thread_id },
+    { thread_id },
     {
       enabled: status === "authenticated",
       onData() {

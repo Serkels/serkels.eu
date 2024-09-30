@@ -11,7 +11,7 @@ import { match, P } from "ts-pattern";
 //
 
 export function BlockProfile({ profile_id }: { profile_id: ID_Schema }) {
-  const { toggle_mutation, find_profile, toggle_add_to_blacklist } =
+  const { is_blocked, toggle_mutation, find_profile, toggle_add_to_blacklist } =
     useBlockProfile(profile_id);
 
   return match([toggle_mutation, find_profile])
@@ -26,7 +26,7 @@ export function BlockProfile({ profile_id }: { profile_id: ID_Schema }) {
         onAction={toggle_add_to_blacklist}
         isDisabled={toggle_mutation.status !== "idle"}
       >
-        {find_profile.data ? (
+        {is_blocked ? (
           <>
             <Archive className="w-4" />
             <span className="w-full">Débloquer le profile</span>
@@ -57,5 +57,6 @@ export function useBlockProfile(profile_id: ID_Schema) {
     toggle_mutation.reset();
   }, [toggle_mutation, utils, profile_id]);
 
-  return { toggle_mutation, find_profile, toggle_add_to_blacklist };
+  const is_blocked = find_profile.isLoading || Boolean(find_profile.data);
+  return { is_blocked, toggle_mutation, find_profile, toggle_add_to_blacklist };
 }

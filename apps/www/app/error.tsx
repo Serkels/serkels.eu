@@ -3,13 +3,13 @@
 import { Error_Layout } from ":components/Error_Layout";
 import { MenuBurger } from ":components/burger";
 import { BigBar } from ":components/shell/BigBar";
-import { signOut } from "@1.modules/auth.next/react";
 import { Button } from "@1.ui/react/button";
 import { ErrorOccur } from "@1.ui/react/error";
 import { VisuallyHidden } from "@1.ui/react/visually_hidden";
 import { useMountEffect } from "@react-hookz/web";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 //
 
@@ -29,9 +29,10 @@ export default function Error({
   error: Error;
   reset: () => void;
 }) {
+  const { replace } = useRouter();
   useMountEffect(() => {
     if (process.env.NODE_ENV !== "development") return;
-    signOut();
+    replace("/logout");
   });
   return (
     <main className="flex min-h-screen flex-col">

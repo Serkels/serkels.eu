@@ -43,3 +43,7 @@ Then("je clique sur la légende {string}", function (text: string) {
 When("je tape {string}", (text: string) => {
   cy.focused().type(text);
 });
+
+When("je choisis l'option {string}", (text: string) => {
+  cy.focused().select(text);
+});

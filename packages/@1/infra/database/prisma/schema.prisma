@@ -9,7 +9,7 @@
 //
 
 datasource db {
-  provider = "postgres"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
   // provider = "sqlite"
   // url      = "file:./dev.db"
@@ -18,7 +18,8 @@ datasource db {
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["driverAdapters"]
-  binaryTargets   = ["native", "debian-openssl-3.0.x"]
+  binaryTargets   = ["native", "debian-openssl-3.0.x", "rhel-openssl-1.0.x"]
+  output          = "../.prisma/client"
 }
 
 //

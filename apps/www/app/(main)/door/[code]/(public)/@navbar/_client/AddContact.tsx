@@ -1,5 +1,6 @@
 "use client";
 
+import { useBlockProfile } from ":components/button/BlockProfile";
 import { TRPC_React } from ":trpc/client";
 import { useSession } from "@1.modules/auth.next/react";
 import { Button } from "@1.ui/react/button";
@@ -24,6 +25,7 @@ export default function AddContact({
     });
   const toggle_contact = TRPC_React.profile.me.contact.toggle.useMutation();
   const utils = TRPC_React.useUtils();
+  const { is_blocked } = useBlockProfile(profile_id);
 
   const toggle_add_contact = useCallback(async () => {
     await toggle_contact.mutateAsync(profile_id);
@@ -49,7 +51,7 @@ export default function AddContact({
       <Button
         className={style({ className })}
         onPress={toggle_add_contact}
-        isDisabled={toggle_contact.status !== "idle"}
+        isDisabled={is_blocked || toggle_contact.status !== "idle"}
       >
         {find_contact.data ? (
           <>

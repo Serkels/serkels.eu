@@ -1,7 +1,7 @@
 //
 
+import { PrismaClient } from "#prisma/client";
 import { PGlite } from "@electric-sql/pglite";
-import { PrismaClient } from "@prisma/client";
 import { readdir, readFile, stat } from "fs/promises";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";

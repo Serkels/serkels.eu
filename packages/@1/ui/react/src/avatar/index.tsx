@@ -102,7 +102,7 @@ export function AvatarMediaHorizontal(
 
   return (
     <figure className={style({ className })} {...other_props}>
-      <Avatar className="h-14 w-14" {...{ image, id }} />
+      <Avatar className="size-14" {...{ image, id }} />
       <figcaption>
         <h4 className="text-xl font-bold text-Cerulean" title={name}>
           {name}

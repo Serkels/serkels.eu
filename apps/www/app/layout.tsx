@@ -1,6 +1,7 @@
 //
 
 import Analytics from ":components/shell/Analytics";
+import { env_app_url_schema } from "@1.modules/core/env.zod";
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { Roboto } from "next/font/google";
@@ -17,18 +18,19 @@ const NextTopLoader = dynamic(() => import(":components/TopLoader"), {
 //
 
 const roboto = Roboto({ weight: ["400", "500", "700"], subsets: ["latin"] });
+const { APP_URL } = env_app_url_schema.parse(process.env);
 
 //
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://toc-toc.org"),
+  metadataBase: new URL(APP_URL),
   title: "Serkels",
   description: "Réseau d'échanges étudiant",
   icons: { icon: "/favicon.ico" },
   openGraph: {
     title: "Serkels",
     description: "Réseau d'échanges étudiant",
-    url: new URL("https://toc-toc.org"),
+    url: new URL(APP_URL),
   },
 };
 

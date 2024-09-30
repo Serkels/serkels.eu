@@ -1,6 +1,6 @@
 //
 
-import { PrismaClient as PrismaClient_Base } from "@prisma/client";
+import { PrismaClient as PrismaClient_Base } from "#prisma/client";
 import process from "node:process";
 
 //
@@ -16,7 +16,7 @@ const prismaClientSingleton = () => {
 
 const prisma = prismaClientSingleton();
 export type PrismaClient = typeof prisma;
-export { CategoryContext, NotificationType } from "@prisma/client";
-export type { Prisma } from "@prisma/client";
+export { CategoryContext, NotificationType } from "#prisma/client";
+export type { Prisma } from "#prisma/client";
 
 export default prisma;

@@ -9,7 +9,7 @@ import {
 import { MobileNavBar } from ":components/shell/MobileNavBar";
 import { TRPC_SSR } from ":trpc/server";
 import { getServerSession } from "@1.modules/auth.next";
-import { PROFILE_ROLES, type Profile } from "@1.modules/profile.domain";
+import { PROFILE_ROLES, type AuthProfile } from "@1.modules/profile.domain";
 import { Avatar } from "@1.modules/profile.ui";
 import { Grid } from "@1.ui/react/grid";
 import { Bell, Exchange, Logo, Messenger, Plus } from "@1.ui/react/icons";
@@ -115,7 +115,7 @@ const user_nav_group_variants = tv(
     responsiveVariants: ["sm", "md"],
   },
 );
-async function MyStudentProfile({ profile }: { profile: Profile }) {
+async function MyStudentProfile({ profile }: { profile: AuthProfile }) {
   const student = await TRPC_SSR.profile.student?.by_profile_id.fetch(
     profile.id,
   );
@@ -147,7 +147,7 @@ async function MyStudentProfile({ profile }: { profile: Profile }) {
   );
 }
 
-async function MyPartnerProfile({ profile }: { profile: Profile }) {
+async function MyPartnerProfile({ profile }: { profile: AuthProfile }) {
   const partner = await TRPC_SSR.profile.partner?.by_profile_id.fetch(
     profile.id,
   );

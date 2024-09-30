@@ -5,7 +5,7 @@ import { useSession } from "@1.modules/auth.next/react";
 import type { Category } from "@1.modules/category.domain";
 import { CreateQuestionForm } from "@1.modules/forum.ui/CreateCard/Form";
 import { Idle } from "@1.modules/forum.ui/CreateCard/Idle";
-import type { Profile } from "@1.modules/profile.domain";
+import type { AuthProfile } from "@1.modules/profile.domain";
 import { Avatar } from "@1.modules/profile.ui/avatar";
 import { Card } from "@1.ui/react/card";
 import { ErrorOccur } from "@1.ui/react/error";
@@ -47,7 +47,7 @@ function Mutate_CreateQuestion({
 }: {
   categories: Category[];
   initialValues?: { title?: string; category?: string };
-  profile: Profile;
+  profile: AuthProfile;
 }) {
   const create_info = TRPC_React.forum.question.create.useMutation();
   const utils = TRPC_React.useUtils();

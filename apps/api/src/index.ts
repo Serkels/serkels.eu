@@ -7,6 +7,7 @@ import "./dotenv";
 import prisma from "@1.infra/database";
 import { Email_Sender, ENV as EmailEnv } from "@1.infra/email";
 import { router } from "@1.infra/trpc";
+import { env_app_url_schema } from "@1.modules/core/env.zod";
 import { HTTPError } from "@1.modules/core/errors";
 import type { Context } from "@1.modules/trpc";
 import { serve } from "@hono/node-server";
@@ -40,6 +41,7 @@ import { z } from "zod";
 
 //
 
+const { APP_URL } = env_app_url_schema.parse(process.env);
 export const ENV = z
   .object({
     NODE_ENV: z
@@ -59,11 +61,10 @@ function createContext(
 ) {
   const headers = new Headers(opts.req.headers as Headers);
 
-  // TODO(douglasduteil): parse with the NEXT_AUTH_HEADER zod validator
   return {
     prisma,
     headers: {
-      origin: headers.get("origin") ?? "https://toc-toc.org",
+      origin: headers.get("origin") ?? APP_URL,
       NEXTAUTH_TOKEN: headers.get("NEXTAUTH_TOKEN") ?? "",
     },
     sender: new Email_Sender(ENV),

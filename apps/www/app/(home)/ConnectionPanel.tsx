@@ -3,7 +3,6 @@
 import { DomLazyMotion } from ":components/shell/DomLazyMotion";
 import { signIn, signOut, useSession } from "@1.modules/auth.next/react";
 import { AuthError, HTTPError } from "@1.modules/core/errors";
-import { PROFILE_ROLES, PROFILE_UNKNOWN } from "@1.modules/profile.domain";
 import { Avatar } from "@1.modules/profile.ui";
 import { Button } from "@1.ui/react/button";
 import { Spinner } from "@1.ui/react/spinner";
@@ -20,6 +19,7 @@ import {
   type ComponentProps,
   type PropsWithChildren,
 } from "react";
+import ContentLoader from "react-content-loader";
 import Nest from "react-nest";
 import { P, match } from "ts-pattern";
 import { LoginForm } from "./LoginForm";
@@ -125,7 +125,6 @@ function LookForExistingSession() {
 
 function LoginFormPanel() {
   const send = useOutlet_Send();
-  const router = useRouter();
 
   const signin_mutation_info = useSignIn_Mutation();
 
@@ -136,15 +135,10 @@ function LoginFormPanel() {
     );
 
   const on_sign_up_form_submit: ComponentProps<typeof LoginForm>["onSignUp"] =
-    useCallback(async ({ email, as }) => {
-      match(as as PROFILE_ROLES)
-        .with(PROFILE_ROLES.enum.STUDENT, () =>
-          router.push(`/signup/student?email=${email}`),
-        )
-        .with(PROFILE_ROLES.enum.PARTNER, () =>
-          router.push(`/signup/partner?email=${email}`),
-        );
-    }, []);
+    useCallback(
+      async ({ email }) => await signin_mutation_info.mutate(email),
+      [],
+    );
 
   useEffect(() => {
     return match(signin_mutation_info)
@@ -238,52 +232,63 @@ function CheckYourMail() {
 }
 
 function ConnectedAs() {
-  const send = useOutlet_Send();
+  const { data: session } = useSession();
+  const router = useRouter();
 
-  try {
-    const { data: session } = useSession();
+  const profile = session?.profile;
 
-    const profile = session?.profile ?? PROFILE_UNKNOWN;
+  useEffect(() => {
+    if (profile) return;
+    router.replace("/signup/student");
+  }, [profile?.id]);
 
-    const on_logout = useCallback(() => signOut(), [profile.id]);
+  const on_logout = useCallback(() => signOut(), [profile?.id]);
 
-    const href = match(profile.role)
-      .with("STUDENT", () => `/exchanges`)
-      .with("PARTNER", () => `/opportunities`)
-      .with("ADMIN", () => `/`)
-      .exhaustive();
+  const href = match(profile?.role)
+    .with("STUDENT", () => `/exchanges`)
+    .with("PARTNER", () => `/opportunities`)
+    .with("ADMIN", () => `/`)
+    .with(undefined, () => "/")
+    .exhaustive();
 
+  if (!profile)
     return (
-      <WhiteCard>
-        <Link href={href}>
-          <figure className="space-y-6">
-            <Avatar className="mx-auto block w-[50%]" profile={profile} />
-            <figcaption className="text-center">
-              <h3 className="text-center">
-                Vous êtes connecté en tant que : <strong>{profile.name}</strong>
-                .
-              </h3>
-            </figcaption>
-          </figure>
-        </Link>
-
-        <hr />
-
-        <button onClick={on_logout}>Me déconnecter</button>
-      </WhiteCard>
+      <ContentLoader
+        speed={2}
+        viewBox="0 0 50 50"
+        gradientRatio={1}
+        backgroundOpacity={0.1}
+        backgroundColor="black"
+        foregroundColor="transparent"
+        foregroundOpacity={0}
+      >
+        <rect x="0" y="0" rx="3" ry="3" width="50" height="50 " />
+      </ContentLoader>
     );
-  } catch (error) {
-    console.error(error);
-    setTimeout(() => signOut({ redirect: false }), 0);
-    setTimeout(() => send({ state: "error", error: error as Error }), 0);
-    return null;
-  }
+  return (
+    <WhiteCard>
+      <Link href={href}>
+        <figure className="space-y-6">
+          <Avatar className="mx-auto block w-[50%]" profile={profile} />
+          <figcaption className="text-center">
+            <h3 className="text-center">
+              Vous êtes connecté en tant que : <strong>{profile.name}</strong>.
+            </h3>
+          </figcaption>
+        </figure>
+      </Link>
+
+      <hr />
+
+      <button onClick={on_logout}>Me déconnecter</button>
+    </WhiteCard>
+  );
 }
 
 function useSignIn_Mutation() {
   return useMutation({
     mutationFn: async (email: string) => {
-      const response = await signIn("email", {
+      const response = await signIn("nodemailer", {
         email,
         redirect: false,
       });
