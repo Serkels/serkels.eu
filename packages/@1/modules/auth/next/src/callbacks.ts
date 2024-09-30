@@ -1,6 +1,6 @@
+import { startSpan } from "@1.modules/core/telemetry";
 import { NEXTAUTH_TRPCENV } from "@douglasduteil/nextauth...trpc.prisma/config";
 import { create_nextauth_header } from "@douglasduteil/nextauth...trpc.prisma/jwt";
-import { startSpan } from "@sentry/core";
 import type { Span } from "@sentry/types";
 import to from "await-to-js";
 import { type NextAuthConfig } from "next-auth";

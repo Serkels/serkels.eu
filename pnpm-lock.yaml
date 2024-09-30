@@ -587,9 +587,6 @@ importers:
       '@douglasduteil/nextauth...trpc.prisma':
         specifier: workspace:*
         version: link:../../../../@douglasduteil/nextauth...trpc.prisma
-      '@sentry/core':
-        specifier: 8.32.0
-        version: 8.32.0
       '@sentry/types':
         specifier: 8.32.0
         version: 8.32.0
@@ -825,6 +822,9 @@ importers:
 
   packages/@1/modules/core:
     dependencies:
+      '@sentry/core':
+        specifier: 8.32.0
+        version: 8.32.0
       date-fns:
         specifier: 4.1.0
         version: 4.1.0

@@ -1,7 +1,7 @@
 //
 
 import prisma from "@1.infra/database";
-import { startSpan } from "@sentry/core";
+import { startSpan } from "@1.modules/core/telemetry";
 import type { AuthProfile } from "@1.modules/profile.domain";
 
 //

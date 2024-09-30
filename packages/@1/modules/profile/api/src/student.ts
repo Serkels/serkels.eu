@@ -2,7 +2,8 @@
 
 import { NotificationType } from "@1.infra/database";
 import { ID_Schema } from "@1.modules/core/domain";
-import { Student_Schema, type Student } from "@1.modules/profile.domain";
+import { startSpan } from "@1.modules/core/telemetry";
+import { Student_Schema } from "@1.modules/profile.domain";
 import { next_auth_procedure, router } from "@1.modules/trpc";
 import { match } from "ts-pattern";
 import { z } from "zod";
@@ -12,24 +13,42 @@ import { z } from "zod";
 export const student_api_router = router({
   by_id: next_auth_procedure
     .input(z.string())
-    .query(async ({ input: id, ctx: { prisma } }) => {
-      return prisma.student.findUniqueOrThrow({
-        where: { id },
-      });
+    .query(({ input: id, ctx: { prisma } }) => {
+      return startSpan(
+        {
+          name: `prisma.student.findFirstOrThrow(id=${id})`,
+          op: "prisma",
+        },
+        function findFirstOrThrow() {
+          return prisma.student.findUniqueOrThrow({
+            where: { id },
+          });
+        },
+      );
     }),
 
   by_profile_id: next_auth_procedure
     .input(z.string())
-    .query(async ({ input: profile_id, ctx: { prisma } }) => {
-      return Student_Schema.parse(
-        await prisma.student.findFirstOrThrow({
-          where: { profile_id },
-          include: { interest: true, profile: true },
-        }),
+    .query(({ input: profile_id, ctx: { prisma } }) => {
+      return startSpan(
         {
-          path: ["<student.by_profile_id>.prisma.student.findFirstOrThrow"],
+          name: `prisma.student.findFirstOrThrow(profile_id=${profile_id})`,
+          op: "prisma",
         },
-      ) as Student;
+        function findFirstOrThrow() {
+          return Student_Schema.parse(
+            prisma.student.findFirstOrThrow({
+              where: { profile_id },
+              include: { interest: true, profile: true },
+            }),
+            {
+              path: [
+                `prisma.student.findFirstOrThrow(profile_id=${profile_id})`,
+              ],
+            },
+          );
+        },
+      );
     }),
 
   //

@@ -1,5 +1,6 @@
 //
 
+import { startSpan } from "@1.modules/core/telemetry";
 import { Profile_Schema, type Profile } from "@1.modules/profile.domain";
 import { next_auth_procedure, router } from "@1.modules/trpc";
 import { z } from "zod";
@@ -21,14 +22,22 @@ const profile_api_router = router({
 
   by_id: next_auth_procedure
     .input(z.string())
-    .query(async ({ input: id, ctx: { prisma } }) => {
-      return prisma.profile.findUniqueOrThrow({
-        include: {
-          in_contact_with: { select: { id: true } },
-          contacts: { select: { id: true } },
+    .query(({ input: id, ctx: { prisma } }) => {
+      return startSpan(
+        {
+          name: `prisma.profile.findFirstOrThrow(${id})`,
+          op: "prisma",
         },
-        where: { id },
-      });
+        function findFirstOrThrow() {
+          return prisma.profile.findUniqueOrThrow({
+            include: {
+              in_contact_with: { select: { id: true } },
+              contacts: { select: { id: true } },
+            },
+            where: { id },
+          });
+        },
+      );
     }),
 
   //

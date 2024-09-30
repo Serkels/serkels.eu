@@ -29,7 +29,6 @@
     "@1.ui/react": "workspace:*",
     "@auth/prisma-adapter": "2.5.3",
     "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
-    "@sentry/core": "8.32.0",
     "@sentry/types": "8.32.0",
     "@trpc/client": "10.45.2",
     "await-to-js": "3.0.0",
