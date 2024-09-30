@@ -52,7 +52,7 @@ export default {
 
   async jwt(params) {
     return start_auth_span_decorator(
-      "callback.jwt" + params.trigger ? `#${params.trigger}` : "",
+      `callback.jwt${params.trigger ? `#${params.trigger}` : ""}`,
       async () => {
         return match(params)
           .with(
@@ -66,9 +66,6 @@ export default {
           .with(
             { trigger: "signIn", user: { email: P.select(P.string) } },
             async (email) => {
-              console.log();
-              console.log("jwt/signIn", params);
-              console.log();
               const [profile_err, profile] = await to(
                 get_auth_profile_by_email(email),
               );

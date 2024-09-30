@@ -3,7 +3,7 @@
 import { NotConnected_Placeholder } from ":components/placeholder/NotConnected_Placeholder";
 import { AuthSessionProvider } from ":components/shell/AuthSessionProvider";
 import type { CodeParms } from ":pipes/code";
-import { getServerSession } from "@1.modules/auth.next";
+import { auth } from "@1.modules/auth.next";
 import { Grid } from "@1.ui/react/grid";
 import { to } from "await-to-js";
 import { redirect } from "next/navigation";
@@ -21,7 +21,7 @@ export default async function Layout({
 }: PropsWithChildren<{ params: CodeParms; navbar: ReactNode }>) {
   let session;
 
-  [, session] = await to(getServerSession());
+  [, session] = await to(auth());
 
   if (!session) return <NotConnected_Placeholder />;
 

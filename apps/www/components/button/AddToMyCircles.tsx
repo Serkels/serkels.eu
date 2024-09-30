@@ -16,6 +16,7 @@ export function AddToMyCircles({ profile_id }: { profile_id: string }) {
   const toggle_add_contact = useCallback(async () => {
     await toggle_contact.mutateAsync(profile_id);
     await Promise.all([
+      utils.exchanges.find.invalidate({ category: "MY_CIRCLES" }),
       utils.profile.me.contact.find_by_profile_id.invalidate(profile_id),
       utils.profile.me.contacts.invalidate({}),
     ]);
