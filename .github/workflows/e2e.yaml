@@ -33,7 +33,11 @@ jobs:
         with:
           cache: pnpm
           node-version-file: package.json
-      - run: docker compose up --build --detach
+
+      - uses: hoverkraft-tech/compose-action@v2.0.0
+        with:
+          down-flags: "--volumes --remove-orphans"
+          up-flags: "--build --detach"
 
       - name: "🔺️  Cache"
         uses: ./.github/actions/cache
@@ -77,8 +81,6 @@ jobs:
 
       - if: failure()
         run: docker compose logs
-      - if: always()
-        run: docker compose down --volumes --remove-orphans
 
     strategy:
       matrix:
