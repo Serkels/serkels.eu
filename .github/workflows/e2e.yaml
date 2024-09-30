@@ -48,17 +48,17 @@ jobs:
       - run: pnpm --filter @1.infra/database exec prisma migrate deploy
       - run: pnpm exec turbo run build
 
-      # - name: Cypress run
-      #   uses: cypress-io/github-action@0da3c06ed8217b912deea9d8ee69630baed1737e # v6.7.6
-      #   env:
-      #     CONSOLA_LEVEL: "2"
-      #     DEPLOY_ENV: "production"
-      #     NODE_ENV: "development"
-      #   with:
-      #     install: false
-      #     start: pnpm start
-      #     working-directory: apps/e2e
-      #     spec: features/${{ matrix.e2e_test }}
+      - name: Cypress run
+        uses: cypress-io/github-action@0da3c06ed8217b912deea9d8ee69630baed1737e # v6.7.6
+        env:
+          CONSOLA_LEVEL: "2"
+          DEPLOY_ENV: "production"
+          NODE_ENV: "development"
+        with:
+          install: false
+          start: pnpm start
+          working-directory: apps/e2e
+          spec: features/${{ matrix.e2e_test }}
 
       - uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
         if: failure()
