@@ -2,6 +2,7 @@
 
 import { Email_Sender } from "@1.infra/email";
 import { SerkelsMagicLinkEmail } from "@1.modules/auth.emails";
+import { env_app_url_schema } from "@1.modules/core/env.zod";
 import Nodemailer from "next-auth/providers/nodemailer";
 import { z } from "zod";
 
