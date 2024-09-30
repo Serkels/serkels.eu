@@ -43,6 +43,7 @@ jobs:
       - run: pnpm run build
       - run: docker compose up --wait
       - run: pnpm --filter @1.infra/database exec prisma migrate deploy
+      - run: pnpm --filter www run build
 
       - name: Cypress run
         uses: cypress-io/github-action@0da3c06ed8217b912deea9d8ee69630baed1737e # v6.7.6

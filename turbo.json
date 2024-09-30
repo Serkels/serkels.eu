@@ -31,7 +31,7 @@
     "studio": { "cache": false },
     "dev": { "persistent": true },
     "lint": { "dependsOn": ["build"] },
-    "start": { "cache": false, "dependsOn": ["build"] },
+    "start": { "persistent": true, "dependsOn": ["build"] },
     "type-check": {
       "dependsOn": ["^type-check"],
       "outputs": ["node_modules/.cache/tsc/**", "dist/**"]
