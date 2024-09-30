@@ -301,6 +301,9 @@ importers:
       '@douglasduteil/datatypes...hours-to-seconds':
         specifier: workspace:*
         version: link:../../packages/@douglasduteil/datatypes...hours-to-seconds
+      '@prisma/nextjs-monorepo-workaround-plugin':
+        specifier: 5.20.0
+        version: 5.20.0
       '@tanstack/react-query-devtools':
         specifier: 4.36.1
         version: 4.36.1(@tanstack/react-query@4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2862,6 +2865,9 @@ packages:
 
   '@prisma/instrumentation@5.19.1':
     resolution: {integrity: sha512-VLnzMQq7CWroL5AeaW0Py2huiNKeoMfCH3SUxstdzPrlWQi6UQ9UrfcbUkNHlVFqOMacqy8X/8YtE0kuKDpD9w==}
+
+  '@prisma/nextjs-monorepo-workaround-plugin@5.20.0':
+    resolution: {integrity: sha512-q0Lf7WktcApMRel4xZ6fyOZj8VF2mVRQa7C2QuqVmrutMWA3ZzFtSOADntH36Dz/UUe5ntuQaNrxJITL0r3WNA==}
 
   '@react-aria/breadcrumbs@3.5.16':
     resolution: {integrity: sha512-OXLKKu4SmjnSaSHkk4kow5/aH/SzlHWPJt+Uq3xec9TwDOr/Ob8aeFVGFoY0HxfGozuQlUz+4e+d29vfA0jNWg==}
@@ -8695,6 +8701,8 @@ snapshots:
       '@opentelemetry/sdk-trace-base': 1.26.0(@opentelemetry/api@1.9.0)
     transitivePeerDependencies:
       - supports-color
+
+  '@prisma/nextjs-monorepo-workaround-plugin@5.20.0': {}
 
   '@react-aria/breadcrumbs@3.5.16(react@18.3.1)':
     dependencies:

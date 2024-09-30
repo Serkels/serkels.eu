@@ -1,5 +1,6 @@
 //
 
+import { PrismaPlugin } from "@prisma/nextjs-monorepo-workaround-plugin";
 import { withSentryConfig } from "@sentry/nextjs";
 import process from "node:process";
 import { z } from "zod";
@@ -103,6 +104,14 @@ const nextConfig = {
         destination: `${ENV.STALKER_TRANSPORT_URL}/:path*`,
       },
     ];
+  },
+
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      config.plugins = [...config.plugins, new PrismaPlugin()];
+    }
+
+    return config;
   },
 };
 
