@@ -42,6 +42,7 @@ import { z } from "zod";
 
 export const ENV = z
   .object({
+    APP_URL: z.string().url().default("http://localhost:3000"),
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
@@ -59,11 +60,10 @@ function createContext(
 ) {
   const headers = new Headers(opts.req.headers as Headers);
 
-  // TODO(douglasduteil): parse with the NEXT_AUTH_HEADER zod validator
   return {
     prisma,
     headers: {
-      origin: headers.get("origin") ?? "https://toc-toc.org",
+      origin: headers.get("origin") ?? ENV.APP_URL,
       NEXTAUTH_TOKEN: headers.get("NEXTAUTH_TOKEN") ?? "",
     },
     sender: new Email_Sender(ENV),
