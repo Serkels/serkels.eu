@@ -1,11 +1,11 @@
 "use client";
 
+import { BlockProfile } from ":components/button/BlockProfile";
 import { Menu } from "@1.ui/react/menu";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { tv } from "tailwind-variants";
 import AddContact from "./_client/AddContact";
-import { BlockProfile } from "./_client/BlockProfile";
 import SendMessage from "./_client/SendMessage";
 import { type CodeParmsAsProfileId } from "./default";
 import { ReportTheProfile, SendMessageMenu, ShareTheProfile } from "./menu";

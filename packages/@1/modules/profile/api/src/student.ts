@@ -35,9 +35,9 @@ export const student_api_router = router({
           name: `prisma.student.findFirstOrThrow(profile_id=${profile_id})`,
           op: "prisma",
         },
-        function findFirstOrThrow() {
-          return Student_Schema.parse(
-            prisma.student.findFirstOrThrow({
+        async function findFirstOrThrow() {
+          return Student_Schema.parseAsync(
+            await prisma.student.findFirstOrThrow({
               where: { profile_id },
               include: { interest: true, profile: true },
             }),

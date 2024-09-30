@@ -1,5 +1,6 @@
 "use client";
 
+import { useBlockProfile } from ":components/button/BlockProfile";
 import { TRPC_React } from ":trpc/client";
 import { Button } from "@1.ui/react/button";
 import { Plus, Trash } from "@1.ui/react/icons";
@@ -12,6 +13,7 @@ export function AddToMyCircles({ profile_id }: { profile_id: string }) {
     TRPC_React.profile.me.contact.find_by_profile_id.useQuery(profile_id);
   const toggle_contact = TRPC_React.profile.me.contact.toggle.useMutation();
   const utils = TRPC_React.useUtils();
+  const { is_blocked } = useBlockProfile(profile_id);
 
   const toggle_add_contact = useCallback(async () => {
     await toggle_contact.mutateAsync(profile_id);
@@ -33,7 +35,7 @@ export function AddToMyCircles({ profile_id }: { profile_id: string }) {
       <Button
         className="h-fit"
         onPress={toggle_add_contact}
-        isDisabled={toggle_contact.status !== "idle"}
+        isDisabled={is_blocked || toggle_contact.status !== "idle"}
       >
         {find_contact.data ? (
           <div className="flex w-full justify-center gap-2">
