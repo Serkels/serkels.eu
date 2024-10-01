@@ -4,6 +4,7 @@
   "private": true,
   "sideEffects": false,
   "type": "module",
+  "main": "index.js",
   "files": [],
   "dependencies": {
     "@douglasduteil/config...tailwindcss": "workspace:*",

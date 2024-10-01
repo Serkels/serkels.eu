@@ -12,7 +12,7 @@ export function LoginDialog({ children }: PropsWithChildren) {
     <Exchange_Ask_Modal>
       {children}
       <Exchange_Ask_Modal.Dialog>
-        <div className="flex flex-1 flex-col justify-center items-center space-y-10">
+        <div className="flex flex-1 flex-col items-center justify-center space-y-10">
           <h1
             className={`
               mx-auto

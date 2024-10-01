@@ -7,6 +7,7 @@
     "clean": "turbo run clean",
     "dev": "turbo run dev --parallel --continue",
     "format:pkg": "pnpx sort-package-json ./package.json ./packages/@1/*/*/package.json ./packages/@1/*/*/*/package.json ./apps/*/package.json",
+    "format:prettier": "prettier --write .",
     "heroku-postbuild": "pnpm dlx npm-run-all heroku-postbuild:*",
     "heroku-postbuild:00": "pnpm exec turbo run build",
     "heroku-prebuild": "pnpm dlx npm-run-all heroku-prebuild:*",
