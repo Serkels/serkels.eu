@@ -1,6 +1,7 @@
 //
 
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
 import { Suspense } from "react";
@@ -33,6 +34,7 @@ function gtag(){dataLayer.push(arguments);}
       <Suspense>
         <Analytics_Client />
       </Suspense>
+      <VercelAnalytics />
     </>
   );
 }
