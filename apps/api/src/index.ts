@@ -62,6 +62,25 @@ function createContext(
   const headers = new Headers(opts.req.headers as Headers);
 
   return {
+    /**
+     * Placeholder for "@1.modules/auth.next"
+     * As the remote server cannot reatch the bff session
+     * we need to mock it here.
+     * @deprecated should not be called from the remote server
+     */
+    auth: () =>
+      Promise.reject(
+        new Error(
+          "👮 You don't want to to that\n" +
+            "This is a bff function from our @1.modules/auth.next\n" +
+            "If you read this, you're probably doing something wrong " +
+            "like calling this function from the remote trpc server..." +
+            "\n\n" +
+            "Consider changing procedure to a remote friendly one" +
+            "getting the authentication from the jwt request header.\n" +
+            "Or consider switching trpc client to run the procedure on the bff 💘",
+        ),
+      ),
     prisma,
     headers: {
       origin: headers.get("origin") ?? APP_URL,

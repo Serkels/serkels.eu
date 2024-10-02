@@ -1,6 +1,6 @@
 "use server";
 
-import { trpc } from "@1.modules/auth.next/trpc";
+import { trpc_caller } from "@1.infra/trpc/react-query/server";
 import { create_report } from "@1.modules/profile.domain/report";
 import to from "await-to-js";
 import { z } from "zod";
@@ -42,7 +42,7 @@ export async function report(
 
   const input = validatedFields.data;
 
-  const [report_error] = await to(trpc.profile.me.report.mutate(input));
+  const [report_error] = await to(trpc_caller.profile.me.report(input));
   if (report_error) {
     return {
       ...state,

@@ -21,7 +21,6 @@
   "dependencies": {
     "@1.modules/{{snakeCase name}}.domain": "workspace:*",
     "@1.modules/trpc": "workspace:*",
-    "@trpc/server": "10.45.2",
     "date-fns": "4.1.0",
     "zod": "3.23.8"
   },

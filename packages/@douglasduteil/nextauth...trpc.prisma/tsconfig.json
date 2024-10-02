@@ -1,5 +1,10 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "@douglasduteil/config...typescript/base.json",
-  "compilerOptions": {}
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": ".",
+    "composite": true,
+    "emitDeclarationOnly": true
+  }
 }

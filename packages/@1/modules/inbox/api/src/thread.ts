@@ -1,7 +1,6 @@
 //
 
-import { next_auth_procedure, router } from "@1.modules/trpc";
-import { observable } from "@trpc/server/observable";
+import { next_auth_procedure, observable, router } from "@1.modules/trpc";
 import { z } from "zod";
 import { on_message_event } from "./channel/message";
 import send from "./send";

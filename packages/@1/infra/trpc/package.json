@@ -5,13 +5,24 @@
   "keywords": [],
   "sideEffects": false,
   "type": "module",
-  "main": "src/index.ts",
-  "module": "src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "types": "./src/*.ts",
+      "default": "./src/*.ts"
+    }
+  },
   "scripts": {
     "type-check": "tsc --build"
   },
   "prettier": "@1.config/prettier",
   "dependencies": {
+    "@1.infra/database": "workspace:*",
+    "@1.infra/email": "workspace:*",
+    "@1.modules/auth.next": "workspace:*",
     "@1.modules/bookmark.api": "workspace:*",
     "@1.modules/category.api": "workspace:*",
     "@1.modules/core": "workspace:*",
@@ -22,6 +33,7 @@
     "@1.modules/opportunity.api": "workspace:*",
     "@1.modules/profile.api": "workspace:*",
     "@1.modules/trpc": "workspace:*",
+    "@trpc/react-query": "10.45.2",
     "@trpc/server": "10.45.2",
     "superjson": "2.2.1",
     "zod": "3.23.8"

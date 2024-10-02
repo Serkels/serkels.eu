@@ -126,6 +126,9 @@ importers:
 
   apps/www:
     dependencies:
+      '@1.infra/trpc':
+        specifier: workspace:*
+        version: link:../../packages/@1/infra/trpc
       '@1.modules/auth.next':
         specifier: workspace:*
         version: link:../../packages/@1/modules/auth/next
@@ -298,9 +301,6 @@ importers:
       '@1.config/typescript':
         specifier: workspace:*
         version: link:../../packages/@1/config/typescript
-      '@1.infra/trpc':
-        specifier: workspace:*
-        version: link:../../packages/@1/infra/trpc
       '@douglasduteil/datatypes...hours-to-seconds':
         specifier: workspace:*
         version: link:../../packages/@douglasduteil/datatypes...hours-to-seconds
@@ -465,6 +465,15 @@ importers:
 
   packages/@1/infra/trpc:
     dependencies:
+      '@1.infra/database':
+        specifier: workspace:*
+        version: link:../database
+      '@1.infra/email':
+        specifier: workspace:*
+        version: link:../email
+      '@1.modules/auth.next':
+        specifier: workspace:*
+        version: link:../../modules/auth/next
       '@1.modules/bookmark.api':
         specifier: workspace:*
         version: link:../../modules/bookmark/api
@@ -495,6 +504,9 @@ importers:
       '@1.modules/trpc':
         specifier: workspace:*
         version: link:../../modules/trpc
+      '@trpc/react-query':
+        specifier: 10.45.2
+        version: 10.45.2(@tanstack/react-query@4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/client@10.45.2(@trpc/server@10.45.2))(@trpc/server@10.45.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@trpc/server':
         specifier: 10.45.2
         version: 10.45.2
@@ -593,9 +605,6 @@ importers:
       '@sentry/types':
         specifier: 8.32.0
         version: 8.32.0
-      '@trpc/client':
-        specifier: 10.45.2
-        version: 10.45.2(@trpc/server@10.45.2)
       await-to-js:
         specifier: 3.0.0
         version: 3.0.0
@@ -621,9 +630,6 @@ importers:
       '@1.config/typescript':
         specifier: workspace:*
         version: link:../../../config/typescript
-      '@1.infra/trpc':
-        specifier: workspace:*
-        version: link:../../../infra/trpc
       '@douglasduteil/datatypes...hours-to-seconds':
         specifier: workspace:*
         version: link:../../../../@douglasduteil/datatypes...hours-to-seconds
@@ -645,9 +651,6 @@ importers:
       '@1.modules/trpc':
         specifier: workspace:*
         version: link:../../trpc
-      '@trpc/server':
-        specifier: 10.45.2
-        version: 10.45.2
       date-fns:
         specifier: 4.1.0
         version: 4.1.0
@@ -738,9 +741,6 @@ importers:
       '@1.modules/trpc':
         specifier: workspace:*
         version: link:../../trpc
-      '@trpc/server':
-        specifier: 10.45.2
-        version: 10.45.2
       '@typeschema/zod':
         specifier: 0.14.0
         version: 0.14.0(@types/json-schema@7.0.15)(zod@3.23.8)
@@ -865,9 +865,6 @@ importers:
       '@1.modules/trpc':
         specifier: workspace:*
         version: link:../../trpc
-      '@trpc/server':
-        specifier: 10.45.2
-        version: 10.45.2
       date-fns:
         specifier: 4.1.0
         version: 4.1.0
@@ -1024,9 +1021,6 @@ importers:
       '@1.modules/trpc':
         specifier: workspace:*
         version: link:../../trpc
-      '@trpc/server':
-        specifier: 10.45.2
-        version: 10.45.2
       date-fns:
         specifier: 4.1.0
         version: 4.1.0
@@ -1159,9 +1153,6 @@ importers:
       '@1.modules/trpc':
         specifier: workspace:*
         version: link:../../trpc
-      '@trpc/server':
-        specifier: 10.45.2
-        version: 10.45.2
       date-fns:
         specifier: 4.1.0
         version: 4.1.0
@@ -1282,9 +1273,6 @@ importers:
       '@1.modules/trpc':
         specifier: workspace:*
         version: link:../../trpc
-      '@trpc/server':
-        specifier: 10.45.2
-        version: 10.45.2
       date-fns:
         specifier: 4.1.0
         version: 4.1.0
@@ -1390,9 +1378,6 @@ importers:
       '@1.modules/trpc':
         specifier: workspace:*
         version: link:../../trpc
-      '@trpc/server':
-        specifier: 10.45.2
-        version: 10.45.2
       date-fns:
         specifier: 4.1.0
         version: 4.1.0
@@ -1516,9 +1501,6 @@ importers:
       '@douglasduteil/nextauth...trpc.prisma':
         specifier: workspace:*
         version: link:../../../../@douglasduteil/nextauth...trpc.prisma
-      '@trpc/server':
-        specifier: 10.45.2
-        version: 10.45.2
       ts-pattern:
         specifier: 5.4.0
         version: 5.4.0
@@ -1615,6 +1597,9 @@ importers:
       '@1.infra/email':
         specifier: workspace:*
         version: link:../../infra/email
+      '@1.modules/auth.next':
+        specifier: workspace:*
+        version: link:../auth/next
       '@1.modules/profile.domain':
         specifier: workspace:*
         version: link:../profile/domain
@@ -8159,7 +8144,7 @@ snapshots:
       '@cucumber/ci-environment': 10.0.1
       '@cucumber/cucumber-expressions': 17.1.0
       '@cucumber/gherkin': 28.0.0
-      '@cucumber/gherkin-streams': 5.0.1(@cucumber/gherkin@28.0.0)(@cucumber/message-streams@4.0.1(@cucumber/messages@24.1.0))(@cucumber/messages@24.1.0)
+      '@cucumber/gherkin-streams': 5.0.1(@cucumber/gherkin@28.0.0)(@cucumber/message-streams@4.0.1(@cucumber/messages@25.0.1))(@cucumber/messages@24.1.0)
       '@cucumber/gherkin-utils': 9.0.0
       '@cucumber/html-formatter': 21.3.1(@cucumber/messages@24.1.0)
       '@cucumber/message-streams': 4.0.1(@cucumber/messages@24.1.0)
@@ -8198,7 +8183,7 @@ snapshots:
       yaml: 2.5.0
       yup: 1.2.0
 
-  '@cucumber/gherkin-streams@5.0.1(@cucumber/gherkin@28.0.0)(@cucumber/message-streams@4.0.1(@cucumber/messages@24.1.0))(@cucumber/messages@24.1.0)':
+  '@cucumber/gherkin-streams@5.0.1(@cucumber/gherkin@28.0.0)(@cucumber/message-streams@4.0.1(@cucumber/messages@25.0.1))(@cucumber/messages@24.1.0)':
     dependencies:
       '@cucumber/gherkin': 28.0.0
       '@cucumber/message-streams': 4.0.1(@cucumber/messages@24.1.0)

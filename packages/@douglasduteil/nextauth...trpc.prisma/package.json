@@ -23,7 +23,9 @@
     }
   },
   "scripts": {
-    "type-check": "tsc --noEmit"
+    "dev": "tsc --build --watch --preserveWatchOutput",
+    "build": "tsc --build",
+    "type-check": "tsc --build"
   },
   "prettier": "@1.config/prettier",
   "dependencies": {

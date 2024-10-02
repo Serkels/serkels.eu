@@ -25,7 +25,6 @@
     "@1.modules/profile.domain": "workspace:*",
     "@1.modules/trpc": "workspace:*",
     "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
-    "@trpc/server": "10.45.2",
     "ts-pattern": "5.4.0",
     "zod": "3.23.8"
   },
