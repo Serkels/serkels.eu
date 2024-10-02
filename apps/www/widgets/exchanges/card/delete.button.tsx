@@ -26,10 +26,10 @@ export function Exchange_Delete_Button() {
   return (
     <Button
       variant={{ intent: "light", size: "sm", state: "ghost" }}
-      className="box-content h-7 p-2"
+      className="box-content h-4 md:h-7 md:p-2"
       onPress={() => set_outlet({ state: "should_delete" })}
     >
-      <Trash className="h-4 text-white" />
+      <Trash className="h-4 text-gray-500" />
     </Button>
   );
 }

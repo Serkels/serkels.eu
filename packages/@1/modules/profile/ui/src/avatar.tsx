@@ -34,7 +34,7 @@ export function StudentAvatarMedia(
       {...other_props}
     >
       <UI_AvatarMedia.SubTitle>
-        <School className="mr-1.5 inline-block w-5" />
+        <School className="mr-1.5 inline-block w-4" />
         <span className="align-bottom">{university}</span>
       </UI_AvatarMedia.SubTitle>
     </UI_AvatarMedia>
