@@ -14,7 +14,8 @@ node_modules/
 .env.*.heroku
 
 # ...
-!*.sql
 _
+!*.sql
 @ts-nocheck/
+dist
 tsconfig.tsbuildinfo

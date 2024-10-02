@@ -3,7 +3,12 @@
 import { Profile_Schema } from "@1.modules/profile.domain";
 import { gravatarUrlFor } from "@1.modules/profile.domain/gravatarUrlFor";
 import { create_report } from "@1.modules/profile.domain/report";
-import { next_auth_procedure, router, with_next_cursor } from "@1.modules/trpc";
+import {
+  next_auth_procedure,
+  router,
+  session_procedure,
+  with_next_cursor,
+} from "@1.modules/trpc";
 import { z } from "zod";
 import added_by from "./me/added_by";
 import blacklist from "./me/blacklist";
@@ -86,7 +91,7 @@ const update = next_auth_procedure
 
 //
 
-const report = next_auth_procedure
+const report = session_procedure
   .input(create_report)
   .mutation(({ ctx, input }) => {
     const { attachments, email, link, comment, category } = input;

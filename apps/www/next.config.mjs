@@ -82,7 +82,7 @@ const nextConfig = {
       },
 
       {
-        source: "/api/trpc/:path*",
+        source: "/api/$/trpc/:path*",
         destination: `${ENV.API_URL}/trpc/:path*`,
       },
 

@@ -14,6 +14,7 @@ import { student_api_router } from "@1.modules/profile.api/student";
 import { procedure, router } from "@1.modules/trpc";
 import type { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
 import { z } from "zod";
+import health_api_router from "./health";
 
 //
 
@@ -22,7 +23,7 @@ export const root_router = router({
   category: category_api_router,
   exchanges: exchange_api_router,
   forum: forum_api_router,
-  health: procedure.query(() => ({ status: "ok" })),
+  health: health_api_router,
   inbox: inbox_api_router,
   opportunity: opportunity_api_router,
   partner: partner_api_router,

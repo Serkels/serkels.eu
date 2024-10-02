@@ -7,6 +7,7 @@
   "main": "./index.ts",
   "types": "./index.ts",
   "scripts": {
+    "dev": "tsc --build --watch --preserveWatchOutput",
     "type-check": "tsc --build"
   },
   "prettier": "@1.config/prettier",

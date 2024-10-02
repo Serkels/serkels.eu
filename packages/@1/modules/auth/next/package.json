@@ -17,6 +17,7 @@
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "scripts": {
+    "dev": "tsc --build --watch --preserveWatchOutput",
     "type-check": "tsc --build"
   },
   "prettier": "@1.config/prettier",
@@ -30,7 +31,6 @@
     "@auth/prisma-adapter": "2.5.3",
     "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
     "@sentry/types": "8.32.0",
-    "@trpc/client": "10.45.2",
     "await-to-js": "3.0.0",
     "next": "14.2.14",
     "next-auth": "5.0.0-beta.22",
@@ -41,7 +41,6 @@
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
-    "@1.infra/trpc": "workspace:*",
     "@douglasduteil/datatypes...hours-to-seconds": "workspace:*",
     "@types/react": "18.3.10",
     "@types/react-dom": "18.3.0",

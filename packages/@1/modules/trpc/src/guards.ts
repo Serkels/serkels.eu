@@ -37,3 +37,40 @@ export const next_auth_procedure = procedure
 export const maybe_next_auth_procedure = procedure.use(
   verify_next_auth_token<{ profile?: AuthProfile }>(true),
 );
+
+export function set_next_auth_session() {
+  return middleware(async function guard_session_middleware({ ctx, next }) {
+    const { auth } = ctx;
+    try {
+      const session = await auth();
+      return next({
+        ctx: {
+          ...ctx,
+          session,
+        },
+      });
+    } catch (cause) {
+      throw new TRPCError({ code: "UNAUTHORIZED", cause });
+    }
+  });
+}
+
+export const maybe_session_procedure = procedure.use(set_next_auth_session());
+
+export const session_procedure = maybe_session_procedure.use(
+  async ({ ctx, next }) => {
+    const { session } = ctx;
+    if (!session?.profile) {
+      throw new TRPCError({
+        code: "UNAUTHORIZED",
+        cause: new Error("No profile"),
+      });
+    }
+    return next({
+      ctx: {
+        ...ctx,
+        session,
+      },
+    });
+  },
+);

@@ -6,6 +6,7 @@ import type { ProcedureBuilder, ProcedureParams } from "@trpc/server";
 
 //
 
+export { observable } from "@trpc/server/observable";
 export type { Context } from "./context";
 export const create_nextauth_header = any_create_nextauth_header<{
   profile: Pick<Profile, "id" | "role">;
@@ -19,7 +20,12 @@ export {
   router,
 } from "./trpc";
 
-export { maybe_next_auth_procedure, next_auth_procedure } from "./guards";
+export {
+  maybe_next_auth_procedure,
+  maybe_session_procedure,
+  next_auth_procedure,
+  session_procedure,
+} from "./guards";
 
 export type inferProcedureInput<TQuery extends ProcedureBuilder<any>> =
   TQuery extends ProcedureBuilder<infer TParams>

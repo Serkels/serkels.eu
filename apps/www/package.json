@@ -11,6 +11,7 @@
   },
   "prettier": "@1.config/prettier/tailwindcss.js",
   "dependencies": {
+    "@1.infra/trpc": "workspace:*",
     "@1.modules/auth.next": "workspace:*",
     "@1.modules/bookmark.ui": "workspace:*",
     "@1.modules/category.domain": "workspace:*",

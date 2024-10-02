@@ -282,7 +282,7 @@
       },
       {
         "label": "🧪 Cypress Run : Current file",
-        "command": "pnpm run test --spec ${fileDirname}/${fileBasename}",
+        "command": "pnpm run test --headed --spec ${fileDirname}/${fileBasename}",
         "type": "shell",
         "group": "build",
         "options": {

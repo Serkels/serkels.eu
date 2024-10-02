@@ -1,0 +1,8 @@
+.gitignore
+.next
+.prisma
+*.hbs
+*.svg
+dist
+node_modules
+pnpm-lock.yaml
