@@ -13,9 +13,9 @@ export function LoginForm({
 }) {
   return (
     <div className="grid grid-cols-1 gap-5 rounded-md border bg-white px-4 py-5 text-Dove_Gray shadow-[10px_10px_10px_#00000029]">
-      <SignUp onSubmit={onSignUp} />
-      <hr />
       <Login onSubmit={onLogin} />
+      <hr />
+      <SignUp onSubmit={onSignUp} />
     </div>
   );
 }
