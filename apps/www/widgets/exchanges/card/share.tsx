@@ -11,7 +11,7 @@ export function Exchange_Share() {
   const exchange = useExchange();
   const href = `${window.location.origin}/exchanges/${exchange.id}`;
   return (
-    <Share_Button className="px-0" href={href}>
+    <Share_Button href={href}>
       <VisuallyHidden>Share the exchange</VisuallyHidden>
       <Share className="size-5 text-white" />
     </Share_Button>
