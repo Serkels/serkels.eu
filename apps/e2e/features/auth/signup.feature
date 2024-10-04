@@ -8,11 +8,9 @@ Contexte:
     Etant donné que je navigue sur la page
 
     Quand je clique sur le bouton "Créer un compte"
-    Et je vois le champ "Adresse email d'inscription"
-
     * je clique sur le champ "Adresse email d'inscription"
     * je tape "didier@yopmail.com"
-    Et je vois le bouton "Valider"
+    Alors je vois le bouton "Valider"
     
     Quand je clique sur le bouton "Valider"
   
