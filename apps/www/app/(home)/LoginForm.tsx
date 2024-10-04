@@ -56,7 +56,6 @@ export function SignUp({ onSubmit }: SignUpProps) {
             </>
           )}
           {submitted && errors.email && (
-            // Si formulaire est soumis et que le champs email est vide ou invalide
             <div className="text-sm text-red-500">{errors.email}</div>
           )}
           <Button
@@ -65,13 +64,10 @@ export function SignUp({ onSubmit }: SignUpProps) {
             isDisabled={isSubmitting}
             onPress={() => {
               if (!showEmailField) {
-                // Premier clic : afficher le champ email ==>
                 setShowEmailField(true);
               } else if (values.email && !errors.email) {
-                // Si l'email est rempli et valide ==>
                 setFieldValue("as", PROFILE_ROLES.enum.STUDENT);
               }
-              // Second clic : état formulaire soumis ==>
               if (showEmailField) {
                 setSubmitted(true);
               }
