@@ -8,7 +8,7 @@ Contexte:
     Etant donné que je navigue sur la page
 
     Quand je clique sur le bouton "Créer un compte"
-    Alors je vous le champ "Adresse email d'inscription"
+    Alors je vois le champ "Adresse email d'inscription"
 
     Quand je clique sur le champ "Adresse email d'inscription"
     * je tape "didier@yopmail.com"
