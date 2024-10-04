@@ -8,9 +8,8 @@ import { tv } from "tailwind-variants";
 import { Card } from "./Card";
 import { Publish_Date } from "./Date";
 import { InfoBar } from "./InfoBar";
-import { useExchange, useExchangeMeta } from "./context";
+import { useExchange } from "./context";
 import { exchange_card } from "./exchange_card";
-
 //
 
 export function Card_Idle({ children }: PropsWithChildren) {
@@ -20,8 +19,6 @@ export function Card_Idle({ children }: PropsWithChildren) {
     type: exchange.type,
   });
   const { title, description } = exchange;
-  const { is_yours } = useExchangeMeta();
-  const { withEdit, classic } = style();
 
   return (
     <div id={exchange.id} className={base()}>
@@ -36,12 +33,15 @@ export function Card_Idle({ children }: PropsWithChildren) {
             </AvatarMedia>
           </Card.Header.Left.Renderer>
           <Card.Header.Center.Renderer childs={children}>
-            <div>
-              <figure className="flex flex-col items-end md:items-center ">
+            <div
+              className="
+            flex h-full items-center justify-center"
+            >
+              <figure className="flex flex-col items-end md:items-center">
                 <div className="text-xl font-bold text-primary">
                   {`${exchange.deals.length} / ${exchange.places}`}
                 </div>
-                <figcaption className="text-center text-sm">
+                <figcaption className="text-center text-gray-500">
                   participant{exchange.places > 1 ? "s" : ""}
                 </figcaption>
               </figure>
@@ -72,7 +72,9 @@ export function Card_Idle({ children }: PropsWithChildren) {
             <p>{description}</p>
           </Card.Body.Renderer>
         </article>
-        <Publish_Date />
+        <div className="flex justify-between">
+          <Publish_Date />
+        </div>
       </div>
       <footer className={footer()}>
         <div className="col-span-1 justify-self-start">
@@ -85,7 +87,7 @@ export function Card_Idle({ children }: PropsWithChildren) {
             ...
           </Card.Footer.Center.Renderer>
         </div>
-        <div className={is_yours ? withEdit() : classic()}>
+        <div className={style()}>
           <Card.Footer.Right.Renderer childs={children}>
             <Share className="size-5" />
           </Card.Footer.Right.Renderer>
@@ -111,9 +113,5 @@ export function ExchangeMenu({ exchange_id }: { exchange_id: string }) {
 }
 
 const style = tv({
-  base: "",
-  slots: {
-    withEdit: "col-start-6 columns-3 items-center gap-4 justify-self-end",
-    classic: "col-start-6 justify-self-end",
-  },
+  base: "col-start-6 flex items-center justify-self-end",
 });

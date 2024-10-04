@@ -39,7 +39,7 @@ export function Share_Button({
     <DialogTrigger>
       <button
         ref={trigger_ref}
-        className={button({ intent: "light" })}
+        className={button({ intent: "light", className: "h-11 p-2" })}
         onClick={copy_to_clipboard}
       >
         {children}

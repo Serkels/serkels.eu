@@ -90,6 +90,7 @@ export const button = tv({
       outline: "border-2 bg-transparent text-black/50",
     },
     size: {
+      xs: "h-4 px-0 text-xs",
       sm: "h-5 px-2 text-sm",
       md: "h-7 px-4 text-base",
       lg: "h-8 px-8 text-lg",
