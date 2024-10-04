@@ -10,9 +10,7 @@ Contexte:
     Quand je clique sur le bouton "Créer un compte"
     * je clique sur le champ "Adresse email d'inscription"
     * je tape "didier@yopmail.com"
-    Alors je vois le bouton "Valider"
-    
-    Quand je clique sur le bouton "Valider"
+    * je clique sur le bouton "Valider"
   
     Alors je vois "Consultez votre boite mail pour confirmer votre identité"
 
