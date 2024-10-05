@@ -9,7 +9,7 @@
   "dependencies": {
     "@douglasduteil/config...tailwindcss": "workspace:*",
     "prettier": "3.3.3",
-    "prettier-plugin-organize-imports": "^4.0.0"
+    "prettier-plugin-organize-imports": "^4.1.0"
   },
   "devDependencies": {
     "typescript": "5.6.2"
