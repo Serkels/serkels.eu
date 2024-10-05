@@ -1,24 +1,13 @@
 "use client";
 
-import * as Sentry from "@sentry/nextjs";
-// import Error from "next/error";
-import { Error_Layout } from ":components/Error_Layout";
 import { MenuBurger } from ":components/burger";
+import { Error_Layout } from ":components/Error_Layout";
 import { BigBar } from ":components/shell/BigBar";
+import SerkelsLogo from ":components/shell/SerkelsLogo";
 import { ErrorOccur } from "@1.ui/react/error";
-import { VisuallyHidden } from "@1.ui/react/visually_hidden";
-import dynamic from "next/dynamic";
+import * as Sentry from "@sentry/nextjs";
 import Link from "next/link";
 import { useEffect } from "react";
-
-//
-
-const SerkelsLogo = dynamic(() => import(":components/shell/SerkelsLogo"), {
-  ssr: false,
-  loading() {
-    return <VisuallyHidden>Serkels</VisuallyHidden>;
-  },
-});
 
 //
 export default function GlobalError({ error }: { error: Error }) {

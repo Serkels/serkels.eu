@@ -11,6 +11,7 @@ import {
   splitLink,
   wsLink,
   type inferReactQueryProcedureOptions,
+  type TRPCWebSocketClient,
 } from "@trpc/react-query";
 import { useEffect, useState, type PropsWithChildren } from "react";
 import SuperJSON from "superjson";
@@ -24,67 +25,93 @@ export const TRPC_React = createTRPCReact<Router>({
   abortOnUnmount: true,
 });
 
-function useTRPCClient() {
-  const { data: session, status } = useSession();
+//
 
-  const [trpc_client, set_trpc_client] =
-    useState<ReturnType<typeof TRPC_React.createClient>>();
+function trpc_config({
+  ws_client,
+  session_header,
+}: {
+  ws_client: TRPCWebSocketClient | undefined;
+  session_header: Record<string, string>;
+}) {
+  const links = [
+    loggerLink({
+      enabled: (opts) =>
+        (process.env.NODE_ENV === "development" &&
+          typeof window !== "undefined") ||
+        (opts.direction === "down" && opts.result instanceof Error),
+    }),
+  ];
 
-  useEffect(() => {
-    if (status === "loading") return;
-
-    const client = createWSClient({
-      url: `${process.env["NEXT_PUBLIC_WEBSOCKET_URL"]}`,
-    });
-
-    const links = [
-      loggerLink({
-        enabled: (opts) =>
-          (process.env.NODE_ENV === "development" &&
-            typeof window !== "undefined") ||
-          (opts.direction === "down" && opts.result instanceof Error),
-      }),
+  if (ws_client) {
+    links.push(
       splitLink({
         condition(op) {
           return op.type === "subscription";
         },
         true: wsLink({
-          client,
+          client: ws_client,
         }),
         false: httpBatchLink({
           url: "/api/$/trpc",
           headers: () => {
-            return { ...session?.header };
+            return { ...session_header };
           },
         }),
       }),
-    ];
+    );
+  } else {
+    links.push(
+      httpBatchLink({
+        url: "/api/$/trpc",
+        headers: () => {
+          return { ...session_header };
+        },
+      }),
+    );
+  }
 
-    //
+  return TRPC_React.createClient({
+    links,
+    transformer: SuperJSON,
+  });
+}
 
-    const _trpc_client = TRPC_React.createClient({
-      links,
-      transformer: SuperJSON,
+//
+
+function useTrpcWsClient() {
+  const [ws_client, set_ws_client] = useState<TRPCWebSocketClient>();
+
+  useEffect(() => {
+    const client = createWSClient({
+      url: `${process.env["NEXT_PUBLIC_WEBSOCKET_URL"]}`,
     });
+    set_ws_client(client);
+    return client.close;
+  }, []);
 
-    //
+  return ws_client;
+}
 
-    set_trpc_client(_trpc_client);
-
-    return () => {
-      if (client) client.close();
-    };
+function useTrpcClient() {
+  const { data: session, status } = useSession();
+  const ws_client = useTrpcWsClient();
+  const [trpc_client, set_trpc_client] = useState(() =>
+    trpc_config({ ws_client, session_header: session?.header ?? {} }),
+  );
+  useEffect(() => {
+    set_trpc_client(
+      trpc_config({ ws_client, session_header: session?.header ?? {} }),
+    );
   }, [status]);
-
   return trpc_client;
 }
+
+//
+
 export function TrpcProvider({ children }: PropsWithChildren) {
-  // const session = useSession();
-
   const query_client = useQueryClient();
-  const trpc_client = useTRPCClient();
-
-  if (!trpc_client) return null;
+  const trpc_client = useTrpcClient();
 
   return (
     <TRPC_React.Provider client={trpc_client} queryClient={query_client}>

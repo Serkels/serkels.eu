@@ -8,6 +8,7 @@ import type { Entity } from "@1.modules/core/domain";
 import { Exchange_Filter, type Exchange } from "@1.modules/exchange.domain";
 import { Exchange_AsyncCard } from "@1.modules/exchange.ui/Card/AsyncCard";
 import { EmptyList, Loading, LoadMoreButton } from "@1.ui/react/async";
+import { AppearMotion } from "@1.ui/react/motion/AppearMotion";
 import { useSearchParams } from "next/navigation";
 import { useEffect, type ComponentProps, type ReactNode } from "react";
 import { match, P } from "ts-pattern";
@@ -23,6 +24,7 @@ function useQueryExchanges(input: {
 }) {
   return TRPC_React.exchanges.find.useInfiniteQuery(input, {
     getNextPageParam: ({ next_cursor }) => next_cursor,
+    keepPreviousData: true,
   });
 }
 type QueryExchanges = ReturnType<typeof useQueryExchanges>;
@@ -53,8 +55,13 @@ export default function AsyncInfiniteList() {
     .with({ status: "error", error: P.select() }, (error) => {
       throw error;
     })
+    .with({ status: "loading", data: P.not(P.nullish) }, (latest_info) => (
+      <List key="exchange_list" {...(latest_info as any)} />
+    ))
     .with({ status: "loading" }, () => <Loading />)
-    .with({ status: "success" }, (success_info) => <List {...success_info} />)
+    .with({ status: "success" }, (success_info) => (
+      <List key="exchange_list" {...success_info} />
+    ))
     .exhaustive();
 }
 
@@ -73,9 +80,11 @@ function List(query_info: QueryExchangesSuccessResult) {
   return (
     <ul className="grid grid-cols-1 gap-9">
       {flatten_pages.map((item) => (
-        <li key={item.id}>
-          <Item {...item} />
-        </li>
+        <AppearMotion key={item.id} layout>
+          <li id={item.id}>
+            <Item {...item} />
+          </li>
+        </AppearMotion>
       ))}
       {match({ isFetchingNextPage, hasNextPage })
         .with({ isFetchingNextPage: true }, () => <Loading_Placeholder />)

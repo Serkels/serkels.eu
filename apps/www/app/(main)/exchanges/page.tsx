@@ -51,7 +51,7 @@ export default async function Page({
       <main>
         <NewExchangeSection />
 
-        <List />
+        <List key="list" />
       </main>
     </TRPC_Hydrate>
   );

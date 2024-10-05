@@ -1,6 +1,7 @@
 "use client";
 
 import { TRPC_React } from ":trpc/client";
+import { useSession } from "@1.modules/auth.next/react";
 import { NotificationGroup } from "@1.modules/notification.domain";
 import { DotIndicator } from "@1.modules/notification.ui/DotIndicator";
 import { badge } from "@1.ui/react/badge/atom";
@@ -9,10 +10,14 @@ import { useAsync, useUpdateEffect } from "@react-hookz/web";
 //
 
 export function Notification_DotIndicator() {
+  const { status } = useSession();
   const utils = TRPC_React.useUtils();
   const { data: count_unread } = TRPC_React.notification.count_unread.useQuery(
     {},
-    { refetchInterval: 1_000 * 30 },
+    {
+      enabled: status === "authenticated",
+      refetchInterval: 1_000 * 30,
+    },
   );
 
   const [, { execute }] = useAsync(() =>
@@ -37,11 +42,15 @@ export function Notification_DotIndicator() {
 }
 
 export function MessageNews_DotIndicator() {
+  const { status } = useSession();
   const utils = TRPC_React.useUtils();
   const { data: count_unread, dataUpdatedAt } =
-    TRPC_React.notification.count_unread.useQuery({
-      type: NotificationGroup.Enum.INBOX,
-    });
+    TRPC_React.notification.count_unread.useQuery(
+      {
+        type: NotificationGroup.Enum.INBOX,
+      },
+      { enabled: status === "authenticated" },
+    );
 
   useUpdateEffect(() => {
     utils.inbox.find.invalidate();
@@ -54,11 +63,15 @@ export function MessageNews_DotIndicator() {
 }
 
 export function ExchangeNews_DotIndicator() {
+  const { status } = useSession();
   const utils = TRPC_React.useUtils();
   const { data: count_unread, dataUpdatedAt } =
-    TRPC_React.notification.count_unread.useQuery({
-      type: NotificationGroup.Enum.EXCHANGE,
-    });
+    TRPC_React.notification.count_unread.useQuery(
+      {
+        type: NotificationGroup.Enum.EXCHANGE,
+      },
+      { enabled: status === "authenticated" },
+    );
 
   useUpdateEffect(() => {
     utils.exchanges.me.find.invalidate();
@@ -71,16 +84,24 @@ export function ExchangeNews_DotIndicator() {
 }
 
 export function NewsInMessage_Indicator() {
-  const { data: count_unread } = TRPC_React.notification.count_unread.useQuery({
-    type: NotificationGroup.Enum.INBOX,
-  });
+  const { status } = useSession();
+  const { data: count_unread } = TRPC_React.notification.count_unread.useQuery(
+    {
+      type: NotificationGroup.Enum.INBOX,
+    },
+    { enabled: status === "authenticated" },
+  );
   return <Notification_CountIndicator count={count_unread} />;
 }
 
 export function NewsInExchange_Indicator() {
-  const { data: count_unread } = TRPC_React.notification.count_unread.useQuery({
-    type: NotificationGroup.Enum.EXCHANGE,
-  });
+  const { status } = useSession();
+  const { data: count_unread } = TRPC_React.notification.count_unread.useQuery(
+    {
+      type: NotificationGroup.Enum.EXCHANGE,
+    },
+    { enabled: status === "authenticated" },
+  );
   return <Notification_CountIndicator count={count_unread} />;
 }
 
