@@ -28,7 +28,7 @@
     "@1.modules/core": "workspace:*",
     "@1.modules/profile.domain": "workspace:*",
     "@1.ui/react": "workspace:*",
-    "@auth/prisma-adapter": "2.5.3",
+    "@auth/prisma-adapter": "2.6.0",
     "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
     "@sentry/types": "8.32.0",
     "await-to-js": "3.0.0",
