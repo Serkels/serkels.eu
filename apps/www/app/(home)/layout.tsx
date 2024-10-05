@@ -3,19 +3,9 @@
 import { MenuBurger } from ":components/burger";
 import { AppFooter } from ":components/shell/AppFooter.server";
 import { BigBar } from ":components/shell/BigBar";
-import { VisuallyHidden } from "@1.ui/react/visually_hidden";
-import dynamic from "next/dynamic";
+import SerkelsLogo from ":components/shell/SerkelsLogo";
 import Link from "next/link";
 import type { PropsWithChildren } from "react";
-
-//
-
-const SerkelsLogo = dynamic(() => import(":components/shell/SerkelsLogo"), {
-  ssr: false,
-  loading() {
-    return <VisuallyHidden>Serkels</VisuallyHidden>;
-  },
-});
 
 //
 
