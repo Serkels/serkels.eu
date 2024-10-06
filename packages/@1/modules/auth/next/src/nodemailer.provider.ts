@@ -22,10 +22,15 @@ export default Nodemailer({
   server: { url: EMAIL_SERVER },
   async sendVerificationRequest(params) {
     const sender = new Email_Sender(process.env as any);
+    const token_url = new URL(params.url);
+    const url = new URL(
+      token_url.pathname + token_url.search + token_url.hash,
+      APP_URL,
+    );
     await sender.send_react_email(
       SerkelsMagicLinkEmail({
         base_url: params.request.headers.get("origin") ?? APP_URL,
-        url: params.url,
+        url: url.toString(),
       }),
       {
         subject: "[Serkels] Connexion",
