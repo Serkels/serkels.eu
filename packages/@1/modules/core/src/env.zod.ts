@@ -33,13 +33,13 @@ export const env_app_url_schema = z
       VERCEL_URL,
     }) => ({
       APP_URL:
+        APP_URL ??
         (NEXT_PUBLIC_VERCEL_ENV === "production"
           ? NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL
           : undefined) ??
         (NEXT_PUBLIC_VERCEL_ENV === "preview"
           ? NEXT_PUBLIC_VERCEL_URL
           : undefined) ??
-        VERCEL_URL ??
-        APP_URL,
+        VERCEL_URL,
     }),
   );

@@ -21,3 +21,9 @@
 | :fr: France | :construction: master | https://master.serkels.fr/ |
 | :fr: France | :test_tube: beta      | https://beta.serkels.fr/   |
 | :fr: France | :rocket: v2024.08.0   | https://serkels.fr/        |
+
+### Direct yopmail compte
+
+- https://YOPmail.com?login=douglas
+- https://YOPmail.com?login=johan
+- https://YOPmail.com?login=dino
