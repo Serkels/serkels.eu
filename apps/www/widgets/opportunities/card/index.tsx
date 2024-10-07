@@ -29,10 +29,13 @@ export function Card({ opportunity }: { opportunity: CardOportunity }) {
     <Link href={href}>
       <Opoortunity_Card opportunity={opportunity}>
         <Opoortunity_Card.Footer_Actions>
-          <div className="flex" onClick={preventNProgressLoader}>
+          <div
+            className="flex items-center gap-2"
+            onClick={preventNProgressLoader}
+          >
             {is_student ? (
               <BookmarkItem_Query
-                className="px-0"
+                className="h-11 p-2"
                 target_id={id}
                 type="opportunity"
               />
@@ -94,7 +97,7 @@ function BookmarkItem_Toggle_Mutation(props: BookmarkButton_Props) {
 
 const style = tv({
   extend: button,
-  base: "size-5",
+  base: "h-full",
   variants: {
     is_in_bookmarks: {
       true: { icon: "text-success" },
