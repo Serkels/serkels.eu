@@ -19,7 +19,7 @@ export function LoginForm({
       <Login onSubmit={onLogin} />
       <div className="inline-flex w-full items-center justify-center px-3">
         <hr className="my-4 h-px w-full border-0 bg-[#BEBEBE] " />
-        <span className="absolute left-1/2 -translate-x-1/2 bg-white px-3 text-[#BEBEBE] ">
+        <span className="absolute left-1/2 -translate-x-1/2 bg-white px-3">
           Ou
         </span>
       </div>
