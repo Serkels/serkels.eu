@@ -15,12 +15,12 @@ export function LoginForm({
   onSignUp: SignUpProps["onSubmit"];
 }) {
   return (
-    <div className="grid grid-cols-1 gap-5 rounded-md border bg-white px-4 py-5 text-Dove_Gray shadow-[10px_10px_10px_#00000029]">
+    <div className="grid grid-cols-1 gap-5 rounded-md border bg-white px-4 py-5 text-[#BEBEBE] shadow-[10px_10px_10px_#00000029]">
       <Login onSubmit={onLogin} />
       <div className="inline-flex w-full items-center justify-center px-3">
-        <hr className="my-4 h-px w-full border-0 bg-Dove_Gray " />
-        <span className="absolute left-1/2 -translate-x-1/2 bg-white px-3 font-medium uppercase text-Dove_Gray ">
-          ou
+        <hr className="my-4 h-px w-full border-0 bg-[#BEBEBE] " />
+        <span className="absolute left-1/2 -translate-x-1/2 bg-white px-3 text-[#BEBEBE] ">
+          Ou
         </span>
       </div>
       <SignUp onSubmit={onSignUp} />
