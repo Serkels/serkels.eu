@@ -77,9 +77,7 @@ export default async function Page({ params }: { params: Params }) {
           <Link href={`/@${profile.id}`}>
             <figure className="flex items-center">
               <img
-                className="mr-4 block rounded-full"
-                width="30"
-                height="30"
+                className="mr-4 block h-10 w-10 rounded-full"
                 src={profile.image}
               />
 
