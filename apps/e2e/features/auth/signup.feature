@@ -7,9 +7,11 @@ Contexte:
   Scénario: Inscription de Didier
     Etant donné que je navigue sur la page
 
-    Quand je clique sur le champ "Adresse email d'inscription"
+    Quand je clique sur le bouton "Créer un compte"
+    * je clique sur le champ "Adresse email d'inscription"
     * je tape "didier@yopmail.com"
-    * je clique sur le bouton "Étudiant"
+    * je clique sur le bouton "Valider"
+  
     Alors je vois "Consultez votre boite mail pour confirmer votre identité"
 
     Quand je clique sur le lien de connexion
