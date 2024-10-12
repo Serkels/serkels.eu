@@ -9,11 +9,11 @@ import {
   create_the_creator_exchange,
 } from "@1.infra/database/seeding";
 import prisma, { empty_database, migrate } from "@1.infra/database/testing";
+import { createCallerFactory, router } from "@1.modules/trpc";
 import {
-  create_nextauth_header,
-  createCallerFactory,
-  router,
-} from "@1.modules/trpc";
+  douglas_golden_nextauth_header,
+  NEXTAUTH_SECRET,
+} from "@1.modules/trpc/testing";
 import {
   afterEach,
   beforeAll,
@@ -25,8 +25,6 @@ import {
 import { find } from "./find";
 
 //
-
-const NEXTAUTH_SECRET = "🔑";
 
 beforeAll(() => {
   process.env["NEXTAUTH_SECRET"] = NEXTAUTH_SECRET;
@@ -42,17 +40,7 @@ beforeAll(() => {
 
 //
 
-let nextauth_header: Awaited<ReturnType<typeof create_nextauth_header>>;
-
-beforeAll(async () => {
-  nextauth_header = await create_nextauth_header({
-    secret: "🔑",
-    token: {
-      from: import.meta.url,
-      profile: { id: "douglas_profile_id", role: "STUDENT" },
-    },
-  });
-});
+const nextauth_header = douglas_golden_nextauth_header;
 
 //
 

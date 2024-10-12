@@ -1,7 +1,7 @@
 //
 
-import { NEXTAUTH_TRPCENV } from "../config";
-import { decode } from "../jwt";
+import { decode } from "@1.modules/auth.next/jwt";
+import { NEXTAUTH_TRPCENV } from "@douglasduteil/nextauth...trpc.prisma/config";
 
 //
 
@@ -11,6 +11,7 @@ export function VerifyNextAuthTokenUseCase<T>(token: string) {
 
     const payload = (await decode({
       token,
+      salt: "🧂",
       secret,
     })) as T;
 

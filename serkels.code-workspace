@@ -237,8 +237,41 @@
         "runOptions": { "instanceLimit": 1 },
       },
       {
+        "label": "📦 Build Modules",
+        "command": "pnpm exec turbo run build --filter=!api --filter=!e2e --filter=!www",
+        "type": "shell",
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:root}",
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "runOptions": { "instanceLimit": 1 },
+      },
+      {
+        "label": "📦 Type Check Modules",
+        "command": "pnpm exec turbo run type-check --filter=!api --filter=!e2e --filter=!www",
+        "type": "shell",
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:root}",
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "runOptions": { "instanceLimit": 1 },
+      },
+      {
         "label": "🧪 Run Test",
         "command": "bun test",
+        "type": "shell",
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:root}",
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "runOptions": { "instanceLimit": 1 },
+      },
+      {
+        "label": "🧪 Run Test : Current file",
+        "command": "bun test ${fileDirname}/${fileBasename}",
         "type": "shell",
         "group": "build",
         "options": {
