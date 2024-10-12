@@ -1,8 +1,8 @@
 //
 
 import type { AuthProfile } from "@1.modules/profile.domain";
-import type { create_nextauth_header } from "@douglasduteil/nextauth...trpc.prisma/jwt";
 import "next-auth";
+import type { create_nextauth_header } from "./jwt";
 
 //
 

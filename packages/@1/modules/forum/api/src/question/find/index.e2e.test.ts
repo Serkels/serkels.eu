@@ -11,12 +11,11 @@ import {
   createCallerFactory,
   router,
 } from "@1.modules/trpc";
+import { NEXTAUTH_SECRET } from "@1.modules/trpc/testing";
 import { beforeAll, describe, expect, setSystemTime, test } from "bun:test";
 import find_quetions from "./index";
 
 //
-
-const NEXTAUTH_SECRET = "🔑";
 
 beforeAll(() => {
   process.env["NEXTAUTH_SECRET"] = NEXTAUTH_SECRET;
@@ -75,16 +74,12 @@ describe("visitor", () => {
   });
 });
 
-describe("connected studient", () => {
-  let nextauth_header: Awaited<ReturnType<typeof create_nextauth_header>>;
-  beforeAll(async () => {
-    nextauth_header = await create_nextauth_header({
-      secret: "🔑",
-      token: {
-        from: import.meta.url,
-        profile: { id: "johan_profile_id", role: "STUDENT" },
-      },
-    });
+describe("connected studient", async () => {
+  const nextauth_header = await create_nextauth_header({
+    secret: "🔑",
+    token: {
+      profile: { id: "johan_profile_id", role: "STUDENT", image: "", name: "" },
+    },
   });
 
   test("find all latest questions", async () => {
