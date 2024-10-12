@@ -1,6 +1,21 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "@1.config/typescript/lib.json",
-  "compilerOptions": { "outDir": "./node_modules/.cache/tsc" },
-  "include": ["src"]
+  "compilerOptions": {
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
+    "noEmit": false,
+    "rootDir": "./src",
+    "outDir": "./dist"
+  },
+  "include": ["src"],
+  "references": [
+    {
+      "path": "../../core"
+    },
+    {
+      "path": "../../profile/domain"
+    }
+  ]
 }

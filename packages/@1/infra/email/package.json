@@ -4,8 +4,16 @@
   "private": true,
   "sideEffects": false,
   "type": "module",
-  "main": "./index.ts",
-  "types": "./index.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./*": {
+      "types": "./dist/*.d.ts",
+      "default": "./dist/*.js"
+    }
+  },
   "scripts": {
     "dev": "tsc --build --watch --preserveWatchOutput",
     "type-check": "tsc --build"

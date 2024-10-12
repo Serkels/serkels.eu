@@ -1,5 +1,6 @@
 "use client";
 
+import { trpc_client } from "@1.infra/trpc/react-query/client";
 import signup_action from "@1.modules/auth.next/actions/signup";
 import type { Category } from "@1.modules/category.domain";
 import { OptionCategories } from "@1.modules/category.ui/form/select";
@@ -40,6 +41,7 @@ export default function Form({ categories }: FormProps) {
     formState: { isSubmitSuccessful, isSubmitting },
   } = form;
 
+  trpc_client.auth;
   const { execute } = useServerAction(signup_action);
 
   const { base } = style();

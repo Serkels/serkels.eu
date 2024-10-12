@@ -17,5 +17,70 @@
     "types": ["gtag.js"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules", ".next"]
+  "exclude": ["node_modules", ".next"],
+  "references": [
+    {
+      "path": "../../packages/@1/config/tailwindcss"
+    },
+    {
+      "path": "../../packages/@1/infra/trpc"
+    },
+    {
+      "path": "../../packages/@1/modules/auth/next"
+    },
+    {
+      "path": "../../packages/@1/modules/bookmark/ui"
+    },
+    {
+      "path": "../../packages/@1/modules/category/domain"
+    },
+    {
+      "path": "../../packages/@1/modules/category/ui"
+    },
+    {
+      "path": "../../packages/@1/modules/core"
+    },
+    {
+      "path": "../../packages/@1/modules/exchange/domain"
+    },
+    {
+      "path": "../../packages/@1/modules/exchange/ui"
+    },
+    {
+      "path": "../../packages/@1/modules/forum/domain"
+    },
+    {
+      "path": "../../packages/@1/modules/forum/ui"
+    },
+    {
+      "path": "../../packages/@1/modules/inbox/domain"
+    },
+    {
+      "path": "../../packages/@1/modules/inbox/ui"
+    },
+    {
+      "path": "../../packages/@1/modules/notification/domain"
+    },
+    {
+      "path": "../../packages/@1/modules/notification/ui"
+    },
+    {
+      "path": "../../packages/@1/modules/opportunity/domain"
+    },
+    {
+      "path": "../../packages/@1/modules/opportunity/ui"
+    },
+    {
+      "path": "../../packages/@1/modules/profile/domain"
+    },
+    {
+      "path": "../../packages/@1/modules/profile/ui"
+    },
+    {
+      "path": "../../packages/@1/ui/react"
+    },
+    {
+      "path": "../../packages/@douglasduteil/nextauth...trpc.prisma"
+    }
+  ]
 }

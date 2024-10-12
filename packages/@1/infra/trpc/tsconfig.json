@@ -1,5 +1,48 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "@1.config/typescript/lib.json",
-  "compilerOptions": { "outDir": "./node_modules/.cache/tsc" }
+  "compilerOptions": {
+    "outDir": "./node_modules/.cache/tsc"
+  },
+  "references": [
+    {
+      "path": "../../modules/auth/next"
+    },
+    {
+      "path": "../../modules/bookmark/api"
+    },
+    {
+      "path": "../../modules/category/api"
+    },
+    {
+      "path": "../../modules/core"
+    },
+    {
+      "path": "../../modules/exchange/api"
+    },
+    {
+      "path": "../../modules/forum/api"
+    },
+    {
+      "path": "../../modules/inbox/api"
+    },
+    {
+      "path": "../../modules/notification/api"
+    },
+    {
+      "path": "../../modules/opportunity/api"
+    },
+    {
+      "path": "../../modules/profile/api"
+    },
+    {
+      "path": "../../modules/trpc"
+    },
+    {
+      "path": "../database"
+    },
+    {
+      "path": "../email"
+    }
+  ]
 }

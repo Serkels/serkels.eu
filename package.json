@@ -17,15 +17,18 @@
     "heroku-prebuild:03": "pnpm exec cpx \"out/**/*\" .",
     "heroku-release": "pnpm dlx npm-run-all heroku-release:*",
     "heroku-release:00": "pnpm --filter @1.infra/database exec prisma migrate deploy",
+    "link:tsconfig": "pnpx @bessonovs/set-project-references --save  && prettier --write **/tsconfig.json",
     "lint": "turbo run lint",
     "start": "turbo run start --parallel --continue --filter www --filter api",
     "studio": "turbo run studio --parallel --continue",
     "test": "bun test",
     "test:watch": "bun test --watch",
-    "type-check": "turbo run type-check"
+    "type-check": "turbo run type-check",
+    "postuninstall": "pnpm run link:tsconfig"
   },
   "devDependencies": {
     "@1.config/happydom": "workspace:*",
+    "@bessonovs/set-project-references": "0.0.10",
     "bun-types": "1.1.29",
     "cpx2": "8.0.0",
     "del-cli": "6.0.0",
@@ -42,7 +45,7 @@
   },
   "pnpm": {
     "overrides": {
-      "next": "14.2.14"
+      "next": "14.2.7"
     },
     "patchedDependencies": {
       "react-nest@0.1.10": "patches/react-nest@0.1.10.patch"

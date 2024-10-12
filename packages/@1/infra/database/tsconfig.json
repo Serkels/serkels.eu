@@ -2,9 +2,11 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "@1.config/typescript/base.json",
   "compilerOptions": {
+    "composite": true,
     "outDir": "./node_modules/.cache/tsc",
     "types": ["bun-types"],
     "rootDir": "."
   },
-  "exclude": ["node_modules", "prisma-client"]
+  "exclude": ["node_modules", "prisma-client"],
+  "references": []
 }
