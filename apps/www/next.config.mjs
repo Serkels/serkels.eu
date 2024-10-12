@@ -12,10 +12,16 @@ let config;
 
 const ENV = z
   .object({
-    API_URL: z.string().url(),
+    API_URL: z.string().url().default("http://localhost:8080"),
     MAINTENANCE: z.coerce.boolean().default(false),
-    STALKER_URL: z.string().url(),
-    STALKER_TRANSPORT_URL: z.string().url(),
+    STALKER_URL: z
+      .string()
+      .url()
+      .default("https://www.googletagmanager.com/gtag/js"),
+    STALKER_TRANSPORT_URL: z
+      .string()
+      .url()
+      .default("https://region1.google-analytics.com"),
   })
   .parse(process.env);
 
