@@ -59,8 +59,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/@1/modules/trpc
       '@hono/node-server':
-        specifier: 1.13.1
-        version: 1.13.1(hono@4.6.4)
+        specifier: 1.13.2
+        version: 1.13.2(hono@4.6.4)
       '@hono/trpc-server':
         specifier: 0.3.2
         version: 0.3.2(@trpc/server@10.45.2)(hono@4.6.4)
@@ -2362,8 +2362,8 @@ packages:
     resolution: {integrity: sha512-y8qtwB2eS4Iqy2frJP1b1zkIYQNcSMTU7FdInsVSV+mQ2JGgih8Pi+j+v+iVnYsnqC+SjZNO/4UUhe16ebvZeA==}
     engines: {node: '>=18.0.0'}
 
-  '@hono/node-server@1.13.1':
-    resolution: {integrity: sha512-TSxE6cT5RHnawbjnveexVN7H2Dpn1YaLxQrCOLCUwD+hFbqbFsnJBgdWcYtASqtWVjA+Qgi8uqFug39GsHjo5A==}
+  '@hono/node-server@1.13.2':
+    resolution: {integrity: sha512-0w8nEmAyx0Ul0CQp8BL2VtAG4YVdpzXd/mvvM+l0G5Oq22pUyHS+KeFFPSY+czLOF5NAiV3MUNPD1n14Ol5svg==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
       hono: ^4
@@ -8362,7 +8362,7 @@ snapshots:
     dependencies:
       happy-dom: 15.7.4
 
-  '@hono/node-server@1.13.1(hono@4.6.4)':
+  '@hono/node-server@1.13.2(hono@4.6.4)':
     dependencies:
       hono: 4.6.4
 
