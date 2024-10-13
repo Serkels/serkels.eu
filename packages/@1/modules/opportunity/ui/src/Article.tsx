@@ -60,9 +60,7 @@ export function Article({
 
       <div className="mb-10">
         <img
-          className="h-auto w-full max-w-full"
-          width="700"
-          height="368"
+          className="max-h-[512px] w-full object-contain"
           src={cover}
           alt={opportunity.title}
         />
