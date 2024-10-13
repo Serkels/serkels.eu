@@ -73,14 +73,19 @@ function Exchange_Action_Ask(exchange: Exchange) {
 //
 
 function Button_FirstExchange({ exchange }: { exchange: Exchange }) {
+  const { is_studient } = useExchangeMeta();
   return match(exchange)
     .with(
       { return_id: P.nullish, type: Exchange_TypeSchema.Enum.PROPOSAL },
-      () => <Button>Demander</Button>,
+      () => <Button isDisabled={!is_studient}>Demander</Button>,
     )
     .with(
       { return_id: P.nullish, type: Exchange_TypeSchema.Enum.RESEARCH },
-      () => <Button>Répondre</Button>,
+      () => <Button isDisabled={!is_studient}>Répondre</Button>,
     )
-    .otherwise(() => <Button intent="warning">Échanger</Button>);
+    .otherwise(() => (
+      <Button intent="warning" isDisabled={!is_studient}>
+        Échanger
+      </Button>
+    ));
 }
