@@ -70,7 +70,7 @@ jobs:
         if: failure()
         with:
           compression-level: 9
-          name: cypress-screenshots-${{ github.run_number }}
+          name: cypress-videos-${{ github.run_number }}
           path: apps/e2e/cypress/videos
 
       - if: failure()
