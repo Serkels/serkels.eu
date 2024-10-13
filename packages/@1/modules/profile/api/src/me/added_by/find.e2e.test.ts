@@ -6,7 +6,11 @@ import {
   create_johan_student,
 } from "@1.infra/database/seeding";
 import prisma, { empty_database, migrate } from "@1.infra/database/testing";
-import { create_nextauth_header, createCallerFactory } from "@1.modules/trpc";
+import { createCallerFactory } from "@1.modules/trpc";
+import {
+  douglas_golden_nextauth_header,
+  NEXTAUTH_SECRET,
+} from "@1.modules/trpc/testing";
 import {
   afterEach,
   beforeAll,
@@ -18,8 +22,6 @@ import {
 import follower_router from "./index";
 
 //
-
-const NEXTAUTH_SECRET = "🔑";
 
 beforeAll(() => {
   process.env["NEXTAUTH_SECRET"] = NEXTAUTH_SECRET;
@@ -33,19 +35,10 @@ beforeAll(() => {
   setSystemTime(new Date("2011-11-11"));
 });
 
+
 //
 
-let nextauth_header: Awaited<ReturnType<typeof create_nextauth_header>>;
-
-beforeAll(async () => {
-  nextauth_header = await create_nextauth_header({
-    secret: "🔑",
-    token: {
-      from: import.meta.url,
-      profile: { id: "douglas_profile_id", role: "STUDENT" },
-    },
-  });
-});
+const nextauth_header = douglas_golden_nextauth_header;
 
 //
 

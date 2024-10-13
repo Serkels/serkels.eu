@@ -2,12 +2,12 @@
 
 import { startSpan } from "@1.modules/core/telemetry";
 import { NEXTAUTH_TRPCENV } from "@douglasduteil/nextauth...trpc.prisma/config";
-import { create_nextauth_header } from "@douglasduteil/nextauth...trpc.prisma/jwt";
 import type { Span } from "@sentry/types";
 import to from "await-to-js";
 import { type NextAuthConfig, type Session } from "next-auth";
 import type { JWT } from "next-auth/jwt";
 import { match, P } from "ts-pattern";
+import { create_nextauth_header } from "./jwt";
 import { get_auth_profile_by_email } from "./repository/get_auth_profile_by_email";
 
 //
@@ -33,7 +33,6 @@ export default {
         session.profile = token.profile;
         session.header = await create_nextauth_header({
           secret,
-          salt: "",
           token: {
             profile: token.profile,
           },

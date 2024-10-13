@@ -1,9 +1,9 @@
 //
 
 import type { AuthProfile } from "@1.modules/profile.domain";
-import { VerifyNextAuthTokenUseCase } from "@douglasduteil/nextauth...trpc.prisma/usecase/VerifyNextAuthTokenUseCase";
 import { TRPCError } from "@trpc/server";
 import { middleware, procedure } from "./trpc";
+import { VerifyNextAuthTokenUseCase } from "./VerifyNextAuthTokenUseCase";
 
 //
 

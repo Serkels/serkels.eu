@@ -13,6 +13,7 @@ import {
   createCallerFactory,
   router,
 } from "@1.modules/trpc";
+import { douglas_golden_nextauth_header } from "@1.modules/trpc/testing";
 import {
   afterEach,
   beforeAll,
@@ -57,13 +58,7 @@ describe("connected studient", () => {
   let nextauth_header: Awaited<ReturnType<typeof create_nextauth_header>>;
 
   beforeAll(async () => {
-    nextauth_header = await create_nextauth_header({
-      secret: "🔑",
-      token: {
-        from: import.meta.url,
-        profile: { id: "douglas_profile_id", role: "STUDENT" },
-      },
-    });
+    nextauth_header = douglas_golden_nextauth_header;
   });
 
   test("should return a sanitize exchange", async () => {

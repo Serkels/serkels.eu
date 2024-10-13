@@ -6,8 +6,8 @@ on:
 
 # Automatically cancel in-progress actions on the same branch
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request_target' && github.ref_name }}
-  cancel-in-progress: true
+  group: ${{ github.workflow}}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 env:
   APP_URL: "http://localhost:3000"
@@ -64,14 +64,14 @@ jobs:
         if: failure()
         with:
           compression-level: 9
-          name: ${{ matrix.e2e_test }}-cypress-screenshots-${{ github.ref_name }}
+          name: ${{ matrix.e2e_test }}-cypress-screenshots-${{ github.event.pull_request.number || github.ref }}
           path: apps/e2e/cypress/screenshots
 
       - uses: actions/upload-artifact@604373da6381bf24206979c74d06a550515601b9 # v4.4.1
         if: failure()
         with:
           compression-level: 9
-          name: ${{ matrix.e2e_test }}-cypress-videos-${{ github.ref_name }}
+          name: ${{ matrix.e2e_test }}-cypress-videos-${{ github.event.pull_request.number || github.ref }}
           path: apps/e2e/cypress/videos
 
       - if: failure()
