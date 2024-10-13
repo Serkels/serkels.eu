@@ -411,8 +411,8 @@ importers:
         specifier: workspace:*
         version: link:../../config/typescript
       '@electric-sql/pglite':
-        specifier: 0.2.11
-        version: 0.2.11
+        specifier: 0.2.12
+        version: 0.2.12
       '@faker-js/faker':
         specifier: 9.0.3
         version: 9.0.3
@@ -427,7 +427,7 @@ importers:
         version: 1.5.3
       pglite-prisma-adapter:
         specifier: 0.3.0
-        version: 0.3.0(@electric-sql/pglite@0.2.11)
+        version: 0.3.0(@electric-sql/pglite@0.2.12)
       prisma:
         specifier: 5.20.0
         version: 5.20.0
@@ -2044,8 +2044,8 @@ packages:
     resolution: {integrity: sha512-D/9dozteKcutI5OdxJd8rU+fL6XgaaRg60sPPJWkT33OCiRfkCu5wO5B/yXTaaL2e6EB0lcCBGe5E0XscZCvvQ==}
     engines: {node: '>=18'}
 
-  '@electric-sql/pglite@0.2.11':
-    resolution: {integrity: sha512-CeCsbtVqccz0MDlEeT6p4xfgKMpq3GvGTKkswuZ2Vv4r40ZQlE0byl3QNpXcpiTxfye+VFt9RZ+lSL+Wq+jhLQ==}
+  '@electric-sql/pglite@0.2.12':
+    resolution: {integrity: sha512-J/X42ujcoFEbOkgRyoNqZB5qcqrnJRWVlwpH3fKYoJkTz49N91uAK/rDSSG/85WRas9nC9mdV4FnMTxnQWE/rw==}
 
   '@esbuild/aix-ppc64@0.19.11':
     resolution: {integrity: sha512-FnzU0LyE3ySQk7UntJO4+qIiQgI7KoODnZg5xzXIrFJlKd2P2gwHsHY4927xj9y5PJmJSzULiUCWmv7iWnNa7g==}
@@ -8178,7 +8178,7 @@ snapshots:
       gonzales-pe: 4.3.0
       node-source-walk: 7.0.0
 
-  '@electric-sql/pglite@0.2.11': {}
+  '@electric-sql/pglite@0.2.12': {}
 
   '@esbuild/aix-ppc64@0.19.11':
     optional: true
@@ -13257,9 +13257,9 @@ snapshots:
       postgres-date: 1.0.7
       postgres-interval: 1.2.0
 
-  pglite-prisma-adapter@0.3.0(@electric-sql/pglite@0.2.11):
+  pglite-prisma-adapter@0.3.0(@electric-sql/pglite@0.2.12):
     dependencies:
-      '@electric-sql/pglite': 0.2.11
+      '@electric-sql/pglite': 0.2.12
       '@prisma/driver-adapter-utils': 5.20.0
 
   picocolors@1.0.1: {}
