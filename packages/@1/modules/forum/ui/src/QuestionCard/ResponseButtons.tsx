@@ -21,9 +21,14 @@ export function SignUpToAnswer() {
   );
 }
 
-export function ToggleOutlet() {
+export function ToggleOutlet(props: ComponentProps<typeof Button>) {
   const [, set_new_outlet] = useNewOutletState();
-  return <ResponseButtons onPress={() => set_new_outlet({ state: "idle" })} />;
+  return (
+    <ResponseButtons
+      {...props}
+      onPress={() => set_new_outlet({ state: "idle" })}
+    />
+  );
 }
 
 export function ResponseButtons(props: ComponentProps<typeof Button>) {

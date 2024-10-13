@@ -153,9 +153,10 @@ function Delete_Answer_Button() {
 export function Footer() {
   const question = useQuestion();
   const [, set_awnser_outlet] = useAwnsersOutletState();
-  const { status } = useSession();
+  const { status, data } = useSession();
   const href_searhparams = new URLSearchParams({ q: question.title });
   const href = `${window.location.origin}/forum?${href_searhparams}#${question.id}`;
+  const is_partner = data?.profile.role === "PARTNER";
 
   return (
     <footer className="mt-4">
@@ -169,7 +170,11 @@ export function Footer() {
           </Button>
         </div>
         <div className="col-span-2 text-center">
-          {status === "authenticated" ? <ToggleOutlet /> : <SignUpToAnswer />}
+          {status === "authenticated" ? (
+            <ToggleOutlet isDisabled={is_partner} />
+          ) : (
+            <SignUpToAnswer />
+          )}
         </div>
         <div className="col-span-2 text-right">
           <Share_Button href={href}>
