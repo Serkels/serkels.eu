@@ -63,14 +63,14 @@ jobs:
         if: failure()
         with:
           compression-level: 9
-          name: ${{ matrix.e2e_test | replace('/', '-') }}-cypress-screenshots-${{ github.ref_name | replace('/', '-') }}
+          name: cypress-screenshots-${{ github.run_number }}
           path: apps/e2e/cypress/screenshots
 
       - uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4.4.3
         if: failure()
         with:
           compression-level: 9
-          name: ${{ matrix.e2e_test | replace('/', '-') }}-cypress-videos-${{ github.ref_name | replace('/', '-') }}
+          name: cypress-screenshots-${{ github.run_number }}
           path: apps/e2e/cypress/videos
 
       - if: failure()
