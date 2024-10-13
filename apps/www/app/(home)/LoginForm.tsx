@@ -87,7 +87,7 @@ export function Login({ onSubmit }: LoginProps) {
       {({ isSubmitting }) => (
         <Form className="flex flex-col items-center space-y-5">
           <Field
-            className="h-8 max-w-[90%] rounded-sm border border-solid border-[#dddddd] px-3 py-2 placeholder-[#AAAAAA] md:text-xs"
+            className="h-8 max-w-[90%] rounded-sm border border-solid border-[#dddddd] px-3 py-2 text-black placeholder-[#AAAAAA] md:text-xs"
             name="email"
             placeholder="Adresse email de connexion"
             required
