@@ -8,6 +8,10 @@ Given("je navigue sur la page", () => {
   cy.visit("/");
 });
 
+Given("je visite la page {string}", (path: string) => {
+  cy.visit(path);
+});
+
 //
 
 Then("je vois {string}", function (text: string) {
