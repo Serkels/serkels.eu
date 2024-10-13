@@ -1,6 +1,7 @@
 "use client";
 
 import { DomLazyMotion } from ":components/shell/DomLazyMotion";
+import { trpc_client } from "@1.infra/trpc/react-query/client";
 import { signIn, signOut, useSession } from "@1.modules/auth.next/react";
 import { AuthError, HTTPError } from "@1.modules/core/errors";
 import { Avatar } from "@1.modules/profile.ui";
@@ -127,18 +128,33 @@ function LoginFormPanel() {
   const send = useOutlet_Send();
 
   const signin_mutation_info = useSignIn_Mutation();
+  const verify_mutation_info = trpc_client.auth.verify.useMutation();
 
   const on_login_form_submit: ComponentProps<typeof LoginForm>["onLogin"] =
-    useCallback(
-      async ({ email }) => await signin_mutation_info.mutate(email),
-      [],
-    );
+    useCallback(async ({ email }) => {
+      const user = await verify_mutation_info.mutateAsync({ email });
+      if (!user) {
+        return send({
+          state: "error",
+          error: new Error(
+            "Aucun utilisateur trouvé. Veuillez d'abord vous inscrire",
+          ),
+        });
+      }
+      await signin_mutation_info.mutate(email);
+    }, []);
 
   const on_sign_up_form_submit: ComponentProps<typeof LoginForm>["onSignUp"] =
-    useCallback(
-      async ({ email }) => await signin_mutation_info.mutate(email),
-      [],
-    );
+    useCallback(async ({ email }) => {
+      const user = await verify_mutation_info.mutateAsync({ email });
+      if (user) {
+        return send({
+          state: "error",
+          error: new Error("Vous êtes déjà inscrit, veuillez vous connecter"),
+        });
+      }
+      await signin_mutation_info.mutate(email);
+    }, []);
 
   useEffect(() => {
     return match(signin_mutation_info)
