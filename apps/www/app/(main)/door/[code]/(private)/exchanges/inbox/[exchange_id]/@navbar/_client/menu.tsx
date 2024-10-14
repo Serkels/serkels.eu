@@ -2,7 +2,7 @@
 
 import { TRPC_React } from ":trpc/client";
 import type { ID_Schema } from "@1.modules/core/domain";
-import { Plus, Trash } from "@1.ui/react/icons";
+import { Trash } from "@1.ui/react/icons";
 import { ActionItem } from "@1.ui/react/menu";
 import { useCallback } from "react";
 import ContentLoader from "react-content-loader";
@@ -27,12 +27,13 @@ export function DeleteExchange_ActionItem({
     );
 
   return (
-    <ActionItem className="text-left" onAction={toggle_add_to_archive}>
+    <ActionItem
+      className="text-left"
+      onAction={toggle_add_to_archive}
+      isDisabled={is_archived}
+    >
       {is_archived ? (
-        <>
-          <Plus className="w-4" />
-          <span className="w-full">Restorer l'échange</span>
-        </>
+        <>Cette échange est archivée.</>
       ) : (
         <>
           <Trash className="w-4" />
@@ -58,7 +59,8 @@ export function useToggleArchiveExchange(exchange_id: ID_Schema) {
 
   const toggle_add_to_archive = useCallback(async () => {
     if (is_archived) {
-      await unarchive_exchange.mutateAsync({ exchange_id });
+      // FUTURE(douglasduteil): uncomment when ready the archive feature is finished
+      // await unarchive_exchange.mutateAsync({ exchange_id });
     } else {
       await archive_exchange.mutateAsync({ exchange_id });
     }
