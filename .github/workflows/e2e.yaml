@@ -82,11 +82,13 @@ jobs:
       matrix:
         e2e_test:
           - auth
+          - exchange_inbox
           - exchanges
           - forum
           - opportunity
           - status
           - studient
+          - studient_inbox
 
   system:
     name: System testing
