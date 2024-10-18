@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "cd ../.. && pnpm run start",
-    "studio": "cypress open --browser electron --e2e ",
+    "studio": "cypress open --browser firefox --e2e ",
     "test": "cypress run --env filterSpecs=true",
     "type-check": "tsc --build"
   },
