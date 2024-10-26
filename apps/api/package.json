@@ -22,7 +22,7 @@
     "@sentry/profiling-node": "8.34.0",
     "@trpc/server": "10.45.2",
     "dotenv": "16.4.5",
-    "hono": "4.6.5",
+    "hono": "4.6.7",
     "tsx": "4.19.1",
     "ws": "8.18.0",
     "zod": "3.23.8"
