@@ -570,8 +570,8 @@ importers:
         specifier: 22.7.7
         version: 22.7.7
       pkgroll:
-        specifier: 2.5.0
-        version: 2.5.0(typescript@5.6.3)
+        specifier: 2.5.1
+        version: 2.5.1(typescript@5.6.3)
       react-email:
         specifier: 3.0.1
         version: 3.0.1(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -6348,8 +6348,8 @@ packages:
     resolution: {integrity: sha512-saLsH7WeYYPiD25LDuLRRY/i+6HaPYr6G1OUlN39otzkSTxKnubR9RTxS3/Kk50s1g2JTgFwWQDQyplC5/SHZg==}
     engines: {node: '>= 6'}
 
-  pkgroll@2.5.0:
-    resolution: {integrity: sha512-nIbxukMp9i63is1Aq8wIHZcNcJyZJRZ340HF7yP3y+TBZ5P34ARI67dBChvCz4DKPaEZu8hRHM+mnDw3G471uA==}
+  pkgroll@2.5.1:
+    resolution: {integrity: sha512-rehzSpQ1T/gh+tlVSxlUeqUPR9W1ZtJXDG00cuussNeCPdS9w1Wv0MWxwL116HbugsTZTrd+lVem+ipinT2JUg==}
     engines: {node: '>=18'}
     hasBin: true
     peerDependencies:
@@ -13250,7 +13250,7 @@ snapshots:
 
   pirates@4.0.6: {}
 
-  pkgroll@2.5.0(typescript@5.6.3):
+  pkgroll@2.5.1(typescript@5.6.3):
     dependencies:
       '@rollup/plugin-alias': 5.1.1(rollup@4.24.0)
       '@rollup/plugin-commonjs': 26.0.3(rollup@4.24.0)
