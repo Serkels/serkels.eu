@@ -18,6 +18,7 @@ Fonctionnalité: Opportunités publics
   Scénario: Voir l'opportunité "Cours de JavaScript"
     Etant donné que je navigue sur la page
     * je clique sur le bouton "Opportunités pros"
+    * je clique sur le bouton "Accepter"
     Quand je clique sur le champ "Recherche"
     * je tape "Cours de JavaScript"
     # * je clique sur "Cours de JavaScript"
