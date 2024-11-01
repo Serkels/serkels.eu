@@ -8,22 +8,23 @@ export const modal = tv({
   base: "",
   slots: {
     dialog: `
-      boder-[#00000017]
       flex
-      min-h-[50vh]
+      min-h-[75vh]
       min-w-[75vw]
+      max-w-[75vw]
       flex-col
-      items-stretch
+      items-center
       justify-center
       rounded-2xl
       border
+      border-[#00000017]
       bg-white
       p-7
       text-black
       shadow-[10px_13px_24px_#00000033]
       focus:outline-none
+      sm:min-h-[50vh]
       sm:min-w-[50vw]
-      sm:max-w-[75vw]
       md:min-w-[45vw]
       md:max-w-[50vw]
       lg:max-w-[25vw]

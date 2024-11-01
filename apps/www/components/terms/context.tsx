@@ -1,6 +1,7 @@
 //
 
 import { useLocalStorageValue } from "@react-hookz/web";
+import { useRouter } from "next/navigation";
 import { createContext, useContext, type PropsWithChildren } from "react";
 
 //
@@ -24,8 +25,14 @@ export function LegalProvider({ children }: PropsWithChildren) {
     },
   );
 
+  const router = useRouter();
+
   const accept = () => set_has_signed(true);
-  const decline = () => set_has_signed(false);
+  const decline = () => {
+    set_has_signed(false);
+    router.push("/");
+  };
+
   return (
     <term_context.Provider value={{ has_signed, accept, decline }}>
       {children}
