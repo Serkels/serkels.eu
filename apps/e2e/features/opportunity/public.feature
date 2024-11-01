@@ -7,6 +7,7 @@ Fonctionnalité: Opportunités publics
   Scénario: Voir les opportunités
     Etant donné que je navigue sur la page
     Quand je clique sur le bouton "Opportunités pros"
+    * je clique sur le bouton "Accepter"
     Alors je vois "Opportunités pros"
     * je vois "Recherche"
     * je vois "Cours de langues"
