@@ -1,6 +1,5 @@
 "use client";
 
-import { MenuBurger } from ":components/burger";
 import { Error_Layout } from ":components/Error_Layout";
 import { BigBar } from ":components/shell/BigBar";
 import SerkelsLogo from ":components/shell/SerkelsLogo";
@@ -20,7 +19,7 @@ export default function GlobalError({ error }: { error: Error }) {
       <body className={`bg-[#F5F8FA] text-base text-black antialiased`}>
         <main className="flex min-h-screen flex-col">
           <BigBar>
-            <MenuBurger />
+            {/* <MenuBurger /> */}
             <Link href="/">
               <SerkelsLogo />
             </Link>

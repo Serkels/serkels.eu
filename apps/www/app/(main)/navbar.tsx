@@ -1,6 +1,5 @@
 //
 
-import { MenuBurger } from ":components/burger";
 import {
   ExchangeNews_DotIndicator,
   MessageNews_DotIndicator,
@@ -25,7 +24,7 @@ import { UserMenuTogglePartner, UserMenuToggleStudent } from "./navbar.client";
 export default function UserBar() {
   return (
     <header className="shadow-[0_3px_6px_#00000029]">
-      <MenuBurger className="text-white md:right-3" />
+      {/* <MenuBurger className="text-white md:right-3" /> */}
 
       <Grid className="items-center bg-primary-gradient-74 text-white sm:grid-cols-[repeat(2,_auto)]">
         <figure className="col-span-1 flex h-16 items-center sm:col-auto md:col-span-2 xl:col-span-3">
@@ -36,7 +35,7 @@ export default function UserBar() {
 
         <MobileNavBar className="left-0 right-0 z-50 hidden h-16 sm:z-auto sm:col-auto sm:h-full md:col-span-4 md:block xl:col-span-6 sm:[&>ul]:w-full lg:[&>ul]:w-auto" />
 
-        <UserNavGroup className="h-full pr-12 md:col-span-2 xl:col-span-3" />
+        <UserNavGroup className="h-full md:col-span-2 xl:col-span-3" />
       </Grid>
     </header>
   );
