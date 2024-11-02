@@ -32,7 +32,7 @@
     "@1.ui/react": "workspace:*",
     "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
     "@douglasduteil/react-hookz...matrix-uri": "workspace:*",
-    "@hookform/resolvers": "3.9.0",
+    "@hookform/resolvers": "3.9.1",
     "@next/third-parties": "14.2.16",
     "@react-hookz/web": "24.0.4",
     "@sentry/nextjs": "8.35.0",
