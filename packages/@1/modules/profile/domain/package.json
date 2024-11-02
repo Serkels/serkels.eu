@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
-    "@types/node": "22.7.5",
+    "@types/node": "22.8.1",
     "typescript": "5.6.3"
   }
 }

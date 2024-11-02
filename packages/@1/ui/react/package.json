@@ -76,13 +76,13 @@
     "@react-hookz/web": "24.0.4",
     "bowser": "2.11.0",
     "date-fns": "4.1.0",
-    "framer-motion": "11.11.8",
+    "framer-motion": "11.11.10",
     "react": "18.3.1",
-    "react-aria-components": "1.4.0",
+    "react-aria-components": "1.4.1",
     "react-nest": "0.1.10",
     "react-slotify": "0.2.2",
     "tailwind-variants": "0.2.1",
-    "ts-pattern": "5.4.0",
+    "ts-pattern": "5.5.0",
     "zsa": "0.6.0",
     "zsa-react": "0.2.3",
     "zsa-react-query": "0.2.1"
@@ -92,9 +92,9 @@
     "@1.config/typescript": "workspace:*",
     "@tanstack/react-query": "4.36.1",
     "@testing-library/react": "16.0.1",
-    "@types/react": "18.3.11",
+    "@types/react": "18.3.12",
     "@types/react-dom": "18.3.1",
-    "tailwindcss": "3.4.13",
+    "tailwindcss": "3.4.14",
     "typescript": "5.6.3"
   }
 }

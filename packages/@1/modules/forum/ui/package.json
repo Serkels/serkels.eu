@@ -38,17 +38,17 @@
     "constate": "3.3.2",
     "react": "18.3.1",
     "react-content-loader": "7.0.2",
-    "react-hook-form": "7.53.0",
+    "react-hook-form": "7.53.1",
     "react-slotify": "0.2.2",
     "tailwind-variants": "0.2.1",
-    "ts-pattern": "5.4.0",
+    "ts-pattern": "5.5.0",
     "zod": "3.23.8"
   },
   "devDependencies": {
     "@1.config/tailwindcss": "workspace:*",
     "@1.config/typescript": "workspace:*",
-    "@types/react": "18.3.11",
-    "tailwindcss": "3.4.13",
+    "@types/react": "18.3.12",
+    "tailwindcss": "3.4.14",
     "typescript": "5.6.3"
   }
 }

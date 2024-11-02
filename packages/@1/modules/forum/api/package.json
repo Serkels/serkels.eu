@@ -25,13 +25,13 @@
     "@1.modules/forum.domain": "workspace:*",
     "@1.modules/trpc": "workspace:*",
     "date-fns": "4.1.0",
-    "ts-pattern": "5.4.0",
+    "ts-pattern": "5.5.0",
     "zod": "3.23.8"
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
     "@1.infra/database": "workspace:*",
-    "@types/node": "22.7.5",
+    "@types/node": "22.8.1",
     "typescript": "5.6.3"
   }
 }
