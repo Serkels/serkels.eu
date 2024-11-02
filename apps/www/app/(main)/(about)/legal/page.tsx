@@ -1,6 +1,9 @@
 //
 
 import dynamic from "next/dynamic";
+import Link from "next/link";
+import type { ReactNode } from "react";
+import { tv } from "tailwind-variants";
 
 //
 
@@ -24,7 +27,7 @@ Vous ne pouvez pas consulter le Site ni utiliser ses fonctionnalités sans accep
 
 Les CGU constituent un contrat entre vous et l’UEE.
 
-Les CGU sont complétées par la Politique de confidentialité de SERKELS, qui détaille la manière dont l’UEE traite vos données à caractère personnel, ainsi que les Règles de modération de SERKELS, qui expliquent les règles appliquées par l’UEE pour modérer le Site.
+Les CGU sont complétées par la Politique de confidentialité de SERKELS, qui détaille la manière dont l’UEE traite vos données à caractère personnel, ainsi que les [Règles de modération de SERKELS](/moderation), qui expliquent les règles appliquées par l’UEE pour modérer le Site.
 
 ## Accès et utilisation du Site
 
@@ -137,7 +140,7 @@ Vous pouvez signaler :
 
 Lorsque vous cliquez sur les icônes en forme de drapeaux afin de réaliser un signalement, une fenêtre s’ouvre vous demandant de renseigner les informations relatives aux signalements. Cette fenêtre vous guidera dans votre signalement, en vous demandant de renseigner les informations dont l’UEE aura besoin pour traiter votre signalement.
 
-Le traitement des signalements est réalisé par l’UEE conformément aux Règles de modération du Site. Nous vous invitons à vous référer à ces règles pour en savoir plus sur la manière dont l’UEE traite les signalements et assure la modération du Site.
+Le traitement des signalements est réalisé par l’UEE conformément aux [Règles de modération du Site](/moderation). Nous vous invitons à vous référer à ces règles pour en savoir plus sur la manière dont l’UEE traite les signalements et assure la modération du Site.
 
 ### Suspension et suppression de Compte
 
@@ -230,9 +233,39 @@ Si vous continuez à utiliser le Site et les services de l’UEE après une modi
 `;
 
 export default function Page() {
+  const { link } = markdownLinkcss();
+
+  const MarkdownLink = ({
+    href,
+    children,
+  }: {
+    href: string;
+    children: ReactNode;
+  }) => {
+    if (href.startsWith("/")) {
+      return (
+        <Link href={href} passHref className={link()}>
+          {children}
+        </Link>
+      );
+    }
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer">
+        {children}
+      </a>
+    );
+  };
+
   return (
     <main className="container prose mx-auto my-10 p-6 lg:prose-xl">
-      <ReactMarkdown>{content}</ReactMarkdown>
+      <ReactMarkdown components={{ a: MarkdownLink }}>{content}</ReactMarkdown>
     </main>
   );
 }
+
+const markdownLinkcss = tv({
+  base: "",
+  slots: {
+    link: "underline-offset-8 hover:text-secondary ",
+  },
+});
