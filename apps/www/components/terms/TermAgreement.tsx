@@ -16,10 +16,11 @@ export function TermAgreement() {
   const { link } = terms();
   const pathname = usePathname();
   const legalPage = ["/legal"].includes(pathname);
+  const confidentialityPage = ["/confidentiality"].includes(pathname);
 
   //
 
-  if (has_signed || legalPage) return null;
+  if (has_signed || legalPage || confidentialityPage) return null;
 
   return (
     <DialogTrigger>
@@ -34,7 +35,7 @@ export function TermAgreement() {
                   conditions générales d'utilisation
                 </Link>{" "}
                 ainsi que la{" "}
-                <Link className={link()} href="/legal">
+                <Link className={link()} href="/confidentiality">
                   politique de confidentialité
                 </Link>{" "}
                 de Serkels.
