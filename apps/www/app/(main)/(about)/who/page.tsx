@@ -18,7 +18,7 @@ export async function generateMetadata(
   _: never,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const title = `Who :: ${(await parent).title?.absolute}`;
+  const title = `Qui sommes-nous ? :: ${(await parent).title?.absolute}`;
 
   return {
     title,
