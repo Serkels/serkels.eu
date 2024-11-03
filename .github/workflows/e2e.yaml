@@ -86,6 +86,7 @@ jobs:
           - forum
           - legal
           - opportunity
+          - partner
           - status
           - studient
 
