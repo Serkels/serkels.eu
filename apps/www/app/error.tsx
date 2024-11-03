@@ -1,7 +1,6 @@
 "use client";
 
 import { Error_Layout } from ":components/Error_Layout";
-import { MenuBurger } from ":components/burger";
 import { BigBar } from ":components/shell/BigBar";
 import SerkelsLogo from ":components/shell/SerkelsLogo";
 import { Button } from "@1.ui/react/button";
@@ -27,7 +26,6 @@ export default function Error({
   return (
     <main className="flex min-h-screen flex-col">
       <BigBar>
-        <MenuBurger />
         <Link href="/">
           <SerkelsLogo />
         </Link>
