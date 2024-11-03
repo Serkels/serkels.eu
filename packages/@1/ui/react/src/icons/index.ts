@@ -14,7 +14,6 @@ export * from "./Exchange";
 export * from "./ExclamationMark";
 export * from "./Exit";
 export * from "./Gear";
-export * from "./HamburgerMenu";
 export * from "./Idle";
 export * from "./Link";
 export * from "./LocationRadius";

@@ -26,7 +26,6 @@ export default function Error({
   return (
     <main className="flex min-h-screen flex-col">
       <BigBar>
-        {/* <MenuBurger /> */}
         <Link href="/">
           <SerkelsLogo />
         </Link>

@@ -24,8 +24,6 @@ import { UserMenuTogglePartner, UserMenuToggleStudent } from "./navbar.client";
 export default function UserBar() {
   return (
     <header className="shadow-[0_3px_6px_#00000029]">
-      {/* <MenuBurger className="text-white md:right-3" /> */}
-
       <Grid className="items-center bg-primary-gradient-74 text-white sm:grid-cols-[repeat(2,_auto)]">
         <figure className="col-span-1 flex h-16 items-center sm:col-auto md:col-span-2 xl:col-span-3">
           <Link href="/">
