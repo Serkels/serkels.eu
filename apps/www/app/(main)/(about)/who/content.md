@@ -1,7 +1,45 @@
-# Qui sommes-nous ?
+# Serkels
 
-Tout a commencé dans les cafés parisiens. Confronté à des difficultés dans la reprise des études supérieures en France, un groupe d’étudiant.e.s réfugié.e.s s’est réuni pour aider d’autres personnes exilées à accéder l’enseignement supérieur en France. La première fois, 3 personnes sont venues pour être accompagnées dans un café, puis 10, puis 20. C’est ainsi que **l’Union des Étudiant.e.s Exilé.e.s** est née. Notre expérience et savoir-faire nous ont permis de devenir un acteur clé dans la défense d’un accès à l’enseignement supérieur et des conditions d’études favorables pour les personnes exilées. En 2023, nous avons accompagné environ 3000 personnes, de 28 nationalités. Aujourd’hui nous accueillons nos bénéficiaires dans nos locaux au Campus Condorcet, situés à Aubervilliers. Nous avons pour ambition de développer nos actions à l’échelle nationale, en commençant par l’ouverture d’une nouvelle antenne à Grenoble et à Lille début 2024, cette dernière destinée à couvrir toute la région Hauts-de-France. L’ouverture d’une troisième antenne dans la région Rhône-Alpes est prévue d’ici 2025. Pour plus d’infos [site web](https://uniondesetudiantsexiles.org/)
+**Faites tourner vos expériences !**
 
-Pour **l’Union des Étudiant.e.s Exilé.e.s (UEE)** il ne faut pas seulement avoir accès aux études, il faut pouvoir les réussir. Parmi les obstacles à la réussite académique pour les étudiant.e.s exilé.e.s, l’isolement peut être un grand défi dans la reprise d’études. Face à la question sur comment faire sortir les étudiant.e.s exilé.e.s de l&#39;isolement social et faciliter le partage entre ceux et celles-ci et les étudiant.e.s francophones, nous avons réfléchi à une réponse innovante et en lien avec les nouvelles technologies...voici comment **Serkels** a vu le jour.
+### Qui sommes-nous ?
 
-**Serkels** est une plateforme numérique d’échange et d’entraide étudiante. **Serkels** offre une safe space pour réunir les étudiant.e.s de l’enseignement supérieur. Nous voyons **Serkels** comme une solution pour sortir les étudiant.e.s exilé.e.s de l&#39;isolement social et faciliter le partage de leur expérience avec la communauté étudiante dans son ensemble. Sur **Serkels**, un.e étudiant.e exilé.e pourra proposer une heure de cours de guitare gratuite, ou une heure de conversation dans sa langue maternelle, contre de l’aide pour préparer un exposé, ou encore même une invitation collective pour aller à un colloque et partager un moment ensemble ! C’est ça le but de **Serkels** – un monde universitaire où le partage d’expérience contribue à s&#39;unir et à créer un lien durable.**Serkels** sera aussi une mine d’informations pour les étudiant.e.s ou futur.e.s étudiant.e.s en exil. Avec un espace pour publier les annonces de nos partenaires, un.e étudiant.e en exil peut trouver facilement les opportunités qui lui conviennent, comme un stage, un cours de français, une formation ou un job étudiant. **Serkels** aide ces étudiant.e.s en exil à établir leur propre cercle d’amis, de contacts et à se créer des opportunités.
+Serkels est une **plateforme gratuite et sécurisée d’échange d’expériences** pour tous les étudiant.e.s : exilé.e.s, locaux.ales, et internationaux.ales.  
+Créée et développée par l’association **SILLAT**, cette initiative est née des réflexions d'un groupe d'étudiant.e.s, diplômé.e.s et expert.e.s venant d’horizons variés. Pensée pour aider les étudiant.e.s à relever les défis de l’intégration et de l’épanouissement durant leurs études supérieures en France, l’équipe de Serkels s’appuie sur ses propres expériences pour proposer une aide concrète.
+
+---
+
+### Notre mission : valoriser vos expériences
+
+Serkels offre aux étudiant.e.s en France une opportunité unique de partager et valoriser leurs expériences académiques, personnelles, administratives et sociales. La plateforme est particulièrement adaptée aux étudiant.e.s internationaux.ales et accueille également les **universités, associations, instituts et centres culturels**, qui peuvent y proposer leurs propres offres et opportunités.
+
+---
+
+### Serkels : + d’échanges et - de barrières
+
+Depuis votre compte Serkels, accédez à des offres d’échange adaptées à vos besoins. Proposez et échangez gratuitement vos **compétences et expériences personnelles, culturelles et académiques**. Serkels est conçu pour élargir votre cercle de connaissances et multiplier les contacts entre étudiant.e.s, créant ainsi de nouvelles opportunités.
+
+---
+
+### Les atouts à échanger : Vous avez plein de ressources !
+
+Sur Serkels, **tout peut être partagé, proposé ou échangé**. Un cours de français contre un livre, une chanson de votre culture contre du soutien scolaire, un cours de guitare contre une activité sportive… Vous pouvez également offrir des billets de musée, organiser des échanges linguistiques ou partager des informations administratives. Avec Serkels, créez vos cercles d’échanges et découvrez de nouvelles expériences ! Pour en savoir plus, consultez notre **guide d’utilisation**.
+
+---
+
+### Pourquoi Serkels est pour vous
+
+#### Étudiant.e.s, diplômé.e.s ou expert.e.s
+
+Quelle que soit votre situation, vous pouvez participer et profiter des offres d'échange, en proposant vos propres **connaissances et expériences**. Toutes les expériences ont de la valeur, qu’elles soient personnelles, académiques, sociales ou culturelles. Avec Serkels, c’est vous qui faites vivre la plateforme !
+
+#### Partenaires institutionnel.le.s
+
+Universités, instituts, centres culturels, associations et entreprises, la plateforme vous invite à rejoindre Serkels. Vous disposez d'un espace dédié pour publier vos **offres et opportunités** : formations intensives de langue française, accompagnement des étudiant.e.s internationaux.ales, services d'information, stages, et plus encore. Prenez place sur Serkels et touchez un public élargi.
+
+---
+
+### En résumé
+
+Rejoignez notre réseau, publiez les **annonces, offres et opportunités** que vous souhaitez échanger, ou trouvez facilement ce dont vous avez besoin.  
+**Avec Serkels, échangeons plus et abaissons les barrières !**
