@@ -1,15 +1,5 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": ["**/.env.*local"],
-  "globalEnv": [
-    "API_URL",
-    "APP_URL",
-    "CI",
-    "DO_NOT_TRACK",
-    "NODE_ENV",
-    "TURBO_TEAM",
-    "TURBO_TOKEN"
-  ],
   "tasks": {
     "@1.infra/database#type-check": { "dependsOn": ["generate"] },
     "@1.infra/database#dev": { "dependsOn": ["generate"] },
@@ -38,26 +28,7 @@
     },
     "www#build": {
       "dependsOn": ["type-check"],
-      "outputs": ["!.next/cache/**", ".next/**"],
-      "env": [
-        "AUTH_SECRET",
-        "CONSOLA_LEVEL",
-        "DATABASE_URL",
-        "DEPLOY_ENV",
-        "MAINTENANCE",
-        "NEXT_PUBLIC_GA_MEASUREMENT_ID",
-        "NEXT_PUBLIC_SENTRY_DSN",
-        "NEXT_PUBLIC_VERCEL_ENV",
-        "NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL",
-        "NEXT_PUBLIC_VERCEL_URL",
-        "NEXT_PUBLIC_WEBSOCKET_URL",
-        "NEXT_TELEMETRY_DISABLED",
-        "NEXTAUTH_*",
-        "SENTRY_*",
-        "SMTP_URL",
-        "STALKER_TRANSPORT_URL",
-        "STALKER_URL"
-      ]
+      "outputs": ["!.next/cache/**", ".next/**"]
     },
     "www#dev": { "persistent": true }
   }
