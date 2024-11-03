@@ -89,6 +89,7 @@ jobs:
           - partner
           - status
           - studient
+          - studient_inbox
 
   system:
     name: System testing
