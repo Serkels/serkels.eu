@@ -20,7 +20,7 @@ export default function Error({
 }) {
   const { replace } = useRouter();
   useMountEffect(() => {
-    if (process.env.NODE_ENV !== "development") return;
+    if (process.env.NODE_ENV === "development") return;
     replace("/logout");
   });
   return (

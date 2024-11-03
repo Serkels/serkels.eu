@@ -4,19 +4,16 @@ import FrozenRouter from ":components/helpers/FrozenRouter";
 import { DomLazyMotion } from ":components/shell/DomLazyMotion";
 import { AnimatePresence, m } from "framer-motion";
 import { forwardRef, type ElementRef, type PropsWithChildren } from "react";
-import Nest from "react-nest";
 
 //
 
 export default function Motion_Layout({ children }: PropsWithChildren) {
-  if (1) return <>{children}</>;
   return (
-    <Nest>
-      <DomLazyMotion />
-      <AnimatePresence mode="wait" />
-      <MotionOutlet />
-      {children}
-    </Nest>
+    <DomLazyMotion>
+      <AnimatePresence mode="wait">
+        <MotionOutlet>{children}</MotionOutlet>
+      </AnimatePresence>
+    </DomLazyMotion>
   );
 }
 //

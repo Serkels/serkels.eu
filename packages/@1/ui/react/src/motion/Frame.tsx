@@ -2,15 +2,12 @@
 
 import { AnimatePresence, LazyMotion, domAnimation } from "framer-motion";
 import type { PropsWithChildren } from "react";
-import Nest from "react-nest";
 
 export function Frame({ children }: PropsWithChildren) {
   return (
-    <Nest>
-      <DomLazyMotion />
-      <AnimatePresence mode="wait" />
-      {children}
-    </Nest>
+    <DomLazyMotion>
+      <AnimatePresence mode="wait">{children}</AnimatePresence>
+    </DomLazyMotion>
   );
 }
 //

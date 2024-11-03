@@ -1,7 +1,8 @@
 //
 
+/// <reference types="./next-auth.d.ts" />
+
 import { auth } from "./auth.config";
-import "./next-auth.d.ts";
 export * from "./auth.config";
 
 /**
