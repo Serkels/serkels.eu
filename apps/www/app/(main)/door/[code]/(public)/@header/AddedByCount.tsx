@@ -9,8 +9,8 @@ export function AddedByCount({ profile_id }: { profile_id: string }) {
   const count = profile.data?.in_contact_with.length ?? 0;
   return (
     <div className="flex flex-col items-center">
-      <div className="text-lg font-bold">{count}</div>
-      <div>Ajouté par</div>
+      <div className="text-lg font-bold text-secondary">{count}</div>
+      <div className="text-secondary">Ajouté par</div>
     </div>
   );
 }
