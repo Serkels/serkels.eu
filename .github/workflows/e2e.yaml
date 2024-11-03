@@ -85,6 +85,7 @@ jobs:
           - exchanges
           - forum
           - opportunity
+          - partner
           - status
           - studient
 
