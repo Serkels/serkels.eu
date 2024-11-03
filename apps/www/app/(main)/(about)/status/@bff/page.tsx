@@ -5,10 +5,7 @@ import { match } from "ts-pattern";
 
 //
 
-//
-export const dynamic = "force-dynamic";
-
-export default async function Page() {
+export default function Page() {
   const { status } = trpc_client.health.ping.useQuery();
 
   return (
