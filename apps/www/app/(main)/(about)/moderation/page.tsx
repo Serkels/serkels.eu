@@ -39,7 +39,7 @@ Il est rappelé à l’utilisateur que SERKELS n’est pas responsable des actio
 
 Les utilisateurs de SERKELS peuvent signaler des contenus contrevenant aux présentes Règles de modération ou à toute loi ou réglementation applicable en utilisant la fonctionnalité « signaler », qui se manifeste par une icône drapeau située dans le coin de tous les contenus publiés sur SERKELS.  
 
-Un utilisateur peut ainsi signaler une annonce, un message… Lorsque l’utilisateur souhaite signaler un contenu et clique sur l’icône « signaler », il accède à un formulaire lui permettant de renseigner avec précision les faits qu’il souhaite signaler.
+Un utilisateur peut ainsi signaler par exemple une annonce, un message… Lorsque l’utilisateur souhaite signaler un contenu et clique sur l’icône « signaler », il accède à un formulaire lui permettant de renseigner avec précision les faits qu’il souhaite signaler.
 
 L’utilisateur est invité à fournir autant de précisions que possible, ainsi que tout élément justificatif permettant d’étayer le signalement (captures écran, liens hypertexte…).
 
