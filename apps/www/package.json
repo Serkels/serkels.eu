@@ -35,7 +35,7 @@
     "@hookform/resolvers": "3.9.1",
     "@next/third-parties": "14.2.16",
     "@react-hookz/web": "24.0.4",
-    "@sentry/nextjs": "8.35.0",
+    "@sentry/nextjs": "8.36.0",
     "@tanstack/react-query": "4.36.1",
     "@trpc/client": "10.45.2",
     "@trpc/react-query": "10.45.2",

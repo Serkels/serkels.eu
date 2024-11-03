@@ -30,7 +30,7 @@
     "@1.ui/react": "workspace:*",
     "@auth/prisma-adapter": "2.7.2",
     "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
-    "@sentry/types": "8.35.0",
+    "@sentry/types": "8.36.0",
     "await-to-js": "3.0.0",
     "next": "14.2.16",
     "next-auth": "5.0.0-beta.25",
