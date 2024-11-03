@@ -1,7 +1,7 @@
 ///
 
 import { AsideFilter } from ":components/shell/AsideFilter";
-import { getServerSession } from "@1.modules/auth.next";
+import { auth } from "@1.modules/auth.next";
 import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import { Grid } from "@1.ui/react/grid";
 import { Suspense, type PropsWithChildren, type ReactNode } from "react";
@@ -39,7 +39,7 @@ export default async function Layout({
 }
 
 async function User_Opportunities_Filter() {
-  const session = await getServerSession();
+  const session = await auth();
 
   if (!session) return null;
 
