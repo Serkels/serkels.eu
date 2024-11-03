@@ -18,7 +18,6 @@ Fonctionnalité: Page de status
     Soit une base de données nourrie au grain
     * je navigue sur la page
     * je me connecte en tant que "douglas@yopmail.com"
-    * je clique sur le bouton "Accepter"
     Quand je clique sur le bouton "Menu Burger"
     * je clique sur "Status"
     Alors je vois "Status"

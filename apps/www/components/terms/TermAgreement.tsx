@@ -1,5 +1,6 @@
 "use client";
 
+import { useSession } from "@1.modules/auth.next/react";
 import { Dialog, DialogTrigger, Modal, ModalOverlay } from "@1.ui/react/aria";
 import { Button } from "@1.ui/react/button";
 import { modal } from "@1.ui/react/modal/atom";
@@ -10,17 +11,25 @@ import { useTerm } from "./context";
 
 //
 
+const EXCLUDED_PATHS = [
+  "/confidentiality",
+  "/faq",
+  "/legal",
+  "/status",
+  "/who",
+];
+
 export function TermAgreement() {
   const { dialog, overlay } = modal();
   const { has_signed, accept, decline } = useTerm();
   const { link } = terms();
   const pathname = usePathname();
-  const legalPage = ["/legal"].includes(pathname);
-  const confidentialityPage = ["/confidentiality"].includes(pathname);
-
+  const excluded_path = EXCLUDED_PATHS.includes(pathname);
+  const { status } = useSession();
+  const is_authenticated = status === "authenticated";
   //
 
-  if (has_signed || legalPage || confidentialityPage) return null;
+  if (has_signed || excluded_path || is_authenticated) return null;
 
   return (
     <DialogTrigger>

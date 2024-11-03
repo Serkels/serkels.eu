@@ -7,8 +7,9 @@ Fonctionnalité: Opportunités publics
   Scénario: Voir les opportunités
     Etant donné que je navigue sur la page
     Quand je clique sur le bouton "Opportunités pros"
+    Alors je vois dans le titre "Opportunities :: Serkels"
     * je clique sur le bouton "Accepter"
-    Alors je vois "Opportunités pros"
+    * je vois "Opportunités pros"
     * je vois "Recherche"
     * je vois "Cours de langues"
     * je vois "Autres"
@@ -18,6 +19,7 @@ Fonctionnalité: Opportunités publics
   Scénario: Voir l'opportunité "Cours de JavaScript"
     Etant donné que je navigue sur la page
     * je clique sur le bouton "Opportunités pros"
+    Alors je vois dans le titre "Opportunities :: Serkels"
     * je clique sur le bouton "Accepter"
     Quand je clique sur le champ "Recherche"
     * je tape "Cours de JavaScript"

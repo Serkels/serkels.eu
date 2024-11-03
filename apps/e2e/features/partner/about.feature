@@ -6,7 +6,7 @@ Fonctionnalité: Consulter la section a propos d'un partenaire
   Scénario: la section a propos de One Does University
     Etant donné que je navigue sur la page
     * je me connecte en tant que "onedoesuniversity@yopmail.com"
-    * je clique sur le bouton "Accepter"
+    Alors je vois dans le titre "Opportunities :: Serkels"
 
     Quand je clique sur la légende "Link to my profile"
 

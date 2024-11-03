@@ -6,9 +6,9 @@ Fonctionnalité: Consulter les échanges proposés d'un étudiant
   Scénario: La biographie de douglas@yopmail.com
     Etant donné que je navigue sur la page
     * je me connecte en tant que "douglas@yopmail.com"
-    * je clique sur le bouton "Accepter"
-    
+
     Quand je clique sur la légende "Link to my profile"
+    Alors je vois dans le titre "About :: Serkels"
     * je clique sur "Publications"
 
     Alors je vois dans le titre "Proposals :: Serkels"
