@@ -1,7 +1,7 @@
 "use client";
 
 import { Share_Button } from ":components/Share_Button";
-import { TRPC_React } from ":trpc/client";
+import { trpc_client } from "@1.infra/trpc/react-query/client";
 import { useSession } from "@1.modules/auth.next/react";
 import type { Entity_Schema } from "@1.modules/core/domain";
 import { Forum_Filter, type Answer } from "@1.modules/forum.domain";
@@ -51,7 +51,7 @@ export default function List() {
     gtag("event", "search", { search_term: search });
   }, [search]);
 
-  const info = TRPC_React.forum.question.find.useInfiniteQuery(
+  const info = trpc_client.forum.question.find.useInfiniteQuery(
     {
       category,
       search,
@@ -70,7 +70,7 @@ export default function List() {
 }
 
 function Item(props: Entity_Schema) {
-  const info = TRPC_React.forum.question.by_id.useQuery(props.id);
+  const info = trpc_client.forum.question.by_id.useQuery(props.id);
 
   return (
     <Question_AsyncCard info={info}>
@@ -109,8 +109,8 @@ function Item(props: Entity_Schema) {
 }
 
 function Delete_Question_Button() {
-  const utils = TRPC_React.useUtils();
-  const { mutateAsync } = TRPC_React.forum.question.delete.useMutation();
+  const utils = trpc_client.useUtils();
+  const { mutateAsync } = trpc_client.forum.question.delete.useMutation();
   const session = useSession();
   const question = useQuestion();
   const is_owner = session.data?.profile.id === question.owner.profile.id;
@@ -130,9 +130,9 @@ function Delete_Question_Button() {
 }
 
 function Delete_Answer_Button() {
-  const utils = TRPC_React.useUtils();
+  const utils = trpc_client.useUtils();
   const { mutateAsync } =
-    TRPC_React.forum.question.answers.delete.useMutation();
+    trpc_client.forum.question.answers.delete.useMutation();
   const session = useSession();
   const answer = useAnswer();
   const is_owner = session.data?.profile.id === answer.owner.profile.id;
@@ -189,7 +189,7 @@ export function Footer() {
 export function QueryResponses() {
   const question = useQuestion();
 
-  const info = TRPC_React.forum.question.answers.find.useInfiniteQuery(
+  const info = trpc_client.forum.question.answers.find.useInfiniteQuery(
     {
       question_id: question.id,
     },
@@ -215,7 +215,7 @@ export function QueryResponses() {
 export function Query_Approved_Response() {
   const question = useQuestion();
 
-  const info = TRPC_React.forum.question.answers.by_id.useQuery(
+  const info = trpc_client.forum.question.answers.by_id.useQuery(
     question.accepted_answer?.id!,
     { enabled: Boolean(question.accepted_answer?.id) },
   );
@@ -236,7 +236,7 @@ export function Query_Approved_Response() {
 
 function AnswerItem(initial: Omit<Answer, "accepted_for">) {
   const question = useQuestion();
-  const info = TRPC_React.forum.question.answers.by_id.useQuery(initial.id);
+  const info = trpc_client.forum.question.answers.by_id.useQuery(initial.id);
   const { data: session } = useSession();
   const is_yours = question.owner.profile.id === session?.profile.id;
   const answer = (info.data ?? initial) as Answer;
@@ -267,9 +267,10 @@ function AnswerItem(initial: Omit<Answer, "accepted_for">) {
 function Approve_Mutation() {
   const { id: question_id, accepted_answer } = useQuestion();
   const { id: answer_id } = useAnswer();
-  const utils = TRPC_React.useUtils();
-  const do_approve = TRPC_React.forum.question.answers.approve.useMutation();
-  const disapprove = TRPC_React.forum.question.answers.disapprove.useMutation();
+  const utils = trpc_client.useUtils();
+  const do_approve = trpc_client.forum.question.answers.approve.useMutation();
+  const disapprove =
+    trpc_client.forum.question.answers.disapprove.useMutation();
   const submitApproval = useCallback(async () => {
     await do_approve.mutateAsync({
       answer_id,
@@ -334,8 +335,8 @@ function Mutate_CreateQuestion() {
   const { id: question_id } = useQuestion();
   const { data: session } = useSession();
   const [, set_awnser_outlet] = useNewOutletState();
-  const create_info = TRPC_React.forum.question.answers.create.useMutation();
-  const utils = TRPC_React.useUtils();
+  const create_info = trpc_client.forum.question.answers.create.useMutation();
+  const utils = trpc_client.useUtils();
 
   const invalidate = useCallback(
     () =>

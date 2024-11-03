@@ -41,3 +41,9 @@ export const Forum_Filter = z.enum([
   "MINE",
   "NOT_APPROVED",
 ]);
+
+export type ForumSearchParams = Promise<{
+  category: string;
+  q: string;
+  f: string;
+}>;
