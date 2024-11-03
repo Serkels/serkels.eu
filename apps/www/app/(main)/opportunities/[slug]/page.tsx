@@ -1,5 +1,6 @@
 //
 
+import { ReactMarkdown } from ":components/markdown";
 import { Share_Button } from ":components/Share_Button";
 import { slug_to_opportunity, type Params } from ":pipes/opportunity_slug";
 import { getServerSession } from "@1.modules/auth.next";
@@ -8,14 +9,9 @@ import { ExclamationMark, Share } from "@1.ui/react/icons";
 import { ActionItem, Menu } from "@1.ui/react/menu";
 import to from "await-to-js";
 import type { Metadata, ResolvingMetadata } from "next";
-import dynamic from "next/dynamic";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Opportunity_Delete_Button } from "./delete";
-
-//
-
-const ReactMarkdown = dynamic(() => import("react-markdown"));
 
 //
 

@@ -1,5 +1,6 @@
 "use client";
 
+import { ReactMarkdown } from ":components/markdown";
 import { AppToastOptions } from ":components/toast";
 import { TRPC_React } from ":trpc/client";
 import type { Exchange } from "@1.modules/exchange.domain";
@@ -18,7 +19,6 @@ import { StudentAvatarMedia } from "@1.modules/profile.ui/avatar";
 import { button } from "@1.ui/react/button/atom";
 import { Exchange as ExchangeIcon, Pen } from "@1.ui/react/icons";
 import { useTimeoutEffect } from "@react-hookz/web";
-import dynamic from "next/dynamic";
 import Link from "next/link";
 import {
   useCallback,
@@ -33,14 +33,6 @@ import { Exchange_Actions } from "./actions";
 import { Exchange_Bookmark } from "./bookmark";
 import { Exchange_Delete_Button } from "./delete.button";
 import { Exchange_Share } from "./share";
-
-//
-
-const ReactMarkdown = dynamic<any>(() => import("react-markdown"), {
-  loading: () => (
-    <p className="bg-gray-200 text-center opacity-50">Chargement...</p>
-  ),
-});
 
 //
 
