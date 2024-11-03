@@ -9,6 +9,7 @@ Fonctionnalité: Consulter les échanges réussis d'un étudiant
     * je me connecte en tant que "douglas@yopmail.com"
 
     Quand je clique sur la légende "Link to my profile"
+    Alors je vois dans le titre "About :: Serkels"
     * je clique sur "Échanges Réussis"
 
     Alors je vois dans le titre "History :: Serkels"

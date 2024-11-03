@@ -76,7 +76,7 @@
     "@react-hookz/web": "24.0.4",
     "bowser": "2.11.0",
     "date-fns": "4.1.0",
-    "framer-motion": "11.11.10",
+    "framer-motion": "11.11.11",
     "react": "18.3.1",
     "react-aria-components": "1.4.1",
     "react-nest": "0.1.10",
