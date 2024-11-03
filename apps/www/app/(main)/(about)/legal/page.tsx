@@ -1,32 +1,70 @@
 //
 
+import { readFile } from "fs/promises";
+import type { Metadata, ResolvingMetadata } from "next";
 import dynamic from "next/dynamic";
+import Link from "next/link";
+import { join } from "path";
+import type { ReactNode } from "react";
+import { tv } from "tailwind-variants";
 
 //
 
 const ReactMarkdown = dynamic<any>(() => import("react-markdown"));
 
-const content = `
-# Politique d'utilisation
+const content = await readFile(
+  join(process.cwd(), "app/(main)/(about)/legal/content.md"),
+  "utf8",
+);
 
-> Conicio comis magnam tristis argentum aduro. Solium coepi argumentum virtus nulla amita approbo volubilis canto. Admoveo dolorum color bibo abduco sint avaritia aro.
+export async function generateMetadata(
+  _: never,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const title = `Legal :: ${(await parent).title?.absolute}`;
 
-Argentum ceno carbo ustilo stabilis decet avaritia desipio. Subnecto certus veritatis et tracto benigne capitulus vestrum cariosus vindico. Vallum triumphus demum.
-Maxime viriliter canonicus clibanus sed corpus volutabrum tumultus aliqua cohibeo. Apostolus aureus vilis aliquam appositus teres talio strenuus vehemens. Defendo calcar spes cultellus excepturi via cubitum defendo adinventitias.
-Causa chirographum temperantia caelum. Valeo amplitudo stillicidium cognatus denuo turbo comitatus vilicus tui defungo. Stipes valetudo asperiores arcus coepi nobis antiquus vos aetas.
-Statua carcer caritas demulceo creta. Debitis venia qui. Adulescens demo natus adopto arcus abscido collum.
-Vos talio caecus. Minus appono votum provident adstringo universe custodia cognatus. Vaco calculus viduo utor trans crur vociferor calcar patrocinor.
-Derideo virtus caelum basium tamdiu decipio voluntarius. Tego aegre denuo circumvenio. Delinquo appositus approbo solio adimpleo arca ullam vitium creator.
-Claustrum demum tumultus suscipio tracto adeptio demitto succedo. Adfectus auctus canonicus quos arx valetudo derideo esse theca sponte. Tamen dolore terminatio.
-Tui curiositas perspiciatis cuius infit. Contigo somnus vulgo tergum custodia temeritas sulum. Curiositas paens utrimque nemo deorsum capillus corona curso.
-Arguo theca cena umbra veritatis. Solitudo triduana crebro virga calamitas cruciamentum spes tergo. Aliquam paulatim alienus cum utrum demoror.'
-
-`;
+  return {
+    title,
+    openGraph: {
+      title,
+    },
+  };
+}
 
 export default function Page() {
+  const { link } = markdownLinkcss();
+
+  const MarkdownLink = ({
+    href,
+    children,
+  }: {
+    href: string;
+    children: ReactNode;
+  }) => {
+    if (href.startsWith("/")) {
+      return (
+        <Link href={href} passHref className={link()}>
+          {children}
+        </Link>
+      );
+    }
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer">
+        {children}
+      </a>
+    );
+  };
+
   return (
     <main className="container prose mx-auto my-10 p-6 lg:prose-xl">
-      <ReactMarkdown>{content}</ReactMarkdown>
+      <ReactMarkdown components={{ a: MarkdownLink }}>{content}</ReactMarkdown>
     </main>
   );
 }
+
+const markdownLinkcss = tv({
+  base: "",
+  slots: {
+    link: "underline-offset-8 hover:text-secondary ",
+  },
+});

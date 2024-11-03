@@ -84,6 +84,7 @@ jobs:
           - auth
           - exchanges
           - forum
+          - legal
           - opportunity
           - status
           - studient

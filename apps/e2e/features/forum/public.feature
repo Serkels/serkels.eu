@@ -7,7 +7,9 @@ Fonctionnalité: Voir le forum
   Scénario:
     Etant donné que je navigue sur la page
     Quand je clique sur le bouton "Discussions"
-    Alors je vois "Discussions"
+    Alors je vois dans le titre "Discussions :: Serkels"
+    * je clique sur le bouton "Accepter"
+    * je vois "Discussions"
     * je vois "Recherche"
     * je vois "Les dernières questions"
     * je vois "Questions répondues"

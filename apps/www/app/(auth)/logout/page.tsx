@@ -1,13 +1,16 @@
 "use client";
 
 import { Banner } from ":components/shell/Banner";
+import { useTerm } from ":components/terms/context";
 import { signOut } from "@1.modules/auth.next/react";
 import { useAsync, useMountEffect } from "@react-hookz/web";
 
 //
 
 export default function Page() {
+  const { decline } = useTerm();
   const [, { execute }] = useAsync(async () => {
+    decline();
     return signOut({ redirect: true, callbackUrl: "/" });
   });
 

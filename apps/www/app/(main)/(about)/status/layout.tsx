@@ -1,10 +1,24 @@
 //
 
+import type { Metadata, ResolvingMetadata } from "next";
 import type { ReactNode } from "react";
 import { tv } from "tailwind-variants";
 
 //
 
+export async function generateMetadata(
+  _: never,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const title = `Status :: ${(await parent).title?.absolute}`;
+
+  return {
+    title,
+    openGraph: {
+      title,
+    },
+  };
+}
 export default function Layout({
   api_database,
   api,
