@@ -17,7 +17,7 @@ export function LoginForm({
   return (
     <div className="grid grid-cols-1 gap-5 rounded-md border bg-white px-4 py-5 text-[#BEBEBE] shadow-[10px_10px_10px_#00000029]">
       <Login onSubmit={onLogin} />
-      <div className="inline-flex w-full items-center justify-center px-3">
+      <div className="relative inline-flex w-full items-center justify-center px-3">
         <hr className="my-4 h-px w-full border-0 bg-[#BEBEBE] " />
         <span className="absolute left-1/2 -translate-x-1/2 bg-white px-3">
           Ou
@@ -33,7 +33,7 @@ const SignUpSchema = z.object({
   email: z.string().email("Email invalide").min(1, "Requis"),
 });
 
-export function SignUp({ onSubmit }: SignUpProps) {
+function SignUp({ onSubmit }: SignUpProps) {
   const [showEmailField, setShowEmailField] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
@@ -81,7 +81,7 @@ export function SignUp({ onSubmit }: SignUpProps) {
   );
 }
 
-export function Login({ onSubmit }: LoginProps) {
+function Login({ onSubmit }: LoginProps) {
   return (
     <Formik initialValues={{ email: "" }} onSubmit={onSubmit}>
       {({ isSubmitting }) => (
