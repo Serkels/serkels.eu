@@ -60,10 +60,10 @@ importers:
         version: link:../../packages/@1/modules/trpc
       '@hono/node-server':
         specifier: 1.13.4
-        version: 1.13.4(hono@4.6.7)
+        version: 1.13.4(hono@4.6.8)
       '@hono/trpc-server':
         specifier: 0.3.2
-        version: 0.3.2(@trpc/server@10.45.2)(hono@4.6.7)
+        version: 0.3.2(@trpc/server@10.45.2)(hono@4.6.8)
       '@sentry/node':
         specifier: 8.36.0
         version: 8.36.0
@@ -77,8 +77,8 @@ importers:
         specifier: 16.4.5
         version: 16.4.5
       hono:
-        specifier: 4.6.7
-        version: 4.6.7
+        specifier: 4.6.8
+        version: 4.6.8
       tsx:
         specifier: 4.19.2
         version: 4.19.2
@@ -5288,8 +5288,8 @@ packages:
   hoist-non-react-statics@3.3.2:
     resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
 
-  hono@4.6.7:
-    resolution: {integrity: sha512-wX4ZbOnzfNO61hUjuQbJ7OPGs1fWXXVVJ8VTPDb2Ls/x9HjCbVTm80Je6VTHMz5n5RGDtBgV9d9ZFZxBqx56ng==}
+  hono@4.6.8:
+    resolution: {integrity: sha512-f+2Ec9JAzabT61pglDiLJcF/DjiSefZkjCn9bzm1cYLGkD5ExJ3Jnv93ax9h0bn7UPLHF81KktoyjdQfWI2n1Q==}
     engines: {node: '>=16.9.0'}
 
   hosted-git-info@2.8.9:
@@ -8333,14 +8333,14 @@ snapshots:
     dependencies:
       happy-dom: 15.8.0
 
-  '@hono/node-server@1.13.4(hono@4.6.7)':
+  '@hono/node-server@1.13.4(hono@4.6.8)':
     dependencies:
-      hono: 4.6.7
+      hono: 4.6.8
 
-  '@hono/trpc-server@0.3.2(@trpc/server@10.45.2)(hono@4.6.7)':
+  '@hono/trpc-server@0.3.2(@trpc/server@10.45.2)(hono@4.6.8)':
     dependencies:
       '@trpc/server': 10.45.2
-      hono: 4.6.7
+      hono: 4.6.8
 
   '@hookform/resolvers@3.9.1(react-hook-form@7.53.1(react@18.3.1))':
     dependencies:
@@ -12041,7 +12041,7 @@ snapshots:
     dependencies:
       react-is: 16.13.1
 
-  hono@4.6.7: {}
+  hono@4.6.8: {}
 
   hosted-git-info@2.8.9: {}
 
