@@ -5,7 +5,7 @@
 ### Qui sommes-nous ?
 
 Serkels est une **plateforme gratuite et sécurisée d’échange d’expériences** pour tous les étudiant.e.s : exilé.e.s, locaux.ales, et internationaux.ales.  
-Créée et développée par l’association **SILLAT**, cette initiative est née des réflexions d'un groupe d'étudiant.e.s, diplômé.e.s et expert.e.s venant d’horizons variés. Pensée pour aider les étudiant.e.s à relever les défis de l’intégration et de l’épanouissement durant leurs études supérieures en France, l’équipe de Serkels s’appuie sur ses propres expériences pour proposer une aide concrète.
+Créée et développée par l’association **L'Union des Étudiants Éxilés (UEE)**, cette initiative est née des réflexions d'un groupe d'étudiant.e.s, diplômé.e.s et expert.e.s venant d’horizons variés. Pensée pour aider les étudiant.e.s à relever les défis de l’intégration et de l’épanouissement durant leurs études supérieures en France, l’équipe de Serkels s’appuie sur ses propres expériences pour proposer une aide concrète.
 
 ---
 
