@@ -27,4 +27,4 @@ runs:
       with:
         # from https://github.com/rharkor/caching-for-turbo/blob/6c84b7e60f2263fb3ace301d617e573d29cab0cb/.github/workflows/ci.yml#L100-L106
         # Use a unique cache prefix for each pipeline & job
-        cache-prefix: ${{ runner.os }}-turbogha-
+        cache-prefix: ${{ runner.os }}-turbogha-${{ hashFiles('**/pnpm-lock.yaml') }}
