@@ -1,6 +1,28 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local"],
+  "globalEnv": [
+    "API_URL",
+    "APP_URL",
+    "AUTH_KV_REST_API_REST_API_READ_ONLY_TOKEN",
+    "AUTH_KV_REST_API_REST_API_TOKEN",
+    "AUTH_KV_REST_API_REST_API_URL",
+    "AUTH_KV_REST_API_URL",
+    "AUTH_SECRET",
+    "CI",
+    "CYPRESS_INSTALL_BINARY",
+    "DATABASE_URL",
+    "DO_NOT_TRACK",
+    "ENABLE_EXPERIMENTAL_COREPACK",
+    "ENABLE_VC_BUILD",
+    "NEXTAUTH_SECRET",
+    "NODE_ENV",
+    "PROFILE_BLOB_READ_WRITE_TOKEN",
+    "SMTP_URL",
+    "STALKER_URL",
+    "TURBO_TEAM",
+    "TURBO_TOKEN"
+  ],
   "tasks": {
     "@1.infra/database#type-check": { "dependsOn": ["generate"] },
     "@1.infra/database#dev": { "dependsOn": ["generate"] },
