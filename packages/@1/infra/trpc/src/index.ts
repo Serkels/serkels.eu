@@ -1,5 +1,6 @@
 //
 
+import auth_api_router from "@1.modules/auth.api";
 import bookmarks_api_router from "@1.modules/bookmark.api";
 import category_api_router from "@1.modules/category.api";
 import type { Location } from "@1.modules/core/Location";
@@ -14,8 +15,8 @@ import { student_api_router } from "@1.modules/profile.api/student";
 import { procedure, router } from "@1.modules/trpc";
 import type { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
 import { z } from "zod";
-import auth_api_router from "./auth";
 import health_api_router from "./health";
+
 //
 
 export const root_router = router({

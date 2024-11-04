@@ -12,6 +12,7 @@
     //
     { "path": "packages/@1/modules/auth/emails", "name": "📦 auth/emails" },
     { "path": "packages/@1/modules/auth/next", "name": "📦 auth/next" },
+    { "path": "packages/@1/modules/auth/api", "name": "🫙 auth/api" },
     //
     //
     //
@@ -294,6 +295,17 @@
       {
         "label": "🧪 Watch Test",
         "command": "bun test --watch",
+        "type": "shell",
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:root}",
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "runOptions": { "instanceLimit": 1 },
+      },
+      {
+        "label": "🧪 Watch Test : Current file",
+        "command": "bun test --watch ${fileDirname}/${fileBasename}",
         "type": "shell",
         "group": "build",
         "options": {

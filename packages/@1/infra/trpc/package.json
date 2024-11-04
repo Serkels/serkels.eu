@@ -22,6 +22,7 @@
   "dependencies": {
     "@1.infra/database": "workspace:*",
     "@1.infra/email": "workspace:*",
+    "@1.modules/auth.api": "workspace:*",
     "@1.modules/auth.next": "workspace:*",
     "@1.modules/bookmark.api": "workspace:*",
     "@1.modules/category.api": "workspace:*",
