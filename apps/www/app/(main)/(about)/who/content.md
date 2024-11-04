@@ -41,5 +41,6 @@ Universités, instituts, centres culturels, associations et entreprises, la plat
 
 ### En résumé
 
-Rejoignez notre réseau, publiez les **annonces, offres et opportunités** que vous souhaitez échanger, ou trouvez facilement ce dont vous avez besoin.  
+Rejoignez notre réseau, publiez les **annonces, offres et opportunités** que vous souhaitez échanger, ou trouvez facilement ce dont vous avez besoin.
+
 **Avec Serkels, échangeons plus et abaissons les barrières !**

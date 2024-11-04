@@ -38,7 +38,7 @@ jobs:
       - run: pnpm install --frozen-lockfile --prefer-offline
 
       - name: Install dependencies
-        uses: cypress-io/github-action@0da3c06ed8217b912deea9d8ee69630baed1737e # v6.7.6
+        uses: cypress-io/github-action@f1f0912d392f0d06bdd01fb9ebe3b3299e5806fb # v6.7.7
         with:
           runTests: false
 
@@ -48,7 +48,7 @@ jobs:
       - run: pnpm exec turbo run build
 
       - name: Cypress run
-        uses: cypress-io/github-action@0da3c06ed8217b912deea9d8ee69630baed1737e # v6.7.6
+        uses: cypress-io/github-action@f1f0912d392f0d06bdd01fb9ebe3b3299e5806fb # v6.7.7
         env:
           CONSOLA_LEVEL: "2"
           DEPLOY_ENV: "production"
@@ -90,6 +90,7 @@ jobs:
           - status
           - studient
           - studient_inbox
+          - who
 
   system:
     name: System testing
