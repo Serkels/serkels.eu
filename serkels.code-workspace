@@ -85,6 +85,10 @@
     //
     //
     //
+    { "path": "packages/@1/modules/post/api", "name": "🫙 post.api" },
+    //
+    //
+    //
     { "path": "packages/@1/modules/profile/api", "name": "🫙 profile.api" },
     {
       "path": "packages/@1/modules/profile/domain",
