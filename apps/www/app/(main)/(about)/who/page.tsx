@@ -3,7 +3,7 @@
 import { readFile } from "fs/promises";
 import type { Metadata, ResolvingMetadata } from "next";
 import dynamic from "next/dynamic";
-import { join } from "path/posix";
+import { join } from "path";
 
 //
 
