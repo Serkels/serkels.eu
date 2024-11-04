@@ -12,6 +12,7 @@
     //
     { "path": "packages/@1/modules/auth/emails", "name": "📦 auth/emails" },
     { "path": "packages/@1/modules/auth/next", "name": "📦 auth/next" },
+    { "path": "packages/@1/modules/auth/api", "name": "🫙 auth/api" },
     //
     //
     //
@@ -137,7 +138,7 @@
       "dist/": true,
       "e2e-report/": true,
       "e2e-results/": true,
-      "node_modules/": true,
+      // "node_modules/": true,
       "out/": true,
       "packages/__legacy__": true,
       "storybook-static/": true,
