@@ -7,11 +7,6 @@ settings:
 overrides:
   next: 14.2.16
 
-patchedDependencies:
-  react-nest@0.1.10:
-    hash: oxxc2okcxsefs22szuakzwvvp4
-    path: patches/react-nest@0.1.10.patch
-
 importers:
 
   .:
@@ -273,9 +268,6 @@ importers:
       react-markdown:
         specifier: 9.0.1
         version: 9.0.1(@types/react@18.3.12)(react@18.3.1)
-      react-nest:
-        specifier: 0.1.10
-        version: 0.1.10(patch_hash=oxxc2okcxsefs22szuakzwvvp4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-slotify:
         specifier: 0.2.2
         version: 0.2.2(react@18.3.1)
@@ -1714,9 +1706,6 @@ importers:
       react-aria-components:
         specifier: 1.4.1
         version: 1.4.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      react-nest:
-        specifier: 0.1.10
-        version: 0.1.10(patch_hash=oxxc2okcxsefs22szuakzwvvp4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-slotify:
         specifier: 0.2.2
         version: 0.2.2(react@18.3.1)
@@ -6826,12 +6815,6 @@ packages:
     peerDependencies:
       '@types/react': '>=18'
       react: '>=18'
-
-  react-nest@0.1.10:
-    resolution: {integrity: sha512-eTln9iBXP08GR98xCzV4S+E2mTgOtBs41Y4+ieEPeAx+3SyHxA/lllkih2WgKIZ+6F1G0lz0QWty3BVIfE8MQQ==}
-    peerDependencies:
-      react: '>=16.8.0'
-      react-dom: '>=16.8.0'
 
   react-promise-suspense@0.3.4:
     resolution: {integrity: sha512-I42jl7L3Ze6kZaq+7zXWSunBa3b1on5yfvUW6Eo/3fFOj6dZ5Bqmcd264nJbTK/gn1HjjILAjSwnZbV4RpSaNQ==}
@@ -14024,11 +14007,6 @@ snapshots:
       vfile: 6.0.3
     transitivePeerDependencies:
       - supports-color
-
-  react-nest@0.1.10(patch_hash=oxxc2okcxsefs22szuakzwvvp4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
-    dependencies:
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
 
   react-promise-suspense@0.3.4:
     dependencies:

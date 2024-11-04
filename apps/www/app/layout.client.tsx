@@ -12,7 +12,6 @@ import {
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import debug from "debug";
 import { useState, type PropsWithChildren } from "react";
-import Nest from "react-nest";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -41,13 +40,13 @@ export function RootProviders({ children }: PropsWithChildren) {
         className="min-w-[25%] text-center"
         position={isMd ? "bottom-left" : "top-center"}
       />
-      <Nest>
-        <LegalProvider />
-        <AuthSessionProvider />
-        <ReactQueryClientProvider />
-        <TrpcProvider />
-        {children}
-      </Nest>
+      <LegalProvider>
+        <AuthSessionProvider>
+          <ReactQueryClientProvider>
+            <TrpcProvider>{children}</TrpcProvider>
+          </ReactQueryClientProvider>
+        </AuthSessionProvider>
+      </LegalProvider>
     </>
   );
 }

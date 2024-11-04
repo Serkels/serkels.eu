@@ -43,9 +43,6 @@
   "pnpm": {
     "overrides": {
       "next": "14.2.16"
-    },
-    "patchedDependencies": {
-      "react-nest@0.1.10": "patches/react-nest@0.1.10.patch"
     }
   }
 }

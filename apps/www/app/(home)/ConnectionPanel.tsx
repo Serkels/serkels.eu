@@ -21,7 +21,6 @@ import {
   type PropsWithChildren,
 } from "react";
 import ContentLoader from "react-content-loader";
-import Nest from "react-nest";
 import { P, match } from "ts-pattern";
 import { LoginForm } from "./LoginForm";
 
@@ -62,12 +61,13 @@ const [Outlet_Provider, useOutlet_Error, useOutlet_Send, useOutlet_State] =
 
 export default function ConnectionPanel() {
   return (
-    <Nest>
-      <Outlet_Provider />
-      <DomLazyMotion />
-      <AnimatePresence mode="wait" />
-      <ConnectionPanel_MotionOutlet />
-    </Nest>
+    <Outlet_Provider>
+      <DomLazyMotion>
+        <AnimatePresence mode="wait">
+          <ConnectionPanel_MotionOutlet />
+        </AnimatePresence>
+      </DomLazyMotion>
+    </Outlet_Provider>
   );
 }
 
