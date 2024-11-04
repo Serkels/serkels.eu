@@ -10,7 +10,6 @@ import { Exchanges_Filter } from "./_client/Exchanges_Filter";
 //
 
 const SearchForm = dynamic(() => import("./_client/SearchForm"), {
-  ssr: false,
   loading() {
     return <InputSearch />;
   },

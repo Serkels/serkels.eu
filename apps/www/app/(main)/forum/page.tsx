@@ -12,14 +12,12 @@ import dynamic from "next/dynamic";
 //
 
 const List = dynamic(() => import("./_client/List"), {
-  ssr: false,
   loading() {
     return <Spinner />;
   },
 });
 
 const Create = dynamic(() => import("./_client/Create"), {
-  ssr: false,
   loading() {
     return <CreateCard_Idle />;
   },

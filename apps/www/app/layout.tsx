@@ -11,9 +11,7 @@ import { RootProviders } from "./layout.client";
 
 //
 
-const NextTopLoader = dynamic(() => import(":components/TopLoader"), {
-  ssr: false,
-});
+const NextTopLoader = dynamic(() => import(":components/TopLoader"));
 
 //
 

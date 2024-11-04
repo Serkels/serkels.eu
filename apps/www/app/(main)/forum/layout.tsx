@@ -10,7 +10,6 @@ import { Filter } from "./_client/Filter";
 //
 
 const SearchForm = dynamic(() => import("./_client/SearchForm"), {
-  ssr: false,
   loading() {
     return <InputSearch />;
   },

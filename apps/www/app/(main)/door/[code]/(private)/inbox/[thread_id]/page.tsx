@@ -20,7 +20,6 @@ import Conversation_Form from "./_client/Conversation_Form";
 const Thread_Timeline = dynamic(
   () => import("./_client/Infinite_Thread_Timeline"),
   {
-    ssr: false,
     loading() {
       return <Loading_Placeholder />;
     },
