@@ -20,18 +20,13 @@ import health_api_router from "./health";
 //
 
 export const root_router = router({
+  auth: auth_api_router,
   bookmarks: bookmarks_api_router,
   category: category_api_router,
   exchanges: exchange_api_router,
   forum: forum_api_router,
   health: health_api_router,
-  auth: auth_api_router,
   inbox: inbox_api_router,
-  opportunity: opportunity_api_router,
-  partner: partner_api_router,
-  profile: profile_api_router,
-  student: student_api_router,
-  notification: notification_api_router,
   locations: procedure
     .input(z.object({ location: z.string().trim().default("Paris") }))
     .query(async ({ input: { location: nom } }) => {
@@ -45,6 +40,11 @@ export const root_router = router({
       );
       return response.json() as Promise<Location[]>;
     }),
+  notification: notification_api_router,
+  opportunity: opportunity_api_router,
+  partner: partner_api_router,
+  profile: profile_api_router,
+  student: student_api_router,
 });
 
 export { root_router as router };
