@@ -39,3 +39,6 @@ runs:
         key: ${{ runner.os }}-${{ inputs.name }}-turbo-renovate
         restore-keys: |
           ${{ runner.os }}-turbo-
+
+    - name: "🔺️  Cache for Turbo"
+      uses: rharkor/caching-for-turbo@439abec0d28d21b192fa8817b744ffdf1ee5ac0d # v1.5
