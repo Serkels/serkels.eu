@@ -4,9 +4,22 @@
   "globalEnv": [
     "API_URL",
     "APP_URL",
+    "AUTH_KV_REST_API_REST_API_READ_ONLY_TOKEN",
+    "AUTH_KV_REST_API_REST_API_TOKEN",
+    "AUTH_KV_REST_API_REST_API_URL",
+    "AUTH_KV_REST_API_URL",
+    "AUTH_SECRET",
     "CI",
+    "CYPRESS_INSTALL_BINARY",
+    "DATABASE_URL",
     "DO_NOT_TRACK",
+    "ENABLE_EXPERIMENTAL_COREPACK",
+    "ENABLE_VC_BUILD",
+    "NEXTAUTH_SECRET",
     "NODE_ENV",
+    "PROFILE_BLOB_READ_WRITE_TOKEN",
+    "SMTP_URL",
+    "STALKER_URL",
     "TURBO_TEAM",
     "TURBO_TOKEN"
   ],
@@ -38,26 +51,7 @@
     },
     "www#build": {
       "dependsOn": ["type-check"],
-      "outputs": ["!.next/cache/**", ".next/**"],
-      "env": [
-        "AUTH_SECRET",
-        "CONSOLA_LEVEL",
-        "DATABASE_URL",
-        "DEPLOY_ENV",
-        "MAINTENANCE",
-        "NEXT_PUBLIC_GA_MEASUREMENT_ID",
-        "NEXT_PUBLIC_SENTRY_DSN",
-        "NEXT_PUBLIC_VERCEL_ENV",
-        "NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL",
-        "NEXT_PUBLIC_VERCEL_URL",
-        "NEXT_PUBLIC_WEBSOCKET_URL",
-        "NEXT_TELEMETRY_DISABLED",
-        "NEXTAUTH_*",
-        "SENTRY_*",
-        "SMTP_URL",
-        "STALKER_TRANSPORT_URL",
-        "STALKER_URL"
-      ]
+      "outputs": ["!.next/cache/**", ".next/**"]
     },
     "www#dev": { "persistent": true }
   }
