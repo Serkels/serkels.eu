@@ -4,7 +4,7 @@ import { readFile } from "fs/promises";
 import type { Metadata, ResolvingMetadata } from "next";
 import dynamic from "next/dynamic";
 import { join } from "path";
-
+import rehypeRaw from "rehype-raw";
 //
 
 const ReactMarkdown = dynamic<any>(() => import("react-markdown"));
@@ -31,7 +31,7 @@ export async function generateMetadata(
 export default function Page() {
   return (
     <main className="container prose mx-auto my-10 p-6 lg:prose-xl">
-      <ReactMarkdown>{content}</ReactMarkdown>
+      <ReactMarkdown rehypePlugins={[rehypeRaw]}>{content}</ReactMarkdown>
     </main>
   );
 }
