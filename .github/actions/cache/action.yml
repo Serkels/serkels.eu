@@ -22,20 +22,9 @@ runs:
         restore-keys: |
           ${{ runner.os }}-pnpm-store-
 
-    - name: "🔺️  Cache turbo build setup"
-      if: contains(github.head_ref, 'renovate/') != true
-      uses: actions/cache@v4
+    - name: "🔺️  Cache for Turbo"
+      uses: rharkor/caching-for-turbo@439abec0d28d21b192fa8817b744ffdf1ee5ac0d # v1.5
       with:
-        path: .turbo
-        key: ${{ runner.os }}-${{ inputs.name }}-turbo-${{ hashFiles('**/pnpm-lock.yaml') }}
-        restore-keys: |
-          ${{ runner.os }}-turbo-
-
-    - name: "🔺️  Cache turbo build setup"
-      if: contains(github.head_ref, 'renovate/') == true
-      uses: actions/cache@v4
-      with:
-        path: .turbo
-        key: ${{ runner.os }}-${{ inputs.name }}-turbo-renovate
-        restore-keys: |
-          ${{ runner.os }}-turbo-
+        # from https://github.com/rharkor/caching-for-turbo/blob/6c84b7e60f2263fb3ace301d617e573d29cab0cb/.github/workflows/ci.yml#L100-L106
+        # Use a unique cache prefix for each pipeline & job
+        cache-prefix: ${{ runner.os }}-turbogha-

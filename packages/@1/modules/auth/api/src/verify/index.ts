@@ -9,7 +9,7 @@ export default router({
   verify: procedure
     .input(z.object({ email: z.string() }))
     .mutation(async ({ ctx: { prisma }, input: { email } }) => {
-      return await prisma.user.findUnique({
+      return prisma.user.findUnique({
         select: { id: true },
         where: { email },
       });
