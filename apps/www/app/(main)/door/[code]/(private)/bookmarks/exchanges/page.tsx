@@ -1,8 +1,8 @@
 //
 
-import { TRPC_SSR } from ":trpc/server";
 import { Exchange_Card } from ":widgets/exchanges/card";
-import { getServerSession } from "@1.modules/auth.next";
+import { trpc_server } from "@1.infra/trpc/react-query/server";
+import { auth } from "@1.modules/auth.next";
 import type { Metadata, ResolvingMetadata } from "next";
 
 //
@@ -18,8 +18,9 @@ export async function generateMetadata(
 
 //
 export default async function Page() {
-  const session = await getServerSession();
-  const { data: exchanges } = await TRPC_SSR.bookmarks.exchanges.find.fetch();
+  const session = await auth();
+  const { data: exchanges } =
+    await trpc_server.bookmarks.exchanges.find.fetch();
 
   if (!session) return null;
   if (exchanges.length === 0)
