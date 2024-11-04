@@ -1,17 +1,8 @@
 //
 
-import { procedure, router } from "@1.modules/trpc";
-import { z } from "zod";
+import { mergeRouters } from "@1.modules/trpc";
+import verify_router from "./verify";
 
 //
 
-export default router({
-  verify: procedure
-    .input(z.object({ email: z.string() }))
-    .mutation(async ({ ctx: { prisma }, input: { email } }) => {
-      return await prisma.user.findUnique({
-        select: { id: true },
-        where: { email },
-      });
-    }),
-});
+export default mergeRouters(verify_router);
