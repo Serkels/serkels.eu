@@ -90,6 +90,7 @@ jobs:
           - status
           - studient
           - studient_inbox
+          - who
 
   system:
     name: System testing
