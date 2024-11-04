@@ -480,6 +480,9 @@ importers:
       '@1.infra/email':
         specifier: workspace:*
         version: link:../email
+      '@1.modules/auth.api':
+        specifier: workspace:*
+        version: link:../../modules/auth/api
       '@1.modules/auth.next':
         specifier: workspace:*
         version: link:../../modules/auth/next
@@ -529,6 +532,31 @@ importers:
       '@1.config/typescript':
         specifier: workspace:*
         version: link:../../config/typescript
+      typescript:
+        specifier: 5.6.3
+        version: 5.6.3
+
+  packages/@1/modules/auth/api:
+    dependencies:
+      '@1.modules/category.domain':
+        specifier: workspace:*
+        version: link:../../category/domain
+      '@1.modules/trpc':
+        specifier: workspace:*
+        version: link:../../trpc
+      '@typeschema/zod':
+        specifier: 0.14.0
+        version: 0.14.0(@types/json-schema@7.0.15)(zod@3.23.8)
+      zod:
+        specifier: 3.23.8
+        version: 3.23.8
+    devDependencies:
+      '@1.config/typescript':
+        specifier: workspace:*
+        version: link:../../../config/typescript
+      '@1.infra/database':
+        specifier: workspace:*
+        version: link:../../../infra/database
       typescript:
         specifier: 5.6.3
         version: 5.6.3
