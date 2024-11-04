@@ -82,6 +82,7 @@ jobs:
       matrix:
         e2e_test:
           - auth
+          - exchange_inbox
           - exchanges
           - forum
           - legal

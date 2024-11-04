@@ -83,7 +83,9 @@ async function UserNavGroup({ className }: ComponentPropsWithoutRef<"nav">) {
           <Messenger className={icon()} />
           <MessageNews_DotIndicator />
         </Link>
-        <Link href={`/@~/exchanges/inbox`} className="relative flex">
+        <Link href={`/@~/exchanges/inbox`} className="relative flex"
+          aria-label="Link to my exchanges inbox"
+        >
           <VisuallyHidden>Mes échanges</VisuallyHidden>
           <Exchange className={icon()} />
           <ExchangeNews_DotIndicator />
