@@ -1,5 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": ["**/.env.*local"],
   "tasks": {
     "@1.infra/database#type-check": { "dependsOn": ["generate"] },
     "@1.infra/database#dev": { "dependsOn": ["generate"] },
