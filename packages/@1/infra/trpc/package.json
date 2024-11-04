@@ -33,6 +33,7 @@
     "@1.modules/notification.api": "workspace:*",
     "@1.modules/opportunity.api": "workspace:*",
     "@1.modules/profile.api": "workspace:*",
+    "@1.modules/post.api": "workspace:*",
     "@1.modules/trpc": "workspace:*",
     "@trpc/react-query": "10.45.2",
     "@trpc/server": "10.45.2",
