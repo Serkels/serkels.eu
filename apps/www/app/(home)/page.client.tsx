@@ -6,12 +6,9 @@ import dynamic from "next/dynamic";
 
 //
 
-const Carousel = dynamic(() => import("@1.ui/react/carousel"), {
-  ssr: false,
-});
+const Carousel = dynamic(() => import("@1.ui/react/carousel"));
 
 const ConnectionPanel = dynamic(() => import("./ConnectionPanel"), {
-  ssr: false,
   loading: () => (
     <section className="text-center">
       <Spinner />

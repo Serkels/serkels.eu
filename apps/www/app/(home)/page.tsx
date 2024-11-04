@@ -20,7 +20,6 @@ import { tv } from "tailwind-variants";
 //
 
 const HomeCarousel = dynamic(() => import("./page.client"), {
-  ssr: false,
   loading: () => <CarouselPlaceholder />,
 });
 

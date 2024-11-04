@@ -7,7 +7,6 @@ import dynamic from "next/dynamic";
 //
 
 const Welcome_Flow = dynamic(() => import("./page.client"), {
-  ssr: false,
   loading() {
     return <Spinner />;
   },
