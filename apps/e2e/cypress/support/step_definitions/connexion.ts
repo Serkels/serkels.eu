@@ -18,7 +18,7 @@ When("je me connecte en tant que {string}", (email: string) => {
 
     cy.maildevDeleteMessageById(message.id);
   });
-  cy.contains("Vous êtes connecté en tant que : ").click();
+  cy.contains("Vous êtes connecté");
 });
 
 When("je clique sur le lien de connexion", () => {

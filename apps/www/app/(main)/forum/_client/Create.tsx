@@ -19,14 +19,16 @@ import { P, match } from "ts-pattern";
 
 export default function Create() {
   const { data: categories } = TRPC_React.category.forum.useQuery();
-  if (!categories) return null;
 
   const search_params = useSearchParams() ?? new URLSearchParams();
   const { id: category } =
-    categories.find(({ slug }) => search_params.get("category") === slug) ?? {};
+    (categories ?? []).find(
+      ({ slug }) => search_params.get("category") === slug,
+    ) ?? {};
   const { data: session } = useSession();
   const [isOpen, setIsOpen] = useToggle(false);
 
+  if (!categories) return null;
   if (!session) return null;
   return match(isOpen)
     .with(true, () => (
