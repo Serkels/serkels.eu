@@ -3,6 +3,9 @@
 import { format, parseISO } from "date-fns";
 import { fr } from "date-fns/locale";
 import { Footer } from "./Footer";
+
+//
+
 export async function AppFooter() {
   const now = await getServerDate();
   const year = new Date(now).getFullYear();

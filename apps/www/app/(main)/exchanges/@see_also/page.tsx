@@ -1,7 +1,9 @@
 //
 
-import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
+import { TRPC_Hydrate } from ":trpc/server";
 import List from ":widgets/opportunities/list";
+import { trpc_server } from "@1.infra/trpc/react-query/server";
+import type { ExchangeSearchParams } from "@1.modules/exchange.domain";
 import Link from "next/link";
 
 //
@@ -9,11 +11,11 @@ import Link from "next/link";
 export default async function Page({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: ExchangeSearchParams;
 }) {
-  const category = String(searchParams["category"] ?? "");
+  const { category } = await searchParams;
 
-  await TRPC_SSR.opportunity.find.prefetchInfinite({
+  await trpc_server.opportunity.find.prefetchInfinite({
     category,
     limit: 5,
   });

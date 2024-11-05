@@ -132,3 +132,11 @@ export const Exchange_Create_Schema = z.object({
 
 export interface Exchange_Create
   extends z.TypeOf<typeof Exchange_Create_Schema> {}
+
+//
+
+export type ExchangeSearchParams = Promise<{
+  category: string;
+  q: string;
+  f: string;
+}>;
