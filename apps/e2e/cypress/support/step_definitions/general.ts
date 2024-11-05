@@ -19,7 +19,7 @@ Then("je vois {string}", function (text: string) {
 });
 
 Then("je vois la légende {string}", function (text: string) {
-  cy.get(`[aria-label="${text}"]`);
+  cy.get(`[aria-label*="${text}"]`);
 });
 
 Then("je vois dans le titre {string}", function (text: string) {
@@ -37,11 +37,11 @@ When("je clique sur le bouton {string}", (text: string) => {
 });
 
 When("je clique sur le champ {string}", (text: string) => {
-  cy.get(`input[placeholder="${text}"]`).click();
+  cy.get(`[placeholder*="${text}"]`).click();
 });
 
 Then("je clique sur la légende {string}", function (text: string) {
-  cy.get(`[aria-label="${text}"]`).click();
+  cy.get(`[aria-label*="${text}"]`).click();
 });
 
 When("je tape {string}", (text: string) => {
