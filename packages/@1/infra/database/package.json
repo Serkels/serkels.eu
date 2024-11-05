@@ -52,7 +52,7 @@
   "prettier": "@1.config/prettier",
   "dependencies": {
     "@1.modules/notification.domain": "workspace:*",
-    "@prisma/client": "5.21.1"
+    "@prisma/client": "5.22.0"
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
@@ -62,7 +62,7 @@
     "date-fns": "4.1.0",
     "dedent": "1.5.3",
     "pglite-prisma-adapter": "0.3.0",
-    "prisma": "5.21.1",
+    "prisma": "5.22.0",
     "slugify": "1.6.6",
     "tsx": "4.19.2"
   },
