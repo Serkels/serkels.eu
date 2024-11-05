@@ -21,6 +21,7 @@ export function MobileNavBar({ className }: ComponentPropsWithoutRef<"nav">) {
       <ul className="grid h-full grid-cols-3 md:mx-auto md:max-w-2xl">
         <li>
           <Link
+            aria-label="Link to exchanges"
             className={link({
               is_active: pathname.includes("/exchanges"),
             })}
@@ -33,6 +34,7 @@ export function MobileNavBar({ className }: ComponentPropsWithoutRef<"nav">) {
         </li>
         <li>
           <Link
+            aria-label="Link to opportunities"
             className={link({ is_active: pathname.includes("/opportunities") })}
             href="/opportunities"
           >
@@ -46,6 +48,7 @@ export function MobileNavBar({ className }: ComponentPropsWithoutRef<"nav">) {
         </li>
         <li>
           <Link
+            aria-label="Link to forum"
             className={link({ is_active: pathname.includes("/forum") })}
             href="/forum"
           >

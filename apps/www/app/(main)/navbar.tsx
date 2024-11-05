@@ -53,7 +53,7 @@ async function UserNavGroup({ className }: ComponentPropsWithoutRef<"nav">) {
   return match(session.profile.role)
     .with(PROFILE_ROLES.Enum.ADMIN, () => (
       <nav className={base({ className })}>
-        <Link href={`/@~`} className="flex">
+        <Link className="flex" href={`/@~`}>
           <VisuallyHidden>Moi</VisuallyHidden>
           <Avatar
             className="size-7 border-2 border-white"
@@ -64,7 +64,7 @@ async function UserNavGroup({ className }: ComponentPropsWithoutRef<"nav">) {
     ))
     .with(PROFILE_ROLES.Enum.PARTNER, () => (
       <nav className={base({ className })}>
-        <Link href={`/@~/opportunities/new`} className="flex">
+        <Link className="flex" href={`/@~/opportunities/new`}>
           <VisuallyHidden>Créer une opportunité</VisuallyHidden>
           <Plus className={icon({ className: "bg-transparent p-0.5" })} />
         </Link>

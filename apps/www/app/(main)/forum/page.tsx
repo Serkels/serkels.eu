@@ -52,7 +52,6 @@ export default async function Page({
   searchParams: ForumSearchParams;
 }) {
   const { category, q: search, f: filter_param } = await searchParams;
-
   const filter_parsed_return = Forum_Filter.safeParse(filter_param);
   const filter = filter_parsed_return.success
     ? filter_parsed_return.data

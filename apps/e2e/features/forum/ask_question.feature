@@ -5,7 +5,8 @@ Fonctionnalité: Posez une question
     Soit une base de données nourrie au grain
     * je navigue sur la page
     * je me connecte en tant que "douglas@yopmail.com"
-    * je clique sur le bouton "Discussions"
+    * je vois dans le titre "Exchange :: Serkels"
+    * je clique sur la légende "Link to forum"
     * je vois dans le titre "Discussions :: Serkels"
     * je clique sur le bouton "Pose une question aux étudiant.e.s ..."
     * je clique sur le champ "Pose une question aux étudiant.e.s ..."
