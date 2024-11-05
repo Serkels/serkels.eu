@@ -1,18 +1,15 @@
 //
 
+import { ReactMarkdown } from ":components/markdown";
 import { BlockedProfile_Placeholder } from ":components/placeholder/BlockedProfile_Placeholder";
 import { code_to_profile_id, type CodeParms } from ":pipes/code";
 import { TRPC_SSR } from ":trpc/server";
 import { AuthError } from "@1.modules/core/errors";
 import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import type { Metadata, ResolvingMetadata } from "next";
-import dynamic from "next/dynamic";
+
 import { notFound } from "next/navigation";
 import { match } from "ts-pattern";
-
-//
-
-const ReactMarkdown = dynamic<any>(() => import("react-markdown"));
 
 //
 

@@ -1,15 +1,13 @@
 //
 
-import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
+import { TRPC_Hydrate } from ":trpc/server";
+import { trpc_server } from "@1.infra/trpc/react-query/server";
 import { Filter } from "./Filter";
-
-//
-export const revalidate = 0;
 
 //
 
 export default async function Page() {
-  await TRPC_SSR.category.forum.prefetch();
+  await trpc_server.category.forum.prefetch();
   return (
     <TRPC_Hydrate>
       <Filter />

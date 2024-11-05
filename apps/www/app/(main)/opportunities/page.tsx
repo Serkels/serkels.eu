@@ -1,7 +1,10 @@
 //
 
 import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
-import { Partner_Filter } from "@1.modules/opportunity.domain";
+import {
+  Partner_Filter,
+  type OpportunitySearchParams,
+} from "@1.modules/opportunity.domain";
 import type { _1_HOUR_ } from "@douglasduteil/datatypes...hours-to-seconds";
 import type { Metadata, ResolvingMetadata } from "next";
 import List from "./_client/List";
@@ -31,11 +34,10 @@ export async function generateMetadata(
 export default async function Page({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: OpportunitySearchParams;
 }) {
-  const category = String(searchParams["category"]);
-  const search = String(searchParams["q"]);
-  const filter_parsed_return = Partner_Filter.safeParse(searchParams["f"]);
+  const { category, q: search, f: filter_param } = await searchParams;
+  const filter_parsed_return = Partner_Filter.safeParse(filter_param);
   const filter = filter_parsed_return.success
     ? filter_parsed_return.data
     : undefined;

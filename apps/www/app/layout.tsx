@@ -1,13 +1,14 @@
 //
 
 import Analytics from ":components/shell/Analytics";
+import { RootProviders } from ":components/shell/RootProviders";
 import { env_app_url_schema } from "@1.modules/core/env.zod";
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { Roboto } from "next/font/google";
 import { type PropsWithChildren } from "react";
+import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
-import { RootProviders } from "./layout.client";
 
 //
 

@@ -1,8 +1,9 @@
 //
 
-import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
-import { getServerSession } from "@1.modules/auth.next";
-import { Forum_Filter } from "@1.modules/forum.domain";
+import { TRPC_Hydrate } from ":trpc/server";
+import { trpc_server } from "@1.infra/trpc/react-query/server";
+import { auth } from "@1.modules/auth.next";
+import { Forum_Filter, type ForumSearchParams } from "@1.modules/forum.domain";
 import { Idle as CreateCard_Idle } from "@1.modules/forum.ui/CreateCard/Idle";
 import { Spinner } from "@1.ui/react/spinner";
 import type { _1_HOUR_ } from "@douglasduteil/datatypes...hours-to-seconds";
@@ -48,16 +49,16 @@ export async function generateMetadata(
 export default async function Page({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: ForumSearchParams;
 }) {
-  const category = String(searchParams["category"]);
-  const search = String(searchParams["q"]);
-  const filter_parsed_return = Forum_Filter.safeParse(searchParams["f"]);
+  const { category, q: search, f: filter_param } = await searchParams;
+
+  const filter_parsed_return = Forum_Filter.safeParse(filter_param);
   const filter = filter_parsed_return.success
     ? filter_parsed_return.data
     : undefined;
 
-  await TRPC_SSR.forum.question.find.prefetchInfinite({
+  await trpc_server.forum.question.find.prefetchInfinite({
     category,
     search,
     filter,
@@ -74,7 +75,7 @@ export default async function Page({
 }
 
 async function CreateQuestionSection() {
-  const session = await getServerSession();
+  const session = await auth();
 
   if (!session) return null;
   if (session.profile.role !== "STUDENT") return null;

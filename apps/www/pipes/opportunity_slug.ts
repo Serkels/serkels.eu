@@ -1,13 +1,14 @@
 //
 
-import { TRPC_SSR } from ":trpc/server";
+import { trpc_server } from "@1.infra/trpc/react-query/server";
 
 //
 
-export interface Params {
+export type Params = Promise<{
   slug: string;
-}
+}>;
 
-export async function slug_to_opportunity({ slug }: Params) {
-  return TRPC_SSR.opportunity.by_slug.fetch(slug);
+export async function slug_to_opportunity(params: Params) {
+  const { slug } = await params;
+  return trpc_server.opportunity.by_slug.fetch(slug);
 }

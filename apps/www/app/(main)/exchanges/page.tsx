@@ -1,8 +1,12 @@
 //
 
-import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
+import { TRPC_Hydrate } from ":trpc/server";
+import { trpc_server } from "@1.infra/trpc/react-query/server";
 import { getServerSession } from "@1.modules/auth.next";
-import { Exchange_Filter } from "@1.modules/exchange.domain";
+import {
+  Exchange_Filter,
+  type ExchangeSearchParams,
+} from "@1.modules/exchange.domain";
 import { card } from "@1.ui/react/card/atom";
 import { PlusBox } from "@1.ui/react/icons";
 import { link } from "@1.ui/react/link/atom";
@@ -31,16 +35,15 @@ export async function generateMetadata(
 export default async function Page({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: ExchangeSearchParams;
 }) {
-  const category = String(searchParams["category"]);
-  const search = String(searchParams["q"]);
-  const filter_parsed_return = Exchange_Filter.safeParse(searchParams["f"]);
+  const { category, q: search, f: filter_param } = await searchParams;
+  const filter_parsed_return = Exchange_Filter.safeParse(filter_param);
   const filter = filter_parsed_return.success
     ? filter_parsed_return.data
     : undefined;
 
-  await TRPC_SSR.exchanges.find.prefetchInfinite({
+  await trpc_server.exchanges.find.prefetchInfinite({
     category,
     filter,
     search,

@@ -2,6 +2,7 @@
 
 import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
 import List from ":widgets/opportunities/list";
+import type { ForumSearchParams } from "@1.modules/forum.domain";
 import Link from "next/link";
 
 //
@@ -9,9 +10,9 @@ import Link from "next/link";
 export default async function Page({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: ForumSearchParams;
 }) {
-  const category = String(searchParams["category"] ?? "");
+  const { category } = await searchParams;
 
   await Promise.all([
     TRPC_SSR.opportunity.find.prefetchInfinite({

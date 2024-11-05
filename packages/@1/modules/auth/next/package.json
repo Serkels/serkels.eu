@@ -32,7 +32,7 @@
     "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
     "@sentry/types": "8.36.0",
     "await-to-js": "3.0.0",
-    "next": "14.2.16",
+    "next": "15.0.2",
     "next-auth": "5.0.0-beta.25",
     "prisma": "5.21.1",
     "superjson": "2.2.1",

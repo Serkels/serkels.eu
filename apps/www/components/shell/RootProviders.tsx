@@ -13,24 +13,8 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import debug from "debug";
 import { useState, type PropsWithChildren } from "react";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 //
-
-if (
-  process.env.NODE_ENV === "development" &&
-  process.env["NEXT_PUBLIC_DEBUG"]
-) {
-  debug.enable(process.env["NEXT_PUBLIC_DEBUG"] ?? "*");
-}
-
-const options: DefaultOptions = {
-  // from https://openapi-ts.pages.dev/openapi-fetch/examples/#further-optimization
-  queries: {
-    networkMode: "offlineFirst", // keep caches as long as possible
-    refetchOnWindowFocus: false, // don’t refetch on window focus
-  },
-};
 
 export function RootProviders({ children }: PropsWithChildren) {
   const isMd = useMediaQuery("(min-width: 768px)");
@@ -50,6 +34,21 @@ export function RootProviders({ children }: PropsWithChildren) {
     </>
   );
 }
+
+if (
+  process.env.NODE_ENV === "development" &&
+  process.env["NEXT_PUBLIC_DEBUG"]
+) {
+  debug.enable(process.env["NEXT_PUBLIC_DEBUG"] ?? "*");
+}
+
+const options: DefaultOptions = {
+  // from https://openapi-ts.pages.dev/openapi-fetch/examples/#further-optimization
+  queries: {
+    networkMode: "offlineFirst", // keep caches as long as possible
+    refetchOnWindowFocus: false, // don’t refetch on window focus
+  },
+};
 
 function ReactQueryClientProvider({ children }: PropsWithChildren) {
   const [query_client] = useState(

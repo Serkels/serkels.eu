@@ -69,3 +69,9 @@ export type CardOportunity = Pick<
   | "owner"
   | "title"
 >;
+
+export type OpportunitySearchParams = Promise<{
+  category: string;
+  q: string;
+  f: string;
+}>;
