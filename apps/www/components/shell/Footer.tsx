@@ -29,6 +29,10 @@ export function Footer({
             Politique de confidentialité
           </Link>
           -
+          <Link className={link()} href="/moderation">
+            Règles de modération
+          </Link>
+          -
           <Link className={link()} href="/notices">
             Mentions légales
           </Link>
