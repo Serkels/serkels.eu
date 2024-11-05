@@ -345,8 +345,8 @@ importers:
   packages/@1/config/happydom:
     dependencies:
       '@happy-dom/global-registrator':
-        specifier: 15.8.4
-        version: 15.8.4
+        specifier: 15.8.5
+        version: 15.8.5
     devDependencies:
       typescript:
         specifier: 5.6.3
@@ -2404,8 +2404,8 @@ packages:
   '@hapi/topo@5.1.0':
     resolution: {integrity: sha512-foQZKJig7Ob0BMAYBfcJk8d77QtOe7Wo4ox7ff1lQYoNNAb6jwcY1ncdoy2e9wQZzvNy7ODZCYJkK8kzmcAnAg==}
 
-  '@happy-dom/global-registrator@15.8.4':
-    resolution: {integrity: sha512-oEOkYRXir1xbD4ZPoH2ren+3bytlfo1XOohH2Ig4znmmxDK2XJQg4sXzhPeNIP5jTXnKxGToBTN5Klg3YVh5ug==}
+  '@happy-dom/global-registrator@15.8.5':
+    resolution: {integrity: sha512-CVypwKrm7WQhOpw0XLZRBD0yfWAlZspP7RElP2AOmfSNdWhV74po8YZmLuR5OF7jU2mSCKxdPayaCP6SnWv8/w==}
     engines: {node: '>=18.0.0'}
 
   '@hono/node-server@1.13.5':
@@ -5316,8 +5316,8 @@ packages:
     engines: {node: '>=0.4.7'}
     hasBin: true
 
-  happy-dom@15.8.4:
-    resolution: {integrity: sha512-0xghS3Tnhd5Z9o8TW0OE4eihdq0LEbkKknO3k7rSlc90UK8uesaEcp0iRomqPddVWaQd0BJZFSNGGKmr/hvaZg==}
+  happy-dom@15.8.5:
+    resolution: {integrity: sha512-WqNS+DlaEyFHRf2CloccGwtWoy4voV0NY+BUHrxk1l/VQOqf5ZJgoq8T2TAtMSLwO5RMeBPJ1niaYfaI1oEv6A==}
     engines: {node: '>=18.0.0'}
 
   has-ansi@4.0.1:
@@ -8495,9 +8495,9 @@ snapshots:
     dependencies:
       '@hapi/hoek': 9.3.0
 
-  '@happy-dom/global-registrator@15.8.4':
+  '@happy-dom/global-registrator@15.8.5':
     dependencies:
-      happy-dom: 15.8.4
+      happy-dom: 15.8.5
 
   '@hono/node-server@1.13.5(hono@4.6.9)':
     dependencies:
@@ -12154,7 +12154,7 @@ snapshots:
     optionalDependencies:
       uglify-js: 3.19.3
 
-  happy-dom@15.8.4:
+  happy-dom@15.8.5:
     dependencies:
       entities: 4.5.0
       webidl-conversions: 7.0.0
