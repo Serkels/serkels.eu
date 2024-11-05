@@ -15,6 +15,7 @@ const EXCLUDED_PATHS = [
   "/confidentiality",
   "/faq",
   "/legal",
+  "/moderation",
   "/notices",
   "/status",
   "/who",

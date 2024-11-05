@@ -85,6 +85,7 @@ jobs:
           - exchanges
           - forum
           - legal
+          - moderation
           - opportunity
           - partner
           - status
