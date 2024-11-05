@@ -1,3 +1,7 @@
+//
+
 import dynamic from "next/dynamic";
 
-export const ReactMarkdown = dynamic<any>(() => import("react-markdown"));
+//
+
+export const ReactMarkdown = dynamic(() => import("react-markdown"));
