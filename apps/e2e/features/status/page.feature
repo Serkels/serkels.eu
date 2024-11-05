@@ -13,12 +13,12 @@ Fonctionnalité: Page de status
     * je vois "BFF Session🟩"
     * je vois "Stream🟩"
 
-  Scénario: Voir le statut des serveurs
+  Scénario: Voir le statut de session
     Soit une base de données nourrie au grain
     * je navigue sur la page
     * je me connecte en tant que "douglas@yopmail.com"
     * je clique sur "Status"
-    
+
     Alors je vois "Status"
     * je vois "Api Request🟩"
     * je vois "BFF Request🟩"

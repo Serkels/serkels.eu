@@ -7,11 +7,8 @@ Fonctionnalité: Envoyer un message a Jackie Smith
   Scénario: Douglas envoie un message à Jackie Smith
     Etant donné que je navigue sur la page
     * je me connecte en tant que "douglas@yopmail.com"
-    * je vois dans le titre "Exchange :: Serkels"
-
-    * je clique sur la légende "Link to my profile"
+    * je visite la page "/@~"
     * je vois dans le titre "About :: Serkels"
-
     * je clique sur "Messages privés"
     * je vois dans le titre "Inbox :: Serkels"
 
