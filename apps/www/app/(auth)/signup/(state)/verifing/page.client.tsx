@@ -2,7 +2,7 @@
 
 import { Spinner } from "@1.ui/react/spinner";
 import { useTimeoutEffect, useToggle } from "@react-hookz/web";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { tv } from "tailwind-variants";
 import { match } from "ts-pattern";
 
@@ -16,7 +16,7 @@ export default function Verifying_Flow() {
   }, 6_666);
 
   return (
-    <motion.div
+    <m.div
       key={String(email_sent)}
       initial={{ y: 10, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
@@ -27,7 +27,7 @@ export default function Verifying_Flow() {
         .with(false, () => <Verifying_SendingEmail />)
         .with(true, () => <Verifying_EmailSent />)
         .exhaustive()}
-    </motion.div>
+    </m.div>
   );
 }
 

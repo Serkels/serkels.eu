@@ -18,7 +18,7 @@ const create_report_form = create_report.extend({
     .optional(),
 });
 /**
- * @deprecated To rewrite using zsa
+ * @deprecated To rewrite using trpc
  */
 export async function report(
   state: z.TypeOf<typeof create_report_form>,

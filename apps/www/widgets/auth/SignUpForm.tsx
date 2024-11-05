@@ -1,6 +1,10 @@
 "use client";
 
-import signup_action from "@1.modules/auth.next/actions/signup";
+import {
+  trpc_client,
+  type TRPCClientRouterErrorLike,
+} from "@1.infra/trpc/react-query/client";
+import { signIn, useSession } from "@1.modules/auth.next/react";
 import type { Category } from "@1.modules/category.domain";
 import { OptionCategories } from "@1.modules/category.ui/form/select";
 import {
@@ -12,7 +16,6 @@ import { Button } from "@1.ui/react/button";
 import { input, select } from "@1.ui/react/form/atom";
 import { UserAvatarFilled } from "@1.ui/react/icons";
 import { VisuallyHidden } from "@1.ui/react/visually_hidden";
-import { useServerAction } from "@1.ui/react/zsa/react";
 import { FormProvider, useForm, useFormContext } from "react-hook-form";
 import { tv } from "tailwind-variants";
 import { z } from "zod";
@@ -33,6 +36,7 @@ type FormValues = z.infer<typeof form_zod_schema>;
 //
 
 export default function Form({ categories }: FormProps) {
+  const { data: session } = useSession();
   const form = useForm<FormValues>();
   const {
     handleSubmit,
@@ -40,11 +44,13 @@ export default function Form({ categories }: FormProps) {
     formState: { isSubmitSuccessful, isSubmitting },
   } = form;
 
-  const { execute } = useServerAction(signup_action);
+  const { mutateAsync, error } = trpc_client.auth.signup.useMutation();
 
   const { base } = style();
   return (
     <FormProvider {...form}>
+      <ErrorPanel error={error} />
+
       <div className="mx-auto">
         <UserAvatarFilled className="h-14 w-14 text-gray-400" />
         <VisuallyHidden>Créer d'un compte étudiant</VisuallyHidden>
@@ -52,7 +58,10 @@ export default function Form({ categories }: FormProps) {
 
       <form
         className={base()}
-        onSubmit={handleSubmit((values) => execute(values))}
+        onSubmit={handleSubmit(async (values) => {
+          await mutateAsync(values);
+          return signIn("nodemailer", { email: session?.user?.email });
+        })}
       >
         <input
           {...register("role")}
@@ -77,6 +86,21 @@ export default function Form({ categories }: FormProps) {
         </Button>
       </form>
     </FormProvider>
+  );
+}
+
+function ErrorPanel({ error }: { error: TRPCClientRouterErrorLike | null }) {
+  if (!error) return null;
+  const { base } = style();
+  return (
+    <div
+      className={base({
+        className: "mb-12 bg-red-300 text-black",
+      })}
+    >
+      💥 Une erreur est survenue. Veuillez réessayer plus tard ou recommencer la
+      procedure.
+    </div>
   );
 }
 

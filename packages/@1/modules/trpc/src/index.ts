@@ -1,10 +1,11 @@
 //
 
 export { create_nextauth_header } from "@1.modules/auth.next/jwt";
-import type { ProcedureBuilder, ProcedureParams } from "@trpc/server";
+import { type ProcedureBuilder, type ProcedureParams } from "@trpc/server";
 
 //
 
+export { TRPCError } from "@trpc/server";
 export { observable } from "@trpc/server/observable";
 export type { Context } from "./context";
 

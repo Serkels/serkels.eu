@@ -24,13 +24,15 @@ export async function generateMetadata(
 
 //
 
-export default function Page({
+type VerifyingSearchParams = Promise<{ error?: string }>;
+export default async function Page({
   searchParams,
 }: {
-  searchParams: { error?: string | string[] | undefined };
+  searchParams: VerifyingSearchParams;
 }) {
-  if (typeof searchParams.error === "string") {
-    throw new AuthError(searchParams.error);
+  const { error } = await searchParams;
+  if (typeof error === "string") {
+    throw new AuthError(error);
   }
 
   return (

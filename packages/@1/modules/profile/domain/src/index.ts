@@ -35,6 +35,7 @@ export interface AuthProfile extends z.TypeOf<typeof AuthProfile_Schema> {}
 
 export const NewProfile_Schema = AuthProfile_Schema.omit({
   id: true,
+  image: true,
 }).describe("NewProfile_PropsSchema");
 //
 

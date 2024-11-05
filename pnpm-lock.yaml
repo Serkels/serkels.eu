@@ -511,6 +511,9 @@ importers:
       '@1.modules/trpc':
         specifier: workspace:*
         version: link:../../modules/trpc
+      '@trpc/client':
+        specifier: 10.45.2
+        version: 10.45.2(@trpc/server@10.45.2)
       '@trpc/react-query':
         specifier: 10.45.2
         version: 10.45.2(@tanstack/react-query@4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/client@10.45.2(@trpc/server@10.45.2))(@trpc/server@10.45.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -533,15 +536,27 @@ importers:
 
   packages/@1/modules/auth/api:
     dependencies:
+      '@1.modules/auth.next':
+        specifier: workspace:*
+        version: link:../next
       '@1.modules/category.domain':
         specifier: workspace:*
         version: link:../../category/domain
+      '@1.modules/core':
+        specifier: workspace:*
+        version: link:../../core
+      '@1.modules/profile.domain':
+        specifier: workspace:*
+        version: link:../../profile/domain
       '@1.modules/trpc':
         specifier: workspace:*
         version: link:../../trpc
       '@typeschema/zod':
         specifier: 0.14.0
         version: 0.14.0(@types/json-schema@7.0.15)(zod@3.23.8)
+      ts-pattern:
+        specifier: 5.5.0
+        version: 5.5.0
       zod:
         specifier: 3.23.8
         version: 3.23.8
@@ -1715,15 +1730,6 @@ importers:
       ts-pattern:
         specifier: 5.5.0
         version: 5.5.0
-      zsa:
-        specifier: 0.6.0
-        version: 0.6.0(zod@3.23.8)
-      zsa-react:
-        specifier: 0.2.3
-        version: 0.2.3(react@18.3.1)(zod@3.23.8)
-      zsa-react-query:
-        specifier: 0.2.1
-        version: 0.2.1(@tanstack/react-query@4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(zod@3.23.8)
     devDependencies:
       '@1.config/tailwindcss':
         specifier: workspace:*
@@ -8001,24 +8007,6 @@ packages:
 
   zohar@1.0.1:
     resolution: {integrity: sha512-6rdn6TwM1/PFmcZjW2ycj5WMQAHKxWiI3IPtNxNKVRimSIXAi829yXT1ZSYFSwAw9cdtWXHrioCghZSwbP/X4w==}
-
-  zsa-react-query@0.2.1:
-    resolution: {integrity: sha512-/2IbJFGOneghpNlqd+VdNXNUzxYdPKIyGADcWGFS8gbUIBNyzdkZqcUqHxeU9Qwu9t7I8jbQHGkpV775kbq3Ng==}
-    peerDependencies:
-      '@tanstack/react-query': ^5.0.0
-      react: ^18.0.0 || ^19.0.0
-      zod: ^3.23.5
-
-  zsa-react@0.2.3:
-    resolution: {integrity: sha512-THCoIIhtEU3jXTrNBM/PBc0PyHCekizSGEc+fg0LGo1NM1J02LFQN7ICR948X25IjtkZdvxUZmT0+M73GG8eEw==}
-    peerDependencies:
-      react: ^18.0.0 || ^19.0.0
-      zod: ^3.23.5
-
-  zsa@0.6.0:
-    resolution: {integrity: sha512-Pq3X4T0dna5s4dIevYOJiRdM3DUHRvEHS2q1AH/bvkPSh640u+9veVj5zmzmbL0A6cpXMYagwKsR4keGOc0jPQ==}
-    peerDependencies:
-      zod: ^3.23.5
 
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
@@ -15393,22 +15381,5 @@ snapshots:
   zod@3.23.8: {}
 
   zohar@1.0.1: {}
-
-  zsa-react-query@0.2.1(@tanstack/react-query@4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(zod@3.23.8):
-    dependencies:
-      '@tanstack/react-query': 4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      react: 18.3.1
-      zod: 3.23.8
-      zsa: 0.6.0(zod@3.23.8)
-
-  zsa-react@0.2.3(react@18.3.1)(zod@3.23.8):
-    dependencies:
-      react: 18.3.1
-      zod: 3.23.8
-      zsa: 0.6.0(zod@3.23.8)
-
-  zsa@0.6.0(zod@3.23.8):
-    dependencies:
-      zod: 3.23.8
 
   zwitch@2.0.4: {}
