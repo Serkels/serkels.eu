@@ -35,38 +35,37 @@ Participez à un nouvel aspect **inclusif** de l'engagement social en rejoignant
 Il suffit de créer votre compte sur la plateforme Serkels, puis, vous y trouverez 3 espaces :
 
 1. Echanges
+   Ici, vous êtes libres de **proposer**, **demander** ou **échanger** des services, besoins, compétences et expériences.
 
-Ici, vous êtes libres de **proposer**, **demander** ou **échanger** des services, besoins, compétences et expériences.
+   Exemples :
 
-Exemples :
-
-- Je **propose** d’apprendre à cuisiner une recette de mon pays.
-- Je **demande** un temps de soutien dans une matière précise.
-- Je **propose** un cours de guitare **contre** un livre.
-- Je **demande** un cours de français **contre** un ticket de musée.
+   - Je **propose** d’apprendre à cuisiner une recette de mon pays.
+   - Je **demande** un temps de soutien dans une matière précise.
+   - Je **propose** un cours de guitare **contre** un livre.
+   - Je **demande** un cours de français **contre** un ticket de musée.
 
 1. Opportunités pros
 
-Ici, nos **partenaires professionnels** (universités, instituts ou centres culturels, associations ou entreprises) peuvent publier des opportunités variées : stages, cours de langues, alternances, jobs étudiants, services et informations diverses…
+   Ici, nos **partenaires professionnels** (universités, instituts ou centres culturels, associations ou entreprises) peuvent publier des opportunités variées : stages, cours de langues, alternances, jobs étudiants, services et informations diverses…
 
-Partenaires pro : Serkels propose d’entrer en relation avec vous. Via votre compte, vous disposez d'un espace pour publier vos offres et opportunités.
+   Partenaires pro : Serkels propose d’entrer en relation avec vous. Via votre compte, vous disposez d'un espace pour publier vos offres et opportunités.
 
-Venez toucher et élargir votre public !
+   Venez toucher et élargir votre public !
 
-Etudiant.e.s : Gagnez du temps dans vos recherches pros !
+   Etudiant.e.s : Gagnez du temps dans vos recherches pros !
 
 1. Discussions
 
-Ici, vous pouvez exprimer toutes vos questions librement, et proposer des réponses pour aider la communauté à votre tour, dans l’esprit d’un forum.
+   Ici, vous pouvez exprimer toutes vos questions librement, et proposer des réponses pour aider la communauté à votre tour, dans l’esprit d’un forum.
 
-Cet espace est réservé aux étudiant.e.s. Vous pourriez, par exemple, demander… :
+   Cet espace est réservé aux étudiant.e.s. Vous pourriez, par exemple, demander… :
 
-- J’ai besoin de faire réparer mon vélo, un conseil ?
-- Est-ce que vous connaissez un club de lecture sympa dans mon quartier ?
-- J’ai une question précise sur les APL, quelqu’un pour me répondre ?
-- …
+   - J’ai besoin de faire réparer mon vélo, un conseil ?
+   - Est-ce que vous connaissez un club de lecture sympa dans mon quartier ?
+   - J’ai une question précise sur les APL, quelqu’un pour me répondre ?
+   - …
 
-Toutes les questions sont les bienvenues, chez Serkels !
+   Toutes les questions sont les bienvenues, chez Serkels !
 
 ---
 
