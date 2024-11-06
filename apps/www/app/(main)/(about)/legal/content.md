@@ -68,8 +68,6 @@ Toute inscription qui ne respecte pas ces conditions pourra entraîner la suspen
 
 Les Comptes sont strictement personnels. Vous vous engagez donc :
 
-- A utiliser un mot de passe fort et à le garder secret ;
-
 - A ne pas partager votre Compte avec une autre personne ;
 
 - A ne pas prêter, céder, donner, ni transférer d’une quelconque manière tout ou partie de votre Compte à un tiers.
