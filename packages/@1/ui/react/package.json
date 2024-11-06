@@ -53,17 +53,9 @@
       "types": "./src/useragent/index.ts",
       "default": "./src/useragent/index.ts"
     },
-    "./zsa": {
-      "types": "./src/zsa/index.ts",
-      "default": "./src/zsa/index.ts"
-    },
-    "./zsa/react": {
-      "types": "./src/zsa/react.ts",
-      "default": "./src/zsa/react.ts"
-    },
-    "./zsa/react-query": {
-      "types": "./src/zsa/react-query.ts",
-      "default": "./src/zsa/react-query.ts"
+    "./react-query": {
+      "types": "./src/react-query/index.ts",
+      "default": "./src/react-query/index.ts"
     }
   },
   "scripts": {
@@ -81,10 +73,7 @@
     "react-aria-components": "1.4.1",
     "react-slotify": "0.2.2",
     "tailwind-variants": "0.2.1",
-    "ts-pattern": "5.5.0",
-    "zsa": "0.6.0",
-    "zsa-react": "0.2.3",
-    "zsa-react-query": "0.2.1"
+    "ts-pattern": "5.5.0"
   },
   "devDependencies": {
     "@1.config/tailwindcss": "workspace:*",
