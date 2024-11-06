@@ -49,10 +49,6 @@
       "dependsOn": ["^type-check"],
       "outputs": ["node_modules/.cache/tsc/**", "dist/**"]
     },
-    "www#build": {
-      "dependsOn": ["type-check"],
-      "outputs": ["!.next/cache/**", ".next/**"]
-    },
     "www#dev": { "persistent": true }
   }
 }
