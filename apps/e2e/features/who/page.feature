@@ -5,4 +5,4 @@ Fonctionnalité: Page de présentation
     Quand je clique sur "Qui sommes-nous ?"
     Alors je vois dans le titre "Qui sommes-nous ? :: Serkels"
     * je vois "Serkels"
-    * je vois "plateforme gratuite et sécurisée d’échange d’expériences"
+    * je vois "Faites tourner vos expériences !"
