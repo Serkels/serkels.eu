@@ -40,10 +40,10 @@ Ici, vous êtes libres de **proposer**, **demander **ou **échanger **des servic
 
 Exemples :
 
-- Je **propose **d’apprendre à cuisiner une recette de mon pays.
-- Je **demande **un temps de soutien dans une matière précise.
-- Je **propose **un cours de guitare **contre **un livre.
-- Je **demande **un cours de français **contre **un ticket de musée.
+- Je **propose** d’apprendre à cuisiner une recette de mon pays.
+- Je **demande** un temps de soutien dans une matière précise.
+- Je **propose** un cours de guitare **contre **un livre.
+- Je **demande** un cours de français **contre **un ticket de musée.
 
 1. Opportunités pros
 
