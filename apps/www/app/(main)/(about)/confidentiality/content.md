@@ -24,7 +24,7 @@ Vous pouvez contacter l’UEE :
 
 - Par courriel, à l’adresse :
 
-  **contact@serkels.fr**
+  **dpo@ueefrance.org**
 
 - Par voie postale, à l’adresse :
 
@@ -48,7 +48,7 @@ Vous pouvez contacter l’UEE :
 
 ## Destinataires de données
 
-Prestataires techniques : [compléter]
+Prestataires techniques : développeur et modérateur
 
 Prestataires juridiques : délégué à la protection des données, avocats
 
@@ -114,7 +114,7 @@ Vous pouvez vous opposer au traitement de vos données de plusieurs manières :
 
 - Courriel :
 
-  **contact@serkels.fr**
+  **dpo@ueefrance.org**
 
 - Voie postale :
 
@@ -138,7 +138,7 @@ Pour demander l’effacement de vos données, nous vous invitons à nous contact
 
 - Courriel :
 
-  **contact@serkels.fr**
+  **dpo@ueefrance.org**
 
 - Voie postale :
 
