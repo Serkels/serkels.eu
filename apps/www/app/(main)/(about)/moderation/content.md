@@ -1,91 +1,289 @@
-# Règles de modération SERKELS
+# Processus de signalement et modération Serkels :
 
-Les présentes Règles de modération sont destinées aux utilisateurs de la plateforme SERKELS (ci-après « SERKELS »), exploitée par l’Union des étudiants exilés, association Loi 1901 dont le siège est situé 142 rue de Rivoli, 75001 Paris (ci-après « l’UEE »).
+### **1. Réception des signalements**
 
-En utilisant SERKELS, les utilisateurs acceptent de se soumettre aux Règles de modération.
+- **Canal de réception** : Tous les signalements arrivent sur l'adresse `report@serkels.com`, qui est une adresse no-reply.
 
-Ces règles décrivent le comportement attendu des utilisateurs de SERKELS, ainsi que les principes de modération appliqués par les équipes de l’UEE.
+- **Formulaire de signalement** : Lorsque l'utilisateur signale un contenu, il choisit la catégorie (parmi les 10 catégories proposées), précise le contexte (ex. un profil, une opportunité, etc.) grâce à un commentaires libre, et inclut une URL du contexte et éventuellement une capture d’écran.
 
-## Comportement des utilisateurs
+- **Format de réception** : Chaque signalement suit un format standardisé incluant :
 
-Les utilisateurs de SERKELS s’engagent à se comporter à l’égard des autres utilisateurs et du personnel de l’UEE de manière courtoise, en respectant les règles de la politesse et dans une attitude respectueuse de tous.
+  - **Le nom de l’utilisateur** qui effectue le signalement
 
-Les utilisateurs de SERKELS s’interdisent notamment :
+  - **Catégorie du signalement** (parmi les 10 catégories)
 
-- Tout comportement agressif ou violent, ainsi que toute menace ;
-- Tout propos pouvant être constitutif de diffamation, d’injure, d’incitation à la haine ou de toute autre infraction pénalement sanctionnée ;
-- Tout comportement constitutif de harcèlement ;
-- Toute forme de harcèlement sexuel et tout comportement visant à contraindre un autre utilisateur à adopter un comportement ou réaliser un acte de nature romantique ou sexuel ;
-- Tout comportement illicite de quelque nature et sous quelque forme que ce soit.
+  - **URL du contenu signalé :** accessible en étant connecté
 
-Les utilisateurs s’engagent par ailleurs à utiliser SERKELS conformément aux Conditions Générales d’Utilisation, et en particulier s’interdisent d’utiliser SERKELS pour des finalités étrangères à leurs études.
+  - **Capture d’écran (facultatif)**
 
-Il est rappelé à l’utilisateur que SERKELS n’est pas responsable des actions et comportements de ses utilisateurs qui se déroulent en-dehors de la plateforme SERKELS. Toutefois, si un comportement illicite avéré d’un utilisateur de SERKELS est signalé à l’UEE, ayant été préparé à l’aide de SERKELS ou facilité par l’utilisation de SERKELS, l’UEE se réserve le droit de retirer à cet utilisateur son accès à SERKELS.
+### **2. Catégorisation automatique des signalements**
 
-## Principes de modération appliqués par l’UEE
+Les signalements sont classés en fonction des catégories et du contexte. Voici les scénarios potentiels et le traitement associé :
 
-### Outils mis à disposition des utilisateurs
+#### **a. Catégorisation par contexte**
 
-#### Signalements de contenus
+- **1. Les échanges** : Discussions ou transactions entre utilisateurs. Un signalement ici pourrait souvent être lié à des arnaques, de la violence, du harcèlement, etc.
 
-Les utilisateurs de SERKELS peuvent signaler des contenus contrevenant aux présentes Règles de modération ou à toute loi ou réglementation applicable en utilisant la fonctionnalité « signaler », qui se manifeste par une icône drapeau située dans le coin de tous les contenus publiés sur SERKELS.
+- **2. Les profils** : Signalements sur des utilisateurs spécifiques, qui pourraient inclure des fausses informations, des activités illégales, des symboles haineux, etc.
 
-Un utilisateur peut ainsi signaler une annonce, un message… Lorsque l’utilisateur souhaite signaler un contenu et clique sur l’icône « signaler », il accède à un formulaire lui permettant de renseigner avec précision les faits qu’il souhaite signaler.
+- **3. Les opportunités** : Cela concerne des offres d’opportunités. Les signalements ici peuvent être relatifs à des arnaques ou des activités illégales.
 
-L’utilisateur est invité à fournir autant de précisions que possible, ainsi que tout élément justificatif permettant d’étayer le signalement (captures écran, liens hypertexte…).
+- **4. Les questions (dans la partie Discussions)** : Ce sont les questions posées par les utilisateurs, et les signalements peuvent être liés à de fausses informations, discours haineux ou violences.
 
-#### Blocage entre utilisateurs
+- **5. Les réponses aux questions (dans la partie Discussions)** : Comme les questions, les réponses peuvent être signalées pour des raisons similaires (fausses informations, harcèlement, etc.).
 
-Les utilisateurs de SERKELS peuvent bloquer tout autre utilisateur à partir de l’outil de messagerie de SERKELS. Lorsqu’un utilisateur « bloque » un autre utilisateur, il signale à SERKELS qu’il ne souhaite plus recevoir de messages de la part de ce dernier.
+- **6. Les messages privés** : Ici, on pourrait retrouver des signalements de harcèlement, des violences verbales etc.
 
-L’utilisateur bloqué ne pourra plus entrer en contact avec l’utilisateur qui a utilisé la fonctionnalité de blocage à son encontre.
+#### **b. Traitement par catégories de signalement**
 
-Un utilisateur peut « bloquer » ou retirer le blocage à l’encontre d’un autre utilisateur librement, à tout moment et autant de fois qu’il le souhaite.
+Selon la catégorie choisie par l’utilisateur, une priorité et un traitement spécifique doivent être attribués. Voici quelques exemples :
 
-### Mesures de sanction appliquées par l’UEE
+- **Arnaques ou fraude** : Doit déclencher un examen rapide et une suspension temporaire du contenu, en attendant une enquête plus approfondie.
 
-Lorsque l’UEE a connaissance de faits contrevenant aux présentes Règles de modération, soit à la suite d’un signalement, soit par tout autre moyen, l’UEE peut sanctionner tout utilisateur à l’origine de ces faits.
+- **Atteintes aux droits de propriété intellectuelle** : Transfert à une équipe légale spécialisée dans ce domaine pour validation.
 
-#### Suspension du compte utilisateur
+- **Discours ou symboles haineux** : Peut nécessiter une intervention immédiate et la suppression du contenu concerné.
 
-L’UEE peut suspendre le compte d’un utilisateur de manière temporaire. La suspension du compte peut survenir pour plusieurs motifs :
+- **Fausses informations** : Validation par une équipe de modération avec potentielle intervention d’un fact-checker.
 
-- L’UEE mène une enquête sur l’utilisateur suite à un signalement. La suspension du compte prend fin lorsque l’UEE conclut son enquête.
-- L’UEE attend la survenance d’un évènement (décision d’une autorité ou d’une juridiction…) avant de prendre une décision définitive relative à la suppression ou non du compte.
-- L’UEE estime que les faits contrevenant les Règles de modération sont suffisamment graves pour justifier une sanction mais ne permettent pas de justifier la suppression du compte. La durée de la suspension dépend alors de la gravité des actes de l’utilisateur justifiant la suspension et les motifs de la suspension.
+- **Intimidation ou harcèlement** : Vérification des échanges concernés et, si nécessaire, suppression du contenu et blocage de l'utilisateur.
 
-#### Suppression du compte utilisateur
+- **Nudité et activités sexuelles** : Suppression immédiate si la violation est avérée.
 
-En cas de manquement suffisamment grave aux présentes Règles de modération, rendant impossible le maintien de l’utilisateur sur la plateforme SERKELS, l’UEE se réserve le droit de supprimer le compte de l’utilisateur sur SERKELS.
+- **Suicide ou automutilation** : Ce type de signalement nécessite une réponse rapide, avec des options comme la redirection vers des services de soutien ou d’assistance.
 
-L’utilisateur est alors placé sur une « liste rouge » et ne pourra pas ouvrir de nouveau compte sur SERKELS.
+- **Troubles de l’alimentation** : Traité avec délicatesse et, si nécessaire, retrait des contenus sensibles.
 
-**Toute suppression de compte est définitive.**
+- **Vente de biens illégaux ou réglementés** : Analyse et suppression des contenus incriminés, avec potentielle signalisation aux autorités compétentes.
 
-### Procédure de sanction et recours
+- **Violence ou organisations dangereuses** : Intervention rapide avec signalisation aux autorités si nécessaire.
 
-Lorsqu’un signalement visant un utilisateur est adressé à l’UEE, l’UEE informe cet utilisateur par courriel du signalement et des faits qui lui sont reprochés. L’utilisateur peut alors répondre à l’UEE par courriel, notamment pour apporter tout élément nécessaire à la parfaite compréhension des faits par l’UEE ou pour présenter sa défense.
+### **3. Traitement automatisé et vérification humaine**
 
-L’équipe de modération de l’UEE étudie alors l’ensemble des éléments à sa disposition.
+- **Automatisation initiale** : En fonction des catégories, un système automatique peut mettre en quarantaine le contenu concerné, suspendre temporairement l’utilisateur, ou marquer le signalement pour une revue humaine.
 
-L’UEE se réserve le droit de mener toute enquête sur SERKELS, et d’y collecter tout élément, qu’elle jugera pertinent aux fins de prendre une décision relative aux signalements qu’elle reçoit.
+- **Revue humaine** : Certains signalements sensibles ou complexes (ex. harcèlement, suicide) nécessiteront toujours une intervention humaine pour juger de la gravité et des mesures à prendre.
 
-L’UEE informe l’utilisateur visé par un signalement par courriel de sa décision finale, et des motifs la justifiant : soit le signalement est écarté, soit l’UEE prend une mesure de sanction à l’égard de l’utilisateur.
+### **4. Flux d'escalade et sanctions**
 
-En cas de sanction, l’utilisateur peut, dans un délai d’un mois à compter de la réception du courriel l’informant de la sanction, demander que la décision le concernant soit réexaminée.
+Un processus d'escalade doit être mis en place pour les signalements les plus graves. Voici les étapes possibles :
 
-Il doit toutefois présenter des éléments de nature à démontrer que la décision a été prise en l’absence d’une information déterminante. Le cas échéant, le signalement est réexaminé par une formation interne de l’UEE composée de personnes n’ayant pas pris la décision initiale contestée.
+- **Premier avertissement** : Après examen, si le signalement est validé, l’utilisateur signalé reçoit un premier avertissement avec un rappel des règles de la plateforme.
 
-La décision de la formation de réexamen est définitive.
+- **Suspension temporaire** : En cas de récidive ou de violation grave, suspension temporaire de l’utilisateur.
 
-L’utilisateur en est informé par courriel.
+- **Blocage définitif** : Si le comportement persiste ou si le signalement porte sur des faits très graves (violence, vente d’objets illégaux, etc.), blocage définitif de l’utilisateur et suppression de son compte.
+
+### **5. Rapports et suivi des signalements**
+
+Mettre en place un tableau de bord de suivi des signalements avec les métriques suivantes :
+
+- Nombre total de signalements par jour/semaine/mois
+
+- Nombre de signalements par catégorie et par type de contenu (profils, opportunités, etc.)
+
+- Actions prises (contenus supprimés, utilisateurs suspendus, etc.)
+
+- Temps moyen de traitement des signalements
+
+### **6. Communication avec les utilisateurs**
+
+Bien que l’adresse de signalement soit en no-reply, il peut être intéressant d'automatiser des réponses génériques pour informer l'utilisateur que son signalement a bien été pris en compte et qu'une action est en cours. \
+
+### **Résumé du processus global :**
+
+1. **Réception des signalements** sur `report@serkels.com` avec catégorisation automatique par contexte et type de signalement.
+1. **Classement automatique** et mise en quarantaine du contenu si nécessaire (dans les cas graves).
+1. **Vérification humaine** pour les cas complexes ou urgents.
+1. **Sanctions progressives** en fonction de la gravité (avertissement, suspension, bannissement).
+1. **Tableau de bord de suivi** pour monitorer l'activité de modération.
+1. **Communication automatisée** avec l'utilisateur qui a signalé.
+
+En mettant en place cette structure, Serkels s’assure que les signalements sont traités efficacement et que le site reste un environnement sûr pour les utilisateurs.
+
+###
+
+### **Procédure de traitement d’un signalement par le modérateur**
+
+#### **1. Ouverture et vérification initiale du signalement**
+
+- **1.1** : Ouvrir l'email reçu sur `report@serkels.com`.
+
+- **1.2** : Vérifier que l'email contient les informations nécessaires :
+
+  - **Nom de l'utilisateur** qui a effectué le signalement.
+
+  - **Catégorie du signalement** (arnaque, discours haineux, nudité, etc.).
+
+  - **URL du contenu signalé** (ou lien contextuel vers l'échange, profil, etc.).
+
+  - **Capture d’écran** (si incluse).
+
+#### **2. Vérification du contenu signalé**
+
+- **2.1** : Cliquer sur l’URL fournie dans l’email pour accéder au contenu ou à l'élément signalé (échange, profil, question, message privé, etc.).
+
+- **2.2** : Si une capture d’écran est incluse, l’ouvrir pour comparer le contenu signalé avec la version actuelle de l’élément en ligne (au cas où celui-ci aurait été modifié ou supprimé par l’utilisateur avant l'examen).
+
+- **2.3** : Lire attentivement le contenu signalé et déterminer s'il correspond effectivement à la **catégorie de signalement** indiquée par l’utilisateur.
+
+#### **3. Analyse en fonction de la catégorie de signalement**
+
+En fonction de la catégorie de signalement, suivre les étapes appropriées. Voici un guide pour chaque type de signalement :
+
+##### 3.1. Arnaques ou Fraude
+
+- **Action** : Analyser si le contenu contient des pratiques frauduleuses ou trompeuses (ex. fausses offres d’emploi, escroqueries).
+
+- **Étape** :
+
+  - Vérifier l'historique de l'utilisateur signalé (autres signalements, comportement suspect).
+
+  - Si l'arnaque est avérée, **mettre en pause** l'opportunité ou le contenu.
+
+  - Transférer l’information à l’équipe juridique si nécessaire.
+
+##### 3.2. Atteintes aux droits de propriété intellectuelle
+
+- **Action** : Vérifier si le contenu violerait des droits d’auteur (ex. utilisation non autorisée d'images, textes, marques).
+
+- **Étape** :
+
+  - Comparer le contenu avec la capture d'écran ou l'URL signalée.
+
+  - Si une violation est confirmée, **désactiver** le contenu immédiatement.
+
+  - Informer l’équipe légale pour un suivi juridique.
+
+##### 3.3. Discours ou symboles haineux
+
+- **Action** : Identifier si le contenu incite à la haine ou utilise des symboles inappropriés.
+
+- **Étape** :
+
+  - Rechercher les termes ou symboles rapportés dans le contenu.
+
+  - Si confirmés, **supprimer** immédiatement le contenu et suspendre l'utilisateur.
+
+  - Escalader à un niveau supérieur pour un éventuel bannissement.
+
+##### 3.4. Fausses informations
+
+- **Action** : Vérifier la véracité du contenu signalé (ex. désinformation, fake news).
+
+- **Étape** :
+
+  - Effectuer une recherche rapide pour vérifier si le contenu est trompeur ou faussement informatif.
+
+  - Si les fausses informations sont avérées, **mettre en pause** le contenu et le marquer pour correction.
+
+  - Informer l'utilisateur signalé des actions prises.
+
+##### 3.5. Intimidation ou harcèlement
+
+- **Action** : Lire l'intégralité de la conversation ou des échanges concernés.
+
+- **Étape** :
+
+  - Analyser les interactions pour vérifier les éléments d'intimidation (ex. insultes, menaces).
+
+  - Si le harcèlement est avéré, **supprimer** les échanges et envoyer un avertissement à l’utilisateur fautif.
+
+  - En cas de récidive, suspendre ou bannir l’utilisateur.
+
+##### 3.6. Nudité et activités sexuelles
+
+- **Action** : Examiner s’il y a de la nudité ou des contenus sexuels inappropriés.
+
+- **Étape** :
+
+  - Si confirmé, **supprimer** immédiatement le contenu.
+
+  - Avertir ou suspendre l’utilisateur selon la gravité.
+
+##### 3.7. Suicide ou automutilation
+
+- **Action** : Vérifier si le contenu mentionne explicitement des comportements suicidaires ou auto-destructeurs.
+
+- **Étape** :
+
+  - Si des signes de détresse sont présents, **retirer** le contenu.
+
+  - Envoyer une alerte à l’utilisateur signalé avec des ressources d’aide (ex. services de soutien psychologique).
+
+  - Escalader si un danger immédiat est perçu.
+
+##### 3.8. Troubles de l’alimentation
+
+- **Action** : Examiner si le contenu incite à des comportements malsains liés à l’alimentation.
+
+- **Étape** :
+
+  - Si confirmé, **supprimer** le contenu.
+
+  - Envoyer un message de prévention à l’utilisateur concerné.
+
+##### 3.9. Vente de biens illégaux ou réglementés
+
+- **Action** : Vérifier si le contenu fait la promotion de produits interdits (ex. drogues, armes).
+
+- **Étape** :
+
+  - Si confirmé, **supprimer** l’opportunité ou l'échange.
+
+  - Bloquer immédiatement l’utilisateur et transmettre les détails aux autorités si nécessaire.
+
+##### 3.10. Violence ou organisations dangereuses
+
+- **Action** : Examiner les propos ou contenus promouvant la violence ou des groupes extrémistes.
+
+- **Étape** :
+
+  - Si confirmé, **supprimer** le contenu et suspendre l’utilisateur.
+
+  - Transmettre le signalement aux autorités compétentes.
+
+#### **4. Prendre une décision**
+
+- **4.1** : Après vérification et analyse, choisir l'action appropriée parmi :
+
+  - **Suppression immédiate** du contenu.
+
+  - **Mise en pause** du contenu (s'il est nécessaire d'obtenir plus d'informations ou de confirmer avec une autre équipe).
+
+  - **Suspension temporaire** de l'utilisateur.
+
+  - **Avertissement** à l'utilisateur.
+
+  - **Signalement aux autorités** en cas de contenu grave (violence, biens illégaux, etc.).
+
+#### **5. Documenter l’action**
+
+- **5.1** : Documenter l’action dans le système de gestion des signalements pour traçabilité future :
+
+  - Numéro du signalement.
+
+  - Action prise (suppression, suspension, avertissement).
+
+  - Commentaire sur la décision (expliquer brièvement la décision prise).
+
+  - Date et heure de l’action.
+
+#### **6. Clôture du signalement**
+
+- **6.1** : Fermer le signalement dans le système de suivi.
+
+- **6.2** : Envoyer un accusé de réception automatisé à l’utilisateur qui a signalé pour lui notifier que son signalement a été traité.
 
 ---
 
-L’UEE peut modifier les Règles de modération à tout moment.
+### **Récapitulatif des étapes pour le modérateur**
 
-Vous serez alors informé des modifications apportées aux Règles de modération.
+1. **Ouvrir le signalement** et vérifier les informations.
+2. **Accéder au contenu signalé** via l’URL et analyser le contexte.
+3. **Analyser le contenu** en fonction de la catégorie de signalement.
+4. **Prendre une décision** (suppression, suspension, etc.).
+5. **Documenter l’action** dans le système de suivi.
+6. **Clôturer le signalement** et envoyer un accusé de réception automatisé à l’utilisateur ayant émis le signalement.
 
-Si vous continuez à utiliser SERKELS, vous serez réputé avoir accepté les Règles de modération dans leur dernière version.
-
-**Dernière modification : 02/11/2024**
+---

@@ -27,7 +27,7 @@ export async function generateMetadata(
 
 export default function Page() {
   return (
-    <main className="container prose mx-auto my-10 p-6 lg:prose-xl">
+    <main className="container prose mx-auto my-10 p-6 lg:prose-xl lg:max-w-[126ch]">
       <SafeReactMarkdown>{content}</SafeReactMarkdown>
     </main>
   );
