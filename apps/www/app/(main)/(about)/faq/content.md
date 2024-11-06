@@ -26,7 +26,7 @@ Serkels ne dispose pas d'application mobile pour le moment mais la plateforme es
 <details>
 <summary><strong>Comment devenir partenaire avec Serkels ?</strong></summary>
 
-Vous devez écrire un mail sur l'adresse <a href="mailto:support@serkels.fr">support@serkels.fr</a> en expliquant votre souhait de créer un compte Partenaire.
+Vous devez écrire un mail sur l'adresse <a href="mailto:dpo@ueefrance.org">dpo@ueefrance.org</a> en expliquant votre souhait de créer un compte Partenaire.
 
 Notre équipe reviendra alors vers vous avec la procédure à suivre.
 
@@ -44,7 +44,7 @@ L'échange vous permet une interaction directe entre étudiant au contraire de l
 <details>
 <summary><strong>Que faire en cas d'échec de connexion ?</strong></summary>
 
-Vous pouvez envoyer un mail à <a href="mailto:support@serkels.fr">support@serkels.fr</a> en expliquant le souci rencontré et nous vous viendrons en aide le plus rapidement possible.
+Vous pouvez envoyer un mail à <a href="mailto:dpo@ueefrance.org">dpo@ueefrance.org</a> en expliquant le souci rencontré et nous vous viendrons en aide le plus rapidement possible.
 
 </details>
 
@@ -115,7 +115,7 @@ Pour ce faire vous pouvez soit passer par l'échange directement (auquel cas la 
 <details>
 <summary><strong>J'ai fait ma part de l'échange, que faire si l'autre partie n'a pas livré sa part de l'échange ?</strong></summary>
 
-Veuillez signaler tout manquement à l'adresse <a href="mailto:support@serkels.fr">support@serkels.fr</a>.
+Veuillez signaler tout manquement à l'adresse <a href="mailto:dpo@ueefrance.org">dpo@ueefrance.org</a>.
 
 </details>
 
@@ -147,6 +147,6 @@ Vous trouverez un bouton d'action afin de signaler tout ce qui vous paraîtrait 
 <details>
 <summary><strong>Comment supprimer mon profil ?</strong></summary>
 
-Veuillez envoyer votre demande de suppression sur <a href="mailto:support@serkels.fr">support@serkels.fr</a>.
+Veuillez envoyer votre demande de suppression sur <a href="mailto:dpo@ueefrance.org">dpo@ueefrance.org</a>.
 
 </details>
