@@ -1,15 +1,13 @@
 //
 
 import { procedure, router } from "@1.modules/trpc";
-import { readFile } from "fs/promises";
 import { z } from "zod";
 
 //
 
 export default router({
-  verify: procedure
-    .input(z.object({ email: z.string() }))
-    .mutation(async () => {
-      return readFile("./who.md", "utf8");
-    }),
+  static: procedure.input(z.object({ email: z.string() })).query(async () => {
+    // TODO(douglasduteil): get the content form the server somehow ;)
+    throw new Error("To implement");
+  }),
 });
