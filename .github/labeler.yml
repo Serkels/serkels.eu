@@ -57,6 +57,9 @@
 "scope: opportunities":
   - changed-files:
       - any-glob-to-any-file: "packages/@1/modules/opportunities/**/*"
+"scope: post":
+  - changed-files:
+      - any-glob-to-any-file: "packages/@1/modules/post/**/*"
 "scope: profile":
   - changed-files:
       - any-glob-to-any-file: "packages/@1/modules/profile/**/*"
