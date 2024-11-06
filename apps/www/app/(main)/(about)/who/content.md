@@ -2,32 +2,45 @@
 
 **Faites tourner vos expériences !**
 
-### Une plateforme gratuite et sécurisée d’échange d’expériences pour tous les étudiant.e.s, exilé.e.s, locaux.ales et internationaux.ales
+### Qui sommes-nous ?
 
-Serkels est créée et développée par l’association [SILLAT](https://uniondesetudiantsexiles.org/). Cette idée est née des réflexions et travaux d'un groupe d'étudiant.e.s, diplômé.e.s ou expert.e.s, venant d’horizon variés, français.es, internationaux.ales, exilé.e.s. Conçue pour aider les étudiant.e.s à relever les défis auxquels ils.elles sont confronté.e.s pour leur intégration et épanouissement durant leurs études supérieures en France : l’équipe de Serkels a parfois eu affaire à ces mêmes difficultés et souhaite maintenant aider à faciliter la vie des étudiant.e.s.
+Serkels est une **plateforme gratuite et sécurisée d’échange d’expériences** pour tous les étudiant.e.s : exilé.e.s, locaux.ales, et internationaux.ales.  
+Créée et développée par l’association **L'Union des Étudiants Éxilés (UEE)**, cette initiative est née des réflexions d'un groupe d'étudiant.e.s, diplômé.e.s et expert.e.s venant d’horizons variés. Pensée pour aider les étudiant.e.s à relever les défis de l’intégration et de l’épanouissement durant leurs études supérieures en France, l’équipe de Serkels s’appuie sur ses propres expériences pour proposer une aide concrète.
 
-### Nous existons pour mettre en valeur vos expériences
+---
 
-Serkels est une opportunité pour les étudiant.e.s en France, de valoriser leurs expériences, les échanger et les partager avec les autres. Un espace d’offre de services, de collaborations et d’échanges, qu’elles soient personnelles, académiques, administratives ou sociales. Particulièrement adaptée aux étudiant.e.s internationaux.ales, résidant en France. Universités, associations, instituts ou centres culturels, tous types d'établissements sont les bienvenus pour proposer également des offres, opportunités et échanges.
+### Notre mission : valoriser vos expériences
 
-### Serkels : + d’échanges et - de barrières
+Serkels offre aux étudiant.e.s en France une opportunité unique de partager et valoriser leurs expériences académiques, personnelles, administratives et sociales. La plateforme est particulièrement adaptée aux étudiant.e.s internationaux.ales et accueille également les **universités, associations, instituts et centres culturels**, qui peuvent y proposer leurs propres offres et opportunités.
 
-Depuis votre compte, découvrez les offres d’échange correspondant à vos besoins. Proposez et échangez vos expériences et compétences personnelles, culturelles et académiques gratuitement. Serkels vous permet d’élargir facilement votre cercle de connaissances, de multiplier les contacts entre étudiant.e.s et de vous créer des opportunités.
+---
 
-### Les atouts à échanger : vous avez plein de ressources !
+### Serkels : + d’échanges et - de barrières
 
-Vous pouvez tout partager, proposer ou donner. Par exemple, un cours de français peut être échangé contre un livre, une chanson de votre culture ou un temps de soutien scolaire, un cours de guitare contre une activité sportive... Un billet de musée à proposer, des échanges linguistiques ou informations administratives ? Avec Serkels, créez vos cercles d’échanges d’expériences. Pour en savoir plus, visitez le guide d’utilisation.
+Depuis votre compte Serkels, accédez à des offres d’échange adaptées à vos besoins. Proposez et échangez gratuitement vos **compétences et expériences personnelles, culturelles et académiques**. Serkels est conçu pour élargir votre cercle de connaissances et multiplier les contacts entre étudiant.e.s, créant ainsi de nouvelles opportunités.
 
-### Tout le monde peut participer avec Serkels, c’est un nouvel aspect écologique et inclusif de l'engagement social.
+---
 
-### Et vous, qui êtes-vous et pourquoi Serkels est intéressant pour vous ?
+### Les atouts à échanger : Vous avez plein de ressources !
 
-**Étudiant.e, diplômé.e ou expert.e :** Quelle que soit votre situation, vous pouvez participer et profiter des offres et opportunités, en proposant d’échanger vos propres connaissances et expériences. Toutes les expériences ont de la valeur, qu’elles soient personnelles ou académiques, sociales ou culturelles ! Serkels est ce que vous en faîtes.
+Sur Serkels, **tout peut être partagé, proposé ou échangé**. Un cours de français contre un livre, une chanson de votre culture contre du soutien scolaire, un cours de guitare contre une activité sportive… Vous pouvez également offrir des billets de musée, organiser des échanges linguistiques ou partager des informations administratives. Avec Serkels, créez vos cercles d’échanges et découvrez de nouvelles expériences ! Pour en savoir plus, consultez notre **guide d’utilisation**.
 
-**Partenaires institutionnel.le.s :** Vous êtes une université, un institut ou un centre culturel, une association ou une entreprise ? La plateforme propose d’entrer en relation avec vous. Via votre compte dans Serkels, vous disposez d'un espace pour publier des offres et opportunités. Certains proposent des formations intensives à la langue française dédiée aux étudiants.e.s internationaux.ales et un accompagnement dans leur parcours d’études supérieures. D’autres proposent des services et informations, stages et alternances. Prenez votre place au sein Serkels, touchez et élargissez votre public.
+---
 
-### En résumé : Rejoignez notre réseau, publiez les annonces, offres et opportunités que vous souhaitez échanger ou les besoins que vous avez. Trouvez facilement ce que vous cherchez.
+### Pourquoi Serkels est pour vous
 
-### Contactez-nous !
+#### Étudiant.e.s, diplômé.e.s ou expert.e.s
 
-Vous avez des questions sur notre plateforme, des suggestions pour améliorer l'expérience des étudiants ou vous souhaitez partager vos opinions ? Nous serions ravis de vous entendre. N'hésitez pas à nous contacter et nous vous répondrons dans les plus brefs délais.
+Quelle que soit votre situation, vous pouvez participer et profiter des offres d'échange, en proposant vos propres **connaissances et expériences**. Toutes les expériences ont de la valeur, qu’elles soient personnelles, académiques, sociales ou culturelles. Avec Serkels, c’est vous qui faites vivre la plateforme !
+
+#### Partenaires institutionnel.le.s
+
+Universités, instituts, centres culturels, associations et entreprises, la plateforme vous invite à rejoindre Serkels. Vous disposez d'un espace dédié pour publier vos **offres et opportunités** : formations intensives de langue française, accompagnement des étudiant.e.s internationaux.ales, services d'information, stages, et plus encore. Prenez place sur Serkels et touchez un public élargi.
+
+---
+
+### En résumé
+
+Rejoignez notre réseau, publiez les **annonces, offres et opportunités** que vous souhaitez échanger, ou trouvez facilement ce dont vous avez besoin.
+
+**Avec Serkels, échangeons plus et abaissons les barrières !**
