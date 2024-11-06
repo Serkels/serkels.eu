@@ -12,11 +12,11 @@ import { z } from "zod";
 const log = Debug("packages/@1/infra/email/index.ts");
 
 export const ENV = z.object({
-  EMAIL_NOREPLY: z.string().email().default("no-reply@serkels.fr"),
-  EMAIL_REPORT: z.string().email().default("report@serkels.fr"),
+  EMAIL_FROM: z.string().email().default("no-reply@toc-toc.org"),
   NODE_ENV: z
     .enum(["development", "test", "production"])
     .default("development"),
+  REPORT_EMAIL_FROM: z.string().email().default("tyree.braun84@ethereal.email"),
   SMTP_URL: z.string(),
 });
 
@@ -37,7 +37,7 @@ export class Email_Sender {
   async send(options: Mail.Options) {
     log("send", options);
     return this.transporter.sendMail({
-      from: this.env.EMAIL_NOREPLY,
+      from: this.env.EMAIL_FROM,
       ...options,
     });
   }
@@ -45,7 +45,8 @@ export class Email_Sender {
   async send_report(options: Mail.Options) {
     log("send_report", options);
     return this.transporter.sendMail({
-      to: this.env.EMAIL_REPORT,
+      from: this.env.EMAIL_FROM,
+      to: this.env.REPORT_EMAIL_FROM,
       ...options,
     });
   }
@@ -60,7 +61,7 @@ export class Email_Sender {
       plainText: true,
     });
     return this.transporter.sendMail({
-      from: this.env.EMAIL_NOREPLY,
+      from: this.env.EMAIL_FROM,
       ...options,
       html,
       text,
