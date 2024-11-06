@@ -48,7 +48,7 @@ Vous pouvez contacter l’UEE :
 
 ## Destinataires de données
 
-Prestataires techniques : [compléter]
+Prestataires techniques : développeur et modérateur
 
 Prestataires juridiques : délégué à la protection des données, avocats
 
