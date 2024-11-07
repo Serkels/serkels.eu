@@ -9,9 +9,13 @@ import { Card } from "./Card";
 //
 
 export async function generateMetadata(
-  { params: { exchange_id } }: { params: Params },
+  props: { params: Promise<Params> },
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
+  const params = await props.params;
+
+  const { exchange_id } = params;
+
   const [, exchange] = await to(TRPC_SSR.exchanges.by_id.fetch(exchange_id));
 
   const title = exchange?.title ?? "Not Found";
@@ -20,7 +24,8 @@ export async function generateMetadata(
   };
 }
 
-export default function Page({ params }: { params: Params }) {
+export default async function Page(props: { params: Promise<Params> }) {
+  const params = await props.params;
   const { exchange_id } = params;
 
   return <Card exchange_id={exchange_id} />;

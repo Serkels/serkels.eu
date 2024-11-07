@@ -13,9 +13,10 @@ import { Form } from "./page.client";
 //
 
 export async function generateMetadata(
-  { params }: { params: Params },
+  props: { params: Promise<Params> },
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
+  const params = await props.params;
   const [, profile] = await to(TRPC_SSR.profile.by_id.fetch(params.profile_id));
   const { name } = profile ?? { name: "O_0" };
   const title = `${name} :: ${(await parent).title?.absolute}`;
@@ -30,7 +31,8 @@ export async function generateMetadata(
 
 //
 
-export default async function Page({ params }: { params: Params }) {
+export default async function Page(props: { params: Promise<Params> }) {
+  const params = await props.params;
   const inbox = await TRPC_SSR.inbox.by_profile_id.fetch(params);
   if (inbox) return redirect(`/@~/inbox/${inbox.thread.id}`);
   const profile = await TRPC_SSR.profile.by_id.fetch(params.profile_id);

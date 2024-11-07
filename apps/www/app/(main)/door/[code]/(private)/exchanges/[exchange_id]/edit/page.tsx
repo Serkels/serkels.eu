@@ -19,7 +19,8 @@ export async function generateMetadata(
 
 //
 
-export default async function Page({ params }: { params: Params }) {
+export default async function Page(props: { params: Promise<Params> }) {
+  const params = await props.params;
   const { exchange_id } = params;
 
   await TRPC_SSR.exchanges.by_id.prefetch(exchange_id);
