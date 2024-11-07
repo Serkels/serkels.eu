@@ -217,7 +217,7 @@ export default function Page() {
           </summary>
           Oui. A part quelques rares exceptions, il n'y pas d'âge maximum pour
           accéder à l'université. Si vous rencontrez une discrimination liée à
-          votre âge, nous vous invitons à contacter l'UEE.
+          votre âge, nous vous invitons à contacter SILLAT.
         </details>
         <details>
           <summary className="text-lg font-bold">
