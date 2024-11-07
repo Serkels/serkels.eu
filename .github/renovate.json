@@ -5,7 +5,8 @@
     ":automergeAll",
     ":timezone(Europe/Paris)"
   ],
-  "automergeSchedule": ["every weekend"],
+  "automerge": true,
   "dependencyDashboardAutoclose": true,
-  "labels": ["dependencies"]
+  "labels": ["dependencies"],
+  "schedule": ["after 10pm and before 5am every weekend"]
 }
