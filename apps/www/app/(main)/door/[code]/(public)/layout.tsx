@@ -8,16 +8,17 @@ import type { PropsWithChildren, ReactNode } from "react";
 
 //
 
-export default async function Layout({
-  children,
-  navbar,
-  header,
-  params,
-}: PropsWithChildren<{
-  header: ReactNode;
-  navbar: ReactNode;
-  params: CodeParms;
-}>) {
+export default async function Layout(
+  props: PropsWithChildren<{
+    header: ReactNode;
+    navbar: ReactNode;
+    params: CodeParms;
+  }>,
+) {
+  const params = await props.params;
+
+  const { children, navbar, header } = props;
+
   const [, profile_id] = await to(code_to_profile_id(params));
 
   const [, session] = await to(auth());

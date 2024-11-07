@@ -20,7 +20,8 @@ export async function generateMetadata(
   };
 }
 
-export default async function Page({ params }: { params: CodeParms }) {
+export default async function Page(props: { params: Promise<CodeParms> }) {
+  const params = await props.params;
   const profile_id = await code_to_profile_id(params);
 
   if (!profile_id) {

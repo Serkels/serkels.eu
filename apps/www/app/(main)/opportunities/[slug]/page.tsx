@@ -16,9 +16,10 @@ import { Opportunity_Delete_Button } from "./delete";
 //
 
 export async function generateMetadata(
-  { params }: { params: Params },
+  props: { params: Promise<Params> },
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
+  const params = await props.params;
   const [, opportunity] = await to(slug_to_opportunity(params));
 
   const title = `${opportunity?.title ?? "O_0"} :: ${(await parent).title?.absolute}`;
@@ -33,7 +34,8 @@ export async function generateMetadata(
 
 //
 
-export default async function Page({ params }: { params: Params }) {
+export default async function Page(props: { params: Promise<Params> }) {
+  const params = await props.params;
   const session = await auth();
 
   try {

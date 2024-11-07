@@ -10,7 +10,8 @@ import { Partner_Page, Student_Page } from "./default.client";
 
 //
 export type CodeParmsAsProfileId = CodeParms & { profile_id: string };
-export default async function Page({ params }: { params: CodeParms }) {
+export default async function Page(props: { params: Promise<CodeParms> }) {
+  const params = await props.params;
   try {
     const profile_id = await code_to_profile_id(params);
     if (!profile_id) {

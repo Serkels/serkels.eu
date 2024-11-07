@@ -8,10 +8,13 @@ import type { PropsWithChildren } from "react";
 
 //
 
-export default async function Layout({
-  children,
-  params,
-}: PropsWithChildren<{ params: { code: string } }>) {
+export default async function Layout(
+  props: PropsWithChildren<{ params: Promise<{ code: string }> }>,
+) {
+  const params = await props.params;
+
+  const { children } = props;
+
   const [, session] = await to(getServerSession());
   if (!session) return null;
 

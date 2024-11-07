@@ -14,11 +14,13 @@ import { match } from "ts-pattern";
 
 //
 
-export default async function Layout({
-  children,
-  params,
-  navbar,
-}: PropsWithChildren<{ params: CodeParms; navbar: ReactNode }>) {
+export default async function Layout(
+  props: PropsWithChildren<{ params: CodeParms; navbar: ReactNode }>,
+) {
+  const params = await props.params;
+
+  const { children, navbar } = props;
+
   let session;
 
   [, session] = await to(auth());

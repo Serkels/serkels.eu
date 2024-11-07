@@ -35,7 +35,6 @@ beforeAll(() => {
   setSystemTime(new Date("2011-11-11"));
 });
 
-
 //
 
 const nextauth_header = douglas_golden_nextauth_header;

@@ -25,7 +25,8 @@ export async function generateMetadata(
 
 //
 
-export default async function Page({ params }: { params: CodeParms }) {
+export default async function Page(props: { params: Promise<CodeParms> }) {
+  const params = await props.params;
   if (params.code !== "~") {
     redirect(`/@${params.code}`);
   }

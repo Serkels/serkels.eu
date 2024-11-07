@@ -18,7 +18,8 @@ import { CircleCount } from "./CircleCount";
 
 //
 
-export default async function Page({ params }: { params: CodeParms }) {
+export default async function Page(props: { params: Promise<CodeParms> }) {
+  const params = await props.params;
   const [code_to_profile_id_err, profile_id] = await to(
     code_to_profile_id(params),
   );

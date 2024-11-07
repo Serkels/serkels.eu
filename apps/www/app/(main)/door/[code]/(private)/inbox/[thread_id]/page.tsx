@@ -29,9 +29,10 @@ const Thread_Timeline = dynamic(
 //
 
 export async function generateMetadata(
-  { params }: { params: Params },
+  props: { params: Promise<Params> },
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
+  const params = await props.params;
   let title = `${params.thread_id} :: ${(await parent).title?.absolute}`;
   const [, profile_id] = await to(session_profile_id());
   const [, thread] = await to(
@@ -63,7 +64,8 @@ export async function generateMetadata(
 
 //
 
-export default async function Page({ params }: { params: Params }) {
+export default async function Page(props: { params: Promise<Params> }) {
+  const params = await props.params;
   const { thread_id } = params;
 
   const [thread_err, thread] = await to(

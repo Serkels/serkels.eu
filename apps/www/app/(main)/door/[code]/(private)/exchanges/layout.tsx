@@ -21,10 +21,13 @@ export async function generateMetadata(
 
 //
 
-export default async function Layout({
-  children,
-  params,
-}: PropsWithChildren<{ params: CodeParms }>) {
+export default async function Layout(
+  props: PropsWithChildren<{ params: CodeParms }>,
+) {
+  const params = await props.params;
+
+  const { children } = props;
+
   const profile_id = await code_to_profile_id(params);
 
   if (!profile_id) {

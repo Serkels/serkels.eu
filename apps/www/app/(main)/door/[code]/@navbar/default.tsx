@@ -11,7 +11,8 @@ import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import { notFound } from "next/navigation";
 import { match } from "ts-pattern";
 
-export default async function Page({ params }: { params: CodeParms }) {
+export default async function Page(props: { params: Promise<CodeParms> }) {
+  const params = await props.params;
   const is_yours = params.code === "~";
   if (!is_yours) return null;
 

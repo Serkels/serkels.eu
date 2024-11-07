@@ -7,10 +7,13 @@ import type { PropsWithChildren } from "react";
 
 //
 
-export default async function Layout({
-  children,
-  params,
-}: PropsWithChildren<{ params: Params }>) {
+export default async function Layout(
+  props: PropsWithChildren<{ params: Params }>,
+) {
+  const params = await props.params;
+
+  const { children } = props;
+
   const { exchange_id } = params;
   try {
     await TRPC_SSR.exchanges.by_id.prefetch(exchange_id);

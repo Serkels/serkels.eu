@@ -14,7 +14,10 @@ import { DeleteExchange_ActionItem } from "./_client/menu";
 
 //
 
-export default async function DealNavbarPage({ params }: { params: Params }) {
+export default async function DealNavbarPage(props: {
+  params: Promise<Params>;
+}) {
+  const params = await props.params;
   const { exchange_id } = params;
 
   try {
