@@ -1,12 +1,17 @@
 {
   "extends": [
-    "config:base",
+    "config:recommended",
     ":maintainLockFilesWeekly",
     ":automergeAll",
     ":timezone(Europe/Paris)"
   ],
   "automerge": true,
   "dependencyDashboardAutoclose": true,
-  "labels": ["dependencies"],
-  "schedule": ["after 10pm and before 5am every weekend"]
+  "labels": [
+    "dependencies"
+  ],
+  "schedule": [
+    "after 10pm every weekend",
+    "before 5am every weekend"
+  ]
 }
