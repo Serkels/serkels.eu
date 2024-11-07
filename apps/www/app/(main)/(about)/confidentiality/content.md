@@ -24,7 +24,7 @@ Vous pouvez contacter l’UEE :
 
 - Par courriel, à l’adresse :
 
-  **dpo@ueefrance.org**
+  **dpo@sillat.fr**
 
 - Par voie postale, à l’adresse :
 
@@ -92,7 +92,7 @@ Pour toute question relative au traitement de vos données à caractère personn
 
 - Courriel :
 
-  **dpo@ueefrance.org**
+  **dpo@sillat.fr**
 
 - Voie postale :
 
@@ -114,7 +114,7 @@ Vous pouvez vous opposer au traitement de vos données de plusieurs manières :
 
 - Courriel :
 
-  **dpo@ueefrance.org**
+  **dpo@sillat.fr**
 
 - Voie postale :
 
@@ -138,7 +138,7 @@ Pour demander l’effacement de vos données, nous vous invitons à nous contact
 
 - Courriel :
 
-  **dpo@ueefrance.org**
+  **dpo@sillat.fr**
 
 - Voie postale :
 

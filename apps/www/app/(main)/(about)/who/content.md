@@ -71,4 +71,4 @@ Il suffit de créer votre compte sur la plateforme Serkels, puis, vous y trouver
 
 ## Contactez-nous !
 
-Vous avez des questions sur notre plateforme, des suggestions pour améliorer l'expérience des étudiant.e.s ou vous souhaitez partager vos opinions ? Nous serions ravi.e.s de vous entendre. N'hésitez pas à nous contacter à [dpo@ueefrance.org](mailto:dpo@ueefrance.org) et nous vous répondrons dans les plus brefs délais.
+Vous avez des questions sur notre plateforme, des suggestions pour améliorer l'expérience des étudiant.e.s ou vous souhaitez partager vos opinions ? Nous serions ravi.e.s de vous entendre. N'hésitez pas à nous contacter à [dpo@sillat.fr](mailto:dpo@sillat.fr) et nous vous répondrons dans les plus brefs délais.
