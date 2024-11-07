@@ -1,6 +1,6 @@
 # Conditions générales d’utilisation
 
-La Plateforme SERKELS appartient à l’Union des Etudiants Exilés (l’UEE).
+La Plateforme SERKELS appartient à SILLAT.
 
 Lorsque vous accédez à la plateforme SERKELS (« le Site »), que ce soit pour consulter une page, naviguer, utiliser l’une quelconque de ses fonctionnalités ou tout autre motif, vous acceptez les présentes Conditions Générales d’Utilisation (les « CGU »), qui régissent votre utilisation du Site.
 
@@ -10,9 +10,9 @@ Avant d’utiliser le Site, vous devez accepter les CGU de manière express.
 
 Vous ne pouvez pas consulter le Site ni utiliser ses fonctionnalités sans accepter les CGU.
 
-Les CGU constituent un contrat entre vous et l’UEE.
+Les CGU constituent un contrat entre vous et SILLAT.
 
-Les CGU sont complétées par la Politique de confidentialité de SERKELS, qui détaille la manière dont l’UEE traite vos données à caractère personnel, ainsi que les [Règles de modération de SERKELS](/moderation), qui expliquent les règles appliquées par l’UEE pour modérer le Site.
+Les CGU sont complétées par la Politique de confidentialité de SERKELS, qui détaille la manière dont SILLAT traite vos données à caractère personnel, ainsi que les [Règles de modération de SERKELS](/moderation), qui expliquent les règles appliquées par SILLAT pour modérer le Site.
 
 ## Accès et utilisation du Site
 
@@ -20,17 +20,17 @@ Les CGU sont complétées par la Politique de confidentialité de SERKELS, qui d
 
 Le Site est accessible en ligne à l’adresse www.serkels.fr. L’accès au Site nécessite une connexion internet et un appareil permettant de naviguer sur internet.
 
-L’UEE fait tout son possible pour maintenir le Site accessible et performant, sans retard ni difficultés excessives.
+SILLAT fait tout son possible pour maintenir le Site accessible et performant, sans retard ni difficultés excessives.
 
-Toutefois, l’UEE ne peut garantir un accès au Site sans interruption ni dérangement.
+Toutefois, SILLAT ne peut garantir un accès au Site sans interruption ni dérangement.
 
-Ainsi, afin d’améliorer les fonctionnalités du Site et les services afférents, l’UEE peut être amenée à réaliser des opérations de maintenance, de mise à jour ou encore d’intégration de nouveaux développements.
+Ainsi, afin d’améliorer les fonctionnalités du Site et les services afférents, SILLAT peut être amenée à réaliser des opérations de maintenance, de mise à jour ou encore d’intégration de nouveaux développements.
 
-Par ailleurs, l’UEE ne peut garantir un fonctionnement sans interruption du réseau internet.
+Par ailleurs, SILLAT ne peut garantir un fonctionnement sans interruption du réseau internet.
 
 Vous êtes seul responsable de la mise en place et de la tenue à jour des moyens informatiques et de télécommunication nécessaires à l’accès au Site, et tout frais y afférent, tel que le prix d’une connexion internet, est à votre charge exclusive.
 
-L’UEE attire votre attention sur le fait que le réseau internet n’est pas parfaitement sécurisé.
+SILLAT attire votre attention sur le fait que le réseau internet n’est pas parfaitement sécurisé.
 
 Il vous appartient donc de prendre toutes les mesures appropriées pour protéger vos données, logiciels et appareils.
 
@@ -54,13 +54,13 @@ Lorsque le formulaire comporte des champs libres, vous garantissez que les infor
 
 - Ne portent pas atteinte à la vie privée ou à l’image de tiers, y compris aux droits des personnes physiques relatives à leurs données à caractère personnel, conformément au Règlement n° 2016/679 du 27 avril 2016 relatif à la protection des personnes physiques à l’égard du traitement des données à caractère personnel et à la libre circulation de ces données et à la Loi relative à l’informatique, aux fichiers et aux libertés.
 
-En vous inscrivant sur le Site, vous garantissez que vous avez la capacité de conclure un contrat avec l’UEE.
+En vous inscrivant sur le Site, vous garantissez que vous avez la capacité de conclure un contrat avec SILLAT.
 
 - Vous garantissez également que vous avez plus de 18 ans.
 
 - Vous ne pouvez par ailleurs être titulaire que d’un seul Compte sur le Site. En vous inscrivant vous garantissez donc que vous n’avez pas déjà un compte sur le Site et que vous êtes inscrit sous votre nom réel.
 
-Toute inscription qui ne respecte pas ces conditions pourra entraîner la suspension ou la suppression du compte par l’UEE.
+Toute inscription qui ne respecte pas ces conditions pourra entraîner la suspension ou la suppression du compte par SILLAT.
 
 ### Utilisation de la Plateforme
 
@@ -72,7 +72,7 @@ Les Comptes sont strictement personnels. Vous vous engagez donc :
 
 - A ne pas prêter, céder, donner, ni transférer d’une quelconque manière tout ou partie de votre Compte à un tiers.
 
-Vous vous engagez également à vous conformer à la loi lorsque vous utilisez le Site et les services de l’UEE, y compris dans toutes vos interactions avec les autres utilisateurs du Site.
+Vous vous engagez également à vous conformer à la loi lorsque vous utilisez le Site et les services de SILLAT, y compris dans toutes vos interactions avec les autres utilisateurs du Site.
 
 Le Site vous permet :
 
@@ -98,13 +98,13 @@ En acceptant les présentes CGU, vous vous engagez à :
 
 - Ne pas utiliser le Site et les services afférents en détournant ou usurpant l’identité d’une tierce personne physique ou morale.
 
-### Utilisation de vos données par l’UEE
+### Utilisation de vos données par SILLAT
 
-L’UEE exploite vos données aux seules fins d’assurer le fonctionnement du Site et de fournir les services afférents.
+SILLAT exploite vos données aux seules fins d’assurer le fonctionnement du Site et de fournir les services afférents.
 
-L’UEE ne transmet pas vos données à des tiers, à l’exception de ses prestataires participant à la fourniture des services.
+SILLAT ne transmet pas vos données à des tiers, à l’exception de ses prestataires participant à la fourniture des services.
 
-Pour plus d’informations sur le traitement de vos données personnelles par l’UEE, nous vous invitons à consulter notre Politique de confidentialité.
+Pour plus d’informations sur le traitement de vos données personnelles par SILLAT, nous vous invitons à consulter notre Politique de confidentialité.
 
 ## Signalements, suspension et suppression de compte
 
@@ -120,21 +120,21 @@ Vous pouvez signaler :
 
 - Un échange public prenant la forme de « questions » ou « réponses », en cliquant sur le drapeau en haut à droite de l’échange.
 
-Lorsque vous cliquez sur les icônes en forme de drapeaux afin de réaliser un signalement, une fenêtre s’ouvre vous demandant de renseigner les informations relatives aux signalements. Cette fenêtre vous guidera dans votre signalement, en vous demandant de renseigner les informations dont l’UEE aura besoin pour traiter votre signalement.
+Lorsque vous cliquez sur les icônes en forme de drapeaux afin de réaliser un signalement, une fenêtre s’ouvre vous demandant de renseigner les informations relatives aux signalements. Cette fenêtre vous guidera dans votre signalement, en vous demandant de renseigner les informations dont SILLAT aura besoin pour traiter votre signalement.
 
-Le traitement des signalements est réalisé par l’UEE conformément aux [Règles de modération du Site](/moderation). Nous vous invitons à vous référer à ces règles pour en savoir plus sur la manière dont l’UEE traite les signalements et assure la modération du Site.
+Le traitement des signalements est réalisé par SILLAT conformément aux [Règles de modération du Site](/moderation). Nous vous invitons à vous référer à ces règles pour en savoir plus sur la manière dont SILLAT traite les signalements et assure la modération du Site.
 
 ### Suspension et suppression de Compte
 
-Lorsqu’un utilisateur fait l’objet d’un signalement ou lorsque l’UEE identifie un comportement illicite ou contraire aux présentes CGU de la part d’un utilisateur, l’UEE se réserve le droit de suspendre ou de supprimer le Compte de l’utilisateur, après étude de la situation et selon la gravité des actes commis.
+Lorsqu’un utilisateur fait l’objet d’un signalement ou lorsque SILLAT identifie un comportement illicite ou contraire aux présentes CGU de la part d’un utilisateur, SILLAT se réserve le droit de suspendre ou de supprimer le Compte de l’utilisateur, après étude de la situation et selon la gravité des actes commis.
 
-Le cas échéant, la décision de l’UEE est alors signalée par courriel à l’utilisateur concerné.
+Le cas échéant, la décision de SILLAT est alors signalée par courriel à l’utilisateur concerné.
 
-Ce courriel expose les faits ayant fait l’objet d’un signalement ou ayant été identifiés par l’UEE comme illicites ou contraire aux CGU, la nature de la sanction (suppression ou suspension de Compte), les motifs de la décision et la possibilité pour l’utilisateur de contester la décision.
+Ce courriel expose les faits ayant fait l’objet d’un signalement ou ayant été identifiés par SILLAT comme illicites ou contraire aux CGU, la nature de la sanction (suppression ou suspension de Compte), les motifs de la décision et la possibilité pour l’utilisateur de contester la décision.
 
-L’utilisateur dispose d’un délai d’un mois à compter de la réception du courriel pour contester la décision de l’UEE par courriel en réponse ou courrier.
+L’utilisateur dispose d’un délai d’un mois à compter de la réception du courriel pour contester la décision de SILLAT par courriel en réponse ou courrier.
 
-Si l’utilisateur ne répond pas ou si l’UEE maintien sa décision, le Compte de l’utilisateur sera suspendu ou supprimé.
+Si l’utilisateur ne répond pas ou si SILLAT maintien sa décision, le Compte de l’utilisateur sera suspendu ou supprimé.
 
 Toute suppression de Compte est définitive.
 
@@ -142,43 +142,43 @@ Toute suppression de Compte est définitive.
 
 Vous pouvez résilier les présentes CGU à tout moment en supprimant votre Compte sur le Site. Toute suppression de Compte est définitive.
 
-Si vous n’utilisez pas votre Compte pendant plus de deux (2) ans, l’UEE procèdera à la suppression automatique du Compte.
+Si vous n’utilisez pas votre Compte pendant plus de deux (2) ans, SILLAT procèdera à la suppression automatique du Compte.
 
-Cette suppression vaut résiliation du contrat entre vous et l’UEE.
+Cette suppression vaut résiliation du contrat entre vous et SILLAT.
 
 La suppression de votre Compte pour toute autre raison (Compte doublon, sanction…) entraîne la résiliation des présentes CGU.
 
 ## Propriété intellectuelle
 
-L’UEE est et demeure seule titulaire de l’ensemble des droits de propriété intellectuelle, tels que les marques, droits d’auteur, droits de dessin et modèle, droits de brevet et/ou droits sui generis, afférents au Site, y compris tous logos, textes, images, données, noms de domaine, code et algorithmes intégrés à ou figurant sur le Site, sous réserve des éventuels droits de propriété intellectuel de ses prestataires afférents aux services fournis par ces derniers, ainsi que des droits de propriété intellectuelle des utilisateurs du Site, notamment les partenaires institutionnels de l’UEE (tels que les Universités).
+SILLAT est et demeure seule titulaire de l’ensemble des droits de propriété intellectuelle, tels que les marques, droits d’auteur, droits de dessin et modèle, droits de brevet et/ou droits sui generis, afférents au Site, y compris tous logos, textes, images, données, noms de domaine, code et algorithmes intégrés à ou figurant sur le Site, sous réserve des éventuels droits de propriété intellectuel de ses prestataires afférents aux services fournis par ces derniers, ainsi que des droits de propriété intellectuelle des utilisateurs du Site, notamment les partenaires institutionnels de SILLAT (tels que les Universités).
 
-Aucune cession ou concession de droits de propriété intellectuelle par l’UEE ne saurait résulter des présentes CGU.
+Aucune cession ou concession de droits de propriété intellectuelle par SILLAT ne saurait résulter des présentes CGU.
 
 Vous vous engagez par les présentes à ne pas porter atteinte à ces droits de manière directe ou indirecte.
 
 Le Site est susceptible de contenir des éléments, quels qu’ils soient (notamment des images) représentant tout ou partie de l’image d’une personne physique.
 
-En conséquence, toute utilisation de ces éléments (notamment la reproduction, la communication, le téléchargement, la modification, la traduction, etc.), en tout ou partie, nécessite l’accord écrit et préalable de l’UEE et/ou de la personne concernée, sauf lorsque la législation l’autorise.
+En conséquence, toute utilisation de ces éléments (notamment la reproduction, la communication, le téléchargement, la modification, la traduction, etc.), en tout ou partie, nécessite l’accord écrit et préalable de SILLAT et/ou de la personne concernée, sauf lorsque la législation l’autorise.
 
 ## Absence de garantie
 
-L’UEE n’offre aucune garantie relative au Site et aux services afférents, y compris concernant les niveaux de service. Le Site est fourni en l’état.
+SILLAT n’offre aucune garantie relative au Site et aux services afférents, y compris concernant les niveaux de service. Le Site est fourni en l’état.
 
 Le Site fait par ailleurs l’objet de développements constants.
 
-Pour cette raison, l’UEE se réserve le droit de modifier le Site à tout moment et de réaliser toute opération de mise à jour, de mise en œuvre de nouveaux développements ou de maintenance qui pourrait s’avérer nécessaire.
+Pour cette raison, SILLAT se réserve le droit de modifier le Site à tout moment et de réaliser toute opération de mise à jour, de mise en œuvre de nouveaux développements ou de maintenance qui pourrait s’avérer nécessaire.
 
 Ces opérations peuvent entraîner la modification ou la suspension temporaire des services disponibles sur le Site ou de certaines fonctionnalités du Site.
 
 ## Responsabilité
 
-L’UEE propose les fonctionnalités du Site en qualité d’hébergeur de contenus.
+SILLAT propose les fonctionnalités du Site en qualité d’hébergeur de contenus.
 
-L’UEE n’est pas responsable des contenus publiés par des tiers, ni du contenu des différentes formes d’échanges entre utilisateurs, par messagerie privée ou dans les échanges publics.
+SILLAT n’est pas responsable des contenus publiés par des tiers, ni du contenu des différentes formes d’échanges entre utilisateurs, par messagerie privée ou dans les échanges publics.
 
-L’UEE décline toute responsabilité pour toute perte de bénéfices ou d’opportunité commerciale, toute atteinte à la réputation ou tout dommage indirect, fortuit, consécutif, spécial ou punitif pouvant résulter de l’utilisation du Site ou des services afférents.
+SILLAT décline toute responsabilité pour toute perte de bénéfices ou d’opportunité commerciale, toute atteinte à la réputation ou tout dommage indirect, fortuit, consécutif, spécial ou punitif pouvant résulter de l’utilisation du Site ou des services afférents.
 
-Par ailleurs, l’UEE ne pourra être tenue responsable de tous dommages causés par l’inexécution, partielle ou totale, des présentes CGU lorsque l’inexécution résulte de la faute de l’utilisateur, du fait imprévisible et insurmontable d’un tiers ou d’un événement de force majeure.
+Par ailleurs, SILLAT ne pourra être tenue responsable de tous dommages causés par l’inexécution, partielle ou totale, des présentes CGU lorsque l’inexécution résulte de la faute de l’utilisateur, du fait imprévisible et insurmontable d’un tiers ou d’un événement de force majeure.
 
 ## Divers
 
@@ -198,14 +198,14 @@ Pour tout litige relatif à la formation, la négociation, la conclusion, l’in
 
 ## Modification
 
-Les présentes CGU peuvent être modifiées à tout moment par l’UEE.
+Les présentes CGU peuvent être modifiées à tout moment par SILLAT.
 
-Le cas échéant, l’UEE vous informera des modifications apportées à ses CGU par courriel.
+Le cas échéant, SILLAT vous informera des modifications apportées à ses CGU par courriel.
 
 Les modifications n’ont pas d’effet rétroactif.
 
-Si vous vous opposez à l’une de ces modifications, vous pouvez fermer votre Compte à tout moment et ainsi résilier votre relation contractuelle avec l’UEE.
+Si vous vous opposez à l’une de ces modifications, vous pouvez fermer votre Compte à tout moment et ainsi résilier votre relation contractuelle avec SILLAT.
 
-Si vous continuez à utiliser le Site et les services de l’UEE après une modification des CGU, ces actions vaudront acceptation de la modification.
+Si vous continuez à utiliser le Site et les services de SILLAT après une modification des CGU, ces actions vaudront acceptation de la modification.
 
 #### Version du 30 octobre 2024

@@ -5,4 +5,3 @@ Fonctionnalité: Page de conditions générales d’utilisation
     Quand je clique sur "Conditions générales d'utilisation"
     Alors je vois dans le titre "Legal :: Serkels"
     * je vois "Conditions générales d’utilisation"
-    * je vois "Union des Etudiants Exilés"

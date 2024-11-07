@@ -2,10 +2,10 @@
 
 ### Éditeur du site
 
-**L'Union des Etudiants Exilés (UEE)**  
+**SILLAT**  
 Association loi 1901  
 142, rue de Rivoli, 75001 Paris, France  
-Email : [contact@ueefrance.org](mailto:contact@ueefrance.org)
+Email : [dpo@sillat.fr](mailto:dpo@sillat.fr)
 
 ---
 
