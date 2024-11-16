@@ -29,7 +29,7 @@
     "@tanstack/react-query": "4.36.1",
     "react": "18.3.1",
     "react-content-loader": "7.0.2",
-    "tailwind-variants": "0.2.1",
+    "tailwind-variants": "0.3.0",
     "ts-pattern": "5.5.0",
     "zod": "3.23.8"
   },
