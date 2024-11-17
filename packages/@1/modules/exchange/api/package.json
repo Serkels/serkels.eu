@@ -27,7 +27,7 @@
     "@1.modules/trpc": "workspace:*",
     "date-fns": "4.1.0",
     "ts-pattern": "5.5.0",
-    "xstate": "5.18.2",
+    "xstate": "5.19.0",
     "zod": "3.23.8"
   },
   "devDependencies": {
