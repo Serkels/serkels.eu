@@ -8,45 +8,30 @@ import {
   create_slap_exchange,
 } from "@1.infra/database/seeding";
 import prisma, { empty_database, migrate } from "@1.infra/database/testing";
-import {
-  create_nextauth_header,
-  createCallerFactory,
-  router,
-} from "@1.modules/trpc";
-import { douglas_golden_nextauth_header } from "@1.modules/trpc/testing";
+import { createCallerFactory } from "@1.modules/trpc";
+import { douglas_student_session } from "@1.modules/trpc/testing";
 import {
   afterEach,
   beforeAll,
   beforeEach,
   describe,
   expect,
-  setSystemTime,
   test,
 } from "bun:test";
-import exchange_by_id from "./by_id";
-
-//
-
-const NEXTAUTH_SECRET = "🔑";
-
-beforeAll(() => {
-  process.env["NEXTAUTH_SECRET"] = NEXTAUTH_SECRET;
-});
+import by_id_api_router from "./by_id";
 
 //
 
 beforeAll(empty_database);
 beforeAll(migrate);
-beforeAll(() => {
-  setSystemTime(new Date("2011-11-11"));
-});
 
 //
 
 describe("visitor", () => {
   test("should return a sanitize exchange", async () => {
-    const caller = createCallerFactory(router({ by_id: exchange_by_id }));
+    const caller = createCallerFactory(by_id_api_router);
     const trpc = caller({
+      auth: () => null,
       prisma,
     } as any);
     const exchange = await trpc.by_id("slap_exchange_id");
@@ -55,16 +40,10 @@ describe("visitor", () => {
 });
 
 describe("connected studient", () => {
-  let nextauth_header: Awaited<ReturnType<typeof create_nextauth_header>>;
-
-  beforeAll(async () => {
-    nextauth_header = douglas_golden_nextauth_header;
-  });
-
   test("should return a sanitize exchange", async () => {
-    const caller = createCallerFactory(router({ by_id: exchange_by_id }));
+    const caller = createCallerFactory(by_id_api_router);
     const trpc = caller({
-      headers: { ...nextauth_header },
+      auth: () => douglas_student_session,
       prisma,
     } as any);
     const exchange = await trpc.by_id("slap_exchange_id");

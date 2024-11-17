@@ -1,6 +1,5 @@
 //
 
-import { TrpcRootProvider } from ":trpc/root";
 import { TRPC_SSR } from ":trpc/server";
 import Form from ":widgets/auth/SignUpForm";
 import { auth } from "@1.modules/auth.next";
@@ -38,9 +37,7 @@ async function Page() {
 
   return (
     <main className={base()}>
-      <TrpcRootProvider>
-        <Form categories={await TRPC_SSR.category.exchange.fetch()} />
-      </TrpcRootProvider>
+      <Form categories={await TRPC_SSR.category.exchange.fetch()} />
     </main>
   );
 }

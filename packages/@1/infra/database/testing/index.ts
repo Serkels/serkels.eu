@@ -38,3 +38,19 @@ export async function empty_database() {
   await client.exec(`DROP SCHEMA public CASCADE;`);
   await client.exec(`CREATE SCHEMA public;`);
 }
+
+export async function database_status() {
+  console.log("🕵️ DATABASE STATUS");
+  console.log({
+    exchange_message_notification:
+      await prisma.exchangeMessageNotification.count(),
+    inbox_message_notification: await prisma.inboxMessageNotification.count(),
+    inbox_thread: await prisma.inboxThread.count(),
+    notification: await prisma.notification.count(),
+    profile_added_notification: await prisma.profileAddedNotification.count(),
+    profile: await prisma.profile.count(),
+    student: await prisma.student.count(),
+    thread: await prisma.thread.count(),
+    user: await prisma.user.count(),
+  });
+}

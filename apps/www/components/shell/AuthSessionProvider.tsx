@@ -1,8 +1,11 @@
 "use client";
+
 import type { Session } from "@1.modules/auth.next";
 import { SessionProvider } from "@1.modules/auth.next/react";
 import { sendGAEvent } from "@next/third-parties/google";
 import { useEffect, type PropsWithChildren } from "react";
+
+//
 
 export function AuthSessionProvider({
   children,
