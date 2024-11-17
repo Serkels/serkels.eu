@@ -1,0 +1,29 @@
+// Bun Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should return latest notifications 1`] = `
+{
+  "data": [
+    {
+      "created_at": 2011-11-11T00:00:00.000Z,
+      "exchange_message": null,
+      "forum_message": null,
+      "id": "greatings_notification_id",
+      "inbox_message": {
+        "message": {
+          "author": {
+            "id": "joedart_profile_id",
+            "image": "https://picsum.photos/200/300",
+            "name": "Joe Dart",
+          },
+          "thread_id": "greatings_thread_id",
+        },
+      },
+      "owner_id": "douglas_profile_id",
+      "profile_added": null,
+      "read_at": null,
+      "type": "INBOX_NEW_MESSAGE",
+    },
+  ],
+  "prevCursor": undefined,
+}
+`;

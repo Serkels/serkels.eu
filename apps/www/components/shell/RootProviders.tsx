@@ -1,7 +1,7 @@
 "use client";
 
 import { LegalProvider } from ":components/terms/context";
-import { TrpcProvider } from ":trpc/client";
+import { TrpcRootProvider } from ":trpc/root";
 import { SessionProvider } from "@1.modules/auth.next/react";
 import { useMediaQuery } from "@react-hookz/web";
 import {
@@ -27,7 +27,7 @@ export function RootProviders({ children }: PropsWithChildren) {
       <LegalProvider>
         <AuthSessionProvider>
           <ReactQueryClientProvider>
-            <TrpcProvider>{children}</TrpcProvider>
+            <TrpcRootProvider>{children}</TrpcRootProvider>
           </ReactQueryClientProvider>
         </AuthSessionProvider>
       </LegalProvider>

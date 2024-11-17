@@ -2,6 +2,7 @@
 
 import { ProfileAvatarMedia } from ":components/avatar";
 import type { inferInfiniteQueryObserverSuccessResult } from ":components/inferQueryResult";
+import { Loading_Placeholder } from ":components/placeholder/Loading_Placeholder";
 import { TRPC_React } from ":trpc/client";
 import type { AvatarProfile } from "@1.modules/profile.domain";
 import { EmptyList, LoadMoreButton } from "@1.ui/react/async";
@@ -9,7 +10,6 @@ import { button_item } from "@1.ui/react/button/atom";
 import { Spinner } from "@1.ui/react/spinner";
 import Link from "next/link";
 import { P, match } from "ts-pattern";
-import Loading_Placeholder from "../loading";
 
 //
 

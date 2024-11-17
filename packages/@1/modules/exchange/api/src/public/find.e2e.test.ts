@@ -7,13 +7,9 @@ import {
   create_slap_exchange,
 } from "@1.infra/database/seeding";
 import prisma, { empty_database, migrate } from "@1.infra/database/testing";
+import { createCallerFactory } from "@1.modules/trpc";
 import {
-  create_nextauth_header,
-  createCallerFactory,
-  router,
-} from "@1.modules/trpc";
-import {
-  douglas_golden_nextauth_header,
+  douglas_student_session,
   NEXTAUTH_SECRET,
 } from "@1.modules/trpc/testing";
 import {
@@ -25,7 +21,7 @@ import {
   setSystemTime,
   test,
 } from "bun:test";
-import find from "./find";
+import find_api_router from "./find";
 
 //
 
@@ -45,8 +41,8 @@ beforeAll(() => {
 
 describe("visitor", () => {
   test("should return latest exchanges", async () => {
-    const caller = createCallerFactory(router({ find }));
-    const trpc = caller({ prisma } as any);
+    const caller = createCallerFactory(find_api_router);
+    const trpc = caller({ auth: () => null, prisma } as any);
     const exchange = await trpc.find({});
     expect(exchange).toMatchSnapshot();
   });
@@ -56,8 +52,8 @@ describe("visitor", () => {
       data: { is_active: false },
       where: { id: "slap_exchange_id" },
     });
-    const caller = createCallerFactory(router({ find }));
-    const trpc = caller({ prisma } as any);
+    const caller = createCallerFactory(find_api_router);
+    const trpc = caller({ auth: () => null, prisma } as any);
     const exchange = await trpc.find({});
     expect(exchange).toMatchSnapshot();
   });
@@ -67,24 +63,18 @@ describe("visitor", () => {
       data: { expiry_date: new Date("2011-11-10") },
       where: { id: "slap_exchange_id" },
     });
-    const caller = createCallerFactory(router({ find }));
-    const trpc = caller({ prisma } as any);
+    const caller = createCallerFactory(find_api_router);
+    const trpc = caller({ auth: () => null, prisma } as any);
     const exchange = await trpc.find({});
     expect(exchange).toMatchSnapshot();
   });
 });
 
 describe("connected studient", () => {
-  let nextauth_header: Awaited<ReturnType<typeof create_nextauth_header>>;
-
-  beforeAll(async () => {
-    nextauth_header = douglas_golden_nextauth_header;
-  });
-
   test("should return latest exchanges", async () => {
-    const caller = createCallerFactory(router({ find }));
+    const caller = createCallerFactory(find_api_router);
     const trpc = caller({
-      headers: { ...nextauth_header },
+      auth: () => douglas_student_session,
       prisma,
     } as any);
     const exchange = await trpc.find({});
@@ -96,9 +86,9 @@ describe("connected studient", () => {
       data: { blacklist: { create: { profile_id: "joedart_profile_id" } } },
       where: { id: "douglas_profile_id" },
     });
-    const caller = createCallerFactory(router({ find }));
+    const caller = createCallerFactory(find_api_router);
     const trpc = caller({
-      headers: { ...nextauth_header },
+      auth: () => douglas_student_session,
       prisma,
     } as any);
     const exchange = await trpc.find({});
@@ -110,9 +100,9 @@ describe("connected studient", () => {
       data: { blacklisted_by: { create: { owner_id: "joedart_profile_id" } } },
       where: { id: "douglas_profile_id" },
     });
-    const caller = createCallerFactory(router({ find }));
+    const caller = createCallerFactory(find_api_router);
     const trpc = caller({
-      headers: { ...nextauth_header },
+      auth: () => douglas_student_session,
       prisma,
     } as any);
     const exchange = await trpc.find({});

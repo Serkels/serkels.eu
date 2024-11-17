@@ -1,8 +1,9 @@
 "use client";
 
 import type { inferInfiniteQueryObserverSuccessResult } from ":components/inferQueryResult";
-import { TRPC_React } from ":trpc/client";
+import { Loading_Placeholder } from ":components/placeholder/Loading_Placeholder";
 import { Exchange_Card } from ":widgets/exchanges/card";
+import { trpc_client } from "@1.infra/trpc/react-query/client";
 import { useSession } from "@1.modules/auth.next/react";
 import type { Entity } from "@1.modules/core/domain";
 import { Exchange_Filter, type Exchange } from "@1.modules/exchange.domain";
@@ -13,7 +14,6 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, type ComponentProps, type ReactNode } from "react";
 import { match, P } from "ts-pattern";
 import type { z } from "zod";
-import Loading_Placeholder from "../loading";
 
 //
 
@@ -22,7 +22,7 @@ function useQueryExchanges(input: {
   filter: z.infer<typeof Exchange_Filter> | undefined;
   search: string | undefined;
 }) {
-  return TRPC_React.exchanges.find.useInfiniteQuery(input, {
+  return trpc_client.exchanges.find.useInfiniteQuery(input, {
     getNextPageParam: ({ next_cursor }) => next_cursor,
     keepPreviousData: true,
   });
@@ -116,7 +116,7 @@ function Item({ id }: Entity) {
 //
 
 function useQueryExchangeById(id: string) {
-  return TRPC_React.exchanges.by_id.useQuery(id);
+  return trpc_client.exchanges.by_id.useQuery(id);
 }
 
 function Exchange_byId({

@@ -7,7 +7,7 @@ import {
 } from ":components/navbar/notification_indicator.client";
 import { MobileNavBar } from ":components/shell/MobileNavBar";
 import { TRPC_SSR } from ":trpc/server";
-import { getServerSession } from "@1.modules/auth.next";
+import { auth } from "@1.modules/auth.next";
 import { PROFILE_ROLES, type AuthProfile } from "@1.modules/profile.domain";
 import { Avatar } from "@1.modules/profile.ui";
 import { Grid } from "@1.ui/react/grid";
@@ -40,7 +40,7 @@ export default function UserBar() {
 }
 
 async function UserNavGroup({ className }: ComponentPropsWithoutRef<"nav">) {
-  const session = await getServerSession();
+  const session = await auth();
   const { base, icon } = user_nav_group_variants({
     size: {
       initial: "xsmall",

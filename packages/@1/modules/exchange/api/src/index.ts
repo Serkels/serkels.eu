@@ -5,11 +5,18 @@ import {
   Deal_Status_Schema,
   Exchange_Create_Schema,
 } from "@1.modules/exchange.domain";
-import { next_auth_procedure, procedure, router } from "@1.modules/trpc";
+import {
+  mergeRouters,
+  next_auth_procedure,
+  procedure,
+  router,
+} from "@1.modules/trpc";
 import { z } from "zod";
 import { me } from "./me";
-import by_id from "./public/by_id";
-import find_router from "./public/find";
+import by_id_api_router from "./public/by_id";
+import find_api_router from "./public/find";
+
+//
 
 const exchange_api_router = router({
   //
@@ -38,10 +45,6 @@ const exchange_api_router = router({
   //
 
   me: me,
-
-  //
-
-  by_id,
 
   //
 
@@ -133,11 +136,11 @@ const exchange_api_router = router({
     }),
 
   //
-
-  find: find_router,
-
-  //
 });
 
-export default exchange_api_router;
+export default mergeRouters(
+  by_id_api_router,
+  exchange_api_router,
+  find_api_router,
+);
 export type ExchangeApiRouter = typeof exchange_api_router;
