@@ -8,7 +8,7 @@
   "dependencies": {
     "@douglasduteil/config...tailwindcss": "workspace:*",
     "@tailwindcss/typography": "0.5.15",
-    "tailwindcss": "3.4.14"
+    "tailwindcss": "3.4.15"
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
