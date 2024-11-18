@@ -1,7 +1,8 @@
 //
 
 import type { Params } from ":pipes/opportunity_slug";
-import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
+import { TRPC_Hydrate } from ":trpc/server";
+import { trpc_server } from "@1.infra/trpc/react-query/server";
 import { SeeAlso_Provider } from "./context";
 import Page_Client from "./page.client";
 
@@ -10,13 +11,13 @@ import Page_Client from "./page.client";
 export default async function Page({ params }: { params: Params }) {
   const { slug } = await params;
 
-  const opportunity = await TRPC_SSR.opportunity.by_slug.fetch(slug);
+  const opportunity = await trpc_server.opportunity.by_slug.fetch(slug);
   const {
     id,
     category: { slug: category },
   } = opportunity;
 
-  await TRPC_SSR.opportunity.find.prefetchInfinite({
+  await trpc_server.opportunity.find.prefetchInfinite({
     category,
     limit: 5,
   });

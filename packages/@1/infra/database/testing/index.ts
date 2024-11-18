@@ -42,6 +42,7 @@ export async function empty_database() {
 export async function database_status() {
   console.log("🕵️ DATABASE STATUS");
   console.log({
+    category: await prisma.category.count(),
     exchange_message_notification:
       await prisma.exchangeMessageNotification.count(),
     inbox_message_notification: await prisma.inboxMessageNotification.count(),

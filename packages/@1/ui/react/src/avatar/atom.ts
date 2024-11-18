@@ -28,6 +28,9 @@ export const avatar_media = tv({
     subtitle: "line-clamp-1 text-sm font-light leading-snug text-gray-500",
   },
   variants: {
+    /**
+     * @deprecated remove the tv$ sign
+     */
     tv$direction: {
       column: {
         figure: "flex-col items-center text-center",
@@ -37,9 +40,19 @@ export const avatar_media = tv({
         figure: "flex-row space-x-2",
       },
     },
+    /**
+     * @deprecated remove the tv$ sign
+     */
     tv$size: {
+      auto: {
+        avatar: "",
+      },
       base: {
         avatar: "size-9",
+      },
+      "2xlarge": {
+        avatar: "size-44",
+        title: "text-2xl",
       },
       medium: {
         avatar: "size-14",
@@ -49,12 +62,18 @@ export const avatar_media = tv({
         title: "text-xs",
       },
     },
+    /**
+     * @deprecated remove the tv$ sign
+     */
     tv$color: {
       secondary: {
         title: "text-secondary",
       },
     },
 
+    /**
+     * @deprecated remove the $ sign
+     */
     $linked: { true: {}, false: {} },
   },
   defaultVariants: {

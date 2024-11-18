@@ -1,7 +1,7 @@
 "use client";
 
-import { TRPC_React } from ":trpc/client";
 import { Card } from ":widgets/opportunities/card";
+import { trpc_client } from "@1.infra/trpc/react-query/client";
 import { Partner_Filter } from "@1.modules/opportunity.domain";
 import { Opportunity_InfiniteList } from "@1.modules/opportunity.ui/InfiniteList";
 import { useSearchParams } from "next/navigation";
@@ -22,7 +22,7 @@ export default function List() {
     gtag("event", "search", { search, category, filter });
   }, [search, category, filter]);
 
-  const info = TRPC_React.opportunity.find.useInfiniteQuery(
+  const info = trpc_client.opportunity.find.useInfiniteQuery(
     {
       category,
       search,

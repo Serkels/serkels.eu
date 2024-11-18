@@ -1,37 +1,14 @@
 //
 
 import { ID_Schema } from "@1.modules/core/domain";
-import { next_auth_procedure, procedure, router } from "@1.modules/trpc";
-import { z } from "zod";
+import { mergeRouters, procedure, router } from "@1.modules/trpc";
 import { answers_api_router } from "./answers";
-import find from "./question/find";
+import { create_api_router } from "./question/create";
+import { delete_api_router } from "./question/delete";
+import { find_api_router } from "./question/find";
 
 const question_api_router = router({
   answers: answers_api_router,
-  create: next_auth_procedure
-    .input(z.object({ title: z.string(), category: z.string() }))
-    .mutation(async ({ input, ctx: { prisma, payload } }) => {
-      const {
-        profile: { id: profile_id },
-      } = payload;
-      const { title, category } = input;
-
-      return prisma.question.create({
-        data: {
-          title,
-          category: { connect: { id: category } },
-          owner: { connect: { profile_id } },
-        },
-      });
-    }),
-
-  delete: next_auth_procedure
-    .input(ID_Schema)
-    .mutation(async ({ input: id, ctx: { prisma, payload } }) => {
-      return prisma.question.delete({
-        where: { id, owner: { profile_id: payload.profile.id } },
-      });
-    }),
 
   by_id: procedure
     .input(ID_Schema)
@@ -51,9 +28,12 @@ const question_api_router = router({
         },
       });
     }),
-
-  find: find,
 });
 
-export default question_api_router;
+export default mergeRouters(
+  create_api_router,
+  delete_api_router,
+  find_api_router,
+  question_api_router,
+);
 export type ForumApiRouter = typeof question_api_router;

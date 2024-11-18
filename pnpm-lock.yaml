@@ -708,6 +708,9 @@ importers:
       '@1.config/typescript':
         specifier: workspace:*
         version: link:../../../config/typescript
+      '@1.infra/database':
+        specifier: workspace:*
+        version: link:../../../infra/database
       '@types/node':
         specifier: 22.10.2
         version: 22.10.2

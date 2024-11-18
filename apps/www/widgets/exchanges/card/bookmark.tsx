@@ -1,7 +1,7 @@
 //
 
 import { AppToastOptions } from ":components/toast";
-import { TRPC_React } from ":trpc/client";
+import { trpc_client } from "@1.infra/trpc/react-query/client";
 import { useSession } from "@1.modules/auth.next/react";
 import type { BookmarkButton_Props } from "@1.modules/bookmark.ui/BookmarkButton";
 import { useExchange } from "@1.modules/exchange.ui/Card/context";
@@ -21,7 +21,7 @@ export function Exchange_Bookmark() {
   const { data: session } = useSession();
 
   const is_student = session?.profile.role === PROFILE_ROLES.Enum.STUDENT;
-  const query = TRPC_React.bookmarks.check.useQuery(
+  const query = trpc_client.bookmarks.check.useQuery(
     {
       target_id: exchange.id,
       type: "exchange",
@@ -54,8 +54,8 @@ export function Exchange_Bookmark() {
 
 function BookmarkItem_Toggle_Mutation(props: BookmarkButton_Props) {
   const { className, target_id, type, variants } = props;
-  const toggle = TRPC_React.bookmarks.toggle.useMutation();
-  const utils = TRPC_React.useUtils();
+  const toggle = trpc_client.bookmarks.toggle.useMutation();
+  const utils = trpc_client.useUtils();
   const { base, icon } = style({ ...variants });
   return (
     <button

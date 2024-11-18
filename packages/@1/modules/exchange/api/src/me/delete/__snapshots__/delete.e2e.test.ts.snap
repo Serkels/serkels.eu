@@ -1,0 +1,39 @@
+// Bun Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`return count of all unread notifications 1`] = `
+{
+  "category_id": "film_category_id",
+  "created_at": 2011-11-10T00:00:00.000Z,
+  "description": "The Creator is a good film and you should watch it ;)",
+  "expiry_date": null,
+  "id": "the_creator_exchange_id",
+  "is_active": true,
+  "is_online": true,
+  "location": null,
+  "owner_id": "douglas_student_id",
+  "places": 1,
+  "return_id": null,
+  "title": "The Creator",
+  "type": "PROPOSAL",
+  "updated_at": 2011-11-10T00:00:00.000Z,
+}
+`;
+
+exports[`should delete an exchange and return it 1`] = `
+{
+  "category_id": "film_category_id",
+  "created_at": 2011-11-10T00:00:00.000Z,
+  "description": "The Creator is a good film and you should watch it ;)",
+  "expiry_date": null,
+  "id": "the_creator_exchange_id",
+  "is_active": true,
+  "is_online": true,
+  "location": null,
+  "owner_id": "douglas_student_id",
+  "places": 1,
+  "return_id": null,
+  "title": "The Creator",
+  "type": "PROPOSAL",
+  "updated_at": 2011-11-10T00:00:00.000Z,
+}
+`;

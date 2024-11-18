@@ -87,8 +87,8 @@ test("should not return archived exchanges", async () => {
     headers: { ...nextauth_header },
     prisma,
   } as any);
-  const exchange = await trpc.find({});
-  expect(exchange).toMatchSnapshot();
+  const response = await trpc.find({});
+  expect(response).toMatchSnapshot();
 });
 
 //

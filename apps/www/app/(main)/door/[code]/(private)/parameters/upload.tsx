@@ -21,8 +21,11 @@ export async function uploadImage(formData: FormData) {
     token,
   });
 
-  const profile = await proxyClient.profile.by_id.query(profile_id);
-  await proxyClient.profile.me.update.mutate({ ...profile, image: blob.url });
+  const profile = await proxyClient.legacy_profile.by_id.query(profile_id);
+  await proxyClient.legacy_profile.me.update.mutate({
+    ...profile,
+    image: blob.url,
+  });
 
   revalidatePath(
     `https://xliajqivstyuw7e1.public.blob.vercel-storage.com/${pathname}`,

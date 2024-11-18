@@ -34,8 +34,8 @@ describe("visitor", () => {
       auth: () => null,
       prisma,
     } as any);
-    const exchange = await trpc.by_id("slap_exchange_id");
-    expect(exchange).toMatchSnapshot();
+    const response = await trpc.by_id("slap_exchange_id");
+    expect(response).toMatchSnapshot();
   });
 });
 
@@ -46,8 +46,8 @@ describe("connected studient", () => {
       auth: () => douglas_student_session,
       prisma,
     } as any);
-    const exchange = await trpc.by_id("slap_exchange_id");
-    expect(exchange).toMatchSnapshot();
+    const response = await trpc.by_id("slap_exchange_id");
+    expect(response).toMatchSnapshot();
   });
 });
 

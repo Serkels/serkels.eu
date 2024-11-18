@@ -1,9 +1,9 @@
 "use client";
 
 import { Loading_Placeholder } from ":components/placeholder/Loading_Placeholder";
-import { TRPC_React } from ":trpc/client";
 import { Card } from ":widgets/opportunities/card";
 import type { RouterOutput } from "@1.infra/trpc";
+import { trpc_client } from "@1.infra/trpc/react-query/client";
 import { Button } from "@1.ui/react/button";
 import type { InfiniteQueryObserverSuccessResult } from "@tanstack/react-query";
 import { motion, type MotionProps } from "motion/react";
@@ -24,12 +24,14 @@ export default function AsyncListInfinite(props: {
   const category = props.category ?? search_params.get("category") ?? undefined;
   const exclude_ids = props.exclude_ids ?? [];
 
-  const query_with_category_info = TRPC_React.opportunity.find.useInfiniteQuery(
-    { category, limit: 5 },
-    {
-      getNextPageParam: (lastPage) => lastPage.next_cursor,
-    },
-  );
+  const query_with_category_info =
+    trpc_client.opportunity.find.useInfiniteQuery(
+      { category, limit: 5 },
+      {
+        getNextPageParam: (lastPage) => lastPage.next_cursor,
+      },
+    );
+
   const nothing_found_with_category =
     query_with_category_info.isFetched &&
     query_with_category_info.data &&
@@ -39,7 +41,7 @@ export default function AsyncListInfinite(props: {
       .filter(({ id }) => !exclude_ids.includes(id)).length === 0;
 
   const query_without_category_info =
-    TRPC_React.opportunity.find.useInfiniteQuery(
+    trpc_client.opportunity.find.useInfiniteQuery(
       { limit: 5 },
       {
         getNextPageParam: (lastPage) => lastPage.next_cursor,

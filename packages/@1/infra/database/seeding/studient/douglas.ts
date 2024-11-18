@@ -8,6 +8,7 @@ export async function create_douglas_student(prisma: PrismaClient) {
   const { id } = await prisma.student.create({
     data: {
       city: "London",
+      created_at: new Date(),
       field_of_study: "Film",
       id: "douglas_student_id",
       profile: {
@@ -26,6 +27,7 @@ export async function create_douglas_student(prisma: PrismaClient) {
         },
       },
       university: "University of London",
+      updated_at: new Date(),
     },
     select: { id: true },
   });

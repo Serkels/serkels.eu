@@ -42,7 +42,7 @@ export async function report(
 
   const input = validatedFields.data;
 
-  const [report_error] = await to(trpc_caller.profile.me.report(input));
+  const [report_error] = await to(trpc_caller.legacy_profile.me.report(input));
   if (report_error) {
     return {
       ...state,

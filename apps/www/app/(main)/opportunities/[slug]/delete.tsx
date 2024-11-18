@@ -1,6 +1,6 @@
 "use client";
 
-import { TRPC_React } from ":trpc/client";
+import { trpc_client } from "@1.infra/trpc/react-query/client";
 import { Button } from "@1.ui/react/button";
 import { Trash } from "@1.ui/react/icons";
 import { Spinner } from "@1.ui/react/spinner";
@@ -78,9 +78,9 @@ function Idle() {
 function Deleting() {
   const { id: opportunity_id } = useOpportunity();
 
-  const delete_opportunity = TRPC_React.opportunity.delete.useMutation();
+  const delete_opportunity = trpc_client.opportunity.delete.useMutation();
   const router = useRouter();
-  const utils = TRPC_React.useUtils();
+  const utils = trpc_client.useUtils();
 
   useTimeoutEffect(async () => {
     await delete_opportunity.mutateAsync(opportunity_id);

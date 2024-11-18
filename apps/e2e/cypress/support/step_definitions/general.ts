@@ -18,6 +18,10 @@ Then("je vois {string}", function (text: string) {
   cy.contains(text);
 });
 
+Then("je ne vois pas {string}", function (text: string) {
+  cy.contains(text).should("not.exist");
+});
+
 Then("je vois la légende {string}", function (text: string) {
   cy.get(`[aria-label*="${text}"]`);
 });

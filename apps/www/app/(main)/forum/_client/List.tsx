@@ -138,7 +138,7 @@ function Delete_Answer_Button() {
   const is_owner = session.data?.profile.id === answer.owner.profile.id;
 
   async function deleteAnswer() {
-    await mutateAsync(answer.id);
+    await mutateAsync({ answers_id: answer.id, question_id: answer.parent_id });
     await utils.forum.question.answers.find.invalidate();
   }
 

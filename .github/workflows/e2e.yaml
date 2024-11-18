@@ -86,6 +86,7 @@ jobs:
           - forum
           - legal
           - moderation
+          - notification
           - opportunity
           - partner
           - status

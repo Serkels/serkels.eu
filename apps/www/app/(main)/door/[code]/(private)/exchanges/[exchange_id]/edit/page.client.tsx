@@ -1,6 +1,7 @@
 "use client";
 
 import { TRPC_React } from ":trpc/client";
+import { trpc_client } from "@1.infra/trpc/react-query/client";
 import type { Category } from "@1.modules/category.domain";
 import { type Exchange_Flat_Schema } from "@1.modules/exchange.domain";
 import {
@@ -21,8 +22,8 @@ export function Mutate_Exchange_Island({
 }: {
   exchange_id: string;
 }) {
-  const { data: exchange } = TRPC_React.exchanges.by_id.useQuery(exchange_id);
-  const { data: categories } = TRPC_React.category.exchange.useQuery();
+  const { data: exchange } = trpc_client.exchanges.by_id.useQuery(exchange_id);
+  const { data: categories } = trpc_client.category.exchange.useQuery();
   if (!exchange) return null;
   if (!categories) return null;
   return <Mutate_Exchange exchange={exchange} categories={categories} />;

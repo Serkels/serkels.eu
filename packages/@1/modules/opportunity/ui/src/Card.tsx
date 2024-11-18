@@ -16,6 +16,7 @@ export function Opoortunity_Card({
 }: PropsWithChildren<{ opportunity: CardOportunity }>) {
   const { cover, expiry_date, title, owner, location, category } = opportunity;
   const { base, date } = opoortunity_card();
+
   return (
     <article className={base()}>
       <figure className="flex h-full flex-col">

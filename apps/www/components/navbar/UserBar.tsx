@@ -6,6 +6,7 @@ import {
   Notification_DotIndicator,
 } from ":components/navbar/notification_indicator.client";
 import { MobileNavBar } from ":components/shell/MobileNavBar";
+import { TrpcRootProvider } from ":trpc/root";
 import { TRPC_SSR } from ":trpc/server";
 import { auth } from "@1.modules/auth.next";
 import { PROFILE_ROLES, type AuthProfile } from "@1.modules/profile.domain";
@@ -17,7 +18,7 @@ import Link from "next/link";
 import { type ComponentPropsWithoutRef } from "react";
 import { tv } from "tailwind-variants";
 import { match } from "ts-pattern";
-import { UserMenuTogglePartner, UserMenuToggleStudent } from "./navbar.client";
+import { UserMenuTogglePartner, UserMenuToggleStudent } from "./UserBar.client";
 
 //
 
@@ -32,8 +33,9 @@ export default function UserBar() {
         </figure>
 
         <MobileNavBar className="left-0 right-0 z-50 hidden h-16 sm:z-auto sm:col-auto sm:h-full md:col-span-4 md:block xl:col-span-6 sm:[&>ul]:w-full lg:[&>ul]:w-auto" />
-
-        <UserNavGroup className="h-full md:col-span-2 xl:col-span-3" />
+        <TrpcRootProvider>
+          <UserNavGroup className="h-full md:col-span-2 xl:col-span-3" />
+        </TrpcRootProvider>
       </Grid>
     </header>
   );
@@ -107,7 +109,7 @@ const user_nav_group_variants = tv(
   },
 );
 async function MyStudentProfile({ profile }: { profile: AuthProfile }) {
-  const student = await TRPC_SSR.profile.student?.by_profile_id.fetch(
+  const student = await TRPC_SSR.legacy_profile.student?.by_profile_id.fetch(
     profile.id,
   );
 
@@ -139,7 +141,7 @@ async function MyStudentProfile({ profile }: { profile: AuthProfile }) {
 }
 
 async function MyPartnerProfile({ profile }: { profile: AuthProfile }) {
-  const partner = await TRPC_SSR.profile.partner?.by_profile_id.fetch(
+  const partner = await TRPC_SSR.legacy_profile.partner?.by_profile_id.fetch(
     profile.id,
   );
 

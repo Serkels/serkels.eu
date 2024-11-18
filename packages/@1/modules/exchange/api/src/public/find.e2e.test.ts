@@ -43,8 +43,8 @@ describe("visitor", () => {
   test("should return latest exchanges", async () => {
     const caller = createCallerFactory(find_api_router);
     const trpc = caller({ auth: () => null, prisma } as any);
-    const exchange = await trpc.find({});
-    expect(exchange).toMatchSnapshot();
+    const response = await trpc.find({});
+    expect(response).toMatchSnapshot();
   });
 
   test("should not list successful exchanges", async () => {
@@ -54,8 +54,8 @@ describe("visitor", () => {
     });
     const caller = createCallerFactory(find_api_router);
     const trpc = caller({ auth: () => null, prisma } as any);
-    const exchange = await trpc.find({});
-    expect(exchange).toMatchSnapshot();
+    const response = await trpc.find({});
+    expect(response).toMatchSnapshot();
   });
 
   test("should not list expired exchanges", async () => {
@@ -65,8 +65,8 @@ describe("visitor", () => {
     });
     const caller = createCallerFactory(find_api_router);
     const trpc = caller({ auth: () => null, prisma } as any);
-    const exchange = await trpc.find({});
-    expect(exchange).toMatchSnapshot();
+    const response = await trpc.find({});
+    expect(response).toMatchSnapshot();
   });
 });
 
@@ -77,8 +77,8 @@ describe("connected studient", () => {
       auth: () => douglas_student_session,
       prisma,
     } as any);
-    const exchange = await trpc.find({});
-    expect(exchange).toMatchSnapshot();
+    const response = await trpc.find({});
+    expect(response).toMatchSnapshot();
   });
 
   test("should not list exchanges created by profile I blocked", async () => {
@@ -91,8 +91,8 @@ describe("connected studient", () => {
       auth: () => douglas_student_session,
       prisma,
     } as any);
-    const exchange = await trpc.find({});
-    expect(exchange).toMatchSnapshot();
+    const response = await trpc.find({});
+    expect(response).toMatchSnapshot();
   });
 
   test("should not list exchanges created by profiles who blocked me", async () => {
@@ -105,8 +105,8 @@ describe("connected studient", () => {
       auth: () => douglas_student_session,
       prisma,
     } as any);
-    const exchange = await trpc.find({});
-    expect(exchange).toMatchSnapshot();
+    const response = await trpc.find({});
+    expect(response).toMatchSnapshot();
   });
 });
 
