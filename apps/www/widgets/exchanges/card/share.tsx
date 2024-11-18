@@ -1,4 +1,4 @@
-//
+"use client";
 
 import { Share_Button } from ":components/Share_Button";
 import { useExchange } from "@1.modules/exchange.ui/Card/context";

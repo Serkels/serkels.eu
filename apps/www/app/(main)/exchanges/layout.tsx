@@ -1,6 +1,7 @@
 ///
 
 import { AsideFilter } from ":components/shell/AsideFilter";
+import { TrpcRootProvider } from ":trpc/root";
 import { Exchanges_Filter } from ":widgets/exchanges/filter";
 import { SearchForm } from ":widgets/exchanges/list";
 import { Grid } from "@1.ui/react/grid";
@@ -27,10 +28,12 @@ export default async function Layout({
 
         {categories}
       </AsideFilter>
-      <div className="col-span-full md:col-span-6 md:my-10">{children}</div>
-      {/* <aside className="mt-10 hidden xl:col-span-3 xl:block xl:px-10">
-        {see_also}
-      </aside> */}
+      <TrpcRootProvider>
+        <div className="col-span-full md:col-span-6 md:my-10">{children}</div>
+      </TrpcRootProvider>
+      <aside className="mt-10 hidden xl:col-span-3 xl:block xl:px-10">
+        <TrpcRootProvider>{see_also}</TrpcRootProvider>
+      </aside>
     </Grid>
   );
 }

@@ -1,6 +1,6 @@
 //
 
-import { TRPC_React } from ":trpc/client";
+import { trpc_client } from "@1.infra/trpc/react-query/client";
 import { useSession } from "@1.modules/auth.next/react";
 import { Exchange_TypeSchema, type Exchange } from "@1.modules/exchange.domain";
 import { Exchange_Ask_Modal } from "@1.modules/exchange.ui/ask/modal";
@@ -32,7 +32,7 @@ export function Exchange_Actions() {
 
 function Exchange_Action_Ask(exchange: Exchange) {
   const { is_studient } = useExchangeMeta();
-  const query = TRPC_React.exchanges.me.deal_by_exchange_id.useQuery(
+  const query = trpc_client.exchanges.me.deal_by_exchange_id.useQuery(
     exchange.id,
     { enabled: is_studient },
   );

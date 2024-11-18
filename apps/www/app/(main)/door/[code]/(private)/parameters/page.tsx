@@ -1,7 +1,7 @@
 //
 
 import { code_to_profile_id, type CodeParms } from ":pipes/code";
-import { TRPC_SSR } from ":trpc/server";
+import { trpc_server } from "@1.infra/trpc/react-query/server";
 import { AuthError } from "@1.modules/core/errors";
 import { PROFILE_ROLES, type Profile } from "@1.modules/profile.domain";
 import type { Metadata, ResolvingMetadata } from "next";
@@ -38,7 +38,7 @@ export default async function Page(props: { params: Promise<CodeParms> }) {
       throw new AuthError("No profile id");
     }
 
-    const profile = await TRPC_SSR.profile.by_id.fetch(profile_id);
+    const profile = await trpc_server.legacy_profile.by_id.fetch(profile_id);
 
     return (
       <main className="mx-auto my-10 max-w-3xl px-4">
@@ -67,13 +67,17 @@ async function Role_Editor({
   return match(role)
     .with(PROFILE_ROLES.Enum.STUDENT, async () => {
       const student =
-        await TRPC_SSR.profile.student.by_profile_id.fetch(profile_id);
-      const categories = await TRPC_SSR.category.exchange.fetch();
+        await trpc_server.legacy_profile.student.by_profile_id.fetch(
+          profile_id,
+        );
+      const categories = await trpc_server.category.exchange.fetch();
       return <Student_Editor categories={categories} student={student} />;
     })
     .with(PROFILE_ROLES.Enum.PARTNER, async () => {
       const partner =
-        await TRPC_SSR.profile.partner.by_profile_id.fetch(profile_id);
+        await trpc_server.legacy_profile.partner.by_profile_id.fetch(
+          profile_id,
+        );
       return <Partner_Editor partner={partner} />;
     })
     .otherwise(() => null);

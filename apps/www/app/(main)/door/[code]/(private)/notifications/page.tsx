@@ -1,8 +1,9 @@
 //
 
-import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
+import { TRPC_Hydrate } from ":trpc/server";
 import type { Metadata, ResolvingMetadata } from "next";
 import { AsyncListInfinite } from "./List";
+import { trpc_server } from "@1.infra/trpc/react-query/server";
 
 //
 
@@ -23,7 +24,7 @@ export async function generateMetadata(
 //
 
 export default async function Page() {
-  await TRPC_SSR.notification.find.prefetchInfinite({});
+  await trpc_server.notification.find.prefetchInfinite({});
   //
   return (
     <TRPC_Hydrate>

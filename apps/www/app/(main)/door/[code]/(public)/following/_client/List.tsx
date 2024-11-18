@@ -14,7 +14,7 @@ import { P, match } from "ts-pattern";
 //
 
 function useQueryProfilesFollowingMe() {
-  return TRPC_React.profile.me.added_by.find.useInfiniteQuery(
+  return TRPC_React.legacy_profile.me.added_by.find.useInfiniteQuery(
     {},
     { getNextPageParam: ({ next_cursor }) => next_cursor },
   );

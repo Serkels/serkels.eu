@@ -5,7 +5,7 @@ import { MobileNavBar } from ":components/shell/MobileNavBar";
 import { TermAgreement } from ":components/terms/TermAgreement";
 import type { PropsWithChildren } from "react";
 import { tv } from "tailwind-variants";
-import Header from "./navbar";
+import UserBar from ":components/navbar/UserBar";
 
 //
 
@@ -14,7 +14,7 @@ export default function Main_Layout({ children }: PropsWithChildren) {
   return (
     <div className={base()}>
       <header className={header()}>
-        <Header />
+        <UserBar />
       </header>
 
       {children}

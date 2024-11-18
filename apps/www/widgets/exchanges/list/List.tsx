@@ -115,10 +115,6 @@ function Item({ id }: Entity) {
 
 //
 
-function useQueryExchangeById(id: string) {
-  return trpc_client.exchanges.by_id.useQuery(id);
-}
-
 function Exchange_byId({
   children,
   id,
@@ -126,7 +122,7 @@ function Exchange_byId({
   id: string;
   children: (exchange: Exchange) => ReactNode;
 }) {
-  const info = useQueryExchangeById(id);
+  const info = trpc_client.exchanges.by_id.useQuery(id);
   return (
     <Exchange_AsyncCard
       info={info as ComponentProps<typeof Exchange_AsyncCard>["info"]}

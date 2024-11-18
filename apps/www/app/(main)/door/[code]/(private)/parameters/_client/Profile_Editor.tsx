@@ -24,10 +24,10 @@ export default function Profile_Editor({
   const utils = TRPC_React.useUtils();
   const router = useRouter();
 
-  const query_profile = TRPC_React.profile.by_id.useQuery(profile_id, {
+  const query_profile = TRPC_React.legacy_profile.by_id.useQuery(profile_id, {
     select: ({ bio, name }) => ({ bio, name }),
   });
-  const update_profile = TRPC_React.profile.me.update.useMutation();
+  const update_profile = TRPC_React.legacy_profile.me.update.useMutation();
 
   const profile = query_profile.data ?? initial;
 
@@ -38,7 +38,7 @@ export default function Profile_Editor({
         const data = await update_profile.mutateAsync({
           ...values,
         });
-        await utils.profile.by_id.invalidate(profile_id);
+        await utils.legacy_profile.by_id.invalidate(profile_id);
         await update();
         formik.resetForm({ values: { ...data, email: values.email } });
         router.refresh();

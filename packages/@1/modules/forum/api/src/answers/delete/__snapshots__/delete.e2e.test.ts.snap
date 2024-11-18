@@ -1,0 +1,12 @@
+// Bun Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`delete an answer 1`] = `
+{
+  "content": "I found it ! It's Dune :P",
+  "created_at": 2011-11-12T00:00:00.000Z,
+  "id": "best-film-2011-answer-1",
+  "owner_id": "douglas_student_id",
+  "parent_id": "best-film-2011",
+  "updated_at": 2011-11-12T00:00:00.000Z,
+}
+`;
