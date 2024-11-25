@@ -162,6 +162,7 @@
       "**/coverage": true,
       "**/dist": true,
       "**/node_modules": true,
+      "**/tsconfig*.tsbuildinfo": true,
       "pnpm-lock.yaml": true,
     },
     "editor.quickSuggestions": { "strings": "on" },
