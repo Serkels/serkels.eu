@@ -97,12 +97,6 @@ async function UserNavGroup({ className }: ComponentPropsWithoutRef<"nav">) {
 const user_nav_group_variants = tv(
   {
     base: "flex items-center justify-end space-x-3",
-    variants: {
-      size: {
-        xsmall: ["block"],
-        medium: ["block"],
-      },
-    },
     slots: {
       list: "",
       icon: "box-border size-7 rounded-full bg-white/20 p-1.5",
