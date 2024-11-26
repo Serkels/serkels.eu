@@ -1,7 +1,8 @@
 //
 
-import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
+import { TRPC_Hydrate } from ":trpc/server";
 import List from ":widgets/opportunities/list";
+import { trpc_server } from "@1.infra/trpc/react-query/server";
 import type { ForumSearchParams } from "@1.modules/forum.domain";
 import Link from "next/link";
 
@@ -15,13 +16,8 @@ export default async function Page({
   const { category } = await searchParams;
 
   await Promise.all([
-    TRPC_SSR.opportunity.find.prefetchInfinite({
-      category,
-      limit: 5,
-    }),
-    TRPC_SSR.opportunity.find.prefetchInfinite({
-      limit: 5,
-    }),
+    trpc_server.opportunity.find.prefetchInfinite({ category, limit: 5 }),
+    trpc_server.opportunity.find.prefetchInfinite({ limit: 5 }),
   ]);
 
   return (

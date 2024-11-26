@@ -49,7 +49,7 @@ function List(query_info: QueryContactsSuccessResult) {
     return <EmptyList>Aucun contact dans votre cercle</EmptyList>;
 
   return (
-    <ul className="list-none space-y-6">
+    <ul className="list-none">
       {flatten_pages.map((item) => (
         <li key={item.id}>
           <Item {...item} />
@@ -71,7 +71,10 @@ function List(query_info: QueryContactsSuccessResult) {
 
 function Item(profile: Profile) {
   return (
-    <Link className={button_item()} href={`/@${profile.id}`}>
+    <Link
+      className={button_item({ className: "h-auto" })}
+      href={`/@${profile.id}`}
+    >
       <AvatarMedia
         image={profile.image}
         id={profile.id}
