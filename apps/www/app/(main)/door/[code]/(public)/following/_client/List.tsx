@@ -57,7 +57,7 @@ function List(query_info: QueryProfilesFollowingMeSuccessResult) {
     );
 
   return (
-    <ul className="list-none space-y-6">
+    <ul className="list-none">
       {flatten_pages.map((item) => (
         <li key={item.id}>
           <Item {...item} />
