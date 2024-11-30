@@ -15,8 +15,8 @@ importers:
         specifier: workspace:*
         version: link:packages/@1/config/happydom
       bun-types:
-        specifier: 1.1.36
-        version: 1.1.36
+        specifier: 1.1.38
+        version: 1.1.38
       cpx2:
         specifier: 8.0.0
         version: 8.0.0
@@ -4491,8 +4491,8 @@ packages:
   buffer@5.7.1:
     resolution: {integrity: sha512-EHcyIPBQ4BSGlvjB16k5KgAJ27CIsHY/2JBmCRReo48y9rQ3MaUzWX3KVlBa4U7MyX02HdVj0K7C3WaB3ju7FQ==}
 
-  bun-types@1.1.36:
-    resolution: {integrity: sha512-4hALpWAzRKw7xXDH7MW3MPFn5aIsHcwD5QXUWQfEjATuTp6zONRhav7ThnStqeeRP1QkB/oQa8hRk9OAB0hi8w==}
+  bun-types@1.1.38:
+    resolution: {integrity: sha512-iglB2t9z1Hc6DIuwwscwWj/csx22QlCZ96QbcqQfiy1wmuZ38srQLI/fDVkFHAo2+KL7aJZGVWF+nAWrR6Njig==}
 
   busboy@1.6.0:
     resolution: {integrity: sha512-8SFQbg/0hQ9xy3UNTB0YEnsNBbWfhf7RtnzpL7TkBiTBRfrQ9Fxcnz7VJsleJpyp6rVLvXiuORqjlHi5q+PYuA==}
@@ -11254,7 +11254,7 @@ snapshots:
       base64-js: 1.5.1
       ieee754: 1.2.1
 
-  bun-types@1.1.36:
+  bun-types@1.1.38:
     dependencies:
       '@types/node': 20.12.14
       '@types/ws': 8.5.13
