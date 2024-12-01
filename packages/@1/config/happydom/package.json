@@ -9,7 +9,7 @@
   "files": [],
   "prettier": "@1.config/prettier",
   "dependencies": {
-    "@happy-dom/global-registrator": "15.11.6"
+    "@happy-dom/global-registrator": "15.11.7"
   },
   "devDependencies": {
     "typescript": "5.7.2"
