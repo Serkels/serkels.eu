@@ -24,8 +24,8 @@ importers:
         specifier: 6.0.0
         version: 6.0.0
       prettier:
-        specifier: 3.3.3
-        version: 3.3.3
+        specifier: 3.4.1
+        version: 3.4.1
       tsx:
         specifier: 4.19.2
         version: 4.19.2
@@ -358,11 +358,11 @@ importers:
         specifier: workspace:*
         version: link:../../../@douglasduteil/config/tailwindcss
       prettier:
-        specifier: 3.3.3
-        version: 3.3.3
+        specifier: 3.4.1
+        version: 3.4.1
       prettier-plugin-organize-imports:
         specifier: ^4.1.0
-        version: 4.1.0(prettier@3.3.3)(typescript@5.7.2)
+        version: 4.1.0(prettier@3.4.1)(typescript@5.7.2)
     devDependencies:
       typescript:
         specifier: 5.7.2
@@ -6846,11 +6846,6 @@ packages:
         optional: true
       prettier-plugin-svelte:
         optional: true
-
-  prettier@3.3.3:
-    resolution: {integrity: sha512-i2tDNA0O5IrMO757lfrdQZCc2jPNDVntV0m/+4whiDfWaTKfMNgR7Qz0NAeGz/nRqF4m5/6CLzbP4/liHt12Ew==}
-    engines: {node: '>=14'}
-    hasBin: true
 
   prettier@3.4.1:
     resolution: {integrity: sha512-G+YdqtITVZmOJje6QkXQWzl3fSfMxFwm1tjTyo9exhkmWSqC4Yhd1+lug++IlR2mvRVAxEDDWYkQdeSztajqgg==}
@@ -14038,24 +14033,16 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  prettier-plugin-organize-imports@4.1.0(prettier@3.3.3)(typescript@5.7.2):
-    dependencies:
-      prettier: 3.3.3
-      typescript: 5.7.2
-
   prettier-plugin-organize-imports@4.1.0(prettier@3.4.1)(typescript@5.7.2):
     dependencies:
       prettier: 3.4.1
       typescript: 5.7.2
-    optional: true
 
   prettier-plugin-tailwindcss@0.6.9(prettier-plugin-organize-imports@4.1.0(prettier@3.4.1)(typescript@5.7.2))(prettier@3.4.1):
     dependencies:
       prettier: 3.4.1
     optionalDependencies:
       prettier-plugin-organize-imports: 4.1.0(prettier@3.4.1)(typescript@5.7.2)
-
-  prettier@3.3.3: {}
 
   prettier@3.4.1: {}
 
