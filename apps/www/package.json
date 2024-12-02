@@ -74,7 +74,7 @@
     "@1.config/typescript": "workspace:*",
     "@1.infra/trpc": "workspace:*",
     "@douglasduteil/datatypes...hours-to-seconds": "workspace:*",
-    "@prisma/nextjs-monorepo-workaround-plugin": "5.22.0",
+    "@prisma/nextjs-monorepo-workaround-plugin": "6.0.0",
     "@tanstack/react-query-devtools": "4.36.1",
     "@types/debug": "4.1.12",
     "@types/gtag.js": "0.0.20",
