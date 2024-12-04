@@ -1,14 +1,23 @@
 //
 
 import { Exchange_Create_Schema } from "@1.modules/exchange.domain";
-import { next_auth_procedure, router } from "@1.modules/trpc";
+import {
+  mergeRouters,
+  next_auth_procedure,
+  router,
+  session_procedure,
+} from "@1.modules/trpc";
 import { z } from "zod";
 import archive_router from "./archive";
+import { delete_api_router } from "./delete";
 import { find } from "./find";
 import { inbox } from "./inbox";
 import { thread_update } from "./thread_update";
 
-export const me = router({
+/**
+ * @deprecated externalize all the routes !
+ */
+const me_api_router = router({
   //
 
   archive: archive_router,
@@ -34,10 +43,10 @@ export const me = router({
       });
     }),
 
-  deal_by_exchange_id: next_auth_procedure
+  deal_by_exchange_id: session_procedure
     .input(z.string())
-    .query(async ({ ctx: { payload, prisma }, input: parent_id }) => {
-      const { profile } = payload;
+    .query(async ({ ctx: { session, prisma }, input: parent_id }) => {
+      const { profile } = session;
       const { id: student_id } = await prisma.student.findUniqueOrThrow({
         select: { id: true },
         where: { profile_id: profile.id },
@@ -53,17 +62,6 @@ export const me = router({
         where: {
           participant_per_exchange: { parent_id, participant_id: student_id },
         },
-      });
-    }),
-
-  //
-
-  delete: next_auth_procedure
-    .input(z.string())
-    .mutation(({ input: exchange_id, ctx: { prisma, payload } }) => {
-      const { id: profile_id } = payload.profile;
-      return prisma.exchange.delete({
-        where: { id: exchange_id, owner: { profile_id } },
       });
     }),
 
@@ -95,3 +93,5 @@ export const me = router({
 
   thread_update,
 });
+
+export const me = mergeRouters(delete_api_router, me_api_router);

@@ -26,16 +26,16 @@ export default async function Page(props: { params: Promise<CodeParms> }) {
     return await match({ is_yours, role })
       .with({ role: PROFILE_ROLES.Enum.STUDENT, is_yours: true }, async () => {
         const student =
-          await TRPC_SSR.profile.student.by_profile_id.fetch(profile_id);
+          await TRPC_SSR.legacy_profile.student.by_profile_id.fetch(profile_id);
         return <Student_NavBar student={student} />;
       })
       .with({ role: PROFILE_ROLES.Enum.PARTNER, is_yours: true }, async () => {
         const partner =
-          await TRPC_SSR.profile.partner.by_profile_id.fetch(profile_id);
+          await TRPC_SSR.legacy_profile.partner.by_profile_id.fetch(profile_id);
         return <Partner_NavBar partner={partner} />;
       })
       .otherwise(() => null);
-  } catch (error) {
+  } catch {
     return notFound();
   }
 }

@@ -27,13 +27,13 @@ export default async function Page(props: { params: Promise<CodeParms> }) {
     throw new AuthError("Unkwon code", { cause: code_to_profile_id_err });
   }
   const [profile_err, profile] = await to(
-    TRPC_SSR.profile.by_id.fetch(profile_id),
+    TRPC_SSR.legacy_profile.by_id.fetch(profile_id),
   );
   if (!profile) {
     throw new AuthError("No profile", { cause: profile_err });
   }
 
-  await TRPC_SSR.profile.by_id.prefetch(profile_id);
+  await TRPC_SSR.legacy_profile.by_id.prefetch(profile_id);
 
   return (
     <TRPC_Hydrate>
@@ -67,13 +67,13 @@ async function MaybeProfileLink(
 function ProfileAvatar({ profile }: { profile: Profile }) {
   return match(profile.role)
     .with(PROFILE_ROLES.Enum.STUDENT, async () => {
-      const student = await TRPC_SSR.profile.student.by_profile_id.fetch(
+      const student = await TRPC_SSR.legacy_profile.student.by_profile_id.fetch(
         profile.id,
       );
       return <StudentAvatarMedia tv$size="medium" student={student} />;
     })
     .with(PROFILE_ROLES.Enum.PARTNER, async () => {
-      const partner = await TRPC_SSR.profile.partner.by_profile_id.fetch(
+      const partner = await TRPC_SSR.legacy_profile.partner.by_profile_id.fetch(
         profile.id,
       );
       return <PartnerAvatarMedia tv$size="medium" partner={partner} />;

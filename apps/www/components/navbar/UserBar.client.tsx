@@ -1,13 +1,10 @@
 "use client";
 
-import {
-  Partner_NavBar,
-  Student_NavBar,
-} from ":components/navbar/aside_navbar";
+import { Partner_NavBar, Student_NavBar } from "./aside_navbar";
 import type { Partner, Student } from "@1.modules/profile.domain";
 import { useToggle } from "@react-hookz/web";
-
 import { type PropsWithChildren, type ReactNode } from "react";
+
 //
 export function UserMenuToggleStudent({
   student,

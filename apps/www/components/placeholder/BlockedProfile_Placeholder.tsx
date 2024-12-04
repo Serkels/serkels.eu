@@ -10,7 +10,7 @@ export function BlockedProfile_Placeholder({
 }: {
   recipient_id: ID_Schema;
 }) {
-  const blacklist_item = TRPC_React.profile.me.blacklist.find.useQuery({
+  const blacklist_item = TRPC_React.legacy_profile.me.blacklist.find.useQuery({
     profile_id: recipient_id,
   });
   if (!blacklist_item.data) return null;

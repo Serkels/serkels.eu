@@ -42,16 +42,17 @@ export function BlockProfile({ profile_id }: { profile_id: ID_Schema }) {
 }
 
 export function useBlockProfile(profile_id: ID_Schema) {
-  const find_profile = TRPC_React.profile.me.blacklist.find.useQuery({
+  const find_profile = TRPC_React.legacy_profile.me.blacklist.find.useQuery({
     profile_id,
   });
-  const toggle_mutation = TRPC_React.profile.me.blacklist.toggle.useMutation();
+  const toggle_mutation =
+    TRPC_React.legacy_profile.me.blacklist.toggle.useMutation();
   const utils = TRPC_React.useUtils();
 
   const toggle_add_to_blacklist = useCallback(async () => {
     await toggle_mutation.mutateAsync({ profile_id });
     await Promise.all([
-      utils.profile.me.blacklist.find.refetch({ profile_id }),
+      utils.legacy_profile.me.blacklist.find.refetch({ profile_id }),
       utils.invalidate(),
     ]);
     toggle_mutation.reset();

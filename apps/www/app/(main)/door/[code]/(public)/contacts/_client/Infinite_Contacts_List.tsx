@@ -13,7 +13,7 @@ import Loading_Placeholder from "../loading";
 //
 
 function useQueryContacts() {
-  return TRPC_React.profile.me.contacts.useInfiniteQuery(
+  return TRPC_React.legacy_profile.me.contacts.useInfiniteQuery(
     {},
     { getNextPageParam: ({ next_cursor }) => next_cursor },
   );

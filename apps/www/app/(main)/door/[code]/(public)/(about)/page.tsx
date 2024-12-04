@@ -30,7 +30,7 @@ export default async function Page(props: { params: Promise<CodeParms> }) {
       throw new AuthError("No profile id");
     }
 
-    const profile = await TRPC_SSR.profile.by_id.fetch(profile_id);
+    const profile = await TRPC_SSR.legacy_profile.by_id.fetch(profile_id);
 
     return (
       <main className="prose max-w-full lg:prose-xl">
@@ -60,7 +60,7 @@ export default async function Page(props: { params: Promise<CodeParms> }) {
 
 async function StudentMeta({ profile_id }: { profile_id: string }) {
   const student =
-    await TRPC_SSR.profile.student.by_profile_id.fetch(profile_id);
+    await TRPC_SSR.legacy_profile.student.by_profile_id.fetch(profile_id);
 
   return (
     <ul>
@@ -83,7 +83,7 @@ async function StudentMeta({ profile_id }: { profile_id: string }) {
 
 async function PartnerMeta({ profile_id }: { profile_id: string }) {
   const partner =
-    await TRPC_SSR.profile.partner.by_profile_id.fetch(profile_id);
+    await TRPC_SSR.legacy_profile.partner.by_profile_id.fetch(profile_id);
 
   return (
     <ul>

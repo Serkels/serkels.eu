@@ -2,9 +2,10 @@
 
 import { NotConnected_Placeholder } from ":components/placeholder/NotConnected_Placeholder";
 import { code_to_profile_id, type CodeParms } from ":pipes/code";
-import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
+import { TRPC_Hydrate } from ":trpc/server";
 import { Exchange_Card } from ":widgets/exchanges/card";
-import { getServerSession } from "@1.modules/auth.next";
+import { trpc_server } from "@1.infra/trpc/react-query/server";
+import { auth } from "@1.modules/auth.next";
 import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound, redirect } from "next/navigation";
@@ -27,16 +28,16 @@ export default async function Page(props: { params: Promise<CodeParms> }) {
     return notFound();
   }
 
-  const profile = await TRPC_SSR.profile.by_id.fetch(profile_id);
+  const profile = await trpc_server.profile.by_id.fetch(profile_id);
   if (profile.role !== PROFILE_ROLES.Enum.STUDENT) {
     redirect(`/@${params.code}`);
   }
 
-  const { data: exchanges } = await TRPC_SSR.exchanges.by_profile.fetch({
+  const { data: exchanges } = await trpc_server.exchanges.by_profile.fetch({
     profile_id,
   });
 
-  const session = await getServerSession();
+  const session = await auth();
 
   if (!session) {
     return <NotConnected_Placeholder />;

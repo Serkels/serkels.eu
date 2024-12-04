@@ -26,7 +26,7 @@ export default async function Page(props: { params: Promise<CodeParms> }) {
     return notFound();
   }
 
-  const profile = await TRPC_SSR.profile.by_id.fetch(profile_id);
+  const profile = await TRPC_SSR.legacy_profile.by_id.fetch(profile_id);
   if (profile.role !== PROFILE_ROLES.Enum.PARTNER) {
     redirect(`/@${params.code}`);
   }

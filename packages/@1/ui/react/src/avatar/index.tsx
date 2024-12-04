@@ -51,6 +51,7 @@ export interface AvatarMediaProps
     AvatarMediaVariantProps {
   image?: string;
   id?: string;
+  variant?: AvatarVariantProps;
 }
 export function AvatarMedia(
   props: PropsWithChildren<AvatarMediaProps & { name: string }>,
@@ -64,6 +65,7 @@ export function AvatarMedia(
     tv$color,
     tv$direction,
     tv$size,
+    variant,
     ...other_props
   } = props;
 
@@ -71,6 +73,7 @@ export function AvatarMedia(
     tv$direction,
     tv$size,
     tv$color,
+    ...variant,
   });
 
   return (

@@ -5,6 +5,7 @@ import { type ProcedureBuilder, type ProcedureParams } from "@trpc/server";
 
 //
 
+export type { Session } from "@1.modules/auth.next";
 export { TRPCError } from "@trpc/server";
 export { observable } from "@trpc/server/observable";
 export type { Context } from "./context";

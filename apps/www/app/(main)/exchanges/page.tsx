@@ -1,8 +1,10 @@
 //
 
+import { TrpcRootProvider } from ":trpc/root";
 import { TRPC_Hydrate } from ":trpc/server";
+import { List } from ":widgets/exchanges/list";
 import { trpc_server } from "@1.infra/trpc/react-query/server";
-import { getServerSession } from "@1.modules/auth.next";
+import { auth } from "@1.modules/auth.next";
 import {
   Exchange_Filter,
   type ExchangeSearchParams,
@@ -12,7 +14,6 @@ import { PlusBox } from "@1.ui/react/icons";
 import { link } from "@1.ui/react/link/atom";
 import type { Metadata, ResolvingMetadata } from "next";
 import Link from "next/link";
-import List from "./_client/List";
 
 //
 
@@ -50,18 +51,20 @@ export default async function Page({
   });
 
   return (
-    <TRPC_Hydrate>
-      <main>
-        <NewExchangeSection />
+    <TrpcRootProvider>
+      <TRPC_Hydrate>
+        <main>
+          <NewExchangeSection />
 
-        <List key="list" />
-      </main>
-    </TRPC_Hydrate>
+          <List key="list" />
+        </main>
+      </TRPC_Hydrate>
+    </TrpcRootProvider>
   );
 }
 
 async function NewExchangeSection() {
-  const session = await getServerSession();
+  const session = await auth();
 
   if (!session) return null;
   if (session.profile.role !== "STUDENT") return null;

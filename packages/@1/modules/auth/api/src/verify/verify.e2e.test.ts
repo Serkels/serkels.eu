@@ -4,7 +4,7 @@ import { create_douglas_student } from "@1.infra/database/seeding";
 import prisma, { empty_database, migrate } from "@1.infra/database/testing";
 import { createCallerFactory } from "@1.modules/trpc";
 import { beforeAll, expect, test } from "bun:test";
-import verify_router from "./index";
+import verify_router from "./verify";
 
 //
 

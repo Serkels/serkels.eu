@@ -31,7 +31,7 @@ export default async function Page(props: { params: Promise<CodeParms> }) {
     redirect(`/@${params.code}`);
   }
 
-  await TRPC_SSR.profile.me.added_by.find.prefetchInfinite({});
+  await TRPC_SSR.legacy_profile.me.added_by.find.prefetchInfinite({});
 
   return (
     <main className={column_screen({ className: "bg-white text-black" })}>

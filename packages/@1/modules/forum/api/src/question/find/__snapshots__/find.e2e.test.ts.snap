@@ -1,0 +1,209 @@
+// Bun Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`visitor find all latest questions 1`] = `
+{
+  "data": [
+    {
+      "accepted_answer_id": null,
+      "category_id": "film_category_id",
+      "created_at": 2011-11-11T00:00:00.000Z,
+      "id": "best-film-2011",
+      "owner_id": "douglas_student_id",
+      "title": "What is the best film of 2011 ?",
+      "updated_at": 2011-11-11T00:00:00.000Z,
+    },
+    {
+      "accepted_answer_id": null,
+      "category_id": "film_category_id",
+      "created_at": 2011-11-10T00:00:00.000Z,
+      "id": "popular-film-2011",
+      "owner_id": "douglas_student_id",
+      "title": "What is the most popular film of 2011 ?",
+      "updated_at": 2011-11-10T00:00:00.000Z,
+    },
+    {
+      "accepted_answer_id": null,
+      "category_id": "film_category_id",
+      "created_at": 2011-11-10T00:00:00.000Z,
+      "id": "best-actor-2011",
+      "owner_id": "johan_student_id",
+      "title": "How is the best actor of 2011 ?",
+      "updated_at": 2011-11-10T00:00:00.000Z,
+    },
+  ],
+  "next_cursor": undefined,
+}
+`;
+
+exports[`visitor search for douglas' questions 1`] = `
+{
+  "data": [
+    {
+      "accepted_answer_id": null,
+      "category_id": "film_category_id",
+      "created_at": 2011-11-11T00:00:00.000Z,
+      "id": "best-film-2011",
+      "owner_id": "douglas_student_id",
+      "title": "What is the best film of 2011 ?",
+      "updated_at": 2011-11-11T00:00:00.000Z,
+    },
+    {
+      "accepted_answer_id": null,
+      "category_id": "film_category_id",
+      "created_at": 2011-11-10T00:00:00.000Z,
+      "id": "popular-film-2011",
+      "owner_id": "douglas_student_id",
+      "title": "What is the most popular film of 2011 ?",
+      "updated_at": 2011-11-10T00:00:00.000Z,
+    },
+  ],
+  "next_cursor": undefined,
+}
+`;
+
+exports[`visitor search for 'best actor' questions 1`] = `
+{
+  "data": [],
+  "next_cursor": undefined,
+}
+`;
+
+exports[`connected studient find all latest questions 1`] = `
+{
+  "data": [
+    {
+      "accepted_answer_id": null,
+      "category_id": "film_category_id",
+      "created_at": 2011-11-11T00:00:00.000Z,
+      "id": "best-film-2011",
+      "owner_id": "douglas_student_id",
+      "title": "What is the best film of 2011 ?",
+      "updated_at": 2011-11-11T00:00:00.000Z,
+    },
+    {
+      "accepted_answer_id": null,
+      "category_id": "film_category_id",
+      "created_at": 2011-11-10T00:00:00.000Z,
+      "id": "popular-film-2011",
+      "owner_id": "douglas_student_id",
+      "title": "What is the most popular film of 2011 ?",
+      "updated_at": 2011-11-10T00:00:00.000Z,
+    },
+    {
+      "accepted_answer_id": null,
+      "category_id": "film_category_id",
+      "created_at": 2011-11-10T00:00:00.000Z,
+      "id": "best-actor-2011",
+      "owner_id": "johan_student_id",
+      "title": "How is the best actor of 2011 ?",
+      "updated_at": 2011-11-10T00:00:00.000Z,
+    },
+  ],
+  "next_cursor": undefined,
+}
+`;
+
+exports[`connected studient list my questions 1`] = `
+{
+  "data": [
+    {
+      "accepted_answer_id": null,
+      "category_id": "film_category_id",
+      "created_at": 2011-11-11T00:00:00.000Z,
+      "id": "best-film-2011",
+      "owner_id": "douglas_student_id",
+      "title": "What is the best film of 2011 ?",
+      "updated_at": 2011-11-11T00:00:00.000Z,
+    },
+    {
+      "accepted_answer_id": null,
+      "category_id": "film_category_id",
+      "created_at": 2011-11-10T00:00:00.000Z,
+      "id": "popular-film-2011",
+      "owner_id": "douglas_student_id",
+      "title": "What is the most popular film of 2011 ?",
+      "updated_at": 2011-11-10T00:00:00.000Z,
+    },
+    {
+      "accepted_answer_id": null,
+      "category_id": "film_category_id",
+      "created_at": 2011-11-10T00:00:00.000Z,
+      "id": "best-actor-2011",
+      "owner_id": "johan_student_id",
+      "title": "How is the best actor of 2011 ?",
+      "updated_at": 2011-11-10T00:00:00.000Z,
+    },
+  ],
+  "next_cursor": undefined,
+}
+`;
+
+exports[`connected studient should not list questions created by profile I blocked 1`] = `
+{
+  "data": [
+    {
+      "accepted_answer_id": null,
+      "category_id": "film_category_id",
+      "created_at": 2011-11-11T00:00:00.000Z,
+      "id": "best-film-2011",
+      "owner_id": "douglas_student_id",
+      "title": "What is the best film of 2011 ?",
+      "updated_at": 2011-11-11T00:00:00.000Z,
+    },
+    {
+      "accepted_answer_id": null,
+      "category_id": "film_category_id",
+      "created_at": 2011-11-10T00:00:00.000Z,
+      "id": "popular-film-2011",
+      "owner_id": "douglas_student_id",
+      "title": "What is the most popular film of 2011 ?",
+      "updated_at": 2011-11-10T00:00:00.000Z,
+    },
+    {
+      "accepted_answer_id": null,
+      "category_id": "film_category_id",
+      "created_at": 2011-11-10T00:00:00.000Z,
+      "id": "best-actor-2011",
+      "owner_id": "johan_student_id",
+      "title": "How is the best actor of 2011 ?",
+      "updated_at": 2011-11-10T00:00:00.000Z,
+    },
+  ],
+  "next_cursor": undefined,
+}
+`;
+
+exports[`connected studient should not list questions created by profiles who blocked me 1`] = `
+{
+  "data": [
+    {
+      "accepted_answer_id": null,
+      "category_id": "film_category_id",
+      "created_at": 2011-11-11T00:00:00.000Z,
+      "id": "best-film-2011",
+      "owner_id": "douglas_student_id",
+      "title": "What is the best film of 2011 ?",
+      "updated_at": 2011-11-11T00:00:00.000Z,
+    },
+    {
+      "accepted_answer_id": null,
+      "category_id": "film_category_id",
+      "created_at": 2011-11-10T00:00:00.000Z,
+      "id": "popular-film-2011",
+      "owner_id": "douglas_student_id",
+      "title": "What is the most popular film of 2011 ?",
+      "updated_at": 2011-11-10T00:00:00.000Z,
+    },
+    {
+      "accepted_answer_id": null,
+      "category_id": "film_category_id",
+      "created_at": 2011-11-10T00:00:00.000Z,
+      "id": "best-actor-2011",
+      "owner_id": "johan_student_id",
+      "title": "How is the best actor of 2011 ?",
+      "updated_at": 2011-11-10T00:00:00.000Z,
+    },
+  ],
+  "next_cursor": undefined,
+}
+`;

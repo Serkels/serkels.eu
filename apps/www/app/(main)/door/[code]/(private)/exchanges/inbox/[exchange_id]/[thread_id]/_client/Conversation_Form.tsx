@@ -25,7 +25,7 @@ export default function Conversation_Form({
   const is_active = is_active_exchange(exchange);
   const send_message = TRPC_React.inbox.thread.send.useMutation();
   const utils = TRPC_React.useUtils();
-  const blacklist_item = TRPC_React.profile.me.blacklist.find.useQuery({
+  const blacklist_item = TRPC_React.legacy_profile.me.blacklist.find.useQuery({
     profile_id: recipient_id,
   });
   const form = useForm({

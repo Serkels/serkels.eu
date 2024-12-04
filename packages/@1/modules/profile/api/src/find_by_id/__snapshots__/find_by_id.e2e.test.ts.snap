@@ -1,0 +1,17 @@
+// Bun Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should return profile info to connected users 1`] = `
+{
+  "bio": null,
+  "contacts": [],
+  "created_at": 2011-11-11T00:00:00.000Z,
+  "id": "johan_profile_id",
+  "image": "https://picsum.photos/200/300",
+  "in_contact_with": [],
+  "is_online": false,
+  "name": "Johan",
+  "role": "STUDENT",
+  "updated_at": 2011-11-11T00:00:00.000Z,
+  "user_id": "johan_user_id",
+}
+`;

@@ -2,8 +2,8 @@
 
 import { Loading_Placeholder } from ":components/placeholder/Loading_Placeholder";
 import type { Params } from ":pipes/exchange_by_id";
-import { TRPC_React } from ":trpc/client";
 import { Exchange_Card } from ":widgets/exchanges/card";
+import { trpc_client } from "@1.infra/trpc/react-query/client";
 import { useSession } from "@1.modules/auth.next/react";
 import { notFound } from "next/navigation";
 import { match, P } from "ts-pattern";
@@ -13,7 +13,7 @@ import { match, P } from "ts-pattern";
 export function Card({ exchange_id }: Params) {
   const { data: session } = useSession();
   const { data: exchange, status } =
-    TRPC_React.exchanges.by_id.useQuery(exchange_id);
+    trpc_client.exchanges.by_id.useQuery(exchange_id);
 
   return match({ exchange, status })
     .with({ status: "error" }, () => notFound())

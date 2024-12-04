@@ -34,7 +34,7 @@ export default async function Layout(
     return <NotConnected_Placeholder />;
   }
 
-  const profile = await TRPC_SSR.profile.by_id.fetch(profile_id);
+  const profile = await TRPC_SSR.legacy_profile.by_id.fetch(profile_id);
   if (profile.role !== PROFILE_ROLES.Enum.STUDENT) {
     redirect(`/@${params.code}`);
   }

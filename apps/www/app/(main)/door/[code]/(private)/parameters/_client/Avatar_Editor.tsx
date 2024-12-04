@@ -24,7 +24,7 @@ export default function Avatar_Editor({ profile }: { profile: Profile }) {
     defaultValues: { profile_id: profile.id, image_file: new File([], "") },
   });
   const update_image_to_gravatar =
-    TRPC_React.profile.me.update_image_to_gravatar.useMutation();
+    TRPC_React.legacy_profile.me.update_image_to_gravatar.useMutation();
   const [preview, set_preview] = useState(profile.image);
   const { update } = useSession();
   const router = useRouter();

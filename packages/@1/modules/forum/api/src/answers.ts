@@ -1,9 +1,14 @@
 //
 
-import { NotificationType, type Prisma } from "@1.infra/database";
-import { ID_Schema } from "@1.modules/core/domain";
-import { next_auth_procedure, procedure, router } from "@1.modules/trpc";
+import {
+  mergeRouters,
+  next_auth_procedure,
+  procedure,
+  router,
+} from "@1.modules/trpc";
 import { z } from "zod";
+import { create_api_router } from "./answers/create";
+import { delete_api_router } from "./answers/delete";
 
 //
 
@@ -14,7 +19,10 @@ const protected_answers_procedure = next_auth_procedure.input(
   z.object({ question_id: z.string() }),
 );
 
-export const answers_api_router = router({
+/**
+ * @deprecated use merged routes instead
+ */
+const legacy_answers_api_router = router({
   //
 
   approve: protected_answers_procedure
@@ -37,14 +45,6 @@ export const answers_api_router = router({
       });
     }),
 
-  //
-  delete: next_auth_procedure
-    .input(ID_Schema)
-    .mutation(async ({ input: id, ctx: { prisma, payload } }) => {
-      return prisma.answer.delete({
-        where: { id, owner: { profile_id: payload.profile.id } },
-      });
-    }),
   //
 
   disapprove: protected_answers_procedure
@@ -89,52 +89,6 @@ export const answers_api_router = router({
 
   //
 
-  create: protected_answers_procedure
-    .input(z.object({ content: z.string() }))
-    .mutation(async ({ input, ctx: { prisma, payload } }) => {
-      const {
-        profile: { id: profile_id },
-      } = payload;
-      const { content, question_id } = input;
-
-      const {
-        owner: { profile_id: owner_profile_id },
-      } = await prisma.question.findUniqueOrThrow({
-        select: { owner_id: true, owner: { select: { profile_id: true } } },
-        where: { id: question_id },
-      });
-      const is_self_answer = profile_id === owner_profile_id;
-
-      const create_forum_notifications: Pick<
-        Prisma.AnswerCreateInput,
-        "forum_notifications"
-      > = is_self_answer
-        ? {}
-        : {
-            forum_notifications: {
-              create: {
-                notification: {
-                  create: {
-                    type: NotificationType.FORUM_NEW_AWNSER,
-                    owner: { connect: { id: owner_profile_id } },
-                  },
-                },
-              },
-            },
-          };
-
-      return prisma.answer.create({
-        data: {
-          content,
-          owner: { connect: { profile_id } },
-          parent: { connect: { id: question_id } },
-          ...create_forum_notifications,
-        },
-      });
-    }),
-
-  //
-
   find: answers_procedure
     .input(
       z.object({
@@ -172,3 +126,9 @@ export const answers_api_router = router({
       return { data: items, nextCursor };
     }),
 });
+
+export const answers_api_router = mergeRouters(
+  create_api_router,
+  delete_api_router,
+  legacy_answers_api_router,
+);

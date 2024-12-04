@@ -89,7 +89,7 @@ export default async function Page(props: { params: Promise<Params> }) {
   await TRPC_SSR.inbox.thread.messages.prefetchInfinite({
     thread_id,
   });
-  await TRPC_SSR.profile.me.blacklist.find.prefetch({
+  await TRPC_SSR.legacy_profile.me.blacklist.find.prefetch({
     profile_id: recipient.id,
   });
 

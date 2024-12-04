@@ -2,7 +2,7 @@
 
 import { ReactMarkdown } from ":components/markdown";
 import { AppToastOptions } from ":components/toast";
-import { TRPC_React } from ":trpc/client";
+import { trpc_client } from "@1.infra/trpc/react-query/client";
 import type { Exchange } from "@1.modules/exchange.domain";
 import { Card } from "@1.modules/exchange.ui/Card/Card";
 import { Card_Deleting } from "@1.modules/exchange.ui/Card/Card_Deleting";
@@ -72,11 +72,11 @@ function Card_Outlet({ children }: PropsWithChildren) {
 
 function Deleting({ children }: PropsWithChildren) {
   const { id: exchange_id } = useExchange();
-  const utils = TRPC_React.useUtils();
-  const delete_exchange = TRPC_React.exchanges.me.delete.useMutation();
+  const utils = trpc_client.useUtils();
+  const delete_exchange = trpc_client.exchanges.me.delete.useMutation();
 
   useTimeoutEffect(async () => {
-    await delete_exchange.mutateAsync(exchange_id);
+    await delete_exchange.mutateAsync({ exchange_id });
 
     await Promise.all([
       utils.exchanges.by_id.invalidate(exchange_id),
