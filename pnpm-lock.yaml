@@ -25,7 +25,7 @@ importers:
         version: 6.0.0
       prettier:
         specifier: 3.4.1
-        version: 3.4.2
+        version: 3.4.1
       tsx:
         specifier: 4.19.2
         version: 4.19.2
@@ -281,8 +281,8 @@ importers:
         specifier: 4.0.0
         version: 4.0.0
       superjson:
-        specifier: 2.2.1
-        version: 2.2.1
+        specifier: 2.2.2
+        version: 2.2.2
       tailwind-variants:
         specifier: 0.3.0
         version: 0.3.0(tailwindcss@3.4.15(ts-node@10.9.2(@types/node@22.10.1)(typescript@5.7.2)))
@@ -359,10 +359,10 @@ importers:
         version: link:../../../@douglasduteil/config/tailwindcss
       prettier:
         specifier: 3.4.1
-        version: 3.4.2
+        version: 3.4.1
       prettier-plugin-organize-imports:
         specifier: ^4.1.0
-        version: 4.1.0(prettier@3.4.2)(typescript@5.7.2)
+        version: 4.1.0(prettier@3.4.1)(typescript@5.7.2)
     devDependencies:
       typescript:
         specifier: 5.7.2
@@ -521,8 +521,8 @@ importers:
         specifier: 10.45.2
         version: 10.45.2
       superjson:
-        specifier: 2.2.1
-        version: 2.2.1
+        specifier: 2.2.2
+        version: 2.2.2
       zod:
         specifier: 3.23.8
         version: 3.23.8
@@ -662,8 +662,8 @@ importers:
         specifier: 5.0.0-beta.25
         version: 5.0.0-beta.25(next@15.0.3(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(nodemailer@6.9.16)(react@18.3.1)
       superjson:
-        specifier: 2.2.1
-        version: 2.2.1
+        specifier: 2.2.2
+        version: 2.2.2
       ts-pattern:
         specifier: 5.5.0
         version: 5.5.0
@@ -1679,8 +1679,8 @@ importers:
         specifier: 10.45.2
         version: 10.45.2
       superjson:
-        specifier: 2.2.1
-        version: 2.2.1
+        specifier: 2.2.2
+        version: 2.2.2
       zod:
         specifier: 3.23.8
         version: 3.23.8
@@ -1805,8 +1805,8 @@ importers:
         specifier: 4.24.10
         version: 4.24.10(next@15.0.3(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(nodemailer@6.9.16)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       superjson:
-        specifier: 2.2.1
-        version: 2.2.1
+        specifier: 2.2.2
+        version: 2.2.2
       zod:
         specifier: 3.23.8
         version: 3.23.8
@@ -1834,8 +1834,8 @@ importers:
         specifier: 18.3.1
         version: 18.3.1
       superjson:
-        specifier: 2.2.1
-        version: 2.2.1
+        specifier: 2.2.2
+        version: 2.2.2
 
   turbo/generators:
     devDependencies:
@@ -6845,6 +6845,11 @@ packages:
       prettier-plugin-svelte:
         optional: true
 
+  prettier@3.4.1:
+    resolution: {integrity: sha512-G+YdqtITVZmOJje6QkXQWzl3fSfMxFwm1tjTyo9exhkmWSqC4Yhd1+lug++IlR2mvRVAxEDDWYkQdeSztajqgg==}
+    engines: {node: '>=14'}
+    hasBin: true
+
   prettier@3.4.2:
     resolution: {integrity: sha512-e9MewbtFo+Fevyuxn/4rrcDAaq0IYxPGLvObpQjiZBMAzB9IGmzlnG9RZy3FFas+eBMu2vA0CszMeduow5dIuQ==}
     engines: {node: '>=14'}
@@ -7495,8 +7500,8 @@ packages:
     resolution: {integrity: sha512-mJiVjfd2vokfDxsQPOwJ/PtanO87LhpYY88ubI5dUB1Ab58Txbyje3+jpm+/83R/fevaq/107NNhtYBLuoTrFg==}
     engines: {node: '>=10'}
 
-  superjson@2.2.1:
-    resolution: {integrity: sha512-8iGv75BYOa0xRJHK5vRLEjE2H/i4lulTjzpUXic3Eg8akftYjkmQDa8JARQ42rlczXyFR3IeRoeFCc7RxHsYZA==}
+  superjson@2.2.2:
+    resolution: {integrity: sha512-5JRxVqC8I8NuOUjzBbvVJAKNM8qoVuH0O77h4WInc/qC2q5IreqKxYwgkga3PfA22OayK2ikceb/B26dztPl+Q==}
     engines: {node: '>=16'}
 
   supports-color@5.5.0:
@@ -14030,16 +14035,24 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  prettier-plugin-organize-imports@4.1.0(prettier@3.4.1)(typescript@5.7.2):
+    dependencies:
+      prettier: 3.4.1
+      typescript: 5.7.2
+
   prettier-plugin-organize-imports@4.1.0(prettier@3.4.2)(typescript@5.7.2):
     dependencies:
       prettier: 3.4.2
       typescript: 5.7.2
+    optional: true
 
   prettier-plugin-tailwindcss@0.6.9(prettier-plugin-organize-imports@4.1.0(prettier@3.4.2)(typescript@5.7.2))(prettier@3.4.2):
     dependencies:
       prettier: 3.4.2
     optionalDependencies:
       prettier-plugin-organize-imports: 4.1.0(prettier@3.4.2)(typescript@5.7.2)
+
+  prettier@3.4.1: {}
 
   prettier@3.4.2: {}
 
@@ -14918,7 +14931,7 @@ snapshots:
     dependencies:
       copy-anything: 3.0.5
 
-  superjson@2.2.1:
+  superjson@2.2.2:
     dependencies:
       copy-anything: 3.0.5
 
