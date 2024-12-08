@@ -13,7 +13,7 @@
   "prettier": "@1.config/prettier",
   "dependencies": {
     "@badeball/cypress-cucumber-preprocessor": "21.0.3",
-    "@bahmutov/cypress-esbuild-preprocessor": "2.2.3",
+    "@bahmutov/cypress-esbuild-preprocessor": "2.2.4",
     "cypress": "13.16.0",
     "cypress-maildev": "1.3.2",
     "dotenv": "16.4.5",
