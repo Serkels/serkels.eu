@@ -27,7 +27,7 @@
   "prettier": "@1.config/prettier",
   "dependencies": {
     "@react-email/body": "0.0.10",
-    "@react-email/container": "0.0.14",
+    "@react-email/container": "0.0.15",
     "@react-email/head": "0.0.11",
     "@react-email/heading": "0.0.14",
     "@react-email/html": "0.0.10",
