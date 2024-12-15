@@ -12,7 +12,7 @@
   },
   "prettier": "@1.config/prettier",
   "dependencies": {
-    "@react-email/render": "1.0.2",
+    "@react-email/render": "1.0.3",
     "debug": "4.3.7",
     "nodemailer": "6.9.16",
     "zod": "3.23.8"
