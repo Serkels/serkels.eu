@@ -57,8 +57,8 @@ importers:
         specifier: 1.13.7
         version: 1.13.7(hono@4.6.12)
       '@hono/trpc-server':
-        specifier: 0.3.2
-        version: 0.3.2(@trpc/server@10.45.2)(hono@4.6.12)
+        specifier: 0.3.4
+        version: 0.3.4(@trpc/server@10.45.2)(hono@4.6.12)
       '@sentry/node':
         specifier: 8.41.0
         version: 8.41.0
@@ -2430,8 +2430,8 @@ packages:
     peerDependencies:
       hono: ^4
 
-  '@hono/trpc-server@0.3.2':
-    resolution: {integrity: sha512-dTKDrSldjBn0hi9FjHOGdiHgMCWPoW5NaBUTQRNLyVL9JcJJu9oiwTFoIscPFxc9CF2rAeA8aRGHoFJK+A8cLw==}
+  '@hono/trpc-server@0.3.4':
+    resolution: {integrity: sha512-xFOPjUPnII70FgicDzOJy1ufIoBTu8eF578zGiDOrYOrYN8CJe140s9buzuPkX+SwJRYK8LjEBHywqZtxdm8aA==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       '@trpc/server': ^10.10.0 || >11.0.0-rc
@@ -8732,7 +8732,7 @@ snapshots:
     dependencies:
       hono: 4.6.12
 
-  '@hono/trpc-server@0.3.2(@trpc/server@10.45.2)(hono@4.6.12)':
+  '@hono/trpc-server@0.3.4(@trpc/server@10.45.2)(hono@4.6.12)':
     dependencies:
       '@trpc/server': 10.45.2
       hono: 4.6.12
