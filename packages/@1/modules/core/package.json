@@ -18,6 +18,7 @@
   "types": "./src/index.ts",
   "scripts": {
     "dev": "tsc --build --watch --preserveWatchOutput",
+    "clean": "rm -rf .turbo tsconfig.tsbuildinfo",
     "type-check": "tsc --build"
   },
   "prettier": "@1.config/prettier",

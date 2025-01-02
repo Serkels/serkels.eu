@@ -8,7 +8,7 @@ import {
   domAnimation,
   m,
   type Transition,
-} from "framer-motion";
+} from "motion/react";
 import {
   Children,
   forwardRef,

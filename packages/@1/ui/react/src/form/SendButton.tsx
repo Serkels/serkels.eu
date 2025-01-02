@@ -1,6 +1,6 @@
 //
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 import { match } from "ts-pattern";
 import { Button, type ButtonProps } from "../button";
 import { PaperPlane } from "../icons";

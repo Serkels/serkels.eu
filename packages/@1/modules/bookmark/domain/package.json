@@ -17,6 +17,7 @@
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "scripts": {
+    "clean": "rm -rf .turbo dist tsconfig.tsbuildinfo",
     "type-check": "tsc --build"
   },
   "prettier": "@1.config/prettier",

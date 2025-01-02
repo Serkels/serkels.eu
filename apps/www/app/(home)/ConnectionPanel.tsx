@@ -10,7 +10,7 @@ import { Spinner } from "@1.ui/react/spinner";
 import { useTimeoutEffect } from "@react-hookz/web";
 import { useMutation } from "@tanstack/react-query";
 import constate from "constate";
-import { AnimatePresence, m } from "framer-motion";
+import { AnimatePresence, m } from "motion/react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import {

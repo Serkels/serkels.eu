@@ -98,11 +98,9 @@ FrenchLocationField.Loading = function Loading() {
   );
 };
 
-FrenchLocationField.Success = function Loading(
-  props: FieldAttributes<{}> & {
-    query_info: QueryObserverSuccessResult<Location[]>;
-  },
-) {
+FrenchLocationField.Success = function Loading(props: {
+  query_info: QueryObserverSuccessResult<Location[]>;
+}) {
   const {
     query_info: { data },
     ...other_props
@@ -127,13 +125,12 @@ FrenchLocationField.Success = function Loading(
   );
 };
 FrenchLocationField.SuccessFlat = function Loading(
-  props: FieldAttributes<{}> & {
+  props: {
     query_info: QueryObserverSuccessResult<Location[]>;
-  },
+  } & ComponentProps<"select">,
 ) {
   const {
     query_info: { data },
-    ref,
     ...other_props
   } = props;
   const { className, name, id, disabled } = other_props;

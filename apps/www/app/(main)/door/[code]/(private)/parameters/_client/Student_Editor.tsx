@@ -7,7 +7,7 @@ import { Student_Schema, type Student } from "@1.modules/profile.domain";
 import { Button } from "@1.ui/react/button";
 import { input, label } from "@1.ui/react/form/atom";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 import { useRouter } from "next/navigation";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { z } from "zod";

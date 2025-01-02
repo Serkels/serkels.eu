@@ -1,6 +1,6 @@
 //
 
-import { AnimatePresence, LazyMotion, domAnimation } from "framer-motion";
+import { AnimatePresence, LazyMotion, domAnimation } from "motion/react";
 import type { PropsWithChildren } from "react";
 
 export function Frame({ children }: PropsWithChildren) {

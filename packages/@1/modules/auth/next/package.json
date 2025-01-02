@@ -32,7 +32,7 @@
     "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
     "@sentry/types": "8.41.0",
     "await-to-js": "3.0.0",
-    "next": "15.0.3",
+    "next": "15.1.3",
     "next-auth": "5.0.0-beta.25",
     "superjson": "2.2.2",
     "ts-pattern": "5.5.0",
@@ -41,8 +41,8 @@
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
     "@douglasduteil/datatypes...hours-to-seconds": "workspace:*",
-    "@types/react": "18.3.18",
-    "@types/react-dom": "18.3.5",
+    "@types/react": "19.0.2",
+    "@types/react-dom": "19.0.2",
     "typescript": "5.7.2"
   }
 }

@@ -8,7 +8,7 @@ import { Deal_Status_Schema } from "@1.modules/exchange.domain";
 import { useExchange } from "@1.modules/exchange.ui/context";
 import { Denied } from "@1.ui/react/icons";
 import type { QueryObserverSuccessResult } from "@tanstack/react-query";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import { type PropsWithChildren } from "react";
 import { tv } from "tailwind-variants";

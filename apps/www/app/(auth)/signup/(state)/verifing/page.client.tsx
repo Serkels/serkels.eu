@@ -2,7 +2,7 @@
 
 import { Spinner } from "@1.ui/react/spinner";
 import { useTimeoutEffect, useToggle } from "@react-hookz/web";
-import { m } from "framer-motion";
+import { m } from "motion/react";
 import { tv } from "tailwind-variants";
 import { match } from "ts-pattern";
 

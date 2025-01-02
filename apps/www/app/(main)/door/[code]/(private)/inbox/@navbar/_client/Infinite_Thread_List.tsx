@@ -14,7 +14,7 @@ import { Frame } from "@1.ui/react/motion/Frame";
 import { useUpdateEffect } from "@react-hookz/web";
 import type { UseQueryResult } from "@tanstack/react-query";
 import { isAfter } from "date-fns";
-import { m, type Transition, type Variants } from "framer-motion";
+import { m, type Transition, type Variants } from "motion/react";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { type PropsWithChildren } from "react";
