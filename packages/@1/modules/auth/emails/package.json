@@ -20,6 +20,7 @@
   "scripts": {
     "build": "pkgroll",
     "dev": "pkgroll --watch",
+    "clean": "rm -rf .turbo dist tsconfig.tsbuildinfo",
     "export": "email export",
     "studio": "email dev",
     "type-check": "tsc --build"
