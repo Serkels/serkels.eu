@@ -7,11 +7,12 @@
   ],
   "automerge": true,
   "dependencyDashboardAutoclose": true,
-  "labels": [
-    "dependencies"
+  "labels": ["dependencies"],
+  "packageRules": [
+    {
+      "groupName": "react-email",
+      "matchPackageNames": ["@react-email/**"]
+    }
   ],
-  "schedule": [
-    "after 10pm every weekend",
-    "before 5am every weekend"
-  ]
+  "schedule": ["after 10pm every weekend", "before 5am every weekend"]
 }
