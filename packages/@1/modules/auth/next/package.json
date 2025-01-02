@@ -41,8 +41,8 @@
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
     "@douglasduteil/datatypes...hours-to-seconds": "workspace:*",
-    "@types/react": "18.3.18",
-    "@types/react-dom": "18.3.5",
+    "@types/react": "19.0.2",
+    "@types/react-dom": "19.0.2",
     "typescript": "5.7.2"
   }
 }
