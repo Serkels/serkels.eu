@@ -21,7 +21,7 @@
     "@sentry/node": "8.41.0",
     "@sentry/profiling-node": "8.41.0",
     "@trpc/server": "10.45.2",
-    "dotenv": "16.4.5",
+    "dotenv": "16.4.7",
     "hono": "4.6.15",
     "tsx": "4.19.2",
     "ws": "8.18.0",
