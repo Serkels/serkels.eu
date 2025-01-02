@@ -10,7 +10,7 @@
   "labels": ["dependencies"],
   "packageRules": [
     {
-      "groupName": "react-email",
+      "groupName": "react-email monorepo",
       "matchPackageNames": ["@react-email/**"]
     }
   ],
