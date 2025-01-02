@@ -18,7 +18,7 @@ env:
 jobs:
   e2e:
     name: End to end testing
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -95,7 +95,7 @@ jobs:
 
   system:
     name: System testing
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - uses: actions/checkout@v4
