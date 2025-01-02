@@ -1,6 +1,6 @@
 //
 
-import { motion, type MotionProps } from "framer-motion";
+import { motion, type MotionProps } from "motion/react";
 
 //
 

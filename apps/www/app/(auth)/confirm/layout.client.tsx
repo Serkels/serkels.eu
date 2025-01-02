@@ -1,7 +1,7 @@
 "use client";
 
 import { Frame } from "@1.ui/react/motion/Frame";
-import { m } from "framer-motion";
+import { m } from "motion/react";
 import { usePathname } from "next/navigation";
 import { type PropsWithChildren } from "react";
 

@@ -1,6 +1,6 @@
 //
 
-import { LazyMotion, domAnimation } from "framer-motion";
+import { LazyMotion, domAnimation } from "motion/react";
 import type { PropsWithChildren } from "react";
 
 //

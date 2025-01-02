@@ -6,7 +6,7 @@ import { Card } from ":widgets/opportunities/card";
 import type { RouterOutput } from "@1.infra/trpc";
 import { Button } from "@1.ui/react/button";
 import type { InfiniteQueryObserverSuccessResult } from "@tanstack/react-query";
-import { motion, type MotionProps } from "framer-motion";
+import { motion, type MotionProps } from "motion/react";
 import { useSearchParams } from "next/navigation";
 import { match, P } from "ts-pattern";
 

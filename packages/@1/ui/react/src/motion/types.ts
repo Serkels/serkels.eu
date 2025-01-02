@@ -1,3 +1,3 @@
 //
 
-export type { MotionProps } from "framer-motion";
+export type { MotionProps } from "motion/react";
