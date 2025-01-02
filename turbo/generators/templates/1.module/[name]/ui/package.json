@@ -36,7 +36,7 @@
   "devDependencies": {
     "@1.config/tailwindcss": "workspace:*",
     "@1.config/typescript": "workspace:*",
-    "@types/react": "18.3.16",
+    "@types/react": "18.3.18",
     "tailwindcss": "3.4.17",
     "typescript": "5.7.2"
   }
