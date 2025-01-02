@@ -29,7 +29,7 @@
     "bun-types": "1.1.42",
     "cpx2": "8.0.0",
     "del-cli": "6.0.0",
-    "prettier": "3.4.1",
+    "prettier": "3.4.2",
     "tsx": "4.19.2",
     "turbo": "2.3.3",
     "typescript": "5.7.2"
