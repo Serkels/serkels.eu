@@ -1,0 +1,7 @@
+// Bun Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`return count of all unread notifications 1`] = `6`;
+
+exports[`return count of exchange notifications 1`] = `1`;
+
+exports[`return count of inbox notifications 1`] = `1`;

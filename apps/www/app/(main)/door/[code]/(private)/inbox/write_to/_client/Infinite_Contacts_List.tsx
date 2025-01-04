@@ -12,7 +12,7 @@ import { P, match } from "ts-pattern";
 //
 
 export default function Infinite_Contacts_List() {
-  const info = TRPC_React.profile.me.contacts.useInfiniteQuery(
+  const info = TRPC_React.legacy_profile.me.contacts.useInfiniteQuery(
     {},
     { getNextPageParam: ({ next_cursor }) => next_cursor },
   );

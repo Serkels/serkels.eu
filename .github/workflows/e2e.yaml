@@ -86,10 +86,12 @@ jobs:
           - forum
           - legal
           - moderation
+          - notification
           - opportunity
           - partner
           - status
           - studient
+          - studient_exchanges
           - studient_inbox
           - who
 

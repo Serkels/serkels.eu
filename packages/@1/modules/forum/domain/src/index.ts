@@ -1,6 +1,10 @@
 //
 
-import { Entity_Schema, Entity_Timestamps } from "@1.modules/core/domain";
+import {
+  Entity_Schema,
+  Entity_Timestamps,
+  ID_Schema,
+} from "@1.modules/core/domain";
 import { Profile_Schema, Student_Schema } from "@1.modules/profile.domain";
 import { z } from "zod";
 
@@ -24,10 +28,11 @@ export interface Question extends z.TypeOf<typeof Question_Schema> {}
 export const Answer_Schema = Entity_Schema.merge(Entity_Timestamps)
   .extend({
     accepted_for: Entity_Schema.nullable(),
+    content: z.string(),
     owner: Student_Schema.pick({ id: true, university: true }).extend({
       profile: Profile_Schema.pick({ id: true, name: true, image: true }),
     }),
-    content: z.string(),
+    parent_id: ID_Schema,
   })
   .describe("Answer_PropsSchema");
 

@@ -20,23 +20,27 @@ export default function AddContact({
 }) {
   const { data: session } = useSession();
   const find_contact =
-    TRPC_React.profile.me.contact.find_by_profile_id.useQuery(profile_id, {
-      staleTime: Infinity,
-    });
-  const toggle_contact = TRPC_React.profile.me.contact.toggle.useMutation();
+    TRPC_React.legacy_profile.me.contact.find_by_profile_id.useQuery(
+      profile_id,
+      {
+        staleTime: Infinity,
+      },
+    );
+  const toggle_contact =
+    TRPC_React.legacy_profile.me.contact.toggle.useMutation();
   const utils = TRPC_React.useUtils();
   const { is_blocked } = useBlockProfile(profile_id);
 
   const toggle_add_contact = useCallback(async () => {
     await toggle_contact.mutateAsync(profile_id);
     await Promise.all([
-      utils.profile.by_id.invalidate(profile_id),
-      utils.profile.by_id.invalidate(session?.profile.id),
+      utils.legacy_profile.by_id.invalidate(profile_id),
+      utils.legacy_profile.by_id.invalidate(session?.profile.id),
 
-      utils.profile.me.added_by.find.invalidate(),
-      utils.profile.me.contact.find_by_profile_id.invalidate(profile_id),
+      utils.legacy_profile.me.added_by.find.invalidate(),
+      utils.legacy_profile.me.contact.find_by_profile_id.invalidate(profile_id),
 
-      utils.profile.me.contacts.invalidate({}),
+      utils.legacy_profile.me.contacts.invalidate({}),
     ]);
     toggle_contact.reset();
   }, [toggle_contact, utils, profile_id]);

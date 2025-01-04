@@ -9,6 +9,7 @@ import { match } from "ts-pattern";
 import { Partner_Opportunities_Filter } from "./_client/Partner_Opportunities_Filter";
 import SearchForm from "./_client/SearchForm";
 import Loading from "./loading";
+import { TrpcRootProvider } from ":trpc/root";
 
 //
 
@@ -28,12 +29,14 @@ export default async function Layout({
         </Suspense>
         <User_Opportunities_Filter />
         <hr className="my-5 md:my-10" />
-        {categories}
+        <TrpcRootProvider>{categories}</TrpcRootProvider>
       </AsideFilter>
 
-      <div className="col-span-full md:col-span-6 xl:col-span-9">
-        {children}
-      </div>
+      <TrpcRootProvider>
+        <div className="col-span-full md:col-span-6 xl:col-span-9">
+          {children}
+        </div>
+      </TrpcRootProvider>
     </Grid>
   );
 }

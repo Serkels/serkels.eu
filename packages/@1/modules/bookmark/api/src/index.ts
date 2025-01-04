@@ -1,47 +1,22 @@
 //
 
 import { Bookmark_Category } from "@1.modules/bookmark.domain";
-import { next_auth_procedure, router } from "@1.modules/trpc";
+import { mergeRouters, router, session_procedure } from "@1.modules/trpc";
 import { match } from "ts-pattern";
 import { z } from "zod";
+import { check_api_router } from "./check";
+import { bookmark_type_procedure } from "./procedure";
 
 //
-
-const bookmark_type = next_auth_procedure.input(
-  z.object({ type: Bookmark_Category }),
-);
 
 const bookmarks_api_router = router({
   //
 
-  check: bookmark_type
-    .input(z.object({ target_id: z.string() }))
-    .query(async ({ ctx: { prisma, payload }, input: { target_id, type } }) => {
-      const { id: owner_id } = payload.profile;
-
-      const where = match(type)
-        .with(Bookmark_Category.Enum.exchange, () => ({
-          exchange_id: target_id,
-        }))
-        .with(Bookmark_Category.Enum.opportunity, () => ({
-          opportunity_id: target_id,
-        }))
-        .exhaustive();
-
-      const count = await prisma.bookmark.count({
-        where: { owner_id, ...where },
-      });
-
-      return count === 1;
-    }),
-
-  //
-
-  toggle: bookmark_type
+  toggle: bookmark_type_procedure
     .input(z.object({ target_id: z.string() }))
     .mutation(
-      async ({ ctx: { prisma, payload }, input: { target_id, type } }) => {
-        const { id: owner_id } = payload.profile;
+      async ({ ctx: { prisma, session }, input: { target_id, type } }) => {
+        const { id: owner_id } = session.profile;
 
         const where = match(type)
           .with(Bookmark_Category.Enum.exchange, () => ({
@@ -72,8 +47,8 @@ const bookmarks_api_router = router({
   //
 
   exchanges: router({
-    find: next_auth_procedure.query(async ({ ctx: { prisma, payload } }) => {
-      const { id: owner_id } = payload.profile;
+    find: session_procedure.query(async ({ ctx: { prisma, session } }) => {
+      const { id: owner_id } = session.profile;
       const bookmarks = await prisma.bookmark.findMany({
         where: { owner_id, exchange_id: { not: null } },
         include: {
@@ -96,8 +71,8 @@ const bookmarks_api_router = router({
   //
 
   opportunities: router({
-    find: next_auth_procedure.query(async ({ ctx: { prisma, payload } }) => {
-      const { id: owner_id } = payload.profile;
+    find: session_procedure.query(async ({ ctx: { prisma, session } }) => {
+      const { id: owner_id } = session.profile;
       const bookmarks = await prisma.bookmark.findMany({
         where: { owner_id, opportunity_id: { not: null } },
         include: {
@@ -113,5 +88,4 @@ const bookmarks_api_router = router({
   }),
 });
 
-export default bookmarks_api_router;
-export type BookmarksApiRouter = typeof bookmarks_api_router;
+export default mergeRouters(check_api_router, bookmarks_api_router);

@@ -1,0 +1,13 @@
+// Bun Snapshot v1, https://goo.gl/fbAQLP
+
+
+exports[`return an answer 1`] = `
+{
+  "content": "It's Dune bro ;)",
+  "created_at": Any<Date>,
+  "id": Any<String>,
+  "owner_id": "douglas_student_id",
+  "parent_id": "best-film-2011",
+  "updated_at": Any<Date>,
+}
+`;

@@ -23,12 +23,14 @@
   "dependencies": {
     "@1.modules/bookmark.domain": "workspace:*",
     "@1.modules/trpc": "workspace:*",
+    "await-to-js": "3.0.0",
     "date-fns": "4.1.0",
     "ts-pattern": "5.5.0",
     "zod": "3.23.8"
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
+    "@1.infra/database": "workspace:*",
     "@types/node": "22.10.2",
     "typescript": "5.7.2"
   }

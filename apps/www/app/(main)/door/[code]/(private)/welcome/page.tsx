@@ -1,16 +1,8 @@
 //
 
-import { Spinner } from "@1.ui/react/spinner";
+import { ProfileAvatarMedia } from ":components/avatar";
+import { auth } from "@1.modules/auth.next";
 import type { Metadata, ResolvingMetadata } from "next";
-import dynamic from "next/dynamic";
-
-//
-
-const Welcome_Flow = dynamic(() => import("./page.client"), {
-  loading() {
-    return <Spinner />;
-  },
-});
 
 //
 
@@ -31,6 +23,8 @@ export async function generateMetadata(
 //
 
 export default async function Page() {
+  const session = await auth();
+  if (!session) return null;
   return (
     <main className="flex h-full flex-col items-center justify-center">
       <h1
@@ -45,7 +39,13 @@ export default async function Page() {
         Welcome
       </h1>
       <div className="mx-auto mt-5 text-center">
-        <Welcome_Flow />
+        <ProfileAvatarMedia
+          profile={session.profile}
+          variant={{
+            tv$direction: "column",
+            tv$size: "2xlarge",
+          }}
+        />
       </div>
     </main>
   );

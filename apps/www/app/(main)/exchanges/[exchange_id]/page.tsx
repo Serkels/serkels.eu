@@ -1,10 +1,10 @@
 //
 
 import type { Params } from ":pipes/exchange_by_id";
-import { TRPC_SSR } from ":trpc/server";
 import to from "await-to-js";
 import type { Metadata, ResolvingMetadata } from "next";
 import { Card } from "./Card";
+import { trpc_server } from "@1.infra/trpc/react-query/server";
 
 //
 
@@ -16,7 +16,7 @@ export async function generateMetadata(
 
   const { exchange_id } = params;
 
-  const [, exchange] = await to(TRPC_SSR.exchanges.by_id.fetch(exchange_id));
+  const [, exchange] = await to(trpc_server.exchanges.by_id.fetch(exchange_id));
 
   const title = exchange?.title ?? "Not Found";
   return {

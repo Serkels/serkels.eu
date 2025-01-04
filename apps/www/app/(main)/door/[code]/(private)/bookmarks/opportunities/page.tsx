@@ -1,7 +1,7 @@
 //
 
-import { TRPC_SSR } from ":trpc/server";
 import { Card } from ":widgets/opportunities/card";
+import { trpc_server } from "@1.infra/trpc/react-query/server";
 import type { Metadata, ResolvingMetadata } from "next";
 
 //
@@ -18,7 +18,7 @@ export async function generateMetadata(
 //
 export default async function Page() {
   const { data: opportunities } =
-    await TRPC_SSR.bookmarks.opportunities.find.fetch();
+    await trpc_server.bookmarks.opportunities.find.fetch();
 
   if (opportunities.length === 0)
     return (

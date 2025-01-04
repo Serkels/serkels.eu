@@ -23,6 +23,7 @@ import {
   NewsInExchange_Indicator,
   NewsInMessage_Indicator,
 } from "./notification_indicator.client";
+import { TrpcRootProvider } from ":trpc/root";
 
 //
 
@@ -50,7 +51,9 @@ export function Student_NavBar({
           href="./exchanges/inbox"
         >
           Cercles d'échanges
-          <NewsInExchange_Indicator />
+          <TrpcRootProvider>
+            <NewsInExchange_Indicator />
+          </TrpcRootProvider>
         </Li_Link>
         <Li_Link
           onClick={onClickLink}
@@ -87,7 +90,9 @@ export function Student_NavBar({
         </SubNav_Bookmarks>
         <Li_Link onClick={onClickLink} icon={<Envelope />} href="./inbox">
           Messages privés
-          <NewsInMessage_Indicator />
+          <TrpcRootProvider>
+            <NewsInMessage_Indicator />
+          </TrpcRootProvider>
         </Li_Link>
         <Li_Link
           onClick={onClickLink}

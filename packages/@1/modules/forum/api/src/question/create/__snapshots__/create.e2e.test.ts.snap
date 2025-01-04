@@ -1,0 +1,13 @@
+// Bun Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`return a new question 1`] = `
+{
+  "accepted_answer_id": null,
+  "category_id": "film_category_id",
+  "created_at": Any<Date>,
+  "id": Any<String>,
+  "owner_id": "douglas_student_id",
+  "title": "What is the best film of 2011 ?",
+  "updated_at": Any<Date>,
+}
+`;

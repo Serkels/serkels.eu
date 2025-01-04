@@ -16,7 +16,7 @@ export default function Conversation_Form({
   recipient_id,
 }: Params & { recipient_id: string }) {
   const { mutateAsync } = TRPC_React.inbox.thread.send.useMutation();
-  const blacklist_item = TRPC_React.profile.me.blacklist.find.useQuery({
+  const blacklist_item = TRPC_React.legacy_profile.me.blacklist.find.useQuery({
     profile_id: recipient_id,
   });
   const is_blacklisted = blacklist_item.data?.profile.id === recipient_id;

@@ -1,6 +1,6 @@
 "use client";
 
-import { TRPC_React } from ":trpc/client";
+import { trpc_client } from "@1.infra/trpc/react-query/client";
 import { useSession } from "@1.modules/auth.next/react";
 import { NotificationGroup } from "@1.modules/notification.domain";
 import { DotIndicator } from "@1.modules/notification.ui/DotIndicator";
@@ -11,8 +11,8 @@ import { useAsync, useUpdateEffect } from "@react-hookz/web";
 
 export function Notification_DotIndicator() {
   const { status } = useSession();
-  const utils = TRPC_React.useUtils();
-  const { data: count_unread } = TRPC_React.notification.count_unread.useQuery(
+  const utils = trpc_client.useUtils();
+  const { data: count_unread } = trpc_client.notification.count_unread.useQuery(
     {},
     {
       enabled: status === "authenticated",
@@ -43,9 +43,9 @@ export function Notification_DotIndicator() {
 
 export function MessageNews_DotIndicator() {
   const { status } = useSession();
-  const utils = TRPC_React.useUtils();
+  const utils = trpc_client.useUtils();
   const { data: count_unread, dataUpdatedAt } =
-    TRPC_React.notification.count_unread.useQuery(
+    trpc_client.notification.count_unread.useQuery(
       {
         type: NotificationGroup.Enum.INBOX,
       },
@@ -64,9 +64,9 @@ export function MessageNews_DotIndicator() {
 
 export function ExchangeNews_DotIndicator() {
   const { status } = useSession();
-  const utils = TRPC_React.useUtils();
+  const utils = trpc_client.useUtils();
   const { data: count_unread, dataUpdatedAt } =
-    TRPC_React.notification.count_unread.useQuery(
+    trpc_client.notification.count_unread.useQuery(
       {
         type: NotificationGroup.Enum.EXCHANGE,
       },
@@ -85,7 +85,7 @@ export function ExchangeNews_DotIndicator() {
 
 export function NewsInMessage_Indicator() {
   const { status } = useSession();
-  const { data: count_unread } = TRPC_React.notification.count_unread.useQuery(
+  const { data: count_unread } = trpc_client.notification.count_unread.useQuery(
     {
       type: NotificationGroup.Enum.INBOX,
     },
@@ -96,7 +96,7 @@ export function NewsInMessage_Indicator() {
 
 export function NewsInExchange_Indicator() {
   const { status } = useSession();
-  const { data: count_unread } = TRPC_React.notification.count_unread.useQuery(
+  const { data: count_unread } = trpc_client.notification.count_unread.useQuery(
     {
       type: NotificationGroup.Enum.EXCHANGE,
     },

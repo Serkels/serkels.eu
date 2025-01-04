@@ -6,20 +6,18 @@ import {
   create_johan_student,
 } from "@1.infra/database/seeding";
 import prisma, { empty_database, migrate } from "@1.infra/database/testing";
+import { createCallerFactory, type Session } from "@1.modules/trpc";
 import {
-  create_nextauth_header,
-  createCallerFactory,
-  router,
-} from "@1.modules/trpc";
-import { NEXTAUTH_SECRET } from "@1.modules/trpc/testing";
-import { beforeAll, describe, expect, setSystemTime, test } from "bun:test";
-import find_quetions from "./index";
+  afterAll,
+  beforeAll,
+  describe,
+  expect,
+  setSystemTime,
+  test,
+} from "bun:test";
+import find_quetions from "./find";
 
 //
-
-beforeAll(() => {
-  process.env["NEXTAUTH_SECRET"] = NEXTAUTH_SECRET;
-});
 
 beforeAll(empty_database);
 beforeAll(migrate);
@@ -31,79 +29,60 @@ beforeAll(() => {
 
 describe("visitor", () => {
   test("find all latest questions", async () => {
-    const caller = createCallerFactory(
-      router({
-        find: find_quetions,
-      }),
-    );
+    const caller = createCallerFactory(find_quetions);
     const trpc = caller({
+      auth: () => null,
       prisma,
     } as any);
-    const questions = await trpc.find({});
-    expect(questions).toMatchSnapshot();
+    const response = await trpc.find({});
+    expect(response).toMatchSnapshot();
   });
 
   test("search for douglas' questions", async () => {
-    const caller = createCallerFactory(
-      router({
-        find: find_quetions,
-      }),
-    );
+    const caller = createCallerFactory(find_quetions);
     const trpc = caller({
+      auth: () => null,
       prisma,
     } as any);
-    const questions = await trpc.find({
+    const response = await trpc.find({
       search: "douglas",
     });
-    expect(questions).toMatchSnapshot();
+    expect(response).toMatchSnapshot();
   });
 
   test("search for 'best actor' questions", async () => {
-    const caller = createCallerFactory(
-      router({
-        find: find_quetions,
-      }),
-    );
+    const caller = createCallerFactory(find_quetions);
     const trpc = caller({
+      auth: () => null,
       prisma,
     } as any);
-    const questions = await trpc.find({
+    const response = await trpc.find({
       search: "meilleur acteur",
     });
-    expect(questions).toMatchSnapshot();
+    expect(response).toMatchSnapshot();
   });
 });
 
 describe("connected studient", async () => {
-  const nextauth_header = await create_nextauth_header({
-    secret: "🔑",
-    token: {
-      profile: { id: "johan_profile_id", role: "STUDENT", image: "", name: "" },
-    },
-  });
+  const auth = () =>
+    ({
+      user: { email: "douglas@example.com" },
+    }) as Session;
 
   test("find all latest questions", async () => {
-    const caller = createCallerFactory(
-      router({
-        find: find_quetions,
-      }),
-    );
+    const caller = createCallerFactory(find_quetions);
     const trpc = caller({
-      headers: { ...nextauth_header },
+      auth,
       prisma,
     } as any);
-    const questions = await trpc.find({});
-    expect(questions).toMatchSnapshot();
+    const response = await trpc.find({});
+    expect(response).toMatchSnapshot();
   });
 
   test("list my questions", async () => {
-    const caller = createCallerFactory(
-      router({
-        find: find_quetions,
-      }),
-    );
+    const caller = createCallerFactory(find_quetions);
     const trpc = caller({
-      headers: { ...nextauth_header },
+      auth,
       prisma,
     } as any);
     const questions = await trpc.find({
@@ -117,17 +96,13 @@ describe("connected studient", async () => {
       data: { blacklist: { create: { profile_id: "douglas_profile_id" } } },
       where: { id: "johan_profile_id" },
     });
-    const caller = createCallerFactory(
-      router({
-        find: find_quetions,
-      }),
-    );
+    const caller = createCallerFactory(find_quetions);
     const trpc = caller({
-      headers: { ...nextauth_header },
+      auth,
       prisma,
     } as any);
-    const questions = await trpc.find({});
-    expect(questions).toMatchSnapshot();
+    const response = await trpc.find({});
+    expect(response).toMatchSnapshot();
   });
 
   test("should not list questions created by profiles who blocked me", async () => {
@@ -135,17 +110,13 @@ describe("connected studient", async () => {
       data: { blacklisted_by: { create: { owner_id: "douglas_profile_id" } } },
       where: { id: "johan_profile_id" },
     });
-    const caller = createCallerFactory(
-      router({
-        find: find_quetions,
-      }),
-    );
+    const caller = createCallerFactory(find_quetions);
     const trpc = caller({
-      headers: { ...nextauth_header },
+      auth,
       prisma,
     } as any);
-    const questions = await trpc.find({});
-    expect(questions).toMatchSnapshot();
+    const response = await trpc.find({});
+    expect(response).toMatchSnapshot();
   });
 });
 
@@ -153,7 +124,7 @@ describe("connected studient", async () => {
 
 beforeAll(async function seed() {
   const cinema_category_id = await create_film_category(prisma);
-  const douglas_studient_id = await create_douglas_student(prisma);
+  const douglas_student_id = await create_douglas_student(prisma);
 
   const johan_studient_id = await create_johan_student(prisma);
 
@@ -165,7 +136,7 @@ beforeAll(async function seed() {
         id: "best-film-2011",
         category_id: cinema_category_id,
         created_at: new Date("2011-11-11"),
-        owner_id: douglas_studient_id,
+        owner_id: douglas_student_id,
         title: "What is the best film of 2011 ?",
         updated_at: new Date("2011-11-11"),
       },
@@ -173,7 +144,7 @@ beforeAll(async function seed() {
         id: "popular-film-2011",
         category_id: cinema_category_id,
         created_at: new Date("2011-11-10"),
-        owner_id: douglas_studient_id,
+        owner_id: douglas_student_id,
         title: "What is the most popular film of 2011 ?",
         updated_at: new Date("2011-11-10"),
       },
@@ -187,4 +158,9 @@ beforeAll(async function seed() {
       },
     ],
   });
+});
+
+afterAll(async function empty_delete_entries() {
+  await prisma.category.deleteMany();
+  await prisma.user.deleteMany();
 });

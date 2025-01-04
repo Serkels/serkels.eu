@@ -1,6 +1,6 @@
 //
 
-import { TRPC_Hydrate, TRPC_SSR } from ":trpc/server";
+import { TRPC_Hydrate } from ":trpc/server";
 import {
   Partner_Filter,
   type OpportunitySearchParams,
@@ -8,6 +8,7 @@ import {
 import type { _1_HOUR_ } from "@douglasduteil/datatypes...hours-to-seconds";
 import type { Metadata, ResolvingMetadata } from "next";
 import List from "./_client/List";
+import { trpc_server } from "@1.infra/trpc/react-query/server";
 
 //
 
@@ -42,7 +43,7 @@ export default async function Page({
     ? filter_parsed_return.data
     : undefined;
 
-  await TRPC_SSR.opportunity.find.prefetchInfinite({
+  await trpc_server.opportunity.find.prefetchInfinite({
     category,
     filter,
     search,

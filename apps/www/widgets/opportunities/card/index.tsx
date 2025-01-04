@@ -3,7 +3,7 @@
 import { Share_Button } from ":components/Share_Button";
 import { preventNProgressLoader } from ":components/helpers/preventNProgressLoader";
 import { AppToastOptions } from ":components/toast";
-import { TRPC_React } from ":trpc/client";
+import { trpc_client } from "@1.infra/trpc/react-query/client";
 import { useSession } from "@1.modules/auth.next/react";
 import type { BookmarkButton_Props } from "@1.modules/bookmark.ui/BookmarkButton";
 import { type CardOportunity } from "@1.modules/opportunity.domain";
@@ -52,11 +52,17 @@ export function Card({ opportunity }: { opportunity: CardOportunity }) {
 
 function BookmarkItem_Query(props: BookmarkButton_Props) {
   const { target_id, type } = props;
-  const query = TRPC_React.bookmarks.check.useQuery({ target_id, type });
+  const { data: session } = useSession();
+  const is_student = session?.profile.role === PROFILE_ROLES.Enum.STUDENT;
+  const query = trpc_client.bookmarks.check.useQuery(
+    { target_id, type },
+    { enabled: is_student },
+  );
+  if (1) return null;
 
   return match(query)
     .with({ status: "error", error: P.select() }, (error) => {
-      console.error(error);
+      console.error("trpc_client.bookmarks.check", { error });
       return null;
     })
     .with({ status: "loading" }, () => <Spinner className="size-4" />)
@@ -68,8 +74,8 @@ function BookmarkItem_Query(props: BookmarkButton_Props) {
 
 function BookmarkItem_Toggle_Mutation(props: BookmarkButton_Props) {
   const { className, target_id, type, variants } = props;
-  const toggle = TRPC_React.bookmarks.toggle.useMutation();
-  const utils = TRPC_React.useUtils();
+  const toggle = trpc_client.bookmarks.toggle.useMutation();
+  const utils = trpc_client.useUtils();
   const { base, icon } = style({ ...variants });
 
   return (

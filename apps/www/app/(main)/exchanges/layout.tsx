@@ -1,19 +1,11 @@
 ///
 
 import { AsideFilter } from ":components/shell/AsideFilter";
+import { TrpcRootProvider } from ":trpc/root";
+import { Exchanges_Filter } from ":widgets/exchanges/filter";
+import { SearchForm } from ":widgets/exchanges/list";
 import { Grid } from "@1.ui/react/grid";
-import InputSearch from "@1.ui/react/input/InputSearch";
-import dynamic from "next/dynamic";
 import type { PropsWithChildren, ReactNode } from "react";
-import { Exchanges_Filter } from "./_client/Exchanges_Filter";
-
-//
-
-const SearchForm = dynamic(() => import("./_client/SearchForm"), {
-  loading() {
-    return <InputSearch />;
-  },
-});
 
 //
 
@@ -34,11 +26,13 @@ export default async function Layout({
 
         <hr className="my-5 md:my-10" />
 
-        {categories}
+        <TrpcRootProvider>{categories}</TrpcRootProvider>
       </AsideFilter>
-      <div className="col-span-full md:col-span-6 md:my-10">{children}</div>
+      <TrpcRootProvider>
+        <div className="col-span-full md:col-span-6 md:my-10">{children}</div>
+      </TrpcRootProvider>
       <aside className="mt-10 hidden xl:col-span-3 xl:block xl:px-10">
-        {see_also}
+        <TrpcRootProvider>{see_also}</TrpcRootProvider>
       </aside>
     </Grid>
   );

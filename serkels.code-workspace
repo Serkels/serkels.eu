@@ -194,6 +194,7 @@
         "options": {
           "cwd": "${workspaceFolder:🚀 www}",
           "env": {
+            "NODE_OPTIONS": "--inspect",
             "NODE_ENV": "development",
           },
         },
@@ -289,6 +290,17 @@
       {
         "label": "🧪 Update Test Snapshots",
         "command": "bun test --update-snapshots",
+        "type": "shell",
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder:root}",
+        },
+        "problemMatcher": ["$tsc-watch"],
+        "runOptions": { "instanceLimit": 1 },
+      },
+      {
+        "label": "🧪 Update Test Snapshots : Current file",
+        "command": "bun test --update-snapshots ${fileDirname}/${fileBasename}",
         "type": "shell",
         "group": "build",
         "options": {

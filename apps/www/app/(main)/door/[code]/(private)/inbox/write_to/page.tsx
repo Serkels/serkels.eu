@@ -25,7 +25,7 @@ export async function generateMetadata(
 //
 
 export default async function Page() {
-  await TRPC_SSR.profile.me.contacts.prefetchInfinite({});
+  await TRPC_SSR.legacy_profile.me.contacts.prefetchInfinite({});
 
   return (
     <TRPC_Hydrate>
