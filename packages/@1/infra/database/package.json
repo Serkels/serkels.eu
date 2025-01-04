@@ -58,7 +58,7 @@
     "@1.config/typescript": "workspace:*",
     "@electric-sql/pglite": "0.2.15",
     "@faker-js/faker": "9.2.0",
-    "@types/node": "22.10.2",
+    "@types/node": "22.10.5",
     "date-fns": "4.1.0",
     "dedent": "1.5.3",
     "pglite-prisma-adapter": "0.3.0",
