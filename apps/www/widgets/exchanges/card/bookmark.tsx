@@ -9,6 +9,7 @@ import { PROFILE_ROLES } from "@1.modules/profile.domain";
 import { button } from "@1.ui/react/button/atom";
 import { Bookmark } from "@1.ui/react/icons";
 import { Spinner } from "@1.ui/react/spinner";
+import { VisuallyHidden } from "@1.ui/react/visually_hidden";
 import { sendGAEvent } from "@next/third-parties/google";
 import { toast } from "react-toastify";
 import { tv } from "tailwind-variants";
@@ -82,6 +83,7 @@ function BookmarkItem_Toggle_Mutation(props: BookmarkButton_Props) {
         );
       }}
     >
+      <VisuallyHidden>Bookmark the exchange</VisuallyHidden>
       <Bookmark className={icon()} />
     </button>
   );

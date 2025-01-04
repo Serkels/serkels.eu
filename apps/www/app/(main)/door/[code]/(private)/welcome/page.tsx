@@ -1,9 +1,8 @@
 //
 
-import type { Metadata, ResolvingMetadata } from "next";
-import { Avatar } from "@1.ui/react/avatar";
-import { auth } from "@1.modules/auth.next";
 import { ProfileAvatarMedia } from ":components/avatar";
+import { auth } from "@1.modules/auth.next";
+import type { Metadata, ResolvingMetadata } from "next";
 
 //
 

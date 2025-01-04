@@ -26,7 +26,7 @@ export default async function Layout({
 
         <hr className="my-5 md:my-10" />
 
-        {categories}
+        <TrpcRootProvider>{categories}</TrpcRootProvider>
       </AsideFilter>
       <TrpcRootProvider>
         <div className="col-span-full md:col-span-6 md:my-10">{children}</div>

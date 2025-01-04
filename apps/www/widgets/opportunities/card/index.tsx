@@ -52,11 +52,17 @@ export function Card({ opportunity }: { opportunity: CardOportunity }) {
 
 function BookmarkItem_Query(props: BookmarkButton_Props) {
   const { target_id, type } = props;
-  const query = TRPC_React.bookmarks.check.useQuery({ target_id, type });
+  const { data: session } = useSession();
+  const is_student = session?.profile.role === PROFILE_ROLES.Enum.STUDENT;
+  const query = trpc_client.bookmarks.check.useQuery(
+    { target_id, type },
+    { enabled: is_student },
+  );
+  if (1) return null;
 
   return match(query)
     .with({ status: "error", error: P.select() }, (error) => {
-      console.error(error);
+      console.error("trpc_client.bookmarks.check", { error });
       return null;
     })
     .with({ status: "loading" }, () => <Spinner className="size-4" />)

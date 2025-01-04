@@ -194,6 +194,7 @@
         "options": {
           "cwd": "${workspaceFolder:🚀 www}",
           "env": {
+            "NODE_OPTIONS": "--inspect",
             "NODE_ENV": "development",
           },
         },

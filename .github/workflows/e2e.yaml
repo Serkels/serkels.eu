@@ -91,6 +91,7 @@ jobs:
           - partner
           - status
           - studient
+          - studient_exchanges
           - studient_inbox
           - who
 
