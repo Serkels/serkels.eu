@@ -586,20 +586,20 @@ importers:
         specifier: 0.0.15
         version: 0.0.15(react@19.0.0)
       '@react-email/html':
-        specifier: 0.0.10
-        version: 0.0.10(react@19.0.0)
+        specifier: 0.0.11
+        version: 0.0.11(react@19.0.0)
       '@react-email/img':
         specifier: 0.0.11
         version: 0.0.11(react@19.0.0)
       '@react-email/link':
-        specifier: 0.0.11
-        version: 0.0.11(react@19.0.0)
+        specifier: 0.0.12
+        version: 0.0.12(react@19.0.0)
       '@react-email/preview':
+        specifier: 0.0.12
+        version: 0.0.12(react@19.0.0)
+      '@react-email/text':
         specifier: 0.0.11
         version: 0.0.11(react@19.0.0)
-      '@react-email/text':
-        specifier: 0.0.10
-        version: 0.0.10(react@19.0.0)
       '@types/react':
         specifier: 19.0.2
         version: 19.0.2
@@ -3199,8 +3199,8 @@ packages:
     peerDependencies:
       react: ^18.0 || ^19.0 || ^19.0.0-rc
 
-  '@react-email/html@0.0.10':
-    resolution: {integrity: sha512-06uiuSKJBWQJfhCKv4MPupELei4Lepyz9Sth7Yq7Fq29CAeB1ejLgKkGqn1I+FZ72hQxPLdYF4iq4yloKv3JCg==}
+  '@react-email/html@0.0.11':
+    resolution: {integrity: sha512-qJhbOQy5VW5qzU74AimjAR9FRFQfrMa7dn4gkEXKMB/S9xZN8e1yC1uA9C15jkXI/PzmJ0muDIWmFwatm5/+VA==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       react: ^18.0 || ^19.0 || ^19.0.0-rc
@@ -3211,14 +3211,14 @@ packages:
     peerDependencies:
       react: ^18.0 || ^19.0 || ^19.0.0-rc
 
-  '@react-email/link@0.0.11':
-    resolution: {integrity: sha512-o1/BgPn2Fi+bN4Nh+P64t4tulaOyPhkBNSpNmiYL1Ar+ilw8q0BmUAqM+lvHy8Qr/4K7BjkgFoc4GoYkoEjOig==}
+  '@react-email/link@0.0.12':
+    resolution: {integrity: sha512-vF+xxQk2fGS1CN7UPQDbzvcBGfffr+GjTPNiWM38fhBfsLv6A/YUfaqxWlmL7zLzVmo0K2cvvV9wxlSyNba1aQ==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       react: ^18.0 || ^19.0 || ^19.0.0-rc
 
-  '@react-email/preview@0.0.11':
-    resolution: {integrity: sha512-7O/CT4b16YlSGrj18htTPx3Vbhu2suCGv/cSe5c+fuSrIM/nMiBSZ3Js16Vj0XJbAmmmlVmYFZw9L20wXJ+LjQ==}
+  '@react-email/preview@0.0.12':
+    resolution: {integrity: sha512-g/H5fa9PQPDK6WUEG7iTlC19sAktI23qyoiJtMLqQiXFCfWeQMhqjLGKeLSKkfzszqmfJCjZtpSiKtBoOdxp3Q==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       react: ^18.0 || ^19.0 || ^19.0.0-rc
@@ -3230,8 +3230,8 @@ packages:
       react: ^18.0 || ^19.0 || ^19.0.0-rc
       react-dom: ^18.0 || ^19.0 || ^19.0.0-rc
 
-  '@react-email/text@0.0.10':
-    resolution: {integrity: sha512-wNAnxeEAiFs6N+SxS0y6wTJWfewEzUETuyS2aZmT00xk50VijwyFRuhm4sYSjusMyshevomFwz5jNISCxRsGWw==}
+  '@react-email/text@0.0.11':
+    resolution: {integrity: sha512-a7nl/2KLpRHOYx75YbYZpWspUbX1DFY7JIZbOv5x0QU8SvwDbJt+Hm01vG34PffFyYvHEXrc6Qnip2RTjljNjg==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       react: ^18.0 || ^19.0 || ^19.0.0-rc
@@ -9843,7 +9843,7 @@ snapshots:
     dependencies:
       react: 19.0.0
 
-  '@react-email/html@0.0.10(react@19.0.0)':
+  '@react-email/html@0.0.11(react@19.0.0)':
     dependencies:
       react: 19.0.0
 
@@ -9851,11 +9851,11 @@ snapshots:
     dependencies:
       react: 19.0.0
 
-  '@react-email/link@0.0.11(react@19.0.0)':
+  '@react-email/link@0.0.12(react@19.0.0)':
     dependencies:
       react: 19.0.0
 
-  '@react-email/preview@0.0.11(react@19.0.0)':
+  '@react-email/preview@0.0.12(react@19.0.0)':
     dependencies:
       react: 19.0.0
 
@@ -9867,7 +9867,7 @@ snapshots:
       react-dom: 19.0.0(react@19.0.0)
       react-promise-suspense: 0.3.4
 
-  '@react-email/text@0.0.10(react@19.0.0)':
+  '@react-email/text@0.0.11(react@19.0.0)':
     dependencies:
       react: 19.0.0
 
