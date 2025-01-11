@@ -13,6 +13,6 @@
   },
   "devDependencies": {
     "postcss": "8.4.49",
-    "typescript": "5.7.2"
+    "typescript": "5.7.3"
   }
 }
