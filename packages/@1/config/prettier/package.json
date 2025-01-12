@@ -12,6 +12,6 @@
     "prettier-plugin-organize-imports": "^4.1.0"
   },
   "devDependencies": {
-    "typescript": "5.7.2"
+    "typescript": "5.7.3"
   }
 }
