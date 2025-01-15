@@ -6,6 +6,7 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { join } from "path";
 
 //
+
 const content = await readFile(
   join(process.cwd(), "app/(main)/(about)/who/content.md"),
   "utf8",
