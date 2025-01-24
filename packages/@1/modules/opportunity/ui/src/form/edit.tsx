@@ -182,7 +182,7 @@ function Location_Field() {
           />
         </label>
       </fieldset>
-      <label className={label()} htmlFor="location">
+      <label className={label()}>
         <span className="text-Silver_Chalice">Lieu</span>
 
         <input
