@@ -129,7 +129,7 @@ export default withSentryConfig(config, {
   authToken: process.env.SENTRY_AUTH_TOKEN,
   automaticVercelMonitors: true,
   disableLogger: true,
-  hideSourceMaps: true,
+  hideSourceMaps: false,
   org: "toc-toc-rj",
   project: "www",
   silent: !!process.env.CI,
