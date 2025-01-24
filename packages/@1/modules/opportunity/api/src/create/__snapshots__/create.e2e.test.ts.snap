@@ -1,0 +1,18 @@
+// Bun Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`return my latest followers 1`] = `
+{
+  "category_id": "film_category_id",
+  "cover": "https://example.com/cover.png",
+  "created_at": Any<Date>,
+  "description": "Film description",
+  "expiry_date": 2011-12-11T00:00:00.000Z,
+  "id": Any<String>,
+  "link": "https://example.com/film",
+  "location": "Film location",
+  "owner_id": "vulfpeck_partner_id",
+  "slug": "vulfpeck-le-film",
+  "title": "Vulfpeck : Le film",
+  "updated_at": Any<Date>,
+}
+`;

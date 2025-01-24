@@ -1,15 +1,14 @@
 //
 
-import { procedure, router } from "@1.modules/trpc";
+import { mergeRouters, procedure, router } from "@1.modules/trpc";
 import { z } from "zod";
-import create from "./create";
+import { create_api_router } from "./create";
 import delete_router from "./delete";
 import find_router from "./find";
 
 //
 
 const opportunity_api_router = router({
-  create: create,
   delete: delete_router,
 
   by_id: procedure
@@ -63,5 +62,5 @@ const opportunity_api_router = router({
   find: find_router,
 });
 
-export default opportunity_api_router;
+export default mergeRouters(create_api_router, opportunity_api_router);
 export type OpportunityApiRouter = typeof opportunity_api_router;

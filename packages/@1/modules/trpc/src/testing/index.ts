@@ -17,3 +17,15 @@ export const douglas_golden_nextauth_header = await create_nextauth_header({
     },
   },
 });
+
+export const vulfpeck_golden_nextauth_header = await create_nextauth_header({
+  secret: "🔑",
+  token: {
+    profile: {
+      id: "vulfpeck_profile_id",
+      image: "https://picsum.photos/222/333",
+      name: "Vulfpeck",
+      role: "PARTNER",
+    },
+  },
+});
