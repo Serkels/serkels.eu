@@ -55,7 +55,9 @@ export default function Page() {
                 op: "test",
               },
               async () => {
-                const res = await fetch("/api/sentry-example-api?id=nextjs");
+                const res = await fetch(
+                  `/api/sentry-example-api?id=${new Date().toLocaleTimeString()}`,
+                );
                 if (!res.ok) {
                   throw new Error("Sentry Example Frontend Error");
                 }
