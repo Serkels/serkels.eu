@@ -2,8 +2,8 @@
 
 import { code_to_profile_id, type CodeParms } from ":pipes/code";
 import { auth } from "@1.modules/auth.next";
-import { AuthError } from "@1.modules/core/errors";
 import to from "await-to-js";
+import { forbidden } from "next/navigation";
 import type { PropsWithChildren, ReactNode } from "react";
 
 //
@@ -24,7 +24,7 @@ export default async function Layout(
   const [, session] = await to(auth());
 
   if (!session || !profile_id) {
-    throw new AuthError("No session");
+    return forbidden();
   }
 
   return (
