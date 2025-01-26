@@ -15,8 +15,7 @@ export function Footer({
     <footer className="relative flex min-h-[theme(spacing.8)] justify-center bg-primary-gradient p-1 text-xs text-gray-100 drop-shadow-2xl">
       <section>{children}</section>
       <section className="flex flex-col items-center justify-center gap-2">
-        <section className="flex items-center gap-2 pt-2">
-          {" "}
+        <section className="flex flex-wrap items-center justify-center gap-2 pt-2">
           <Link className={link()} href="/who">
             Qui sommes-nous ?
           </Link>
