@@ -82,3 +82,65 @@ exports[`connected studient should not list opportunities created by profiles wh
   "next_cursor": undefined,
 }
 `;
+
+exports[`connected studient should return my latest opportunities 1`] = `
+{
+  "data": [
+    {
+      "category": {
+        "id": "masterclass_category_id",
+        "name": "Masterclass",
+        "slug": "masterclass",
+      },
+      "cover": "https://picsum.photos/600/400",
+      "created_at": 2011-11-11T00:00:00.000Z,
+      "description": "https://vulf.co/courses/dart/lectures/45940163",
+      "expiry_date": 2024-09-15T00:00:00.000Z,
+      "id": "concert_20240915",
+      "location": "Castoro Cellars Vineyards & Winery",
+      "owner": {
+        "profile": {
+          "id": "vulfpeck_profile_id",
+          "image": "https://picsum.photos/300/300",
+          "name": "Vulfpeck",
+        },
+      },
+      "slug": "whale-rock-festival-2024",
+      "title": "WHALE ROCK FESTIVAL ",
+      "updated_at": 2011-11-11T00:00:00.000Z,
+    },
+  ],
+  "next_cursor": undefined,
+}
+`;
+
+exports[`connected partner should return my latest opportunities 1`] = `
+{
+  "data": [
+    {
+      "category": {
+        "id": "masterclass_category_id",
+        "name": "Masterclass",
+        "slug": "masterclass",
+      },
+      "cover": "https://picsum.photos/600/400",
+      "created_at": 2011-11-11T00:00:00.000Z,
+      "description": "https://vulf.co/courses/dart/lectures/45940163",
+      "expiry_date": 2024-09-15T00:00:00.000Z,
+      "id": "concert_20240915",
+      "location": "Castoro Cellars Vineyards & Winery",
+      "owner": {
+        "profile": {
+          "id": "vulfpeck_profile_id",
+          "image": "https://picsum.photos/300/300",
+          "name": "Vulfpeck",
+        },
+      },
+      "slug": "whale-rock-festival-2024",
+      "title": "WHALE ROCK FESTIVAL ",
+      "updated_at": 2011-11-11T00:00:00.000Z,
+    },
+  ],
+  "next_cursor": undefined,
+}
+`;

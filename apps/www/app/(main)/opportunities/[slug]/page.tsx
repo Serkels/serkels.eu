@@ -5,8 +5,10 @@ import { Share_Button } from ":components/Share_Button";
 import { slug_to_opportunity, type Params } from ":pipes/opportunity_slug";
 import { auth } from "@1.modules/auth.next";
 import { Article, icon_link } from "@1.modules/opportunity.ui/Article";
-import { ExclamationMark, Share } from "@1.ui/react/icons";
+import { button } from "@1.ui/react/button/atom";
+import { ExclamationMark, Pen, Share } from "@1.ui/react/icons";
 import { ActionItem, Menu } from "@1.ui/react/menu";
+import { VisuallyHidden } from "@1.ui/react/visually_hidden";
 import to from "await-to-js";
 import type { Metadata, ResolvingMetadata } from "next";
 import Link from "next/link";
@@ -55,8 +57,20 @@ export default async function Page(props: { params: Promise<Params> }) {
       <Article opportunity={opportunity}>
         {is_yours ? (
           <Article.ActionButton>
-            <div className="flex">
+            <div className="flex justify-center">
               <Opportunity_Delete_Button opportunity_id={opportunity_id} />
+              <Link
+                className={button({
+                  intent: "light",
+                  size: "sm",
+                  state: "ghost",
+                  className: "box-content  h-4 py-2 text-gray-500",
+                })}
+                href={`/@~/opportunities/edit/${slug}`}
+              >
+                <VisuallyHidden>Éditer l'opportunité</VisuallyHidden>
+                <Pen className="h-4" />
+              </Link>
             </div>
           </Article.ActionButton>
         ) : (

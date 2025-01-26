@@ -15,6 +15,7 @@ import {
 import {
   douglas_golden_nextauth_header,
   NEXTAUTH_SECRET,
+  vulfpeck_golden_nextauth_header,
 } from "@1.modules/trpc/testing";
 import {
   afterEach,
@@ -63,7 +64,7 @@ describe("visitor", () => {
   });
 });
 
-describe("connected studient", () => {
+describe("connected student", () => {
   let nextauth_header: Awaited<ReturnType<typeof create_nextauth_header>>;
 
   beforeAll(async () => {
@@ -109,6 +110,35 @@ describe("connected studient", () => {
   });
 });
 
+describe("connected partner", () => {
+  let nextauth_header: Awaited<ReturnType<typeof create_nextauth_header>>;
+
+  beforeAll(async () => {
+    nextauth_header = vulfpeck_golden_nextauth_header;
+  });
+
+  test("should return latest opportunities", async () => {
+    const caller = createCallerFactory(router({ find }));
+    const trpc = caller({
+      headers: { ...nextauth_header },
+      prisma,
+    } as any);
+    const exchange = await trpc.find({});
+    expect(exchange).toMatchSnapshot();
+  });
+
+  test.only("should return my latest opportunities", async () => {
+    const caller = createCallerFactory(router({ find }));
+    const trpc = caller({
+      headers: { ...nextauth_header },
+      prisma,
+    } as any);
+    const exchange = await trpc.find({
+      filter: "MY_OPPORTUNITIES",
+    });
+    expect(exchange).toMatchSnapshot();
+  });
+});
 //
 
 beforeEach(async function seed() {
