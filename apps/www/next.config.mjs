@@ -126,18 +126,15 @@ const nextConfig = {
 
 config = nextConfig;
 
-// Injected content via Sentry wizard below
-
 export default withSentryConfig(config, {
-  authToken: process.env.SENTRY_AUTH_TOKEN,
   automaticVercelMonitors: true,
   disableLogger: true,
-  hideSourceMaps: false,
+  hideSourceMaps: true,
   org: "toc-toc-rj",
   project: "www",
-  silent: !!process.env.CI,
-  telemetry: false,
-  transpileClientSDK: false,
+  reactComponentAnnotation: { enabled: true },
+  silent: !process.env.CI,
+  sourcemaps: { deleteSourcemapsAfterUpload: true },
   tunnelRoute: "/monitoring",
   widenClientFileUpload: true,
 });

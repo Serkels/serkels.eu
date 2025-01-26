@@ -2,7 +2,7 @@
 
 import { startSpan } from "@1.modules/core/telemetry";
 import { NEXTAUTH_TRPCENV } from "@douglasduteil/nextauth...trpc.prisma/config";
-import type { Span } from "@sentry/types";
+import type { Span } from "@sentry/core";
 import to from "await-to-js";
 import { type NextAuthConfig, type Session } from "next-auth";
 import type { JWT } from "next-auth/jwt";
