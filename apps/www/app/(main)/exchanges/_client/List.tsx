@@ -9,6 +9,7 @@ import { Exchange_Filter, type Exchange } from "@1.modules/exchange.domain";
 import { Exchange_AsyncCard } from "@1.modules/exchange.ui/Card/AsyncCard";
 import { EmptyList, Loading, LoadMoreButton } from "@1.ui/react/async";
 import { AppearMotion } from "@1.ui/react/motion/AppearMotion";
+import { LayoutGroup } from "motion/react";
 import { useSearchParams } from "next/navigation";
 import { useEffect, type ComponentProps, type ReactNode } from "react";
 import { match, P } from "ts-pattern";
@@ -79,23 +80,25 @@ function List(query_info: QueryExchangesSuccessResult) {
 
   return (
     <ul className="grid grid-cols-1 gap-9">
-      {flatten_pages.map((item) => (
-        <AppearMotion key={item.id} layout transition={{ duration: 0.2 }}>
-          <li id={item.id}>
-            <Item {...item} />
-          </li>
-        </AppearMotion>
-      ))}
-      {match({ isFetchingNextPage, hasNextPage })
-        .with({ isFetchingNextPage: true }, () => <Loading_Placeholder />)
-        .with({ hasNextPage: true }, () => (
-          <li className="col-span-full p-8 text-center">
-            <LoadMoreButton onPress={() => fetchNextPage()}>
-              Charger plus
-            </LoadMoreButton>
-          </li>
-        ))
-        .otherwise(() => null)}
+      <LayoutGroup>
+        {flatten_pages.map((item) => (
+          <AppearMotion key={item.id} layout transition={{ duration: 0.2 }}>
+            <li id={item.id}>
+              <Item {...item} />
+            </li>
+          </AppearMotion>
+        ))}
+        {match({ isFetchingNextPage, hasNextPage })
+          .with({ isFetchingNextPage: true }, () => <Loading_Placeholder />)
+          .with({ hasNextPage: true }, () => (
+            <li className="col-span-full p-8 text-center">
+              <LoadMoreButton onPress={() => fetchNextPage()}>
+                Charger plus
+              </LoadMoreButton>
+            </li>
+          ))
+          .otherwise(() => null)}
+      </LayoutGroup>
     </ul>
   );
 }
