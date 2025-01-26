@@ -19,7 +19,8 @@ import { isAfter } from "date-fns";
 import dedent from "dedent";
 import process from "node:process";
 import slugify from "slugify";
-import { students as studient_fixtures } from "./seed/fixtures/students";
+import { partners as partner_fixtures } from "./seed/fixtures/partners";
+import { students as student_fixtures } from "./seed/fixtures/students";
 import { faker_image_avatar } from "./seed/helpers/faker_image_avatar";
 
 //
@@ -98,7 +99,8 @@ async function faker_seed() {
   await students_awnsers();
   console.log("🌱 . Students awnser to questions.");
 
-  await studient_fixtures();
+  await student_fixtures();
+  await partner_fixtures();
   console.log("🌱 . E2E Fixture.");
 
   console.log("🌱 .. Faker Seed.");

@@ -1,7 +1,9 @@
 //
 
 import {
+  create_concert_20240915,
   create_film_category,
+  create_masterclass_category,
   create_vulfpeck_partner,
 } from "@1.infra/database/seeding";
 import prisma, { empty_database, migrate } from "@1.infra/database/testing";
@@ -18,7 +20,7 @@ import {
   setSystemTime,
   test,
 } from "bun:test";
-import api_router from "./create";
+import api_router from "./update";
 
 //
 
@@ -47,18 +49,19 @@ test("return my latest followers", async () => {
     prisma,
   } as any);
 
-  const response = await trpc.create({
+  const response = await trpc.update({
     category_id: "film_category_id",
     cover: "https://example.com/cover.png",
-    description: "Film description",
-    title: "Vulfpeck : Le film",
+    description: "Film du concert description",
+    title: "Vulfpeck : Le concert",
     expiry_date: new Date("2011-12-11"),
-    link: "https://example.com/film",
-    location: "Film location",
+    link: "https://example.com/film/concert",
+    location: "Film concert location",
+    id: "concert_20240915",
   });
 
   expect(response).toMatchInlineSnapshot({
-    id: expect.any(String),
+    id: "concert_20240915",
     created_at: expect.any(Date),
     updated_at: expect.any(Date),
   }, `
@@ -66,14 +69,14 @@ test("return my latest followers", async () => {
       "category_id": "film_category_id",
       "cover": "https://example.com/cover.png",
       "created_at": Any<Date>,
-      "description": "Film description",
+      "description": "Film du concert description",
       "expiry_date": 2011-12-11T00:00:00.000Z,
-      "id": Any<String>,
-      "link": "https://example.com/film",
-      "location": "Film location",
+      "id": "concert_20240915",
+      "link": "https://example.com/film/concert",
+      "location": "Film concert location",
       "owner_id": "vulfpeck_partner_id",
-      "slug": "vulfpeck-le-film",
-      "title": "Vulfpeck : Le film",
+      "slug": "whale-rock-festival-2024",
+      "title": "Vulfpeck : Le concert",
       "updated_at": Any<Date>,
     }
   `);
@@ -83,7 +86,9 @@ test("return my latest followers", async () => {
 
 beforeEach(async function seed() {
   await create_film_category(prisma);
-  await create_vulfpeck_partner(prisma);
+  await create_masterclass_category(prisma);
+  const vulfpeck_partner_id = await create_vulfpeck_partner(prisma);
+  await create_concert_20240915(prisma, vulfpeck_partner_id);
 });
 
 afterEach(async function empty_delete_entries() {

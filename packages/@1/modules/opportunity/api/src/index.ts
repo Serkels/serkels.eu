@@ -5,6 +5,7 @@ import { z } from "zod";
 import { create_api_router } from "./create";
 import delete_router from "./delete";
 import find_router from "./find";
+import { update_api_router } from "./update";
 
 //
 
@@ -62,5 +63,9 @@ const opportunity_api_router = router({
   find: find_router,
 });
 
-export default mergeRouters(create_api_router, opportunity_api_router);
+export default mergeRouters(
+  create_api_router,
+  opportunity_api_router,
+  update_api_router,
+);
 export type OpportunityApiRouter = typeof opportunity_api_router;

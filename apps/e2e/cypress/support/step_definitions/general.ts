@@ -48,6 +48,10 @@ When("je tape {string}", (text: string) => {
   cy.focused().type(text);
 });
 
+When("je vide le champ", () => {
+  cy.focused().clear();
+});
+
 When("je choisis l'option {string}", (text: string) => {
   cy.focused().select(text);
 });
