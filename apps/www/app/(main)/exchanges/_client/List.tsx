@@ -80,7 +80,7 @@ function List(query_info: QueryExchangesSuccessResult) {
   return (
     <ul className="grid grid-cols-1 gap-9">
       {flatten_pages.map((item) => (
-        <AppearMotion key={item.id} layout>
+        <AppearMotion key={item.id} layout transition={{ duration: 0.2 }}>
           <li id={item.id}>
             <Item {...item} />
           </li>
