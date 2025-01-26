@@ -94,8 +94,8 @@ importers:
   apps/e2e:
     dependencies:
       '@badeball/cypress-cucumber-preprocessor':
-        specifier: 21.0.3
-        version: 21.0.3(@babel/core@7.26.0)(cypress@13.17.0)(typescript@5.7.3)
+        specifier: 22.0.0
+        version: 22.0.0(@babel/core@7.26.0)(cypress@13.17.0)(typescript@5.7.3)
       '@bahmutov/cypress-esbuild-preprocessor':
         specifier: 2.2.4
         version: 2.2.4(esbuild@0.23.1)
@@ -1997,12 +1997,12 @@ packages:
     resolution: {integrity: sha512-L6mZmwFDK6Cjh1nRCLXpa6no13ZIioJDz7mdkzHv399pThrTa/k0nUlNaenOeh2kWu/iaOQYElEpKPUswUa9Vg==}
     engines: {node: '>=6.9.0'}
 
-  '@badeball/cypress-cucumber-preprocessor@21.0.3':
-    resolution: {integrity: sha512-d88Qcy2uoasQiUP8mBHUkE4TH1Px/rsN56gKSp5C1P45dPC583lxgA4NwsmrgtpjXWXSCi5OYvSk3x7E60h0RA==}
+  '@badeball/cypress-cucumber-preprocessor@22.0.0':
+    resolution: {integrity: sha512-06dv/GmAS77CbRXPfQbBZFgRKXRBJRQyDg3kJTPO3b7KZ4V8AOt32cb083Zc92QAqrerIbvFrHBnruzE/2/NtA==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     peerDependencies:
-      cypress: ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0
+      cypress: ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0
 
   '@bahmutov/cypress-esbuild-preprocessor@2.2.4':
     resolution: {integrity: sha512-t5xOKK+a6PlsxgRBtZDzayUcPJGDLKJt1pwKK/Y8szuDPPF+DbEsrqL8fbKgE1+koPvOVaYMX4ggwQwqfk99hA==}
@@ -8321,7 +8321,7 @@ snapshots:
       '@babel/helper-string-parser': 7.25.9
       '@babel/helper-validator-identifier': 7.25.9
 
-  '@badeball/cypress-cucumber-preprocessor@21.0.3(@babel/core@7.26.0)(cypress@13.17.0)(typescript@5.7.3)':
+  '@badeball/cypress-cucumber-preprocessor@22.0.0(@babel/core@7.26.0)(cypress@13.17.0)(typescript@5.7.3)':
     dependencies:
       '@cucumber/ci-environment': 10.0.1
       '@cucumber/cucumber': 11.2.0
@@ -13744,7 +13744,7 @@ snapshots:
   normalize-package-data@6.0.2:
     dependencies:
       hosted-git-info: 7.0.2
-      semver: 7.5.3
+      semver: 7.6.3
       validate-npm-package-license: 3.0.4
 
   normalize-path@3.0.0: {}
