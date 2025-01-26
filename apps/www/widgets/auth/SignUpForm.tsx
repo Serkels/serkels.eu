@@ -252,7 +252,7 @@ function Interest_Field({ categories }: { categories: Category[] }) {
 
   return (
     <label>
-      <span className="text-Silver_Chalice">Dans quelle categorie ?</span>
+      <span className="text-Silver_Chalice">Dans quelle catégorie ?</span>
 
       <select
         {...register("context.interest_id")}

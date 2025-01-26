@@ -34,7 +34,7 @@ Fonctionnalité: Posez une question
     * je clique sur "Lieu"
     * je tape "Paris"
 
-    * je clique sur "Dans quelle categorie ?"
+    * je clique sur "Dans quelle catégorie ?"
     * je choisis l'option "Autres"
 
     * je clique sur "Lien web"

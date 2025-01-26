@@ -168,7 +168,7 @@ function Category_Field({ categories }: { categories: Category[] }) {
 
   return (
     <label>
-      <span className="text-Silver_Chalice">Dans quelle categorie ?</span>
+      <span className="text-Silver_Chalice">Dans quelle catégorie ?</span>
 
       <select
         {...register("category_id")}
@@ -177,7 +177,7 @@ function Category_Field({ categories }: { categories: Category[] }) {
         required
       >
         <option hidden value="">
-          Dans quelle categorie ?
+          Dans quelle catégorie ?
         </option>
         <OptionCategories categories={categories} />
       </select>
@@ -334,7 +334,7 @@ function Return_Field({ categories }: { categories: Category[] }) {
         required
       >
         <option value="" disabled>
-          Dans quelle categorie ?
+          Dans quelle catégorie ?
         </option>
         <OptionCategories categories={categories} />
       </select>
