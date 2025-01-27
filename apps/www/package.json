@@ -79,7 +79,7 @@
     "@tanstack/react-query-devtools": "4.36.1",
     "@types/debug": "4.1.12",
     "@types/gtag.js": "0.0.20",
-    "@types/node": "22.10.7",
+    "@types/node": "22.10.10",
     "@types/nprogress": "0.2.3",
     "@types/react": "19.0.2",
     "@types/react-dom": "19.0.2",
