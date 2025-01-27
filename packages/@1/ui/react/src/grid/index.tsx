@@ -29,7 +29,7 @@ export interface GridProps
 //
 
 const style = tv({
-  base: `grid grid-cols-2 gap-4 sm:grid-cols-6 md:grid-cols-8 md:gap-6 lg:gap-8 xl:grid-cols-12`,
+  base: `grid grid-cols-2 gap-4 pb-4 sm:grid-cols-6 md:grid-cols-8 md:gap-6 lg:gap-8 xl:grid-cols-12`,
   variants: {
     fluid: {
       false: "px-4 sm:px-8 md:px-6 lg:px-8",
