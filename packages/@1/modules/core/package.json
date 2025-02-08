@@ -23,7 +23,7 @@
   },
   "prettier": "@1.config/prettier",
   "dependencies": {
-    "@sentry/core": "8.41.0",
+    "@sentry/core": "8.54.0",
     "date-fns": "4.1.0",
     "debug": "4.3.7",
     "error-custom-class": "10.0.0",
