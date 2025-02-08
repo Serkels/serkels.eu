@@ -29,7 +29,7 @@
     "@1.modules/exchange.domain": "workspace:*",
     "@1.modules/opportunity.domain": "workspace:*",
     "@1.ui/react": "workspace:*",
-    "@hookform/resolvers": "3.9.1",
+    "@hookform/resolvers": "3.10.0",
     "@react-hookz/web": "24.0.4",
     "@tanstack/react-query": "4.36.1",
     "constate": "3.3.2",
