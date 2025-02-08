@@ -188,8 +188,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/@douglasduteil/react-hookz...matrix-uri
       '@hookform/resolvers':
-        specifier: 3.9.1
-        version: 3.9.1(react-hook-form@7.53.2(react@19.0.0))
+        specifier: 3.10.0
+        version: 3.10.0(react-hook-form@7.53.2(react@19.0.0))
       '@next/third-parties':
         specifier: 15.1.6
         version: 15.1.6(next@15.1.6(@babel/core@7.26.8)(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)
@@ -987,8 +987,8 @@ importers:
         specifier: workspace:*
         version: link:../../../ui/react
       '@hookform/resolvers':
-        specifier: 3.9.1
-        version: 3.9.1(react-hook-form@7.53.2(react@19.0.0))
+        specifier: 3.10.0
+        version: 3.10.0(react-hook-form@7.53.2(react@19.0.0))
       '@react-hookz/web':
         specifier: 24.0.4
         version: 24.0.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -1134,8 +1134,8 @@ importers:
         specifier: workspace:*
         version: link:../../../ui/react
       '@hookform/resolvers':
-        specifier: 3.9.1
-        version: 3.9.1(react-hook-form@7.53.2(react@19.0.0))
+        specifier: 3.10.0
+        version: 3.10.0(react-hook-form@7.53.2(react@19.0.0))
       '@react-hookz/web':
         specifier: 24.0.4
         version: 24.0.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -1254,8 +1254,8 @@ importers:
         specifier: workspace:*
         version: link:../../../ui/react
       '@hookform/resolvers':
-        specifier: 3.9.1
-        version: 3.9.1(react-hook-form@7.53.2(react@19.0.0))
+        specifier: 3.10.0
+        version: 3.10.0(react-hook-form@7.53.2(react@19.0.0))
       '@tanstack/react-query':
         specifier: 4.36.1
         version: 4.36.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -1485,8 +1485,8 @@ importers:
         specifier: workspace:*
         version: link:../../../ui/react
       '@hookform/resolvers':
-        specifier: 3.9.1
-        version: 3.9.1(react-hook-form@7.53.2(react@19.0.0))
+        specifier: 3.10.0
+        version: 3.10.0(react-hook-form@7.53.2(react@19.0.0))
       '@tanstack/react-query':
         specifier: 4.36.1
         version: 4.36.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -2440,8 +2440,8 @@ packages:
       '@trpc/server': ^10.10.0 || >11.0.0-rc
       hono: '>=4.*'
 
-  '@hookform/resolvers@3.9.1':
-    resolution: {integrity: sha512-ud2HqmGBM0P0IABqoskKWI6PEf6ZDDBZkFqe2Vnl+mTHCEHzr3ISjjZyCwTjC/qpL25JC9aIDkloQejvMeq0ug==}
+  '@hookform/resolvers@3.10.0':
+    resolution: {integrity: sha512-79Dv+3mDF7i+2ajj7SkypSKHhl1cbln1OGavqrsF7p6mbUv11xpqpacPsGDCTRvCSjEEIez2ef1NveSVL3b0Ag==}
     peerDependencies:
       react-hook-form: ^7.0.0
 
@@ -8760,7 +8760,7 @@ snapshots:
       '@trpc/server': 10.45.2
       hono: 4.6.20
 
-  '@hookform/resolvers@3.9.1(react-hook-form@7.53.2(react@19.0.0))':
+  '@hookform/resolvers@3.10.0(react-hook-form@7.53.2(react@19.0.0))':
     dependencies:
       react-hook-form: 7.53.2(react@19.0.0)
 
