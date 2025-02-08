@@ -25,7 +25,7 @@
     "@1.modules/profile.domain": "workspace:*",
     "@1.modules/trpc": "workspace:*",
     "@douglasduteil/nextauth...trpc.prisma": "workspace:*",
-    "ts-pattern": "5.5.0",
+    "ts-pattern": "5.6.2",
     "zod": "3.24.1"
   },
   "devDependencies": {

@@ -25,7 +25,7 @@
     "@1.modules/forum.domain": "workspace:*",
     "@1.modules/trpc": "workspace:*",
     "date-fns": "4.1.0",
-    "ts-pattern": "5.5.0",
+    "ts-pattern": "5.6.2",
     "zod": "3.24.1"
   },
   "devDependencies": {
