@@ -34,7 +34,7 @@
     "date-fns": "4.1.0",
     "ts-pattern": "5.5.0",
     "typed-emitter": "2.1.0",
-    "zod": "3.23.8"
+    "zod": "3.24.1"
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",

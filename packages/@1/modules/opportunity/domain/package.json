@@ -24,7 +24,7 @@
     "@1.modules/category.domain": "workspace:*",
     "@1.modules/core": "workspace:*",
     "@1.modules/profile.domain": "workspace:*",
-    "zod": "3.23.8"
+    "zod": "3.24.1"
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
