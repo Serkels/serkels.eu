@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
-    "@types/node": "22.10.10",
+    "@types/node": "22.13.1",
     "pkgroll": "2.5.1",
     "react-email": "3.0.6",
     "typescript": "5.7.3"
