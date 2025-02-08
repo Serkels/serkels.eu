@@ -15,6 +15,7 @@ import {
 import {
   douglas_golden_nextauth_header,
   NEXTAUTH_SECRET,
+  vulfpeck_golden_nextauth_header,
 } from "@1.modules/trpc/testing";
 import {
   afterEach,
@@ -48,7 +49,36 @@ describe("visitor", () => {
     const caller = createCallerFactory(router({ find }));
     const trpc = caller({ prisma } as any);
     const exchange = await trpc.find({});
-    expect(exchange).toMatchSnapshot();
+    expect(exchange).toMatchInlineSnapshot(`
+      {
+        "data": [
+          {
+            "category": {
+              "id": "masterclass_category_id",
+              "name": "Masterclass",
+              "slug": "masterclass",
+            },
+            "cover": "https://picsum.photos/600/400",
+            "created_at": 2011-11-11T00:00:00.000Z,
+            "description": "https://vulf.co/courses/dart/lectures/45940163",
+            "expiry_date": 2024-09-15T00:00:00.000Z,
+            "id": "concert_20240915",
+            "location": "Castoro Cellars Vineyards & Winery",
+            "owner": {
+              "profile": {
+                "id": "vulfpeck_profile_id",
+                "image": "https://picsum.photos/300/300",
+                "name": "Vulfpeck",
+              },
+            },
+            "slug": "whale-rock-festival-2024",
+            "title": "WHALE ROCK FESTIVAL ",
+            "updated_at": 2011-11-11T00:00:00.000Z,
+          },
+        ],
+        "next_cursor": undefined,
+      }
+    `);
   });
 
   test("should not list expired opportunities", async () => {
@@ -59,11 +89,16 @@ describe("visitor", () => {
     const caller = createCallerFactory(router({ find }));
     const trpc = caller({ prisma } as any);
     const exchange = await trpc.find({});
-    expect(exchange).toMatchSnapshot();
+    expect(exchange).toMatchInlineSnapshot(`
+      {
+        "data": [],
+        "next_cursor": undefined,
+      }
+    `);
   });
 });
 
-describe("connected studient", () => {
+describe("connected student", () => {
   let nextauth_header: Awaited<ReturnType<typeof create_nextauth_header>>;
 
   beforeAll(async () => {
@@ -77,7 +112,36 @@ describe("connected studient", () => {
       prisma,
     } as any);
     const exchange = await trpc.find({});
-    expect(exchange).toMatchSnapshot();
+    expect(exchange).toMatchInlineSnapshot(`
+      {
+        "data": [
+          {
+            "category": {
+              "id": "masterclass_category_id",
+              "name": "Masterclass",
+              "slug": "masterclass",
+            },
+            "cover": "https://picsum.photos/600/400",
+            "created_at": 2011-11-11T00:00:00.000Z,
+            "description": "https://vulf.co/courses/dart/lectures/45940163",
+            "expiry_date": 2024-09-15T00:00:00.000Z,
+            "id": "concert_20240915",
+            "location": "Castoro Cellars Vineyards & Winery",
+            "owner": {
+              "profile": {
+                "id": "vulfpeck_profile_id",
+                "image": "https://picsum.photos/300/300",
+                "name": "Vulfpeck",
+              },
+            },
+            "slug": "whale-rock-festival-2024",
+            "title": "WHALE ROCK FESTIVAL ",
+            "updated_at": 2011-11-11T00:00:00.000Z,
+          },
+        ],
+        "next_cursor": undefined,
+      }
+    `);
   });
 
   test("should not list opportunities created by profile I blocked", async () => {
@@ -91,7 +155,12 @@ describe("connected studient", () => {
       prisma,
     } as any);
     const exchange = await trpc.find({});
-    expect(exchange).toMatchSnapshot();
+    expect(exchange).toMatchInlineSnapshot(`
+      {
+        "data": [],
+        "next_cursor": undefined,
+      }
+    `);
   });
 
   test("should not list opportunities created by profiles who blocked me", async () => {
@@ -105,10 +174,102 @@ describe("connected studient", () => {
       prisma,
     } as any);
     const exchange = await trpc.find({});
-    expect(exchange).toMatchSnapshot();
+    expect(exchange).toMatchInlineSnapshot(`
+      {
+        "data": [],
+        "next_cursor": undefined,
+      }
+    `);
   });
 });
 
+describe("connected partner", () => {
+  let nextauth_header: Awaited<ReturnType<typeof create_nextauth_header>>;
+
+  beforeAll(async () => {
+    nextauth_header = vulfpeck_golden_nextauth_header;
+  });
+
+  test("should return latest opportunities", async () => {
+    const caller = createCallerFactory(router({ find }));
+    const trpc = caller({
+      headers: { ...nextauth_header },
+      prisma,
+    } as any);
+    const exchange = await trpc.find({});
+    expect(exchange).toMatchInlineSnapshot(`
+      {
+        "data": [
+          {
+            "category": {
+              "id": "masterclass_category_id",
+              "name": "Masterclass",
+              "slug": "masterclass",
+            },
+            "cover": "https://picsum.photos/600/400",
+            "created_at": 2011-11-11T00:00:00.000Z,
+            "description": "https://vulf.co/courses/dart/lectures/45940163",
+            "expiry_date": 2024-09-15T00:00:00.000Z,
+            "id": "concert_20240915",
+            "location": "Castoro Cellars Vineyards & Winery",
+            "owner": {
+              "profile": {
+                "id": "vulfpeck_profile_id",
+                "image": "https://picsum.photos/300/300",
+                "name": "Vulfpeck",
+              },
+            },
+            "slug": "whale-rock-festival-2024",
+            "title": "WHALE ROCK FESTIVAL ",
+            "updated_at": 2011-11-11T00:00:00.000Z,
+          },
+        ],
+        "next_cursor": undefined,
+      }
+    `);
+  });
+
+  test("should return my latest opportunities", async () => {
+    const caller = createCallerFactory(router({ find }));
+    const trpc = caller({
+      headers: { ...nextauth_header },
+      prisma,
+    } as any);
+    const exchange = await trpc.find({
+      filter: "MY_OPPORTUNITIES",
+    });
+    expect(exchange).toMatchInlineSnapshot(`
+      {
+        "data": [
+          {
+            "category": {
+              "id": "masterclass_category_id",
+              "name": "Masterclass",
+              "slug": "masterclass",
+            },
+            "cover": "https://picsum.photos/600/400",
+            "created_at": 2011-11-11T00:00:00.000Z,
+            "description": "https://vulf.co/courses/dart/lectures/45940163",
+            "expiry_date": 2024-09-15T00:00:00.000Z,
+            "id": "concert_20240915",
+            "location": "Castoro Cellars Vineyards & Winery",
+            "owner": {
+              "profile": {
+                "id": "vulfpeck_profile_id",
+                "image": "https://picsum.photos/300/300",
+                "name": "Vulfpeck",
+              },
+            },
+            "slug": "whale-rock-festival-2024",
+            "title": "WHALE ROCK FESTIVAL ",
+            "updated_at": 2011-11-11T00:00:00.000Z,
+          },
+        ],
+        "next_cursor": undefined,
+      }
+    `);
+  });
+});
 //
 
 beforeEach(async function seed() {

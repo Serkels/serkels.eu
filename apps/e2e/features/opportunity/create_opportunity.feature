@@ -1,5 +1,5 @@
 #language: fr
-Fonctionnalité: Posez une question
+Fonctionnalité: Créer une opportunité
 
   Scénario: Les visiteurs ne peuvent pas créer une opportunité
     Soit une base de données nourrie au grain
