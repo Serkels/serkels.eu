@@ -54,17 +54,19 @@ test("return my latest followers", async () => {
     cover: "https://example.com/cover.png",
     description: "Film du concert description",
     title: "Vulfpeck : Le concert",
-    expiry_date: new Date("2011-12-11"),
+    expiry_date: "2011-12-11",
     link: "https://example.com/film/concert",
     location: "Film concert location",
     id: "concert_20240915",
   });
 
-  expect(response).toMatchInlineSnapshot({
-    id: "concert_20240915",
-    created_at: expect.any(Date),
-    updated_at: expect.any(Date),
-  }, `
+  expect(response).toMatchInlineSnapshot(
+    {
+      id: "concert_20240915",
+      created_at: expect.any(Date),
+      updated_at: expect.any(Date),
+    },
+    `
     {
       "category_id": "film_category_id",
       "cover": "https://example.com/cover.png",
@@ -79,7 +81,8 @@ test("return my latest followers", async () => {
       "title": "Vulfpeck : Le concert",
       "updated_at": Any<Date>,
     }
-  `);
+  `,
+  );
 });
 
 //

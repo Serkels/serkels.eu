@@ -18,9 +18,11 @@ export const Opportunity_Create_Schema = z.object({
     .trim()
     .min(10, "La description doit contenir 10 caractères minimum")
     .max(1_400, "La description doit contenir 1400 caractères maximum"),
-  expiry_date: z.coerce.date({
-    required_error: "Ce champs est requis",
-  }),
+  expiry_date: z.string().pipe(
+    z.coerce.date({
+      required_error: "Ce champs est requis",
+    }),
+  ),
   link: z
     .string({ required_error: "Ce champs est requis" })
     .trim()
@@ -33,8 +35,10 @@ export const Opportunity_Create_Schema = z.object({
   location: z.string().trim().min(1).nullable(),
 });
 
-export interface Opportunity_Create
-  extends z.TypeOf<typeof Opportunity_Create_Schema> {}
+export type OpportunityCreateInput = z.input<typeof Opportunity_Create_Schema>;
+export type OpportunityCreateOutput = z.output<
+  typeof Opportunity_Create_Schema
+>;
 
 //
 
@@ -50,7 +54,7 @@ export const Opportunity_Schema = Entity_Schema.merge(
   })
   .describe("Opportunity Schema");
 
-export interface Opportunity extends z.TypeOf<typeof Opportunity_Schema> {}
+export interface Opportunity extends z.infer<typeof Opportunity_Schema> {}
 
 //
 
