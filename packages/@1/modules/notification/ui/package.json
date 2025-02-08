@@ -29,7 +29,7 @@
     "@1.modules/notification.domain": "workspace:*",
     "@1.ui/react": "workspace:*",
     "@tanstack/react-query": "4.36.1",
-    "next": "15.1.3",
+    "next": "15.1.6",
     "react": "19.0.0",
     "react-content-loader": "7.0.2",
     "tailwind-variants": "0.3.1",
