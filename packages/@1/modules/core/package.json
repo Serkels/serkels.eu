@@ -25,7 +25,7 @@
   "dependencies": {
     "@sentry/core": "8.41.0",
     "date-fns": "4.1.0",
-    "debug": "4.3.7",
+    "debug": "4.4.0",
     "error-custom-class": "10.0.0",
     "zod": "3.23.8",
     "zohar": "1.0.1"
