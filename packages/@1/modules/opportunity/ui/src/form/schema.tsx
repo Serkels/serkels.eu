@@ -1,17 +1,20 @@
 //
 
-import type { Opportunity_Create_Schema } from "@1.modules/opportunity.domain";
+import type {
+  Opportunity,
+  OpportunityCreateInput,
+} from "@1.modules/opportunity.domain";
+import { format } from "date-fns";
 import { useFormContext } from "react-hook-form";
-import { z } from "zod";
 
 //
 
-export type FieldValues = z.infer<typeof Opportunity_Create_Schema>;
-export const useOpportunityFormContext = useFormContext<FieldValues>;
+export const useOpportunityFormContext = useFormContext<OpportunityCreateInput>;
 
-export function form_to_dto(form: FieldValues) {
+export function dto_to_form(dto: Opportunity): OpportunityCreateInput {
   return {
-    ...form,
-    location: form.location ?? null,
+    ...dto,
+    expiry_date: format(dto.expiry_date, "yyyy-MM-dd"),
+    category_id: dto.category.id,
   };
 }

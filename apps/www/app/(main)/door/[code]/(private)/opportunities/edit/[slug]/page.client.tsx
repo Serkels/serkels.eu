@@ -5,12 +5,10 @@ import type { Category } from "@1.modules/category.domain";
 import {
   Opportunity_Create_Schema,
   type Opportunity,
+  type OpportunityCreateInput,
 } from "@1.modules/opportunity.domain";
 import { Edit_Opportunity } from "@1.modules/opportunity.ui/form/edit";
-import {
-  form_to_dto,
-  type FieldValues,
-} from "@1.modules/opportunity.ui/form/schema";
+import { dto_to_form } from "@1.modules/opportunity.ui/form/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
@@ -55,25 +53,25 @@ function use_context(opportunity: Opportunity) {
   const update = TRPC_React.opportunity.update.useMutation();
   const utils = TRPC_React.useUtils();
 
-  const form = useForm<FieldValues>({
-    defaultValues: {
-      ...opportunity,
-    },
+  const form = useForm<OpportunityCreateInput>({
+    defaultValues: dto_to_form(opportunity),
     resolver: zodResolver(Opportunity_Create_Schema),
   });
 
-  const on_submit: SubmitHandler<FieldValues> = useCallback(async (values) => {
-    console.log(values);
-    await update.mutateAsync({
-      ...form_to_dto(values),
-      id: opportunity.id,
-    });
-    await Promise.all([
-      utils.opportunity.find.invalidate(),
-      utils.opportunity.invalidate(),
-    ]);
-    router.push(`/opportunities/${opportunity.slug}`);
-  }, []);
+  const on_submit: SubmitHandler<OpportunityCreateInput> = useCallback(
+    async (values) => {
+      await update.mutateAsync({
+        ...values,
+        id: opportunity.id,
+      });
+      await Promise.all([
+        utils.opportunity.find.invalidate(),
+        utils.opportunity.invalidate(),
+      ]);
+      router.push(`/opportunities/${opportunity.slug}`);
+    },
+    [],
+  );
 
   return { form, on_submit };
 }
