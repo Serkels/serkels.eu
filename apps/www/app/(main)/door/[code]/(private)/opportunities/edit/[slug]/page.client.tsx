@@ -63,7 +63,6 @@ function use_context(opportunity: Opportunity) {
   });
 
   const on_submit: SubmitHandler<FieldValues> = useCallback(async (values) => {
-    console.log(values);
     await update.mutateAsync({
       ...form_to_dto(values),
       id: opportunity.id,

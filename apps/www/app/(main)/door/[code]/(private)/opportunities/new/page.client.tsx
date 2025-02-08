@@ -4,10 +4,7 @@ import { TRPC_React } from ":trpc/client";
 import type { Category } from "@1.modules/category.domain";
 import { Opportunity_Create_Schema } from "@1.modules/opportunity.domain";
 import { Edit_Opportunity } from "@1.modules/opportunity.ui/form/edit";
-import {
-  form_to_dto,
-  type FieldValues,
-} from "@1.modules/opportunity.ui/form/schema";
+import { type FieldValues } from "@1.modules/opportunity.ui/form/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
@@ -46,9 +43,8 @@ function use_context() {
   });
 
   const on_submit: SubmitHandler<FieldValues> = useCallback(async (values) => {
-    const opportunity = await create.mutateAsync(form_to_dto(values));
+    const opportunity = await create.mutateAsync(values);
     await Promise.all([
-      utils.opportunity.by_slug.invalidate(opportunity.slug),
       utils.opportunity.find.invalidate(),
       utils.opportunity.invalidate(),
     ]);

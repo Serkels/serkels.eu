@@ -1,7 +1,6 @@
 #language: fr
 Fonctionnalité: Éditer une opportunité
 
-  @skip
   Scénario: Les visiteurs ne peuvent pas édité une opportunité
     Soit une base de données nourrie au grain
     * je navigue sur la page
