@@ -38,7 +38,7 @@
     "constate": "3.3.2",
     "react": "19.0.0",
     "react-content-loader": "7.0.2",
-    "react-hook-form": "7.53.2",
+    "react-hook-form": "7.54.2",
     "react-slotify": "0.2.2",
     "tailwind-variants": "0.3.1",
     "ts-pattern": "5.6.2",
