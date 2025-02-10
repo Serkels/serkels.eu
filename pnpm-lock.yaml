@@ -25,7 +25,7 @@ importers:
         version: 6.0.0
       prettier:
         specifier: 3.4.2
-        version: 3.4.2
+        version: 3.5.0
       tsx:
         specifier: 4.19.2
         version: 4.19.2
@@ -359,10 +359,10 @@ importers:
         version: link:../../../@douglasduteil/config/tailwindcss
       prettier:
         specifier: 3.4.2
-        version: 3.4.2
+        version: 3.5.0
       prettier-plugin-organize-imports:
         specifier: ^4.1.0
-        version: 4.1.0(prettier@3.4.2)(typescript@5.7.3)
+        version: 4.1.0(prettier@3.5.0)(typescript@5.7.3)
     devDependencies:
       typescript:
         specifier: 5.7.3
@@ -1760,7 +1760,7 @@ importers:
         version: 10.4.20(postcss@8.5.1)
       prettier-plugin-tailwindcss:
         specifier: 0.6.11
-        version: 0.6.11(prettier-plugin-organize-imports@4.1.0(prettier@3.4.2)(typescript@5.7.3))(prettier@3.4.2)
+        version: 0.6.11(prettier-plugin-organize-imports@4.1.0(prettier@3.5.0)(typescript@5.7.3))(prettier@3.5.0)
       tailwind-variants:
         specifier: 0.3.1
         version: 0.3.1(tailwindcss@3.4.17(ts-node@10.9.2(@types/node@22.13.1)(typescript@5.7.3)))
@@ -1847,7 +1847,7 @@ importers:
         version: 2.4.0(@types/node@22.13.1)(typescript@5.7.3)
       prettier:
         specifier: '3'
-        version: 3.4.2
+        version: 3.5.0
       typescript:
         specifier: 5.7.3
         version: 5.7.3
@@ -7058,6 +7058,11 @@ packages:
 
   prettier@3.4.2:
     resolution: {integrity: sha512-e9MewbtFo+Fevyuxn/4rrcDAaq0IYxPGLvObpQjiZBMAzB9IGmzlnG9RZy3FFas+eBMu2vA0CszMeduow5dIuQ==}
+    engines: {node: '>=14'}
+    hasBin: true
+
+  prettier@3.5.0:
+    resolution: {integrity: sha512-quyMrVt6svPS7CjQ9gKb3GLEX/rl3BCL2oa/QkNcXv4YNVBC9olt3s+H7ukto06q7B1Qz46PbrKLO34PR6vXcA==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -14389,18 +14394,20 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  prettier-plugin-organize-imports@4.1.0(prettier@3.4.2)(typescript@5.7.3):
+  prettier-plugin-organize-imports@4.1.0(prettier@3.5.0)(typescript@5.7.3):
     dependencies:
-      prettier: 3.4.2
+      prettier: 3.5.0
       typescript: 5.7.3
 
-  prettier-plugin-tailwindcss@0.6.11(prettier-plugin-organize-imports@4.1.0(prettier@3.4.2)(typescript@5.7.3))(prettier@3.4.2):
+  prettier-plugin-tailwindcss@0.6.11(prettier-plugin-organize-imports@4.1.0(prettier@3.5.0)(typescript@5.7.3))(prettier@3.5.0):
     dependencies:
-      prettier: 3.4.2
+      prettier: 3.5.0
     optionalDependencies:
-      prettier-plugin-organize-imports: 4.1.0(prettier@3.4.2)(typescript@5.7.3)
+      prettier-plugin-organize-imports: 4.1.0(prettier@3.5.0)(typescript@5.7.3)
 
   prettier@3.4.2: {}
+
+  prettier@3.5.0: {}
 
   pretty-bytes@5.6.0: {}
 
