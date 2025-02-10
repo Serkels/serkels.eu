@@ -25,7 +25,7 @@ importers:
         version: 6.0.0
       prettier:
         specifier: 3.4.2
-        version: 3.5.0
+        version: 3.4.2
       tsx:
         specifier: 4.19.2
         version: 4.19.2
@@ -212,8 +212,8 @@ importers:
         specifier: 1.4.1
         version: 1.4.1(next@15.1.6(@babel/core@7.26.8)(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)
       '@vercel/blob':
-        specifier: 0.26.0
-        version: 0.26.0
+        specifier: 0.27.1
+        version: 0.27.1
       '@vercel/speed-insights':
         specifier: 1.1.0
         version: 1.1.0(next@15.1.6(@babel/core@7.26.8)(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)
@@ -359,10 +359,10 @@ importers:
         version: link:../../../@douglasduteil/config/tailwindcss
       prettier:
         specifier: 3.4.2
-        version: 3.5.0
+        version: 3.4.2
       prettier-plugin-organize-imports:
         specifier: ^4.1.0
-        version: 4.1.0(prettier@3.5.0)(typescript@5.7.3)
+        version: 4.1.0(prettier@3.4.2)(typescript@5.7.3)
     devDependencies:
       typescript:
         specifier: 5.7.3
@@ -4321,8 +4321,8 @@ packages:
       vue-router:
         optional: true
 
-  '@vercel/blob@0.26.0':
-    resolution: {integrity: sha512-5aF+bDYGFx5WgxGE+CeOWWI8GYD1I/JxAWl+R//+MgNjkTPpCKkUVjdchFOr622rEu2wuHAOtpLr5HYg7/uRAA==}
+  '@vercel/blob@0.27.1':
+    resolution: {integrity: sha512-X5EG9W1cZW+Nbt/XdrJJSl5DzCXXn1JRP5nfFwkpFD03nB6uh6BldwX4syElHcciM4Pih8CS7Ri1mtLCJvxSHA==}
     engines: {node: '>=16.14'}
 
   '@vercel/speed-insights@1.1.0':
@@ -4672,10 +4672,6 @@ packages:
   busboy@1.6.0:
     resolution: {integrity: sha512-8SFQbg/0hQ9xy3UNTB0YEnsNBbWfhf7RtnzpL7TkBiTBRfrQ9Fxcnz7VJsleJpyp6rVLvXiuORqjlHi5q+PYuA==}
     engines: {node: '>=10.16.0'}
-
-  bytes@3.1.2:
-    resolution: {integrity: sha512-/Nf7TyzTx6S3yRJObOAV7956r8cr2+Oj8AC5dt8wSP3BQAoeX58NoHyCU8P8zGkNXStjTSi6fzO6F0pBdcYbEg==}
-    engines: {node: '>= 0.8'}
 
   cachedir@2.4.0:
     resolution: {integrity: sha512-9EtFOZR8g22CL7BWjJ9BUx1+A/djkofnyW3aOXZORNW2kxoUpx2h+uN2cOqwPmFhnpVmxg+KW2OjOSgChTEvsQ==}
@@ -11214,10 +11210,9 @@ snapshots:
       next: 15.1.6(@babel/core@7.26.8)(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react: 19.0.0
 
-  '@vercel/blob@0.26.0':
+  '@vercel/blob@0.27.1':
     dependencies:
       async-retry: 1.3.3
-      bytes: 3.1.2
       is-buffer: 2.0.5
       is-node-process: 1.2.0
       throttleit: 2.1.0
@@ -11576,8 +11571,6 @@ snapshots:
   busboy@1.6.0:
     dependencies:
       streamsearch: 1.1.0
-
-  bytes@3.1.2: {}
 
   cachedir@2.4.0: {}
 
@@ -14394,10 +14387,16 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  prettier-plugin-organize-imports@4.1.0(prettier@3.4.2)(typescript@5.7.3):
+    dependencies:
+      prettier: 3.4.2
+      typescript: 5.7.3
+
   prettier-plugin-organize-imports@4.1.0(prettier@3.5.0)(typescript@5.7.3):
     dependencies:
       prettier: 3.5.0
       typescript: 5.7.3
+    optional: true
 
   prettier-plugin-tailwindcss@0.6.11(prettier-plugin-organize-imports@4.1.0(prettier@3.5.0)(typescript@5.7.3))(prettier@3.5.0):
     dependencies:
