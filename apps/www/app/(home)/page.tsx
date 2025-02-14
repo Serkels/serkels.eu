@@ -4,7 +4,7 @@ import { AuthSessionProvider } from ":components/shell/AuthSessionProvider";
 import { Banner } from ":components/shell/Banner";
 import { auth } from "@1.modules/auth.next";
 import { Grid } from "@1.ui/react/grid";
-import { Binoculars, Exchange, MessageGroup } from "@1.ui/react/icons";
+import { Binoculars, DoubleQuestionMark, Exchange } from "@1.ui/react/icons";
 import { popover } from "@1.ui/react/popover/atom";
 import type { StylableElementType } from "@1.ui/react/tags/types";
 import type { _1_HOUR_ } from "@douglasduteil/datatypes...hours-to-seconds";
@@ -91,7 +91,7 @@ async function Explore() {
       <ExploreLink
         description="Questions et réponses des étudiants"
         href="/forum"
-        Icon={MessageGroup}
+        Icon={DoubleQuestionMark}
         className={link({
           className: "text-quaternary",
         })}

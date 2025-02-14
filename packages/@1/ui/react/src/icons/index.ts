@@ -9,6 +9,7 @@ export * from "./Book";
 export * from "./Bookmark";
 export * from "./Circle";
 export * from "./Denied";
+export * from "./DoubleQuestionMark";
 export * from "./Envelope";
 export * from "./Exchange";
 export * from "./ExclamationMark";

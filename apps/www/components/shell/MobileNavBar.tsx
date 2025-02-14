@@ -1,6 +1,6 @@
 "use client";
 
-import { Binoculars, Exchange, MessageGroup } from "@1.ui/react/icons";
+import { Binoculars, DoubleQuestionMark, Exchange } from "@1.ui/react/icons";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -52,7 +52,10 @@ export function MobileNavBar({ className }: ComponentPropsWithoutRef<"nav">) {
             className={link({ is_active: pathname.includes("/forum") })}
             href="/forum"
           >
-            <NavItem Icon={MessageGroup} isActive={pathname.includes("/forum")}>
+            <NavItem
+              Icon={DoubleQuestionMark}
+              isActive={pathname.includes("/forum")}
+            >
               Discussions
             </NavItem>
           </Link>
