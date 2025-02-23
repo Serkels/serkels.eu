@@ -12,7 +12,7 @@
     "tailwindcss-animate": "1.0.7"
   },
   "devDependencies": {
-    "postcss": "8.5.2",
+    "postcss": "8.5.3",
     "typescript": "5.7.3"
   }
 }
