@@ -33,7 +33,7 @@
   "devDependencies": {
     "@1.config/typescript": "workspace:*",
     "@1.infra/database": "workspace:*",
-    "@types/node": "22.13.4",
+    "@types/node": "22.13.5",
     "typescript": "5.7.3"
   }
 }
