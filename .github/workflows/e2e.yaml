@@ -53,6 +53,7 @@ jobs:
           CONSOLA_LEVEL: "2"
           DEPLOY_ENV: "production"
           NODE_ENV: "development"
+          NODE_OPTIONS: "--no-experimental-require-module --no-experimental-detect-module"
         with:
           install: false
           start: pnpm start
