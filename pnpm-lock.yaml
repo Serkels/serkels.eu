@@ -15,8 +15,8 @@ importers:
         specifier: workspace:*
         version: link:packages/@1/config/happydom
       bun-types:
-        specifier: 1.2.3
-        version: 1.2.3
+        specifier: 1.2.7
+        version: 1.2.7
       cpx2:
         specifier: 8.0.0
         version: 8.0.0
@@ -25,7 +25,7 @@ importers:
         version: 6.0.0
       prettier:
         specifier: 3.5.1
-        version: 3.5.2
+        version: 3.5.1
       tsx:
         specifier: 4.19.2
         version: 4.19.2
@@ -359,10 +359,10 @@ importers:
         version: link:../../../@douglasduteil/config/tailwindcss
       prettier:
         specifier: 3.5.1
-        version: 3.5.2
+        version: 3.5.1
       prettier-plugin-organize-imports:
         specifier: ^4.1.0
-        version: 4.1.0(prettier@3.5.2)(typescript@5.7.3)
+        version: 4.1.0(prettier@3.5.1)(typescript@5.7.3)
     devDependencies:
       typescript:
         specifier: 5.7.3
@@ -2553,6 +2553,7 @@ packages:
   '@faker-js/faker@9.5.0':
     resolution: {integrity: sha512-3qbjLv+fzuuCg3umxc9/7YjrEXNaKwHgmig949nfyaTx8eL4FAsvFbu+1JcFUj1YAXofhaDn6JdEUBTYuk0Ssw==}
     engines: {node: '>=18.0.0', npm: '>=9.0.0'}
+    deprecated: Please update to a newer version
 
   '@fastify/busboy@2.1.1':
     resolution: {integrity: sha512-vBZP4NlzfOlerQTnba4aqZoMhE/a9HY7HRqoOPaETQcSQuWEIyZMHGfVu6w9wGtGK5fED5qRs2DteVCjOH60sA==}
@@ -4665,8 +4666,8 @@ packages:
   buffer@5.7.1:
     resolution: {integrity: sha512-EHcyIPBQ4BSGlvjB16k5KgAJ27CIsHY/2JBmCRReo48y9rQ3MaUzWX3KVlBa4U7MyX02HdVj0K7C3WaB3ju7FQ==}
 
-  bun-types@1.2.3:
-    resolution: {integrity: sha512-P7AeyTseLKAvgaZqQrvp3RqFM3yN9PlcLuSTe7SoJOfZkER73mLdT2vEQi8U64S1YvM/ldcNiQjn0Sn7H9lGgg==}
+  bun-types@1.2.7:
+    resolution: {integrity: sha512-P4hHhk7kjF99acXqKvltyuMQ2kf/rzIw3ylEDpCxDS9Xa0X0Yp/gJu/vDCucmWpiur5qJ0lwB2bWzOXa2GlHqA==}
 
   busboy@1.6.0:
     resolution: {integrity: sha512-8SFQbg/0hQ9xy3UNTB0YEnsNBbWfhf7RtnzpL7TkBiTBRfrQ9Fxcnz7VJsleJpyp6rVLvXiuORqjlHi5q+PYuA==}
@@ -7051,6 +7052,11 @@ packages:
 
   prettier@3.4.2:
     resolution: {integrity: sha512-e9MewbtFo+Fevyuxn/4rrcDAaq0IYxPGLvObpQjiZBMAzB9IGmzlnG9RZy3FFas+eBMu2vA0CszMeduow5dIuQ==}
+    engines: {node: '>=14'}
+    hasBin: true
+
+  prettier@3.5.1:
+    resolution: {integrity: sha512-hPpFQvHwL3Qv5AdRvBFMhnKo4tYxp0ReXiPn2bxkiohEX6mBeBwEpBSQTkD458RaaDKQMYSp4hX4UtfUTA5wDw==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -11551,7 +11557,7 @@ snapshots:
       base64-js: 1.5.1
       ieee754: 1.2.1
 
-  bun-types@1.2.3:
+  bun-types@1.2.7:
     dependencies:
       '@types/node': 22.13.5
       '@types/ws': 8.5.14
@@ -14379,10 +14385,16 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  prettier-plugin-organize-imports@4.1.0(prettier@3.5.1)(typescript@5.7.3):
+    dependencies:
+      prettier: 3.5.1
+      typescript: 5.7.3
+
   prettier-plugin-organize-imports@4.1.0(prettier@3.5.2)(typescript@5.7.3):
     dependencies:
       prettier: 3.5.2
       typescript: 5.7.3
+    optional: true
 
   prettier-plugin-tailwindcss@0.6.11(prettier-plugin-organize-imports@4.1.0(prettier@3.5.2)(typescript@5.7.3))(prettier@3.5.2):
     dependencies:
@@ -14391,6 +14403,8 @@ snapshots:
       prettier-plugin-organize-imports: 4.1.0(prettier@3.5.2)(typescript@5.7.3)
 
   prettier@3.4.2: {}
+
+  prettier@3.5.1: {}
 
   prettier@3.5.2: {}
 
