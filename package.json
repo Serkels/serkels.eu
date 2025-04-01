@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "@1.config/happydom": "workspace:*",
-    "bun-types": "1.2.3",
+    "bun-types": "1.2.8",
     "cpx2": "8.0.0",
     "del-cli": "6.0.0",
     "prettier": "3.5.1",
