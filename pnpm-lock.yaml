@@ -412,8 +412,8 @@ importers:
         specifier: 0.2.17
         version: 0.2.17
       '@faker-js/faker':
-        specifier: 9.5.0
-        version: 9.5.0
+        specifier: 9.6.0
+        version: 9.6.0
       '@types/node':
         specifier: 22.13.17
         version: 22.13.17
@@ -2560,10 +2560,9 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@faker-js/faker@9.5.0':
-    resolution: {integrity: sha512-3qbjLv+fzuuCg3umxc9/7YjrEXNaKwHgmig949nfyaTx8eL4FAsvFbu+1JcFUj1YAXofhaDn6JdEUBTYuk0Ssw==}
+  '@faker-js/faker@9.6.0':
+    resolution: {integrity: sha512-3vm4by+B5lvsFPSyep3ELWmZfE3kicDtmemVpuwl1yH7tqtnHdsA6hG8fbXedMVdkzgtvzWoRgjSB4Q+FHnZiw==}
     engines: {node: '>=18.0.0', npm: '>=9.0.0'}
-    deprecated: Please update to a newer version
 
   '@fastify/busboy@2.1.1':
     resolution: {integrity: sha512-vBZP4NlzfOlerQTnba4aqZoMhE/a9HY7HRqoOPaETQcSQuWEIyZMHGfVu6w9wGtGK5fED5qRs2DteVCjOH60sA==}
@@ -8977,7 +8976,7 @@ snapshots:
   '@esbuild/win32-x64@0.25.2':
     optional: true
 
-  '@faker-js/faker@9.5.0': {}
+  '@faker-js/faker@9.6.0': {}
 
   '@fastify/busboy@2.1.1': {}
 
