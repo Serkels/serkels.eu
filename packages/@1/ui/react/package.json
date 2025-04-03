@@ -68,7 +68,7 @@
     "@react-hookz/web": "24.0.4",
     "bowser": "2.11.0",
     "date-fns": "4.1.0",
-    "motion": "12.4.3",
+    "motion": "12.6.3",
     "react": "19.0.0",
     "react-aria-components": "1.5.0",
     "react-slotify": "0.2.2",
